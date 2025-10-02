@@ -1,12 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { HubspotSDK as default } from './client';
+export { HubSpot as default } from './client';
 
 export { type Uploadable, toFile } from './core/uploads';
 export { APIPromise } from './core/api-promise';
-export { HubspotSDK, type ClientOptions } from './client';
+export { HubSpot, type ClientOptions } from './client';
 export {
-  HubspotSDKError,
+  HubSpotError,
   APIError,
   APIConnectionError,
   APIConnectionTimeoutError,

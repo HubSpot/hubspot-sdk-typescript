@@ -3,7 +3,7 @@
 import { APIPromise } from 'hubspot-sdk/core/api-promise';
 
 import util from 'node:util';
-import HubspotSDK from 'hubspot-sdk';
+import HubSpot from 'hubspot-sdk';
 import { APIUserAbortError } from 'hubspot-sdk';
 const defaultFetch = fetch;
 
@@ -20,11 +20,10 @@ describe('instantiate client', () => {
   });
 
   describe('defaultHeaders', () => {
-    const client = new HubspotSDK({
+    const client = new HubSpot({
       baseURL: 'http://localhost:5000/',
       defaultHeaders: { 'X-My-Default-Header': '2' },
-      privateAppsKey: 'My Private Apps Key',
-      privateAppsLegacyKey: 'My Private Apps Legacy Key',
+      accessToken: 'My Access Token',
     });
 
     test('they are used in the request', async () => {
@@ -55,14 +54,14 @@ describe('instantiate client', () => {
 
     beforeEach(() => {
       process.env = { ...env };
-      process.env['HUBSPOT_SDK_LOG'] = undefined;
+      process.env['HUB_SPOT_LOG'] = undefined;
     });
 
     afterEach(() => {
       process.env = env;
     });
 
-    const forceAPIResponseForClient = async (client: HubspotSDK) => {
+    const forceAPIResponseForClient = async (client: HubSpot) => {
       await new APIPromise(
         client,
         Promise.resolve({
@@ -88,22 +87,14 @@ describe('instantiate client', () => {
         error: jest.fn(),
       };
 
-      const client = new HubspotSDK({
-        logger: logger,
-        logLevel: 'debug',
-        privateAppsKey: 'My Private Apps Key',
-        privateAppsLegacyKey: 'My Private Apps Legacy Key',
-      });
+      const client = new HubSpot({ logger: logger, logLevel: 'debug', accessToken: 'My Access Token' });
 
       await forceAPIResponseForClient(client);
       expect(debugMock).toHaveBeenCalled();
     });
 
     test('default logLevel is warn', async () => {
-      const client = new HubspotSDK({
-        privateAppsKey: 'My Private Apps Key',
-        privateAppsLegacyKey: 'My Private Apps Legacy Key',
-      });
+      const client = new HubSpot({ accessToken: 'My Access Token' });
       expect(client.logLevel).toBe('warn');
     });
 
@@ -116,12 +107,7 @@ describe('instantiate client', () => {
         error: jest.fn(),
       };
 
-      const client = new HubspotSDK({
-        logger: logger,
-        logLevel: 'info',
-        privateAppsKey: 'My Private Apps Key',
-        privateAppsLegacyKey: 'My Private Apps Legacy Key',
-      });
+      const client = new HubSpot({ logger: logger, logLevel: 'info', accessToken: 'My Access Token' });
 
       await forceAPIResponseForClient(client);
       expect(debugMock).not.toHaveBeenCalled();
@@ -136,12 +122,8 @@ describe('instantiate client', () => {
         error: jest.fn(),
       };
 
-      process.env['HUBSPOT_SDK_LOG'] = 'debug';
-      const client = new HubspotSDK({
-        logger: logger,
-        privateAppsKey: 'My Private Apps Key',
-        privateAppsLegacyKey: 'My Private Apps Legacy Key',
-      });
+      process.env['HUB_SPOT_LOG'] = 'debug';
+      const client = new HubSpot({ logger: logger, accessToken: 'My Access Token' });
       expect(client.logLevel).toBe('debug');
 
       await forceAPIResponseForClient(client);
@@ -157,15 +139,11 @@ describe('instantiate client', () => {
         error: jest.fn(),
       };
 
-      process.env['HUBSPOT_SDK_LOG'] = 'not a log level';
-      const client = new HubspotSDK({
-        logger: logger,
-        privateAppsKey: 'My Private Apps Key',
-        privateAppsLegacyKey: 'My Private Apps Legacy Key',
-      });
+      process.env['HUB_SPOT_LOG'] = 'not a log level';
+      const client = new HubSpot({ logger: logger, accessToken: 'My Access Token' });
       expect(client.logLevel).toBe('warn');
       expect(warnMock).toHaveBeenCalledWith(
-        'process.env[\'HUBSPOT_SDK_LOG\'] was set to "not a log level", expected one of ["off","error","warn","info","debug"]',
+        'process.env[\'HUB_SPOT_LOG\'] was set to "not a log level", expected one of ["off","error","warn","info","debug"]',
       );
     });
 
@@ -178,13 +156,8 @@ describe('instantiate client', () => {
         error: jest.fn(),
       };
 
-      process.env['HUBSPOT_SDK_LOG'] = 'debug';
-      const client = new HubspotSDK({
-        logger: logger,
-        logLevel: 'off',
-        privateAppsKey: 'My Private Apps Key',
-        privateAppsLegacyKey: 'My Private Apps Legacy Key',
-      });
+      process.env['HUB_SPOT_LOG'] = 'debug';
+      const client = new HubSpot({ logger: logger, logLevel: 'off', accessToken: 'My Access Token' });
 
       await forceAPIResponseForClient(client);
       expect(debugMock).not.toHaveBeenCalled();
@@ -199,13 +172,8 @@ describe('instantiate client', () => {
         error: jest.fn(),
       };
 
-      process.env['HUBSPOT_SDK_LOG'] = 'not a log level';
-      const client = new HubspotSDK({
-        logger: logger,
-        logLevel: 'debug',
-        privateAppsKey: 'My Private Apps Key',
-        privateAppsLegacyKey: 'My Private Apps Legacy Key',
-      });
+      process.env['HUB_SPOT_LOG'] = 'not a log level';
+      const client = new HubSpot({ logger: logger, logLevel: 'debug', accessToken: 'My Access Token' });
       expect(client.logLevel).toBe('debug');
       expect(warnMock).not.toHaveBeenCalled();
     });
@@ -213,41 +181,37 @@ describe('instantiate client', () => {
 
   describe('defaultQuery', () => {
     test('with null query params given', () => {
-      const client = new HubspotSDK({
+      const client = new HubSpot({
         baseURL: 'http://localhost:5000/',
         defaultQuery: { apiVersion: 'foo' },
-        privateAppsKey: 'My Private Apps Key',
-        privateAppsLegacyKey: 'My Private Apps Legacy Key',
+        accessToken: 'My Access Token',
       });
       expect(client.buildURL('/foo', null)).toEqual('http://localhost:5000/foo?apiVersion=foo');
     });
 
     test('multiple default query params', () => {
-      const client = new HubspotSDK({
+      const client = new HubSpot({
         baseURL: 'http://localhost:5000/',
         defaultQuery: { apiVersion: 'foo', hello: 'world' },
-        privateAppsKey: 'My Private Apps Key',
-        privateAppsLegacyKey: 'My Private Apps Legacy Key',
+        accessToken: 'My Access Token',
       });
       expect(client.buildURL('/foo', null)).toEqual('http://localhost:5000/foo?apiVersion=foo&hello=world');
     });
 
     test('overriding with `undefined`', () => {
-      const client = new HubspotSDK({
+      const client = new HubSpot({
         baseURL: 'http://localhost:5000/',
         defaultQuery: { hello: 'world' },
-        privateAppsKey: 'My Private Apps Key',
-        privateAppsLegacyKey: 'My Private Apps Legacy Key',
+        accessToken: 'My Access Token',
       });
       expect(client.buildURL('/foo', { hello: undefined })).toEqual('http://localhost:5000/foo');
     });
   });
 
   test('custom fetch', async () => {
-    const client = new HubspotSDK({
+    const client = new HubSpot({
       baseURL: 'http://localhost:5000/',
-      privateAppsKey: 'My Private Apps Key',
-      privateAppsLegacyKey: 'My Private Apps Legacy Key',
+      accessToken: 'My Access Token',
       fetch: (url) => {
         return Promise.resolve(
           new Response(JSON.stringify({ url, custom: true }), {
@@ -263,19 +227,17 @@ describe('instantiate client', () => {
 
   test('explicit global fetch', async () => {
     // make sure the global fetch type is assignable to our Fetch type
-    const client = new HubspotSDK({
+    const client = new HubSpot({
       baseURL: 'http://localhost:5000/',
-      privateAppsKey: 'My Private Apps Key',
-      privateAppsLegacyKey: 'My Private Apps Legacy Key',
+      accessToken: 'My Access Token',
       fetch: defaultFetch,
     });
   });
 
   test('custom signal', async () => {
-    const client = new HubspotSDK({
+    const client = new HubSpot({
       baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-      privateAppsKey: 'My Private Apps Key',
-      privateAppsLegacyKey: 'My Private Apps Legacy Key',
+      accessToken: 'My Access Token',
       fetch: (...args) => {
         return new Promise((resolve, reject) =>
           setTimeout(
@@ -305,10 +267,9 @@ describe('instantiate client', () => {
       return new Response(JSON.stringify({}), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new HubspotSDK({
+    const client = new HubSpot({
       baseURL: 'http://localhost:5000/',
-      privateAppsKey: 'My Private Apps Key',
-      privateAppsLegacyKey: 'My Private Apps Legacy Key',
+      accessToken: 'My Access Token',
       fetch: testFetch,
     });
 
@@ -318,90 +279,65 @@ describe('instantiate client', () => {
 
   describe('baseUrl', () => {
     test('trailing slash', () => {
-      const client = new HubspotSDK({
+      const client = new HubSpot({
         baseURL: 'http://localhost:5000/custom/path/',
-        privateAppsKey: 'My Private Apps Key',
-        privateAppsLegacyKey: 'My Private Apps Legacy Key',
+        accessToken: 'My Access Token',
       });
       expect(client.buildURL('/foo', null)).toEqual('http://localhost:5000/custom/path/foo');
     });
 
     test('no trailing slash', () => {
-      const client = new HubspotSDK({
+      const client = new HubSpot({
         baseURL: 'http://localhost:5000/custom/path',
-        privateAppsKey: 'My Private Apps Key',
-        privateAppsLegacyKey: 'My Private Apps Legacy Key',
+        accessToken: 'My Access Token',
       });
       expect(client.buildURL('/foo', null)).toEqual('http://localhost:5000/custom/path/foo');
     });
 
     afterEach(() => {
-      process.env['HUBSPOT_SDK_BASE_URL'] = undefined;
+      process.env['HUB_SPOT_BASE_URL'] = undefined;
     });
 
     test('explicit option', () => {
-      const client = new HubspotSDK({
-        baseURL: 'https://example.com',
-        privateAppsKey: 'My Private Apps Key',
-        privateAppsLegacyKey: 'My Private Apps Legacy Key',
-      });
+      const client = new HubSpot({ baseURL: 'https://example.com', accessToken: 'My Access Token' });
       expect(client.baseURL).toEqual('https://example.com');
     });
 
     test('env variable', () => {
-      process.env['HUBSPOT_SDK_BASE_URL'] = 'https://example.com/from_env';
-      const client = new HubspotSDK({
-        privateAppsKey: 'My Private Apps Key',
-        privateAppsLegacyKey: 'My Private Apps Legacy Key',
-      });
+      process.env['HUB_SPOT_BASE_URL'] = 'https://example.com/from_env';
+      const client = new HubSpot({ accessToken: 'My Access Token' });
       expect(client.baseURL).toEqual('https://example.com/from_env');
     });
 
     test('empty env variable', () => {
-      process.env['HUBSPOT_SDK_BASE_URL'] = ''; // empty
-      const client = new HubspotSDK({
-        privateAppsKey: 'My Private Apps Key',
-        privateAppsLegacyKey: 'My Private Apps Legacy Key',
-      });
+      process.env['HUB_SPOT_BASE_URL'] = ''; // empty
+      const client = new HubSpot({ accessToken: 'My Access Token' });
       expect(client.baseURL).toEqual('https://api.hubapi.com');
     });
 
     test('blank env variable', () => {
-      process.env['HUBSPOT_SDK_BASE_URL'] = '  '; // blank
-      const client = new HubspotSDK({
-        privateAppsKey: 'My Private Apps Key',
-        privateAppsLegacyKey: 'My Private Apps Legacy Key',
-      });
+      process.env['HUB_SPOT_BASE_URL'] = '  '; // blank
+      const client = new HubSpot({ accessToken: 'My Access Token' });
       expect(client.baseURL).toEqual('https://api.hubapi.com');
     });
 
     test('in request options', () => {
-      const client = new HubspotSDK({
-        privateAppsKey: 'My Private Apps Key',
-        privateAppsLegacyKey: 'My Private Apps Legacy Key',
-      });
+      const client = new HubSpot({ accessToken: 'My Access Token' });
       expect(client.buildURL('/foo', null, 'http://localhost:5000/option')).toEqual(
         'http://localhost:5000/option/foo',
       );
     });
 
     test('in request options overridden by client options', () => {
-      const client = new HubspotSDK({
-        privateAppsKey: 'My Private Apps Key',
-        privateAppsLegacyKey: 'My Private Apps Legacy Key',
-        baseURL: 'http://localhost:5000/client',
-      });
+      const client = new HubSpot({ accessToken: 'My Access Token', baseURL: 'http://localhost:5000/client' });
       expect(client.buildURL('/foo', null, 'http://localhost:5000/option')).toEqual(
         'http://localhost:5000/client/foo',
       );
     });
 
     test('in request options overridden by env variable', () => {
-      process.env['HUBSPOT_SDK_BASE_URL'] = 'http://localhost:5000/env';
-      const client = new HubspotSDK({
-        privateAppsKey: 'My Private Apps Key',
-        privateAppsLegacyKey: 'My Private Apps Legacy Key',
-      });
+      process.env['HUB_SPOT_BASE_URL'] = 'http://localhost:5000/env';
+      const client = new HubSpot({ accessToken: 'My Access Token' });
       expect(client.buildURL('/foo', null, 'http://localhost:5000/option')).toEqual(
         'http://localhost:5000/env/foo',
       );
@@ -409,28 +345,20 @@ describe('instantiate client', () => {
   });
 
   test('maxRetries option is correctly set', () => {
-    const client = new HubspotSDK({
-      maxRetries: 4,
-      privateAppsKey: 'My Private Apps Key',
-      privateAppsLegacyKey: 'My Private Apps Legacy Key',
-    });
+    const client = new HubSpot({ maxRetries: 4, accessToken: 'My Access Token' });
     expect(client.maxRetries).toEqual(4);
 
     // default
-    const client2 = new HubspotSDK({
-      privateAppsKey: 'My Private Apps Key',
-      privateAppsLegacyKey: 'My Private Apps Legacy Key',
-    });
+    const client2 = new HubSpot({ accessToken: 'My Access Token' });
     expect(client2.maxRetries).toEqual(2);
   });
 
   describe('withOptions', () => {
     test('creates a new client with overridden options', async () => {
-      const client = new HubspotSDK({
+      const client = new HubSpot({
         baseURL: 'http://localhost:5000/',
         maxRetries: 3,
-        privateAppsKey: 'My Private Apps Key',
-        privateAppsLegacyKey: 'My Private Apps Legacy Key',
+        accessToken: 'My Access Token',
       });
 
       const newClient = client.withOptions({
@@ -452,12 +380,11 @@ describe('instantiate client', () => {
     });
 
     test('inherits options from the parent client', async () => {
-      const client = new HubspotSDK({
+      const client = new HubSpot({
         baseURL: 'http://localhost:5000/',
         defaultHeaders: { 'X-Test-Header': 'test-value' },
         defaultQuery: { 'test-param': 'test-value' },
-        privateAppsKey: 'My Private Apps Key',
-        privateAppsLegacyKey: 'My Private Apps Legacy Key',
+        accessToken: 'My Access Token',
       });
 
       const newClient = client.withOptions({
@@ -472,11 +399,10 @@ describe('instantiate client', () => {
     });
 
     test('respects runtime property changes when creating new client', () => {
-      const client = new HubspotSDK({
+      const client = new HubSpot({
         baseURL: 'http://localhost:5000/',
         timeout: 1000,
-        privateAppsKey: 'My Private Apps Key',
-        privateAppsLegacyKey: 'My Private Apps Legacy Key',
+        accessToken: 'My Access Token',
       });
 
       // Modify the client properties directly after creation
@@ -505,31 +431,21 @@ describe('instantiate client', () => {
 
   test('with environment variable arguments', () => {
     // set options via env var
-    process.env['HUBSPOT_SDK_PRIVATE_APPS_KEY'] = 'My Private Apps Key';
-    process.env['HUBSPOT_SDK_PRIVATE_APPS_LEGACY_KEY'] = 'My Private Apps Legacy Key';
-    const client = new HubspotSDK();
-    expect(client.privateAppsKey).toBe('My Private Apps Key');
-    expect(client.privateAppsLegacyKey).toBe('My Private Apps Legacy Key');
+    process.env['HUBSPOT_ACCESS_TOKEN'] = 'My Access Token';
+    const client = new HubSpot();
+    expect(client.accessToken).toBe('My Access Token');
   });
 
   test('with overridden environment variable arguments', () => {
     // set options via env var
-    process.env['HUBSPOT_SDK_PRIVATE_APPS_KEY'] = 'another My Private Apps Key';
-    process.env['HUBSPOT_SDK_PRIVATE_APPS_LEGACY_KEY'] = 'another My Private Apps Legacy Key';
-    const client = new HubspotSDK({
-      privateAppsKey: 'My Private Apps Key',
-      privateAppsLegacyKey: 'My Private Apps Legacy Key',
-    });
-    expect(client.privateAppsKey).toBe('My Private Apps Key');
-    expect(client.privateAppsLegacyKey).toBe('My Private Apps Legacy Key');
+    process.env['HUBSPOT_ACCESS_TOKEN'] = 'another My Access Token';
+    const client = new HubSpot({ accessToken: 'My Access Token' });
+    expect(client.accessToken).toBe('My Access Token');
   });
 });
 
 describe('request building', () => {
-  const client = new HubspotSDK({
-    privateAppsKey: 'My Private Apps Key',
-    privateAppsLegacyKey: 'My Private Apps Legacy Key',
-  });
+  const client = new HubSpot({ accessToken: 'My Access Token' });
 
   describe('custom headers', () => {
     test('handles undefined', async () => {
@@ -548,10 +464,7 @@ describe('request building', () => {
 });
 
 describe('default encoder', () => {
-  const client = new HubspotSDK({
-    privateAppsKey: 'My Private Apps Key',
-    privateAppsLegacyKey: 'My Private Apps Legacy Key',
-  });
+  const client = new HubSpot({ accessToken: 'My Access Token' });
 
   class Serializable {
     toJSON() {
@@ -636,12 +549,7 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new HubspotSDK({
-      privateAppsKey: 'My Private Apps Key',
-      privateAppsLegacyKey: 'My Private Apps Legacy Key',
-      timeout: 10,
-      fetch: testFetch,
-    });
+    const client = new HubSpot({ accessToken: 'My Access Token', timeout: 10, fetch: testFetch });
 
     expect(await client.request({ path: '/foo', method: 'get' })).toEqual({ a: 1 });
     expect(count).toEqual(2);
@@ -671,12 +579,7 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new HubspotSDK({
-      privateAppsKey: 'My Private Apps Key',
-      privateAppsLegacyKey: 'My Private Apps Legacy Key',
-      fetch: testFetch,
-      maxRetries: 4,
-    });
+    const client = new HubSpot({ accessToken: 'My Access Token', fetch: testFetch, maxRetries: 4 });
 
     expect(await client.request({ path: '/foo', method: 'get' })).toEqual({ a: 1 });
 
@@ -700,12 +603,7 @@ describe('retries', () => {
       capturedRequest = init;
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
-    const client = new HubspotSDK({
-      privateAppsKey: 'My Private Apps Key',
-      privateAppsLegacyKey: 'My Private Apps Legacy Key',
-      fetch: testFetch,
-      maxRetries: 4,
-    });
+    const client = new HubSpot({ accessToken: 'My Access Token', fetch: testFetch, maxRetries: 4 });
 
     expect(
       await client.request({
@@ -734,9 +632,8 @@ describe('retries', () => {
       capturedRequest = init;
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
-    const client = new HubspotSDK({
-      privateAppsKey: 'My Private Apps Key',
-      privateAppsLegacyKey: 'My Private Apps Legacy Key',
+    const client = new HubSpot({
+      accessToken: 'My Access Token',
       fetch: testFetch,
       maxRetries: 4,
       defaultHeaders: { 'X-Stainless-Retry-Count': null },
@@ -768,12 +665,7 @@ describe('retries', () => {
       capturedRequest = init;
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
-    const client = new HubspotSDK({
-      privateAppsKey: 'My Private Apps Key',
-      privateAppsLegacyKey: 'My Private Apps Legacy Key',
-      fetch: testFetch,
-      maxRetries: 4,
-    });
+    const client = new HubSpot({ accessToken: 'My Access Token', fetch: testFetch, maxRetries: 4 });
 
     expect(
       await client.request({
@@ -803,11 +695,7 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new HubspotSDK({
-      privateAppsKey: 'My Private Apps Key',
-      privateAppsLegacyKey: 'My Private Apps Legacy Key',
-      fetch: testFetch,
-    });
+    const client = new HubSpot({ accessToken: 'My Access Token', fetch: testFetch });
 
     expect(await client.request({ path: '/foo', method: 'get' })).toEqual({ a: 1 });
     expect(count).toEqual(2);
@@ -837,11 +725,7 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new HubspotSDK({
-      privateAppsKey: 'My Private Apps Key',
-      privateAppsLegacyKey: 'My Private Apps Legacy Key',
-      fetch: testFetch,
-    });
+    const client = new HubSpot({ accessToken: 'My Access Token', fetch: testFetch });
 
     expect(await client.request({ path: '/foo', method: 'get' })).toEqual({ a: 1 });
     expect(count).toEqual(2);
