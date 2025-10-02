@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { HubspotSDK } from 'hubspot-sdk';
+import { HubSpot } from 'hubspot-sdk';
 
-const { stringifyQuery } = HubspotSDK.prototype as any;
+const { stringifyQuery } = HubSpot.prototype as any;
 
 describe(stringifyQuery, () => {
   for (const [input, expected] of [

@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { hasOwn } from './values';
-import { type HubspotSDK } from '../../client';
+import { type HubSpot } from '../../client';
 import { RequestOptions } from '../request-options';
 
 type LogFn = (message: string, ...rest: unknown[]) => void;
@@ -24,7 +24,7 @@ const levelNumbers = {
 export const parseLogLevel = (
   maybeLevel: string | undefined,
   sourceName: string,
-  client: HubspotSDK,
+  client: HubSpot,
 ): LogLevel | undefined => {
   if (!maybeLevel) {
     return undefined;
@@ -60,7 +60,7 @@ const noopLogger = {
 
 let cachedLoggers = /* @__PURE__ */ new WeakMap<Logger, [LogLevel, Logger]>();
 
-export function loggerFor(client: HubspotSDK): Logger {
+export function loggerFor(client: HubSpot): Logger {
   const logger = client.logger;
   const logLevel = client.logLevel ?? 'off';
   if (!logger) {
@@ -107,6 +107,7 @@ export const formatRequestDetails = (details: {
           name,
           (
             name.toLowerCase() === 'private-app' ||
+            name.toLowerCase() === undefined ||
             name.toLowerCase() === 'private-app-legacy' ||
             name.toLowerCase() === 'authorization' ||
             name.toLowerCase() === 'cookie' ||

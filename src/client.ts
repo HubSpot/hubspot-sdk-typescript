@@ -17,16 +17,242 @@ import * as Errors from './core/error';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
-import { AccountInfo } from './resources/account-info/account-info';
-import { Automation } from './resources/automation/automation';
-import { Cms } from './resources/cms/cms';
-import { CommunicationPreferences } from './resources/communication-preferences/communication-preferences';
-import { CRMObjectSchemas } from './resources/crm-object-schemas/crm-object-schemas';
-import { CRM } from './resources/crm/crm';
-import { Files } from './resources/files/files';
+import {
+  FileCreateParams,
+  FileGetByPathParams,
+  FileGetMetadataParams,
+  FileGetSignedURLParams,
+  FileImportFromURLParams,
+  FileReadParams,
+  FileReplaceParams,
+  FileSearchParams,
+  FileUpdatePropertiesParams,
+  FileUpdatePropertiesRecursivelyParams,
+  FileUploadParams,
+  Files,
+  FilesCollectionResponseFile,
+  FilesCollectionResponseFolder,
+  FilesFile,
+  FilesFileActionResponse,
+  FilesFileStat,
+  FilesFileUpdateInput,
+  FilesFolder,
+  FilesFolderActionResponse,
+  FilesFolderInput,
+  FilesFolderUpdateInput,
+  FilesFolderUpdateInputWithID,
+  FilesFolderUpdateTaskLocator,
+  FilesImportFromURLInput,
+  FilesImportFromURLTaskLocator,
+  FilesSignedURL,
+} from './resources/files';
+import {
+  WebhookConfigureParams,
+  WebhookCreateParams,
+  WebhookDeleteParams,
+  WebhookReadParams,
+  WebhookUpdateBatchParams,
+  WebhookUpdateParams,
+  Webhooks,
+  WebhooksBatchInputSubscriptionBatchUpdateRequest,
+  WebhooksBatchResponseSubscriptionResponse,
+  WebhooksBatchResponseSubscriptionResponseWithErrors,
+  WebhooksSettingsChangeRequest,
+  WebhooksSettingsResponse,
+  WebhooksSubscriptionBatchUpdateRequest,
+  WebhooksSubscriptionCreateRequest,
+  WebhooksSubscriptionListResponse,
+  WebhooksSubscriptionPatchRequest,
+  WebhooksSubscriptionResponse,
+  WebhooksThrottlingSettings,
+} from './resources/webhooks';
+import {
+  Account,
+  AccountActingUser,
+  AccountCollectionResponseHydratedCriticalActionForwardPaging,
+  AccountCollectionResponsePublicAPIUserActionEventForwardPaging,
+  AccountCollectionResponsePublicLoginAuditForwardPaging,
+  AccountHydratedCriticalAction,
+  AccountPublicAPIUserActionEvent,
+  AccountPublicLoginAudit,
+} from './resources/account/account';
+import { Auth } from './resources/auth/auth';
+import {
+  Automation,
+  AutomationAPIAbTestBranchAction,
+  AutomationAPIActionDataValue,
+  AutomationAPIAppendObjectPropertyValue,
+  AutomationAPIAssociationDataSource,
+  AutomationAPIAssociationTimestampDataSource,
+  AutomationAPIAuthKeyWebhookAuthSettings,
+  AutomationAPIBlockedDate,
+  AutomationAPIConnection,
+  AutomationAPIContactFlow,
+  AutomationAPIContactFlowCreateRequest,
+  AutomationAPIContactFlowPutRequest,
+  AutomationAPIContactPropertyAnchor,
+  AutomationAPICustomCodeAction,
+  AutomationAPIDailyEnrollmentSchedule,
+  AutomationAPIDatasetFieldPropertyFilterDataSource,
+  AutomationAPIEnrolledArgumentPropertyFilterDataSource,
+  AutomationAPIEnrolledRecordPropertyFilterDataSource,
+  AutomationAPIEnrollmentEventPropertyValue,
+  AutomationAPIEnumerationOutputField,
+  AutomationAPIEventBasedEnrollmentCriteria,
+  AutomationAPIFetchedObjectPropertyValue,
+  AutomationAPIFlow,
+  AutomationAPIFlowBatchFetchFlowIDCoordinate,
+  AutomationAPIFlowBatchFetchMigrationFlowIDCoordinate,
+  AutomationAPIFlowBatchFetchMigrationWorkflowIDCoordinate,
+  AutomationAPIFlowBatchInput,
+  AutomationAPIFlowBatchMigrationInput,
+  AutomationAPIFlowCreateRequest,
+  AutomationAPIFlowEmailCampaign,
+  AutomationAPIFlowListing,
+  AutomationAPIFlowPutRequest,
+  AutomationAPIIncrementValue,
+  AutomationAPIInputVariable,
+  AutomationAPIListBasedEnrollmentCriteria,
+  AutomationAPIListBranch,
+  AutomationAPIListBranchAction,
+  AutomationAPIManualEnrollmentCriteria,
+  AutomationAPIMonthlyRelativeDaysEnrollmentSchedule,
+  AutomationAPIMonthlySpecificDaysEnrollmentSchedule,
+  AutomationAPIObjectPropertyValue,
+  AutomationAPIPlatformFlow,
+  AutomationAPIPlatformFlowCreateRequest,
+  AutomationAPIPlatformFlowPutRequest,
+  AutomationAPIPropertyBasedEnrollmentSchedule,
+  AutomationAPIRelativeDateTimeValue,
+  AutomationAPISignatureWebhookAuthSettings,
+  AutomationAPISingleConnectionAction,
+  AutomationAPISort,
+  AutomationAPIStaticAppendValue,
+  AutomationAPIStaticBranch,
+  AutomationAPIStaticBranchAction,
+  AutomationAPIStaticDateAnchor,
+  AutomationAPIStaticPropertyFilterDataSource,
+  AutomationAPIStaticTimeZoneStrategy,
+  AutomationAPIStaticValue,
+  AutomationAPITimeDelay,
+  AutomationAPITimeOfDay,
+  AutomationAPITimeWindow,
+  AutomationAPITimestampValue,
+  AutomationAPIUnEnrollmentSetting,
+  AutomationAPIWebhookAction,
+  AutomationAPIWeeklyEnrollmentSchedule,
+  AutomationAPIYearlyEnrollmentSchedule,
+  AutomationBatchResponseAPIFlow,
+  AutomationBatchResponseAPIFlowWithErrors,
+  AutomationBatchResponseFlowIDWorkflowIDMappingResponse,
+  AutomationBatchResponseFlowIDWorkflowIDMappingResponseWithErrors,
+  AutomationCollectionResponseAPIFlowEmailCampaign,
+  AutomationCollectionResponseAPIFlowListingForwardPaging,
+  AutomationFlowIDWorkflowIDMappingResponse,
+  AutomationPublicAbsoluteComparativeTimestampRefineBy,
+  AutomationPublicAbsoluteRangedTimestampRefineBy,
+  AutomationPublicAdsSearchFilter,
+  AutomationPublicAdsTimeFilter,
+  AutomationPublicAllHistoryRefineBy,
+  AutomationPublicAllPropertyTypesOperation,
+  AutomationPublicAndFilterBranch,
+  AutomationPublicAssociationFilterBranch,
+  AutomationPublicAssociationInListFilter,
+  AutomationPublicBoolPropertyOperation,
+  AutomationPublicCalendarDatePropertyOperation,
+  AutomationPublicCampaignInfluencedFilter,
+  AutomationPublicCommunicationSubscriptionFilter,
+  AutomationPublicComparativeDatePropertyOperation,
+  AutomationPublicComparativePropertyUpdatedOperation,
+  AutomationPublicConstantFilter,
+  AutomationPublicCtaAnalyticsFilter,
+  AutomationPublicDatePoint,
+  AutomationPublicDatePropertyOperation,
+  AutomationPublicDateTimePropertyOperation,
+  AutomationPublicEmailEventFilter,
+  AutomationPublicEmailSubscriptionFilter,
+  AutomationPublicEnumerationPropertyOperation,
+  AutomationPublicEventAnalyticsFilter,
+  AutomationPublicEventFilterMetadata,
+  AutomationPublicFiscalQuarterReference,
+  AutomationPublicFiscalYearReference,
+  AutomationPublicFormSubmissionFilter,
+  AutomationPublicFormSubmissionOnPageFilter,
+  AutomationPublicInListFilter,
+  AutomationPublicInListFilterMetadata,
+  AutomationPublicIndexOffset,
+  AutomationPublicIndexedTimePoint,
+  AutomationPublicIntegrationEventFilter,
+  AutomationPublicMonthReference,
+  AutomationPublicMultiStringPropertyOperation,
+  AutomationPublicNotAllFilterBranch,
+  AutomationPublicNotAnyFilterBranch,
+  AutomationPublicNowReference,
+  AutomationPublicNumAssociationsFilter,
+  AutomationPublicNumOccurrencesRefineBy,
+  AutomationPublicNumberPropertyOperation,
+  AutomationPublicOrFilterBranch,
+  AutomationPublicPageViewAnalyticsFilter,
+  AutomationPublicPrivacyAnalyticsFilter,
+  AutomationPublicPropertyAssociationFilterBranch,
+  AutomationPublicPropertyAssociationInListFilter,
+  AutomationPublicPropertyFilter,
+  AutomationPublicPropertyReferencedTime,
+  AutomationPublicQuarterReference,
+  AutomationPublicRangedDatePropertyOperation,
+  AutomationPublicRangedNumberPropertyOperation,
+  AutomationPublicRangedTimeOperation,
+  AutomationPublicRelativeComparativeTimestampRefineBy,
+  AutomationPublicRelativeRangedTimestampRefineBy,
+  AutomationPublicRestrictedFilterBranch,
+  AutomationPublicRollingDateRangePropertyOperation,
+  AutomationPublicRollingPropertyUpdatedOperation,
+  AutomationPublicSetOccurrencesRefineBy,
+  AutomationPublicStringPropertyOperation,
+  AutomationPublicSurveyMonkeyFilter,
+  AutomationPublicSurveyMonkeyValueFilter,
+  AutomationPublicTimeOffset,
+  AutomationPublicTimePointOperation,
+  AutomationPublicTodayReference,
+  AutomationPublicUnifiedEventsFilter,
+  AutomationPublicUnifiedEventsFilterBranch,
+  AutomationPublicWebinarFilter,
+  AutomationPublicWeekReference,
+  AutomationPublicYearReference,
+} from './resources/automation/automation';
+import {
+  Cms,
+  CmsCollectionResponseWithTotalURLMappingForwardPaging,
+  CmsURLMapping,
+  CmsURLMappingCreateRequestBody,
+} from './resources/cms/cms';
+import {
+  CRM,
+  CRMAssociatedID,
+  CRMAssociationDefinition,
+  CRMAssociationDefinitionEgg,
+  CRMAssociationSpec,
+  CRMAssociationSpecWithLabel,
+  CRMBatchResponsePublicDefaultAssociation,
+  CRMCollectionResponseMultiAssociatedObjectWithLabel,
+  CRMCollectionResponseObjectSchemaNoPaging,
+  CRMCreatedResponseLabelsBetweenObjectPair,
+  CRMLabelsBetweenObjectPair,
+  CRMMultiAssociatedObjectWithLabel,
+  CRMObjectSchema,
+  CRMObjectSchemaEgg,
+  CRMObjectTypeDefinition,
+  CRMObjectTypeDefinitionLabels,
+  CRMObjectTypeDefinitionPatch,
+  CRMObjectTypePropertyCreate,
+  CRMOption,
+  CRMOptionInput,
+  CRMProperty,
+  CRMPropertyModificationMetadata,
+  CRMPublicDefaultAssociation,
+  CRMPublicObjectID,
+} from './resources/crm/crm';
 import { Marketing } from './resources/marketing/marketing';
-import { OAuth } from './resources/oauth/oauth';
-import { Webhooks } from './resources/webhooks/webhooks';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
@@ -42,19 +268,24 @@ import { isEmptyObj } from './internal/utils/values';
 
 export interface ClientOptions {
   /**
-   * Defaults to process.env['HUBSPOT_SDK_PRIVATE_APPS_KEY'].
+   * Defaults to process.env['HUBSPOT_ACCESS_TOKEN'].
    */
-  privateAppsKey?: string | null | undefined;
+  accessToken?: string | null | undefined;
 
   /**
-   * Defaults to process.env['HUBSPOT_SDK_PRIVATE_APPS_LEGACY_KEY'].
+   * Defaults to process.env['DEVELOPER_HAPI_KEY'].
    */
-  privateAppsLegacyKey?: string | null | undefined;
+  developerHapiKey?: string | null | undefined;
+
+  /**
+   * Defaults to process.env['PRIVATE_APPS_LEGACY'].
+   */
+  privateAppsLegacy?: string | null | undefined;
 
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
    *
-   * Defaults to process.env['HUBSPOT_SDK_BASE_URL'].
+   * Defaults to process.env['HUB_SPOT_BASE_URL'].
    */
   baseURL?: string | null | undefined;
 
@@ -108,7 +339,7 @@ export interface ClientOptions {
   /**
    * Set the log level.
    *
-   * Defaults to process.env['HUBSPOT_SDK_LOG'] or 'warn' if it isn't set.
+   * Defaults to process.env['HUB_SPOT_LOG'] or 'warn' if it isn't set.
    */
   logLevel?: LogLevel | undefined;
 
@@ -121,11 +352,12 @@ export interface ClientOptions {
 }
 
 /**
- * API Client for interfacing with the Hubspot SDK API.
+ * API Client for interfacing with the Hub Spot API.
  */
-export class HubspotSDK {
-  privateAppsKey: string | null;
-  privateAppsLegacyKey: string | null;
+export class HubSpot {
+  accessToken: string | null;
+  developerHapiKey: string | null;
+  privateAppsLegacy: string | null;
 
   baseURL: string;
   maxRetries: number;
@@ -140,11 +372,12 @@ export class HubspotSDK {
   private _options: ClientOptions;
 
   /**
-   * API Client for interfacing with the Hubspot SDK API.
+   * API Client for interfacing with the Hub Spot API.
    *
-   * @param {string | null | undefined} [opts.privateAppsKey=process.env['HUBSPOT_SDK_PRIVATE_APPS_KEY'] ?? null]
-   * @param {string | null | undefined} [opts.privateAppsLegacyKey=process.env['HUBSPOT_SDK_PRIVATE_APPS_LEGACY_KEY'] ?? null]
-   * @param {string} [opts.baseURL=process.env['HUBSPOT_SDK_BASE_URL'] ?? https://api.hubapi.com] - Override the default base URL for the API.
+   * @param {string | null | undefined} [opts.accessToken=process.env['HUBSPOT_ACCESS_TOKEN'] ?? null]
+   * @param {string | null | undefined} [opts.developerHapiKey=process.env['DEVELOPER_HAPI_KEY'] ?? null]
+   * @param {string | null | undefined} [opts.privateAppsLegacy=process.env['PRIVATE_APPS_LEGACY'] ?? null]
+   * @param {string} [opts.baseURL=process.env['HUB_SPOT_BASE_URL'] ?? https://api.hubapi.com] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
    * @param {Fetch} [opts.fetch] - Specify a custom `fetch` function implementation.
@@ -153,27 +386,29 @@ export class HubspotSDK {
    * @param {Record<string, string | undefined>} opts.defaultQuery - Default query parameters to include with every request to the API.
    */
   constructor({
-    baseURL = readEnv('HUBSPOT_SDK_BASE_URL'),
-    privateAppsKey = readEnv('HUBSPOT_SDK_PRIVATE_APPS_KEY') ?? null,
-    privateAppsLegacyKey = readEnv('HUBSPOT_SDK_PRIVATE_APPS_LEGACY_KEY') ?? null,
+    baseURL = readEnv('HUB_SPOT_BASE_URL'),
+    accessToken = readEnv('HUBSPOT_ACCESS_TOKEN') ?? null,
+    developerHapiKey = readEnv('DEVELOPER_HAPI_KEY') ?? null,
+    privateAppsLegacy = readEnv('PRIVATE_APPS_LEGACY') ?? null,
     ...opts
   }: ClientOptions = {}) {
     const options: ClientOptions = {
-      privateAppsKey,
-      privateAppsLegacyKey,
+      accessToken,
+      developerHapiKey,
+      privateAppsLegacy,
       ...opts,
       baseURL: baseURL || `https://api.hubapi.com`,
     };
 
     this.baseURL = options.baseURL!;
-    this.timeout = options.timeout ?? HubspotSDK.DEFAULT_TIMEOUT /* 1 minute */;
+    this.timeout = options.timeout ?? HubSpot.DEFAULT_TIMEOUT /* 1 minute */;
     this.logger = options.logger ?? console;
     const defaultLogLevel = 'warn';
     // Set default logLevel early so that we can log a warning in parseLogLevel.
     this.logLevel = defaultLogLevel;
     this.logLevel =
       parseLogLevel(options.logLevel, 'ClientOptions.logLevel', this) ??
-      parseLogLevel(readEnv('HUBSPOT_SDK_LOG'), "process.env['HUBSPOT_SDK_LOG']", this) ??
+      parseLogLevel(readEnv('HUB_SPOT_LOG'), "process.env['HUB_SPOT_LOG']", this) ??
       defaultLogLevel;
     this.fetchOptions = options.fetchOptions;
     this.maxRetries = options.maxRetries ?? 2;
@@ -182,8 +417,9 @@ export class HubspotSDK {
 
     this._options = options;
 
-    this.privateAppsKey = privateAppsKey;
-    this.privateAppsLegacyKey = privateAppsLegacyKey;
+    this.accessToken = accessToken;
+    this.developerHapiKey = developerHapiKey;
+    this.privateAppsLegacy = privateAppsLegacy;
   }
 
   /**
@@ -199,8 +435,9 @@ export class HubspotSDK {
       logLevel: this.logLevel,
       fetch: this.fetch,
       fetchOptions: this.fetchOptions,
-      privateAppsKey: this.privateAppsKey,
-      privateAppsLegacyKey: this.privateAppsLegacyKey,
+      accessToken: this.accessToken,
+      developerHapiKey: this.developerHapiKey,
+      privateAppsLegacy: this.privateAppsLegacy,
       ...options,
     });
     return client;
@@ -214,27 +451,14 @@ export class HubspotSDK {
   }
 
   protected defaultQuery(): Record<string, string | undefined> | undefined {
-    return this._options.defaultQuery;
+    return {
+      hapikey: this.developerHapiKey ?? undefined,
+      ...this._options.defaultQuery,
+    };
   }
 
   protected validateHeaders({ values, nulls }: NullableHeaders) {
-    if (this.privateAppsKey && values.get('private-app')) {
-      return;
-    }
-    if (nulls.has('private-app')) {
-      return;
-    }
-
-    if (this.privateAppsLegacyKey && values.get('private-app-legacy')) {
-      return;
-    }
-    if (nulls.has('private-app-legacy')) {
-      return;
-    }
-
-    throw new Error(
-      'Could not resolve authentication method. Expected either privateAppsKey or privateAppsLegacyKey to be set. Or for one of the "private-app" or "private-app-legacy" headers to be explicitly omitted',
-    );
+    return;
   }
 
   protected async authHeaders(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
@@ -242,17 +466,17 @@ export class HubspotSDK {
   }
 
   protected async privateAppsAuth(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
-    if (this.privateAppsKey == null) {
+    if (this.accessToken == null) {
       return undefined;
     }
-    return buildHeaders([{ 'private-app': this.privateAppsKey }]);
+    return buildHeaders([{ 'private-app': this.accessToken }]);
   }
 
   protected async privateAppsLegacyAuth(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
-    if (this.privateAppsLegacyKey == null) {
+    if (this.privateAppsLegacy == null) {
       return undefined;
     }
-    return buildHeaders([{ 'private-app-legacy': this.privateAppsLegacyKey }]);
+    return buildHeaders([{ 'private-app-legacy': this.privateAppsLegacy }]);
   }
 
   protected stringifyQuery(query: Record<string, unknown>): string {
@@ -724,10 +948,10 @@ export class HubspotSDK {
     }
   }
 
-  static HubspotSDK = this;
+  static HubSpot = this;
   static DEFAULT_TIMEOUT = 60000; // 1 minute
 
-  static HubspotSDKError = Errors.HubspotSDKError;
+  static HubSpotError = Errors.HubSpotError;
   static APIError = Errors.APIError;
   static APIConnectionError = Errors.APIConnectionError;
   static APIConnectionTimeoutError = Errors.APIConnectionTimeoutError;
@@ -743,49 +967,278 @@ export class HubspotSDK {
 
   static toFile = Uploads.toFile;
 
-  accountInfo: API.AccountInfo = new API.AccountInfo(this);
-  oauth: API.OAuth = new API.OAuth(this);
+  account: API.Account = new API.Account(this);
+  auth: API.Auth = new API.Auth(this);
   automation: API.Automation = new API.Automation(this);
   cms: API.Cms = new API.Cms(this);
   crm: API.CRM = new API.CRM(this);
-  crmObjectSchemas: API.CRMObjectSchemas = new API.CRMObjectSchemas(this);
   files: API.Files = new API.Files(this);
   marketing: API.Marketing = new API.Marketing(this);
-  communicationPreferences: API.CommunicationPreferences = new API.CommunicationPreferences(this);
   webhooks: API.Webhooks = new API.Webhooks(this);
 }
 
-HubspotSDK.AccountInfo = AccountInfo;
-HubspotSDK.OAuth = OAuth;
-HubspotSDK.Automation = Automation;
-HubspotSDK.Cms = Cms;
-HubspotSDK.CRM = CRM;
-HubspotSDK.CRMObjectSchemas = CRMObjectSchemas;
-HubspotSDK.Files = Files;
-HubspotSDK.Marketing = Marketing;
-HubspotSDK.CommunicationPreferences = CommunicationPreferences;
-HubspotSDK.Webhooks = Webhooks;
+HubSpot.Account = Account;
+HubSpot.Auth = Auth;
+HubSpot.Automation = Automation;
+HubSpot.Cms = Cms;
+HubSpot.CRM = CRM;
+HubSpot.Files = Files;
+HubSpot.Marketing = Marketing;
+HubSpot.Webhooks = Webhooks;
 
-export declare namespace HubspotSDK {
+export declare namespace HubSpot {
   export type RequestOptions = Opts.RequestOptions;
 
-  export { AccountInfo as AccountInfo };
+  export {
+    Account as Account,
+    type AccountActingUser as AccountActingUser,
+    type AccountCollectionResponseHydratedCriticalActionForwardPaging as AccountCollectionResponseHydratedCriticalActionForwardPaging,
+    type AccountCollectionResponsePublicAPIUserActionEventForwardPaging as AccountCollectionResponsePublicAPIUserActionEventForwardPaging,
+    type AccountCollectionResponsePublicLoginAuditForwardPaging as AccountCollectionResponsePublicLoginAuditForwardPaging,
+    type AccountHydratedCriticalAction as AccountHydratedCriticalAction,
+    type AccountPublicAPIUserActionEvent as AccountPublicAPIUserActionEvent,
+    type AccountPublicLoginAudit as AccountPublicLoginAudit,
+  };
 
-  export { OAuth as OAuth };
+  export { Auth as Auth };
 
-  export { Automation as Automation };
+  export {
+    Automation as Automation,
+    type AutomationAPIAbTestBranchAction as AutomationAPIAbTestBranchAction,
+    type AutomationAPIActionDataValue as AutomationAPIActionDataValue,
+    type AutomationAPIAppendObjectPropertyValue as AutomationAPIAppendObjectPropertyValue,
+    type AutomationAPIAssociationDataSource as AutomationAPIAssociationDataSource,
+    type AutomationAPIAssociationTimestampDataSource as AutomationAPIAssociationTimestampDataSource,
+    type AutomationAPIAuthKeyWebhookAuthSettings as AutomationAPIAuthKeyWebhookAuthSettings,
+    type AutomationAPIBlockedDate as AutomationAPIBlockedDate,
+    type AutomationAPIConnection as AutomationAPIConnection,
+    type AutomationAPIContactFlow as AutomationAPIContactFlow,
+    type AutomationAPIContactFlowCreateRequest as AutomationAPIContactFlowCreateRequest,
+    type AutomationAPIContactFlowPutRequest as AutomationAPIContactFlowPutRequest,
+    type AutomationAPIContactPropertyAnchor as AutomationAPIContactPropertyAnchor,
+    type AutomationAPICustomCodeAction as AutomationAPICustomCodeAction,
+    type AutomationAPIDailyEnrollmentSchedule as AutomationAPIDailyEnrollmentSchedule,
+    type AutomationAPIDatasetFieldPropertyFilterDataSource as AutomationAPIDatasetFieldPropertyFilterDataSource,
+    type AutomationAPIEnrolledArgumentPropertyFilterDataSource as AutomationAPIEnrolledArgumentPropertyFilterDataSource,
+    type AutomationAPIEnrolledRecordPropertyFilterDataSource as AutomationAPIEnrolledRecordPropertyFilterDataSource,
+    type AutomationAPIEnrollmentEventPropertyValue as AutomationAPIEnrollmentEventPropertyValue,
+    type AutomationAPIEnumerationOutputField as AutomationAPIEnumerationOutputField,
+    type AutomationAPIEventBasedEnrollmentCriteria as AutomationAPIEventBasedEnrollmentCriteria,
+    type AutomationAPIFetchedObjectPropertyValue as AutomationAPIFetchedObjectPropertyValue,
+    type AutomationAPIFlow as AutomationAPIFlow,
+    type AutomationAPIFlowBatchFetchFlowIDCoordinate as AutomationAPIFlowBatchFetchFlowIDCoordinate,
+    type AutomationAPIFlowBatchFetchMigrationFlowIDCoordinate as AutomationAPIFlowBatchFetchMigrationFlowIDCoordinate,
+    type AutomationAPIFlowBatchFetchMigrationWorkflowIDCoordinate as AutomationAPIFlowBatchFetchMigrationWorkflowIDCoordinate,
+    type AutomationAPIFlowBatchInput as AutomationAPIFlowBatchInput,
+    type AutomationAPIFlowBatchMigrationInput as AutomationAPIFlowBatchMigrationInput,
+    type AutomationAPIFlowCreateRequest as AutomationAPIFlowCreateRequest,
+    type AutomationAPIFlowEmailCampaign as AutomationAPIFlowEmailCampaign,
+    type AutomationAPIFlowListing as AutomationAPIFlowListing,
+    type AutomationAPIFlowPutRequest as AutomationAPIFlowPutRequest,
+    type AutomationAPIIncrementValue as AutomationAPIIncrementValue,
+    type AutomationAPIInputVariable as AutomationAPIInputVariable,
+    type AutomationAPIListBasedEnrollmentCriteria as AutomationAPIListBasedEnrollmentCriteria,
+    type AutomationAPIListBranch as AutomationAPIListBranch,
+    type AutomationAPIListBranchAction as AutomationAPIListBranchAction,
+    type AutomationAPIManualEnrollmentCriteria as AutomationAPIManualEnrollmentCriteria,
+    type AutomationAPIMonthlyRelativeDaysEnrollmentSchedule as AutomationAPIMonthlyRelativeDaysEnrollmentSchedule,
+    type AutomationAPIMonthlySpecificDaysEnrollmentSchedule as AutomationAPIMonthlySpecificDaysEnrollmentSchedule,
+    type AutomationAPIObjectPropertyValue as AutomationAPIObjectPropertyValue,
+    type AutomationAPIPlatformFlow as AutomationAPIPlatformFlow,
+    type AutomationAPIPlatformFlowCreateRequest as AutomationAPIPlatformFlowCreateRequest,
+    type AutomationAPIPlatformFlowPutRequest as AutomationAPIPlatformFlowPutRequest,
+    type AutomationAPIPropertyBasedEnrollmentSchedule as AutomationAPIPropertyBasedEnrollmentSchedule,
+    type AutomationAPIRelativeDateTimeValue as AutomationAPIRelativeDateTimeValue,
+    type AutomationAPISignatureWebhookAuthSettings as AutomationAPISignatureWebhookAuthSettings,
+    type AutomationAPISingleConnectionAction as AutomationAPISingleConnectionAction,
+    type AutomationAPISort as AutomationAPISort,
+    type AutomationAPIStaticAppendValue as AutomationAPIStaticAppendValue,
+    type AutomationAPIStaticBranch as AutomationAPIStaticBranch,
+    type AutomationAPIStaticBranchAction as AutomationAPIStaticBranchAction,
+    type AutomationAPIStaticDateAnchor as AutomationAPIStaticDateAnchor,
+    type AutomationAPIStaticPropertyFilterDataSource as AutomationAPIStaticPropertyFilterDataSource,
+    type AutomationAPIStaticTimeZoneStrategy as AutomationAPIStaticTimeZoneStrategy,
+    type AutomationAPIStaticValue as AutomationAPIStaticValue,
+    type AutomationAPITimeDelay as AutomationAPITimeDelay,
+    type AutomationAPITimeOfDay as AutomationAPITimeOfDay,
+    type AutomationAPITimestampValue as AutomationAPITimestampValue,
+    type AutomationAPITimeWindow as AutomationAPITimeWindow,
+    type AutomationAPIUnEnrollmentSetting as AutomationAPIUnEnrollmentSetting,
+    type AutomationAPIWebhookAction as AutomationAPIWebhookAction,
+    type AutomationAPIWeeklyEnrollmentSchedule as AutomationAPIWeeklyEnrollmentSchedule,
+    type AutomationAPIYearlyEnrollmentSchedule as AutomationAPIYearlyEnrollmentSchedule,
+    type AutomationBatchResponseAPIFlow as AutomationBatchResponseAPIFlow,
+    type AutomationBatchResponseAPIFlowWithErrors as AutomationBatchResponseAPIFlowWithErrors,
+    type AutomationBatchResponseFlowIDWorkflowIDMappingResponse as AutomationBatchResponseFlowIDWorkflowIDMappingResponse,
+    type AutomationBatchResponseFlowIDWorkflowIDMappingResponseWithErrors as AutomationBatchResponseFlowIDWorkflowIDMappingResponseWithErrors,
+    type AutomationCollectionResponseAPIFlowEmailCampaign as AutomationCollectionResponseAPIFlowEmailCampaign,
+    type AutomationCollectionResponseAPIFlowListingForwardPaging as AutomationCollectionResponseAPIFlowListingForwardPaging,
+    type AutomationFlowIDWorkflowIDMappingResponse as AutomationFlowIDWorkflowIDMappingResponse,
+    type AutomationPublicAbsoluteComparativeTimestampRefineBy as AutomationPublicAbsoluteComparativeTimestampRefineBy,
+    type AutomationPublicAbsoluteRangedTimestampRefineBy as AutomationPublicAbsoluteRangedTimestampRefineBy,
+    type AutomationPublicAdsSearchFilter as AutomationPublicAdsSearchFilter,
+    type AutomationPublicAdsTimeFilter as AutomationPublicAdsTimeFilter,
+    type AutomationPublicAllHistoryRefineBy as AutomationPublicAllHistoryRefineBy,
+    type AutomationPublicAllPropertyTypesOperation as AutomationPublicAllPropertyTypesOperation,
+    type AutomationPublicAndFilterBranch as AutomationPublicAndFilterBranch,
+    type AutomationPublicAssociationFilterBranch as AutomationPublicAssociationFilterBranch,
+    type AutomationPublicAssociationInListFilter as AutomationPublicAssociationInListFilter,
+    type AutomationPublicBoolPropertyOperation as AutomationPublicBoolPropertyOperation,
+    type AutomationPublicCalendarDatePropertyOperation as AutomationPublicCalendarDatePropertyOperation,
+    type AutomationPublicCampaignInfluencedFilter as AutomationPublicCampaignInfluencedFilter,
+    type AutomationPublicCommunicationSubscriptionFilter as AutomationPublicCommunicationSubscriptionFilter,
+    type AutomationPublicComparativeDatePropertyOperation as AutomationPublicComparativeDatePropertyOperation,
+    type AutomationPublicComparativePropertyUpdatedOperation as AutomationPublicComparativePropertyUpdatedOperation,
+    type AutomationPublicConstantFilter as AutomationPublicConstantFilter,
+    type AutomationPublicCtaAnalyticsFilter as AutomationPublicCtaAnalyticsFilter,
+    type AutomationPublicDatePoint as AutomationPublicDatePoint,
+    type AutomationPublicDatePropertyOperation as AutomationPublicDatePropertyOperation,
+    type AutomationPublicDateTimePropertyOperation as AutomationPublicDateTimePropertyOperation,
+    type AutomationPublicEmailEventFilter as AutomationPublicEmailEventFilter,
+    type AutomationPublicEmailSubscriptionFilter as AutomationPublicEmailSubscriptionFilter,
+    type AutomationPublicEnumerationPropertyOperation as AutomationPublicEnumerationPropertyOperation,
+    type AutomationPublicEventAnalyticsFilter as AutomationPublicEventAnalyticsFilter,
+    type AutomationPublicEventFilterMetadata as AutomationPublicEventFilterMetadata,
+    type AutomationPublicFiscalQuarterReference as AutomationPublicFiscalQuarterReference,
+    type AutomationPublicFiscalYearReference as AutomationPublicFiscalYearReference,
+    type AutomationPublicFormSubmissionFilter as AutomationPublicFormSubmissionFilter,
+    type AutomationPublicFormSubmissionOnPageFilter as AutomationPublicFormSubmissionOnPageFilter,
+    type AutomationPublicIndexedTimePoint as AutomationPublicIndexedTimePoint,
+    type AutomationPublicIndexOffset as AutomationPublicIndexOffset,
+    type AutomationPublicInListFilter as AutomationPublicInListFilter,
+    type AutomationPublicInListFilterMetadata as AutomationPublicInListFilterMetadata,
+    type AutomationPublicIntegrationEventFilter as AutomationPublicIntegrationEventFilter,
+    type AutomationPublicMonthReference as AutomationPublicMonthReference,
+    type AutomationPublicMultiStringPropertyOperation as AutomationPublicMultiStringPropertyOperation,
+    type AutomationPublicNotAllFilterBranch as AutomationPublicNotAllFilterBranch,
+    type AutomationPublicNotAnyFilterBranch as AutomationPublicNotAnyFilterBranch,
+    type AutomationPublicNowReference as AutomationPublicNowReference,
+    type AutomationPublicNumAssociationsFilter as AutomationPublicNumAssociationsFilter,
+    type AutomationPublicNumberPropertyOperation as AutomationPublicNumberPropertyOperation,
+    type AutomationPublicNumOccurrencesRefineBy as AutomationPublicNumOccurrencesRefineBy,
+    type AutomationPublicOrFilterBranch as AutomationPublicOrFilterBranch,
+    type AutomationPublicPageViewAnalyticsFilter as AutomationPublicPageViewAnalyticsFilter,
+    type AutomationPublicPrivacyAnalyticsFilter as AutomationPublicPrivacyAnalyticsFilter,
+    type AutomationPublicPropertyAssociationFilterBranch as AutomationPublicPropertyAssociationFilterBranch,
+    type AutomationPublicPropertyAssociationInListFilter as AutomationPublicPropertyAssociationInListFilter,
+    type AutomationPublicPropertyFilter as AutomationPublicPropertyFilter,
+    type AutomationPublicPropertyReferencedTime as AutomationPublicPropertyReferencedTime,
+    type AutomationPublicQuarterReference as AutomationPublicQuarterReference,
+    type AutomationPublicRangedDatePropertyOperation as AutomationPublicRangedDatePropertyOperation,
+    type AutomationPublicRangedNumberPropertyOperation as AutomationPublicRangedNumberPropertyOperation,
+    type AutomationPublicRangedTimeOperation as AutomationPublicRangedTimeOperation,
+    type AutomationPublicRelativeComparativeTimestampRefineBy as AutomationPublicRelativeComparativeTimestampRefineBy,
+    type AutomationPublicRelativeRangedTimestampRefineBy as AutomationPublicRelativeRangedTimestampRefineBy,
+    type AutomationPublicRestrictedFilterBranch as AutomationPublicRestrictedFilterBranch,
+    type AutomationPublicRollingDateRangePropertyOperation as AutomationPublicRollingDateRangePropertyOperation,
+    type AutomationPublicRollingPropertyUpdatedOperation as AutomationPublicRollingPropertyUpdatedOperation,
+    type AutomationPublicSetOccurrencesRefineBy as AutomationPublicSetOccurrencesRefineBy,
+    type AutomationPublicStringPropertyOperation as AutomationPublicStringPropertyOperation,
+    type AutomationPublicSurveyMonkeyFilter as AutomationPublicSurveyMonkeyFilter,
+    type AutomationPublicSurveyMonkeyValueFilter as AutomationPublicSurveyMonkeyValueFilter,
+    type AutomationPublicTimeOffset as AutomationPublicTimeOffset,
+    type AutomationPublicTimePointOperation as AutomationPublicTimePointOperation,
+    type AutomationPublicTodayReference as AutomationPublicTodayReference,
+    type AutomationPublicUnifiedEventsFilter as AutomationPublicUnifiedEventsFilter,
+    type AutomationPublicUnifiedEventsFilterBranch as AutomationPublicUnifiedEventsFilterBranch,
+    type AutomationPublicWebinarFilter as AutomationPublicWebinarFilter,
+    type AutomationPublicWeekReference as AutomationPublicWeekReference,
+    type AutomationPublicYearReference as AutomationPublicYearReference,
+  };
 
-  export { Cms as Cms };
+  export {
+    Cms as Cms,
+    type CmsCollectionResponseWithTotalURLMappingForwardPaging as CmsCollectionResponseWithTotalURLMappingForwardPaging,
+    type CmsURLMapping as CmsURLMapping,
+    type CmsURLMappingCreateRequestBody as CmsURLMappingCreateRequestBody,
+  };
 
-  export { CRM as CRM };
+  export {
+    CRM as CRM,
+    type CRMAssociatedID as CRMAssociatedID,
+    type CRMAssociationDefinition as CRMAssociationDefinition,
+    type CRMAssociationDefinitionEgg as CRMAssociationDefinitionEgg,
+    type CRMAssociationSpec as CRMAssociationSpec,
+    type CRMAssociationSpecWithLabel as CRMAssociationSpecWithLabel,
+    type CRMBatchResponsePublicDefaultAssociation as CRMBatchResponsePublicDefaultAssociation,
+    type CRMCollectionResponseMultiAssociatedObjectWithLabel as CRMCollectionResponseMultiAssociatedObjectWithLabel,
+    type CRMCollectionResponseObjectSchemaNoPaging as CRMCollectionResponseObjectSchemaNoPaging,
+    type CRMCreatedResponseLabelsBetweenObjectPair as CRMCreatedResponseLabelsBetweenObjectPair,
+    type CRMLabelsBetweenObjectPair as CRMLabelsBetweenObjectPair,
+    type CRMMultiAssociatedObjectWithLabel as CRMMultiAssociatedObjectWithLabel,
+    type CRMObjectSchema as CRMObjectSchema,
+    type CRMObjectSchemaEgg as CRMObjectSchemaEgg,
+    type CRMObjectTypeDefinition as CRMObjectTypeDefinition,
+    type CRMObjectTypeDefinitionLabels as CRMObjectTypeDefinitionLabels,
+    type CRMObjectTypeDefinitionPatch as CRMObjectTypeDefinitionPatch,
+    type CRMObjectTypePropertyCreate as CRMObjectTypePropertyCreate,
+    type CRMOption as CRMOption,
+    type CRMOptionInput as CRMOptionInput,
+    type CRMProperty as CRMProperty,
+    type CRMPropertyModificationMetadata as CRMPropertyModificationMetadata,
+    type CRMPublicDefaultAssociation as CRMPublicDefaultAssociation,
+    type CRMPublicObjectID as CRMPublicObjectID,
+  };
 
-  export { CRMObjectSchemas as CRMObjectSchemas };
-
-  export { Files as Files };
+  export {
+    Files as Files,
+    type FilesCollectionResponseFile as FilesCollectionResponseFile,
+    type FilesCollectionResponseFolder as FilesCollectionResponseFolder,
+    type FilesFile as FilesFile,
+    type FilesFileActionResponse as FilesFileActionResponse,
+    type FilesFileStat as FilesFileStat,
+    type FilesFileUpdateInput as FilesFileUpdateInput,
+    type FilesFolder as FilesFolder,
+    type FilesFolderActionResponse as FilesFolderActionResponse,
+    type FilesFolderInput as FilesFolderInput,
+    type FilesFolderUpdateInput as FilesFolderUpdateInput,
+    type FilesFolderUpdateInputWithID as FilesFolderUpdateInputWithID,
+    type FilesFolderUpdateTaskLocator as FilesFolderUpdateTaskLocator,
+    type FilesImportFromURLInput as FilesImportFromURLInput,
+    type FilesImportFromURLTaskLocator as FilesImportFromURLTaskLocator,
+    type FilesSignedURL as FilesSignedURL,
+    type FileCreateParams as FileCreateParams,
+    type FileGetByPathParams as FileGetByPathParams,
+    type FileGetMetadataParams as FileGetMetadataParams,
+    type FileGetSignedURLParams as FileGetSignedURLParams,
+    type FileImportFromURLParams as FileImportFromURLParams,
+    type FileReadParams as FileReadParams,
+    type FileReplaceParams as FileReplaceParams,
+    type FileSearchParams as FileSearchParams,
+    type FileUpdatePropertiesParams as FileUpdatePropertiesParams,
+    type FileUpdatePropertiesRecursivelyParams as FileUpdatePropertiesRecursivelyParams,
+    type FileUploadParams as FileUploadParams,
+  };
 
   export { Marketing as Marketing };
 
-  export { CommunicationPreferences as CommunicationPreferences };
+  export {
+    Webhooks as Webhooks,
+    type WebhooksBatchInputSubscriptionBatchUpdateRequest as WebhooksBatchInputSubscriptionBatchUpdateRequest,
+    type WebhooksBatchResponseSubscriptionResponse as WebhooksBatchResponseSubscriptionResponse,
+    type WebhooksBatchResponseSubscriptionResponseWithErrors as WebhooksBatchResponseSubscriptionResponseWithErrors,
+    type WebhooksSettingsChangeRequest as WebhooksSettingsChangeRequest,
+    type WebhooksSettingsResponse as WebhooksSettingsResponse,
+    type WebhooksSubscriptionBatchUpdateRequest as WebhooksSubscriptionBatchUpdateRequest,
+    type WebhooksSubscriptionCreateRequest as WebhooksSubscriptionCreateRequest,
+    type WebhooksSubscriptionListResponse as WebhooksSubscriptionListResponse,
+    type WebhooksSubscriptionPatchRequest as WebhooksSubscriptionPatchRequest,
+    type WebhooksSubscriptionResponse as WebhooksSubscriptionResponse,
+    type WebhooksThrottlingSettings as WebhooksThrottlingSettings,
+    type WebhookCreateParams as WebhookCreateParams,
+    type WebhookUpdateParams as WebhookUpdateParams,
+    type WebhookDeleteParams as WebhookDeleteParams,
+    type WebhookConfigureParams as WebhookConfigureParams,
+    type WebhookReadParams as WebhookReadParams,
+    type WebhookUpdateBatchParams as WebhookUpdateBatchParams,
+  };
 
-  export { Webhooks as Webhooks };
+  export type BatchInputString = API.BatchInputString;
+  export type Error = API.Error;
+  export type ErrorDetail = API.ErrorDetail;
+  export type ForwardPaging = API.ForwardPaging;
+  export type NextPage = API.NextPage;
+  export type Paging = API.Paging;
+  export type PreviousPage = API.PreviousPage;
+  export type StandardError = API.StandardError;
 }
