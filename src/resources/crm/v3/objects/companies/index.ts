@@ -1,0 +1,37 @@
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+export {
+  Batch,
+  type CRMObjectsBatchInputSimplePublicObjectBatchInput,
+  type CRMObjectsBatchInputSimplePublicObjectBatchInputForCreate,
+  type CRMObjectsBatchInputSimplePublicObjectBatchInputUpsert,
+  type CRMObjectsBatchInputSimplePublicObjectID,
+  type CRMObjectsBatchReadInputSimplePublicObjectID,
+  type CRMObjectsBatchResponseSimplePublicObject,
+  type CRMObjectsBatchResponseSimplePublicUpsertObject,
+  type CRMObjectsSimplePublicObjectID,
+  type BatchCreateParams,
+  type BatchUpdateParams,
+  type BatchArchiveParams,
+  type BatchReadParams,
+  type BatchUpsertParams,
+} from './batch';
+export {
+  Companies,
+  type CRMObjectsCollectionResponseSimplePublicObjectWithAssociations,
+  type CRMObjectsCollectionResponseWithTotalSimplePublicObject,
+  type CRMObjectsCreatedResponseSimplePublicObject,
+  type CRMObjectsPublicAssociationsForObject,
+  type CRMObjectsPublicMergeInput,
+  type CRMObjectsPublicObjectSearchRequest,
+  type CRMObjectsSimplePublicObject,
+  type CRMObjectsSimplePublicObjectInput,
+  type CRMObjectsSimplePublicObjectInputForCreate,
+  type CRMObjectsSimplePublicObjectWithAssociations,
+  type CompanyCreateParams,
+  type CompanyRetrieveParams,
+  type CompanyUpdateParams,
+  type CompanyListParams,
+  type CompanyMergeParams,
+  type CompanySearchParams,
+} from './companies';
