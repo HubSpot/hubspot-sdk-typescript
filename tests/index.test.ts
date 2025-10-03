@@ -425,20 +425,6 @@ describe('instantiate client', () => {
       expect(newClient.buildURL('/bar', null)).toEqual('http://localhost:6000/bar');
     });
   });
-
-  test('with environment variable arguments', () => {
-    // set options via env var
-    process.env['HUBSPOT_ACCESS_TOKEN'] = 'pat-123123';
-    const client = new HubSpot();
-    expect(client.accessToken).toBe('pat-123123');
-  });
-
-  test('with overridden environment variable arguments', () => {
-    // set options via env var
-    process.env['HUBSPOT_ACCESS_TOKEN'] = 'another pat-123123';
-    const client = new HubSpot({ accessToken: 'pat-123123' });
-    expect(client.accessToken).toBe('pat-123123');
-  });
 });
 
 describe('request building', () => {

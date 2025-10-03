@@ -256,9 +256,6 @@ import {
 import { isEmptyObj } from './internal/utils/values';
 
 export interface ClientOptions {
-  /**
-   * Defaults to process.env['HUBSPOT_ACCESS_TOKEN'].
-   */
   accessToken?: string | null | undefined;
 
   /**
@@ -357,7 +354,7 @@ export class HubSpot {
   /**
    * API Client for interfacing with the Hub Spot API.
    *
-   * @param {string | null | undefined} [opts.accessToken=process.env['HUBSPOT_ACCESS_TOKEN'] ?? null]
+   * @param {string | null | undefined} [opts.accessToken]
    * @param {string | null | undefined} [opts.developerHapikey=process.env['HUBSPOT_DEVELOPER_HAPI_KEY'] ?? null]
    * @param {string} [opts.baseURL=process.env['HUB_SPOT_BASE_URL'] ?? https://api.hubapi.com] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
@@ -369,7 +366,7 @@ export class HubSpot {
    */
   constructor({
     baseURL = readEnv('HUB_SPOT_BASE_URL'),
-    accessToken = readEnv('HUBSPOT_ACCESS_TOKEN') ?? null,
+    accessToken = null,
     developerHapikey = readEnv('HUBSPOT_DEVELOPER_HAPI_KEY') ?? null,
     ...opts
   }: ClientOptions = {}) {
