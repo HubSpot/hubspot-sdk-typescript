@@ -3,7 +3,7 @@
 import HubSpot from 'hubspot-sdk';
 
 const client = new HubSpot({
-  accessToken: 'My Access Token',
+  accessToken: 'pat-123123',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 

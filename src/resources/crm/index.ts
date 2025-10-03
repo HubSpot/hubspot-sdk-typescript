@@ -38,15 +38,7 @@ export {
   type CRMPublicDefaultAssociation,
   type CRMPublicObjectID,
 } from './crm';
-export {
-  ObjectSchemas,
-  type ObjectSchemaCreateParams,
-  type ObjectSchemaUpdateParams,
-  type ObjectSchemaListParams,
-  type ObjectSchemaDeleteParams,
-  type ObjectSchemaArchiveAssociationParams,
-  type ObjectSchemaCreateAssociationParams,
-} from './object-schemas';
+export { Extensions } from './extensions/index';
 export {
   Objects,
   type CRMObjectsBatchInputSimplePublicObjectBatchInput,

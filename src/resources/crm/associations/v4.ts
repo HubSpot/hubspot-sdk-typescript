@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
 import * as CRMAPI from '../crm';
+import * as EmailsAPI from '../../marketing/emails';
 import { APIPromise } from '../../../core/api-promise';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
@@ -127,7 +128,7 @@ export interface CRMAssociationsV4BatchResponseLabelsBetweenObjectPair {
 
   status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
 
-  errors?: Array<Shared.StandardError>;
+  errors?: Array<CRMAssociationsV4StandardError1>;
 
   links?: { [key: string]: string };
 
@@ -145,7 +146,7 @@ export interface CRMAssociationsV4BatchResponsePublicAssociationMultiWithLabel {
 
   status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
 
-  errors?: Array<Shared.StandardError>;
+  errors?: Array<CRMAssociationsV4StandardError1>;
 
   links?: { [key: string]: string };
 
@@ -163,7 +164,7 @@ export interface CRMAssociationsV4BatchResponseVoid {
 
   status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
 
-  errors?: Array<Shared.StandardError>;
+  errors?: Array<CRMAssociationsV4StandardError1>;
 
   links?: { [key: string]: string };
 
@@ -203,7 +204,7 @@ export interface CRMAssociationsV4PublicAssociationMultiPost {
 
   to: CRMAPI.CRMPublicObjectID;
 
-  types: Array<CRMAPI.CRMAssociationSpec>;
+  types: Array<CRMAssociationsV4AssociationSpec1>;
 }
 
 export interface CRMAssociationsV4PublicAssociationMultiWithLabel {
@@ -211,7 +212,7 @@ export interface CRMAssociationsV4PublicAssociationMultiWithLabel {
 
   to: Array<CRMAPI.CRMMultiAssociatedObjectWithLabel>;
 
-  paging?: Shared.Paging;
+  paging?: EmailsAPI.MarketingEmailsPaging;
 }
 
 export interface CRMAssociationsV4PublicDefaultAssociationMultiPost {
@@ -271,7 +272,7 @@ export interface V4CreateParams {
   /**
    * Body param:
    */
-  body: Array<CRMAssociationsV4AssociationSpec1>;
+  body: Array<CRMAPI.CRMAssociationSpec>;
 }
 
 export interface V4ListParams {

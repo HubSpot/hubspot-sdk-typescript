@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
 import * as CRMAPI from '../crm';
+import * as EmailsAPI from '../../marketing/emails';
 import * as V4API from './v4';
 import {
   CRMAssociationsV4AssociationSpec1,
@@ -139,7 +140,7 @@ export interface CRMAssociationsPublicAssociationMulti {
 
   to: Array<CRMAPI.CRMAssociatedID>;
 
-  paging?: Shared.Paging;
+  paging?: EmailsAPI.MarketingEmailsPaging;
 }
 
 export interface AssociationCreateParams {

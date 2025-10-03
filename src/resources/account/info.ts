@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as Shared from '../shared';
+import * as EmailsAPI from '../marketing/emails';
 
 export class Info extends APIResource {}
 
@@ -22,7 +22,7 @@ export interface AccountInfoAPIUsage {
 export interface AccountInfoCollectionResponseAPIUsage {
   results: Array<AccountInfoAPIUsage>;
 
-  paging?: Shared.Paging;
+  paging?: EmailsAPI.MarketingEmailsPaging;
 }
 
 export interface AccountInfoPortalInformationResponse {

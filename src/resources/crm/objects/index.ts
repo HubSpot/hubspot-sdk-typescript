@@ -63,3 +63,12 @@ export {
   type CRMObjectsSimplePublicUpsertObject,
   type CRMObjectsValueWithTimestamp,
 } from './objects';
+export {
+  Schemas,
+  type SchemaCreateParams,
+  type SchemaUpdateParams,
+  type SchemaListParams,
+  type SchemaDeleteParams,
+  type SchemaArchiveAssociationParams,
+  type SchemaCreateAssociationParams,
+} from './schemas';

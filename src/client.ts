@@ -18,35 +18,6 @@ import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
 import {
-  FileCreateParams,
-  FileGetByPathParams,
-  FileGetMetadataParams,
-  FileGetSignedURLParams,
-  FileImportFromURLParams,
-  FileReadParams,
-  FileReplaceParams,
-  FileSearchParams,
-  FileUpdatePropertiesParams,
-  FileUpdatePropertiesRecursivelyParams,
-  FileUploadParams,
-  Files,
-  FilesCollectionResponseFile,
-  FilesCollectionResponseFolder,
-  FilesFile,
-  FilesFileActionResponse,
-  FilesFileStat,
-  FilesFileUpdateInput,
-  FilesFolder,
-  FilesFolderActionResponse,
-  FilesFolderInput,
-  FilesFolderUpdateInput,
-  FilesFolderUpdateInputWithID,
-  FilesFolderUpdateTaskLocator,
-  FilesImportFromURLInput,
-  FilesImportFromURLTaskLocator,
-  FilesSignedURL,
-} from './resources/files';
-import {
   WebhookConfigureParams,
   WebhookCreateParams,
   WebhookDeleteParams,
@@ -252,6 +223,24 @@ import {
   CRMPublicDefaultAssociation,
   CRMPublicObjectID,
 } from './resources/crm/crm';
+import {
+  Files,
+  FilesCollectionResponseFile,
+  FilesCollectionResponseFolder,
+  FilesFile,
+  FilesFileActionResponse,
+  FilesFileStat,
+  FilesFileUpdateInput,
+  FilesFolder,
+  FilesFolderActionResponse,
+  FilesFolderInput,
+  FilesFolderUpdateInput,
+  FilesFolderUpdateInputWithID,
+  FilesFolderUpdateTaskLocator,
+  FilesImportFromURLInput,
+  FilesImportFromURLTaskLocator,
+  FilesSignedURL,
+} from './resources/files/files';
 import { Marketing } from './resources/marketing/marketing';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
@@ -273,14 +262,9 @@ export interface ClientOptions {
   accessToken?: string | null | undefined;
 
   /**
-   * Defaults to process.env['DEVELOPER_HAPI_KEY'].
+   * Defaults to process.env['HUBSPOT_DEVELOPER_HAPI_KEY'].
    */
-  developerHapiKey?: string | null | undefined;
-
-  /**
-   * Defaults to process.env['PRIVATE_APPS_LEGACY'].
-   */
-  privateAppsLegacy?: string | null | undefined;
+  developerHapikey?: string | null | undefined;
 
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
@@ -356,8 +340,7 @@ export interface ClientOptions {
  */
 export class HubSpot {
   accessToken: string | null;
-  developerHapiKey: string | null;
-  privateAppsLegacy: string | null;
+  developerHapikey: string | null;
 
   baseURL: string;
   maxRetries: number;
@@ -375,8 +358,7 @@ export class HubSpot {
    * API Client for interfacing with the Hub Spot API.
    *
    * @param {string | null | undefined} [opts.accessToken=process.env['HUBSPOT_ACCESS_TOKEN'] ?? null]
-   * @param {string | null | undefined} [opts.developerHapiKey=process.env['DEVELOPER_HAPI_KEY'] ?? null]
-   * @param {string | null | undefined} [opts.privateAppsLegacy=process.env['PRIVATE_APPS_LEGACY'] ?? null]
+   * @param {string | null | undefined} [opts.developerHapikey=process.env['HUBSPOT_DEVELOPER_HAPI_KEY'] ?? null]
    * @param {string} [opts.baseURL=process.env['HUB_SPOT_BASE_URL'] ?? https://api.hubapi.com] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
@@ -388,14 +370,12 @@ export class HubSpot {
   constructor({
     baseURL = readEnv('HUB_SPOT_BASE_URL'),
     accessToken = readEnv('HUBSPOT_ACCESS_TOKEN') ?? null,
-    developerHapiKey = readEnv('DEVELOPER_HAPI_KEY') ?? null,
-    privateAppsLegacy = readEnv('PRIVATE_APPS_LEGACY') ?? null,
+    developerHapikey = readEnv('HUBSPOT_DEVELOPER_HAPI_KEY') ?? null,
     ...opts
   }: ClientOptions = {}) {
     const options: ClientOptions = {
       accessToken,
-      developerHapiKey,
-      privateAppsLegacy,
+      developerHapikey,
       ...opts,
       baseURL: baseURL || `https://api.hubapi.com`,
     };
@@ -418,8 +398,7 @@ export class HubSpot {
     this._options = options;
 
     this.accessToken = accessToken;
-    this.developerHapiKey = developerHapiKey;
-    this.privateAppsLegacy = privateAppsLegacy;
+    this.developerHapikey = developerHapikey;
   }
 
   /**
@@ -436,8 +415,7 @@ export class HubSpot {
       fetch: this.fetch,
       fetchOptions: this.fetchOptions,
       accessToken: this.accessToken,
-      developerHapiKey: this.developerHapiKey,
-      privateAppsLegacy: this.privateAppsLegacy,
+      developerHapikey: this.developerHapikey,
       ...options,
     });
     return client;
@@ -452,7 +430,7 @@ export class HubSpot {
 
   protected defaultQuery(): Record<string, string | undefined> | undefined {
     return {
-      hapikey: this.developerHapiKey ?? undefined,
+      hapikey: this.developerHapikey ?? undefined,
       ...this._options.defaultQuery,
     };
   }
@@ -462,21 +440,10 @@ export class HubSpot {
   }
 
   protected async authHeaders(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
-    return buildHeaders([await this.privateAppsAuth(opts), await this.privateAppsLegacyAuth(opts)]);
-  }
-
-  protected async privateAppsAuth(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
     if (this.accessToken == null) {
       return undefined;
     }
     return buildHeaders([{ 'private-app': this.accessToken }]);
-  }
-
-  protected async privateAppsLegacyAuth(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
-    if (this.privateAppsLegacy == null) {
-      return undefined;
-    }
-    return buildHeaders([{ 'private-app-legacy': this.privateAppsLegacy }]);
   }
 
   protected stringifyQuery(query: Record<string, unknown>): string {
@@ -1197,17 +1164,6 @@ export declare namespace HubSpot {
     type FilesImportFromURLInput as FilesImportFromURLInput,
     type FilesImportFromURLTaskLocator as FilesImportFromURLTaskLocator,
     type FilesSignedURL as FilesSignedURL,
-    type FileCreateParams as FileCreateParams,
-    type FileGetByPathParams as FileGetByPathParams,
-    type FileGetMetadataParams as FileGetMetadataParams,
-    type FileGetSignedURLParams as FileGetSignedURLParams,
-    type FileImportFromURLParams as FileImportFromURLParams,
-    type FileReadParams as FileReadParams,
-    type FileReplaceParams as FileReplaceParams,
-    type FileSearchParams as FileSearchParams,
-    type FileUpdatePropertiesParams as FileUpdatePropertiesParams,
-    type FileUpdatePropertiesRecursivelyParams as FileUpdatePropertiesRecursivelyParams,
-    type FileUploadParams as FileUploadParams,
   };
 
   export { Marketing as Marketing };

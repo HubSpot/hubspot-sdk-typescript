@@ -3,14 +3,14 @@
 import HubSpot, { toFile } from 'hubspot-sdk';
 
 const client = new HubSpot({
-  accessToken: 'My Access Token',
+  accessToken: 'pat-123123',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
 describe('resource files', () => {
   // Prism tests are disabled
-  test.skip('create: only required params', async () => {
-    const responsePromise = client.files.create({ name: 'name' });
+  test.skip('update', async () => {
+    const responsePromise = client.files.files.update('321669910225', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -18,20 +18,11 @@ describe('resource files', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('create: required and optional params', async () => {
-    const response = await client.files.create({
-      name: 'name',
-      parentFolderId: 'parentFolderId',
-      parentPath: 'parentPath',
-    });
   });
 
   // Prism tests are disabled
   test.skip('delete', async () => {
-    const responsePromise = client.files.delete('321669910225');
+    const responsePromise = client.files.files.delete('321669910225');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -42,8 +33,8 @@ describe('resource files', () => {
   });
 
   // Prism tests are disabled
-  test.skip('archiveByPath', async () => {
-    const responsePromise = client.files.archiveByPath('folderPath');
+  test.skip('gdprDelete', async () => {
+    const responsePromise = client.files.files.gdprDelete('321669910225');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -54,8 +45,8 @@ describe('resource files', () => {
   });
 
   // Prism tests are disabled
-  test.skip('checkImport', async () => {
-    const responsePromise = client.files.checkImport('taskId');
+  test.skip('get', async () => {
+    const responsePromise = client.files.files.get('321669910225');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -66,20 +57,20 @@ describe('resource files', () => {
   });
 
   // Prism tests are disabled
-  test.skip('checkUpdateStatus', async () => {
-    const responsePromise = client.files.checkUpdateStatus('taskId');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
+  test.skip('get: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.files.files.get(
+        '321669910225',
+        { properties: ['string'] },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(HubSpot.NotFoundError);
   });
 
   // Prism tests are disabled
   test.skip('getByPath', async () => {
-    const responsePromise = client.files.getByPath('folderPath');
+    const responsePromise = client.files.files.getByPath('path');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -93,13 +84,13 @@ describe('resource files', () => {
   test.skip('getByPath: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.files.getByPath('folderPath', { properties: ['string'] }, { path: '/_stainless_unknown_path' }),
+      client.files.files.getByPath('path', { properties: ['string'] }, { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(HubSpot.NotFoundError);
   });
 
   // Prism tests are disabled
-  test.skip('getMetadata', async () => {
-    const responsePromise = client.files.getMetadata('path');
+  test.skip('getImportFromURLAsyncStatus', async () => {
+    const responsePromise = client.files.files.getImportFromURLAsyncStatus('taskId');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -110,16 +101,8 @@ describe('resource files', () => {
   });
 
   // Prism tests are disabled
-  test.skip('getMetadata: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.files.getMetadata('path', { properties: ['string'] }, { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(HubSpot.NotFoundError);
-  });
-
-  // Prism tests are disabled
   test.skip('getSignedURL', async () => {
-    const responsePromise = client.files.getSignedURL('321669910225');
+    const responsePromise = client.files.files.getSignedURL('321669910225');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -133,7 +116,7 @@ describe('resource files', () => {
   test.skip('getSignedURL: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.files.getSignedURL(
+      client.files.files.getSignedURL(
         '321669910225',
         { expirationSeconds: 0, size: 'thumb', upscale: true },
         { path: '/_stainless_unknown_path' },
@@ -142,8 +125,8 @@ describe('resource files', () => {
   });
 
   // Prism tests are disabled
-  test.skip('importFromURL: only required params', async () => {
-    const responsePromise = client.files.importFromURL({ access: 'PUBLIC_INDEXABLE', url: 'url' });
+  test.skip('importFromURLAsync: only required params', async () => {
+    const responsePromise = client.files.files.importFromURLAsync({ access: 'PUBLIC_INDEXABLE', url: 'url' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -154,8 +137,8 @@ describe('resource files', () => {
   });
 
   // Prism tests are disabled
-  test.skip('importFromURL: required and optional params', async () => {
-    const response = await client.files.importFromURL({
+  test.skip('importFromURLAsync: required and optional params', async () => {
+    const response = await client.files.files.importFromURLAsync({
       access: 'PUBLIC_INDEXABLE',
       url: 'url',
       duplicateValidationScope: 'ENTIRE_PORTAL',
@@ -170,40 +153,8 @@ describe('resource files', () => {
   });
 
   // Prism tests are disabled
-  test.skip('purge', async () => {
-    const responsePromise = client.files.purge('321669910225');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('read', async () => {
-    const responsePromise = client.files.read('321669910225');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('read: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.files.read('321669910225', { properties: ['string'] }, { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(HubSpot.NotFoundError);
-  });
-
-  // Prism tests are disabled
   test.skip('replace', async () => {
-    const responsePromise = client.files.replace('321669910225');
+    const responsePromise = client.files.files.replace('321669910225');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -217,7 +168,7 @@ describe('resource files', () => {
   test.skip('replace: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.files.replace(
+      client.files.files.replace(
         '321669910225',
         {
           charsetHunch: 'charsetHunch',
@@ -231,7 +182,7 @@ describe('resource files', () => {
 
   // Prism tests are disabled
   test.skip('search', async () => {
-    const responsePromise = client.files.search();
+    const responsePromise = client.files.files.search();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -245,7 +196,7 @@ describe('resource files', () => {
   test.skip('search: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.files.search(
+      client.files.files.search(
         {
           after: 'after',
           allowsAnonymousAccess: true,
@@ -290,41 +241,8 @@ describe('resource files', () => {
   });
 
   // Prism tests are disabled
-  test.skip('updateProperties', async () => {
-    const responsePromise = client.files.updateProperties('321669910225', {});
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('updatePropertiesRecursively: only required params', async () => {
-    const responsePromise = client.files.updatePropertiesRecursively({ id: 'id' });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('updatePropertiesRecursively: required and optional params', async () => {
-    const response = await client.files.updatePropertiesRecursively({
-      id: 'id',
-      name: 'name',
-      parentFolderId: 0,
-    });
-  });
-
-  // Prism tests are disabled
   test.skip('upload', async () => {
-    const responsePromise = client.files.upload();
+    const responsePromise = client.files.files.upload();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -338,7 +256,7 @@ describe('resource files', () => {
   test.skip('upload: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.files.upload(
+      client.files.files.upload(
         {
           charsetHunch: 'charsetHunch',
           file: await toFile(Buffer.from('# my file contents'), 'README.md'),

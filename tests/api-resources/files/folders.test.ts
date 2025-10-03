@@ -3,20 +3,14 @@
 import HubSpot from 'hubspot-sdk';
 
 const client = new HubSpot({
-  accessToken: 'My Access Token',
+  accessToken: 'pat-123123',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource objectSchemas', () => {
+describe('resource folders', () => {
   // Prism tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.crm.objectSchemas.create({
-      associatedObjects: ['string'],
-      labels: {},
-      name: 'name',
-      properties: [{ fieldType: 'fieldType', label: 'label', name: 'name', type: 'string' }],
-      requiredProperties: ['string'],
-    });
+    const responsePromise = client.files.folders.create({ name: 'name' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -28,72 +22,141 @@ describe('resource objectSchemas', () => {
 
   // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
-    const response = await client.crm.objectSchemas.create({
-      associatedObjects: ['string'],
-      labels: { plural: 'plural', singular: 'singular' },
+    const response = await client.files.folders.create({
       name: 'name',
-      properties: [
+      parentFolderId: 'parentFolderId',
+      parentPath: 'parentPath',
+    });
+  });
+
+  // Prism tests are disabled
+  test.skip('deleteByID', async () => {
+    const responsePromise = client.files.folders.deleteByID('321669910225');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('deleteByPath', async () => {
+    const responsePromise = client.files.folders.deleteByPath('folderPath');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('getByID', async () => {
+    const responsePromise = client.files.folders.getByID('321669910225');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('getByID: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.files.folders.getByID(
+        '321669910225',
+        { properties: ['string'] },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(HubSpot.NotFoundError);
+  });
+
+  // Prism tests are disabled
+  test.skip('getByPath', async () => {
+    const responsePromise = client.files.folders.getByPath('folderPath');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('getByPath: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.files.folders.getByPath(
+        'folderPath',
+        { properties: ['string'] },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(HubSpot.NotFoundError);
+  });
+
+  // Prism tests are disabled
+  test.skip('getUpdateAsyncStatus', async () => {
+    const responsePromise = client.files.folders.getUpdateAsyncStatus('taskId');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('search', async () => {
+    const responsePromise = client.files.folders.search();
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('search: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.files.folders.search(
         {
-          fieldType: 'fieldType',
-          label: 'label',
+          after: 'after',
+          before: 'before',
+          createdAt: '2019-12-27T18:11:19.117Z',
+          createdAtGte: '2019-12-27T18:11:19.117Z',
+          createdAtLte: '2019-12-27T18:11:19.117Z',
+          idGte: 0,
+          idLte: 0,
+          ids: [0],
+          limit: 0,
           name: 'name',
-          type: 'string',
-          displayOrder: 0,
-          formField: true,
-          groupName: 'groupName',
-          hasUniqueValue: true,
-          hidden: true,
-          numberDisplayHint: 'unformatted',
-          options: [{ hidden: true, label: 'label', value: 'value', displayOrder: 0 }],
-          optionSortStrategy: 'DISPLAY_ORDER',
-          referencedObjectType: 'referencedObjectType',
-          searchableInGlobalSearch: true,
-          showCurrencySymbol: true,
-          textDisplayHint: 'unformatted_single_line',
+          parentFolderIds: [0],
+          path: 'path',
+          properties: ['string'],
+          sort: ['string'],
+          updatedAt: '2019-12-27T18:11:19.117Z',
+          updatedAtGte: '2019-12-27T18:11:19.117Z',
+          updatedAtLte: '2019-12-27T18:11:19.117Z',
         },
-      ],
-      requiredProperties: ['string'],
-      primaryDisplayProperty: 'primaryDisplayProperty',
-      searchableProperties: ['string'],
-      secondaryDisplayProperties: ['string'],
-    });
-  });
-
-  // Prism tests are disabled
-  test.skip('update', async () => {
-    const responsePromise = client.crm.objectSchemas.update('objectType', {});
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('list', async () => {
-    const responsePromise = client.crm.objectSchemas.list();
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('list: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.crm.objectSchemas.list({ archived: true }, { path: '/_stainless_unknown_path' }),
+        { path: '/_stainless_unknown_path' },
+      ),
     ).rejects.toThrow(HubSpot.NotFoundError);
   });
 
   // Prism tests are disabled
-  test.skip('delete', async () => {
-    const responsePromise = client.crm.objectSchemas.delete('objectType');
+  test.skip('updateAsync: only required params', async () => {
+    const responsePromise = client.files.folders.updateAsync({ id: 'id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -104,61 +167,13 @@ describe('resource objectSchemas', () => {
   });
 
   // Prism tests are disabled
-  test.skip('delete: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.crm.objectSchemas.delete('objectType', { archived: true }, { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(HubSpot.NotFoundError);
+  test.skip('updateAsync: required and optional params', async () => {
+    const response = await client.files.folders.updateAsync({ id: 'id', name: 'name', parentFolderId: 0 });
   });
 
   // Prism tests are disabled
-  test.skip('archiveAssociation: only required params', async () => {
-    const responsePromise = client.crm.objectSchemas.archiveAssociation('associationIdentifier', {
-      objectType: 'objectType',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('archiveAssociation: required and optional params', async () => {
-    const response = await client.crm.objectSchemas.archiveAssociation('associationIdentifier', {
-      objectType: 'objectType',
-    });
-  });
-
-  // Prism tests are disabled
-  test.skip('createAssociation: only required params', async () => {
-    const responsePromise = client.crm.objectSchemas.createAssociation('objectType', {
-      fromObjectTypeId: 'fromObjectTypeId',
-      toObjectTypeId: 'toObjectTypeId',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('createAssociation: required and optional params', async () => {
-    const response = await client.crm.objectSchemas.createAssociation('objectType', {
-      fromObjectTypeId: 'fromObjectTypeId',
-      toObjectTypeId: 'toObjectTypeId',
-      name: 'name',
-    });
-  });
-
-  // Prism tests are disabled
-  test.skip('read', async () => {
-    const responsePromise = client.crm.objectSchemas.read('objectType');
+  test.skip('updateByID', async () => {
+    const responsePromise = client.files.folders.updateByID('321669910225', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

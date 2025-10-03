@@ -7,10 +7,10 @@ const client = new HubSpot({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource subscriptions', () => {
+describe('resource recordingSettings', () => {
   // Prism tests are disabled
-  test.skip('list', async () => {
-    const responsePromise = client.marketing.subscriptions.list();
+  test.skip('getURLFormat', async () => {
+    const responsePromise = client.crm.extensions.calling.recordingSettings.getURLFormat(0);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,8 +21,8 @@ describe('resource subscriptions', () => {
   });
 
   // Prism tests are disabled
-  test.skip('getEmailStatus', async () => {
-    const responsePromise = client.marketing.subscriptions.getEmailStatus('emailAddress');
+  test.skip('markAsReady: only required params', async () => {
+    const responsePromise = client.crm.extensions.calling.recordingSettings.markAsReady({ engagementId: 0 });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -33,10 +33,14 @@ describe('resource subscriptions', () => {
   });
 
   // Prism tests are disabled
-  test.skip('subscribe: only required params', async () => {
-    const responsePromise = client.marketing.subscriptions.subscribe({
-      emailAddress: 'emailAddress',
-      subscriptionId: 'subscriptionId',
+  test.skip('markAsReady: required and optional params', async () => {
+    const response = await client.crm.extensions.calling.recordingSettings.markAsReady({ engagementId: 0 });
+  });
+
+  // Prism tests are disabled
+  test.skip('registerURLFormat: only required params', async () => {
+    const responsePromise = client.crm.extensions.calling.recordingSettings.registerURLFormat(0, {
+      urlToRetrieveAuthedRecording: 'urlToRetrieveAuthedRecording',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -48,21 +52,15 @@ describe('resource subscriptions', () => {
   });
 
   // Prism tests are disabled
-  test.skip('subscribe: required and optional params', async () => {
-    const response = await client.marketing.subscriptions.subscribe({
-      emailAddress: 'emailAddress',
-      subscriptionId: 'subscriptionId',
-      legalBasis: 'LEGITIMATE_INTEREST_PQL',
-      legalBasisExplanation: 'legalBasisExplanation',
+  test.skip('registerURLFormat: required and optional params', async () => {
+    const response = await client.crm.extensions.calling.recordingSettings.registerURLFormat(0, {
+      urlToRetrieveAuthedRecording: 'urlToRetrieveAuthedRecording',
     });
   });
 
   // Prism tests are disabled
-  test.skip('unsubscribe: only required params', async () => {
-    const responsePromise = client.marketing.subscriptions.unsubscribe({
-      emailAddress: 'emailAddress',
-      subscriptionId: 'subscriptionId',
-    });
+  test.skip('updateURLFormat', async () => {
+    const responsePromise = client.crm.extensions.calling.recordingSettings.updateURLFormat(0, {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -70,15 +68,5 @@ describe('resource subscriptions', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('unsubscribe: required and optional params', async () => {
-    const response = await client.marketing.subscriptions.unsubscribe({
-      emailAddress: 'emailAddress',
-      subscriptionId: 'subscriptionId',
-      legalBasis: 'LEGITIMATE_INTEREST_PQL',
-      legalBasisExplanation: 'legalBasisExplanation',
-    });
   });
 });
