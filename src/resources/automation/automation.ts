@@ -38,6 +38,7 @@ import {
   AutomationActionsPublicObjectRequestOptions,
   AutomationActionsPublicSingleFieldDependency,
 } from './actions';
+import * as EmailsAPI from '../marketing/emails';
 
 export class Automation extends APIResource {
   actions: ActionsAPI.Actions = new ActionsAPI.Actions(this._client);
@@ -1111,7 +1112,7 @@ export interface AutomationBatchResponseFlowIDWorkflowIDMappingResponseWithError
 export interface AutomationCollectionResponseAPIFlowEmailCampaign {
   results: Array<AutomationAPIFlowEmailCampaign>;
 
-  paging?: Shared.Paging;
+  paging?: EmailsAPI.MarketingEmailsPaging;
 }
 
 export interface AutomationCollectionResponseAPIFlowListingForwardPaging {

@@ -204,18 +204,7 @@ export {
   type FilesImportFromURLInput,
   type FilesImportFromURLTaskLocator,
   type FilesSignedURL,
-  type FileCreateParams,
-  type FileGetByPathParams,
-  type FileGetMetadataParams,
-  type FileGetSignedURLParams,
-  type FileImportFromURLParams,
-  type FileReadParams,
-  type FileReplaceParams,
-  type FileSearchParams,
-  type FileUpdatePropertiesParams,
-  type FileUpdatePropertiesRecursivelyParams,
-  type FileUploadParams,
-} from './files';
+} from './files/files';
 export { Marketing } from './marketing/marketing';
 export {
   Webhooks,

@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
 import * as CRMAPI from '../crm';
+import * as EmailsAPI from '../../marketing/emails';
 import * as CompaniesAPI from './companies';
 import {
   Companies,
@@ -28,6 +29,16 @@ import {
   ContactUpsertParams,
   Contacts,
 } from './contacts';
+import * as SchemasAPI from './schemas';
+import {
+  SchemaArchiveAssociationParams,
+  SchemaCreateAssociationParams,
+  SchemaCreateParams,
+  SchemaDeleteParams,
+  SchemaListParams,
+  SchemaUpdateParams,
+  Schemas,
+} from './schemas';
 import * as DealsAPI from './deals/deals';
 import {
   DealCreateParams,
@@ -44,6 +55,7 @@ export class Objects extends APIResource {
   companies: CompaniesAPI.Companies = new CompaniesAPI.Companies(this._client);
   contacts: ContactsAPI.Contacts = new ContactsAPI.Contacts(this._client);
   deals: DealsAPI.Deals = new DealsAPI.Deals(this._client);
+  schemas: SchemasAPI.Schemas = new SchemasAPI.Schemas(this._client);
 }
 
 export interface CRMObjectsBatchInputSimplePublicObjectBatchInput {
@@ -111,13 +123,13 @@ export interface CRMObjectsBatchResponseSimplePublicUpsertObject {
 export interface CRMObjectsCollectionResponseAssociatedID {
   results: Array<CRMAPI.CRMAssociatedID>;
 
-  paging?: Shared.Paging;
+  paging?: EmailsAPI.MarketingEmailsPaging;
 }
 
 export interface CRMObjectsCollectionResponseSimplePublicObjectWithAssociations {
   results: Array<CRMObjectsSimplePublicObjectWithAssociations>;
 
-  paging?: Shared.Paging;
+  paging?: EmailsAPI.MarketingEmailsPaging;
 }
 
 export interface CRMObjectsCollectionResponseWithTotalSimplePublicObject {
@@ -125,7 +137,7 @@ export interface CRMObjectsCollectionResponseWithTotalSimplePublicObject {
 
   total: number;
 
-  paging?: Shared.Paging;
+  paging?: EmailsAPI.MarketingEmailsPaging;
 }
 
 export interface CRMObjectsCreatedResponseSimplePublicObject {
@@ -314,6 +326,7 @@ export interface CRMObjectsValueWithTimestamp {
 Objects.Companies = Companies;
 Objects.Contacts = Contacts;
 Objects.Deals = Deals;
+Objects.Schemas = Schemas;
 
 export declare namespace Objects {
   export {
@@ -380,5 +393,15 @@ export declare namespace Objects {
     type DealReadParams as DealReadParams,
     type DealSearchParams as DealSearchParams,
     type DealUpsertParams as DealUpsertParams,
+  };
+
+  export {
+    Schemas as Schemas,
+    type SchemaCreateParams as SchemaCreateParams,
+    type SchemaUpdateParams as SchemaUpdateParams,
+    type SchemaListParams as SchemaListParams,
+    type SchemaDeleteParams as SchemaDeleteParams,
+    type SchemaArchiveAssociationParams as SchemaArchiveAssociationParams,
+    type SchemaCreateAssociationParams as SchemaCreateAssociationParams,
   };
 }

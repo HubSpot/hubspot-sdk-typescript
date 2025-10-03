@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as Shared from '../shared';
 import * as CRMAPI from './crm';
+import * as EmailsAPI from '../marketing/emails';
 import { APIPromise } from '../../core/api-promise';
 import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
@@ -114,13 +115,13 @@ export interface CRMPropertiesBatchResponseProperty {
 export interface CRMPropertiesCollectionResponseProperty {
   results: Array<CRMAPI.CRMProperty>;
 
-  paging?: Shared.Paging;
+  paging?: EmailsAPI.MarketingEmailsPaging;
 }
 
 export interface CRMPropertiesCollectionResponsePropertyGroup {
   results: Array<CRMPropertiesPropertyGroup>;
 
-  paging?: Shared.Paging;
+  paging?: EmailsAPI.MarketingEmailsPaging;
 }
 
 export interface CRMPropertiesCreatedResponseProperty {

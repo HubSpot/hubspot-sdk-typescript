@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
 import * as CRMAPI from '../../crm/crm';
+import * as EmailsAPI from '../../marketing/emails';
 import * as RowsAPI from './rows/rows';
 import { Rows } from './rows/rows';
 import { APIPromise } from '../../../core/api-promise';
@@ -789,7 +790,7 @@ export interface CmsHubdbStreamingCollectionResponseWithTotalHubDBTableRowV3 {
 
   type: 'STREAMING';
 
-  paging?: Shared.Paging;
+  paging?: EmailsAPI.MarketingEmailsPaging;
 }
 
 export type CmsHubdbUnifiedCollectionResponseWithTotalBaseHubDBTableRowV3 =

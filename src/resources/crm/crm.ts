@@ -1,17 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as Shared from '../shared';
-import * as ObjectSchemasAPI from './object-schemas';
-import {
-  ObjectSchemaArchiveAssociationParams,
-  ObjectSchemaCreateAssociationParams,
-  ObjectSchemaCreateParams,
-  ObjectSchemaDeleteParams,
-  ObjectSchemaListParams,
-  ObjectSchemaUpdateParams,
-  ObjectSchemas,
-} from './object-schemas';
 import * as PipelinesAPI from './pipelines';
 import {
   CRMPipelinesCollectionResponsePipelineNoPaging,
@@ -56,6 +45,7 @@ import {
   PropertyReadParams,
   PropertyUpdateParams,
 } from './properties';
+import * as EmailsAPI from '../marketing/emails';
 import * as AssociationsAPI from './associations/associations';
 import {
   AssociationCreateParams,
@@ -70,6 +60,8 @@ import {
   CRMAssociationsPublicAssociationMulti,
 } from './associations/associations';
 import * as V4API from './associations/v4';
+import * as ExtensionsAPI from './extensions/extensions';
+import { Extensions } from './extensions/extensions';
 import * as ObjectsAPI from './objects/objects';
 import {
   CRMObjectsBatchInputSimplePublicObjectBatchInput,
@@ -104,7 +96,7 @@ import {
 
 export class CRM extends APIResource {
   associations: AssociationsAPI.Associations = new AssociationsAPI.Associations(this._client);
-  objectSchemas: ObjectSchemasAPI.ObjectSchemas = new ObjectSchemasAPI.ObjectSchemas(this._client);
+  extensions: ExtensionsAPI.Extensions = new ExtensionsAPI.Extensions(this._client);
   objects: ObjectsAPI.Objects = new ObjectsAPI.Objects(this._client);
   pipelines: PipelinesAPI.Pipelines = new PipelinesAPI.Pipelines(this._client);
   properties: PropertiesAPI.Properties = new PropertiesAPI.Properties(this._client);
@@ -173,7 +165,7 @@ export interface CRMBatchResponsePublicDefaultAssociation {
 export interface CRMCollectionResponseMultiAssociatedObjectWithLabel {
   results: Array<CRMMultiAssociatedObjectWithLabel>;
 
-  paging?: Shared.Paging;
+  paging?: EmailsAPI.MarketingEmailsPaging;
 }
 
 export interface CRMCollectionResponseObjectSchemaNoPaging {
@@ -445,7 +437,7 @@ export interface CRMPublicObjectID {
 }
 
 CRM.Associations = Associations;
-CRM.ObjectSchemas = ObjectSchemas;
+CRM.Extensions = Extensions;
 CRM.Objects = Objects;
 CRM.Pipelines = Pipelines;
 CRM.Properties = Properties;
@@ -490,15 +482,7 @@ export declare namespace CRM {
     type AssociationReadParams as AssociationReadParams,
   };
 
-  export {
-    ObjectSchemas as ObjectSchemas,
-    type ObjectSchemaCreateParams as ObjectSchemaCreateParams,
-    type ObjectSchemaUpdateParams as ObjectSchemaUpdateParams,
-    type ObjectSchemaListParams as ObjectSchemaListParams,
-    type ObjectSchemaDeleteParams as ObjectSchemaDeleteParams,
-    type ObjectSchemaArchiveAssociationParams as ObjectSchemaArchiveAssociationParams,
-    type ObjectSchemaCreateAssociationParams as ObjectSchemaCreateAssociationParams,
-  };
+  export { Extensions as Extensions };
 
   export {
     Objects as Objects,

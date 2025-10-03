@@ -447,17 +447,49 @@ Methods:
 - <code title="put /crm/v4/objects/{fromObjectType}/{fromObjectId}/associations/default/{toObjectType}/{toObjectId}">client.crm.associations.v4.<a href="./src/resources/crm/associations/v4.ts">createDefault</a>(toObjectID, { ...params }) -> CRMBatchResponsePublicDefaultAssociation</code>
 - <code title="post /crm/v4/associations/usage/high-usage-report/{userId}">client.crm.associations.v4.<a href="./src/resources/crm/associations/v4.ts">request</a>(userID) -> CRMAssociationsV4ReportCreationResponse</code>
 
-## ObjectSchemas
+## Extensions
+
+### Calling
+
+Types:
+
+- <code><a href="./src/resources/crm/extensions/calling/calling.ts">CRMExtensionsCallingChannelConnectionSettingsPatchRequest</a></code>
+- <code><a href="./src/resources/crm/extensions/calling/calling.ts">CRMExtensionsCallingChannelConnectionSettingsRequest</a></code>
+- <code><a href="./src/resources/crm/extensions/calling/calling.ts">CRMExtensionsCallingChannelConnectionSettingsResponse</a></code>
+- <code><a href="./src/resources/crm/extensions/calling/calling.ts">CRMExtensionsCallingMarkRecordingAsReadyRequest</a></code>
+- <code><a href="./src/resources/crm/extensions/calling/calling.ts">CRMExtensionsCallingRecordingSettingsPatchRequest</a></code>
+- <code><a href="./src/resources/crm/extensions/calling/calling.ts">CRMExtensionsCallingRecordingSettingsRequest</a></code>
+- <code><a href="./src/resources/crm/extensions/calling/calling.ts">CRMExtensionsCallingRecordingSettingsResponse</a></code>
+- <code><a href="./src/resources/crm/extensions/calling/calling.ts">CRMExtensionsCallingSettingsPatchRequest</a></code>
+- <code><a href="./src/resources/crm/extensions/calling/calling.ts">CRMExtensionsCallingSettingsRequest</a></code>
+- <code><a href="./src/resources/crm/extensions/calling/calling.ts">CRMExtensionsCallingSettingsResponse</a></code>
+
+#### ChannelConnectionSettings
 
 Methods:
 
-- <code title="post /crm-object-schemas/v3/schemas">client.crm.objectSchemas.<a href="./src/resources/crm/object-schemas.ts">create</a>({ ...params }) -> CRMObjectSchema</code>
-- <code title="patch /crm-object-schemas/v3/schemas/{objectType}">client.crm.objectSchemas.<a href="./src/resources/crm/object-schemas.ts">update</a>(objectType, { ...params }) -> CRMObjectTypeDefinition</code>
-- <code title="get /crm-object-schemas/v3/schemas">client.crm.objectSchemas.<a href="./src/resources/crm/object-schemas.ts">list</a>({ ...params }) -> CRMCollectionResponseObjectSchemaNoPaging</code>
-- <code title="delete /crm-object-schemas/v3/schemas/{objectType}">client.crm.objectSchemas.<a href="./src/resources/crm/object-schemas.ts">delete</a>(objectType, { ...params }) -> void</code>
-- <code title="delete /crm-object-schemas/v3/schemas/{objectType}/associations/{associationIdentifier}">client.crm.objectSchemas.<a href="./src/resources/crm/object-schemas.ts">archiveAssociation</a>(associationIdentifier, { ...params }) -> void</code>
-- <code title="post /crm-object-schemas/v3/schemas/{objectType}/associations">client.crm.objectSchemas.<a href="./src/resources/crm/object-schemas.ts">createAssociation</a>(objectType, { ...params }) -> CRMAssociationDefinition</code>
-- <code title="get /crm-object-schemas/v3/schemas/{objectType}">client.crm.objectSchemas.<a href="./src/resources/crm/object-schemas.ts">read</a>(objectType) -> CRMObjectSchema</code>
+- <code title="post /crm/v3/extensions/calling/{appId}/settings/channel-connection">client.crm.extensions.calling.channelConnectionSettings.<a href="./src/resources/crm/extensions/calling/channel-connection-settings.ts">create</a>(appID, { ...params }) -> CRMExtensionsCallingChannelConnectionSettingsResponse</code>
+- <code title="patch /crm/v3/extensions/calling/{appId}/settings/channel-connection">client.crm.extensions.calling.channelConnectionSettings.<a href="./src/resources/crm/extensions/calling/channel-connection-settings.ts">update</a>(appID, { ...params }) -> CRMExtensionsCallingChannelConnectionSettingsResponse</code>
+- <code title="delete /crm/v3/extensions/calling/{appId}/settings/channel-connection">client.crm.extensions.calling.channelConnectionSettings.<a href="./src/resources/crm/extensions/calling/channel-connection-settings.ts">delete</a>(appID) -> void</code>
+- <code title="get /crm/v3/extensions/calling/{appId}/settings/channel-connection">client.crm.extensions.calling.channelConnectionSettings.<a href="./src/resources/crm/extensions/calling/channel-connection-settings.ts">get</a>(appID) -> CRMExtensionsCallingChannelConnectionSettingsResponse</code>
+
+#### RecordingSettings
+
+Methods:
+
+- <code title="get /crm/v3/extensions/calling/{appId}/settings/recording">client.crm.extensions.calling.recordingSettings.<a href="./src/resources/crm/extensions/calling/recording-settings.ts">getURLFormat</a>(appID) -> CRMExtensionsCallingRecordingSettingsResponse</code>
+- <code title="post /crm/v3/extensions/calling/recordings/ready">client.crm.extensions.calling.recordingSettings.<a href="./src/resources/crm/extensions/calling/recording-settings.ts">markAsReady</a>({ ...params }) -> void</code>
+- <code title="post /crm/v3/extensions/calling/{appId}/settings/recording">client.crm.extensions.calling.recordingSettings.<a href="./src/resources/crm/extensions/calling/recording-settings.ts">registerURLFormat</a>(appID, { ...params }) -> CRMExtensionsCallingRecordingSettingsResponse</code>
+- <code title="patch /crm/v3/extensions/calling/{appId}/settings/recording">client.crm.extensions.calling.recordingSettings.<a href="./src/resources/crm/extensions/calling/recording-settings.ts">updateURLFormat</a>(appID, { ...params }) -> CRMExtensionsCallingRecordingSettingsResponse</code>
+
+#### Settings
+
+Methods:
+
+- <code title="post /crm/v3/extensions/calling/{appId}/settings">client.crm.extensions.calling.settings.<a href="./src/resources/crm/extensions/calling/settings.ts">create</a>(appID, { ...params }) -> WebhooksSettingsResponse</code>
+- <code title="patch /crm/v3/extensions/calling/{appId}/settings">client.crm.extensions.calling.settings.<a href="./src/resources/crm/extensions/calling/settings.ts">update</a>(appID, { ...params }) -> WebhooksSettingsResponse</code>
+- <code title="delete /crm/v3/extensions/calling/{appId}/settings">client.crm.extensions.calling.settings.<a href="./src/resources/crm/extensions/calling/settings.ts">delete</a>(appID) -> void</code>
+- <code title="get /crm/v3/extensions/calling/{appId}/settings">client.crm.extensions.calling.settings.<a href="./src/resources/crm/extensions/calling/settings.ts">get</a>(appID) -> WebhooksSettingsResponse</code>
 
 ## Objects
 
@@ -535,6 +567,18 @@ Methods:
 
 #### Batch
 
+### Schemas
+
+Methods:
+
+- <code title="post /crm-object-schemas/v3/schemas">client.crm.objects.schemas.<a href="./src/resources/crm/objects/schemas.ts">create</a>({ ...params }) -> CRMObjectSchema</code>
+- <code title="patch /crm-object-schemas/v3/schemas/{objectType}">client.crm.objects.schemas.<a href="./src/resources/crm/objects/schemas.ts">update</a>(objectType, { ...params }) -> CRMObjectTypeDefinition</code>
+- <code title="get /crm-object-schemas/v3/schemas">client.crm.objects.schemas.<a href="./src/resources/crm/objects/schemas.ts">list</a>({ ...params }) -> CRMCollectionResponseObjectSchemaNoPaging</code>
+- <code title="delete /crm-object-schemas/v3/schemas/{objectType}">client.crm.objects.schemas.<a href="./src/resources/crm/objects/schemas.ts">delete</a>(objectType, { ...params }) -> void</code>
+- <code title="delete /crm-object-schemas/v3/schemas/{objectType}/associations/{associationIdentifier}">client.crm.objects.schemas.<a href="./src/resources/crm/objects/schemas.ts">archiveAssociation</a>(associationIdentifier, { ...params }) -> void</code>
+- <code title="post /crm-object-schemas/v3/schemas/{objectType}/associations">client.crm.objects.schemas.<a href="./src/resources/crm/objects/schemas.ts">createAssociation</a>(objectType, { ...params }) -> CRMAssociationDefinition</code>
+- <code title="get /crm-object-schemas/v3/schemas/{objectType}">client.crm.objects.schemas.<a href="./src/resources/crm/objects/schemas.ts">read</a>(objectType) -> CRMObjectSchema</code>
+
 ## Pipelines
 
 Types:
@@ -593,44 +637,108 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/files.ts">FilesCollectionResponseFile</a></code>
-- <code><a href="./src/resources/files.ts">FilesCollectionResponseFolder</a></code>
-- <code><a href="./src/resources/files.ts">FilesFile</a></code>
-- <code><a href="./src/resources/files.ts">FilesFileActionResponse</a></code>
-- <code><a href="./src/resources/files.ts">FilesFileStat</a></code>
-- <code><a href="./src/resources/files.ts">FilesFileUpdateInput</a></code>
-- <code><a href="./src/resources/files.ts">FilesFolder</a></code>
-- <code><a href="./src/resources/files.ts">FilesFolderActionResponse</a></code>
-- <code><a href="./src/resources/files.ts">FilesFolderInput</a></code>
-- <code><a href="./src/resources/files.ts">FilesFolderUpdateInput</a></code>
-- <code><a href="./src/resources/files.ts">FilesFolderUpdateInputWithID</a></code>
-- <code><a href="./src/resources/files.ts">FilesFolderUpdateTaskLocator</a></code>
-- <code><a href="./src/resources/files.ts">FilesImportFromURLInput</a></code>
-- <code><a href="./src/resources/files.ts">FilesImportFromURLTaskLocator</a></code>
-- <code><a href="./src/resources/files.ts">FilesSignedURL</a></code>
+- <code><a href="./src/resources/files/files.ts">FilesCollectionResponseFile</a></code>
+- <code><a href="./src/resources/files/files.ts">FilesCollectionResponseFolder</a></code>
+- <code><a href="./src/resources/files/files.ts">FilesFile</a></code>
+- <code><a href="./src/resources/files/files.ts">FilesFileActionResponse</a></code>
+- <code><a href="./src/resources/files/files.ts">FilesFileStat</a></code>
+- <code><a href="./src/resources/files/files.ts">FilesFileUpdateInput</a></code>
+- <code><a href="./src/resources/files/files.ts">FilesFolder</a></code>
+- <code><a href="./src/resources/files/files.ts">FilesFolderActionResponse</a></code>
+- <code><a href="./src/resources/files/files.ts">FilesFolderInput</a></code>
+- <code><a href="./src/resources/files/files.ts">FilesFolderUpdateInput</a></code>
+- <code><a href="./src/resources/files/files.ts">FilesFolderUpdateInputWithID</a></code>
+- <code><a href="./src/resources/files/files.ts">FilesFolderUpdateTaskLocator</a></code>
+- <code><a href="./src/resources/files/files.ts">FilesImportFromURLInput</a></code>
+- <code><a href="./src/resources/files/files.ts">FilesImportFromURLTaskLocator</a></code>
+- <code><a href="./src/resources/files/files.ts">FilesSignedURL</a></code>
+
+## Files
 
 Methods:
 
-- <code title="post /files/v3/folders">client.files.<a href="./src/resources/files.ts">create</a>({ ...params }) -> FilesFolder</code>
-- <code title="delete /files/v3/folders/{folderId}">client.files.<a href="./src/resources/files.ts">delete</a>(folderID) -> void</code>
-- <code title="delete /files/v3/folders/{folderPath}">client.files.<a href="./src/resources/files.ts">archiveByPath</a>(folderPath) -> void</code>
-- <code title="get /files/v3/files/import-from-url/async/tasks/{taskId}/status">client.files.<a href="./src/resources/files.ts">checkImport</a>(taskID) -> FilesFileActionResponse</code>
-- <code title="get /files/v3/folders/update/async/tasks/{taskId}/status">client.files.<a href="./src/resources/files.ts">checkUpdateStatus</a>(taskID) -> FilesFolderActionResponse</code>
-- <code title="get /files/v3/folders/{folderPath}">client.files.<a href="./src/resources/files.ts">getByPath</a>(folderPath, { ...params }) -> FilesFolder</code>
-- <code title="get /files/v3/files/stat/{path}">client.files.<a href="./src/resources/files.ts">getMetadata</a>(path\_, { ...params }) -> FilesFileStat</code>
-- <code title="get /files/v3/files/{fileId}/signed-url">client.files.<a href="./src/resources/files.ts">getSignedURL</a>(fileID, { ...params }) -> FilesSignedURL</code>
-- <code title="post /files/v3/files/import-from-url/async">client.files.<a href="./src/resources/files.ts">importFromURL</a>({ ...params }) -> FilesImportFromURLTaskLocator</code>
-- <code title="delete /files/v3/files/{fileId}/gdpr-delete">client.files.<a href="./src/resources/files.ts">purge</a>(fileID) -> void</code>
-- <code title="get /files/v3/folders/{folderId}">client.files.<a href="./src/resources/files.ts">read</a>(folderID, { ...params }) -> FilesFolder</code>
-- <code title="put /files/v3/files/{fileId}">client.files.<a href="./src/resources/files.ts">replace</a>(fileID, { ...params }) -> FilesFile</code>
-- <code title="get /files/v3/files/search">client.files.<a href="./src/resources/files.ts">search</a>({ ...params }) -> FilesCollectionResponseFile</code>
-- <code title="patch /files/v3/folders/{folderId}">client.files.<a href="./src/resources/files.ts">updateProperties</a>(folderID, { ...params }) -> FilesFolder</code>
-- <code title="post /files/v3/folders/update/async">client.files.<a href="./src/resources/files.ts">updatePropertiesRecursively</a>({ ...params }) -> FilesFolderUpdateTaskLocator</code>
-- <code title="post /files/v3/files">client.files.<a href="./src/resources/files.ts">upload</a>({ ...params }) -> FilesFile</code>
+- <code title="patch /files/v3/files/{fileId}">client.files.files.<a href="./src/resources/files/files_.ts">update</a>(fileID, { ...params }) -> FilesFile</code>
+- <code title="delete /files/v3/files/{fileId}">client.files.files.<a href="./src/resources/files/files_.ts">delete</a>(fileID) -> void</code>
+- <code title="delete /files/v3/files/{fileId}/gdpr-delete">client.files.files.<a href="./src/resources/files/files_.ts">gdprDelete</a>(fileID) -> void</code>
+- <code title="get /files/v3/files/{fileId}">client.files.files.<a href="./src/resources/files/files_.ts">get</a>(fileID, { ...params }) -> FilesFile</code>
+- <code title="get /files/v3/files/stat/{path}">client.files.files.<a href="./src/resources/files/files_.ts">getByPath</a>(path\_, { ...params }) -> FilesFileStat</code>
+- <code title="get /files/v3/files/import-from-url/async/tasks/{taskId}/status">client.files.files.<a href="./src/resources/files/files_.ts">getImportFromURLAsyncStatus</a>(taskID) -> FilesFileActionResponse</code>
+- <code title="get /files/v3/files/{fileId}/signed-url">client.files.files.<a href="./src/resources/files/files_.ts">getSignedURL</a>(fileID, { ...params }) -> FilesSignedURL</code>
+- <code title="post /files/v3/files/import-from-url/async">client.files.files.<a href="./src/resources/files/files_.ts">importFromURLAsync</a>({ ...params }) -> FilesImportFromURLTaskLocator</code>
+- <code title="put /files/v3/files/{fileId}">client.files.files.<a href="./src/resources/files/files_.ts">replace</a>(fileID, { ...params }) -> FilesFile</code>
+- <code title="get /files/v3/files/search">client.files.files.<a href="./src/resources/files/files_.ts">search</a>({ ...params }) -> FilesCollectionResponseFile</code>
+- <code title="post /files/v3/files">client.files.files.<a href="./src/resources/files/files_.ts">upload</a>({ ...params }) -> FilesFile</code>
+
+## Folders
+
+Methods:
+
+- <code title="post /files/v3/folders">client.files.folders.<a href="./src/resources/files/folders.ts">create</a>({ ...params }) -> FilesFolder</code>
+- <code title="delete /files/v3/folders/{folderId}">client.files.folders.<a href="./src/resources/files/folders.ts">deleteByID</a>(folderID) -> void</code>
+- <code title="delete /files/v3/folders/{folderPath}">client.files.folders.<a href="./src/resources/files/folders.ts">deleteByPath</a>(folderPath) -> void</code>
+- <code title="get /files/v3/folders/{folderId}">client.files.folders.<a href="./src/resources/files/folders.ts">getByID</a>(folderID, { ...params }) -> FilesFolder</code>
+- <code title="get /files/v3/folders/{folderPath}">client.files.folders.<a href="./src/resources/files/folders.ts">getByPath</a>(folderPath, { ...params }) -> FilesFolder</code>
+- <code title="get /files/v3/folders/update/async/tasks/{taskId}/status">client.files.folders.<a href="./src/resources/files/folders.ts">getUpdateAsyncStatus</a>(taskID) -> FilesFolderActionResponse</code>
+- <code title="get /files/v3/folders/search">client.files.folders.<a href="./src/resources/files/folders.ts">search</a>({ ...params }) -> FilesCollectionResponseFolder</code>
+- <code title="post /files/v3/folders/update/async">client.files.folders.<a href="./src/resources/files/folders.ts">updateAsync</a>({ ...params }) -> FilesFolderUpdateTaskLocator</code>
+- <code title="patch /files/v3/folders/{folderId}">client.files.folders.<a href="./src/resources/files/folders.ts">updateByID</a>(folderID, { ...params }) -> FilesFolder</code>
 
 # Marketing
 
 ## Emails
+
+Types:
+
+- <code><a href="./src/resources/marketing/emails.ts">MarketingEmailsAbTestCreateRequestVNext</a></code>
+- <code><a href="./src/resources/marketing/emails.ts">MarketingEmailsAggregateEmailStatistics</a></code>
+- <code><a href="./src/resources/marketing/emails.ts">MarketingEmailsCollectionResponseWithTotalEmailStatisticIntervalNoPaging</a></code>
+- <code><a href="./src/resources/marketing/emails.ts">MarketingEmailsCollectionResponseWithTotalPublicEmailForwardPaging</a></code>
+- <code><a href="./src/resources/marketing/emails.ts">MarketingEmailsCollectionResponseWithTotalVersionPublicEmail</a></code>
+- <code><a href="./src/resources/marketing/emails.ts">MarketingEmailsEmailCloneRequestVNext</a></code>
+- <code><a href="./src/resources/marketing/emails.ts">MarketingEmailsEmailCreateRequest</a></code>
+- <code><a href="./src/resources/marketing/emails.ts">MarketingEmailsEmailStatisticInterval</a></code>
+- <code><a href="./src/resources/marketing/emails.ts">MarketingEmailsEmailStatisticsData</a></code>
+- <code><a href="./src/resources/marketing/emails.ts">MarketingEmailsEmailUpdateRequest</a></code>
+- <code><a href="./src/resources/marketing/emails.ts">MarketingEmailsInterval</a></code>
+- <code><a href="./src/resources/marketing/emails.ts">MarketingEmailsPaging</a></code>
+- <code><a href="./src/resources/marketing/emails.ts">MarketingEmailsPublicButtonStyleSettings</a></code>
+- <code><a href="./src/resources/marketing/emails.ts">MarketingEmailsPublicDividerStyleSettings</a></code>
+- <code><a href="./src/resources/marketing/emails.ts">MarketingEmailsPublicEmail</a></code>
+- <code><a href="./src/resources/marketing/emails.ts">MarketingEmailsPublicEmailContent</a></code>
+- <code><a href="./src/resources/marketing/emails.ts">MarketingEmailsPublicEmailFromDetails</a></code>
+- <code><a href="./src/resources/marketing/emails.ts">MarketingEmailsPublicEmailRecipients</a></code>
+- <code><a href="./src/resources/marketing/emails.ts">MarketingEmailsPublicEmailStyleSettings</a></code>
+- <code><a href="./src/resources/marketing/emails.ts">MarketingEmailsPublicEmailSubscriptionDetails</a></code>
+- <code><a href="./src/resources/marketing/emails.ts">MarketingEmailsPublicEmailTestingDetails</a></code>
+- <code><a href="./src/resources/marketing/emails.ts">MarketingEmailsPublicEmailToDetails</a></code>
+- <code><a href="./src/resources/marketing/emails.ts">MarketingEmailsPublicFontStyle</a></code>
+- <code><a href="./src/resources/marketing/emails.ts">MarketingEmailsPublicRssEmailDetails</a></code>
+- <code><a href="./src/resources/marketing/emails.ts">MarketingEmailsPublicWebversionDetails</a></code>
+- <code><a href="./src/resources/marketing/emails.ts">MarketingEmailsSmartEmailField</a></code>
+- <code><a href="./src/resources/marketing/emails.ts">MarketingEmailsVersionPublicEmail</a></code>
+- <code><a href="./src/resources/marketing/emails.ts">MarketingEmailsVersionUser</a></code>
+
+Methods:
+
+- <code title="post /marketing/v3/emails/">client.marketing.emails.<a href="./src/resources/marketing/emails.ts">create</a>({ ...params }) -> MarketingEmailsPublicEmail</code>
+- <code title="patch /marketing/v3/emails/{emailId}">client.marketing.emails.<a href="./src/resources/marketing/emails.ts">update</a>(emailID, { ...params }) -> MarketingEmailsPublicEmail</code>
+- <code title="get /marketing/v3/emails/">client.marketing.emails.<a href="./src/resources/marketing/emails.ts">list</a>({ ...params }) -> MarketingEmailsCollectionResponseWithTotalPublicEmailForwardPaging</code>
+- <code title="delete /marketing/v3/emails/{emailId}">client.marketing.emails.<a href="./src/resources/marketing/emails.ts">delete</a>(emailID, { ...params }) -> void</code>
+- <code title="post /marketing/v3/emails/clone">client.marketing.emails.<a href="./src/resources/marketing/emails.ts">clone</a>({ ...params }) -> MarketingEmailsPublicEmail</code>
+- <code title="post /marketing/v3/emails/ab-test/create-variation">client.marketing.emails.<a href="./src/resources/marketing/emails.ts">createAbTestVariation</a>({ ...params }) -> MarketingEmailsPublicEmail</code>
+- <code title="get /marketing/v3/emails/{emailId}/ab-test/get-variation">client.marketing.emails.<a href="./src/resources/marketing/emails.ts">getAbTestVariation</a>(emailID) -> MarketingEmailsPublicEmail</code>
+- <code title="get /marketing/v3/emails/{emailId}/draft">client.marketing.emails.<a href="./src/resources/marketing/emails.ts">getDraft</a>(emailID) -> MarketingEmailsPublicEmail</code>
+- <code title="get /marketing/v3/emails/statistics/list">client.marketing.emails.<a href="./src/resources/marketing/emails.ts">getEmailsList</a>({ ...params }) -> MarketingEmailsAggregateEmailStatistics</code>
+- <code title="get /marketing/v3/emails/statistics/histogram">client.marketing.emails.<a href="./src/resources/marketing/emails.ts">getHistogram</a>({ ...params }) -> MarketingEmailsCollectionResponseWithTotalEmailStatisticIntervalNoPaging</code>
+- <code title="get /marketing/v3/emails/{emailId}/revisions/{revisionId}">client.marketing.emails.<a href="./src/resources/marketing/emails.ts">getRevisionByID</a>(revisionID, { ...params }) -> MarketingEmailsVersionPublicEmail</code>
+- <code title="get /marketing/v3/emails/{emailId}/revisions">client.marketing.emails.<a href="./src/resources/marketing/emails.ts">getRevisions</a>(emailID, { ...params }) -> MarketingEmailsCollectionResponseWithTotalVersionPublicEmail</code>
+- <code title="post /marketing/v3/emails/{emailId}/publish">client.marketing.emails.<a href="./src/resources/marketing/emails.ts">publishOrSend</a>(emailID) -> void</code>
+- <code title="get /marketing/v3/emails/{emailId}">client.marketing.emails.<a href="./src/resources/marketing/emails.ts">read</a>(emailID, { ...params }) -> MarketingEmailsPublicEmail</code>
+- <code title="post /marketing/v3/emails/{emailId}/draft/reset">client.marketing.emails.<a href="./src/resources/marketing/emails.ts">resetDraft</a>(emailID) -> void</code>
+- <code title="post /marketing/v3/emails/{emailId}/revisions/{revisionId}/restore-to-draft">client.marketing.emails.<a href="./src/resources/marketing/emails.ts">restoreDraftRevision</a>(revisionID, { ...params }) -> MarketingEmailsPublicEmail</code>
+- <code title="post /marketing/v3/emails/{emailId}/revisions/{revisionId}/restore">client.marketing.emails.<a href="./src/resources/marketing/emails.ts">restoreRevision</a>(revisionID, { ...params }) -> void</code>
+- <code title="post /marketing/v3/emails/{emailId}/unpublish">client.marketing.emails.<a href="./src/resources/marketing/emails.ts">unpublishOrCancel</a>(emailID) -> void</code>
+- <code title="patch /marketing/v3/emails/{emailId}/draft">client.marketing.emails.<a href="./src/resources/marketing/emails.ts">upsertDraft</a>(emailID, { ...params }) -> MarketingEmailsPublicEmail</code>
 
 ## Forms
 
