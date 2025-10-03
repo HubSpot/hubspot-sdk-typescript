@@ -106,9 +106,8 @@ export const formatRequestDetails = (details: {
         ([name, value]) => [
           name,
           (
-            name.toLowerCase() === 'private-app' ||
-            name.toLowerCase() === undefined ||
             name.toLowerCase() === 'authorization' ||
+            name.toLowerCase() === undefined ||
             name.toLowerCase() === 'cookie' ||
             name.toLowerCase() === 'set-cookie'
           ) ?

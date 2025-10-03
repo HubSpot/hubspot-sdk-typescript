@@ -443,7 +443,7 @@ export class HubSpot {
     if (this.accessToken == null) {
       return undefined;
     }
-    return buildHeaders([{ 'private-app': this.accessToken }]);
+    return buildHeaders([{ Authorization: `Bearer ${this.accessToken}` }]);
   }
 
   protected stringifyQuery(query: Record<string, unknown>): string {
