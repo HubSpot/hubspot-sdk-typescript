@@ -13,7 +13,7 @@ export class OAuth extends APIResource {
   create(
     body: OAuthCreateParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<AuthOAuthTokenResponseIf> {
+  ): APIPromise<TokenResponseIf> {
     return this._client.post('/oauth/v1/token', {
       body,
       ...options,
@@ -34,12 +34,12 @@ export class OAuth extends APIResource {
   /**
    * Retrieve refresh token metadata
    */
-  get(token: string, options?: RequestOptions): APIPromise<AuthOAuthRefreshTokenInfoResponse> {
+  get(token: string, options?: RequestOptions): APIPromise<RefreshTokenInfoResponse> {
     return this._client.get(path`/oauth/v1/refresh-tokens/${token}`, options);
   }
 }
 
-export interface AuthOAuthAccessTokenInfoResponse {
+export interface AccessTokenInfoResponse {
   token: string;
 
   app_id: number;
@@ -59,7 +59,7 @@ export interface AuthOAuthAccessTokenInfoResponse {
   user?: string;
 }
 
-export interface AuthOAuthRefreshTokenInfoResponse {
+export interface RefreshTokenInfoResponse {
   token: string;
 
   client_id: string;
@@ -77,7 +77,7 @@ export interface AuthOAuthRefreshTokenInfoResponse {
   user?: string;
 }
 
-export interface AuthOAuthTokenResponseIf {
+export interface TokenResponseIf {
   access_token: string;
 
   expires_in: number;
@@ -105,9 +105,9 @@ export interface OAuthCreateParams {
 
 export declare namespace OAuth {
   export {
-    type AuthOAuthAccessTokenInfoResponse as AuthOAuthAccessTokenInfoResponse,
-    type AuthOAuthRefreshTokenInfoResponse as AuthOAuthRefreshTokenInfoResponse,
-    type AuthOAuthTokenResponseIf as AuthOAuthTokenResponseIf,
+    type AccessTokenInfoResponse as AccessTokenInfoResponse,
+    type RefreshTokenInfoResponse as RefreshTokenInfoResponse,
+    type TokenResponseIf as TokenResponseIf,
     type OAuthCreateParams as OAuthCreateParams,
   };
 }

@@ -13,7 +13,7 @@ export class Files extends APIResource {
   /**
    * Update file properties
    */
-  update(fileID: string, body: FileUpdateParams, options?: RequestOptions): APIPromise<FilesAPI.FilesFile> {
+  update(fileID: string, body: FileUpdateParams, options?: RequestOptions): APIPromise<FilesAPI.File> {
     return this._client.patch(path`/files/v3/files/${fileID}`, { body, ...options });
   }
 
@@ -44,7 +44,7 @@ export class Files extends APIResource {
     fileID: string,
     query: FileGetParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<FilesAPI.FilesFile> {
+  ): APIPromise<FilesAPI.File> {
     return this._client.get(path`/files/v3/files/${fileID}`, { query, ...options });
   }
 
@@ -55,7 +55,7 @@ export class Files extends APIResource {
     path_: string,
     query: FileGetByPathParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<FilesAPI.FilesFileStat> {
+  ): APIPromise<FilesAPI.FileStat> {
     return this._client.get(path`/files/v3/files/stat/${path_}`, { query, ...options });
   }
 
@@ -65,7 +65,7 @@ export class Files extends APIResource {
   getImportFromURLAsyncStatus(
     taskID: string,
     options?: RequestOptions,
-  ): APIPromise<FilesAPI.FilesFileActionResponse> {
+  ): APIPromise<FilesAPI.FileActionResponse> {
     return this._client.get(path`/files/v3/files/import-from-url/async/tasks/${taskID}/status`, options);
   }
 
@@ -76,7 +76,7 @@ export class Files extends APIResource {
     fileID: string,
     query: FileGetSignedURLParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<FilesAPI.FilesSignedURL> {
+  ): APIPromise<FilesAPI.SignedURL> {
     return this._client.get(path`/files/v3/files/${fileID}/signed-url`, { query, ...options });
   }
 
@@ -86,7 +86,7 @@ export class Files extends APIResource {
   importFromURLAsync(
     body: FileImportFromURLAsyncParams,
     options?: RequestOptions,
-  ): APIPromise<FilesAPI.FilesImportFromURLTaskLocator> {
+  ): APIPromise<FilesAPI.ImportFromURLTaskLocator> {
     return this._client.post('/files/v3/files/import-from-url/async', { body, ...options });
   }
 
@@ -97,7 +97,7 @@ export class Files extends APIResource {
     fileID: string,
     body: FileReplaceParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<FilesAPI.FilesFile> {
+  ): APIPromise<FilesAPI.File> {
     return this._client.put(
       path`/files/v3/files/${fileID}`,
       multipartFormRequestOptions({ body, ...options }, this._client),
@@ -110,7 +110,7 @@ export class Files extends APIResource {
   search(
     query: FileSearchParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<FilesAPI.FilesCollectionResponseFile> {
+  ): APIPromise<FilesAPI.CollectionResponseFile> {
     return this._client.get('/files/v3/files/search', { query, ...options });
   }
 
@@ -120,7 +120,7 @@ export class Files extends APIResource {
   upload(
     body: FileUploadParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<FilesAPI.FilesFile> {
+  ): APIPromise<FilesAPI.File> {
     return this._client.post(
       '/files/v3/files',
       multipartFormRequestOptions({ body, ...options }, this._client),

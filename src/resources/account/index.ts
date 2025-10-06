@@ -2,17 +2,12 @@
 
 export {
   Account,
-  type AccountActingUser,
-  type AccountCollectionResponseHydratedCriticalActionForwardPaging,
-  type AccountCollectionResponsePublicAPIUserActionEventForwardPaging,
-  type AccountCollectionResponsePublicLoginAuditForwardPaging,
-  type AccountHydratedCriticalAction,
-  type AccountPublicAPIUserActionEvent,
-  type AccountPublicLoginAudit,
+  type ActingUser,
+  type CollectionResponseHydratedCriticalActionForwardPaging,
+  type CollectionResponsePublicAPIUserActionEventForwardPaging,
+  type CollectionResponsePublicLoginAuditForwardPaging,
+  type HydratedCriticalAction,
+  type PublicAPIUserActionEvent,
+  type PublicLoginAudit,
 } from './account';
-export {
-  Info,
-  type AccountInfoAPIUsage,
-  type AccountInfoCollectionResponseAPIUsage,
-  type AccountInfoPortalInformationResponse,
-} from './info';
+export { Info, type APIUsage, type CollectionResponseAPIUsage, type PortalInformationResponse } from './info';

@@ -17,7 +17,7 @@ export class V4 extends APIResource {
     toObjectID: string,
     params: V4CreateParams,
     options?: RequestOptions,
-  ): APIPromise<CRMAPI.CRMCreatedResponseLabelsBetweenObjectPair> {
+  ): APIPromise<CRMAPI.CreatedResponseLabelsBetweenObjectPair> {
     const { objectType, objectId, toObjectType, body } = params;
     return this._client.put(
       path`/crm/v4/objects/${objectType}/${objectId}/associations/${toObjectType}/${toObjectID}`,
@@ -32,7 +32,7 @@ export class V4 extends APIResource {
     toObjectType: string,
     params: V4ListParams,
     options?: RequestOptions,
-  ): APIPromise<CRMAPI.CRMCollectionResponseMultiAssociatedObjectWithLabel> {
+  ): APIPromise<CRMAPI.CollectionResponseMultiAssociatedObjectWithLabel> {
     const { objectType, objectId, ...query } = params;
     return this._client.get(path`/crm/v4/objects/${objectType}/${objectId}/associations/${toObjectType}`, {
       query,
@@ -58,7 +58,7 @@ export class V4 extends APIResource {
     toObjectType: string,
     params: V4ArchiveLabelsParams,
     options?: RequestOptions,
-  ): APIPromise<CRMAssociationsV4BatchResponseVoid> {
+  ): APIPromise<BatchResponseVoid> {
     const { fromObjectType, ...body } = params;
     return this._client.post(
       path`/crm/v4/associations/${fromObjectType}/${toObjectType}/batch/labels/archive`,
@@ -73,7 +73,7 @@ export class V4 extends APIResource {
     toObjectID: string,
     params: V4CreateDefaultParams,
     options?: RequestOptions,
-  ): APIPromise<CRMAPI.CRMBatchResponsePublicDefaultAssociation> {
+  ): APIPromise<CRMAPI.BatchResponsePublicDefaultAssociation> {
     const { fromObjectType, fromObjectId, toObjectType } = params;
     return this._client.put(
       path`/crm/v4/objects/${fromObjectType}/${fromObjectId}/associations/default/${toObjectType}/${toObjectID}`,
@@ -84,18 +84,18 @@ export class V4 extends APIResource {
   /**
    * Report
    */
-  request(userID: number, options?: RequestOptions): APIPromise<CRMAssociationsV4ReportCreationResponse> {
+  request(userID: number, options?: RequestOptions): APIPromise<ReportCreationResponse> {
     return this._client.post(path`/crm/v4/associations/usage/high-usage-report/${userID}`, options);
   }
 }
 
-export interface CRMAssociationsV4AssociationSpec1 {
+export interface AssociationSpec1 {
   associationCategory: 'HUBSPOT_DEFINED' | 'USER_DEFINED' | 'INTEGRATOR_DEFINED';
 
   associationTypeId: number;
 }
 
-export interface CRMAssociationsV4AssociationSpecWithLabel1 {
+export interface AssociationSpecWithLabel1 {
   category: 'HUBSPOT_DEFINED' | 'USER_DEFINED' | 'INTEGRATOR_DEFINED';
 
   typeId: number;
@@ -103,32 +103,32 @@ export interface CRMAssociationsV4AssociationSpecWithLabel1 {
   label?: string;
 }
 
-export interface CRMAssociationsV4BatchInputPublicAssociationMultiArchive {
-  inputs: Array<CRMAssociationsV4PublicAssociationMultiArchive>;
+export interface BatchInputPublicAssociationMultiArchive {
+  inputs: Array<PublicAssociationMultiArchive>;
 }
 
-export interface CRMAssociationsV4BatchInputPublicAssociationMultiPost {
-  inputs: Array<CRMAssociationsV4PublicAssociationMultiPost>;
+export interface BatchInputPublicAssociationMultiPost {
+  inputs: Array<PublicAssociationMultiPost>;
 }
 
-export interface CRMAssociationsV4BatchInputPublicDefaultAssociationMultiPost {
-  inputs: Array<CRMAssociationsV4PublicDefaultAssociationMultiPost>;
+export interface BatchInputPublicDefaultAssociationMultiPost {
+  inputs: Array<PublicDefaultAssociationMultiPost>;
 }
 
-export interface CRMAssociationsV4BatchInputPublicFetchAssociationsBatchRequest {
-  inputs: Array<CRMAssociationsV4PublicFetchAssociationsBatchRequest>;
+export interface BatchInputPublicFetchAssociationsBatchRequest {
+  inputs: Array<PublicFetchAssociationsBatchRequest>;
 }
 
-export interface CRMAssociationsV4BatchResponseLabelsBetweenObjectPair {
+export interface BatchResponseLabelsBetweenObjectPair {
   completedAt: string;
 
-  results: Array<CRMAPI.CRMLabelsBetweenObjectPair>;
+  results: Array<CRMAPI.LabelsBetweenObjectPair>;
 
   startedAt: string;
 
   status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
 
-  errors?: Array<CRMAssociationsV4StandardError1>;
+  errors?: Array<StandardError1>;
 
   links?: { [key: string]: string };
 
@@ -137,16 +137,16 @@ export interface CRMAssociationsV4BatchResponseLabelsBetweenObjectPair {
   requestedAt?: string;
 }
 
-export interface CRMAssociationsV4BatchResponsePublicAssociationMultiWithLabel {
+export interface BatchResponsePublicAssociationMultiWithLabel {
   completedAt: string;
 
-  results: Array<CRMAssociationsV4PublicAssociationMultiWithLabel>;
+  results: Array<PublicAssociationMultiWithLabel>;
 
   startedAt: string;
 
   status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
 
-  errors?: Array<CRMAssociationsV4StandardError1>;
+  errors?: Array<StandardError1>;
 
   links?: { [key: string]: string };
 
@@ -155,7 +155,7 @@ export interface CRMAssociationsV4BatchResponsePublicAssociationMultiWithLabel {
   requestedAt?: string;
 }
 
-export interface CRMAssociationsV4BatchResponseVoid {
+export interface BatchResponseVoid {
   completedAt: string;
 
   results: Array<unknown>;
@@ -164,7 +164,7 @@ export interface CRMAssociationsV4BatchResponseVoid {
 
   status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
 
-  errors?: Array<CRMAssociationsV4StandardError1>;
+  errors?: Array<StandardError1>;
 
   links?: { [key: string]: string };
 
@@ -173,7 +173,7 @@ export interface CRMAssociationsV4BatchResponseVoid {
   requestedAt?: string;
 }
 
-export interface CRMAssociationsV4DateTime {
+export interface DateTime {
   dateOnly: boolean;
 
   timeZoneShift: number;
@@ -181,61 +181,61 @@ export interface CRMAssociationsV4DateTime {
   value: number;
 }
 
-export interface CRMAssociationsV4NextPage1 {
+export interface NextPage1 {
   after: string;
 
   link?: string;
 }
 
-export interface CRMAssociationsV4PreviousPage1 {
+export interface PreviousPage1 {
   before: string;
 
   link?: string;
 }
 
-export interface CRMAssociationsV4PublicAssociationMultiArchive {
-  from: CRMAPI.CRMPublicObjectID;
+export interface PublicAssociationMultiArchive {
+  from: CRMAPI.PublicObjectID;
 
-  to: Array<CRMAPI.CRMPublicObjectID>;
+  to: Array<CRMAPI.PublicObjectID>;
 }
 
-export interface CRMAssociationsV4PublicAssociationMultiPost {
-  from: CRMAPI.CRMPublicObjectID;
+export interface PublicAssociationMultiPost {
+  from: CRMAPI.PublicObjectID;
 
-  to: CRMAPI.CRMPublicObjectID;
+  to: CRMAPI.PublicObjectID;
 
-  types: Array<CRMAssociationsV4AssociationSpec1>;
+  types: Array<AssociationSpec1>;
 }
 
-export interface CRMAssociationsV4PublicAssociationMultiWithLabel {
-  from: CRMAPI.CRMPublicObjectID;
+export interface PublicAssociationMultiWithLabel {
+  from: CRMAPI.PublicObjectID;
 
-  to: Array<CRMAPI.CRMMultiAssociatedObjectWithLabel>;
+  to: Array<CRMAPI.MultiAssociatedObjectWithLabel>;
 
-  paging?: EmailsAPI.MarketingEmailsPaging;
+  paging?: EmailsAPI.Paging;
 }
 
-export interface CRMAssociationsV4PublicDefaultAssociationMultiPost {
-  from: CRMAPI.CRMPublicObjectID;
+export interface PublicDefaultAssociationMultiPost {
+  from: CRMAPI.PublicObjectID;
 
-  to: CRMAPI.CRMPublicObjectID;
+  to: CRMAPI.PublicObjectID;
 }
 
-export interface CRMAssociationsV4PublicFetchAssociationsBatchRequest {
+export interface PublicFetchAssociationsBatchRequest {
   id: string;
 
   after?: string;
 }
 
-export interface CRMAssociationsV4ReportCreationResponse {
-  enqueueTime: CRMAssociationsV4DateTime;
+export interface ReportCreationResponse {
+  enqueueTime: DateTime;
 
   userEmail: string;
 
   userId: number;
 }
 
-export interface CRMAssociationsV4StandardError1 {
+export interface StandardError1 {
   category: string;
 
   context: { [key: string]: Array<string> };
@@ -272,7 +272,7 @@ export interface V4CreateParams {
   /**
    * Body param:
    */
-  body: Array<CRMAPI.CRMAssociationSpec>;
+  body: Array<CRMAPI.AssociationSpec>;
 }
 
 export interface V4ListParams {
@@ -314,7 +314,7 @@ export interface V4ArchiveLabelsParams {
   /**
    * Body param:
    */
-  inputs: Array<CRMAssociationsV4PublicAssociationMultiPost>;
+  inputs: Array<PublicAssociationMultiPost>;
 }
 
 export interface V4CreateDefaultParams {
@@ -327,25 +327,25 @@ export interface V4CreateDefaultParams {
 
 export declare namespace V4 {
   export {
-    type CRMAssociationsV4AssociationSpec1 as CRMAssociationsV4AssociationSpec1,
-    type CRMAssociationsV4AssociationSpecWithLabel1 as CRMAssociationsV4AssociationSpecWithLabel1,
-    type CRMAssociationsV4BatchInputPublicAssociationMultiArchive as CRMAssociationsV4BatchInputPublicAssociationMultiArchive,
-    type CRMAssociationsV4BatchInputPublicAssociationMultiPost as CRMAssociationsV4BatchInputPublicAssociationMultiPost,
-    type CRMAssociationsV4BatchInputPublicDefaultAssociationMultiPost as CRMAssociationsV4BatchInputPublicDefaultAssociationMultiPost,
-    type CRMAssociationsV4BatchInputPublicFetchAssociationsBatchRequest as CRMAssociationsV4BatchInputPublicFetchAssociationsBatchRequest,
-    type CRMAssociationsV4BatchResponseLabelsBetweenObjectPair as CRMAssociationsV4BatchResponseLabelsBetweenObjectPair,
-    type CRMAssociationsV4BatchResponsePublicAssociationMultiWithLabel as CRMAssociationsV4BatchResponsePublicAssociationMultiWithLabel,
-    type CRMAssociationsV4BatchResponseVoid as CRMAssociationsV4BatchResponseVoid,
-    type CRMAssociationsV4DateTime as CRMAssociationsV4DateTime,
-    type CRMAssociationsV4NextPage1 as CRMAssociationsV4NextPage1,
-    type CRMAssociationsV4PreviousPage1 as CRMAssociationsV4PreviousPage1,
-    type CRMAssociationsV4PublicAssociationMultiArchive as CRMAssociationsV4PublicAssociationMultiArchive,
-    type CRMAssociationsV4PublicAssociationMultiPost as CRMAssociationsV4PublicAssociationMultiPost,
-    type CRMAssociationsV4PublicAssociationMultiWithLabel as CRMAssociationsV4PublicAssociationMultiWithLabel,
-    type CRMAssociationsV4PublicDefaultAssociationMultiPost as CRMAssociationsV4PublicDefaultAssociationMultiPost,
-    type CRMAssociationsV4PublicFetchAssociationsBatchRequest as CRMAssociationsV4PublicFetchAssociationsBatchRequest,
-    type CRMAssociationsV4ReportCreationResponse as CRMAssociationsV4ReportCreationResponse,
-    type CRMAssociationsV4StandardError1 as CRMAssociationsV4StandardError1,
+    type AssociationSpec1 as AssociationSpec1,
+    type AssociationSpecWithLabel1 as AssociationSpecWithLabel1,
+    type BatchInputPublicAssociationMultiArchive as BatchInputPublicAssociationMultiArchive,
+    type BatchInputPublicAssociationMultiPost as BatchInputPublicAssociationMultiPost,
+    type BatchInputPublicDefaultAssociationMultiPost as BatchInputPublicDefaultAssociationMultiPost,
+    type BatchInputPublicFetchAssociationsBatchRequest as BatchInputPublicFetchAssociationsBatchRequest,
+    type BatchResponseLabelsBetweenObjectPair as BatchResponseLabelsBetweenObjectPair,
+    type BatchResponsePublicAssociationMultiWithLabel as BatchResponsePublicAssociationMultiWithLabel,
+    type BatchResponseVoid as BatchResponseVoid,
+    type DateTime as DateTime,
+    type NextPage1 as NextPage1,
+    type PreviousPage1 as PreviousPage1,
+    type PublicAssociationMultiArchive as PublicAssociationMultiArchive,
+    type PublicAssociationMultiPost as PublicAssociationMultiPost,
+    type PublicAssociationMultiWithLabel as PublicAssociationMultiWithLabel,
+    type PublicDefaultAssociationMultiPost as PublicDefaultAssociationMultiPost,
+    type PublicFetchAssociationsBatchRequest as PublicFetchAssociationsBatchRequest,
+    type ReportCreationResponse as ReportCreationResponse,
+    type StandardError1 as StandardError1,
     type V4CreateParams as V4CreateParams,
     type V4ListParams as V4ListParams,
     type V4DeleteParams as V4DeleteParams,

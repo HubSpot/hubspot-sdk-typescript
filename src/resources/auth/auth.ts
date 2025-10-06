@@ -3,11 +3,11 @@
 import { APIResource } from '../../core/resource';
 import * as OAuthAPI from './oauth';
 import {
-  AuthOAuthAccessTokenInfoResponse,
-  AuthOAuthRefreshTokenInfoResponse,
-  AuthOAuthTokenResponseIf,
+  AccessTokenInfoResponse,
   OAuth,
   OAuthCreateParams,
+  RefreshTokenInfoResponse,
+  TokenResponseIf,
 } from './oauth';
 
 export class Auth extends APIResource {
@@ -19,9 +19,9 @@ Auth.OAuth = OAuth;
 export declare namespace Auth {
   export {
     OAuth as OAuth,
-    type AuthOAuthAccessTokenInfoResponse as AuthOAuthAccessTokenInfoResponse,
-    type AuthOAuthRefreshTokenInfoResponse as AuthOAuthRefreshTokenInfoResponse,
-    type AuthOAuthTokenResponseIf as AuthOAuthTokenResponseIf,
+    type AccessTokenInfoResponse as AccessTokenInfoResponse,
+    type RefreshTokenInfoResponse as RefreshTokenInfoResponse,
+    type TokenResponseIf as TokenResponseIf,
     type OAuthCreateParams as OAuthCreateParams,
   };
 }

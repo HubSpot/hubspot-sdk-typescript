@@ -11,7 +11,7 @@ export class Schemas extends APIResource {
   /**
    * Create a new schema
    */
-  create(body: SchemaCreateParams, options?: RequestOptions): APIPromise<CRMAPI.CRMObjectSchema> {
+  create(body: SchemaCreateParams, options?: RequestOptions): APIPromise<CRMAPI.ObjectSchema> {
     return this._client.post('/crm-object-schemas/v3/schemas', { body, ...options });
   }
 
@@ -22,7 +22,7 @@ export class Schemas extends APIResource {
     objectType: string,
     body: SchemaUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<CRMAPI.CRMObjectTypeDefinition> {
+  ): APIPromise<CRMAPI.ObjectTypeDefinition> {
     return this._client.patch(path`/crm-object-schemas/v3/schemas/${objectType}`, { body, ...options });
   }
 
@@ -32,7 +32,7 @@ export class Schemas extends APIResource {
   list(
     query: SchemaListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CRMAPI.CRMCollectionResponseObjectSchemaNoPaging> {
+  ): APIPromise<CRMAPI.CollectionResponseObjectSchemaNoPaging> {
     return this._client.get('/crm-object-schemas/v3/schemas', { query, ...options });
   }
 
@@ -74,7 +74,7 @@ export class Schemas extends APIResource {
     objectType: string,
     body: SchemaCreateAssociationParams,
     options?: RequestOptions,
-  ): APIPromise<CRMAPI.CRMAssociationDefinition> {
+  ): APIPromise<CRMAPI.AssociationDefinition> {
     return this._client.post(path`/crm-object-schemas/v3/schemas/${objectType}/associations`, {
       body,
       ...options,
@@ -84,7 +84,7 @@ export class Schemas extends APIResource {
   /**
    * Get an existing schema
    */
-  read(objectType: string, options?: RequestOptions): APIPromise<CRMAPI.CRMObjectSchema> {
+  read(objectType: string, options?: RequestOptions): APIPromise<CRMAPI.ObjectSchema> {
     return this._client.get(path`/crm-object-schemas/v3/schemas/${objectType}`, options);
   }
 }
@@ -92,11 +92,11 @@ export class Schemas extends APIResource {
 export interface SchemaCreateParams {
   associatedObjects: Array<string>;
 
-  labels: CRMAPI.CRMObjectTypeDefinitionLabels;
+  labels: CRMAPI.ObjectTypeDefinitionLabels;
 
   name: string;
 
-  properties: Array<CRMAPI.CRMObjectTypePropertyCreate>;
+  properties: Array<CRMAPI.ObjectTypePropertyCreate>;
 
   requiredProperties: Array<string>;
 
@@ -110,7 +110,7 @@ export interface SchemaCreateParams {
 export interface SchemaUpdateParams {
   clearDescription?: boolean;
 
-  labels?: CRMAPI.CRMObjectTypeDefinitionLabels;
+  labels?: CRMAPI.ObjectTypeDefinitionLabels;
 
   primaryDisplayProperty?: string;
 

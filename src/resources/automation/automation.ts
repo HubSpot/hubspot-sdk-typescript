@@ -16,27 +16,27 @@ import {
   ActionReadParams,
   ActionUpdateParams,
   Actions,
-  AutomationActionsBatchInputCallbackCompletionBatchRequest,
-  AutomationActionsCallbackCompletionBatchRequest,
-  AutomationActionsCallbackCompletionRequest,
-  AutomationActionsCollectionResponsePublicActionDefinitionForwardPaging,
-  AutomationActionsCollectionResponsePublicActionFunctionIdentifierNoPaging,
-  AutomationActionsCollectionResponsePublicActionRevisionForwardPaging,
-  AutomationActionsFieldTypeDefinition,
-  AutomationActionsInputFieldDefinition,
-  AutomationActionsOption,
-  AutomationActionsOutputFieldDefinition,
-  AutomationActionsPublicActionDefinition,
-  AutomationActionsPublicActionDefinitionEgg,
-  AutomationActionsPublicActionDefinitionPatch,
-  AutomationActionsPublicActionFunction,
-  AutomationActionsPublicActionFunctionIdentifier,
-  AutomationActionsPublicActionLabels,
-  AutomationActionsPublicActionRevision,
-  AutomationActionsPublicConditionalSingleFieldDependency,
-  AutomationActionsPublicExecutionTranslationRule,
-  AutomationActionsPublicObjectRequestOptions,
-  AutomationActionsPublicSingleFieldDependency,
+  BatchInputCallbackCompletionBatchRequest,
+  CallbackCompletionBatchRequest,
+  CallbackCompletionRequest,
+  CollectionResponsePublicActionDefinitionForwardPaging,
+  CollectionResponsePublicActionFunctionIdentifierNoPaging,
+  CollectionResponsePublicActionRevisionForwardPaging,
+  FieldTypeDefinition,
+  InputFieldDefinition,
+  Option,
+  OutputFieldDefinition,
+  PublicActionDefinition,
+  PublicActionDefinitionEgg,
+  PublicActionDefinitionPatch,
+  PublicActionFunction,
+  PublicActionFunctionIdentifier,
+  PublicActionLabels,
+  PublicActionRevision,
+  PublicConditionalSingleFieldDependency,
+  PublicExecutionTranslationRule,
+  PublicObjectRequestOptions,
+  PublicSingleFieldDependency,
 } from './actions';
 import * as EmailsAPI from '../marketing/emails';
 
@@ -44,15 +44,15 @@ export class Automation extends APIResource {
   actions: ActionsAPI.Actions = new ActionsAPI.Actions(this._client);
 }
 
-export interface AutomationAPIAbTestBranchAction {
+export interface APIAbTestBranchAction {
   actionId: string;
 
-  testBranches: Array<AutomationAPIConnection>;
+  testBranches: Array<APIConnection>;
 
   type: 'AB_TEST_BRANCH';
 }
 
-export interface AutomationAPIActionDataValue {
+export interface APIActionDataValue {
   actionId: string;
 
   dataKey: string;
@@ -60,13 +60,13 @@ export interface AutomationAPIActionDataValue {
   type: 'FIELD_DATA';
 }
 
-export interface AutomationAPIAppendObjectPropertyValue {
+export interface APIAppendObjectPropertyValue {
   appendPropertyName: string;
 
   type: 'APPEND_OBJECT_PROPERTY';
 }
 
-export interface AutomationAPIAssociationDataSource {
+export interface APIAssociationDataSource {
   associationCategory: 'HUBSPOT_DEFINED' | 'USER_DEFINED' | 'INTEGRATOR_DEFINED';
 
   associationTypeId: number;
@@ -77,10 +77,10 @@ export interface AutomationAPIAssociationDataSource {
 
   type: 'ASSOCIATION';
 
-  sortBy?: AutomationAPISort;
+  sortBy?: APISort;
 }
 
-export interface AutomationAPIAssociationTimestampDataSource {
+export interface APIAssociationTimestampDataSource {
   associationCategory: 'HUBSPOT_DEFINED' | 'USER_DEFINED' | 'INTEGRATOR_DEFINED';
 
   associationTypeId: number;
@@ -92,7 +92,7 @@ export interface AutomationAPIAssociationTimestampDataSource {
   type: 'ASSOCIATION_TIMESTAMP';
 }
 
-export interface AutomationAPIAuthKeyWebhookAuthSettings {
+export interface APIAuthKeyWebhookAuthSettings {
   location: 'HEADER' | 'QUERY_PARAM';
 
   name: string;
@@ -102,7 +102,7 @@ export interface AutomationAPIAuthKeyWebhookAuthSettings {
   type: 'AUTH_KEY';
 }
 
-export interface AutomationAPIBlockedDate {
+export interface APIBlockedDate {
   dayOfMonth: number;
 
   month:
@@ -122,25 +122,25 @@ export interface AutomationAPIBlockedDate {
   year?: number;
 }
 
-export interface AutomationAPIConnection {
+export interface APIConnection {
   edgeType: string;
 
   nextActionId: string;
 }
 
-export interface AutomationAPIContactFlow {
+export interface APIContactFlow {
   id: string;
 
   actions: Array<
-    | AutomationAPIStaticBranchAction
-    | AutomationAPIListBranchAction
-    | AutomationAPIAbTestBranchAction
-    | AutomationAPICustomCodeAction
-    | AutomationAPIWebhookAction
-    | AutomationAPISingleConnectionAction
+    | APIStaticBranchAction
+    | APIListBranchAction
+    | APIAbTestBranchAction
+    | APICustomCodeAction
+    | APIWebhookAction
+    | APISingleConnectionAction
   >;
 
-  blockedDates: Array<AutomationAPIBlockedDate>;
+  blockedDates: Array<APIBlockedDate>;
 
   canEnrollFromSalesforce: boolean;
 
@@ -151,12 +151,12 @@ export interface AutomationAPIContactFlow {
   customProperties: { [key: string]: string };
 
   dataSources: Array<
-    | AutomationAPIAssociationDataSource
-    | AutomationAPIAssociationTimestampDataSource
-    | AutomationAPIStaticPropertyFilterDataSource
-    | AutomationAPIEnrolledRecordPropertyFilterDataSource
-    | AutomationAPIDatasetFieldPropertyFilterDataSource
-    | AutomationAPIEnrolledArgumentPropertyFilterDataSource
+    | APIAssociationDataSource
+    | APIAssociationTimestampDataSource
+    | APIStaticPropertyFilterDataSource
+    | APIEnrolledRecordPropertyFilterDataSource
+    | APIDatasetFieldPropertyFilterDataSource
+    | APIEnrolledArgumentPropertyFilterDataSource
   >;
 
   flowType: 'WORKFLOW' | 'ACTION_SET' | 'UNKNOWN';
@@ -171,69 +171,69 @@ export interface AutomationAPIContactFlow {
 
   suppressionListIds: Array<number>;
 
-  timeWindows: Array<AutomationAPITimeWindow>;
+  timeWindows: Array<APITimeWindow>;
 
   type: 'CONTACT_FLOW' | 'PLATFORM_FLOW';
 
   updatedAt: string;
 
   enrollmentCriteria?:
-    | AutomationAPIListBasedEnrollmentCriteria
-    | AutomationAPIEventBasedEnrollmentCriteria
-    | AutomationAPIManualEnrollmentCriteria;
+    | APIListBasedEnrollmentCriteria
+    | APIEventBasedEnrollmentCriteria
+    | APIManualEnrollmentCriteria;
 
   enrollmentSchedule?:
-    | AutomationAPIDailyEnrollmentSchedule
-    | AutomationAPIWeeklyEnrollmentSchedule
-    | AutomationAPIMonthlySpecificDaysEnrollmentSchedule
-    | AutomationAPIMonthlyRelativeDaysEnrollmentSchedule
-    | AutomationAPIYearlyEnrollmentSchedule
-    | AutomationAPIPropertyBasedEnrollmentSchedule;
+    | APIDailyEnrollmentSchedule
+    | APIWeeklyEnrollmentSchedule
+    | APIMonthlySpecificDaysEnrollmentSchedule
+    | APIMonthlyRelativeDaysEnrollmentSchedule
+    | APIYearlyEnrollmentSchedule
+    | APIPropertyBasedEnrollmentSchedule;
 
-  eventAnchor?: AutomationAPIContactPropertyAnchor | AutomationAPIStaticDateAnchor;
+  eventAnchor?: APIContactPropertyAnchor | APIStaticDateAnchor;
 
   goalFilterBranch?:
-    | AutomationPublicOrFilterBranch
-    | AutomationPublicAndFilterBranch
-    | AutomationPublicNotAllFilterBranch
-    | AutomationPublicNotAnyFilterBranch
-    | AutomationPublicRestrictedFilterBranch
-    | AutomationPublicUnifiedEventsFilterBranch
-    | AutomationPublicPropertyAssociationFilterBranch
-    | AutomationPublicAssociationFilterBranch;
+    | PublicOrFilterBranch
+    | PublicAndFilterBranch
+    | PublicNotAllFilterBranch
+    | PublicNotAnyFilterBranch
+    | PublicRestrictedFilterBranch
+    | PublicUnifiedEventsFilterBranch
+    | PublicPropertyAssociationFilterBranch
+    | PublicAssociationFilterBranch;
 
   name?: string;
 
   startActionId?: string;
 
-  unEnrollmentSetting?: AutomationAPIUnEnrollmentSetting;
+  unEnrollmentSetting?: APIUnEnrollmentSetting;
 
   uuid?: string;
 }
 
-export interface AutomationAPIContactFlowCreateRequest {
+export interface APIContactFlowCreateRequest {
   actions: Array<
-    | AutomationAPIStaticBranchAction
-    | AutomationAPIListBranchAction
-    | AutomationAPIAbTestBranchAction
-    | AutomationAPICustomCodeAction
-    | AutomationAPIWebhookAction
-    | AutomationAPISingleConnectionAction
+    | APIStaticBranchAction
+    | APIListBranchAction
+    | APIAbTestBranchAction
+    | APICustomCodeAction
+    | APIWebhookAction
+    | APISingleConnectionAction
   >;
 
-  blockedDates: Array<AutomationAPIBlockedDate>;
+  blockedDates: Array<APIBlockedDate>;
 
   canEnrollFromSalesforce: boolean;
 
   customProperties: { [key: string]: string };
 
   dataSources: Array<
-    | AutomationAPIAssociationDataSource
-    | AutomationAPIAssociationTimestampDataSource
-    | AutomationAPIStaticPropertyFilterDataSource
-    | AutomationAPIEnrolledRecordPropertyFilterDataSource
-    | AutomationAPIDatasetFieldPropertyFilterDataSource
-    | AutomationAPIEnrolledArgumentPropertyFilterDataSource
+    | APIAssociationDataSource
+    | APIAssociationTimestampDataSource
+    | APIStaticPropertyFilterDataSource
+    | APIEnrolledRecordPropertyFilterDataSource
+    | APIDatasetFieldPropertyFilterDataSource
+    | APIEnrolledArgumentPropertyFilterDataSource
   >;
 
   flowType: 'WORKFLOW' | 'ACTION_SET' | 'UNKNOWN';
@@ -244,55 +244,55 @@ export interface AutomationAPIContactFlowCreateRequest {
 
   suppressionListIds: Array<number>;
 
-  timeWindows: Array<AutomationAPITimeWindow>;
+  timeWindows: Array<APITimeWindow>;
 
   type: 'CONTACT_FLOW' | 'PLATFORM_FLOW';
 
   enrollmentCriteria?:
-    | AutomationAPIListBasedEnrollmentCriteria
-    | AutomationAPIEventBasedEnrollmentCriteria
-    | AutomationAPIManualEnrollmentCriteria;
+    | APIListBasedEnrollmentCriteria
+    | APIEventBasedEnrollmentCriteria
+    | APIManualEnrollmentCriteria;
 
   enrollmentSchedule?:
-    | AutomationAPIDailyEnrollmentSchedule
-    | AutomationAPIWeeklyEnrollmentSchedule
-    | AutomationAPIMonthlySpecificDaysEnrollmentSchedule
-    | AutomationAPIMonthlyRelativeDaysEnrollmentSchedule
-    | AutomationAPIYearlyEnrollmentSchedule
-    | AutomationAPIPropertyBasedEnrollmentSchedule;
+    | APIDailyEnrollmentSchedule
+    | APIWeeklyEnrollmentSchedule
+    | APIMonthlySpecificDaysEnrollmentSchedule
+    | APIMonthlyRelativeDaysEnrollmentSchedule
+    | APIYearlyEnrollmentSchedule
+    | APIPropertyBasedEnrollmentSchedule;
 
-  eventAnchor?: AutomationAPIContactPropertyAnchor | AutomationAPIStaticDateAnchor;
+  eventAnchor?: APIContactPropertyAnchor | APIStaticDateAnchor;
 
   goalFilterBranch?:
-    | AutomationPublicOrFilterBranch
-    | AutomationPublicAndFilterBranch
-    | AutomationPublicNotAllFilterBranch
-    | AutomationPublicNotAnyFilterBranch
-    | AutomationPublicRestrictedFilterBranch
-    | AutomationPublicUnifiedEventsFilterBranch
-    | AutomationPublicPropertyAssociationFilterBranch
-    | AutomationPublicAssociationFilterBranch;
+    | PublicOrFilterBranch
+    | PublicAndFilterBranch
+    | PublicNotAllFilterBranch
+    | PublicNotAnyFilterBranch
+    | PublicRestrictedFilterBranch
+    | PublicUnifiedEventsFilterBranch
+    | PublicPropertyAssociationFilterBranch
+    | PublicAssociationFilterBranch;
 
   name?: string;
 
   startActionId?: string;
 
-  unEnrollmentSetting?: AutomationAPIUnEnrollmentSetting;
+  unEnrollmentSetting?: APIUnEnrollmentSetting;
 
   uuid?: string;
 }
 
-export interface AutomationAPIContactFlowPutRequest {
+export interface APIContactFlowPutRequest {
   actions: Array<
-    | AutomationAPIStaticBranchAction
-    | AutomationAPIListBranchAction
-    | AutomationAPIAbTestBranchAction
-    | AutomationAPICustomCodeAction
-    | AutomationAPIWebhookAction
-    | AutomationAPISingleConnectionAction
+    | APIStaticBranchAction
+    | APIListBranchAction
+    | APIAbTestBranchAction
+    | APICustomCodeAction
+    | APIWebhookAction
+    | APISingleConnectionAction
   >;
 
-  blockedDates: Array<AutomationAPIBlockedDate>;
+  blockedDates: Array<APIBlockedDate>;
 
   canEnrollFromSalesforce: boolean;
 
@@ -304,56 +304,56 @@ export interface AutomationAPIContactFlowPutRequest {
 
   suppressionListIds: Array<number>;
 
-  timeWindows: Array<AutomationAPITimeWindow>;
+  timeWindows: Array<APITimeWindow>;
 
   type: 'CONTACT_FLOW' | 'PLATFORM_FLOW';
 
   enrollmentCriteria?:
-    | AutomationAPIListBasedEnrollmentCriteria
-    | AutomationAPIEventBasedEnrollmentCriteria
-    | AutomationAPIManualEnrollmentCriteria;
+    | APIListBasedEnrollmentCriteria
+    | APIEventBasedEnrollmentCriteria
+    | APIManualEnrollmentCriteria;
 
   enrollmentSchedule?:
-    | AutomationAPIDailyEnrollmentSchedule
-    | AutomationAPIWeeklyEnrollmentSchedule
-    | AutomationAPIMonthlySpecificDaysEnrollmentSchedule
-    | AutomationAPIMonthlyRelativeDaysEnrollmentSchedule
-    | AutomationAPIYearlyEnrollmentSchedule
-    | AutomationAPIPropertyBasedEnrollmentSchedule;
+    | APIDailyEnrollmentSchedule
+    | APIWeeklyEnrollmentSchedule
+    | APIMonthlySpecificDaysEnrollmentSchedule
+    | APIMonthlyRelativeDaysEnrollmentSchedule
+    | APIYearlyEnrollmentSchedule
+    | APIPropertyBasedEnrollmentSchedule;
 
-  eventAnchor?: AutomationAPIContactPropertyAnchor | AutomationAPIStaticDateAnchor;
+  eventAnchor?: APIContactPropertyAnchor | APIStaticDateAnchor;
 
   goalFilterBranch?:
-    | AutomationPublicOrFilterBranch
-    | AutomationPublicAndFilterBranch
-    | AutomationPublicNotAllFilterBranch
-    | AutomationPublicNotAnyFilterBranch
-    | AutomationPublicRestrictedFilterBranch
-    | AutomationPublicUnifiedEventsFilterBranch
-    | AutomationPublicPropertyAssociationFilterBranch
-    | AutomationPublicAssociationFilterBranch;
+    | PublicOrFilterBranch
+    | PublicAndFilterBranch
+    | PublicNotAllFilterBranch
+    | PublicNotAnyFilterBranch
+    | PublicRestrictedFilterBranch
+    | PublicUnifiedEventsFilterBranch
+    | PublicPropertyAssociationFilterBranch
+    | PublicAssociationFilterBranch;
 
   name?: string;
 
   startActionId?: string;
 
-  unEnrollmentSetting?: AutomationAPIUnEnrollmentSetting;
+  unEnrollmentSetting?: APIUnEnrollmentSetting;
 
   uuid?: string;
 }
 
-export interface AutomationAPIContactPropertyAnchor {
+export interface APIContactPropertyAnchor {
   contactProperty: string;
 
   type: 'CONTACT_PROPERTY_ANCHOR';
 }
 
-export interface AutomationAPICustomCodeAction {
+export interface APICustomCodeAction {
   actionId: string;
 
-  inputFields: Array<AutomationAPIInputVariable>;
+  inputFields: Array<APIInputVariable>;
 
-  outputFields: Array<AutomationAPIEnumerationOutputField>;
+  outputFields: Array<APIEnumerationOutputField>;
 
   runtime: string;
 
@@ -363,16 +363,16 @@ export interface AutomationAPICustomCodeAction {
 
   type: 'CUSTOM_CODE';
 
-  connection?: AutomationAPIConnection;
+  connection?: APIConnection;
 }
 
-export interface AutomationAPIDailyEnrollmentSchedule {
-  timeOfDay: AutomationAPITimeOfDay;
+export interface APIDailyEnrollmentSchedule {
+  timeOfDay: APITimeOfDay;
 
   type: 'DAILY';
 }
 
-export interface AutomationAPIDatasetFieldPropertyFilterDataSource {
+export interface APIDatasetFieldPropertyFilterDataSource {
   datasetFieldName: string;
 
   name: string;
@@ -381,10 +381,10 @@ export interface AutomationAPIDatasetFieldPropertyFilterDataSource {
 
   type: 'DATASET_FIELD_PROPERTY_FILTER';
 
-  sortBy?: AutomationAPISort;
+  sortBy?: APISort;
 }
 
-export interface AutomationAPIEnrolledArgumentPropertyFilterDataSource {
+export interface APIEnrolledArgumentPropertyFilterDataSource {
   argumentName: string;
 
   name: string;
@@ -393,10 +393,10 @@ export interface AutomationAPIEnrolledArgumentPropertyFilterDataSource {
 
   type: 'ENROLLED_ARGUMENT_PROPERTY_FILTER';
 
-  sortBy?: AutomationAPISort;
+  sortBy?: APISort;
 }
 
-export interface AutomationAPIEnrolledRecordPropertyFilterDataSource {
+export interface APIEnrolledRecordPropertyFilterDataSource {
   name: string;
 
   propertyName: string;
@@ -405,16 +405,16 @@ export interface AutomationAPIEnrolledRecordPropertyFilterDataSource {
 
   type: 'ENROLLED_RECORD_PROPERTY_FILTER';
 
-  sortBy?: AutomationAPISort;
+  sortBy?: APISort;
 }
 
-export interface AutomationAPIEnrollmentEventPropertyValue {
+export interface APIEnrollmentEventPropertyValue {
   enrollmentEventPropertyToken: string;
 
   type: 'ENROLLMENT_EVENT_PROPERTY';
 }
 
-export interface AutomationAPIEnumerationOutputField {
+export interface APIEnumerationOutputField {
   name: string;
 
   options: Array<string>;
@@ -422,18 +422,18 @@ export interface AutomationAPIEnumerationOutputField {
   type: 'ENUMERATION';
 }
 
-export interface AutomationAPIEventBasedEnrollmentCriteria {
-  eventFilterBranches: Array<AutomationPublicUnifiedEventsFilterBranch>;
+export interface APIEventBasedEnrollmentCriteria {
+  eventFilterBranches: Array<PublicUnifiedEventsFilterBranch>;
 
   listMembershipFilterBranches: Array<
-    | AutomationPublicOrFilterBranch
-    | AutomationPublicAndFilterBranch
-    | AutomationPublicNotAllFilterBranch
-    | AutomationPublicNotAnyFilterBranch
-    | AutomationPublicRestrictedFilterBranch
-    | AutomationPublicUnifiedEventsFilterBranch
-    | AutomationPublicPropertyAssociationFilterBranch
-    | AutomationPublicAssociationFilterBranch
+    | PublicOrFilterBranch
+    | PublicAndFilterBranch
+    | PublicNotAllFilterBranch
+    | PublicNotAnyFilterBranch
+    | PublicRestrictedFilterBranch
+    | PublicUnifiedEventsFilterBranch
+    | PublicPropertyAssociationFilterBranch
+    | PublicAssociationFilterBranch
   >;
 
   shouldReEnroll: boolean;
@@ -441,56 +441,53 @@ export interface AutomationAPIEventBasedEnrollmentCriteria {
   type: 'EVENT_BASED';
 
   refinementCriteria?:
-    | AutomationPublicOrFilterBranch
-    | AutomationPublicAndFilterBranch
-    | AutomationPublicNotAllFilterBranch
-    | AutomationPublicNotAnyFilterBranch
-    | AutomationPublicRestrictedFilterBranch
-    | AutomationPublicUnifiedEventsFilterBranch
-    | AutomationPublicPropertyAssociationFilterBranch
-    | AutomationPublicAssociationFilterBranch;
+    | PublicOrFilterBranch
+    | PublicAndFilterBranch
+    | PublicNotAllFilterBranch
+    | PublicNotAnyFilterBranch
+    | PublicRestrictedFilterBranch
+    | PublicUnifiedEventsFilterBranch
+    | PublicPropertyAssociationFilterBranch
+    | PublicAssociationFilterBranch;
 }
 
-export interface AutomationAPIFetchedObjectPropertyValue {
+export interface APIFetchedObjectPropertyValue {
   propertyToken: string;
 
   type: 'FETCHED_OBJECT_PROPERTY';
 }
 
-export type AutomationAPIFlow = unknown;
+export type APIFlow = unknown;
 
-export interface AutomationAPIFlowBatchFetchFlowIDCoordinate {
+export interface APIFlowBatchFetchFlowIDCoordinate {
   flowId: string;
 
   type: 'FLOW_ID';
 }
 
-export interface AutomationAPIFlowBatchFetchMigrationFlowIDCoordinate {
+export interface APIFlowBatchFetchMigrationFlowIDCoordinate {
   flowMigrationStatuses: string;
 
   type: 'FLOW_ID';
 }
 
-export interface AutomationAPIFlowBatchFetchMigrationWorkflowIDCoordinate {
+export interface APIFlowBatchFetchMigrationWorkflowIDCoordinate {
   flowMigrationStatusForClassicWorkflows: string;
 
   type: 'WORKFLOW_ID';
 }
 
-export interface AutomationAPIFlowBatchInput {
-  inputs: Array<AutomationAPIFlowBatchFetchFlowIDCoordinate>;
+export interface APIFlowBatchInput {
+  inputs: Array<APIFlowBatchFetchFlowIDCoordinate>;
 }
 
-export interface AutomationAPIFlowBatchMigrationInput {
-  inputs: Array<
-    | AutomationAPIFlowBatchFetchMigrationFlowIDCoordinate
-    | AutomationAPIFlowBatchFetchMigrationWorkflowIDCoordinate
-  >;
+export interface APIFlowBatchMigrationInput {
+  inputs: Array<APIFlowBatchFetchMigrationFlowIDCoordinate | APIFlowBatchFetchMigrationWorkflowIDCoordinate>;
 }
 
-export type AutomationAPIFlowCreateRequest = unknown;
+export type APIFlowCreateRequest = unknown;
 
-export interface AutomationAPIFlowEmailCampaign {
+export interface APIFlowEmailCampaign {
   emailCampaignId: string;
 
   emailContentId: string;
@@ -498,7 +495,7 @@ export interface AutomationAPIFlowEmailCampaign {
   flowId: string;
 }
 
-export interface AutomationAPIFlowListing {
+export interface APIFlowListing {
   id: string;
 
   createdAt: string;
@@ -518,50 +515,50 @@ export interface AutomationAPIFlowListing {
   uuid?: string;
 }
 
-export type AutomationAPIFlowPutRequest = unknown;
+export type APIFlowPutRequest = unknown;
 
-export interface AutomationAPIIncrementValue {
+export interface APIIncrementValue {
   incrementAmount: number;
 
   type: 'INCREMENT';
 }
 
-export interface AutomationAPIInputVariable {
+export interface APIInputVariable {
   name: string;
 
   value:
-    | AutomationAPIActionDataValue
-    | AutomationAPIObjectPropertyValue
-    | AutomationAPIStaticValue
-    | AutomationAPIRelativeDateTimeValue
-    | AutomationAPITimestampValue
-    | AutomationAPIIncrementValue
-    | AutomationAPIFetchedObjectPropertyValue
-    | AutomationAPIAppendObjectPropertyValue
-    | AutomationAPIStaticAppendValue
-    | AutomationAPIEnrollmentEventPropertyValue;
+    | APIActionDataValue
+    | APIObjectPropertyValue
+    | APIStaticValue
+    | APIRelativeDateTimeValue
+    | APITimestampValue
+    | APIIncrementValue
+    | APIFetchedObjectPropertyValue
+    | APIAppendObjectPropertyValue
+    | APIStaticAppendValue
+    | APIEnrollmentEventPropertyValue;
 }
 
-export interface AutomationAPIListBasedEnrollmentCriteria {
+export interface APIListBasedEnrollmentCriteria {
   listFilterBranch:
-    | AutomationPublicOrFilterBranch
-    | AutomationPublicAndFilterBranch
-    | AutomationPublicNotAllFilterBranch
-    | AutomationPublicNotAnyFilterBranch
-    | AutomationPublicRestrictedFilterBranch
-    | AutomationPublicUnifiedEventsFilterBranch
-    | AutomationPublicPropertyAssociationFilterBranch
-    | AutomationPublicAssociationFilterBranch;
+    | PublicOrFilterBranch
+    | PublicAndFilterBranch
+    | PublicNotAllFilterBranch
+    | PublicNotAnyFilterBranch
+    | PublicRestrictedFilterBranch
+    | PublicUnifiedEventsFilterBranch
+    | PublicPropertyAssociationFilterBranch
+    | PublicAssociationFilterBranch;
 
   reEnrollmentTriggersFilterBranches: Array<
-    | AutomationPublicOrFilterBranch
-    | AutomationPublicAndFilterBranch
-    | AutomationPublicNotAllFilterBranch
-    | AutomationPublicNotAnyFilterBranch
-    | AutomationPublicRestrictedFilterBranch
-    | AutomationPublicUnifiedEventsFilterBranch
-    | AutomationPublicPropertyAssociationFilterBranch
-    | AutomationPublicAssociationFilterBranch
+    | PublicOrFilterBranch
+    | PublicAndFilterBranch
+    | PublicNotAllFilterBranch
+    | PublicNotAnyFilterBranch
+    | PublicRestrictedFilterBranch
+    | PublicUnifiedEventsFilterBranch
+    | PublicPropertyAssociationFilterBranch
+    | PublicAssociationFilterBranch
   >;
 
   shouldReEnroll: boolean;
@@ -571,75 +568,75 @@ export interface AutomationAPIListBasedEnrollmentCriteria {
   unEnrollObjectsNotMeetingCriteria: boolean;
 }
 
-export interface AutomationAPIListBranch {
+export interface APIListBranch {
   branchName?: string;
 
-  connection?: AutomationAPIConnection;
+  connection?: APIConnection;
 
   filterBranch?:
-    | AutomationPublicOrFilterBranch
-    | AutomationPublicAndFilterBranch
-    | AutomationPublicNotAllFilterBranch
-    | AutomationPublicNotAnyFilterBranch
-    | AutomationPublicRestrictedFilterBranch
-    | AutomationPublicUnifiedEventsFilterBranch
-    | AutomationPublicPropertyAssociationFilterBranch
-    | AutomationPublicAssociationFilterBranch;
+    | PublicOrFilterBranch
+    | PublicAndFilterBranch
+    | PublicNotAllFilterBranch
+    | PublicNotAnyFilterBranch
+    | PublicRestrictedFilterBranch
+    | PublicUnifiedEventsFilterBranch
+    | PublicPropertyAssociationFilterBranch
+    | PublicAssociationFilterBranch;
 }
 
-export interface AutomationAPIListBranchAction {
+export interface APIListBranchAction {
   actionId: string;
 
-  listBranches: Array<AutomationAPIListBranch>;
+  listBranches: Array<APIListBranch>;
 
   type: 'LIST_BRANCH';
 
-  defaultBranch?: AutomationAPIConnection;
+  defaultBranch?: APIConnection;
 
   defaultBranchName?: string;
 }
 
-export interface AutomationAPIManualEnrollmentCriteria {
+export interface APIManualEnrollmentCriteria {
   shouldReEnroll: boolean;
 
   type: 'MANUAL';
 }
 
-export interface AutomationAPIMonthlyRelativeDaysEnrollmentSchedule {
+export interface APIMonthlyRelativeDaysEnrollmentSchedule {
   monthlyRelativeDays: 'LAST_DAY_OF_MONTH' | 'FIRST_MONDAY_OF_MONTH';
 
-  timeOfDay: AutomationAPITimeOfDay;
+  timeOfDay: APITimeOfDay;
 
   type: 'MONTHLY_RELATIVE_DAYS';
 }
 
-export interface AutomationAPIMonthlySpecificDaysEnrollmentSchedule {
+export interface APIMonthlySpecificDaysEnrollmentSchedule {
   daysOfMonth: Array<number>;
 
-  timeOfDay: AutomationAPITimeOfDay;
+  timeOfDay: APITimeOfDay;
 
   type: 'MONTHLY_SPECIFIC_DAYS';
 }
 
-export interface AutomationAPIObjectPropertyValue {
+export interface APIObjectPropertyValue {
   propertyName: string;
 
   type: 'OBJECT_PROPERTY';
 }
 
-export interface AutomationAPIPlatformFlow {
+export interface APIPlatformFlow {
   id: string;
 
   actions: Array<
-    | AutomationAPIStaticBranchAction
-    | AutomationAPIListBranchAction
-    | AutomationAPIAbTestBranchAction
-    | AutomationAPICustomCodeAction
-    | AutomationAPIWebhookAction
-    | AutomationAPISingleConnectionAction
+    | APIStaticBranchAction
+    | APIListBranchAction
+    | APIAbTestBranchAction
+    | APICustomCodeAction
+    | APIWebhookAction
+    | APISingleConnectionAction
   >;
 
-  blockedDates: Array<AutomationAPIBlockedDate>;
+  blockedDates: Array<APIBlockedDate>;
 
   createdAt: string;
 
@@ -648,12 +645,12 @@ export interface AutomationAPIPlatformFlow {
   customProperties: { [key: string]: string };
 
   dataSources: Array<
-    | AutomationAPIAssociationDataSource
-    | AutomationAPIAssociationTimestampDataSource
-    | AutomationAPIStaticPropertyFilterDataSource
-    | AutomationAPIEnrolledRecordPropertyFilterDataSource
-    | AutomationAPIDatasetFieldPropertyFilterDataSource
-    | AutomationAPIEnrolledArgumentPropertyFilterDataSource
+    | APIAssociationDataSource
+    | APIAssociationTimestampDataSource
+    | APIStaticPropertyFilterDataSource
+    | APIEnrolledRecordPropertyFilterDataSource
+    | APIDatasetFieldPropertyFilterDataSource
+    | APIEnrolledArgumentPropertyFilterDataSource
   >;
 
   flowType: 'WORKFLOW' | 'ACTION_SET' | 'UNKNOWN';
@@ -666,63 +663,63 @@ export interface AutomationAPIPlatformFlow {
 
   revisionId: string;
 
-  timeWindows: Array<AutomationAPITimeWindow>;
+  timeWindows: Array<APITimeWindow>;
 
   type: 'CONTACT_FLOW' | 'PLATFORM_FLOW';
 
   updatedAt: string;
 
   enrollmentCriteria?:
-    | AutomationAPIListBasedEnrollmentCriteria
-    | AutomationAPIEventBasedEnrollmentCriteria
-    | AutomationAPIManualEnrollmentCriteria;
+    | APIListBasedEnrollmentCriteria
+    | APIEventBasedEnrollmentCriteria
+    | APIManualEnrollmentCriteria;
 
   enrollmentSchedule?:
-    | AutomationAPIDailyEnrollmentSchedule
-    | AutomationAPIWeeklyEnrollmentSchedule
-    | AutomationAPIMonthlySpecificDaysEnrollmentSchedule
-    | AutomationAPIMonthlyRelativeDaysEnrollmentSchedule
-    | AutomationAPIYearlyEnrollmentSchedule
-    | AutomationAPIPropertyBasedEnrollmentSchedule;
+    | APIDailyEnrollmentSchedule
+    | APIWeeklyEnrollmentSchedule
+    | APIMonthlySpecificDaysEnrollmentSchedule
+    | APIMonthlyRelativeDaysEnrollmentSchedule
+    | APIYearlyEnrollmentSchedule
+    | APIPropertyBasedEnrollmentSchedule;
 
   name?: string;
 
   startActionId?: string;
 
   suppressionFilterBranch?:
-    | AutomationPublicOrFilterBranch
-    | AutomationPublicAndFilterBranch
-    | AutomationPublicNotAllFilterBranch
-    | AutomationPublicNotAnyFilterBranch
-    | AutomationPublicRestrictedFilterBranch
-    | AutomationPublicUnifiedEventsFilterBranch
-    | AutomationPublicPropertyAssociationFilterBranch
-    | AutomationPublicAssociationFilterBranch;
+    | PublicOrFilterBranch
+    | PublicAndFilterBranch
+    | PublicNotAllFilterBranch
+    | PublicNotAnyFilterBranch
+    | PublicRestrictedFilterBranch
+    | PublicUnifiedEventsFilterBranch
+    | PublicPropertyAssociationFilterBranch
+    | PublicAssociationFilterBranch;
 
   uuid?: string;
 }
 
-export interface AutomationAPIPlatformFlowCreateRequest {
+export interface APIPlatformFlowCreateRequest {
   actions: Array<
-    | AutomationAPIStaticBranchAction
-    | AutomationAPIListBranchAction
-    | AutomationAPIAbTestBranchAction
-    | AutomationAPICustomCodeAction
-    | AutomationAPIWebhookAction
-    | AutomationAPISingleConnectionAction
+    | APIStaticBranchAction
+    | APIListBranchAction
+    | APIAbTestBranchAction
+    | APICustomCodeAction
+    | APIWebhookAction
+    | APISingleConnectionAction
   >;
 
-  blockedDates: Array<AutomationAPIBlockedDate>;
+  blockedDates: Array<APIBlockedDate>;
 
   customProperties: { [key: string]: string };
 
   dataSources: Array<
-    | AutomationAPIAssociationDataSource
-    | AutomationAPIAssociationTimestampDataSource
-    | AutomationAPIStaticPropertyFilterDataSource
-    | AutomationAPIEnrolledRecordPropertyFilterDataSource
-    | AutomationAPIDatasetFieldPropertyFilterDataSource
-    | AutomationAPIEnrolledArgumentPropertyFilterDataSource
+    | APIAssociationDataSource
+    | APIAssociationTimestampDataSource
+    | APIStaticPropertyFilterDataSource
+    | APIEnrolledRecordPropertyFilterDataSource
+    | APIDatasetFieldPropertyFilterDataSource
+    | APIEnrolledArgumentPropertyFilterDataSource
   >;
 
   flowType: 'WORKFLOW' | 'ACTION_SET' | 'UNKNOWN';
@@ -731,51 +728,51 @@ export interface AutomationAPIPlatformFlowCreateRequest {
 
   objectTypeId: string;
 
-  timeWindows: Array<AutomationAPITimeWindow>;
+  timeWindows: Array<APITimeWindow>;
 
   type: 'CONTACT_FLOW' | 'PLATFORM_FLOW';
 
   enrollmentCriteria?:
-    | AutomationAPIListBasedEnrollmentCriteria
-    | AutomationAPIEventBasedEnrollmentCriteria
-    | AutomationAPIManualEnrollmentCriteria;
+    | APIListBasedEnrollmentCriteria
+    | APIEventBasedEnrollmentCriteria
+    | APIManualEnrollmentCriteria;
 
   enrollmentSchedule?:
-    | AutomationAPIDailyEnrollmentSchedule
-    | AutomationAPIWeeklyEnrollmentSchedule
-    | AutomationAPIMonthlySpecificDaysEnrollmentSchedule
-    | AutomationAPIMonthlyRelativeDaysEnrollmentSchedule
-    | AutomationAPIYearlyEnrollmentSchedule
-    | AutomationAPIPropertyBasedEnrollmentSchedule;
+    | APIDailyEnrollmentSchedule
+    | APIWeeklyEnrollmentSchedule
+    | APIMonthlySpecificDaysEnrollmentSchedule
+    | APIMonthlyRelativeDaysEnrollmentSchedule
+    | APIYearlyEnrollmentSchedule
+    | APIPropertyBasedEnrollmentSchedule;
 
   name?: string;
 
   startActionId?: string;
 
   suppressionFilterBranch?:
-    | AutomationPublicOrFilterBranch
-    | AutomationPublicAndFilterBranch
-    | AutomationPublicNotAllFilterBranch
-    | AutomationPublicNotAnyFilterBranch
-    | AutomationPublicRestrictedFilterBranch
-    | AutomationPublicUnifiedEventsFilterBranch
-    | AutomationPublicPropertyAssociationFilterBranch
-    | AutomationPublicAssociationFilterBranch;
+    | PublicOrFilterBranch
+    | PublicAndFilterBranch
+    | PublicNotAllFilterBranch
+    | PublicNotAnyFilterBranch
+    | PublicRestrictedFilterBranch
+    | PublicUnifiedEventsFilterBranch
+    | PublicPropertyAssociationFilterBranch
+    | PublicAssociationFilterBranch;
 
   uuid?: string;
 }
 
-export interface AutomationAPIPlatformFlowPutRequest {
+export interface APIPlatformFlowPutRequest {
   actions: Array<
-    | AutomationAPIStaticBranchAction
-    | AutomationAPIListBranchAction
-    | AutomationAPIAbTestBranchAction
-    | AutomationAPICustomCodeAction
-    | AutomationAPIWebhookAction
-    | AutomationAPISingleConnectionAction
+    | APIStaticBranchAction
+    | APIListBranchAction
+    | APIAbTestBranchAction
+    | APICustomCodeAction
+    | APIWebhookAction
+    | APISingleConnectionAction
   >;
 
-  blockedDates: Array<AutomationAPIBlockedDate>;
+  blockedDates: Array<APIBlockedDate>;
 
   customProperties: { [key: string]: string };
 
@@ -783,65 +780,65 @@ export interface AutomationAPIPlatformFlowPutRequest {
 
   revisionId: string;
 
-  timeWindows: Array<AutomationAPITimeWindow>;
+  timeWindows: Array<APITimeWindow>;
 
   type: 'CONTACT_FLOW' | 'PLATFORM_FLOW';
 
   enrollmentCriteria?:
-    | AutomationAPIListBasedEnrollmentCriteria
-    | AutomationAPIEventBasedEnrollmentCriteria
-    | AutomationAPIManualEnrollmentCriteria;
+    | APIListBasedEnrollmentCriteria
+    | APIEventBasedEnrollmentCriteria
+    | APIManualEnrollmentCriteria;
 
   enrollmentSchedule?:
-    | AutomationAPIDailyEnrollmentSchedule
-    | AutomationAPIWeeklyEnrollmentSchedule
-    | AutomationAPIMonthlySpecificDaysEnrollmentSchedule
-    | AutomationAPIMonthlyRelativeDaysEnrollmentSchedule
-    | AutomationAPIYearlyEnrollmentSchedule
-    | AutomationAPIPropertyBasedEnrollmentSchedule;
+    | APIDailyEnrollmentSchedule
+    | APIWeeklyEnrollmentSchedule
+    | APIMonthlySpecificDaysEnrollmentSchedule
+    | APIMonthlyRelativeDaysEnrollmentSchedule
+    | APIYearlyEnrollmentSchedule
+    | APIPropertyBasedEnrollmentSchedule;
 
   name?: string;
 
   startActionId?: string;
 
   suppressionFilterBranch?:
-    | AutomationPublicOrFilterBranch
-    | AutomationPublicAndFilterBranch
-    | AutomationPublicNotAllFilterBranch
-    | AutomationPublicNotAnyFilterBranch
-    | AutomationPublicRestrictedFilterBranch
-    | AutomationPublicUnifiedEventsFilterBranch
-    | AutomationPublicPropertyAssociationFilterBranch
-    | AutomationPublicAssociationFilterBranch;
+    | PublicOrFilterBranch
+    | PublicAndFilterBranch
+    | PublicNotAllFilterBranch
+    | PublicNotAnyFilterBranch
+    | PublicRestrictedFilterBranch
+    | PublicUnifiedEventsFilterBranch
+    | PublicPropertyAssociationFilterBranch
+    | PublicAssociationFilterBranch;
 
   uuid?: string;
 }
 
-export interface AutomationAPIPropertyBasedEnrollmentSchedule {
+export interface APIPropertyBasedEnrollmentSchedule {
   dateProperty: string;
 
   daysDelta: number;
 
-  timeOfDay: AutomationAPITimeOfDay;
+  timeOfDay: APITimeOfDay;
 
   type: 'PROPERTY_BASED';
 
   yearly: boolean;
 }
 
-export interface AutomationAPIRelativeDateTimeValue {
-  timeDelay: AutomationAPITimeDelay;
+export interface APIRelativeDateTimeValue {
+  timeDelay: APITimeDelay;
 
   type: 'RELATIVE_DATETIME';
 }
 
-export interface AutomationAPISignatureWebhookAuthSettings {
+export interface APISignatureWebhookAuthSettings {
   appId: number;
 
   type: 'SIGNATURE';
 }
 
-export interface AutomationAPISingleConnectionAction {
+export interface APISingleConnectionAction {
   actionId: string;
 
   actionTypeId: string;
@@ -852,10 +849,10 @@ export interface AutomationAPISingleConnectionAction {
 
   type: 'SINGLE_CONNECTION';
 
-  connection?: AutomationAPIConnection;
+  connection?: APIConnection;
 }
 
-export interface AutomationAPISort {
+export interface APISort {
   order: 'ASC' | 'DESC';
 
   property: string;
@@ -863,43 +860,43 @@ export interface AutomationAPISort {
   missing?: string;
 }
 
-export interface AutomationAPIStaticAppendValue {
+export interface APIStaticAppendValue {
   staticAppendValue: string;
 
   type: 'STATIC_APPEND_VALUE';
 }
 
-export interface AutomationAPIStaticBranch {
+export interface APIStaticBranch {
   branchValue: string;
 
-  connection?: AutomationAPIConnection;
+  connection?: APIConnection;
 }
 
-export interface AutomationAPIStaticBranchAction {
+export interface APIStaticBranchAction {
   actionId: string;
 
   inputValue:
-    | AutomationAPIActionDataValue
-    | AutomationAPIObjectPropertyValue
-    | AutomationAPIStaticValue
-    | AutomationAPIRelativeDateTimeValue
-    | AutomationAPITimestampValue
-    | AutomationAPIIncrementValue
-    | AutomationAPIFetchedObjectPropertyValue
-    | AutomationAPIAppendObjectPropertyValue
-    | AutomationAPIStaticAppendValue
-    | AutomationAPIEnrollmentEventPropertyValue;
+    | APIActionDataValue
+    | APIObjectPropertyValue
+    | APIStaticValue
+    | APIRelativeDateTimeValue
+    | APITimestampValue
+    | APIIncrementValue
+    | APIFetchedObjectPropertyValue
+    | APIAppendObjectPropertyValue
+    | APIStaticAppendValue
+    | APIEnrollmentEventPropertyValue;
 
-  staticBranches: Array<AutomationAPIStaticBranch>;
+  staticBranches: Array<APIStaticBranch>;
 
   type: 'STATIC_BRANCH';
 
-  defaultBranch?: AutomationAPIConnection;
+  defaultBranch?: APIConnection;
 
   defaultBranchName?: string;
 }
 
-export interface AutomationAPIStaticDateAnchor {
+export interface APIStaticDateAnchor {
   dayOfMonth: number;
 
   month:
@@ -921,7 +918,7 @@ export interface AutomationAPIStaticDateAnchor {
   year?: number;
 }
 
-export interface AutomationAPIStaticPropertyFilterDataSource {
+export interface APIStaticPropertyFilterDataSource {
   name: string;
 
   propertyName: string;
@@ -930,22 +927,22 @@ export interface AutomationAPIStaticPropertyFilterDataSource {
 
   type: 'STATIC_PROPERTY_FILTER';
 
-  sortBy?: AutomationAPISort;
+  sortBy?: APISort;
 }
 
-export interface AutomationAPIStaticTimeZoneStrategy {
+export interface APIStaticTimeZoneStrategy {
   timeZoneId: string;
 
   type: 'STATIC_TIME_ZONE';
 }
 
-export interface AutomationAPIStaticValue {
+export interface APIStaticValue {
   staticValue: string;
 
   type: 'STATIC_VALUE';
 }
 
-export interface AutomationAPITimeDelay {
+export interface APITimeDelay {
   daysOfWeek: Array<'MONDAY' | 'TUESDAY' | 'WEDNESDAY' | 'THURSDAY' | 'FRIDAY' | 'SATURDAY' | 'SUNDAY'>;
 
   delta: number;
@@ -968,62 +965,62 @@ export interface AutomationAPITimeDelay {
     | 'ERAS'
     | 'FOREVER';
 
-  timeOfDay?: AutomationAPITimeOfDay;
+  timeOfDay?: APITimeOfDay;
 
-  timeZoneStrategy?: AutomationAPIStaticTimeZoneStrategy;
+  timeZoneStrategy?: APIStaticTimeZoneStrategy;
 }
 
-export interface AutomationAPITimeOfDay {
+export interface APITimeOfDay {
   hour: number;
 
   minute: number;
 }
 
-export interface AutomationAPITimestampValue {
+export interface APITimestampValue {
   timestampType: 'EXECUTION_TIME';
 
   type: 'TIMESTAMP';
 }
 
-export interface AutomationAPITimeWindow {
+export interface APITimeWindow {
   day: 'MONDAY' | 'TUESDAY' | 'WEDNESDAY' | 'THURSDAY' | 'FRIDAY' | 'SATURDAY' | 'SUNDAY';
 
-  endTime: AutomationAPITimeOfDay;
+  endTime: APITimeOfDay;
 
-  startTime: AutomationAPITimeOfDay;
+  startTime: APITimeOfDay;
 }
 
-export interface AutomationAPIUnEnrollmentSetting {
+export interface APIUnEnrollmentSetting {
   flowIds: Array<string>;
 
   type: 'ALL' | 'SELECTIVE';
 }
 
-export interface AutomationAPIWebhookAction {
+export interface APIWebhookAction {
   actionId: string;
 
   method: 'CONNECT' | 'DELETE' | 'GET' | 'HEAD' | 'OPTIONS' | 'PATCH' | 'POST' | 'PUT' | 'TRACE';
 
-  queryParams: Array<AutomationAPIInputVariable>;
+  queryParams: Array<APIInputVariable>;
 
   type: 'WEBHOOK';
 
   webhookUrl: string;
 
-  authSettings?: AutomationAPIAuthKeyWebhookAuthSettings | AutomationAPISignatureWebhookAuthSettings;
+  authSettings?: APIAuthKeyWebhookAuthSettings | APISignatureWebhookAuthSettings;
 
-  connection?: AutomationAPIConnection;
+  connection?: APIConnection;
 }
 
-export interface AutomationAPIWeeklyEnrollmentSchedule {
+export interface APIWeeklyEnrollmentSchedule {
   daysOfWeek: Array<'MONDAY' | 'TUESDAY' | 'WEDNESDAY' | 'THURSDAY' | 'FRIDAY' | 'SATURDAY' | 'SUNDAY'>;
 
-  timeOfDay: AutomationAPITimeOfDay;
+  timeOfDay: APITimeOfDay;
 
   type: 'WEEKLY';
 }
 
-export interface AutomationAPIYearlyEnrollmentSchedule {
+export interface APIYearlyEnrollmentSchedule {
   dayOfMonth: number;
 
   month:
@@ -1040,15 +1037,15 @@ export interface AutomationAPIYearlyEnrollmentSchedule {
     | 'NOVEMBER'
     | 'DECEMBER';
 
-  timeOfDay: AutomationAPITimeOfDay;
+  timeOfDay: APITimeOfDay;
 
   type: 'YEARLY';
 }
 
-export interface AutomationBatchResponseAPIFlow {
+export interface BatchResponseAPIFlow {
   completedAt: string;
 
-  results: Array<AutomationAPIFlow>;
+  results: Array<APIFlow>;
 
   startedAt: string;
 
@@ -1059,42 +1056,10 @@ export interface AutomationBatchResponseAPIFlow {
   requestedAt?: string;
 }
 
-export interface AutomationBatchResponseAPIFlowWithErrors {
+export interface BatchResponseAPIFlowWithErrors {
   completedAt: string;
 
-  results: Array<AutomationAPIFlow>;
-
-  startedAt: string;
-
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
-
-  errors?: Array<Shared.StandardError>;
-
-  links?: { [key: string]: string };
-
-  numErrors?: number;
-
-  requestedAt?: string;
-}
-
-export interface AutomationBatchResponseFlowIDWorkflowIDMappingResponse {
-  completedAt: string;
-
-  results: Array<AutomationFlowIDWorkflowIDMappingResponse>;
-
-  startedAt: string;
-
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
-
-  links?: { [key: string]: string };
-
-  requestedAt?: string;
-}
-
-export interface AutomationBatchResponseFlowIDWorkflowIDMappingResponseWithErrors {
-  completedAt: string;
-
-  results: Array<AutomationFlowIDWorkflowIDMappingResponse>;
+  results: Array<APIFlow>;
 
   startedAt: string;
 
@@ -1109,25 +1074,57 @@ export interface AutomationBatchResponseFlowIDWorkflowIDMappingResponseWithError
   requestedAt?: string;
 }
 
-export interface AutomationCollectionResponseAPIFlowEmailCampaign {
-  results: Array<AutomationAPIFlowEmailCampaign>;
+export interface BatchResponseFlowIDWorkflowIDMappingResponse {
+  completedAt: string;
 
-  paging?: EmailsAPI.MarketingEmailsPaging;
+  results: Array<FlowIDWorkflowIDMappingResponse>;
+
+  startedAt: string;
+
+  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+
+  links?: { [key: string]: string };
+
+  requestedAt?: string;
 }
 
-export interface AutomationCollectionResponseAPIFlowListingForwardPaging {
-  results: Array<AutomationAPIFlowListing>;
+export interface BatchResponseFlowIDWorkflowIDMappingResponseWithErrors {
+  completedAt: string;
+
+  results: Array<FlowIDWorkflowIDMappingResponse>;
+
+  startedAt: string;
+
+  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+
+  errors?: Array<Shared.StandardError>;
+
+  links?: { [key: string]: string };
+
+  numErrors?: number;
+
+  requestedAt?: string;
+}
+
+export interface CollectionResponseAPIFlowEmailCampaign {
+  results: Array<APIFlowEmailCampaign>;
+
+  paging?: EmailsAPI.Paging;
+}
+
+export interface CollectionResponseAPIFlowListingForwardPaging {
+  results: Array<APIFlowListing>;
 
   paging?: Shared.ForwardPaging;
 }
 
-export interface AutomationFlowIDWorkflowIDMappingResponse {
+export interface FlowIDWorkflowIDMappingResponse {
   flowId: number;
 
   workflowId: number;
 }
 
-export interface AutomationPublicAbsoluteComparativeTimestampRefineBy {
+export interface PublicAbsoluteComparativeTimestampRefineBy {
   comparison: string;
 
   timestamp: number;
@@ -1135,7 +1132,7 @@ export interface AutomationPublicAbsoluteComparativeTimestampRefineBy {
   type: 'ABSOLUTE_COMPARATIVE';
 }
 
-export interface AutomationPublicAbsoluteRangedTimestampRefineBy {
+export interface PublicAbsoluteRangedTimestampRefineBy {
   lowerTimestamp: number;
 
   rangeType: string;
@@ -1145,7 +1142,7 @@ export interface AutomationPublicAbsoluteRangedTimestampRefineBy {
   upperTimestamp: number;
 }
 
-export interface AutomationPublicAdsSearchFilter {
+export interface PublicAdsSearchFilter {
   adNetwork: string;
 
   entityType: string;
@@ -1159,26 +1156,26 @@ export interface AutomationPublicAdsSearchFilter {
   searchTermType: string;
 }
 
-export interface AutomationPublicAdsTimeFilter {
+export interface PublicAdsTimeFilter {
   filterType: 'ADS_TIME';
 
   pruningRefineBy:
-    | AutomationPublicNumOccurrencesRefineBy
-    | AutomationPublicSetOccurrencesRefineBy
-    | AutomationPublicRelativeComparativeTimestampRefineBy
-    | AutomationPublicRelativeRangedTimestampRefineBy
-    | AutomationPublicAbsoluteComparativeTimestampRefineBy
-    | AutomationPublicAbsoluteRangedTimestampRefineBy
-    | AutomationPublicAllHistoryRefineBy
-    | AutomationPublicTimePointOperation
-    | AutomationPublicRangedTimeOperation;
+    | PublicNumOccurrencesRefineBy
+    | PublicSetOccurrencesRefineBy
+    | PublicRelativeComparativeTimestampRefineBy
+    | PublicRelativeRangedTimestampRefineBy
+    | PublicAbsoluteComparativeTimestampRefineBy
+    | PublicAbsoluteRangedTimestampRefineBy
+    | PublicAllHistoryRefineBy
+    | PublicTimePointOperation
+    | PublicRangedTimeOperation;
 }
 
-export interface AutomationPublicAllHistoryRefineBy {
+export interface PublicAllHistoryRefineBy {
   type: 'ALL_HISTORY';
 }
 
-export interface AutomationPublicAllPropertyTypesOperation {
+export interface PublicAllPropertyTypesOperation {
   includeObjectsWithNoValueSet: boolean;
 
   operationType: 'ALL_PROPERTY';
@@ -1186,16 +1183,16 @@ export interface AutomationPublicAllPropertyTypesOperation {
   operator: string;
 }
 
-export interface AutomationPublicAndFilterBranch {
+export interface PublicAndFilterBranch {
   filterBranches: Array<
-    | AutomationPublicOrFilterBranch
-    | AutomationPublicAndFilterBranch
-    | AutomationPublicNotAllFilterBranch
-    | AutomationPublicNotAnyFilterBranch
-    | AutomationPublicRestrictedFilterBranch
-    | AutomationPublicUnifiedEventsFilterBranch
-    | AutomationPublicPropertyAssociationFilterBranch
-    | AutomationPublicAssociationFilterBranch
+    | PublicOrFilterBranch
+    | PublicAndFilterBranch
+    | PublicNotAllFilterBranch
+    | PublicNotAnyFilterBranch
+    | PublicRestrictedFilterBranch
+    | PublicUnifiedEventsFilterBranch
+    | PublicPropertyAssociationFilterBranch
+    | PublicAssociationFilterBranch
   >;
 
   filterBranchOperator: string;
@@ -1203,46 +1200,46 @@ export interface AutomationPublicAndFilterBranch {
   filterBranchType: 'AND';
 
   filters: Array<
-    | AutomationPublicPropertyFilter
-    | AutomationPublicAssociationInListFilter
-    | AutomationPublicPageViewAnalyticsFilter
-    | AutomationPublicCtaAnalyticsFilter
-    | AutomationPublicEventAnalyticsFilter
-    | AutomationPublicFormSubmissionFilter
-    | AutomationPublicFormSubmissionOnPageFilter
-    | AutomationPublicIntegrationEventFilter
-    | AutomationPublicEmailSubscriptionFilter
-    | AutomationPublicCommunicationSubscriptionFilter
-    | AutomationPublicCampaignInfluencedFilter
-    | AutomationPublicSurveyMonkeyFilter
-    | AutomationPublicSurveyMonkeyValueFilter
-    | AutomationPublicWebinarFilter
-    | AutomationPublicEmailEventFilter
-    | AutomationPublicPrivacyAnalyticsFilter
-    | AutomationPublicAdsSearchFilter
-    | AutomationPublicAdsTimeFilter
-    | AutomationPublicInListFilter
-    | AutomationPublicNumAssociationsFilter
-    | AutomationPublicUnifiedEventsFilter
-    | AutomationPublicPropertyAssociationInListFilter
-    | AutomationPublicConstantFilter
+    | PublicPropertyFilter
+    | PublicAssociationInListFilter
+    | PublicPageViewAnalyticsFilter
+    | PublicCtaAnalyticsFilter
+    | PublicEventAnalyticsFilter
+    | PublicFormSubmissionFilter
+    | PublicFormSubmissionOnPageFilter
+    | PublicIntegrationEventFilter
+    | PublicEmailSubscriptionFilter
+    | PublicCommunicationSubscriptionFilter
+    | PublicCampaignInfluencedFilter
+    | PublicSurveyMonkeyFilter
+    | PublicSurveyMonkeyValueFilter
+    | PublicWebinarFilter
+    | PublicEmailEventFilter
+    | PublicPrivacyAnalyticsFilter
+    | PublicAdsSearchFilter
+    | PublicAdsTimeFilter
+    | PublicInListFilter
+    | PublicNumAssociationsFilter
+    | PublicUnifiedEventsFilter
+    | PublicPropertyAssociationInListFilter
+    | PublicConstantFilter
   >;
 }
 
-export interface AutomationPublicAssociationFilterBranch {
+export interface PublicAssociationFilterBranch {
   associationCategory: string;
 
   associationTypeId: number;
 
   filterBranches: Array<
-    | AutomationPublicOrFilterBranch
-    | AutomationPublicAndFilterBranch
-    | AutomationPublicNotAllFilterBranch
-    | AutomationPublicNotAnyFilterBranch
-    | AutomationPublicRestrictedFilterBranch
-    | AutomationPublicUnifiedEventsFilterBranch
-    | AutomationPublicPropertyAssociationFilterBranch
-    | AutomationPublicAssociationFilterBranch
+    | PublicOrFilterBranch
+    | PublicAndFilterBranch
+    | PublicNotAllFilterBranch
+    | PublicNotAnyFilterBranch
+    | PublicRestrictedFilterBranch
+    | PublicUnifiedEventsFilterBranch
+    | PublicPropertyAssociationFilterBranch
+    | PublicAssociationFilterBranch
   >;
 
   filterBranchOperator: string;
@@ -1250,29 +1247,29 @@ export interface AutomationPublicAssociationFilterBranch {
   filterBranchType: 'ASSOCIATION';
 
   filters: Array<
-    | AutomationPublicPropertyFilter
-    | AutomationPublicAssociationInListFilter
-    | AutomationPublicPageViewAnalyticsFilter
-    | AutomationPublicCtaAnalyticsFilter
-    | AutomationPublicEventAnalyticsFilter
-    | AutomationPublicFormSubmissionFilter
-    | AutomationPublicFormSubmissionOnPageFilter
-    | AutomationPublicIntegrationEventFilter
-    | AutomationPublicEmailSubscriptionFilter
-    | AutomationPublicCommunicationSubscriptionFilter
-    | AutomationPublicCampaignInfluencedFilter
-    | AutomationPublicSurveyMonkeyFilter
-    | AutomationPublicSurveyMonkeyValueFilter
-    | AutomationPublicWebinarFilter
-    | AutomationPublicEmailEventFilter
-    | AutomationPublicPrivacyAnalyticsFilter
-    | AutomationPublicAdsSearchFilter
-    | AutomationPublicAdsTimeFilter
-    | AutomationPublicInListFilter
-    | AutomationPublicNumAssociationsFilter
-    | AutomationPublicUnifiedEventsFilter
-    | AutomationPublicPropertyAssociationInListFilter
-    | AutomationPublicConstantFilter
+    | PublicPropertyFilter
+    | PublicAssociationInListFilter
+    | PublicPageViewAnalyticsFilter
+    | PublicCtaAnalyticsFilter
+    | PublicEventAnalyticsFilter
+    | PublicFormSubmissionFilter
+    | PublicFormSubmissionOnPageFilter
+    | PublicIntegrationEventFilter
+    | PublicEmailSubscriptionFilter
+    | PublicCommunicationSubscriptionFilter
+    | PublicCampaignInfluencedFilter
+    | PublicSurveyMonkeyFilter
+    | PublicSurveyMonkeyValueFilter
+    | PublicWebinarFilter
+    | PublicEmailEventFilter
+    | PublicPrivacyAnalyticsFilter
+    | PublicAdsSearchFilter
+    | PublicAdsTimeFilter
+    | PublicInListFilter
+    | PublicNumAssociationsFilter
+    | PublicUnifiedEventsFilter
+    | PublicPropertyAssociationInListFilter
+    | PublicConstantFilter
   >;
 
   objectTypeId: string;
@@ -1280,21 +1277,21 @@ export interface AutomationPublicAssociationFilterBranch {
   operator: string;
 }
 
-export interface AutomationPublicAssociationInListFilter {
+export interface PublicAssociationInListFilter {
   associationCategory: string;
 
   associationTypeId: number;
 
   coalescingRefineBy:
-    | AutomationPublicNumOccurrencesRefineBy
-    | AutomationPublicSetOccurrencesRefineBy
-    | AutomationPublicRelativeComparativeTimestampRefineBy
-    | AutomationPublicRelativeRangedTimestampRefineBy
-    | AutomationPublicAbsoluteComparativeTimestampRefineBy
-    | AutomationPublicAbsoluteRangedTimestampRefineBy
-    | AutomationPublicAllHistoryRefineBy
-    | AutomationPublicTimePointOperation
-    | AutomationPublicRangedTimeOperation;
+    | PublicNumOccurrencesRefineBy
+    | PublicSetOccurrencesRefineBy
+    | PublicRelativeComparativeTimestampRefineBy
+    | PublicRelativeRangedTimestampRefineBy
+    | PublicAbsoluteComparativeTimestampRefineBy
+    | PublicAbsoluteRangedTimestampRefineBy
+    | PublicAllHistoryRefineBy
+    | PublicTimePointOperation
+    | PublicRangedTimeOperation;
 
   filterType: 'ASSOCIATION';
 
@@ -1307,7 +1304,7 @@ export interface AutomationPublicAssociationInListFilter {
   toObjectTypeId?: string;
 }
 
-export interface AutomationPublicBoolPropertyOperation {
+export interface PublicBoolPropertyOperation {
   includeObjectsWithNoValueSet: boolean;
 
   operationType: 'BOOL';
@@ -1317,7 +1314,7 @@ export interface AutomationPublicBoolPropertyOperation {
   value: boolean;
 }
 
-export interface AutomationPublicCalendarDatePropertyOperation {
+export interface PublicCalendarDatePropertyOperation {
   includeObjectsWithNoValueSet: boolean;
 
   operationType: 'CALENDAR_DATE';
@@ -1345,13 +1342,13 @@ export interface AutomationPublicCalendarDatePropertyOperation {
   useFiscalYear?: boolean;
 }
 
-export interface AutomationPublicCampaignInfluencedFilter {
+export interface PublicCampaignInfluencedFilter {
   campaignId: string;
 
   filterType: 'CAMPAIGN_INFLUENCED';
 }
 
-export interface AutomationPublicCommunicationSubscriptionFilter {
+export interface PublicCommunicationSubscriptionFilter {
   acceptedOptStates: Array<string>;
 
   channel: string;
@@ -1365,7 +1362,7 @@ export interface AutomationPublicCommunicationSubscriptionFilter {
   businessUnitId?: string;
 }
 
-export interface AutomationPublicComparativeDatePropertyOperation {
+export interface PublicComparativeDatePropertyOperation {
   comparisonPropertyName: string;
 
   includeObjectsWithNoValueSet: boolean;
@@ -1377,7 +1374,7 @@ export interface AutomationPublicComparativeDatePropertyOperation {
   defaultComparisonValue?: string;
 }
 
-export interface AutomationPublicComparativePropertyUpdatedOperation {
+export interface PublicComparativePropertyUpdatedOperation {
   comparisonPropertyName: string;
 
   includeObjectsWithNoValueSet: boolean;
@@ -1389,7 +1386,7 @@ export interface AutomationPublicComparativePropertyUpdatedOperation {
   defaultComparisonValue?: string;
 }
 
-export interface AutomationPublicConstantFilter {
+export interface PublicConstantFilter {
   filterType: 'CONSTANT';
 
   shouldAccept: boolean;
@@ -1397,7 +1394,7 @@ export interface AutomationPublicConstantFilter {
   source?: string;
 }
 
-export interface AutomationPublicCtaAnalyticsFilter {
+export interface PublicCtaAnalyticsFilter {
   ctaName: string;
 
   filterType: 'CTA';
@@ -1405,29 +1402,29 @@ export interface AutomationPublicCtaAnalyticsFilter {
   operator: string;
 
   coalescingRefineBy?:
-    | AutomationPublicNumOccurrencesRefineBy
-    | AutomationPublicSetOccurrencesRefineBy
-    | AutomationPublicRelativeComparativeTimestampRefineBy
-    | AutomationPublicRelativeRangedTimestampRefineBy
-    | AutomationPublicAbsoluteComparativeTimestampRefineBy
-    | AutomationPublicAbsoluteRangedTimestampRefineBy
-    | AutomationPublicAllHistoryRefineBy
-    | AutomationPublicTimePointOperation
-    | AutomationPublicRangedTimeOperation;
+    | PublicNumOccurrencesRefineBy
+    | PublicSetOccurrencesRefineBy
+    | PublicRelativeComparativeTimestampRefineBy
+    | PublicRelativeRangedTimestampRefineBy
+    | PublicAbsoluteComparativeTimestampRefineBy
+    | PublicAbsoluteRangedTimestampRefineBy
+    | PublicAllHistoryRefineBy
+    | PublicTimePointOperation
+    | PublicRangedTimeOperation;
 
   pruningRefineBy?:
-    | AutomationPublicNumOccurrencesRefineBy
-    | AutomationPublicSetOccurrencesRefineBy
-    | AutomationPublicRelativeComparativeTimestampRefineBy
-    | AutomationPublicRelativeRangedTimestampRefineBy
-    | AutomationPublicAbsoluteComparativeTimestampRefineBy
-    | AutomationPublicAbsoluteRangedTimestampRefineBy
-    | AutomationPublicAllHistoryRefineBy
-    | AutomationPublicTimePointOperation
-    | AutomationPublicRangedTimeOperation;
+    | PublicNumOccurrencesRefineBy
+    | PublicSetOccurrencesRefineBy
+    | PublicRelativeComparativeTimestampRefineBy
+    | PublicRelativeRangedTimestampRefineBy
+    | PublicAbsoluteComparativeTimestampRefineBy
+    | PublicAbsoluteRangedTimestampRefineBy
+    | PublicAllHistoryRefineBy
+    | PublicTimePointOperation
+    | PublicRangedTimeOperation;
 }
 
-export interface AutomationPublicDatePoint {
+export interface PublicDatePoint {
   day: number;
 
   month: number;
@@ -1449,7 +1446,7 @@ export interface AutomationPublicDatePoint {
   timezoneSource?: string;
 }
 
-export interface AutomationPublicDatePropertyOperation {
+export interface PublicDatePropertyOperation {
   day: number;
 
   includeObjectsWithNoValueSet: boolean;
@@ -1463,7 +1460,7 @@ export interface AutomationPublicDatePropertyOperation {
   year: number;
 }
 
-export interface AutomationPublicDateTimePropertyOperation {
+export interface PublicDateTimePropertyOperation {
   includeObjectsWithNoValueSet: boolean;
 
   operationType: 'DATETIME';
@@ -1475,7 +1472,7 @@ export interface AutomationPublicDateTimePropertyOperation {
   timestamp: number;
 }
 
-export interface AutomationPublicEmailEventFilter {
+export interface PublicEmailEventFilter {
   appId: string;
 
   emailId: string;
@@ -1502,18 +1499,18 @@ export interface AutomationPublicEmailEventFilter {
   clickUrl?: string;
 
   pruningRefineBy?:
-    | AutomationPublicNumOccurrencesRefineBy
-    | AutomationPublicSetOccurrencesRefineBy
-    | AutomationPublicRelativeComparativeTimestampRefineBy
-    | AutomationPublicRelativeRangedTimestampRefineBy
-    | AutomationPublicAbsoluteComparativeTimestampRefineBy
-    | AutomationPublicAbsoluteRangedTimestampRefineBy
-    | AutomationPublicAllHistoryRefineBy
-    | AutomationPublicTimePointOperation
-    | AutomationPublicRangedTimeOperation;
+    | PublicNumOccurrencesRefineBy
+    | PublicSetOccurrencesRefineBy
+    | PublicRelativeComparativeTimestampRefineBy
+    | PublicRelativeRangedTimestampRefineBy
+    | PublicAbsoluteComparativeTimestampRefineBy
+    | PublicAbsoluteRangedTimestampRefineBy
+    | PublicAllHistoryRefineBy
+    | PublicTimePointOperation
+    | PublicRangedTimeOperation;
 }
 
-export interface AutomationPublicEmailSubscriptionFilter {
+export interface PublicEmailSubscriptionFilter {
   acceptedStatuses: Array<string>;
 
   filterType: 'EMAIL_SUBSCRIPTION';
@@ -1523,7 +1520,7 @@ export interface AutomationPublicEmailSubscriptionFilter {
   subscriptionType?: string;
 }
 
-export interface AutomationPublicEnumerationPropertyOperation {
+export interface PublicEnumerationPropertyOperation {
   includeObjectsWithNoValueSet: boolean;
 
   operationType: 'ENUMERATION';
@@ -1533,7 +1530,7 @@ export interface AutomationPublicEnumerationPropertyOperation {
   values: Array<string>;
 }
 
-export interface AutomationPublicEventAnalyticsFilter {
+export interface PublicEventAnalyticsFilter {
   eventId: string;
 
   filterType: 'EVENT';
@@ -1541,52 +1538,52 @@ export interface AutomationPublicEventAnalyticsFilter {
   operator: string;
 
   coalescingRefineBy?:
-    | AutomationPublicNumOccurrencesRefineBy
-    | AutomationPublicSetOccurrencesRefineBy
-    | AutomationPublicRelativeComparativeTimestampRefineBy
-    | AutomationPublicRelativeRangedTimestampRefineBy
-    | AutomationPublicAbsoluteComparativeTimestampRefineBy
-    | AutomationPublicAbsoluteRangedTimestampRefineBy
-    | AutomationPublicAllHistoryRefineBy
-    | AutomationPublicTimePointOperation
-    | AutomationPublicRangedTimeOperation;
+    | PublicNumOccurrencesRefineBy
+    | PublicSetOccurrencesRefineBy
+    | PublicRelativeComparativeTimestampRefineBy
+    | PublicRelativeRangedTimestampRefineBy
+    | PublicAbsoluteComparativeTimestampRefineBy
+    | PublicAbsoluteRangedTimestampRefineBy
+    | PublicAllHistoryRefineBy
+    | PublicTimePointOperation
+    | PublicRangedTimeOperation;
 
   pruningRefineBy?:
-    | AutomationPublicNumOccurrencesRefineBy
-    | AutomationPublicSetOccurrencesRefineBy
-    | AutomationPublicRelativeComparativeTimestampRefineBy
-    | AutomationPublicRelativeRangedTimestampRefineBy
-    | AutomationPublicAbsoluteComparativeTimestampRefineBy
-    | AutomationPublicAbsoluteRangedTimestampRefineBy
-    | AutomationPublicAllHistoryRefineBy
-    | AutomationPublicTimePointOperation
-    | AutomationPublicRangedTimeOperation;
+    | PublicNumOccurrencesRefineBy
+    | PublicSetOccurrencesRefineBy
+    | PublicRelativeComparativeTimestampRefineBy
+    | PublicRelativeRangedTimestampRefineBy
+    | PublicAbsoluteComparativeTimestampRefineBy
+    | PublicAbsoluteRangedTimestampRefineBy
+    | PublicAllHistoryRefineBy
+    | PublicTimePointOperation
+    | PublicRangedTimeOperation;
 }
 
-export interface AutomationPublicEventFilterMetadata {
+export interface PublicEventFilterMetadata {
   operation:
-    | AutomationPublicBoolPropertyOperation
-    | AutomationPublicNumberPropertyOperation
-    | AutomationPublicStringPropertyOperation
-    | AutomationPublicDateTimePropertyOperation
-    | AutomationPublicRangedDatePropertyOperation
-    | AutomationPublicComparativePropertyUpdatedOperation
-    | AutomationPublicComparativeDatePropertyOperation
-    | AutomationPublicRollingDateRangePropertyOperation
-    | AutomationPublicRollingPropertyUpdatedOperation
-    | AutomationPublicEnumerationPropertyOperation
-    | AutomationPublicAllPropertyTypesOperation
-    | AutomationPublicRangedNumberPropertyOperation
-    | AutomationPublicMultiStringPropertyOperation
-    | AutomationPublicDatePropertyOperation
-    | AutomationPublicCalendarDatePropertyOperation
-    | AutomationPublicTimePointOperation
-    | AutomationPublicRangedTimeOperation;
+    | PublicBoolPropertyOperation
+    | PublicNumberPropertyOperation
+    | PublicStringPropertyOperation
+    | PublicDateTimePropertyOperation
+    | PublicRangedDatePropertyOperation
+    | PublicComparativePropertyUpdatedOperation
+    | PublicComparativeDatePropertyOperation
+    | PublicRollingDateRangePropertyOperation
+    | PublicRollingPropertyUpdatedOperation
+    | PublicEnumerationPropertyOperation
+    | PublicAllPropertyTypesOperation
+    | PublicRangedNumberPropertyOperation
+    | PublicMultiStringPropertyOperation
+    | PublicDatePropertyOperation
+    | PublicCalendarDatePropertyOperation
+    | PublicTimePointOperation
+    | PublicRangedTimeOperation;
 
   property: string;
 }
 
-export interface AutomationPublicFiscalQuarterReference {
+export interface PublicFiscalQuarterReference {
   day: number;
 
   month: number;
@@ -1602,7 +1599,7 @@ export interface AutomationPublicFiscalQuarterReference {
   second?: number;
 }
 
-export interface AutomationPublicFiscalYearReference {
+export interface PublicFiscalYearReference {
   day: number;
 
   month: number;
@@ -1618,37 +1615,37 @@ export interface AutomationPublicFiscalYearReference {
   second?: number;
 }
 
-export interface AutomationPublicFormSubmissionFilter {
+export interface PublicFormSubmissionFilter {
   filterType: 'FORM_SUBMISSION';
 
   operator: 'FILLED_OUT' | 'NOT_FILLED_OUT';
 
   coalescingRefineBy?:
-    | AutomationPublicNumOccurrencesRefineBy
-    | AutomationPublicSetOccurrencesRefineBy
-    | AutomationPublicRelativeComparativeTimestampRefineBy
-    | AutomationPublicRelativeRangedTimestampRefineBy
-    | AutomationPublicAbsoluteComparativeTimestampRefineBy
-    | AutomationPublicAbsoluteRangedTimestampRefineBy
-    | AutomationPublicAllHistoryRefineBy
-    | AutomationPublicTimePointOperation
-    | AutomationPublicRangedTimeOperation;
+    | PublicNumOccurrencesRefineBy
+    | PublicSetOccurrencesRefineBy
+    | PublicRelativeComparativeTimestampRefineBy
+    | PublicRelativeRangedTimestampRefineBy
+    | PublicAbsoluteComparativeTimestampRefineBy
+    | PublicAbsoluteRangedTimestampRefineBy
+    | PublicAllHistoryRefineBy
+    | PublicTimePointOperation
+    | PublicRangedTimeOperation;
 
   formId?: string;
 
   pruningRefineBy?:
-    | AutomationPublicNumOccurrencesRefineBy
-    | AutomationPublicSetOccurrencesRefineBy
-    | AutomationPublicRelativeComparativeTimestampRefineBy
-    | AutomationPublicRelativeRangedTimestampRefineBy
-    | AutomationPublicAbsoluteComparativeTimestampRefineBy
-    | AutomationPublicAbsoluteRangedTimestampRefineBy
-    | AutomationPublicAllHistoryRefineBy
-    | AutomationPublicTimePointOperation
-    | AutomationPublicRangedTimeOperation;
+    | PublicNumOccurrencesRefineBy
+    | PublicSetOccurrencesRefineBy
+    | PublicRelativeComparativeTimestampRefineBy
+    | PublicRelativeRangedTimestampRefineBy
+    | PublicAbsoluteComparativeTimestampRefineBy
+    | PublicAbsoluteRangedTimestampRefineBy
+    | PublicAllHistoryRefineBy
+    | PublicTimePointOperation
+    | PublicRangedTimeOperation;
 }
 
-export interface AutomationPublicFormSubmissionOnPageFilter {
+export interface PublicFormSubmissionOnPageFilter {
   filterType: 'FORM_SUBMISSION_ON_PAGE';
 
   operator: 'FILLED_OUT' | 'NOT_FILLED_OUT';
@@ -1656,51 +1653,51 @@ export interface AutomationPublicFormSubmissionOnPageFilter {
   pageId: string;
 
   coalescingRefineBy?:
-    | AutomationPublicNumOccurrencesRefineBy
-    | AutomationPublicSetOccurrencesRefineBy
-    | AutomationPublicRelativeComparativeTimestampRefineBy
-    | AutomationPublicRelativeRangedTimestampRefineBy
-    | AutomationPublicAbsoluteComparativeTimestampRefineBy
-    | AutomationPublicAbsoluteRangedTimestampRefineBy
-    | AutomationPublicAllHistoryRefineBy
-    | AutomationPublicTimePointOperation
-    | AutomationPublicRangedTimeOperation;
+    | PublicNumOccurrencesRefineBy
+    | PublicSetOccurrencesRefineBy
+    | PublicRelativeComparativeTimestampRefineBy
+    | PublicRelativeRangedTimestampRefineBy
+    | PublicAbsoluteComparativeTimestampRefineBy
+    | PublicAbsoluteRangedTimestampRefineBy
+    | PublicAllHistoryRefineBy
+    | PublicTimePointOperation
+    | PublicRangedTimeOperation;
 
   formId?: string;
 
   pruningRefineBy?:
-    | AutomationPublicNumOccurrencesRefineBy
-    | AutomationPublicSetOccurrencesRefineBy
-    | AutomationPublicRelativeComparativeTimestampRefineBy
-    | AutomationPublicRelativeRangedTimestampRefineBy
-    | AutomationPublicAbsoluteComparativeTimestampRefineBy
-    | AutomationPublicAbsoluteRangedTimestampRefineBy
-    | AutomationPublicAllHistoryRefineBy
-    | AutomationPublicTimePointOperation
-    | AutomationPublicRangedTimeOperation;
+    | PublicNumOccurrencesRefineBy
+    | PublicSetOccurrencesRefineBy
+    | PublicRelativeComparativeTimestampRefineBy
+    | PublicRelativeRangedTimestampRefineBy
+    | PublicAbsoluteComparativeTimestampRefineBy
+    | PublicAbsoluteRangedTimestampRefineBy
+    | PublicAllHistoryRefineBy
+    | PublicTimePointOperation
+    | PublicRangedTimeOperation;
 }
 
-export interface AutomationPublicIndexedTimePoint {
+export interface PublicIndexedTimePoint {
   indexReference:
-    | AutomationPublicNowReference
-    | AutomationPublicTodayReference
-    | AutomationPublicWeekReference
-    | AutomationPublicFiscalQuarterReference
-    | AutomationPublicFiscalYearReference
-    | AutomationPublicYearReference
-    | AutomationPublicQuarterReference
-    | AutomationPublicMonthReference;
+    | PublicNowReference
+    | PublicTodayReference
+    | PublicWeekReference
+    | PublicFiscalQuarterReference
+    | PublicFiscalYearReference
+    | PublicYearReference
+    | PublicQuarterReference
+    | PublicMonthReference;
 
   timeType: 'INDEXED';
 
   zoneId: string;
 
-  offset?: AutomationPublicIndexOffset;
+  offset?: PublicIndexOffset;
 
   timezoneSource?: string;
 }
 
-export interface AutomationPublicIndexOffset {
+export interface PublicIndexOffset {
   days?: number;
 
   hours?: number;
@@ -1720,31 +1717,31 @@ export interface AutomationPublicIndexOffset {
   years?: number;
 }
 
-export interface AutomationPublicInListFilter {
+export interface PublicInListFilter {
   filterType: 'IN_LIST';
 
   listId: string;
 
   operator: string;
 
-  metadata?: AutomationPublicInListFilterMetadata;
+  metadata?: PublicInListFilterMetadata;
 }
 
-export interface AutomationPublicInListFilterMetadata {
+export interface PublicInListFilterMetadata {
   id: string;
 
   inListType: string;
 }
 
-export interface AutomationPublicIntegrationEventFilter {
+export interface PublicIntegrationEventFilter {
   eventTypeId: number;
 
-  filterLines: Array<AutomationPublicEventFilterMetadata>;
+  filterLines: Array<PublicEventFilterMetadata>;
 
   filterType: 'INTEGRATION_EVENT';
 }
 
-export interface AutomationPublicMonthReference {
+export interface PublicMonthReference {
   day: number;
 
   referenceType: 'MONTH';
@@ -1758,7 +1755,7 @@ export interface AutomationPublicMonthReference {
   second?: number;
 }
 
-export interface AutomationPublicMultiStringPropertyOperation {
+export interface PublicMultiStringPropertyOperation {
   includeObjectsWithNoValueSet: boolean;
 
   operationType: 'MULTISTRING';
@@ -1768,16 +1765,16 @@ export interface AutomationPublicMultiStringPropertyOperation {
   values: Array<string>;
 }
 
-export interface AutomationPublicNotAllFilterBranch {
+export interface PublicNotAllFilterBranch {
   filterBranches: Array<
-    | AutomationPublicOrFilterBranch
-    | AutomationPublicAndFilterBranch
-    | AutomationPublicNotAllFilterBranch
-    | AutomationPublicNotAnyFilterBranch
-    | AutomationPublicRestrictedFilterBranch
-    | AutomationPublicUnifiedEventsFilterBranch
-    | AutomationPublicPropertyAssociationFilterBranch
-    | AutomationPublicAssociationFilterBranch
+    | PublicOrFilterBranch
+    | PublicAndFilterBranch
+    | PublicNotAllFilterBranch
+    | PublicNotAnyFilterBranch
+    | PublicRestrictedFilterBranch
+    | PublicUnifiedEventsFilterBranch
+    | PublicPropertyAssociationFilterBranch
+    | PublicAssociationFilterBranch
   >;
 
   filterBranchOperator: string;
@@ -1785,42 +1782,42 @@ export interface AutomationPublicNotAllFilterBranch {
   filterBranchType: 'NOT_ALL';
 
   filters: Array<
-    | AutomationPublicPropertyFilter
-    | AutomationPublicAssociationInListFilter
-    | AutomationPublicPageViewAnalyticsFilter
-    | AutomationPublicCtaAnalyticsFilter
-    | AutomationPublicEventAnalyticsFilter
-    | AutomationPublicFormSubmissionFilter
-    | AutomationPublicFormSubmissionOnPageFilter
-    | AutomationPublicIntegrationEventFilter
-    | AutomationPublicEmailSubscriptionFilter
-    | AutomationPublicCommunicationSubscriptionFilter
-    | AutomationPublicCampaignInfluencedFilter
-    | AutomationPublicSurveyMonkeyFilter
-    | AutomationPublicSurveyMonkeyValueFilter
-    | AutomationPublicWebinarFilter
-    | AutomationPublicEmailEventFilter
-    | AutomationPublicPrivacyAnalyticsFilter
-    | AutomationPublicAdsSearchFilter
-    | AutomationPublicAdsTimeFilter
-    | AutomationPublicInListFilter
-    | AutomationPublicNumAssociationsFilter
-    | AutomationPublicUnifiedEventsFilter
-    | AutomationPublicPropertyAssociationInListFilter
-    | AutomationPublicConstantFilter
+    | PublicPropertyFilter
+    | PublicAssociationInListFilter
+    | PublicPageViewAnalyticsFilter
+    | PublicCtaAnalyticsFilter
+    | PublicEventAnalyticsFilter
+    | PublicFormSubmissionFilter
+    | PublicFormSubmissionOnPageFilter
+    | PublicIntegrationEventFilter
+    | PublicEmailSubscriptionFilter
+    | PublicCommunicationSubscriptionFilter
+    | PublicCampaignInfluencedFilter
+    | PublicSurveyMonkeyFilter
+    | PublicSurveyMonkeyValueFilter
+    | PublicWebinarFilter
+    | PublicEmailEventFilter
+    | PublicPrivacyAnalyticsFilter
+    | PublicAdsSearchFilter
+    | PublicAdsTimeFilter
+    | PublicInListFilter
+    | PublicNumAssociationsFilter
+    | PublicUnifiedEventsFilter
+    | PublicPropertyAssociationInListFilter
+    | PublicConstantFilter
   >;
 }
 
-export interface AutomationPublicNotAnyFilterBranch {
+export interface PublicNotAnyFilterBranch {
   filterBranches: Array<
-    | AutomationPublicOrFilterBranch
-    | AutomationPublicAndFilterBranch
-    | AutomationPublicNotAllFilterBranch
-    | AutomationPublicNotAnyFilterBranch
-    | AutomationPublicRestrictedFilterBranch
-    | AutomationPublicUnifiedEventsFilterBranch
-    | AutomationPublicPropertyAssociationFilterBranch
-    | AutomationPublicAssociationFilterBranch
+    | PublicOrFilterBranch
+    | PublicAndFilterBranch
+    | PublicNotAllFilterBranch
+    | PublicNotAnyFilterBranch
+    | PublicRestrictedFilterBranch
+    | PublicUnifiedEventsFilterBranch
+    | PublicPropertyAssociationFilterBranch
+    | PublicAssociationFilterBranch
   >;
 
   filterBranchOperator: string;
@@ -1828,33 +1825,33 @@ export interface AutomationPublicNotAnyFilterBranch {
   filterBranchType: 'NOT_ANY';
 
   filters: Array<
-    | AutomationPublicPropertyFilter
-    | AutomationPublicAssociationInListFilter
-    | AutomationPublicPageViewAnalyticsFilter
-    | AutomationPublicCtaAnalyticsFilter
-    | AutomationPublicEventAnalyticsFilter
-    | AutomationPublicFormSubmissionFilter
-    | AutomationPublicFormSubmissionOnPageFilter
-    | AutomationPublicIntegrationEventFilter
-    | AutomationPublicEmailSubscriptionFilter
-    | AutomationPublicCommunicationSubscriptionFilter
-    | AutomationPublicCampaignInfluencedFilter
-    | AutomationPublicSurveyMonkeyFilter
-    | AutomationPublicSurveyMonkeyValueFilter
-    | AutomationPublicWebinarFilter
-    | AutomationPublicEmailEventFilter
-    | AutomationPublicPrivacyAnalyticsFilter
-    | AutomationPublicAdsSearchFilter
-    | AutomationPublicAdsTimeFilter
-    | AutomationPublicInListFilter
-    | AutomationPublicNumAssociationsFilter
-    | AutomationPublicUnifiedEventsFilter
-    | AutomationPublicPropertyAssociationInListFilter
-    | AutomationPublicConstantFilter
+    | PublicPropertyFilter
+    | PublicAssociationInListFilter
+    | PublicPageViewAnalyticsFilter
+    | PublicCtaAnalyticsFilter
+    | PublicEventAnalyticsFilter
+    | PublicFormSubmissionFilter
+    | PublicFormSubmissionOnPageFilter
+    | PublicIntegrationEventFilter
+    | PublicEmailSubscriptionFilter
+    | PublicCommunicationSubscriptionFilter
+    | PublicCampaignInfluencedFilter
+    | PublicSurveyMonkeyFilter
+    | PublicSurveyMonkeyValueFilter
+    | PublicWebinarFilter
+    | PublicEmailEventFilter
+    | PublicPrivacyAnalyticsFilter
+    | PublicAdsSearchFilter
+    | PublicAdsTimeFilter
+    | PublicInListFilter
+    | PublicNumAssociationsFilter
+    | PublicUnifiedEventsFilter
+    | PublicPropertyAssociationInListFilter
+    | PublicConstantFilter
   >;
 }
 
-export interface AutomationPublicNowReference {
+export interface PublicNowReference {
   referenceType: 'NOW';
 
   hour?: number;
@@ -1866,26 +1863,26 @@ export interface AutomationPublicNowReference {
   second?: number;
 }
 
-export interface AutomationPublicNumAssociationsFilter {
+export interface PublicNumAssociationsFilter {
   associationCategory: string;
 
   associationTypeId: number;
 
   coalescingRefineBy:
-    | AutomationPublicNumOccurrencesRefineBy
-    | AutomationPublicSetOccurrencesRefineBy
-    | AutomationPublicRelativeComparativeTimestampRefineBy
-    | AutomationPublicRelativeRangedTimestampRefineBy
-    | AutomationPublicAbsoluteComparativeTimestampRefineBy
-    | AutomationPublicAbsoluteRangedTimestampRefineBy
-    | AutomationPublicAllHistoryRefineBy
-    | AutomationPublicTimePointOperation
-    | AutomationPublicRangedTimeOperation;
+    | PublicNumOccurrencesRefineBy
+    | PublicSetOccurrencesRefineBy
+    | PublicRelativeComparativeTimestampRefineBy
+    | PublicRelativeRangedTimestampRefineBy
+    | PublicAbsoluteComparativeTimestampRefineBy
+    | PublicAbsoluteRangedTimestampRefineBy
+    | PublicAllHistoryRefineBy
+    | PublicTimePointOperation
+    | PublicRangedTimeOperation;
 
   filterType: 'NUM_ASSOCIATIONS';
 }
 
-export interface AutomationPublicNumberPropertyOperation {
+export interface PublicNumberPropertyOperation {
   includeObjectsWithNoValueSet: boolean;
 
   operationType: 'NUMBER';
@@ -1895,7 +1892,7 @@ export interface AutomationPublicNumberPropertyOperation {
   value: number;
 }
 
-export interface AutomationPublicNumOccurrencesRefineBy {
+export interface PublicNumOccurrencesRefineBy {
   type: 'NUM_OCCURRENCES';
 
   maxOccurrences?: number;
@@ -1903,16 +1900,16 @@ export interface AutomationPublicNumOccurrencesRefineBy {
   minOccurrences?: number;
 }
 
-export interface AutomationPublicOrFilterBranch {
+export interface PublicOrFilterBranch {
   filterBranches: Array<
-    | AutomationPublicOrFilterBranch
-    | AutomationPublicAndFilterBranch
-    | AutomationPublicNotAllFilterBranch
-    | AutomationPublicNotAnyFilterBranch
-    | AutomationPublicRestrictedFilterBranch
-    | AutomationPublicUnifiedEventsFilterBranch
-    | AutomationPublicPropertyAssociationFilterBranch
-    | AutomationPublicAssociationFilterBranch
+    | PublicOrFilterBranch
+    | PublicAndFilterBranch
+    | PublicNotAllFilterBranch
+    | PublicNotAnyFilterBranch
+    | PublicRestrictedFilterBranch
+    | PublicUnifiedEventsFilterBranch
+    | PublicPropertyAssociationFilterBranch
+    | PublicAssociationFilterBranch
   >;
 
   filterBranchOperator: string;
@@ -1920,33 +1917,33 @@ export interface AutomationPublicOrFilterBranch {
   filterBranchType: 'OR';
 
   filters: Array<
-    | AutomationPublicPropertyFilter
-    | AutomationPublicAssociationInListFilter
-    | AutomationPublicPageViewAnalyticsFilter
-    | AutomationPublicCtaAnalyticsFilter
-    | AutomationPublicEventAnalyticsFilter
-    | AutomationPublicFormSubmissionFilter
-    | AutomationPublicFormSubmissionOnPageFilter
-    | AutomationPublicIntegrationEventFilter
-    | AutomationPublicEmailSubscriptionFilter
-    | AutomationPublicCommunicationSubscriptionFilter
-    | AutomationPublicCampaignInfluencedFilter
-    | AutomationPublicSurveyMonkeyFilter
-    | AutomationPublicSurveyMonkeyValueFilter
-    | AutomationPublicWebinarFilter
-    | AutomationPublicEmailEventFilter
-    | AutomationPublicPrivacyAnalyticsFilter
-    | AutomationPublicAdsSearchFilter
-    | AutomationPublicAdsTimeFilter
-    | AutomationPublicInListFilter
-    | AutomationPublicNumAssociationsFilter
-    | AutomationPublicUnifiedEventsFilter
-    | AutomationPublicPropertyAssociationInListFilter
-    | AutomationPublicConstantFilter
+    | PublicPropertyFilter
+    | PublicAssociationInListFilter
+    | PublicPageViewAnalyticsFilter
+    | PublicCtaAnalyticsFilter
+    | PublicEventAnalyticsFilter
+    | PublicFormSubmissionFilter
+    | PublicFormSubmissionOnPageFilter
+    | PublicIntegrationEventFilter
+    | PublicEmailSubscriptionFilter
+    | PublicCommunicationSubscriptionFilter
+    | PublicCampaignInfluencedFilter
+    | PublicSurveyMonkeyFilter
+    | PublicSurveyMonkeyValueFilter
+    | PublicWebinarFilter
+    | PublicEmailEventFilter
+    | PublicPrivacyAnalyticsFilter
+    | PublicAdsSearchFilter
+    | PublicAdsTimeFilter
+    | PublicInListFilter
+    | PublicNumAssociationsFilter
+    | PublicUnifiedEventsFilter
+    | PublicPropertyAssociationInListFilter
+    | PublicConstantFilter
   >;
 }
 
-export interface AutomationPublicPageViewAnalyticsFilter {
+export interface PublicPageViewAnalyticsFilter {
   filterType: 'PAGE_VIEW';
 
   operator: string;
@@ -1954,31 +1951,31 @@ export interface AutomationPublicPageViewAnalyticsFilter {
   pageUrl: string;
 
   coalescingRefineBy?:
-    | AutomationPublicNumOccurrencesRefineBy
-    | AutomationPublicSetOccurrencesRefineBy
-    | AutomationPublicRelativeComparativeTimestampRefineBy
-    | AutomationPublicRelativeRangedTimestampRefineBy
-    | AutomationPublicAbsoluteComparativeTimestampRefineBy
-    | AutomationPublicAbsoluteRangedTimestampRefineBy
-    | AutomationPublicAllHistoryRefineBy
-    | AutomationPublicTimePointOperation
-    | AutomationPublicRangedTimeOperation;
+    | PublicNumOccurrencesRefineBy
+    | PublicSetOccurrencesRefineBy
+    | PublicRelativeComparativeTimestampRefineBy
+    | PublicRelativeRangedTimestampRefineBy
+    | PublicAbsoluteComparativeTimestampRefineBy
+    | PublicAbsoluteRangedTimestampRefineBy
+    | PublicAllHistoryRefineBy
+    | PublicTimePointOperation
+    | PublicRangedTimeOperation;
 
   enableTracking?: boolean;
 
   pruningRefineBy?:
-    | AutomationPublicNumOccurrencesRefineBy
-    | AutomationPublicSetOccurrencesRefineBy
-    | AutomationPublicRelativeComparativeTimestampRefineBy
-    | AutomationPublicRelativeRangedTimestampRefineBy
-    | AutomationPublicAbsoluteComparativeTimestampRefineBy
-    | AutomationPublicAbsoluteRangedTimestampRefineBy
-    | AutomationPublicAllHistoryRefineBy
-    | AutomationPublicTimePointOperation
-    | AutomationPublicRangedTimeOperation;
+    | PublicNumOccurrencesRefineBy
+    | PublicSetOccurrencesRefineBy
+    | PublicRelativeComparativeTimestampRefineBy
+    | PublicRelativeRangedTimestampRefineBy
+    | PublicAbsoluteComparativeTimestampRefineBy
+    | PublicAbsoluteRangedTimestampRefineBy
+    | PublicAllHistoryRefineBy
+    | PublicTimePointOperation
+    | PublicRangedTimeOperation;
 }
 
-export interface AutomationPublicPrivacyAnalyticsFilter {
+export interface PublicPrivacyAnalyticsFilter {
   filterType: 'PRIVACY';
 
   operator: string;
@@ -1986,16 +1983,16 @@ export interface AutomationPublicPrivacyAnalyticsFilter {
   privacyName: string;
 }
 
-export interface AutomationPublicPropertyAssociationFilterBranch {
+export interface PublicPropertyAssociationFilterBranch {
   filterBranches: Array<
-    | AutomationPublicOrFilterBranch
-    | AutomationPublicAndFilterBranch
-    | AutomationPublicNotAllFilterBranch
-    | AutomationPublicNotAnyFilterBranch
-    | AutomationPublicRestrictedFilterBranch
-    | AutomationPublicUnifiedEventsFilterBranch
-    | AutomationPublicPropertyAssociationFilterBranch
-    | AutomationPublicAssociationFilterBranch
+    | PublicOrFilterBranch
+    | PublicAndFilterBranch
+    | PublicNotAllFilterBranch
+    | PublicNotAnyFilterBranch
+    | PublicRestrictedFilterBranch
+    | PublicUnifiedEventsFilterBranch
+    | PublicPropertyAssociationFilterBranch
+    | PublicAssociationFilterBranch
   >;
 
   filterBranchOperator: string;
@@ -2003,29 +2000,29 @@ export interface AutomationPublicPropertyAssociationFilterBranch {
   filterBranchType: 'PROPERTY_ASSOCIATION';
 
   filters: Array<
-    | AutomationPublicPropertyFilter
-    | AutomationPublicAssociationInListFilter
-    | AutomationPublicPageViewAnalyticsFilter
-    | AutomationPublicCtaAnalyticsFilter
-    | AutomationPublicEventAnalyticsFilter
-    | AutomationPublicFormSubmissionFilter
-    | AutomationPublicFormSubmissionOnPageFilter
-    | AutomationPublicIntegrationEventFilter
-    | AutomationPublicEmailSubscriptionFilter
-    | AutomationPublicCommunicationSubscriptionFilter
-    | AutomationPublicCampaignInfluencedFilter
-    | AutomationPublicSurveyMonkeyFilter
-    | AutomationPublicSurveyMonkeyValueFilter
-    | AutomationPublicWebinarFilter
-    | AutomationPublicEmailEventFilter
-    | AutomationPublicPrivacyAnalyticsFilter
-    | AutomationPublicAdsSearchFilter
-    | AutomationPublicAdsTimeFilter
-    | AutomationPublicInListFilter
-    | AutomationPublicNumAssociationsFilter
-    | AutomationPublicUnifiedEventsFilter
-    | AutomationPublicPropertyAssociationInListFilter
-    | AutomationPublicConstantFilter
+    | PublicPropertyFilter
+    | PublicAssociationInListFilter
+    | PublicPageViewAnalyticsFilter
+    | PublicCtaAnalyticsFilter
+    | PublicEventAnalyticsFilter
+    | PublicFormSubmissionFilter
+    | PublicFormSubmissionOnPageFilter
+    | PublicIntegrationEventFilter
+    | PublicEmailSubscriptionFilter
+    | PublicCommunicationSubscriptionFilter
+    | PublicCampaignInfluencedFilter
+    | PublicSurveyMonkeyFilter
+    | PublicSurveyMonkeyValueFilter
+    | PublicWebinarFilter
+    | PublicEmailEventFilter
+    | PublicPrivacyAnalyticsFilter
+    | PublicAdsSearchFilter
+    | PublicAdsTimeFilter
+    | PublicInListFilter
+    | PublicNumAssociationsFilter
+    | PublicUnifiedEventsFilter
+    | PublicPropertyAssociationInListFilter
+    | PublicConstantFilter
   >;
 
   objectTypeId: string;
@@ -2035,17 +2032,17 @@ export interface AutomationPublicPropertyAssociationFilterBranch {
   propertyWithObjectId: string;
 }
 
-export interface AutomationPublicPropertyAssociationInListFilter {
+export interface PublicPropertyAssociationInListFilter {
   coalescingRefineBy:
-    | AutomationPublicNumOccurrencesRefineBy
-    | AutomationPublicSetOccurrencesRefineBy
-    | AutomationPublicRelativeComparativeTimestampRefineBy
-    | AutomationPublicRelativeRangedTimestampRefineBy
-    | AutomationPublicAbsoluteComparativeTimestampRefineBy
-    | AutomationPublicAbsoluteRangedTimestampRefineBy
-    | AutomationPublicAllHistoryRefineBy
-    | AutomationPublicTimePointOperation
-    | AutomationPublicRangedTimeOperation;
+    | PublicNumOccurrencesRefineBy
+    | PublicSetOccurrencesRefineBy
+    | PublicRelativeComparativeTimestampRefineBy
+    | PublicRelativeRangedTimestampRefineBy
+    | PublicAbsoluteComparativeTimestampRefineBy
+    | PublicAbsoluteRangedTimestampRefineBy
+    | PublicAllHistoryRefineBy
+    | PublicTimePointOperation
+    | PublicRangedTimeOperation;
 
   filterType: 'PROPERTY_ASSOCIATION';
 
@@ -2058,32 +2055,32 @@ export interface AutomationPublicPropertyAssociationInListFilter {
   toObjectTypeId?: string;
 }
 
-export interface AutomationPublicPropertyFilter {
+export interface PublicPropertyFilter {
   filterType: 'PROPERTY';
 
   operation:
-    | AutomationPublicBoolPropertyOperation
-    | AutomationPublicNumberPropertyOperation
-    | AutomationPublicStringPropertyOperation
-    | AutomationPublicDateTimePropertyOperation
-    | AutomationPublicRangedDatePropertyOperation
-    | AutomationPublicComparativePropertyUpdatedOperation
-    | AutomationPublicComparativeDatePropertyOperation
-    | AutomationPublicRollingDateRangePropertyOperation
-    | AutomationPublicRollingPropertyUpdatedOperation
-    | AutomationPublicEnumerationPropertyOperation
-    | AutomationPublicAllPropertyTypesOperation
-    | AutomationPublicRangedNumberPropertyOperation
-    | AutomationPublicMultiStringPropertyOperation
-    | AutomationPublicDatePropertyOperation
-    | AutomationPublicCalendarDatePropertyOperation
-    | AutomationPublicTimePointOperation
-    | AutomationPublicRangedTimeOperation;
+    | PublicBoolPropertyOperation
+    | PublicNumberPropertyOperation
+    | PublicStringPropertyOperation
+    | PublicDateTimePropertyOperation
+    | PublicRangedDatePropertyOperation
+    | PublicComparativePropertyUpdatedOperation
+    | PublicComparativeDatePropertyOperation
+    | PublicRollingDateRangePropertyOperation
+    | PublicRollingPropertyUpdatedOperation
+    | PublicEnumerationPropertyOperation
+    | PublicAllPropertyTypesOperation
+    | PublicRangedNumberPropertyOperation
+    | PublicMultiStringPropertyOperation
+    | PublicDatePropertyOperation
+    | PublicCalendarDatePropertyOperation
+    | PublicTimePointOperation
+    | PublicRangedTimeOperation;
 
   property: string;
 }
 
-export interface AutomationPublicPropertyReferencedTime {
+export interface PublicPropertyReferencedTime {
   property: string;
 
   referenceType: string;
@@ -2095,7 +2092,7 @@ export interface AutomationPublicPropertyReferencedTime {
   timezoneSource?: string;
 }
 
-export interface AutomationPublicQuarterReference {
+export interface PublicQuarterReference {
   day: number;
 
   month: number;
@@ -2111,7 +2108,7 @@ export interface AutomationPublicQuarterReference {
   second?: number;
 }
 
-export interface AutomationPublicRangedDatePropertyOperation {
+export interface PublicRangedDatePropertyOperation {
   includeObjectsWithNoValueSet: boolean;
 
   lowerBound: number;
@@ -2125,7 +2122,7 @@ export interface AutomationPublicRangedDatePropertyOperation {
   upperBound: number;
 }
 
-export interface AutomationPublicRangedNumberPropertyOperation {
+export interface PublicRangedNumberPropertyOperation {
   includeObjectsWithNoValueSet: boolean;
 
   lowerBound: number;
@@ -2137,13 +2134,10 @@ export interface AutomationPublicRangedNumberPropertyOperation {
   upperBound: number;
 }
 
-export interface AutomationPublicRangedTimeOperation {
+export interface PublicRangedTimeOperation {
   includeObjectsWithNoValueSet: boolean;
 
-  lowerBoundTimePoint:
-    | AutomationPublicDatePoint
-    | AutomationPublicIndexedTimePoint
-    | AutomationPublicPropertyReferencedTime;
+  lowerBoundTimePoint: PublicDatePoint | PublicIndexedTimePoint | PublicPropertyReferencedTime;
 
   operationType: string;
 
@@ -2151,10 +2145,7 @@ export interface AutomationPublicRangedTimeOperation {
 
   type: 'TIME_RANGED';
 
-  upperBoundTimePoint:
-    | AutomationPublicDatePoint
-    | AutomationPublicIndexedTimePoint
-    | AutomationPublicPropertyReferencedTime;
+  upperBoundTimePoint: PublicDatePoint | PublicIndexedTimePoint | PublicPropertyReferencedTime;
 
   lowerBoundEndpointBehavior?: string;
 
@@ -2163,34 +2154,34 @@ export interface AutomationPublicRangedTimeOperation {
   upperBoundEndpointBehavior?: string;
 }
 
-export interface AutomationPublicRelativeComparativeTimestampRefineBy {
+export interface PublicRelativeComparativeTimestampRefineBy {
   comparison: string;
 
-  timeOffset: AutomationPublicTimeOffset;
+  timeOffset: PublicTimeOffset;
 
   type: 'RELATIVE_COMPARATIVE';
 }
 
-export interface AutomationPublicRelativeRangedTimestampRefineBy {
-  lowerBoundOffset: AutomationPublicTimeOffset;
+export interface PublicRelativeRangedTimestampRefineBy {
+  lowerBoundOffset: PublicTimeOffset;
 
   rangeType: string;
 
   type: 'RELATIVE_RANGED';
 
-  upperBoundOffset: AutomationPublicTimeOffset;
+  upperBoundOffset: PublicTimeOffset;
 }
 
-export interface AutomationPublicRestrictedFilterBranch {
+export interface PublicRestrictedFilterBranch {
   filterBranches: Array<
-    | AutomationPublicOrFilterBranch
-    | AutomationPublicAndFilterBranch
-    | AutomationPublicNotAllFilterBranch
-    | AutomationPublicNotAnyFilterBranch
-    | AutomationPublicRestrictedFilterBranch
-    | AutomationPublicUnifiedEventsFilterBranch
-    | AutomationPublicPropertyAssociationFilterBranch
-    | AutomationPublicAssociationFilterBranch
+    | PublicOrFilterBranch
+    | PublicAndFilterBranch
+    | PublicNotAllFilterBranch
+    | PublicNotAnyFilterBranch
+    | PublicRestrictedFilterBranch
+    | PublicUnifiedEventsFilterBranch
+    | PublicPropertyAssociationFilterBranch
+    | PublicAssociationFilterBranch
   >;
 
   filterBranchOperator: string;
@@ -2198,33 +2189,33 @@ export interface AutomationPublicRestrictedFilterBranch {
   filterBranchType: 'RESTRICTED';
 
   filters: Array<
-    | AutomationPublicPropertyFilter
-    | AutomationPublicAssociationInListFilter
-    | AutomationPublicPageViewAnalyticsFilter
-    | AutomationPublicCtaAnalyticsFilter
-    | AutomationPublicEventAnalyticsFilter
-    | AutomationPublicFormSubmissionFilter
-    | AutomationPublicFormSubmissionOnPageFilter
-    | AutomationPublicIntegrationEventFilter
-    | AutomationPublicEmailSubscriptionFilter
-    | AutomationPublicCommunicationSubscriptionFilter
-    | AutomationPublicCampaignInfluencedFilter
-    | AutomationPublicSurveyMonkeyFilter
-    | AutomationPublicSurveyMonkeyValueFilter
-    | AutomationPublicWebinarFilter
-    | AutomationPublicEmailEventFilter
-    | AutomationPublicPrivacyAnalyticsFilter
-    | AutomationPublicAdsSearchFilter
-    | AutomationPublicAdsTimeFilter
-    | AutomationPublicInListFilter
-    | AutomationPublicNumAssociationsFilter
-    | AutomationPublicUnifiedEventsFilter
-    | AutomationPublicPropertyAssociationInListFilter
-    | AutomationPublicConstantFilter
+    | PublicPropertyFilter
+    | PublicAssociationInListFilter
+    | PublicPageViewAnalyticsFilter
+    | PublicCtaAnalyticsFilter
+    | PublicEventAnalyticsFilter
+    | PublicFormSubmissionFilter
+    | PublicFormSubmissionOnPageFilter
+    | PublicIntegrationEventFilter
+    | PublicEmailSubscriptionFilter
+    | PublicCommunicationSubscriptionFilter
+    | PublicCampaignInfluencedFilter
+    | PublicSurveyMonkeyFilter
+    | PublicSurveyMonkeyValueFilter
+    | PublicWebinarFilter
+    | PublicEmailEventFilter
+    | PublicPrivacyAnalyticsFilter
+    | PublicAdsSearchFilter
+    | PublicAdsTimeFilter
+    | PublicInListFilter
+    | PublicNumAssociationsFilter
+    | PublicUnifiedEventsFilter
+    | PublicPropertyAssociationInListFilter
+    | PublicConstantFilter
   >;
 }
 
-export interface AutomationPublicRollingDateRangePropertyOperation {
+export interface PublicRollingDateRangePropertyOperation {
   includeObjectsWithNoValueSet: boolean;
 
   numberOfDays: number;
@@ -2236,7 +2227,7 @@ export interface AutomationPublicRollingDateRangePropertyOperation {
   requiresTimeZoneConversion: boolean;
 }
 
-export interface AutomationPublicRollingPropertyUpdatedOperation {
+export interface PublicRollingPropertyUpdatedOperation {
   includeObjectsWithNoValueSet: boolean;
 
   numberOfDays: number;
@@ -2246,13 +2237,13 @@ export interface AutomationPublicRollingPropertyUpdatedOperation {
   operator: string;
 }
 
-export interface AutomationPublicSetOccurrencesRefineBy {
+export interface PublicSetOccurrencesRefineBy {
   setType: string;
 
   type: 'SET_OCCURRENCES';
 }
 
-export interface AutomationPublicStringPropertyOperation {
+export interface PublicStringPropertyOperation {
   includeObjectsWithNoValueSet: boolean;
 
   operationType: 'STRING';
@@ -2262,7 +2253,7 @@ export interface AutomationPublicStringPropertyOperation {
   value: string;
 }
 
-export interface AutomationPublicSurveyMonkeyFilter {
+export interface PublicSurveyMonkeyFilter {
   filterType: 'SURVEY_MONKEY';
 
   operator: string;
@@ -2270,7 +2261,7 @@ export interface AutomationPublicSurveyMonkeyFilter {
   surveyId: string;
 }
 
-export interface AutomationPublicSurveyMonkeyValueFilter {
+export interface PublicSurveyMonkeyValueFilter {
   filterType: 'SURVEY_MONKEY_VALUE';
 
   operator: string;
@@ -2280,30 +2271,30 @@ export interface AutomationPublicSurveyMonkeyValueFilter {
   surveyQuestion: string;
 
   valueComparison:
-    | AutomationPublicBoolPropertyOperation
-    | AutomationPublicNumberPropertyOperation
-    | AutomationPublicStringPropertyOperation
-    | AutomationPublicDateTimePropertyOperation
-    | AutomationPublicRangedDatePropertyOperation
-    | AutomationPublicComparativePropertyUpdatedOperation
-    | AutomationPublicComparativeDatePropertyOperation
-    | AutomationPublicRollingDateRangePropertyOperation
-    | AutomationPublicRollingPropertyUpdatedOperation
-    | AutomationPublicEnumerationPropertyOperation
-    | AutomationPublicAllPropertyTypesOperation
-    | AutomationPublicRangedNumberPropertyOperation
-    | AutomationPublicMultiStringPropertyOperation
-    | AutomationPublicDatePropertyOperation
-    | AutomationPublicCalendarDatePropertyOperation
-    | AutomationPublicTimePointOperation
-    | AutomationPublicRangedTimeOperation;
+    | PublicBoolPropertyOperation
+    | PublicNumberPropertyOperation
+    | PublicStringPropertyOperation
+    | PublicDateTimePropertyOperation
+    | PublicRangedDatePropertyOperation
+    | PublicComparativePropertyUpdatedOperation
+    | PublicComparativeDatePropertyOperation
+    | PublicRollingDateRangePropertyOperation
+    | PublicRollingPropertyUpdatedOperation
+    | PublicEnumerationPropertyOperation
+    | PublicAllPropertyTypesOperation
+    | PublicRangedNumberPropertyOperation
+    | PublicMultiStringPropertyOperation
+    | PublicDatePropertyOperation
+    | PublicCalendarDatePropertyOperation
+    | PublicTimePointOperation
+    | PublicRangedTimeOperation;
 
   surveyAnswerColId?: string;
 
   surveyAnswerRowId?: string;
 }
 
-export interface AutomationPublicTimeOffset {
+export interface PublicTimeOffset {
   amount: number;
 
   offsetDirection: string;
@@ -2311,17 +2302,14 @@ export interface AutomationPublicTimeOffset {
   timeUnit: string;
 }
 
-export interface AutomationPublicTimePointOperation {
+export interface PublicTimePointOperation {
   includeObjectsWithNoValueSet: boolean;
 
   operationType: 'TIME_POINT';
 
   operator: string;
 
-  timePoint:
-    | AutomationPublicDatePoint
-    | AutomationPublicIndexedTimePoint
-    | AutomationPublicPropertyReferencedTime;
+  timePoint: PublicDatePoint | PublicIndexedTimePoint | PublicPropertyReferencedTime;
 
   type: string;
 
@@ -2330,7 +2318,7 @@ export interface AutomationPublicTimePointOperation {
   propertyParser?: string;
 }
 
-export interface AutomationPublicTodayReference {
+export interface PublicTodayReference {
   referenceType: 'TODAY';
 
   hour?: number;
@@ -2342,48 +2330,48 @@ export interface AutomationPublicTodayReference {
   second?: number;
 }
 
-export interface AutomationPublicUnifiedEventsFilter {
-  filterLines: Array<AutomationPublicEventFilterMetadata>;
+export interface PublicUnifiedEventsFilter {
+  filterLines: Array<PublicEventFilterMetadata>;
 
   filterType: 'UNIFIED_EVENTS';
 
   coalescingRefineBy?:
-    | AutomationPublicNumOccurrencesRefineBy
-    | AutomationPublicSetOccurrencesRefineBy
-    | AutomationPublicRelativeComparativeTimestampRefineBy
-    | AutomationPublicRelativeRangedTimestampRefineBy
-    | AutomationPublicAbsoluteComparativeTimestampRefineBy
-    | AutomationPublicAbsoluteRangedTimestampRefineBy
-    | AutomationPublicAllHistoryRefineBy
-    | AutomationPublicTimePointOperation
-    | AutomationPublicRangedTimeOperation;
+    | PublicNumOccurrencesRefineBy
+    | PublicSetOccurrencesRefineBy
+    | PublicRelativeComparativeTimestampRefineBy
+    | PublicRelativeRangedTimestampRefineBy
+    | PublicAbsoluteComparativeTimestampRefineBy
+    | PublicAbsoluteRangedTimestampRefineBy
+    | PublicAllHistoryRefineBy
+    | PublicTimePointOperation
+    | PublicRangedTimeOperation;
 
   eventTypeId?: string;
 
   pruningRefineBy?:
-    | AutomationPublicNumOccurrencesRefineBy
-    | AutomationPublicSetOccurrencesRefineBy
-    | AutomationPublicRelativeComparativeTimestampRefineBy
-    | AutomationPublicRelativeRangedTimestampRefineBy
-    | AutomationPublicAbsoluteComparativeTimestampRefineBy
-    | AutomationPublicAbsoluteRangedTimestampRefineBy
-    | AutomationPublicAllHistoryRefineBy
-    | AutomationPublicTimePointOperation
-    | AutomationPublicRangedTimeOperation;
+    | PublicNumOccurrencesRefineBy
+    | PublicSetOccurrencesRefineBy
+    | PublicRelativeComparativeTimestampRefineBy
+    | PublicRelativeRangedTimestampRefineBy
+    | PublicAbsoluteComparativeTimestampRefineBy
+    | PublicAbsoluteRangedTimestampRefineBy
+    | PublicAllHistoryRefineBy
+    | PublicTimePointOperation
+    | PublicRangedTimeOperation;
 }
 
-export interface AutomationPublicUnifiedEventsFilterBranch {
+export interface PublicUnifiedEventsFilterBranch {
   eventTypeId: string;
 
   filterBranches: Array<
-    | AutomationPublicOrFilterBranch
-    | AutomationPublicAndFilterBranch
-    | AutomationPublicNotAllFilterBranch
-    | AutomationPublicNotAnyFilterBranch
-    | AutomationPublicRestrictedFilterBranch
-    | AutomationPublicUnifiedEventsFilterBranch
-    | AutomationPublicPropertyAssociationFilterBranch
-    | AutomationPublicAssociationFilterBranch
+    | PublicOrFilterBranch
+    | PublicAndFilterBranch
+    | PublicNotAllFilterBranch
+    | PublicNotAnyFilterBranch
+    | PublicRestrictedFilterBranch
+    | PublicUnifiedEventsFilterBranch
+    | PublicPropertyAssociationFilterBranch
+    | PublicAssociationFilterBranch
   >;
 
   filterBranchOperator: string;
@@ -2391,46 +2379,46 @@ export interface AutomationPublicUnifiedEventsFilterBranch {
   filterBranchType: 'UNIFIED_EVENTS';
 
   filters: Array<
-    | AutomationPublicPropertyFilter
-    | AutomationPublicAssociationInListFilter
-    | AutomationPublicPageViewAnalyticsFilter
-    | AutomationPublicCtaAnalyticsFilter
-    | AutomationPublicEventAnalyticsFilter
-    | AutomationPublicFormSubmissionFilter
-    | AutomationPublicFormSubmissionOnPageFilter
-    | AutomationPublicIntegrationEventFilter
-    | AutomationPublicEmailSubscriptionFilter
-    | AutomationPublicCommunicationSubscriptionFilter
-    | AutomationPublicCampaignInfluencedFilter
-    | AutomationPublicSurveyMonkeyFilter
-    | AutomationPublicSurveyMonkeyValueFilter
-    | AutomationPublicWebinarFilter
-    | AutomationPublicEmailEventFilter
-    | AutomationPublicPrivacyAnalyticsFilter
-    | AutomationPublicAdsSearchFilter
-    | AutomationPublicAdsTimeFilter
-    | AutomationPublicInListFilter
-    | AutomationPublicNumAssociationsFilter
-    | AutomationPublicUnifiedEventsFilter
-    | AutomationPublicPropertyAssociationInListFilter
-    | AutomationPublicConstantFilter
+    | PublicPropertyFilter
+    | PublicAssociationInListFilter
+    | PublicPageViewAnalyticsFilter
+    | PublicCtaAnalyticsFilter
+    | PublicEventAnalyticsFilter
+    | PublicFormSubmissionFilter
+    | PublicFormSubmissionOnPageFilter
+    | PublicIntegrationEventFilter
+    | PublicEmailSubscriptionFilter
+    | PublicCommunicationSubscriptionFilter
+    | PublicCampaignInfluencedFilter
+    | PublicSurveyMonkeyFilter
+    | PublicSurveyMonkeyValueFilter
+    | PublicWebinarFilter
+    | PublicEmailEventFilter
+    | PublicPrivacyAnalyticsFilter
+    | PublicAdsSearchFilter
+    | PublicAdsTimeFilter
+    | PublicInListFilter
+    | PublicNumAssociationsFilter
+    | PublicUnifiedEventsFilter
+    | PublicPropertyAssociationInListFilter
+    | PublicConstantFilter
   >;
 
   operator: 'HAS_COMPLETED' | 'HAS_NOT_COMPLETED';
 
   coalescingRefineBy?:
-    | AutomationPublicNumOccurrencesRefineBy
-    | AutomationPublicSetOccurrencesRefineBy
-    | AutomationPublicRelativeComparativeTimestampRefineBy
-    | AutomationPublicRelativeRangedTimestampRefineBy
-    | AutomationPublicAbsoluteComparativeTimestampRefineBy
-    | AutomationPublicAbsoluteRangedTimestampRefineBy
-    | AutomationPublicAllHistoryRefineBy
-    | AutomationPublicTimePointOperation
-    | AutomationPublicRangedTimeOperation;
+    | PublicNumOccurrencesRefineBy
+    | PublicSetOccurrencesRefineBy
+    | PublicRelativeComparativeTimestampRefineBy
+    | PublicRelativeRangedTimestampRefineBy
+    | PublicAbsoluteComparativeTimestampRefineBy
+    | PublicAbsoluteRangedTimestampRefineBy
+    | PublicAllHistoryRefineBy
+    | PublicTimePointOperation
+    | PublicRangedTimeOperation;
 }
 
-export interface AutomationPublicWebinarFilter {
+export interface PublicWebinarFilter {
   filterType: 'WEBINAR';
 
   operator: string;
@@ -2438,7 +2426,7 @@ export interface AutomationPublicWebinarFilter {
   webinarId?: string;
 }
 
-export interface AutomationPublicWeekReference {
+export interface PublicWeekReference {
   dayOfWeek: 'MONDAY' | 'TUESDAY' | 'WEDNESDAY' | 'THURSDAY' | 'FRIDAY' | 'SATURDAY' | 'SUNDAY';
 
   referenceType: 'WEEK';
@@ -2452,7 +2440,7 @@ export interface AutomationPublicWeekReference {
   second?: number;
 }
 
-export interface AutomationPublicYearReference {
+export interface PublicYearReference {
   day: number;
 
   month: number;
@@ -2472,171 +2460,171 @@ Automation.Actions = Actions;
 
 export declare namespace Automation {
   export {
-    type AutomationAPIAbTestBranchAction as AutomationAPIAbTestBranchAction,
-    type AutomationAPIActionDataValue as AutomationAPIActionDataValue,
-    type AutomationAPIAppendObjectPropertyValue as AutomationAPIAppendObjectPropertyValue,
-    type AutomationAPIAssociationDataSource as AutomationAPIAssociationDataSource,
-    type AutomationAPIAssociationTimestampDataSource as AutomationAPIAssociationTimestampDataSource,
-    type AutomationAPIAuthKeyWebhookAuthSettings as AutomationAPIAuthKeyWebhookAuthSettings,
-    type AutomationAPIBlockedDate as AutomationAPIBlockedDate,
-    type AutomationAPIConnection as AutomationAPIConnection,
-    type AutomationAPIContactFlow as AutomationAPIContactFlow,
-    type AutomationAPIContactFlowCreateRequest as AutomationAPIContactFlowCreateRequest,
-    type AutomationAPIContactFlowPutRequest as AutomationAPIContactFlowPutRequest,
-    type AutomationAPIContactPropertyAnchor as AutomationAPIContactPropertyAnchor,
-    type AutomationAPICustomCodeAction as AutomationAPICustomCodeAction,
-    type AutomationAPIDailyEnrollmentSchedule as AutomationAPIDailyEnrollmentSchedule,
-    type AutomationAPIDatasetFieldPropertyFilterDataSource as AutomationAPIDatasetFieldPropertyFilterDataSource,
-    type AutomationAPIEnrolledArgumentPropertyFilterDataSource as AutomationAPIEnrolledArgumentPropertyFilterDataSource,
-    type AutomationAPIEnrolledRecordPropertyFilterDataSource as AutomationAPIEnrolledRecordPropertyFilterDataSource,
-    type AutomationAPIEnrollmentEventPropertyValue as AutomationAPIEnrollmentEventPropertyValue,
-    type AutomationAPIEnumerationOutputField as AutomationAPIEnumerationOutputField,
-    type AutomationAPIEventBasedEnrollmentCriteria as AutomationAPIEventBasedEnrollmentCriteria,
-    type AutomationAPIFetchedObjectPropertyValue as AutomationAPIFetchedObjectPropertyValue,
-    type AutomationAPIFlow as AutomationAPIFlow,
-    type AutomationAPIFlowBatchFetchFlowIDCoordinate as AutomationAPIFlowBatchFetchFlowIDCoordinate,
-    type AutomationAPIFlowBatchFetchMigrationFlowIDCoordinate as AutomationAPIFlowBatchFetchMigrationFlowIDCoordinate,
-    type AutomationAPIFlowBatchFetchMigrationWorkflowIDCoordinate as AutomationAPIFlowBatchFetchMigrationWorkflowIDCoordinate,
-    type AutomationAPIFlowBatchInput as AutomationAPIFlowBatchInput,
-    type AutomationAPIFlowBatchMigrationInput as AutomationAPIFlowBatchMigrationInput,
-    type AutomationAPIFlowCreateRequest as AutomationAPIFlowCreateRequest,
-    type AutomationAPIFlowEmailCampaign as AutomationAPIFlowEmailCampaign,
-    type AutomationAPIFlowListing as AutomationAPIFlowListing,
-    type AutomationAPIFlowPutRequest as AutomationAPIFlowPutRequest,
-    type AutomationAPIIncrementValue as AutomationAPIIncrementValue,
-    type AutomationAPIInputVariable as AutomationAPIInputVariable,
-    type AutomationAPIListBasedEnrollmentCriteria as AutomationAPIListBasedEnrollmentCriteria,
-    type AutomationAPIListBranch as AutomationAPIListBranch,
-    type AutomationAPIListBranchAction as AutomationAPIListBranchAction,
-    type AutomationAPIManualEnrollmentCriteria as AutomationAPIManualEnrollmentCriteria,
-    type AutomationAPIMonthlyRelativeDaysEnrollmentSchedule as AutomationAPIMonthlyRelativeDaysEnrollmentSchedule,
-    type AutomationAPIMonthlySpecificDaysEnrollmentSchedule as AutomationAPIMonthlySpecificDaysEnrollmentSchedule,
-    type AutomationAPIObjectPropertyValue as AutomationAPIObjectPropertyValue,
-    type AutomationAPIPlatformFlow as AutomationAPIPlatformFlow,
-    type AutomationAPIPlatformFlowCreateRequest as AutomationAPIPlatformFlowCreateRequest,
-    type AutomationAPIPlatformFlowPutRequest as AutomationAPIPlatformFlowPutRequest,
-    type AutomationAPIPropertyBasedEnrollmentSchedule as AutomationAPIPropertyBasedEnrollmentSchedule,
-    type AutomationAPIRelativeDateTimeValue as AutomationAPIRelativeDateTimeValue,
-    type AutomationAPISignatureWebhookAuthSettings as AutomationAPISignatureWebhookAuthSettings,
-    type AutomationAPISingleConnectionAction as AutomationAPISingleConnectionAction,
-    type AutomationAPISort as AutomationAPISort,
-    type AutomationAPIStaticAppendValue as AutomationAPIStaticAppendValue,
-    type AutomationAPIStaticBranch as AutomationAPIStaticBranch,
-    type AutomationAPIStaticBranchAction as AutomationAPIStaticBranchAction,
-    type AutomationAPIStaticDateAnchor as AutomationAPIStaticDateAnchor,
-    type AutomationAPIStaticPropertyFilterDataSource as AutomationAPIStaticPropertyFilterDataSource,
-    type AutomationAPIStaticTimeZoneStrategy as AutomationAPIStaticTimeZoneStrategy,
-    type AutomationAPIStaticValue as AutomationAPIStaticValue,
-    type AutomationAPITimeDelay as AutomationAPITimeDelay,
-    type AutomationAPITimeOfDay as AutomationAPITimeOfDay,
-    type AutomationAPITimestampValue as AutomationAPITimestampValue,
-    type AutomationAPITimeWindow as AutomationAPITimeWindow,
-    type AutomationAPIUnEnrollmentSetting as AutomationAPIUnEnrollmentSetting,
-    type AutomationAPIWebhookAction as AutomationAPIWebhookAction,
-    type AutomationAPIWeeklyEnrollmentSchedule as AutomationAPIWeeklyEnrollmentSchedule,
-    type AutomationAPIYearlyEnrollmentSchedule as AutomationAPIYearlyEnrollmentSchedule,
-    type AutomationBatchResponseAPIFlow as AutomationBatchResponseAPIFlow,
-    type AutomationBatchResponseAPIFlowWithErrors as AutomationBatchResponseAPIFlowWithErrors,
-    type AutomationBatchResponseFlowIDWorkflowIDMappingResponse as AutomationBatchResponseFlowIDWorkflowIDMappingResponse,
-    type AutomationBatchResponseFlowIDWorkflowIDMappingResponseWithErrors as AutomationBatchResponseFlowIDWorkflowIDMappingResponseWithErrors,
-    type AutomationCollectionResponseAPIFlowEmailCampaign as AutomationCollectionResponseAPIFlowEmailCampaign,
-    type AutomationCollectionResponseAPIFlowListingForwardPaging as AutomationCollectionResponseAPIFlowListingForwardPaging,
-    type AutomationFlowIDWorkflowIDMappingResponse as AutomationFlowIDWorkflowIDMappingResponse,
-    type AutomationPublicAbsoluteComparativeTimestampRefineBy as AutomationPublicAbsoluteComparativeTimestampRefineBy,
-    type AutomationPublicAbsoluteRangedTimestampRefineBy as AutomationPublicAbsoluteRangedTimestampRefineBy,
-    type AutomationPublicAdsSearchFilter as AutomationPublicAdsSearchFilter,
-    type AutomationPublicAdsTimeFilter as AutomationPublicAdsTimeFilter,
-    type AutomationPublicAllHistoryRefineBy as AutomationPublicAllHistoryRefineBy,
-    type AutomationPublicAllPropertyTypesOperation as AutomationPublicAllPropertyTypesOperation,
-    type AutomationPublicAndFilterBranch as AutomationPublicAndFilterBranch,
-    type AutomationPublicAssociationFilterBranch as AutomationPublicAssociationFilterBranch,
-    type AutomationPublicAssociationInListFilter as AutomationPublicAssociationInListFilter,
-    type AutomationPublicBoolPropertyOperation as AutomationPublicBoolPropertyOperation,
-    type AutomationPublicCalendarDatePropertyOperation as AutomationPublicCalendarDatePropertyOperation,
-    type AutomationPublicCampaignInfluencedFilter as AutomationPublicCampaignInfluencedFilter,
-    type AutomationPublicCommunicationSubscriptionFilter as AutomationPublicCommunicationSubscriptionFilter,
-    type AutomationPublicComparativeDatePropertyOperation as AutomationPublicComparativeDatePropertyOperation,
-    type AutomationPublicComparativePropertyUpdatedOperation as AutomationPublicComparativePropertyUpdatedOperation,
-    type AutomationPublicConstantFilter as AutomationPublicConstantFilter,
-    type AutomationPublicCtaAnalyticsFilter as AutomationPublicCtaAnalyticsFilter,
-    type AutomationPublicDatePoint as AutomationPublicDatePoint,
-    type AutomationPublicDatePropertyOperation as AutomationPublicDatePropertyOperation,
-    type AutomationPublicDateTimePropertyOperation as AutomationPublicDateTimePropertyOperation,
-    type AutomationPublicEmailEventFilter as AutomationPublicEmailEventFilter,
-    type AutomationPublicEmailSubscriptionFilter as AutomationPublicEmailSubscriptionFilter,
-    type AutomationPublicEnumerationPropertyOperation as AutomationPublicEnumerationPropertyOperation,
-    type AutomationPublicEventAnalyticsFilter as AutomationPublicEventAnalyticsFilter,
-    type AutomationPublicEventFilterMetadata as AutomationPublicEventFilterMetadata,
-    type AutomationPublicFiscalQuarterReference as AutomationPublicFiscalQuarterReference,
-    type AutomationPublicFiscalYearReference as AutomationPublicFiscalYearReference,
-    type AutomationPublicFormSubmissionFilter as AutomationPublicFormSubmissionFilter,
-    type AutomationPublicFormSubmissionOnPageFilter as AutomationPublicFormSubmissionOnPageFilter,
-    type AutomationPublicIndexedTimePoint as AutomationPublicIndexedTimePoint,
-    type AutomationPublicIndexOffset as AutomationPublicIndexOffset,
-    type AutomationPublicInListFilter as AutomationPublicInListFilter,
-    type AutomationPublicInListFilterMetadata as AutomationPublicInListFilterMetadata,
-    type AutomationPublicIntegrationEventFilter as AutomationPublicIntegrationEventFilter,
-    type AutomationPublicMonthReference as AutomationPublicMonthReference,
-    type AutomationPublicMultiStringPropertyOperation as AutomationPublicMultiStringPropertyOperation,
-    type AutomationPublicNotAllFilterBranch as AutomationPublicNotAllFilterBranch,
-    type AutomationPublicNotAnyFilterBranch as AutomationPublicNotAnyFilterBranch,
-    type AutomationPublicNowReference as AutomationPublicNowReference,
-    type AutomationPublicNumAssociationsFilter as AutomationPublicNumAssociationsFilter,
-    type AutomationPublicNumberPropertyOperation as AutomationPublicNumberPropertyOperation,
-    type AutomationPublicNumOccurrencesRefineBy as AutomationPublicNumOccurrencesRefineBy,
-    type AutomationPublicOrFilterBranch as AutomationPublicOrFilterBranch,
-    type AutomationPublicPageViewAnalyticsFilter as AutomationPublicPageViewAnalyticsFilter,
-    type AutomationPublicPrivacyAnalyticsFilter as AutomationPublicPrivacyAnalyticsFilter,
-    type AutomationPublicPropertyAssociationFilterBranch as AutomationPublicPropertyAssociationFilterBranch,
-    type AutomationPublicPropertyAssociationInListFilter as AutomationPublicPropertyAssociationInListFilter,
-    type AutomationPublicPropertyFilter as AutomationPublicPropertyFilter,
-    type AutomationPublicPropertyReferencedTime as AutomationPublicPropertyReferencedTime,
-    type AutomationPublicQuarterReference as AutomationPublicQuarterReference,
-    type AutomationPublicRangedDatePropertyOperation as AutomationPublicRangedDatePropertyOperation,
-    type AutomationPublicRangedNumberPropertyOperation as AutomationPublicRangedNumberPropertyOperation,
-    type AutomationPublicRangedTimeOperation as AutomationPublicRangedTimeOperation,
-    type AutomationPublicRelativeComparativeTimestampRefineBy as AutomationPublicRelativeComparativeTimestampRefineBy,
-    type AutomationPublicRelativeRangedTimestampRefineBy as AutomationPublicRelativeRangedTimestampRefineBy,
-    type AutomationPublicRestrictedFilterBranch as AutomationPublicRestrictedFilterBranch,
-    type AutomationPublicRollingDateRangePropertyOperation as AutomationPublicRollingDateRangePropertyOperation,
-    type AutomationPublicRollingPropertyUpdatedOperation as AutomationPublicRollingPropertyUpdatedOperation,
-    type AutomationPublicSetOccurrencesRefineBy as AutomationPublicSetOccurrencesRefineBy,
-    type AutomationPublicStringPropertyOperation as AutomationPublicStringPropertyOperation,
-    type AutomationPublicSurveyMonkeyFilter as AutomationPublicSurveyMonkeyFilter,
-    type AutomationPublicSurveyMonkeyValueFilter as AutomationPublicSurveyMonkeyValueFilter,
-    type AutomationPublicTimeOffset as AutomationPublicTimeOffset,
-    type AutomationPublicTimePointOperation as AutomationPublicTimePointOperation,
-    type AutomationPublicTodayReference as AutomationPublicTodayReference,
-    type AutomationPublicUnifiedEventsFilter as AutomationPublicUnifiedEventsFilter,
-    type AutomationPublicUnifiedEventsFilterBranch as AutomationPublicUnifiedEventsFilterBranch,
-    type AutomationPublicWebinarFilter as AutomationPublicWebinarFilter,
-    type AutomationPublicWeekReference as AutomationPublicWeekReference,
-    type AutomationPublicYearReference as AutomationPublicYearReference,
+    type APIAbTestBranchAction as APIAbTestBranchAction,
+    type APIActionDataValue as APIActionDataValue,
+    type APIAppendObjectPropertyValue as APIAppendObjectPropertyValue,
+    type APIAssociationDataSource as APIAssociationDataSource,
+    type APIAssociationTimestampDataSource as APIAssociationTimestampDataSource,
+    type APIAuthKeyWebhookAuthSettings as APIAuthKeyWebhookAuthSettings,
+    type APIBlockedDate as APIBlockedDate,
+    type APIConnection as APIConnection,
+    type APIContactFlow as APIContactFlow,
+    type APIContactFlowCreateRequest as APIContactFlowCreateRequest,
+    type APIContactFlowPutRequest as APIContactFlowPutRequest,
+    type APIContactPropertyAnchor as APIContactPropertyAnchor,
+    type APICustomCodeAction as APICustomCodeAction,
+    type APIDailyEnrollmentSchedule as APIDailyEnrollmentSchedule,
+    type APIDatasetFieldPropertyFilterDataSource as APIDatasetFieldPropertyFilterDataSource,
+    type APIEnrolledArgumentPropertyFilterDataSource as APIEnrolledArgumentPropertyFilterDataSource,
+    type APIEnrolledRecordPropertyFilterDataSource as APIEnrolledRecordPropertyFilterDataSource,
+    type APIEnrollmentEventPropertyValue as APIEnrollmentEventPropertyValue,
+    type APIEnumerationOutputField as APIEnumerationOutputField,
+    type APIEventBasedEnrollmentCriteria as APIEventBasedEnrollmentCriteria,
+    type APIFetchedObjectPropertyValue as APIFetchedObjectPropertyValue,
+    type APIFlow as APIFlow,
+    type APIFlowBatchFetchFlowIDCoordinate as APIFlowBatchFetchFlowIDCoordinate,
+    type APIFlowBatchFetchMigrationFlowIDCoordinate as APIFlowBatchFetchMigrationFlowIDCoordinate,
+    type APIFlowBatchFetchMigrationWorkflowIDCoordinate as APIFlowBatchFetchMigrationWorkflowIDCoordinate,
+    type APIFlowBatchInput as APIFlowBatchInput,
+    type APIFlowBatchMigrationInput as APIFlowBatchMigrationInput,
+    type APIFlowCreateRequest as APIFlowCreateRequest,
+    type APIFlowEmailCampaign as APIFlowEmailCampaign,
+    type APIFlowListing as APIFlowListing,
+    type APIFlowPutRequest as APIFlowPutRequest,
+    type APIIncrementValue as APIIncrementValue,
+    type APIInputVariable as APIInputVariable,
+    type APIListBasedEnrollmentCriteria as APIListBasedEnrollmentCriteria,
+    type APIListBranch as APIListBranch,
+    type APIListBranchAction as APIListBranchAction,
+    type APIManualEnrollmentCriteria as APIManualEnrollmentCriteria,
+    type APIMonthlyRelativeDaysEnrollmentSchedule as APIMonthlyRelativeDaysEnrollmentSchedule,
+    type APIMonthlySpecificDaysEnrollmentSchedule as APIMonthlySpecificDaysEnrollmentSchedule,
+    type APIObjectPropertyValue as APIObjectPropertyValue,
+    type APIPlatformFlow as APIPlatformFlow,
+    type APIPlatformFlowCreateRequest as APIPlatformFlowCreateRequest,
+    type APIPlatformFlowPutRequest as APIPlatformFlowPutRequest,
+    type APIPropertyBasedEnrollmentSchedule as APIPropertyBasedEnrollmentSchedule,
+    type APIRelativeDateTimeValue as APIRelativeDateTimeValue,
+    type APISignatureWebhookAuthSettings as APISignatureWebhookAuthSettings,
+    type APISingleConnectionAction as APISingleConnectionAction,
+    type APISort as APISort,
+    type APIStaticAppendValue as APIStaticAppendValue,
+    type APIStaticBranch as APIStaticBranch,
+    type APIStaticBranchAction as APIStaticBranchAction,
+    type APIStaticDateAnchor as APIStaticDateAnchor,
+    type APIStaticPropertyFilterDataSource as APIStaticPropertyFilterDataSource,
+    type APIStaticTimeZoneStrategy as APIStaticTimeZoneStrategy,
+    type APIStaticValue as APIStaticValue,
+    type APITimeDelay as APITimeDelay,
+    type APITimeOfDay as APITimeOfDay,
+    type APITimestampValue as APITimestampValue,
+    type APITimeWindow as APITimeWindow,
+    type APIUnEnrollmentSetting as APIUnEnrollmentSetting,
+    type APIWebhookAction as APIWebhookAction,
+    type APIWeeklyEnrollmentSchedule as APIWeeklyEnrollmentSchedule,
+    type APIYearlyEnrollmentSchedule as APIYearlyEnrollmentSchedule,
+    type BatchResponseAPIFlow as BatchResponseAPIFlow,
+    type BatchResponseAPIFlowWithErrors as BatchResponseAPIFlowWithErrors,
+    type BatchResponseFlowIDWorkflowIDMappingResponse as BatchResponseFlowIDWorkflowIDMappingResponse,
+    type BatchResponseFlowIDWorkflowIDMappingResponseWithErrors as BatchResponseFlowIDWorkflowIDMappingResponseWithErrors,
+    type CollectionResponseAPIFlowEmailCampaign as CollectionResponseAPIFlowEmailCampaign,
+    type CollectionResponseAPIFlowListingForwardPaging as CollectionResponseAPIFlowListingForwardPaging,
+    type FlowIDWorkflowIDMappingResponse as FlowIDWorkflowIDMappingResponse,
+    type PublicAbsoluteComparativeTimestampRefineBy as PublicAbsoluteComparativeTimestampRefineBy,
+    type PublicAbsoluteRangedTimestampRefineBy as PublicAbsoluteRangedTimestampRefineBy,
+    type PublicAdsSearchFilter as PublicAdsSearchFilter,
+    type PublicAdsTimeFilter as PublicAdsTimeFilter,
+    type PublicAllHistoryRefineBy as PublicAllHistoryRefineBy,
+    type PublicAllPropertyTypesOperation as PublicAllPropertyTypesOperation,
+    type PublicAndFilterBranch as PublicAndFilterBranch,
+    type PublicAssociationFilterBranch as PublicAssociationFilterBranch,
+    type PublicAssociationInListFilter as PublicAssociationInListFilter,
+    type PublicBoolPropertyOperation as PublicBoolPropertyOperation,
+    type PublicCalendarDatePropertyOperation as PublicCalendarDatePropertyOperation,
+    type PublicCampaignInfluencedFilter as PublicCampaignInfluencedFilter,
+    type PublicCommunicationSubscriptionFilter as PublicCommunicationSubscriptionFilter,
+    type PublicComparativeDatePropertyOperation as PublicComparativeDatePropertyOperation,
+    type PublicComparativePropertyUpdatedOperation as PublicComparativePropertyUpdatedOperation,
+    type PublicConstantFilter as PublicConstantFilter,
+    type PublicCtaAnalyticsFilter as PublicCtaAnalyticsFilter,
+    type PublicDatePoint as PublicDatePoint,
+    type PublicDatePropertyOperation as PublicDatePropertyOperation,
+    type PublicDateTimePropertyOperation as PublicDateTimePropertyOperation,
+    type PublicEmailEventFilter as PublicEmailEventFilter,
+    type PublicEmailSubscriptionFilter as PublicEmailSubscriptionFilter,
+    type PublicEnumerationPropertyOperation as PublicEnumerationPropertyOperation,
+    type PublicEventAnalyticsFilter as PublicEventAnalyticsFilter,
+    type PublicEventFilterMetadata as PublicEventFilterMetadata,
+    type PublicFiscalQuarterReference as PublicFiscalQuarterReference,
+    type PublicFiscalYearReference as PublicFiscalYearReference,
+    type PublicFormSubmissionFilter as PublicFormSubmissionFilter,
+    type PublicFormSubmissionOnPageFilter as PublicFormSubmissionOnPageFilter,
+    type PublicIndexedTimePoint as PublicIndexedTimePoint,
+    type PublicIndexOffset as PublicIndexOffset,
+    type PublicInListFilter as PublicInListFilter,
+    type PublicInListFilterMetadata as PublicInListFilterMetadata,
+    type PublicIntegrationEventFilter as PublicIntegrationEventFilter,
+    type PublicMonthReference as PublicMonthReference,
+    type PublicMultiStringPropertyOperation as PublicMultiStringPropertyOperation,
+    type PublicNotAllFilterBranch as PublicNotAllFilterBranch,
+    type PublicNotAnyFilterBranch as PublicNotAnyFilterBranch,
+    type PublicNowReference as PublicNowReference,
+    type PublicNumAssociationsFilter as PublicNumAssociationsFilter,
+    type PublicNumberPropertyOperation as PublicNumberPropertyOperation,
+    type PublicNumOccurrencesRefineBy as PublicNumOccurrencesRefineBy,
+    type PublicOrFilterBranch as PublicOrFilterBranch,
+    type PublicPageViewAnalyticsFilter as PublicPageViewAnalyticsFilter,
+    type PublicPrivacyAnalyticsFilter as PublicPrivacyAnalyticsFilter,
+    type PublicPropertyAssociationFilterBranch as PublicPropertyAssociationFilterBranch,
+    type PublicPropertyAssociationInListFilter as PublicPropertyAssociationInListFilter,
+    type PublicPropertyFilter as PublicPropertyFilter,
+    type PublicPropertyReferencedTime as PublicPropertyReferencedTime,
+    type PublicQuarterReference as PublicQuarterReference,
+    type PublicRangedDatePropertyOperation as PublicRangedDatePropertyOperation,
+    type PublicRangedNumberPropertyOperation as PublicRangedNumberPropertyOperation,
+    type PublicRangedTimeOperation as PublicRangedTimeOperation,
+    type PublicRelativeComparativeTimestampRefineBy as PublicRelativeComparativeTimestampRefineBy,
+    type PublicRelativeRangedTimestampRefineBy as PublicRelativeRangedTimestampRefineBy,
+    type PublicRestrictedFilterBranch as PublicRestrictedFilterBranch,
+    type PublicRollingDateRangePropertyOperation as PublicRollingDateRangePropertyOperation,
+    type PublicRollingPropertyUpdatedOperation as PublicRollingPropertyUpdatedOperation,
+    type PublicSetOccurrencesRefineBy as PublicSetOccurrencesRefineBy,
+    type PublicStringPropertyOperation as PublicStringPropertyOperation,
+    type PublicSurveyMonkeyFilter as PublicSurveyMonkeyFilter,
+    type PublicSurveyMonkeyValueFilter as PublicSurveyMonkeyValueFilter,
+    type PublicTimeOffset as PublicTimeOffset,
+    type PublicTimePointOperation as PublicTimePointOperation,
+    type PublicTodayReference as PublicTodayReference,
+    type PublicUnifiedEventsFilter as PublicUnifiedEventsFilter,
+    type PublicUnifiedEventsFilterBranch as PublicUnifiedEventsFilterBranch,
+    type PublicWebinarFilter as PublicWebinarFilter,
+    type PublicWeekReference as PublicWeekReference,
+    type PublicYearReference as PublicYearReference,
   };
 
   export {
     Actions as Actions,
-    type AutomationActionsBatchInputCallbackCompletionBatchRequest as AutomationActionsBatchInputCallbackCompletionBatchRequest,
-    type AutomationActionsCallbackCompletionBatchRequest as AutomationActionsCallbackCompletionBatchRequest,
-    type AutomationActionsCallbackCompletionRequest as AutomationActionsCallbackCompletionRequest,
-    type AutomationActionsCollectionResponsePublicActionDefinitionForwardPaging as AutomationActionsCollectionResponsePublicActionDefinitionForwardPaging,
-    type AutomationActionsCollectionResponsePublicActionFunctionIdentifierNoPaging as AutomationActionsCollectionResponsePublicActionFunctionIdentifierNoPaging,
-    type AutomationActionsCollectionResponsePublicActionRevisionForwardPaging as AutomationActionsCollectionResponsePublicActionRevisionForwardPaging,
-    type AutomationActionsFieldTypeDefinition as AutomationActionsFieldTypeDefinition,
-    type AutomationActionsInputFieldDefinition as AutomationActionsInputFieldDefinition,
-    type AutomationActionsOption as AutomationActionsOption,
-    type AutomationActionsOutputFieldDefinition as AutomationActionsOutputFieldDefinition,
-    type AutomationActionsPublicActionDefinition as AutomationActionsPublicActionDefinition,
-    type AutomationActionsPublicActionDefinitionEgg as AutomationActionsPublicActionDefinitionEgg,
-    type AutomationActionsPublicActionDefinitionPatch as AutomationActionsPublicActionDefinitionPatch,
-    type AutomationActionsPublicActionFunction as AutomationActionsPublicActionFunction,
-    type AutomationActionsPublicActionFunctionIdentifier as AutomationActionsPublicActionFunctionIdentifier,
-    type AutomationActionsPublicActionLabels as AutomationActionsPublicActionLabels,
-    type AutomationActionsPublicActionRevision as AutomationActionsPublicActionRevision,
-    type AutomationActionsPublicConditionalSingleFieldDependency as AutomationActionsPublicConditionalSingleFieldDependency,
-    type AutomationActionsPublicExecutionTranslationRule as AutomationActionsPublicExecutionTranslationRule,
-    type AutomationActionsPublicObjectRequestOptions as AutomationActionsPublicObjectRequestOptions,
-    type AutomationActionsPublicSingleFieldDependency as AutomationActionsPublicSingleFieldDependency,
+    type BatchInputCallbackCompletionBatchRequest as BatchInputCallbackCompletionBatchRequest,
+    type CallbackCompletionBatchRequest as CallbackCompletionBatchRequest,
+    type CallbackCompletionRequest as CallbackCompletionRequest,
+    type CollectionResponsePublicActionDefinitionForwardPaging as CollectionResponsePublicActionDefinitionForwardPaging,
+    type CollectionResponsePublicActionFunctionIdentifierNoPaging as CollectionResponsePublicActionFunctionIdentifierNoPaging,
+    type CollectionResponsePublicActionRevisionForwardPaging as CollectionResponsePublicActionRevisionForwardPaging,
+    type FieldTypeDefinition as FieldTypeDefinition,
+    type InputFieldDefinition as InputFieldDefinition,
+    type Option as Option,
+    type OutputFieldDefinition as OutputFieldDefinition,
+    type PublicActionDefinition as PublicActionDefinition,
+    type PublicActionDefinitionEgg as PublicActionDefinitionEgg,
+    type PublicActionDefinitionPatch as PublicActionDefinitionPatch,
+    type PublicActionFunction as PublicActionFunction,
+    type PublicActionFunctionIdentifier as PublicActionFunctionIdentifier,
+    type PublicActionLabels as PublicActionLabels,
+    type PublicActionRevision as PublicActionRevision,
+    type PublicConditionalSingleFieldDependency as PublicConditionalSingleFieldDependency,
+    type PublicExecutionTranslationRule as PublicExecutionTranslationRule,
+    type PublicObjectRequestOptions as PublicObjectRequestOptions,
+    type PublicSingleFieldDependency as PublicSingleFieldDependency,
     type ActionCreateParams as ActionCreateParams,
     type ActionUpdateParams as ActionUpdateParams,
     type ActionListParams as ActionListParams,

@@ -10,22 +10,14 @@ export class Pipelines extends APIResource {
   /**
    * Create a pipeline
    */
-  create(
-    objectType: string,
-    body: PipelineCreateParams,
-    options?: RequestOptions,
-  ): APIPromise<CRMPipelinesPipeline> {
+  create(objectType: string, body: PipelineCreateParams, options?: RequestOptions): APIPromise<Pipeline> {
     return this._client.post(path`/crm/v3/pipelines/${objectType}`, { body, ...options });
   }
 
   /**
    * Update a pipeline stage
    */
-  update(
-    stageID: string,
-    params: PipelineUpdateParams,
-    options?: RequestOptions,
-  ): APIPromise<CRMPipelinesPipelineStage> {
+  update(stageID: string, params: PipelineUpdateParams, options?: RequestOptions): APIPromise<PipelineStage> {
     const { objectType, pipelineId, ...body } = params;
     return this._client.patch(path`/crm/v3/pipelines/${objectType}/${pipelineId}/stages/${stageID}`, {
       body,
@@ -36,10 +28,7 @@ export class Pipelines extends APIResource {
   /**
    * Retrieve all pipelines
    */
-  list(
-    objectType: string,
-    options?: RequestOptions,
-  ): APIPromise<CRMPipelinesCollectionResponsePipelineNoPaging> {
+  list(objectType: string, options?: RequestOptions): APIPromise<CollectionResponsePipelineNoPaging> {
     return this._client.get(path`/crm/v3/pipelines/${objectType}`, options);
   }
 
@@ -61,7 +50,7 @@ export class Pipelines extends APIResource {
     pipelineID: string,
     params: PipelineGetAuditParams,
     options?: RequestOptions,
-  ): APIPromise<CRMPipelinesCollectionResponsePublicAuditInfoNoPaging> {
+  ): APIPromise<CollectionResponsePublicAuditInfoNoPaging> {
     const { objectType } = params;
     return this._client.get(path`/crm/v3/pipelines/${objectType}/${pipelineID}/audit`, options);
   }
@@ -69,11 +58,7 @@ export class Pipelines extends APIResource {
   /**
    * Return a pipeline stage by ID
    */
-  read(
-    stageID: string,
-    params: PipelineReadParams,
-    options?: RequestOptions,
-  ): APIPromise<CRMPipelinesPipelineStage> {
+  read(stageID: string, params: PipelineReadParams, options?: RequestOptions): APIPromise<PipelineStage> {
     const { objectType, pipelineId } = params;
     return this._client.get(path`/crm/v3/pipelines/${objectType}/${pipelineId}/stages/${stageID}`, options);
   }
@@ -85,7 +70,7 @@ export class Pipelines extends APIResource {
     stageID: string,
     params: PipelineReplaceParams,
     options?: RequestOptions,
-  ): APIPromise<CRMPipelinesPipelineStage> {
+  ): APIPromise<PipelineStage> {
     const { objectType, pipelineId, ...body } = params;
     return this._client.put(path`/crm/v3/pipelines/${objectType}/${pipelineId}/stages/${stageID}`, {
       body,
@@ -94,19 +79,19 @@ export class Pipelines extends APIResource {
   }
 }
 
-export interface CRMPipelinesCollectionResponsePipelineNoPaging {
-  results: Array<CRMPipelinesPipeline>;
+export interface CollectionResponsePipelineNoPaging {
+  results: Array<Pipeline>;
 }
 
-export interface CRMPipelinesCollectionResponsePipelineStageNoPaging {
-  results: Array<CRMPipelinesPipelineStage>;
+export interface CollectionResponsePipelineStageNoPaging {
+  results: Array<PipelineStage>;
 }
 
-export interface CRMPipelinesCollectionResponsePublicAuditInfoNoPaging {
-  results: Array<CRMPipelinesPublicAuditInfo>;
+export interface CollectionResponsePublicAuditInfoNoPaging {
+  results: Array<PublicAuditInfo>;
 }
 
-export interface CRMPipelinesPipeline {
+export interface Pipeline {
   id: string;
 
   archived: boolean;
@@ -117,22 +102,22 @@ export interface CRMPipelinesPipeline {
 
   label: string;
 
-  stages: Array<CRMPipelinesPipelineStage>;
+  stages: Array<PipelineStage>;
 
   updatedAt: string;
 
   archivedAt?: string;
 }
 
-export interface CRMPipelinesPipelineInput {
+export interface PipelineInput {
   displayOrder: number;
 
   label: string;
 
-  stages: Array<CRMPipelinesPipelineStageInput>;
+  stages: Array<PipelineStageInput>;
 }
 
-export interface CRMPipelinesPipelinePatchInput {
+export interface PipelinePatchInput {
   archived?: boolean;
 
   displayOrder?: number;
@@ -140,7 +125,7 @@ export interface CRMPipelinesPipelinePatchInput {
   label?: string;
 }
 
-export interface CRMPipelinesPipelineStage {
+export interface PipelineStage {
   id: string;
 
   archived: boolean;
@@ -160,7 +145,7 @@ export interface CRMPipelinesPipelineStage {
   writePermissions?: 'CRM_PERMISSIONS_ENFORCEMENT' | 'READ_ONLY' | 'INTERNAL_ONLY';
 }
 
-export interface CRMPipelinesPipelineStageInput {
+export interface PipelineStageInput {
   displayOrder: number;
 
   label: string;
@@ -168,7 +153,7 @@ export interface CRMPipelinesPipelineStageInput {
   metadata?: { [key: string]: string };
 }
 
-export interface CRMPipelinesPipelineStagePatchInput {
+export interface PipelineStagePatchInput {
   archived?: boolean;
 
   displayOrder?: number;
@@ -178,7 +163,7 @@ export interface CRMPipelinesPipelineStagePatchInput {
   metadata?: { [key: string]: string };
 }
 
-export interface CRMPipelinesPublicAuditInfo {
+export interface PublicAuditInfo {
   action: string;
 
   identifier: string;
@@ -199,7 +184,7 @@ export interface PipelineCreateParams {
 
   label: string;
 
-  stages: Array<CRMPipelinesPipelineStageInput>;
+  stages: Array<PipelineStageInput>;
 }
 
 export interface PipelineUpdateParams {
@@ -279,16 +264,16 @@ export interface PipelineReplaceParams {
 
 export declare namespace Pipelines {
   export {
-    type CRMPipelinesCollectionResponsePipelineNoPaging as CRMPipelinesCollectionResponsePipelineNoPaging,
-    type CRMPipelinesCollectionResponsePipelineStageNoPaging as CRMPipelinesCollectionResponsePipelineStageNoPaging,
-    type CRMPipelinesCollectionResponsePublicAuditInfoNoPaging as CRMPipelinesCollectionResponsePublicAuditInfoNoPaging,
-    type CRMPipelinesPipeline as CRMPipelinesPipeline,
-    type CRMPipelinesPipelineInput as CRMPipelinesPipelineInput,
-    type CRMPipelinesPipelinePatchInput as CRMPipelinesPipelinePatchInput,
-    type CRMPipelinesPipelineStage as CRMPipelinesPipelineStage,
-    type CRMPipelinesPipelineStageInput as CRMPipelinesPipelineStageInput,
-    type CRMPipelinesPipelineStagePatchInput as CRMPipelinesPipelineStagePatchInput,
-    type CRMPipelinesPublicAuditInfo as CRMPipelinesPublicAuditInfo,
+    type CollectionResponsePipelineNoPaging as CollectionResponsePipelineNoPaging,
+    type CollectionResponsePipelineStageNoPaging as CollectionResponsePipelineStageNoPaging,
+    type CollectionResponsePublicAuditInfoNoPaging as CollectionResponsePublicAuditInfoNoPaging,
+    type Pipeline as Pipeline,
+    type PipelineInput as PipelineInput,
+    type PipelinePatchInput as PipelinePatchInput,
+    type PipelineStage as PipelineStage,
+    type PipelineStageInput as PipelineStageInput,
+    type PipelineStagePatchInput as PipelineStagePatchInput,
+    type PublicAuditInfo as PublicAuditInfo,
     type PipelineCreateParams as PipelineCreateParams,
     type PipelineUpdateParams as PipelineUpdateParams,
     type PipelineDeleteParams as PipelineDeleteParams,

@@ -6,25 +6,25 @@ import * as CRMAPI from '../crm';
 import * as EmailsAPI from '../../marketing/emails';
 import * as V4API from './v4';
 import {
-  CRMAssociationsV4AssociationSpec1,
-  CRMAssociationsV4AssociationSpecWithLabel1,
-  CRMAssociationsV4BatchInputPublicAssociationMultiArchive,
-  CRMAssociationsV4BatchInputPublicAssociationMultiPost,
-  CRMAssociationsV4BatchInputPublicDefaultAssociationMultiPost,
-  CRMAssociationsV4BatchInputPublicFetchAssociationsBatchRequest,
-  CRMAssociationsV4BatchResponseLabelsBetweenObjectPair,
-  CRMAssociationsV4BatchResponsePublicAssociationMultiWithLabel,
-  CRMAssociationsV4BatchResponseVoid,
-  CRMAssociationsV4DateTime,
-  CRMAssociationsV4NextPage1,
-  CRMAssociationsV4PreviousPage1,
-  CRMAssociationsV4PublicAssociationMultiArchive,
-  CRMAssociationsV4PublicAssociationMultiPost,
-  CRMAssociationsV4PublicAssociationMultiWithLabel,
-  CRMAssociationsV4PublicDefaultAssociationMultiPost,
-  CRMAssociationsV4PublicFetchAssociationsBatchRequest,
-  CRMAssociationsV4ReportCreationResponse,
-  CRMAssociationsV4StandardError1,
+  AssociationSpec1,
+  AssociationSpecWithLabel1,
+  BatchInputPublicAssociationMultiArchive,
+  BatchInputPublicAssociationMultiPost,
+  BatchInputPublicDefaultAssociationMultiPost,
+  BatchInputPublicFetchAssociationsBatchRequest,
+  BatchResponseLabelsBetweenObjectPair,
+  BatchResponsePublicAssociationMultiWithLabel,
+  BatchResponseVoid,
+  DateTime,
+  NextPage1,
+  PreviousPage1,
+  PublicAssociationMultiArchive,
+  PublicAssociationMultiPost,
+  PublicAssociationMultiWithLabel,
+  PublicDefaultAssociationMultiPost,
+  PublicFetchAssociationsBatchRequest,
+  ReportCreationResponse,
+  StandardError1,
   V4,
   V4ArchiveLabelsParams,
   V4CreateDefaultParams,
@@ -47,7 +47,7 @@ export class Associations extends APIResource {
     toObjectType: string,
     params: AssociationCreateParams,
     options?: RequestOptions,
-  ): APIPromise<CRMAssociationsBatchResponsePublicAssociation> {
+  ): APIPromise<BatchResponsePublicAssociation> {
     const { fromObjectType, ...body } = params;
     return this._client.post(path`/crm/v3/associations/${fromObjectType}/${toObjectType}/batch/create`, {
       body,
@@ -74,7 +74,7 @@ export class Associations extends APIResource {
     toObjectType: string,
     params: AssociationReadParams,
     options?: RequestOptions,
-  ): APIPromise<CRMAssociationsBatchResponsePublicAssociationMulti> {
+  ): APIPromise<BatchResponsePublicAssociationMulti> {
     const { fromObjectType, ...body } = params;
     return this._client.post(path`/crm/v3/associations/${fromObjectType}/${toObjectType}/batch/read`, {
       body,
@@ -83,18 +83,18 @@ export class Associations extends APIResource {
   }
 }
 
-export interface CRMAssociationsBatchInputPublicAssociation {
-  inputs: Array<CRMAssociationsPublicAssociation>;
+export interface BatchInputPublicAssociation {
+  inputs: Array<PublicAssociation>;
 }
 
-export interface CRMAssociationsBatchInputPublicObjectID {
-  inputs: Array<CRMAPI.CRMPublicObjectID>;
+export interface BatchInputPublicObjectID {
+  inputs: Array<CRMAPI.PublicObjectID>;
 }
 
-export interface CRMAssociationsBatchResponsePublicAssociation {
+export interface BatchResponsePublicAssociation {
   completedAt: string;
 
-  results: Array<CRMAssociationsPublicAssociation>;
+  results: Array<PublicAssociation>;
 
   startedAt: string;
 
@@ -109,10 +109,10 @@ export interface CRMAssociationsBatchResponsePublicAssociation {
   requestedAt?: string;
 }
 
-export interface CRMAssociationsBatchResponsePublicAssociationMulti {
+export interface BatchResponsePublicAssociationMulti {
   completedAt: string;
 
-  results: Array<CRMAssociationsPublicAssociationMulti>;
+  results: Array<PublicAssociationMulti>;
 
   startedAt: string;
 
@@ -127,20 +127,20 @@ export interface CRMAssociationsBatchResponsePublicAssociationMulti {
   requestedAt?: string;
 }
 
-export interface CRMAssociationsPublicAssociation {
-  from: CRMAPI.CRMPublicObjectID;
+export interface PublicAssociation {
+  from: CRMAPI.PublicObjectID;
 
-  to: CRMAPI.CRMPublicObjectID;
+  to: CRMAPI.PublicObjectID;
 
   type: string;
 }
 
-export interface CRMAssociationsPublicAssociationMulti {
-  from: CRMAPI.CRMPublicObjectID;
+export interface PublicAssociationMulti {
+  from: CRMAPI.PublicObjectID;
 
-  to: Array<CRMAPI.CRMAssociatedID>;
+  to: Array<CRMAPI.AssociatedID>;
 
-  paging?: EmailsAPI.MarketingEmailsPaging;
+  paging?: EmailsAPI.Paging;
 }
 
 export interface AssociationCreateParams {
@@ -152,7 +152,7 @@ export interface AssociationCreateParams {
   /**
    * Body param:
    */
-  inputs: Array<CRMAssociationsPublicAssociation>;
+  inputs: Array<PublicAssociation>;
 }
 
 export interface AssociationDeleteParams {
@@ -164,7 +164,7 @@ export interface AssociationDeleteParams {
   /**
    * Body param:
    */
-  inputs: Array<CRMAssociationsPublicAssociation>;
+  inputs: Array<PublicAssociation>;
 }
 
 export interface AssociationReadParams {
@@ -176,19 +176,19 @@ export interface AssociationReadParams {
   /**
    * Body param:
    */
-  inputs: Array<CRMAPI.CRMPublicObjectID>;
+  inputs: Array<CRMAPI.PublicObjectID>;
 }
 
 Associations.V4 = V4;
 
 export declare namespace Associations {
   export {
-    type CRMAssociationsBatchInputPublicAssociation as CRMAssociationsBatchInputPublicAssociation,
-    type CRMAssociationsBatchInputPublicObjectID as CRMAssociationsBatchInputPublicObjectID,
-    type CRMAssociationsBatchResponsePublicAssociation as CRMAssociationsBatchResponsePublicAssociation,
-    type CRMAssociationsBatchResponsePublicAssociationMulti as CRMAssociationsBatchResponsePublicAssociationMulti,
-    type CRMAssociationsPublicAssociation as CRMAssociationsPublicAssociation,
-    type CRMAssociationsPublicAssociationMulti as CRMAssociationsPublicAssociationMulti,
+    type BatchInputPublicAssociation as BatchInputPublicAssociation,
+    type BatchInputPublicObjectID as BatchInputPublicObjectID,
+    type BatchResponsePublicAssociation as BatchResponsePublicAssociation,
+    type BatchResponsePublicAssociationMulti as BatchResponsePublicAssociationMulti,
+    type PublicAssociation as PublicAssociation,
+    type PublicAssociationMulti as PublicAssociationMulti,
     type AssociationCreateParams as AssociationCreateParams,
     type AssociationDeleteParams as AssociationDeleteParams,
     type AssociationReadParams as AssociationReadParams,
@@ -196,25 +196,25 @@ export declare namespace Associations {
 
   export {
     V4 as V4,
-    type CRMAssociationsV4AssociationSpec1 as CRMAssociationsV4AssociationSpec1,
-    type CRMAssociationsV4AssociationSpecWithLabel1 as CRMAssociationsV4AssociationSpecWithLabel1,
-    type CRMAssociationsV4BatchInputPublicAssociationMultiArchive as CRMAssociationsV4BatchInputPublicAssociationMultiArchive,
-    type CRMAssociationsV4BatchInputPublicAssociationMultiPost as CRMAssociationsV4BatchInputPublicAssociationMultiPost,
-    type CRMAssociationsV4BatchInputPublicDefaultAssociationMultiPost as CRMAssociationsV4BatchInputPublicDefaultAssociationMultiPost,
-    type CRMAssociationsV4BatchInputPublicFetchAssociationsBatchRequest as CRMAssociationsV4BatchInputPublicFetchAssociationsBatchRequest,
-    type CRMAssociationsV4BatchResponseLabelsBetweenObjectPair as CRMAssociationsV4BatchResponseLabelsBetweenObjectPair,
-    type CRMAssociationsV4BatchResponsePublicAssociationMultiWithLabel as CRMAssociationsV4BatchResponsePublicAssociationMultiWithLabel,
-    type CRMAssociationsV4BatchResponseVoid as CRMAssociationsV4BatchResponseVoid,
-    type CRMAssociationsV4DateTime as CRMAssociationsV4DateTime,
-    type CRMAssociationsV4NextPage1 as CRMAssociationsV4NextPage1,
-    type CRMAssociationsV4PreviousPage1 as CRMAssociationsV4PreviousPage1,
-    type CRMAssociationsV4PublicAssociationMultiArchive as CRMAssociationsV4PublicAssociationMultiArchive,
-    type CRMAssociationsV4PublicAssociationMultiPost as CRMAssociationsV4PublicAssociationMultiPost,
-    type CRMAssociationsV4PublicAssociationMultiWithLabel as CRMAssociationsV4PublicAssociationMultiWithLabel,
-    type CRMAssociationsV4PublicDefaultAssociationMultiPost as CRMAssociationsV4PublicDefaultAssociationMultiPost,
-    type CRMAssociationsV4PublicFetchAssociationsBatchRequest as CRMAssociationsV4PublicFetchAssociationsBatchRequest,
-    type CRMAssociationsV4ReportCreationResponse as CRMAssociationsV4ReportCreationResponse,
-    type CRMAssociationsV4StandardError1 as CRMAssociationsV4StandardError1,
+    type AssociationSpec1 as AssociationSpec1,
+    type AssociationSpecWithLabel1 as AssociationSpecWithLabel1,
+    type BatchInputPublicAssociationMultiArchive as BatchInputPublicAssociationMultiArchive,
+    type BatchInputPublicAssociationMultiPost as BatchInputPublicAssociationMultiPost,
+    type BatchInputPublicDefaultAssociationMultiPost as BatchInputPublicDefaultAssociationMultiPost,
+    type BatchInputPublicFetchAssociationsBatchRequest as BatchInputPublicFetchAssociationsBatchRequest,
+    type BatchResponseLabelsBetweenObjectPair as BatchResponseLabelsBetweenObjectPair,
+    type BatchResponsePublicAssociationMultiWithLabel as BatchResponsePublicAssociationMultiWithLabel,
+    type BatchResponseVoid as BatchResponseVoid,
+    type DateTime as DateTime,
+    type NextPage1 as NextPage1,
+    type PreviousPage1 as PreviousPage1,
+    type PublicAssociationMultiArchive as PublicAssociationMultiArchive,
+    type PublicAssociationMultiPost as PublicAssociationMultiPost,
+    type PublicAssociationMultiWithLabel as PublicAssociationMultiWithLabel,
+    type PublicDefaultAssociationMultiPost as PublicDefaultAssociationMultiPost,
+    type PublicFetchAssociationsBatchRequest as PublicFetchAssociationsBatchRequest,
+    type ReportCreationResponse as ReportCreationResponse,
+    type StandardError1 as StandardError1,
     type V4CreateParams as V4CreateParams,
     type V4ListParams as V4ListParams,
     type V4DeleteParams as V4DeleteParams,

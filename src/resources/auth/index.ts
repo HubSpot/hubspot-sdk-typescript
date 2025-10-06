@@ -3,8 +3,8 @@
 export { Auth } from './auth';
 export {
   OAuth,
-  type AuthOAuthAccessTokenInfoResponse,
-  type AuthOAuthRefreshTokenInfoResponse,
-  type AuthOAuthTokenResponseIf,
+  type AccessTokenInfoResponse,
+  type RefreshTokenInfoResponse,
+  type TokenResponseIf,
   type OAuthCreateParams,
 } from './oauth';

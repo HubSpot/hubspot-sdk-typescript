@@ -5,7 +5,7 @@ import * as EmailsAPI from '../marketing/emails';
 
 export class Info extends APIResource {}
 
-export interface AccountInfoAPIUsage {
+export interface APIUsage {
   collectedAt: string;
 
   currentUsage: number;
@@ -19,13 +19,13 @@ export interface AccountInfoAPIUsage {
   resetsAt?: string;
 }
 
-export interface AccountInfoCollectionResponseAPIUsage {
-  results: Array<AccountInfoAPIUsage>;
+export interface CollectionResponseAPIUsage {
+  results: Array<APIUsage>;
 
-  paging?: EmailsAPI.MarketingEmailsPaging;
+  paging?: EmailsAPI.Paging;
 }
 
-export interface AccountInfoPortalInformationResponse {
+export interface PortalInformationResponse {
   accountType: 'STANDARD' | 'DEVELOPER_TEST' | 'SANDBOX' | 'APP_DEVELOPER';
 
   additionalCurrencies: Array<string>;
@@ -47,8 +47,8 @@ export interface AccountInfoPortalInformationResponse {
 
 export declare namespace Info {
   export {
-    type AccountInfoAPIUsage as AccountInfoAPIUsage,
-    type AccountInfoCollectionResponseAPIUsage as AccountInfoCollectionResponseAPIUsage,
-    type AccountInfoPortalInformationResponse as AccountInfoPortalInformationResponse,
+    type APIUsage as APIUsage,
+    type CollectionResponseAPIUsage as CollectionResponseAPIUsage,
+    type PortalInformationResponse as PortalInformationResponse,
   };
 }

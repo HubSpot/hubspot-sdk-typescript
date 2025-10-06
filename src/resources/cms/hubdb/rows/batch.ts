@@ -14,7 +14,7 @@ export class Batch extends APIResource {
     tableIDOrName: string,
     body: BatchReplaceParams,
     options?: RequestOptions,
-  ): APIPromise<HubdbAPI.CmsHubdbBatchResponseHubDBTableRowV3> {
+  ): APIPromise<HubdbAPI.BatchResponseHubDBTableRowV3> {
     return this._client.post(path`/cms/v3/hubdb/tables/${tableIDOrName}/rows/draft/batch/replace`, {
       body,
       ...options,
@@ -23,7 +23,7 @@ export class Batch extends APIResource {
 }
 
 export interface BatchReplaceParams {
-  inputs: Array<HubdbAPI.CmsHubdbHubDBTableRowV3BatchUpdateRequest>;
+  inputs: Array<HubdbAPI.HubDBTableRowV3BatchUpdateRequest>;
 }
 
 export declare namespace Batch {

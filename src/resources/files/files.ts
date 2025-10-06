@@ -31,19 +31,19 @@ export class Files extends APIResource {
   folders: FoldersAPI.Folders = new FoldersAPI.Folders(this._client);
 }
 
-export interface FilesCollectionResponseFile {
-  results: Array<FilesFile>;
+export interface CollectionResponseFile {
+  results: Array<File>;
 
-  paging?: EmailsAPI.MarketingEmailsPaging;
+  paging?: EmailsAPI.Paging;
 }
 
-export interface FilesCollectionResponseFolder {
-  results: Array<FilesFolder>;
+export interface CollectionResponseFolder {
+  results: Array<Folder>;
 
-  paging?: EmailsAPI.MarketingEmailsPaging;
+  paging?: EmailsAPI.Paging;
 }
 
-export interface FilesFile {
+export interface File {
   id: string;
 
   access:
@@ -95,7 +95,7 @@ export interface FilesFile {
   width?: number;
 }
 
-export interface FilesFileActionResponse {
+export interface FileActionResponse {
   completedAt: string;
 
   startedAt: string;
@@ -112,16 +112,16 @@ export interface FilesFileActionResponse {
 
   requestedAt?: string;
 
-  result?: FilesFile;
+  result?: File;
 }
 
-export interface FilesFileStat {
-  file?: FilesFile;
+export interface FileStat {
+  file?: File;
 
-  folder?: FilesFolder;
+  folder?: Folder;
 }
 
-export interface FilesFileUpdateInput {
+export interface FileUpdateInput {
   access?:
     | 'PUBLIC_INDEXABLE'
     | 'PUBLIC_NOT_INDEXABLE'
@@ -145,7 +145,7 @@ export interface FilesFileUpdateInput {
   parentFolderPath?: string;
 }
 
-export interface FilesFolder {
+export interface Folder {
   id: string;
 
   archived: boolean;
@@ -163,7 +163,7 @@ export interface FilesFolder {
   path?: string;
 }
 
-export interface FilesFolderActionResponse {
+export interface FolderActionResponse {
   completedAt: string;
 
   startedAt: string;
@@ -180,10 +180,10 @@ export interface FilesFolderActionResponse {
 
   requestedAt?: string;
 
-  result?: FilesFolder;
+  result?: Folder;
 }
 
-export interface FilesFolderInput {
+export interface FolderInput {
   name: string;
 
   parentFolderId?: string;
@@ -191,13 +191,13 @@ export interface FilesFolderInput {
   parentPath?: string;
 }
 
-export interface FilesFolderUpdateInput {
+export interface FolderUpdateInput {
   name?: string;
 
   parentFolderId?: number;
 }
 
-export interface FilesFolderUpdateInputWithID {
+export interface FolderUpdateInputWithID {
   id: string;
 
   name?: string;
@@ -205,13 +205,13 @@ export interface FilesFolderUpdateInputWithID {
   parentFolderId?: number;
 }
 
-export interface FilesFolderUpdateTaskLocator {
+export interface FolderUpdateTaskLocator {
   id: string;
 
   links: { [key: string]: string };
 }
 
-export interface FilesImportFromURLInput {
+export interface ImportFromURLInput {
   access:
     | 'PUBLIC_INDEXABLE'
     | 'PUBLIC_NOT_INDEXABLE'
@@ -241,13 +241,13 @@ export interface FilesImportFromURLInput {
   ttl?: string;
 }
 
-export interface FilesImportFromURLTaskLocator {
+export interface ImportFromURLTaskLocator {
   id: string;
 
   links: { [key: string]: string };
 }
 
-export interface FilesSignedURL {
+export interface SignedURL {
   expiresAt: string;
 
   extension: string;
@@ -270,21 +270,21 @@ Files.Folders = Folders;
 
 export declare namespace Files {
   export {
-    type FilesCollectionResponseFile as FilesCollectionResponseFile,
-    type FilesCollectionResponseFolder as FilesCollectionResponseFolder,
-    type FilesFile as FilesFile,
-    type FilesFileActionResponse as FilesFileActionResponse,
-    type FilesFileStat as FilesFileStat,
-    type FilesFileUpdateInput as FilesFileUpdateInput,
-    type FilesFolder as FilesFolder,
-    type FilesFolderActionResponse as FilesFolderActionResponse,
-    type FilesFolderInput as FilesFolderInput,
-    type FilesFolderUpdateInput as FilesFolderUpdateInput,
-    type FilesFolderUpdateInputWithID as FilesFolderUpdateInputWithID,
-    type FilesFolderUpdateTaskLocator as FilesFolderUpdateTaskLocator,
-    type FilesImportFromURLInput as FilesImportFromURLInput,
-    type FilesImportFromURLTaskLocator as FilesImportFromURLTaskLocator,
-    type FilesSignedURL as FilesSignedURL,
+    type CollectionResponseFile as CollectionResponseFile,
+    type CollectionResponseFolder as CollectionResponseFolder,
+    type File as File,
+    type FileActionResponse as FileActionResponse,
+    type FileStat as FileStat,
+    type FileUpdateInput as FileUpdateInput,
+    type Folder as Folder,
+    type FolderActionResponse as FolderActionResponse,
+    type FolderInput as FolderInput,
+    type FolderUpdateInput as FolderUpdateInput,
+    type FolderUpdateInputWithID as FolderUpdateInputWithID,
+    type FolderUpdateTaskLocator as FolderUpdateTaskLocator,
+    type ImportFromURLInput as ImportFromURLInput,
+    type ImportFromURLTaskLocator as ImportFromURLTaskLocator,
+    type SignedURL as SignedURL,
   };
 
   export {

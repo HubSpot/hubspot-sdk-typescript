@@ -11,7 +11,7 @@ export class Folders extends APIResource {
   /**
    * Create folder
    */
-  create(body: FolderCreateParams, options?: RequestOptions): APIPromise<FilesAPI.FilesFolder> {
+  create(body: FolderCreateParams, options?: RequestOptions): APIPromise<FilesAPI.Folder> {
     return this._client.post('/files/v3/folders', { body, ...options });
   }
 
@@ -42,7 +42,7 @@ export class Folders extends APIResource {
     folderID: string,
     query: FolderGetByIDParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<FilesAPI.FilesFolder> {
+  ): APIPromise<FilesAPI.Folder> {
     return this._client.get(path`/files/v3/folders/${folderID}`, { query, ...options });
   }
 
@@ -53,17 +53,14 @@ export class Folders extends APIResource {
     folderPath: string,
     query: FolderGetByPathParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<FilesAPI.FilesFolder> {
+  ): APIPromise<FilesAPI.Folder> {
     return this._client.get(path`/files/v3/folders/${folderPath}`, { query, ...options });
   }
 
   /**
    * Check folder update status
    */
-  getUpdateAsyncStatus(
-    taskID: string,
-    options?: RequestOptions,
-  ): APIPromise<FilesAPI.FilesFolderActionResponse> {
+  getUpdateAsyncStatus(taskID: string, options?: RequestOptions): APIPromise<FilesAPI.FolderActionResponse> {
     return this._client.get(path`/files/v3/folders/update/async/tasks/${taskID}/status`, options);
   }
 
@@ -73,7 +70,7 @@ export class Folders extends APIResource {
   search(
     query: FolderSearchParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<FilesAPI.FilesCollectionResponseFolder> {
+  ): APIPromise<FilesAPI.CollectionResponseFolder> {
     return this._client.get('/files/v3/folders/search', { query, ...options });
   }
 
@@ -83,7 +80,7 @@ export class Folders extends APIResource {
   updateAsync(
     body: FolderUpdateAsyncParams,
     options?: RequestOptions,
-  ): APIPromise<FilesAPI.FilesFolderUpdateTaskLocator> {
+  ): APIPromise<FilesAPI.FolderUpdateTaskLocator> {
     return this._client.post('/files/v3/folders/update/async', { body, ...options });
   }
 
@@ -94,7 +91,7 @@ export class Folders extends APIResource {
     folderID: string,
     body: FolderUpdateByIDParams,
     options?: RequestOptions,
-  ): APIPromise<FilesAPI.FilesFolder> {
+  ): APIPromise<FilesAPI.Folder> {
     return this._client.patch(path`/files/v3/folders/${folderID}`, { body, ...options });
   }
 }
