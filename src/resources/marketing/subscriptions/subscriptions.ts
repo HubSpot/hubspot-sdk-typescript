@@ -4,10 +4,10 @@ import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
 import * as V3API from './v3';
 import {
-  MarketingSubscriptionsV3PublicSubscriptionStatus,
-  MarketingSubscriptionsV3PublicSubscriptionStatusesResponse,
-  MarketingSubscriptionsV3PublicUpdateSubscriptionStatusRequest,
-  MarketingSubscriptionsV3SubscriptionDefinitionsResponse,
+  PublicSubscriptionStatus,
+  PublicSubscriptionStatusesResponse,
+  PublicUpdateSubscriptionStatusRequest,
+  SubscriptionDefinitionsResponse,
   V3,
 } from './v3';
 import { APIPromise } from '../../../core/api-promise';
@@ -20,7 +20,7 @@ export class Subscriptions extends APIResource {
   /**
    * Get subscription definitions
    */
-  list(options?: RequestOptions): APIPromise<V3API.MarketingSubscriptionsV3SubscriptionDefinitionsResponse> {
+  list(options?: RequestOptions): APIPromise<V3API.SubscriptionDefinitionsResponse> {
     return this._client.get('/communication-preferences/v3/definitions', options);
   }
 
@@ -30,7 +30,7 @@ export class Subscriptions extends APIResource {
   getEmailStatus(
     emailAddress: string,
     options?: RequestOptions,
-  ): APIPromise<V3API.MarketingSubscriptionsV3PublicSubscriptionStatusesResponse> {
+  ): APIPromise<V3API.PublicSubscriptionStatusesResponse> {
     return this._client.get(path`/communication-preferences/v3/status/email/${emailAddress}`, options);
   }
 
@@ -40,7 +40,7 @@ export class Subscriptions extends APIResource {
   subscribe(
     body: SubscriptionSubscribeParams,
     options?: RequestOptions,
-  ): APIPromise<V3API.MarketingSubscriptionsV3PublicSubscriptionStatus> {
+  ): APIPromise<V3API.PublicSubscriptionStatus> {
     return this._client.post('/communication-preferences/v3/subscribe', { body, ...options });
   }
 
@@ -50,15 +50,15 @@ export class Subscriptions extends APIResource {
   unsubscribe(
     body: SubscriptionUnsubscribeParams,
     options?: RequestOptions,
-  ): APIPromise<V3API.MarketingSubscriptionsV3PublicSubscriptionStatus> {
+  ): APIPromise<V3API.PublicSubscriptionStatus> {
     return this._client.post('/communication-preferences/v3/unsubscribe', { body, ...options });
   }
 }
 
-export interface MarketingSubscriptionsActionResponseWithResultsPublicStatus {
+export interface ActionResponseWithResultsPublicStatus {
   completedAt: string;
 
-  results: Array<MarketingSubscriptionsPublicStatus>;
+  results: Array<PublicStatus>;
 
   startedAt: string;
 
@@ -73,10 +73,10 @@ export interface MarketingSubscriptionsActionResponseWithResultsPublicStatus {
   requestedAt?: string;
 }
 
-export interface MarketingSubscriptionsActionResponseWithResultsPublicWideStatus {
+export interface ActionResponseWithResultsPublicWideStatus {
   completedAt: string;
 
-  results: Array<MarketingSubscriptionsPublicWideStatus>;
+  results: Array<PublicWideStatus>;
 
   startedAt: string;
 
@@ -91,10 +91,10 @@ export interface MarketingSubscriptionsActionResponseWithResultsPublicWideStatus
   requestedAt?: string;
 }
 
-export interface MarketingSubscriptionsActionResponseWithResultsSubscriptionDefinition {
+export interface ActionResponseWithResultsSubscriptionDefinition {
   completedAt: string;
 
-  results: Array<MarketingSubscriptionsSubscriptionDefinition>;
+  results: Array<SubscriptionDefinition>;
 
   startedAt: string;
 
@@ -109,14 +109,14 @@ export interface MarketingSubscriptionsActionResponseWithResultsSubscriptionDefi
   requestedAt?: string;
 }
 
-export interface MarketingSubscriptionsBatchInputPublicStatusRequest {
-  inputs: Array<MarketingSubscriptionsPublicStatusRequest>;
+export interface BatchInputPublicStatusRequest {
+  inputs: Array<PublicStatusRequest>;
 }
 
-export interface MarketingSubscriptionsBatchResponsePublicBulkOptOutFromAllResponse {
+export interface BatchResponsePublicBulkOptOutFromAllResponse {
   completedAt: string;
 
-  results: Array<MarketingSubscriptionsPublicBulkOptOutFromAllResponse>;
+  results: Array<PublicBulkOptOutFromAllResponse>;
 
   startedAt: string;
 
@@ -131,10 +131,10 @@ export interface MarketingSubscriptionsBatchResponsePublicBulkOptOutFromAllRespo
   requestedAt?: string;
 }
 
-export interface MarketingSubscriptionsBatchResponsePublicStatus {
+export interface BatchResponsePublicStatus {
   completedAt: string;
 
-  results: Array<MarketingSubscriptionsPublicStatus>;
+  results: Array<PublicStatus>;
 
   startedAt: string;
 
@@ -149,10 +149,10 @@ export interface MarketingSubscriptionsBatchResponsePublicStatus {
   requestedAt?: string;
 }
 
-export interface MarketingSubscriptionsBatchResponsePublicStatusBulkResponse {
+export interface BatchResponsePublicStatusBulkResponse {
   completedAt: string;
 
-  results: Array<MarketingSubscriptionsPublicStatusBulkResponse>;
+  results: Array<PublicStatusBulkResponse>;
 
   startedAt: string;
 
@@ -163,42 +163,10 @@ export interface MarketingSubscriptionsBatchResponsePublicStatusBulkResponse {
   requestedAt?: string;
 }
 
-export interface MarketingSubscriptionsBatchResponsePublicStatusBulkResponseWithErrors {
+export interface BatchResponsePublicStatusBulkResponseWithErrors {
   completedAt: string;
 
-  results: Array<MarketingSubscriptionsPublicStatusBulkResponse>;
-
-  startedAt: string;
-
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
-
-  errors?: Array<Shared.StandardError>;
-
-  links?: { [key: string]: string };
-
-  numErrors?: number;
-
-  requestedAt?: string;
-}
-
-export interface MarketingSubscriptionsBatchResponsePublicWideStatusBulkResponse {
-  completedAt: string;
-
-  results: Array<MarketingSubscriptionsPublicWideStatusBulkResponse>;
-
-  startedAt: string;
-
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
-
-  links?: { [key: string]: string };
-
-  requestedAt?: string;
-}
-
-export interface MarketingSubscriptionsBatchResponsePublicWideStatusBulkResponseWithErrors {
-  completedAt: string;
-
-  results: Array<MarketingSubscriptionsPublicWideStatusBulkResponse>;
+  results: Array<PublicStatusBulkResponse>;
 
   startedAt: string;
 
@@ -213,7 +181,39 @@ export interface MarketingSubscriptionsBatchResponsePublicWideStatusBulkResponse
   requestedAt?: string;
 }
 
-export interface MarketingSubscriptionsPartialPublicStatusRequest {
+export interface BatchResponsePublicWideStatusBulkResponse {
+  completedAt: string;
+
+  results: Array<PublicWideStatusBulkResponse>;
+
+  startedAt: string;
+
+  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+
+  links?: { [key: string]: string };
+
+  requestedAt?: string;
+}
+
+export interface BatchResponsePublicWideStatusBulkResponseWithErrors {
+  completedAt: string;
+
+  results: Array<PublicWideStatusBulkResponse>;
+
+  startedAt: string;
+
+  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+
+  errors?: Array<Shared.StandardError>;
+
+  links?: { [key: string]: string };
+
+  numErrors?: number;
+
+  requestedAt?: string;
+}
+
+export interface PartialPublicStatusRequest {
   channel: 'EMAIL';
 
   statusState: 'SUBSCRIBED' | 'UNSUBSCRIBED' | 'NOT_SPECIFIED';
@@ -232,13 +232,13 @@ export interface MarketingSubscriptionsPartialPublicStatusRequest {
   legalBasisExplanation?: string;
 }
 
-export interface MarketingSubscriptionsPublicBulkOptOutFromAllResponse {
+export interface PublicBulkOptOutFromAllResponse {
   subscriberIdString: string;
 
-  statuses?: Array<MarketingSubscriptionsPublicStatus>;
+  statuses?: Array<PublicStatus>;
 }
 
-export interface MarketingSubscriptionsPublicStatus {
+export interface PublicStatus {
   channel: 'EMAIL';
 
   source: string;
@@ -273,13 +273,13 @@ export interface MarketingSubscriptionsPublicStatus {
   subscriptionName?: string;
 }
 
-export interface MarketingSubscriptionsPublicStatusBulkResponse {
-  statuses: Array<MarketingSubscriptionsPublicStatus>;
+export interface PublicStatusBulkResponse {
+  statuses: Array<PublicStatus>;
 
   subscriberIdString: string;
 }
 
-export interface MarketingSubscriptionsPublicStatusRequest {
+export interface PublicStatusRequest {
   channel: 'EMAIL';
 
   statusState: 'SUBSCRIBED' | 'UNSUBSCRIBED' | 'NOT_SPECIFIED';
@@ -300,7 +300,7 @@ export interface MarketingSubscriptionsPublicStatusRequest {
   legalBasisExplanation?: string;
 }
 
-export interface MarketingSubscriptionsPublicSubscriptionTranslation {
+export interface PublicSubscriptionTranslation {
   createdAt: number;
 
   languageCode: string;
@@ -312,7 +312,7 @@ export interface MarketingSubscriptionsPublicSubscriptionTranslation {
   updatedAt: number;
 }
 
-export interface MarketingSubscriptionsPublicWideStatus {
+export interface PublicWideStatus {
   channel: 'EMAIL';
 
   status: 'SUBSCRIBED' | 'UNSUBSCRIBED' | 'NOT_SPECIFIED';
@@ -326,13 +326,13 @@ export interface MarketingSubscriptionsPublicWideStatus {
   businessUnitId?: number;
 }
 
-export interface MarketingSubscriptionsPublicWideStatusBulkResponse {
+export interface PublicWideStatusBulkResponse {
   subscriberIdString: string;
 
-  wideStatuses: Array<MarketingSubscriptionsPublicWideStatus>;
+  wideStatuses: Array<PublicWideStatus>;
 }
 
-export interface MarketingSubscriptionsSubscriptionDefinition {
+export interface SubscriptionDefinition {
   id: string;
 
   createdAt: string;
@@ -353,7 +353,7 @@ export interface MarketingSubscriptionsSubscriptionDefinition {
 
   purpose?: string;
 
-  subscriptionTranslations?: Array<MarketingSubscriptionsPublicSubscriptionTranslation>;
+  subscriptionTranslations?: Array<PublicSubscriptionTranslation>;
 }
 
 export interface SubscriptionSubscribeParams {
@@ -394,34 +394,34 @@ Subscriptions.V3 = V3;
 
 export declare namespace Subscriptions {
   export {
-    type MarketingSubscriptionsActionResponseWithResultsPublicStatus as MarketingSubscriptionsActionResponseWithResultsPublicStatus,
-    type MarketingSubscriptionsActionResponseWithResultsPublicWideStatus as MarketingSubscriptionsActionResponseWithResultsPublicWideStatus,
-    type MarketingSubscriptionsActionResponseWithResultsSubscriptionDefinition as MarketingSubscriptionsActionResponseWithResultsSubscriptionDefinition,
-    type MarketingSubscriptionsBatchInputPublicStatusRequest as MarketingSubscriptionsBatchInputPublicStatusRequest,
-    type MarketingSubscriptionsBatchResponsePublicBulkOptOutFromAllResponse as MarketingSubscriptionsBatchResponsePublicBulkOptOutFromAllResponse,
-    type MarketingSubscriptionsBatchResponsePublicStatus as MarketingSubscriptionsBatchResponsePublicStatus,
-    type MarketingSubscriptionsBatchResponsePublicStatusBulkResponse as MarketingSubscriptionsBatchResponsePublicStatusBulkResponse,
-    type MarketingSubscriptionsBatchResponsePublicStatusBulkResponseWithErrors as MarketingSubscriptionsBatchResponsePublicStatusBulkResponseWithErrors,
-    type MarketingSubscriptionsBatchResponsePublicWideStatusBulkResponse as MarketingSubscriptionsBatchResponsePublicWideStatusBulkResponse,
-    type MarketingSubscriptionsBatchResponsePublicWideStatusBulkResponseWithErrors as MarketingSubscriptionsBatchResponsePublicWideStatusBulkResponseWithErrors,
-    type MarketingSubscriptionsPartialPublicStatusRequest as MarketingSubscriptionsPartialPublicStatusRequest,
-    type MarketingSubscriptionsPublicBulkOptOutFromAllResponse as MarketingSubscriptionsPublicBulkOptOutFromAllResponse,
-    type MarketingSubscriptionsPublicStatus as MarketingSubscriptionsPublicStatus,
-    type MarketingSubscriptionsPublicStatusBulkResponse as MarketingSubscriptionsPublicStatusBulkResponse,
-    type MarketingSubscriptionsPublicStatusRequest as MarketingSubscriptionsPublicStatusRequest,
-    type MarketingSubscriptionsPublicSubscriptionTranslation as MarketingSubscriptionsPublicSubscriptionTranslation,
-    type MarketingSubscriptionsPublicWideStatus as MarketingSubscriptionsPublicWideStatus,
-    type MarketingSubscriptionsPublicWideStatusBulkResponse as MarketingSubscriptionsPublicWideStatusBulkResponse,
-    type MarketingSubscriptionsSubscriptionDefinition as MarketingSubscriptionsSubscriptionDefinition,
+    type ActionResponseWithResultsPublicStatus as ActionResponseWithResultsPublicStatus,
+    type ActionResponseWithResultsPublicWideStatus as ActionResponseWithResultsPublicWideStatus,
+    type ActionResponseWithResultsSubscriptionDefinition as ActionResponseWithResultsSubscriptionDefinition,
+    type BatchInputPublicStatusRequest as BatchInputPublicStatusRequest,
+    type BatchResponsePublicBulkOptOutFromAllResponse as BatchResponsePublicBulkOptOutFromAllResponse,
+    type BatchResponsePublicStatus as BatchResponsePublicStatus,
+    type BatchResponsePublicStatusBulkResponse as BatchResponsePublicStatusBulkResponse,
+    type BatchResponsePublicStatusBulkResponseWithErrors as BatchResponsePublicStatusBulkResponseWithErrors,
+    type BatchResponsePublicWideStatusBulkResponse as BatchResponsePublicWideStatusBulkResponse,
+    type BatchResponsePublicWideStatusBulkResponseWithErrors as BatchResponsePublicWideStatusBulkResponseWithErrors,
+    type PartialPublicStatusRequest as PartialPublicStatusRequest,
+    type PublicBulkOptOutFromAllResponse as PublicBulkOptOutFromAllResponse,
+    type PublicStatus as PublicStatus,
+    type PublicStatusBulkResponse as PublicStatusBulkResponse,
+    type PublicStatusRequest as PublicStatusRequest,
+    type PublicSubscriptionTranslation as PublicSubscriptionTranslation,
+    type PublicWideStatus as PublicWideStatus,
+    type PublicWideStatusBulkResponse as PublicWideStatusBulkResponse,
+    type SubscriptionDefinition as SubscriptionDefinition,
     type SubscriptionSubscribeParams as SubscriptionSubscribeParams,
     type SubscriptionUnsubscribeParams as SubscriptionUnsubscribeParams,
   };
 
   export {
     V3 as V3,
-    type MarketingSubscriptionsV3PublicSubscriptionStatus as MarketingSubscriptionsV3PublicSubscriptionStatus,
-    type MarketingSubscriptionsV3PublicSubscriptionStatusesResponse as MarketingSubscriptionsV3PublicSubscriptionStatusesResponse,
-    type MarketingSubscriptionsV3PublicUpdateSubscriptionStatusRequest as MarketingSubscriptionsV3PublicUpdateSubscriptionStatusRequest,
-    type MarketingSubscriptionsV3SubscriptionDefinitionsResponse as MarketingSubscriptionsV3SubscriptionDefinitionsResponse,
+    type PublicSubscriptionStatus as PublicSubscriptionStatus,
+    type PublicSubscriptionStatusesResponse as PublicSubscriptionStatusesResponse,
+    type PublicUpdateSubscriptionStatusRequest as PublicUpdateSubscriptionStatusRequest,
+    type SubscriptionDefinitionsResponse as SubscriptionDefinitionsResponse,
   };
 }

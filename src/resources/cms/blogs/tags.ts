@@ -11,14 +11,14 @@ export class Tags extends APIResource {
   /**
    * Create a new Blog Tag
    */
-  create(body: TagCreateParams, options?: RequestOptions): APIPromise<CmsBlogsTagsTag> {
+  create(body: TagCreateParams, options?: RequestOptions): APIPromise<Tag> {
     return this._client.post('/cms/v3/blogs/tags', { body, ...options });
   }
 
   /**
    * Update a Blog Tag
    */
-  update(objectID: string, params: TagUpdateParams, options?: RequestOptions): APIPromise<CmsBlogsTagsTag> {
+  update(objectID: string, params: TagUpdateParams, options?: RequestOptions): APIPromise<Tag> {
     const { archived, ...body } = params;
     return this._client.patch(path`/cms/v3/blogs/tags/${objectID}`, {
       query: { archived },
@@ -33,7 +33,7 @@ export class Tags extends APIResource {
   list(
     query: TagListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CmsBlogsTagsCollectionResponseWithTotalTagForwardPaging> {
+  ): APIPromise<CollectionResponseWithTotalTagForwardPaging> {
     return this._client.get('/cms/v3/blogs/tags', { query, ...options });
   }
 
@@ -78,20 +78,14 @@ export class Tags extends APIResource {
   /**
    * Create a batch of Blog Tags
    */
-  createBatch(
-    body: TagCreateBatchParams,
-    options?: RequestOptions,
-  ): APIPromise<CmsBlogsTagsBatchResponseTag> {
+  createBatch(body: TagCreateBatchParams, options?: RequestOptions): APIPromise<BatchResponseTag> {
     return this._client.post('/cms/v3/blogs/tags/batch/create', { body, ...options });
   }
 
   /**
    * Create a new language variation
    */
-  createLangVariation(
-    body: TagCreateLangVariationParams,
-    options?: RequestOptions,
-  ): APIPromise<CmsBlogsTagsTag> {
+  createLangVariation(body: TagCreateLangVariationParams, options?: RequestOptions): APIPromise<Tag> {
     return this._client.post('/cms/v3/blogs/tags/multi-language/create-language-variation', {
       body,
       ...options,
@@ -116,14 +110,14 @@ export class Tags extends APIResource {
     objectID: string,
     query: TagReadParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CmsBlogsTagsTag> {
+  ): APIPromise<Tag> {
     return this._client.get(path`/cms/v3/blogs/tags/${objectID}`, { query, ...options });
   }
 
   /**
    * Retrieve a batch of Blog Tags
    */
-  readBatch(params: TagReadBatchParams, options?: RequestOptions): APIPromise<CmsBlogsTagsBatchResponseTag> {
+  readBatch(params: TagReadBatchParams, options?: RequestOptions): APIPromise<BatchResponseTag> {
     const { archived, ...body } = params;
     return this._client.post('/cms/v3/blogs/tags/batch/read', { query: { archived }, body, ...options });
   }
@@ -142,10 +136,7 @@ export class Tags extends APIResource {
   /**
    * Update a batch of Blog Tags
    */
-  updateBatch(
-    params: TagUpdateBatchParams,
-    options?: RequestOptions,
-  ): APIPromise<CmsBlogsTagsBatchResponseTag> {
+  updateBatch(params: TagUpdateBatchParams, options?: RequestOptions): APIPromise<BatchResponseTag> {
     const { archived, ...body } = params;
     return this._client.post('/cms/v3/blogs/tags/batch/update', { query: { archived }, body, ...options });
   }
@@ -162,7 +153,7 @@ export class Tags extends APIResource {
   }
 }
 
-export interface CmsBlogsTagsAttachToLangPrimaryRequestVNext {
+export interface AttachToLangPrimaryRequestVNext {
   id: string;
 
   language: string;
@@ -172,18 +163,18 @@ export interface CmsBlogsTagsAttachToLangPrimaryRequestVNext {
   primaryLanguage?: string;
 }
 
-export interface CmsBlogsTagsBatchInputJsonNode {
+export interface BatchInputJsonNode {
   inputs: Array<unknown>;
 }
 
-export interface CmsBlogsTagsBatchInputTag {
-  inputs: Array<CmsBlogsTagsTag>;
+export interface BatchInputTag {
+  inputs: Array<Tag>;
 }
 
-export interface CmsBlogsTagsBatchResponseTag {
+export interface BatchResponseTag {
   completedAt: string;
 
-  results: Array<CmsBlogsTagsTag>;
+  results: Array<Tag>;
 
   startedAt: string;
 
@@ -194,10 +185,10 @@ export interface CmsBlogsTagsBatchResponseTag {
   requestedAt?: string;
 }
 
-export interface CmsBlogsTagsBatchResponseTagWithErrors {
+export interface BatchResponseTagWithErrors {
   completedAt: string;
 
-  results: Array<CmsBlogsTagsTag>;
+  results: Array<Tag>;
 
   startedAt: string;
 
@@ -212,23 +203,23 @@ export interface CmsBlogsTagsBatchResponseTagWithErrors {
   requestedAt?: string;
 }
 
-export interface CmsBlogsTagsCollectionResponseWithTotalTagForwardPaging {
-  results: Array<CmsBlogsTagsTag>;
+export interface CollectionResponseWithTotalTagForwardPaging {
+  results: Array<Tag>;
 
   total: number;
 
   paging?: Shared.ForwardPaging;
 }
 
-export interface CmsBlogsTagsDetachFromLangGroupRequestVNext {
+export interface DetachFromLangGroupRequestVNext {
   id: string;
 }
 
-export interface CmsBlogsTagsSetNewLanguagePrimaryRequestVNext {
+export interface SetNewLanguagePrimaryRequestVNext {
   id: string;
 }
 
-export interface CmsBlogsTagsTag {
+export interface Tag {
   id: string;
 
   created: string;
@@ -998,7 +989,7 @@ export interface CmsBlogsTagsTag {
   updated: string;
 }
 
-export interface CmsBlogsTagsTagCloneRequestVNext {
+export interface TagCloneRequestVNext {
   id: string;
 
   name: string;
@@ -1008,7 +999,7 @@ export interface CmsBlogsTagsTagCloneRequestVNext {
   primaryLanguage?: string;
 }
 
-export interface CmsBlogsTagsUpdateLanguagesRequestVNext {
+export interface UpdateLanguagesRequestVNext {
   languages: { [key: string]: string };
 
   primaryId: string;
@@ -2623,7 +2614,7 @@ export interface TagAttachToLangGroupParams {
 }
 
 export interface TagCreateBatchParams {
-  inputs: Array<CmsBlogsTagsTag>;
+  inputs: Array<Tag>;
 }
 
 export interface TagCreateLangVariationParams {
@@ -2682,17 +2673,17 @@ export interface TagUpdateLangsParams {
 
 export declare namespace Tags {
   export {
-    type CmsBlogsTagsAttachToLangPrimaryRequestVNext as CmsBlogsTagsAttachToLangPrimaryRequestVNext,
-    type CmsBlogsTagsBatchInputJsonNode as CmsBlogsTagsBatchInputJsonNode,
-    type CmsBlogsTagsBatchInputTag as CmsBlogsTagsBatchInputTag,
-    type CmsBlogsTagsBatchResponseTag as CmsBlogsTagsBatchResponseTag,
-    type CmsBlogsTagsBatchResponseTagWithErrors as CmsBlogsTagsBatchResponseTagWithErrors,
-    type CmsBlogsTagsCollectionResponseWithTotalTagForwardPaging as CmsBlogsTagsCollectionResponseWithTotalTagForwardPaging,
-    type CmsBlogsTagsDetachFromLangGroupRequestVNext as CmsBlogsTagsDetachFromLangGroupRequestVNext,
-    type CmsBlogsTagsSetNewLanguagePrimaryRequestVNext as CmsBlogsTagsSetNewLanguagePrimaryRequestVNext,
-    type CmsBlogsTagsTag as CmsBlogsTagsTag,
-    type CmsBlogsTagsTagCloneRequestVNext as CmsBlogsTagsTagCloneRequestVNext,
-    type CmsBlogsTagsUpdateLanguagesRequestVNext as CmsBlogsTagsUpdateLanguagesRequestVNext,
+    type AttachToLangPrimaryRequestVNext as AttachToLangPrimaryRequestVNext,
+    type BatchInputJsonNode as BatchInputJsonNode,
+    type BatchInputTag as BatchInputTag,
+    type BatchResponseTag as BatchResponseTag,
+    type BatchResponseTagWithErrors as BatchResponseTagWithErrors,
+    type CollectionResponseWithTotalTagForwardPaging as CollectionResponseWithTotalTagForwardPaging,
+    type DetachFromLangGroupRequestVNext as DetachFromLangGroupRequestVNext,
+    type SetNewLanguagePrimaryRequestVNext as SetNewLanguagePrimaryRequestVNext,
+    type Tag as Tag,
+    type TagCloneRequestVNext as TagCloneRequestVNext,
+    type UpdateLanguagesRequestVNext as UpdateLanguagesRequestVNext,
     type TagCreateParams as TagCreateParams,
     type TagUpdateParams as TagUpdateParams,
     type TagListParams as TagListParams,

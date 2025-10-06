@@ -13,27 +13,27 @@ export class Domains extends APIResource {
   list(
     query: DomainListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CmsDomainsCollectionResponseWithTotalDomainForwardPaging> {
+  ): APIPromise<CollectionResponseWithTotalDomainForwardPaging> {
     return this._client.get('/cms/v3/domains/', { query, ...options });
   }
 
   /**
    * Get a single domain
    */
-  read(domainID: string, options?: RequestOptions): APIPromise<CmsDomainsDomain> {
+  read(domainID: string, options?: RequestOptions): APIPromise<Domain> {
     return this._client.get(path`/cms/v3/domains/${domainID}`, options);
   }
 }
 
-export interface CmsDomainsCollectionResponseWithTotalDomainForwardPaging {
-  results: Array<CmsDomainsDomain>;
+export interface CollectionResponseWithTotalDomainForwardPaging {
+  results: Array<Domain>;
 
   total: number;
 
   paging?: Shared.ForwardPaging;
 }
 
-export interface CmsDomainsDomain {
+export interface Domain {
   id: string;
 
   domain: string;
@@ -99,8 +99,8 @@ export interface DomainListParams {
 
 export declare namespace Domains {
   export {
-    type CmsDomainsCollectionResponseWithTotalDomainForwardPaging as CmsDomainsCollectionResponseWithTotalDomainForwardPaging,
-    type CmsDomainsDomain as CmsDomainsDomain,
+    type CollectionResponseWithTotalDomainForwardPaging as CollectionResponseWithTotalDomainForwardPaging,
+    type Domain as Domain,
     type DomainListParams as DomainListParams,
   };
 }

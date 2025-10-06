@@ -5,7 +5,7 @@ import * as SubscriptionsAPI from './subscriptions';
 
 export class V3 extends APIResource {}
 
-export interface MarketingSubscriptionsV3PublicSubscriptionStatus {
+export interface PublicSubscriptionStatus {
   id: string;
 
   name: string;
@@ -30,13 +30,13 @@ export interface MarketingSubscriptionsV3PublicSubscriptionStatus {
   preferenceGroupName?: string;
 }
 
-export interface MarketingSubscriptionsV3PublicSubscriptionStatusesResponse {
+export interface PublicSubscriptionStatusesResponse {
   recipient: string;
 
-  subscriptionStatuses: Array<MarketingSubscriptionsV3PublicSubscriptionStatus>;
+  subscriptionStatuses: Array<PublicSubscriptionStatus>;
 }
 
-export interface MarketingSubscriptionsV3PublicUpdateSubscriptionStatusRequest {
+export interface PublicUpdateSubscriptionStatusRequest {
   emailAddress: string;
 
   subscriptionId: string;
@@ -53,15 +53,15 @@ export interface MarketingSubscriptionsV3PublicUpdateSubscriptionStatusRequest {
   legalBasisExplanation?: string;
 }
 
-export interface MarketingSubscriptionsV3SubscriptionDefinitionsResponse {
-  subscriptionDefinitions: Array<SubscriptionsAPI.MarketingSubscriptionsSubscriptionDefinition>;
+export interface SubscriptionDefinitionsResponse {
+  subscriptionDefinitions: Array<SubscriptionsAPI.SubscriptionDefinition>;
 }
 
 export declare namespace V3 {
   export {
-    type MarketingSubscriptionsV3PublicSubscriptionStatus as MarketingSubscriptionsV3PublicSubscriptionStatus,
-    type MarketingSubscriptionsV3PublicSubscriptionStatusesResponse as MarketingSubscriptionsV3PublicSubscriptionStatusesResponse,
-    type MarketingSubscriptionsV3PublicUpdateSubscriptionStatusRequest as MarketingSubscriptionsV3PublicUpdateSubscriptionStatusRequest,
-    type MarketingSubscriptionsV3SubscriptionDefinitionsResponse as MarketingSubscriptionsV3SubscriptionDefinitionsResponse,
+    type PublicSubscriptionStatus as PublicSubscriptionStatus,
+    type PublicSubscriptionStatusesResponse as PublicSubscriptionStatusesResponse,
+    type PublicUpdateSubscriptionStatusRequest as PublicUpdateSubscriptionStatusRequest,
+    type SubscriptionDefinitionsResponse as SubscriptionDefinitionsResponse,
   };
 }

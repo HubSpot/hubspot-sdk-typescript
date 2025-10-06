@@ -28,7 +28,7 @@ export class Forms extends APIResource {
   list(
     query: FormListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<MarketingFormsCollectionResponseFormDefinitionBaseForwardPaging> {
+  ): APIPromise<CollectionResponseFormDefinitionBaseForwardPaging> {
     return this._client.get('/marketing/v3/forms/', { query, ...options });
   }
 
@@ -61,14 +61,14 @@ export class Forms extends APIResource {
   }
 }
 
-export interface MarketingFormsCollectionResponseFormDefinitionBaseForwardPaging {
-  results: Array<MarketingFormsHubSpotFormDefinition>;
+export interface CollectionResponseFormDefinitionBaseForwardPaging {
+  results: Array<HubSpotFormDefinition>;
 
   paging?: Shared.ForwardPaging;
 }
 
-export interface MarketingFormsDatepickerField {
-  dependentFields: Array<MarketingFormsDependentField>;
+export interface DatepickerField {
+  dependentFields: Array<DependentField>;
 
   fieldType: 'datepicker';
 
@@ -87,26 +87,26 @@ export interface MarketingFormsDatepickerField {
   placeholder?: string;
 }
 
-export interface MarketingFormsDependentField {
-  dependentCondition: MarketingFormsDependentFieldFilter;
+export interface DependentField {
+  dependentCondition: DependentFieldFilter;
 
   dependentField:
-    | MarketingFormsEmailField
-    | MarketingFormsPhoneField
-    | MarketingFormsMobilePhoneField
-    | MarketingFormsSingleLineTextField
-    | MarketingFormsMultiLineTextField
-    | MarketingFormsNumberField
-    | MarketingFormsSingleCheckboxField
-    | MarketingFormsMultipleCheckboxesField
-    | MarketingFormsDropdownField
-    | MarketingFormsRadioField
-    | MarketingFormsDatepickerField
-    | MarketingFormsFileField
-    | MarketingFormsPaymentLinkRadioField;
+    | EmailField
+    | PhoneField
+    | MobilePhoneField
+    | SingleLineTextField
+    | MultiLineTextField
+    | NumberField
+    | SingleCheckboxField
+    | MultipleCheckboxesField
+    | DropdownField
+    | RadioField
+    | DatepickerField
+    | FileField
+    | PaymentLinkRadioField;
 }
 
-export interface MarketingFormsDependentFieldFilter {
+export interface DependentFieldFilter {
   operator:
     | 'eq'
     | 'neq'
@@ -139,10 +139,10 @@ export interface MarketingFormsDependentFieldFilter {
   values: Array<string>;
 }
 
-export interface MarketingFormsDropdownField {
+export interface DropdownField {
   defaultValues: Array<string>;
 
-  dependentFields: Array<MarketingFormsDependentField>;
+  dependentFields: Array<DependentField>;
 
   fieldType: 'dropdown';
 
@@ -154,15 +154,15 @@ export interface MarketingFormsDropdownField {
 
   objectTypeId: string;
 
-  options: Array<MarketingFormsEnumeratedFieldOption>;
+  options: Array<EnumeratedFieldOption>;
 
   required: boolean;
 
   placeholder?: string;
 }
 
-export interface MarketingFormsEmailField {
-  dependentFields: Array<MarketingFormsDependentField>;
+export interface EmailField {
+  dependentFields: Array<DependentField>;
 
   fieldType: 'email';
 
@@ -176,20 +176,20 @@ export interface MarketingFormsEmailField {
 
   required: boolean;
 
-  validation: MarketingFormsEmailFieldValidation;
+  validation: EmailFieldValidation;
 
   defaultValue?: string;
 
   placeholder?: string;
 }
 
-export interface MarketingFormsEmailFieldValidation {
+export interface EmailFieldValidation {
   blockedEmailDomains: Array<string>;
 
   useDefaultBlockList: boolean;
 }
 
-export interface MarketingFormsEnumeratedFieldOption {
+export interface EnumeratedFieldOption {
   displayOrder: number;
 
   label: string;
@@ -197,21 +197,21 @@ export interface MarketingFormsEnumeratedFieldOption {
   value: string;
 }
 
-export interface MarketingFormsFieldGroup {
+export interface FieldGroup {
   fields: Array<
-    | MarketingFormsEmailField
-    | MarketingFormsPhoneField
-    | MarketingFormsMobilePhoneField
-    | MarketingFormsSingleLineTextField
-    | MarketingFormsMultiLineTextField
-    | MarketingFormsNumberField
-    | MarketingFormsSingleCheckboxField
-    | MarketingFormsMultipleCheckboxesField
-    | MarketingFormsDropdownField
-    | MarketingFormsRadioField
-    | MarketingFormsDatepickerField
-    | MarketingFormsFileField
-    | MarketingFormsPaymentLinkRadioField
+    | EmailField
+    | PhoneField
+    | MobilePhoneField
+    | SingleLineTextField
+    | MultiLineTextField
+    | NumberField
+    | SingleCheckboxField
+    | MultipleCheckboxesField
+    | DropdownField
+    | RadioField
+    | DatepickerField
+    | FileField
+    | PaymentLinkRadioField
   >;
 
   groupType: 'default_group' | 'progressive' | 'queued';
@@ -221,10 +221,10 @@ export interface MarketingFormsFieldGroup {
   richText?: string;
 }
 
-export interface MarketingFormsFileField {
+export interface FileField {
   allowMultipleFiles: boolean;
 
-  dependentFields: Array<MarketingFormsDependentField>;
+  dependentFields: Array<DependentField>;
 
   fieldType: 'file';
 
@@ -243,14 +243,14 @@ export interface MarketingFormsFileField {
   placeholder?: string;
 }
 
-export type MarketingFormsFormDefinitionBase = unknown;
+export type FormDefinitionBase = unknown;
 
-export type MarketingFormsFormDefinitionCreateRequestBase = unknown;
+export type FormDefinitionCreateRequestBase = unknown;
 
-export interface MarketingFormsFormDisplayOptions {
+export interface FormDisplayOptions {
   renderRawHtml: boolean;
 
-  style: MarketingFormsFormStyle;
+  style: FormStyle;
 
   submitButtonText: string;
 
@@ -259,13 +259,13 @@ export interface MarketingFormsFormDisplayOptions {
   cssClass?: string;
 }
 
-export interface MarketingFormsFormPostSubmitAction {
+export interface FormPostSubmitAction {
   type: 'thank_you' | 'redirect_url';
 
   value: string;
 }
 
-export interface MarketingFormsFormStyle {
+export interface FormStyle {
   backgroundWidth: string;
 
   fontFamily: string;
@@ -291,7 +291,7 @@ export interface MarketingFormsFormStyle {
   submitSize: string;
 }
 
-export interface MarketingFormsHubSpotFormConfiguration {
+export interface HubSpotFormConfiguration {
   allowLinkToResetKnownValues: boolean;
 
   archivable: boolean;
@@ -350,35 +350,35 @@ export interface MarketingFormsHubSpotFormConfiguration {
 
   notifyRecipients: Array<string>;
 
-  postSubmitAction: MarketingFormsFormPostSubmitAction;
+  postSubmitAction: FormPostSubmitAction;
 
   prePopulateKnownValues: boolean;
 
   recaptchaEnabled: boolean;
 
-  lifecycleStages?: Array<MarketingFormsLifecycleStage>;
+  lifecycleStages?: Array<LifecycleStage>;
 }
 
-export interface MarketingFormsHubSpotFormDefinition {
+export interface HubSpotFormDefinition {
   id: string;
 
   archived: boolean;
 
-  configuration: MarketingFormsHubSpotFormConfiguration;
+  configuration: HubSpotFormConfiguration;
 
   createdAt: string;
 
-  displayOptions: MarketingFormsFormDisplayOptions;
+  displayOptions: FormDisplayOptions;
 
-  fieldGroups: Array<MarketingFormsFieldGroup>;
+  fieldGroups: Array<FieldGroup>;
 
   formType: 'hubspot';
 
   legalConsentOptions:
-    | MarketingFormsLegalConsentOptionsNone
-    | MarketingFormsLegalConsentOptionsLegitimateInterest
-    | MarketingFormsLegalConsentOptionsExplicitConsentToProcess
-    | MarketingFormsLegalConsentOptionsImplicitConsentToProcess;
+    | LegalConsentOptionsNone
+    | LegalConsentOptionsLegitimateInterest
+    | LegalConsentOptionsExplicitConsentToProcess
+    | LegalConsentOptionsImplicitConsentToProcess;
 
   name: string;
 
@@ -387,24 +387,24 @@ export interface MarketingFormsHubSpotFormDefinition {
   archivedAt?: string;
 }
 
-export interface MarketingFormsHubSpotFormDefinitionCreateRequest {
+export interface HubSpotFormDefinitionCreateRequest {
   archived: boolean;
 
-  configuration: MarketingFormsHubSpotFormConfiguration;
+  configuration: HubSpotFormConfiguration;
 
   createdAt: string;
 
-  displayOptions: MarketingFormsFormDisplayOptions;
+  displayOptions: FormDisplayOptions;
 
-  fieldGroups: Array<MarketingFormsFieldGroup>;
+  fieldGroups: Array<FieldGroup>;
 
   formType: 'hubspot';
 
   legalConsentOptions:
-    | MarketingFormsLegalConsentOptionsNone
-    | MarketingFormsLegalConsentOptionsLegitimateInterest
-    | MarketingFormsLegalConsentOptionsExplicitConsentToProcess
-    | MarketingFormsLegalConsentOptionsImplicitConsentToProcess;
+    | LegalConsentOptionsNone
+    | LegalConsentOptionsLegitimateInterest
+    | LegalConsentOptionsExplicitConsentToProcess
+    | LegalConsentOptionsImplicitConsentToProcess;
 
   name: string;
 
@@ -413,25 +413,25 @@ export interface MarketingFormsHubSpotFormDefinitionCreateRequest {
   archivedAt?: string;
 }
 
-export interface MarketingFormsHubSpotFormDefinitionPatchRequest {
+export interface HubSpotFormDefinitionPatchRequest {
   archived?: boolean;
 
-  configuration?: MarketingFormsHubSpotFormConfiguration;
+  configuration?: HubSpotFormConfiguration;
 
-  displayOptions?: MarketingFormsFormDisplayOptions;
+  displayOptions?: FormDisplayOptions;
 
-  fieldGroups?: Array<MarketingFormsFieldGroup>;
+  fieldGroups?: Array<FieldGroup>;
 
   legalConsentOptions?:
-    | MarketingFormsLegalConsentOptionsNone
-    | MarketingFormsLegalConsentOptionsLegitimateInterest
-    | MarketingFormsLegalConsentOptionsExplicitConsentToProcess
-    | MarketingFormsLegalConsentOptionsImplicitConsentToProcess;
+    | LegalConsentOptionsNone
+    | LegalConsentOptionsLegitimateInterest
+    | LegalConsentOptionsExplicitConsentToProcess
+    | LegalConsentOptionsImplicitConsentToProcess;
 
   name?: string;
 }
 
-export interface MarketingFormsLegalConsentCheckbox {
+export interface LegalConsentCheckbox {
   label: string;
 
   required: boolean;
@@ -439,8 +439,8 @@ export interface MarketingFormsLegalConsentCheckbox {
   subscriptionTypeId: number;
 }
 
-export interface MarketingFormsLegalConsentOptionsExplicitConsentToProcess {
-  communicationsCheckboxes: Array<MarketingFormsLegalConsentCheckbox>;
+export interface LegalConsentOptionsExplicitConsentToProcess {
+  communicationsCheckboxes: Array<LegalConsentCheckbox>;
 
   privacyText: string;
 
@@ -455,8 +455,8 @@ export interface MarketingFormsLegalConsentOptionsExplicitConsentToProcess {
   consentToProcessText?: string;
 }
 
-export interface MarketingFormsLegalConsentOptionsImplicitConsentToProcess {
-  communicationsCheckboxes: Array<MarketingFormsLegalConsentCheckbox>;
+export interface LegalConsentOptionsImplicitConsentToProcess {
+  communicationsCheckboxes: Array<LegalConsentCheckbox>;
 
   privacyText: string;
 
@@ -467,7 +467,7 @@ export interface MarketingFormsLegalConsentOptionsImplicitConsentToProcess {
   consentToProcessText?: string;
 }
 
-export interface MarketingFormsLegalConsentOptionsLegitimateInterest {
+export interface LegalConsentOptionsLegitimateInterest {
   lawfulBasis: 'lead' | 'client' | 'other';
 
   privacyText: string;
@@ -477,18 +477,18 @@ export interface MarketingFormsLegalConsentOptionsLegitimateInterest {
   type: 'legitimate_interest';
 }
 
-export interface MarketingFormsLegalConsentOptionsNone {
+export interface LegalConsentOptionsNone {
   type: 'none';
 }
 
-export interface MarketingFormsLifecycleStage {
+export interface LifecycleStage {
   objectTypeId: string;
 
   value: string;
 }
 
-export interface MarketingFormsMobilePhoneField {
-  dependentFields: Array<MarketingFormsDependentField>;
+export interface MobilePhoneField {
+  dependentFields: Array<DependentField>;
 
   fieldType: 'mobile_phone';
 
@@ -502,15 +502,15 @@ export interface MarketingFormsMobilePhoneField {
 
   required: boolean;
 
-  validation: MarketingFormsPhoneFieldValidation;
+  validation: PhoneFieldValidation;
 
   defaultValue?: string;
 
   placeholder?: string;
 }
 
-export interface MarketingFormsMultiLineTextField {
-  dependentFields: Array<MarketingFormsDependentField>;
+export interface MultiLineTextField {
+  dependentFields: Array<DependentField>;
 
   fieldType: 'multi_line_text';
 
@@ -529,10 +529,10 @@ export interface MarketingFormsMultiLineTextField {
   placeholder?: string;
 }
 
-export interface MarketingFormsMultipleCheckboxesField {
+export interface MultipleCheckboxesField {
   defaultValues: Array<string>;
 
-  dependentFields: Array<MarketingFormsDependentField>;
+  dependentFields: Array<DependentField>;
 
   fieldType: 'multiple_checkboxes';
 
@@ -544,13 +544,13 @@ export interface MarketingFormsMultipleCheckboxesField {
 
   objectTypeId: string;
 
-  options: Array<MarketingFormsEnumeratedFieldOption>;
+  options: Array<EnumeratedFieldOption>;
 
   required: boolean;
 }
 
-export interface MarketingFormsNumberField {
-  dependentFields: Array<MarketingFormsDependentField>;
+export interface NumberField {
+  dependentFields: Array<DependentField>;
 
   fieldType: 'number';
 
@@ -568,19 +568,19 @@ export interface MarketingFormsNumberField {
 
   placeholder?: string;
 
-  validation?: MarketingFormsNumberFieldValidation;
+  validation?: NumberFieldValidation;
 }
 
-export interface MarketingFormsNumberFieldValidation {
+export interface NumberFieldValidation {
   maxAllowedDigits: number;
 
   minAllowedDigits: number;
 }
 
-export interface MarketingFormsPaymentLinkRadioField {
+export interface PaymentLinkRadioField {
   defaultValues: Array<string>;
 
-  dependentFields: Array<MarketingFormsDependentField>;
+  dependentFields: Array<DependentField>;
 
   fieldType: 'payment_link_radio';
 
@@ -592,13 +592,13 @@ export interface MarketingFormsPaymentLinkRadioField {
 
   objectTypeId: string;
 
-  options: Array<MarketingFormsEnumeratedFieldOption>;
+  options: Array<EnumeratedFieldOption>;
 
   required: boolean;
 }
 
-export interface MarketingFormsPhoneField {
-  dependentFields: Array<MarketingFormsDependentField>;
+export interface PhoneField {
+  dependentFields: Array<DependentField>;
 
   fieldType: 'phone';
 
@@ -614,23 +614,23 @@ export interface MarketingFormsPhoneField {
 
   useCountryCodeSelect: boolean;
 
-  validation: MarketingFormsPhoneFieldValidation;
+  validation: PhoneFieldValidation;
 
   defaultValue?: string;
 
   placeholder?: string;
 }
 
-export interface MarketingFormsPhoneFieldValidation {
+export interface PhoneFieldValidation {
   maxAllowedDigits: number;
 
   minAllowedDigits: number;
 }
 
-export interface MarketingFormsRadioField {
+export interface RadioField {
   defaultValues: Array<string>;
 
-  dependentFields: Array<MarketingFormsDependentField>;
+  dependentFields: Array<DependentField>;
 
   fieldType: 'radio';
 
@@ -642,15 +642,15 @@ export interface MarketingFormsRadioField {
 
   objectTypeId: string;
 
-  options: Array<MarketingFormsEnumeratedFieldOption>;
+  options: Array<EnumeratedFieldOption>;
 
   required: boolean;
 
   placeholder?: string;
 }
 
-export interface MarketingFormsSingleCheckboxField {
-  dependentFields: Array<MarketingFormsDependentField>;
+export interface SingleCheckboxField {
+  dependentFields: Array<DependentField>;
 
   fieldType: 'single_checkbox';
 
@@ -667,8 +667,8 @@ export interface MarketingFormsSingleCheckboxField {
   defaultValue?: string;
 }
 
-export interface MarketingFormsSingleLineTextField {
-  dependentFields: Array<MarketingFormsDependentField>;
+export interface SingleLineTextField {
+  dependentFields: Array<DependentField>;
 
   fieldType: 'single_line_text';
 
@@ -692,17 +692,17 @@ export interface FormCreateParams {}
 export interface FormUpdateParams {
   archived?: boolean;
 
-  configuration?: MarketingFormsHubSpotFormConfiguration;
+  configuration?: HubSpotFormConfiguration;
 
-  displayOptions?: MarketingFormsFormDisplayOptions;
+  displayOptions?: FormDisplayOptions;
 
-  fieldGroups?: Array<MarketingFormsFieldGroup>;
+  fieldGroups?: Array<FieldGroup>;
 
   legalConsentOptions?:
-    | MarketingFormsLegalConsentOptionsNone
-    | MarketingFormsLegalConsentOptionsLegitimateInterest
-    | MarketingFormsLegalConsentOptionsExplicitConsentToProcess
-    | MarketingFormsLegalConsentOptionsImplicitConsentToProcess;
+    | LegalConsentOptionsNone
+    | LegalConsentOptionsLegitimateInterest
+    | LegalConsentOptionsExplicitConsentToProcess
+    | LegalConsentOptionsImplicitConsentToProcess;
 
   name?: string;
 }
@@ -726,21 +726,21 @@ export interface FormReplaceParams {
 
   archived: boolean;
 
-  configuration: MarketingFormsHubSpotFormConfiguration;
+  configuration: HubSpotFormConfiguration;
 
   createdAt: string;
 
-  displayOptions: MarketingFormsFormDisplayOptions;
+  displayOptions: FormDisplayOptions;
 
-  fieldGroups: Array<MarketingFormsFieldGroup>;
+  fieldGroups: Array<FieldGroup>;
 
   formType: 'hubspot';
 
   legalConsentOptions:
-    | MarketingFormsLegalConsentOptionsNone
-    | MarketingFormsLegalConsentOptionsLegitimateInterest
-    | MarketingFormsLegalConsentOptionsExplicitConsentToProcess
-    | MarketingFormsLegalConsentOptionsImplicitConsentToProcess;
+    | LegalConsentOptionsNone
+    | LegalConsentOptionsLegitimateInterest
+    | LegalConsentOptionsExplicitConsentToProcess
+    | LegalConsentOptionsImplicitConsentToProcess;
 
   name: string;
 
@@ -751,42 +751,42 @@ export interface FormReplaceParams {
 
 export declare namespace Forms {
   export {
-    type MarketingFormsCollectionResponseFormDefinitionBaseForwardPaging as MarketingFormsCollectionResponseFormDefinitionBaseForwardPaging,
-    type MarketingFormsDatepickerField as MarketingFormsDatepickerField,
-    type MarketingFormsDependentField as MarketingFormsDependentField,
-    type MarketingFormsDependentFieldFilter as MarketingFormsDependentFieldFilter,
-    type MarketingFormsDropdownField as MarketingFormsDropdownField,
-    type MarketingFormsEmailField as MarketingFormsEmailField,
-    type MarketingFormsEmailFieldValidation as MarketingFormsEmailFieldValidation,
-    type MarketingFormsEnumeratedFieldOption as MarketingFormsEnumeratedFieldOption,
-    type MarketingFormsFieldGroup as MarketingFormsFieldGroup,
-    type MarketingFormsFileField as MarketingFormsFileField,
-    type MarketingFormsFormDefinitionBase as MarketingFormsFormDefinitionBase,
-    type MarketingFormsFormDefinitionCreateRequestBase as MarketingFormsFormDefinitionCreateRequestBase,
-    type MarketingFormsFormDisplayOptions as MarketingFormsFormDisplayOptions,
-    type MarketingFormsFormPostSubmitAction as MarketingFormsFormPostSubmitAction,
-    type MarketingFormsFormStyle as MarketingFormsFormStyle,
-    type MarketingFormsHubSpotFormConfiguration as MarketingFormsHubSpotFormConfiguration,
-    type MarketingFormsHubSpotFormDefinition as MarketingFormsHubSpotFormDefinition,
-    type MarketingFormsHubSpotFormDefinitionCreateRequest as MarketingFormsHubSpotFormDefinitionCreateRequest,
-    type MarketingFormsHubSpotFormDefinitionPatchRequest as MarketingFormsHubSpotFormDefinitionPatchRequest,
-    type MarketingFormsLegalConsentCheckbox as MarketingFormsLegalConsentCheckbox,
-    type MarketingFormsLegalConsentOptionsExplicitConsentToProcess as MarketingFormsLegalConsentOptionsExplicitConsentToProcess,
-    type MarketingFormsLegalConsentOptionsImplicitConsentToProcess as MarketingFormsLegalConsentOptionsImplicitConsentToProcess,
-    type MarketingFormsLegalConsentOptionsLegitimateInterest as MarketingFormsLegalConsentOptionsLegitimateInterest,
-    type MarketingFormsLegalConsentOptionsNone as MarketingFormsLegalConsentOptionsNone,
-    type MarketingFormsLifecycleStage as MarketingFormsLifecycleStage,
-    type MarketingFormsMobilePhoneField as MarketingFormsMobilePhoneField,
-    type MarketingFormsMultiLineTextField as MarketingFormsMultiLineTextField,
-    type MarketingFormsMultipleCheckboxesField as MarketingFormsMultipleCheckboxesField,
-    type MarketingFormsNumberField as MarketingFormsNumberField,
-    type MarketingFormsNumberFieldValidation as MarketingFormsNumberFieldValidation,
-    type MarketingFormsPaymentLinkRadioField as MarketingFormsPaymentLinkRadioField,
-    type MarketingFormsPhoneField as MarketingFormsPhoneField,
-    type MarketingFormsPhoneFieldValidation as MarketingFormsPhoneFieldValidation,
-    type MarketingFormsRadioField as MarketingFormsRadioField,
-    type MarketingFormsSingleCheckboxField as MarketingFormsSingleCheckboxField,
-    type MarketingFormsSingleLineTextField as MarketingFormsSingleLineTextField,
+    type CollectionResponseFormDefinitionBaseForwardPaging as CollectionResponseFormDefinitionBaseForwardPaging,
+    type DatepickerField as DatepickerField,
+    type DependentField as DependentField,
+    type DependentFieldFilter as DependentFieldFilter,
+    type DropdownField as DropdownField,
+    type EmailField as EmailField,
+    type EmailFieldValidation as EmailFieldValidation,
+    type EnumeratedFieldOption as EnumeratedFieldOption,
+    type FieldGroup as FieldGroup,
+    type FileField as FileField,
+    type FormDefinitionBase as FormDefinitionBase,
+    type FormDefinitionCreateRequestBase as FormDefinitionCreateRequestBase,
+    type FormDisplayOptions as FormDisplayOptions,
+    type FormPostSubmitAction as FormPostSubmitAction,
+    type FormStyle as FormStyle,
+    type HubSpotFormConfiguration as HubSpotFormConfiguration,
+    type HubSpotFormDefinition as HubSpotFormDefinition,
+    type HubSpotFormDefinitionCreateRequest as HubSpotFormDefinitionCreateRequest,
+    type HubSpotFormDefinitionPatchRequest as HubSpotFormDefinitionPatchRequest,
+    type LegalConsentCheckbox as LegalConsentCheckbox,
+    type LegalConsentOptionsExplicitConsentToProcess as LegalConsentOptionsExplicitConsentToProcess,
+    type LegalConsentOptionsImplicitConsentToProcess as LegalConsentOptionsImplicitConsentToProcess,
+    type LegalConsentOptionsLegitimateInterest as LegalConsentOptionsLegitimateInterest,
+    type LegalConsentOptionsNone as LegalConsentOptionsNone,
+    type LifecycleStage as LifecycleStage,
+    type MobilePhoneField as MobilePhoneField,
+    type MultiLineTextField as MultiLineTextField,
+    type MultipleCheckboxesField as MultipleCheckboxesField,
+    type NumberField as NumberField,
+    type NumberFieldValidation as NumberFieldValidation,
+    type PaymentLinkRadioField as PaymentLinkRadioField,
+    type PhoneField as PhoneField,
+    type PhoneFieldValidation as PhoneFieldValidation,
+    type RadioField as RadioField,
+    type SingleCheckboxField as SingleCheckboxField,
+    type SingleLineTextField as SingleLineTextField,
     type FormCreateParams as FormCreateParams,
     type FormUpdateParams as FormUpdateParams,
     type FormListParams as FormListParams,

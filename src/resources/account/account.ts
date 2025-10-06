@@ -3,42 +3,37 @@
 import { APIResource } from '../../core/resource';
 import * as Shared from '../shared';
 import * as InfoAPI from './info';
-import {
-  AccountInfoAPIUsage,
-  AccountInfoCollectionResponseAPIUsage,
-  AccountInfoPortalInformationResponse,
-  Info,
-} from './info';
+import { APIUsage, CollectionResponseAPIUsage, Info, PortalInformationResponse } from './info';
 
 export class Account extends APIResource {
   info: InfoAPI.Info = new InfoAPI.Info(this._client);
 }
 
-export interface AccountActingUser {
+export interface ActingUser {
   userId: number;
 
   userEmail?: string;
 }
 
-export interface AccountCollectionResponseHydratedCriticalActionForwardPaging {
-  results: Array<AccountHydratedCriticalAction>;
+export interface CollectionResponseHydratedCriticalActionForwardPaging {
+  results: Array<HydratedCriticalAction>;
 
   paging?: Shared.ForwardPaging;
 }
 
-export interface AccountCollectionResponsePublicAPIUserActionEventForwardPaging {
-  results: Array<AccountPublicAPIUserActionEvent>;
+export interface CollectionResponsePublicAPIUserActionEventForwardPaging {
+  results: Array<PublicAPIUserActionEvent>;
 
   paging?: Shared.ForwardPaging;
 }
 
-export interface AccountCollectionResponsePublicLoginAuditForwardPaging {
-  results: Array<AccountPublicLoginAudit>;
+export interface CollectionResponsePublicLoginAuditForwardPaging {
+  results: Array<PublicLoginAudit>;
 
   paging?: Shared.ForwardPaging;
 }
 
-export interface AccountHydratedCriticalAction {
+export interface HydratedCriticalAction {
   id: string;
 
   createdAt: string;
@@ -62,10 +57,10 @@ export interface AccountHydratedCriticalAction {
   regionCode?: string;
 }
 
-export interface AccountPublicAPIUserActionEvent {
+export interface PublicAPIUserActionEvent {
   id: string;
 
-  actingUser: AccountActingUser;
+  actingUser: ActingUser;
 
   action: string;
 
@@ -78,7 +73,7 @@ export interface AccountPublicAPIUserActionEvent {
   targetObjectId?: string;
 }
 
-export interface AccountPublicLoginAudit {
+export interface PublicLoginAudit {
   id: string;
 
   loginAt: string;
@@ -104,19 +99,19 @@ Account.Info = Info;
 
 export declare namespace Account {
   export {
-    type AccountActingUser as AccountActingUser,
-    type AccountCollectionResponseHydratedCriticalActionForwardPaging as AccountCollectionResponseHydratedCriticalActionForwardPaging,
-    type AccountCollectionResponsePublicAPIUserActionEventForwardPaging as AccountCollectionResponsePublicAPIUserActionEventForwardPaging,
-    type AccountCollectionResponsePublicLoginAuditForwardPaging as AccountCollectionResponsePublicLoginAuditForwardPaging,
-    type AccountHydratedCriticalAction as AccountHydratedCriticalAction,
-    type AccountPublicAPIUserActionEvent as AccountPublicAPIUserActionEvent,
-    type AccountPublicLoginAudit as AccountPublicLoginAudit,
+    type ActingUser as ActingUser,
+    type CollectionResponseHydratedCriticalActionForwardPaging as CollectionResponseHydratedCriticalActionForwardPaging,
+    type CollectionResponsePublicAPIUserActionEventForwardPaging as CollectionResponsePublicAPIUserActionEventForwardPaging,
+    type CollectionResponsePublicLoginAuditForwardPaging as CollectionResponsePublicLoginAuditForwardPaging,
+    type HydratedCriticalAction as HydratedCriticalAction,
+    type PublicAPIUserActionEvent as PublicAPIUserActionEvent,
+    type PublicLoginAudit as PublicLoginAudit,
   };
 
   export {
     Info as Info,
-    type AccountInfoAPIUsage as AccountInfoAPIUsage,
-    type AccountInfoCollectionResponseAPIUsage as AccountInfoCollectionResponseAPIUsage,
-    type AccountInfoPortalInformationResponse as AccountInfoPortalInformationResponse,
+    type APIUsage as APIUsage,
+    type CollectionResponseAPIUsage as CollectionResponseAPIUsage,
+    type PortalInformationResponse as PortalInformationResponse,
   };
 }

@@ -11,7 +11,7 @@ export class URLRedirects extends APIResource {
   /**
    * Create a redirect
    */
-  create(body: URLRedirectCreateParams, options?: RequestOptions): APIPromise<CmsAPI.CmsURLMapping> {
+  create(body: URLRedirectCreateParams, options?: RequestOptions): APIPromise<CmsAPI.URLMapping> {
     return this._client.post('/cms/v3/url-redirects/', { body, ...options });
   }
 
@@ -22,7 +22,7 @@ export class URLRedirects extends APIResource {
     urlRedirectID: string,
     body: URLRedirectUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<CmsAPI.CmsURLMapping> {
+  ): APIPromise<CmsAPI.URLMapping> {
     return this._client.patch(path`/cms/v3/url-redirects/${urlRedirectID}`, { body, ...options });
   }
 
@@ -32,7 +32,7 @@ export class URLRedirects extends APIResource {
   list(
     query: URLRedirectListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CmsAPI.CmsCollectionResponseWithTotalURLMappingForwardPaging> {
+  ): APIPromise<CmsAPI.CollectionResponseWithTotalURLMappingForwardPaging> {
     return this._client.get('/cms/v3/url-redirects/', { query, ...options });
   }
 
@@ -49,7 +49,7 @@ export class URLRedirects extends APIResource {
   /**
    * Get details for a redirect
    */
-  read(urlRedirectID: string, options?: RequestOptions): APIPromise<CmsAPI.CmsURLMapping> {
+  read(urlRedirectID: string, options?: RequestOptions): APIPromise<CmsAPI.URLMapping> {
     return this._client.get(path`/cms/v3/url-redirects/${urlRedirectID}`, options);
   }
 }

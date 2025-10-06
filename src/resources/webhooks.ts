@@ -15,7 +15,7 @@ export class Webhooks extends APIResource {
     appID: number,
     body: WebhookCreateParams,
     options?: RequestOptions,
-  ): APIPromise<WebhooksSubscriptionResponse> {
+  ): APIPromise<SubscriptionResponse> {
     return this._client.post(path`/webhooks/v3/${appID}/subscriptions`, { body, ...options });
   }
 
@@ -26,7 +26,7 @@ export class Webhooks extends APIResource {
     subscriptionID: number,
     params: WebhookUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<WebhooksSubscriptionResponse> {
+  ): APIPromise<SubscriptionResponse> {
     const { appId, ...body } = params;
     return this._client.patch(path`/webhooks/v3/${appId}/subscriptions/${subscriptionID}`, {
       body,
@@ -37,7 +37,7 @@ export class Webhooks extends APIResource {
   /**
    * Read event subscriptions
    */
-  list(appID: number, options?: RequestOptions): APIPromise<WebhooksSubscriptionListResponse> {
+  list(appID: number, options?: RequestOptions): APIPromise<SubscriptionListResponse> {
     return this._client.get(path`/webhooks/v3/${appID}/subscriptions`, options);
   }
 
@@ -69,7 +69,7 @@ export class Webhooks extends APIResource {
     appID: number,
     body: WebhookConfigureParams,
     options?: RequestOptions,
-  ): APIPromise<WebhooksSettingsResponse> {
+  ): APIPromise<SettingsResponse> {
     return this._client.put(path`/webhooks/v3/${appID}/settings`, { body, ...options });
   }
 
@@ -80,7 +80,7 @@ export class Webhooks extends APIResource {
     subscriptionID: number,
     params: WebhookReadParams,
     options?: RequestOptions,
-  ): APIPromise<WebhooksSubscriptionResponse> {
+  ): APIPromise<SubscriptionResponse> {
     const { appId } = params;
     return this._client.get(path`/webhooks/v3/${appId}/subscriptions/${subscriptionID}`, options);
   }
@@ -92,19 +92,19 @@ export class Webhooks extends APIResource {
     appID: number,
     body: WebhookUpdateBatchParams,
     options?: RequestOptions,
-  ): APIPromise<WebhooksBatchResponseSubscriptionResponse> {
+  ): APIPromise<BatchResponseSubscriptionResponse> {
     return this._client.post(path`/webhooks/v3/${appID}/subscriptions/batch/update`, { body, ...options });
   }
 }
 
-export interface WebhooksBatchInputSubscriptionBatchUpdateRequest {
-  inputs: Array<WebhooksSubscriptionBatchUpdateRequest>;
+export interface BatchInputSubscriptionBatchUpdateRequest {
+  inputs: Array<SubscriptionBatchUpdateRequest>;
 }
 
-export interface WebhooksBatchResponseSubscriptionResponse {
+export interface BatchResponseSubscriptionResponse {
   completedAt: string;
 
-  results: Array<WebhooksSubscriptionResponse>;
+  results: Array<SubscriptionResponse>;
 
   startedAt: string;
 
@@ -115,10 +115,10 @@ export interface WebhooksBatchResponseSubscriptionResponse {
   requestedAt?: string;
 }
 
-export interface WebhooksBatchResponseSubscriptionResponseWithErrors {
+export interface BatchResponseSubscriptionResponseWithErrors {
   completedAt: string;
 
-  results: Array<WebhooksSubscriptionResponse>;
+  results: Array<SubscriptionResponse>;
 
   startedAt: string;
 
@@ -133,29 +133,29 @@ export interface WebhooksBatchResponseSubscriptionResponseWithErrors {
   requestedAt?: string;
 }
 
-export interface WebhooksSettingsChangeRequest {
+export interface SettingsChangeRequest {
   targetUrl: string;
 
-  throttling: WebhooksThrottlingSettings;
+  throttling: ThrottlingSettings;
 }
 
-export interface WebhooksSettingsResponse {
+export interface SettingsResponse {
   createdAt: string;
 
   targetUrl: string;
 
-  throttling: WebhooksThrottlingSettings;
+  throttling: ThrottlingSettings;
 
   updatedAt?: string;
 }
 
-export interface WebhooksSubscriptionBatchUpdateRequest {
+export interface SubscriptionBatchUpdateRequest {
   id: number;
 
   active: boolean;
 }
 
-export interface WebhooksSubscriptionCreateRequest {
+export interface SubscriptionCreateRequest {
   eventType:
     | 'contact.propertyChange'
     | 'company.propertyChange'
@@ -212,15 +212,15 @@ export interface WebhooksSubscriptionCreateRequest {
   propertyName?: string;
 }
 
-export interface WebhooksSubscriptionListResponse {
-  results: Array<WebhooksSubscriptionResponse>;
+export interface SubscriptionListResponse {
+  results: Array<SubscriptionResponse>;
 }
 
-export interface WebhooksSubscriptionPatchRequest {
+export interface SubscriptionPatchRequest {
   active?: boolean;
 }
 
-export interface WebhooksSubscriptionResponse {
+export interface SubscriptionResponse {
   id: string;
 
   active: boolean;
@@ -283,7 +283,7 @@ export interface WebhooksSubscriptionResponse {
   updatedAt?: string;
 }
 
-export interface WebhooksThrottlingSettings {
+export interface ThrottlingSettings {
   maxConcurrentRequests: number;
 }
 
@@ -363,7 +363,7 @@ export interface WebhookDeleteParams {
 export interface WebhookConfigureParams {
   targetUrl: string;
 
-  throttling: WebhooksThrottlingSettings;
+  throttling: ThrottlingSettings;
 }
 
 export interface WebhookReadParams {
@@ -371,22 +371,22 @@ export interface WebhookReadParams {
 }
 
 export interface WebhookUpdateBatchParams {
-  inputs: Array<WebhooksSubscriptionBatchUpdateRequest>;
+  inputs: Array<SubscriptionBatchUpdateRequest>;
 }
 
 export declare namespace Webhooks {
   export {
-    type WebhooksBatchInputSubscriptionBatchUpdateRequest as WebhooksBatchInputSubscriptionBatchUpdateRequest,
-    type WebhooksBatchResponseSubscriptionResponse as WebhooksBatchResponseSubscriptionResponse,
-    type WebhooksBatchResponseSubscriptionResponseWithErrors as WebhooksBatchResponseSubscriptionResponseWithErrors,
-    type WebhooksSettingsChangeRequest as WebhooksSettingsChangeRequest,
-    type WebhooksSettingsResponse as WebhooksSettingsResponse,
-    type WebhooksSubscriptionBatchUpdateRequest as WebhooksSubscriptionBatchUpdateRequest,
-    type WebhooksSubscriptionCreateRequest as WebhooksSubscriptionCreateRequest,
-    type WebhooksSubscriptionListResponse as WebhooksSubscriptionListResponse,
-    type WebhooksSubscriptionPatchRequest as WebhooksSubscriptionPatchRequest,
-    type WebhooksSubscriptionResponse as WebhooksSubscriptionResponse,
-    type WebhooksThrottlingSettings as WebhooksThrottlingSettings,
+    type BatchInputSubscriptionBatchUpdateRequest as BatchInputSubscriptionBatchUpdateRequest,
+    type BatchResponseSubscriptionResponse as BatchResponseSubscriptionResponse,
+    type BatchResponseSubscriptionResponseWithErrors as BatchResponseSubscriptionResponseWithErrors,
+    type SettingsChangeRequest as SettingsChangeRequest,
+    type SettingsResponse as SettingsResponse,
+    type SubscriptionBatchUpdateRequest as SubscriptionBatchUpdateRequest,
+    type SubscriptionCreateRequest as SubscriptionCreateRequest,
+    type SubscriptionListResponse as SubscriptionListResponse,
+    type SubscriptionPatchRequest as SubscriptionPatchRequest,
+    type SubscriptionResponse as SubscriptionResponse,
+    type ThrottlingSettings as ThrottlingSettings,
     type WebhookCreateParams as WebhookCreateParams,
     type WebhookUpdateParams as WebhookUpdateParams,
     type WebhookDeleteParams as WebhookDeleteParams,

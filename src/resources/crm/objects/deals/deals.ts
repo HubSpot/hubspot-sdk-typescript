@@ -21,7 +21,7 @@ export class Deals extends APIResource {
   create(
     body: DealCreateParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CRMObjectsCreatedResponseSimplePublicObject> {
+  ): APIPromise<ObjectsAPI.CreatedResponseSimplePublicObject> {
     return this._client.post('/crm/v3/objects/0-3', { body, ...options });
   }
 
@@ -32,7 +32,7 @@ export class Deals extends APIResource {
     dealID: string,
     params: DealUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CRMObjectsSimplePublicObject> {
+  ): APIPromise<ObjectsAPI.SimplePublicObject> {
     const { idProperty, ...body } = params;
     return this._client.patch(path`/crm/v3/objects/0-3/${dealID}`, {
       query: { idProperty },
@@ -47,7 +47,7 @@ export class Deals extends APIResource {
   list(
     query: DealListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CRMObjectsCollectionResponseSimplePublicObjectWithAssociations> {
+  ): APIPromise<ObjectsAPI.CollectionResponseSimplePublicObjectWithAssociations> {
     return this._client.get('/crm/v3/objects/0-3', { query, ...options });
   }
 
@@ -64,10 +64,7 @@ export class Deals extends APIResource {
   /**
    * Merge two deals with same type
    */
-  merge(
-    body: DealMergeParams,
-    options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CRMObjectsSimplePublicObject> {
+  merge(body: DealMergeParams, options?: RequestOptions): APIPromise<ObjectsAPI.SimplePublicObject> {
     return this._client.post('/crm/v3/objects/0-3/merge', { body, ...options });
   }
 
@@ -78,14 +75,14 @@ export class Deals extends APIResource {
     dealID: string,
     query: DealReadParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CRMObjectsSimplePublicObjectWithAssociations> {
+  ): APIPromise<ObjectsAPI.SimplePublicObjectWithAssociations> {
     return this._client.get(path`/crm/v3/objects/0-3/${dealID}`, { query, ...options });
   }
 
   search(
     body: DealSearchParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CRMObjectsCollectionResponseWithTotalSimplePublicObject> {
+  ): APIPromise<ObjectsAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/v3/objects/0-3/search', { body, ...options });
   }
 
@@ -95,7 +92,7 @@ export class Deals extends APIResource {
   upsert(
     body: DealUpsertParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CRMObjectsBatchResponseSimplePublicUpsertObject> {
+  ): APIPromise<ObjectsAPI.BatchResponseSimplePublicUpsertObject> {
     return this._client.post('/crm/v3/objects/0-3/batch/upsert', { body, ...options });
   }
 }
@@ -103,7 +100,7 @@ export class Deals extends APIResource {
 export interface DealCreateParams {
   properties: { [key: string]: string };
 
-  associations?: Array<ObjectsAPI.CRMObjectsPublicAssociationsForObject>;
+  associations?: Array<ObjectsAPI.PublicAssociationsForObject>;
 }
 
 export interface DealUpdateParams {
@@ -153,7 +150,7 @@ export interface DealReadParams {
 export interface DealSearchParams {
   after?: string;
 
-  filterGroups?: Array<ObjectsAPI.CRMObjectsFilterGroup>;
+  filterGroups?: Array<ObjectsAPI.FilterGroup>;
 
   limit?: number;
 
@@ -165,7 +162,7 @@ export interface DealSearchParams {
 }
 
 export interface DealUpsertParams {
-  inputs: Array<ObjectsAPI.CRMObjectsSimplePublicObjectBatchInputUpsert>;
+  inputs: Array<ObjectsAPI.SimplePublicObjectBatchInputUpsert>;
 }
 
 Deals.Associations = Associations;

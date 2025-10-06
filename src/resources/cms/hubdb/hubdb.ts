@@ -33,7 +33,7 @@ export class Hubdb extends APIResource {
     tableIDOrName: string,
     body: HubdbCloneDraftTableParams,
     options?: RequestOptions,
-  ): APIPromise<CmsHubdbHubDBTableV3> {
+  ): APIPromise<HubDBTableV3> {
     return this._client.post(path`/cms/v3/hubdb/tables/${tableIDOrName}/draft/clone`, { body, ...options });
   }
 
@@ -44,7 +44,7 @@ export class Hubdb extends APIResource {
     rowID: string,
     params: HubdbCloneDraftTableRowParams,
     options?: RequestOptions,
-  ): APIPromise<CmsHubdbHubDBTableRowV3> {
+  ): APIPromise<HubDBTableRowV3> {
     const { tableIdOrName, name } = params;
     return this._client.post(path`/cms/v3/hubdb/tables/${tableIdOrName}/rows/${rowID}/draft/clone`, {
       query: { name },
@@ -59,7 +59,7 @@ export class Hubdb extends APIResource {
     tableIDOrName: string,
     body: HubdbCloneDraftTableRowsParams,
     options?: RequestOptions,
-  ): APIPromise<CmsHubdbBatchResponseHubDBTableRowV3> {
+  ): APIPromise<BatchResponseHubDBTableRowV3> {
     return this._client.post(path`/cms/v3/hubdb/tables/${tableIDOrName}/rows/draft/batch/clone`, {
       body,
       ...options,
@@ -73,7 +73,7 @@ export class Hubdb extends APIResource {
     tableIDOrName: string,
     body: HubdbCreateDraftTableRowsParams,
     options?: RequestOptions,
-  ): APIPromise<CmsHubdbBatchResponseHubDBTableRowV3> {
+  ): APIPromise<BatchResponseHubDBTableRowV3> {
     return this._client.post(path`/cms/v3/hubdb/tables/${tableIDOrName}/rows/draft/batch/create`, {
       body,
       ...options,
@@ -83,7 +83,7 @@ export class Hubdb extends APIResource {
   /**
    * Create a new table
    */
-  createTable(body: HubdbCreateTableParams, options?: RequestOptions): APIPromise<CmsHubdbHubDBTableV3> {
+  createTable(body: HubdbCreateTableParams, options?: RequestOptions): APIPromise<HubDBTableV3> {
     return this._client.post('/cms/v3/hubdb/tables', { body, ...options });
   }
 
@@ -94,7 +94,7 @@ export class Hubdb extends APIResource {
     tableIDOrName: string,
     body: HubdbCreateTableRowParams,
     options?: RequestOptions,
-  ): APIPromise<CmsHubdbHubDBTableRowV3> {
+  ): APIPromise<HubDBTableRowV3> {
     return this._client.post(path`/cms/v3/hubdb/tables/${tableIDOrName}/rows`, { body, ...options });
   }
 
@@ -136,7 +136,7 @@ export class Hubdb extends APIResource {
   getAllDraftTables(
     query: HubdbGetAllDraftTablesParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CmsHubdbCollectionResponseWithTotalHubDBTableV3ForwardPaging> {
+  ): APIPromise<CollectionResponseWithTotalHubDBTableV3ForwardPaging> {
     return this._client.get('/cms/v3/hubdb/tables/draft', { query, ...options });
   }
 
@@ -146,7 +146,7 @@ export class Hubdb extends APIResource {
   getAllTables(
     query: HubdbGetAllTablesParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CmsHubdbCollectionResponseWithTotalHubDBTableV3ForwardPaging> {
+  ): APIPromise<CollectionResponseWithTotalHubDBTableV3ForwardPaging> {
     return this._client.get('/cms/v3/hubdb/tables', { query, ...options });
   }
 
@@ -157,7 +157,7 @@ export class Hubdb extends APIResource {
     tableIDOrName: string,
     query: HubdbGetDraftTableDetailsByIDParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CmsHubdbHubDBTableV3> {
+  ): APIPromise<HubDBTableV3> {
     return this._client.get(path`/cms/v3/hubdb/tables/${tableIDOrName}/draft`, { query, ...options });
   }
 
@@ -168,7 +168,7 @@ export class Hubdb extends APIResource {
     rowID: string,
     params: HubdbGetDraftTableRowByIDParams,
     options?: RequestOptions,
-  ): APIPromise<CmsHubdbHubDBTableRowV3> {
+  ): APIPromise<HubDBTableRowV3> {
     const { tableIdOrName, ...query } = params;
     return this._client.get(path`/cms/v3/hubdb/tables/${tableIdOrName}/rows/${rowID}/draft`, {
       query,
@@ -183,7 +183,7 @@ export class Hubdb extends APIResource {
     tableIDOrName: string,
     query: HubdbGetTableDetailsParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CmsHubdbHubDBTableV3> {
+  ): APIPromise<HubDBTableV3> {
     return this._client.get(path`/cms/v3/hubdb/tables/${tableIDOrName}`, { query, ...options });
   }
 
@@ -194,7 +194,7 @@ export class Hubdb extends APIResource {
     rowID: string,
     params: HubdbGetTableRowParams,
     options?: RequestOptions,
-  ): APIPromise<CmsHubdbHubDBTableRowV3> {
+  ): APIPromise<HubDBTableRowV3> {
     const { tableIdOrName, ...query } = params;
     return this._client.get(path`/cms/v3/hubdb/tables/${tableIdOrName}/rows/${rowID}`, { query, ...options });
   }
@@ -206,7 +206,7 @@ export class Hubdb extends APIResource {
     tableIDOrName: string,
     query: HubdbGetTableRowsParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CmsHubdbUnifiedCollectionResponseWithTotalBaseHubDBTableRowV3> {
+  ): APIPromise<UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3> {
     return this._client.get(path`/cms/v3/hubdb/tables/${tableIDOrName}/rows`, { query, ...options });
   }
 
@@ -217,7 +217,7 @@ export class Hubdb extends APIResource {
     tableIDOrName: string,
     body: HubdbImportDraftTableParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CmsHubdbImportResult> {
+  ): APIPromise<ImportResult> {
     return this._client.post(
       path`/cms/v3/hubdb/tables/${tableIDOrName}/draft/import`,
       multipartFormRequestOptions({ body, ...options }, this._client),
@@ -231,7 +231,7 @@ export class Hubdb extends APIResource {
     tableIDOrName: string,
     params: HubdbPublishDraftTableParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CmsHubdbHubDBTableV3> {
+  ): APIPromise<HubDBTableV3> {
     const { includeForeignIds } = params ?? {};
     return this._client.post(path`/cms/v3/hubdb/tables/${tableIDOrName}/draft/publish`, {
       query: { includeForeignIds },
@@ -276,7 +276,7 @@ export class Hubdb extends APIResource {
     tableIDOrName: string,
     body: HubdbReadDraftTableRowsParams,
     options?: RequestOptions,
-  ): APIPromise<CmsHubdbBatchResponseHubDBTableRowV3> {
+  ): APIPromise<BatchResponseHubDBTableRowV3> {
     return this._client.post(path`/cms/v3/hubdb/tables/${tableIDOrName}/rows/draft/batch/read`, {
       body,
       ...options,
@@ -290,7 +290,7 @@ export class Hubdb extends APIResource {
     tableIDOrName: string,
     body: HubdbReadTableRowsParams,
     options?: RequestOptions,
-  ): APIPromise<CmsHubdbBatchResponseHubDBTableRowV3> {
+  ): APIPromise<BatchResponseHubDBTableRowV3> {
     return this._client.post(path`/cms/v3/hubdb/tables/${tableIDOrName}/rows/batch/read`, {
       body,
       ...options,
@@ -319,7 +319,7 @@ export class Hubdb extends APIResource {
     rowID: string,
     params: HubdbReplaceDraftTableRowParams,
     options?: RequestOptions,
-  ): APIPromise<CmsHubdbHubDBTableRowV3> {
+  ): APIPromise<HubDBTableRowV3> {
     const { tableIdOrName, ...body } = params;
     return this._client.put(path`/cms/v3/hubdb/tables/${tableIdOrName}/rows/${rowID}/draft`, {
       body,
@@ -334,7 +334,7 @@ export class Hubdb extends APIResource {
     tableIDOrName: string,
     body: HubdbReplaceDraftTableRowsParams,
     options?: RequestOptions,
-  ): APIPromise<CmsHubdbBatchResponseHubDBTableRowV3> {
+  ): APIPromise<BatchResponseHubDBTableRowV3> {
     return this._client.post(path`/cms/v3/hubdb/tables/${tableIDOrName}/rows/draft/batch/replace`, {
       body,
       ...options,
@@ -348,7 +348,7 @@ export class Hubdb extends APIResource {
     tableIDOrName: string,
     params: HubdbResetDraftTableParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CmsHubdbHubDBTableV3> {
+  ): APIPromise<HubDBTableV3> {
     const { includeForeignIds } = params ?? {};
     return this._client.post(path`/cms/v3/hubdb/tables/${tableIDOrName}/draft/reset`, {
       query: { includeForeignIds },
@@ -363,7 +363,7 @@ export class Hubdb extends APIResource {
     tableIDOrName: string,
     params: HubdbUnpublishTableParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CmsHubdbHubDBTableV3> {
+  ): APIPromise<HubDBTableV3> {
     const { includeForeignIds } = params ?? {};
     return this._client.post(path`/cms/v3/hubdb/tables/${tableIDOrName}/unpublish`, {
       query: { includeForeignIds },
@@ -378,7 +378,7 @@ export class Hubdb extends APIResource {
     tableIDOrName: string,
     params: HubdbUpdateDraftTableParams,
     options?: RequestOptions,
-  ): APIPromise<CmsHubdbHubDBTableV3> {
+  ): APIPromise<HubDBTableV3> {
     const { archived, includeForeignIds, isGetLocalizedSchema, ...body } = params;
     return this._client.patch(path`/cms/v3/hubdb/tables/${tableIDOrName}/draft`, {
       query: { archived, includeForeignIds, isGetLocalizedSchema },
@@ -394,7 +394,7 @@ export class Hubdb extends APIResource {
     rowID: string,
     params: HubdbUpdateDraftTableRowParams,
     options?: RequestOptions,
-  ): APIPromise<CmsHubdbHubDBTableRowV3> {
+  ): APIPromise<HubDBTableRowV3> {
     const { tableIdOrName, ...body } = params;
     return this._client.patch(path`/cms/v3/hubdb/tables/${tableIdOrName}/rows/${rowID}/draft`, {
       body,
@@ -409,7 +409,7 @@ export class Hubdb extends APIResource {
     tableIDOrName: string,
     body: HubdbUpdateDraftTableRowsParams,
     options?: RequestOptions,
-  ): APIPromise<CmsHubdbBatchResponseHubDBTableRowV3> {
+  ): APIPromise<BatchResponseHubDBTableRowV3> {
     return this._client.post(path`/cms/v3/hubdb/tables/${tableIDOrName}/rows/draft/batch/update`, {
       body,
       ...options,
@@ -417,36 +417,36 @@ export class Hubdb extends APIResource {
   }
 }
 
-export interface CmsHubdbBatchInputHubDBTableRowBatchCloneRequest {
-  inputs: Array<CmsHubdbHubDBTableRowBatchCloneRequest>;
+export interface BatchInputHubDBTableRowBatchCloneRequest {
+  inputs: Array<HubDBTableRowBatchCloneRequest>;
 }
 
-export interface CmsHubdbBatchInputHubDBTableRowV3BatchUpdateRequest {
-  inputs: Array<CmsHubdbHubDBTableRowV3BatchUpdateRequest>;
+export interface BatchInputHubDBTableRowV3BatchUpdateRequest {
+  inputs: Array<HubDBTableRowV3BatchUpdateRequest>;
 }
 
-export interface CmsHubdbBatchInputHubDBTableRowV3Request {
-  inputs: Array<CmsHubdbHubDBTableRowV3Request>;
+export interface BatchInputHubDBTableRowV3Request {
+  inputs: Array<HubDBTableRowV3Request>;
 }
 
-export interface CmsHubdbBatchResponseHubDBTableRowV3 {
+export interface BatchResponseHubDBTableRowV3 {
   completedAt?: string;
 
   links?: { [key: string]: string };
 
   requestedAt?: string;
 
-  results?: Array<CmsHubdbHubDBTableRowV3>;
+  results?: Array<HubDBTableRowV3>;
 
   startedAt?: string;
 
   status?: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
 }
 
-export interface CmsHubdbBatchResponseHubDBTableRowV3WithErrors {
+export interface BatchResponseHubDBTableRowV3WithErrors {
   completedAt: string;
 
-  results: Array<CmsHubdbHubDBTableRowV3>;
+  results: Array<HubDBTableRowV3>;
 
   startedAt: string;
 
@@ -461,25 +461,25 @@ export interface CmsHubdbBatchResponseHubDBTableRowV3WithErrors {
   requestedAt?: string;
 }
 
-export interface CmsHubdbBoundedNextPage {
+export interface BoundedNextPage {
   offset: number;
 
   link?: string;
 }
 
-export interface CmsHubdbBoundedPaging {
-  next?: CmsHubdbBoundedNextPage;
+export interface BoundedPaging {
+  next?: BoundedNextPage;
 }
 
-export interface CmsHubdbCollectionResponseWithTotalHubDBTableV3ForwardPaging {
-  results: Array<CmsHubdbHubDBTableV3>;
+export interface CollectionResponseWithTotalHubDBTableV3ForwardPaging {
+  results: Array<HubDBTableV3>;
 
   total: number;
 
   paging?: Shared.ForwardPaging;
 }
 
-export interface CmsHubdbColumn {
+export interface Column {
   label: string;
 
   name: string;
@@ -512,7 +512,7 @@ export interface CmsHubdbColumn {
 
   createdAt?: string;
 
-  createdBy?: CmsHubdbSimpleUser;
+  createdBy?: SimpleUser;
 
   createdByUserId?: number;
 
@@ -520,35 +520,35 @@ export interface CmsHubdbColumn {
 
   foreignColumnId?: number;
 
-  foreignIds?: Array<CmsHubdbForeignID>;
+  foreignIds?: Array<ForeignID>;
 
-  foreignIdsById?: { [key: string]: CmsHubdbForeignID };
+  foreignIdsById?: { [key: string]: ForeignID };
 
-  foreignIdsByName?: { [key: string]: CmsHubdbForeignID };
+  foreignIdsByName?: { [key: string]: ForeignID };
 
   foreignTableId?: number;
 
   optionCount?: number;
 
-  options?: Array<CRMAPI.CRMOption>;
+  options?: Array<CRMAPI.Option>;
 
   updatedAt?: string;
 
-  updatedBy?: CmsHubdbSimpleUser;
+  updatedBy?: SimpleUser;
 
   updatedByUserId?: number;
 
   width?: number;
 }
 
-export interface CmsHubdbColumnRequest {
+export interface ColumnRequest {
   id: number;
 
   label: string;
 
   name: string;
 
-  options: Array<CRMAPI.CRMOption>;
+  options: Array<CRMAPI.Option>;
 
   type:
     | 'NULL'
@@ -583,7 +583,7 @@ export interface CmsHubdbColumnRequest {
   maxNumberOfOptions?: number;
 }
 
-export interface CmsHubdbForeignID {
+export interface ForeignID {
   id: string;
 
   name: string;
@@ -591,7 +591,7 @@ export interface CmsHubdbForeignID {
   type: string;
 }
 
-export interface CmsHubdbHubDBTableCloneRequest {
+export interface HubDBTableCloneRequest {
   copyRows: boolean;
 
   isHubspotDefined: boolean;
@@ -601,13 +601,13 @@ export interface CmsHubdbHubDBTableCloneRequest {
   newName?: string;
 }
 
-export interface CmsHubdbHubDBTableRowBatchCloneRequest {
+export interface HubDBTableRowBatchCloneRequest {
   id: string;
 
   name?: string;
 }
 
-export interface CmsHubdbHubDBTableRowV3 {
+export interface HubDBTableRowV3 {
   values: { [key: string]: unknown };
 
   id?: string;
@@ -625,10 +625,10 @@ export interface CmsHubdbHubDBTableRowV3 {
   updatedAt?: string;
 }
 
-export interface CmsHubdbHubDBTableRowV3BatchUpdateRequest {
+export interface HubDBTableRowV3BatchUpdateRequest {
   id: string;
 
-  values: { [key: string]: CmsHubdbVariant };
+  values: { [key: string]: Variant };
 
   childTableId?: number;
 
@@ -639,8 +639,8 @@ export interface CmsHubdbHubDBTableRowV3BatchUpdateRequest {
   path?: string;
 }
 
-export interface CmsHubdbHubDBTableRowV3Request {
-  values: { [key: string]: CmsHubdbVariant };
+export interface HubDBTableRowV3Request {
+  values: { [key: string]: Variant };
 
   childTableId?: number;
 
@@ -651,7 +651,7 @@ export interface CmsHubdbHubDBTableRowV3Request {
   path?: string;
 }
 
-export interface CmsHubdbHubDBTableV3 {
+export interface HubDBTableV3 {
   deletedAt: string;
 
   label: string;
@@ -666,11 +666,11 @@ export interface CmsHubdbHubDBTableV3 {
 
   columnCount?: number;
 
-  columns?: Array<CmsHubdbColumn>;
+  columns?: Array<Column>;
 
   createdAt?: string;
 
-  createdBy?: CmsHubdbSimpleUser;
+  createdBy?: SimpleUser;
 
   deleted?: boolean;
 
@@ -688,12 +688,12 @@ export interface CmsHubdbHubDBTableV3 {
 
   updatedAt?: string;
 
-  updatedBy?: CmsHubdbSimpleUser;
+  updatedBy?: SimpleUser;
 
   useForPages?: boolean;
 }
 
-export interface CmsHubdbHubDBTableV3Request {
+export interface HubDBTableV3Request {
   label: string;
 
   name: string;
@@ -702,7 +702,7 @@ export interface CmsHubdbHubDBTableV3Request {
 
   allowPublicApiAccess?: boolean;
 
-  columns?: Array<CmsHubdbColumnRequest>;
+  columns?: Array<ColumnRequest>;
 
   dynamicMetaTags?: { [key: string]: number };
 
@@ -711,7 +711,7 @@ export interface CmsHubdbHubDBTableV3Request {
   useForPages?: boolean;
 }
 
-export interface CmsHubdbImportResult {
+export interface ImportResult {
   duplicateRows: number;
 
   errors: Array<Shared.Error>;
@@ -721,7 +721,7 @@ export interface CmsHubdbImportResult {
   rowsImported: number;
 }
 
-export interface CmsHubdbOption {
+export interface Option {
   id: string;
 
   createdAt: string;
@@ -734,28 +734,28 @@ export interface CmsHubdbOption {
 
   updatedAt: string;
 
-  createdBy?: CmsHubdbSimpleUser;
+  createdBy?: SimpleUser;
 
   createdByUserId?: number;
 
   label?: string;
 
-  updatedBy?: CmsHubdbSimpleUser;
+  updatedBy?: SimpleUser;
 
   updatedByUserId?: number;
 }
 
-export interface CmsHubdbRandomAccessCollectionResponseWithTotalHubDBTableRowV3 {
+export interface RandomAccessCollectionResponseWithTotalHubDBTableRowV3 {
   results: Array<unknown>;
 
   total: number;
 
   type: 'RANDOM_ACCESS';
 
-  paging?: CmsHubdbBoundedPaging;
+  paging?: BoundedPaging;
 }
 
-export interface CmsHubdbSimpleUser {
+export interface SimpleUser {
   id: string;
 
   email: string;
@@ -765,7 +765,7 @@ export interface CmsHubdbSimpleUser {
   lastName: string;
 }
 
-export interface CmsHubdbStandardError {
+export interface StandardError {
   category: string;
 
   context: { [key: string]: Array<string> };
@@ -783,21 +783,21 @@ export interface CmsHubdbStandardError {
   id?: string;
 }
 
-export interface CmsHubdbStreamingCollectionResponseWithTotalHubDBTableRowV3 {
+export interface StreamingCollectionResponseWithTotalHubDBTableRowV3 {
   results: Array<unknown>;
 
   total: number;
 
   type: 'STREAMING';
 
-  paging?: EmailsAPI.MarketingEmailsPaging;
+  paging?: EmailsAPI.Paging;
 }
 
-export type CmsHubdbUnifiedCollectionResponseWithTotalBaseHubDBTableRowV3 =
-  | CmsHubdbRandomAccessCollectionResponseWithTotalHubDBTableRowV3
-  | CmsHubdbStreamingCollectionResponseWithTotalHubDBTableRowV3;
+export type UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3 =
+  | RandomAccessCollectionResponseWithTotalHubDBTableRowV3
+  | StreamingCollectionResponseWithTotalHubDBTableRowV3;
 
-export type CmsHubdbVariant = unknown;
+export type Variant = unknown;
 
 export interface HubdbCloneDraftTableParams {
   copyRows: boolean;
@@ -822,11 +822,11 @@ export interface HubdbCloneDraftTableRowParams {
 }
 
 export interface HubdbCloneDraftTableRowsParams {
-  inputs: Array<CmsHubdbHubDBTableRowBatchCloneRequest>;
+  inputs: Array<HubDBTableRowBatchCloneRequest>;
 }
 
 export interface HubdbCreateDraftTableRowsParams {
-  inputs: Array<CmsHubdbHubDBTableRowV3Request>;
+  inputs: Array<HubDBTableRowV3Request>;
 }
 
 export interface HubdbCreateTableParams {
@@ -838,7 +838,7 @@ export interface HubdbCreateTableParams {
 
   allowPublicApiAccess?: boolean;
 
-  columns?: Array<CmsHubdbColumnRequest>;
+  columns?: Array<ColumnRequest>;
 
   dynamicMetaTags?: { [key: string]: number };
 
@@ -848,7 +848,7 @@ export interface HubdbCreateTableParams {
 }
 
 export interface HubdbCreateTableRowParams {
-  values: { [key: string]: CmsHubdbVariant };
+  values: { [key: string]: Variant };
 
   childTableId?: number;
 
@@ -1012,7 +1012,7 @@ export interface HubdbReplaceDraftTableRowParams {
   /**
    * Body param:
    */
-  values: { [key: string]: CmsHubdbVariant };
+  values: { [key: string]: Variant };
 
   /**
    * Body param:
@@ -1036,7 +1036,7 @@ export interface HubdbReplaceDraftTableRowParams {
 }
 
 export interface HubdbReplaceDraftTableRowsParams {
-  inputs: Array<CmsHubdbHubDBTableRowV3BatchUpdateRequest>;
+  inputs: Array<HubDBTableRowV3BatchUpdateRequest>;
 }
 
 export interface HubdbResetDraftTableParams {
@@ -1086,7 +1086,7 @@ export interface HubdbUpdateDraftTableParams {
   /**
    * Body param:
    */
-  columns?: Array<CmsHubdbColumnRequest>;
+  columns?: Array<ColumnRequest>;
 
   /**
    * Body param:
@@ -1113,7 +1113,7 @@ export interface HubdbUpdateDraftTableRowParams {
   /**
    * Body param:
    */
-  values: { [key: string]: CmsHubdbVariant };
+  values: { [key: string]: Variant };
 
   /**
    * Body param:
@@ -1137,39 +1137,39 @@ export interface HubdbUpdateDraftTableRowParams {
 }
 
 export interface HubdbUpdateDraftTableRowsParams {
-  inputs: Array<CmsHubdbHubDBTableRowV3BatchUpdateRequest>;
+  inputs: Array<HubDBTableRowV3BatchUpdateRequest>;
 }
 
 Hubdb.Rows = Rows;
 
 export declare namespace Hubdb {
   export {
-    type CmsHubdbBatchInputHubDBTableRowBatchCloneRequest as CmsHubdbBatchInputHubDBTableRowBatchCloneRequest,
-    type CmsHubdbBatchInputHubDBTableRowV3BatchUpdateRequest as CmsHubdbBatchInputHubDBTableRowV3BatchUpdateRequest,
-    type CmsHubdbBatchInputHubDBTableRowV3Request as CmsHubdbBatchInputHubDBTableRowV3Request,
-    type CmsHubdbBatchResponseHubDBTableRowV3 as CmsHubdbBatchResponseHubDBTableRowV3,
-    type CmsHubdbBatchResponseHubDBTableRowV3WithErrors as CmsHubdbBatchResponseHubDBTableRowV3WithErrors,
-    type CmsHubdbBoundedNextPage as CmsHubdbBoundedNextPage,
-    type CmsHubdbBoundedPaging as CmsHubdbBoundedPaging,
-    type CmsHubdbCollectionResponseWithTotalHubDBTableV3ForwardPaging as CmsHubdbCollectionResponseWithTotalHubDBTableV3ForwardPaging,
-    type CmsHubdbColumn as CmsHubdbColumn,
-    type CmsHubdbColumnRequest as CmsHubdbColumnRequest,
-    type CmsHubdbForeignID as CmsHubdbForeignID,
-    type CmsHubdbHubDBTableCloneRequest as CmsHubdbHubDBTableCloneRequest,
-    type CmsHubdbHubDBTableRowBatchCloneRequest as CmsHubdbHubDBTableRowBatchCloneRequest,
-    type CmsHubdbHubDBTableRowV3 as CmsHubdbHubDBTableRowV3,
-    type CmsHubdbHubDBTableRowV3BatchUpdateRequest as CmsHubdbHubDBTableRowV3BatchUpdateRequest,
-    type CmsHubdbHubDBTableRowV3Request as CmsHubdbHubDBTableRowV3Request,
-    type CmsHubdbHubDBTableV3 as CmsHubdbHubDBTableV3,
-    type CmsHubdbHubDBTableV3Request as CmsHubdbHubDBTableV3Request,
-    type CmsHubdbImportResult as CmsHubdbImportResult,
-    type CmsHubdbOption as CmsHubdbOption,
-    type CmsHubdbRandomAccessCollectionResponseWithTotalHubDBTableRowV3 as CmsHubdbRandomAccessCollectionResponseWithTotalHubDBTableRowV3,
-    type CmsHubdbSimpleUser as CmsHubdbSimpleUser,
-    type CmsHubdbStandardError as CmsHubdbStandardError,
-    type CmsHubdbStreamingCollectionResponseWithTotalHubDBTableRowV3 as CmsHubdbStreamingCollectionResponseWithTotalHubDBTableRowV3,
-    type CmsHubdbUnifiedCollectionResponseWithTotalBaseHubDBTableRowV3 as CmsHubdbUnifiedCollectionResponseWithTotalBaseHubDBTableRowV3,
-    type CmsHubdbVariant as CmsHubdbVariant,
+    type BatchInputHubDBTableRowBatchCloneRequest as BatchInputHubDBTableRowBatchCloneRequest,
+    type BatchInputHubDBTableRowV3BatchUpdateRequest as BatchInputHubDBTableRowV3BatchUpdateRequest,
+    type BatchInputHubDBTableRowV3Request as BatchInputHubDBTableRowV3Request,
+    type BatchResponseHubDBTableRowV3 as BatchResponseHubDBTableRowV3,
+    type BatchResponseHubDBTableRowV3WithErrors as BatchResponseHubDBTableRowV3WithErrors,
+    type BoundedNextPage as BoundedNextPage,
+    type BoundedPaging as BoundedPaging,
+    type CollectionResponseWithTotalHubDBTableV3ForwardPaging as CollectionResponseWithTotalHubDBTableV3ForwardPaging,
+    type Column as Column,
+    type ColumnRequest as ColumnRequest,
+    type ForeignID as ForeignID,
+    type HubDBTableCloneRequest as HubDBTableCloneRequest,
+    type HubDBTableRowBatchCloneRequest as HubDBTableRowBatchCloneRequest,
+    type HubDBTableRowV3 as HubDBTableRowV3,
+    type HubDBTableRowV3BatchUpdateRequest as HubDBTableRowV3BatchUpdateRequest,
+    type HubDBTableRowV3Request as HubDBTableRowV3Request,
+    type HubDBTableV3 as HubDBTableV3,
+    type HubDBTableV3Request as HubDBTableV3Request,
+    type ImportResult as ImportResult,
+    type Option as Option,
+    type RandomAccessCollectionResponseWithTotalHubDBTableRowV3 as RandomAccessCollectionResponseWithTotalHubDBTableRowV3,
+    type SimpleUser as SimpleUser,
+    type StandardError as StandardError,
+    type StreamingCollectionResponseWithTotalHubDBTableRowV3 as StreamingCollectionResponseWithTotalHubDBTableRowV3,
+    type UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3 as UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3,
+    type Variant as Variant,
     type HubdbCloneDraftTableParams as HubdbCloneDraftTableParams,
     type HubdbCloneDraftTableRowParams as HubdbCloneDraftTableRowParams,
     type HubdbCloneDraftTableRowsParams as HubdbCloneDraftTableRowsParams,

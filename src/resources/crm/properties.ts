@@ -17,7 +17,7 @@ export class Properties extends APIResource {
     objectType: string,
     body: PropertyCreateParams,
     options?: RequestOptions,
-  ): APIPromise<CRMPropertiesCreatedResponsePropertyGroup> {
+  ): APIPromise<CreatedResponsePropertyGroup> {
     return this._client.post(path`/crm/v3/properties/${objectType}/groups`, { body, ...options });
   }
 
@@ -28,7 +28,7 @@ export class Properties extends APIResource {
     propertyName: string,
     params: PropertyUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<CRMAPI.CRMProperty> {
+  ): APIPromise<CRMAPI.Property> {
     const { objectType, ...body } = params;
     return this._client.patch(path`/crm/v3/properties/${objectType}/${propertyName}`, { body, ...options });
   }
@@ -36,10 +36,7 @@ export class Properties extends APIResource {
   /**
    * Read all property groups
    */
-  list(
-    objectType: string,
-    options?: RequestOptions,
-  ): APIPromise<CRMPropertiesCollectionResponsePropertyGroup> {
+  list(objectType: string, options?: RequestOptions): APIPromise<CollectionResponsePropertyGroup> {
     return this._client.get(path`/crm/v3/properties/${objectType}/groups`, options);
   }
 
@@ -61,7 +58,7 @@ export class Properties extends APIResource {
     propertyName: string,
     params: PropertyGetByNameParams,
     options?: RequestOptions,
-  ): APIPromise<CRMAPI.CRMProperty> {
+  ): APIPromise<CRMAPI.Property> {
     const { objectType, ...query } = params;
     return this._client.get(path`/crm/v3/properties/${objectType}/${propertyName}`, { query, ...options });
   }
@@ -73,31 +70,31 @@ export class Properties extends APIResource {
     objectType: string,
     body: PropertyReadParams,
     options?: RequestOptions,
-  ): APIPromise<CRMPropertiesBatchResponseProperty> {
+  ): APIPromise<BatchResponseProperty> {
     return this._client.post(path`/crm/v3/properties/${objectType}/batch/read`, { body, ...options });
   }
 }
 
-export interface CRMPropertiesBatchInputPropertyCreate {
-  inputs: Array<CRMPropertiesPropertyCreate>;
+export interface BatchInputPropertyCreate {
+  inputs: Array<PropertyCreate>;
 }
 
-export interface CRMPropertiesBatchInputPropertyName {
-  inputs: Array<CRMPropertiesPropertyName>;
+export interface BatchInputPropertyName {
+  inputs: Array<PropertyName>;
 }
 
-export interface CRMPropertiesBatchReadInputPropertyName {
+export interface BatchReadInputPropertyName {
   archived: boolean;
 
-  inputs: Array<CRMPropertiesPropertyName>;
+  inputs: Array<PropertyName>;
 
   dataSensitivity?: 'non_sensitive' | 'sensitive' | 'highly_sensitive';
 }
 
-export interface CRMPropertiesBatchResponseProperty {
+export interface BatchResponseProperty {
   completedAt: string;
 
-  results: Array<CRMAPI.CRMProperty>;
+  results: Array<CRMAPI.Property>;
 
   startedAt: string;
 
@@ -112,35 +109,35 @@ export interface CRMPropertiesBatchResponseProperty {
   requestedAt?: string;
 }
 
-export interface CRMPropertiesCollectionResponseProperty {
-  results: Array<CRMAPI.CRMProperty>;
+export interface CollectionResponseProperty {
+  results: Array<CRMAPI.Property>;
 
-  paging?: EmailsAPI.MarketingEmailsPaging;
+  paging?: EmailsAPI.Paging;
 }
 
-export interface CRMPropertiesCollectionResponsePropertyGroup {
-  results: Array<CRMPropertiesPropertyGroup>;
+export interface CollectionResponsePropertyGroup {
+  results: Array<PropertyGroup>;
 
-  paging?: EmailsAPI.MarketingEmailsPaging;
+  paging?: EmailsAPI.Paging;
 }
 
-export interface CRMPropertiesCreatedResponseProperty {
+export interface CreatedResponseProperty {
   createdResourceId: string;
 
-  entity: CRMAPI.CRMProperty;
+  entity: CRMAPI.Property;
 
   location?: string;
 }
 
-export interface CRMPropertiesCreatedResponsePropertyGroup {
+export interface CreatedResponsePropertyGroup {
   createdResourceId: string;
 
-  entity: CRMPropertiesPropertyGroup;
+  entity: PropertyGroup;
 
   location?: string;
 }
 
-export interface CRMPropertiesOptionInput {
+export interface OptionInput {
   hidden: boolean;
 
   label: string;
@@ -150,7 +147,7 @@ export interface CRMPropertiesOptionInput {
   displayOrder?: number;
 }
 
-export interface CRMPropertiesPropertyCreate {
+export interface PropertyCreate {
   fieldType:
     | 'booleancheckbox'
     | 'calculation_equation'
@@ -187,12 +184,12 @@ export interface CRMPropertiesPropertyCreate {
 
   hidden?: boolean;
 
-  options?: Array<CRMPropertiesOptionInput>;
+  options?: Array<OptionInput>;
 
   referencedObjectType?: string;
 }
 
-export interface CRMPropertiesPropertyGroup {
+export interface PropertyGroup {
   archived: boolean;
 
   displayOrder: number;
@@ -202,7 +199,7 @@ export interface CRMPropertiesPropertyGroup {
   name: string;
 }
 
-export interface CRMPropertiesPropertyGroupCreate {
+export interface PropertyGroupCreate {
   label: string;
 
   name: string;
@@ -210,17 +207,17 @@ export interface CRMPropertiesPropertyGroupCreate {
   displayOrder?: number;
 }
 
-export interface CRMPropertiesPropertyGroupUpdate {
+export interface PropertyGroupUpdate {
   displayOrder?: number;
 
   label?: string;
 }
 
-export interface CRMPropertiesPropertyName {
+export interface PropertyName {
   name: string;
 }
 
-export interface CRMPropertiesPropertyUpdate {
+export interface PropertyUpdate {
   calculationFormula?: string;
 
   displayOrder?: number;
@@ -247,7 +244,7 @@ export interface CRMPropertiesPropertyUpdate {
 
   label?: string;
 
-  options?: Array<CRMPropertiesOptionInput>;
+  options?: Array<OptionInput>;
 
   type?: 'bool' | 'date' | 'datetime' | 'enumeration' | 'number' | 'phone_number' | 'string';
 }
@@ -316,7 +313,7 @@ export interface PropertyUpdateParams {
   /**
    * Body param:
    */
-  options?: Array<CRMPropertiesOptionInput>;
+  options?: Array<OptionInput>;
 
   /**
    * Body param:
@@ -348,28 +345,28 @@ export interface PropertyGetByNameParams {
 export interface PropertyReadParams {
   archived: boolean;
 
-  inputs: Array<CRMPropertiesPropertyName>;
+  inputs: Array<PropertyName>;
 
   dataSensitivity?: 'non_sensitive' | 'sensitive' | 'highly_sensitive';
 }
 
 export declare namespace Properties {
   export {
-    type CRMPropertiesBatchInputPropertyCreate as CRMPropertiesBatchInputPropertyCreate,
-    type CRMPropertiesBatchInputPropertyName as CRMPropertiesBatchInputPropertyName,
-    type CRMPropertiesBatchReadInputPropertyName as CRMPropertiesBatchReadInputPropertyName,
-    type CRMPropertiesBatchResponseProperty as CRMPropertiesBatchResponseProperty,
-    type CRMPropertiesCollectionResponseProperty as CRMPropertiesCollectionResponseProperty,
-    type CRMPropertiesCollectionResponsePropertyGroup as CRMPropertiesCollectionResponsePropertyGroup,
-    type CRMPropertiesCreatedResponseProperty as CRMPropertiesCreatedResponseProperty,
-    type CRMPropertiesCreatedResponsePropertyGroup as CRMPropertiesCreatedResponsePropertyGroup,
-    type CRMPropertiesOptionInput as CRMPropertiesOptionInput,
-    type CRMPropertiesPropertyCreate as CRMPropertiesPropertyCreate,
-    type CRMPropertiesPropertyGroup as CRMPropertiesPropertyGroup,
-    type CRMPropertiesPropertyGroupCreate as CRMPropertiesPropertyGroupCreate,
-    type CRMPropertiesPropertyGroupUpdate as CRMPropertiesPropertyGroupUpdate,
-    type CRMPropertiesPropertyName as CRMPropertiesPropertyName,
-    type CRMPropertiesPropertyUpdate as CRMPropertiesPropertyUpdate,
+    type BatchInputPropertyCreate as BatchInputPropertyCreate,
+    type BatchInputPropertyName as BatchInputPropertyName,
+    type BatchReadInputPropertyName as BatchReadInputPropertyName,
+    type BatchResponseProperty as BatchResponseProperty,
+    type CollectionResponseProperty as CollectionResponseProperty,
+    type CollectionResponsePropertyGroup as CollectionResponsePropertyGroup,
+    type CreatedResponseProperty as CreatedResponseProperty,
+    type CreatedResponsePropertyGroup as CreatedResponsePropertyGroup,
+    type OptionInput as OptionInput,
+    type PropertyCreate as PropertyCreate,
+    type PropertyGroup as PropertyGroup,
+    type PropertyGroupCreate as PropertyGroupCreate,
+    type PropertyGroupUpdate as PropertyGroupUpdate,
+    type PropertyName as PropertyName,
+    type PropertyUpdate as PropertyUpdate,
     type PropertyCreateParams as PropertyCreateParams,
     type PropertyUpdateParams as PropertyUpdateParams,
     type PropertyDeleteParams as PropertyDeleteParams,

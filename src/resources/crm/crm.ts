@@ -3,46 +3,45 @@
 import { APIResource } from '../../core/resource';
 import * as PipelinesAPI from './pipelines';
 import {
-  CRMPipelinesCollectionResponsePipelineNoPaging,
-  CRMPipelinesCollectionResponsePipelineStageNoPaging,
-  CRMPipelinesCollectionResponsePublicAuditInfoNoPaging,
-  CRMPipelinesPipeline,
-  CRMPipelinesPipelineInput,
-  CRMPipelinesPipelinePatchInput,
-  CRMPipelinesPipelineStage,
-  CRMPipelinesPipelineStageInput,
-  CRMPipelinesPipelineStagePatchInput,
-  CRMPipelinesPublicAuditInfo,
+  CollectionResponsePipelineNoPaging,
+  CollectionResponsePipelineStageNoPaging,
+  CollectionResponsePublicAuditInfoNoPaging,
+  Pipeline,
   PipelineCreateParams,
   PipelineDeleteParams,
   PipelineGetAuditParams,
+  PipelineInput,
+  PipelinePatchInput,
   PipelineReadParams,
   PipelineReplaceParams,
+  PipelineStage,
+  PipelineStageInput,
+  PipelineStagePatchInput,
   PipelineUpdateParams,
   Pipelines,
+  PublicAuditInfo,
 } from './pipelines';
 import * as PropertiesAPI from './properties';
 import {
-  CRMPropertiesBatchInputPropertyCreate,
-  CRMPropertiesBatchInputPropertyName,
-  CRMPropertiesBatchReadInputPropertyName,
-  CRMPropertiesBatchResponseProperty,
-  CRMPropertiesCollectionResponseProperty,
-  CRMPropertiesCollectionResponsePropertyGroup,
-  CRMPropertiesCreatedResponseProperty,
-  CRMPropertiesCreatedResponsePropertyGroup,
-  CRMPropertiesOptionInput,
-  CRMPropertiesPropertyCreate,
-  CRMPropertiesPropertyGroup,
-  CRMPropertiesPropertyGroupCreate,
-  CRMPropertiesPropertyGroupUpdate,
-  CRMPropertiesPropertyName,
-  CRMPropertiesPropertyUpdate,
+  BatchInputPropertyCreate,
+  BatchInputPropertyName,
+  BatchReadInputPropertyName,
+  BatchResponseProperty,
+  CollectionResponseProperty,
+  CollectionResponsePropertyGroup,
+  CreatedResponseProperty,
+  CreatedResponsePropertyGroup,
   Properties,
+  PropertyCreate,
   PropertyCreateParams,
   PropertyDeleteParams,
   PropertyGetByNameParams,
+  PropertyGroup,
+  PropertyGroupCreate,
+  PropertyGroupUpdate,
+  PropertyName,
   PropertyReadParams,
+  PropertyUpdate,
   PropertyUpdateParams,
 } from './properties';
 import * as EmailsAPI from '../marketing/emails';
@@ -52,46 +51,46 @@ import {
   AssociationDeleteParams,
   AssociationReadParams,
   Associations,
-  CRMAssociationsBatchInputPublicAssociation,
-  CRMAssociationsBatchInputPublicObjectID,
-  CRMAssociationsBatchResponsePublicAssociation,
-  CRMAssociationsBatchResponsePublicAssociationMulti,
-  CRMAssociationsPublicAssociation,
-  CRMAssociationsPublicAssociationMulti,
+  BatchInputPublicAssociation,
+  BatchInputPublicObjectID,
+  BatchResponsePublicAssociation,
+  BatchResponsePublicAssociationMulti,
+  PublicAssociation,
+  PublicAssociationMulti,
 } from './associations/associations';
 import * as V4API from './associations/v4';
 import * as ExtensionsAPI from './extensions/extensions';
 import { Extensions } from './extensions/extensions';
 import * as ObjectsAPI from './objects/objects';
 import {
-  CRMObjectsBatchInputSimplePublicObjectBatchInput,
-  CRMObjectsBatchInputSimplePublicObjectBatchInputForCreate,
-  CRMObjectsBatchInputSimplePublicObjectBatchInputUpsert,
-  CRMObjectsBatchInputSimplePublicObjectID,
-  CRMObjectsBatchReadInputSimplePublicObjectID,
-  CRMObjectsBatchResponseSimplePublicObject,
-  CRMObjectsBatchResponseSimplePublicUpsertObject,
-  CRMObjectsCollectionResponseAssociatedID,
-  CRMObjectsCollectionResponseSimplePublicObjectWithAssociations,
-  CRMObjectsCollectionResponseWithTotalSimplePublicObject,
-  CRMObjectsCreatedResponseSimplePublicObject,
-  CRMObjectsFilter,
-  CRMObjectsFilterGroup,
-  CRMObjectsPublicAssociationsForObject,
-  CRMObjectsPublicGdprDeleteInput,
-  CRMObjectsPublicMergeInput,
-  CRMObjectsPublicObjectSearchRequest,
-  CRMObjectsSimplePublicObject,
-  CRMObjectsSimplePublicObjectBatchInput,
-  CRMObjectsSimplePublicObjectBatchInputForCreate,
-  CRMObjectsSimplePublicObjectBatchInputUpsert,
-  CRMObjectsSimplePublicObjectID,
-  CRMObjectsSimplePublicObjectInput,
-  CRMObjectsSimplePublicObjectInputForCreate,
-  CRMObjectsSimplePublicObjectWithAssociations,
-  CRMObjectsSimplePublicUpsertObject,
-  CRMObjectsValueWithTimestamp,
+  BatchInputSimplePublicObjectBatchInput,
+  BatchInputSimplePublicObjectBatchInputForCreate,
+  BatchInputSimplePublicObjectBatchInputUpsert,
+  BatchInputSimplePublicObjectID,
+  BatchReadInputSimplePublicObjectID,
+  BatchResponseSimplePublicObject,
+  BatchResponseSimplePublicUpsertObject,
+  CollectionResponseAssociatedID,
+  CollectionResponseSimplePublicObjectWithAssociations,
+  CollectionResponseWithTotalSimplePublicObject,
+  CreatedResponseSimplePublicObject,
+  Filter,
+  FilterGroup,
   Objects,
+  PublicAssociationsForObject,
+  PublicGdprDeleteInput,
+  PublicMergeInput,
+  PublicObjectSearchRequest,
+  SimplePublicObject,
+  SimplePublicObjectBatchInput,
+  SimplePublicObjectBatchInputForCreate,
+  SimplePublicObjectBatchInputUpsert,
+  SimplePublicObjectID,
+  SimplePublicObjectInput,
+  SimplePublicObjectInputForCreate,
+  SimplePublicObjectWithAssociations,
+  SimplePublicUpsertObject,
+  ValueWithTimestamp,
 } from './objects/objects';
 
 export class CRM extends APIResource {
@@ -102,13 +101,13 @@ export class CRM extends APIResource {
   properties: PropertiesAPI.Properties = new PropertiesAPI.Properties(this._client);
 }
 
-export interface CRMAssociatedID {
+export interface AssociatedID {
   id: string;
 
   type: string;
 }
 
-export interface CRMAssociationDefinition {
+export interface AssociationDefinition {
   id: string;
 
   fromObjectTypeId: string;
@@ -122,7 +121,7 @@ export interface CRMAssociationDefinition {
   updatedAt?: string;
 }
 
-export interface CRMAssociationDefinitionEgg {
+export interface AssociationDefinitionEgg {
   fromObjectTypeId: string;
 
   toObjectTypeId: string;
@@ -130,13 +129,13 @@ export interface CRMAssociationDefinitionEgg {
   name?: string;
 }
 
-export interface CRMAssociationSpec {
+export interface AssociationSpec {
   associationCategory: 'HUBSPOT_DEFINED' | 'USER_DEFINED' | 'INTEGRATOR_DEFINED';
 
   associationTypeId: number;
 }
 
-export interface CRMAssociationSpecWithLabel {
+export interface AssociationSpecWithLabel {
   category: 'HUBSPOT_DEFINED' | 'USER_DEFINED' | 'INTEGRATOR_DEFINED';
 
   typeId: number;
@@ -144,16 +143,16 @@ export interface CRMAssociationSpecWithLabel {
   label?: string;
 }
 
-export interface CRMBatchResponsePublicDefaultAssociation {
+export interface BatchResponsePublicDefaultAssociation {
   completedAt: string;
 
-  results: Array<CRMPublicDefaultAssociation>;
+  results: Array<PublicDefaultAssociation>;
 
   startedAt: string;
 
   status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
 
-  errors?: Array<V4API.CRMAssociationsV4StandardError1>;
+  errors?: Array<V4API.StandardError1>;
 
   links?: { [key: string]: string };
 
@@ -162,25 +161,25 @@ export interface CRMBatchResponsePublicDefaultAssociation {
   requestedAt?: string;
 }
 
-export interface CRMCollectionResponseMultiAssociatedObjectWithLabel {
-  results: Array<CRMMultiAssociatedObjectWithLabel>;
+export interface CollectionResponseMultiAssociatedObjectWithLabel {
+  results: Array<MultiAssociatedObjectWithLabel>;
 
-  paging?: EmailsAPI.MarketingEmailsPaging;
+  paging?: EmailsAPI.Paging;
 }
 
-export interface CRMCollectionResponseObjectSchemaNoPaging {
-  results: Array<CRMObjectSchema>;
+export interface CollectionResponseObjectSchemaNoPaging {
+  results: Array<ObjectSchema>;
 }
 
-export interface CRMCreatedResponseLabelsBetweenObjectPair {
+export interface CreatedResponseLabelsBetweenObjectPair {
   createdResourceId: string;
 
-  entity: CRMLabelsBetweenObjectPair;
+  entity: LabelsBetweenObjectPair;
 
   location?: string;
 }
 
-export interface CRMLabelsBetweenObjectPair {
+export interface LabelsBetweenObjectPair {
   fromObjectId: string;
 
   fromObjectTypeId: string;
@@ -192,22 +191,22 @@ export interface CRMLabelsBetweenObjectPair {
   toObjectTypeId: string;
 }
 
-export interface CRMMultiAssociatedObjectWithLabel {
-  associationTypes: Array<V4API.CRMAssociationsV4AssociationSpecWithLabel1>;
+export interface MultiAssociatedObjectWithLabel {
+  associationTypes: Array<V4API.AssociationSpecWithLabel1>;
 
   toObjectId: string;
 }
 
-export interface CRMObjectSchema {
+export interface ObjectSchema {
   id: string;
 
-  associations: Array<CRMAssociationDefinition>;
+  associations: Array<AssociationDefinition>;
 
-  labels: CRMObjectTypeDefinitionLabels;
+  labels: ObjectTypeDefinitionLabels;
 
   name: string;
 
-  properties: Array<CRMProperty>;
+  properties: Array<Property>;
 
   requiredProperties: Array<string>;
 
@@ -232,14 +231,14 @@ export interface CRMObjectSchema {
   updatedByUserId?: number;
 }
 
-export interface CRMObjectSchemaEgg {
+export interface ObjectSchemaEgg {
   associatedObjects: Array<string>;
 
-  labels: CRMObjectTypeDefinitionLabels;
+  labels: ObjectTypeDefinitionLabels;
 
   name: string;
 
-  properties: Array<CRMObjectTypePropertyCreate>;
+  properties: Array<ObjectTypePropertyCreate>;
 
   requiredProperties: Array<string>;
 
@@ -250,10 +249,10 @@ export interface CRMObjectSchemaEgg {
   secondaryDisplayProperties?: Array<string>;
 }
 
-export interface CRMObjectTypeDefinition {
+export interface ObjectTypeDefinition {
   id: string;
 
-  labels: CRMObjectTypeDefinitionLabels;
+  labels: ObjectTypeDefinitionLabels;
 
   name: string;
 
@@ -278,16 +277,16 @@ export interface CRMObjectTypeDefinition {
   updatedAt?: string;
 }
 
-export interface CRMObjectTypeDefinitionLabels {
+export interface ObjectTypeDefinitionLabels {
   plural?: string;
 
   singular?: string;
 }
 
-export interface CRMObjectTypeDefinitionPatch {
+export interface ObjectTypeDefinitionPatch {
   clearDescription?: boolean;
 
-  labels?: CRMObjectTypeDefinitionLabels;
+  labels?: ObjectTypeDefinitionLabels;
 
   primaryDisplayProperty?: string;
 
@@ -300,7 +299,7 @@ export interface CRMObjectTypeDefinitionPatch {
   secondaryDisplayProperties?: Array<string>;
 }
 
-export interface CRMObjectTypePropertyCreate {
+export interface ObjectTypePropertyCreate {
   fieldType: string;
 
   label: string;
@@ -321,7 +320,7 @@ export interface CRMObjectTypePropertyCreate {
 
   numberDisplayHint?: 'unformatted' | 'formatted' | 'currency' | 'percentage' | 'duration' | 'probability';
 
-  options?: Array<PropertiesAPI.CRMPropertiesOptionInput>;
+  options?: Array<PropertiesAPI.OptionInput>;
 
   optionSortStrategy?: 'DISPLAY_ORDER' | 'ALPHABETICAL';
 
@@ -342,7 +341,7 @@ export interface CRMObjectTypePropertyCreate {
     | 'postal_code';
 }
 
-export interface CRMOption {
+export interface Option {
   hidden: boolean;
 
   label: string;
@@ -352,7 +351,7 @@ export interface CRMOption {
   displayOrder?: number;
 }
 
-export interface CRMOptionInput {
+export interface OptionInput {
   displayOrder: number;
 
   hidden: boolean;
@@ -362,7 +361,7 @@ export interface CRMOptionInput {
   value: string;
 }
 
-export interface CRMProperty {
+export interface Property {
   fieldType: string;
 
   groupName: string;
@@ -371,7 +370,7 @@ export interface CRMProperty {
 
   name: string;
 
-  options: Array<CRMOption>;
+  options: Array<Option>;
 
   type: string;
 
@@ -401,7 +400,7 @@ export interface CRMProperty {
 
   hubspotDefined?: boolean;
 
-  modificationMetadata?: CRMPropertyModificationMetadata;
+  modificationMetadata?: PropertyModificationMetadata;
 
   referencedObjectType?: string;
 
@@ -414,7 +413,7 @@ export interface CRMProperty {
   updatedUserId?: string;
 }
 
-export interface CRMPropertyModificationMetadata {
+export interface PropertyModificationMetadata {
   archivable: boolean;
 
   readOnlyDefinition: boolean;
@@ -424,15 +423,15 @@ export interface CRMPropertyModificationMetadata {
   readOnlyOptions?: boolean;
 }
 
-export interface CRMPublicDefaultAssociation {
-  associationSpec: V4API.CRMAssociationsV4AssociationSpec1;
+export interface PublicDefaultAssociation {
+  associationSpec: V4API.AssociationSpec1;
 
-  from: CRMPublicObjectID;
+  from: PublicObjectID;
 
-  to: CRMPublicObjectID;
+  to: PublicObjectID;
 }
 
-export interface CRMPublicObjectID {
+export interface PublicObjectID {
   id: string;
 }
 
@@ -444,39 +443,39 @@ CRM.Properties = Properties;
 
 export declare namespace CRM {
   export {
-    type CRMAssociatedID as CRMAssociatedID,
-    type CRMAssociationDefinition as CRMAssociationDefinition,
-    type CRMAssociationDefinitionEgg as CRMAssociationDefinitionEgg,
-    type CRMAssociationSpec as CRMAssociationSpec,
-    type CRMAssociationSpecWithLabel as CRMAssociationSpecWithLabel,
-    type CRMBatchResponsePublicDefaultAssociation as CRMBatchResponsePublicDefaultAssociation,
-    type CRMCollectionResponseMultiAssociatedObjectWithLabel as CRMCollectionResponseMultiAssociatedObjectWithLabel,
-    type CRMCollectionResponseObjectSchemaNoPaging as CRMCollectionResponseObjectSchemaNoPaging,
-    type CRMCreatedResponseLabelsBetweenObjectPair as CRMCreatedResponseLabelsBetweenObjectPair,
-    type CRMLabelsBetweenObjectPair as CRMLabelsBetweenObjectPair,
-    type CRMMultiAssociatedObjectWithLabel as CRMMultiAssociatedObjectWithLabel,
-    type CRMObjectSchema as CRMObjectSchema,
-    type CRMObjectSchemaEgg as CRMObjectSchemaEgg,
-    type CRMObjectTypeDefinition as CRMObjectTypeDefinition,
-    type CRMObjectTypeDefinitionLabels as CRMObjectTypeDefinitionLabels,
-    type CRMObjectTypeDefinitionPatch as CRMObjectTypeDefinitionPatch,
-    type CRMObjectTypePropertyCreate as CRMObjectTypePropertyCreate,
-    type CRMOption as CRMOption,
-    type CRMOptionInput as CRMOptionInput,
-    type CRMProperty as CRMProperty,
-    type CRMPropertyModificationMetadata as CRMPropertyModificationMetadata,
-    type CRMPublicDefaultAssociation as CRMPublicDefaultAssociation,
-    type CRMPublicObjectID as CRMPublicObjectID,
+    type AssociatedID as AssociatedID,
+    type AssociationDefinition as AssociationDefinition,
+    type AssociationDefinitionEgg as AssociationDefinitionEgg,
+    type AssociationSpec as AssociationSpec,
+    type AssociationSpecWithLabel as AssociationSpecWithLabel,
+    type BatchResponsePublicDefaultAssociation as BatchResponsePublicDefaultAssociation,
+    type CollectionResponseMultiAssociatedObjectWithLabel as CollectionResponseMultiAssociatedObjectWithLabel,
+    type CollectionResponseObjectSchemaNoPaging as CollectionResponseObjectSchemaNoPaging,
+    type CreatedResponseLabelsBetweenObjectPair as CreatedResponseLabelsBetweenObjectPair,
+    type LabelsBetweenObjectPair as LabelsBetweenObjectPair,
+    type MultiAssociatedObjectWithLabel as MultiAssociatedObjectWithLabel,
+    type ObjectSchema as ObjectSchema,
+    type ObjectSchemaEgg as ObjectSchemaEgg,
+    type ObjectTypeDefinition as ObjectTypeDefinition,
+    type ObjectTypeDefinitionLabels as ObjectTypeDefinitionLabels,
+    type ObjectTypeDefinitionPatch as ObjectTypeDefinitionPatch,
+    type ObjectTypePropertyCreate as ObjectTypePropertyCreate,
+    type Option as Option,
+    type OptionInput as OptionInput,
+    type Property as Property,
+    type PropertyModificationMetadata as PropertyModificationMetadata,
+    type PublicDefaultAssociation as PublicDefaultAssociation,
+    type PublicObjectID as PublicObjectID,
   };
 
   export {
     Associations as Associations,
-    type CRMAssociationsBatchInputPublicAssociation as CRMAssociationsBatchInputPublicAssociation,
-    type CRMAssociationsBatchInputPublicObjectID as CRMAssociationsBatchInputPublicObjectID,
-    type CRMAssociationsBatchResponsePublicAssociation as CRMAssociationsBatchResponsePublicAssociation,
-    type CRMAssociationsBatchResponsePublicAssociationMulti as CRMAssociationsBatchResponsePublicAssociationMulti,
-    type CRMAssociationsPublicAssociation as CRMAssociationsPublicAssociation,
-    type CRMAssociationsPublicAssociationMulti as CRMAssociationsPublicAssociationMulti,
+    type BatchInputPublicAssociation as BatchInputPublicAssociation,
+    type BatchInputPublicObjectID as BatchInputPublicObjectID,
+    type BatchResponsePublicAssociation as BatchResponsePublicAssociation,
+    type BatchResponsePublicAssociationMulti as BatchResponsePublicAssociationMulti,
+    type PublicAssociation as PublicAssociation,
+    type PublicAssociationMulti as PublicAssociationMulti,
     type AssociationCreateParams as AssociationCreateParams,
     type AssociationDeleteParams as AssociationDeleteParams,
     type AssociationReadParams as AssociationReadParams,
@@ -486,47 +485,47 @@ export declare namespace CRM {
 
   export {
     Objects as Objects,
-    type CRMObjectsBatchInputSimplePublicObjectBatchInput as CRMObjectsBatchInputSimplePublicObjectBatchInput,
-    type CRMObjectsBatchInputSimplePublicObjectBatchInputForCreate as CRMObjectsBatchInputSimplePublicObjectBatchInputForCreate,
-    type CRMObjectsBatchInputSimplePublicObjectBatchInputUpsert as CRMObjectsBatchInputSimplePublicObjectBatchInputUpsert,
-    type CRMObjectsBatchInputSimplePublicObjectID as CRMObjectsBatchInputSimplePublicObjectID,
-    type CRMObjectsBatchReadInputSimplePublicObjectID as CRMObjectsBatchReadInputSimplePublicObjectID,
-    type CRMObjectsBatchResponseSimplePublicObject as CRMObjectsBatchResponseSimplePublicObject,
-    type CRMObjectsBatchResponseSimplePublicUpsertObject as CRMObjectsBatchResponseSimplePublicUpsertObject,
-    type CRMObjectsCollectionResponseAssociatedID as CRMObjectsCollectionResponseAssociatedID,
-    type CRMObjectsCollectionResponseSimplePublicObjectWithAssociations as CRMObjectsCollectionResponseSimplePublicObjectWithAssociations,
-    type CRMObjectsCollectionResponseWithTotalSimplePublicObject as CRMObjectsCollectionResponseWithTotalSimplePublicObject,
-    type CRMObjectsCreatedResponseSimplePublicObject as CRMObjectsCreatedResponseSimplePublicObject,
-    type CRMObjectsFilter as CRMObjectsFilter,
-    type CRMObjectsFilterGroup as CRMObjectsFilterGroup,
-    type CRMObjectsPublicAssociationsForObject as CRMObjectsPublicAssociationsForObject,
-    type CRMObjectsPublicGdprDeleteInput as CRMObjectsPublicGdprDeleteInput,
-    type CRMObjectsPublicMergeInput as CRMObjectsPublicMergeInput,
-    type CRMObjectsPublicObjectSearchRequest as CRMObjectsPublicObjectSearchRequest,
-    type CRMObjectsSimplePublicObject as CRMObjectsSimplePublicObject,
-    type CRMObjectsSimplePublicObjectBatchInput as CRMObjectsSimplePublicObjectBatchInput,
-    type CRMObjectsSimplePublicObjectBatchInputForCreate as CRMObjectsSimplePublicObjectBatchInputForCreate,
-    type CRMObjectsSimplePublicObjectBatchInputUpsert as CRMObjectsSimplePublicObjectBatchInputUpsert,
-    type CRMObjectsSimplePublicObjectID as CRMObjectsSimplePublicObjectID,
-    type CRMObjectsSimplePublicObjectInput as CRMObjectsSimplePublicObjectInput,
-    type CRMObjectsSimplePublicObjectInputForCreate as CRMObjectsSimplePublicObjectInputForCreate,
-    type CRMObjectsSimplePublicObjectWithAssociations as CRMObjectsSimplePublicObjectWithAssociations,
-    type CRMObjectsSimplePublicUpsertObject as CRMObjectsSimplePublicUpsertObject,
-    type CRMObjectsValueWithTimestamp as CRMObjectsValueWithTimestamp,
+    type BatchInputSimplePublicObjectBatchInput as BatchInputSimplePublicObjectBatchInput,
+    type BatchInputSimplePublicObjectBatchInputForCreate as BatchInputSimplePublicObjectBatchInputForCreate,
+    type BatchInputSimplePublicObjectBatchInputUpsert as BatchInputSimplePublicObjectBatchInputUpsert,
+    type BatchInputSimplePublicObjectID as BatchInputSimplePublicObjectID,
+    type BatchReadInputSimplePublicObjectID as BatchReadInputSimplePublicObjectID,
+    type BatchResponseSimplePublicObject as BatchResponseSimplePublicObject,
+    type BatchResponseSimplePublicUpsertObject as BatchResponseSimplePublicUpsertObject,
+    type CollectionResponseAssociatedID as CollectionResponseAssociatedID,
+    type CollectionResponseSimplePublicObjectWithAssociations as CollectionResponseSimplePublicObjectWithAssociations,
+    type CollectionResponseWithTotalSimplePublicObject as CollectionResponseWithTotalSimplePublicObject,
+    type CreatedResponseSimplePublicObject as CreatedResponseSimplePublicObject,
+    type Filter as Filter,
+    type FilterGroup as FilterGroup,
+    type PublicAssociationsForObject as PublicAssociationsForObject,
+    type PublicGdprDeleteInput as PublicGdprDeleteInput,
+    type PublicMergeInput as PublicMergeInput,
+    type PublicObjectSearchRequest as PublicObjectSearchRequest,
+    type SimplePublicObject as SimplePublicObject,
+    type SimplePublicObjectBatchInput as SimplePublicObjectBatchInput,
+    type SimplePublicObjectBatchInputForCreate as SimplePublicObjectBatchInputForCreate,
+    type SimplePublicObjectBatchInputUpsert as SimplePublicObjectBatchInputUpsert,
+    type SimplePublicObjectID as SimplePublicObjectID,
+    type SimplePublicObjectInput as SimplePublicObjectInput,
+    type SimplePublicObjectInputForCreate as SimplePublicObjectInputForCreate,
+    type SimplePublicObjectWithAssociations as SimplePublicObjectWithAssociations,
+    type SimplePublicUpsertObject as SimplePublicUpsertObject,
+    type ValueWithTimestamp as ValueWithTimestamp,
   };
 
   export {
     Pipelines as Pipelines,
-    type CRMPipelinesCollectionResponsePipelineNoPaging as CRMPipelinesCollectionResponsePipelineNoPaging,
-    type CRMPipelinesCollectionResponsePipelineStageNoPaging as CRMPipelinesCollectionResponsePipelineStageNoPaging,
-    type CRMPipelinesCollectionResponsePublicAuditInfoNoPaging as CRMPipelinesCollectionResponsePublicAuditInfoNoPaging,
-    type CRMPipelinesPipeline as CRMPipelinesPipeline,
-    type CRMPipelinesPipelineInput as CRMPipelinesPipelineInput,
-    type CRMPipelinesPipelinePatchInput as CRMPipelinesPipelinePatchInput,
-    type CRMPipelinesPipelineStage as CRMPipelinesPipelineStage,
-    type CRMPipelinesPipelineStageInput as CRMPipelinesPipelineStageInput,
-    type CRMPipelinesPipelineStagePatchInput as CRMPipelinesPipelineStagePatchInput,
-    type CRMPipelinesPublicAuditInfo as CRMPipelinesPublicAuditInfo,
+    type CollectionResponsePipelineNoPaging as CollectionResponsePipelineNoPaging,
+    type CollectionResponsePipelineStageNoPaging as CollectionResponsePipelineStageNoPaging,
+    type CollectionResponsePublicAuditInfoNoPaging as CollectionResponsePublicAuditInfoNoPaging,
+    type Pipeline as Pipeline,
+    type PipelineInput as PipelineInput,
+    type PipelinePatchInput as PipelinePatchInput,
+    type PipelineStage as PipelineStage,
+    type PipelineStageInput as PipelineStageInput,
+    type PipelineStagePatchInput as PipelineStagePatchInput,
+    type PublicAuditInfo as PublicAuditInfo,
     type PipelineCreateParams as PipelineCreateParams,
     type PipelineUpdateParams as PipelineUpdateParams,
     type PipelineDeleteParams as PipelineDeleteParams,
@@ -537,21 +536,20 @@ export declare namespace CRM {
 
   export {
     Properties as Properties,
-    type CRMPropertiesBatchInputPropertyCreate as CRMPropertiesBatchInputPropertyCreate,
-    type CRMPropertiesBatchInputPropertyName as CRMPropertiesBatchInputPropertyName,
-    type CRMPropertiesBatchReadInputPropertyName as CRMPropertiesBatchReadInputPropertyName,
-    type CRMPropertiesBatchResponseProperty as CRMPropertiesBatchResponseProperty,
-    type CRMPropertiesCollectionResponseProperty as CRMPropertiesCollectionResponseProperty,
-    type CRMPropertiesCollectionResponsePropertyGroup as CRMPropertiesCollectionResponsePropertyGroup,
-    type CRMPropertiesCreatedResponseProperty as CRMPropertiesCreatedResponseProperty,
-    type CRMPropertiesCreatedResponsePropertyGroup as CRMPropertiesCreatedResponsePropertyGroup,
-    type CRMPropertiesOptionInput as CRMPropertiesOptionInput,
-    type CRMPropertiesPropertyCreate as CRMPropertiesPropertyCreate,
-    type CRMPropertiesPropertyGroup as CRMPropertiesPropertyGroup,
-    type CRMPropertiesPropertyGroupCreate as CRMPropertiesPropertyGroupCreate,
-    type CRMPropertiesPropertyGroupUpdate as CRMPropertiesPropertyGroupUpdate,
-    type CRMPropertiesPropertyName as CRMPropertiesPropertyName,
-    type CRMPropertiesPropertyUpdate as CRMPropertiesPropertyUpdate,
+    type BatchInputPropertyCreate as BatchInputPropertyCreate,
+    type BatchInputPropertyName as BatchInputPropertyName,
+    type BatchReadInputPropertyName as BatchReadInputPropertyName,
+    type BatchResponseProperty as BatchResponseProperty,
+    type CollectionResponseProperty as CollectionResponseProperty,
+    type CollectionResponsePropertyGroup as CollectionResponsePropertyGroup,
+    type CreatedResponseProperty as CreatedResponseProperty,
+    type CreatedResponsePropertyGroup as CreatedResponsePropertyGroup,
+    type PropertyCreate as PropertyCreate,
+    type PropertyGroup as PropertyGroup,
+    type PropertyGroupCreate as PropertyGroupCreate,
+    type PropertyGroupUpdate as PropertyGroupUpdate,
+    type PropertyName as PropertyName,
+    type PropertyUpdate as PropertyUpdate,
     type PropertyCreateParams as PropertyCreateParams,
     type PropertyUpdateParams as PropertyUpdateParams,
     type PropertyDeleteParams as PropertyDeleteParams,

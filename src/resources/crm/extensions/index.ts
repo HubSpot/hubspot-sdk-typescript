@@ -2,15 +2,20 @@
 
 export {
   Calling,
-  type CRMExtensionsCallingChannelConnectionSettingsPatchRequest,
-  type CRMExtensionsCallingChannelConnectionSettingsRequest,
-  type CRMExtensionsCallingChannelConnectionSettingsResponse,
-  type CRMExtensionsCallingMarkRecordingAsReadyRequest,
-  type CRMExtensionsCallingRecordingSettingsPatchRequest,
-  type CRMExtensionsCallingRecordingSettingsRequest,
-  type CRMExtensionsCallingRecordingSettingsResponse,
-  type CRMExtensionsCallingSettingsPatchRequest,
-  type CRMExtensionsCallingSettingsRequest,
-  type CRMExtensionsCallingSettingsResponse,
-} from './calling/index';
+  type ChannelConnectionSettingsPatchRequest,
+  type ChannelConnectionSettingsRequest,
+  type ChannelConnectionSettingsResponse,
+  type MarkRecordingAsReadyRequest,
+  type RecordingSettingsPatchRequest,
+  type RecordingSettingsRequest,
+  type RecordingSettingsResponse,
+  type SettingsPatchRequest,
+  type SettingsRequest,
+  type SettingsResponse,
+  type CallingCreateParams,
+  type CallingUpdateParams,
+  type CallingMarkAsReadyParams,
+  type CallingRegisterURLFormatParams,
+  type CallingUpdateURLFormatParams,
+} from './calling';
 export { Extensions } from './extensions';

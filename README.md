@@ -29,11 +29,11 @@ const client = new HubSpot({
   accessToken: 'pat-123123',
 });
 
-const crmObjectsCreatedResponseSimplePublicObject = await client.crm.objects.contacts.create({
+const createdResponseSimplePublicObject = await client.crm.objects.contacts.create({
   properties: { foo: 'string' },
 });
 
-console.log(crmObjectsCreatedResponseSimplePublicObject.createdResourceId);
+console.log(createdResponseSimplePublicObject.createdResourceId);
 ```
 
 ### Request & Response types
@@ -49,7 +49,7 @@ const client = new HubSpot({
 });
 
 const params: HubSpot.CRM.Objects.ContactCreateParams = { properties: { foo: 'string' } };
-const crmObjectsCreatedResponseSimplePublicObject: HubSpot.CRM.CRMObjectsCreatedResponseSimplePublicObject =
+const createdResponseSimplePublicObject: HubSpot.CRM.CreatedResponseSimplePublicObject =
   await client.crm.objects.contacts.create(params);
 ```
 
@@ -96,7 +96,7 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const crmObjectsCreatedResponseSimplePublicObject = await client.crm.objects.contacts
+const createdResponseSimplePublicObject = await client.crm.objects.contacts
   .create({ properties: { foo: 'string' } })
   .catch(async (err) => {
     if (err instanceof HubSpot.APIError) {
@@ -182,11 +182,11 @@ const response = await client.crm.objects.contacts.create({ properties: { foo: '
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: crmObjectsCreatedResponseSimplePublicObject, response: raw } = await client.crm.objects.contacts
+const { data: createdResponseSimplePublicObject, response: raw } = await client.crm.objects.contacts
   .create({ properties: { foo: 'string' } })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(crmObjectsCreatedResponseSimplePublicObject.createdResourceId);
+console.log(createdResponseSimplePublicObject.createdResourceId);
 ```
 
 ### Logging

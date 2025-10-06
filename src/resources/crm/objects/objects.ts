@@ -58,24 +58,24 @@ export class Objects extends APIResource {
   schemas: SchemasAPI.Schemas = new SchemasAPI.Schemas(this._client);
 }
 
-export interface CRMObjectsBatchInputSimplePublicObjectBatchInput {
-  inputs: Array<CRMObjectsSimplePublicObjectBatchInput>;
+export interface BatchInputSimplePublicObjectBatchInput {
+  inputs: Array<SimplePublicObjectBatchInput>;
 }
 
-export interface CRMObjectsBatchInputSimplePublicObjectBatchInputForCreate {
-  inputs: Array<CRMObjectsSimplePublicObjectBatchInputForCreate>;
+export interface BatchInputSimplePublicObjectBatchInputForCreate {
+  inputs: Array<SimplePublicObjectBatchInputForCreate>;
 }
 
-export interface CRMObjectsBatchInputSimplePublicObjectBatchInputUpsert {
-  inputs: Array<CRMObjectsSimplePublicObjectBatchInputUpsert>;
+export interface BatchInputSimplePublicObjectBatchInputUpsert {
+  inputs: Array<SimplePublicObjectBatchInputUpsert>;
 }
 
-export interface CRMObjectsBatchInputSimplePublicObjectID {
-  inputs: Array<CRMObjectsSimplePublicObjectID>;
+export interface BatchInputSimplePublicObjectID {
+  inputs: Array<SimplePublicObjectID>;
 }
 
-export interface CRMObjectsBatchReadInputSimplePublicObjectID {
-  inputs: Array<CRMObjectsSimplePublicObjectID>;
+export interface BatchReadInputSimplePublicObjectID {
+  inputs: Array<SimplePublicObjectID>;
 
   properties: Array<string>;
 
@@ -84,10 +84,10 @@ export interface CRMObjectsBatchReadInputSimplePublicObjectID {
   idProperty?: string;
 }
 
-export interface CRMObjectsBatchResponseSimplePublicObject {
+export interface BatchResponseSimplePublicObject {
   completedAt: string;
 
-  results: Array<CRMObjectsSimplePublicObject>;
+  results: Array<SimplePublicObject>;
 
   startedAt: string;
 
@@ -102,10 +102,10 @@ export interface CRMObjectsBatchResponseSimplePublicObject {
   requestedAt?: string;
 }
 
-export interface CRMObjectsBatchResponseSimplePublicUpsertObject {
+export interface BatchResponseSimplePublicUpsertObject {
   completedAt: string;
 
-  results: Array<CRMObjectsSimplePublicUpsertObject>;
+  results: Array<SimplePublicUpsertObject>;
 
   startedAt: string;
 
@@ -120,35 +120,35 @@ export interface CRMObjectsBatchResponseSimplePublicUpsertObject {
   requestedAt?: string;
 }
 
-export interface CRMObjectsCollectionResponseAssociatedID {
-  results: Array<CRMAPI.CRMAssociatedID>;
+export interface CollectionResponseAssociatedID {
+  results: Array<CRMAPI.AssociatedID>;
 
-  paging?: EmailsAPI.MarketingEmailsPaging;
+  paging?: EmailsAPI.Paging;
 }
 
-export interface CRMObjectsCollectionResponseSimplePublicObjectWithAssociations {
-  results: Array<CRMObjectsSimplePublicObjectWithAssociations>;
+export interface CollectionResponseSimplePublicObjectWithAssociations {
+  results: Array<SimplePublicObjectWithAssociations>;
 
-  paging?: EmailsAPI.MarketingEmailsPaging;
+  paging?: EmailsAPI.Paging;
 }
 
-export interface CRMObjectsCollectionResponseWithTotalSimplePublicObject {
-  results: Array<CRMObjectsSimplePublicObject>;
+export interface CollectionResponseWithTotalSimplePublicObject {
+  results: Array<SimplePublicObject>;
 
   total: number;
 
-  paging?: EmailsAPI.MarketingEmailsPaging;
+  paging?: EmailsAPI.Paging;
 }
 
-export interface CRMObjectsCreatedResponseSimplePublicObject {
+export interface CreatedResponseSimplePublicObject {
   createdResourceId: string;
 
-  entity: CRMObjectsSimplePublicObject;
+  entity: SimplePublicObject;
 
   location?: string;
 }
 
-export interface CRMObjectsFilter {
+export interface Filter {
   operator:
     | 'EQ'
     | 'NEQ'
@@ -173,32 +173,32 @@ export interface CRMObjectsFilter {
   values?: Array<string>;
 }
 
-export interface CRMObjectsFilterGroup {
-  filters: Array<CRMObjectsFilter>;
+export interface FilterGroup {
+  filters: Array<Filter>;
 }
 
-export interface CRMObjectsPublicAssociationsForObject {
-  to: CRMAPI.CRMPublicObjectID;
+export interface PublicAssociationsForObject {
+  to: CRMAPI.PublicObjectID;
 
-  types: Array<CRMAPI.CRMAssociationSpec>;
+  types: Array<CRMAPI.AssociationSpec>;
 }
 
-export interface CRMObjectsPublicGdprDeleteInput {
+export interface PublicGdprDeleteInput {
   objectId: string;
 
   idProperty?: string;
 }
 
-export interface CRMObjectsPublicMergeInput {
+export interface PublicMergeInput {
   objectIdToMerge: string;
 
   primaryObjectId: string;
 }
 
-export interface CRMObjectsPublicObjectSearchRequest {
+export interface PublicObjectSearchRequest {
   after?: string;
 
-  filterGroups?: Array<CRMObjectsFilterGroup>;
+  filterGroups?: Array<FilterGroup>;
 
   limit?: number;
 
@@ -209,7 +209,7 @@ export interface CRMObjectsPublicObjectSearchRequest {
   sorts?: Array<string>;
 }
 
-export interface CRMObjectsSimplePublicObject {
+export interface SimplePublicObject {
   id: string;
 
   createdAt: string;
@@ -224,10 +224,10 @@ export interface CRMObjectsSimplePublicObject {
 
   objectWriteTraceId?: string;
 
-  propertiesWithHistory?: { [key: string]: Array<CRMObjectsValueWithTimestamp> };
+  propertiesWithHistory?: { [key: string]: Array<ValueWithTimestamp> };
 }
 
-export interface CRMObjectsSimplePublicObjectBatchInput {
+export interface SimplePublicObjectBatchInput {
   id: string;
 
   properties: { [key: string]: string };
@@ -237,15 +237,15 @@ export interface CRMObjectsSimplePublicObjectBatchInput {
   objectWriteTraceId?: string;
 }
 
-export interface CRMObjectsSimplePublicObjectBatchInputForCreate {
+export interface SimplePublicObjectBatchInputForCreate {
   properties: { [key: string]: string };
 
-  associations?: Array<CRMObjectsPublicAssociationsForObject>;
+  associations?: Array<PublicAssociationsForObject>;
 
   objectWriteTraceId?: string;
 }
 
-export interface CRMObjectsSimplePublicObjectBatchInputUpsert {
+export interface SimplePublicObjectBatchInputUpsert {
   id: string;
 
   properties: { [key: string]: string };
@@ -255,21 +255,21 @@ export interface CRMObjectsSimplePublicObjectBatchInputUpsert {
   objectWriteTraceId?: string;
 }
 
-export interface CRMObjectsSimplePublicObjectID {
+export interface SimplePublicObjectID {
   id: string;
 }
 
-export interface CRMObjectsSimplePublicObjectInput {
+export interface SimplePublicObjectInput {
   properties: { [key: string]: string };
 }
 
-export interface CRMObjectsSimplePublicObjectInputForCreate {
+export interface SimplePublicObjectInputForCreate {
   properties: { [key: string]: string };
 
-  associations?: Array<CRMObjectsPublicAssociationsForObject>;
+  associations?: Array<PublicAssociationsForObject>;
 }
 
-export interface CRMObjectsSimplePublicObjectWithAssociations {
+export interface SimplePublicObjectWithAssociations {
   id: string;
 
   createdAt: string;
@@ -282,14 +282,14 @@ export interface CRMObjectsSimplePublicObjectWithAssociations {
 
   archivedAt?: string;
 
-  associations?: { [key: string]: CRMObjectsCollectionResponseAssociatedID };
+  associations?: { [key: string]: CollectionResponseAssociatedID };
 
   objectWriteTraceId?: string;
 
-  propertiesWithHistory?: { [key: string]: Array<CRMObjectsValueWithTimestamp> };
+  propertiesWithHistory?: { [key: string]: Array<ValueWithTimestamp> };
 }
 
-export interface CRMObjectsSimplePublicUpsertObject {
+export interface SimplePublicUpsertObject {
   id: string;
 
   createdAt: string;
@@ -306,10 +306,10 @@ export interface CRMObjectsSimplePublicUpsertObject {
 
   objectWriteTraceId?: string;
 
-  propertiesWithHistory?: { [key: string]: Array<CRMObjectsValueWithTimestamp> };
+  propertiesWithHistory?: { [key: string]: Array<ValueWithTimestamp> };
 }
 
-export interface CRMObjectsValueWithTimestamp {
+export interface ValueWithTimestamp {
   sourceType: string;
 
   timestamp: string;
@@ -330,33 +330,33 @@ Objects.Schemas = Schemas;
 
 export declare namespace Objects {
   export {
-    type CRMObjectsBatchInputSimplePublicObjectBatchInput as CRMObjectsBatchInputSimplePublicObjectBatchInput,
-    type CRMObjectsBatchInputSimplePublicObjectBatchInputForCreate as CRMObjectsBatchInputSimplePublicObjectBatchInputForCreate,
-    type CRMObjectsBatchInputSimplePublicObjectBatchInputUpsert as CRMObjectsBatchInputSimplePublicObjectBatchInputUpsert,
-    type CRMObjectsBatchInputSimplePublicObjectID as CRMObjectsBatchInputSimplePublicObjectID,
-    type CRMObjectsBatchReadInputSimplePublicObjectID as CRMObjectsBatchReadInputSimplePublicObjectID,
-    type CRMObjectsBatchResponseSimplePublicObject as CRMObjectsBatchResponseSimplePublicObject,
-    type CRMObjectsBatchResponseSimplePublicUpsertObject as CRMObjectsBatchResponseSimplePublicUpsertObject,
-    type CRMObjectsCollectionResponseAssociatedID as CRMObjectsCollectionResponseAssociatedID,
-    type CRMObjectsCollectionResponseSimplePublicObjectWithAssociations as CRMObjectsCollectionResponseSimplePublicObjectWithAssociations,
-    type CRMObjectsCollectionResponseWithTotalSimplePublicObject as CRMObjectsCollectionResponseWithTotalSimplePublicObject,
-    type CRMObjectsCreatedResponseSimplePublicObject as CRMObjectsCreatedResponseSimplePublicObject,
-    type CRMObjectsFilter as CRMObjectsFilter,
-    type CRMObjectsFilterGroup as CRMObjectsFilterGroup,
-    type CRMObjectsPublicAssociationsForObject as CRMObjectsPublicAssociationsForObject,
-    type CRMObjectsPublicGdprDeleteInput as CRMObjectsPublicGdprDeleteInput,
-    type CRMObjectsPublicMergeInput as CRMObjectsPublicMergeInput,
-    type CRMObjectsPublicObjectSearchRequest as CRMObjectsPublicObjectSearchRequest,
-    type CRMObjectsSimplePublicObject as CRMObjectsSimplePublicObject,
-    type CRMObjectsSimplePublicObjectBatchInput as CRMObjectsSimplePublicObjectBatchInput,
-    type CRMObjectsSimplePublicObjectBatchInputForCreate as CRMObjectsSimplePublicObjectBatchInputForCreate,
-    type CRMObjectsSimplePublicObjectBatchInputUpsert as CRMObjectsSimplePublicObjectBatchInputUpsert,
-    type CRMObjectsSimplePublicObjectID as CRMObjectsSimplePublicObjectID,
-    type CRMObjectsSimplePublicObjectInput as CRMObjectsSimplePublicObjectInput,
-    type CRMObjectsSimplePublicObjectInputForCreate as CRMObjectsSimplePublicObjectInputForCreate,
-    type CRMObjectsSimplePublicObjectWithAssociations as CRMObjectsSimplePublicObjectWithAssociations,
-    type CRMObjectsSimplePublicUpsertObject as CRMObjectsSimplePublicUpsertObject,
-    type CRMObjectsValueWithTimestamp as CRMObjectsValueWithTimestamp,
+    type BatchInputSimplePublicObjectBatchInput as BatchInputSimplePublicObjectBatchInput,
+    type BatchInputSimplePublicObjectBatchInputForCreate as BatchInputSimplePublicObjectBatchInputForCreate,
+    type BatchInputSimplePublicObjectBatchInputUpsert as BatchInputSimplePublicObjectBatchInputUpsert,
+    type BatchInputSimplePublicObjectID as BatchInputSimplePublicObjectID,
+    type BatchReadInputSimplePublicObjectID as BatchReadInputSimplePublicObjectID,
+    type BatchResponseSimplePublicObject as BatchResponseSimplePublicObject,
+    type BatchResponseSimplePublicUpsertObject as BatchResponseSimplePublicUpsertObject,
+    type CollectionResponseAssociatedID as CollectionResponseAssociatedID,
+    type CollectionResponseSimplePublicObjectWithAssociations as CollectionResponseSimplePublicObjectWithAssociations,
+    type CollectionResponseWithTotalSimplePublicObject as CollectionResponseWithTotalSimplePublicObject,
+    type CreatedResponseSimplePublicObject as CreatedResponseSimplePublicObject,
+    type Filter as Filter,
+    type FilterGroup as FilterGroup,
+    type PublicAssociationsForObject as PublicAssociationsForObject,
+    type PublicGdprDeleteInput as PublicGdprDeleteInput,
+    type PublicMergeInput as PublicMergeInput,
+    type PublicObjectSearchRequest as PublicObjectSearchRequest,
+    type SimplePublicObject as SimplePublicObject,
+    type SimplePublicObjectBatchInput as SimplePublicObjectBatchInput,
+    type SimplePublicObjectBatchInputForCreate as SimplePublicObjectBatchInputForCreate,
+    type SimplePublicObjectBatchInputUpsert as SimplePublicObjectBatchInputUpsert,
+    type SimplePublicObjectID as SimplePublicObjectID,
+    type SimplePublicObjectInput as SimplePublicObjectInput,
+    type SimplePublicObjectInputForCreate as SimplePublicObjectInputForCreate,
+    type SimplePublicObjectWithAssociations as SimplePublicObjectWithAssociations,
+    type SimplePublicUpsertObject as SimplePublicUpsertObject,
+    type ValueWithTimestamp as ValueWithTimestamp,
   };
 
   export {

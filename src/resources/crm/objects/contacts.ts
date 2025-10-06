@@ -14,7 +14,7 @@ export class Contacts extends APIResource {
   create(
     body: ContactCreateParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CRMObjectsCreatedResponseSimplePublicObject> {
+  ): APIPromise<ObjectsAPI.CreatedResponseSimplePublicObject> {
     return this._client.post('/crm/v3/objects/contacts', { body, ...options });
   }
 
@@ -24,7 +24,7 @@ export class Contacts extends APIResource {
   update(
     body: ContactUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CRMObjectsBatchResponseSimplePublicObject> {
+  ): APIPromise<ObjectsAPI.BatchResponseSimplePublicObject> {
     return this._client.post('/crm/v3/objects/contacts/batch/update', { body, ...options });
   }
 
@@ -34,7 +34,7 @@ export class Contacts extends APIResource {
   list(
     query: ContactListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CRMObjectsCollectionResponseSimplePublicObjectWithAssociations> {
+  ): APIPromise<ObjectsAPI.CollectionResponseSimplePublicObjectWithAssociations> {
     return this._client.get('/crm/v3/objects/contacts', { query, ...options });
   }
 
@@ -52,10 +52,7 @@ export class Contacts extends APIResource {
   /**
    * Merge two contacts
    */
-  merge(
-    body: ContactMergeParams,
-    options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CRMObjectsSimplePublicObject> {
+  merge(body: ContactMergeParams, options?: RequestOptions): APIPromise<ObjectsAPI.SimplePublicObject> {
     return this._client.post('/crm/v3/objects/contacts/merge', { body, ...options });
   }
 
@@ -77,7 +74,7 @@ export class Contacts extends APIResource {
     contactID: string,
     query: ContactReadParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CRMObjectsSimplePublicObjectWithAssociations> {
+  ): APIPromise<ObjectsAPI.SimplePublicObjectWithAssociations> {
     return this._client.get(path`/crm/v3/objects/contacts/${contactID}`, { query, ...options });
   }
 
@@ -87,7 +84,7 @@ export class Contacts extends APIResource {
   search(
     body: ContactSearchParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CRMObjectsCollectionResponseWithTotalSimplePublicObject> {
+  ): APIPromise<ObjectsAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/v3/objects/contacts/search', { body, ...options });
   }
 
@@ -97,7 +94,7 @@ export class Contacts extends APIResource {
   upsert(
     body: ContactUpsertParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CRMObjectsBatchResponseSimplePublicUpsertObject> {
+  ): APIPromise<ObjectsAPI.BatchResponseSimplePublicUpsertObject> {
     return this._client.post('/crm/v3/objects/contacts/batch/upsert', { body, ...options });
   }
 }
@@ -105,11 +102,11 @@ export class Contacts extends APIResource {
 export interface ContactCreateParams {
   properties: { [key: string]: string };
 
-  associations?: Array<ObjectsAPI.CRMObjectsPublicAssociationsForObject>;
+  associations?: Array<ObjectsAPI.PublicAssociationsForObject>;
 }
 
 export interface ContactUpdateParams {
-  inputs: Array<ObjectsAPI.CRMObjectsSimplePublicObjectBatchInput>;
+  inputs: Array<ObjectsAPI.SimplePublicObjectBatchInput>;
 }
 
 export interface ContactListParams {
@@ -127,7 +124,7 @@ export interface ContactListParams {
 }
 
 export interface ContactDeleteParams {
-  inputs: Array<ObjectsAPI.CRMObjectsSimplePublicObjectID>;
+  inputs: Array<ObjectsAPI.SimplePublicObjectID>;
 }
 
 export interface ContactMergeParams {
@@ -155,7 +152,7 @@ export interface ContactReadParams {
 export interface ContactSearchParams {
   after?: string;
 
-  filterGroups?: Array<ObjectsAPI.CRMObjectsFilterGroup>;
+  filterGroups?: Array<ObjectsAPI.FilterGroup>;
 
   limit?: number;
 
@@ -167,7 +164,7 @@ export interface ContactSearchParams {
 }
 
 export interface ContactUpsertParams {
-  inputs: Array<ObjectsAPI.CRMObjectsSimplePublicObjectBatchInputUpsert>;
+  inputs: Array<ObjectsAPI.SimplePublicObjectBatchInputUpsert>;
 }
 
 export declare namespace Contacts {

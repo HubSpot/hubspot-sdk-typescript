@@ -11,18 +11,14 @@ export class Emails extends APIResource {
   /**
    * Create a new marketing email.
    */
-  create(body: EmailCreateParams, options?: RequestOptions): APIPromise<MarketingEmailsPublicEmail> {
+  create(body: EmailCreateParams, options?: RequestOptions): APIPromise<PublicEmail> {
     return this._client.post('/marketing/v3/emails/', { body, ...options });
   }
 
   /**
    * Update a marketing email.
    */
-  update(
-    emailID: string,
-    params: EmailUpdateParams,
-    options?: RequestOptions,
-  ): APIPromise<MarketingEmailsPublicEmail> {
+  update(emailID: string, params: EmailUpdateParams, options?: RequestOptions): APIPromise<PublicEmail> {
     const { query_archived, ...body } = params;
     return this._client.patch(path`/marketing/v3/emails/${emailID}`, {
       query: { archived: query_archived },
@@ -37,7 +33,7 @@ export class Emails extends APIResource {
   list(
     query: EmailListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<MarketingEmailsCollectionResponseWithTotalPublicEmailForwardPaging> {
+  ): APIPromise<CollectionResponseWithTotalPublicEmailForwardPaging> {
     return this._client.get('/marketing/v3/emails/', { query, ...options });
   }
 
@@ -60,7 +56,7 @@ export class Emails extends APIResource {
   /**
    * Clone a marketing email.
    */
-  clone(body: EmailCloneParams, options?: RequestOptions): APIPromise<MarketingEmailsPublicEmail> {
+  clone(body: EmailCloneParams, options?: RequestOptions): APIPromise<PublicEmail> {
     return this._client.post('/marketing/v3/emails/clone', { body, ...options });
   }
 
@@ -70,21 +66,21 @@ export class Emails extends APIResource {
   createAbTestVariation(
     body: EmailCreateAbTestVariationParams,
     options?: RequestOptions,
-  ): APIPromise<MarketingEmailsPublicEmail> {
+  ): APIPromise<PublicEmail> {
     return this._client.post('/marketing/v3/emails/ab-test/create-variation', { body, ...options });
   }
 
   /**
    * Get the variation of a an A/B marketing email
    */
-  getAbTestVariation(emailID: string, options?: RequestOptions): APIPromise<MarketingEmailsPublicEmail> {
+  getAbTestVariation(emailID: string, options?: RequestOptions): APIPromise<PublicEmail> {
     return this._client.get(path`/marketing/v3/emails/${emailID}/ab-test/get-variation`, options);
   }
 
   /**
    * Get draft version of a marketing email
    */
-  getDraft(emailID: string, options?: RequestOptions): APIPromise<MarketingEmailsPublicEmail> {
+  getDraft(emailID: string, options?: RequestOptions): APIPromise<PublicEmail> {
     return this._client.get(path`/marketing/v3/emails/${emailID}/draft`, options);
   }
 
@@ -94,7 +90,7 @@ export class Emails extends APIResource {
   getEmailsList(
     query: EmailGetEmailsListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<MarketingEmailsAggregateEmailStatistics> {
+  ): APIPromise<AggregateEmailStatistics> {
     return this._client.get('/marketing/v3/emails/statistics/list', { query, ...options });
   }
 
@@ -104,7 +100,7 @@ export class Emails extends APIResource {
   getHistogram(
     query: EmailGetHistogramParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<MarketingEmailsCollectionResponseWithTotalEmailStatisticIntervalNoPaging> {
+  ): APIPromise<CollectionResponseWithTotalEmailStatisticIntervalNoPaging> {
     return this._client.get('/marketing/v3/emails/statistics/histogram', { query, ...options });
   }
 
@@ -115,7 +111,7 @@ export class Emails extends APIResource {
     revisionID: string,
     params: EmailGetRevisionByIDParams,
     options?: RequestOptions,
-  ): APIPromise<MarketingEmailsVersionPublicEmail> {
+  ): APIPromise<VersionPublicEmail> {
     const { emailId } = params;
     return this._client.get(path`/marketing/v3/emails/${emailId}/revisions/${revisionID}`, options);
   }
@@ -127,7 +123,7 @@ export class Emails extends APIResource {
     emailID: string,
     query: EmailGetRevisionsParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<MarketingEmailsCollectionResponseWithTotalVersionPublicEmail> {
+  ): APIPromise<CollectionResponseWithTotalVersionPublicEmail> {
     return this._client.get(path`/marketing/v3/emails/${emailID}/revisions`, { query, ...options });
   }
 
@@ -148,7 +144,7 @@ export class Emails extends APIResource {
     emailID: string,
     query: EmailReadParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<MarketingEmailsPublicEmail> {
+  ): APIPromise<PublicEmail> {
     return this._client.get(path`/marketing/v3/emails/${emailID}`, { query, ...options });
   }
 
@@ -169,7 +165,7 @@ export class Emails extends APIResource {
     revisionID: number,
     params: EmailRestoreDraftRevisionParams,
     options?: RequestOptions,
-  ): APIPromise<MarketingEmailsPublicEmail> {
+  ): APIPromise<PublicEmail> {
     const { emailId } = params;
     return this._client.post(
       path`/marketing/v3/emails/${emailId}/revisions/${revisionID}/restore-to-draft`,
@@ -209,48 +205,48 @@ export class Emails extends APIResource {
     emailID: string,
     body: EmailUpsertDraftParams,
     options?: RequestOptions,
-  ): APIPromise<MarketingEmailsPublicEmail> {
+  ): APIPromise<PublicEmail> {
     return this._client.patch(path`/marketing/v3/emails/${emailID}/draft`, { body, ...options });
   }
 }
 
-export interface MarketingEmailsAbTestCreateRequestVNext {
+export interface AbTestCreateRequestVNext {
   contentId: string;
 
   variationName: string;
 }
 
-export interface MarketingEmailsAggregateEmailStatistics {
-  aggregate?: MarketingEmailsEmailStatisticsData;
+export interface AggregateEmailStatistics {
+  aggregate?: EmailStatisticsData;
 
-  campaignAggregations?: { [key: string]: MarketingEmailsEmailStatisticsData };
+  campaignAggregations?: { [key: string]: EmailStatisticsData };
 
   emails?: Array<number>;
 }
 
-export interface MarketingEmailsCollectionResponseWithTotalEmailStatisticIntervalNoPaging {
-  results: Array<MarketingEmailsEmailStatisticInterval>;
+export interface CollectionResponseWithTotalEmailStatisticIntervalNoPaging {
+  results: Array<EmailStatisticInterval>;
 
   total: number;
 }
 
-export interface MarketingEmailsCollectionResponseWithTotalPublicEmailForwardPaging {
-  results: Array<MarketingEmailsPublicEmail>;
+export interface CollectionResponseWithTotalPublicEmailForwardPaging {
+  results: Array<PublicEmail>;
 
   total: number;
 
   paging?: Shared.ForwardPaging;
 }
 
-export interface MarketingEmailsCollectionResponseWithTotalVersionPublicEmail {
-  results: Array<MarketingEmailsVersionPublicEmail>;
+export interface CollectionResponseWithTotalVersionPublicEmail {
+  results: Array<VersionPublicEmail>;
 
   total: number;
 
-  paging?: MarketingEmailsPaging;
+  paging?: Paging;
 }
 
-export interface MarketingEmailsEmailCloneRequestVNext {
+export interface EmailCloneRequestVNext {
   id: string;
 
   cloneName?: string;
@@ -258,7 +254,7 @@ export interface MarketingEmailsEmailCloneRequestVNext {
   language?: string;
 }
 
-export interface MarketingEmailsEmailCreateRequest {
+export interface EmailCreateRequest {
   name: string;
 
   activeDomain?: string;
@@ -269,11 +265,11 @@ export interface MarketingEmailsEmailCreateRequest {
 
   campaign?: string;
 
-  content?: MarketingEmailsPublicEmailContent;
+  content?: PublicEmailContent;
 
   feedbackSurveyId?: string;
 
-  from?: MarketingEmailsPublicEmailFromDetails;
+  from?: PublicEmailFromDetails;
 
   jitterSendTime?: boolean;
 
@@ -1071,7 +1067,7 @@ export interface MarketingEmailsEmailCreateRequest {
 
   publishDate?: string;
 
-  rssData?: MarketingEmailsPublicRssEmailDetails;
+  rssData?: PublicRssEmailDetails;
 
   sendOnPublish?: boolean;
 
@@ -1187,22 +1183,22 @@ export interface MarketingEmailsEmailCreateRequest {
 
   subject?: string;
 
-  subscriptionDetails?: MarketingEmailsPublicEmailSubscriptionDetails;
+  subscriptionDetails?: PublicEmailSubscriptionDetails;
 
-  testing?: MarketingEmailsPublicEmailTestingDetails;
+  testing?: PublicEmailTestingDetails;
 
-  to?: MarketingEmailsPublicEmailToDetails;
+  to?: PublicEmailToDetails;
 
-  webversion?: MarketingEmailsPublicWebversionDetails;
+  webversion?: PublicWebversionDetails;
 }
 
-export interface MarketingEmailsEmailStatisticInterval {
-  aggregations?: MarketingEmailsEmailStatisticsData;
+export interface EmailStatisticInterval {
+  aggregations?: EmailStatisticsData;
 
-  interval?: MarketingEmailsInterval;
+  interval?: Interval;
 }
 
-export interface MarketingEmailsEmailStatisticsData {
+export interface EmailStatisticsData {
   counters: { [key: string]: number };
 
   deviceBreakdown: { [key: string]: { [key: string]: number } };
@@ -1212,7 +1208,7 @@ export interface MarketingEmailsEmailStatisticsData {
   ratios: { [key: string]: number };
 }
 
-export interface MarketingEmailsEmailUpdateRequest {
+export interface EmailUpdateRequest {
   activeDomain?: string;
 
   archived?: boolean;
@@ -1221,9 +1217,9 @@ export interface MarketingEmailsEmailUpdateRequest {
 
   campaign?: string;
 
-  content?: MarketingEmailsPublicEmailContent;
+  content?: PublicEmailContent;
 
-  from?: MarketingEmailsPublicEmailFromDetails;
+  from?: PublicEmailFromDetails;
 
   jitterSendTime?: boolean;
 
@@ -2023,7 +2019,7 @@ export interface MarketingEmailsEmailUpdateRequest {
 
   publishDate?: string;
 
-  rssData?: MarketingEmailsPublicRssEmailDetails;
+  rssData?: PublicRssEmailDetails;
 
   sendOnPublish?: boolean;
 
@@ -2139,36 +2135,36 @@ export interface MarketingEmailsEmailUpdateRequest {
 
   subject?: string;
 
-  subscriptionDetails?: MarketingEmailsPublicEmailSubscriptionDetails;
+  subscriptionDetails?: PublicEmailSubscriptionDetails;
 
-  testing?: MarketingEmailsPublicEmailTestingDetails;
+  testing?: PublicEmailTestingDetails;
 
-  to?: MarketingEmailsPublicEmailToDetails;
+  to?: PublicEmailToDetails;
 
-  webversion?: MarketingEmailsPublicWebversionDetails;
+  webversion?: PublicWebversionDetails;
 }
 
-export interface MarketingEmailsInterval {
+export interface Interval {
   end: string;
 
   start: string;
 }
 
-export interface MarketingEmailsPaging {
+export interface Paging {
   next: Shared.NextPage;
 
   prev?: Shared.PreviousPage;
 }
 
-export interface MarketingEmailsPublicButtonStyleSettings {
+export interface PublicButtonStyleSettings {
   backgroundColor?: unknown;
 
   cornerRadius?: number;
 
-  fontStyle?: MarketingEmailsPublicFontStyle;
+  fontStyle?: PublicFontStyle;
 }
 
-export interface MarketingEmailsPublicDividerStyleSettings {
+export interface PublicDividerStyleSettings {
   color?: unknown;
 
   height?: number;
@@ -2176,12 +2172,12 @@ export interface MarketingEmailsPublicDividerStyleSettings {
   lineType?: string;
 }
 
-export interface MarketingEmailsPublicEmail {
+export interface PublicEmail {
   id: string;
 
-  content: MarketingEmailsPublicEmailContent;
+  content: PublicEmailContent;
 
-  from: MarketingEmailsPublicEmailFromDetails;
+  from: PublicEmailFromDetails;
 
   name: string;
 
@@ -2224,7 +2220,7 @@ export interface MarketingEmailsPublicEmail {
 
   subject: string;
 
-  to: MarketingEmailsPublicEmailToDetails;
+  to: PublicEmailToDetails;
 
   activeDomain?: string;
 
@@ -3062,13 +3058,13 @@ export interface MarketingEmailsPublicEmail {
 
   publishedByName?: string;
 
-  rssData?: MarketingEmailsPublicRssEmailDetails;
+  rssData?: PublicRssEmailDetails;
 
-  stats?: MarketingEmailsEmailStatisticsData;
+  stats?: EmailStatisticsData;
 
-  subscriptionDetails?: MarketingEmailsPublicEmailSubscriptionDetails;
+  subscriptionDetails?: PublicEmailSubscriptionDetails;
 
-  testing?: MarketingEmailsPublicEmailTestingDetails;
+  testing?: PublicEmailTestingDetails;
 
   type?:
     | 'AB_EMAIL'
@@ -3107,19 +3103,19 @@ export interface MarketingEmailsPublicEmail {
 
   updatedById?: string;
 
-  webversion?: MarketingEmailsPublicWebversionDetails;
+  webversion?: PublicWebversionDetails;
 
   workflowNames?: Array<string>;
 }
 
-export interface MarketingEmailsPublicEmailContent {
+export interface PublicEmailContent {
   flexAreas?: { [key: string]: unknown };
 
   plainTextVersion?: string;
 
-  smartFields?: { [key: string]: MarketingEmailsSmartEmailField };
+  smartFields?: { [key: string]: SmartEmailField };
 
-  styleSettings?: MarketingEmailsPublicEmailStyleSettings;
+  styleSettings?: PublicEmailStyleSettings;
 
   templatePath?: string;
 
@@ -3130,7 +3126,7 @@ export interface MarketingEmailsPublicEmailContent {
   widgets?: { [key: string]: unknown };
 }
 
-export interface MarketingEmailsPublicEmailFromDetails {
+export interface PublicEmailFromDetails {
   customReplyTo?: string;
 
   fromName?: string;
@@ -3138,13 +3134,13 @@ export interface MarketingEmailsPublicEmailFromDetails {
   replyTo?: string;
 }
 
-export interface MarketingEmailsPublicEmailRecipients {
+export interface PublicEmailRecipients {
   exclude?: Array<string>;
 
   include?: Array<string>;
 }
 
-export interface MarketingEmailsPublicEmailStyleSettings {
+export interface PublicEmailStyleSettings {
   backgroundColor?: string;
 
   backgroundImage?: string;
@@ -3159,7 +3155,7 @@ export interface MarketingEmailsPublicEmailStyleSettings {
 
   bodyColor?: string;
 
-  buttonStyleSettings?: MarketingEmailsPublicButtonStyleSettings;
+  buttonStyleSettings?: PublicButtonStyleSettings;
 
   colorPickerFavorite1?: string;
 
@@ -3173,17 +3169,17 @@ export interface MarketingEmailsPublicEmailStyleSettings {
 
   colorPickerFavorite6?: string;
 
-  dividerStyleSettings?: MarketingEmailsPublicDividerStyleSettings;
+  dividerStyleSettings?: PublicDividerStyleSettings;
 
   emailBodyPadding?: string;
 
   emailBodyWidth?: string;
 
-  headingOneFont?: MarketingEmailsPublicFontStyle;
+  headingOneFont?: PublicFontStyle;
 
-  headingTwoFont?: MarketingEmailsPublicFontStyle;
+  headingTwoFont?: PublicFontStyle;
 
-  linksFont?: MarketingEmailsPublicFontStyle;
+  linksFont?: PublicFontStyle;
 
   primaryAccentColor?: string;
 
@@ -3206,7 +3202,7 @@ export interface MarketingEmailsPublicEmailStyleSettings {
   secondaryFontSize?: number;
 }
 
-export interface MarketingEmailsPublicEmailSubscriptionDetails {
+export interface PublicEmailSubscriptionDetails {
   officeLocationId?: string;
 
   preferencesGroupId?: string;
@@ -3214,7 +3210,7 @@ export interface MarketingEmailsPublicEmailSubscriptionDetails {
   subscriptionId?: string;
 }
 
-export interface MarketingEmailsPublicEmailTestingDetails {
+export interface PublicEmailTestingDetails {
   abSampleSizeDefault?:
     | 'master'
     | 'variant'
@@ -3254,19 +3250,19 @@ export interface MarketingEmailsPublicEmailTestingDetails {
   testId?: string;
 }
 
-export interface MarketingEmailsPublicEmailToDetails {
-  contactIds?: MarketingEmailsPublicEmailRecipients;
+export interface PublicEmailToDetails {
+  contactIds?: PublicEmailRecipients;
 
-  contactIlsLists?: MarketingEmailsPublicEmailRecipients;
+  contactIlsLists?: PublicEmailRecipients;
 
-  contactLists?: MarketingEmailsPublicEmailRecipients;
+  contactLists?: PublicEmailRecipients;
 
   limitSendFrequency?: boolean;
 
   suppressGraymail?: boolean;
 }
 
-export interface MarketingEmailsPublicFontStyle {
+export interface PublicFontStyle {
   bold?: boolean;
 
   color?: string;
@@ -3280,7 +3276,7 @@ export interface MarketingEmailsPublicFontStyle {
   underline?: boolean;
 }
 
-export interface MarketingEmailsPublicRssEmailDetails {
+export interface PublicRssEmailDetails {
   blogEmailType?: string;
 
   blogImageMaxWidth?: number;
@@ -3300,7 +3296,7 @@ export interface MarketingEmailsPublicRssEmailDetails {
   useHeadlineAsSubject?: boolean;
 }
 
-export interface MarketingEmailsPublicWebversionDetails {
+export interface PublicWebversionDetails {
   domain?: string;
 
   enabled?: boolean;
@@ -3324,19 +3320,19 @@ export interface MarketingEmailsPublicWebversionDetails {
   url?: string;
 }
 
-export type MarketingEmailsSmartEmailField = unknown;
+export type SmartEmailField = unknown;
 
-export interface MarketingEmailsVersionPublicEmail {
+export interface VersionPublicEmail {
   id: string;
 
-  object: MarketingEmailsPublicEmail;
+  object: PublicEmail;
 
   updatedAt: string;
 
-  user: MarketingEmailsVersionUser;
+  user: VersionUser;
 }
 
-export interface MarketingEmailsVersionUser {
+export interface VersionUser {
   id: string;
 
   email: string;
@@ -3355,11 +3351,11 @@ export interface EmailCreateParams {
 
   campaign?: string;
 
-  content?: MarketingEmailsPublicEmailContent;
+  content?: PublicEmailContent;
 
   feedbackSurveyId?: string;
 
-  from?: MarketingEmailsPublicEmailFromDetails;
+  from?: PublicEmailFromDetails;
 
   jitterSendTime?: boolean;
 
@@ -4157,7 +4153,7 @@ export interface EmailCreateParams {
 
   publishDate?: string;
 
-  rssData?: MarketingEmailsPublicRssEmailDetails;
+  rssData?: PublicRssEmailDetails;
 
   sendOnPublish?: boolean;
 
@@ -4273,13 +4269,13 @@ export interface EmailCreateParams {
 
   subject?: string;
 
-  subscriptionDetails?: MarketingEmailsPublicEmailSubscriptionDetails;
+  subscriptionDetails?: PublicEmailSubscriptionDetails;
 
-  testing?: MarketingEmailsPublicEmailTestingDetails;
+  testing?: PublicEmailTestingDetails;
 
-  to?: MarketingEmailsPublicEmailToDetails;
+  to?: PublicEmailToDetails;
 
-  webversion?: MarketingEmailsPublicWebversionDetails;
+  webversion?: PublicWebversionDetails;
 }
 
 export interface EmailUpdateParams {
@@ -4311,12 +4307,12 @@ export interface EmailUpdateParams {
   /**
    * Body param:
    */
-  content?: MarketingEmailsPublicEmailContent;
+  content?: PublicEmailContent;
 
   /**
    * Body param:
    */
-  from?: MarketingEmailsPublicEmailFromDetails;
+  from?: PublicEmailFromDetails;
 
   /**
    * Body param:
@@ -5131,7 +5127,7 @@ export interface EmailUpdateParams {
   /**
    * Body param:
    */
-  rssData?: MarketingEmailsPublicRssEmailDetails;
+  rssData?: PublicRssEmailDetails;
 
   /**
    * Body param:
@@ -5262,22 +5258,22 @@ export interface EmailUpdateParams {
   /**
    * Body param:
    */
-  subscriptionDetails?: MarketingEmailsPublicEmailSubscriptionDetails;
+  subscriptionDetails?: PublicEmailSubscriptionDetails;
 
   /**
    * Body param:
    */
-  testing?: MarketingEmailsPublicEmailTestingDetails;
+  testing?: PublicEmailTestingDetails;
 
   /**
    * Body param:
    */
-  to?: MarketingEmailsPublicEmailToDetails;
+  to?: PublicEmailToDetails;
 
   /**
    * Body param:
    */
-  webversion?: MarketingEmailsPublicWebversionDetails;
+  webversion?: PublicWebversionDetails;
 }
 
 export interface EmailListParams {
@@ -5426,9 +5422,9 @@ export interface EmailUpsertDraftParams {
 
   campaign?: string;
 
-  content?: MarketingEmailsPublicEmailContent;
+  content?: PublicEmailContent;
 
-  from?: MarketingEmailsPublicEmailFromDetails;
+  from?: PublicEmailFromDetails;
 
   jitterSendTime?: boolean;
 
@@ -6228,7 +6224,7 @@ export interface EmailUpsertDraftParams {
 
   publishDate?: string;
 
-  rssData?: MarketingEmailsPublicRssEmailDetails;
+  rssData?: PublicRssEmailDetails;
 
   sendOnPublish?: boolean;
 
@@ -6344,45 +6340,45 @@ export interface EmailUpsertDraftParams {
 
   subject?: string;
 
-  subscriptionDetails?: MarketingEmailsPublicEmailSubscriptionDetails;
+  subscriptionDetails?: PublicEmailSubscriptionDetails;
 
-  testing?: MarketingEmailsPublicEmailTestingDetails;
+  testing?: PublicEmailTestingDetails;
 
-  to?: MarketingEmailsPublicEmailToDetails;
+  to?: PublicEmailToDetails;
 
-  webversion?: MarketingEmailsPublicWebversionDetails;
+  webversion?: PublicWebversionDetails;
 }
 
 export declare namespace Emails {
   export {
-    type MarketingEmailsAbTestCreateRequestVNext as MarketingEmailsAbTestCreateRequestVNext,
-    type MarketingEmailsAggregateEmailStatistics as MarketingEmailsAggregateEmailStatistics,
-    type MarketingEmailsCollectionResponseWithTotalEmailStatisticIntervalNoPaging as MarketingEmailsCollectionResponseWithTotalEmailStatisticIntervalNoPaging,
-    type MarketingEmailsCollectionResponseWithTotalPublicEmailForwardPaging as MarketingEmailsCollectionResponseWithTotalPublicEmailForwardPaging,
-    type MarketingEmailsCollectionResponseWithTotalVersionPublicEmail as MarketingEmailsCollectionResponseWithTotalVersionPublicEmail,
-    type MarketingEmailsEmailCloneRequestVNext as MarketingEmailsEmailCloneRequestVNext,
-    type MarketingEmailsEmailCreateRequest as MarketingEmailsEmailCreateRequest,
-    type MarketingEmailsEmailStatisticInterval as MarketingEmailsEmailStatisticInterval,
-    type MarketingEmailsEmailStatisticsData as MarketingEmailsEmailStatisticsData,
-    type MarketingEmailsEmailUpdateRequest as MarketingEmailsEmailUpdateRequest,
-    type MarketingEmailsInterval as MarketingEmailsInterval,
-    type MarketingEmailsPaging as MarketingEmailsPaging,
-    type MarketingEmailsPublicButtonStyleSettings as MarketingEmailsPublicButtonStyleSettings,
-    type MarketingEmailsPublicDividerStyleSettings as MarketingEmailsPublicDividerStyleSettings,
-    type MarketingEmailsPublicEmail as MarketingEmailsPublicEmail,
-    type MarketingEmailsPublicEmailContent as MarketingEmailsPublicEmailContent,
-    type MarketingEmailsPublicEmailFromDetails as MarketingEmailsPublicEmailFromDetails,
-    type MarketingEmailsPublicEmailRecipients as MarketingEmailsPublicEmailRecipients,
-    type MarketingEmailsPublicEmailStyleSettings as MarketingEmailsPublicEmailStyleSettings,
-    type MarketingEmailsPublicEmailSubscriptionDetails as MarketingEmailsPublicEmailSubscriptionDetails,
-    type MarketingEmailsPublicEmailTestingDetails as MarketingEmailsPublicEmailTestingDetails,
-    type MarketingEmailsPublicEmailToDetails as MarketingEmailsPublicEmailToDetails,
-    type MarketingEmailsPublicFontStyle as MarketingEmailsPublicFontStyle,
-    type MarketingEmailsPublicRssEmailDetails as MarketingEmailsPublicRssEmailDetails,
-    type MarketingEmailsPublicWebversionDetails as MarketingEmailsPublicWebversionDetails,
-    type MarketingEmailsSmartEmailField as MarketingEmailsSmartEmailField,
-    type MarketingEmailsVersionPublicEmail as MarketingEmailsVersionPublicEmail,
-    type MarketingEmailsVersionUser as MarketingEmailsVersionUser,
+    type AbTestCreateRequestVNext as AbTestCreateRequestVNext,
+    type AggregateEmailStatistics as AggregateEmailStatistics,
+    type CollectionResponseWithTotalEmailStatisticIntervalNoPaging as CollectionResponseWithTotalEmailStatisticIntervalNoPaging,
+    type CollectionResponseWithTotalPublicEmailForwardPaging as CollectionResponseWithTotalPublicEmailForwardPaging,
+    type CollectionResponseWithTotalVersionPublicEmail as CollectionResponseWithTotalVersionPublicEmail,
+    type EmailCloneRequestVNext as EmailCloneRequestVNext,
+    type EmailCreateRequest as EmailCreateRequest,
+    type EmailStatisticInterval as EmailStatisticInterval,
+    type EmailStatisticsData as EmailStatisticsData,
+    type EmailUpdateRequest as EmailUpdateRequest,
+    type Interval as Interval,
+    type Paging as Paging,
+    type PublicButtonStyleSettings as PublicButtonStyleSettings,
+    type PublicDividerStyleSettings as PublicDividerStyleSettings,
+    type PublicEmail as PublicEmail,
+    type PublicEmailContent as PublicEmailContent,
+    type PublicEmailFromDetails as PublicEmailFromDetails,
+    type PublicEmailRecipients as PublicEmailRecipients,
+    type PublicEmailStyleSettings as PublicEmailStyleSettings,
+    type PublicEmailSubscriptionDetails as PublicEmailSubscriptionDetails,
+    type PublicEmailTestingDetails as PublicEmailTestingDetails,
+    type PublicEmailToDetails as PublicEmailToDetails,
+    type PublicFontStyle as PublicFontStyle,
+    type PublicRssEmailDetails as PublicRssEmailDetails,
+    type PublicWebversionDetails as PublicWebversionDetails,
+    type SmartEmailField as SmartEmailField,
+    type VersionPublicEmail as VersionPublicEmail,
+    type VersionUser as VersionUser,
     type EmailCreateParams as EmailCreateParams,
     type EmailUpdateParams as EmailUpdateParams,
     type EmailListParams as EmailListParams,

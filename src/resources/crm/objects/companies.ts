@@ -14,7 +14,7 @@ export class Companies extends APIResource {
   create(
     body: CompanyCreateParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CRMObjectsCreatedResponseSimplePublicObject> {
+  ): APIPromise<ObjectsAPI.CreatedResponseSimplePublicObject> {
     return this._client.post('/crm/v3/objects/companies', { body, ...options });
   }
 
@@ -24,7 +24,7 @@ export class Companies extends APIResource {
   update(
     body: CompanyUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CRMObjectsBatchResponseSimplePublicObject> {
+  ): APIPromise<ObjectsAPI.BatchResponseSimplePublicObject> {
     return this._client.post('/crm/v3/objects/companies/batch/update', { body, ...options });
   }
 
@@ -34,7 +34,7 @@ export class Companies extends APIResource {
   list(
     query: CompanyListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CRMObjectsCollectionResponseSimplePublicObjectWithAssociations> {
+  ): APIPromise<ObjectsAPI.CollectionResponseSimplePublicObjectWithAssociations> {
     return this._client.get('/crm/v3/objects/companies', { query, ...options });
   }
 
@@ -52,10 +52,7 @@ export class Companies extends APIResource {
   /**
    * Merge two companies
    */
-  merge(
-    body: CompanyMergeParams,
-    options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CRMObjectsSimplePublicObject> {
+  merge(body: CompanyMergeParams, options?: RequestOptions): APIPromise<ObjectsAPI.SimplePublicObject> {
     return this._client.post('/crm/v3/objects/companies/merge', { body, ...options });
   }
 
@@ -66,7 +63,7 @@ export class Companies extends APIResource {
     companyID: string,
     query: CompanyReadParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CRMObjectsSimplePublicObjectWithAssociations> {
+  ): APIPromise<ObjectsAPI.SimplePublicObjectWithAssociations> {
     return this._client.get(path`/crm/v3/objects/companies/${companyID}`, { query, ...options });
   }
 
@@ -76,7 +73,7 @@ export class Companies extends APIResource {
   search(
     body: CompanySearchParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CRMObjectsCollectionResponseWithTotalSimplePublicObject> {
+  ): APIPromise<ObjectsAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/v3/objects/companies/search', { body, ...options });
   }
 
@@ -86,7 +83,7 @@ export class Companies extends APIResource {
   upsert(
     body: CompanyUpsertParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CRMObjectsBatchResponseSimplePublicUpsertObject> {
+  ): APIPromise<ObjectsAPI.BatchResponseSimplePublicUpsertObject> {
     return this._client.post('/crm/v3/objects/companies/batch/upsert', { body, ...options });
   }
 }
@@ -94,11 +91,11 @@ export class Companies extends APIResource {
 export interface CompanyCreateParams {
   properties: { [key: string]: string };
 
-  associations?: Array<ObjectsAPI.CRMObjectsPublicAssociationsForObject>;
+  associations?: Array<ObjectsAPI.PublicAssociationsForObject>;
 }
 
 export interface CompanyUpdateParams {
-  inputs: Array<ObjectsAPI.CRMObjectsSimplePublicObjectBatchInput>;
+  inputs: Array<ObjectsAPI.SimplePublicObjectBatchInput>;
 }
 
 export interface CompanyListParams {
@@ -116,7 +113,7 @@ export interface CompanyListParams {
 }
 
 export interface CompanyDeleteParams {
-  inputs: Array<ObjectsAPI.CRMObjectsSimplePublicObjectID>;
+  inputs: Array<ObjectsAPI.SimplePublicObjectID>;
 }
 
 export interface CompanyMergeParams {
@@ -140,7 +137,7 @@ export interface CompanyReadParams {
 export interface CompanySearchParams {
   after?: string;
 
-  filterGroups?: Array<ObjectsAPI.CRMObjectsFilterGroup>;
+  filterGroups?: Array<ObjectsAPI.FilterGroup>;
 
   limit?: number;
 
@@ -152,7 +149,7 @@ export interface CompanySearchParams {
 }
 
 export interface CompanyUpsertParams {
-  inputs: Array<ObjectsAPI.CRMObjectsSimplePublicObjectBatchInputUpsert>;
+  inputs: Array<ObjectsAPI.SimplePublicObjectBatchInputUpsert>;
 }
 
 export declare namespace Companies {

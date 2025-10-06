@@ -16,7 +16,7 @@ export class Actions extends APIResource {
     appID: number,
     body: ActionCreateParams,
     options?: RequestOptions,
-  ): APIPromise<AutomationActionsPublicActionDefinition> {
+  ): APIPromise<PublicActionDefinition> {
     return this._client.post(path`/automation/v4/actions/${appID}`, { body, ...options });
   }
 
@@ -27,7 +27,7 @@ export class Actions extends APIResource {
     definitionID: string,
     params: ActionUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<AutomationActionsPublicActionDefinition> {
+  ): APIPromise<PublicActionDefinition> {
     const { appId, ...body } = params;
     return this._client.patch(path`/automation/v4/actions/${appId}/${definitionID}`, { body, ...options });
   }
@@ -39,7 +39,7 @@ export class Actions extends APIResource {
     definitionID: string,
     params: ActionListParams,
     options?: RequestOptions,
-  ): APIPromise<AutomationActionsCollectionResponsePublicActionRevisionForwardPaging> {
+  ): APIPromise<CollectionResponsePublicActionRevisionForwardPaging> {
     const { appId, ...query } = params;
     return this._client.get(path`/automation/v4/actions/${appId}/${definitionID}/revisions`, {
       query,
@@ -106,7 +106,7 @@ export class Actions extends APIResource {
     functionID: string,
     params: ActionCreateOrReplaceParams,
     options?: RequestOptions,
-  ): APIPromise<AutomationActionsPublicActionFunctionIdentifier> {
+  ): APIPromise<PublicActionFunctionIdentifier> {
     const { appId, definitionId, functionType, body } = params;
     return this._client.put(
       path`/automation/v4/actions/${appId}/${definitionId}/functions/${functionType}/${functionID}`,
@@ -125,7 +125,7 @@ export class Actions extends APIResource {
       | 'POST_ACTION_EXECUTION',
     params: ActionCreateOrReplaceByFunctionTypeParams,
     options?: RequestOptions,
-  ): APIPromise<AutomationActionsPublicActionFunctionIdentifier> {
+  ): APIPromise<PublicActionFunctionIdentifier> {
     const { appId, definitionId, body } = params;
     return this._client.put(path`/automation/v4/actions/${appId}/${definitionId}/functions/${functionType}`, {
       body: body,
@@ -145,7 +145,7 @@ export class Actions extends APIResource {
       | 'POST_ACTION_EXECUTION',
     params: ActionGetByFunctionTypeParams,
     options?: RequestOptions,
-  ): APIPromise<AutomationActionsPublicActionFunction> {
+  ): APIPromise<PublicActionFunction> {
     const { appId, definitionId } = params;
     return this._client.get(
       path`/automation/v4/actions/${appId}/${definitionId}/functions/${functionType}`,
@@ -160,7 +160,7 @@ export class Actions extends APIResource {
     functionID: string,
     params: ActionReadParams,
     options?: RequestOptions,
-  ): APIPromise<AutomationActionsPublicActionFunction> {
+  ): APIPromise<PublicActionFunction> {
     const { appId, definitionId, functionType } = params;
     return this._client.get(
       path`/automation/v4/actions/${appId}/${definitionId}/functions/${functionType}/${functionID}`,
@@ -169,42 +169,42 @@ export class Actions extends APIResource {
   }
 }
 
-export interface AutomationActionsBatchInputCallbackCompletionBatchRequest {
-  inputs: Array<AutomationActionsCallbackCompletionBatchRequest>;
+export interface BatchInputCallbackCompletionBatchRequest {
+  inputs: Array<CallbackCompletionBatchRequest>;
 }
 
-export interface AutomationActionsCallbackCompletionBatchRequest {
+export interface CallbackCompletionBatchRequest {
   callbackId: string;
 
   outputFields: { [key: string]: string };
 }
 
-export interface AutomationActionsCallbackCompletionRequest {
+export interface CallbackCompletionRequest {
   outputFields: { [key: string]: string };
 }
 
-export interface AutomationActionsCollectionResponsePublicActionDefinitionForwardPaging {
-  results: Array<AutomationActionsPublicActionDefinition>;
+export interface CollectionResponsePublicActionDefinitionForwardPaging {
+  results: Array<PublicActionDefinition>;
 
   paging?: Shared.ForwardPaging;
 }
 
-export interface AutomationActionsCollectionResponsePublicActionFunctionIdentifierNoPaging {
-  results: Array<AutomationActionsPublicActionFunctionIdentifier>;
+export interface CollectionResponsePublicActionFunctionIdentifierNoPaging {
+  results: Array<PublicActionFunctionIdentifier>;
 }
 
-export interface AutomationActionsCollectionResponsePublicActionRevisionForwardPaging {
-  results: Array<AutomationActionsPublicActionRevision>;
+export interface CollectionResponsePublicActionRevisionForwardPaging {
+  results: Array<PublicActionRevision>;
 
   paging?: Shared.ForwardPaging;
 }
 
-export interface AutomationActionsFieldTypeDefinition {
+export interface FieldTypeDefinition {
   externalOptions: boolean;
 
   name: string;
 
-  options: Array<CRMAPI.CRMOption>;
+  options: Array<CRMAPI.Option>;
 
   type:
     | 'string'
@@ -401,10 +401,10 @@ export interface AutomationActionsFieldTypeDefinition {
     | 'UNKNOWN';
 }
 
-export interface AutomationActionsInputFieldDefinition {
+export interface InputFieldDefinition {
   isRequired: boolean;
 
-  typeDefinition: AutomationActionsFieldTypeDefinition;
+  typeDefinition: FieldTypeDefinition;
 
   automationFieldType?: string;
 
@@ -417,7 +417,7 @@ export interface AutomationActionsInputFieldDefinition {
   >;
 }
 
-export interface AutomationActionsOption {
+export interface Option {
   displayOrder: number;
 
   doubleData: number;
@@ -431,20 +431,20 @@ export interface AutomationActionsOption {
   value: string;
 }
 
-export interface AutomationActionsOutputFieldDefinition {
-  typeDefinition: AutomationActionsFieldTypeDefinition;
+export interface OutputFieldDefinition {
+  typeDefinition: FieldTypeDefinition;
 }
 
-export interface AutomationActionsPublicActionDefinition {
+export interface PublicActionDefinition {
   id: string;
 
   actionUrl: string;
 
-  functions: Array<AutomationActionsPublicActionFunctionIdentifier>;
+  functions: Array<PublicActionFunctionIdentifier>;
 
-  inputFields: Array<AutomationActionsInputFieldDefinition>;
+  inputFields: Array<InputFieldDefinition>;
 
-  labels: { [key: string]: AutomationActionsPublicActionLabels };
+  labels: { [key: string]: PublicActionLabels };
 
   objectTypes: Array<string>;
 
@@ -454,25 +454,23 @@ export interface AutomationActionsPublicActionDefinition {
 
   archivedAt?: number;
 
-  executionRules?: Array<AutomationActionsPublicExecutionTranslationRule>;
+  executionRules?: Array<PublicExecutionTranslationRule>;
 
-  inputFieldDependencies?: Array<
-    AutomationActionsPublicSingleFieldDependency | AutomationActionsPublicConditionalSingleFieldDependency
-  >;
+  inputFieldDependencies?: Array<PublicSingleFieldDependency | PublicConditionalSingleFieldDependency>;
 
-  objectRequestOptions?: AutomationActionsPublicObjectRequestOptions;
+  objectRequestOptions?: PublicObjectRequestOptions;
 
-  outputFields?: Array<AutomationActionsOutputFieldDefinition>;
+  outputFields?: Array<OutputFieldDefinition>;
 }
 
-export interface AutomationActionsPublicActionDefinitionEgg {
+export interface PublicActionDefinitionEgg {
   actionUrl: string;
 
-  functions: Array<AutomationActionsPublicActionFunction>;
+  functions: Array<PublicActionFunction>;
 
-  inputFields: Array<AutomationActionsInputFieldDefinition>;
+  inputFields: Array<InputFieldDefinition>;
 
-  labels: { [key: string]: AutomationActionsPublicActionLabels };
+  labels: { [key: string]: PublicActionLabels };
 
   objectTypes: Array<string>;
 
@@ -480,40 +478,36 @@ export interface AutomationActionsPublicActionDefinitionEgg {
 
   archivedAt?: number;
 
-  executionRules?: Array<AutomationActionsPublicExecutionTranslationRule>;
+  executionRules?: Array<PublicExecutionTranslationRule>;
 
-  inputFieldDependencies?: Array<
-    AutomationActionsPublicSingleFieldDependency | AutomationActionsPublicConditionalSingleFieldDependency
-  >;
+  inputFieldDependencies?: Array<PublicSingleFieldDependency | PublicConditionalSingleFieldDependency>;
 
-  objectRequestOptions?: AutomationActionsPublicObjectRequestOptions;
+  objectRequestOptions?: PublicObjectRequestOptions;
 
-  outputFields?: Array<AutomationActionsOutputFieldDefinition>;
+  outputFields?: Array<OutputFieldDefinition>;
 }
 
-export interface AutomationActionsPublicActionDefinitionPatch {
+export interface PublicActionDefinitionPatch {
   actionUrl?: string;
 
-  executionRules?: Array<AutomationActionsPublicExecutionTranslationRule>;
+  executionRules?: Array<PublicExecutionTranslationRule>;
 
-  inputFieldDependencies?: Array<
-    AutomationActionsPublicSingleFieldDependency | AutomationActionsPublicConditionalSingleFieldDependency
-  >;
+  inputFieldDependencies?: Array<PublicSingleFieldDependency | PublicConditionalSingleFieldDependency>;
 
-  inputFields?: Array<AutomationActionsInputFieldDefinition>;
+  inputFields?: Array<InputFieldDefinition>;
 
-  labels?: { [key: string]: AutomationActionsPublicActionLabels };
+  labels?: { [key: string]: PublicActionLabels };
 
-  objectRequestOptions?: AutomationActionsPublicObjectRequestOptions;
+  objectRequestOptions?: PublicObjectRequestOptions;
 
   objectTypes?: Array<string>;
 
-  outputFields?: Array<AutomationActionsOutputFieldDefinition>;
+  outputFields?: Array<OutputFieldDefinition>;
 
   published?: boolean;
 }
 
-export interface AutomationActionsPublicActionFunction {
+export interface PublicActionFunction {
   functionSource: string;
 
   functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION';
@@ -521,13 +515,13 @@ export interface AutomationActionsPublicActionFunction {
   id?: string;
 }
 
-export interface AutomationActionsPublicActionFunctionIdentifier {
+export interface PublicActionFunctionIdentifier {
   functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION';
 
   id?: string;
 }
 
-export interface AutomationActionsPublicActionLabels {
+export interface PublicActionLabels {
   actionName: string;
 
   actionCardContent?: string;
@@ -547,17 +541,17 @@ export interface AutomationActionsPublicActionLabels {
   outputFieldLabels?: { [key: string]: string };
 }
 
-export interface AutomationActionsPublicActionRevision {
+export interface PublicActionRevision {
   id: string;
 
   createdAt: string;
 
-  definition: AutomationActionsPublicActionDefinition;
+  definition: PublicActionDefinition;
 
   revisionId: string;
 }
 
-export interface AutomationActionsPublicConditionalSingleFieldDependency {
+export interface PublicConditionalSingleFieldDependency {
   controllingFieldName: string;
 
   controllingFieldValue: string;
@@ -567,17 +561,17 @@ export interface AutomationActionsPublicConditionalSingleFieldDependency {
   dependentFieldNames: Array<string>;
 }
 
-export interface AutomationActionsPublicExecutionTranslationRule {
+export interface PublicExecutionTranslationRule {
   conditions: { [key: string]: unknown };
 
   labelName: string;
 }
 
-export interface AutomationActionsPublicObjectRequestOptions {
+export interface PublicObjectRequestOptions {
   properties: Array<string>;
 }
 
-export interface AutomationActionsPublicSingleFieldDependency {
+export interface PublicSingleFieldDependency {
   controllingFieldName: string;
 
   dependencyType: 'SINGLE_FIELD';
@@ -588,11 +582,11 @@ export interface AutomationActionsPublicSingleFieldDependency {
 export interface ActionCreateParams {
   actionUrl: string;
 
-  functions: Array<AutomationActionsPublicActionFunction>;
+  functions: Array<PublicActionFunction>;
 
-  inputFields: Array<AutomationActionsInputFieldDefinition>;
+  inputFields: Array<InputFieldDefinition>;
 
-  labels: { [key: string]: AutomationActionsPublicActionLabels };
+  labels: { [key: string]: PublicActionLabels };
 
   objectTypes: Array<string>;
 
@@ -600,15 +594,13 @@ export interface ActionCreateParams {
 
   archivedAt?: number;
 
-  executionRules?: Array<AutomationActionsPublicExecutionTranslationRule>;
+  executionRules?: Array<PublicExecutionTranslationRule>;
 
-  inputFieldDependencies?: Array<
-    AutomationActionsPublicSingleFieldDependency | AutomationActionsPublicConditionalSingleFieldDependency
-  >;
+  inputFieldDependencies?: Array<PublicSingleFieldDependency | PublicConditionalSingleFieldDependency>;
 
-  objectRequestOptions?: AutomationActionsPublicObjectRequestOptions;
+  objectRequestOptions?: PublicObjectRequestOptions;
 
-  outputFields?: Array<AutomationActionsOutputFieldDefinition>;
+  outputFields?: Array<OutputFieldDefinition>;
 }
 
 export interface ActionUpdateParams {
@@ -625,29 +617,27 @@ export interface ActionUpdateParams {
   /**
    * Body param:
    */
-  executionRules?: Array<AutomationActionsPublicExecutionTranslationRule>;
+  executionRules?: Array<PublicExecutionTranslationRule>;
 
   /**
    * Body param:
    */
-  inputFieldDependencies?: Array<
-    AutomationActionsPublicSingleFieldDependency | AutomationActionsPublicConditionalSingleFieldDependency
-  >;
+  inputFieldDependencies?: Array<PublicSingleFieldDependency | PublicConditionalSingleFieldDependency>;
 
   /**
    * Body param:
    */
-  inputFields?: Array<AutomationActionsInputFieldDefinition>;
+  inputFields?: Array<InputFieldDefinition>;
 
   /**
    * Body param:
    */
-  labels?: { [key: string]: AutomationActionsPublicActionLabels };
+  labels?: { [key: string]: PublicActionLabels };
 
   /**
    * Body param:
    */
-  objectRequestOptions?: AutomationActionsPublicObjectRequestOptions;
+  objectRequestOptions?: PublicObjectRequestOptions;
 
   /**
    * Body param:
@@ -657,7 +647,7 @@ export interface ActionUpdateParams {
   /**
    * Body param:
    */
-  outputFields?: Array<AutomationActionsOutputFieldDefinition>;
+  outputFields?: Array<OutputFieldDefinition>;
 
   /**
    * Body param:
@@ -701,7 +691,7 @@ export interface ActionCompleteParams {
 }
 
 export interface ActionCompleteBatchParams {
-  inputs: Array<AutomationActionsCallbackCompletionBatchRequest>;
+  inputs: Array<CallbackCompletionBatchRequest>;
 }
 
 export interface ActionCreateOrReplaceParams {
@@ -759,27 +749,27 @@ export interface ActionReadParams {
 
 export declare namespace Actions {
   export {
-    type AutomationActionsBatchInputCallbackCompletionBatchRequest as AutomationActionsBatchInputCallbackCompletionBatchRequest,
-    type AutomationActionsCallbackCompletionBatchRequest as AutomationActionsCallbackCompletionBatchRequest,
-    type AutomationActionsCallbackCompletionRequest as AutomationActionsCallbackCompletionRequest,
-    type AutomationActionsCollectionResponsePublicActionDefinitionForwardPaging as AutomationActionsCollectionResponsePublicActionDefinitionForwardPaging,
-    type AutomationActionsCollectionResponsePublicActionFunctionIdentifierNoPaging as AutomationActionsCollectionResponsePublicActionFunctionIdentifierNoPaging,
-    type AutomationActionsCollectionResponsePublicActionRevisionForwardPaging as AutomationActionsCollectionResponsePublicActionRevisionForwardPaging,
-    type AutomationActionsFieldTypeDefinition as AutomationActionsFieldTypeDefinition,
-    type AutomationActionsInputFieldDefinition as AutomationActionsInputFieldDefinition,
-    type AutomationActionsOption as AutomationActionsOption,
-    type AutomationActionsOutputFieldDefinition as AutomationActionsOutputFieldDefinition,
-    type AutomationActionsPublicActionDefinition as AutomationActionsPublicActionDefinition,
-    type AutomationActionsPublicActionDefinitionEgg as AutomationActionsPublicActionDefinitionEgg,
-    type AutomationActionsPublicActionDefinitionPatch as AutomationActionsPublicActionDefinitionPatch,
-    type AutomationActionsPublicActionFunction as AutomationActionsPublicActionFunction,
-    type AutomationActionsPublicActionFunctionIdentifier as AutomationActionsPublicActionFunctionIdentifier,
-    type AutomationActionsPublicActionLabels as AutomationActionsPublicActionLabels,
-    type AutomationActionsPublicActionRevision as AutomationActionsPublicActionRevision,
-    type AutomationActionsPublicConditionalSingleFieldDependency as AutomationActionsPublicConditionalSingleFieldDependency,
-    type AutomationActionsPublicExecutionTranslationRule as AutomationActionsPublicExecutionTranslationRule,
-    type AutomationActionsPublicObjectRequestOptions as AutomationActionsPublicObjectRequestOptions,
-    type AutomationActionsPublicSingleFieldDependency as AutomationActionsPublicSingleFieldDependency,
+    type BatchInputCallbackCompletionBatchRequest as BatchInputCallbackCompletionBatchRequest,
+    type CallbackCompletionBatchRequest as CallbackCompletionBatchRequest,
+    type CallbackCompletionRequest as CallbackCompletionRequest,
+    type CollectionResponsePublicActionDefinitionForwardPaging as CollectionResponsePublicActionDefinitionForwardPaging,
+    type CollectionResponsePublicActionFunctionIdentifierNoPaging as CollectionResponsePublicActionFunctionIdentifierNoPaging,
+    type CollectionResponsePublicActionRevisionForwardPaging as CollectionResponsePublicActionRevisionForwardPaging,
+    type FieldTypeDefinition as FieldTypeDefinition,
+    type InputFieldDefinition as InputFieldDefinition,
+    type Option as Option,
+    type OutputFieldDefinition as OutputFieldDefinition,
+    type PublicActionDefinition as PublicActionDefinition,
+    type PublicActionDefinitionEgg as PublicActionDefinitionEgg,
+    type PublicActionDefinitionPatch as PublicActionDefinitionPatch,
+    type PublicActionFunction as PublicActionFunction,
+    type PublicActionFunctionIdentifier as PublicActionFunctionIdentifier,
+    type PublicActionLabels as PublicActionLabels,
+    type PublicActionRevision as PublicActionRevision,
+    type PublicConditionalSingleFieldDependency as PublicConditionalSingleFieldDependency,
+    type PublicExecutionTranslationRule as PublicExecutionTranslationRule,
+    type PublicObjectRequestOptions as PublicObjectRequestOptions,
+    type PublicSingleFieldDependency as PublicSingleFieldDependency,
     type ActionCreateParams as ActionCreateParams,
     type ActionUpdateParams as ActionUpdateParams,
     type ActionListParams as ActionListParams,

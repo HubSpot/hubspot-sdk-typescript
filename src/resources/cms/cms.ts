@@ -3,12 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as Shared from '../shared';
 import * as DomainsAPI from './domains';
-import {
-  CmsDomainsCollectionResponseWithTotalDomainForwardPaging,
-  CmsDomainsDomain,
-  DomainListParams,
-  Domains,
-} from './domains';
+import { CollectionResponseWithTotalDomainForwardPaging, Domain, DomainListParams, Domains } from './domains';
 import * as URLRedirectsAPI from './url-redirects';
 import {
   URLRedirectCreateParams,
@@ -20,32 +15,24 @@ import * as BlogsAPI from './blogs/blogs';
 import { Blogs } from './blogs/blogs';
 import * as HubdbAPI from './hubdb/hubdb';
 import {
-  CmsHubdbBatchInputHubDBTableRowBatchCloneRequest,
-  CmsHubdbBatchInputHubDBTableRowV3BatchUpdateRequest,
-  CmsHubdbBatchInputHubDBTableRowV3Request,
-  CmsHubdbBatchResponseHubDBTableRowV3,
-  CmsHubdbBatchResponseHubDBTableRowV3WithErrors,
-  CmsHubdbBoundedNextPage,
-  CmsHubdbBoundedPaging,
-  CmsHubdbCollectionResponseWithTotalHubDBTableV3ForwardPaging,
-  CmsHubdbColumn,
-  CmsHubdbColumnRequest,
-  CmsHubdbForeignID,
-  CmsHubdbHubDBTableCloneRequest,
-  CmsHubdbHubDBTableRowBatchCloneRequest,
-  CmsHubdbHubDBTableRowV3,
-  CmsHubdbHubDBTableRowV3BatchUpdateRequest,
-  CmsHubdbHubDBTableRowV3Request,
-  CmsHubdbHubDBTableV3,
-  CmsHubdbHubDBTableV3Request,
-  CmsHubdbImportResult,
-  CmsHubdbOption,
-  CmsHubdbRandomAccessCollectionResponseWithTotalHubDBTableRowV3,
-  CmsHubdbSimpleUser,
-  CmsHubdbStandardError,
-  CmsHubdbStreamingCollectionResponseWithTotalHubDBTableRowV3,
-  CmsHubdbUnifiedCollectionResponseWithTotalBaseHubDBTableRowV3,
-  CmsHubdbVariant,
+  BatchInputHubDBTableRowBatchCloneRequest,
+  BatchInputHubDBTableRowV3BatchUpdateRequest,
+  BatchInputHubDBTableRowV3Request,
+  BatchResponseHubDBTableRowV3,
+  BatchResponseHubDBTableRowV3WithErrors,
+  BoundedNextPage,
+  BoundedPaging,
+  CollectionResponseWithTotalHubDBTableV3ForwardPaging,
+  Column,
+  ColumnRequest,
+  ForeignID,
+  HubDBTableCloneRequest,
+  HubDBTableRowBatchCloneRequest,
+  HubDBTableRowV3,
+  HubDBTableRowV3BatchUpdateRequest,
+  HubDBTableRowV3Request,
+  HubDBTableV3,
+  HubDBTableV3Request,
   Hubdb,
   HubdbCloneDraftTableParams,
   HubdbCloneDraftTableRowParams,
@@ -76,6 +63,14 @@ import {
   HubdbUpdateDraftTableParams,
   HubdbUpdateDraftTableRowParams,
   HubdbUpdateDraftTableRowsParams,
+  ImportResult,
+  Option,
+  RandomAccessCollectionResponseWithTotalHubDBTableRowV3,
+  SimpleUser,
+  StandardError,
+  StreamingCollectionResponseWithTotalHubDBTableRowV3,
+  UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3,
+  Variant,
 } from './hubdb/hubdb';
 
 export class Cms extends APIResource {
@@ -85,15 +80,15 @@ export class Cms extends APIResource {
   urlRedirects: URLRedirectsAPI.URLRedirects = new URLRedirectsAPI.URLRedirects(this._client);
 }
 
-export interface CmsCollectionResponseWithTotalURLMappingForwardPaging {
-  results: Array<CmsURLMapping>;
+export interface CollectionResponseWithTotalURLMappingForwardPaging {
+  results: Array<URLMapping>;
 
   total: number;
 
   paging?: Shared.ForwardPaging;
 }
 
-export interface CmsURLMapping {
+export interface URLMapping {
   id: string;
 
   destination: string;
@@ -121,7 +116,7 @@ export interface CmsURLMapping {
   updated?: string;
 }
 
-export interface CmsURLMappingCreateRequestBody {
+export interface URLMappingCreateRequestBody {
   destination: string;
 
   redirectStyle: number;
@@ -150,48 +145,48 @@ Cms.URLRedirects = URLRedirects;
 
 export declare namespace Cms {
   export {
-    type CmsCollectionResponseWithTotalURLMappingForwardPaging as CmsCollectionResponseWithTotalURLMappingForwardPaging,
-    type CmsURLMapping as CmsURLMapping,
-    type CmsURLMappingCreateRequestBody as CmsURLMappingCreateRequestBody,
+    type CollectionResponseWithTotalURLMappingForwardPaging as CollectionResponseWithTotalURLMappingForwardPaging,
+    type URLMapping as URLMapping,
+    type URLMappingCreateRequestBody as URLMappingCreateRequestBody,
   };
 
   export { Blogs as Blogs };
 
   export {
     Domains as Domains,
-    type CmsDomainsCollectionResponseWithTotalDomainForwardPaging as CmsDomainsCollectionResponseWithTotalDomainForwardPaging,
-    type CmsDomainsDomain as CmsDomainsDomain,
+    type CollectionResponseWithTotalDomainForwardPaging as CollectionResponseWithTotalDomainForwardPaging,
+    type Domain as Domain,
     type DomainListParams as DomainListParams,
   };
 
   export {
     Hubdb as Hubdb,
-    type CmsHubdbBatchInputHubDBTableRowBatchCloneRequest as CmsHubdbBatchInputHubDBTableRowBatchCloneRequest,
-    type CmsHubdbBatchInputHubDBTableRowV3BatchUpdateRequest as CmsHubdbBatchInputHubDBTableRowV3BatchUpdateRequest,
-    type CmsHubdbBatchInputHubDBTableRowV3Request as CmsHubdbBatchInputHubDBTableRowV3Request,
-    type CmsHubdbBatchResponseHubDBTableRowV3 as CmsHubdbBatchResponseHubDBTableRowV3,
-    type CmsHubdbBatchResponseHubDBTableRowV3WithErrors as CmsHubdbBatchResponseHubDBTableRowV3WithErrors,
-    type CmsHubdbBoundedNextPage as CmsHubdbBoundedNextPage,
-    type CmsHubdbBoundedPaging as CmsHubdbBoundedPaging,
-    type CmsHubdbCollectionResponseWithTotalHubDBTableV3ForwardPaging as CmsHubdbCollectionResponseWithTotalHubDBTableV3ForwardPaging,
-    type CmsHubdbColumn as CmsHubdbColumn,
-    type CmsHubdbColumnRequest as CmsHubdbColumnRequest,
-    type CmsHubdbForeignID as CmsHubdbForeignID,
-    type CmsHubdbHubDBTableCloneRequest as CmsHubdbHubDBTableCloneRequest,
-    type CmsHubdbHubDBTableRowBatchCloneRequest as CmsHubdbHubDBTableRowBatchCloneRequest,
-    type CmsHubdbHubDBTableRowV3 as CmsHubdbHubDBTableRowV3,
-    type CmsHubdbHubDBTableRowV3BatchUpdateRequest as CmsHubdbHubDBTableRowV3BatchUpdateRequest,
-    type CmsHubdbHubDBTableRowV3Request as CmsHubdbHubDBTableRowV3Request,
-    type CmsHubdbHubDBTableV3 as CmsHubdbHubDBTableV3,
-    type CmsHubdbHubDBTableV3Request as CmsHubdbHubDBTableV3Request,
-    type CmsHubdbImportResult as CmsHubdbImportResult,
-    type CmsHubdbOption as CmsHubdbOption,
-    type CmsHubdbRandomAccessCollectionResponseWithTotalHubDBTableRowV3 as CmsHubdbRandomAccessCollectionResponseWithTotalHubDBTableRowV3,
-    type CmsHubdbSimpleUser as CmsHubdbSimpleUser,
-    type CmsHubdbStandardError as CmsHubdbStandardError,
-    type CmsHubdbStreamingCollectionResponseWithTotalHubDBTableRowV3 as CmsHubdbStreamingCollectionResponseWithTotalHubDBTableRowV3,
-    type CmsHubdbUnifiedCollectionResponseWithTotalBaseHubDBTableRowV3 as CmsHubdbUnifiedCollectionResponseWithTotalBaseHubDBTableRowV3,
-    type CmsHubdbVariant as CmsHubdbVariant,
+    type BatchInputHubDBTableRowBatchCloneRequest as BatchInputHubDBTableRowBatchCloneRequest,
+    type BatchInputHubDBTableRowV3BatchUpdateRequest as BatchInputHubDBTableRowV3BatchUpdateRequest,
+    type BatchInputHubDBTableRowV3Request as BatchInputHubDBTableRowV3Request,
+    type BatchResponseHubDBTableRowV3 as BatchResponseHubDBTableRowV3,
+    type BatchResponseHubDBTableRowV3WithErrors as BatchResponseHubDBTableRowV3WithErrors,
+    type BoundedNextPage as BoundedNextPage,
+    type BoundedPaging as BoundedPaging,
+    type CollectionResponseWithTotalHubDBTableV3ForwardPaging as CollectionResponseWithTotalHubDBTableV3ForwardPaging,
+    type Column as Column,
+    type ColumnRequest as ColumnRequest,
+    type ForeignID as ForeignID,
+    type HubDBTableCloneRequest as HubDBTableCloneRequest,
+    type HubDBTableRowBatchCloneRequest as HubDBTableRowBatchCloneRequest,
+    type HubDBTableRowV3 as HubDBTableRowV3,
+    type HubDBTableRowV3BatchUpdateRequest as HubDBTableRowV3BatchUpdateRequest,
+    type HubDBTableRowV3Request as HubDBTableRowV3Request,
+    type HubDBTableV3 as HubDBTableV3,
+    type HubDBTableV3Request as HubDBTableV3Request,
+    type ImportResult as ImportResult,
+    type Option as Option,
+    type RandomAccessCollectionResponseWithTotalHubDBTableRowV3 as RandomAccessCollectionResponseWithTotalHubDBTableRowV3,
+    type SimpleUser as SimpleUser,
+    type StandardError as StandardError,
+    type StreamingCollectionResponseWithTotalHubDBTableRowV3 as StreamingCollectionResponseWithTotalHubDBTableRowV3,
+    type UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3 as UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3,
+    type Variant as Variant,
     type HubdbCloneDraftTableParams as HubdbCloneDraftTableParams,
     type HubdbCloneDraftTableRowParams as HubdbCloneDraftTableRowParams,
     type HubdbCloneDraftTableRowsParams as HubdbCloneDraftTableRowsParams,
