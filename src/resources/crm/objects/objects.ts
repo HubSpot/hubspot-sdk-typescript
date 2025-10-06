@@ -31,6 +31,16 @@ import {
 } from './contacts';
 import * as SchemasAPI from './schemas';
 import {
+  AssociationDefinition,
+  AssociationDefinitionEgg,
+  CollectionResponseObjectSchemaNoPaging,
+  ObjectSchema,
+  ObjectSchemaEgg,
+  ObjectTypeDefinition,
+  ObjectTypeDefinitionLabels,
+  ObjectTypeDefinitionPatch,
+  ObjectTypePropertyCreate,
+  OptionInput,
   SchemaArchiveAssociationParams,
   SchemaCreateAssociationParams,
   SchemaCreateParams,
@@ -397,6 +407,16 @@ export declare namespace Objects {
 
   export {
     Schemas as Schemas,
+    type AssociationDefinition as AssociationDefinition,
+    type AssociationDefinitionEgg as AssociationDefinitionEgg,
+    type CollectionResponseObjectSchemaNoPaging as CollectionResponseObjectSchemaNoPaging,
+    type ObjectSchema as ObjectSchema,
+    type ObjectSchemaEgg as ObjectSchemaEgg,
+    type ObjectTypeDefinition as ObjectTypeDefinition,
+    type ObjectTypeDefinitionLabels as ObjectTypeDefinitionLabels,
+    type ObjectTypeDefinitionPatch as ObjectTypeDefinitionPatch,
+    type ObjectTypePropertyCreate as ObjectTypePropertyCreate,
+    type OptionInput as OptionInput,
     type SchemaCreateParams as SchemaCreateParams,
     type SchemaUpdateParams as SchemaUpdateParams,
     type SchemaListParams as SchemaListParams,

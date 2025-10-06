@@ -65,6 +65,16 @@ export {
 } from './objects';
 export {
   Schemas,
+  type AssociationDefinition,
+  type AssociationDefinitionEgg,
+  type CollectionResponseObjectSchemaNoPaging,
+  type ObjectSchema,
+  type ObjectSchemaEgg,
+  type ObjectTypeDefinition,
+  type ObjectTypeDefinitionLabels,
+  type ObjectTypeDefinitionPatch,
+  type ObjectTypePropertyCreate,
+  type OptionInput,
   type SchemaCreateParams,
   type SchemaUpdateParams,
   type SchemaListParams,

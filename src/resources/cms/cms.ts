@@ -1,11 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as Shared from '../shared';
 import * as DomainsAPI from './domains';
 import { CollectionResponseWithTotalDomainForwardPaging, Domain, DomainListParams, Domains } from './domains';
 import * as URLRedirectsAPI from './url-redirects';
 import {
+  CollectionResponseWithTotalURLMappingForwardPaging,
+  URLMapping,
+  URLMappingCreateRequestBody,
   URLRedirectCreateParams,
   URLRedirectListParams,
   URLRedirectUpdateParams,
@@ -80,76 +82,12 @@ export class Cms extends APIResource {
   urlRedirects: URLRedirectsAPI.URLRedirects = new URLRedirectsAPI.URLRedirects(this._client);
 }
 
-export interface CollectionResponseWithTotalURLMappingForwardPaging {
-  results: Array<URLMapping>;
-
-  total: number;
-
-  paging?: Shared.ForwardPaging;
-}
-
-export interface URLMapping {
-  id: string;
-
-  destination: string;
-
-  isMatchFullUrl: boolean;
-
-  isMatchQueryString: boolean;
-
-  isOnlyAfterNotFound: boolean;
-
-  isPattern: boolean;
-
-  isProtocolAgnostic: boolean;
-
-  isTrailingSlashOptional: boolean;
-
-  precedence: number;
-
-  redirectStyle: number;
-
-  routePrefix: string;
-
-  created?: string;
-
-  updated?: string;
-}
-
-export interface URLMappingCreateRequestBody {
-  destination: string;
-
-  redirectStyle: number;
-
-  routePrefix: string;
-
-  isMatchFullUrl?: boolean;
-
-  isMatchQueryString?: boolean;
-
-  isOnlyAfterNotFound?: boolean;
-
-  isPattern?: boolean;
-
-  isProtocolAgnostic?: boolean;
-
-  isTrailingSlashOptional?: boolean;
-
-  precedence?: number;
-}
-
 Cms.Blogs = Blogs;
 Cms.Domains = Domains;
 Cms.Hubdb = Hubdb;
 Cms.URLRedirects = URLRedirects;
 
 export declare namespace Cms {
-  export {
-    type CollectionResponseWithTotalURLMappingForwardPaging as CollectionResponseWithTotalURLMappingForwardPaging,
-    type URLMapping as URLMapping,
-    type URLMappingCreateRequestBody as URLMappingCreateRequestBody,
-  };
-
   export { Blogs as Blogs };
 
   export {
@@ -220,6 +158,9 @@ export declare namespace Cms {
 
   export {
     URLRedirects as URLRedirects,
+    type CollectionResponseWithTotalURLMappingForwardPaging as CollectionResponseWithTotalURLMappingForwardPaging,
+    type URLMapping as URLMapping,
+    type URLMappingCreateRequestBody as URLMappingCreateRequestBody,
     type URLRedirectCreateParams as URLRedirectCreateParams,
     type URLRedirectUpdateParams as URLRedirectUpdateParams,
     type URLRedirectListParams as URLRedirectListParams,
