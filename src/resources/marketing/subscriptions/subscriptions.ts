@@ -1,26 +1,39 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
-import * as Shared from '../../shared';
-import * as V3API from './v3';
+import * as V4API from './v4/v4';
 import {
-  PublicSubscriptionStatus,
-  PublicSubscriptionStatusesResponse,
-  PublicUpdateSubscriptionStatusRequest,
-  SubscriptionDefinitionsResponse,
-  V3,
-} from './v3';
+  ActionResponseWithResultsPublicStatus,
+  ActionResponseWithResultsPublicWideStatus,
+  ActionResponseWithResultsSubscriptionDefinition,
+  BatchInputPublicStatusRequest,
+  BatchResponsePublicBulkOptOutFromAllResponse,
+  BatchResponsePublicStatus,
+  BatchResponsePublicStatusBulkResponse,
+  BatchResponsePublicStatusBulkResponseWithErrors,
+  BatchResponsePublicWideStatusBulkResponse,
+  BatchResponsePublicWideStatusBulkResponseWithErrors,
+  PartialPublicStatusRequest,
+  PublicBulkOptOutFromAllResponse,
+  PublicStatus,
+  PublicStatusBulkResponse,
+  PublicStatusRequest,
+  PublicSubscriptionTranslation,
+  PublicWideStatus,
+  PublicWideStatusBulkResponse,
+  V4,
+} from './v4/v4';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
 export class Subscriptions extends APIResource {
-  v3: V3API.V3 = new V3API.V3(this._client);
+  v4: V4API.V4 = new V4API.V4(this._client);
 
   /**
    * Get subscription definitions
    */
-  list(options?: RequestOptions): APIPromise<V3API.SubscriptionDefinitionsResponse> {
+  list(options?: RequestOptions): APIPromise<SubscriptionDefinitionsResponse> {
     return this._client.get('/communication-preferences/v3/definitions', options);
   }
 
@@ -30,7 +43,7 @@ export class Subscriptions extends APIResource {
   getEmailStatus(
     emailAddress: string,
     options?: RequestOptions,
-  ): APIPromise<V3API.PublicSubscriptionStatusesResponse> {
+  ): APIPromise<PublicSubscriptionStatusesResponse> {
     return this._client.get(path`/communication-preferences/v3/status/email/${emailAddress}`, options);
   }
 
@@ -40,7 +53,7 @@ export class Subscriptions extends APIResource {
   subscribe(
     body: SubscriptionSubscribeParams,
     options?: RequestOptions,
-  ): APIPromise<V3API.PublicSubscriptionStatus> {
+  ): APIPromise<PublicSubscriptionStatus> {
     return this._client.post('/communication-preferences/v3/subscribe', { body, ...options });
   }
 
@@ -50,286 +63,57 @@ export class Subscriptions extends APIResource {
   unsubscribe(
     body: SubscriptionUnsubscribeParams,
     options?: RequestOptions,
-  ): APIPromise<V3API.PublicSubscriptionStatus> {
+  ): APIPromise<PublicSubscriptionStatus> {
     return this._client.post('/communication-preferences/v3/unsubscribe', { body, ...options });
   }
 }
 
-export interface ActionResponseWithResultsPublicStatus {
-  completedAt: string;
-
-  results: Array<PublicStatus>;
-
-  startedAt: string;
-
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
-
-  errors?: Array<Shared.StandardError>;
-
-  links?: { [key: string]: string };
-
-  numErrors?: number;
-
-  requestedAt?: string;
-}
-
-export interface ActionResponseWithResultsPublicWideStatus {
-  completedAt: string;
-
-  results: Array<PublicWideStatus>;
-
-  startedAt: string;
-
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
-
-  errors?: Array<Shared.StandardError>;
-
-  links?: { [key: string]: string };
-
-  numErrors?: number;
-
-  requestedAt?: string;
-}
-
-export interface ActionResponseWithResultsSubscriptionDefinition {
-  completedAt: string;
-
-  results: Array<SubscriptionDefinition>;
-
-  startedAt: string;
-
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
-
-  errors?: Array<Shared.StandardError>;
-
-  links?: { [key: string]: string };
-
-  numErrors?: number;
-
-  requestedAt?: string;
-}
-
-export interface BatchInputPublicStatusRequest {
-  inputs: Array<PublicStatusRequest>;
-}
-
-export interface BatchResponsePublicBulkOptOutFromAllResponse {
-  completedAt: string;
-
-  results: Array<PublicBulkOptOutFromAllResponse>;
-
-  startedAt: string;
-
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
-
-  errors?: Array<Shared.StandardError>;
-
-  links?: { [key: string]: string };
-
-  numErrors?: number;
-
-  requestedAt?: string;
-}
-
-export interface BatchResponsePublicStatus {
-  completedAt: string;
-
-  results: Array<PublicStatus>;
-
-  startedAt: string;
-
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
-
-  errors?: Array<Shared.StandardError>;
-
-  links?: { [key: string]: string };
-
-  numErrors?: number;
-
-  requestedAt?: string;
-}
-
-export interface BatchResponsePublicStatusBulkResponse {
-  completedAt: string;
-
-  results: Array<PublicStatusBulkResponse>;
-
-  startedAt: string;
-
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
-
-  links?: { [key: string]: string };
-
-  requestedAt?: string;
-}
-
-export interface BatchResponsePublicStatusBulkResponseWithErrors {
-  completedAt: string;
-
-  results: Array<PublicStatusBulkResponse>;
-
-  startedAt: string;
-
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
-
-  errors?: Array<Shared.StandardError>;
-
-  links?: { [key: string]: string };
-
-  numErrors?: number;
-
-  requestedAt?: string;
-}
-
-export interface BatchResponsePublicWideStatusBulkResponse {
-  completedAt: string;
-
-  results: Array<PublicWideStatusBulkResponse>;
-
-  startedAt: string;
-
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
-
-  links?: { [key: string]: string };
-
-  requestedAt?: string;
-}
-
-export interface BatchResponsePublicWideStatusBulkResponseWithErrors {
-  completedAt: string;
-
-  results: Array<PublicWideStatusBulkResponse>;
-
-  startedAt: string;
-
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
-
-  errors?: Array<Shared.StandardError>;
-
-  links?: { [key: string]: string };
-
-  numErrors?: number;
-
-  requestedAt?: string;
-}
-
-export interface PartialPublicStatusRequest {
-  channel: 'EMAIL';
-
-  statusState: 'SUBSCRIBED' | 'UNSUBSCRIBED' | 'NOT_SPECIFIED';
-
-  subscriptionId: number;
-
-  legalBasis?:
-    | 'LEGITIMATE_INTEREST_PQL'
-    | 'LEGITIMATE_INTEREST_CLIENT'
-    | 'PERFORMANCE_OF_CONTRACT'
-    | 'CONSENT_WITH_NOTICE'
-    | 'NON_GDPR'
-    | 'PROCESS_AND_STORE'
-    | 'LEGITIMATE_INTEREST_OTHER';
-
-  legalBasisExplanation?: string;
-}
-
-export interface PublicBulkOptOutFromAllResponse {
-  subscriberIdString: string;
-
-  statuses?: Array<PublicStatus>;
-}
-
-export interface PublicStatus {
-  channel: 'EMAIL';
-
-  source: string;
-
-  status: 'SUBSCRIBED' | 'UNSUBSCRIBED' | 'NOT_SPECIFIED';
-
-  subscriberIdString: string;
-
-  subscriptionId: number;
-
-  timestamp: string;
-
-  businessUnitId?: number;
-
-  legalBasis?:
-    | 'LEGITIMATE_INTEREST_PQL'
-    | 'LEGITIMATE_INTEREST_CLIENT'
-    | 'PERFORMANCE_OF_CONTRACT'
-    | 'CONSENT_WITH_NOTICE'
-    | 'NON_GDPR'
-    | 'PROCESS_AND_STORE'
-    | 'LEGITIMATE_INTEREST_OTHER';
-
-  legalBasisExplanation?: string;
-
-  setStatusSuccessReason?:
-    | 'RESUBSCRIBE_OCCURRED'
-    | 'NO_STATUS_CHANGE'
-    | 'UNSUBSCRIBE_FROM_ALL_OCCURRED'
-    | 'REQUESTED_CHANGE_OCCURRED';
-
-  subscriptionName?: string;
-}
-
-export interface PublicStatusBulkResponse {
-  statuses: Array<PublicStatus>;
-
-  subscriberIdString: string;
-}
-
-export interface PublicStatusRequest {
-  channel: 'EMAIL';
-
-  statusState: 'SUBSCRIBED' | 'UNSUBSCRIBED' | 'NOT_SPECIFIED';
-
-  subscriberIdString: string;
-
-  subscriptionId: number;
-
-  legalBasis?:
-    | 'LEGITIMATE_INTEREST_PQL'
-    | 'LEGITIMATE_INTEREST_CLIENT'
-    | 'PERFORMANCE_OF_CONTRACT'
-    | 'CONSENT_WITH_NOTICE'
-    | 'NON_GDPR'
-    | 'PROCESS_AND_STORE'
-    | 'LEGITIMATE_INTEREST_OTHER';
-
-  legalBasisExplanation?: string;
-}
-
-export interface PublicSubscriptionTranslation {
-  createdAt: number;
-
-  languageCode: string;
+export interface PublicSubscriptionStatus {
+  id: string;
 
   name: string;
 
-  subscriptionId: number;
+  sourceOfStatus: 'PORTAL_WIDE_STATUS' | 'BRAND_WIDE_STATUS' | 'SUBSCRIPTION_STATUS';
 
-  updatedAt: number;
+  status: 'SUBSCRIBED' | 'NOT_SUBSCRIBED';
+
+  brandId?: number;
+
+  legalBasis?:
+    | 'LEGITIMATE_INTEREST_PQL'
+    | 'LEGITIMATE_INTEREST_CLIENT'
+    | 'PERFORMANCE_OF_CONTRACT'
+    | 'CONSENT_WITH_NOTICE'
+    | 'NON_GDPR'
+    | 'PROCESS_AND_STORE'
+    | 'LEGITIMATE_INTEREST_OTHER';
+
+  legalBasisExplanation?: string;
+
+  preferenceGroupName?: string;
 }
 
-export interface PublicWideStatus {
-  channel: 'EMAIL';
+export interface PublicSubscriptionStatusesResponse {
+  recipient: string;
 
-  status: 'SUBSCRIBED' | 'UNSUBSCRIBED' | 'NOT_SPECIFIED';
-
-  subscriberIdString: string;
-
-  timestamp: string;
-
-  wideStatusType: 'PORTAL_WIDE' | 'BUSINESS_UNIT_WIDE';
-
-  businessUnitId?: number;
+  subscriptionStatuses: Array<PublicSubscriptionStatus>;
 }
 
-export interface PublicWideStatusBulkResponse {
-  subscriberIdString: string;
+export interface PublicUpdateSubscriptionStatusRequest {
+  emailAddress: string;
 
-  wideStatuses: Array<PublicWideStatus>;
+  subscriptionId: string;
+
+  legalBasis?:
+    | 'LEGITIMATE_INTEREST_PQL'
+    | 'LEGITIMATE_INTEREST_CLIENT'
+    | 'PERFORMANCE_OF_CONTRACT'
+    | 'CONSENT_WITH_NOTICE'
+    | 'NON_GDPR'
+    | 'PROCESS_AND_STORE'
+    | 'LEGITIMATE_INTEREST_OTHER';
+
+  legalBasisExplanation?: string;
 }
 
 export interface SubscriptionDefinition {
@@ -352,8 +136,10 @@ export interface SubscriptionDefinition {
   communicationMethod?: string;
 
   purpose?: string;
+}
 
-  subscriptionTranslations?: Array<PublicSubscriptionTranslation>;
+export interface SubscriptionDefinitionsResponse {
+  subscriptionDefinitions: Array<SubscriptionDefinition>;
 }
 
 export interface SubscriptionSubscribeParams {
@@ -390,10 +176,21 @@ export interface SubscriptionUnsubscribeParams {
   legalBasisExplanation?: string;
 }
 
-Subscriptions.V3 = V3;
+Subscriptions.V4 = V4;
 
 export declare namespace Subscriptions {
   export {
+    type PublicSubscriptionStatus as PublicSubscriptionStatus,
+    type PublicSubscriptionStatusesResponse as PublicSubscriptionStatusesResponse,
+    type PublicUpdateSubscriptionStatusRequest as PublicUpdateSubscriptionStatusRequest,
+    type SubscriptionDefinition as SubscriptionDefinition,
+    type SubscriptionDefinitionsResponse as SubscriptionDefinitionsResponse,
+    type SubscriptionSubscribeParams as SubscriptionSubscribeParams,
+    type SubscriptionUnsubscribeParams as SubscriptionUnsubscribeParams,
+  };
+
+  export {
+    V4 as V4,
     type ActionResponseWithResultsPublicStatus as ActionResponseWithResultsPublicStatus,
     type ActionResponseWithResultsPublicWideStatus as ActionResponseWithResultsPublicWideStatus,
     type ActionResponseWithResultsSubscriptionDefinition as ActionResponseWithResultsSubscriptionDefinition,
@@ -412,16 +209,5 @@ export declare namespace Subscriptions {
     type PublicSubscriptionTranslation as PublicSubscriptionTranslation,
     type PublicWideStatus as PublicWideStatus,
     type PublicWideStatusBulkResponse as PublicWideStatusBulkResponse,
-    type SubscriptionDefinition as SubscriptionDefinition,
-    type SubscriptionSubscribeParams as SubscriptionSubscribeParams,
-    type SubscriptionUnsubscribeParams as SubscriptionUnsubscribeParams,
-  };
-
-  export {
-    V3 as V3,
-    type PublicSubscriptionStatus as PublicSubscriptionStatus,
-    type PublicSubscriptionStatusesResponse as PublicSubscriptionStatusesResponse,
-    type PublicUpdateSubscriptionStatusRequest as PublicUpdateSubscriptionStatusRequest,
-    type SubscriptionDefinitionsResponse as SubscriptionDefinitionsResponse,
   };
 }

@@ -13,15 +13,17 @@ Types:
 
 # Account
 
+## AuditLogs
+
 Types:
 
-- <code><a href="./src/resources/account/account.ts">ActingUser</a></code>
-- <code><a href="./src/resources/account/account.ts">CollectionResponseHydratedCriticalActionForwardPaging</a></code>
-- <code><a href="./src/resources/account/account.ts">CollectionResponsePublicAPIUserActionEventForwardPaging</a></code>
-- <code><a href="./src/resources/account/account.ts">CollectionResponsePublicLoginAuditForwardPaging</a></code>
-- <code><a href="./src/resources/account/account.ts">HydratedCriticalAction</a></code>
-- <code><a href="./src/resources/account/account.ts">PublicAPIUserActionEvent</a></code>
-- <code><a href="./src/resources/account/account.ts">PublicLoginAudit</a></code>
+- <code><a href="./src/resources/account/audit-logs.ts">ActingUser</a></code>
+- <code><a href="./src/resources/account/audit-logs.ts">CollectionResponseHydratedCriticalActionForwardPaging</a></code>
+- <code><a href="./src/resources/account/audit-logs.ts">CollectionResponsePublicAPIUserActionEventForwardPaging</a></code>
+- <code><a href="./src/resources/account/audit-logs.ts">CollectionResponsePublicLoginAuditForwardPaging</a></code>
+- <code><a href="./src/resources/account/audit-logs.ts">HydratedCriticalAction</a></code>
+- <code><a href="./src/resources/account/audit-logs.ts">PublicAPIUserActionEvent</a></code>
+- <code><a href="./src/resources/account/audit-logs.ts">PublicLoginAudit</a></code>
 
 ## Info
 
@@ -48,149 +50,6 @@ Methods:
 - <code title="get /oauth/v1/refresh-tokens/{token}">client.auth.oauth.<a href="./src/resources/auth/oauth.ts">get</a>(token) -> RefreshTokenInfoResponse</code>
 
 # Automation
-
-Types:
-
-- <code><a href="./src/resources/automation/automation.ts">APIAbTestBranchAction</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIActionDataValue</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIAppendObjectPropertyValue</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIAssociationDataSource</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIAssociationTimestampDataSource</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIAuthKeyWebhookAuthSettings</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIBlockedDate</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIConnection</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIContactFlow</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIContactFlowCreateRequest</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIContactFlowPutRequest</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIContactPropertyAnchor</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APICustomCodeAction</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIDailyEnrollmentSchedule</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIDatasetFieldPropertyFilterDataSource</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIEnrolledArgumentPropertyFilterDataSource</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIEnrolledRecordPropertyFilterDataSource</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIEnrollmentEventPropertyValue</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIEnumerationOutputField</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIEventBasedEnrollmentCriteria</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIFetchedObjectPropertyValue</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIFlow</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIFlowBatchFetchFlowIDCoordinate</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIFlowBatchFetchMigrationFlowIDCoordinate</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIFlowBatchFetchMigrationWorkflowIDCoordinate</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIFlowBatchInput</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIFlowBatchMigrationInput</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIFlowCreateRequest</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIFlowEmailCampaign</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIFlowListing</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIFlowPutRequest</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIIncrementValue</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIInputVariable</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIListBasedEnrollmentCriteria</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIListBranch</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIListBranchAction</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIManualEnrollmentCriteria</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIMonthlyRelativeDaysEnrollmentSchedule</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIMonthlySpecificDaysEnrollmentSchedule</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIObjectPropertyValue</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIPlatformFlow</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIPlatformFlowCreateRequest</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIPlatformFlowPutRequest</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIPropertyBasedEnrollmentSchedule</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIRelativeDateTimeValue</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APISignatureWebhookAuthSettings</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APISingleConnectionAction</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APISort</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIStaticAppendValue</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIStaticBranch</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIStaticBranchAction</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIStaticDateAnchor</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIStaticPropertyFilterDataSource</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIStaticTimeZoneStrategy</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIStaticValue</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APITimeDelay</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APITimeOfDay</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APITimestampValue</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APITimeWindow</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIUnEnrollmentSetting</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIWebhookAction</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIWeeklyEnrollmentSchedule</a></code>
-- <code><a href="./src/resources/automation/automation.ts">APIYearlyEnrollmentSchedule</a></code>
-- <code><a href="./src/resources/automation/automation.ts">BatchResponseAPIFlow</a></code>
-- <code><a href="./src/resources/automation/automation.ts">BatchResponseAPIFlowWithErrors</a></code>
-- <code><a href="./src/resources/automation/automation.ts">BatchResponseFlowIDWorkflowIDMappingResponse</a></code>
-- <code><a href="./src/resources/automation/automation.ts">BatchResponseFlowIDWorkflowIDMappingResponseWithErrors</a></code>
-- <code><a href="./src/resources/automation/automation.ts">CollectionResponseAPIFlowEmailCampaign</a></code>
-- <code><a href="./src/resources/automation/automation.ts">CollectionResponseAPIFlowListingForwardPaging</a></code>
-- <code><a href="./src/resources/automation/automation.ts">FlowIDWorkflowIDMappingResponse</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicAbsoluteComparativeTimestampRefineBy</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicAbsoluteRangedTimestampRefineBy</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicAdsSearchFilter</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicAdsTimeFilter</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicAllHistoryRefineBy</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicAllPropertyTypesOperation</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicAndFilterBranch</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicAssociationFilterBranch</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicAssociationInListFilter</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicBoolPropertyOperation</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicCalendarDatePropertyOperation</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicCampaignInfluencedFilter</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicCommunicationSubscriptionFilter</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicComparativeDatePropertyOperation</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicComparativePropertyUpdatedOperation</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicConstantFilter</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicCtaAnalyticsFilter</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicDatePoint</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicDatePropertyOperation</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicDateTimePropertyOperation</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicEmailEventFilter</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicEmailSubscriptionFilter</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicEnumerationPropertyOperation</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicEventAnalyticsFilter</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicEventFilterMetadata</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicFiscalQuarterReference</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicFiscalYearReference</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicFormSubmissionFilter</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicFormSubmissionOnPageFilter</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicIndexedTimePoint</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicIndexOffset</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicInListFilter</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicInListFilterMetadata</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicIntegrationEventFilter</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicMonthReference</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicMultiStringPropertyOperation</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicNotAllFilterBranch</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicNotAnyFilterBranch</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicNowReference</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicNumAssociationsFilter</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicNumberPropertyOperation</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicNumOccurrencesRefineBy</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicOrFilterBranch</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicPageViewAnalyticsFilter</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicPrivacyAnalyticsFilter</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicPropertyAssociationFilterBranch</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicPropertyAssociationInListFilter</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicPropertyFilter</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicPropertyReferencedTime</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicQuarterReference</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicRangedDatePropertyOperation</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicRangedNumberPropertyOperation</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicRangedTimeOperation</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicRelativeComparativeTimestampRefineBy</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicRelativeRangedTimestampRefineBy</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicRestrictedFilterBranch</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicRollingDateRangePropertyOperation</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicRollingPropertyUpdatedOperation</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicSetOccurrencesRefineBy</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicStringPropertyOperation</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicSurveyMonkeyFilter</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicSurveyMonkeyValueFilter</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicTimeOffset</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicTimePointOperation</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicTodayReference</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicUnifiedEventsFilter</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicUnifiedEventsFilterBranch</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicWebinarFilter</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicWeekReference</a></code>
-- <code><a href="./src/resources/automation/automation.ts">PublicYearReference</a></code>
 
 ## Actions
 
@@ -232,13 +91,152 @@ Methods:
 - <code title="get /automation/v4/actions/{appId}/{definitionId}/functions/{functionType}">client.automation.actions.<a href="./src/resources/automation/actions.ts">getByFunctionType</a>(functionType, { ...params }) -> PublicActionFunction</code>
 - <code title="get /automation/v4/actions/{appId}/{definitionId}/functions/{functionType}/{functionId}">client.automation.actions.<a href="./src/resources/automation/actions.ts">read</a>(functionID, { ...params }) -> PublicActionFunction</code>
 
-# Cms
+## Workflows
 
 Types:
 
-- <code><a href="./src/resources/cms/cms.ts">CollectionResponseWithTotalURLMappingForwardPaging</a></code>
-- <code><a href="./src/resources/cms/cms.ts">URLMapping</a></code>
-- <code><a href="./src/resources/cms/cms.ts">URLMappingCreateRequestBody</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIAbTestBranchAction</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIActionDataValue</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIAppendObjectPropertyValue</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIAssociationDataSource</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIAssociationTimestampDataSource</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIAuthKeyWebhookAuthSettings</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIBlockedDate</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIConnection</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIContactFlow</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIContactFlowCreateRequest</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIContactFlowPutRequest</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIContactPropertyAnchor</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APICustomCodeAction</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIDailyEnrollmentSchedule</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIDatasetFieldPropertyFilterDataSource</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIEnrolledArgumentPropertyFilterDataSource</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIEnrolledRecordPropertyFilterDataSource</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIEnrollmentEventPropertyValue</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIEnumerationOutputField</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIEventBasedEnrollmentCriteria</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIFetchedObjectPropertyValue</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIFlow</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIFlowBatchFetchFlowIDCoordinate</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIFlowBatchFetchMigrationFlowIDCoordinate</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIFlowBatchFetchMigrationWorkflowIDCoordinate</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIFlowBatchInput</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIFlowBatchMigrationInput</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIFlowCreateRequest</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIFlowEmailCampaign</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIFlowListing</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIFlowPutRequest</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIIncrementValue</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIInputVariable</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIListBasedEnrollmentCriteria</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIListBranch</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIListBranchAction</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIManualEnrollmentCriteria</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIMonthlyRelativeDaysEnrollmentSchedule</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIMonthlySpecificDaysEnrollmentSchedule</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIObjectPropertyValue</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIPlatformFlow</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIPlatformFlowCreateRequest</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIPlatformFlowPutRequest</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIPropertyBasedEnrollmentSchedule</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIRelativeDateTimeValue</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APISignatureWebhookAuthSettings</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APISingleConnectionAction</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APISort</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIStaticAppendValue</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIStaticBranch</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIStaticBranchAction</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIStaticDateAnchor</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIStaticPropertyFilterDataSource</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIStaticTimeZoneStrategy</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIStaticValue</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APITimeDelay</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APITimeOfDay</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APITimestampValue</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APITimeWindow</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIUnEnrollmentSetting</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIWebhookAction</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIWeeklyEnrollmentSchedule</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APIYearlyEnrollmentSchedule</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">BatchResponseAPIFlow</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">BatchResponseAPIFlowWithErrors</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">BatchResponseFlowIDWorkflowIDMappingResponse</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">BatchResponseFlowIDWorkflowIDMappingResponseWithErrors</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">CollectionResponseAPIFlowEmailCampaign</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">CollectionResponseAPIFlowListingForwardPaging</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">FlowIDWorkflowIDMappingResponse</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicAbsoluteComparativeTimestampRefineBy</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicAbsoluteRangedTimestampRefineBy</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicAdsSearchFilter</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicAdsTimeFilter</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicAllHistoryRefineBy</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicAllPropertyTypesOperation</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicAndFilterBranch</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicAssociationFilterBranch</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicAssociationInListFilter</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicBoolPropertyOperation</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicCalendarDatePropertyOperation</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicCampaignInfluencedFilter</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicCommunicationSubscriptionFilter</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicComparativeDatePropertyOperation</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicComparativePropertyUpdatedOperation</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicConstantFilter</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicCtaAnalyticsFilter</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicDatePoint</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicDatePropertyOperation</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicDateTimePropertyOperation</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicEmailEventFilter</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicEmailSubscriptionFilter</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicEnumerationPropertyOperation</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicEventAnalyticsFilter</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicEventFilterMetadata</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicFiscalQuarterReference</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicFiscalYearReference</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicFormSubmissionFilter</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicFormSubmissionOnPageFilter</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicIndexedTimePoint</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicIndexOffset</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicInListFilter</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicInListFilterMetadata</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicIntegrationEventFilter</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicMonthReference</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicMultiStringPropertyOperation</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicNotAllFilterBranch</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicNotAnyFilterBranch</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicNowReference</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicNumAssociationsFilter</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicNumberPropertyOperation</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicNumOccurrencesRefineBy</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicOrFilterBranch</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicPageViewAnalyticsFilter</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicPrivacyAnalyticsFilter</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicPropertyAssociationFilterBranch</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicPropertyAssociationInListFilter</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicPropertyFilter</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicPropertyReferencedTime</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicQuarterReference</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicRangedDatePropertyOperation</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicRangedNumberPropertyOperation</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicRangedTimeOperation</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicRelativeComparativeTimestampRefineBy</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicRelativeRangedTimestampRefineBy</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicRestrictedFilterBranch</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicRollingDateRangePropertyOperation</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicRollingPropertyUpdatedOperation</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicSetOccurrencesRefineBy</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicStringPropertyOperation</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicSurveyMonkeyFilter</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicSurveyMonkeyValueFilter</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicTimeOffset</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicTimePointOperation</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicTodayReference</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicUnifiedEventsFilter</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicUnifiedEventsFilterBranch</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicWebinarFilter</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicWeekReference</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">PublicYearReference</a></code>
+
+# Cms
 
 ## Blogs
 
@@ -361,6 +359,12 @@ Methods:
 
 ## URLRedirects
 
+Types:
+
+- <code><a href="./src/resources/cms/url-redirects.ts">CollectionResponseWithTotalURLMappingForwardPaging</a></code>
+- <code><a href="./src/resources/cms/url-redirects.ts">URLMapping</a></code>
+- <code><a href="./src/resources/cms/url-redirects.ts">URLMappingCreateRequestBody</a></code>
+
 Methods:
 
 - <code title="post /cms/v3/url-redirects/">client.cms.urlRedirects.<a href="./src/resources/cms/url-redirects.ts">create</a>({ ...params }) -> URLMapping</code>
@@ -369,29 +373,80 @@ Methods:
 - <code title="delete /cms/v3/url-redirects/{urlRedirectId}">client.cms.urlRedirects.<a href="./src/resources/cms/url-redirects.ts">delete</a>(urlRedirectID) -> void</code>
 - <code title="get /cms/v3/url-redirects/{urlRedirectId}">client.cms.urlRedirects.<a href="./src/resources/cms/url-redirects.ts">read</a>(urlRedirectID) -> URLMapping</code>
 
+# Conversations
+
+## CustomChannels
+
+Types:
+
+- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">ChannelIntegrationMessageEgg</a></code>
+- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">ChannelIntegrationParticipant</a></code>
+- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">CollectionResponseWithTotalPublicChannelAccountForwardPaging</a></code>
+- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">CollectionResponseWithTotalPublicChannelIntegrationChannelForwardPaging</a></code>
+- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">ContactAddress</a></code>
+- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">ContactAttachment</a></code>
+- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">ContactEmail</a></code>
+- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">ContactName</a></code>
+- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">ContactOrg</a></code>
+- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">ContactPhone</a></code>
+- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">ContactProfile</a></code>
+- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">ContactURL</a></code>
+- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">FileAttachment</a></code>
+- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">LocationAttachment</a></code>
+- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">MessageHeaderAttachment</a></code>
+- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PreResolvedContact</a></code>
+- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PreResolvedContacts</a></code>
+- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicChannelAccount</a></code>
+- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicChannelAccountEgg</a></code>
+- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicChannelAccountStagingToken</a></code>
+- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicChannelAccountStagingTokenUpdateRequest</a></code>
+- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicChannelAccountUpdateRequest</a></code>
+- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicChannelIntegrationChannel</a></code>
+- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicChannelIntegrationChannelCreate</a></code>
+- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicChannelIntegrationChannelPatch</a></code>
+- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicChannelIntegrationMessageUpdateRequest</a></code>
+- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicClient</a></code>
+- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicContact</a></code>
+- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicConversationsMessage</a></code>
+- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicDeliveryIdentifier</a></code>
+- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicFile</a></code>
+- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicLocation</a></code>
+- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicMessageFailureDetails</a></code>
+- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicMessageHeader</a></code>
+- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicMessageStatus</a></code>
+- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicQuickReplies</a></code>
+- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicRecipient</a></code>
+- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicSender</a></code>
+- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicSocialMetadataAttachment</a></code>
+- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicUnsupportedContent</a></code>
+- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicWhatsAppTemplateMetadata</a></code>
+- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">QuickRepliesAttachment</a></code>
+- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">QuickReply</a></code>
+- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">SocialMetadata</a></code>
+- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">SocialMetadataIntegrationAttachment</a></code>
+- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">UnsupportedContentAttachment</a></code>
+
+### Messages
+
+Methods:
+
+- <code title="post /conversations/v3/custom-channels/{channelId}/messages">client.conversations.customChannels.messages.<a href="./src/resources/conversations/custom-channels/messages.ts">create</a>(channelID, { ...params }) -> PublicConversationsMessage</code>
+- <code title="get /conversations/v3/custom-channels/{channelId}/messages/{messageId}">client.conversations.customChannels.messages.<a href="./src/resources/conversations/custom-channels/messages.ts">get</a>(messageID, { ...params }) -> PublicConversationsMessage</code>
+- <code title="patch /conversations/v3/custom-channels/{channelId}/messages/{messageId}">client.conversations.customChannels.messages.<a href="./src/resources/conversations/custom-channels/messages.ts">updateStatus</a>(messageID, { ...params }) -> PublicConversationsMessage</code>
+
 # CRM
 
 Types:
 
 - <code><a href="./src/resources/crm/crm.ts">AssociatedID</a></code>
-- <code><a href="./src/resources/crm/crm.ts">AssociationDefinition</a></code>
-- <code><a href="./src/resources/crm/crm.ts">AssociationDefinitionEgg</a></code>
 - <code><a href="./src/resources/crm/crm.ts">AssociationSpec</a></code>
 - <code><a href="./src/resources/crm/crm.ts">AssociationSpecWithLabel</a></code>
 - <code><a href="./src/resources/crm/crm.ts">BatchResponsePublicDefaultAssociation</a></code>
 - <code><a href="./src/resources/crm/crm.ts">CollectionResponseMultiAssociatedObjectWithLabel</a></code>
-- <code><a href="./src/resources/crm/crm.ts">CollectionResponseObjectSchemaNoPaging</a></code>
 - <code><a href="./src/resources/crm/crm.ts">CreatedResponseLabelsBetweenObjectPair</a></code>
 - <code><a href="./src/resources/crm/crm.ts">LabelsBetweenObjectPair</a></code>
 - <code><a href="./src/resources/crm/crm.ts">MultiAssociatedObjectWithLabel</a></code>
-- <code><a href="./src/resources/crm/crm.ts">ObjectSchema</a></code>
-- <code><a href="./src/resources/crm/crm.ts">ObjectSchemaEgg</a></code>
-- <code><a href="./src/resources/crm/crm.ts">ObjectTypeDefinition</a></code>
-- <code><a href="./src/resources/crm/crm.ts">ObjectTypeDefinitionLabels</a></code>
-- <code><a href="./src/resources/crm/crm.ts">ObjectTypeDefinitionPatch</a></code>
-- <code><a href="./src/resources/crm/crm.ts">ObjectTypePropertyCreate</a></code>
 - <code><a href="./src/resources/crm/crm.ts">Option</a></code>
-- <code><a href="./src/resources/crm/crm.ts">OptionInput</a></code>
 - <code><a href="./src/resources/crm/crm.ts">Property</a></code>
 - <code><a href="./src/resources/crm/crm.ts">PropertyModificationMetadata</a></code>
 - <code><a href="./src/resources/crm/crm.ts">PublicDefaultAssociation</a></code>
@@ -553,6 +608,19 @@ Methods:
 
 ### Schemas
 
+Types:
+
+- <code><a href="./src/resources/crm/objects/schemas.ts">AssociationDefinition</a></code>
+- <code><a href="./src/resources/crm/objects/schemas.ts">AssociationDefinitionEgg</a></code>
+- <code><a href="./src/resources/crm/objects/schemas.ts">CollectionResponseObjectSchemaNoPaging</a></code>
+- <code><a href="./src/resources/crm/objects/schemas.ts">ObjectSchema</a></code>
+- <code><a href="./src/resources/crm/objects/schemas.ts">ObjectSchemaEgg</a></code>
+- <code><a href="./src/resources/crm/objects/schemas.ts">ObjectTypeDefinition</a></code>
+- <code><a href="./src/resources/crm/objects/schemas.ts">ObjectTypeDefinitionLabels</a></code>
+- <code><a href="./src/resources/crm/objects/schemas.ts">ObjectTypeDefinitionPatch</a></code>
+- <code><a href="./src/resources/crm/objects/schemas.ts">ObjectTypePropertyCreate</a></code>
+- <code><a href="./src/resources/crm/objects/schemas.ts">OptionInput</a></code>
+
 Methods:
 
 - <code title="post /crm-object-schemas/v3/schemas">client.crm.objects.schemas.<a href="./src/resources/crm/objects/schemas.ts">create</a>({ ...params }) -> ObjectSchema</code>
@@ -647,6 +715,7 @@ Methods:
 - <code title="get /files/v3/files/{fileId}">client.files.files.<a href="./src/resources/files/files_.ts">get</a>(fileID, { ...params }) -> File</code>
 - <code title="get /files/v3/files/stat/{path}">client.files.files.<a href="./src/resources/files/files_.ts">getByPath</a>(path\_, { ...params }) -> FileStat</code>
 - <code title="get /files/v3/files/import-from-url/async/tasks/{taskId}/status">client.files.files.<a href="./src/resources/files/files_.ts">getImportFromURLAsyncStatus</a>(taskID) -> FileActionResponse</code>
+- <code title="get /files/v3/files/import-from-url/async/tasks/{taskId}/status">client.files.files.<a href="./src/resources/files/files_.ts">getImportTaskStatus</a>(taskID) -> FileActionResponse</code>
 - <code title="get /files/v3/files/{fileId}/signed-url">client.files.files.<a href="./src/resources/files/files_.ts">getSignedURL</a>(fileID, { ...params }) -> SignedURL</code>
 - <code title="post /files/v3/files/import-from-url/async">client.files.files.<a href="./src/resources/files/files_.ts">importFromURLAsync</a>({ ...params }) -> ImportFromURLTaskLocator</code>
 - <code title="put /files/v3/files/{fileId}">client.files.files.<a href="./src/resources/files/files_.ts">replace</a>(fileID, { ...params }) -> File</code>
@@ -778,25 +847,11 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/marketing/subscriptions/subscriptions.ts">ActionResponseWithResultsPublicStatus</a></code>
-- <code><a href="./src/resources/marketing/subscriptions/subscriptions.ts">ActionResponseWithResultsPublicWideStatus</a></code>
-- <code><a href="./src/resources/marketing/subscriptions/subscriptions.ts">ActionResponseWithResultsSubscriptionDefinition</a></code>
-- <code><a href="./src/resources/marketing/subscriptions/subscriptions.ts">BatchInputPublicStatusRequest</a></code>
-- <code><a href="./src/resources/marketing/subscriptions/subscriptions.ts">BatchResponsePublicBulkOptOutFromAllResponse</a></code>
-- <code><a href="./src/resources/marketing/subscriptions/subscriptions.ts">BatchResponsePublicStatus</a></code>
-- <code><a href="./src/resources/marketing/subscriptions/subscriptions.ts">BatchResponsePublicStatusBulkResponse</a></code>
-- <code><a href="./src/resources/marketing/subscriptions/subscriptions.ts">BatchResponsePublicStatusBulkResponseWithErrors</a></code>
-- <code><a href="./src/resources/marketing/subscriptions/subscriptions.ts">BatchResponsePublicWideStatusBulkResponse</a></code>
-- <code><a href="./src/resources/marketing/subscriptions/subscriptions.ts">BatchResponsePublicWideStatusBulkResponseWithErrors</a></code>
-- <code><a href="./src/resources/marketing/subscriptions/subscriptions.ts">PartialPublicStatusRequest</a></code>
-- <code><a href="./src/resources/marketing/subscriptions/subscriptions.ts">PublicBulkOptOutFromAllResponse</a></code>
-- <code><a href="./src/resources/marketing/subscriptions/subscriptions.ts">PublicStatus</a></code>
-- <code><a href="./src/resources/marketing/subscriptions/subscriptions.ts">PublicStatusBulkResponse</a></code>
-- <code><a href="./src/resources/marketing/subscriptions/subscriptions.ts">PublicStatusRequest</a></code>
-- <code><a href="./src/resources/marketing/subscriptions/subscriptions.ts">PublicSubscriptionTranslation</a></code>
-- <code><a href="./src/resources/marketing/subscriptions/subscriptions.ts">PublicWideStatus</a></code>
-- <code><a href="./src/resources/marketing/subscriptions/subscriptions.ts">PublicWideStatusBulkResponse</a></code>
+- <code><a href="./src/resources/marketing/subscriptions/subscriptions.ts">PublicSubscriptionStatus</a></code>
+- <code><a href="./src/resources/marketing/subscriptions/subscriptions.ts">PublicSubscriptionStatusesResponse</a></code>
+- <code><a href="./src/resources/marketing/subscriptions/subscriptions.ts">PublicUpdateSubscriptionStatusRequest</a></code>
 - <code><a href="./src/resources/marketing/subscriptions/subscriptions.ts">SubscriptionDefinition</a></code>
+- <code><a href="./src/resources/marketing/subscriptions/subscriptions.ts">SubscriptionDefinitionsResponse</a></code>
 
 Methods:
 
@@ -805,14 +860,72 @@ Methods:
 - <code title="post /communication-preferences/v3/subscribe">client.marketing.subscriptions.<a href="./src/resources/marketing/subscriptions/subscriptions.ts">subscribe</a>({ ...params }) -> PublicSubscriptionStatus</code>
 - <code title="post /communication-preferences/v3/unsubscribe">client.marketing.subscriptions.<a href="./src/resources/marketing/subscriptions/subscriptions.ts">unsubscribe</a>({ ...params }) -> PublicSubscriptionStatus</code>
 
-### V3
+### V4
 
 Types:
 
-- <code><a href="./src/resources/marketing/subscriptions/v3.ts">PublicSubscriptionStatus</a></code>
-- <code><a href="./src/resources/marketing/subscriptions/v3.ts">PublicSubscriptionStatusesResponse</a></code>
-- <code><a href="./src/resources/marketing/subscriptions/v3.ts">PublicUpdateSubscriptionStatusRequest</a></code>
-- <code><a href="./src/resources/marketing/subscriptions/v3.ts">SubscriptionDefinitionsResponse</a></code>
+- <code><a href="./src/resources/marketing/subscriptions/v4/v4.ts">ActionResponseWithResultsPublicStatus</a></code>
+- <code><a href="./src/resources/marketing/subscriptions/v4/v4.ts">ActionResponseWithResultsPublicWideStatus</a></code>
+- <code><a href="./src/resources/marketing/subscriptions/v4/v4.ts">ActionResponseWithResultsSubscriptionDefinition</a></code>
+- <code><a href="./src/resources/marketing/subscriptions/v4/v4.ts">BatchInputPublicStatusRequest</a></code>
+- <code><a href="./src/resources/marketing/subscriptions/v4/v4.ts">BatchResponsePublicBulkOptOutFromAllResponse</a></code>
+- <code><a href="./src/resources/marketing/subscriptions/v4/v4.ts">BatchResponsePublicStatus</a></code>
+- <code><a href="./src/resources/marketing/subscriptions/v4/v4.ts">BatchResponsePublicStatusBulkResponse</a></code>
+- <code><a href="./src/resources/marketing/subscriptions/v4/v4.ts">BatchResponsePublicStatusBulkResponseWithErrors</a></code>
+- <code><a href="./src/resources/marketing/subscriptions/v4/v4.ts">BatchResponsePublicWideStatusBulkResponse</a></code>
+- <code><a href="./src/resources/marketing/subscriptions/v4/v4.ts">BatchResponsePublicWideStatusBulkResponseWithErrors</a></code>
+- <code><a href="./src/resources/marketing/subscriptions/v4/v4.ts">PartialPublicStatusRequest</a></code>
+- <code><a href="./src/resources/marketing/subscriptions/v4/v4.ts">PublicBulkOptOutFromAllResponse</a></code>
+- <code><a href="./src/resources/marketing/subscriptions/v4/v4.ts">PublicStatus</a></code>
+- <code><a href="./src/resources/marketing/subscriptions/v4/v4.ts">PublicStatusBulkResponse</a></code>
+- <code><a href="./src/resources/marketing/subscriptions/v4/v4.ts">PublicStatusRequest</a></code>
+- <code><a href="./src/resources/marketing/subscriptions/v4/v4.ts">PublicSubscriptionTranslation</a></code>
+- <code><a href="./src/resources/marketing/subscriptions/v4/v4.ts">PublicWideStatus</a></code>
+- <code><a href="./src/resources/marketing/subscriptions/v4/v4.ts">PublicWideStatusBulkResponse</a></code>
+
+#### Definitions
+
+Methods:
+
+- <code title="get /communication-preferences/v4/definitions">client.marketing.subscriptions.v4.definitions.<a href="./src/resources/marketing/subscriptions/v4/definitions.ts">list</a>({ ...params }) -> ActionResponseWithResultsSubscriptionDefinition</code>
+
+#### Statuses
+
+Methods:
+
+- <code title="get /communication-preferences/v4/statuses/{subscriberIdString}">client.marketing.subscriptions.v4.statuses.<a href="./src/resources/marketing/subscriptions/v4/statuses.ts">get</a>(subscriberIDString, { ...params }) -> ActionResponseWithResultsPublicStatus</code>
+- <code title="post /communication-preferences/v4/statuses/batch/read">client.marketing.subscriptions.v4.statuses.<a href="./src/resources/marketing/subscriptions/v4/statuses.ts">getBatch</a>({ ...params }) -> BatchResponsePublicStatusBulkResponse</code>
+- <code title="get /communication-preferences/v4/statuses/{subscriberIdString}/unsubscribe-all">client.marketing.subscriptions.v4.statuses.<a href="./src/resources/marketing/subscriptions/v4/statuses.ts">getUnsubscribeAllStatus</a>(subscriberIDString, { ...params }) -> ActionResponseWithResultsPublicWideStatus</code>
+- <code title="post /communication-preferences/v4/statuses/batch/unsubscribe-all/read">client.marketing.subscriptions.v4.statuses.<a href="./src/resources/marketing/subscriptions/v4/statuses.ts">getUnsubscribeAllStatusBatch</a>({ ...params }) -> BatchResponsePublicWideStatusBulkResponse</code>
+- <code title="post /communication-preferences/v4/statuses/{subscriberIdString}">client.marketing.subscriptions.v4.statuses.<a href="./src/resources/marketing/subscriptions/v4/statuses.ts">set</a>(subscriberIDString, { ...params }) -> ActionResponseWithResultsPublicStatus</code>
+- <code title="post /communication-preferences/v4/statuses/{subscriberIdString}/unsubscribe-all">client.marketing.subscriptions.v4.statuses.<a href="./src/resources/marketing/subscriptions/v4/statuses.ts">unsubscribeAll</a>(subscriberIDString, { ...params }) -> ActionResponseWithResultsPublicStatus</code>
+- <code title="post /communication-preferences/v4/statuses/batch/unsubscribe-all">client.marketing.subscriptions.v4.statuses.<a href="./src/resources/marketing/subscriptions/v4/statuses.ts">unsubscribeAllBatch</a>({ ...params }) -> BatchResponsePublicBulkOptOutFromAllResponse</code>
+- <code title="post /communication-preferences/v4/statuses/batch/write">client.marketing.subscriptions.v4.statuses.<a href="./src/resources/marketing/subscriptions/v4/statuses.ts">updateBatch</a>({ ...params }) -> BatchResponsePublicStatus</code>
+
+# Settings
+
+## Users
+
+Types:
+
+- <code><a href="./src/resources/settings/users.ts">CollectionResponsePublicPermissionSetNoPaging</a></code>
+- <code><a href="./src/resources/settings/users.ts">CollectionResponsePublicTeamNoPaging</a></code>
+- <code><a href="./src/resources/settings/users.ts">CollectionResponsePublicUserForwardPaging</a></code>
+- <code><a href="./src/resources/settings/users.ts">PublicPermissionSet</a></code>
+- <code><a href="./src/resources/settings/users.ts">PublicTeam</a></code>
+- <code><a href="./src/resources/settings/users.ts">PublicUser</a></code>
+- <code><a href="./src/resources/settings/users.ts">PublicUserUpdate</a></code>
+- <code><a href="./src/resources/settings/users.ts">UserProvisionRequest</a></code>
+
+Methods:
+
+- <code title="post /settings/v3/users/">client.settings.users.<a href="./src/resources/settings/users.ts">create</a>({ ...params }) -> PublicUser</code>
+- <code title="put /settings/v3/users/{userId}">client.settings.users.<a href="./src/resources/settings/users.ts">update</a>(userID, { ...params }) -> PublicUser</code>
+- <code title="get /settings/v3/users/">client.settings.users.<a href="./src/resources/settings/users.ts">list</a>({ ...params }) -> CollectionResponsePublicUserForwardPaging</code>
+- <code title="delete /settings/v3/users/{userId}">client.settings.users.<a href="./src/resources/settings/users.ts">delete</a>(userID, { ...params }) -> void</code>
+- <code title="get /settings/v3/users/{userId}">client.settings.users.<a href="./src/resources/settings/users.ts">get</a>(userID, { ...params }) -> PublicUser</code>
+- <code title="get /settings/v3/users/roles">client.settings.users.<a href="./src/resources/settings/users.ts">listRoles</a>() -> CollectionResponsePublicPermissionSetNoPaging</code>
+- <code title="get /settings/v3/users/teams">client.settings.users.<a href="./src/resources/settings/users.ts">listTeams</a>() -> CollectionResponsePublicTeamNoPaging</code>
 
 # Webhooks
 

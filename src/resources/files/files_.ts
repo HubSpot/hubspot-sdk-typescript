@@ -70,6 +70,13 @@ export class Files extends APIResource {
   }
 
   /**
+   * Check import status
+   */
+  getImportTaskStatus(taskID: string, options?: RequestOptions): APIPromise<FilesAPI.FileActionResponse> {
+    return this._client.get(path`/files/v3/files/import-from-url/async/tasks/${taskID}/status`, options);
+  }
+
+  /**
    * Get signed URL to access private file
    */
   getSignedURL(

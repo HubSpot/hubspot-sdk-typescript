@@ -35,8 +35,9 @@ export {
   type ActionGetByFunctionTypeParams,
   type ActionReadParams,
 } from './actions';
+export { Automation } from './automation';
 export {
-  Automation,
+  Workflows,
   type APIAbTestBranchAction,
   type APIActionDataValue,
   type APIAppendObjectPropertyValue,
@@ -177,4 +178,4 @@ export {
   type PublicWebinarFilter,
   type PublicWeekReference,
   type PublicYearReference,
-} from './automation';
+} from './workflows';

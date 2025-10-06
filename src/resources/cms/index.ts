@@ -1,12 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export { Blogs } from './blogs/index';
-export {
-  Cms,
-  type CollectionResponseWithTotalURLMappingForwardPaging,
-  type URLMapping,
-  type URLMappingCreateRequestBody,
-} from './cms';
+export { Cms } from './cms';
 export {
   Domains,
   type CollectionResponseWithTotalDomainForwardPaging,
@@ -73,6 +68,9 @@ export {
 } from './hubdb/index';
 export {
   URLRedirects,
+  type CollectionResponseWithTotalURLMappingForwardPaging,
+  type URLMapping,
+  type URLMappingCreateRequestBody,
   type URLRedirectCreateParams,
   type URLRedirectUpdateParams,
   type URLRedirectListParams,

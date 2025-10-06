@@ -31,6 +31,7 @@ import {
   CollectionResponsePropertyGroup,
   CreatedResponseProperty,
   CreatedResponsePropertyGroup,
+  OptionInput,
   Properties,
   PropertyCreate,
   PropertyCreateParams,
@@ -107,28 +108,6 @@ export interface AssociatedID {
   type: string;
 }
 
-export interface AssociationDefinition {
-  id: string;
-
-  fromObjectTypeId: string;
-
-  toObjectTypeId: string;
-
-  createdAt?: string;
-
-  name?: string;
-
-  updatedAt?: string;
-}
-
-export interface AssociationDefinitionEgg {
-  fromObjectTypeId: string;
-
-  toObjectTypeId: string;
-
-  name?: string;
-}
-
 export interface AssociationSpec {
   associationCategory: 'HUBSPOT_DEFINED' | 'USER_DEFINED' | 'INTEGRATOR_DEFINED';
 
@@ -167,10 +146,6 @@ export interface CollectionResponseMultiAssociatedObjectWithLabel {
   paging?: EmailsAPI.Paging;
 }
 
-export interface CollectionResponseObjectSchemaNoPaging {
-  results: Array<ObjectSchema>;
-}
-
 export interface CreatedResponseLabelsBetweenObjectPair {
   createdResourceId: string;
 
@@ -197,150 +172,6 @@ export interface MultiAssociatedObjectWithLabel {
   toObjectId: string;
 }
 
-export interface ObjectSchema {
-  id: string;
-
-  associations: Array<AssociationDefinition>;
-
-  labels: ObjectTypeDefinitionLabels;
-
-  name: string;
-
-  properties: Array<Property>;
-
-  requiredProperties: Array<string>;
-
-  archived?: boolean;
-
-  createdAt?: string;
-
-  createdByUserId?: number;
-
-  fullyQualifiedName?: string;
-
-  objectTypeId?: string;
-
-  primaryDisplayProperty?: string;
-
-  searchableProperties?: Array<string>;
-
-  secondaryDisplayProperties?: Array<string>;
-
-  updatedAt?: string;
-
-  updatedByUserId?: number;
-}
-
-export interface ObjectSchemaEgg {
-  associatedObjects: Array<string>;
-
-  labels: ObjectTypeDefinitionLabels;
-
-  name: string;
-
-  properties: Array<ObjectTypePropertyCreate>;
-
-  requiredProperties: Array<string>;
-
-  primaryDisplayProperty?: string;
-
-  searchableProperties?: Array<string>;
-
-  secondaryDisplayProperties?: Array<string>;
-}
-
-export interface ObjectTypeDefinition {
-  id: string;
-
-  labels: ObjectTypeDefinitionLabels;
-
-  name: string;
-
-  requiredProperties: Array<string>;
-
-  archived?: boolean;
-
-  createdAt?: string;
-
-  fullyQualifiedName?: string;
-
-  objectTypeId?: string;
-
-  portalId?: number;
-
-  primaryDisplayProperty?: string;
-
-  searchableProperties?: Array<string>;
-
-  secondaryDisplayProperties?: Array<string>;
-
-  updatedAt?: string;
-}
-
-export interface ObjectTypeDefinitionLabels {
-  plural?: string;
-
-  singular?: string;
-}
-
-export interface ObjectTypeDefinitionPatch {
-  clearDescription?: boolean;
-
-  labels?: ObjectTypeDefinitionLabels;
-
-  primaryDisplayProperty?: string;
-
-  requiredProperties?: Array<string>;
-
-  restorable?: boolean;
-
-  searchableProperties?: Array<string>;
-
-  secondaryDisplayProperties?: Array<string>;
-}
-
-export interface ObjectTypePropertyCreate {
-  fieldType: string;
-
-  label: string;
-
-  name: string;
-
-  type: 'string' | 'number' | 'date' | 'datetime' | 'enumeration' | 'bool';
-
-  displayOrder?: number;
-
-  formField?: boolean;
-
-  groupName?: string;
-
-  hasUniqueValue?: boolean;
-
-  hidden?: boolean;
-
-  numberDisplayHint?: 'unformatted' | 'formatted' | 'currency' | 'percentage' | 'duration' | 'probability';
-
-  options?: Array<PropertiesAPI.OptionInput>;
-
-  optionSortStrategy?: 'DISPLAY_ORDER' | 'ALPHABETICAL';
-
-  referencedObjectType?: string;
-
-  searchableInGlobalSearch?: boolean;
-
-  showCurrencySymbol?: boolean;
-
-  textDisplayHint?:
-    | 'unformatted_single_line'
-    | 'multi_line'
-    | 'email'
-    | 'phone_number'
-    | 'domain_name'
-    | 'ip_address'
-    | 'physical_address'
-    | 'postal_code';
-}
-
 export interface Option {
   hidden: boolean;
 
@@ -349,16 +180,6 @@ export interface Option {
   value: string;
 
   displayOrder?: number;
-}
-
-export interface OptionInput {
-  displayOrder: number;
-
-  hidden: boolean;
-
-  label: string;
-
-  value: string;
 }
 
 export interface Property {
@@ -444,24 +265,14 @@ CRM.Properties = Properties;
 export declare namespace CRM {
   export {
     type AssociatedID as AssociatedID,
-    type AssociationDefinition as AssociationDefinition,
-    type AssociationDefinitionEgg as AssociationDefinitionEgg,
     type AssociationSpec as AssociationSpec,
     type AssociationSpecWithLabel as AssociationSpecWithLabel,
     type BatchResponsePublicDefaultAssociation as BatchResponsePublicDefaultAssociation,
     type CollectionResponseMultiAssociatedObjectWithLabel as CollectionResponseMultiAssociatedObjectWithLabel,
-    type CollectionResponseObjectSchemaNoPaging as CollectionResponseObjectSchemaNoPaging,
     type CreatedResponseLabelsBetweenObjectPair as CreatedResponseLabelsBetweenObjectPair,
     type LabelsBetweenObjectPair as LabelsBetweenObjectPair,
     type MultiAssociatedObjectWithLabel as MultiAssociatedObjectWithLabel,
-    type ObjectSchema as ObjectSchema,
-    type ObjectSchemaEgg as ObjectSchemaEgg,
-    type ObjectTypeDefinition as ObjectTypeDefinition,
-    type ObjectTypeDefinitionLabels as ObjectTypeDefinitionLabels,
-    type ObjectTypeDefinitionPatch as ObjectTypeDefinitionPatch,
-    type ObjectTypePropertyCreate as ObjectTypePropertyCreate,
     type Option as Option,
-    type OptionInput as OptionInput,
     type Property as Property,
     type PropertyModificationMetadata as PropertyModificationMetadata,
     type PublicDefaultAssociation as PublicDefaultAssociation,
@@ -544,6 +355,7 @@ export declare namespace CRM {
     type CollectionResponsePropertyGroup as CollectionResponsePropertyGroup,
     type CreatedResponseProperty as CreatedResponseProperty,
     type CreatedResponsePropertyGroup as CreatedResponsePropertyGroup,
+    type OptionInput as OptionInput,
     type PropertyCreate as PropertyCreate,
     type PropertyGroup as PropertyGroup,
     type PropertyGroupCreate as PropertyGroupCreate,

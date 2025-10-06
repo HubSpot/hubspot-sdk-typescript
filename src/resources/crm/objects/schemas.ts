@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import * as CRMAPI from '../crm';
+import * as PropertiesAPI from '../properties';
 import { APIPromise } from '../../../core/api-promise';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
@@ -11,7 +12,7 @@ export class Schemas extends APIResource {
   /**
    * Create a new schema
    */
-  create(body: SchemaCreateParams, options?: RequestOptions): APIPromise<CRMAPI.ObjectSchema> {
+  create(body: SchemaCreateParams, options?: RequestOptions): APIPromise<ObjectSchema> {
     return this._client.post('/crm-object-schemas/v3/schemas', { body, ...options });
   }
 
@@ -22,7 +23,7 @@ export class Schemas extends APIResource {
     objectType: string,
     body: SchemaUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<CRMAPI.ObjectTypeDefinition> {
+  ): APIPromise<ObjectTypeDefinition> {
     return this._client.patch(path`/crm-object-schemas/v3/schemas/${objectType}`, { body, ...options });
   }
 
@@ -32,7 +33,7 @@ export class Schemas extends APIResource {
   list(
     query: SchemaListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CRMAPI.CollectionResponseObjectSchemaNoPaging> {
+  ): APIPromise<CollectionResponseObjectSchemaNoPaging> {
     return this._client.get('/crm-object-schemas/v3/schemas', { query, ...options });
   }
 
@@ -74,7 +75,7 @@ export class Schemas extends APIResource {
     objectType: string,
     body: SchemaCreateAssociationParams,
     options?: RequestOptions,
-  ): APIPromise<CRMAPI.AssociationDefinition> {
+  ): APIPromise<AssociationDefinition> {
     return this._client.post(path`/crm-object-schemas/v3/schemas/${objectType}/associations`, {
       body,
       ...options,
@@ -84,19 +85,199 @@ export class Schemas extends APIResource {
   /**
    * Get an existing schema
    */
-  read(objectType: string, options?: RequestOptions): APIPromise<CRMAPI.ObjectSchema> {
+  read(objectType: string, options?: RequestOptions): APIPromise<ObjectSchema> {
     return this._client.get(path`/crm-object-schemas/v3/schemas/${objectType}`, options);
   }
+}
+
+export interface AssociationDefinition {
+  id: string;
+
+  fromObjectTypeId: string;
+
+  toObjectTypeId: string;
+
+  createdAt?: string;
+
+  name?: string;
+
+  updatedAt?: string;
+}
+
+export interface AssociationDefinitionEgg {
+  fromObjectTypeId: string;
+
+  toObjectTypeId: string;
+
+  name?: string;
+}
+
+export interface CollectionResponseObjectSchemaNoPaging {
+  results: Array<ObjectSchema>;
+}
+
+export interface ObjectSchema {
+  id: string;
+
+  associations: Array<AssociationDefinition>;
+
+  labels: ObjectTypeDefinitionLabels;
+
+  name: string;
+
+  properties: Array<CRMAPI.Property>;
+
+  requiredProperties: Array<string>;
+
+  archived?: boolean;
+
+  createdAt?: string;
+
+  createdByUserId?: number;
+
+  fullyQualifiedName?: string;
+
+  objectTypeId?: string;
+
+  primaryDisplayProperty?: string;
+
+  searchableProperties?: Array<string>;
+
+  secondaryDisplayProperties?: Array<string>;
+
+  updatedAt?: string;
+
+  updatedByUserId?: number;
+}
+
+export interface ObjectSchemaEgg {
+  associatedObjects: Array<string>;
+
+  labels: ObjectTypeDefinitionLabels;
+
+  name: string;
+
+  properties: Array<ObjectTypePropertyCreate>;
+
+  requiredProperties: Array<string>;
+
+  primaryDisplayProperty?: string;
+
+  searchableProperties?: Array<string>;
+
+  secondaryDisplayProperties?: Array<string>;
+}
+
+export interface ObjectTypeDefinition {
+  id: string;
+
+  labels: ObjectTypeDefinitionLabels;
+
+  name: string;
+
+  requiredProperties: Array<string>;
+
+  archived?: boolean;
+
+  createdAt?: string;
+
+  fullyQualifiedName?: string;
+
+  objectTypeId?: string;
+
+  portalId?: number;
+
+  primaryDisplayProperty?: string;
+
+  searchableProperties?: Array<string>;
+
+  secondaryDisplayProperties?: Array<string>;
+
+  updatedAt?: string;
+}
+
+export interface ObjectTypeDefinitionLabels {
+  plural?: string;
+
+  singular?: string;
+}
+
+export interface ObjectTypeDefinitionPatch {
+  clearDescription?: boolean;
+
+  labels?: ObjectTypeDefinitionLabels;
+
+  primaryDisplayProperty?: string;
+
+  requiredProperties?: Array<string>;
+
+  restorable?: boolean;
+
+  searchableProperties?: Array<string>;
+
+  secondaryDisplayProperties?: Array<string>;
+}
+
+export interface ObjectTypePropertyCreate {
+  fieldType: string;
+
+  label: string;
+
+  name: string;
+
+  type: 'string' | 'number' | 'date' | 'datetime' | 'enumeration' | 'bool';
+
+  displayOrder?: number;
+
+  formField?: boolean;
+
+  groupName?: string;
+
+  hasUniqueValue?: boolean;
+
+  hidden?: boolean;
+
+  numberDisplayHint?: 'unformatted' | 'formatted' | 'currency' | 'percentage' | 'duration' | 'probability';
+
+  options?: Array<PropertiesAPI.OptionInput>;
+
+  optionSortStrategy?: 'DISPLAY_ORDER' | 'ALPHABETICAL';
+
+  referencedObjectType?: string;
+
+  searchableInGlobalSearch?: boolean;
+
+  showCurrencySymbol?: boolean;
+
+  textDisplayHint?:
+    | 'unformatted_single_line'
+    | 'multi_line'
+    | 'email'
+    | 'phone_number'
+    | 'domain_name'
+    | 'ip_address'
+    | 'physical_address'
+    | 'postal_code';
+}
+
+export interface OptionInput {
+  displayOrder: number;
+
+  hidden: boolean;
+
+  label: string;
+
+  value: string;
 }
 
 export interface SchemaCreateParams {
   associatedObjects: Array<string>;
 
-  labels: CRMAPI.ObjectTypeDefinitionLabels;
+  labels: ObjectTypeDefinitionLabels;
 
   name: string;
 
-  properties: Array<CRMAPI.ObjectTypePropertyCreate>;
+  properties: Array<ObjectTypePropertyCreate>;
 
   requiredProperties: Array<string>;
 
@@ -110,7 +291,7 @@ export interface SchemaCreateParams {
 export interface SchemaUpdateParams {
   clearDescription?: boolean;
 
-  labels?: CRMAPI.ObjectTypeDefinitionLabels;
+  labels?: ObjectTypeDefinitionLabels;
 
   primaryDisplayProperty?: string;
 
@@ -145,6 +326,16 @@ export interface SchemaCreateAssociationParams {
 
 export declare namespace Schemas {
   export {
+    type AssociationDefinition as AssociationDefinition,
+    type AssociationDefinitionEgg as AssociationDefinitionEgg,
+    type CollectionResponseObjectSchemaNoPaging as CollectionResponseObjectSchemaNoPaging,
+    type ObjectSchema as ObjectSchema,
+    type ObjectSchemaEgg as ObjectSchemaEgg,
+    type ObjectTypeDefinition as ObjectTypeDefinition,
+    type ObjectTypeDefinitionLabels as ObjectTypeDefinitionLabels,
+    type ObjectTypeDefinitionPatch as ObjectTypeDefinitionPatch,
+    type ObjectTypePropertyCreate as ObjectTypePropertyCreate,
+    type OptionInput as OptionInput,
     type SchemaCreateParams as SchemaCreateParams,
     type SchemaUpdateParams as SchemaUpdateParams,
     type SchemaListParams as SchemaListParams,
