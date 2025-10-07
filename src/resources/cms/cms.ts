@@ -2,12 +2,19 @@
 
 import { APIResource } from '../../core/resource';
 import * as DomainsAPI from './domains';
-import { CollectionResponseWithTotalDomainForwardPaging, Domain, DomainListParams, Domains } from './domains';
+import {
+  CollectionResponseWithTotalDomainForwardPaging,
+  Domain,
+  DomainListParams,
+  Domains,
+  DomainsCursorURLPage,
+} from './domains';
 import * as URLRedirectsAPI from './url-redirects';
 import {
   CollectionResponseWithTotalURLMappingForwardPaging,
   URLMapping,
   URLMappingCreateRequestBody,
+  URLMappingsCursorURLPage,
   URLRedirectCreateParams,
   URLRedirectListParams,
   URLRedirectUpdateParams,
@@ -94,6 +101,7 @@ export declare namespace Cms {
     Domains as Domains,
     type CollectionResponseWithTotalDomainForwardPaging as CollectionResponseWithTotalDomainForwardPaging,
     type Domain as Domain,
+    type DomainsCursorURLPage as DomainsCursorURLPage,
     type DomainListParams as DomainListParams,
   };
 
@@ -161,6 +169,7 @@ export declare namespace Cms {
     type CollectionResponseWithTotalURLMappingForwardPaging as CollectionResponseWithTotalURLMappingForwardPaging,
     type URLMapping as URLMapping,
     type URLMappingCreateRequestBody as URLMappingCreateRequestBody,
+    type URLMappingsCursorURLPage as URLMappingsCursorURLPage,
     type URLRedirectCreateParams as URLRedirectCreateParams,
     type URLRedirectUpdateParams as URLRedirectUpdateParams,
     type URLRedirectListParams as URLRedirectListParams,

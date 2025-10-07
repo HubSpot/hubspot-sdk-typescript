@@ -34,6 +34,7 @@ export {
   type ActionCreateOrReplaceByFunctionTypeParams,
   type ActionGetByFunctionTypeParams,
   type ActionReadParams,
+  type PublicActionRevisionsCursorURLPage,
 } from './actions';
 export { Automation } from './automation';
 export {

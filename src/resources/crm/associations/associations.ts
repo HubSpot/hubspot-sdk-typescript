@@ -88,7 +88,7 @@ export interface BatchInputPublicAssociation {
 }
 
 export interface BatchInputPublicObjectID {
-  inputs: Array<CRMAPI.PublicObjectID>;
+  inputs: Array<Shared.PublicObjectID>;
 }
 
 export interface BatchResponsePublicAssociation {
@@ -128,15 +128,15 @@ export interface BatchResponsePublicAssociationMulti {
 }
 
 export interface PublicAssociation {
-  from: CRMAPI.PublicObjectID;
+  from: Shared.PublicObjectID;
 
-  to: CRMAPI.PublicObjectID;
+  to: Shared.PublicObjectID;
 
   type: string;
 }
 
 export interface PublicAssociationMulti {
-  from: CRMAPI.PublicObjectID;
+  from: Shared.PublicObjectID;
 
   to: Array<CRMAPI.AssociatedID>;
 
@@ -176,7 +176,7 @@ export interface AssociationReadParams {
   /**
    * Body param:
    */
-  inputs: Array<CRMAPI.PublicObjectID>;
+  inputs: Array<Shared.PublicObjectID>;
 }
 
 Associations.V4 = V4;

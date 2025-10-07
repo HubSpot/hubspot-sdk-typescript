@@ -4,6 +4,7 @@ import { APIResource } from '../../core/resource';
 import * as Shared from '../shared';
 import * as CRMAPI from '../crm/crm';
 import { APIPromise } from '../../core/api-promise';
+import { CursorURLPage, type CursorURLPageParams, PagePromise } from '../../core/pagination';
 import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
@@ -39,12 +40,13 @@ export class Actions extends APIResource {
     definitionID: string,
     params: ActionListParams,
     options?: RequestOptions,
-  ): APIPromise<CollectionResponsePublicActionRevisionForwardPaging> {
+  ): PagePromise<PublicActionRevisionsCursorURLPage, PublicActionRevision> {
     const { appId, ...query } = params;
-    return this._client.get(path`/automation/v4/actions/${appId}/${definitionID}/revisions`, {
-      query,
-      ...options,
-    });
+    return this._client.getAPIList(
+      path`/automation/v4/actions/${appId}/${definitionID}/revisions`,
+      CursorURLPage<PublicActionRevision>,
+      { query, ...options },
+    );
   }
 
   /**
@@ -168,6 +170,8 @@ export class Actions extends APIResource {
     );
   }
 }
+
+export type PublicActionRevisionsCursorURLPage = CursorURLPage<PublicActionRevision>;
 
 export interface BatchInputCallbackCompletionBatchRequest {
   inputs: Array<CallbackCompletionBatchRequest>;
@@ -655,7 +659,7 @@ export interface ActionUpdateParams {
   published?: boolean;
 }
 
-export interface ActionListParams {
+export interface ActionListParams extends CursorURLPageParams {
   /**
    * Path param:
    */
@@ -665,11 +669,6 @@ export interface ActionListParams {
    * Query param:
    */
   after?: string;
-
-  /**
-   * Query param:
-   */
-  limit?: number;
 }
 
 export interface ActionDeleteParams {
@@ -770,6 +769,7 @@ export declare namespace Actions {
     type PublicExecutionTranslationRule as PublicExecutionTranslationRule,
     type PublicObjectRequestOptions as PublicObjectRequestOptions,
     type PublicSingleFieldDependency as PublicSingleFieldDependency,
+    type PublicActionRevisionsCursorURLPage as PublicActionRevisionsCursorURLPage,
     type ActionCreateParams as ActionCreateParams,
     type ActionUpdateParams as ActionUpdateParams,
     type ActionListParams as ActionListParams,

@@ -12,8 +12,9 @@ export {
   type PublicUserUpdate,
   type UserProvisionRequest,
   type UserCreateParams,
-  type UserUpdateParams,
   type UserListParams,
   type UserDeleteParams,
-  type UserGetParams,
+  type UserReadParams,
+  type UserReplaceParams,
+  type PublicUsersCursorURLPage,
 } from './users';

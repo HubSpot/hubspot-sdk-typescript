@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as Shared from '../shared';
 import { APIPromise } from '../../core/api-promise';
+import { CursorURLPage, type CursorURLPageParams, PagePromise } from '../../core/pagination';
 import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
@@ -16,21 +17,13 @@ export class Users extends APIResource {
   }
 
   /**
-   * Modifies a user
-   */
-  update(userID: string, params: UserUpdateParams, options?: RequestOptions): APIPromise<PublicUser> {
-    const { idProperty, ...body } = params;
-    return this._client.put(path`/settings/v3/users/${userID}`, { query: { idProperty }, body, ...options });
-  }
-
-  /**
    * Retrieves a list of users from an account
    */
   list(
     query: UserListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CollectionResponsePublicUserForwardPaging> {
-    return this._client.get('/settings/v3/users/', { query, ...options });
+  ): PagePromise<PublicUsersCursorURLPage, PublicUser> {
+    return this._client.getAPIList('/settings/v3/users/', CursorURLPage<PublicUser>, { query, ...options });
   }
 
   /**
@@ -52,28 +45,24 @@ export class Users extends APIResource {
   /**
    * Retrieves a user
    */
-  get(
+  read(
     userID: string,
-    query: UserGetParams | null | undefined = {},
+    query: UserReadParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<PublicUser> {
     return this._client.get(path`/settings/v3/users/${userID}`, { query, ...options });
   }
 
   /**
-   * Retrieves the roles on an account
+   * Modifies a user
    */
-  listRoles(options?: RequestOptions): APIPromise<CollectionResponsePublicPermissionSetNoPaging> {
-    return this._client.get('/settings/v3/users/roles', options);
-  }
-
-  /**
-   * See details about this account's teams
-   */
-  listTeams(options?: RequestOptions): APIPromise<CollectionResponsePublicTeamNoPaging> {
-    return this._client.get('/settings/v3/users/teams', options);
+  replace(userID: string, params: UserReplaceParams, options?: RequestOptions): APIPromise<PublicUser> {
+    const { idProperty, ...body } = params;
+    return this._client.put(path`/settings/v3/users/${userID}`, { query: { idProperty }, body, ...options });
   }
 }
+
+export type PublicUsersCursorURLPage = CursorURLPage<PublicUser>;
 
 export interface CollectionResponsePublicPermissionSetNoPaging {
   results: Array<PublicPermissionSet>;
@@ -173,7 +162,19 @@ export interface UserCreateParams {
   sendWelcomeEmail?: boolean;
 }
 
-export interface UserUpdateParams {
+export interface UserListParams extends CursorURLPageParams {
+  after?: string;
+}
+
+export interface UserDeleteParams {
+  idProperty?: 'USER_ID' | 'EMAIL';
+}
+
+export interface UserReadParams {
+  idProperty?: 'USER_ID' | 'EMAIL';
+}
+
+export interface UserReplaceParams {
   /**
    * Query param:
    */
@@ -205,20 +206,6 @@ export interface UserUpdateParams {
   secondaryTeamIds?: Array<string>;
 }
 
-export interface UserListParams {
-  after?: string;
-
-  limit?: number;
-}
-
-export interface UserDeleteParams {
-  idProperty?: 'USER_ID' | 'EMAIL';
-}
-
-export interface UserGetParams {
-  idProperty?: 'USER_ID' | 'EMAIL';
-}
-
 export declare namespace Users {
   export {
     type CollectionResponsePublicPermissionSetNoPaging as CollectionResponsePublicPermissionSetNoPaging,
@@ -229,10 +216,11 @@ export declare namespace Users {
     type PublicUser as PublicUser,
     type PublicUserUpdate as PublicUserUpdate,
     type UserProvisionRequest as UserProvisionRequest,
+    type PublicUsersCursorURLPage as PublicUsersCursorURLPage,
     type UserCreateParams as UserCreateParams,
-    type UserUpdateParams as UserUpdateParams,
     type UserListParams as UserListParams,
     type UserDeleteParams as UserDeleteParams,
-    type UserGetParams as UserGetParams,
+    type UserReadParams as UserReadParams,
+    type UserReplaceParams as UserReplaceParams,
   };
 }

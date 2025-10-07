@@ -14,6 +14,8 @@ import * as Opts from './internal/request-options';
 import * as qs from './internal/qs';
 import { VERSION } from './version';
 import * as Errors from './core/error';
+import * as Pagination from './core/pagination';
+import { AbstractPage, type CursorURLPageParams, CursorURLPageResponse } from './core/pagination';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
@@ -44,7 +46,6 @@ import { Cms } from './resources/cms/cms';
 import { Conversations } from './resources/conversations/conversations';
 import {
   AssociatedID,
-  AssociationSpec,
   AssociationSpecWithLabel,
   BatchResponsePublicDefaultAssociation,
   CRM,
@@ -56,7 +57,6 @@ import {
   Property,
   PropertyModificationMetadata,
   PublicDefaultAssociation,
-  PublicObjectID,
 } from './resources/crm/crm';
 import {
   CollectionResponseFile,
@@ -77,6 +77,7 @@ import {
   SignedURL,
 } from './resources/files/files';
 import { Marketing } from './resources/marketing/marketing';
+import { Scheduler } from './resources/scheduler/scheduler';
 import { Settings } from './resources/settings/settings';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
@@ -532,6 +533,25 @@ export class HubSpot {
     return { response, options, controller, requestLogID, retryOfRequestLogID, startTime };
   }
 
+  getAPIList<Item, PageClass extends Pagination.AbstractPage<Item> = Pagination.AbstractPage<Item>>(
+    path: string,
+    Page: new (...args: any[]) => PageClass,
+    opts?: RequestOptions,
+  ): Pagination.PagePromise<PageClass, Item> {
+    return this.requestAPIList(Page, { method: 'get', path, ...opts });
+  }
+
+  requestAPIList<
+    Item = unknown,
+    PageClass extends Pagination.AbstractPage<Item> = Pagination.AbstractPage<Item>,
+  >(
+    Page: new (...args: ConstructorParameters<typeof Pagination.AbstractPage>) => PageClass,
+    options: FinalRequestOptions,
+  ): Pagination.PagePromise<PageClass, Item> {
+    const request = this.makeRequest(options, null, undefined);
+    return new Pagination.PagePromise<PageClass, Item>(this as any as HubSpot, request, Page);
+  }
+
   async fetchWithTimeout(
     url: RequestInfo,
     init: RequestInit | undefined,
@@ -772,6 +792,7 @@ export class HubSpot {
   crm: API.CRM = new API.CRM(this);
   files: API.Files = new API.Files(this);
   marketing: API.Marketing = new API.Marketing(this);
+  scheduler: API.Scheduler = new API.Scheduler(this);
   settings: API.Settings = new API.Settings(this);
   webhooks: API.Webhooks = new API.Webhooks(this);
 }
@@ -784,11 +805,18 @@ HubSpot.Conversations = Conversations;
 HubSpot.CRM = CRM;
 HubSpot.Files = Files;
 HubSpot.Marketing = Marketing;
+HubSpot.Scheduler = Scheduler;
 HubSpot.Settings = Settings;
 HubSpot.Webhooks = Webhooks;
 
 export declare namespace HubSpot {
   export type RequestOptions = Opts.RequestOptions;
+
+  export import CursorURLPage = Pagination.CursorURLPage;
+  export {
+    type CursorURLPageParams as CursorURLPageParams,
+    type CursorURLPageResponse as CursorURLPageResponse,
+  };
 
   export { Account as Account };
 
@@ -803,7 +831,6 @@ export declare namespace HubSpot {
   export {
     CRM as CRM,
     type AssociatedID as AssociatedID,
-    type AssociationSpec as AssociationSpec,
     type AssociationSpecWithLabel as AssociationSpecWithLabel,
     type BatchResponsePublicDefaultAssociation as BatchResponsePublicDefaultAssociation,
     type CollectionResponseMultiAssociatedObjectWithLabel as CollectionResponseMultiAssociatedObjectWithLabel,
@@ -814,7 +841,6 @@ export declare namespace HubSpot {
     type Property as Property,
     type PropertyModificationMetadata as PropertyModificationMetadata,
     type PublicDefaultAssociation as PublicDefaultAssociation,
-    type PublicObjectID as PublicObjectID,
   };
 
   export {
@@ -837,6 +863,8 @@ export declare namespace HubSpot {
   };
 
   export { Marketing as Marketing };
+
+  export { Scheduler as Scheduler };
 
   export { Settings as Settings };
 
@@ -861,6 +889,7 @@ export declare namespace HubSpot {
     type WebhookUpdateBatchParams as WebhookUpdateBatchParams,
   };
 
+  export type AssociationSpec = API.AssociationSpec;
   export type BatchInputString = API.BatchInputString;
   export type Error = API.Error;
   export type ErrorDetail = API.ErrorDetail;
@@ -868,5 +897,6 @@ export declare namespace HubSpot {
   export type NextPage = API.NextPage;
   export type Paging = API.Paging;
   export type PreviousPage = API.PreviousPage;
+  export type PublicObjectID = API.PublicObjectID;
   export type StandardError = API.StandardError;
 }

@@ -60,6 +60,7 @@ import {
   DealUpsertParams,
   Deals,
 } from './deals/deals';
+import { CursorURLPage } from '../../../core/pagination';
 
 export class Objects extends APIResource {
   companies: CompaniesAPI.Companies = new CompaniesAPI.Companies(this._client);
@@ -67,6 +68,9 @@ export class Objects extends APIResource {
   deals: DealsAPI.Deals = new DealsAPI.Deals(this._client);
   schemas: SchemasAPI.Schemas = new SchemasAPI.Schemas(this._client);
 }
+
+export type SimplePublicObjectWithAssociationsCursorURLPage =
+  CursorURLPage<SimplePublicObjectWithAssociations>;
 
 export interface BatchInputSimplePublicObjectBatchInput {
   inputs: Array<SimplePublicObjectBatchInput>;
@@ -188,9 +192,9 @@ export interface FilterGroup {
 }
 
 export interface PublicAssociationsForObject {
-  to: CRMAPI.PublicObjectID;
+  to: Shared.PublicObjectID;
 
-  types: Array<CRMAPI.AssociationSpec>;
+  types: Array<Shared.AssociationSpec>;
 }
 
 export interface PublicGdprDeleteInput {

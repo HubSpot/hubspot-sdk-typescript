@@ -30,4 +30,4 @@ export {
   type PublicSubscriptionTranslation,
   type PublicWideStatus,
   type PublicWideStatusBulkResponse,
-} from './v4/index';
+} from './v4';

@@ -101,18 +101,6 @@ describe('resource files', () => {
   });
 
   // Prism tests are disabled
-  test.skip('getImportTaskStatus', async () => {
-    const responsePromise = client.files.files.getImportTaskStatus('taskId');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
   test.skip('getSignedURL', async () => {
     const responsePromise = client.files.files.getSignedURL('321669910225');
     const rawResponse = await responsePromise.asResponse();

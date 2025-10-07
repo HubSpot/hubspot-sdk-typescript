@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
 import { APIPromise } from '../../../core/api-promise';
+import { CursorURLPage, type CursorURLPageParams, PagePromise } from '../../../core/pagination';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -33,8 +34,8 @@ export class Tags extends APIResource {
   list(
     query: TagListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CollectionResponseWithTotalTagForwardPaging> {
-    return this._client.get('/cms/v3/blogs/tags', { query, ...options });
+  ): PagePromise<TagsCursorURLPage, Tag> {
+    return this._client.getAPIList('/cms/v3/blogs/tags', CursorURLPage<Tag>, { query, ...options });
   }
 
   /**
@@ -152,6 +153,8 @@ export class Tags extends APIResource {
     });
   }
 }
+
+export type TagsCursorURLPage = CursorURLPage<Tag>;
 
 export interface AttachToLangPrimaryRequestVNext {
   id: string;
@@ -2571,7 +2574,7 @@ export interface TagUpdateParams {
   archived?: boolean;
 }
 
-export interface TagListParams {
+export interface TagListParams extends CursorURLPageParams {
   after?: string;
 
   archived?: boolean;
@@ -2581,8 +2584,6 @@ export interface TagListParams {
   createdAt?: string;
 
   createdBefore?: string;
-
-  limit?: number;
 
   property?: string;
 
@@ -2684,6 +2685,7 @@ export declare namespace Tags {
     type Tag as Tag,
     type TagCloneRequestVNext as TagCloneRequestVNext,
     type UpdateLanguagesRequestVNext as UpdateLanguagesRequestVNext,
+    type TagsCursorURLPage as TagsCursorURLPage,
     type TagCreateParams as TagCreateParams,
     type TagUpdateParams as TagUpdateParams,
     type TagListParams as TagListParams,
