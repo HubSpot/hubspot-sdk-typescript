@@ -49,4 +49,4 @@ export {
   type SocialMetadata,
   type SocialMetadataIntegrationAttachment,
   type UnsupportedContentAttachment,
-} from './custom-channels/index';
+} from './custom-channels';

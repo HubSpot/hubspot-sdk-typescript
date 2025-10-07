@@ -3,8 +3,10 @@
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
 import * as CRMAPI from '../crm';
+import { MultiAssociatedObjectWithLabelsCursorURLPage } from '../crm';
 import * as EmailsAPI from '../../marketing/emails';
 import { APIPromise } from '../../../core/api-promise';
+import { CursorURLPage, type CursorURLPageParams, PagePromise } from '../../../core/pagination';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -32,12 +34,13 @@ export class V4 extends APIResource {
     toObjectType: string,
     params: V4ListParams,
     options?: RequestOptions,
-  ): APIPromise<CRMAPI.CollectionResponseMultiAssociatedObjectWithLabel> {
+  ): PagePromise<MultiAssociatedObjectWithLabelsCursorURLPage, CRMAPI.MultiAssociatedObjectWithLabel> {
     const { objectType, objectId, ...query } = params;
-    return this._client.get(path`/crm/v4/objects/${objectType}/${objectId}/associations/${toObjectType}`, {
-      query,
-      ...options,
-    });
+    return this._client.getAPIList(
+      path`/crm/v4/objects/${objectType}/${objectId}/associations/${toObjectType}`,
+      CursorURLPage<CRMAPI.MultiAssociatedObjectWithLabel>,
+      { query, ...options },
+    );
   }
 
   /**
@@ -128,7 +131,7 @@ export interface BatchResponseLabelsBetweenObjectPair {
 
   status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
 
-  errors?: Array<StandardError1>;
+  errors?: Array<Shared.StandardError>;
 
   links?: { [key: string]: string };
 
@@ -146,7 +149,7 @@ export interface BatchResponsePublicAssociationMultiWithLabel {
 
   status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
 
-  errors?: Array<StandardError1>;
+  errors?: Array<Shared.StandardError>;
 
   links?: { [key: string]: string };
 
@@ -164,7 +167,7 @@ export interface BatchResponseVoid {
 
   status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
 
-  errors?: Array<StandardError1>;
+  errors?: Array<Shared.StandardError>;
 
   links?: { [key: string]: string };
 
@@ -194,21 +197,21 @@ export interface PreviousPage1 {
 }
 
 export interface PublicAssociationMultiArchive {
-  from: CRMAPI.PublicObjectID;
+  from: Shared.PublicObjectID;
 
-  to: Array<CRMAPI.PublicObjectID>;
+  to: Array<Shared.PublicObjectID>;
 }
 
 export interface PublicAssociationMultiPost {
-  from: CRMAPI.PublicObjectID;
+  from: Shared.PublicObjectID;
 
-  to: CRMAPI.PublicObjectID;
+  to: Shared.PublicObjectID;
 
-  types: Array<AssociationSpec1>;
+  types: Array<Shared.AssociationSpec>;
 }
 
 export interface PublicAssociationMultiWithLabel {
-  from: CRMAPI.PublicObjectID;
+  from: Shared.PublicObjectID;
 
   to: Array<CRMAPI.MultiAssociatedObjectWithLabel>;
 
@@ -216,9 +219,9 @@ export interface PublicAssociationMultiWithLabel {
 }
 
 export interface PublicDefaultAssociationMultiPost {
-  from: CRMAPI.PublicObjectID;
+  from: Shared.PublicObjectID;
 
-  to: CRMAPI.PublicObjectID;
+  to: Shared.PublicObjectID;
 }
 
 export interface PublicFetchAssociationsBatchRequest {
@@ -272,10 +275,10 @@ export interface V4CreateParams {
   /**
    * Body param:
    */
-  body: Array<CRMAPI.AssociationSpec>;
+  body: Array<AssociationSpec1>;
 }
 
-export interface V4ListParams {
+export interface V4ListParams extends CursorURLPageParams {
   /**
    * Path param:
    */
@@ -290,11 +293,6 @@ export interface V4ListParams {
    * Query param:
    */
   after?: string;
-
-  /**
-   * Query param:
-   */
-  limit?: number;
 }
 
 export interface V4DeleteParams {
@@ -353,3 +351,5 @@ export declare namespace V4 {
     type V4CreateDefaultParams as V4CreateDefaultParams,
   };
 }
+
+export { type MultiAssociatedObjectWithLabelsCursorURLPage };

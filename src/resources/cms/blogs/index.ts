@@ -28,4 +28,5 @@ export {
   type TagSetLangPrimaryParams,
   type TagUpdateBatchParams,
   type TagUpdateLangsParams,
+  type TagsCursorURLPage,
 } from './tags';

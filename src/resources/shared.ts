@@ -1,5 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+export interface AssociationSpec {
+  associationCategory: 'HUBSPOT_DEFINED' | 'USER_DEFINED' | 'INTEGRATOR_DEFINED';
+
+  associationTypeId: number;
+}
+
 export interface BatchInputString {
   inputs: Array<string>;
 }
@@ -52,6 +58,10 @@ export interface PreviousPage {
   before: string;
 
   link?: string;
+}
+
+export interface PublicObjectID {
+  id: string;
 }
 
 export interface StandardError {

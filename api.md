@@ -2,6 +2,7 @@
 
 Types:
 
+- <code><a href="./src/resources/shared.ts">AssociationSpec</a></code>
 - <code><a href="./src/resources/shared.ts">BatchInputString</a></code>
 - <code><a href="./src/resources/shared.ts">Error</a></code>
 - <code><a href="./src/resources/shared.ts">ErrorDetail</a></code>
@@ -9,6 +10,7 @@ Types:
 - <code><a href="./src/resources/shared.ts">NextPage</a></code>
 - <code><a href="./src/resources/shared.ts">Paging</a></code>
 - <code><a href="./src/resources/shared.ts">PreviousPage</a></code>
+- <code><a href="./src/resources/shared.ts">PublicObjectID</a></code>
 - <code><a href="./src/resources/shared.ts">StandardError</a></code>
 
 # Account
@@ -81,7 +83,7 @@ Methods:
 
 - <code title="post /automation/v4/actions/{appId}">client.automation.actions.<a href="./src/resources/automation/actions.ts">create</a>(appID, { ...params }) -> PublicActionDefinition</code>
 - <code title="patch /automation/v4/actions/{appId}/{definitionId}">client.automation.actions.<a href="./src/resources/automation/actions.ts">update</a>(definitionID, { ...params }) -> PublicActionDefinition</code>
-- <code title="get /automation/v4/actions/{appId}/{definitionId}/revisions">client.automation.actions.<a href="./src/resources/automation/actions.ts">list</a>(definitionID, { ...params }) -> CollectionResponsePublicActionRevisionForwardPaging</code>
+- <code title="get /automation/v4/actions/{appId}/{definitionId}/revisions">client.automation.actions.<a href="./src/resources/automation/actions.ts">list</a>(definitionID, { ...params }) -> PublicActionRevisionsCursorURLPage</code>
 - <code title="delete /automation/v4/actions/{appId}/{definitionId}/functions/{functionType}/{functionId}">client.automation.actions.<a href="./src/resources/automation/actions.ts">delete</a>(functionID, { ...params }) -> void</code>
 - <code title="delete /automation/v4/actions/{appId}/{definitionId}/functions/{functionType}">client.automation.actions.<a href="./src/resources/automation/actions.ts">archiveByFunctionType</a>(functionType, { ...params }) -> void</code>
 - <code title="post /automation/v4/actions/callbacks/{callbackId}/complete">client.automation.actions.<a href="./src/resources/automation/actions.ts">complete</a>(callbackID, { ...params }) -> void</code>
@@ -260,7 +262,7 @@ Methods:
 
 - <code title="post /cms/v3/blogs/tags">client.cms.blogs.tags.<a href="./src/resources/cms/blogs/tags.ts">create</a>({ ...params }) -> Tag</code>
 - <code title="patch /cms/v3/blogs/tags/{objectId}">client.cms.blogs.tags.<a href="./src/resources/cms/blogs/tags.ts">update</a>(objectID, { ...params }) -> Tag</code>
-- <code title="get /cms/v3/blogs/tags">client.cms.blogs.tags.<a href="./src/resources/cms/blogs/tags.ts">list</a>({ ...params }) -> CollectionResponseWithTotalTagForwardPaging</code>
+- <code title="get /cms/v3/blogs/tags">client.cms.blogs.tags.<a href="./src/resources/cms/blogs/tags.ts">list</a>({ ...params }) -> TagsCursorURLPage</code>
 - <code title="delete /cms/v3/blogs/tags/{objectId}">client.cms.blogs.tags.<a href="./src/resources/cms/blogs/tags.ts">delete</a>(objectID, { ...params }) -> void</code>
 - <code title="post /cms/v3/blogs/tags/batch/archive">client.cms.blogs.tags.<a href="./src/resources/cms/blogs/tags.ts">archiveBatch</a>({ ...params }) -> void</code>
 - <code title="post /cms/v3/blogs/tags/multi-language/attach-to-lang-group">client.cms.blogs.tags.<a href="./src/resources/cms/blogs/tags.ts">attachToLangGroup</a>({ ...params }) -> void</code>
@@ -282,7 +284,7 @@ Types:
 
 Methods:
 
-- <code title="get /cms/v3/domains/">client.cms.domains.<a href="./src/resources/cms/domains.ts">list</a>({ ...params }) -> CollectionResponseWithTotalDomainForwardPaging</code>
+- <code title="get /cms/v3/domains/">client.cms.domains.<a href="./src/resources/cms/domains.ts">list</a>({ ...params }) -> DomainsCursorURLPage</code>
 - <code title="get /cms/v3/domains/{domainId}">client.cms.domains.<a href="./src/resources/cms/domains.ts">read</a>(domainID) -> Domain</code>
 
 ## Hubdb
@@ -369,7 +371,7 @@ Methods:
 
 - <code title="post /cms/v3/url-redirects/">client.cms.urlRedirects.<a href="./src/resources/cms/url-redirects.ts">create</a>({ ...params }) -> URLMapping</code>
 - <code title="patch /cms/v3/url-redirects/{urlRedirectId}">client.cms.urlRedirects.<a href="./src/resources/cms/url-redirects.ts">update</a>(urlRedirectID, { ...params }) -> URLMapping</code>
-- <code title="get /cms/v3/url-redirects/">client.cms.urlRedirects.<a href="./src/resources/cms/url-redirects.ts">list</a>({ ...params }) -> CollectionResponseWithTotalURLMappingForwardPaging</code>
+- <code title="get /cms/v3/url-redirects/">client.cms.urlRedirects.<a href="./src/resources/cms/url-redirects.ts">list</a>({ ...params }) -> URLMappingsCursorURLPage</code>
 - <code title="delete /cms/v3/url-redirects/{urlRedirectId}">client.cms.urlRedirects.<a href="./src/resources/cms/url-redirects.ts">delete</a>(urlRedirectID) -> void</code>
 - <code title="get /cms/v3/url-redirects/{urlRedirectId}">client.cms.urlRedirects.<a href="./src/resources/cms/url-redirects.ts">read</a>(urlRedirectID) -> URLMapping</code>
 
@@ -379,67 +381,58 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">ChannelIntegrationMessageEgg</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">ChannelIntegrationParticipant</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">CollectionResponseWithTotalPublicChannelAccountForwardPaging</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">CollectionResponseWithTotalPublicChannelIntegrationChannelForwardPaging</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">ContactAddress</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">ContactAttachment</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">ContactEmail</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">ContactName</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">ContactOrg</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">ContactPhone</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">ContactProfile</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">ContactURL</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">FileAttachment</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">LocationAttachment</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">MessageHeaderAttachment</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PreResolvedContact</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PreResolvedContacts</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicChannelAccount</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicChannelAccountEgg</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicChannelAccountStagingToken</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicChannelAccountStagingTokenUpdateRequest</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicChannelAccountUpdateRequest</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicChannelIntegrationChannel</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicChannelIntegrationChannelCreate</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicChannelIntegrationChannelPatch</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicChannelIntegrationMessageUpdateRequest</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicClient</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicContact</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicConversationsMessage</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicDeliveryIdentifier</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicFile</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicLocation</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicMessageFailureDetails</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicMessageHeader</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicMessageStatus</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicQuickReplies</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicRecipient</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicSender</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicSocialMetadataAttachment</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicUnsupportedContent</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicWhatsAppTemplateMetadata</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">QuickRepliesAttachment</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">QuickReply</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">SocialMetadata</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">SocialMetadataIntegrationAttachment</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">UnsupportedContentAttachment</a></code>
-
-### Messages
-
-Methods:
-
-- <code title="post /conversations/v3/custom-channels/{channelId}/messages">client.conversations.customChannels.messages.<a href="./src/resources/conversations/custom-channels/messages.ts">create</a>(channelID, { ...params }) -> PublicConversationsMessage</code>
-- <code title="get /conversations/v3/custom-channels/{channelId}/messages/{messageId}">client.conversations.customChannels.messages.<a href="./src/resources/conversations/custom-channels/messages.ts">get</a>(messageID, { ...params }) -> PublicConversationsMessage</code>
-- <code title="patch /conversations/v3/custom-channels/{channelId}/messages/{messageId}">client.conversations.customChannels.messages.<a href="./src/resources/conversations/custom-channels/messages.ts">updateStatus</a>(messageID, { ...params }) -> PublicConversationsMessage</code>
+- <code><a href="./src/resources/conversations/custom-channels.ts">ChannelIntegrationMessageEgg</a></code>
+- <code><a href="./src/resources/conversations/custom-channels.ts">ChannelIntegrationParticipant</a></code>
+- <code><a href="./src/resources/conversations/custom-channels.ts">CollectionResponseWithTotalPublicChannelAccountForwardPaging</a></code>
+- <code><a href="./src/resources/conversations/custom-channels.ts">CollectionResponseWithTotalPublicChannelIntegrationChannelForwardPaging</a></code>
+- <code><a href="./src/resources/conversations/custom-channels.ts">ContactAddress</a></code>
+- <code><a href="./src/resources/conversations/custom-channels.ts">ContactAttachment</a></code>
+- <code><a href="./src/resources/conversations/custom-channels.ts">ContactEmail</a></code>
+- <code><a href="./src/resources/conversations/custom-channels.ts">ContactName</a></code>
+- <code><a href="./src/resources/conversations/custom-channels.ts">ContactOrg</a></code>
+- <code><a href="./src/resources/conversations/custom-channels.ts">ContactPhone</a></code>
+- <code><a href="./src/resources/conversations/custom-channels.ts">ContactProfile</a></code>
+- <code><a href="./src/resources/conversations/custom-channels.ts">ContactURL</a></code>
+- <code><a href="./src/resources/conversations/custom-channels.ts">FileAttachment</a></code>
+- <code><a href="./src/resources/conversations/custom-channels.ts">LocationAttachment</a></code>
+- <code><a href="./src/resources/conversations/custom-channels.ts">MessageHeaderAttachment</a></code>
+- <code><a href="./src/resources/conversations/custom-channels.ts">PreResolvedContact</a></code>
+- <code><a href="./src/resources/conversations/custom-channels.ts">PreResolvedContacts</a></code>
+- <code><a href="./src/resources/conversations/custom-channels.ts">PublicChannelAccount</a></code>
+- <code><a href="./src/resources/conversations/custom-channels.ts">PublicChannelAccountEgg</a></code>
+- <code><a href="./src/resources/conversations/custom-channels.ts">PublicChannelAccountStagingToken</a></code>
+- <code><a href="./src/resources/conversations/custom-channels.ts">PublicChannelAccountStagingTokenUpdateRequest</a></code>
+- <code><a href="./src/resources/conversations/custom-channels.ts">PublicChannelAccountUpdateRequest</a></code>
+- <code><a href="./src/resources/conversations/custom-channels.ts">PublicChannelIntegrationChannel</a></code>
+- <code><a href="./src/resources/conversations/custom-channels.ts">PublicChannelIntegrationChannelCreate</a></code>
+- <code><a href="./src/resources/conversations/custom-channels.ts">PublicChannelIntegrationChannelPatch</a></code>
+- <code><a href="./src/resources/conversations/custom-channels.ts">PublicChannelIntegrationMessageUpdateRequest</a></code>
+- <code><a href="./src/resources/conversations/custom-channels.ts">PublicClient</a></code>
+- <code><a href="./src/resources/conversations/custom-channels.ts">PublicContact</a></code>
+- <code><a href="./src/resources/conversations/custom-channels.ts">PublicConversationsMessage</a></code>
+- <code><a href="./src/resources/conversations/custom-channels.ts">PublicDeliveryIdentifier</a></code>
+- <code><a href="./src/resources/conversations/custom-channels.ts">PublicFile</a></code>
+- <code><a href="./src/resources/conversations/custom-channels.ts">PublicLocation</a></code>
+- <code><a href="./src/resources/conversations/custom-channels.ts">PublicMessageFailureDetails</a></code>
+- <code><a href="./src/resources/conversations/custom-channels.ts">PublicMessageHeader</a></code>
+- <code><a href="./src/resources/conversations/custom-channels.ts">PublicMessageStatus</a></code>
+- <code><a href="./src/resources/conversations/custom-channels.ts">PublicQuickReplies</a></code>
+- <code><a href="./src/resources/conversations/custom-channels.ts">PublicRecipient</a></code>
+- <code><a href="./src/resources/conversations/custom-channels.ts">PublicSender</a></code>
+- <code><a href="./src/resources/conversations/custom-channels.ts">PublicSocialMetadataAttachment</a></code>
+- <code><a href="./src/resources/conversations/custom-channels.ts">PublicUnsupportedContent</a></code>
+- <code><a href="./src/resources/conversations/custom-channels.ts">PublicWhatsAppTemplateMetadata</a></code>
+- <code><a href="./src/resources/conversations/custom-channels.ts">QuickRepliesAttachment</a></code>
+- <code><a href="./src/resources/conversations/custom-channels.ts">QuickReply</a></code>
+- <code><a href="./src/resources/conversations/custom-channels.ts">SocialMetadata</a></code>
+- <code><a href="./src/resources/conversations/custom-channels.ts">SocialMetadataIntegrationAttachment</a></code>
+- <code><a href="./src/resources/conversations/custom-channels.ts">UnsupportedContentAttachment</a></code>
 
 # CRM
 
 Types:
 
 - <code><a href="./src/resources/crm/crm.ts">AssociatedID</a></code>
-- <code><a href="./src/resources/crm/crm.ts">AssociationSpec</a></code>
 - <code><a href="./src/resources/crm/crm.ts">AssociationSpecWithLabel</a></code>
 - <code><a href="./src/resources/crm/crm.ts">BatchResponsePublicDefaultAssociation</a></code>
 - <code><a href="./src/resources/crm/crm.ts">CollectionResponseMultiAssociatedObjectWithLabel</a></code>
@@ -450,7 +443,6 @@ Types:
 - <code><a href="./src/resources/crm/crm.ts">Property</a></code>
 - <code><a href="./src/resources/crm/crm.ts">PropertyModificationMetadata</a></code>
 - <code><a href="./src/resources/crm/crm.ts">PublicDefaultAssociation</a></code>
-- <code><a href="./src/resources/crm/crm.ts">PublicObjectID</a></code>
 
 ## Associations
 
@@ -496,7 +488,7 @@ Types:
 Methods:
 
 - <code title="put /crm/v4/objects/{objectType}/{objectId}/associations/{toObjectType}/{toObjectId}">client.crm.associations.v4.<a href="./src/resources/crm/associations/v4.ts">create</a>(toObjectID, [ ...body ]) -> CreatedResponseLabelsBetweenObjectPair</code>
-- <code title="get /crm/v4/objects/{objectType}/{objectId}/associations/{toObjectType}">client.crm.associations.v4.<a href="./src/resources/crm/associations/v4.ts">list</a>(toObjectType, { ...params }) -> CollectionResponseMultiAssociatedObjectWithLabel</code>
+- <code title="get /crm/v4/objects/{objectType}/{objectId}/associations/{toObjectType}">client.crm.associations.v4.<a href="./src/resources/crm/associations/v4.ts">list</a>(toObjectType, { ...params }) -> MultiAssociatedObjectWithLabelsCursorURLPage</code>
 - <code title="delete /crm/v4/objects/{objectType}/{objectId}/associations/{toObjectType}/{toObjectId}">client.crm.associations.v4.<a href="./src/resources/crm/associations/v4.ts">delete</a>(toObjectID, { ...params }) -> void</code>
 - <code title="post /crm/v4/associations/{fromObjectType}/{toObjectType}/batch/labels/archive">client.crm.associations.v4.<a href="./src/resources/crm/associations/v4.ts">archiveLabels</a>(toObjectType, { ...params }) -> BatchResponseVoid</code>
 - <code title="put /crm/v4/objects/{fromObjectType}/{fromObjectId}/associations/default/{toObjectType}/{toObjectId}">client.crm.associations.v4.<a href="./src/resources/crm/associations/v4.ts">createDefault</a>(toObjectID, { ...params }) -> BatchResponsePublicDefaultAssociation</code>
@@ -568,7 +560,7 @@ Methods:
 
 - <code title="post /crm/v3/objects/companies">client.crm.objects.companies.<a href="./src/resources/crm/objects/companies.ts">create</a>({ ...params }) -> CreatedResponseSimplePublicObject</code>
 - <code title="post /crm/v3/objects/companies/batch/update">client.crm.objects.companies.<a href="./src/resources/crm/objects/companies.ts">update</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
-- <code title="get /crm/v3/objects/companies">client.crm.objects.companies.<a href="./src/resources/crm/objects/companies.ts">list</a>({ ...params }) -> CollectionResponseSimplePublicObjectWithAssociations</code>
+- <code title="get /crm/v3/objects/companies">client.crm.objects.companies.<a href="./src/resources/crm/objects/companies.ts">list</a>({ ...params }) -> SimplePublicObjectWithAssociationsCursorURLPage</code>
 - <code title="post /crm/v3/objects/companies/batch/archive">client.crm.objects.companies.<a href="./src/resources/crm/objects/companies.ts">delete</a>({ ...params }) -> void</code>
 - <code title="post /crm/v3/objects/companies/merge">client.crm.objects.companies.<a href="./src/resources/crm/objects/companies.ts">merge</a>({ ...params }) -> SimplePublicObject</code>
 - <code title="get /crm/v3/objects/companies/{companyId}">client.crm.objects.companies.<a href="./src/resources/crm/objects/companies.ts">read</a>(companyID, { ...params }) -> SimplePublicObjectWithAssociations</code>
@@ -581,7 +573,7 @@ Methods:
 
 - <code title="post /crm/v3/objects/contacts">client.crm.objects.contacts.<a href="./src/resources/crm/objects/contacts.ts">create</a>({ ...params }) -> CreatedResponseSimplePublicObject</code>
 - <code title="post /crm/v3/objects/contacts/batch/update">client.crm.objects.contacts.<a href="./src/resources/crm/objects/contacts.ts">update</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
-- <code title="get /crm/v3/objects/contacts">client.crm.objects.contacts.<a href="./src/resources/crm/objects/contacts.ts">list</a>({ ...params }) -> CollectionResponseSimplePublicObjectWithAssociations</code>
+- <code title="get /crm/v3/objects/contacts">client.crm.objects.contacts.<a href="./src/resources/crm/objects/contacts.ts">list</a>({ ...params }) -> SimplePublicObjectWithAssociationsCursorURLPage</code>
 - <code title="post /crm/v3/objects/contacts/batch/archive">client.crm.objects.contacts.<a href="./src/resources/crm/objects/contacts.ts">delete</a>({ ...params }) -> void</code>
 - <code title="post /crm/v3/objects/contacts/merge">client.crm.objects.contacts.<a href="./src/resources/crm/objects/contacts.ts">merge</a>({ ...params }) -> SimplePublicObject</code>
 - <code title="post /crm/v3/objects/contacts/gdpr-delete">client.crm.objects.contacts.<a href="./src/resources/crm/objects/contacts.ts">purge</a>({ ...params }) -> void</code>
@@ -595,7 +587,7 @@ Methods:
 
 - <code title="post /crm/v3/objects/0-3">client.crm.objects.deals.<a href="./src/resources/crm/objects/deals/deals.ts">create</a>({ ...params }) -> CreatedResponseSimplePublicObject</code>
 - <code title="patch /crm/v3/objects/0-3/{dealId}">client.crm.objects.deals.<a href="./src/resources/crm/objects/deals/deals.ts">update</a>(dealID, { ...params }) -> SimplePublicObject</code>
-- <code title="get /crm/v3/objects/0-3">client.crm.objects.deals.<a href="./src/resources/crm/objects/deals/deals.ts">list</a>({ ...params }) -> CollectionResponseSimplePublicObjectWithAssociations</code>
+- <code title="get /crm/v3/objects/0-3">client.crm.objects.deals.<a href="./src/resources/crm/objects/deals/deals.ts">list</a>({ ...params }) -> SimplePublicObjectWithAssociationsCursorURLPage</code>
 - <code title="delete /crm/v3/objects/0-3/{dealId}">client.crm.objects.deals.<a href="./src/resources/crm/objects/deals/deals.ts">delete</a>(dealID) -> void</code>
 - <code title="post /crm/v3/objects/0-3/merge">client.crm.objects.deals.<a href="./src/resources/crm/objects/deals/deals.ts">merge</a>({ ...params }) -> SimplePublicObject</code>
 - <code title="get /crm/v3/objects/0-3/{dealId}">client.crm.objects.deals.<a href="./src/resources/crm/objects/deals/deals.ts">read</a>(dealID, { ...params }) -> SimplePublicObjectWithAssociations</code>
@@ -630,6 +622,19 @@ Methods:
 - <code title="delete /crm-object-schemas/v3/schemas/{objectType}/associations/{associationIdentifier}">client.crm.objects.schemas.<a href="./src/resources/crm/objects/schemas.ts">archiveAssociation</a>(associationIdentifier, { ...params }) -> void</code>
 - <code title="post /crm-object-schemas/v3/schemas/{objectType}/associations">client.crm.objects.schemas.<a href="./src/resources/crm/objects/schemas.ts">createAssociation</a>(objectType, { ...params }) -> AssociationDefinition</code>
 - <code title="get /crm-object-schemas/v3/schemas/{objectType}">client.crm.objects.schemas.<a href="./src/resources/crm/objects/schemas.ts">read</a>(objectType) -> ObjectSchema</code>
+
+## Owners
+
+Types:
+
+- <code><a href="./src/resources/crm/owners.ts">CollectionResponsePublicOwnerForwardPaging</a></code>
+- <code><a href="./src/resources/crm/owners.ts">PublicOwner</a></code>
+- <code><a href="./src/resources/crm/owners.ts">PublicTeam</a></code>
+
+Methods:
+
+- <code title="get /crm/v3/owners/">client.crm.owners.<a href="./src/resources/crm/owners.ts">list</a>({ ...params }) -> PublicOwnersCursorURLPage</code>
+- <code title="get /crm/v3/owners/{ownerId}">client.crm.owners.<a href="./src/resources/crm/owners.ts">get</a>(ownerID, { ...params }) -> PublicOwner</code>
 
 ## Pipelines
 
@@ -715,7 +720,6 @@ Methods:
 - <code title="get /files/v3/files/{fileId}">client.files.files.<a href="./src/resources/files/files_.ts">get</a>(fileID, { ...params }) -> File</code>
 - <code title="get /files/v3/files/stat/{path}">client.files.files.<a href="./src/resources/files/files_.ts">getByPath</a>(path\_, { ...params }) -> FileStat</code>
 - <code title="get /files/v3/files/import-from-url/async/tasks/{taskId}/status">client.files.files.<a href="./src/resources/files/files_.ts">getImportFromURLAsyncStatus</a>(taskID) -> FileActionResponse</code>
-- <code title="get /files/v3/files/import-from-url/async/tasks/{taskId}/status">client.files.files.<a href="./src/resources/files/files_.ts">getImportTaskStatus</a>(taskID) -> FileActionResponse</code>
 - <code title="get /files/v3/files/{fileId}/signed-url">client.files.files.<a href="./src/resources/files/files_.ts">getSignedURL</a>(fileID, { ...params }) -> SignedURL</code>
 - <code title="post /files/v3/files/import-from-url/async">client.files.files.<a href="./src/resources/files/files_.ts">importFromURLAsync</a>({ ...params }) -> ImportFromURLTaskLocator</code>
 - <code title="put /files/v3/files/{fileId}">client.files.files.<a href="./src/resources/files/files_.ts">replace</a>(fileID, { ...params }) -> File</code>
@@ -775,7 +779,7 @@ Methods:
 
 - <code title="post /marketing/v3/emails/">client.marketing.emails.<a href="./src/resources/marketing/emails.ts">create</a>({ ...params }) -> PublicEmail</code>
 - <code title="patch /marketing/v3/emails/{emailId}">client.marketing.emails.<a href="./src/resources/marketing/emails.ts">update</a>(emailID, { ...params }) -> PublicEmail</code>
-- <code title="get /marketing/v3/emails/">client.marketing.emails.<a href="./src/resources/marketing/emails.ts">list</a>({ ...params }) -> CollectionResponseWithTotalPublicEmailForwardPaging</code>
+- <code title="get /marketing/v3/emails/">client.marketing.emails.<a href="./src/resources/marketing/emails.ts">list</a>({ ...params }) -> PublicEmailsCursorURLPage</code>
 - <code title="delete /marketing/v3/emails/{emailId}">client.marketing.emails.<a href="./src/resources/marketing/emails.ts">delete</a>(emailID, { ...params }) -> void</code>
 - <code title="post /marketing/v3/emails/clone">client.marketing.emails.<a href="./src/resources/marketing/emails.ts">clone</a>({ ...params }) -> PublicEmail</code>
 - <code title="post /marketing/v3/emails/ab-test/create-variation">client.marketing.emails.<a href="./src/resources/marketing/emails.ts">createAbTestVariation</a>({ ...params }) -> PublicEmail</code>
@@ -838,7 +842,7 @@ Methods:
 
 - <code title="post /marketing/v3/forms/">client.marketing.forms.<a href="./src/resources/marketing/forms.ts">create</a>() -> unknown</code>
 - <code title="patch /marketing/v3/forms/{formId}">client.marketing.forms.<a href="./src/resources/marketing/forms.ts">update</a>(formID, { ...params }) -> unknown</code>
-- <code title="get /marketing/v3/forms/">client.marketing.forms.<a href="./src/resources/marketing/forms.ts">list</a>({ ...params }) -> CollectionResponseFormDefinitionBaseForwardPaging</code>
+- <code title="get /marketing/v3/forms/">client.marketing.forms.<a href="./src/resources/marketing/forms.ts">list</a>({ ...params }) -> HubSpotFormDefinitionsCursorURLPage</code>
 - <code title="delete /marketing/v3/forms/{formId}">client.marketing.forms.<a href="./src/resources/marketing/forms.ts">delete</a>(formID) -> void</code>
 - <code title="get /marketing/v3/forms/{formId}">client.marketing.forms.<a href="./src/resources/marketing/forms.ts">read</a>(formID, { ...params }) -> unknown</code>
 - <code title="put /marketing/v3/forms/{formId}">client.marketing.forms.<a href="./src/resources/marketing/forms.ts">replace</a>(formID, { ...params }) -> unknown</code>
@@ -864,43 +868,79 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/marketing/subscriptions/v4/v4.ts">ActionResponseWithResultsPublicStatus</a></code>
-- <code><a href="./src/resources/marketing/subscriptions/v4/v4.ts">ActionResponseWithResultsPublicWideStatus</a></code>
-- <code><a href="./src/resources/marketing/subscriptions/v4/v4.ts">ActionResponseWithResultsSubscriptionDefinition</a></code>
-- <code><a href="./src/resources/marketing/subscriptions/v4/v4.ts">BatchInputPublicStatusRequest</a></code>
-- <code><a href="./src/resources/marketing/subscriptions/v4/v4.ts">BatchResponsePublicBulkOptOutFromAllResponse</a></code>
-- <code><a href="./src/resources/marketing/subscriptions/v4/v4.ts">BatchResponsePublicStatus</a></code>
-- <code><a href="./src/resources/marketing/subscriptions/v4/v4.ts">BatchResponsePublicStatusBulkResponse</a></code>
-- <code><a href="./src/resources/marketing/subscriptions/v4/v4.ts">BatchResponsePublicStatusBulkResponseWithErrors</a></code>
-- <code><a href="./src/resources/marketing/subscriptions/v4/v4.ts">BatchResponsePublicWideStatusBulkResponse</a></code>
-- <code><a href="./src/resources/marketing/subscriptions/v4/v4.ts">BatchResponsePublicWideStatusBulkResponseWithErrors</a></code>
-- <code><a href="./src/resources/marketing/subscriptions/v4/v4.ts">PartialPublicStatusRequest</a></code>
-- <code><a href="./src/resources/marketing/subscriptions/v4/v4.ts">PublicBulkOptOutFromAllResponse</a></code>
-- <code><a href="./src/resources/marketing/subscriptions/v4/v4.ts">PublicStatus</a></code>
-- <code><a href="./src/resources/marketing/subscriptions/v4/v4.ts">PublicStatusBulkResponse</a></code>
-- <code><a href="./src/resources/marketing/subscriptions/v4/v4.ts">PublicStatusRequest</a></code>
-- <code><a href="./src/resources/marketing/subscriptions/v4/v4.ts">PublicSubscriptionTranslation</a></code>
-- <code><a href="./src/resources/marketing/subscriptions/v4/v4.ts">PublicWideStatus</a></code>
-- <code><a href="./src/resources/marketing/subscriptions/v4/v4.ts">PublicWideStatusBulkResponse</a></code>
+- <code><a href="./src/resources/marketing/subscriptions/v4.ts">ActionResponseWithResultsPublicStatus</a></code>
+- <code><a href="./src/resources/marketing/subscriptions/v4.ts">ActionResponseWithResultsPublicWideStatus</a></code>
+- <code><a href="./src/resources/marketing/subscriptions/v4.ts">ActionResponseWithResultsSubscriptionDefinition</a></code>
+- <code><a href="./src/resources/marketing/subscriptions/v4.ts">BatchInputPublicStatusRequest</a></code>
+- <code><a href="./src/resources/marketing/subscriptions/v4.ts">BatchResponsePublicBulkOptOutFromAllResponse</a></code>
+- <code><a href="./src/resources/marketing/subscriptions/v4.ts">BatchResponsePublicStatus</a></code>
+- <code><a href="./src/resources/marketing/subscriptions/v4.ts">BatchResponsePublicStatusBulkResponse</a></code>
+- <code><a href="./src/resources/marketing/subscriptions/v4.ts">BatchResponsePublicStatusBulkResponseWithErrors</a></code>
+- <code><a href="./src/resources/marketing/subscriptions/v4.ts">BatchResponsePublicWideStatusBulkResponse</a></code>
+- <code><a href="./src/resources/marketing/subscriptions/v4.ts">BatchResponsePublicWideStatusBulkResponseWithErrors</a></code>
+- <code><a href="./src/resources/marketing/subscriptions/v4.ts">PartialPublicStatusRequest</a></code>
+- <code><a href="./src/resources/marketing/subscriptions/v4.ts">PublicBulkOptOutFromAllResponse</a></code>
+- <code><a href="./src/resources/marketing/subscriptions/v4.ts">PublicStatus</a></code>
+- <code><a href="./src/resources/marketing/subscriptions/v4.ts">PublicStatusBulkResponse</a></code>
+- <code><a href="./src/resources/marketing/subscriptions/v4.ts">PublicStatusRequest</a></code>
+- <code><a href="./src/resources/marketing/subscriptions/v4.ts">PublicSubscriptionTranslation</a></code>
+- <code><a href="./src/resources/marketing/subscriptions/v4.ts">PublicWideStatus</a></code>
+- <code><a href="./src/resources/marketing/subscriptions/v4.ts">PublicWideStatusBulkResponse</a></code>
 
-#### Definitions
+# Scheduler
+
+## Meetings
+
+Types:
+
+- <code><a href="./src/resources/scheduler/meetings/meetings.ts">CollectionResponseWithTotalExternalLinkMetadataForwardPaging</a></code>
+- <code><a href="./src/resources/scheduler/meetings/meetings.ts">ExternalAssociationCreateRequest</a></code>
+- <code><a href="./src/resources/scheduler/meetings/meetings.ts">ExternalBookingFormField</a></code>
+- <code><a href="./src/resources/scheduler/meetings/meetings.ts">ExternalBookingInfo</a></code>
+- <code><a href="./src/resources/scheduler/meetings/meetings.ts">ExternalBrandingMetadata</a></code>
+- <code><a href="./src/resources/scheduler/meetings/meetings.ts">ExternalCalendarMeetingEventCreateProperties</a></code>
+- <code><a href="./src/resources/scheduler/meetings/meetings.ts">ExternalCalendarMeetingEventCreateRequest</a></code>
+- <code><a href="./src/resources/scheduler/meetings/meetings.ts">ExternalCalendarMeetingEventResponseProperties</a></code>
+- <code><a href="./src/resources/scheduler/meetings/meetings.ts">ExternalCalenderMeetingEventResponse</a></code>
+- <code><a href="./src/resources/scheduler/meetings/meetings.ts">ExternalClosedRange</a></code>
+- <code><a href="./src/resources/scheduler/meetings/meetings.ts">ExternalCommunicationConsentCheckbox</a></code>
+- <code><a href="./src/resources/scheduler/meetings/meetings.ts">ExternalEmailReminderSchedule</a></code>
+- <code><a href="./src/resources/scheduler/meetings/meetings.ts">ExternalGuestSettings</a></code>
+- <code><a href="./src/resources/scheduler/meetings/meetings.ts">ExternalLegalConsentOptions</a></code>
+- <code><a href="./src/resources/scheduler/meetings/meetings.ts">ExternalLegalConsentResponse</a></code>
+- <code><a href="./src/resources/scheduler/meetings/meetings.ts">ExternalLinkAvailability</a></code>
+- <code><a href="./src/resources/scheduler/meetings/meetings.ts">ExternalLinkAvailabilityAndBusyTimes</a></code>
+- <code><a href="./src/resources/scheduler/meetings/meetings.ts">ExternalLinkAvailabilityForDuration</a></code>
+- <code><a href="./src/resources/scheduler/meetings/meetings.ts">ExternalLinkDisplayInfo</a></code>
+- <code><a href="./src/resources/scheduler/meetings/meetings.ts">ExternalLinkFormField</a></code>
+- <code><a href="./src/resources/scheduler/meetings/meetings.ts">ExternalLinkMetadata</a></code>
+- <code><a href="./src/resources/scheduler/meetings/meetings.ts">ExternalMeetingAvailability</a></code>
+- <code><a href="./src/resources/scheduler/meetings/meetings.ts">ExternalMeetingBooking</a></code>
+- <code><a href="./src/resources/scheduler/meetings/meetings.ts">ExternalMeetingBookingResponse</a></code>
+- <code><a href="./src/resources/scheduler/meetings/meetings.ts">ExternalMeetingsLinkSettings</a></code>
+- <code><a href="./src/resources/scheduler/meetings/meetings.ts">ExternalMeetingsUser</a></code>
+- <code><a href="./src/resources/scheduler/meetings/meetings.ts">ExternalMeetingsWelcomeScreenInfo</a></code>
+- <code><a href="./src/resources/scheduler/meetings/meetings.ts">ExternalOption</a></code>
+- <code><a href="./src/resources/scheduler/meetings/meetings.ts">ExternalReminder</a></code>
+- <code><a href="./src/resources/scheduler/meetings/meetings.ts">ExternalTimeRange</a></code>
+- <code><a href="./src/resources/scheduler/meetings/meetings.ts">ExternalUserBusyTimes</a></code>
+- <code><a href="./src/resources/scheduler/meetings/meetings.ts">ExternalUserProfile</a></code>
+- <code><a href="./src/resources/scheduler/meetings/meetings.ts">ExternalValidatedFormField</a></code>
+
+### Calendar
 
 Methods:
 
-- <code title="get /communication-preferences/v4/definitions">client.marketing.subscriptions.v4.definitions.<a href="./src/resources/marketing/subscriptions/v4/definitions.ts">list</a>({ ...params }) -> ActionResponseWithResultsSubscriptionDefinition</code>
+- <code title="post /scheduler/v3/meetings/calendar">client.scheduler.meetings.calendar.<a href="./src/resources/scheduler/meetings/calendar.ts">create</a>({ ...params }) -> ExternalCalenderMeetingEventResponse</code>
 
-#### Statuses
+### MeetingsLinks
 
 Methods:
 
-- <code title="get /communication-preferences/v4/statuses/{subscriberIdString}">client.marketing.subscriptions.v4.statuses.<a href="./src/resources/marketing/subscriptions/v4/statuses.ts">get</a>(subscriberIDString, { ...params }) -> ActionResponseWithResultsPublicStatus</code>
-- <code title="post /communication-preferences/v4/statuses/batch/read">client.marketing.subscriptions.v4.statuses.<a href="./src/resources/marketing/subscriptions/v4/statuses.ts">getBatch</a>({ ...params }) -> BatchResponsePublicStatusBulkResponse</code>
-- <code title="get /communication-preferences/v4/statuses/{subscriberIdString}/unsubscribe-all">client.marketing.subscriptions.v4.statuses.<a href="./src/resources/marketing/subscriptions/v4/statuses.ts">getUnsubscribeAllStatus</a>(subscriberIDString, { ...params }) -> ActionResponseWithResultsPublicWideStatus</code>
-- <code title="post /communication-preferences/v4/statuses/batch/unsubscribe-all/read">client.marketing.subscriptions.v4.statuses.<a href="./src/resources/marketing/subscriptions/v4/statuses.ts">getUnsubscribeAllStatusBatch</a>({ ...params }) -> BatchResponsePublicWideStatusBulkResponse</code>
-- <code title="post /communication-preferences/v4/statuses/{subscriberIdString}">client.marketing.subscriptions.v4.statuses.<a href="./src/resources/marketing/subscriptions/v4/statuses.ts">set</a>(subscriberIDString, { ...params }) -> ActionResponseWithResultsPublicStatus</code>
-- <code title="post /communication-preferences/v4/statuses/{subscriberIdString}/unsubscribe-all">client.marketing.subscriptions.v4.statuses.<a href="./src/resources/marketing/subscriptions/v4/statuses.ts">unsubscribeAll</a>(subscriberIDString, { ...params }) -> ActionResponseWithResultsPublicStatus</code>
-- <code title="post /communication-preferences/v4/statuses/batch/unsubscribe-all">client.marketing.subscriptions.v4.statuses.<a href="./src/resources/marketing/subscriptions/v4/statuses.ts">unsubscribeAllBatch</a>({ ...params }) -> BatchResponsePublicBulkOptOutFromAllResponse</code>
-- <code title="post /communication-preferences/v4/statuses/batch/write">client.marketing.subscriptions.v4.statuses.<a href="./src/resources/marketing/subscriptions/v4/statuses.ts">updateBatch</a>({ ...params }) -> BatchResponsePublicStatus</code>
+- <code title="get /scheduler/v3/meetings/meeting-links">client.scheduler.meetings.meetingsLinks.<a href="./src/resources/scheduler/meetings/meetings-links.ts">list</a>() -> CollectionResponseWithTotalExternalLinkMetadataForwardPaging</code>
+- <code title="post /scheduler/v3/meetings/meeting-links/book">client.scheduler.meetings.meetingsLinks.<a href="./src/resources/scheduler/meetings/meetings-links.ts">book</a>({ ...params }) -> ExternalMeetingBookingResponse</code>
+- <code title="get /scheduler/v3/meetings/meeting-links/book/{slug}">client.scheduler.meetings.meetingsLinks.<a href="./src/resources/scheduler/meetings/meetings-links.ts">getInitialBookingInfo</a>(slug) -> ExternalBookingInfo</code>
+- <code title="get /scheduler/v3/meetings/meeting-links/book/availability-page/{slug}">client.scheduler.meetings.meetingsLinks.<a href="./src/resources/scheduler/meetings/meetings-links.ts">getNextAvailability</a>(slug) -> ExternalLinkAvailabilityAndBusyTimes</code>
 
 # Settings
 
@@ -920,12 +960,10 @@ Types:
 Methods:
 
 - <code title="post /settings/v3/users/">client.settings.users.<a href="./src/resources/settings/users.ts">create</a>({ ...params }) -> PublicUser</code>
-- <code title="put /settings/v3/users/{userId}">client.settings.users.<a href="./src/resources/settings/users.ts">update</a>(userID, { ...params }) -> PublicUser</code>
-- <code title="get /settings/v3/users/">client.settings.users.<a href="./src/resources/settings/users.ts">list</a>({ ...params }) -> CollectionResponsePublicUserForwardPaging</code>
+- <code title="get /settings/v3/users/">client.settings.users.<a href="./src/resources/settings/users.ts">list</a>({ ...params }) -> PublicUsersCursorURLPage</code>
 - <code title="delete /settings/v3/users/{userId}">client.settings.users.<a href="./src/resources/settings/users.ts">delete</a>(userID, { ...params }) -> void</code>
-- <code title="get /settings/v3/users/{userId}">client.settings.users.<a href="./src/resources/settings/users.ts">get</a>(userID, { ...params }) -> PublicUser</code>
-- <code title="get /settings/v3/users/roles">client.settings.users.<a href="./src/resources/settings/users.ts">listRoles</a>() -> CollectionResponsePublicPermissionSetNoPaging</code>
-- <code title="get /settings/v3/users/teams">client.settings.users.<a href="./src/resources/settings/users.ts">listTeams</a>() -> CollectionResponsePublicTeamNoPaging</code>
+- <code title="get /settings/v3/users/{userId}">client.settings.users.<a href="./src/resources/settings/users.ts">read</a>(userID, { ...params }) -> PublicUser</code>
+- <code title="put /settings/v3/users/{userId}">client.settings.users.<a href="./src/resources/settings/users.ts">replace</a>(userID, { ...params }) -> PublicUser</code>
 
 # Webhooks
 

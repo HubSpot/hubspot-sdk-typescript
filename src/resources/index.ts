@@ -7,7 +7,6 @@ export { Automation } from './automation/automation';
 export {
   CRM,
   type AssociatedID,
-  type AssociationSpec,
   type AssociationSpecWithLabel,
   type BatchResponsePublicDefaultAssociation,
   type CollectionResponseMultiAssociatedObjectWithLabel,
@@ -18,7 +17,7 @@ export {
   type Property,
   type PropertyModificationMetadata,
   type PublicDefaultAssociation,
-  type PublicObjectID,
+  type MultiAssociatedObjectWithLabelsCursorURLPage,
 } from './crm/crm';
 export { Cms } from './cms/cms';
 export { Conversations } from './conversations/conversations';
@@ -41,6 +40,7 @@ export {
   type SignedURL,
 } from './files/files';
 export { Marketing } from './marketing/marketing';
+export { Scheduler } from './scheduler/scheduler';
 export { Settings } from './settings/settings';
 export {
   Webhooks,

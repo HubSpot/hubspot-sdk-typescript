@@ -2,7 +2,9 @@
 
 import { APIResource } from '../../../core/resource';
 import * as ObjectsAPI from './objects';
+import { SimplePublicObjectWithAssociationsCursorURLPage } from './objects';
 import { APIPromise } from '../../../core/api-promise';
+import { CursorURLPage, type CursorURLPageParams, PagePromise } from '../../../core/pagination';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -34,8 +36,15 @@ export class Companies extends APIResource {
   list(
     query: CompanyListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CollectionResponseSimplePublicObjectWithAssociations> {
-    return this._client.get('/crm/v3/objects/companies', { query, ...options });
+  ): PagePromise<
+    SimplePublicObjectWithAssociationsCursorURLPage,
+    ObjectsAPI.SimplePublicObjectWithAssociations
+  > {
+    return this._client.getAPIList(
+      '/crm/v3/objects/companies',
+      CursorURLPage<ObjectsAPI.SimplePublicObjectWithAssociations>,
+      { query, ...options },
+    );
   }
 
   /**
@@ -98,14 +107,12 @@ export interface CompanyUpdateParams {
   inputs: Array<ObjectsAPI.SimplePublicObjectBatchInput>;
 }
 
-export interface CompanyListParams {
+export interface CompanyListParams extends CursorURLPageParams {
   after?: string;
 
   archived?: boolean;
 
   associations?: Array<string>;
-
-  limit?: number;
 
   properties?: Array<string>;
 
@@ -164,3 +171,5 @@ export declare namespace Companies {
     type CompanyUpsertParams as CompanyUpsertParams,
   };
 }
+
+export { type SimplePublicObjectWithAssociationsCursorURLPage };

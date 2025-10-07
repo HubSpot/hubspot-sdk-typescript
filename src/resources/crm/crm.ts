@@ -1,6 +1,17 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as Shared from '../shared';
+import * as OwnersAPI from './owners';
+import {
+  CollectionResponsePublicOwnerForwardPaging,
+  OwnerGetParams,
+  OwnerListParams,
+  Owners,
+  PublicOwner,
+  PublicOwnersCursorURLPage,
+  PublicTeam,
+} from './owners';
 import * as PipelinesAPI from './pipelines';
 import {
   CollectionResponsePipelineNoPaging,
@@ -93,25 +104,23 @@ import {
   SimplePublicUpsertObject,
   ValueWithTimestamp,
 } from './objects/objects';
+import { CursorURLPage } from '../../core/pagination';
 
 export class CRM extends APIResource {
   associations: AssociationsAPI.Associations = new AssociationsAPI.Associations(this._client);
   extensions: ExtensionsAPI.Extensions = new ExtensionsAPI.Extensions(this._client);
   objects: ObjectsAPI.Objects = new ObjectsAPI.Objects(this._client);
+  owners: OwnersAPI.Owners = new OwnersAPI.Owners(this._client);
   pipelines: PipelinesAPI.Pipelines = new PipelinesAPI.Pipelines(this._client);
   properties: PropertiesAPI.Properties = new PropertiesAPI.Properties(this._client);
 }
+
+export type MultiAssociatedObjectWithLabelsCursorURLPage = CursorURLPage<MultiAssociatedObjectWithLabel>;
 
 export interface AssociatedID {
   id: string;
 
   type: string;
-}
-
-export interface AssociationSpec {
-  associationCategory: 'HUBSPOT_DEFINED' | 'USER_DEFINED' | 'INTEGRATOR_DEFINED';
-
-  associationTypeId: number;
 }
 
 export interface AssociationSpecWithLabel {
@@ -247,25 +256,21 @@ export interface PropertyModificationMetadata {
 export interface PublicDefaultAssociation {
   associationSpec: V4API.AssociationSpec1;
 
-  from: PublicObjectID;
+  from: Shared.PublicObjectID;
 
-  to: PublicObjectID;
-}
-
-export interface PublicObjectID {
-  id: string;
+  to: Shared.PublicObjectID;
 }
 
 CRM.Associations = Associations;
 CRM.Extensions = Extensions;
 CRM.Objects = Objects;
+CRM.Owners = Owners;
 CRM.Pipelines = Pipelines;
 CRM.Properties = Properties;
 
 export declare namespace CRM {
   export {
     type AssociatedID as AssociatedID,
-    type AssociationSpec as AssociationSpec,
     type AssociationSpecWithLabel as AssociationSpecWithLabel,
     type BatchResponsePublicDefaultAssociation as BatchResponsePublicDefaultAssociation,
     type CollectionResponseMultiAssociatedObjectWithLabel as CollectionResponseMultiAssociatedObjectWithLabel,
@@ -276,7 +281,6 @@ export declare namespace CRM {
     type Property as Property,
     type PropertyModificationMetadata as PropertyModificationMetadata,
     type PublicDefaultAssociation as PublicDefaultAssociation,
-    type PublicObjectID as PublicObjectID,
   };
 
   export {
@@ -323,6 +327,16 @@ export declare namespace CRM {
     type SimplePublicObjectWithAssociations as SimplePublicObjectWithAssociations,
     type SimplePublicUpsertObject as SimplePublicUpsertObject,
     type ValueWithTimestamp as ValueWithTimestamp,
+  };
+
+  export {
+    Owners as Owners,
+    type CollectionResponsePublicOwnerForwardPaging as CollectionResponsePublicOwnerForwardPaging,
+    type PublicOwner as PublicOwner,
+    type PublicTeam as PublicTeam,
+    type PublicOwnersCursorURLPage as PublicOwnersCursorURLPage,
+    type OwnerListParams as OwnerListParams,
+    type OwnerGetParams as OwnerGetParams,
   };
 
   export {

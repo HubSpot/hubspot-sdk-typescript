@@ -15,7 +15,6 @@ export {
 export {
   CRM,
   type AssociatedID,
-  type AssociationSpec,
   type AssociationSpecWithLabel,
   type BatchResponsePublicDefaultAssociation,
   type CollectionResponseMultiAssociatedObjectWithLabel,
@@ -26,7 +25,7 @@ export {
   type Property,
   type PropertyModificationMetadata,
   type PublicDefaultAssociation,
-  type PublicObjectID,
+  type MultiAssociatedObjectWithLabelsCursorURLPage,
 } from './crm';
 export { Extensions } from './extensions/index';
 export {
@@ -58,7 +57,17 @@ export {
   type SimplePublicObjectWithAssociations,
   type SimplePublicUpsertObject,
   type ValueWithTimestamp,
+  type SimplePublicObjectWithAssociationsCursorURLPage,
 } from './objects/index';
+export {
+  Owners,
+  type CollectionResponsePublicOwnerForwardPaging,
+  type PublicOwner,
+  type PublicTeam,
+  type OwnerListParams,
+  type OwnerGetParams,
+  type PublicOwnersCursorURLPage,
+} from './owners';
 export {
   Pipelines,
   type CollectionResponsePipelineNoPaging,

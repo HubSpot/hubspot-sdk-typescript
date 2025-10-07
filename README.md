@@ -29,11 +29,11 @@ const client = new HubSpot({
   accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
 });
 
-const createdResponseSimplePublicObject = await client.crm.objects.contacts.create({
-  properties: { foo: 'string' },
+const result = await client.crm.objects.contacts.create({
+  properties: { email: 'mark.s@lumon.industries', lastname: 'S.', firstname: 'Mark' },
 });
 
-console.log(createdResponseSimplePublicObject.createdResourceId);
+console.log(result.createdResourceId);
 ```
 
 ### Request & Response types
@@ -48,7 +48,9 @@ const client = new HubSpot({
   accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
 });
 
-const params: HubSpot.CRM.Objects.ContactCreateParams = { properties: { foo: 'string' } };
+const params: HubSpot.CRM.Objects.ContactCreateParams = {
+  properties: { email: 'mark.s@lumon.industries', lastname: 'S.', firstname: 'Mark' },
+};
 const createdResponseSimplePublicObject: HubSpot.CRM.CreatedResponseSimplePublicObject =
   await client.crm.objects.contacts.create(params);
 ```
@@ -97,7 +99,7 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 const createdResponseSimplePublicObject = await client.crm.objects.contacts
-  .create({ properties: { foo: 'string' } })
+  .create({ properties: { email: 'mark.s@lumon.industries', lastname: 'S.', firstname: 'Mark' } })
   .catch(async (err) => {
     if (err instanceof HubSpot.APIError) {
       console.log(err.status); // 400
@@ -138,7 +140,7 @@ const client = new HubSpot({
 });
 
 // Or, configure per-request:
-await client.crm.objects.contacts.create({ properties: { foo: 'string' } }, {
+await client.crm.objects.contacts.create({ properties: { email: 'mark.s@lumon.industries', lastname: 'S.', firstname: 'Mark' } }, {
   maxRetries: 5,
 });
 ```
@@ -155,7 +157,7 @@ const client = new HubSpot({
 });
 
 // Override per-request:
-await client.crm.objects.contacts.create({ properties: { foo: 'string' } }, {
+await client.crm.objects.contacts.create({ properties: { email: 'mark.s@lumon.industries', lastname: 'S.', firstname: 'Mark' } }, {
   timeout: 5 * 1000,
 });
 ```
@@ -163,6 +165,37 @@ await client.crm.objects.contacts.create({ properties: { foo: 'string' } }, {
 On timeout, an `APIConnectionTimeoutError` is thrown.
 
 Note that requests which time out will be [retried twice by default](#retries).
+
+## Auto-pagination
+
+List methods in the HubSpot API are paginated.
+You can use the `for await … of` syntax to iterate through items across all pages:
+
+```ts
+async function fetchAllSimplePublicObjectWithAssociations(params) {
+  const allSimplePublicObjectWithAssociations = [];
+  // Automatically fetches more pages as needed.
+  for await (const simplePublicObjectWithAssociations of client.crm.objects.contacts.list({ limit: 30 })) {
+    allSimplePublicObjectWithAssociations.push(simplePublicObjectWithAssociations);
+  }
+  return allSimplePublicObjectWithAssociations;
+}
+```
+
+Alternatively, you can request a single page at a time:
+
+```ts
+let page = await client.crm.objects.contacts.list({ limit: 30 });
+for (const simplePublicObjectWithAssociations of page.results) {
+  console.log(simplePublicObjectWithAssociations);
+}
+
+// Convenience methods are provided for manually paginating:
+while (page.hasNextPage()) {
+  page = await page.getNextPage();
+  // ...
+}
+```
 
 ## Advanced Usage
 
@@ -178,12 +211,14 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new HubSpot();
 
-const response = await client.crm.objects.contacts.create({ properties: { foo: 'string' } }).asResponse();
+const response = await client.crm.objects.contacts
+  .create({ properties: { email: 'mark.s@lumon.industries', lastname: 'S.', firstname: 'Mark' } })
+  .asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
 const { data: createdResponseSimplePublicObject, response: raw } = await client.crm.objects.contacts
-  .create({ properties: { foo: 'string' } })
+  .create({ properties: { email: 'mark.s@lumon.industries', lastname: 'S.', firstname: 'Mark' } })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
 console.log(createdResponseSimplePublicObject.createdResourceId);

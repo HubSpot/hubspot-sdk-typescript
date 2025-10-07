@@ -10,12 +10,13 @@ import {
   PublicTeam,
   PublicUser,
   PublicUserUpdate,
+  PublicUsersCursorURLPage,
   UserCreateParams,
   UserDeleteParams,
-  UserGetParams,
   UserListParams,
   UserProvisionRequest,
-  UserUpdateParams,
+  UserReadParams,
+  UserReplaceParams,
   Users,
 } from './users';
 
@@ -36,10 +37,11 @@ export declare namespace Settings {
     type PublicUser as PublicUser,
     type PublicUserUpdate as PublicUserUpdate,
     type UserProvisionRequest as UserProvisionRequest,
+    type PublicUsersCursorURLPage as PublicUsersCursorURLPage,
     type UserCreateParams as UserCreateParams,
-    type UserUpdateParams as UserUpdateParams,
     type UserListParams as UserListParams,
     type UserDeleteParams as UserDeleteParams,
-    type UserGetParams as UserGetParams,
+    type UserReadParams as UserReadParams,
+    type UserReplaceParams as UserReplaceParams,
   };
 }

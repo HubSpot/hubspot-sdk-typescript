@@ -7,6 +7,7 @@ export {
   type CollectionResponseWithTotalDomainForwardPaging,
   type Domain,
   type DomainListParams,
+  type DomainsCursorURLPage,
 } from './domains';
 export {
   Hubdb,
@@ -74,4 +75,5 @@ export {
   type URLRedirectCreateParams,
   type URLRedirectUpdateParams,
   type URLRedirectListParams,
+  type URLMappingsCursorURLPage,
 } from './url-redirects';
