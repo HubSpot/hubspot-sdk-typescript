@@ -3,10 +3,8 @@
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
 import * as CRMAPI from '../crm';
-import { MultiAssociatedObjectWithLabelsCursorURLPage } from '../crm';
 import * as EmailsAPI from '../../marketing/emails';
 import { APIPromise } from '../../../core/api-promise';
-import { CursorURLPage, type CursorURLPageParams, PagePromise } from '../../../core/pagination';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -34,13 +32,12 @@ export class V4 extends APIResource {
     toObjectType: string,
     params: V4ListParams,
     options?: RequestOptions,
-  ): PagePromise<MultiAssociatedObjectWithLabelsCursorURLPage, CRMAPI.MultiAssociatedObjectWithLabel> {
+  ): APIPromise<CRMAPI.CollectionResponseMultiAssociatedObjectWithLabel> {
     const { objectType, objectId, ...query } = params;
-    return this._client.getAPIList(
-      path`/crm/v4/objects/${objectType}/${objectId}/associations/${toObjectType}`,
-      CursorURLPage<CRMAPI.MultiAssociatedObjectWithLabel>,
-      { query, ...options },
-    );
+    return this._client.get(path`/crm/v4/objects/${objectType}/${objectId}/associations/${toObjectType}`, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -278,7 +275,7 @@ export interface V4CreateParams {
   body: Array<AssociationSpec1>;
 }
 
-export interface V4ListParams extends CursorURLPageParams {
+export interface V4ListParams {
   /**
    * Path param:
    */
@@ -293,6 +290,11 @@ export interface V4ListParams extends CursorURLPageParams {
    * Query param:
    */
   after?: string;
+
+  /**
+   * Query param:
+   */
+  limit?: number;
 }
 
 export interface V4DeleteParams {
@@ -351,5 +353,3 @@ export declare namespace V4 {
     type V4CreateDefaultParams as V4CreateDefaultParams,
   };
 }
-
-export { type MultiAssociatedObjectWithLabelsCursorURLPage };

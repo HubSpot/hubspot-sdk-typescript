@@ -4,7 +4,6 @@ import { APIResource } from '../../core/resource';
 import * as Shared from '../shared';
 import * as UsersAPI from '../settings/users';
 import { APIPromise } from '../../core/api-promise';
-import { CursorURLPage, type CursorURLPageParams, PagePromise } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
@@ -15,8 +14,8 @@ export class Owners extends APIResource {
   list(
     query: OwnerListParams | null | undefined = {},
     options?: RequestOptions,
-  ): PagePromise<PublicOwnersCursorURLPage, PublicOwner> {
-    return this._client.getAPIList('/crm/v3/owners/', CursorURLPage<PublicOwner>, { query, ...options });
+  ): APIPromise<CollectionResponsePublicOwnerForwardPaging> {
+    return this._client.get('/crm/v3/owners/', { query, ...options });
   }
 
   /**
@@ -30,8 +29,6 @@ export class Owners extends APIResource {
     return this._client.get(path`/crm/v3/owners/${ownerID}`, { query, ...options });
   }
 }
-
-export type PublicOwnersCursorURLPage = CursorURLPage<PublicOwner>;
 
 export interface CollectionResponsePublicOwnerForwardPaging {
   results: Array<PublicOwner>;
@@ -71,12 +68,14 @@ export interface PublicTeam {
   primary: boolean;
 }
 
-export interface OwnerListParams extends CursorURLPageParams {
+export interface OwnerListParams {
   after?: string;
 
   archived?: boolean;
 
   email?: string;
+
+  limit?: number;
 }
 
 export interface OwnerGetParams {
@@ -90,7 +89,6 @@ export declare namespace Owners {
     type CollectionResponsePublicOwnerForwardPaging as CollectionResponsePublicOwnerForwardPaging,
     type PublicOwner as PublicOwner,
     type PublicTeam as PublicTeam,
-    type PublicOwnersCursorURLPage as PublicOwnersCursorURLPage,
     type OwnerListParams as OwnerListParams,
     type OwnerGetParams as OwnerGetParams,
   };

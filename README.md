@@ -166,37 +166,6 @@ On timeout, an `APIConnectionTimeoutError` is thrown.
 
 Note that requests which time out will be [retried twice by default](#retries).
 
-## Auto-pagination
-
-List methods in the HubSpot API are paginated.
-You can use the `for await … of` syntax to iterate through items across all pages:
-
-```ts
-async function fetchAllSimplePublicObjectWithAssociations(params) {
-  const allSimplePublicObjectWithAssociations = [];
-  // Automatically fetches more pages as needed.
-  for await (const simplePublicObjectWithAssociations of client.crm.objects.contacts.list({ limit: 30 })) {
-    allSimplePublicObjectWithAssociations.push(simplePublicObjectWithAssociations);
-  }
-  return allSimplePublicObjectWithAssociations;
-}
-```
-
-Alternatively, you can request a single page at a time:
-
-```ts
-let page = await client.crm.objects.contacts.list({ limit: 30 });
-for (const simplePublicObjectWithAssociations of page.results) {
-  console.log(simplePublicObjectWithAssociations);
-}
-
-// Convenience methods are provided for manually paginating:
-while (page.hasNextPage()) {
-  page = await page.getNextPage();
-  // ...
-}
-```
-
 ## Advanced Usage
 
 ### Accessing raw Response data (e.g., headers)
