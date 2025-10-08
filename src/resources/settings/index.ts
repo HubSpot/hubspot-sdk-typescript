@@ -16,5 +16,4 @@ export {
   type UserDeleteParams,
   type UserReadParams,
   type UserReplaceParams,
-  type PublicUsersCursorURLPage,
 } from './users';

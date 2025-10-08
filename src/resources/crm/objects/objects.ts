@@ -60,7 +60,6 @@ import {
   DealUpsertParams,
   Deals,
 } from './deals/deals';
-import { CursorURLPage } from '../../../core/pagination';
 
 export class Objects extends APIResource {
   companies: CompaniesAPI.Companies = new CompaniesAPI.Companies(this._client);
@@ -68,9 +67,6 @@ export class Objects extends APIResource {
   deals: DealsAPI.Deals = new DealsAPI.Deals(this._client);
   schemas: SchemasAPI.Schemas = new SchemasAPI.Schemas(this._client);
 }
-
-export type SimplePublicObjectWithAssociationsCursorURLPage =
-  CursorURLPage<SimplePublicObjectWithAssociations>;
 
 export interface BatchInputSimplePublicObjectBatchInput {
   inputs: Array<SimplePublicObjectBatchInput>;

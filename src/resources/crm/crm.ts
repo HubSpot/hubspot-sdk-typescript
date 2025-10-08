@@ -9,7 +9,6 @@ import {
   OwnerListParams,
   Owners,
   PublicOwner,
-  PublicOwnersCursorURLPage,
   PublicTeam,
 } from './owners';
 import * as PipelinesAPI from './pipelines';
@@ -104,7 +103,6 @@ import {
   SimplePublicUpsertObject,
   ValueWithTimestamp,
 } from './objects/objects';
-import { CursorURLPage } from '../../core/pagination';
 
 export class CRM extends APIResource {
   associations: AssociationsAPI.Associations = new AssociationsAPI.Associations(this._client);
@@ -114,8 +112,6 @@ export class CRM extends APIResource {
   pipelines: PipelinesAPI.Pipelines = new PipelinesAPI.Pipelines(this._client);
   properties: PropertiesAPI.Properties = new PropertiesAPI.Properties(this._client);
 }
-
-export type MultiAssociatedObjectWithLabelsCursorURLPage = CursorURLPage<MultiAssociatedObjectWithLabel>;
 
 export interface AssociatedID {
   id: string;
@@ -334,7 +330,6 @@ export declare namespace CRM {
     type CollectionResponsePublicOwnerForwardPaging as CollectionResponsePublicOwnerForwardPaging,
     type PublicOwner as PublicOwner,
     type PublicTeam as PublicTeam,
-    type PublicOwnersCursorURLPage as PublicOwnersCursorURLPage,
     type OwnerListParams as OwnerListParams,
     type OwnerGetParams as OwnerGetParams,
   };

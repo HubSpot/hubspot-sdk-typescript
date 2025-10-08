@@ -3,7 +3,6 @@
 import { APIResource } from '../../core/resource';
 import * as Shared from '../shared';
 import { APIPromise } from '../../core/api-promise';
-import { CursorURLPage, type CursorURLPageParams, PagePromise } from '../../core/pagination';
 import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
@@ -33,11 +32,8 @@ export class URLRedirects extends APIResource {
   list(
     query: URLRedirectListParams | null | undefined = {},
     options?: RequestOptions,
-  ): PagePromise<URLMappingsCursorURLPage, URLMapping> {
-    return this._client.getAPIList('/cms/v3/url-redirects/', CursorURLPage<URLMapping>, {
-      query,
-      ...options,
-    });
+  ): APIPromise<CollectionResponseWithTotalURLMappingForwardPaging> {
+    return this._client.get('/cms/v3/url-redirects/', { query, ...options });
   }
 
   /**
@@ -57,8 +53,6 @@ export class URLRedirects extends APIResource {
     return this._client.get(path`/cms/v3/url-redirects/${urlRedirectID}`, options);
   }
 }
-
-export type URLMappingsCursorURLPage = CursorURLPage<URLMapping>;
 
 export interface CollectionResponseWithTotalURLMappingForwardPaging {
   results: Array<URLMapping>;
@@ -168,7 +162,7 @@ export interface URLRedirectUpdateParams {
   updated?: string;
 }
 
-export interface URLRedirectListParams extends CursorURLPageParams {
+export interface URLRedirectListParams {
   after?: string;
 
   archived?: boolean;
@@ -178,6 +172,8 @@ export interface URLRedirectListParams extends CursorURLPageParams {
   createdAt?: string;
 
   createdBefore?: string;
+
+  limit?: number;
 
   sort?: Array<string>;
 
@@ -193,7 +189,6 @@ export declare namespace URLRedirects {
     type CollectionResponseWithTotalURLMappingForwardPaging as CollectionResponseWithTotalURLMappingForwardPaging,
     type URLMapping as URLMapping,
     type URLMappingCreateRequestBody as URLMappingCreateRequestBody,
-    type URLMappingsCursorURLPage as URLMappingsCursorURLPage,
     type URLRedirectCreateParams as URLRedirectCreateParams,
     type URLRedirectUpdateParams as URLRedirectUpdateParams,
     type URLRedirectListParams as URLRedirectListParams,

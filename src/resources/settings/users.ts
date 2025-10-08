@@ -3,7 +3,6 @@
 import { APIResource } from '../../core/resource';
 import * as Shared from '../shared';
 import { APIPromise } from '../../core/api-promise';
-import { CursorURLPage, type CursorURLPageParams, PagePromise } from '../../core/pagination';
 import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
@@ -22,8 +21,8 @@ export class Users extends APIResource {
   list(
     query: UserListParams | null | undefined = {},
     options?: RequestOptions,
-  ): PagePromise<PublicUsersCursorURLPage, PublicUser> {
-    return this._client.getAPIList('/settings/v3/users/', CursorURLPage<PublicUser>, { query, ...options });
+  ): APIPromise<CollectionResponsePublicUserForwardPaging> {
+    return this._client.get('/settings/v3/users/', { query, ...options });
   }
 
   /**
@@ -61,8 +60,6 @@ export class Users extends APIResource {
     return this._client.put(path`/settings/v3/users/${userID}`, { query: { idProperty }, body, ...options });
   }
 }
-
-export type PublicUsersCursorURLPage = CursorURLPage<PublicUser>;
 
 export interface CollectionResponsePublicPermissionSetNoPaging {
   results: Array<PublicPermissionSet>;
@@ -162,8 +159,10 @@ export interface UserCreateParams {
   sendWelcomeEmail?: boolean;
 }
 
-export interface UserListParams extends CursorURLPageParams {
+export interface UserListParams {
   after?: string;
+
+  limit?: number;
 }
 
 export interface UserDeleteParams {
@@ -216,7 +215,6 @@ export declare namespace Users {
     type PublicUser as PublicUser,
     type PublicUserUpdate as PublicUserUpdate,
     type UserProvisionRequest as UserProvisionRequest,
-    type PublicUsersCursorURLPage as PublicUsersCursorURLPage,
     type UserCreateParams as UserCreateParams,
     type UserListParams as UserListParams,
     type UserDeleteParams as UserDeleteParams,

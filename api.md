@@ -83,7 +83,7 @@ Methods:
 
 - <code title="post /automation/v4/actions/{appId}">client.automation.actions.<a href="./src/resources/automation/actions.ts">create</a>(appID, { ...params }) -> PublicActionDefinition</code>
 - <code title="patch /automation/v4/actions/{appId}/{definitionId}">client.automation.actions.<a href="./src/resources/automation/actions.ts">update</a>(definitionID, { ...params }) -> PublicActionDefinition</code>
-- <code title="get /automation/v4/actions/{appId}/{definitionId}/revisions">client.automation.actions.<a href="./src/resources/automation/actions.ts">list</a>(definitionID, { ...params }) -> PublicActionRevisionsCursorURLPage</code>
+- <code title="get /automation/v4/actions/{appId}/{definitionId}/revisions">client.automation.actions.<a href="./src/resources/automation/actions.ts">list</a>(definitionID, { ...params }) -> CollectionResponsePublicActionRevisionForwardPaging</code>
 - <code title="delete /automation/v4/actions/{appId}/{definitionId}/functions/{functionType}/{functionId}">client.automation.actions.<a href="./src/resources/automation/actions.ts">delete</a>(functionID, { ...params }) -> void</code>
 - <code title="delete /automation/v4/actions/{appId}/{definitionId}/functions/{functionType}">client.automation.actions.<a href="./src/resources/automation/actions.ts">archiveByFunctionType</a>(functionType, { ...params }) -> void</code>
 - <code title="post /automation/v4/actions/callbacks/{callbackId}/complete">client.automation.actions.<a href="./src/resources/automation/actions.ts">complete</a>(callbackID, { ...params }) -> void</code>
@@ -262,7 +262,7 @@ Methods:
 
 - <code title="post /cms/v3/blogs/tags">client.cms.blogs.tags.<a href="./src/resources/cms/blogs/tags.ts">create</a>({ ...params }) -> Tag</code>
 - <code title="patch /cms/v3/blogs/tags/{objectId}">client.cms.blogs.tags.<a href="./src/resources/cms/blogs/tags.ts">update</a>(objectID, { ...params }) -> Tag</code>
-- <code title="get /cms/v3/blogs/tags">client.cms.blogs.tags.<a href="./src/resources/cms/blogs/tags.ts">list</a>({ ...params }) -> TagsCursorURLPage</code>
+- <code title="get /cms/v3/blogs/tags">client.cms.blogs.tags.<a href="./src/resources/cms/blogs/tags.ts">list</a>({ ...params }) -> CollectionResponseWithTotalTagForwardPaging</code>
 - <code title="delete /cms/v3/blogs/tags/{objectId}">client.cms.blogs.tags.<a href="./src/resources/cms/blogs/tags.ts">delete</a>(objectID, { ...params }) -> void</code>
 - <code title="post /cms/v3/blogs/tags/batch/archive">client.cms.blogs.tags.<a href="./src/resources/cms/blogs/tags.ts">archiveBatch</a>({ ...params }) -> void</code>
 - <code title="post /cms/v3/blogs/tags/multi-language/attach-to-lang-group">client.cms.blogs.tags.<a href="./src/resources/cms/blogs/tags.ts">attachToLangGroup</a>({ ...params }) -> void</code>
@@ -284,7 +284,7 @@ Types:
 
 Methods:
 
-- <code title="get /cms/v3/domains/">client.cms.domains.<a href="./src/resources/cms/domains.ts">list</a>({ ...params }) -> DomainsCursorURLPage</code>
+- <code title="get /cms/v3/domains/">client.cms.domains.<a href="./src/resources/cms/domains.ts">list</a>({ ...params }) -> CollectionResponseWithTotalDomainForwardPaging</code>
 - <code title="get /cms/v3/domains/{domainId}">client.cms.domains.<a href="./src/resources/cms/domains.ts">read</a>(domainID) -> Domain</code>
 
 ## Hubdb
@@ -371,7 +371,7 @@ Methods:
 
 - <code title="post /cms/v3/url-redirects/">client.cms.urlRedirects.<a href="./src/resources/cms/url-redirects.ts">create</a>({ ...params }) -> URLMapping</code>
 - <code title="patch /cms/v3/url-redirects/{urlRedirectId}">client.cms.urlRedirects.<a href="./src/resources/cms/url-redirects.ts">update</a>(urlRedirectID, { ...params }) -> URLMapping</code>
-- <code title="get /cms/v3/url-redirects/">client.cms.urlRedirects.<a href="./src/resources/cms/url-redirects.ts">list</a>({ ...params }) -> URLMappingsCursorURLPage</code>
+- <code title="get /cms/v3/url-redirects/">client.cms.urlRedirects.<a href="./src/resources/cms/url-redirects.ts">list</a>({ ...params }) -> CollectionResponseWithTotalURLMappingForwardPaging</code>
 - <code title="delete /cms/v3/url-redirects/{urlRedirectId}">client.cms.urlRedirects.<a href="./src/resources/cms/url-redirects.ts">delete</a>(urlRedirectID) -> void</code>
 - <code title="get /cms/v3/url-redirects/{urlRedirectId}">client.cms.urlRedirects.<a href="./src/resources/cms/url-redirects.ts">read</a>(urlRedirectID) -> URLMapping</code>
 
@@ -488,7 +488,7 @@ Types:
 Methods:
 
 - <code title="put /crm/v4/objects/{objectType}/{objectId}/associations/{toObjectType}/{toObjectId}">client.crm.associations.v4.<a href="./src/resources/crm/associations/v4.ts">create</a>(toObjectID, [ ...body ]) -> CreatedResponseLabelsBetweenObjectPair</code>
-- <code title="get /crm/v4/objects/{objectType}/{objectId}/associations/{toObjectType}">client.crm.associations.v4.<a href="./src/resources/crm/associations/v4.ts">list</a>(toObjectType, { ...params }) -> MultiAssociatedObjectWithLabelsCursorURLPage</code>
+- <code title="get /crm/v4/objects/{objectType}/{objectId}/associations/{toObjectType}">client.crm.associations.v4.<a href="./src/resources/crm/associations/v4.ts">list</a>(toObjectType, { ...params }) -> CollectionResponseMultiAssociatedObjectWithLabel</code>
 - <code title="delete /crm/v4/objects/{objectType}/{objectId}/associations/{toObjectType}/{toObjectId}">client.crm.associations.v4.<a href="./src/resources/crm/associations/v4.ts">delete</a>(toObjectID, { ...params }) -> void</code>
 - <code title="post /crm/v4/associations/{fromObjectType}/{toObjectType}/batch/labels/archive">client.crm.associations.v4.<a href="./src/resources/crm/associations/v4.ts">archiveLabels</a>(toObjectType, { ...params }) -> BatchResponseVoid</code>
 - <code title="put /crm/v4/objects/{fromObjectType}/{fromObjectId}/associations/default/{toObjectType}/{toObjectId}">client.crm.associations.v4.<a href="./src/resources/crm/associations/v4.ts">createDefault</a>(toObjectID, { ...params }) -> BatchResponsePublicDefaultAssociation</code>
@@ -560,7 +560,7 @@ Methods:
 
 - <code title="post /crm/v3/objects/companies">client.crm.objects.companies.<a href="./src/resources/crm/objects/companies.ts">create</a>({ ...params }) -> CreatedResponseSimplePublicObject</code>
 - <code title="post /crm/v3/objects/companies/batch/update">client.crm.objects.companies.<a href="./src/resources/crm/objects/companies.ts">update</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
-- <code title="get /crm/v3/objects/companies">client.crm.objects.companies.<a href="./src/resources/crm/objects/companies.ts">list</a>({ ...params }) -> SimplePublicObjectWithAssociationsCursorURLPage</code>
+- <code title="get /crm/v3/objects/companies">client.crm.objects.companies.<a href="./src/resources/crm/objects/companies.ts">list</a>({ ...params }) -> CollectionResponseSimplePublicObjectWithAssociations</code>
 - <code title="post /crm/v3/objects/companies/batch/archive">client.crm.objects.companies.<a href="./src/resources/crm/objects/companies.ts">delete</a>({ ...params }) -> void</code>
 - <code title="post /crm/v3/objects/companies/merge">client.crm.objects.companies.<a href="./src/resources/crm/objects/companies.ts">merge</a>({ ...params }) -> SimplePublicObject</code>
 - <code title="get /crm/v3/objects/companies/{companyId}">client.crm.objects.companies.<a href="./src/resources/crm/objects/companies.ts">read</a>(companyID, { ...params }) -> SimplePublicObjectWithAssociations</code>
@@ -573,7 +573,7 @@ Methods:
 
 - <code title="post /crm/v3/objects/contacts">client.crm.objects.contacts.<a href="./src/resources/crm/objects/contacts.ts">create</a>({ ...params }) -> CreatedResponseSimplePublicObject</code>
 - <code title="post /crm/v3/objects/contacts/batch/update">client.crm.objects.contacts.<a href="./src/resources/crm/objects/contacts.ts">update</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
-- <code title="get /crm/v3/objects/contacts">client.crm.objects.contacts.<a href="./src/resources/crm/objects/contacts.ts">list</a>({ ...params }) -> SimplePublicObjectWithAssociationsCursorURLPage</code>
+- <code title="get /crm/v3/objects/contacts">client.crm.objects.contacts.<a href="./src/resources/crm/objects/contacts.ts">list</a>({ ...params }) -> CollectionResponseSimplePublicObjectWithAssociations</code>
 - <code title="post /crm/v3/objects/contacts/batch/archive">client.crm.objects.contacts.<a href="./src/resources/crm/objects/contacts.ts">delete</a>({ ...params }) -> void</code>
 - <code title="post /crm/v3/objects/contacts/merge">client.crm.objects.contacts.<a href="./src/resources/crm/objects/contacts.ts">merge</a>({ ...params }) -> SimplePublicObject</code>
 - <code title="post /crm/v3/objects/contacts/gdpr-delete">client.crm.objects.contacts.<a href="./src/resources/crm/objects/contacts.ts">purge</a>({ ...params }) -> void</code>
@@ -587,7 +587,7 @@ Methods:
 
 - <code title="post /crm/v3/objects/0-3">client.crm.objects.deals.<a href="./src/resources/crm/objects/deals/deals.ts">create</a>({ ...params }) -> CreatedResponseSimplePublicObject</code>
 - <code title="patch /crm/v3/objects/0-3/{dealId}">client.crm.objects.deals.<a href="./src/resources/crm/objects/deals/deals.ts">update</a>(dealID, { ...params }) -> SimplePublicObject</code>
-- <code title="get /crm/v3/objects/0-3">client.crm.objects.deals.<a href="./src/resources/crm/objects/deals/deals.ts">list</a>({ ...params }) -> SimplePublicObjectWithAssociationsCursorURLPage</code>
+- <code title="get /crm/v3/objects/0-3">client.crm.objects.deals.<a href="./src/resources/crm/objects/deals/deals.ts">list</a>({ ...params }) -> CollectionResponseSimplePublicObjectWithAssociations</code>
 - <code title="delete /crm/v3/objects/0-3/{dealId}">client.crm.objects.deals.<a href="./src/resources/crm/objects/deals/deals.ts">delete</a>(dealID) -> void</code>
 - <code title="post /crm/v3/objects/0-3/merge">client.crm.objects.deals.<a href="./src/resources/crm/objects/deals/deals.ts">merge</a>({ ...params }) -> SimplePublicObject</code>
 - <code title="get /crm/v3/objects/0-3/{dealId}">client.crm.objects.deals.<a href="./src/resources/crm/objects/deals/deals.ts">read</a>(dealID, { ...params }) -> SimplePublicObjectWithAssociations</code>
@@ -633,7 +633,7 @@ Types:
 
 Methods:
 
-- <code title="get /crm/v3/owners/">client.crm.owners.<a href="./src/resources/crm/owners.ts">list</a>({ ...params }) -> PublicOwnersCursorURLPage</code>
+- <code title="get /crm/v3/owners/">client.crm.owners.<a href="./src/resources/crm/owners.ts">list</a>({ ...params }) -> CollectionResponsePublicOwnerForwardPaging</code>
 - <code title="get /crm/v3/owners/{ownerId}">client.crm.owners.<a href="./src/resources/crm/owners.ts">get</a>(ownerID, { ...params }) -> PublicOwner</code>
 
 ## Pipelines
@@ -779,7 +779,7 @@ Methods:
 
 - <code title="post /marketing/v3/emails/">client.marketing.emails.<a href="./src/resources/marketing/emails.ts">create</a>({ ...params }) -> PublicEmail</code>
 - <code title="patch /marketing/v3/emails/{emailId}">client.marketing.emails.<a href="./src/resources/marketing/emails.ts">update</a>(emailID, { ...params }) -> PublicEmail</code>
-- <code title="get /marketing/v3/emails/">client.marketing.emails.<a href="./src/resources/marketing/emails.ts">list</a>({ ...params }) -> PublicEmailsCursorURLPage</code>
+- <code title="get /marketing/v3/emails/">client.marketing.emails.<a href="./src/resources/marketing/emails.ts">list</a>({ ...params }) -> CollectionResponseWithTotalPublicEmailForwardPaging</code>
 - <code title="delete /marketing/v3/emails/{emailId}">client.marketing.emails.<a href="./src/resources/marketing/emails.ts">delete</a>(emailID, { ...params }) -> void</code>
 - <code title="post /marketing/v3/emails/clone">client.marketing.emails.<a href="./src/resources/marketing/emails.ts">clone</a>({ ...params }) -> PublicEmail</code>
 - <code title="post /marketing/v3/emails/ab-test/create-variation">client.marketing.emails.<a href="./src/resources/marketing/emails.ts">createAbTestVariation</a>({ ...params }) -> PublicEmail</code>
@@ -842,7 +842,7 @@ Methods:
 
 - <code title="post /marketing/v3/forms/">client.marketing.forms.<a href="./src/resources/marketing/forms.ts">create</a>() -> unknown</code>
 - <code title="patch /marketing/v3/forms/{formId}">client.marketing.forms.<a href="./src/resources/marketing/forms.ts">update</a>(formID, { ...params }) -> unknown</code>
-- <code title="get /marketing/v3/forms/">client.marketing.forms.<a href="./src/resources/marketing/forms.ts">list</a>({ ...params }) -> HubSpotFormDefinitionsCursorURLPage</code>
+- <code title="get /marketing/v3/forms/">client.marketing.forms.<a href="./src/resources/marketing/forms.ts">list</a>({ ...params }) -> CollectionResponseFormDefinitionBaseForwardPaging</code>
 - <code title="delete /marketing/v3/forms/{formId}">client.marketing.forms.<a href="./src/resources/marketing/forms.ts">delete</a>(formID) -> void</code>
 - <code title="get /marketing/v3/forms/{formId}">client.marketing.forms.<a href="./src/resources/marketing/forms.ts">read</a>(formID, { ...params }) -> unknown</code>
 - <code title="put /marketing/v3/forms/{formId}">client.marketing.forms.<a href="./src/resources/marketing/forms.ts">replace</a>(formID, { ...params }) -> unknown</code>
@@ -960,7 +960,7 @@ Types:
 Methods:
 
 - <code title="post /settings/v3/users/">client.settings.users.<a href="./src/resources/settings/users.ts">create</a>({ ...params }) -> PublicUser</code>
-- <code title="get /settings/v3/users/">client.settings.users.<a href="./src/resources/settings/users.ts">list</a>({ ...params }) -> PublicUsersCursorURLPage</code>
+- <code title="get /settings/v3/users/">client.settings.users.<a href="./src/resources/settings/users.ts">list</a>({ ...params }) -> CollectionResponsePublicUserForwardPaging</code>
 - <code title="delete /settings/v3/users/{userId}">client.settings.users.<a href="./src/resources/settings/users.ts">delete</a>(userID, { ...params }) -> void</code>
 - <code title="get /settings/v3/users/{userId}">client.settings.users.<a href="./src/resources/settings/users.ts">read</a>(userID, { ...params }) -> PublicUser</code>
 - <code title="put /settings/v3/users/{userId}">client.settings.users.<a href="./src/resources/settings/users.ts">replace</a>(userID, { ...params }) -> PublicUser</code>

@@ -28,7 +28,6 @@ import {
   TagUpdateLangsParams,
   TagUpdateParams,
   Tags,
-  TagsCursorURLPage,
   UpdateLanguagesRequestVNext,
 } from './tags';
 
@@ -52,7 +51,6 @@ export declare namespace Blogs {
     type Tag as Tag,
     type TagCloneRequestVNext as TagCloneRequestVNext,
     type UpdateLanguagesRequestVNext as UpdateLanguagesRequestVNext,
-    type TagsCursorURLPage as TagsCursorURLPage,
     type TagCreateParams as TagCreateParams,
     type TagUpdateParams as TagUpdateParams,
     type TagListParams as TagListParams,
