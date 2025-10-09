@@ -2,7 +2,9 @@
 
 import { APIResource } from '../../../core/resource';
 import * as ObjectsAPI from './objects';
+import { SimplePublicObjectWithAssociationsPage } from './objects';
 import { APIPromise } from '../../../core/api-promise';
+import { Page, type PageParams, PagePromise } from '../../../core/pagination';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -34,8 +36,12 @@ export class Contacts extends APIResource {
   list(
     query: ContactListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CollectionResponseSimplePublicObjectWithAssociations> {
-    return this._client.get('/crm/v3/objects/contacts', { query, ...options });
+  ): PagePromise<SimplePublicObjectWithAssociationsPage, ObjectsAPI.SimplePublicObjectWithAssociations> {
+    return this._client.getAPIList(
+      '/crm/v3/objects/contacts',
+      Page<ObjectsAPI.SimplePublicObjectWithAssociations>,
+      { query, ...options },
+    );
   }
 
   /**
@@ -109,14 +115,10 @@ export interface ContactUpdateParams {
   inputs: Array<ObjectsAPI.SimplePublicObjectBatchInput>;
 }
 
-export interface ContactListParams {
-  after?: string;
-
+export interface ContactListParams extends PageParams {
   archived?: boolean;
 
   associations?: Array<string>;
-
-  limit?: number;
 
   properties?: Array<string>;
 
@@ -180,3 +182,5 @@ export declare namespace Contacts {
     type ContactUpsertParams as ContactUpsertParams,
   };
 }
+
+export { type SimplePublicObjectWithAssociationsPage };

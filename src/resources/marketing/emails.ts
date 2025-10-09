@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as Shared from '../shared';
 import { APIPromise } from '../../core/api-promise';
+import { Page, type PageParams, PagePromise } from '../../core/pagination';
 import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
@@ -33,8 +34,8 @@ export class Emails extends APIResource {
   list(
     query: EmailListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CollectionResponseWithTotalPublicEmailForwardPaging> {
-    return this._client.get('/marketing/v3/emails/', { query, ...options });
+  ): PagePromise<PublicEmailsPage, PublicEmail> {
+    return this._client.getAPIList('/marketing/v3/emails/', Page<PublicEmail>, { query, ...options });
   }
 
   /**
@@ -209,6 +210,8 @@ export class Emails extends APIResource {
     return this._client.patch(path`/marketing/v3/emails/${emailID}/draft`, { body, ...options });
   }
 }
+
+export type PublicEmailsPage = Page<PublicEmail>;
 
 export interface AbTestCreateRequestVNext {
   contentId: string;
@@ -5276,9 +5279,7 @@ export interface EmailUpdateParams {
   webversion?: PublicWebversionDetails;
 }
 
-export interface EmailListParams {
-  after?: string;
-
+export interface EmailListParams extends PageParams {
   archived?: boolean;
 
   campaign?: string;
@@ -5294,8 +5295,6 @@ export interface EmailListParams {
   includeStats?: boolean;
 
   isPublished?: boolean;
-
-  limit?: number;
 
   marketingCampaignNames?: boolean;
 
@@ -6379,6 +6378,7 @@ export declare namespace Emails {
     type SmartEmailField as SmartEmailField,
     type VersionPublicEmail as VersionPublicEmail,
     type VersionUser as VersionUser,
+    type PublicEmailsPage as PublicEmailsPage,
     type EmailCreateParams as EmailCreateParams,
     type EmailUpdateParams as EmailUpdateParams,
     type EmailListParams as EmailListParams,

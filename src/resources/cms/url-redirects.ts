@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as Shared from '../shared';
 import { APIPromise } from '../../core/api-promise';
+import { Page, type PageParams, PagePromise } from '../../core/pagination';
 import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
@@ -32,8 +33,8 @@ export class URLRedirects extends APIResource {
   list(
     query: URLRedirectListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CollectionResponseWithTotalURLMappingForwardPaging> {
-    return this._client.get('/cms/v3/url-redirects/', { query, ...options });
+  ): PagePromise<URLMappingsPage, URLMapping> {
+    return this._client.getAPIList('/cms/v3/url-redirects/', Page<URLMapping>, { query, ...options });
   }
 
   /**
@@ -53,6 +54,8 @@ export class URLRedirects extends APIResource {
     return this._client.get(path`/cms/v3/url-redirects/${urlRedirectID}`, options);
   }
 }
+
+export type URLMappingsPage = Page<URLMapping>;
 
 export interface CollectionResponseWithTotalURLMappingForwardPaging {
   results: Array<URLMapping>;
@@ -162,9 +165,7 @@ export interface URLRedirectUpdateParams {
   updated?: string;
 }
 
-export interface URLRedirectListParams {
-  after?: string;
-
+export interface URLRedirectListParams extends PageParams {
   archived?: boolean;
 
   createdAfter?: string;
@@ -172,8 +173,6 @@ export interface URLRedirectListParams {
   createdAt?: string;
 
   createdBefore?: string;
-
-  limit?: number;
 
   sort?: Array<string>;
 
@@ -189,6 +188,7 @@ export declare namespace URLRedirects {
     type CollectionResponseWithTotalURLMappingForwardPaging as CollectionResponseWithTotalURLMappingForwardPaging,
     type URLMapping as URLMapping,
     type URLMappingCreateRequestBody as URLMappingCreateRequestBody,
+    type URLMappingsPage as URLMappingsPage,
     type URLRedirectCreateParams as URLRedirectCreateParams,
     type URLRedirectUpdateParams as URLRedirectUpdateParams,
     type URLRedirectListParams as URLRedirectListParams,

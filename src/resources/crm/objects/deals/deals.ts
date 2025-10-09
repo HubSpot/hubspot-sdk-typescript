@@ -2,11 +2,13 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as ObjectsAPI from '../objects';
+import { SimplePublicObjectWithAssociationsPage } from '../objects';
 import * as AssociationsAPI from './associations';
 import { Associations } from './associations';
 import * as BatchAPI from './batch';
 import { Batch } from './batch';
 import { APIPromise } from '../../../../core/api-promise';
+import { Page, type PageParams, PagePromise } from '../../../../core/pagination';
 import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
@@ -47,8 +49,12 @@ export class Deals extends APIResource {
   list(
     query: DealListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CollectionResponseSimplePublicObjectWithAssociations> {
-    return this._client.get('/crm/v3/objects/0-3', { query, ...options });
+  ): PagePromise<SimplePublicObjectWithAssociationsPage, ObjectsAPI.SimplePublicObjectWithAssociations> {
+    return this._client.getAPIList(
+      '/crm/v3/objects/0-3',
+      Page<ObjectsAPI.SimplePublicObjectWithAssociations>,
+      { query, ...options },
+    );
   }
 
   /**
@@ -115,14 +121,10 @@ export interface DealUpdateParams {
   idProperty?: string;
 }
 
-export interface DealListParams {
-  after?: string;
-
+export interface DealListParams extends PageParams {
   archived?: boolean;
 
   associations?: Array<string>;
-
-  limit?: number;
 
   properties?: Array<string>;
 
@@ -183,3 +185,5 @@ export declare namespace Deals {
 
   export { Batch as Batch };
 }
+
+export { type SimplePublicObjectWithAssociationsPage };

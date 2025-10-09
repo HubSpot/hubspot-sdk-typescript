@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as Shared from '../shared';
 import { APIPromise } from '../../core/api-promise';
+import { Page, type PageParams, PagePromise } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
@@ -13,8 +14,8 @@ export class Domains extends APIResource {
   list(
     query: DomainListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CollectionResponseWithTotalDomainForwardPaging> {
-    return this._client.get('/cms/v3/domains/', { query, ...options });
+  ): PagePromise<DomainsPage, Domain> {
+    return this._client.getAPIList('/cms/v3/domains/', Page<Domain>, { query, ...options });
   }
 
   /**
@@ -24,6 +25,8 @@ export class Domains extends APIResource {
     return this._client.get(path`/cms/v3/domains/${domainID}`, options);
   }
 }
+
+export type DomainsPage = Page<Domain>;
 
 export interface CollectionResponseWithTotalDomainForwardPaging {
   results: Array<Domain>;
@@ -75,9 +78,7 @@ export interface Domain {
   updated?: string;
 }
 
-export interface DomainListParams {
-  after?: string;
-
+export interface DomainListParams extends PageParams {
   archived?: boolean;
 
   createdAfter?: string;
@@ -85,8 +86,6 @@ export interface DomainListParams {
   createdAt?: string;
 
   createdBefore?: string;
-
-  limit?: number;
 
   sort?: Array<string>;
 
@@ -101,6 +100,7 @@ export declare namespace Domains {
   export {
     type CollectionResponseWithTotalDomainForwardPaging as CollectionResponseWithTotalDomainForwardPaging,
     type Domain as Domain,
+    type DomainsPage as DomainsPage,
     type DomainListParams as DomainListParams,
   };
 }

@@ -44,6 +44,7 @@ export {
   type EmailRestoreDraftRevisionParams,
   type EmailRestoreRevisionParams,
   type EmailUpsertDraftParams,
+  type PublicEmailsPage,
 } from './emails';
 export {
   Forms,
@@ -88,6 +89,7 @@ export {
   type FormListParams,
   type FormReadParams,
   type FormReplaceParams,
+  type HubSpotFormDefinitionsPage,
 } from './forms';
 export { Marketing } from './marketing';
 export {

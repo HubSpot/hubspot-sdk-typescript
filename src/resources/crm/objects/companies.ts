@@ -2,7 +2,9 @@
 
 import { APIResource } from '../../../core/resource';
 import * as ObjectsAPI from './objects';
+import { SimplePublicObjectWithAssociationsPage } from './objects';
 import { APIPromise } from '../../../core/api-promise';
+import { Page, type PageParams, PagePromise } from '../../../core/pagination';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -34,8 +36,12 @@ export class Companies extends APIResource {
   list(
     query: CompanyListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CollectionResponseSimplePublicObjectWithAssociations> {
-    return this._client.get('/crm/v3/objects/companies', { query, ...options });
+  ): PagePromise<SimplePublicObjectWithAssociationsPage, ObjectsAPI.SimplePublicObjectWithAssociations> {
+    return this._client.getAPIList(
+      '/crm/v3/objects/companies',
+      Page<ObjectsAPI.SimplePublicObjectWithAssociations>,
+      { query, ...options },
+    );
   }
 
   /**
@@ -98,14 +104,10 @@ export interface CompanyUpdateParams {
   inputs: Array<ObjectsAPI.SimplePublicObjectBatchInput>;
 }
 
-export interface CompanyListParams {
-  after?: string;
-
+export interface CompanyListParams extends PageParams {
   archived?: boolean;
 
   associations?: Array<string>;
-
-  limit?: number;
 
   properties?: Array<string>;
 
@@ -164,3 +166,5 @@ export declare namespace Companies {
     type CompanyUpsertParams as CompanyUpsertParams,
   };
 }
+
+export { type SimplePublicObjectWithAssociationsPage };

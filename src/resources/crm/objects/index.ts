@@ -62,6 +62,7 @@ export {
   type SimplePublicObjectWithAssociations,
   type SimplePublicUpsertObject,
   type ValueWithTimestamp,
+  type SimplePublicObjectWithAssociationsPage,
 } from './objects';
 export {
   Schemas,

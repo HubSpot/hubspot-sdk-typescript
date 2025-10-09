@@ -34,6 +34,7 @@ export {
   type ActionCreateOrReplaceByFunctionTypeParams,
   type ActionGetByFunctionTypeParams,
   type ActionReadParams,
+  type PublicActionRevisionsPage,
 } from './actions';
 export { Automation } from './automation';
 export {

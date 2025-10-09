@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
 import { APIPromise } from '../../../core/api-promise';
+import { Page, type PageParams, PagePromise } from '../../../core/pagination';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -30,11 +31,8 @@ export class Tags extends APIResource {
   /**
    * Get all Blog Tags
    */
-  list(
-    query: TagListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<CollectionResponseWithTotalTagForwardPaging> {
-    return this._client.get('/cms/v3/blogs/tags', { query, ...options });
+  list(query: TagListParams | null | undefined = {}, options?: RequestOptions): PagePromise<TagsPage, Tag> {
+    return this._client.getAPIList('/cms/v3/blogs/tags', Page<Tag>, { query, ...options });
   }
 
   /**
@@ -152,6 +150,8 @@ export class Tags extends APIResource {
     });
   }
 }
+
+export type TagsPage = Page<Tag>;
 
 export interface AttachToLangPrimaryRequestVNext {
   id: string;
@@ -2571,9 +2571,7 @@ export interface TagUpdateParams {
   archived?: boolean;
 }
 
-export interface TagListParams {
-  after?: string;
-
+export interface TagListParams extends PageParams {
   archived?: boolean;
 
   createdAfter?: string;
@@ -2581,8 +2579,6 @@ export interface TagListParams {
   createdAt?: string;
 
   createdBefore?: string;
-
-  limit?: number;
 
   property?: string;
 
@@ -2684,6 +2680,7 @@ export declare namespace Tags {
     type Tag as Tag,
     type TagCloneRequestVNext as TagCloneRequestVNext,
     type UpdateLanguagesRequestVNext as UpdateLanguagesRequestVNext,
+    type TagsPage as TagsPage,
     type TagCreateParams as TagCreateParams,
     type TagUpdateParams as TagUpdateParams,
     type TagListParams as TagListParams,
