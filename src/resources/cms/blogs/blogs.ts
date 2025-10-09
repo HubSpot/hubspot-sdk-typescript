@@ -31,14 +31,20 @@ import {
   TagsPage,
   UpdateLanguagesRequestVNext,
 } from './tags';
+import * as PostsAPI from './posts/posts';
+import { Posts } from './posts/posts';
 
 export class Blogs extends APIResource {
+  posts: PostsAPI.Posts = new PostsAPI.Posts(this._client);
   tags: TagsAPI.Tags = new TagsAPI.Tags(this._client);
 }
 
+Blogs.Posts = Posts;
 Blogs.Tags = Tags;
 
 export declare namespace Blogs {
+  export { Posts as Posts };
+
   export {
     Tags as Tags,
     type AttachToLangPrimaryRequestVNext as AttachToLangPrimaryRequestVNext,
