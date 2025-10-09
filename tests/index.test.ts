@@ -459,6 +459,15 @@ describe('instantiate client', () => {
       expect(newClient.buildURL('/bar', null)).toEqual('http://localhost:6000/bar');
     });
   });
+
+  test('multiple auth schemes validation', () => {
+    expect(() => {
+      new HubSpot({
+        accessToken: 'token',
+        developerAPIKey: 'key',
+      });
+    }).toThrow('You provided multiple authentication methods (accessToken, developerAPIKey)');
+  });
 });
 
 describe('request building', () => {

@@ -92,6 +92,26 @@ import {
 } from './internal/utils/log';
 import { isEmptyObj } from './internal/utils/values';
 
+function validateSingleAuth(
+  accessToken: string | null | undefined,
+  developerAPIKey: string | null | undefined,
+): void {
+  const provided: string[] = [];
+  if (accessToken != null) {
+    provided.push('accessToken');
+  }
+  if (developerAPIKey != null) {
+    provided.push('developerAPIKey');
+  }
+
+  if (provided.length > 1) {
+    throw new Errors.HubSpotError(
+      `You provided multiple authentication methods (${provided.join(', ')}), ` +
+        `but only one can be used at a time. Please use only one of: accessToken or developerAPIKey.`,
+    );
+  }
+}
+
 export interface ClientOptions {
   accessToken?: string | null | undefined;
 
@@ -210,6 +230,8 @@ export class HubSpot {
       ...opts,
       baseURL: baseURL || `https://api.hubapi.com`,
     };
+
+    validateSingleAuth(accessToken, developerAPIKey);
 
     this.baseURL = options.baseURL!;
     this.timeout = options.timeout ?? HubSpot.DEFAULT_TIMEOUT /* 1 minute */;
