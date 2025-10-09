@@ -16,19 +16,6 @@ import {
   CompanyUpdateParams,
   CompanyUpsertParams,
 } from './companies';
-import * as ContactsAPI from './contacts';
-import {
-  ContactCreateParams,
-  ContactDeleteParams,
-  ContactListParams,
-  ContactMergeParams,
-  ContactPurgeParams,
-  ContactReadParams,
-  ContactSearchParams,
-  ContactUpdateParams,
-  ContactUpsertParams,
-  Contacts,
-} from './contacts';
 import * as SchemasAPI from './schemas';
 import {
   AssociationDefinition,
@@ -49,6 +36,17 @@ import {
   SchemaUpdateParams,
   Schemas,
 } from './schemas';
+import * as ContactsAPI from './contacts/contacts';
+import {
+  ContactCreateParams,
+  ContactListParams,
+  ContactMergeParams,
+  ContactPurgeParams,
+  ContactReadParams,
+  ContactSearchParams,
+  ContactUpdateParams,
+  Contacts,
+} from './contacts/contacts';
 import * as DealsAPI from './deals/deals';
 import {
   DealCreateParams,
@@ -389,12 +387,10 @@ export declare namespace Objects {
     type ContactCreateParams as ContactCreateParams,
     type ContactUpdateParams as ContactUpdateParams,
     type ContactListParams as ContactListParams,
-    type ContactDeleteParams as ContactDeleteParams,
     type ContactMergeParams as ContactMergeParams,
     type ContactPurgeParams as ContactPurgeParams,
     type ContactReadParams as ContactReadParams,
     type ContactSearchParams as ContactSearchParams,
-    type ContactUpsertParams as ContactUpsertParams,
   };
 
   export {
