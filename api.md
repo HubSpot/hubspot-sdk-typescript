@@ -242,6 +242,12 @@ Types:
 
 ## Blogs
 
+### Posts
+
+#### Batch
+
+#### MultiLanguage
+
 ### Tags
 
 Types:

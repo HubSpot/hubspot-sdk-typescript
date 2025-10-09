@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export { Blogs } from './blogs';
+export { Posts } from './posts/index';
 export {
   Tags,
   type AttachToLangPrimaryRequestVNext,
