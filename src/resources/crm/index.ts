@@ -25,6 +25,7 @@ export {
   type Property,
   type PropertyModificationMetadata,
   type PublicDefaultAssociation,
+  type MultiAssociatedObjectWithLabelsPage,
 } from './crm';
 export { Extensions } from './extensions/index';
 export {
@@ -56,6 +57,7 @@ export {
   type SimplePublicObjectWithAssociations,
   type SimplePublicUpsertObject,
   type ValueWithTimestamp,
+  type SimplePublicObjectWithAssociationsPage,
 } from './objects/index';
 export {
   Owners,
@@ -64,6 +66,7 @@ export {
   type PublicTeam,
   type OwnerListParams,
   type OwnerGetParams,
+  type PublicOwnersPage,
 } from './owners';
 export {
   Pipelines,

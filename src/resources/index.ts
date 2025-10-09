@@ -17,6 +17,7 @@ export {
   type Property,
   type PropertyModificationMetadata,
   type PublicDefaultAssociation,
+  type MultiAssociatedObjectWithLabelsPage,
 } from './crm/crm';
 export { Cms } from './cms/cms';
 export { Conversations } from './conversations/conversations';

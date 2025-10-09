@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as Shared from '../shared';
 import { APIPromise } from '../../core/api-promise';
+import { Page, type PageParams, PagePromise } from '../../core/pagination';
 import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
@@ -21,8 +22,8 @@ export class Users extends APIResource {
   list(
     query: UserListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CollectionResponsePublicUserForwardPaging> {
-    return this._client.get('/settings/v3/users/', { query, ...options });
+  ): PagePromise<PublicUsersPage, PublicUser> {
+    return this._client.getAPIList('/settings/v3/users/', Page<PublicUser>, { query, ...options });
   }
 
   /**
@@ -60,6 +61,8 @@ export class Users extends APIResource {
     return this._client.put(path`/settings/v3/users/${userID}`, { query: { idProperty }, body, ...options });
   }
 }
+
+export type PublicUsersPage = Page<PublicUser>;
 
 export interface CollectionResponsePublicPermissionSetNoPaging {
   results: Array<PublicPermissionSet>;
@@ -159,11 +162,7 @@ export interface UserCreateParams {
   sendWelcomeEmail?: boolean;
 }
 
-export interface UserListParams {
-  after?: string;
-
-  limit?: number;
-}
+export interface UserListParams extends PageParams {}
 
 export interface UserDeleteParams {
   idProperty?: 'USER_ID' | 'EMAIL';
@@ -215,6 +214,7 @@ export declare namespace Users {
     type PublicUser as PublicUser,
     type PublicUserUpdate as PublicUserUpdate,
     type UserProvisionRequest as UserProvisionRequest,
+    type PublicUsersPage as PublicUsersPage,
     type UserCreateParams as UserCreateParams,
     type UserListParams as UserListParams,
     type UserDeleteParams as UserDeleteParams,

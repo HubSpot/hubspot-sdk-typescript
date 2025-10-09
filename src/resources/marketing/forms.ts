@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as Shared from '../shared';
 import { APIPromise } from '../../core/api-promise';
+import { Page, type PageParams, PagePromise } from '../../core/pagination';
 import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
@@ -28,8 +29,11 @@ export class Forms extends APIResource {
   list(
     query: FormListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CollectionResponseFormDefinitionBaseForwardPaging> {
-    return this._client.get('/marketing/v3/forms/', { query, ...options });
+  ): PagePromise<HubSpotFormDefinitionsPage, HubSpotFormDefinition> {
+    return this._client.getAPIList('/marketing/v3/forms/', Page<HubSpotFormDefinition>, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -60,6 +64,8 @@ export class Forms extends APIResource {
     return this._client.put(path`/marketing/v3/forms/${formID}`, { body, ...options });
   }
 }
+
+export type HubSpotFormDefinitionsPage = Page<HubSpotFormDefinition>;
 
 export interface CollectionResponseFormDefinitionBaseForwardPaging {
   results: Array<HubSpotFormDefinition>;
@@ -707,14 +713,10 @@ export interface FormUpdateParams {
   name?: string;
 }
 
-export interface FormListParams {
-  after?: string;
-
+export interface FormListParams extends PageParams {
   archived?: boolean;
 
   formTypes?: Array<'hubspot' | 'captured' | 'flow' | 'blog_comment' | 'all'>;
-
-  limit?: number;
 }
 
 export interface FormReadParams {
@@ -787,6 +789,7 @@ export declare namespace Forms {
     type RadioField as RadioField,
     type SingleCheckboxField as SingleCheckboxField,
     type SingleLineTextField as SingleLineTextField,
+    type HubSpotFormDefinitionsPage as HubSpotFormDefinitionsPage,
     type FormCreateParams as FormCreateParams,
     type FormUpdateParams as FormUpdateParams,
     type FormListParams as FormListParams,
