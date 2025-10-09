@@ -29,9 +29,7 @@ const client = new HubSpot({
   accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
 });
 
-const result = await client.crm.objects.contacts.create({
-  properties: { email: 'mark.s@lumon.industries', lastname: 'S.', firstname: 'Mark' },
-});
+const result = await client.crm.objects.contacts.create({ properties: { email: 'mark.s@lumon.industries' } });
 
 console.log(result.createdResourceId);
 ```
@@ -48,9 +46,7 @@ const client = new HubSpot({
   accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
 });
 
-const params: HubSpot.CRM.Objects.ContactCreateParams = {
-  properties: { email: 'mark.s@lumon.industries', lastname: 'S.', firstname: 'Mark' },
-};
+const params: HubSpot.CRM.Objects.ContactCreateParams = { properties: { email: 'mark.s@lumon.industries' } };
 const createdResponseSimplePublicObject: HubSpot.CRM.CreatedResponseSimplePublicObject =
   await client.crm.objects.contacts.create(params);
 ```
@@ -99,7 +95,7 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 const createdResponseSimplePublicObject = await client.crm.objects.contacts
-  .create({ properties: { email: 'mark.s@lumon.industries', lastname: 'S.', firstname: 'Mark' } })
+  .create({ properties: { email: 'mark.s@lumon.industries' } })
   .catch(async (err) => {
     if (err instanceof HubSpot.APIError) {
       console.log(err.status); // 400
@@ -140,7 +136,7 @@ const client = new HubSpot({
 });
 
 // Or, configure per-request:
-await client.crm.objects.contacts.create({ properties: { email: 'mark.s@lumon.industries', lastname: 'S.', firstname: 'Mark' } }, {
+await client.crm.objects.contacts.create({ properties: { email: 'mark.s@lumon.industries' } }, {
   maxRetries: 5,
 });
 ```
@@ -157,7 +153,7 @@ const client = new HubSpot({
 });
 
 // Override per-request:
-await client.crm.objects.contacts.create({ properties: { email: 'mark.s@lumon.industries', lastname: 'S.', firstname: 'Mark' } }, {
+await client.crm.objects.contacts.create({ properties: { email: 'mark.s@lumon.industries' } }, {
   timeout: 5 * 1000,
 });
 ```
@@ -175,7 +171,7 @@ You can use the `for await … of` syntax to iterate through items across all pa
 async function fetchAllSimplePublicObjectWithAssociations(params) {
   const allSimplePublicObjectWithAssociations = [];
   // Automatically fetches more pages as needed.
-  for await (const simplePublicObjectWithAssociations of client.crm.objects.contacts.list({ limit: 10 })) {
+  for await (const simplePublicObjectWithAssociations of client.crm.objects.contacts.list({ limit: 100 })) {
     allSimplePublicObjectWithAssociations.push(simplePublicObjectWithAssociations);
   }
   return allSimplePublicObjectWithAssociations;
@@ -185,7 +181,7 @@ async function fetchAllSimplePublicObjectWithAssociations(params) {
 Alternatively, you can request a single page at a time:
 
 ```ts
-let page = await client.crm.objects.contacts.list({ limit: 10 });
+let page = await client.crm.objects.contacts.list({ limit: 100 });
 for (const simplePublicObjectWithAssociations of page.results) {
   console.log(simplePublicObjectWithAssociations);
 }
@@ -212,13 +208,13 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 const client = new HubSpot();
 
 const response = await client.crm.objects.contacts
-  .create({ properties: { email: 'mark.s@lumon.industries', lastname: 'S.', firstname: 'Mark' } })
+  .create({ properties: { email: 'mark.s@lumon.industries' } })
   .asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
 const { data: createdResponseSimplePublicObject, response: raw } = await client.crm.objects.contacts
-  .create({ properties: { email: 'mark.s@lumon.industries', lastname: 'S.', firstname: 'Mark' } })
+  .create({ properties: { email: 'mark.s@lumon.industries' } })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
 console.log(createdResponseSimplePublicObject.createdResourceId);

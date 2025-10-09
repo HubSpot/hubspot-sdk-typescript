@@ -95,7 +95,7 @@ import { isEmptyObj } from './internal/utils/values';
 export interface ClientOptions {
   accessToken?: string | null | undefined;
 
-  developerHapikey?: string | null | undefined;
+  developerAPIKey?: string | null | undefined;
 
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
@@ -171,7 +171,7 @@ export interface ClientOptions {
  */
 export class HubSpot {
   accessToken: string | null;
-  developerHapikey: string | null;
+  developerAPIKey: string | null;
 
   baseURL: string;
   maxRetries: number;
@@ -189,7 +189,7 @@ export class HubSpot {
    * API Client for interfacing with the Hub Spot API.
    *
    * @param {string | null | undefined} [opts.accessToken]
-   * @param {string | null | undefined} [opts.developerHapikey]
+   * @param {string | null | undefined} [opts.developerAPIKey]
    * @param {string} [opts.baseURL=process.env['HUB_SPOT_BASE_URL'] ?? https://api.hubapi.com] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
@@ -201,12 +201,12 @@ export class HubSpot {
   constructor({
     baseURL = readEnv('HUB_SPOT_BASE_URL'),
     accessToken = null,
-    developerHapikey = null,
+    developerAPIKey = null,
     ...opts
   }: ClientOptions = {}) {
     const options: ClientOptions = {
       accessToken,
-      developerHapikey,
+      developerAPIKey,
       ...opts,
       baseURL: baseURL || `https://api.hubapi.com`,
     };
@@ -229,7 +229,7 @@ export class HubSpot {
     this._options = options;
 
     this.accessToken = accessToken;
-    this.developerHapikey = developerHapikey;
+    this.developerAPIKey = developerAPIKey;
   }
 
   /**
@@ -246,7 +246,7 @@ export class HubSpot {
       fetch: this.fetch,
       fetchOptions: this.fetchOptions,
       accessToken: this.accessToken,
-      developerHapikey: this.developerHapikey,
+      developerAPIKey: this.developerAPIKey,
       ...options,
     });
     return client;
@@ -261,7 +261,7 @@ export class HubSpot {
 
   protected defaultQuery(): Record<string, string | undefined> | undefined {
     return {
-      hapikey: this.developerHapikey ?? undefined,
+      hapikey: this.developerAPIKey ?? undefined,
       ...this._options.defaultQuery,
     };
   }

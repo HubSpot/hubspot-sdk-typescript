@@ -16,13 +16,11 @@ export {
   type ContactCreateParams,
   type ContactUpdateParams,
   type ContactListParams,
-  type ContactDeleteParams,
   type ContactMergeParams,
   type ContactPurgeParams,
   type ContactReadParams,
   type ContactSearchParams,
-  type ContactUpsertParams,
-} from './contacts';
+} from './contacts/index';
 export {
   Deals,
   type DealCreateParams,

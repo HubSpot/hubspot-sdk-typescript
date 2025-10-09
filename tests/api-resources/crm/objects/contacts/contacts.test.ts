@@ -32,8 +32,8 @@ describe('resource contacts', () => {
 
   // Prism tests are disabled
   test.skip('update: only required params', async () => {
-    const responsePromise = client.crm.objects.contacts.update({
-      inputs: [{ id: 'id', properties: { foo: 'string' } }],
+    const responsePromise = client.crm.objects.contacts.update('contactId', {
+      properties: { foo: 'string' },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -46,16 +46,7 @@ describe('resource contacts', () => {
 
   // Prism tests are disabled
   test.skip('update: required and optional params', async () => {
-    const response = await client.crm.objects.contacts.update({
-      inputs: [
-        {
-          id: 'id',
-          properties: { foo: 'string' },
-          idProperty: 'idProperty',
-          objectWriteTraceId: 'objectWriteTraceId',
-        },
-      ],
-    });
+    const response = await client.crm.objects.contacts.update('contactId', { properties: { foo: 'string' } });
   });
 
   // Prism tests are disabled
@@ -89,8 +80,8 @@ describe('resource contacts', () => {
   });
 
   // Prism tests are disabled
-  test.skip('delete: only required params', async () => {
-    const responsePromise = client.crm.objects.contacts.delete({ inputs: [{ id: 'id' }] });
+  test.skip('delete', async () => {
+    const responsePromise = client.crm.objects.contacts.delete('contactId');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -98,11 +89,6 @@ describe('resource contacts', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('delete: required and optional params', async () => {
-    const response = await client.crm.objects.contacts.delete({ inputs: [{ id: 'id' }] });
   });
 
   // Prism tests are disabled
@@ -187,33 +173,5 @@ describe('resource contacts', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('upsert: only required params', async () => {
-    const responsePromise = client.crm.objects.contacts.upsert({
-      inputs: [{ id: 'id', properties: { foo: 'string' } }],
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('upsert: required and optional params', async () => {
-    const response = await client.crm.objects.contacts.upsert({
-      inputs: [
-        {
-          id: 'id',
-          properties: { foo: 'string' },
-          idProperty: 'idProperty',
-          objectWriteTraceId: 'objectWriteTraceId',
-        },
-      ],
-    });
   });
 });
