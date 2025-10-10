@@ -133,13 +133,13 @@ export interface BatchResponseSimplePublicUpsertObject {
 export interface CollectionResponseAssociatedID {
   results: Array<CRMAPI.AssociatedID>;
 
-  paging?: EmailsAPI.Paging;
+  paging?: EmailsAPI.MarketingEmailsPaging;
 }
 
 export interface CollectionResponseSimplePublicObjectWithAssociations {
   results: Array<SimplePublicObjectWithAssociations>;
 
-  paging?: EmailsAPI.Paging;
+  paging?: EmailsAPI.MarketingEmailsPaging;
 }
 
 export interface CollectionResponseWithTotalSimplePublicObject {
@@ -147,7 +147,7 @@ export interface CollectionResponseWithTotalSimplePublicObject {
 
   total: number;
 
-  paging?: EmailsAPI.Paging;
+  paging?: EmailsAPI.MarketingEmailsPaging;
 }
 
 export interface CreatedResponseSimplePublicObject {

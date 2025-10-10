@@ -157,7 +157,7 @@ export interface Column {
 
   optionCount?: number;
 
-  options?: Array<CRMAPI.Option>;
+  options?: Array<CRMAPI.CRMOption>;
 
   updatedAt?: string;
 
@@ -175,7 +175,7 @@ export interface ColumnRequest {
 
   name: string;
 
-  options: Array<CRMAPI.Option>;
+  options: Array<CRMAPI.CRMOption>;
 
   type:
     | 'NULL'
@@ -216,6 +216,48 @@ export interface ForeignID {
   name: string;
 
   type: string;
+}
+
+export interface HubDBOption {
+  id: string;
+
+  createdAt: string;
+
+  name: string;
+
+  order: number;
+
+  type: string;
+
+  updatedAt: string;
+
+  createdBy?: SimpleUser;
+
+  createdByUserId?: number;
+
+  label?: string;
+
+  updatedBy?: SimpleUser;
+
+  updatedByUserId?: number;
+}
+
+export interface HubDBStandardError {
+  category: string;
+
+  context: { [key: string]: Array<string> };
+
+  errors: Array<Shared.ErrorDetail>;
+
+  links: { [key: string]: string };
+
+  message: string;
+
+  status: string;
+
+  subCategory: unknown;
+
+  id?: string;
 }
 
 export interface HubDBTableCloneRequest {
@@ -348,30 +390,6 @@ export interface ImportResult {
   rowsImported: number;
 }
 
-export interface Option {
-  id: string;
-
-  createdAt: string;
-
-  name: string;
-
-  order: number;
-
-  type: string;
-
-  updatedAt: string;
-
-  createdBy?: SimpleUser;
-
-  createdByUserId?: number;
-
-  label?: string;
-
-  updatedBy?: SimpleUser;
-
-  updatedByUserId?: number;
-}
-
 export interface RandomAccessCollectionResponseWithTotalHubDBTableRowV3 {
   results: Array<unknown>;
 
@@ -392,24 +410,6 @@ export interface SimpleUser {
   lastName: string;
 }
 
-export interface StandardError {
-  category: string;
-
-  context: { [key: string]: Array<string> };
-
-  errors: Array<Shared.ErrorDetail>;
-
-  links: { [key: string]: string };
-
-  message: string;
-
-  status: string;
-
-  subCategory: unknown;
-
-  id?: string;
-}
-
 export interface StreamingCollectionResponseWithTotalHubDBTableRowV3 {
   results: Array<unknown>;
 
@@ -417,7 +417,7 @@ export interface StreamingCollectionResponseWithTotalHubDBTableRowV3 {
 
   type: 'STREAMING';
 
-  paging?: EmailsAPI.Paging;
+  paging?: EmailsAPI.MarketingEmailsPaging;
 }
 
 export type UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3 =
@@ -442,6 +442,8 @@ export declare namespace Hubdb {
     type Column as Column,
     type ColumnRequest as ColumnRequest,
     type ForeignID as ForeignID,
+    type HubDBOption as HubDBOption,
+    type HubDBStandardError as HubDBStandardError,
     type HubDBTableCloneRequest as HubDBTableCloneRequest,
     type HubDBTableRowBatchCloneRequest as HubDBTableRowBatchCloneRequest,
     type HubDBTableRowV3 as HubDBTableRowV3,
@@ -450,10 +452,8 @@ export declare namespace Hubdb {
     type HubDBTableV3 as HubDBTableV3,
     type HubDBTableV3Request as HubDBTableV3Request,
     type ImportResult as ImportResult,
-    type Option as Option,
     type RandomAccessCollectionResponseWithTotalHubDBTableRowV3 as RandomAccessCollectionResponseWithTotalHubDBTableRowV3,
     type SimpleUser as SimpleUser,
-    type StandardError as StandardError,
     type StreamingCollectionResponseWithTotalHubDBTableRowV3 as StreamingCollectionResponseWithTotalHubDBTableRowV3,
     type UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3 as UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3,
     type Variant as Variant,

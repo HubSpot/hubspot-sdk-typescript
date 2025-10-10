@@ -34,13 +34,13 @@ export class Files extends APIResource {
 export interface CollectionResponseFile {
   results: Array<File>;
 
-  paging?: EmailsAPI.Paging;
+  paging?: EmailsAPI.MarketingEmailsPaging;
 }
 
 export interface CollectionResponseFolder {
   results: Array<Folder>;
 
-  paging?: EmailsAPI.Paging;
+  paging?: EmailsAPI.MarketingEmailsPaging;
 }
 
 export interface File {

@@ -69,7 +69,7 @@ export interface CollectionResponsePublicPermissionSetNoPaging {
 }
 
 export interface CollectionResponsePublicTeamNoPaging {
-  results: Array<PublicTeam>;
+  results: Array<SettingsUsersPublicTeam>;
 }
 
 export interface CollectionResponsePublicUserForwardPaging {
@@ -84,16 +84,6 @@ export interface PublicPermissionSet {
   name: string;
 
   requiresBillingWrite: boolean;
-}
-
-export interface PublicTeam {
-  id: string;
-
-  name: string;
-
-  secondaryUserIds: Array<string>;
-
-  userIds: Array<string>;
 }
 
 export interface PublicUser {
@@ -128,6 +118,16 @@ export interface PublicUserUpdate {
   roleId?: string;
 
   secondaryTeamIds?: Array<string>;
+}
+
+export interface SettingsUsersPublicTeam {
+  id: string;
+
+  name: string;
+
+  secondaryUserIds: Array<string>;
+
+  userIds: Array<string>;
 }
 
 export interface UserProvisionRequest {
@@ -210,9 +210,9 @@ export declare namespace Users {
     type CollectionResponsePublicTeamNoPaging as CollectionResponsePublicTeamNoPaging,
     type CollectionResponsePublicUserForwardPaging as CollectionResponsePublicUserForwardPaging,
     type PublicPermissionSet as PublicPermissionSet,
-    type PublicTeam as PublicTeam,
     type PublicUser as PublicUser,
     type PublicUserUpdate as PublicUserUpdate,
+    type SettingsUsersPublicTeam as SettingsUsersPublicTeam,
     type UserProvisionRequest as UserProvisionRequest,
     type PublicUsersPage as PublicUsersPage,
     type UserCreateParams as UserCreateParams,

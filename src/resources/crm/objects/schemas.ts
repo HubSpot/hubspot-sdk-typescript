@@ -239,7 +239,7 @@ export interface ObjectTypePropertyCreate {
 
   numberDisplayHint?: 'unformatted' | 'formatted' | 'currency' | 'percentage' | 'duration' | 'probability';
 
-  options?: Array<PropertiesAPI.OptionInput>;
+  options?: Array<PropertiesAPI.CRMPropertiesOptionInput>;
 
   optionSortStrategy?: 'DISPLAY_ORDER' | 'ALPHABETICAL';
 

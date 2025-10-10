@@ -56,7 +56,7 @@ export interface PublicOwner {
 
   lastName?: string;
 
-  teams?: Array<UsersAPI.PublicTeam>;
+  teams?: Array<UsersAPI.SettingsUsersPublicTeam>;
 
   userId?: number;
 
