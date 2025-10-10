@@ -49,13 +49,12 @@ import {
 } from './contacts/contacts';
 import * as DealsAPI from './deals/deals';
 import {
-  DealCreateParams,
-  DealListParams,
-  DealMergeParams,
-  DealReadParams,
-  DealSearchParams,
-  DealUpdateParams,
-  DealUpsertParams,
+  DealCreateByObjectTypeIDParams,
+  DealGetByObjectTypeIDParams,
+  DealListByObjectTypeIDParams,
+  DealMergeByObjectTypeIDParams,
+  DealSearchByObjectTypeIDParams,
+  DealUpdateByObjectTypeIDParams,
   Deals,
 } from './deals/deals';
 import { Page } from '../../../core/pagination';
@@ -395,13 +394,12 @@ export declare namespace Objects {
 
   export {
     Deals as Deals,
-    type DealCreateParams as DealCreateParams,
-    type DealUpdateParams as DealUpdateParams,
-    type DealListParams as DealListParams,
-    type DealMergeParams as DealMergeParams,
-    type DealReadParams as DealReadParams,
-    type DealSearchParams as DealSearchParams,
-    type DealUpsertParams as DealUpsertParams,
+    type DealCreateByObjectTypeIDParams as DealCreateByObjectTypeIDParams,
+    type DealGetByObjectTypeIDParams as DealGetByObjectTypeIDParams,
+    type DealListByObjectTypeIDParams as DealListByObjectTypeIDParams,
+    type DealMergeByObjectTypeIDParams as DealMergeByObjectTypeIDParams,
+    type DealSearchByObjectTypeIDParams as DealSearchByObjectTypeIDParams,
+    type DealUpdateByObjectTypeIDParams as DealUpdateByObjectTypeIDParams,
   };
 
   export {

@@ -29,7 +29,6 @@ export {
   type PublicWebversionDetails,
   type SmartEmailField,
   type VersionPublicEmail,
-  type VersionUser,
   type EmailCreateParams,
   type EmailUpdateParams,
   type EmailListParams,

@@ -1,6 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Account } from './account';
+export {
+  Account,
+  type APIUsage,
+  type CollectionResponseAPIUsage,
+  type PortalInformationResponse,
+} from './account';
 export {
   AuditLogs,
   type ActingUser,
@@ -11,4 +16,3 @@ export {
   type PublicAPIUserActionEvent,
   type PublicLoginAudit,
 } from './audit-logs';
-export { Info, type APIUsage, type CollectionResponseAPIUsage, type PortalInformationResponse } from './info';

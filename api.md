@@ -12,8 +12,15 @@ Types:
 - <code><a href="./src/resources/shared.ts">PreviousPage</a></code>
 - <code><a href="./src/resources/shared.ts">PublicObjectID</a></code>
 - <code><a href="./src/resources/shared.ts">StandardError</a></code>
+- <code><a href="./src/resources/shared.ts">VersionUser</a></code>
 
 # Account
+
+Types:
+
+- <code><a href="./src/resources/account/account.ts">APIUsage</a></code>
+- <code><a href="./src/resources/account/account.ts">CollectionResponseAPIUsage</a></code>
+- <code><a href="./src/resources/account/account.ts">PortalInformationResponse</a></code>
 
 ## AuditLogs
 
@@ -26,14 +33,6 @@ Types:
 - <code><a href="./src/resources/account/audit-logs.ts">HydratedCriticalAction</a></code>
 - <code><a href="./src/resources/account/audit-logs.ts">PublicAPIUserActionEvent</a></code>
 - <code><a href="./src/resources/account/audit-logs.ts">PublicLoginAudit</a></code>
-
-## Info
-
-Types:
-
-- <code><a href="./src/resources/account/info.ts">APIUsage</a></code>
-- <code><a href="./src/resources/account/info.ts">CollectionResponseAPIUsage</a></code>
-- <code><a href="./src/resources/account/info.ts">PortalInformationResponse</a></code>
 
 # Auth
 
@@ -242,27 +241,76 @@ Types:
 
 ## Blogs
 
+Types:
+
+- <code><a href="./src/resources/cms/blogs/blogs.ts">AttachToLangPrimaryRequestVNext</a></code>
+- <code><a href="./src/resources/cms/blogs/blogs.ts">BatchInputJsonNode</a></code>
+- <code><a href="./src/resources/cms/blogs/blogs.ts">DetachFromLangGroupRequestVNext</a></code>
+- <code><a href="./src/resources/cms/blogs/blogs.ts">SetNewLanguagePrimaryRequestVNext</a></code>
+- <code><a href="./src/resources/cms/blogs/blogs.ts">UpdateLanguagesRequestVNext</a></code>
+
 ### Posts
 
-#### Batch
+Types:
 
-#### MultiLanguage
+- <code><a href="./src/resources/cms/blogs/posts.ts">Angle</a></code>
+- <code><a href="./src/resources/cms/blogs/posts.ts">BackgroundImage</a></code>
+- <code><a href="./src/resources/cms/blogs/posts.ts">BatchInputBlogPost</a></code>
+- <code><a href="./src/resources/cms/blogs/posts.ts">BatchResponseBlogPost</a></code>
+- <code><a href="./src/resources/cms/blogs/posts.ts">BatchResponseBlogPostWithErrors</a></code>
+- <code><a href="./src/resources/cms/blogs/posts.ts">BlogPost</a></code>
+- <code><a href="./src/resources/cms/blogs/posts.ts">BlogPostLanguageCloneRequestVNext</a></code>
+- <code><a href="./src/resources/cms/blogs/posts.ts">BreakpointStyles</a></code>
+- <code><a href="./src/resources/cms/blogs/posts.ts">CollectionResponseWithTotalBlogPostForwardPaging</a></code>
+- <code><a href="./src/resources/cms/blogs/posts.ts">CollectionResponseWithTotalVersionBlogPost</a></code>
+- <code><a href="./src/resources/cms/blogs/posts.ts">ColorStop</a></code>
+- <code><a href="./src/resources/cms/blogs/posts.ts">ContentCloneRequestVNext</a></code>
+- <code><a href="./src/resources/cms/blogs/posts.ts">ContentLanguageVariation</a></code>
+- <code><a href="./src/resources/cms/blogs/posts.ts">ContentScheduleRequestVNext</a></code>
+- <code><a href="./src/resources/cms/blogs/posts.ts">Gradient</a></code>
+- <code><a href="./src/resources/cms/blogs/posts.ts">LayoutSection</a></code>
+- <code><a href="./src/resources/cms/blogs/posts.ts">Margin</a></code>
+- <code><a href="./src/resources/cms/blogs/posts.ts">Padding</a></code>
+- <code><a href="./src/resources/cms/blogs/posts.ts">PublicAccessRule</a></code>
+- <code><a href="./src/resources/cms/blogs/posts.ts">RgbaColor</a></code>
+- <code><a href="./src/resources/cms/blogs/posts.ts">RowMetaData</a></code>
+- <code><a href="./src/resources/cms/blogs/posts.ts">SideOrCorner</a></code>
+- <code><a href="./src/resources/cms/blogs/posts.ts">Styles</a></code>
+- <code><a href="./src/resources/cms/blogs/posts.ts">VersionBlogPost</a></code>
+
+Methods:
+
+- <code title="post /cms/v3/blogs/posts">client.cms.blogs.posts.<a href="./src/resources/cms/blogs/posts.ts">create</a>({ ...params }) -> BlogPost</code>
+- <code title="patch /cms/v3/blogs/posts/{objectId}">client.cms.blogs.posts.<a href="./src/resources/cms/blogs/posts.ts">update</a>(objectID, { ...params }) -> BlogPost</code>
+- <code title="get /cms/v3/blogs/posts">client.cms.blogs.posts.<a href="./src/resources/cms/blogs/posts.ts">list</a>({ ...params }) -> BlogPostsPage</code>
+- <code title="delete /cms/v3/blogs/posts/{objectId}">client.cms.blogs.posts.<a href="./src/resources/cms/blogs/posts.ts">delete</a>(objectID, { ...params }) -> void</code>
+- <code title="post /cms/v3/blogs/posts/multi-language/attach-to-lang-group">client.cms.blogs.posts.<a href="./src/resources/cms/blogs/posts.ts">attachToLangGroup</a>({ ...params }) -> void</code>
+- <code title="post /cms/v3/blogs/posts/clone">client.cms.blogs.posts.<a href="./src/resources/cms/blogs/posts.ts">clone</a>({ ...params }) -> BlogPost</code>
+- <code title="post /cms/v3/blogs/posts/multi-language/create-language-variation">client.cms.blogs.posts.<a href="./src/resources/cms/blogs/posts.ts">createLangVariation</a>({ ...params }) -> BlogPost</code>
+- <code title="post /cms/v3/blogs/posts/multi-language/detach-from-lang-group">client.cms.blogs.posts.<a href="./src/resources/cms/blogs/posts.ts">detachFromLangGroup</a>({ ...params }) -> void</code>
+- <code title="get /cms/v3/blogs/posts/{objectId}/draft">client.cms.blogs.posts.<a href="./src/resources/cms/blogs/posts.ts">getDraftByID</a>(objectID) -> BlogPost</code>
+- <code title="get /cms/v3/blogs/posts/{objectId}/revisions/{revisionId}">client.cms.blogs.posts.<a href="./src/resources/cms/blogs/posts.ts">getPreviousVersion</a>(revisionID, { ...params }) -> VersionBlogPost</code>
+- <code title="get /cms/v3/blogs/posts/{objectId}/revisions">client.cms.blogs.posts.<a href="./src/resources/cms/blogs/posts.ts">getPreviousVersions</a>(objectID, { ...params }) -> CollectionResponseWithTotalVersionBlogPost</code>
+- <code title="post /cms/v3/blogs/posts/{objectId}/draft/push-live">client.cms.blogs.posts.<a href="./src/resources/cms/blogs/posts.ts">pushLive</a>(objectID) -> void</code>
+- <code title="get /cms/v3/blogs/posts/{objectId}">client.cms.blogs.posts.<a href="./src/resources/cms/blogs/posts.ts">read</a>(objectID, { ...params }) -> BlogPost</code>
+- <code title="post /cms/v3/blogs/posts/{objectId}/draft/reset">client.cms.blogs.posts.<a href="./src/resources/cms/blogs/posts.ts">resetDraft</a>(objectID) -> void</code>
+- <code title="post /cms/v3/blogs/posts/{objectId}/revisions/{revisionId}/restore">client.cms.blogs.posts.<a href="./src/resources/cms/blogs/posts.ts">restorePreviousVersion</a>(revisionID, { ...params }) -> BlogPost</code>
+- <code title="post /cms/v3/blogs/posts/{objectId}/revisions/{revisionId}/restore-to-draft">client.cms.blogs.posts.<a href="./src/resources/cms/blogs/posts.ts">restorePreviousVersionToDraft</a>(revisionID, { ...params }) -> BlogPost</code>
+- <code title="post /cms/v3/blogs/posts/schedule">client.cms.blogs.posts.<a href="./src/resources/cms/blogs/posts.ts">schedule</a>({ ...params }) -> void</code>
+- <code title="put /cms/v3/blogs/posts/multi-language/set-new-lang-primary">client.cms.blogs.posts.<a href="./src/resources/cms/blogs/posts.ts">setLangPrimary</a>({ ...params }) -> void</code>
+- <code title="patch /cms/v3/blogs/posts/{objectId}/draft">client.cms.blogs.posts.<a href="./src/resources/cms/blogs/posts.ts">updateDraft</a>(objectID, { ...params }) -> BlogPost</code>
+- <code title="post /cms/v3/blogs/posts/multi-language/update-languages">client.cms.blogs.posts.<a href="./src/resources/cms/blogs/posts.ts">updateLangs</a>({ ...params }) -> void</code>
 
 ### Tags
 
 Types:
 
-- <code><a href="./src/resources/cms/blogs/tags.ts">AttachToLangPrimaryRequestVNext</a></code>
-- <code><a href="./src/resources/cms/blogs/tags.ts">BatchInputJsonNode</a></code>
 - <code><a href="./src/resources/cms/blogs/tags.ts">BatchInputTag</a></code>
 - <code><a href="./src/resources/cms/blogs/tags.ts">BatchResponseTag</a></code>
 - <code><a href="./src/resources/cms/blogs/tags.ts">BatchResponseTagWithErrors</a></code>
 - <code><a href="./src/resources/cms/blogs/tags.ts">CollectionResponseWithTotalTagForwardPaging</a></code>
-- <code><a href="./src/resources/cms/blogs/tags.ts">DetachFromLangGroupRequestVNext</a></code>
-- <code><a href="./src/resources/cms/blogs/tags.ts">SetNewLanguagePrimaryRequestVNext</a></code>
 - <code><a href="./src/resources/cms/blogs/tags.ts">Tag</a></code>
 - <code><a href="./src/resources/cms/blogs/tags.ts">TagCloneRequestVNext</a></code>
-- <code><a href="./src/resources/cms/blogs/tags.ts">UpdateLanguagesRequestVNext</a></code>
 
 Methods:
 
@@ -324,46 +372,53 @@ Types:
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3</a></code>
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">Variant</a></code>
 
-Methods:
-
-- <code title="delete /cms/v3/hubdb/tables/{tableIdOrName}">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">archiveTable</a>(tableIDOrName) -> void</code>
-- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/draft/clone">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">cloneDraftTable</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
-- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft/clone">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">cloneDraftTableRow</a>(rowID, { ...params }) -> HubDBTableRowV3</code>
-- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/clone">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">cloneDraftTableRows</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
-- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/create">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">createDraftTableRows</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
-- <code title="post /cms/v3/hubdb/tables">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">createTable</a>({ ...params }) -> HubDBTableV3</code>
-- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">createTableRow</a>(tableIDOrName, { ...params }) -> HubDBTableRowV3</code>
-- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}/draft/export">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">exportDraftTable</a>(tableIDOrName, { ...params }) -> Response</code>
-- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}/export">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">exportTable</a>(tableIDOrName, { ...params }) -> Response</code>
-- <code title="get /cms/v3/hubdb/tables/draft">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">getAllDraftTables</a>({ ...params }) -> CollectionResponseWithTotalHubDBTableV3ForwardPaging</code>
-- <code title="get /cms/v3/hubdb/tables">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">getAllTables</a>({ ...params }) -> CollectionResponseWithTotalHubDBTableV3ForwardPaging</code>
-- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}/draft">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">getDraftTableDetailsByID</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
-- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">getDraftTableRowByID</a>(rowID, { ...params }) -> HubDBTableRowV3</code>
-- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">getTableDetails</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
-- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">getTableRow</a>(rowID, { ...params }) -> HubDBTableRowV3</code>
-- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}/rows">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">getTableRows</a>(tableIDOrName, { ...params }) -> UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3</code>
-- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/draft/import">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">importDraftTable</a>(tableIDOrName, { ...params }) -> ImportResult</code>
-- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/draft/publish">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">publishDraftTable</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
-- <code title="delete /cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">purgeDraftTableRow</a>(rowID, { ...params }) -> void</code>
-- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/purge">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">purgeDraftTableRows</a>(tableIDOrName, { ...params }) -> void</code>
-- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/read">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">readDraftTableRows</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
-- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/batch/read">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">readTableRows</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
-- <code title="delete /cms/v3/hubdb/tables/{tableIdOrName}/versions/{versionId}">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">removeTableVersion</a>(versionID, { ...params }) -> void</code>
-- <code title="put /cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">replaceDraftTableRow</a>(rowID, { ...params }) -> HubDBTableRowV3</code>
-- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/replace">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">replaceDraftTableRows</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
-- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/draft/reset">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">resetDraftTable</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
-- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/unpublish">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">unpublishTable</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
-- <code title="patch /cms/v3/hubdb/tables/{tableIdOrName}/draft">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">updateDraftTable</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
-- <code title="patch /cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">updateDraftTableRow</a>(rowID, { ...params }) -> HubDBTableRowV3</code>
-- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/update">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">updateDraftTableRows</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
-
 ### Rows
 
-#### Batch
+Methods:
+
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows/rows.ts">create</a>(tableIDOrName, { ...params }) -> HubDBTableRowV3</code>
+- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}/rows">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows/rows.ts">list</a>(tableIDOrName, { ...params }) -> RandomAccessCollectionResponseWithTotalHubDBTableRowV3ResultsPage</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft/clone">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows/rows.ts">cloneDraft</a>(rowID, { ...params }) -> HubDBTableRowV3</code>
+- <code title="delete /cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows/rows.ts">deleteDraft</a>(rowID, { ...params }) -> void</code>
+- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows/rows.ts">get</a>(rowID, { ...params }) -> HubDBTableRowV3</code>
+- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows/rows.ts">getDraft</a>(rowID, { ...params }) -> HubDBTableRowV3</code>
+- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows/rows.ts">listDraft</a>(tableIDOrName, { ...params }) -> UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3</code>
+- <code title="put /cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows/rows.ts">replaceDraft</a>(rowID, { ...params }) -> HubDBTableRowV3</code>
+- <code title="patch /cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows/rows.ts">updateDraft</a>(rowID, { ...params }) -> HubDBTableRowV3</code>
+
+#### Draft
+
+##### Batch
 
 Methods:
 
-- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/replace">client.cms.hubdb.rows.batch.<a href="./src/resources/cms/hubdb/rows/batch.ts">replace</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/clone">client.cms.hubdb.rows.draft.batch.<a href="./src/resources/cms/hubdb/rows/draft/batch.ts">cloneBatch</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/create">client.cms.hubdb.rows.draft.batch.<a href="./src/resources/cms/hubdb/rows/draft/batch.ts">createBatch</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/purge">client.cms.hubdb.rows.draft.batch.<a href="./src/resources/cms/hubdb/rows/draft/batch.ts">purgeBatch</a>(tableIDOrName, { ...params }) -> void</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/batch/read">client.cms.hubdb.rows.draft.batch.<a href="./src/resources/cms/hubdb/rows/draft/batch.ts">readBatch</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/read">client.cms.hubdb.rows.draft.batch.<a href="./src/resources/cms/hubdb/rows/draft/batch.ts">readDraftBatch</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/replace">client.cms.hubdb.rows.draft.batch.<a href="./src/resources/cms/hubdb/rows/draft/batch.ts">replaceBatch</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/update">client.cms.hubdb.rows.draft.batch.<a href="./src/resources/cms/hubdb/rows/draft/batch.ts">updateBatch</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
+
+### Tables
+
+Methods:
+
+- <code title="post /cms/v3/hubdb/tables">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">create</a>({ ...params }) -> HubDBTableV3</code>
+- <code title="get /cms/v3/hubdb/tables">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">list</a>({ ...params }) -> HubDBTableV3sPage</code>
+- <code title="delete /cms/v3/hubdb/tables/{tableIdOrName}">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">archive</a>(tableIDOrName) -> void</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/draft/clone">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">cloneDraft</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
+- <code title="delete /cms/v3/hubdb/tables/{tableIdOrName}/versions/{versionId}">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">deleteVersion</a>(versionID, { ...params }) -> void</code>
+- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}/export">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">export</a>(tableIDOrName, { ...params }) -> Response</code>
+- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}/draft/export">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">exportDraft</a>(tableIDOrName, { ...params }) -> Response</code>
+- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">get</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
+- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}/draft">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">getDraft</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/draft/import">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">importDraft</a>(tableIDOrName, { ...params }) -> ImportResult</code>
+- <code title="get /cms/v3/hubdb/tables/draft">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">listDrafts</a>({ ...params }) -> CollectionResponseWithTotalHubDBTableV3ForwardPaging</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/draft/publish">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">publishDraft</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/draft/reset">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">resetDraft</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/unpublish">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">unpublish</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
+- <code title="patch /cms/v3/hubdb/tables/{tableIdOrName}/draft">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">updateDraft</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
 
 ## URLRedirects
 
@@ -600,18 +655,25 @@ Methods:
 
 Methods:
 
-- <code title="post /crm/v3/objects/0-3">client.crm.objects.deals.<a href="./src/resources/crm/objects/deals/deals.ts">create</a>({ ...params }) -> CreatedResponseSimplePublicObject</code>
-- <code title="patch /crm/v3/objects/0-3/{dealId}">client.crm.objects.deals.<a href="./src/resources/crm/objects/deals/deals.ts">update</a>(dealID, { ...params }) -> SimplePublicObject</code>
-- <code title="get /crm/v3/objects/0-3">client.crm.objects.deals.<a href="./src/resources/crm/objects/deals/deals.ts">list</a>({ ...params }) -> SimplePublicObjectWithAssociationsPage</code>
-- <code title="delete /crm/v3/objects/0-3/{dealId}">client.crm.objects.deals.<a href="./src/resources/crm/objects/deals/deals.ts">delete</a>(dealID) -> void</code>
-- <code title="post /crm/v3/objects/0-3/merge">client.crm.objects.deals.<a href="./src/resources/crm/objects/deals/deals.ts">merge</a>({ ...params }) -> SimplePublicObject</code>
-- <code title="get /crm/v3/objects/0-3/{dealId}">client.crm.objects.deals.<a href="./src/resources/crm/objects/deals/deals.ts">read</a>(dealID, { ...params }) -> SimplePublicObjectWithAssociations</code>
-- <code title="post /crm/v3/objects/0-3/search">client.crm.objects.deals.<a href="./src/resources/crm/objects/deals/deals.ts">search</a>({ ...params }) -> CollectionResponseWithTotalSimplePublicObject</code>
-- <code title="post /crm/v3/objects/0-3/batch/upsert">client.crm.objects.deals.<a href="./src/resources/crm/objects/deals/deals.ts">upsert</a>({ ...params }) -> BatchResponseSimplePublicUpsertObject</code>
+- <code title="post /crm/v3/objects/0-3">client.crm.objects.deals.<a href="./src/resources/crm/objects/deals/deals.ts">createByObjectTypeID</a>({ ...params }) -> CreatedResponseSimplePublicObject</code>
+- <code title="delete /crm/v3/objects/0-3/{dealId}">client.crm.objects.deals.<a href="./src/resources/crm/objects/deals/deals.ts">deleteByObjectTypeID</a>(dealID) -> void</code>
+- <code title="get /crm/v3/objects/0-3/{dealId}">client.crm.objects.deals.<a href="./src/resources/crm/objects/deals/deals.ts">getByObjectTypeID</a>(dealID, { ...params }) -> SimplePublicObjectWithAssociations</code>
+- <code title="get /crm/v3/objects/0-3">client.crm.objects.deals.<a href="./src/resources/crm/objects/deals/deals.ts">listByObjectTypeID</a>({ ...params }) -> CollectionResponseSimplePublicObjectWithAssociations</code>
+- <code title="post /crm/v3/objects/0-3/merge">client.crm.objects.deals.<a href="./src/resources/crm/objects/deals/deals.ts">mergeByObjectTypeID</a>({ ...params }) -> SimplePublicObject</code>
+- <code title="post /crm/v3/objects/0-3/search">client.crm.objects.deals.<a href="./src/resources/crm/objects/deals/deals.ts">searchByObjectTypeID</a>({ ...params }) -> CollectionResponseWithTotalSimplePublicObject</code>
+- <code title="patch /crm/v3/objects/0-3/{dealId}">client.crm.objects.deals.<a href="./src/resources/crm/objects/deals/deals.ts">updateByObjectTypeID</a>(dealID, { ...params }) -> SimplePublicObject</code>
 
 #### Associations
 
 #### Batch
+
+Methods:
+
+- <code title="post /crm/v3/objects/0-3/batch/create">client.crm.objects.deals.batch.<a href="./src/resources/crm/objects/deals/batch.ts">create</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
+- <code title="post /crm/v3/objects/0-3/batch/update">client.crm.objects.deals.batch.<a href="./src/resources/crm/objects/deals/batch.ts">update</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
+- <code title="post /crm/v3/objects/0-3/batch/archive">client.crm.objects.deals.batch.<a href="./src/resources/crm/objects/deals/batch.ts">delete</a>({ ...params }) -> void</code>
+- <code title="post /crm/v3/objects/0-3/batch/read">client.crm.objects.deals.batch.<a href="./src/resources/crm/objects/deals/batch.ts">read</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
+- <code title="post /crm/v3/objects/0-3/batch/upsert">client.crm.objects.deals.batch.<a href="./src/resources/crm/objects/deals/batch.ts">upsert</a>({ ...params }) -> BatchResponseSimplePublicUpsertObject</code>
 
 ### Schemas
 
@@ -788,7 +850,6 @@ Types:
 - <code><a href="./src/resources/marketing/emails.ts">PublicWebversionDetails</a></code>
 - <code><a href="./src/resources/marketing/emails.ts">SmartEmailField</a></code>
 - <code><a href="./src/resources/marketing/emails.ts">VersionPublicEmail</a></code>
-- <code><a href="./src/resources/marketing/emails.ts">VersionUser</a></code>
 
 Methods:
 
