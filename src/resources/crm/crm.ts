@@ -38,11 +38,11 @@ import {
   BatchInputPropertyName,
   BatchReadInputPropertyName,
   BatchResponseProperty,
+  CRMPropertiesOptionInput,
   CollectionResponseProperty,
   CollectionResponsePropertyGroup,
   CreatedResponseProperty,
   CreatedResponsePropertyGroup,
-  OptionInput,
   Properties,
   PropertyCreate,
   PropertyCreateParams,
@@ -152,7 +152,7 @@ export interface BatchResponsePublicDefaultAssociation {
 export interface CollectionResponseMultiAssociatedObjectWithLabel {
   results: Array<MultiAssociatedObjectWithLabel>;
 
-  paging?: EmailsAPI.Paging;
+  paging?: EmailsAPI.MarketingEmailsPaging;
 }
 
 export interface CreatedResponseLabelsBetweenObjectPair {
@@ -161,6 +161,16 @@ export interface CreatedResponseLabelsBetweenObjectPair {
   entity: LabelsBetweenObjectPair;
 
   location?: string;
+}
+
+export interface CRMOption {
+  hidden: boolean;
+
+  label: string;
+
+  value: string;
+
+  displayOrder?: number;
 }
 
 export interface LabelsBetweenObjectPair {
@@ -181,16 +191,6 @@ export interface MultiAssociatedObjectWithLabel {
   toObjectId: string;
 }
 
-export interface Option {
-  hidden: boolean;
-
-  label: string;
-
-  value: string;
-
-  displayOrder?: number;
-}
-
 export interface Property {
   fieldType: string;
 
@@ -200,7 +200,7 @@ export interface Property {
 
   name: string;
 
-  options: Array<Option>;
+  options: Array<CRMOption>;
 
   type: string;
 
@@ -275,9 +275,9 @@ export declare namespace CRM {
     type BatchResponsePublicDefaultAssociation as BatchResponsePublicDefaultAssociation,
     type CollectionResponseMultiAssociatedObjectWithLabel as CollectionResponseMultiAssociatedObjectWithLabel,
     type CreatedResponseLabelsBetweenObjectPair as CreatedResponseLabelsBetweenObjectPair,
+    type CRMOption as CRMOption,
     type LabelsBetweenObjectPair as LabelsBetweenObjectPair,
     type MultiAssociatedObjectWithLabel as MultiAssociatedObjectWithLabel,
-    type Option as Option,
     type Property as Property,
     type PropertyModificationMetadata as PropertyModificationMetadata,
     type PublicDefaultAssociation as PublicDefaultAssociation,
@@ -369,7 +369,7 @@ export declare namespace CRM {
     type CollectionResponsePropertyGroup as CollectionResponsePropertyGroup,
     type CreatedResponseProperty as CreatedResponseProperty,
     type CreatedResponsePropertyGroup as CreatedResponsePropertyGroup,
-    type OptionInput as OptionInput,
+    type CRMPropertiesOptionInput as CRMPropertiesOptionInput,
     type PropertyCreate as PropertyCreate,
     type PropertyGroup as PropertyGroup,
     type PropertyGroupCreate as PropertyGroupCreate,

@@ -208,7 +208,7 @@ export interface FieldTypeDefinition {
 
   name: string;
 
-  options: Array<CRMAPI.Option>;
+  options: Array<CRMAPI.CRMOption>;
 
   type:
     | 'string'

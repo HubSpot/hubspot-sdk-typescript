@@ -112,13 +112,13 @@ export interface BatchResponseProperty {
 export interface CollectionResponseProperty {
   results: Array<CRMAPI.Property>;
 
-  paging?: EmailsAPI.Paging;
+  paging?: EmailsAPI.MarketingEmailsPaging;
 }
 
 export interface CollectionResponsePropertyGroup {
   results: Array<PropertyGroup>;
 
-  paging?: EmailsAPI.Paging;
+  paging?: EmailsAPI.MarketingEmailsPaging;
 }
 
 export interface CreatedResponseProperty {
@@ -137,7 +137,7 @@ export interface CreatedResponsePropertyGroup {
   location?: string;
 }
 
-export interface OptionInput {
+export interface CRMPropertiesOptionInput {
   hidden: boolean;
 
   label: string;
@@ -184,7 +184,7 @@ export interface PropertyCreate {
 
   hidden?: boolean;
 
-  options?: Array<OptionInput>;
+  options?: Array<CRMPropertiesOptionInput>;
 
   referencedObjectType?: string;
 }
@@ -244,7 +244,7 @@ export interface PropertyUpdate {
 
   label?: string;
 
-  options?: Array<OptionInput>;
+  options?: Array<CRMPropertiesOptionInput>;
 
   type?: 'bool' | 'date' | 'datetime' | 'enumeration' | 'number' | 'phone_number' | 'string';
 }
@@ -313,7 +313,7 @@ export interface PropertyUpdateParams {
   /**
    * Body param:
    */
-  options?: Array<OptionInput>;
+  options?: Array<CRMPropertiesOptionInput>;
 
   /**
    * Body param:
@@ -360,7 +360,7 @@ export declare namespace Properties {
     type CollectionResponsePropertyGroup as CollectionResponsePropertyGroup,
     type CreatedResponseProperty as CreatedResponseProperty,
     type CreatedResponsePropertyGroup as CreatedResponsePropertyGroup,
-    type OptionInput as OptionInput,
+    type CRMPropertiesOptionInput as CRMPropertiesOptionInput,
     type PropertyCreate as PropertyCreate,
     type PropertyGroup as PropertyGroup,
     type PropertyGroupCreate as PropertyGroupCreate,

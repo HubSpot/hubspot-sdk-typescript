@@ -246,7 +246,7 @@ export interface CollectionResponseWithTotalVersionPublicEmail {
 
   total: number;
 
-  paging?: Paging;
+  paging?: MarketingEmailsPaging;
 }
 
 export interface EmailCloneRequestVNext {
@@ -2153,7 +2153,7 @@ export interface Interval {
   start: string;
 }
 
-export interface Paging {
+export interface MarketingEmailsPaging {
   next: Shared.NextPage;
 
   prev?: Shared.PreviousPage;
@@ -6353,7 +6353,7 @@ export declare namespace Emails {
     type EmailStatisticsData as EmailStatisticsData,
     type EmailUpdateRequest as EmailUpdateRequest,
     type Interval as Interval,
-    type Paging as Paging,
+    type MarketingEmailsPaging as MarketingEmailsPaging,
     type PublicButtonStyleSettings as PublicButtonStyleSettings,
     type PublicDividerStyleSettings as PublicDividerStyleSettings,
     type PublicEmail as PublicEmail,

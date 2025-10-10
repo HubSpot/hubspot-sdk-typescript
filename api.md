@@ -356,6 +356,8 @@ Types:
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">Column</a></code>
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">ColumnRequest</a></code>
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">ForeignID</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">HubDBOption</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">HubDBStandardError</a></code>
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">HubDBTableCloneRequest</a></code>
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">HubDBTableRowBatchCloneRequest</a></code>
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">HubDBTableRowV3</a></code>
@@ -364,10 +366,8 @@ Types:
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">HubDBTableV3</a></code>
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">HubDBTableV3Request</a></code>
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">ImportResult</a></code>
-- <code><a href="./src/resources/cms/hubdb/hubdb.ts">Option</a></code>
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">RandomAccessCollectionResponseWithTotalHubDBTableRowV3</a></code>
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">SimpleUser</a></code>
-- <code><a href="./src/resources/cms/hubdb/hubdb.ts">StandardError</a></code>
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">StreamingCollectionResponseWithTotalHubDBTableRowV3</a></code>
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3</a></code>
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">Variant</a></code>
@@ -498,9 +498,9 @@ Types:
 - <code><a href="./src/resources/crm/crm.ts">BatchResponsePublicDefaultAssociation</a></code>
 - <code><a href="./src/resources/crm/crm.ts">CollectionResponseMultiAssociatedObjectWithLabel</a></code>
 - <code><a href="./src/resources/crm/crm.ts">CreatedResponseLabelsBetweenObjectPair</a></code>
+- <code><a href="./src/resources/crm/crm.ts">CRMOption</a></code>
 - <code><a href="./src/resources/crm/crm.ts">LabelsBetweenObjectPair</a></code>
 - <code><a href="./src/resources/crm/crm.ts">MultiAssociatedObjectWithLabel</a></code>
-- <code><a href="./src/resources/crm/crm.ts">Option</a></code>
 - <code><a href="./src/resources/crm/crm.ts">Property</a></code>
 - <code><a href="./src/resources/crm/crm.ts">PropertyModificationMetadata</a></code>
 - <code><a href="./src/resources/crm/crm.ts">PublicDefaultAssociation</a></code>
@@ -750,7 +750,7 @@ Types:
 - <code><a href="./src/resources/crm/properties.ts">CollectionResponsePropertyGroup</a></code>
 - <code><a href="./src/resources/crm/properties.ts">CreatedResponseProperty</a></code>
 - <code><a href="./src/resources/crm/properties.ts">CreatedResponsePropertyGroup</a></code>
-- <code><a href="./src/resources/crm/properties.ts">OptionInput</a></code>
+- <code><a href="./src/resources/crm/properties.ts">CRMPropertiesOptionInput</a></code>
 - <code><a href="./src/resources/crm/properties.ts">PropertyCreate</a></code>
 - <code><a href="./src/resources/crm/properties.ts">PropertyGroup</a></code>
 - <code><a href="./src/resources/crm/properties.ts">PropertyGroupCreate</a></code>
@@ -834,7 +834,7 @@ Types:
 - <code><a href="./src/resources/marketing/emails.ts">EmailStatisticsData</a></code>
 - <code><a href="./src/resources/marketing/emails.ts">EmailUpdateRequest</a></code>
 - <code><a href="./src/resources/marketing/emails.ts">Interval</a></code>
-- <code><a href="./src/resources/marketing/emails.ts">Paging</a></code>
+- <code><a href="./src/resources/marketing/emails.ts">MarketingEmailsPaging</a></code>
 - <code><a href="./src/resources/marketing/emails.ts">PublicButtonStyleSettings</a></code>
 - <code><a href="./src/resources/marketing/emails.ts">PublicDividerStyleSettings</a></code>
 - <code><a href="./src/resources/marketing/emails.ts">PublicEmail</a></code>
@@ -1013,9 +1013,9 @@ Types:
 - <code><a href="./src/resources/settings/users.ts">CollectionResponsePublicTeamNoPaging</a></code>
 - <code><a href="./src/resources/settings/users.ts">CollectionResponsePublicUserForwardPaging</a></code>
 - <code><a href="./src/resources/settings/users.ts">PublicPermissionSet</a></code>
-- <code><a href="./src/resources/settings/users.ts">PublicTeam</a></code>
 - <code><a href="./src/resources/settings/users.ts">PublicUser</a></code>
 - <code><a href="./src/resources/settings/users.ts">PublicUserUpdate</a></code>
+- <code><a href="./src/resources/settings/users.ts">SettingsUsersPublicTeam</a></code>
 - <code><a href="./src/resources/settings/users.ts">UserProvisionRequest</a></code>
 
 Methods:
@@ -1034,13 +1034,13 @@ Types:
 - <code><a href="./src/resources/webhooks.ts">BatchResponseSubscriptionResponse</a></code>
 - <code><a href="./src/resources/webhooks.ts">BatchResponseSubscriptionResponseWithErrors</a></code>
 - <code><a href="./src/resources/webhooks.ts">SettingsChangeRequest</a></code>
-- <code><a href="./src/resources/webhooks.ts">SettingsResponse</a></code>
 - <code><a href="./src/resources/webhooks.ts">SubscriptionBatchUpdateRequest</a></code>
 - <code><a href="./src/resources/webhooks.ts">SubscriptionCreateRequest</a></code>
 - <code><a href="./src/resources/webhooks.ts">SubscriptionListResponse</a></code>
 - <code><a href="./src/resources/webhooks.ts">SubscriptionPatchRequest</a></code>
 - <code><a href="./src/resources/webhooks.ts">SubscriptionResponse</a></code>
 - <code><a href="./src/resources/webhooks.ts">ThrottlingSettings</a></code>
+- <code><a href="./src/resources/webhooks.ts">WebhooksSettingsResponse</a></code>
 
 Methods:
 
@@ -1049,6 +1049,6 @@ Methods:
 - <code title="get /webhooks/v3/{appId}/subscriptions">client.webhooks.<a href="./src/resources/webhooks.ts">list</a>(appID) -> SubscriptionListResponse</code>
 - <code title="delete /webhooks/v3/{appId}/subscriptions/{subscriptionId}">client.webhooks.<a href="./src/resources/webhooks.ts">delete</a>(subscriptionID, { ...params }) -> void</code>
 - <code title="delete /webhooks/v3/{appId}/settings">client.webhooks.<a href="./src/resources/webhooks.ts">clear</a>(appID) -> void</code>
-- <code title="put /webhooks/v3/{appId}/settings">client.webhooks.<a href="./src/resources/webhooks.ts">configure</a>(appID, { ...params }) -> SettingsResponse</code>
+- <code title="put /webhooks/v3/{appId}/settings">client.webhooks.<a href="./src/resources/webhooks.ts">configure</a>(appID, { ...params }) -> WebhooksSettingsResponse</code>
 - <code title="get /webhooks/v3/{appId}/subscriptions/{subscriptionId}">client.webhooks.<a href="./src/resources/webhooks.ts">read</a>(subscriptionID, { ...params }) -> SubscriptionResponse</code>
 - <code title="post /webhooks/v3/{appId}/subscriptions/batch/update">client.webhooks.<a href="./src/resources/webhooks.ts">updateBatch</a>(appID, { ...params }) -> BatchResponseSubscriptionResponse</code>

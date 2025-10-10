@@ -140,7 +140,7 @@ export interface PublicAssociationMulti {
 
   to: Array<CRMAPI.AssociatedID>;
 
-  paging?: EmailsAPI.Paging;
+  paging?: EmailsAPI.MarketingEmailsPaging;
 }
 
 export interface AssociationCreateParams {

@@ -1071,7 +1071,7 @@ export interface BatchResponseFlowIDWorkflowIDMappingResponseWithErrors {
 export interface CollectionResponseAPIFlowEmailCampaign {
   results: Array<APIFlowEmailCampaign>;
 
-  paging?: EmailsAPI.Paging;
+  paging?: EmailsAPI.MarketingEmailsPaging;
 }
 
 export interface CollectionResponseAPIFlowListingForwardPaging {

@@ -215,7 +215,7 @@ export interface PublicAssociationMultiWithLabel {
 
   to: Array<CRMAPI.MultiAssociatedObjectWithLabel>;
 
-  paging?: EmailsAPI.Paging;
+  paging?: EmailsAPI.MarketingEmailsPaging;
 }
 
 export interface PublicDefaultAssociationMultiPost {

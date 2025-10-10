@@ -1237,7 +1237,7 @@ export interface CollectionResponseWithTotalVersionBlogPost {
 
   total: number;
 
-  paging?: EmailsAPI.Paging;
+  paging?: EmailsAPI.MarketingEmailsPaging;
 }
 
 export interface ColorStop {
