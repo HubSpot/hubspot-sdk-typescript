@@ -39,7 +39,12 @@ import {
   WebhookUpdateParams,
   Webhooks,
 } from './resources/webhooks';
-import { Account } from './resources/account/account';
+import {
+  APIUsage,
+  Account,
+  CollectionResponseAPIUsage,
+  PortalInformationResponse,
+} from './resources/account/account';
 import { Auth } from './resources/auth/auth';
 import { Automation } from './resources/automation/automation';
 import { Cms } from './resources/cms/cms';
@@ -837,7 +842,12 @@ export declare namespace HubSpot {
   export import Page = Pagination.Page;
   export { type PageParams as PageParams, type PageResponse as PageResponse };
 
-  export { Account as Account };
+  export {
+    Account as Account,
+    type APIUsage as APIUsage,
+    type CollectionResponseAPIUsage as CollectionResponseAPIUsage,
+    type PortalInformationResponse as PortalInformationResponse,
+  };
 
   export { Auth as Auth };
 
@@ -918,4 +928,5 @@ export declare namespace HubSpot {
   export type PreviousPage = API.PreviousPage;
   export type PublicObjectID = API.PublicObjectID;
   export type StandardError = API.StandardError;
+  export type VersionUser = API.VersionUser;
 }

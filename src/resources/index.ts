@@ -1,7 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export * from './shared';
-export { Account } from './account/account';
+export {
+  Account,
+  type APIUsage,
+  type CollectionResponseAPIUsage,
+  type PortalInformationResponse,
+} from './account/account';
 export { Auth } from './auth/auth';
 export { Automation } from './automation/automation';
 export {

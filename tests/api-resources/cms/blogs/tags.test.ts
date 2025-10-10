@@ -151,7 +151,7 @@ describe('resource tags', () => {
   test.skip('attachToLangGroup: only required params', async () => {
     const responsePromise = client.cms.blogs.tags.attachToLangGroup({
       id: 'id',
-      language: 'language',
+      language: 'af',
       primaryId: 'primaryId',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -167,7 +167,7 @@ describe('resource tags', () => {
   test.skip('attachToLangGroup: required and optional params', async () => {
     const response = await client.cms.blogs.tags.attachToLangGroup({
       id: 'id',
-      language: 'language',
+      language: 'af',
       primaryId: 'primaryId',
       primaryLanguage: 'primaryLanguage',
     });

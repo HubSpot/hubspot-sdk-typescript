@@ -21,7 +21,14 @@ import {
   URLRedirects,
 } from './url-redirects';
 import * as BlogsAPI from './blogs/blogs';
-import { Blogs } from './blogs/blogs';
+import {
+  AttachToLangPrimaryRequestVNext,
+  BatchInputJsonNode,
+  Blogs,
+  DetachFromLangGroupRequestVNext,
+  SetNewLanguagePrimaryRequestVNext,
+  UpdateLanguagesRequestVNext,
+} from './blogs/blogs';
 import * as HubdbAPI from './hubdb/hubdb';
 import {
   BatchInputHubDBTableRowBatchCloneRequest,
@@ -43,35 +50,6 @@ import {
   HubDBTableV3,
   HubDBTableV3Request,
   Hubdb,
-  HubdbCloneDraftTableParams,
-  HubdbCloneDraftTableRowParams,
-  HubdbCloneDraftTableRowsParams,
-  HubdbCreateDraftTableRowsParams,
-  HubdbCreateTableParams,
-  HubdbCreateTableRowParams,
-  HubdbExportDraftTableParams,
-  HubdbExportTableParams,
-  HubdbGetAllDraftTablesParams,
-  HubdbGetAllTablesParams,
-  HubdbGetDraftTableDetailsByIDParams,
-  HubdbGetDraftTableRowByIDParams,
-  HubdbGetTableDetailsParams,
-  HubdbGetTableRowParams,
-  HubdbGetTableRowsParams,
-  HubdbImportDraftTableParams,
-  HubdbPublishDraftTableParams,
-  HubdbPurgeDraftTableRowParams,
-  HubdbPurgeDraftTableRowsParams,
-  HubdbReadDraftTableRowsParams,
-  HubdbReadTableRowsParams,
-  HubdbRemoveTableVersionParams,
-  HubdbReplaceDraftTableRowParams,
-  HubdbReplaceDraftTableRowsParams,
-  HubdbResetDraftTableParams,
-  HubdbUnpublishTableParams,
-  HubdbUpdateDraftTableParams,
-  HubdbUpdateDraftTableRowParams,
-  HubdbUpdateDraftTableRowsParams,
   ImportResult,
   Option,
   RandomAccessCollectionResponseWithTotalHubDBTableRowV3,
@@ -95,7 +73,14 @@ Cms.Hubdb = Hubdb;
 Cms.URLRedirects = URLRedirects;
 
 export declare namespace Cms {
-  export { Blogs as Blogs };
+  export {
+    Blogs as Blogs,
+    type AttachToLangPrimaryRequestVNext as AttachToLangPrimaryRequestVNext,
+    type BatchInputJsonNode as BatchInputJsonNode,
+    type DetachFromLangGroupRequestVNext as DetachFromLangGroupRequestVNext,
+    type SetNewLanguagePrimaryRequestVNext as SetNewLanguagePrimaryRequestVNext,
+    type UpdateLanguagesRequestVNext as UpdateLanguagesRequestVNext,
+  };
 
   export {
     Domains as Domains,
@@ -133,35 +118,6 @@ export declare namespace Cms {
     type StreamingCollectionResponseWithTotalHubDBTableRowV3 as StreamingCollectionResponseWithTotalHubDBTableRowV3,
     type UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3 as UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3,
     type Variant as Variant,
-    type HubdbCloneDraftTableParams as HubdbCloneDraftTableParams,
-    type HubdbCloneDraftTableRowParams as HubdbCloneDraftTableRowParams,
-    type HubdbCloneDraftTableRowsParams as HubdbCloneDraftTableRowsParams,
-    type HubdbCreateDraftTableRowsParams as HubdbCreateDraftTableRowsParams,
-    type HubdbCreateTableParams as HubdbCreateTableParams,
-    type HubdbCreateTableRowParams as HubdbCreateTableRowParams,
-    type HubdbExportDraftTableParams as HubdbExportDraftTableParams,
-    type HubdbExportTableParams as HubdbExportTableParams,
-    type HubdbGetAllDraftTablesParams as HubdbGetAllDraftTablesParams,
-    type HubdbGetAllTablesParams as HubdbGetAllTablesParams,
-    type HubdbGetDraftTableDetailsByIDParams as HubdbGetDraftTableDetailsByIDParams,
-    type HubdbGetDraftTableRowByIDParams as HubdbGetDraftTableRowByIDParams,
-    type HubdbGetTableDetailsParams as HubdbGetTableDetailsParams,
-    type HubdbGetTableRowParams as HubdbGetTableRowParams,
-    type HubdbGetTableRowsParams as HubdbGetTableRowsParams,
-    type HubdbImportDraftTableParams as HubdbImportDraftTableParams,
-    type HubdbPublishDraftTableParams as HubdbPublishDraftTableParams,
-    type HubdbPurgeDraftTableRowParams as HubdbPurgeDraftTableRowParams,
-    type HubdbPurgeDraftTableRowsParams as HubdbPurgeDraftTableRowsParams,
-    type HubdbReadDraftTableRowsParams as HubdbReadDraftTableRowsParams,
-    type HubdbReadTableRowsParams as HubdbReadTableRowsParams,
-    type HubdbRemoveTableVersionParams as HubdbRemoveTableVersionParams,
-    type HubdbReplaceDraftTableRowParams as HubdbReplaceDraftTableRowParams,
-    type HubdbReplaceDraftTableRowsParams as HubdbReplaceDraftTableRowsParams,
-    type HubdbResetDraftTableParams as HubdbResetDraftTableParams,
-    type HubdbUnpublishTableParams as HubdbUnpublishTableParams,
-    type HubdbUpdateDraftTableParams as HubdbUpdateDraftTableParams,
-    type HubdbUpdateDraftTableRowParams as HubdbUpdateDraftTableRowParams,
-    type HubdbUpdateDraftTableRowsParams as HubdbUpdateDraftTableRowsParams,
   };
 
   export {

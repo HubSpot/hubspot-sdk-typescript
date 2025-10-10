@@ -10,7 +10,7 @@ import { path } from '../../internal/utils/path';
 
 export class Emails extends APIResource {
   /**
-   * Create a new marketing email.
+   * Create a new marketing email
    */
   create(body: EmailCreateParams, options?: RequestOptions): APIPromise<PublicEmail> {
     return this._client.post('/marketing/v3/emails/', { body, ...options });
@@ -29,7 +29,7 @@ export class Emails extends APIResource {
   }
 
   /**
-   * Get all marketing emails for a HubSpot account.
+   * Get all marketing emails
    */
   list(
     query: EmailListParams | null | undefined = {},
@@ -3332,15 +3332,7 @@ export interface VersionPublicEmail {
 
   updatedAt: string;
 
-  user: VersionUser;
-}
-
-export interface VersionUser {
-  id: string;
-
-  email: string;
-
-  fullName: string;
+  user: Shared.VersionUser;
 }
 
 export interface EmailCreateParams {
@@ -6377,7 +6369,6 @@ export declare namespace Emails {
     type PublicWebversionDetails as PublicWebversionDetails,
     type SmartEmailField as SmartEmailField,
     type VersionPublicEmail as VersionPublicEmail,
-    type VersionUser as VersionUser,
     type PublicEmailsPage as PublicEmailsPage,
     type EmailCreateParams as EmailCreateParams,
     type EmailUpdateParams as EmailUpdateParams,

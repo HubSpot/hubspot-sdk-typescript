@@ -1,6 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Blogs } from './blogs/index';
+export {
+  Blogs,
+  type AttachToLangPrimaryRequestVNext,
+  type BatchInputJsonNode,
+  type DetachFromLangGroupRequestVNext,
+  type SetNewLanguagePrimaryRequestVNext,
+  type UpdateLanguagesRequestVNext,
+} from './blogs/index';
 export { Cms } from './cms';
 export {
   Domains,
@@ -37,35 +44,7 @@ export {
   type StreamingCollectionResponseWithTotalHubDBTableRowV3,
   type UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3,
   type Variant,
-  type HubdbCloneDraftTableParams,
-  type HubdbCloneDraftTableRowParams,
-  type HubdbCloneDraftTableRowsParams,
-  type HubdbCreateDraftTableRowsParams,
-  type HubdbCreateTableParams,
-  type HubdbCreateTableRowParams,
-  type HubdbExportDraftTableParams,
-  type HubdbExportTableParams,
-  type HubdbGetAllDraftTablesParams,
-  type HubdbGetAllTablesParams,
-  type HubdbGetDraftTableDetailsByIDParams,
-  type HubdbGetDraftTableRowByIDParams,
-  type HubdbGetTableDetailsParams,
-  type HubdbGetTableRowParams,
-  type HubdbGetTableRowsParams,
-  type HubdbImportDraftTableParams,
-  type HubdbPublishDraftTableParams,
-  type HubdbPurgeDraftTableRowParams,
-  type HubdbPurgeDraftTableRowsParams,
-  type HubdbReadDraftTableRowsParams,
-  type HubdbReadTableRowsParams,
-  type HubdbRemoveTableVersionParams,
-  type HubdbReplaceDraftTableRowParams,
-  type HubdbReplaceDraftTableRowsParams,
-  type HubdbResetDraftTableParams,
-  type HubdbUnpublishTableParams,
-  type HubdbUpdateDraftTableParams,
-  type HubdbUpdateDraftTableRowParams,
-  type HubdbUpdateDraftTableRowsParams,
+  type HubDBTableV3sPage,
 } from './hubdb/index';
 export {
   URLRedirects,

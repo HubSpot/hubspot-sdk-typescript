@@ -7,10 +7,12 @@ const client = new HubSpot({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource deals', () => {
+describe('resource batch', () => {
   // Prism tests are disabled
-  test.skip('createByObjectTypeID: only required params', async () => {
-    const responsePromise = client.crm.objects.deals.createByObjectTypeID({ properties: { foo: 'string' } });
+  test.skip('cloneBatch: only required params', async () => {
+    const responsePromise = client.cms.hubdb.rows.draft.batch.cloneBatch('tableIdOrName', {
+      inputs: [{ id: 'id' }],
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,92 +23,123 @@ describe('resource deals', () => {
   });
 
   // Prism tests are disabled
-  test.skip('createByObjectTypeID: required and optional params', async () => {
-    const response = await client.crm.objects.deals.createByObjectTypeID({
-      properties: { foo: 'string' },
-      associations: [
-        { to: { id: 'id' }, types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }] },
+  test.skip('cloneBatch: required and optional params', async () => {
+    const response = await client.cms.hubdb.rows.draft.batch.cloneBatch('tableIdOrName', {
+      inputs: [{ id: 'id', name: 'name' }],
+    });
+  });
+
+  // Prism tests are disabled
+  test.skip('createBatch: only required params', async () => {
+    const responsePromise = client.cms.hubdb.rows.draft.batch.createBatch('tableIdOrName', {
+      inputs: [{ values: { foo: {} } }],
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('createBatch: required and optional params', async () => {
+    const response = await client.cms.hubdb.rows.draft.batch.createBatch('tableIdOrName', {
+      inputs: [{ values: { foo: {} }, childTableId: 0, displayIndex: 0, name: 'name', path: 'path' }],
+    });
+  });
+
+  // Prism tests are disabled
+  test.skip('purgeBatch: only required params', async () => {
+    const responsePromise = client.cms.hubdb.rows.draft.batch.purgeBatch('tableIdOrName', {
+      inputs: ['string'],
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('purgeBatch: required and optional params', async () => {
+    const response = await client.cms.hubdb.rows.draft.batch.purgeBatch('tableIdOrName', {
+      inputs: ['string'],
+    });
+  });
+
+  // Prism tests are disabled
+  test.skip('readBatch: only required params', async () => {
+    const responsePromise = client.cms.hubdb.rows.draft.batch.readBatch('tableIdOrName', {
+      inputs: ['string'],
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('readBatch: required and optional params', async () => {
+    const response = await client.cms.hubdb.rows.draft.batch.readBatch('tableIdOrName', {
+      inputs: ['string'],
+    });
+  });
+
+  // Prism tests are disabled
+  test.skip('readDraftBatch: only required params', async () => {
+    const responsePromise = client.cms.hubdb.rows.draft.batch.readDraftBatch('tableIdOrName', {
+      inputs: ['string'],
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('readDraftBatch: required and optional params', async () => {
+    const response = await client.cms.hubdb.rows.draft.batch.readDraftBatch('tableIdOrName', {
+      inputs: ['string'],
+    });
+  });
+
+  // Prism tests are disabled
+  test.skip('replaceBatch: only required params', async () => {
+    const responsePromise = client.cms.hubdb.rows.draft.batch.replaceBatch('tableIdOrName', {
+      inputs: [{ id: 'id', values: { foo: {} } }],
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('replaceBatch: required and optional params', async () => {
+    const response = await client.cms.hubdb.rows.draft.batch.replaceBatch('tableIdOrName', {
+      inputs: [
+        { id: 'id', values: { foo: {} }, childTableId: 0, displayIndex: 0, name: 'name', path: 'path' },
       ],
     });
   });
 
   // Prism tests are disabled
-  test.skip('deleteByObjectTypeID', async () => {
-    const responsePromise = client.crm.objects.deals.deleteByObjectTypeID('dealId');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('getByObjectTypeID', async () => {
-    const responsePromise = client.crm.objects.deals.getByObjectTypeID('dealId');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('getByObjectTypeID: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.crm.objects.deals.getByObjectTypeID(
-        'dealId',
-        {
-          archived: true,
-          associations: ['string'],
-          idProperty: 'idProperty',
-          properties: ['string'],
-          propertiesWithHistory: ['string'],
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(HubSpot.NotFoundError);
-  });
-
-  // Prism tests are disabled
-  test.skip('listByObjectTypeID', async () => {
-    const responsePromise = client.crm.objects.deals.listByObjectTypeID();
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('listByObjectTypeID: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.crm.objects.deals.listByObjectTypeID(
-        {
-          after: 'after',
-          archived: true,
-          associations: ['string'],
-          limit: 0,
-          properties: ['string'],
-          propertiesWithHistory: ['string'],
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(HubSpot.NotFoundError);
-  });
-
-  // Prism tests are disabled
-  test.skip('mergeByObjectTypeID: only required params', async () => {
-    const responsePromise = client.crm.objects.deals.mergeByObjectTypeID({
-      objectIdToMerge: 'objectIdToMerge',
-      primaryObjectId: 'primaryObjectId',
+  test.skip('updateBatch: only required params', async () => {
+    const responsePromise = client.cms.hubdb.rows.draft.batch.updateBatch('tableIdOrName', {
+      inputs: [{ id: 'id', values: { foo: {} } }],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -118,44 +151,11 @@ describe('resource deals', () => {
   });
 
   // Prism tests are disabled
-  test.skip('mergeByObjectTypeID: required and optional params', async () => {
-    const response = await client.crm.objects.deals.mergeByObjectTypeID({
-      objectIdToMerge: 'objectIdToMerge',
-      primaryObjectId: 'primaryObjectId',
-    });
-  });
-
-  // Prism tests are disabled
-  test.skip('searchByObjectTypeID', async () => {
-    const responsePromise = client.crm.objects.deals.searchByObjectTypeID({});
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('updateByObjectTypeID: only required params', async () => {
-    const responsePromise = client.crm.objects.deals.updateByObjectTypeID('dealId', {
-      properties: { foo: 'string' },
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('updateByObjectTypeID: required and optional params', async () => {
-    const response = await client.crm.objects.deals.updateByObjectTypeID('dealId', {
-      properties: { foo: 'string' },
-      idProperty: 'idProperty',
+  test.skip('updateBatch: required and optional params', async () => {
+    const response = await client.cms.hubdb.rows.draft.batch.updateBatch('tableIdOrName', {
+      inputs: [
+        { id: 'id', values: { foo: {} }, childTableId: 0, displayIndex: 0, name: 'name', path: 'path' },
+      ],
     });
   });
 });

@@ -23,13 +23,12 @@ export {
 } from './contacts/index';
 export {
   Deals,
-  type DealCreateParams,
-  type DealUpdateParams,
-  type DealListParams,
-  type DealMergeParams,
-  type DealReadParams,
-  type DealSearchParams,
-  type DealUpsertParams,
+  type DealCreateByObjectTypeIDParams,
+  type DealGetByObjectTypeIDParams,
+  type DealListByObjectTypeIDParams,
+  type DealMergeByObjectTypeIDParams,
+  type DealSearchByObjectTypeIDParams,
+  type DealUpdateByObjectTypeIDParams,
 } from './deals/index';
 export {
   Objects,

@@ -46,7 +46,6 @@ import {
   PublicWebversionDetails,
   SmartEmailField,
   VersionPublicEmail,
-  VersionUser,
 } from './emails';
 import * as FormsAPI from './forms';
 import {
@@ -146,7 +145,6 @@ export declare namespace Marketing {
     type PublicWebversionDetails as PublicWebversionDetails,
     type SmartEmailField as SmartEmailField,
     type VersionPublicEmail as VersionPublicEmail,
-    type VersionUser as VersionUser,
     type PublicEmailsPage as PublicEmailsPage,
     type EmailCreateParams as EmailCreateParams,
     type EmailUpdateParams as EmailUpdateParams,

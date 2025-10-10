@@ -81,3 +81,11 @@ export interface StandardError {
 
   subCategory?: unknown;
 }
+
+export interface VersionUser {
+  id: string;
+
+  email: string;
+
+  fullName: string;
+}
