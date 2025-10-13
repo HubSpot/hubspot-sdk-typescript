@@ -539,7 +539,7 @@ export interface FormDefinitionBase {
   archivedAt?: string;
 }
 
-export interface HubSpotFormDefinitionCreateRequest {
+export interface FormDefinitionCreateRequestBase {
   archived: boolean;
 
   configuration: HubSpotFormConfiguration;
