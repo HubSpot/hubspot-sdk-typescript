@@ -231,14 +231,29 @@ export interface PublicStatusBulkResponse {
 }
 
 export interface PublicStatusRequest {
+  /**
+   * The type of communication channel. Currently, only `EMAIL` is supported.
+   */
   channel: 'EMAIL';
 
+  /**
+   * The status of the contact's subscription.
+   */
   statusState: 'SUBSCRIBED' | 'UNSUBSCRIBED' | 'NOT_SPECIFIED';
 
+  /**
+   * The contact's email address.
+   */
   subscriberIdString: string;
 
+  /**
+   * The ID of the subscription to update.
+   */
   subscriptionId: number;
 
+  /**
+   * The legal basis for communication.
+   */
   legalBasis?:
     | 'LEGITIMATE_INTEREST_PQL'
     | 'LEGITIMATE_INTEREST_CLIENT'
@@ -248,11 +263,16 @@ export interface PublicStatusRequest {
     | 'PROCESS_AND_STORE'
     | 'LEGITIMATE_INTEREST_OTHER';
 
+  /**
+   * The explanation for the legal basis.
+   */
   legalBasisExplanation?: string;
 }
 
 export interface PublicSubscriptionTranslation {
   createdAt: number;
+
+  description: string;
 
   languageCode: string;
 

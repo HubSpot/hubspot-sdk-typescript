@@ -131,7 +131,15 @@ describe('resource hubdb', () => {
           id: 0,
           label: 'label',
           name: 'name',
-          options: [{ hidden: true, label: 'label', value: 'value', displayOrder: 0 }],
+          options: [
+            {
+              hidden: false,
+              label: 'Option A',
+              value: 'A',
+              description: 'Choice number one',
+              displayOrder: 1,
+            },
+          ],
           type: 'NULL',
           foreignColumnId: 0,
           foreignTableId: 0,
@@ -641,7 +649,15 @@ describe('resource hubdb', () => {
           id: 0,
           label: 'label',
           name: 'name',
-          options: [{ hidden: true, label: 'label', value: 'value', displayOrder: 0 }],
+          options: [
+            {
+              hidden: false,
+              label: 'Option A',
+              value: 'A',
+              description: 'Choice number one',
+              displayOrder: 1,
+            },
+          ],
           type: 'NULL',
           foreignColumnId: 0,
           foreignTableId: 0,

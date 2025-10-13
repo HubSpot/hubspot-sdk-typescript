@@ -508,6 +508,8 @@ export interface ExternalMeetingsUser {
 }
 
 export interface ExternalMeetingsWelcomeScreenInfo {
+  description?: string;
+
   logoUrl?: string;
 
   showWelcomeScreen?: boolean;
@@ -518,6 +520,8 @@ export interface ExternalMeetingsWelcomeScreenInfo {
 }
 
 export interface ExternalOption {
+  description: string;
+
   displayOrder: number;
 
   doubleData: number;

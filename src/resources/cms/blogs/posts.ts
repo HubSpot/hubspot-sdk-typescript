@@ -11,14 +11,15 @@ import { path } from '../../../internal/utils/path';
 
 export class Posts extends APIResource {
   /**
-   * Create a new post
+   * Create a new blog post, specifying its content in the request body.
    */
   create(body: PostCreateParams, options?: RequestOptions): APIPromise<BlogPost> {
     return this._client.post('/cms/v3/blogs/posts', { body, ...options });
   }
 
   /**
-   * Update a post
+   * Partially updates a single blog post by ID. You only need to specify the values
+   * that you want to update.
    */
   update(objectID: string, params: PostUpdateParams, options?: RequestOptions): APIPromise<BlogPost> {
     const { archived, ...body } = params;
@@ -30,7 +31,8 @@ export class Posts extends APIResource {
   }
 
   /**
-   * Get all posts
+   * Retrieve all blog posts, with paging and filtering options. This method would be
+   * useful for an integration that ingests posts and suggests edits.
    */
   list(
     query: PostListParams | null | undefined = {},
@@ -40,7 +42,7 @@ export class Posts extends APIResource {
   }
 
   /**
-   * Delete a blog post
+   * Delete a blog post by ID.
    */
   delete(
     objectID: string,
@@ -56,7 +58,8 @@ export class Posts extends APIResource {
   }
 
   /**
-   * Attach post to a multi-language group
+   * Attach a blog post to a
+   * [multi-language group](https://developers.hubspot.com/docs/guides/cms/content/multi-language-content).
    */
   attachToLangGroup(body: PostAttachToLangGroupParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/cms/v3/blogs/posts/multi-language/attach-to-lang-group', {
@@ -67,14 +70,14 @@ export class Posts extends APIResource {
   }
 
   /**
-   * Clone a blog post
+   * Clone a blog post, making a copy of it in a new blog post.
    */
   clone(body: PostCloneParams, options?: RequestOptions): APIPromise<BlogPost> {
     return this._client.post('/cms/v3/blogs/posts/clone', { body, ...options });
   }
 
   /**
-   * Create a language variation
+   * Create a new language variation from an existing blog post
    */
   createLangVariation(body: PostCreateLangVariationParams, options?: RequestOptions): APIPromise<BlogPost> {
     return this._client.post('/cms/v3/blogs/posts/multi-language/create-language-variation', {
@@ -84,7 +87,8 @@ export class Posts extends APIResource {
   }
 
   /**
-   * Detach post from a multi-language group
+   * Detach a blog post from a
+   * [multi-language group](https://developers.hubspot.com/docs/guides/cms/content/multi-language-content).
    */
   detachFromLangGroup(body: PostDetachFromLangGroupParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/cms/v3/blogs/posts/multi-language/detach-from-lang-group', {
@@ -95,14 +99,14 @@ export class Posts extends APIResource {
   }
 
   /**
-   * Retrieve the full draft version of the Blog Post
+   * Retrieve the full draft version of a blog post.
    */
   getDraftByID(objectID: string, options?: RequestOptions): APIPromise<BlogPost> {
     return this._client.get(path`/cms/v3/blogs/posts/${objectID}/draft`, options);
   }
 
   /**
-   * Retrieve a previous version of a blog post
+   * Retrieve a previous version of a blog post.
    */
   getPreviousVersion(
     revisionID: string,
@@ -114,7 +118,7 @@ export class Posts extends APIResource {
   }
 
   /**
-   * Retrieves all previous versions of a post
+   * Retrieve all the previous versions of a blog post.
    */
   getPreviousVersions(
     objectID: string,
@@ -125,7 +129,8 @@ export class Posts extends APIResource {
   }
 
   /**
-   * Publish blog post draft
+   * Publish the draft version of the blog post, sending its content to the live
+   * page.
    */
   pushLive(objectID: string, options?: RequestOptions): APIPromise<void> {
     return this._client.post(path`/cms/v3/blogs/posts/${objectID}/draft/push-live`, {
@@ -135,7 +140,7 @@ export class Posts extends APIResource {
   }
 
   /**
-   * Retrieve a blog post
+   * Retrieve a blog post by the post ID.
    */
   read(
     objectID: string,
@@ -146,7 +151,8 @@ export class Posts extends APIResource {
   }
 
   /**
-   * Reset post draft to the live version
+   * Discard all drafted content, resetting the draft to contain the content in the
+   * currently published version.
    */
   resetDraft(objectID: string, options?: RequestOptions): APIPromise<void> {
     return this._client.post(path`/cms/v3/blogs/posts/${objectID}/draft/reset`, {
@@ -156,7 +162,7 @@ export class Posts extends APIResource {
   }
 
   /**
-   * Restore a previous version
+   * Restores a blog post to one of its previous versions.
    */
   restorePreviousVersion(
     revisionID: string,
@@ -168,7 +174,8 @@ export class Posts extends APIResource {
   }
 
   /**
-   * Restore a draft to a previous version
+   * Takes a specified version of a blog post, sets it as the new draft version of
+   * the blog post.
    */
   restorePreviousVersionToDraft(
     revisionID: number,
@@ -183,7 +190,7 @@ export class Posts extends APIResource {
   }
 
   /**
-   * Schedule a post to be published
+   * Schedule a blog post to be published at a specified time.
    */
   schedule(body: PostScheduleParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/cms/v3/blogs/posts/schedule', {
@@ -194,7 +201,9 @@ export class Posts extends APIResource {
   }
 
   /**
-   * Set a new primary language
+   * Set the primary language of a
+   * [multi-language group](https://developers.hubspot.com/docs/guides/cms/content/multi-language-content)
+   * to the language of the provided post (specified as an ID in the request body)
    */
   setLangPrimary(body: PostSetLangPrimaryParams, options?: RequestOptions): APIPromise<void> {
     return this._client.put('/cms/v3/blogs/posts/multi-language/set-new-lang-primary', {
@@ -205,14 +214,16 @@ export class Posts extends APIResource {
   }
 
   /**
-   * Update the draft of a post
+   * Partially updates the draft version of a single blog post by ID. You only need
+   * to specify the values that you want to update.
    */
   updateDraft(objectID: string, body: PostUpdateDraftParams, options?: RequestOptions): APIPromise<BlogPost> {
     return this._client.patch(path`/cms/v3/blogs/posts/${objectID}/draft`, { body, ...options });
   }
 
   /**
-   * Update languages of multi-language group
+   * Explicitly set new languages for each post in a
+   * [multi-language group](https://developers.hubspot.com/docs/guides/cms/content/multi-language-content).
    */
   updateLangs(body: PostUpdateLangsParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/cms/v3/blogs/posts/multi-language/update-languages', {
@@ -239,43 +250,103 @@ export interface BackgroundImage {
   imageUrl: string;
 }
 
+/**
+ * Wrapper for providing an array of blog posts as inputs.
+ */
 export interface BatchInputBlogPost {
+  /**
+   * Blog posts to input.
+   */
   inputs: Array<BlogPost>;
 }
 
+/**
+ * Response object for batch operations on blog posts.
+ */
 export interface BatchResponseBlogPost {
+  /**
+   * Time of batch operation completion.
+   */
   completedAt: string;
 
+  /**
+   * Results of batch operation.
+   */
   results: Array<BlogPost>;
 
+  /**
+   * Time of batch operation start.
+   */
   startedAt: string;
 
+  /**
+   * Status of batch operation.
+   */
   status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
 
+  /**
+   * Links associated with batch operation.
+   */
   links?: { [key: string]: string };
 
+  /**
+   * Time of batch operation request.
+   */
   requestedAt?: string;
 }
 
+/**
+ * Response object for batch operations on blog posts with errors.
+ */
 export interface BatchResponseBlogPostWithErrors {
+  /**
+   * Time of batch operation completion.
+   */
   completedAt: string;
 
+  /**
+   * Results of batch operation.
+   */
   results: Array<BlogPost>;
 
+  /**
+   * Time of batch operation start.
+   */
   startedAt: string;
 
+  /**
+   * Status of batch operation.
+   */
   status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
 
+  /**
+   * Errors in batch operation.
+   */
   errors?: Array<Shared.StandardError>;
 
+  /**
+   * Links associated with batch operation.
+   */
   links?: { [key: string]: string };
 
+  /**
+   * Number of errors.
+   */
   numErrors?: number;
 
+  /**
+   * Time of batch operation request.
+   */
   requestedAt?: string;
 }
 
+/**
+ * Model definition for a Blog Post.
+ */
 export interface BlogPost {
+  /**
+   * The unique ID of the blog post.
+   */
   id: string;
 
   abStatus:
@@ -290,22 +361,51 @@ export interface BlogPost {
 
   abTestId: string;
 
+  /**
+   * The timestamp (ISO8601 format) when this Blog Post was deleted.
+   */
   archivedAt: number;
 
+  /**
+   * If True, the post will not show up in your dashboard, although the post could
+   * still be live.
+   */
   archivedInDashboard: boolean;
 
+  /**
+   * List of stylesheets to attach to this blog post. These stylesheets are attached
+   * to just this page. Order of precedence is bottom to top, just like in the HTML.
+   */
   attachedStylesheets: Array<{ [key: string]: unknown }>;
 
+  /**
+   * The name of the blog author associated with the post.
+   */
   authorName: string;
 
+  /**
+   * The ID of the blog author associated with this post.
+   */
   blogAuthorId: string;
 
+  /**
+   * The GUID of the marketing campaign the post is associated with.
+   */
   campaign: string;
 
+  /**
+   * ID of the object type.
+   */
   categoryId: number;
 
+  /**
+   * The ID of the post's parent blog.
+   */
   contentGroupId: string;
 
+  /**
+   * An ENUM descibing the type of this object. Should always be BLOG_POST.
+   */
   contentTypeCategory:
     | '0'
     | '1'
@@ -326,10 +426,17 @@ export interface BlogPost {
 
   created: string;
 
+  /**
+   * The ID of the user that created the post.
+   */
   createdById: string;
 
   currentlyPublished: boolean;
 
+  /**
+   * A generated ENUM descibing the current state of this Blog Post. Should always
+   * match state.
+   */
   currentState:
     | 'AUTOMATED'
     | 'AUTOMATED_DRAFT'
@@ -363,34 +470,76 @@ export interface BlogPost {
     | 'AUTOMATED_DRAFT_ABVARIANT'
     | 'AUTOMATED_LOSER_ABVARIANT';
 
+  /**
+   * The domain that the post lives on. If null, the post will default to the domain
+   * of the parent blog.
+   */
   domain: string;
 
   dynamicPageDataSourceId: string;
 
   dynamicPageDataSourceType: number;
 
+  /**
+   * For dynamic HubDB pages, the ID of the HubDB table this post references.
+   */
   dynamicPageHubDbTableId: string;
 
+  /**
+   * Boolean to determine whether or not the styles from the template should be
+   * applied.
+   */
   enableDomainStylesheets: boolean;
 
+  /**
+   * Boolean to allow overriding the AMP settings for the blog.
+   */
   enableGoogleAmpOutputOverride: boolean;
 
+  /**
+   * Boolean to determine whether or not the styles from the template should be
+   * applied.
+   */
   enableLayoutStylesheets: boolean;
 
+  /**
+   * The featuredImage of this Blog Post.
+   */
   featuredImage: string;
 
+  /**
+   * Alt Text of the featuredImage.
+   */
   featuredImageAltText: string;
 
   folderId: string;
 
+  /**
+   * Custom HTML for embed codes, javascript that should be placed before the </body>
+   * tag of the page.
+   */
   footerHtml: string;
 
+  /**
+   * Custom HTML for embed codes, javascript, etc. that goes in the <head> tag of the
+   * page.
+   */
   headHtml: string;
 
+  /**
+   * The HTML title of the post.
+   */
   htmlTitle: string;
 
+  /**
+   * Boolean to determine whether or not the Primary CSS Files should be applied.
+   */
   includeDefaultCustomCss: boolean;
 
+  /**
+   * The explicitly defined ISO 639 language code of the post. If null, the post will
+   * default to the language of the parent blog.
+   */
   language:
     | 'af'
     | 'af-na'
@@ -1151,12 +1300,22 @@ export interface BlogPost {
 
   layoutSections: { [key: string]: LayoutSection };
 
+  /**
+   * Optional override to set the URL to be used in the rel=canonical link tag on the
+   * page.
+   */
   linkRelCanonicalUrl: string;
 
   mabExperimentId: string;
 
+  /**
+   * A description that goes in <meta> tag on the page.
+   */
   metaDescription: string;
 
+  /**
+   * The internal name of the post.
+   */
   name: string;
 
   pageExpiryDate: number;
@@ -1167,52 +1326,119 @@ export interface BlogPost {
 
   pageExpiryRedirectUrl: string;
 
+  /**
+   * Set this to create a password protected page. Entering the password will be
+   * required to view the page.
+   */
   password: string;
 
+  /**
+   * The HTML of the main post body.
+   */
   postBody: string;
 
+  /**
+   * The summary of the blog post that will appear on the main listing page.
+   */
   postSummary: string;
 
+  /**
+   * Rules for require member registration to access private content.
+   */
   publicAccessRules: Array<PublicAccessRule>;
 
+  /**
+   * Boolean to determine whether or not to respect publicAccessRules.
+   */
   publicAccessRulesEnabled: boolean;
 
+  /**
+   * The date (ISO8601 format) the blog post is to be published at.
+   */
   publishDate: string;
 
+  /**
+   * Set this to true if you want to be published immediately when the schedule
+   * publish endpoint is called, and to ignore the publish_date setting.
+   */
   publishImmediately: boolean;
 
+  /**
+   * The contents of the RSS body for this Blog Post.
+   */
   rssBody: string;
 
+  /**
+   * The contents of the RSS summary for this Blog Post.
+   */
   rssSummary: string;
 
+  /**
+   * The URL slug of the blog post. This field is appended to the domain to construct
+   * the url of this post.
+   */
   slug: string;
 
+  /**
+   * An enumeration describing the current publish state of the post.
+   */
   state: string;
 
+  /**
+   * The IDs of the tags associated with this post.
+   */
   tagIds: Array<number>;
 
   themeSettingsValues: { [key: string]: unknown };
 
+  /**
+   * ID of the primary blog post that this post was translated from.
+   */
   translatedFromId: string;
 
   translations: { [key: string]: ContentLanguageVariation };
 
   updated: string;
 
+  /**
+   * The ID of the user that updated the post.
+   */
   updatedById: string;
 
+  /**
+   * A generated field representing the URL of this blog post.
+   */
   url: string;
 
+  /**
+   * Boolean to determine if this post should use a featured image.
+   */
   useFeaturedImage: boolean;
 
+  /**
+   * A data structure containing the data for all the modules inside the containers
+   * for this post. This will only be populated if the page has widget containers.
+   */
   widgetContainers: { [key: string]: unknown };
 
+  /**
+   * A data structure containing the data for all the modules for this page.
+   */
   widgets: { [key: string]: unknown };
 }
 
+/**
+ * Request body object for creating new blog post language variant.
+ */
 export interface BlogPostLanguageCloneRequestVNext {
+  /**
+   * ID of blog post to clone.
+   */
   id: string;
 
+  /**
+   * Target language of new variant.
+   */
   language?: string;
 }
 
@@ -1224,29 +1450,63 @@ export interface BreakpointStyles {
   padding: Padding;
 }
 
+/**
+ * Response object for collections of blog posts with pagination information.
+ */
 export interface CollectionResponseWithTotalBlogPostForwardPaging {
+  /**
+   * Collection of blog posts.
+   */
   results: Array<BlogPost>;
 
+  /**
+   * Total number of blog posts.
+   */
   total: number;
 
   paging?: Shared.ForwardPaging;
 }
 
+/**
+ * Response object for collections of blog post versions with pagination
+ * information.
+ */
 export interface CollectionResponseWithTotalVersionBlogPost {
+  /**
+   * Collection of blog post versions.
+   */
   results: Array<VersionBlogPost>;
 
+  /**
+   * Total number of blog post versions.
+   */
   total: number;
 
+  /**
+   * Contains information pagination of results.
+   */
   paging?: EmailsAPI.Paging;
 }
 
 export interface ColorStop {
+  /**
+   * A color defined by RGB values.
+   */
   color: RgbaColor;
 }
 
+/**
+ * Request body object for cloning content.
+ */
 export interface ContentCloneRequestVNext {
+  /**
+   * ID of the object to be cloned.
+   */
   id: string;
 
+  /**
+   * Name of the cloned object.
+   */
   cloneName?: string;
 }
 
@@ -1282,9 +1542,18 @@ export interface ContentLanguageVariation {
   tagIds?: Array<number>;
 }
 
+/**
+ * Request body object for scheduling the publish of content
+ */
 export interface ContentScheduleRequestVNext {
+  /**
+   * The ID of the object to be scheduled.
+   */
   id: string;
 
+  /**
+   * The date the object should transition from scheduled to published.
+   */
   publishDate: string;
 }
 
@@ -1309,6 +1578,9 @@ export interface LayoutSection {
 
   name: string;
 
+  /**
+   * null
+   */
   params: { [key: string]: unknown };
 
   rowMetaData: Array<RowMetaData>;
@@ -1330,13 +1602,28 @@ export type Padding = unknown;
 
 export type PublicAccessRule = unknown;
 
+/**
+ * A color defined by RGB values.
+ */
 export interface RgbaColor {
+  /**
+   * Alpha.
+   */
   a: number;
 
+  /**
+   * Blue.
+   */
   b: number;
 
+  /**
+   * Green.
+   */
   g: number;
 
+  /**
+   * Red.
+   */
   r: number;
 }
 
@@ -1353,6 +1640,9 @@ export interface SideOrCorner {
 }
 
 export interface Styles {
+  /**
+   * A color defined by RGB values.
+   */
   backgroundColor: RgbaColor;
 
   backgroundGradient: Gradient;
@@ -1370,17 +1660,33 @@ export interface Styles {
   breakpointStyles?: { [key: string]: BreakpointStyles };
 }
 
+/**
+ * Model definition of a version of a blog post.
+ */
 export interface VersionBlogPost {
+  /**
+   * The id of the version.
+   */
   id: string;
 
+  /**
+   * Model definition for a Blog Post.
+   */
   object: BlogPost;
 
   updatedAt: string;
 
+  /**
+   * Model definition for a version user. Contains addition information about the
+   * user who created a version.
+   */
   user: Shared.VersionUser;
 }
 
 export interface PostCreateParams {
+  /**
+   * The unique ID of the blog post.
+   */
   id: string;
 
   abStatus:
@@ -1395,22 +1701,51 @@ export interface PostCreateParams {
 
   abTestId: string;
 
+  /**
+   * The timestamp (ISO8601 format) when this Blog Post was deleted.
+   */
   archivedAt: number;
 
+  /**
+   * If True, the post will not show up in your dashboard, although the post could
+   * still be live.
+   */
   archivedInDashboard: boolean;
 
+  /**
+   * List of stylesheets to attach to this blog post. These stylesheets are attached
+   * to just this page. Order of precedence is bottom to top, just like in the HTML.
+   */
   attachedStylesheets: Array<{ [key: string]: unknown }>;
 
+  /**
+   * The name of the blog author associated with the post.
+   */
   authorName: string;
 
+  /**
+   * The ID of the blog author associated with this post.
+   */
   blogAuthorId: string;
 
+  /**
+   * The GUID of the marketing campaign the post is associated with.
+   */
   campaign: string;
 
+  /**
+   * ID of the object type.
+   */
   categoryId: number;
 
+  /**
+   * The ID of the post's parent blog.
+   */
   contentGroupId: string;
 
+  /**
+   * An ENUM descibing the type of this object. Should always be BLOG_POST.
+   */
   contentTypeCategory:
     | '0'
     | '1'
@@ -1431,10 +1766,17 @@ export interface PostCreateParams {
 
   created: string;
 
+  /**
+   * The ID of the user that created the post.
+   */
   createdById: string;
 
   currentlyPublished: boolean;
 
+  /**
+   * A generated ENUM descibing the current state of this Blog Post. Should always
+   * match state.
+   */
   currentState:
     | 'AUTOMATED'
     | 'AUTOMATED_DRAFT'
@@ -1468,34 +1810,76 @@ export interface PostCreateParams {
     | 'AUTOMATED_DRAFT_ABVARIANT'
     | 'AUTOMATED_LOSER_ABVARIANT';
 
+  /**
+   * The domain that the post lives on. If null, the post will default to the domain
+   * of the parent blog.
+   */
   domain: string;
 
   dynamicPageDataSourceId: string;
 
   dynamicPageDataSourceType: number;
 
+  /**
+   * For dynamic HubDB pages, the ID of the HubDB table this post references.
+   */
   dynamicPageHubDbTableId: string;
 
+  /**
+   * Boolean to determine whether or not the styles from the template should be
+   * applied.
+   */
   enableDomainStylesheets: boolean;
 
+  /**
+   * Boolean to allow overriding the AMP settings for the blog.
+   */
   enableGoogleAmpOutputOverride: boolean;
 
+  /**
+   * Boolean to determine whether or not the styles from the template should be
+   * applied.
+   */
   enableLayoutStylesheets: boolean;
 
+  /**
+   * The featuredImage of this Blog Post.
+   */
   featuredImage: string;
 
+  /**
+   * Alt Text of the featuredImage.
+   */
   featuredImageAltText: string;
 
   folderId: string;
 
+  /**
+   * Custom HTML for embed codes, javascript that should be placed before the </body>
+   * tag of the page.
+   */
   footerHtml: string;
 
+  /**
+   * Custom HTML for embed codes, javascript, etc. that goes in the <head> tag of the
+   * page.
+   */
   headHtml: string;
 
+  /**
+   * The HTML title of the post.
+   */
   htmlTitle: string;
 
+  /**
+   * Boolean to determine whether or not the Primary CSS Files should be applied.
+   */
   includeDefaultCustomCss: boolean;
 
+  /**
+   * The explicitly defined ISO 639 language code of the post. If null, the post will
+   * default to the language of the parent blog.
+   */
   language:
     | 'af'
     | 'af-na'
@@ -2256,12 +2640,22 @@ export interface PostCreateParams {
 
   layoutSections: { [key: string]: LayoutSection };
 
+  /**
+   * Optional override to set the URL to be used in the rel=canonical link tag on the
+   * page.
+   */
   linkRelCanonicalUrl: string;
 
   mabExperimentId: string;
 
+  /**
+   * A description that goes in <meta> tag on the page.
+   */
   metaDescription: string;
 
+  /**
+   * The internal name of the post.
+   */
   name: string;
 
   pageExpiryDate: number;
@@ -2272,52 +2666,110 @@ export interface PostCreateParams {
 
   pageExpiryRedirectUrl: string;
 
+  /**
+   * Set this to create a password protected page. Entering the password will be
+   * required to view the page.
+   */
   password: string;
 
+  /**
+   * The HTML of the main post body.
+   */
   postBody: string;
 
+  /**
+   * The summary of the blog post that will appear on the main listing page.
+   */
   postSummary: string;
 
+  /**
+   * Rules for require member registration to access private content.
+   */
   publicAccessRules: Array<PublicAccessRule>;
 
+  /**
+   * Boolean to determine whether or not to respect publicAccessRules.
+   */
   publicAccessRulesEnabled: boolean;
 
+  /**
+   * The date (ISO8601 format) the blog post is to be published at.
+   */
   publishDate: string;
 
+  /**
+   * Set this to true if you want to be published immediately when the schedule
+   * publish endpoint is called, and to ignore the publish_date setting.
+   */
   publishImmediately: boolean;
 
+  /**
+   * The contents of the RSS body for this Blog Post.
+   */
   rssBody: string;
 
+  /**
+   * The contents of the RSS summary for this Blog Post.
+   */
   rssSummary: string;
 
+  /**
+   * The URL slug of the blog post. This field is appended to the domain to construct
+   * the url of this post.
+   */
   slug: string;
 
+  /**
+   * An enumeration describing the current publish state of the post.
+   */
   state: string;
 
+  /**
+   * The IDs of the tags associated with this post.
+   */
   tagIds: Array<number>;
 
   themeSettingsValues: { [key: string]: unknown };
 
+  /**
+   * ID of the primary blog post that this post was translated from.
+   */
   translatedFromId: string;
 
   translations: { [key: string]: ContentLanguageVariation };
 
   updated: string;
 
+  /**
+   * The ID of the user that updated the post.
+   */
   updatedById: string;
 
+  /**
+   * A generated field representing the URL of this blog post.
+   */
   url: string;
 
+  /**
+   * Boolean to determine if this post should use a featured image.
+   */
   useFeaturedImage: boolean;
 
+  /**
+   * A data structure containing the data for all the modules inside the containers
+   * for this post. This will only be populated if the page has widget containers.
+   */
   widgetContainers: { [key: string]: unknown };
 
+  /**
+   * A data structure containing the data for all the modules for this page.
+   */
   widgets: { [key: string]: unknown };
 }
 
 export interface PostUpdateParams {
   /**
-   * Body param:
+   * Body param: The unique ID of the blog post.
    */
   id: string;
 
@@ -2340,47 +2792,51 @@ export interface PostUpdateParams {
   abTestId: string;
 
   /**
-   * Body param:
+   * Body param: The timestamp (ISO8601 format) when this Blog Post was deleted.
    */
   archivedAt: number;
 
   /**
-   * Body param:
+   * Body param: If True, the post will not show up in your dashboard, although the
+   * post could still be live.
    */
   archivedInDashboard: boolean;
 
   /**
-   * Body param:
+   * Body param: List of stylesheets to attach to this blog post. These stylesheets
+   * are attached to just this page. Order of precedence is bottom to top, just like
+   * in the HTML.
    */
   attachedStylesheets: Array<{ [key: string]: unknown }>;
 
   /**
-   * Body param:
+   * Body param: The name of the blog author associated with the post.
    */
   authorName: string;
 
   /**
-   * Body param:
+   * Body param: The ID of the blog author associated with this post.
    */
   blogAuthorId: string;
 
   /**
-   * Body param:
+   * Body param: The GUID of the marketing campaign the post is associated with.
    */
   campaign: string;
 
   /**
-   * Body param:
+   * Body param: ID of the object type.
    */
   categoryId: number;
 
   /**
-   * Body param:
+   * Body param: The ID of the post's parent blog.
    */
   contentGroupId: string;
 
   /**
-   * Body param:
+   * Body param: An ENUM descibing the type of this object. Should always be
+   * BLOG_POST.
    */
   contentTypeCategory:
     | '0'
@@ -2406,7 +2862,7 @@ export interface PostUpdateParams {
   created: string;
 
   /**
-   * Body param:
+   * Body param: The ID of the user that created the post.
    */
   createdById: string;
 
@@ -2416,7 +2872,8 @@ export interface PostUpdateParams {
   currentlyPublished: boolean;
 
   /**
-   * Body param:
+   * Body param: A generated ENUM descibing the current state of this Blog Post.
+   * Should always match state.
    */
   currentState:
     | 'AUTOMATED'
@@ -2452,7 +2909,8 @@ export interface PostUpdateParams {
     | 'AUTOMATED_LOSER_ABVARIANT';
 
   /**
-   * Body param:
+   * Body param: The domain that the post lives on. If null, the post will default to
+   * the domain of the parent blog.
    */
   domain: string;
 
@@ -2467,32 +2925,35 @@ export interface PostUpdateParams {
   dynamicPageDataSourceType: number;
 
   /**
-   * Body param:
+   * Body param: For dynamic HubDB pages, the ID of the HubDB table this post
+   * references.
    */
   dynamicPageHubDbTableId: string;
 
   /**
-   * Body param:
+   * Body param: Boolean to determine whether or not the styles from the template
+   * should be applied.
    */
   enableDomainStylesheets: boolean;
 
   /**
-   * Body param:
+   * Body param: Boolean to allow overriding the AMP settings for the blog.
    */
   enableGoogleAmpOutputOverride: boolean;
 
   /**
-   * Body param:
+   * Body param: Boolean to determine whether or not the styles from the template
+   * should be applied.
    */
   enableLayoutStylesheets: boolean;
 
   /**
-   * Body param:
+   * Body param: The featuredImage of this Blog Post.
    */
   featuredImage: string;
 
   /**
-   * Body param:
+   * Body param: Alt Text of the featuredImage.
    */
   featuredImageAltText: string;
 
@@ -2502,27 +2963,31 @@ export interface PostUpdateParams {
   folderId: string;
 
   /**
-   * Body param:
+   * Body param: Custom HTML for embed codes, javascript that should be placed before
+   * the </body> tag of the page.
    */
   footerHtml: string;
 
   /**
-   * Body param:
+   * Body param: Custom HTML for embed codes, javascript, etc. that goes in the
+   * <head> tag of the page.
    */
   headHtml: string;
 
   /**
-   * Body param:
+   * Body param: The HTML title of the post.
    */
   htmlTitle: string;
 
   /**
-   * Body param:
+   * Body param: Boolean to determine whether or not the Primary CSS Files should be
+   * applied.
    */
   includeDefaultCustomCss: boolean;
 
   /**
-   * Body param:
+   * Body param: The explicitly defined ISO 639 language code of the post. If null,
+   * the post will default to the language of the parent blog.
    */
   language:
     | 'af'
@@ -3288,7 +3753,8 @@ export interface PostUpdateParams {
   layoutSections: { [key: string]: LayoutSection };
 
   /**
-   * Body param:
+   * Body param: Optional override to set the URL to be used in the rel=canonical
+   * link tag on the page.
    */
   linkRelCanonicalUrl: string;
 
@@ -3298,12 +3764,12 @@ export interface PostUpdateParams {
   mabExperimentId: string;
 
   /**
-   * Body param:
+   * Body param: A description that goes in <meta> tag on the page.
    */
   metaDescription: string;
 
   /**
-   * Body param:
+   * Body param: The internal name of the post.
    */
   name: string;
 
@@ -3328,62 +3794,66 @@ export interface PostUpdateParams {
   pageExpiryRedirectUrl: string;
 
   /**
-   * Body param:
+   * Body param: Set this to create a password protected page. Entering the password
+   * will be required to view the page.
    */
   password: string;
 
   /**
-   * Body param:
+   * Body param: The HTML of the main post body.
    */
   postBody: string;
 
   /**
-   * Body param:
+   * Body param: The summary of the blog post that will appear on the main listing
+   * page.
    */
   postSummary: string;
 
   /**
-   * Body param:
+   * Body param: Rules for require member registration to access private content.
    */
   publicAccessRules: Array<PublicAccessRule>;
 
   /**
-   * Body param:
+   * Body param: Boolean to determine whether or not to respect publicAccessRules.
    */
   publicAccessRulesEnabled: boolean;
 
   /**
-   * Body param:
+   * Body param: The date (ISO8601 format) the blog post is to be published at.
    */
   publishDate: string;
 
   /**
-   * Body param:
+   * Body param: Set this to true if you want to be published immediately when the
+   * schedule publish endpoint is called, and to ignore the publish_date setting.
    */
   publishImmediately: boolean;
 
   /**
-   * Body param:
+   * Body param: The contents of the RSS body for this Blog Post.
    */
   rssBody: string;
 
   /**
-   * Body param:
+   * Body param: The contents of the RSS summary for this Blog Post.
    */
   rssSummary: string;
 
   /**
-   * Body param:
+   * Body param: The URL slug of the blog post. This field is appended to the domain
+   * to construct the url of this post.
    */
   slug: string;
 
   /**
-   * Body param:
+   * Body param: An enumeration describing the current publish state of the post.
    */
   state: string;
 
   /**
-   * Body param:
+   * Body param: The IDs of the tags associated with this post.
    */
   tagIds: Array<number>;
 
@@ -3393,7 +3863,7 @@ export interface PostUpdateParams {
   themeSettingsValues: { [key: string]: unknown };
 
   /**
-   * Body param:
+   * Body param: ID of the primary blog post that this post was translated from.
    */
   translatedFromId: string;
 
@@ -3408,63 +3878,101 @@ export interface PostUpdateParams {
   updated: string;
 
   /**
-   * Body param:
+   * Body param: The ID of the user that updated the post.
    */
   updatedById: string;
 
   /**
-   * Body param:
+   * Body param: A generated field representing the URL of this blog post.
    */
   url: string;
 
   /**
-   * Body param:
+   * Body param: Boolean to determine if this post should use a featured image.
    */
   useFeaturedImage: boolean;
 
   /**
-   * Body param:
+   * Body param: A data structure containing the data for all the modules inside the
+   * containers for this post. This will only be populated if the page has widget
+   * containers.
    */
   widgetContainers: { [key: string]: unknown };
 
   /**
-   * Body param:
+   * Body param: A data structure containing the data for all the modules for this
+   * page.
    */
   widgets: { [key: string]: unknown };
 
   /**
-   * Query param:
+   * Query param: Specifies whether to update deleted blog posts. Defaults to
+   * `false`.
    */
   archived?: boolean;
 }
 
 export interface PostListParams extends PageParams {
+  /**
+   * Specifies whether to return deleted blog posts. Defaults to `false`.
+   */
   archived?: boolean;
 
+  /**
+   * Only return blog posts created after the specified time.
+   */
   createdAfter?: string;
 
+  /**
+   * Only return blog posts created at exactly the specified time.
+   */
   createdAt?: string;
 
+  /**
+   * Only return blog posts created before the specified time.
+   */
   createdBefore?: string;
 
   property?: string;
 
+  /**
+   * Specifies which fields to use for sorting results. Valid fields are `createdAt`
+   * (default), `name`, `updatedAt`, `createdBy`, `updatedBy`.
+   */
   sort?: Array<string>;
 
+  /**
+   * Only return blog posts last updated after the specified time.
+   */
   updatedAfter?: string;
 
+  /**
+   * Only return blog posts last updated at exactly the specified time.
+   */
   updatedAt?: string;
 
+  /**
+   * Only return blog posts last updated before the specified time.
+   */
   updatedBefore?: string;
 }
 
 export interface PostDeleteParams {
+  /**
+   * Whether to return only results that have been deleted.
+   */
   archived?: boolean;
 }
 
 export interface PostAttachToLangGroupParams {
+  /**
+   * ID of the object to add to a multi-language group.
+   */
   id: string;
 
+  /**
+   * Designated language of the object to add to a multi-language group.
+   */
   language:
     | 'af'
     | 'af-na'
@@ -4223,64 +4731,119 @@ export interface PostAttachToLangGroupParams {
     | 'zu'
     | 'zu-za';
 
+  /**
+   * ID of primary language object in multi-language group.
+   */
   primaryId: string;
 
+  /**
+   * Primary language of the multi-language group.
+   */
   primaryLanguage?: string;
 }
 
 export interface PostCloneParams {
+  /**
+   * ID of the object to be cloned.
+   */
   id: string;
 
+  /**
+   * Name of the cloned object.
+   */
   cloneName?: string;
 }
 
 export interface PostCreateLangVariationParams {
+  /**
+   * ID of blog post to clone.
+   */
   id: string;
 
+  /**
+   * Target language of new variant.
+   */
   language?: string;
 }
 
 export interface PostDetachFromLangGroupParams {
+  /**
+   * ID of the object to remove from a multi-language group.
+   */
   id: string;
 }
 
 export interface PostGetPreviousVersionParams {
+  /**
+   * The ID of the blog post.
+   */
   objectId: string;
 }
 
 export interface PostGetPreviousVersionsParams {
+  /**
+   * The cursor token value to get the next set of results. You can get this from the
+   * `paging.next.after` JSON property of a paged response containing more results.
+   */
   after?: string;
 
   before?: string;
 
+  /**
+   * The maximum number of results to return. Default is 100.
+   */
   limit?: number;
 }
 
 export interface PostReadParams {
+  /**
+   * Specifies whether to return deleted blog posts. Defaults to `false`.
+   */
   archived?: boolean;
 
+  /**
+   * Specific properties to return.
+   */
   property?: string;
 }
 
 export interface PostRestorePreviousVersionParams {
+  /**
+   * The ID of the blog post.
+   */
   objectId: string;
 }
 
 export interface PostRestorePreviousVersionToDraftParams {
+  /**
+   * The ID of the blog post.
+   */
   objectId: string;
 }
 
 export interface PostScheduleParams {
+  /**
+   * The ID of the object to be scheduled.
+   */
   id: string;
 
+  /**
+   * The date the object should transition from scheduled to published.
+   */
   publishDate: string;
 }
 
 export interface PostSetLangPrimaryParams {
+  /**
+   * ID of object to set as primary in multi-language group.
+   */
   id: string;
 }
 
 export interface PostUpdateDraftParams {
+  /**
+   * The unique ID of the blog post.
+   */
   id: string;
 
   abStatus:
@@ -4295,22 +4858,51 @@ export interface PostUpdateDraftParams {
 
   abTestId: string;
 
+  /**
+   * The timestamp (ISO8601 format) when this Blog Post was deleted.
+   */
   archivedAt: number;
 
+  /**
+   * If True, the post will not show up in your dashboard, although the post could
+   * still be live.
+   */
   archivedInDashboard: boolean;
 
+  /**
+   * List of stylesheets to attach to this blog post. These stylesheets are attached
+   * to just this page. Order of precedence is bottom to top, just like in the HTML.
+   */
   attachedStylesheets: Array<{ [key: string]: unknown }>;
 
+  /**
+   * The name of the blog author associated with the post.
+   */
   authorName: string;
 
+  /**
+   * The ID of the blog author associated with this post.
+   */
   blogAuthorId: string;
 
+  /**
+   * The GUID of the marketing campaign the post is associated with.
+   */
   campaign: string;
 
+  /**
+   * ID of the object type.
+   */
   categoryId: number;
 
+  /**
+   * The ID of the post's parent blog.
+   */
   contentGroupId: string;
 
+  /**
+   * An ENUM descibing the type of this object. Should always be BLOG_POST.
+   */
   contentTypeCategory:
     | '0'
     | '1'
@@ -4331,10 +4923,17 @@ export interface PostUpdateDraftParams {
 
   created: string;
 
+  /**
+   * The ID of the user that created the post.
+   */
   createdById: string;
 
   currentlyPublished: boolean;
 
+  /**
+   * A generated ENUM descibing the current state of this Blog Post. Should always
+   * match state.
+   */
   currentState:
     | 'AUTOMATED'
     | 'AUTOMATED_DRAFT'
@@ -4368,34 +4967,76 @@ export interface PostUpdateDraftParams {
     | 'AUTOMATED_DRAFT_ABVARIANT'
     | 'AUTOMATED_LOSER_ABVARIANT';
 
+  /**
+   * The domain that the post lives on. If null, the post will default to the domain
+   * of the parent blog.
+   */
   domain: string;
 
   dynamicPageDataSourceId: string;
 
   dynamicPageDataSourceType: number;
 
+  /**
+   * For dynamic HubDB pages, the ID of the HubDB table this post references.
+   */
   dynamicPageHubDbTableId: string;
 
+  /**
+   * Boolean to determine whether or not the styles from the template should be
+   * applied.
+   */
   enableDomainStylesheets: boolean;
 
+  /**
+   * Boolean to allow overriding the AMP settings for the blog.
+   */
   enableGoogleAmpOutputOverride: boolean;
 
+  /**
+   * Boolean to determine whether or not the styles from the template should be
+   * applied.
+   */
   enableLayoutStylesheets: boolean;
 
+  /**
+   * The featuredImage of this Blog Post.
+   */
   featuredImage: string;
 
+  /**
+   * Alt Text of the featuredImage.
+   */
   featuredImageAltText: string;
 
   folderId: string;
 
+  /**
+   * Custom HTML for embed codes, javascript that should be placed before the </body>
+   * tag of the page.
+   */
   footerHtml: string;
 
+  /**
+   * Custom HTML for embed codes, javascript, etc. that goes in the <head> tag of the
+   * page.
+   */
   headHtml: string;
 
+  /**
+   * The HTML title of the post.
+   */
   htmlTitle: string;
 
+  /**
+   * Boolean to determine whether or not the Primary CSS Files should be applied.
+   */
   includeDefaultCustomCss: boolean;
 
+  /**
+   * The explicitly defined ISO 639 language code of the post. If null, the post will
+   * default to the language of the parent blog.
+   */
   language:
     | 'af'
     | 'af-na'
@@ -5156,12 +5797,22 @@ export interface PostUpdateDraftParams {
 
   layoutSections: { [key: string]: LayoutSection };
 
+  /**
+   * Optional override to set the URL to be used in the rel=canonical link tag on the
+   * page.
+   */
   linkRelCanonicalUrl: string;
 
   mabExperimentId: string;
 
+  /**
+   * A description that goes in <meta> tag on the page.
+   */
   metaDescription: string;
 
+  /**
+   * The internal name of the post.
+   */
   name: string;
 
   pageExpiryDate: number;
@@ -5172,52 +5823,116 @@ export interface PostUpdateDraftParams {
 
   pageExpiryRedirectUrl: string;
 
+  /**
+   * Set this to create a password protected page. Entering the password will be
+   * required to view the page.
+   */
   password: string;
 
+  /**
+   * The HTML of the main post body.
+   */
   postBody: string;
 
+  /**
+   * The summary of the blog post that will appear on the main listing page.
+   */
   postSummary: string;
 
+  /**
+   * Rules for require member registration to access private content.
+   */
   publicAccessRules: Array<PublicAccessRule>;
 
+  /**
+   * Boolean to determine whether or not to respect publicAccessRules.
+   */
   publicAccessRulesEnabled: boolean;
 
+  /**
+   * The date (ISO8601 format) the blog post is to be published at.
+   */
   publishDate: string;
 
+  /**
+   * Set this to true if you want to be published immediately when the schedule
+   * publish endpoint is called, and to ignore the publish_date setting.
+   */
   publishImmediately: boolean;
 
+  /**
+   * The contents of the RSS body for this Blog Post.
+   */
   rssBody: string;
 
+  /**
+   * The contents of the RSS summary for this Blog Post.
+   */
   rssSummary: string;
 
+  /**
+   * The URL slug of the blog post. This field is appended to the domain to construct
+   * the url of this post.
+   */
   slug: string;
 
+  /**
+   * An enumeration describing the current publish state of the post.
+   */
   state: string;
 
+  /**
+   * The IDs of the tags associated with this post.
+   */
   tagIds: Array<number>;
 
   themeSettingsValues: { [key: string]: unknown };
 
+  /**
+   * ID of the primary blog post that this post was translated from.
+   */
   translatedFromId: string;
 
   translations: { [key: string]: ContentLanguageVariation };
 
   updated: string;
 
+  /**
+   * The ID of the user that updated the post.
+   */
   updatedById: string;
 
+  /**
+   * A generated field representing the URL of this blog post.
+   */
   url: string;
 
+  /**
+   * Boolean to determine if this post should use a featured image.
+   */
   useFeaturedImage: boolean;
 
+  /**
+   * A data structure containing the data for all the modules inside the containers
+   * for this post. This will only be populated if the page has widget containers.
+   */
   widgetContainers: { [key: string]: unknown };
 
+  /**
+   * A data structure containing the data for all the modules for this page.
+   */
   widgets: { [key: string]: unknown };
 }
 
 export interface PostUpdateLangsParams {
+  /**
+   * Map of object IDs to associated languages of object in the multi-language group.
+   */
   languages: { [key: string]: string };
 
+  /**
+   * ID of the primary object in the multi-language group.
+   */
   primaryId: string;
 }
 

@@ -48,7 +48,8 @@ export class Hubdb extends APIResource {
   tables: TablesAPI.Tables = new TablesAPI.Tables(this._client);
 
   /**
-   * Archive a table
+   * Archive (soft delete) an existing HubDB table. This archives both the published
+   * and draft versions.
    */
   archiveTable(tableIDOrName: string, options?: RequestOptions): APIPromise<void> {
     return this._client.delete(path`/cms/v3/hubdb/tables/${tableIDOrName}`, {
@@ -58,7 +59,9 @@ export class Hubdb extends APIResource {
   }
 
   /**
-   * Clone a table
+   * Clone an existing HubDB table. The `newName` and `newLabel` of the new table can
+   * be sent as JSON in the request body. This will create the cloned table as a
+   * draft.
    */
   cloneDraftTable(
     tableIDOrName: string,
@@ -69,7 +72,7 @@ export class Hubdb extends APIResource {
   }
 
   /**
-   * Clone a row
+   * Clones a single row in the draft version of a table.
    */
   cloneDraftTableRow(
     rowID: string,
@@ -84,7 +87,8 @@ export class Hubdb extends APIResource {
   }
 
   /**
-   * Clone rows in batch
+   * Clones rows in the draft version of the specified table, given a set of row ids.
+   * Maximum of 100 row ids per call.
    */
   cloneDraftTableRows(
     tableIDOrName: string,
@@ -98,7 +102,9 @@ export class Hubdb extends APIResource {
   }
 
   /**
-   * Create rows in batch
+   * Creates rows in the draft version of the specified table, given an array of row
+   * objects. Maximum of 100 row object per call. See the overview section for more
+   * details with an example.
    */
   createDraftTableRows(
     tableIDOrName: string,
@@ -112,14 +118,17 @@ export class Hubdb extends APIResource {
   }
 
   /**
-   * Create a new table
+   * Creates a new draft HubDB table given a JSON schema. The table name and label
+   * should be unique for each account.
    */
   createTable(body: HubdbCreateTableParams, options?: RequestOptions): APIPromise<HubDBTableV3> {
     return this._client.post('/cms/v3/hubdb/tables', { body, ...options });
   }
 
   /**
-   * Add a new row to a table
+   * Add a new row to a HubDB table. New rows will be added to the draft version of
+   * the table. Use the `/publish` endpoint to push these changes to published
+   * version.
    */
   createTableRow(
     tableIDOrName: string,
@@ -130,7 +139,7 @@ export class Hubdb extends APIResource {
   }
 
   /**
-   * Export a draft table
+   * Exports the draft version of a table to CSV / EXCEL format.
    */
   exportDraftTable(
     tableIDOrName: string,
@@ -146,7 +155,7 @@ export class Hubdb extends APIResource {
   }
 
   /**
-   * Export a published version of a table
+   * Exports the published version of a table in a specified format.
    */
   exportTable(
     tableIDOrName: string,
@@ -162,7 +171,8 @@ export class Hubdb extends APIResource {
   }
 
   /**
-   * Return all draft tables
+   * Returns the details for each draft table defined in the specified account,
+   * including column definitions.
    */
   getAllDraftTables(
     query: HubdbGetAllDraftTablesParams | null | undefined = {},
@@ -172,7 +182,8 @@ export class Hubdb extends APIResource {
   }
 
   /**
-   * Get all published tables
+   * Returns the details for the published version of each table defined in an
+   * account, including column definitions.
    */
   getAllTables(
     query: HubdbGetAllTablesParams | null | undefined = {},
@@ -182,7 +193,9 @@ export class Hubdb extends APIResource {
   }
 
   /**
-   * Get details for a draft table
+   * Get the details for the draft version of a specific HubDB table. This will
+   * include the definitions for the columns in the table and the number of rows in
+   * the table.
    */
   getDraftTableDetailsByID(
     tableIDOrName: string,
@@ -193,7 +206,7 @@ export class Hubdb extends APIResource {
   }
 
   /**
-   * Get a row from the draft table
+   * Get a single row by ID from a table's draft version.
    */
   getDraftTableRowByID(
     rowID: string,
@@ -208,7 +221,13 @@ export class Hubdb extends APIResource {
   }
 
   /**
-   * Get details of a published table
+   * Returns the details for the published version of the specified table. This will
+   * include the definitions for the columns in the table and the number of rows in
+   * the table.
+   *
+   * **Note:** This endpoint can be accessed without any authentication if the table
+   * is set to be allowed for public access. To do so, you'll need to include the
+   * HubSpot account ID in a `portalId` query parameter.
    */
   getTableDetails(
     tableIDOrName: string,
@@ -219,7 +238,9 @@ export class Hubdb extends APIResource {
   }
 
   /**
-   * Get a table row
+   * Get a single row by ID from the published version of a table. **Note:** This
+   * endpoint can be accessed without any authentication, if the table is set to be
+   * allowed for public access.
    */
   getTableRow(
     rowID: string,
@@ -231,7 +252,16 @@ export class Hubdb extends APIResource {
   }
 
   /**
-   * Get rows for a table
+   * Returns a set of rows in the published version of the specified table. Row
+   * results can be filtered and sorted. Filtering and sorting options will be sent
+   * as query parameters to the API request. For example, by adding the query
+   * parameters `column1__gt=5&sort=-column1`, API returns the rows with values for
+   * column `column1` greater than 5 and in the descending order of `column1` values.
+   * Refer to the
+   * [overview section](https://developers.hubspot.com/docs/api/cms/hubdb#filtering-and-sorting-table-rows)
+   * for detailed filtering and sorting options. **Note:** This endpoint can be
+   * accessed without any authentication, if the table is set to be allowed for
+   * public access.
    */
   getTableRows(
     tableIDOrName: string,
@@ -242,7 +272,15 @@ export class Hubdb extends APIResource {
   }
 
   /**
-   * Import data into draft table
+   * Import the contents of a CSV file into an existing HubDB table. The data will
+   * always be imported into the draft version of the table. Use the `/publish`
+   * endpoint to push these changes to the published version. This endpoint takes a
+   * multi-part POST request. The first part will be a set of JSON-formatted options
+   * for the import and you can specify this with the name as `config`. The second
+   * part will be the CSV file you want to import and you can specify this with the
+   * name as `file`. Refer the
+   * [overview section](https://developers.hubspot.com/docs/api/cms/hubdb#importing-tables)
+   * to check the details and format of the JSON-formatted options for the import.
    */
   importDraftTable(
     tableIDOrName: string,
@@ -256,7 +294,9 @@ export class Hubdb extends APIResource {
   }
 
   /**
-   * Publish a table from draft
+   * Publishes the table by copying the data and table schema changes from draft
+   * version to the published version, meaning any website pages using data from the
+   * table will be updated.
    */
   publishDraftTable(
     tableIDOrName: string,
@@ -271,7 +311,7 @@ export class Hubdb extends APIResource {
   }
 
   /**
-   * Permanently deletes a row
+   * Permanently deletes a row from a table's draft version.
    */
   purgeDraftTableRow(
     rowID: string,
@@ -286,7 +326,8 @@ export class Hubdb extends APIResource {
   }
 
   /**
-   * Permanently deletes rows
+   * Permanently deletes rows from the draft version of the table, given a set of row
+   * IDs. Maximum of 100 row IDs per call.
    */
   purgeDraftTableRows(
     tableIDOrName: string,
@@ -301,7 +342,8 @@ export class Hubdb extends APIResource {
   }
 
   /**
-   * Get a set of rows from draft table
+   * Returns rows in the draft version of the specified table, given a set of row
+   * IDs.
    */
   readDraftTableRows(
     tableIDOrName: string,
@@ -315,7 +357,9 @@ export class Hubdb extends APIResource {
   }
 
   /**
-   * Get a set of rows
+   * Returns rows in the published version of the specified table, given a set of row
+   * IDs. **Note:** This endpoint can be accessed without any authentication if the
+   * table is set to be allowed for public access.
    */
   readTableRows(
     tableIDOrName: string,
@@ -329,7 +373,7 @@ export class Hubdb extends APIResource {
   }
 
   /**
-   * Delete a table version
+   * Delete a specific version of a table
    */
   removeTableVersion(
     versionID: number,
@@ -344,7 +388,10 @@ export class Hubdb extends APIResource {
   }
 
   /**
-   * Replaces an existing row
+   * Replace a single row in the draft version of a table. All column values must be
+   * specified. If a column has a value in the target table and this request doesn't
+   * define that value, it will be deleted. See the "Create a row" endpoint for
+   * instructions on how to format the JSON row definitions.
    */
   replaceDraftTableRow(
     rowID: string,
@@ -359,7 +406,10 @@ export class Hubdb extends APIResource {
   }
 
   /**
-   * Replace rows in batch in draft table
+   * Replaces multiple rows as a batch in the draft version of the table, with a
+   * maximum of 100 rows per call. See the endpoint
+   * `PUT /tables/{tableIdOrName}/rows/{rowId}/draft` for details on updating a
+   * single row.
    */
   replaceDraftTableRows(
     tableIDOrName: string,
@@ -373,7 +423,9 @@ export class Hubdb extends APIResource {
   }
 
   /**
-   * Reset a draft table
+   * Replaces the data in the draft version of the table with values from the
+   * published version. Any unpublished changes in the draft will be lost after this
+   * call is made.
    */
   resetDraftTable(
     tableIDOrName: string,
@@ -388,7 +440,8 @@ export class Hubdb extends APIResource {
   }
 
   /**
-   * Unpublish a table
+   * Unpublishes the table, meaning any website pages using data from the table will
+   * not render any data.
    */
   unpublishTable(
     tableIDOrName: string,
@@ -403,7 +456,14 @@ export class Hubdb extends APIResource {
   }
 
   /**
-   * Update an existing table
+   * Update an existing HubDB table. You can use this endpoint to add or remove
+   * columns to the table as well as restore an archived table. Tables updated using
+   * the endpoint will only modify the draft verion of the table. Use the `/publish`
+   * endpoint to push all the changes to the published version. To restore a table,
+   * include the query parameter `archived=true` and `"archived": false` in the json
+   * body. **Note:** You need to include all the columns in the input when you are
+   * adding/removing/updating a column. If you do not include an already existing
+   * column in the request, it will be deleted.
    */
   updateDraftTable(
     tableIDOrName: string,
@@ -419,7 +479,10 @@ export class Hubdb extends APIResource {
   }
 
   /**
-   * Updates an existing row
+   * Sparse updates a single row in the table's draft version. All the column values
+   * need not be specified. Only the columns or fields that needs to be modified can
+   * be specified. See the "Create a row" endpoint for instructions on how to format
+   * the JSON row definitions.
    */
   updateDraftTableRow(
     rowID: string,
@@ -434,7 +497,10 @@ export class Hubdb extends APIResource {
   }
 
   /**
-   * Update rows in batch in draft table
+   * Updates multiple rows as a batch in the draft version of the table, with a
+   * maximum of 100 rows per call. See the endpoint
+   * `PATCH /tables/{tableIdOrName}/rows/{rowId}/draft` for details on updating a
+   * single row.
    */
   updateDraftTableRows(
     tableIDOrName: string,
@@ -513,10 +579,19 @@ export interface CollectionResponseWithTotalHubDBTableV3ForwardPaging {
 }
 
 export interface Column {
+  /**
+   * Label of the column
+   */
   label: string;
 
+  /**
+   * Name of the column
+   */
   name: string;
 
+  /**
+   * Type of the column
+   */
   type:
     | 'NULL'
     | 'TEXT'
@@ -541,6 +616,9 @@ export interface Column {
     | 'HUBSPOT_VIDEO'
     | 'EMBED';
 
+  /**
+   * Column Id
+   */
   id?: string;
 
   createdAt?: string;
@@ -551,18 +629,41 @@ export interface Column {
 
   deleted?: boolean;
 
+  description?: string;
+
+  /**
+   * Foreign Column id
+   */
   foreignColumnId?: number;
 
+  /**
+   * Foreign Ids
+   */
   foreignIds?: Array<ForeignID>;
 
+  /**
+   * Foreign ids
+   */
   foreignIdsById?: { [key: string]: ForeignID };
 
+  /**
+   * Foreign ids by name
+   */
   foreignIdsByName?: { [key: string]: ForeignID };
 
+  /**
+   * Foreign table id referenced
+   */
   foreignTableId?: number;
 
+  /**
+   * Number of options available
+   */
   optionCount?: number;
 
+  /**
+   * Options to choose for select and multi-select columns
+   */
   options?: Array<CRMAPI.Option>;
 
   updatedAt?: string;
@@ -571,18 +672,36 @@ export interface Column {
 
   updatedByUserId?: number;
 
+  /**
+   * Column width for HubDB UI
+   */
   width?: number;
 }
 
 export interface ColumnRequest {
+  /**
+   * Column Id
+   */
   id: number;
 
+  /**
+   * Label of the column
+   */
   label: string;
 
+  /**
+   * Name of the column
+   */
   name: string;
 
+  /**
+   * Options to choose for select and multi-select columns
+   */
   options: Array<CRMAPI.Option>;
 
+  /**
+   * Type of the column
+   */
   type:
     | 'NULL'
     | 'TEXT'
@@ -607,8 +726,14 @@ export interface ColumnRequest {
     | 'HUBSPOT_VIDEO'
     | 'EMBED';
 
+  /**
+   * The id of the column from another table to which the column refers/points to.
+   */
   foreignColumnId?: number;
 
+  /**
+   * The id of another table to which the column refers/points to.
+   */
   foreignTableId?: number;
 
   maxNumberOfCharacters?: number;
@@ -625,12 +750,21 @@ export interface ForeignID {
 }
 
 export interface HubDBTableCloneRequest {
+  /**
+   * Specifies whether to copy the rows during clone
+   */
   copyRows: boolean;
 
   isHubspotDefined: boolean;
 
+  /**
+   * The new label for the cloned table
+   */
   newLabel?: string;
 
+  /**
+   * The new name for the cloned table
+   */
   newName?: string;
 }
 
@@ -641,140 +775,303 @@ export interface HubDBTableRowBatchCloneRequest {
 }
 
 export interface HubDBTableRowV3 {
+  /**
+   * List of key value pairs with the column name and column value
+   */
   values: { [key: string]: unknown };
 
+  /**
+   * The id of the table row
+   */
   id?: string;
 
+  /**
+   * Specifies the value for the column child table id
+   */
   childTableId?: string;
 
+  /**
+   * Timestamp at which the row is created
+   */
   createdAt?: string;
 
+  /**
+   * Specifies the value for `hs_name` column, which will be used as title in the
+   * dynamic pages
+   */
   name?: string;
 
+  /**
+   * Specifies the value for `hs_path` column, which will be used as slug in the
+   * dynamic pages
+   */
   path?: string;
 
   publishedAt?: string;
 
+  /**
+   * Timestamp at which the row is updated last time
+   */
   updatedAt?: string;
 }
 
 export interface HubDBTableRowV3BatchUpdateRequest {
+  /**
+   * The id of the table row
+   */
   id: string;
 
+  /**
+   * List of key value pairs with the column name and column value
+   */
   values: { [key: string]: Variant };
 
+  /**
+   * Specifies the value for the column child table id
+   */
   childTableId?: number;
 
   displayIndex?: number;
 
+  /**
+   * Specifies the value for `hs_name` column, which will be used as title in the
+   * dynamic pages
+   */
   name?: string;
 
+  /**
+   * Specifies the value for `hs_path` column, which will be used as slug in the
+   * dynamic pages
+   */
   path?: string;
 }
 
 export interface HubDBTableRowV3Request {
+  /**
+   * List of key value pairs with the column name and column value
+   */
   values: { [key: string]: Variant };
 
+  /**
+   * Specifies the value for the column child table id
+   */
   childTableId?: number;
 
   displayIndex?: number;
 
+  /**
+   * Specifies the value for `hs_name` column, which will be used as title in the
+   * dynamic pages
+   */
   name?: string;
 
+  /**
+   * Specifies the value for `hs_path` column, which will be used as slug in the
+   * dynamic pages
+   */
   path?: string;
 }
 
 export interface HubDBTableV3 {
   deletedAt: string;
 
+  /**
+   * Label of the table
+   */
   label: string;
 
+  /**
+   * Name of the table
+   */
   name: string;
 
+  /**
+   * Id of the table
+   */
   id?: string;
 
+  /**
+   * Specifies whether child tables can be created
+   */
   allowChildTables?: boolean;
 
+  /**
+   * Specifies whether the table can be read by public without authorization
+   */
   allowPublicApiAccess?: boolean;
 
+  /**
+   * Number of columns including deleted
+   */
   columnCount?: number;
 
+  /**
+   * List of columns in the table
+   */
   columns?: Array<Column>;
 
+  /**
+   * Timestamp at which the table is created
+   */
   createdAt?: string;
 
   createdBy?: SimpleUser;
 
   deleted?: boolean;
 
+  /**
+   * Specifies the key value pairs of the
+   * [metadata fields](https://developers.hubspot.com/docs/cms/guides/dynamic-pages/hubdb#dynamic-pages)
+   * with the associated column IDs.
+   */
   dynamicMetaTags?: { [key: string]: number };
 
+  /**
+   * Specifies creation of multi-level dynamic pages using child tables
+   */
   enableChildTablePages?: boolean;
 
   isOrderedManually?: boolean;
 
   published?: boolean;
 
+  /**
+   * Timestamp at which the table is published recently
+   */
   publishedAt?: string;
 
+  /**
+   * Number of rows in the table
+   */
   rowCount?: number;
 
+  /**
+   * Timestamp at which the table is updated recently
+   */
   updatedAt?: string;
 
   updatedBy?: SimpleUser;
 
+  /**
+   * Specifies whether the table can be used for creation of dynamic pages
+   */
   useForPages?: boolean;
 }
 
 export interface HubDBTableV3Request {
+  /**
+   * Label of the table
+   */
   label: string;
 
+  /**
+   * Name of the table
+   */
   name: string;
 
+  /**
+   * Specifies whether child tables can be created
+   */
   allowChildTables?: boolean;
 
+  /**
+   * Specifies whether the table can be read by public without authorization
+   */
   allowPublicApiAccess?: boolean;
 
+  /**
+   * List of columns in the table
+   */
   columns?: Array<ColumnRequest>;
 
+  /**
+   * Specifies the key value pairs of the
+   * [metadata fields](https://developers.hubspot.com/docs/cms/guides/dynamic-pages/hubdb#dynamic-pages)
+   * with the associated column IDs.
+   */
   dynamicMetaTags?: { [key: string]: number };
 
+  /**
+   * Specifies creation of multi-level dynamic pages using child tables
+   */
   enableChildTablePages?: boolean;
 
+  /**
+   * Specifies whether the table can be used for creation of dynamic pages
+   */
   useForPages?: boolean;
 }
 
 export interface ImportResult {
+  /**
+   * Specifies number of duplicate rows
+   */
   duplicateRows: number;
 
+  /**
+   * List of errors during import
+   */
   errors: Array<Shared.Error>;
 
+  /**
+   * Specifies whether row limit exceeded during import
+   */
   rowLimitExceeded: boolean;
 
+  /**
+   * Specifies number of rows imported
+   */
   rowsImported: number;
 }
 
+/**
+ * A HubSpot property option
+ */
 export interface Option {
+  /**
+   * The unique ID of the option.
+   */
   id: string;
 
+  /**
+   * The timestamp when the option was created, in ISO 8601 format.
+   */
   createdAt: string;
 
+  /**
+   * An internal name assigned to the option, distinct from the label.
+   */
   name: string;
 
   order: number;
 
+  /**
+   * Indicates the category or data type of the option (e.g., string, number).
+   */
   type: string;
 
+  /**
+   * The timestamp when the option was last updated, in ISO 8601 format.
+   */
   updatedAt: string;
 
   createdBy?: SimpleUser;
 
+  /**
+   * The ID of the user who created the option.
+   */
   createdByUserId?: number;
 
+  /**
+   * A user-friendly label that identifies the option.
+   */
   label?: string;
 
   updatedBy?: SimpleUser;
 
+  /**
+   * The ID of the user who last updated the option.
+   */
   updatedByUserId?: number;
 }
 
@@ -798,21 +1095,50 @@ export interface SimpleUser {
   lastName: string;
 }
 
+/**
+ * Ye olde error
+ */
 export interface StandardError {
+  /**
+   * Specifies the main category of the error, determining the broad area of issue.
+   */
   category: string;
 
+  /**
+   * An object containing context-specific information pertinent to the error.
+   */
   context: { [key: string]: Array<string> };
 
+  /**
+   * The detailed error objects.
+   */
   errors: Array<Shared.ErrorDetail>;
 
+  /**
+   * An object containing links related to the error, such as documentation URLs or
+   * support contact pages.
+   */
   links: { [key: string]: string };
 
+  /**
+   * A detailed message describing the error.
+   */
   message: string;
 
+  /**
+   * The HTTP status code associated with the error.
+   */
   status: string;
 
+  /**
+   * Identifies the subcategory of the error, providing more specific context within
+   * the main category.
+   */
   subCategory: unknown;
 
+  /**
+   * The unique ID of the error instance.
+   */
   id?: string;
 }
 
@@ -823,6 +1149,9 @@ export interface StreamingCollectionResponseWithTotalHubDBTableRowV3 {
 
   type: 'STREAMING';
 
+  /**
+   * Contains information pagination of results.
+   */
   paging?: EmailsAPI.Paging;
 }
 
@@ -833,18 +1162,27 @@ export type UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3 =
 export type Variant = unknown;
 
 export interface HubdbCloneDraftTableParams {
+  /**
+   * Specifies whether to copy the rows during clone
+   */
   copyRows: boolean;
 
   isHubspotDefined: boolean;
 
+  /**
+   * The new label for the cloned table
+   */
   newLabel?: string;
 
+  /**
+   * The new name for the cloned table
+   */
   newName?: string;
 }
 
 export interface HubdbCloneDraftTableRowParams {
   /**
-   * Path param:
+   * Path param: The ID or name of the table
    */
   tableIdOrName: string;
 
@@ -863,98 +1201,216 @@ export interface HubdbCreateDraftTableRowsParams {
 }
 
 export interface HubdbCreateTableParams {
+  /**
+   * Label of the table
+   */
   label: string;
 
+  /**
+   * Name of the table
+   */
   name: string;
 
+  /**
+   * Specifies whether child tables can be created
+   */
   allowChildTables?: boolean;
 
+  /**
+   * Specifies whether the table can be read by public without authorization
+   */
   allowPublicApiAccess?: boolean;
 
+  /**
+   * List of columns in the table
+   */
   columns?: Array<ColumnRequest>;
 
+  /**
+   * Specifies the key value pairs of the
+   * [metadata fields](https://developers.hubspot.com/docs/cms/guides/dynamic-pages/hubdb#dynamic-pages)
+   * with the associated column IDs.
+   */
   dynamicMetaTags?: { [key: string]: number };
 
+  /**
+   * Specifies creation of multi-level dynamic pages using child tables
+   */
   enableChildTablePages?: boolean;
 
+  /**
+   * Specifies whether the table can be used for creation of dynamic pages
+   */
   useForPages?: boolean;
 }
 
 export interface HubdbCreateTableRowParams {
+  /**
+   * List of key value pairs with the column name and column value
+   */
   values: { [key: string]: Variant };
 
+  /**
+   * Specifies the value for the column child table id
+   */
   childTableId?: number;
 
   displayIndex?: number;
 
+  /**
+   * Specifies the value for `hs_name` column, which will be used as title in the
+   * dynamic pages
+   */
   name?: string;
 
+  /**
+   * Specifies the value for `hs_path` column, which will be used as slug in the
+   * dynamic pages
+   */
   path?: string;
 }
 
 export interface HubdbExportDraftTableParams {
+  /**
+   * The file format to export. Possible values include `CSV`, `XLSX`, and `XLS`.
+   */
   format?: string;
 }
 
 export interface HubdbExportTableParams {
+  /**
+   * The file format to export. Possible values include `CSV`, `XLSX`, and `XLS`.
+   */
   format?: string;
 }
 
 export interface HubdbGetAllDraftTablesParams {
+  /**
+   * The cursor token value to get the next set of results. You can get this from the
+   * `paging.next.after` JSON property of a paged response containing more results.
+   */
   after?: string;
 
+  /**
+   * Specifies whether to return archived tables. Defaults to `false`.
+   */
   archived?: boolean;
 
   contentType?: string;
 
+  /**
+   * Only return tables created after the specified time.
+   */
   createdAfter?: string;
 
+  /**
+   * Only return tables created at exactly the specified time.
+   */
   createdAt?: string;
 
+  /**
+   * Only return tables created before the specified time.
+   */
   createdBefore?: string;
 
   isGetLocalizedSchema?: boolean;
 
+  /**
+   * The maximum number of results to return. Default is 1000.
+   */
   limit?: number;
 
+  /**
+   * Specifies which fields to use for sorting results. Valid fields are `name`,
+   * `createdAt`, `updatedAt`, `createdBy`, `updatedBy`. `createdAt` will be used by
+   * default.
+   */
   sort?: Array<string>;
 
+  /**
+   * Only return tables last updated after the specified time.
+   */
   updatedAfter?: string;
 
+  /**
+   * Only return tables last updated at exactly the specified time.
+   */
   updatedAt?: string;
 
+  /**
+   * Only return tables last updated before the specified time.
+   */
   updatedBefore?: string;
 }
 
 export interface HubdbGetAllTablesParams {
+  /**
+   * The cursor token value to get the next set of results. You can get this from the
+   * `paging.next.after` JSON property of a paged response containing more results.
+   */
   after?: string;
 
+  /**
+   * Specifies whether to return archived tables. Defaults to `false`.
+   */
   archived?: boolean;
 
   contentType?: string;
 
+  /**
+   * Only return tables created after the specified time.
+   */
   createdAfter?: string;
 
+  /**
+   * Only return tables created at exactly the specified time.
+   */
   createdAt?: string;
 
+  /**
+   * Only return tables created before the specified time.
+   */
   createdBefore?: string;
 
   isGetLocalizedSchema?: boolean;
 
+  /**
+   * The maximum number of results to return. Default is 1000.
+   */
   limit?: number;
 
+  /**
+   * Specifies which fields to use for sorting results. Valid fields are `name`,
+   * `createdAt`, `updatedAt`, `createdBy`, `updatedBy`. `createdAt` will be used by
+   * default.
+   */
   sort?: Array<string>;
 
+  /**
+   * Only return tables last updated after the specified time.
+   */
   updatedAfter?: string;
 
+  /**
+   * Only return tables last updated at exactly the specified time.
+   */
   updatedAt?: string;
 
+  /**
+   * Only return tables last updated before the specified time.
+   */
   updatedBefore?: string;
 }
 
 export interface HubdbGetDraftTableDetailsByIDParams {
+  /**
+   * Set this to `true` to return an archived table. Defaults to `false`.
+   */
   archived?: boolean;
 
+  /**
+   * Set this to `true` to populate foreign ID values in the result.
+   */
   includeForeignIds?: boolean;
 
   isGetLocalizedSchema?: boolean;
@@ -962,7 +1418,7 @@ export interface HubdbGetDraftTableDetailsByIDParams {
 
 export interface HubdbGetDraftTableRowByIDParams {
   /**
-   * Path param:
+   * Path param: The ID or name of the table
    */
   tableIdOrName: string;
 
@@ -973,8 +1429,14 @@ export interface HubdbGetDraftTableRowByIDParams {
 }
 
 export interface HubdbGetTableDetailsParams {
+  /**
+   * Set this to `true` to return details for an archived table. Defaults to `false`.
+   */
   archived?: boolean;
 
+  /**
+   * Set this to `true` to populate foreign ID values in the result.
+   */
   includeForeignIds?: boolean;
 
   isGetLocalizedSchema?: boolean;
@@ -982,7 +1444,7 @@ export interface HubdbGetTableDetailsParams {
 
 export interface HubdbGetTableRowParams {
   /**
-   * Path param:
+   * Path param: The ID or name of the table
    */
   tableIdOrName: string;
 
@@ -993,16 +1455,31 @@ export interface HubdbGetTableRowParams {
 }
 
 export interface HubdbGetTableRowsParams {
+  /**
+   * The cursor token value to get the next set of results. You can get this from the
+   * `paging.next.after` JSON property of a paged response containing more results.
+   */
   after?: string;
 
   archived?: boolean;
 
+  /**
+   * The maximum number of results to return. Default is `1000`.
+   */
   limit?: number;
 
   offset?: number;
 
+  /**
+   * Specify the column names to get results containing only the required columns
+   * instead of all column details.
+   */
   properties?: Array<string>;
 
+  /**
+   * Specifies the column names to sort the results by. See the above description for
+   * more details.
+   */
   sort?: Array<string>;
 }
 
@@ -1013,22 +1490,37 @@ export interface HubdbImportDraftTableParams {
 }
 
 export interface HubdbPublishDraftTableParams {
+  /**
+   * Set this to `true` to populate foreign ID values in the response.
+   */
   includeForeignIds?: boolean;
 }
 
 export interface HubdbPurgeDraftTableRowParams {
+  /**
+   * The ID or name of the table
+   */
   tableIdOrName: string;
 }
 
 export interface HubdbPurgeDraftTableRowsParams {
+  /**
+   * Strings to input.
+   */
   inputs: Array<string>;
 }
 
 export interface HubdbReadDraftTableRowsParams {
+  /**
+   * Strings to input.
+   */
   inputs: Array<string>;
 }
 
 export interface HubdbReadTableRowsParams {
+  /**
+   * Strings to input.
+   */
   inputs: Array<string>;
 }
 
@@ -1038,17 +1530,17 @@ export interface HubdbRemoveTableVersionParams {
 
 export interface HubdbReplaceDraftTableRowParams {
   /**
-   * Path param:
+   * Path param: The ID or name of the table
    */
   tableIdOrName: string;
 
   /**
-   * Body param:
+   * Body param: List of key value pairs with the column name and column value
    */
   values: { [key: string]: Variant };
 
   /**
-   * Body param:
+   * Body param: Specifies the value for the column child table id
    */
   childTableId?: number;
 
@@ -1058,12 +1550,14 @@ export interface HubdbReplaceDraftTableRowParams {
   displayIndex?: number;
 
   /**
-   * Body param:
+   * Body param: Specifies the value for `hs_name` column, which will be used as
+   * title in the dynamic pages
    */
   name?: string;
 
   /**
-   * Body param:
+   * Body param: Specifies the value for `hs_path` column, which will be used as slug
+   * in the dynamic pages
    */
   path?: string;
 }
@@ -1073,31 +1567,37 @@ export interface HubdbReplaceDraftTableRowsParams {
 }
 
 export interface HubdbResetDraftTableParams {
+  /**
+   * Set this to `true` to populate foreign ID values in the response.
+   */
   includeForeignIds?: boolean;
 }
 
 export interface HubdbUnpublishTableParams {
+  /**
+   * Set this to `true` to populate foreign ID values in the response.
+   */
   includeForeignIds?: boolean;
 }
 
 export interface HubdbUpdateDraftTableParams {
   /**
-   * Body param:
+   * Body param: Label of the table
    */
   label: string;
 
   /**
-   * Body param:
+   * Body param: Name of the table
    */
   name: string;
 
   /**
-   * Query param:
+   * Query param: Specifies whether to return archived tables. Defaults to `false`.
    */
   archived?: boolean;
 
   /**
-   * Query param:
+   * Query param: Set this to `true` to populate foreign ID values in the result.
    */
   includeForeignIds?: boolean;
 
@@ -1107,49 +1607,53 @@ export interface HubdbUpdateDraftTableParams {
   isGetLocalizedSchema?: boolean;
 
   /**
-   * Body param:
+   * Body param: Specifies whether child tables can be created
    */
   allowChildTables?: boolean;
 
   /**
-   * Body param:
+   * Body param: Specifies whether the table can be read by public without
+   * authorization
    */
   allowPublicApiAccess?: boolean;
 
   /**
-   * Body param:
+   * Body param: List of columns in the table
    */
   columns?: Array<ColumnRequest>;
 
   /**
-   * Body param:
+   * Body param: Specifies the key value pairs of the
+   * [metadata fields](https://developers.hubspot.com/docs/cms/guides/dynamic-pages/hubdb#dynamic-pages)
+   * with the associated column IDs.
    */
   dynamicMetaTags?: { [key: string]: number };
 
   /**
-   * Body param:
+   * Body param: Specifies creation of multi-level dynamic pages using child tables
    */
   enableChildTablePages?: boolean;
 
   /**
-   * Body param:
+   * Body param: Specifies whether the table can be used for creation of dynamic
+   * pages
    */
   useForPages?: boolean;
 }
 
 export interface HubdbUpdateDraftTableRowParams {
   /**
-   * Path param:
+   * Path param: The ID or name of the table
    */
   tableIdOrName: string;
 
   /**
-   * Body param:
+   * Body param: List of key value pairs with the column name and column value
    */
   values: { [key: string]: Variant };
 
   /**
-   * Body param:
+   * Body param: Specifies the value for the column child table id
    */
   childTableId?: number;
 
@@ -1159,12 +1663,14 @@ export interface HubdbUpdateDraftTableRowParams {
   displayIndex?: number;
 
   /**
-   * Body param:
+   * Body param: Specifies the value for `hs_name` column, which will be used as
+   * title in the dynamic pages
    */
   name?: string;
 
   /**
-   * Body param:
+   * Body param: Specifies the value for `hs_path` column, which will be used as slug
+   * in the dynamic pages
    */
   path?: string;
 }

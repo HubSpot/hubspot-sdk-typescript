@@ -117,17 +117,35 @@ export class CRM extends APIResource {
 
 export type MultiAssociatedObjectWithLabelsPage = Page<MultiAssociatedObjectWithLabel>;
 
+/**
+ * Contains the id and type of an association
+ */
 export interface AssociatedID {
+  /**
+   * The ID for the association type.
+   */
   id: string;
 
+  /**
+   * The type of association.
+   */
   type: string;
 }
 
 export interface AssociationSpecWithLabel {
+  /**
+   * The category of this association type (either HUBSPOT_DEFINED or USER_DEFINED)
+   */
   category: 'HUBSPOT_DEFINED' | 'USER_DEFINED' | 'INTEGRATOR_DEFINED';
 
+  /**
+   * The ID of this association type, unique within an association category
+   */
   typeId: number;
 
+  /**
+   * The label for this association type
+   */
   label?: string;
 }
 
@@ -152,6 +170,9 @@ export interface BatchResponsePublicDefaultAssociation {
 export interface CollectionResponseMultiAssociatedObjectWithLabel {
   results: Array<MultiAssociatedObjectWithLabel>;
 
+  /**
+   * Contains information pagination of results.
+   */
   paging?: EmailsAPI.Paging;
 }
 
@@ -181,65 +202,181 @@ export interface MultiAssociatedObjectWithLabel {
   toObjectId: string;
 }
 
+/**
+ * The options available when a property is an enumeration
+ */
 export interface Option {
+  /**
+   * Hidden options will not be displayed in HubSpot.
+   */
   hidden: boolean;
 
+  /**
+   * A human-readable option label that will be shown in HubSpot.
+   */
   label: string;
 
+  /**
+   * The internal value of the option, which must be used when setting the property
+   * value through the API.
+   */
   value: string;
 
+  /**
+   * A description of the option.
+   */
+  description?: string;
+
+  /**
+   * Options are displayed in order starting with the lowest positive integer value.
+   * Values of -1 will cause the option to be displayed after any positive values.
+   */
   displayOrder?: number;
 }
 
+/**
+ * Defines a property
+ */
 export interface Property {
+  /**
+   * A description of the property that will be shown as help text in HubSpot.
+   */
+  description: string;
+
+  /**
+   * Controls how the property appears in HubSpot.
+   */
   fieldType: string;
 
+  /**
+   * The name of the property group the property belongs to.
+   */
   groupName: string;
 
+  /**
+   * A human-readable property label that will be shown in HubSpot.
+   */
   label: string;
 
+  /**
+   * The internal property name, which must be used when referencing the property via
+   * the API.
+   */
   name: string;
 
+  /**
+   * A list of valid options for the property. This field is required for enumerated
+   * properties, but will be empty for other property types.
+   */
   options: Array<Option>;
 
+  /**
+   * The property data type.
+   */
   type: string;
 
+  /**
+   * Whether or not the property is archived.
+   */
   archived?: boolean;
 
+  /**
+   * When the property was archived.
+   */
   archivedAt?: string;
 
+  /**
+   * For default properties, true indicates that the property is calculated by a
+   * HubSpot process. It has no effect for custom properties.
+   */
   calculated?: boolean;
 
+  /**
+   * The formula used for calculated properties.
+   */
   calculationFormula?: string;
 
+  /**
+   * When the property was created
+   */
   createdAt?: string;
 
+  /**
+   * The internal ID of the user who created the property in HubSpot. This field may
+   * not exist if the property was created outside of HubSpot.
+   */
   createdUserId?: string;
 
+  /**
+   * Indicates the sensitivity level of the property, such as "non_sensitive",
+   * "sensitive", or "highly_sensitive".
+   */
   dataSensitivity?: 'non_sensitive' | 'sensitive' | 'highly_sensitive';
 
+  /**
+   * The order that this property should be displayed in the HubSpot UI relative to
+   * other properties for this object type. Properties are displayed in order
+   * starting with the lowest positive integer value. A value of -1 will cause the
+   * property to be displayed **after** any positive values.
+   */
   displayOrder?: number;
 
+  /**
+   * For default properties, true indicates that the options are stored externally to
+   * the property settings.
+   */
   externalOptions?: boolean;
 
+  /**
+   * Whether or not the property can be used in a HubSpot form.
+   */
   formField?: boolean;
 
+  /**
+   * Whether or not the property's value must be unique. Once set, this can't be
+   * changed.
+   */
   hasUniqueValue?: boolean;
 
+  /**
+   * Whether or not the property will be hidden from the HubSpot UI. It's recommended
+   * that this be set to false for custom properties.
+   */
   hidden?: boolean;
 
+  /**
+   * This will be true for default object properties built into HubSpot.
+   */
   hubspotDefined?: boolean;
 
   modificationMetadata?: PropertyModificationMetadata;
 
+  /**
+   * If this property is related to other object(s), they'll be listed here.
+   */
   referencedObjectType?: string;
 
+  /**
+   * When sensitiveData is true, lists the type of sensitive data contained in the
+   * property (e.g., "HIPAA").
+   */
   sensitiveDataCategories?: Array<string>;
 
+  /**
+   * Whether the property will display the currency symbol set in the account
+   * settings.
+   */
   showCurrencySymbol?: boolean;
 
+  /**
+   * The timestamp when the property was last updated, in ISO 8601 format.
+   */
   updatedAt?: string;
 
+  /**
+   * The internal user ID of the user who updated the property in HubSpot. This field
+   * may not exist if the property was updated outside of HubSpot.
+   */
   updatedUserId?: string;
 }
 
@@ -254,6 +391,10 @@ export interface PropertyModificationMetadata {
 }
 
 export interface PublicDefaultAssociation {
+  /**
+   * Defines the type, direction, and details of the relationship between two CRM
+   * objects.
+   */
   associationSpec: V4API.AssociationSpec1;
 
   from: Shared.PublicObjectID;

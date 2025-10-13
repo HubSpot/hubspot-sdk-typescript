@@ -282,6 +282,9 @@ export interface PublicChannelIntegrationChannelPatch {
 }
 
 export interface PublicChannelIntegrationMessageUpdateRequest {
+  /**
+   * Valid status are SENT, FAILED, and READ
+   */
   statusType: 'SENT' | 'FAILED' | 'READ';
 
   errorMessage?: string;
@@ -470,6 +473,8 @@ export interface SocialMetadata {
   mediaType: string;
 
   id?: string;
+
+  description?: string;
 
   mediaTitle?: string;
 

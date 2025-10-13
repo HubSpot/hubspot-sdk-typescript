@@ -25,7 +25,7 @@ describe('resource contacts', () => {
     const response = await client.crm.objects.contacts.create({
       properties: { foo: 'string' },
       associations: [
-        { to: { id: 'id' }, types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }] },
+        { to: { id: '37295' }, types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 279 }] },
       ],
     });
   });
@@ -33,7 +33,15 @@ describe('resource contacts', () => {
   // Prism tests are disabled
   test.skip('update: only required params', async () => {
     const responsePromise = client.crm.objects.contacts.update('contactId', {
-      properties: { foo: 'string' },
+      properties: {
+        property_checkbox: 'false',
+        property_date: '1572480000000',
+        property_dropdown: 'choice_b',
+        property_multiple_checkboxes: 'chocolate;strawberry',
+        property_number: '17',
+        property_radio: 'option_1',
+        property_string: 'value',
+      },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -46,7 +54,17 @@ describe('resource contacts', () => {
 
   // Prism tests are disabled
   test.skip('update: required and optional params', async () => {
-    const response = await client.crm.objects.contacts.update('contactId', { properties: { foo: 'string' } });
+    const response = await client.crm.objects.contacts.update('contactId', {
+      properties: {
+        property_checkbox: 'false',
+        property_date: '1572480000000',
+        property_dropdown: 'choice_b',
+        property_multiple_checkboxes: 'chocolate;strawberry',
+        property_number: '17',
+        property_radio: 'option_1',
+        property_string: 'value',
+      },
+    });
   });
 
   // Prism tests are disabled

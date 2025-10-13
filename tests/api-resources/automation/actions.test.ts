@@ -19,7 +19,7 @@ describe('resource actions', () => {
           typeDefinition: {
             externalOptions: true,
             name: 'name',
-            options: [{ hidden: true, label: 'label', value: 'value' }],
+            options: [{ hidden: false, label: 'Option A', value: 'A' }],
             type: 'string',
           },
         },
@@ -48,8 +48,17 @@ describe('resource actions', () => {
           typeDefinition: {
             externalOptions: true,
             name: 'name',
-            options: [{ hidden: true, label: 'label', value: 'value', displayOrder: 0 }],
+            options: [
+              {
+                hidden: false,
+                label: 'Option A',
+                value: 'A',
+                description: 'Choice number one',
+                displayOrder: 1,
+              },
+            ],
             type: 'string',
+            description: 'description',
             externalOptionsReferenceType: 'externalOptionsReferenceType',
             fieldType: 'booleancheckbox',
             helpText: 'helpText',
@@ -91,8 +100,17 @@ describe('resource actions', () => {
           typeDefinition: {
             externalOptions: true,
             name: 'name',
-            options: [{ hidden: true, label: 'label', value: 'value', displayOrder: 0 }],
+            options: [
+              {
+                hidden: false,
+                label: 'Option A',
+                value: 'A',
+                description: 'Choice number one',
+                displayOrder: 1,
+              },
+            ],
             type: 'string',
+            description: 'description',
             externalOptionsReferenceType: 'externalOptionsReferenceType',
             fieldType: 'booleancheckbox',
             helpText: 'helpText',
@@ -136,8 +154,17 @@ describe('resource actions', () => {
           typeDefinition: {
             externalOptions: true,
             name: 'name',
-            options: [{ hidden: true, label: 'label', value: 'value', displayOrder: 0 }],
+            options: [
+              {
+                hidden: false,
+                label: 'Option A',
+                value: 'A',
+                description: 'Choice number one',
+                displayOrder: 1,
+              },
+            ],
             type: 'string',
+            description: 'description',
             externalOptionsReferenceType: 'externalOptionsReferenceType',
             fieldType: 'booleancheckbox',
             helpText: 'helpText',
@@ -169,8 +196,17 @@ describe('resource actions', () => {
           typeDefinition: {
             externalOptions: true,
             name: 'name',
-            options: [{ hidden: true, label: 'label', value: 'value', displayOrder: 0 }],
+            options: [
+              {
+                hidden: false,
+                label: 'Option A',
+                value: 'A',
+                description: 'Choice number one',
+                displayOrder: 1,
+              },
+            ],
             type: 'string',
+            description: 'description',
             externalOptionsReferenceType: 'externalOptionsReferenceType',
             fieldType: 'booleancheckbox',
             helpText: 'helpText',

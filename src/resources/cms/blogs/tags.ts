@@ -10,14 +10,16 @@ import { path } from '../../../internal/utils/path';
 
 export class Tags extends APIResource {
   /**
-   * Create a new Blog Tag
+   * Create a new Blog Tag.
    */
   create(body: TagCreateParams, options?: RequestOptions): APIPromise<Tag> {
     return this._client.post('/cms/v3/blogs/tags', { body, ...options });
   }
 
   /**
-   * Update a Blog Tag
+   * Sparse updates a single Blog Tag object identified by the id in the path. All
+   * the column values need not be specified. Only the that need to be modified can
+   * be specified.
    */
   update(objectID: string, params: TagUpdateParams, options?: RequestOptions): APIPromise<Tag> {
     const { archived, ...body } = params;
@@ -29,14 +31,16 @@ export class Tags extends APIResource {
   }
 
   /**
-   * Get all Blog Tags
+   * Get the list of blog tags. Supports paging and filtering. This method would be
+   * useful for an integration that examined these models and used an external
+   * service to suggest edits.
    */
   list(query: TagListParams | null | undefined = {}, options?: RequestOptions): PagePromise<TagsPage, Tag> {
     return this._client.getAPIList('/cms/v3/blogs/tags', Page<Tag>, { query, ...options });
   }
 
   /**
-   * Delete a Blog Tag
+   * Delete the Blog Tag object identified by the id in the path.
    */
   delete(
     objectID: string,
@@ -52,7 +56,7 @@ export class Tags extends APIResource {
   }
 
   /**
-   * Delete a batch of Blog Tags
+   * Delete the Blog Tag objects identified in the request body.
    */
   archiveBatch(body: TagArchiveBatchParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/cms/v3/blogs/tags/batch/archive', {
@@ -63,7 +67,7 @@ export class Tags extends APIResource {
   }
 
   /**
-   * Attach a Blog Tag to a multi-language group
+   * Attach a Blog Tag to a multi-language group.
    */
   attachToLangGroup(body: TagAttachToLangGroupParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/cms/v3/blogs/tags/multi-language/attach-to-lang-group', {
@@ -74,14 +78,14 @@ export class Tags extends APIResource {
   }
 
   /**
-   * Create a batch of Blog Tags
+   * Create the Blog Tag objects detailed in the request body.
    */
   createBatch(body: TagCreateBatchParams, options?: RequestOptions): APIPromise<BatchResponseTag> {
     return this._client.post('/cms/v3/blogs/tags/batch/create', { body, ...options });
   }
 
   /**
-   * Create a new language variation
+   * Create a new language variation from an existing Blog Tag
    */
   createLangVariation(body: TagCreateLangVariationParams, options?: RequestOptions): APIPromise<Tag> {
     return this._client.post('/cms/v3/blogs/tags/multi-language/create-language-variation', {
@@ -91,7 +95,7 @@ export class Tags extends APIResource {
   }
 
   /**
-   * Detach a Blog Tag from a multi-language group
+   * Detach a Blog Tag from a multi-language group.
    */
   detachFromLangGroup(body: TagDetachFromLangGroupParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/cms/v3/blogs/tags/multi-language/detach-from-lang-group', {
@@ -102,7 +106,7 @@ export class Tags extends APIResource {
   }
 
   /**
-   * Retrieve a Blog Tag
+   * Retrieve the Blog Tag object identified by the id in the path.
    */
   read(
     objectID: string,
@@ -113,7 +117,7 @@ export class Tags extends APIResource {
   }
 
   /**
-   * Retrieve a batch of Blog Tags
+   * Retrieve the Blog Tag objects identified in the request body.
    */
   readBatch(params: TagReadBatchParams, options?: RequestOptions): APIPromise<BatchResponseTag> {
     const { archived, ...body } = params;
@@ -121,7 +125,7 @@ export class Tags extends APIResource {
   }
 
   /**
-   * Set a new primary language
+   * Set a Blog Tag as the primary language of a multi-language group.
    */
   setLangPrimary(body: TagSetLangPrimaryParams, options?: RequestOptions): APIPromise<void> {
     return this._client.put('/cms/v3/blogs/tags/multi-language/set-new-lang-primary', {
@@ -132,7 +136,7 @@ export class Tags extends APIResource {
   }
 
   /**
-   * Update a batch of Blog Tags
+   * Update the Blog Tag objects identified in the request body.
    */
   updateBatch(params: TagUpdateBatchParams, options?: RequestOptions): APIPromise<BatchResponseTag> {
     const { archived, ...body } = params;
@@ -140,7 +144,7 @@ export class Tags extends APIResource {
   }
 
   /**
-   * Update languages of multi-language group
+   * Explicitly set new languages for each Blog Tag in a multi-language group.
    */
   updateLangs(body: TagUpdateLangsParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/cms/v3/blogs/tags/multi-language/update-languages', {
@@ -153,57 +157,132 @@ export class Tags extends APIResource {
 
 export type TagsPage = Page<Tag>;
 
+/**
+ * Wrapper for providing an array of blog tags as inputs.
+ */
 export interface BatchInputTag {
+  /**
+   * Blog tags to input.
+   */
   inputs: Array<Tag>;
 }
 
+/**
+ * Response object for batch operations on blog tags.
+ */
 export interface BatchResponseTag {
+  /**
+   * Time of batch operation completion.
+   */
   completedAt: string;
 
+  /**
+   * Results of batch operation.
+   */
   results: Array<Tag>;
 
+  /**
+   * Time of batch operation start.
+   */
   startedAt: string;
 
+  /**
+   * Status of batch operation.
+   */
   status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
 
+  /**
+   * Links associated with batch operation.
+   */
   links?: { [key: string]: string };
 
+  /**
+   * Time of batch operation request.
+   */
   requestedAt?: string;
 }
 
+/**
+ * Response object for batch operations on blog tags with errors.
+ */
 export interface BatchResponseTagWithErrors {
+  /**
+   * Time of batch operation completion.
+   */
   completedAt: string;
 
+  /**
+   * Results of batch operation.
+   */
   results: Array<Tag>;
 
+  /**
+   * Time of batch operation start.
+   */
   startedAt: string;
 
+  /**
+   * Status of batch operation.
+   */
   status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
 
+  /**
+   * Errors in batch operation.
+   */
   errors?: Array<Shared.StandardError>;
 
+  /**
+   * Links associated with batch operation.
+   */
   links?: { [key: string]: string };
 
+  /**
+   * Number of errors.
+   */
   numErrors?: number;
 
+  /**
+   * Time of batch operation request.
+   */
   requestedAt?: string;
 }
 
+/**
+ * Response object for collections of blog tags with pagination information.
+ */
 export interface CollectionResponseWithTotalTagForwardPaging {
+  /**
+   * Collection of blog tags.
+   */
   results: Array<Tag>;
 
+  /**
+   * Total number of blog tags.
+   */
   total: number;
 
   paging?: Shared.ForwardPaging;
 }
 
+/**
+ * Model definition for a Tag.
+ */
 export interface Tag {
+  /**
+   * The unique ID of the Blog Tag.
+   */
   id: string;
 
   created: string;
 
+  /**
+   * The timestamp (ISO8601 format) when this Blog Tag was deleted.
+   */
   deletedAt: string;
 
+  /**
+   * The explicitly defined ISO 639 language code of the tag.
+   */
   language:
     | 'af'
     | 'af-na'
@@ -960,30 +1039,60 @@ export interface Tag {
     | 'zu'
     | 'zu-za';
 
+  /**
+   * The name of the tag.
+   */
   name: string;
 
+  /**
+   * ID of the primary tag this object was translated from.
+   */
   translatedFromId: number;
 
   updated: string;
 }
 
+/**
+ * Request body object for cloning blog tags.
+ */
 export interface TagCloneRequestVNext {
+  /**
+   * ID of the object to be cloned.
+   */
   id: string;
 
+  /**
+   * Name of newly cloned blog tag.
+   */
   name: string;
 
+  /**
+   * Target language of new variant.
+   */
   language?: string;
 
+  /**
+   * Language of primary blog tag to clone.
+   */
   primaryLanguage?: string;
 }
 
 export interface TagCreateParams {
+  /**
+   * The unique ID of the Blog Tag.
+   */
   id: string;
 
   created: string;
 
+  /**
+   * The timestamp (ISO8601 format) when this Blog Tag was deleted.
+   */
   deletedAt: string;
 
+  /**
+   * The explicitly defined ISO 639 language code of the tag.
+   */
   language:
     | 'af'
     | 'af-na'
@@ -1740,8 +1849,14 @@ export interface TagCreateParams {
     | 'zu'
     | 'zu-za';
 
+  /**
+   * The name of the tag.
+   */
   name: string;
 
+  /**
+   * ID of the primary tag this object was translated from.
+   */
   translatedFromId: number;
 
   updated: string;
@@ -1749,7 +1864,7 @@ export interface TagCreateParams {
 
 export interface TagUpdateParams {
   /**
-   * Body param:
+   * Body param: The unique ID of the Blog Tag.
    */
   id: string;
 
@@ -1759,12 +1874,12 @@ export interface TagUpdateParams {
   created: string;
 
   /**
-   * Body param:
+   * Body param: The timestamp (ISO8601 format) when this Blog Tag was deleted.
    */
   deletedAt: string;
 
   /**
-   * Body param:
+   * Body param: The explicitly defined ISO 639 language code of the tag.
    */
   language:
     | 'af'
@@ -2523,12 +2638,12 @@ export interface TagUpdateParams {
     | 'zu-za';
 
   /**
-   * Body param:
+   * Body param: The name of the tag.
    */
   name: string;
 
   /**
-   * Body param:
+   * Body param: ID of the primary tag this object was translated from.
    */
   translatedFromId: number;
 
@@ -2538,42 +2653,80 @@ export interface TagUpdateParams {
   updated: string;
 
   /**
-   * Query param:
+   * Query param: Specifies whether to update deleted Blog Tags. Defaults to `false`.
    */
   archived?: boolean;
 }
 
 export interface TagListParams extends PageParams {
+  /**
+   * Specifies whether to return deleted Blog Tags. Defaults to `false`.
+   */
   archived?: boolean;
 
+  /**
+   * Only return Blog Tags created after the specified time.
+   */
   createdAfter?: string;
 
+  /**
+   * Only return Blog Tags created at exactly the specified time.
+   */
   createdAt?: string;
 
+  /**
+   * Only return Blog Tags created before the specified time.
+   */
   createdBefore?: string;
 
   property?: string;
 
+  /**
+   * Specifies which fields to use for sorting results. Valid fields are `name`,
+   * `createdAt`, `updatedAt`, `createdBy`, `updatedBy`. `createdAt` will be used by
+   * default.
+   */
   sort?: Array<string>;
 
+  /**
+   * Only return Blog Tags last updated after the specified time.
+   */
   updatedAfter?: string;
 
+  /**
+   * Only return Blog Tags last updated at exactly the specified time.
+   */
   updatedAt?: string;
 
+  /**
+   * Only return Blog Tags last updated before the specified time.
+   */
   updatedBefore?: string;
 }
 
 export interface TagDeleteParams {
+  /**
+   * Whether to return only results that have been archived.
+   */
   archived?: boolean;
 }
 
 export interface TagArchiveBatchParams {
+  /**
+   * Strings to input.
+   */
   inputs: Array<string>;
 }
 
 export interface TagAttachToLangGroupParams {
+  /**
+   * ID of the object to add to a multi-language group.
+   */
   id: string;
 
+  /**
+   * Designated language of the object to add to a multi-language group.
+   */
   language:
     | 'af'
     | 'af-na'
@@ -3332,30 +3485,57 @@ export interface TagAttachToLangGroupParams {
     | 'zu'
     | 'zu-za';
 
+  /**
+   * ID of primary language object in multi-language group.
+   */
   primaryId: string;
 
+  /**
+   * Primary language of the multi-language group.
+   */
   primaryLanguage?: string;
 }
 
 export interface TagCreateBatchParams {
+  /**
+   * Blog tags to input.
+   */
   inputs: Array<Tag>;
 }
 
 export interface TagCreateLangVariationParams {
+  /**
+   * ID of the object to be cloned.
+   */
   id: string;
 
+  /**
+   * Name of newly cloned blog tag.
+   */
   name: string;
 
+  /**
+   * Target language of new variant.
+   */
   language?: string;
 
+  /**
+   * Language of primary blog tag to clone.
+   */
   primaryLanguage?: string;
 }
 
 export interface TagDetachFromLangGroupParams {
+  /**
+   * ID of the object to remove from a multi-language group.
+   */
   id: string;
 }
 
 export interface TagReadParams {
+  /**
+   * Specifies whether to return deleted Blog Tags. Defaults to `false`.
+   */
   archived?: boolean;
 
   property?: string;
@@ -3363,35 +3543,44 @@ export interface TagReadParams {
 
 export interface TagReadBatchParams {
   /**
-   * Body param:
+   * Body param: Strings to input.
    */
   inputs: Array<string>;
 
   /**
-   * Query param:
+   * Query param: Specifies whether to return deleted Blog Tags. Defaults to `false`.
    */
   archived?: boolean;
 }
 
 export interface TagSetLangPrimaryParams {
+  /**
+   * ID of object to set as primary in multi-language group.
+   */
   id: string;
 }
 
 export interface TagUpdateBatchParams {
   /**
-   * Body param:
+   * Body param: JSON nodes to input.
    */
   inputs: Array<unknown>;
 
   /**
-   * Query param:
+   * Query param: Specifies whether to update deleted Blog Tags. Defaults to `false`.
    */
   archived?: boolean;
 }
 
 export interface TagUpdateLangsParams {
+  /**
+   * Map of object IDs to associated languages of object in the multi-language group.
+   */
   languages: { [key: string]: string };
 
+  /**
+   * ID of the primary object in the multi-language group.
+   */
   primaryId: string;
 }
 

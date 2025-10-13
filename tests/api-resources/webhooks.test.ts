@@ -26,7 +26,7 @@ describe('resource webhooks', () => {
       eventType: 'contact.propertyChange',
       active: true,
       objectTypeId: 'objectTypeId',
-      propertyName: 'propertyName',
+      propertyName: 'email',
     });
   });
 
@@ -91,8 +91,8 @@ describe('resource webhooks', () => {
   // Prism tests are disabled
   test.skip('configure: only required params', async () => {
     const responsePromise = client.webhooks.configure(0, {
-      targetUrl: 'targetUrl',
-      throttling: { maxConcurrentRequests: 0 },
+      targetUrl: 'https://www.example.com/hubspot/target',
+      throttling: { maxConcurrentRequests: 10 },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -106,8 +106,8 @@ describe('resource webhooks', () => {
   // Prism tests are disabled
   test.skip('configure: required and optional params', async () => {
     const response = await client.webhooks.configure(0, {
-      targetUrl: 'targetUrl',
-      throttling: { maxConcurrentRequests: 0 },
+      targetUrl: 'https://www.example.com/hubspot/target',
+      throttling: { maxConcurrentRequests: 10 },
     });
   });
 

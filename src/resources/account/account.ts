@@ -18,23 +18,47 @@ export class Account extends APIResource {
   auditLogs: AuditLogsAPI.AuditLogs = new AuditLogsAPI.AuditLogs(this._client);
 }
 
+/**
+ * API usage and limits information for a HubSpot account.
+ */
 export interface APIUsage {
+  /**
+   * Indicates when the cache was last updated.
+   */
   collectedAt: string;
 
+  /**
+   * How many API calls an account has made for the current day.
+   */
   currentUsage: number;
 
+  /**
+   * Status of fetching the information, including if the data came from the cache.
+   */
   fetchStatus: 'SUCCESS' | 'TIMEOUT' | 'FAILURE' | 'CACHED' | 'NOTFOUND';
 
+  /**
+   * Name of the limit type.
+   */
   name: string;
 
+  /**
+   * Limits by which a single integration can consume the HubSpot public APIs.
+   */
   usageLimit: number;
 
+  /**
+   * Time that the limit will reset.
+   */
   resetsAt?: string;
 }
 
 export interface CollectionResponseAPIUsage {
   results: Array<APIUsage>;
 
+  /**
+   * Contains information pagination of results.
+   */
   paging?: EmailsAPI.Paging;
 }
 

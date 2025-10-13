@@ -10,7 +10,7 @@ const client = new HubSpot({
 describe('resource users', () => {
   // Prism tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.settings.users.create({ email: 'email' });
+    const responsePromise = client.settings.users.create({ email: 'newUser@email.com' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,12 +23,12 @@ describe('resource users', () => {
   // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.settings.users.create({
-      email: 'email',
+      email: 'newUser@email.com',
       firstName: 'firstName',
       lastName: 'lastName',
-      primaryTeamId: 'primaryTeamId',
-      roleId: 'roleId',
-      secondaryTeamIds: ['string'],
+      primaryTeamId: '101',
+      roleId: '100',
+      secondaryTeamIds: ['102'],
       sendWelcomeEmail: true,
     });
   });
