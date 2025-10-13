@@ -14,11 +14,11 @@ export class Forms extends APIResource {
    *
    * @example
    * ```ts
-   * const hubSpotFormDefinition =
+   * const formDefinitionBase =
    *   await client.marketing.forms.create();
    * ```
    */
-  create(body: FormCreateParams, options?: RequestOptions): APIPromise<HubSpotFormDefinition> {
+  create(body: FormCreateParams, options?: RequestOptions): APIPromise<FormDefinitionBase> {
     return this._client.post('/marketing/v3/forms/', { body, ...options });
   }
 
@@ -27,15 +27,11 @@ export class Forms extends APIResource {
    *
    * @example
    * ```ts
-   * const hubSpotFormDefinition =
+   * const formDefinitionBase =
    *   await client.marketing.forms.update('formId');
    * ```
    */
-  update(
-    formID: string,
-    body: FormUpdateParams,
-    options?: RequestOptions,
-  ): APIPromise<HubSpotFormDefinition> {
+  update(formID: string, body: FormUpdateParams, options?: RequestOptions): APIPromise<FormDefinitionBase> {
     return this._client.patch(path`/marketing/v3/forms/${formID}`, { body, ...options });
   }
 
@@ -82,7 +78,7 @@ export class Forms extends APIResource {
    *
    * @example
    * ```ts
-   * const hubSpotFormDefinition =
+   * const formDefinitionBase =
    *   await client.marketing.forms.read('formId');
    * ```
    */
@@ -90,7 +86,7 @@ export class Forms extends APIResource {
     formID: string,
     query: FormReadParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<HubSpotFormDefinition> {
+  ): APIPromise<FormDefinitionBase> {
     return this._client.get(path`/marketing/v3/forms/${formID}`, { query, ...options });
   }
 
@@ -99,15 +95,11 @@ export class Forms extends APIResource {
    *
    * @example
    * ```ts
-   * const hubSpotFormDefinition =
+   * const formDefinitionBase =
    *   await client.marketing.forms.replace('formId');
    * ```
    */
-  replace(
-    formID: string,
-    body: FormReplaceParams,
-    options?: RequestOptions,
-  ): APIPromise<HubSpotFormDefinition> {
+  replace(formID: string, body: FormReplaceParams, options?: RequestOptions): APIPromise<FormDefinitionBase> {
     return this._client.put(path`/marketing/v3/forms/${formID}`, { body, ...options });
   }
 }
@@ -516,7 +508,7 @@ export interface FileField {
   placeholder?: string;
 }
 
-export interface HubSpotFormDefinition {
+export interface FormDefinitionBase {
   id: string;
 
   archived: boolean;
