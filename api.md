@@ -356,8 +356,6 @@ Types:
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">Column</a></code>
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">ColumnRequest</a></code>
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">ForeignID</a></code>
-- <code><a href="./src/resources/cms/hubdb/hubdb.ts">HubDBOption</a></code>
-- <code><a href="./src/resources/cms/hubdb/hubdb.ts">HubDBStandardError</a></code>
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">HubDBTableCloneRequest</a></code>
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">HubDBTableRowBatchCloneRequest</a></code>
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">HubDBTableRowV3</a></code>
@@ -366,11 +364,46 @@ Types:
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">HubDBTableV3</a></code>
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">HubDBTableV3Request</a></code>
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">ImportResult</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">Option</a></code>
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">RandomAccessCollectionResponseWithTotalHubDBTableRowV3</a></code>
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">SimpleUser</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">StandardError</a></code>
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">StreamingCollectionResponseWithTotalHubDBTableRowV3</a></code>
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3</a></code>
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">Variant</a></code>
+
+Methods:
+
+- <code title="delete /cms/v3/hubdb/tables/{tableIdOrName}">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">archiveTable</a>(tableIDOrName) -> void</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/draft/clone">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">cloneDraftTable</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft/clone">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">cloneDraftTableRow</a>(rowID, { ...params }) -> HubDBTableRowV3</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/clone">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">cloneDraftTableRows</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/create">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">createDraftTableRows</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
+- <code title="post /cms/v3/hubdb/tables">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">createTable</a>({ ...params }) -> HubDBTableV3</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">createTableRow</a>(tableIDOrName, { ...params }) -> HubDBTableRowV3</code>
+- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}/draft/export">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">exportDraftTable</a>(tableIDOrName, { ...params }) -> Response</code>
+- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}/export">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">exportTable</a>(tableIDOrName, { ...params }) -> Response</code>
+- <code title="get /cms/v3/hubdb/tables/draft">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">getAllDraftTables</a>({ ...params }) -> CollectionResponseWithTotalHubDBTableV3ForwardPaging</code>
+- <code title="get /cms/v3/hubdb/tables">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">getAllTables</a>({ ...params }) -> CollectionResponseWithTotalHubDBTableV3ForwardPaging</code>
+- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}/draft">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">getDraftTableDetailsByID</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
+- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">getDraftTableRowByID</a>(rowID, { ...params }) -> HubDBTableRowV3</code>
+- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">getTableDetails</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
+- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">getTableRow</a>(rowID, { ...params }) -> HubDBTableRowV3</code>
+- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}/rows">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">getTableRows</a>(tableIDOrName, { ...params }) -> UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/draft/import">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">importDraftTable</a>(tableIDOrName, { ...params }) -> ImportResult</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/draft/publish">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">publishDraftTable</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
+- <code title="delete /cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">purgeDraftTableRow</a>(rowID, { ...params }) -> void</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/purge">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">purgeDraftTableRows</a>(tableIDOrName, { ...params }) -> void</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/read">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">readDraftTableRows</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/batch/read">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">readTableRows</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
+- <code title="delete /cms/v3/hubdb/tables/{tableIdOrName}/versions/{versionId}">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">removeTableVersion</a>(versionID, { ...params }) -> void</code>
+- <code title="put /cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">replaceDraftTableRow</a>(rowID, { ...params }) -> HubDBTableRowV3</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/replace">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">replaceDraftTableRows</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/draft/reset">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">resetDraftTable</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/unpublish">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">unpublishTable</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
+- <code title="patch /cms/v3/hubdb/tables/{tableIdOrName}/draft">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">updateDraftTable</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
+- <code title="patch /cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">updateDraftTableRow</a>(rowID, { ...params }) -> HubDBTableRowV3</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/update">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">updateDraftTableRows</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
 
 ### Rows
 
@@ -498,9 +531,9 @@ Types:
 - <code><a href="./src/resources/crm/crm.ts">BatchResponsePublicDefaultAssociation</a></code>
 - <code><a href="./src/resources/crm/crm.ts">CollectionResponseMultiAssociatedObjectWithLabel</a></code>
 - <code><a href="./src/resources/crm/crm.ts">CreatedResponseLabelsBetweenObjectPair</a></code>
-- <code><a href="./src/resources/crm/crm.ts">CRMOption</a></code>
 - <code><a href="./src/resources/crm/crm.ts">LabelsBetweenObjectPair</a></code>
 - <code><a href="./src/resources/crm/crm.ts">MultiAssociatedObjectWithLabel</a></code>
+- <code><a href="./src/resources/crm/crm.ts">Option</a></code>
 - <code><a href="./src/resources/crm/crm.ts">Property</a></code>
 - <code><a href="./src/resources/crm/crm.ts">PropertyModificationMetadata</a></code>
 - <code><a href="./src/resources/crm/crm.ts">PublicDefaultAssociation</a></code>
@@ -655,25 +688,18 @@ Methods:
 
 Methods:
 
-- <code title="post /crm/v3/objects/0-3">client.crm.objects.deals.<a href="./src/resources/crm/objects/deals/deals.ts">createByObjectTypeID</a>({ ...params }) -> CreatedResponseSimplePublicObject</code>
-- <code title="delete /crm/v3/objects/0-3/{dealId}">client.crm.objects.deals.<a href="./src/resources/crm/objects/deals/deals.ts">deleteByObjectTypeID</a>(dealID) -> void</code>
-- <code title="get /crm/v3/objects/0-3/{dealId}">client.crm.objects.deals.<a href="./src/resources/crm/objects/deals/deals.ts">getByObjectTypeID</a>(dealID, { ...params }) -> SimplePublicObjectWithAssociations</code>
-- <code title="get /crm/v3/objects/0-3">client.crm.objects.deals.<a href="./src/resources/crm/objects/deals/deals.ts">listByObjectTypeID</a>({ ...params }) -> CollectionResponseSimplePublicObjectWithAssociations</code>
-- <code title="post /crm/v3/objects/0-3/merge">client.crm.objects.deals.<a href="./src/resources/crm/objects/deals/deals.ts">mergeByObjectTypeID</a>({ ...params }) -> SimplePublicObject</code>
-- <code title="post /crm/v3/objects/0-3/search">client.crm.objects.deals.<a href="./src/resources/crm/objects/deals/deals.ts">searchByObjectTypeID</a>({ ...params }) -> CollectionResponseWithTotalSimplePublicObject</code>
-- <code title="patch /crm/v3/objects/0-3/{dealId}">client.crm.objects.deals.<a href="./src/resources/crm/objects/deals/deals.ts">updateByObjectTypeID</a>(dealID, { ...params }) -> SimplePublicObject</code>
+- <code title="post /crm/v3/objects/0-3">client.crm.objects.deals.<a href="./src/resources/crm/objects/deals/deals.ts">create</a>({ ...params }) -> CreatedResponseSimplePublicObject</code>
+- <code title="patch /crm/v3/objects/0-3/{dealId}">client.crm.objects.deals.<a href="./src/resources/crm/objects/deals/deals.ts">update</a>(dealID, { ...params }) -> SimplePublicObject</code>
+- <code title="get /crm/v3/objects/0-3">client.crm.objects.deals.<a href="./src/resources/crm/objects/deals/deals.ts">list</a>({ ...params }) -> SimplePublicObjectWithAssociationsPage</code>
+- <code title="delete /crm/v3/objects/0-3/{dealId}">client.crm.objects.deals.<a href="./src/resources/crm/objects/deals/deals.ts">delete</a>(dealID) -> void</code>
+- <code title="post /crm/v3/objects/0-3/merge">client.crm.objects.deals.<a href="./src/resources/crm/objects/deals/deals.ts">merge</a>({ ...params }) -> SimplePublicObject</code>
+- <code title="get /crm/v3/objects/0-3/{dealId}">client.crm.objects.deals.<a href="./src/resources/crm/objects/deals/deals.ts">read</a>(dealID, { ...params }) -> SimplePublicObjectWithAssociations</code>
+- <code title="post /crm/v3/objects/0-3/search">client.crm.objects.deals.<a href="./src/resources/crm/objects/deals/deals.ts">search</a>({ ...params }) -> CollectionResponseWithTotalSimplePublicObject</code>
+- <code title="post /crm/v3/objects/0-3/batch/upsert">client.crm.objects.deals.<a href="./src/resources/crm/objects/deals/deals.ts">upsert</a>({ ...params }) -> BatchResponseSimplePublicUpsertObject</code>
 
 #### Associations
 
 #### Batch
-
-Methods:
-
-- <code title="post /crm/v3/objects/0-3/batch/create">client.crm.objects.deals.batch.<a href="./src/resources/crm/objects/deals/batch.ts">create</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
-- <code title="post /crm/v3/objects/0-3/batch/update">client.crm.objects.deals.batch.<a href="./src/resources/crm/objects/deals/batch.ts">update</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
-- <code title="post /crm/v3/objects/0-3/batch/archive">client.crm.objects.deals.batch.<a href="./src/resources/crm/objects/deals/batch.ts">delete</a>({ ...params }) -> void</code>
-- <code title="post /crm/v3/objects/0-3/batch/read">client.crm.objects.deals.batch.<a href="./src/resources/crm/objects/deals/batch.ts">read</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
-- <code title="post /crm/v3/objects/0-3/batch/upsert">client.crm.objects.deals.batch.<a href="./src/resources/crm/objects/deals/batch.ts">upsert</a>({ ...params }) -> BatchResponseSimplePublicUpsertObject</code>
 
 ### Schemas
 
@@ -750,7 +776,7 @@ Types:
 - <code><a href="./src/resources/crm/properties.ts">CollectionResponsePropertyGroup</a></code>
 - <code><a href="./src/resources/crm/properties.ts">CreatedResponseProperty</a></code>
 - <code><a href="./src/resources/crm/properties.ts">CreatedResponsePropertyGroup</a></code>
-- <code><a href="./src/resources/crm/properties.ts">CRMPropertiesOptionInput</a></code>
+- <code><a href="./src/resources/crm/properties.ts">OptionInput</a></code>
 - <code><a href="./src/resources/crm/properties.ts">PropertyCreate</a></code>
 - <code><a href="./src/resources/crm/properties.ts">PropertyGroup</a></code>
 - <code><a href="./src/resources/crm/properties.ts">PropertyGroupCreate</a></code>
@@ -834,7 +860,7 @@ Types:
 - <code><a href="./src/resources/marketing/emails.ts">EmailStatisticsData</a></code>
 - <code><a href="./src/resources/marketing/emails.ts">EmailUpdateRequest</a></code>
 - <code><a href="./src/resources/marketing/emails.ts">Interval</a></code>
-- <code><a href="./src/resources/marketing/emails.ts">MarketingEmailsPaging</a></code>
+- <code><a href="./src/resources/marketing/emails.ts">Paging</a></code>
 - <code><a href="./src/resources/marketing/emails.ts">PublicButtonStyleSettings</a></code>
 - <code><a href="./src/resources/marketing/emails.ts">PublicDividerStyleSettings</a></code>
 - <code><a href="./src/resources/marketing/emails.ts">PublicEmail</a></code>
@@ -916,12 +942,12 @@ Types:
 
 Methods:
 
-- <code title="post /marketing/v3/forms/">client.marketing.forms.<a href="./src/resources/marketing/forms.ts">create</a>() -> unknown</code>
-- <code title="patch /marketing/v3/forms/{formId}">client.marketing.forms.<a href="./src/resources/marketing/forms.ts">update</a>(formID, { ...params }) -> unknown</code>
+- <code title="post /marketing/v3/forms/">client.marketing.forms.<a href="./src/resources/marketing/forms.ts">create</a>() -> HubSpotFormDefinition</code>
+- <code title="patch /marketing/v3/forms/{formId}">client.marketing.forms.<a href="./src/resources/marketing/forms.ts">update</a>(formID, { ...params }) -> HubSpotFormDefinition</code>
 - <code title="get /marketing/v3/forms/">client.marketing.forms.<a href="./src/resources/marketing/forms.ts">list</a>({ ...params }) -> HubSpotFormDefinitionsPage</code>
 - <code title="delete /marketing/v3/forms/{formId}">client.marketing.forms.<a href="./src/resources/marketing/forms.ts">delete</a>(formID) -> void</code>
-- <code title="get /marketing/v3/forms/{formId}">client.marketing.forms.<a href="./src/resources/marketing/forms.ts">read</a>(formID, { ...params }) -> unknown</code>
-- <code title="put /marketing/v3/forms/{formId}">client.marketing.forms.<a href="./src/resources/marketing/forms.ts">replace</a>(formID, { ...params }) -> unknown</code>
+- <code title="get /marketing/v3/forms/{formId}">client.marketing.forms.<a href="./src/resources/marketing/forms.ts">read</a>(formID, { ...params }) -> HubSpotFormDefinition</code>
+- <code title="put /marketing/v3/forms/{formId}">client.marketing.forms.<a href="./src/resources/marketing/forms.ts">replace</a>(formID) -> HubSpotFormDefinition</code>
 
 ## Subscriptions
 
@@ -1013,9 +1039,9 @@ Types:
 - <code><a href="./src/resources/settings/users.ts">CollectionResponsePublicTeamNoPaging</a></code>
 - <code><a href="./src/resources/settings/users.ts">CollectionResponsePublicUserForwardPaging</a></code>
 - <code><a href="./src/resources/settings/users.ts">PublicPermissionSet</a></code>
+- <code><a href="./src/resources/settings/users.ts">PublicTeam</a></code>
 - <code><a href="./src/resources/settings/users.ts">PublicUser</a></code>
 - <code><a href="./src/resources/settings/users.ts">PublicUserUpdate</a></code>
-- <code><a href="./src/resources/settings/users.ts">SettingsUsersPublicTeam</a></code>
 - <code><a href="./src/resources/settings/users.ts">UserProvisionRequest</a></code>
 
 Methods:
@@ -1034,13 +1060,13 @@ Types:
 - <code><a href="./src/resources/webhooks.ts">BatchResponseSubscriptionResponse</a></code>
 - <code><a href="./src/resources/webhooks.ts">BatchResponseSubscriptionResponseWithErrors</a></code>
 - <code><a href="./src/resources/webhooks.ts">SettingsChangeRequest</a></code>
+- <code><a href="./src/resources/webhooks.ts">SettingsResponse</a></code>
 - <code><a href="./src/resources/webhooks.ts">SubscriptionBatchUpdateRequest</a></code>
 - <code><a href="./src/resources/webhooks.ts">SubscriptionCreateRequest</a></code>
 - <code><a href="./src/resources/webhooks.ts">SubscriptionListResponse</a></code>
 - <code><a href="./src/resources/webhooks.ts">SubscriptionPatchRequest</a></code>
 - <code><a href="./src/resources/webhooks.ts">SubscriptionResponse</a></code>
 - <code><a href="./src/resources/webhooks.ts">ThrottlingSettings</a></code>
-- <code><a href="./src/resources/webhooks.ts">WebhooksSettingsResponse</a></code>
 
 Methods:
 
@@ -1049,6 +1075,6 @@ Methods:
 - <code title="get /webhooks/v3/{appId}/subscriptions">client.webhooks.<a href="./src/resources/webhooks.ts">list</a>(appID) -> SubscriptionListResponse</code>
 - <code title="delete /webhooks/v3/{appId}/subscriptions/{subscriptionId}">client.webhooks.<a href="./src/resources/webhooks.ts">delete</a>(subscriptionID, { ...params }) -> void</code>
 - <code title="delete /webhooks/v3/{appId}/settings">client.webhooks.<a href="./src/resources/webhooks.ts">clear</a>(appID) -> void</code>
-- <code title="put /webhooks/v3/{appId}/settings">client.webhooks.<a href="./src/resources/webhooks.ts">configure</a>(appID, { ...params }) -> WebhooksSettingsResponse</code>
+- <code title="put /webhooks/v3/{appId}/settings">client.webhooks.<a href="./src/resources/webhooks.ts">configure</a>(appID, { ...params }) -> SettingsResponse</code>
 - <code title="get /webhooks/v3/{appId}/subscriptions/{subscriptionId}">client.webhooks.<a href="./src/resources/webhooks.ts">read</a>(subscriptionID, { ...params }) -> SubscriptionResponse</code>
 - <code title="post /webhooks/v3/{appId}/subscriptions/batch/update">client.webhooks.<a href="./src/resources/webhooks.ts">updateBatch</a>(appID, { ...params }) -> BatchResponseSubscriptionResponse</code>

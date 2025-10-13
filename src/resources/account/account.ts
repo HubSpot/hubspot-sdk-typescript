@@ -35,7 +35,7 @@ export interface APIUsage {
 export interface CollectionResponseAPIUsage {
   results: Array<APIUsage>;
 
-  paging?: EmailsAPI.MarketingEmailsPaging;
+  paging?: EmailsAPI.Paging;
 }
 
 export interface PortalInformationResponse {

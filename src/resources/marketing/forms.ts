@@ -12,14 +12,18 @@ export class Forms extends APIResource {
   /**
    * Create a form
    */
-  create(body: FormCreateParams, options?: RequestOptions): APIPromise<unknown> {
+  create(body: FormCreateParams, options?: RequestOptions): APIPromise<HubSpotFormDefinition> {
     return this._client.post('/marketing/v3/forms/', { body, ...options });
   }
 
   /**
    * Partially update a form definition
    */
-  update(formID: string, body: FormUpdateParams, options?: RequestOptions): APIPromise<unknown> {
+  update(
+    formID: string,
+    body: FormUpdateParams,
+    options?: RequestOptions,
+  ): APIPromise<HubSpotFormDefinition> {
     return this._client.patch(path`/marketing/v3/forms/${formID}`, { body, ...options });
   }
 
@@ -53,14 +57,18 @@ export class Forms extends APIResource {
     formID: string,
     query: FormReadParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<unknown> {
+  ): APIPromise<HubSpotFormDefinition> {
     return this._client.get(path`/marketing/v3/forms/${formID}`, { query, ...options });
   }
 
   /**
    * Update a form definition
    */
-  replace(formID: string, body: FormReplaceParams, options?: RequestOptions): APIPromise<unknown> {
+  replace(
+    formID: string,
+    body: FormReplaceParams,
+    options?: RequestOptions,
+  ): APIPromise<HubSpotFormDefinition> {
     return this._client.put(path`/marketing/v3/forms/${formID}`, { body, ...options });
   }
 }
@@ -249,9 +257,59 @@ export interface FileField {
   placeholder?: string;
 }
 
-export type FormDefinitionBase = unknown;
+export interface HubSpotFormDefinition {
+  id: string;
 
-export type FormDefinitionCreateRequestBase = unknown;
+  archived: boolean;
+
+  configuration: HubSpotFormConfiguration;
+
+  createdAt: string;
+
+  displayOptions: FormDisplayOptions;
+
+  fieldGroups: Array<FieldGroup>;
+
+  formType: 'hubspot';
+
+  legalConsentOptions:
+    | LegalConsentOptionsNone
+    | LegalConsentOptionsLegitimateInterest
+    | LegalConsentOptionsExplicitConsentToProcess
+    | LegalConsentOptionsImplicitConsentToProcess;
+
+  name: string;
+
+  updatedAt: string;
+
+  archivedAt?: string;
+}
+
+export interface HubSpotFormDefinitionCreateRequest {
+  archived: boolean;
+
+  configuration: HubSpotFormConfiguration;
+
+  createdAt: string;
+
+  displayOptions: FormDisplayOptions;
+
+  fieldGroups: Array<FieldGroup>;
+
+  formType: 'hubspot';
+
+  legalConsentOptions:
+    | LegalConsentOptionsNone
+    | LegalConsentOptionsLegitimateInterest
+    | LegalConsentOptionsExplicitConsentToProcess
+    | LegalConsentOptionsImplicitConsentToProcess;
+
+  name: string;
+
+  updatedAt: string;
+
+  archivedAt?: string;
+}
 
 export interface FormDisplayOptions {
   renderRawHtml: boolean;
@@ -723,33 +781,7 @@ export interface FormReadParams {
   archived?: boolean;
 }
 
-export interface FormReplaceParams {
-  id: string;
-
-  archived: boolean;
-
-  configuration: HubSpotFormConfiguration;
-
-  createdAt: string;
-
-  displayOptions: FormDisplayOptions;
-
-  fieldGroups: Array<FieldGroup>;
-
-  formType: 'hubspot';
-
-  legalConsentOptions:
-    | LegalConsentOptionsNone
-    | LegalConsentOptionsLegitimateInterest
-    | LegalConsentOptionsExplicitConsentToProcess
-    | LegalConsentOptionsImplicitConsentToProcess;
-
-  name: string;
-
-  updatedAt: string;
-
-  archivedAt?: string;
-}
+export interface FormReplaceParams {}
 
 export declare namespace Forms {
   export {

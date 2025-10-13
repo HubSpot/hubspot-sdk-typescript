@@ -419,7 +419,7 @@ export interface APIFetchedObjectPropertyValue {
   type: 'FETCHED_OBJECT_PROPERTY';
 }
 
-export type APIFlow = unknown;
+export type APIFlow = APIContactFlow | APIPlatformFlow;
 
 export interface APIFlowBatchFetchFlowIDCoordinate {
   flowId: string;
@@ -447,7 +447,7 @@ export interface APIFlowBatchMigrationInput {
   inputs: Array<APIFlowBatchFetchMigrationFlowIDCoordinate | APIFlowBatchFetchMigrationWorkflowIDCoordinate>;
 }
 
-export type APIFlowCreateRequest = unknown;
+export type APIFlowCreateRequest = APIContactFlowCreateRequest | APIPlatformFlowCreateRequest;
 
 export interface APIFlowEmailCampaign {
   emailCampaignId: string;
@@ -477,7 +477,7 @@ export interface APIFlowListing {
   uuid?: string;
 }
 
-export type APIFlowPutRequest = unknown;
+export type APIFlowPutRequest = APIContactFlowPutRequest | APIPlatformFlowPutRequest;
 
 export interface APIIncrementValue {
   incrementAmount: number;
@@ -1071,7 +1071,7 @@ export interface BatchResponseFlowIDWorkflowIDMappingResponseWithErrors {
 export interface CollectionResponseAPIFlowEmailCampaign {
   results: Array<APIFlowEmailCampaign>;
 
-  paging?: EmailsAPI.MarketingEmailsPaging;
+  paging?: EmailsAPI.Paging;
 }
 
 export interface CollectionResponseAPIFlowListingForwardPaging {
