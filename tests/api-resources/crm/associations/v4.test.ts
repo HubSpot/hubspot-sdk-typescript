@@ -14,7 +14,7 @@ describe('resource v4', () => {
       objectType: 'objectType',
       objectId: 'objectId',
       toObjectType: 'toObjectType',
-      body: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
+      body: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 279 }],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -31,7 +31,7 @@ describe('resource v4', () => {
       objectType: 'objectType',
       objectId: 'objectId',
       toObjectType: 'toObjectType',
-      body: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
+      body: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 279 }],
     });
   });
 
@@ -91,8 +91,8 @@ describe('resource v4', () => {
       fromObjectType: 'fromObjectType',
       inputs: [
         {
-          from: { id: 'id' },
-          to: { id: 'id' },
+          from: { id: '37295' },
+          to: { id: '37295' },
           types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
         },
       ],
@@ -112,8 +112,8 @@ describe('resource v4', () => {
       fromObjectType: 'fromObjectType',
       inputs: [
         {
-          from: { id: 'id' },
-          to: { id: 'id' },
+          from: { id: '37295' },
+          to: { id: '37295' },
           types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
         },
       ],

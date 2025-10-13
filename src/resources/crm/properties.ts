@@ -11,7 +11,16 @@ import { path } from '../../internal/utils/path';
 
 export class Properties extends APIResource {
   /**
-   * Create a property group
+   * Create and return a copy of a new property group.
+   *
+   * @example
+   * ```ts
+   * const createdResponsePropertyGroup =
+   *   await client.crm.properties.create('objectType', {
+   *     label: 'My Property Group',
+   *     name: 'mypropertygroup',
+   *   });
+   * ```
    */
   create(
     objectType: string,
@@ -22,7 +31,16 @@ export class Properties extends APIResource {
   }
 
   /**
-   * Update a property
+   * Perform a partial update of a property identified by { propertyName }. Provided
+   * fields will be overwritten.
+   *
+   * @example
+   * ```ts
+   * const property = await client.crm.properties.update(
+   *   'propertyName',
+   *   { objectType: 'objectType' },
+   * );
+   * ```
    */
   update(
     propertyName: string,
@@ -34,14 +52,28 @@ export class Properties extends APIResource {
   }
 
   /**
-   * Read all property groups
+   * Read all existing property groups for the specified object type and HubSpot
+   * account.
+   *
+   * @example
+   * ```ts
+   * const collectionResponsePropertyGroup =
+   *   await client.crm.properties.list('objectType');
+   * ```
    */
   list(objectType: string, options?: RequestOptions): APIPromise<CollectionResponsePropertyGroup> {
     return this._client.get(path`/crm/v3/properties/${objectType}/groups`, options);
   }
 
   /**
-   * Archive a property
+   * Move a property identified by {propertyName} to the recycling bin.
+   *
+   * @example
+   * ```ts
+   * await client.crm.properties.delete('propertyName', {
+   *   objectType: 'objectType',
+   * });
+   * ```
    */
   delete(propertyName: string, params: PropertyDeleteParams, options?: RequestOptions): APIPromise<void> {
     const { objectType } = params;
@@ -52,7 +84,15 @@ export class Properties extends APIResource {
   }
 
   /**
-   * Read a property
+   * Read a property identified by {propertyName}.
+   *
+   * @example
+   * ```ts
+   * const property = await client.crm.properties.getByName(
+   *   'propertyName',
+   *   { objectType: 'objectType' },
+   * );
+   * ```
    */
   getByName(
     propertyName: string,
@@ -64,7 +104,16 @@ export class Properties extends APIResource {
   }
 
   /**
-   * Read a batch of properties
+   * Read a provided list of properties.
+   *
+   * @example
+   * ```ts
+   * const batchResponseProperty =
+   *   await client.crm.properties.read('objectType', {
+   *     archived: true,
+   *     inputs: [{ name: 'my_custom_property' }],
+   *   });
+   * ```
    */
   read(
     objectType: string,
@@ -112,18 +161,27 @@ export interface BatchResponseProperty {
 export interface CollectionResponseProperty {
   results: Array<CRMAPI.Property>;
 
+  /**
+   * Contains information pagination of results.
+   */
   paging?: EmailsAPI.Paging;
 }
 
 export interface CollectionResponsePropertyGroup {
   results: Array<PropertyGroup>;
 
+  /**
+   * Contains information pagination of results.
+   */
   paging?: EmailsAPI.Paging;
 }
 
 export interface CreatedResponseProperty {
   createdResourceId: string;
 
+  /**
+   * Defines a property
+   */
   entity: CRMAPI.Property;
 
   location?: string;
@@ -132,22 +190,49 @@ export interface CreatedResponseProperty {
 export interface CreatedResponsePropertyGroup {
   createdResourceId: string;
 
+  /**
+   * An ID for a group of properties
+   */
   entity: PropertyGroup;
 
   location?: string;
 }
 
 export interface OptionInput {
+  /**
+   * If true, the option will not be shown in forms, bots, or meeting scheduling
+   * pages. Supported for contact, company, ticket, and custom object enumeration
+   * properties.
+   */
   hidden: boolean;
 
+  /**
+   * A human-readable option label that will be shown in HubSpot.
+   */
   label: string;
 
+  /**
+   * The internal value of the option, which must be used when setting the property
+   * value through the API.
+   */
   value: string;
 
+  /**
+   * A description of the option.
+   */
+  description?: string;
+
+  /**
+   * Options are shown in order starting with the lowest positive integer value.
+   * Values of -1 will cause the option to be displayed after any positive values.
+   */
   displayOrder?: number;
 }
 
 export interface PropertyCreate {
+  /**
+   * Controls how the property appears in HubSpot.
+   */
   fieldType:
     | 'booleancheckbox'
     | 'calculation_equation'
@@ -162,66 +247,170 @@ export interface PropertyCreate {
     | 'text'
     | 'textarea';
 
+  /**
+   * The name of the property group the property belongs to.
+   */
   groupName: string;
 
+  /**
+   * A human-readable property label that will be shown in HubSpot.
+   */
   label: string;
 
+  /**
+   * The internal property name, which must be used when referencing the property via
+   * the API.
+   */
   name: string;
 
+  /**
+   * The data type of the property.
+   */
   type: 'bool' | 'date' | 'datetime' | 'enumeration' | 'number' | 'phone_number' | 'string';
 
+  /**
+   * Represents a formula that is used to compute a calculated property.
+   */
   calculationFormula?: string;
 
   dataSensitivity?: 'non_sensitive' | 'sensitive' | 'highly_sensitive';
 
+  /**
+   * A description of the property that will be shown as help text in HubSpot.
+   */
+  description?: string;
+
+  /**
+   * Properties are displayed in order starting with the lowest positive integer
+   * value. Values of -1 will cause the property to be displayed after any positive
+   * values.
+   */
   displayOrder?: number;
 
+  /**
+   * Applicable only for 'enumeration' type properties. Should be set to true in
+   * conjunction with a 'referencedObjectType' of 'OWNER'. Otherwise false.
+   */
   externalOptions?: boolean;
 
+  /**
+   * Whether or not the property can be used in a HubSpot form.
+   */
   formField?: boolean;
 
+  /**
+   * Whether or not the property's value must be unique. Once set, this can't be
+   * changed.
+   */
   hasUniqueValue?: boolean;
 
+  /**
+   * If true, the option will not be shown in forms, bots, or meeting scheduling
+   * pages. Supported for contact, company, ticket, and custom object enumeration
+   * properties.
+   */
   hidden?: boolean;
 
+  /**
+   * A list of valid options for the property. This field is required for enumerated
+   * properties.
+   */
   options?: Array<OptionInput>;
 
+  /**
+   * Should be set to 'OWNER' when 'externalOptions' is true, which causes the
+   * property to dynamically pull option values from the current HubSpot users.
+   */
   referencedObjectType?: string;
 }
 
+/**
+ * An ID for a group of properties
+ */
 export interface PropertyGroup {
   archived: boolean;
 
+  /**
+   * Property groups are displayed in order starting with the lowest positive integer
+   * value. Values of -1 will cause the property group to be displayed after any
+   * positive values.
+   */
   displayOrder: number;
 
+  /**
+   * A human-readable label that will be shown in HubSpot.
+   */
   label: string;
 
+  /**
+   * The internal property group name, which must be used when referencing the
+   * property group via the API.
+   */
   name: string;
 }
 
 export interface PropertyGroupCreate {
+  /**
+   * A human-readable label that will be shown in HubSpot.
+   */
   label: string;
 
+  /**
+   * The internal property group name, which must be used when referencing the
+   * property group via the API.
+   */
   name: string;
 
+  /**
+   * Property groups are displayed in order starting with the lowest positive integer
+   * value. Values of -1 will cause the property group to be displayed after any
+   * positive values.
+   */
   displayOrder?: number;
 }
 
 export interface PropertyGroupUpdate {
+  /**
+   * Property groups are displayed in order starting with the lowest positive integer
+   * value. Values of -1 will cause the property group to be displayed after any
+   * positive values.
+   */
   displayOrder?: number;
 
+  /**
+   * A human-readable label that will be shown in HubSpot.
+   */
   label?: string;
 }
 
 export interface PropertyName {
+  /**
+   * The name of the property to read or modify.
+   */
   name: string;
 }
 
 export interface PropertyUpdate {
+  /**
+   * Represents a formula that is used to compute a calculated property.
+   */
   calculationFormula?: string;
 
+  /**
+   * A description of the property that will be shown as help text in HubSpot.
+   */
+  description?: string;
+
+  /**
+   * Properties are displayed in order starting with the lowest positive integer
+   * value. Values of -1 will cause the Property to be displayed after any positive
+   * values.
+   */
   displayOrder?: number;
 
+  /**
+   * Controls how the property appears in HubSpot.
+   */
   fieldType?:
     | 'booleancheckbox'
     | 'calculation_equation'
@@ -236,24 +425,54 @@ export interface PropertyUpdate {
     | 'text'
     | 'textarea';
 
+  /**
+   * Whether or not the property can be used in a HubSpot form.
+   */
   formField?: boolean;
 
+  /**
+   * The name of the property group the property belongs to.
+   */
   groupName?: string;
 
+  /**
+   * If true, the property won't be visible and can't be used in HubSpot.
+   */
   hidden?: boolean;
 
+  /**
+   * A human-readable property label that will be shown in HubSpot.
+   */
   label?: string;
 
+  /**
+   * A list of valid options for the property.
+   */
   options?: Array<OptionInput>;
 
+  /**
+   * The data type of the property.
+   */
   type?: 'bool' | 'date' | 'datetime' | 'enumeration' | 'number' | 'phone_number' | 'string';
 }
 
 export interface PropertyCreateParams {
+  /**
+   * A human-readable label that will be shown in HubSpot.
+   */
   label: string;
 
+  /**
+   * The internal property group name, which must be used when referencing the
+   * property group via the API.
+   */
   name: string;
 
+  /**
+   * Property groups are displayed in order starting with the lowest positive integer
+   * value. Values of -1 will cause the property group to be displayed after any
+   * positive values.
+   */
   displayOrder?: number;
 }
 
@@ -264,17 +483,25 @@ export interface PropertyUpdateParams {
   objectType: string;
 
   /**
-   * Body param:
+   * Body param: Represents a formula that is used to compute a calculated property.
    */
   calculationFormula?: string;
 
   /**
-   * Body param:
+   * Body param: A description of the property that will be shown as help text in
+   * HubSpot.
+   */
+  description?: string;
+
+  /**
+   * Body param: Properties are displayed in order starting with the lowest positive
+   * integer value. Values of -1 will cause the Property to be displayed after any
+   * positive values.
    */
   displayOrder?: number;
 
   /**
-   * Body param:
+   * Body param: Controls how the property appears in HubSpot.
    */
   fieldType?:
     | 'booleancheckbox'
@@ -291,32 +518,32 @@ export interface PropertyUpdateParams {
     | 'textarea';
 
   /**
-   * Body param:
+   * Body param: Whether or not the property can be used in a HubSpot form.
    */
   formField?: boolean;
 
   /**
-   * Body param:
+   * Body param: The name of the property group the property belongs to.
    */
   groupName?: string;
 
   /**
-   * Body param:
+   * Body param: If true, the property won't be visible and can't be used in HubSpot.
    */
   hidden?: boolean;
 
   /**
-   * Body param:
+   * Body param: A human-readable property label that will be shown in HubSpot.
    */
   label?: string;
 
   /**
-   * Body param:
+   * Body param: A list of valid options for the property.
    */
   options?: Array<OptionInput>;
 
   /**
-   * Body param:
+   * Body param: The data type of the property.
    */
   type?: 'bool' | 'date' | 'datetime' | 'enumeration' | 'number' | 'phone_number' | 'string';
 }
@@ -332,7 +559,7 @@ export interface PropertyGetByNameParams {
   objectType: string;
 
   /**
-   * Query param:
+   * Query param: Whether to return only results that have been archived.
    */
   archived?: boolean;
 

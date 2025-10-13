@@ -11,11 +11,13 @@ describe('resource schemas', () => {
   // Prism tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.crm.objects.schemas.create({
-      associatedObjects: ['string'],
+      associatedObjects: ['CONTACT'],
       labels: {},
-      name: 'name',
-      properties: [{ fieldType: 'fieldType', label: 'label', name: 'name', type: 'string' }],
-      requiredProperties: ['string'],
+      name: 'my_object',
+      properties: [
+        { fieldType: 'select', label: 'My object property', name: 'my_object_property', type: 'enumeration' },
+      ],
+      requiredProperties: ['my_object_property'],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,22 +31,38 @@ describe('resource schemas', () => {
   // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.crm.objects.schemas.create({
-      associatedObjects: ['string'],
-      labels: { plural: 'plural', singular: 'singular' },
-      name: 'name',
+      associatedObjects: ['CONTACT'],
+      labels: { plural: 'My objects', singular: 'My object' },
+      name: 'my_object',
       properties: [
         {
-          fieldType: 'fieldType',
-          label: 'label',
-          name: 'name',
-          type: 'string',
-          displayOrder: 0,
+          fieldType: 'select',
+          label: 'My object property',
+          name: 'my_object_property',
+          type: 'enumeration',
+          description: 'description',
+          displayOrder: 2,
           formField: true,
-          groupName: 'groupName',
-          hasUniqueValue: true,
+          groupName: 'my_object_information',
+          hasUniqueValue: false,
           hidden: true,
           numberDisplayHint: 'unformatted',
-          options: [{ hidden: true, label: 'label', value: 'value', displayOrder: 0 }],
+          options: [
+            {
+              hidden: false,
+              label: 'Option A',
+              value: 'A',
+              description: 'Choice number one',
+              displayOrder: 1,
+            },
+            {
+              hidden: false,
+              label: 'Option B',
+              value: 'B',
+              description: 'Choice number two',
+              displayOrder: 2,
+            },
+          ],
           optionSortStrategy: 'DISPLAY_ORDER',
           referencedObjectType: 'referencedObjectType',
           searchableInGlobalSearch: true,
@@ -52,8 +70,9 @@ describe('resource schemas', () => {
           textDisplayHint: 'unformatted_single_line',
         },
       ],
-      requiredProperties: ['string'],
-      primaryDisplayProperty: 'primaryDisplayProperty',
+      requiredProperties: ['my_object_property'],
+      description: 'description',
+      primaryDisplayProperty: 'my_object_property',
       searchableProperties: ['string'],
       secondaryDisplayProperties: ['string'],
     });
@@ -139,8 +158,8 @@ describe('resource schemas', () => {
   // Prism tests are disabled
   test.skip('createAssociation: only required params', async () => {
     const responsePromise = client.crm.objects.schemas.createAssociation('objectType', {
-      fromObjectTypeId: 'fromObjectTypeId',
-      toObjectTypeId: 'toObjectTypeId',
+      fromObjectTypeId: '2-123456',
+      toObjectTypeId: 'contact',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -154,9 +173,9 @@ describe('resource schemas', () => {
   // Prism tests are disabled
   test.skip('createAssociation: required and optional params', async () => {
     const response = await client.crm.objects.schemas.createAssociation('objectType', {
-      fromObjectTypeId: 'fromObjectTypeId',
-      toObjectTypeId: 'toObjectTypeId',
-      name: 'name',
+      fromObjectTypeId: '2-123456',
+      toObjectTypeId: 'contact',
+      name: 'my_object_to_contact',
     });
   });
 

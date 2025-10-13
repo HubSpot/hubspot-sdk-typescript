@@ -10,14 +10,14 @@ import { path } from '../../internal/utils/path';
 
 export class URLRedirects extends APIResource {
   /**
-   * Create a redirect
+   * Creates and configures a new URL redirect.
    */
   create(body: URLRedirectCreateParams, options?: RequestOptions): APIPromise<URLMapping> {
     return this._client.post('/cms/v3/url-redirects/', { body, ...options });
   }
 
   /**
-   * Update a redirect
+   * Updates the settings for an existing URL redirect.
    */
   update(
     urlRedirectID: string,
@@ -28,7 +28,8 @@ export class URLRedirects extends APIResource {
   }
 
   /**
-   * Get current redirects
+   * Returns all existing URL redirects. Results can be limited and filtered by
+   * creation or updated date.
    */
   list(
     query: URLRedirectListParams | null | undefined = {},
@@ -38,7 +39,7 @@ export class URLRedirects extends APIResource {
   }
 
   /**
-   * Delete a redirect
+   * Delete one existing redirect, so it is no longer mapped.
    */
   delete(urlRedirectID: string, options?: RequestOptions): APIPromise<void> {
     return this._client.delete(path`/cms/v3/url-redirects/${urlRedirectID}`, {
@@ -48,7 +49,7 @@ export class URLRedirects extends APIResource {
   }
 
   /**
-   * Get details for a redirect
+   * Returns the details for a single existing URL redirect by ID.
    */
   read(urlRedirectID: string, options?: RequestOptions): APIPromise<URLMapping> {
     return this._client.get(path`/cms/v3/url-redirects/${urlRedirectID}`, options);
@@ -66,26 +67,66 @@ export interface CollectionResponseWithTotalURLMappingForwardPaging {
 }
 
 export interface URLMapping {
+  /**
+   * The unique ID of this URL redirect.
+   */
   id: string;
 
+  /**
+   * The destination URL, where the target URL should be redirected if it matches the
+   * `routePrefix`.
+   */
   destination: string;
 
+  /**
+   * Whether the `routePrefix` should match on the entire URL, including the domain.
+   */
   isMatchFullUrl: boolean;
 
+  /**
+   * Whether the `routePrefix` should match on the entire URL path, including the
+   * query string.
+   */
   isMatchQueryString: boolean;
 
+  /**
+   * Whether the URL redirect mapping should apply only if a live page on the URL
+   * isn't found. If False, the URL redirect mapping will take precedence over any
+   * existing page.
+   */
   isOnlyAfterNotFound: boolean;
 
+  /**
+   * Whether the `routePrefix` should match based on pattern.
+   */
   isPattern: boolean;
 
+  /**
+   * Whether the `routePrefix` should match both HTTP and HTTPS protocols.
+   */
   isProtocolAgnostic: boolean;
 
+  /**
+   * Whether a trailing slash will be ignored.
+   */
   isTrailingSlashOptional: boolean;
 
+  /**
+   * Used to prioritize URL redirection. If a given URL matches more than one
+   * redirect, the one with the **lower** precedence will be used.
+   */
   precedence: number;
 
+  /**
+   * The type of redirect to create. Options include: 301 (permanent), 302
+   * (temporary), or 305 (proxy). Find more details
+   * [here](https://knowledge.hubspot.com/cos-general/how-to-redirect-a-hubspot-page).
+   */
   redirectStyle: number;
 
+  /**
+   * The target incoming URL, path, or pattern to match for redirection.
+   */
   routePrefix: string;
 
   created?: string;
@@ -138,26 +179,66 @@ export interface URLRedirectCreateParams {
 }
 
 export interface URLRedirectUpdateParams {
+  /**
+   * The unique ID of this URL redirect.
+   */
   id: string;
 
+  /**
+   * The destination URL, where the target URL should be redirected if it matches the
+   * `routePrefix`.
+   */
   destination: string;
 
+  /**
+   * Whether the `routePrefix` should match on the entire URL, including the domain.
+   */
   isMatchFullUrl: boolean;
 
+  /**
+   * Whether the `routePrefix` should match on the entire URL path, including the
+   * query string.
+   */
   isMatchQueryString: boolean;
 
+  /**
+   * Whether the URL redirect mapping should apply only if a live page on the URL
+   * isn't found. If False, the URL redirect mapping will take precedence over any
+   * existing page.
+   */
   isOnlyAfterNotFound: boolean;
 
+  /**
+   * Whether the `routePrefix` should match based on pattern.
+   */
   isPattern: boolean;
 
+  /**
+   * Whether the `routePrefix` should match both HTTP and HTTPS protocols.
+   */
   isProtocolAgnostic: boolean;
 
+  /**
+   * Whether a trailing slash will be ignored.
+   */
   isTrailingSlashOptional: boolean;
 
+  /**
+   * Used to prioritize URL redirection. If a given URL matches more than one
+   * redirect, the one with the **lower** precedence will be used.
+   */
   precedence: number;
 
+  /**
+   * The type of redirect to create. Options include: 301 (permanent), 302
+   * (temporary), or 305 (proxy). Find more details
+   * [here](https://knowledge.hubspot.com/cos-general/how-to-redirect-a-hubspot-page).
+   */
   redirectStyle: number;
 
+  /**
+   * The target incoming URL, path, or pattern to match for redirection.
+   */
   routePrefix: string;
 
   created?: string;
@@ -166,20 +247,41 @@ export interface URLRedirectUpdateParams {
 }
 
 export interface URLRedirectListParams extends PageParams {
+  /**
+   * Whether to return only results that have been archived.
+   */
   archived?: boolean;
 
+  /**
+   * Only return redirects created after this date.
+   */
   createdAfter?: string;
 
+  /**
+   * Only return redirects created on exactly this date.
+   */
   createdAt?: string;
 
+  /**
+   * Only return redirects created before this date.
+   */
   createdBefore?: string;
 
   sort?: Array<string>;
 
+  /**
+   * Only return redirects last updated after this date.
+   */
   updatedAfter?: string;
 
+  /**
+   * Only return redirects last updated on exactly this date.
+   */
   updatedAt?: string;
 
+  /**
+   * Only return redirects last updated before this date.
+   */
   updatedBefore?: string;
 }
 

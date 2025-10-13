@@ -7,24 +7,52 @@ import * as EmailsAPI from '../marketing/emails';
 export class Workflows extends APIResource {}
 
 export interface APIAbTestBranchAction {
+  /**
+   * The ID for this action.
+   */
   actionId: string;
 
   testBranches: Array<APIConnection>;
 
+  /**
+   * The type of action this is, can be: "STATIC_BRANCH", "LIST_BRANCH",
+   * "AB_TEST_BRANCH", "CUSTOM_CODE", "WEBHOOK", or "SINGLE_CONNECTION"
+   */
   type: 'AB_TEST_BRANCH';
 }
 
 export interface APIActionDataValue {
+  /**
+   * Which action to pull data from.
+   */
   actionId: string;
 
+  /**
+   * The output field name for that action
+   */
   dataKey: string;
 
+  /**
+   * This is the type of input value. This can be one of: "FIELD_DATA",
+   * "OBJECT_PROPERTY", "STATIC_VALUE", "RELATIVE_DATETIME", "TIMESTAMP",
+   * "INCREMENT", "FETCHED_OBJECT_PROPERTY", "APPEND_OBJECT_PROPERTY",
+   * "STATIC_APPEND_VALUE", "ENROLLMENT_EVENT_PROPERTY"
+   */
   type: 'FIELD_DATA';
 }
 
 export interface APIAppendObjectPropertyValue {
+  /**
+   * The name of the property to append data from
+   */
   appendPropertyName: string;
 
+  /**
+   * This is the type of input value. This can be one of: "FIELD_DATA",
+   * "OBJECT_PROPERTY", "STATIC_VALUE", "RELATIVE_DATETIME", "TIMESTAMP",
+   * "INCREMENT", "FETCHED_OBJECT_PROPERTY", "APPEND_OBJECT_PROPERTY",
+   * "STATIC_APPEND_VALUE", "ENROLLMENT_EVENT_PROPERTY"
+   */
   type: 'APPEND_OBJECT_PROPERTY';
 }
 
@@ -55,12 +83,24 @@ export interface APIAssociationTimestampDataSource {
 }
 
 export interface APIAuthKeyWebhookAuthSettings {
+  /**
+   * Where in the request this auth key should be located: "HEADER" or "QUERY_PARAM"
+   */
   location: 'HEADER' | 'QUERY_PARAM';
 
+  /**
+   * The name to use for this auth key.
+   */
   name: string;
 
+  /**
+   * The secret to pass through in this auth key.
+   */
   secretName: string;
 
+  /**
+   * The type of webhook auth settings this is, can be: "AUTH_KEY" or "SIGNATURE"
+   */
   type: 'AUTH_KEY';
 }
 
@@ -139,6 +179,8 @@ export interface APIContactFlow {
 
   updatedAt: string;
 
+  description?: string;
+
   enrollmentCriteria?:
     | APIListBasedEnrollmentCriteria
     | APIEventBasedEnrollmentCriteria
@@ -210,6 +252,8 @@ export interface APIContactFlowCreateRequest {
 
   type: 'CONTACT_FLOW' | 'PLATFORM_FLOW';
 
+  description?: string;
+
   enrollmentCriteria?:
     | APIListBasedEnrollmentCriteria
     | APIEventBasedEnrollmentCriteria
@@ -270,6 +314,8 @@ export interface APIContactFlowPutRequest {
 
   type: 'CONTACT_FLOW' | 'PLATFORM_FLOW';
 
+  description?: string;
+
   enrollmentCriteria?:
     | APIListBasedEnrollmentCriteria
     | APIEventBasedEnrollmentCriteria
@@ -305,24 +351,53 @@ export interface APIContactFlowPutRequest {
 }
 
 export interface APIContactPropertyAnchor {
+  /**
+   * A date property on the contact to use as the anchor point of this workflow.
+   */
   contactProperty: string;
 
+  /**
+   * The type of event anchor this is, can be: "CONTACT_PROPERTY_ANCHOR" or
+   * "STATIC_DATE_ANCHOR"
+   */
   type: 'CONTACT_PROPERTY_ANCHOR';
 }
 
 export interface APICustomCodeAction {
+  /**
+   * The ID for this action.
+   */
   actionId: string;
 
   inputFields: Array<APIInputVariable>;
 
+  /**
+   * The list of output fields that this custom action makes available to the rest of
+   * the flow.
+   */
   outputFields: Array<APIEnumerationOutputField>;
 
+  /**
+   * The runtime to use to execute the source code. Supported runtimes are:
+   * "NODE16X", "NODE20X", "PYTHON39"
+   */
   runtime: string;
 
+  /**
+   * The names of any "secrets" setup in this portal that will be used in this
+   * action.
+   */
   secretNames: Array<string>;
 
+  /**
+   * The source code to execute when this action executes.
+   */
   sourceCode: string;
 
+  /**
+   * The type of action this is, can be: "STATIC_BRANCH", "LIST_BRANCH",
+   * "AB_TEST_BRANCH", "CUSTOM_CODE", "WEBHOOK", or "SINGLE_CONNECTION"
+   */
   type: 'CUSTOM_CODE';
 
   connection?: APIConnection;
@@ -331,6 +406,10 @@ export interface APICustomCodeAction {
 export interface APIDailyEnrollmentSchedule {
   timeOfDay: APITimeOfDay;
 
+  /**
+   * The type of enrollment schedule this is, can be: "DAILY", "WEEKLY",
+   * "MONTHLY_SPECIFIC_DAYS", "MONTHLY_RELATIVE_DAYS", "YEARLY"
+   */
   type: 'DAILY';
 }
 
@@ -387,6 +466,12 @@ export interface APIEnumerationOutputField {
 export interface APIEventBasedEnrollmentCriteria {
   eventFilterBranches: Array<PublicUnifiedEventsFilterBranch>;
 
+  /**
+   * If you want to listen to list-membership events (an object was added to a list,
+   * an object was removed from a list) you need to use this
+   * `listMembershipFilterBranches` property instead of `eventFilterBranches`,
+   * because list membership events work differently.
+   */
   listMembershipFilterBranches: Array<
     | PublicOrFilterBranch
     | PublicAndFilterBranch
@@ -398,10 +483,20 @@ export interface APIEventBasedEnrollmentCriteria {
     | PublicAssociationFilterBranch
   >;
 
+  /**
+   * Whether or not the same object can enroll in this workflow twice.
+   */
   shouldReEnroll: boolean;
 
+  /**
+   * The type of enrollment criteria this is, this can be "LIST_BASED",
+   * "EVENT_BASED", or "MANUAL".
+   */
   type: 'EVENT_BASED';
 
+  /**
+   * List-based criteria to further refine which contacts will enroll in this flow.
+   */
   refinementCriteria?:
     | PublicOrFilterBranch
     | PublicAndFilterBranch
@@ -414,8 +509,17 @@ export interface APIEventBasedEnrollmentCriteria {
 }
 
 export interface APIFetchedObjectPropertyValue {
+  /**
+   * The token to use to identify the object property to use
+   */
   propertyToken: string;
 
+  /**
+   * This is the type of input value. This can be one of: "FIELD_DATA",
+   * "OBJECT_PROPERTY", "STATIC_VALUE", "RELATIVE_DATETIME", "TIMESTAMP",
+   * "INCREMENT", "FETCHED_OBJECT_PROPERTY", "APPEND_OBJECT_PROPERTY",
+   * "STATIC_APPEND_VALUE", "ENROLLMENT_EVENT_PROPERTY"
+   */
   type: 'FETCHED_OBJECT_PROPERTY';
 }
 
@@ -428,14 +532,26 @@ export interface APIFlowBatchFetchFlowIDCoordinate {
 }
 
 export interface APIFlowBatchFetchMigrationFlowIDCoordinate {
+  /**
+   * The flowId from the V4 API
+   */
   flowMigrationStatuses: string;
 
+  /**
+   * The type of input this is, can be FLOW_ID or WORKFLOW_ID
+   */
   type: 'FLOW_ID';
 }
 
 export interface APIFlowBatchFetchMigrationWorkflowIDCoordinate {
+  /**
+   * The workflowId from the V3 API
+   */
   flowMigrationStatusForClassicWorkflows: string;
 
+  /**
+   * The type of input this is, can be FLOW_ID or WORKFLOW_ID
+   */
   type: 'WORKFLOW_ID';
 }
 
@@ -458,30 +574,69 @@ export interface APIFlowEmailCampaign {
 }
 
 export interface APIFlowListing {
+  /**
+   * The unique ID for this flow. This is auto-generated when creating the flow.
+   */
   id: string;
 
+  /**
+   * The timestamp this flow was created.
+   */
   createdAt: string;
 
+  /**
+   * Deprecated. Will be removed.
+   */
   flowType: string;
 
+  /**
+   * This controls whether or not the flow is "enabled" if it's actively listening
+   * for enrollment triggers and executing actions. If this is `false` the flow is
+   * not accepting any enrollments or executing any actions.
+   */
   isEnabled: boolean;
 
+  /**
+   * The CRM object type for objects that can be enrolled into this flow.
+   */
   objectTypeId: string;
 
+  /**
+   * Deprecated. Will be removed.
+   */
   revisionId: string;
 
+  /**
+   * The timestamp this flow was last updated.
+   */
   updatedAt: string;
 
+  /**
+   * The user-provided name for this flow. Names get auto-created for workflows that
+   * are created without a name.
+   */
   name?: string;
 
+  /**
+   * An optional unique key for this flow. This is only unique per-portal.
+   */
   uuid?: string;
 }
 
 export type APIFlowPutRequest = APIContactFlowPutRequest | APIPlatformFlowPutRequest;
 
 export interface APIIncrementValue {
+  /**
+   * The amount be which to increment
+   */
   incrementAmount: number;
 
+  /**
+   * This is the type of input value. This can be one of: "FIELD_DATA",
+   * "OBJECT_PROPERTY", "STATIC_VALUE", "RELATIVE_DATETIME", "TIMESTAMP",
+   * "INCREMENT", "FETCHED_OBJECT_PROPERTY", "APPEND_OBJECT_PROPERTY",
+   * "STATIC_APPEND_VALUE", "ENROLLMENT_EVENT_PROPERTY"
+   */
   type: 'INCREMENT';
 }
 
@@ -502,6 +657,9 @@ export interface APIInputVariable {
 }
 
 export interface APIListBasedEnrollmentCriteria {
+  /**
+   * The list filter branch that represents the enrollment trigger to this flow.
+   */
   listFilterBranch:
     | PublicOrFilterBranch
     | PublicAndFilterBranch
@@ -512,6 +670,10 @@ export interface APIListBasedEnrollmentCriteria {
     | PublicPropertyAssociationFilterBranch
     | PublicAssociationFilterBranch;
 
+  /**
+   * A list of filter branches to listen for in order to re-enroll objects into this
+   * workflow.
+   */
   reEnrollmentTriggersFilterBranches: Array<
     | PublicOrFilterBranch
     | PublicAndFilterBranch
@@ -523,18 +685,36 @@ export interface APIListBasedEnrollmentCriteria {
     | PublicAssociationFilterBranch
   >;
 
+  /**
+   * Whether or not the same object can enroll in this workflow twice.
+   */
   shouldReEnroll: boolean;
 
+  /**
+   * The type of enrollment criteria this is, this can be "LIST_BASED",
+   * "EVENT_BASED", or "MANUAL".
+   */
   type: 'LIST_BASED';
 
+  /**
+   * Whether or not to remove objects from this workflow if they stop meeting the
+   * enrollment criteria.
+   */
   unEnrollObjectsNotMeetingCriteria: boolean;
 }
 
 export interface APIListBranch {
+  /**
+   * The name of this branch
+   */
   branchName?: string;
 
   connection?: APIConnection;
 
+  /**
+   * The list criteria that determine when to execute this branch. The first matching
+   * branch will execute.
+   */
   filterBranch?:
     | PublicOrFilterBranch
     | PublicAndFilterBranch
@@ -547,42 +727,83 @@ export interface APIListBranch {
 }
 
 export interface APIListBranchAction {
+  /**
+   * The ID for this action.
+   */
   actionId: string;
 
   listBranches: Array<APIListBranch>;
 
+  /**
+   * The type of action this is, can be: "STATIC_BRANCH", "LIST_BRANCH",
+   * "AB_TEST_BRANCH", "CUSTOM_CODE", "WEBHOOK", or "SINGLE_CONNECTION"
+   */
   type: 'LIST_BRANCH';
 
   defaultBranch?: APIConnection;
 
+  /**
+   * The name of the default branch, the branch that gets executed if the object does
+   * not match any of the `listBranch` criteria.
+   */
   defaultBranchName?: string;
 }
 
 export interface APIManualEnrollmentCriteria {
+  /**
+   * Whether or not the same object can enroll in this workflow twice.
+   */
   shouldReEnroll: boolean;
 
+  /**
+   * The type of enrollment criteria this is, this can be "LIST_BASED",
+   * "EVENT_BASED", or "MANUAL".
+   */
   type: 'MANUAL';
 }
 
 export interface APIMonthlyRelativeDaysEnrollmentSchedule {
+  /**
+   * Can be either "LAST_DAY_OF_MONTH" or "FIRST_MONDAY_OF_MONTH"
+   */
   monthlyRelativeDays: 'LAST_DAY_OF_MONTH' | 'FIRST_MONDAY_OF_MONTH';
 
   timeOfDay: APITimeOfDay;
 
+  /**
+   * The type of enrollment schedule this is, can be: "DAILY", "WEEKLY",
+   * "MONTHLY_SPECIFIC_DAYS", "MONTHLY_RELATIVE_DAYS", "YEARLY"
+   */
   type: 'MONTHLY_RELATIVE_DAYS';
 }
 
 export interface APIMonthlySpecificDaysEnrollmentSchedule {
+  /**
+   * Which days of the month to run this workflow on.
+   */
   daysOfMonth: Array<number>;
 
   timeOfDay: APITimeOfDay;
 
+  /**
+   * The type of enrollment schedule this is, can be: "DAILY", "WEEKLY",
+   * "MONTHLY_SPECIFIC_DAYS", "MONTHLY_RELATIVE_DAYS", "YEARLY"
+   */
   type: 'MONTHLY_SPECIFIC_DAYS';
 }
 
 export interface APIObjectPropertyValue {
+  /**
+   * The property name to pull data from.
+   */
   propertyName: string;
 
+  /**
+   * This is the type of input value. This can be one of: "FIELD_DATA",
+   * "OBJECT_PROPERTY", "STATIC_VALUE", "RELATIVE_DATETIME", "TIMESTAMP",
+   * "INCREMENT", "FETCHED_OBJECT_PROPERTY", "APPEND_OBJECT_PROPERTY",
+   * "STATIC_APPEND_VALUE", "ENROLLMENT_EVENT_PROPERTY"
+   */
   type: 'OBJECT_PROPERTY';
 }
 
@@ -630,6 +851,8 @@ export interface APIPlatformFlow {
   type: 'CONTACT_FLOW' | 'PLATFORM_FLOW';
 
   updatedAt: string;
+
+  description?: string;
 
   enrollmentCriteria?:
     | APIListBasedEnrollmentCriteria
@@ -694,6 +917,8 @@ export interface APIPlatformFlowCreateRequest {
 
   type: 'CONTACT_FLOW' | 'PLATFORM_FLOW';
 
+  description?: string;
+
   enrollmentCriteria?:
     | APIListBasedEnrollmentCriteria
     | APIEventBasedEnrollmentCriteria
@@ -746,6 +971,8 @@ export interface APIPlatformFlowPutRequest {
 
   type: 'CONTACT_FLOW' | 'PLATFORM_FLOW';
 
+  description?: string;
+
   enrollmentCriteria?:
     | APIListBasedEnrollmentCriteria
     | APIEventBasedEnrollmentCriteria
@@ -791,24 +1018,53 @@ export interface APIPropertyBasedEnrollmentSchedule {
 export interface APIRelativeDateTimeValue {
   timeDelay: APITimeDelay;
 
+  /**
+   * This is the type of input value. This can be one of: "FIELD_DATA",
+   * "OBJECT_PROPERTY", "STATIC_VALUE", "RELATIVE_DATETIME", "TIMESTAMP",
+   * "INCREMENT", "FETCHED_OBJECT_PROPERTY", "APPEND_OBJECT_PROPERTY",
+   * "STATIC_APPEND_VALUE", "ENROLLMENT_EVENT_PROPERTY"
+   */
   type: 'RELATIVE_DATETIME';
 }
 
 export interface APISignatureWebhookAuthSettings {
+  /**
+   * The appId that this signature will be generated for.
+   */
   appId: number;
 
+  /**
+   * The type of webhook auth settings this is, can be: "AUTH_KEY" or "SIGNATURE"
+   */
   type: 'SIGNATURE';
 }
 
 export interface APISingleConnectionAction {
+  /**
+   * The ID for this action.
+   */
   actionId: string;
 
+  /**
+   * The ID of the actionType to use.
+   */
   actionTypeId: string;
 
+  /**
+   * The version of this actionType to use.
+   */
   actionTypeVersion: number;
 
+  /**
+   * The fields to pass into this action. Different action types accept different
+   * fields.
+   */
   fields: { [key: string]: unknown };
 
+  /**
+   * The type of action this is, can be: "STATIC_BRANCH", "LIST_BRANCH",
+   * "AB_TEST_BRANCH", "CUSTOM_CODE", "WEBHOOK", or "SINGLE_CONNECTION"
+   */
   type: 'SINGLE_CONNECTION';
 
   connection?: APIConnection;
@@ -823,20 +1079,39 @@ export interface APISort {
 }
 
 export interface APIStaticAppendValue {
+  /**
+   * The value to append
+   */
   staticAppendValue: string;
 
+  /**
+   * This is the type of input value. This can be one of: "FIELD_DATA",
+   * "OBJECT_PROPERTY", "STATIC_VALUE", "RELATIVE_DATETIME", "TIMESTAMP",
+   * "INCREMENT", "FETCHED_OBJECT_PROPERTY", "APPEND_OBJECT_PROPERTY",
+   * "STATIC_APPEND_VALUE", "ENROLLMENT_EVENT_PROPERTY"
+   */
   type: 'STATIC_APPEND_VALUE';
 }
 
 export interface APIStaticBranch {
+  /**
+   * If value to check for. If the value of the `inputValue` matches this
+   * `branchValue` than this `connection` will get traversed.
+   */
   branchValue: string;
 
   connection?: APIConnection;
 }
 
 export interface APIStaticBranchAction {
+  /**
+   * The ID for this action.
+   */
   actionId: string;
 
+  /**
+   * The input value to branch off of.
+   */
   inputValue:
     | APIActionDataValue
     | APIObjectPropertyValue
@@ -851,16 +1126,30 @@ export interface APIStaticBranchAction {
 
   staticBranches: Array<APIStaticBranch>;
 
+  /**
+   * The type of action this is, can be: "STATIC_BRANCH", "LIST_BRANCH",
+   * "AB_TEST_BRANCH", "CUSTOM_CODE", "WEBHOOK", or "SINGLE_CONNECTION"
+   */
   type: 'STATIC_BRANCH';
 
   defaultBranch?: APIConnection;
 
+  /**
+   * The name of the default branch, the branch that gets executed if `inputValue`
+   * does not match any of the `staticBranches`.
+   */
   defaultBranchName?: string;
 }
 
 export interface APIStaticDateAnchor {
+  /**
+   * The day of the date to anchor on
+   */
   dayOfMonth: number;
 
+  /**
+   * The month of the date to anchor on
+   */
   month:
     | 'JANUARY'
     | 'FEBRUARY'
@@ -875,8 +1164,16 @@ export interface APIStaticDateAnchor {
     | 'NOVEMBER'
     | 'DECEMBER';
 
+  /**
+   * The type of event anchor this is, can be: "CONTACT_PROPERTY_ANCHOR" or
+   * "STATIC_DATE_ANCHOR"
+   */
   type: 'STATIC_DATE_ANCHOR';
 
+  /**
+   * The year of the date to anchor on. If this is not provided then this flow will
+   * re-run each year.
+   */
   year?: number;
 }
 
@@ -899,8 +1196,17 @@ export interface APIStaticTimeZoneStrategy {
 }
 
 export interface APIStaticValue {
+  /**
+   * A static value to use as the input
+   */
   staticValue: string;
 
+  /**
+   * This is the type of input value. This can be one of: "FIELD_DATA",
+   * "OBJECT_PROPERTY", "STATIC_VALUE", "RELATIVE_DATETIME", "TIMESTAMP",
+   * "INCREMENT", "FETCHED_OBJECT_PROPERTY", "APPEND_OBJECT_PROPERTY",
+   * "STATIC_APPEND_VALUE", "ENROLLMENT_EVENT_PROPERTY"
+   */
   type: 'STATIC_VALUE';
 }
 
@@ -939,8 +1245,17 @@ export interface APITimeOfDay {
 }
 
 export interface APITimestampValue {
+  /**
+   * Currently only EXECUTION_TIME is supported.
+   */
   timestampType: 'EXECUTION_TIME';
 
+  /**
+   * This is the type of input value. This can be one of: "FIELD_DATA",
+   * "OBJECT_PROPERTY", "STATIC_VALUE", "RELATIVE_DATETIME", "TIMESTAMP",
+   * "INCREMENT", "FETCHED_OBJECT_PROPERTY", "APPEND_OBJECT_PROPERTY",
+   * "STATIC_APPEND_VALUE", "ENROLLMENT_EVENT_PROPERTY"
+   */
   type: 'TIMESTAMP';
 }
 
@@ -953,38 +1268,77 @@ export interface APITimeWindow {
 }
 
 export interface APIUnEnrollmentSetting {
+  /**
+   * The IDs of the flows to unenroll an object in if it's enrolled in this flow.
+   */
   flowIds: Array<string>;
 
+  /**
+   * The type of unenrollment to perform:
+   *
+   * "ALL" - unenroll the object from all other flows
+   *
+   * "SELECTIVE" - only unenroll the object from the flows specified in `flowIds`
+   */
   type: 'ALL' | 'SELECTIVE';
 }
 
 export interface APIWebhookAction {
+  /**
+   * The ID for this action.
+   */
   actionId: string;
 
+  /**
+   * The HTTP method to use when calling the webhook URL
+   */
   method: 'CONNECT' | 'DELETE' | 'GET' | 'HEAD' | 'OPTIONS' | 'PATCH' | 'POST' | 'PUT' | 'TRACE';
 
   queryParams: Array<APIInputVariable>;
 
+  /**
+   * The type of action this is, can be: "STATIC_BRANCH", "LIST_BRANCH",
+   * "AB_TEST_BRANCH", "CUSTOM_CODE", "WEBHOOK", or "SINGLE_CONNECTION"
+   */
   type: 'WEBHOOK';
 
+  /**
+   * The URL to call each time this action is executed.
+   */
   webhookUrl: string;
 
+  /**
+   * The type of auth to use when calling the webhook endpoint.
+   */
   authSettings?: APIAuthKeyWebhookAuthSettings | APISignatureWebhookAuthSettings;
 
   connection?: APIConnection;
 }
 
 export interface APIWeeklyEnrollmentSchedule {
+  /**
+   * Which days of the week to allow enrollments.
+   */
   daysOfWeek: Array<'MONDAY' | 'TUESDAY' | 'WEDNESDAY' | 'THURSDAY' | 'FRIDAY' | 'SATURDAY' | 'SUNDAY'>;
 
   timeOfDay: APITimeOfDay;
 
+  /**
+   * The type of enrollment schedule this is, can be: "DAILY", "WEEKLY",
+   * "MONTHLY_SPECIFIC_DAYS", "MONTHLY_RELATIVE_DAYS", "YEARLY"
+   */
   type: 'WEEKLY';
 }
 
 export interface APIYearlyEnrollmentSchedule {
+  /**
+   * The day of the date each year to run this flow.
+   */
   dayOfMonth: number;
 
+  /**
+   * The month of the date each year to run this flow.
+   */
   month:
     | 'JANUARY'
     | 'FEBRUARY'
@@ -1001,6 +1355,10 @@ export interface APIYearlyEnrollmentSchedule {
 
   timeOfDay: APITimeOfDay;
 
+  /**
+   * The type of enrollment schedule this is, can be: "DAILY", "WEEKLY",
+   * "MONTHLY_SPECIFIC_DAYS", "MONTHLY_RELATIVE_DAYS", "YEARLY"
+   */
   type: 'YEARLY';
 }
 
@@ -1071,6 +1429,9 @@ export interface BatchResponseFlowIDWorkflowIDMappingResponseWithErrors {
 export interface CollectionResponseAPIFlowEmailCampaign {
   results: Array<APIFlowEmailCampaign>;
 
+  /**
+   * Contains information pagination of results.
+   */
   paging?: EmailsAPI.Paging;
 }
 

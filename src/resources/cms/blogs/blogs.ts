@@ -78,9 +78,18 @@ export class Blogs extends APIResource {
   tags: TagsAPI.Tags = new TagsAPI.Tags(this._client);
 }
 
+/**
+ * Request body object for attaching objects to multi-language groups.
+ */
 export interface AttachToLangPrimaryRequestVNext {
+  /**
+   * ID of the object to add to a multi-language group.
+   */
   id: string;
 
+  /**
+   * Designated language of the object to add to a multi-language group.
+   */
   language:
     | 'af'
     | 'af-na'
@@ -839,26 +848,59 @@ export interface AttachToLangPrimaryRequestVNext {
     | 'zu'
     | 'zu-za';
 
+  /**
+   * ID of primary language object in multi-language group.
+   */
   primaryId: string;
 
+  /**
+   * Primary language of the multi-language group.
+   */
   primaryLanguage?: string;
 }
 
+/**
+ * Wrapper for providing an array of JSON nodes as inputs.
+ */
 export interface BatchInputJsonNode {
+  /**
+   * JSON nodes to input.
+   */
   inputs: Array<unknown>;
 }
 
+/**
+ * Request body object for detaching objects from multi-language groups.
+ */
 export interface DetachFromLangGroupRequestVNext {
+  /**
+   * ID of the object to remove from a multi-language group.
+   */
   id: string;
 }
 
+/**
+ * Request body object for setting a new primary language.
+ */
 export interface SetNewLanguagePrimaryRequestVNext {
+  /**
+   * ID of object to set as primary in multi-language group.
+   */
   id: string;
 }
 
+/**
+ * Request object for updating languages within a multi-language group.
+ */
 export interface UpdateLanguagesRequestVNext {
+  /**
+   * Map of object IDs to associated languages of object in the multi-language group.
+   */
   languages: { [key: string]: string };
 
+  /**
+   * ID of the primary object in the multi-language group.
+   */
   primaryId: string;
 }
 

@@ -25,7 +25,7 @@ describe('resource companies', () => {
     const response = await client.crm.objects.companies.create({
       properties: { foo: 'string' },
       associations: [
-        { to: { id: 'id' }, types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }] },
+        { to: { id: '37295' }, types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 279 }] },
       ],
     });
   });
@@ -51,7 +51,7 @@ describe('resource companies', () => {
         {
           id: 'id',
           properties: { foo: 'string' },
-          idProperty: 'idProperty',
+          idProperty: 'my_unique_property_name',
           objectWriteTraceId: 'objectWriteTraceId',
         },
       ],

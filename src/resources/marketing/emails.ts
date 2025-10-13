@@ -10,14 +10,28 @@ import { path } from '../../internal/utils/path';
 
 export class Emails extends APIResource {
   /**
-   * Create a new marketing email
+   * Use this endpoint to create a new marketing email.
+   *
+   * @example
+   * ```ts
+   * const publicEmail = await client.marketing.emails.create({
+   *   name: 'My subject',
+   * });
+   * ```
    */
   create(body: EmailCreateParams, options?: RequestOptions): APIPromise<PublicEmail> {
     return this._client.post('/marketing/v3/emails/', { body, ...options });
   }
 
   /**
-   * Update a marketing email.
+   * Change properties of a marketing email.
+   *
+   * @example
+   * ```ts
+   * const publicEmail = await client.marketing.emails.update(
+   *   'emailId',
+   * );
+   * ```
    */
   update(emailID: string, params: EmailUpdateParams, options?: RequestOptions): APIPromise<PublicEmail> {
     const { query_archived, ...body } = params;
@@ -29,7 +43,16 @@ export class Emails extends APIResource {
   }
 
   /**
-   * Get all marketing emails
+   * The results can be filtered, allowing you to find a specific set of emails. See
+   * the table below for a full list of filtering options.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const publicEmail of client.marketing.emails.list()) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     query: EmailListParams | null | undefined = {},
@@ -39,7 +62,12 @@ export class Emails extends APIResource {
   }
 
   /**
-   * Delete a marketing email.
+   * Delete a marketing email by its ID
+   *
+   * @example
+   * ```ts
+   * await client.marketing.emails.delete('emailId');
+   * ```
    */
   delete(
     emailID: string,
@@ -55,14 +83,33 @@ export class Emails extends APIResource {
   }
 
   /**
-   * Clone a marketing email.
+   * This will create a duplicate email with the same properties as the original,
+   * with the exception of a unique ID.
+   *
+   * @example
+   * ```ts
+   * const publicEmail = await client.marketing.emails.clone({
+   *   id: 'id',
+   * });
+   * ```
    */
   clone(body: EmailCloneParams, options?: RequestOptions): APIPromise<PublicEmail> {
     return this._client.post('/marketing/v3/emails/clone', { body, ...options });
   }
 
   /**
-   * Create an A/B test variation of a marketing email.
+   * Create a variation of a marketing email for an A/B test. The new variation will
+   * be created as a draft. If an active variation already exists, a new one won't be
+   * created.
+   *
+   * @example
+   * ```ts
+   * const publicEmail =
+   *   await client.marketing.emails.createAbTestVariation({
+   *     contentId: '7',
+   *     variationName: 'variationName',
+   *   });
+   * ```
    */
   createAbTestVariation(
     body: EmailCreateAbTestVariationParams,
@@ -72,21 +119,47 @@ export class Emails extends APIResource {
   }
 
   /**
-   * Get the variation of a an A/B marketing email
+   * This endpoint lets you obtain the variation of an A/B marketing email. If the
+   * email is variation A (master) it will return variation B (variant) and vice
+   * versa.
+   *
+   * @example
+   * ```ts
+   * const publicEmail =
+   *   await client.marketing.emails.getAbTestVariation(
+   *     'emailId',
+   *   );
+   * ```
    */
   getAbTestVariation(emailID: string, options?: RequestOptions): APIPromise<PublicEmail> {
     return this._client.get(path`/marketing/v3/emails/${emailID}/ab-test/get-variation`, options);
   }
 
   /**
-   * Get draft version of a marketing email
+   * Get the draft version of an email (if it exists). If no draft version exists,
+   * the published email is returned.
+   *
+   * @example
+   * ```ts
+   * const publicEmail = await client.marketing.emails.getDraft(
+   *   'emailId',
+   * );
+   * ```
    */
   getDraft(emailID: string, options?: RequestOptions): APIPromise<PublicEmail> {
     return this._client.get(path`/marketing/v3/emails/${emailID}/draft`, options);
   }
 
   /**
-   * Get aggregated statistics.
+   * Use this endpoint to get aggregated statistics of emails sent in a specified
+   * time span. It also returns the list of emails that were sent during the time
+   * span.
+   *
+   * @example
+   * ```ts
+   * const aggregateEmailStatistics =
+   *   await client.marketing.emails.getEmailsList();
+   * ```
    */
   getEmailsList(
     query: EmailGetEmailsListParams | null | undefined = {},
@@ -96,7 +169,14 @@ export class Emails extends APIResource {
   }
 
   /**
-   * Get aggregated statistic intervals.
+   * Get aggregated statistics in intervals for a specified time span. Each interval
+   * contains aggregated statistics of the emails that were sent in that time.
+   *
+   * @example
+   * ```ts
+   * const collectionResponseWithTotalEmailStatisticIntervalNoPaging =
+   *   await client.marketing.emails.getHistogram();
+   * ```
    */
   getHistogram(
     query: EmailGetHistogramParams | null | undefined = {},
@@ -106,7 +186,16 @@ export class Emails extends APIResource {
   }
 
   /**
-   * Get a revision of a marketing email.
+   * Get a specific revision of a marketing email.
+   *
+   * @example
+   * ```ts
+   * const versionPublicEmail =
+   *   await client.marketing.emails.getRevisionByID(
+   *     'revisionId',
+   *     { emailId: 'emailId' },
+   *   );
+   * ```
    */
   getRevisionByID(
     revisionID: string,
@@ -118,7 +207,15 @@ export class Emails extends APIResource {
   }
 
   /**
-   * Get revisions of a marketing email
+   * Get a list of all versions of a marketing email, with each entry including the
+   * full state of that particular version. To view the most recent version, sort by
+   * the updatedAt parameter.
+   *
+   * @example
+   * ```ts
+   * const collectionResponseWithTotalVersionPublicEmail =
+   *   await client.marketing.emails.getRevisions('emailId');
+   * ```
    */
   getRevisions(
     emailID: string,
@@ -129,7 +226,14 @@ export class Emails extends APIResource {
   }
 
   /**
-   * Publish or send a marketing email.
+   * If you have a Marketing Hub Enterprise account or the transactional email
+   * add-on, you can use this endpoint to publish an automated email or send/schedule
+   * a regular email.
+   *
+   * @example
+   * ```ts
+   * await client.marketing.emails.publishOrSend('emailId');
+   * ```
    */
   publishOrSend(emailID: string, options?: RequestOptions): APIPromise<void> {
     return this._client.post(path`/marketing/v3/emails/${emailID}/publish`, {
@@ -139,7 +243,14 @@ export class Emails extends APIResource {
   }
 
   /**
-   * Get the details of a specified marketing email.
+   * Get the details for a marketing email.
+   *
+   * @example
+   * ```ts
+   * const publicEmail = await client.marketing.emails.read(
+   *   'emailId',
+   * );
+   * ```
    */
   read(
     emailID: string,
@@ -150,7 +261,12 @@ export class Emails extends APIResource {
   }
 
   /**
-   * Reset Draft
+   * Resets the draft back to a copy of the live object.
+   *
+   * @example
+   * ```ts
+   * await client.marketing.emails.resetDraft('emailId');
+   * ```
    */
   resetDraft(emailID: string, options?: RequestOptions): APIPromise<void> {
     return this._client.post(path`/marketing/v3/emails/${emailID}/draft/reset`, {
@@ -160,7 +276,16 @@ export class Emails extends APIResource {
   }
 
   /**
-   * Restore a revision of a marketing email to DRAFT state
+   * Restores a previous revision of a marketing email to DRAFT state. If there is
+   * currently something in the draft for that object, it is overwritten.
+   *
+   * @example
+   * ```ts
+   * const publicEmail =
+   *   await client.marketing.emails.restoreDraftRevision(0, {
+   *     emailId: 'emailId',
+   *   });
+   * ```
    */
   restoreDraftRevision(
     revisionID: number,
@@ -175,7 +300,16 @@ export class Emails extends APIResource {
   }
 
   /**
-   * Restore a revision of a marketing email
+   * Restores a previous revision of a marketing email. The current revision becomes
+   * old, and the restored revision is given a new version number.
+   *
+   * @example
+   * ```ts
+   * await client.marketing.emails.restoreRevision(
+   *   'revisionId',
+   *   { emailId: 'emailId' },
+   * );
+   * ```
    */
   restoreRevision(
     revisionID: string,
@@ -190,7 +324,15 @@ export class Emails extends APIResource {
   }
 
   /**
-   * Unpublish or cancel a marketing email.
+   * If you have a Marketing Hub Enterprise account or the transactional email
+   * add-on, you can use this endpoint to unpublish an automated email or cancel a
+   * regular email. If the email is already in the process of being sent, canceling
+   * might not be possible.
+   *
+   * @example
+   * ```ts
+   * await client.marketing.emails.unpublishOrCancel('emailId');
+   * ```
    */
   unpublishOrCancel(emailID: string, options?: RequestOptions): APIPromise<void> {
     return this._client.post(path`/marketing/v3/emails/${emailID}/unpublish`, {
@@ -200,7 +342,16 @@ export class Emails extends APIResource {
   }
 
   /**
-   * Create or update draft version
+   * Create or update the draft version of a marketing email. If no draft exists, the
+   * system creates a draft from the current “live” email then applies the request
+   * body to that draft. The draft version only lives on the buffer—the email is not
+   * cloned.
+   *
+   * @example
+   * ```ts
+   * const publicEmail =
+   *   await client.marketing.emails.upsertDraft('emailId');
+   * ```
    */
   upsertDraft(
     emailID: string,
@@ -213,65 +364,144 @@ export class Emails extends APIResource {
 
 export type PublicEmailsPage = Page<PublicEmail>;
 
+/**
+ * Request body object for creating A/B tests.
+ */
 export interface AbTestCreateRequestVNext {
+  /**
+   * ID of the object to test.
+   */
   contentId: string;
 
   variationName: string;
 }
 
+/**
+ * Aggregated statistics for the given interval, plus the IDs of emails that were
+ * sent during that interval.
+ */
 export interface AggregateEmailStatistics {
   aggregate?: EmailStatisticsData;
 
+  /**
+   * The aggregated statistics per campaign.
+   */
   campaignAggregations?: { [key: string]: EmailStatisticsData };
 
+  /**
+   * List of email IDs that were sent during the time span.
+   */
   emails?: Array<number>;
 }
 
+/**
+ * Response object for collections of EmailStatisticIntervals.
+ */
 export interface CollectionResponseWithTotalEmailStatisticIntervalNoPaging {
+  /**
+   * Collection of objects.
+   */
   results: Array<EmailStatisticInterval>;
 
+  /**
+   * Total number of objects.
+   */
   total: number;
 }
 
+/**
+ * Response object for collections of marketing emails with pagination information.
+ */
 export interface CollectionResponseWithTotalPublicEmailForwardPaging {
+  /**
+   * Collection of emails.
+   */
   results: Array<PublicEmail>;
 
+  /**
+   * Total number of content emails.
+   */
   total: number;
 
   paging?: Shared.ForwardPaging;
 }
 
+/**
+ * Response object for collections of marketing emails with pagination information.
+ */
 export interface CollectionResponseWithTotalVersionPublicEmail {
+  /**
+   * Collection of emails.
+   */
   results: Array<VersionPublicEmail>;
 
+  /**
+   * Total number of content emails.
+   */
   total: number;
 
+  /**
+   * Contains information pagination of results.
+   */
   paging?: Paging;
 }
 
 export interface EmailCloneRequestVNext {
+  /**
+   * The unique identifier of the email to be cloned.
+   */
   id: string;
 
+  /**
+   * The name to assign to the cloned email.
+   */
   cloneName?: string;
 
+  /**
+   * The language code for the cloned email, such as 'en' for English.
+   */
   language?: string;
 }
 
+/**
+ * Properties of a marketing email you can set when creating a marketing email.
+ */
 export interface EmailCreateRequest {
+  /**
+   * The name of the email, as displayed on the email dashboard.
+   */
   name: string;
 
+  /**
+   * The active domain of the email.
+   */
   activeDomain?: string;
 
+  /**
+   * Determines if the email is archived or not.
+   */
   archived?: boolean;
 
   businessUnitId?: number;
 
+  /**
+   * The ID of the campaign this email is associated to.
+   */
   campaign?: string;
 
+  /**
+   * Data structure representing the content of the email.
+   */
   content?: PublicEmailContent;
 
+  /**
+   * The ID of the feedback survey linked to the email.
+   */
   feedbackSurveyId?: string;
 
+  /**
+   * Data structure representing the from fields on the email.
+   */
   from?: PublicEmailFromDetails;
 
   jitterSendTime?: boolean;
@@ -1068,12 +1298,25 @@ export interface EmailCreateRequest {
     | 'zu'
     | 'zu-za';
 
+  /**
+   * The date and time the email is scheduled for, in ISO8601 representation. This is
+   * only used in local time or scheduled emails.
+   */
   publishDate?: string;
 
+  /**
+   * RSS related data if it is a blog or rss email.
+   */
   rssData?: PublicRssEmailDetails;
 
+  /**
+   * Determines whether the email will be sent immediately on publish.
+   */
   sendOnPublish?: boolean;
 
+  /**
+   * The email state.
+   */
   state?:
     | 'AUTOMATED'
     | 'AUTOMATED_DRAFT'
@@ -1107,6 +1350,9 @@ export interface EmailCreateRequest {
     | 'AUTOMATED_DRAFT_ABVARIANT'
     | 'AUTOMATED_LOSER_ABVARIANT';
 
+  /**
+   * The email subcategory.
+   */
   subcategory?:
     | 'ab_master'
     | 'ab_variant'
@@ -1184,12 +1430,24 @@ export interface EmailCreateRequest {
     | 'blog_author_detail'
     | 'UNKNOWN';
 
+  /**
+   * The subject of the email.
+   */
   subject?: string;
 
+  /**
+   * Data structure representing the subscription fields of the email.
+   */
   subscriptionDetails?: PublicEmailSubscriptionDetails;
 
+  /**
+   * AB testing related data. This property is only returned for AB type emails.
+   */
   testing?: PublicEmailTestingDetails;
 
+  /**
+   * Data structure representing the to fields of the email.
+   */
   to?: PublicEmailToDetails;
 
   webversion?: PublicWebversionDetails;
@@ -1202,26 +1460,56 @@ export interface EmailStatisticInterval {
 }
 
 export interface EmailStatisticsData {
+  /**
+   * Counters like number of `sent`, `open` or `delivered`.
+   */
   counters: { [key: string]: number };
 
+  /**
+   * Statistics by device.
+   */
   deviceBreakdown: { [key: string]: { [key: string]: number } };
 
+  /**
+   * Number of emails that were dropped and bounced.
+   */
   qualifierStats: { [key: string]: { [key: string]: number } };
 
+  /**
+   * Ratios like `openratio` or `clickratio`
+   */
   ratios: { [key: string]: number };
 }
 
+/**
+ * Properties of a marketing email you can update via the API.
+ */
 export interface EmailUpdateRequest {
+  /**
+   * The active domain of the email.
+   */
   activeDomain?: string;
 
+  /**
+   * Determines if the email is archived or not.
+   */
   archived?: boolean;
 
   businessUnitId?: number;
 
+  /**
+   * The ID of the campaign this email is associated to.
+   */
   campaign?: string;
 
+  /**
+   * Data structure representing the content of the email.
+   */
   content?: PublicEmailContent;
 
+  /**
+   * Data structure representing the from fields on the email.
+   */
   from?: PublicEmailFromDetails;
 
   jitterSendTime?: boolean;
@@ -2018,14 +2306,30 @@ export interface EmailUpdateRequest {
     | 'zu'
     | 'zu-za';
 
+  /**
+   * The name of the email, as displayed on the email dashboard.
+   */
   name?: string;
 
+  /**
+   * The date and time the email is scheduled for, in ISO8601 representation. This is
+   * only used in local time or scheduled emails.
+   */
   publishDate?: string;
 
+  /**
+   * RSS related data if it is a blog or rss email.
+   */
   rssData?: PublicRssEmailDetails;
 
+  /**
+   * Determines whether the email will be sent immediately on publish.
+   */
   sendOnPublish?: boolean;
 
+  /**
+   * The email state.
+   */
   state?:
     | 'AUTOMATED'
     | 'AUTOMATED_DRAFT'
@@ -2059,6 +2363,9 @@ export interface EmailUpdateRequest {
     | 'AUTOMATED_DRAFT_ABVARIANT'
     | 'AUTOMATED_LOSER_ABVARIANT';
 
+  /**
+   * The email subcategory.
+   */
   subcategory?:
     | 'ab_master'
     | 'ab_variant'
@@ -2136,12 +2443,24 @@ export interface EmailUpdateRequest {
     | 'blog_author_detail'
     | 'UNKNOWN';
 
+  /**
+   * The subject of the email.
+   */
   subject?: string;
 
+  /**
+   * Data structure representing the subscription fields of the email.
+   */
   subscriptionDetails?: PublicEmailSubscriptionDetails;
 
+  /**
+   * AB testing related data. This property is only returned for AB type emails.
+   */
   testing?: PublicEmailTestingDetails;
 
+  /**
+   * Data structure representing the to fields of the email.
+   */
   to?: PublicEmailToDetails;
 
   webversion?: PublicWebversionDetails;
@@ -2153,9 +2472,20 @@ export interface Interval {
   start: string;
 }
 
+/**
+ * Contains information pagination of results.
+ */
 export interface Paging {
+  /**
+   * Specifies the paging information needed to retrieve the next set of results in a
+   * paginated API response
+   */
   next: Shared.NextPage;
 
+  /**
+   * specifies the paging information needed to retrieve the previous set of results
+   * in a paginated API response
+   */
   prev?: Shared.PreviousPage;
 }
 
@@ -2175,17 +2505,38 @@ export interface PublicDividerStyleSettings {
   lineType?: string;
 }
 
+/**
+ * A marketing email
+ */
 export interface PublicEmail {
+  /**
+   * The email ID.
+   */
   id: string;
 
+  /**
+   * Data structure representing the content of the email.
+   */
   content: PublicEmailContent;
 
+  /**
+   * Data structure representing the from fields on the email.
+   */
   from: PublicEmailFromDetails;
 
+  /**
+   * The name of the email, as displayed on the email dashboard.
+   */
   name: string;
 
+  /**
+   * Determines whether the email will be sent immediately on publish.
+   */
   sendOnPublish: boolean;
 
+  /**
+   * The email state.
+   */
   state:
     | 'AUTOMATED'
     | 'AUTOMATED_DRAFT'
@@ -2219,42 +2570,84 @@ export interface PublicEmail {
     | 'AUTOMATED_DRAFT_ABVARIANT'
     | 'AUTOMATED_LOSER_ABVARIANT';
 
+  /**
+   * The email subcategory.
+   */
   subcategory: string;
 
+  /**
+   * The subject of the email.
+   */
   subject: string;
 
+  /**
+   * Data structure representing the to fields of the email.
+   */
   to: PublicEmailToDetails;
 
+  /**
+   * The active domain of the email.
+   */
   activeDomain?: string;
 
   allEmailCampaignIds?: Array<string>;
 
+  /**
+   * Determines if the email is archived or not.
+   */
   archived?: boolean;
 
   businessUnitId?: string;
 
+  /**
+   * The campaign GUID on the email.
+   */
   campaign?: string;
 
+  /**
+   * The name of the campaign.
+   */
   campaignName?: string;
 
   campaignUtm?: string;
 
+  /**
+   * The ID of the email this email was cloned from.
+   */
   clonedFrom?: string;
 
+  /**
+   * The date and time of the email's creation, in ISO8601 representation.
+   */
   createdAt?: string;
 
+  /**
+   * The id of the user who created the email.
+   */
   createdById?: string;
 
+  /**
+   * The date and time the email was deleted at, in ISO8601 representation.
+   */
   deletedAt?: string;
 
   emailCampaignGroupId?: string;
 
+  /**
+   * The ID of the feedback survey linked to the email.
+   */
   feedbackSurveyId?: string;
 
   folderId?: number;
 
+  /**
+   * Returns the published status of the email. This is read only.
+   */
   isPublished?: boolean;
 
+  /**
+   * Returns whether the email is a transactional email or not. This is read only.
+   */
   isTransactional?: boolean;
 
   jitterSendTime?: boolean;
@@ -3051,24 +3444,47 @@ export interface PublicEmail {
     | 'zu'
     | 'zu-za';
 
+  /**
+   * The date and time the email is scheduled for, in ISO8601 representation. This is
+   * only used in local time or scheduled emails.
+   */
   publishDate?: string;
 
+  /**
+   * The date and time the email was published at, in ISO8601 representation.
+   */
   publishedAt?: string;
 
   publishedByEmail?: string;
 
+  /**
+   * The ID of the user who published the email.
+   */
   publishedById?: string;
 
   publishedByName?: string;
 
+  /**
+   * RSS related data if it is a blog or rss email.
+   */
   rssData?: PublicRssEmailDetails;
 
   stats?: EmailStatisticsData;
 
+  /**
+   * Data structure representing the subscription fields of the email.
+   */
   subscriptionDetails?: PublicEmailSubscriptionDetails;
 
+  /**
+   * AB testing related data. This property is only returned for AB type emails.
+   */
   testing?: PublicEmailTestingDetails;
 
+  /**
+   * The email type, this is derived from other properties on the email such as
+   * subcategory.
+   */
   type?:
     | 'AB_EMAIL'
     | 'BATCH_EMAIL'
@@ -3102,15 +3518,27 @@ export interface PublicEmail {
     | 'MEMBERSHIP_FOLLOW_UP_EMAIL'
     | 'MEMBERSHIP_VERIFICATION_EMAIL';
 
+  /**
+   * The date and time of the last update to the email, in ISO8601 representation.
+   */
   updatedAt?: string;
 
+  /**
+   * The ID of the user who last updated the email.
+   */
   updatedById?: string;
 
   webversion?: PublicWebversionDetails;
 
+  /**
+   * Names of workflows in which the email is used within a "send email" action.
+   */
   workflowNames?: Array<string>;
 }
 
+/**
+ * Data structure representing the content of the email.
+ */
 export interface PublicEmailContent {
   flexAreas?: { [key: string]: unknown };
 
@@ -3129,17 +3557,39 @@ export interface PublicEmailContent {
   widgets?: { [key: string]: unknown };
 }
 
+/**
+ * Data structure representing the from fields on the email.
+ */
 export interface PublicEmailFromDetails {
+  /**
+   * The reply to recipients will see.
+   */
   customReplyTo?: string;
 
+  /**
+   * The name recipients will see.
+   */
   fromName?: string;
 
+  /**
+   * The from address and reply to email address (if no customReplyTo defined)
+   * recipients will see.
+   */
   replyTo?: string;
 }
 
+/**
+ * Data structure representing lists of IDs that should be included and excluded.
+ */
 export interface PublicEmailRecipients {
+  /**
+   * Excluded IDs.
+   */
   exclude?: Array<string>;
 
+  /**
+   * Included IDs.
+   */
   include?: Array<string>;
 }
 
@@ -3205,15 +3655,31 @@ export interface PublicEmailStyleSettings {
   secondaryFontSize?: number;
 }
 
+/**
+ * Data structure representing the subscription fields of the email.
+ */
 export interface PublicEmailSubscriptionDetails {
+  /**
+   * ID of the selected office location.
+   */
   officeLocationId?: string;
 
   preferencesGroupId?: string;
 
+  /**
+   * ID of the subscription.
+   */
   subscriptionId?: string;
 }
 
+/**
+ * AB testing related data. This property is only returned for AB type emails.
+ */
 export interface PublicEmailTestingDetails {
+  /**
+   * Version of the email that should be sent if there are too few recipients to
+   * conduct an AB test.
+   */
   abSampleSizeDefault?:
     | 'master'
     | 'variant'
@@ -3224,6 +3690,10 @@ export interface PublicEmailTestingDetails {
     | 'automated_variant'
     | 'automated_loser_variant';
 
+  /**
+   * Version of the email that should be sent if the results are inconclusive after
+   * the test period, master or variant.
+   */
   abSamplingDefault?:
     | 'master'
     | 'variant'
@@ -3234,6 +3704,9 @@ export interface PublicEmailTestingDetails {
     | 'automated_variant'
     | 'automated_loser_variant';
 
+  /**
+   * Status of the AB test.
+   */
   abStatus?:
     | 'master'
     | 'variant'
@@ -3244,20 +3717,45 @@ export interface PublicEmailTestingDetails {
     | 'automated_variant'
     | 'automated_loser_variant';
 
+  /**
+   * Metric to determine the version that will be sent to the remaining contacts.
+   */
   abSuccessMetric?: 'CLICKS_BY_OPENS' | 'CLICKS_BY_DELIVERED' | 'OPENS_BY_DELIVERED';
 
+  /**
+   * The size of your test group.
+   */
   abTestPercentage?: number;
 
+  /**
+   * Time limit on gathering test results. After this time is up, the winning version
+   * will be sent to the remaining contacts.
+   */
   hoursToWait?: number;
 
+  /**
+   * The ID of the AB test.
+   */
   testId?: string;
 }
 
+/**
+ * Data structure representing the to fields of the email.
+ */
 export interface PublicEmailToDetails {
+  /**
+   * Data structure representing lists of IDs that should be included and excluded.
+   */
   contactIds?: PublicEmailRecipients;
 
+  /**
+   * Data structure representing lists of IDs that should be included and excluded.
+   */
   contactIlsLists?: PublicEmailRecipients;
 
+  /**
+   * Data structure representing lists of IDs that should be included and excluded.
+   */
   contactLists?: PublicEmailRecipients;
 
   limitSendFrequency?: boolean;
@@ -3279,6 +3777,9 @@ export interface PublicFontStyle {
   underline?: boolean;
 }
 
+/**
+ * RSS related data if it is a blog or rss email.
+ */
 export interface PublicRssEmailDetails {
   blogEmailType?: string;
 
@@ -3323,33 +3824,72 @@ export interface PublicWebversionDetails {
   url?: string;
 }
 
+/**
+ * An email field whose value is controlled by one or more smart rules.
+ */
 export type SmartEmailField = unknown;
 
+/**
+ * Model definition for a marketing email version. Contains metadata describing the
+ * version of the marketing email. It can be used to view edit history of a
+ * marketing email.
+ */
 export interface VersionPublicEmail {
+  /**
+   * ID of this marketing email version.
+   */
   id: string;
 
+  /**
+   * A marketing email
+   */
   object: PublicEmail;
 
   updatedAt: string;
 
+  /**
+   * Model definition for a version user. Contains addition information about the
+   * user who created a version.
+   */
   user: Shared.VersionUser;
 }
 
 export interface EmailCreateParams {
+  /**
+   * The name of the email, as displayed on the email dashboard.
+   */
   name: string;
 
+  /**
+   * The active domain of the email.
+   */
   activeDomain?: string;
 
+  /**
+   * Determines if the email is archived or not.
+   */
   archived?: boolean;
 
   businessUnitId?: number;
 
+  /**
+   * The ID of the campaign this email is associated to.
+   */
   campaign?: string;
 
+  /**
+   * Data structure representing the content of the email.
+   */
   content?: PublicEmailContent;
 
+  /**
+   * The ID of the feedback survey linked to the email.
+   */
   feedbackSurveyId?: string;
 
+  /**
+   * Data structure representing the from fields on the email.
+   */
   from?: PublicEmailFromDetails;
 
   jitterSendTime?: boolean;
@@ -4146,12 +4686,25 @@ export interface EmailCreateParams {
     | 'zu'
     | 'zu-za';
 
+  /**
+   * The date and time the email is scheduled for, in ISO8601 representation. This is
+   * only used in local time or scheduled emails.
+   */
   publishDate?: string;
 
+  /**
+   * RSS related data if it is a blog or rss email.
+   */
   rssData?: PublicRssEmailDetails;
 
+  /**
+   * Determines whether the email will be sent immediately on publish.
+   */
   sendOnPublish?: boolean;
 
+  /**
+   * The email state.
+   */
   state?:
     | 'AUTOMATED'
     | 'AUTOMATED_DRAFT'
@@ -4185,6 +4738,9 @@ export interface EmailCreateParams {
     | 'AUTOMATED_DRAFT_ABVARIANT'
     | 'AUTOMATED_LOSER_ABVARIANT';
 
+  /**
+   * The email subcategory.
+   */
   subcategory?:
     | 'ab_master'
     | 'ab_variant'
@@ -4262,12 +4818,24 @@ export interface EmailCreateParams {
     | 'blog_author_detail'
     | 'UNKNOWN';
 
+  /**
+   * The subject of the email.
+   */
   subject?: string;
 
+  /**
+   * Data structure representing the subscription fields of the email.
+   */
   subscriptionDetails?: PublicEmailSubscriptionDetails;
 
+  /**
+   * AB testing related data. This property is only returned for AB type emails.
+   */
   testing?: PublicEmailTestingDetails;
 
+  /**
+   * Data structure representing the to fields of the email.
+   */
   to?: PublicEmailToDetails;
 
   webversion?: PublicWebversionDetails;
@@ -4275,17 +4843,17 @@ export interface EmailCreateParams {
 
 export interface EmailUpdateParams {
   /**
-   * Query param:
+   * Query param: Whether to return only results that have been archived.
    */
   query_archived?: boolean;
 
   /**
-   * Body param:
+   * Body param: The active domain of the email.
    */
   activeDomain?: string;
 
   /**
-   * Body param:
+   * Body param: Determines if the email is archived or not.
    */
   body_archived?: boolean;
 
@@ -4295,17 +4863,17 @@ export interface EmailUpdateParams {
   businessUnitId?: number;
 
   /**
-   * Body param:
+   * Body param: The ID of the campaign this email is associated to.
    */
   campaign?: string;
 
   /**
-   * Body param:
+   * Body param: Data structure representing the content of the email.
    */
   content?: PublicEmailContent;
 
   /**
-   * Body param:
+   * Body param: Data structure representing the from fields on the email.
    */
   from?: PublicEmailFromDetails;
 
@@ -5110,27 +5678,28 @@ export interface EmailUpdateParams {
     | 'zu-za';
 
   /**
-   * Body param:
+   * Body param: The name of the email, as displayed on the email dashboard.
    */
   name?: string;
 
   /**
-   * Body param:
+   * Body param: The date and time the email is scheduled for, in ISO8601
+   * representation. This is only used in local time or scheduled emails.
    */
   publishDate?: string;
 
   /**
-   * Body param:
+   * Body param: RSS related data if it is a blog or rss email.
    */
   rssData?: PublicRssEmailDetails;
 
   /**
-   * Body param:
+   * Body param: Determines whether the email will be sent immediately on publish.
    */
   sendOnPublish?: boolean;
 
   /**
-   * Body param:
+   * Body param: The email state.
    */
   state?:
     | 'AUTOMATED'
@@ -5166,7 +5735,7 @@ export interface EmailUpdateParams {
     | 'AUTOMATED_LOSER_ABVARIANT';
 
   /**
-   * Body param:
+   * Body param: The email subcategory.
    */
   subcategory?:
     | 'ab_master'
@@ -5246,22 +5815,23 @@ export interface EmailUpdateParams {
     | 'UNKNOWN';
 
   /**
-   * Body param:
+   * Body param: The subject of the email.
    */
   subject?: string;
 
   /**
-   * Body param:
+   * Body param: Data structure representing the subscription fields of the email.
    */
   subscriptionDetails?: PublicEmailSubscriptionDetails;
 
   /**
-   * Body param:
+   * Body param: AB testing related data. This property is only returned for AB type
+   * emails.
    */
   testing?: PublicEmailTestingDetails;
 
   /**
-   * Body param:
+   * Body param: Data structure representing the to fields of the email.
    */
   to?: PublicEmailToDetails;
 
@@ -5272,26 +5842,62 @@ export interface EmailUpdateParams {
 }
 
 export interface EmailListParams extends PageParams {
+  /**
+   * Specifies whether to return archived emails. Defaults to `false`.
+   */
   archived?: boolean;
 
+  /**
+   * Filter by campaign GUID. All emails will be returned if not present.
+   */
   campaign?: string;
 
+  /**
+   * Only return emails created after the specified time.
+   */
   createdAfter?: string;
 
+  /**
+   * Only return emails created at exactly the specified time.
+   */
   createdAt?: string;
 
+  /**
+   * Only return emails created before the specified time.
+   */
   createdBefore?: string;
 
+  /**
+   * Limit the response to only include this specified list of properties.
+   */
   includedProperties?: Array<string>;
 
+  /**
+   * Include statistics with emails.
+   */
   includeStats?: boolean;
 
+  /**
+   * Filter by published/draft emails. All emails will be returned if not present.
+   */
   isPublished?: boolean;
 
+  /**
+   * Include the names for any associated marketing campaigns.
+   */
   marketingCampaignNames?: boolean;
 
+  /**
+   * Specifies which fields to use for sorting results. Valid fields are `name`,
+   * `createdAt`, `updatedAt`, `createdBy`, `updatedBy`. `createdAt` will be used by
+   * default.
+   */
   sort?: Array<string>;
 
+  /**
+   * Email types to be filtered by. Multiple types can be included. All emails will
+   * be returned if not present.
+   */
   type?:
     | 'AB_EMAIL'
     | 'BATCH_EMAIL'
@@ -5325,96 +5931,200 @@ export interface EmailListParams extends PageParams {
     | 'MEMBERSHIP_FOLLOW_UP_EMAIL'
     | 'MEMBERSHIP_VERIFICATION_EMAIL';
 
+  /**
+   * Only return emails last updated after the specified time.
+   */
   updatedAfter?: string;
 
+  /**
+   * Only return emails last updated at exactly the specified time.
+   */
   updatedAt?: string;
 
+  /**
+   * Only return emails last updated before the specified time.
+   */
   updatedBefore?: string;
 
+  /**
+   * Include the names of any workflows associated with the returned emails.
+   */
   workflowNames?: boolean;
 }
 
 export interface EmailDeleteParams {
+  /**
+   * Whether to return only results that have been archived.
+   */
   archived?: boolean;
 }
 
 export interface EmailCloneParams {
+  /**
+   * The unique identifier of the email to be cloned.
+   */
   id: string;
 
+  /**
+   * The name to assign to the cloned email.
+   */
   cloneName?: string;
 
+  /**
+   * The language code for the cloned email, such as 'en' for English.
+   */
   language?: string;
 }
 
 export interface EmailCreateAbTestVariationParams {
+  /**
+   * ID of the object to test.
+   */
   contentId: string;
 
   variationName: string;
 }
 
 export interface EmailGetEmailsListParams {
+  /**
+   * Filter by email IDs. Only include statistics of emails with these IDs.
+   */
   emailIds?: Array<number>;
 
+  /**
+   * The end timestamp of the time span, in ISO8601 representation.
+   */
   endTimestamp?: string;
 
+  /**
+   * Specifies which email properties should be returned. All properties will be
+   * returned by default.
+   */
   property?: string;
 
+  /**
+   * The start timestamp of the time span, in ISO8601 representation.
+   */
   startTimestamp?: string;
 }
 
 export interface EmailGetHistogramParams {
+  /**
+   * Filter by email IDs. Only include statistics of emails with these IDs.
+   */
   emailIds?: Array<number>;
 
+  /**
+   * The end timestamp of the time span, in ISO8601 representation.
+   */
   endTimestamp?: string;
 
+  /**
+   * The interval to aggregate statistics for.
+   */
   interval?: 'YEAR' | 'QUARTER' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR' | 'QUARTER_HOUR' | 'MINUTE' | 'SECOND';
 
+  /**
+   * The start timestamp of the time span, in ISO8601 representation.
+   */
   startTimestamp?: string;
 }
 
 export interface EmailGetRevisionByIDParams {
+  /**
+   * The marketing email ID.
+   */
   emailId: string;
 }
 
 export interface EmailGetRevisionsParams {
+  /**
+   * The cursor token value to get the next set of results. You can get this from the
+   * `paging.next.after` JSON property of a paged response containing more results.
+   */
   after?: string;
 
+  /**
+   * The cursor token value to get the previous set of results. You can get this from
+   * the `paging.prev.before` JSON property of a paged response containing more
+   * results.
+   */
   before?: string;
 
+  /**
+   * The maximum number of results to return. Default is 10.
+   */
   limit?: number;
 }
 
 export interface EmailReadParams {
+  /**
+   * Whether to return only results that have been archived.
+   */
   archived?: boolean;
 
+  /**
+   * Limit the response to only include the specified properties.
+   */
   includedProperties?: Array<string>;
 
+  /**
+   * Include statistics with email.
+   */
   includeStats?: boolean;
 
+  /**
+   * If set to true, loads `campaignName` and `campaignUtm`.
+   */
   marketingCampaignNames?: boolean;
 
+  /**
+   * If set to true, loads workflows in which the email is used within a "send email"
+   * action.
+   */
   workflowNames?: boolean;
 }
 
 export interface EmailRestoreDraftRevisionParams {
+  /**
+   * The marketing email ID.
+   */
   emailId: string;
 }
 
 export interface EmailRestoreRevisionParams {
+  /**
+   * The marketing email ID.
+   */
   emailId: string;
 }
 
 export interface EmailUpsertDraftParams {
+  /**
+   * The active domain of the email.
+   */
   activeDomain?: string;
 
+  /**
+   * Determines if the email is archived or not.
+   */
   archived?: boolean;
 
   businessUnitId?: number;
 
+  /**
+   * The ID of the campaign this email is associated to.
+   */
   campaign?: string;
 
+  /**
+   * Data structure representing the content of the email.
+   */
   content?: PublicEmailContent;
 
+  /**
+   * Data structure representing the from fields on the email.
+   */
   from?: PublicEmailFromDetails;
 
   jitterSendTime?: boolean;
@@ -6211,14 +6921,30 @@ export interface EmailUpsertDraftParams {
     | 'zu'
     | 'zu-za';
 
+  /**
+   * The name of the email, as displayed on the email dashboard.
+   */
   name?: string;
 
+  /**
+   * The date and time the email is scheduled for, in ISO8601 representation. This is
+   * only used in local time or scheduled emails.
+   */
   publishDate?: string;
 
+  /**
+   * RSS related data if it is a blog or rss email.
+   */
   rssData?: PublicRssEmailDetails;
 
+  /**
+   * Determines whether the email will be sent immediately on publish.
+   */
   sendOnPublish?: boolean;
 
+  /**
+   * The email state.
+   */
   state?:
     | 'AUTOMATED'
     | 'AUTOMATED_DRAFT'
@@ -6252,6 +6978,9 @@ export interface EmailUpsertDraftParams {
     | 'AUTOMATED_DRAFT_ABVARIANT'
     | 'AUTOMATED_LOSER_ABVARIANT';
 
+  /**
+   * The email subcategory.
+   */
   subcategory?:
     | 'ab_master'
     | 'ab_variant'
@@ -6329,12 +7058,24 @@ export interface EmailUpsertDraftParams {
     | 'blog_author_detail'
     | 'UNKNOWN';
 
+  /**
+   * The subject of the email.
+   */
   subject?: string;
 
+  /**
+   * Data structure representing the subscription fields of the email.
+   */
   subscriptionDetails?: PublicEmailSubscriptionDetails;
 
+  /**
+   * AB testing related data. This property is only returned for AB type emails.
+   */
   testing?: PublicEmailTestingDetails;
 
+  /**
+   * Data structure representing the to fields of the email.
+   */
   to?: PublicEmailToDetails;
 
   webversion?: PublicWebversionDetails;

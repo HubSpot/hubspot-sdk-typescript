@@ -12,8 +12,11 @@ describe('resource pipelines', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.crm.pipelines.create('objectType', {
       displayOrder: 0,
-      label: 'label',
-      stages: [{ displayOrder: 0, label: 'label' }],
+      label: 'My replaced pipeline',
+      stages: [
+        { displayOrder: 0, label: 'In Progress' },
+        { displayOrder: 1, label: 'Done' },
+      ],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -28,8 +31,11 @@ describe('resource pipelines', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.crm.pipelines.create('objectType', {
       displayOrder: 0,
-      label: 'label',
-      stages: [{ displayOrder: 0, label: 'label', metadata: { foo: 'string' } }],
+      label: 'My replaced pipeline',
+      stages: [
+        { displayOrder: 0, label: 'In Progress', metadata: { ticketState: 'OPEN' } },
+        { displayOrder: 1, label: 'Done', metadata: { ticketState: 'CLOSED' } },
+      ],
     });
   });
 
@@ -54,9 +60,9 @@ describe('resource pipelines', () => {
       objectType: 'objectType',
       pipelineId: 'pipelineId',
       archived: true,
-      displayOrder: 0,
-      label: 'label',
-      metadata: { foo: 'string' },
+      displayOrder: 1,
+      label: 'Done',
+      metadata: { ticketState: 'CLOSED' },
     });
   });
 
@@ -140,8 +146,8 @@ describe('resource pipelines', () => {
     const responsePromise = client.crm.pipelines.replace('stageId', {
       objectType: 'objectType',
       pipelineId: 'pipelineId',
-      displayOrder: 0,
-      label: 'label',
+      displayOrder: 1,
+      label: 'Done',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -157,9 +163,9 @@ describe('resource pipelines', () => {
     const response = await client.crm.pipelines.replace('stageId', {
       objectType: 'objectType',
       pipelineId: 'pipelineId',
-      displayOrder: 0,
-      label: 'label',
-      metadata: { foo: 'string' },
+      displayOrder: 1,
+      label: 'Done',
+      metadata: { ticketState: 'CLOSED' },
     });
   });
 });

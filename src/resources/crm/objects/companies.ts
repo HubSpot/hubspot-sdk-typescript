@@ -11,7 +11,19 @@ import { path } from '../../../internal/utils/path';
 
 export class Companies extends APIResource {
   /**
-   * Create a company
+   * Create a single company. Include a `properties` object to define
+   * [property values](https://developers.hubspot.com/docs/guides/api/crm/properties)
+   * for the company, along with an `associations` array to define
+   * [associations](https://developers.hubspot.com/docs/guides/api/crm/associations/associations-v4)
+   * with other CRM records.
+   *
+   * @example
+   * ```ts
+   * const createdResponseSimplePublicObject =
+   *   await client.crm.objects.companies.create({
+   *     properties: { foo: 'string' },
+   *   });
+   * ```
    */
   create(
     body: CompanyCreateParams,
@@ -21,7 +33,15 @@ export class Companies extends APIResource {
   }
 
   /**
-   * Update a batch of companies
+   * Update a batch of companies by ID.
+   *
+   * @example
+   * ```ts
+   * const batchResponseSimplePublicObject =
+   *   await client.crm.objects.companies.update({
+   *     inputs: [{ id: 'id', properties: { foo: 'string' } }],
+   *   });
+   * ```
    */
   update(
     body: CompanyUpdateParams,
@@ -31,7 +51,16 @@ export class Companies extends APIResource {
   }
 
   /**
-   * Retrieve companies
+   * Retrieve all companies, using query parameters to control the information that
+   * gets returned.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const simplePublicObjectWithAssociations of client.crm.objects.companies.list()) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     query: CompanyListParams | null | undefined = {},
@@ -45,7 +74,16 @@ export class Companies extends APIResource {
   }
 
   /**
-   * Archive a batch of companies
+   * Delete a batch of companies by ID. Deleted companies can be restored within 90
+   * days of deletion. Learn more about
+   * [restoring records](https://knowledge.hubspot.com/records/restore-deleted-records).
+   *
+   * @example
+   * ```ts
+   * await client.crm.objects.companies.delete({
+   *   inputs: [{ id: 'id' }],
+   * });
+   * ```
    */
   delete(body: CompanyDeleteParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/crm/v3/objects/companies/batch/archive', {
@@ -56,14 +94,32 @@ export class Companies extends APIResource {
   }
 
   /**
-   * Merge two companies
+   * Merge two company records. Learn more about
+   * [merging records](https://knowledge.hubspot.com/records/merge-records).
+   *
+   * @example
+   * ```ts
+   * const simplePublicObject =
+   *   await client.crm.objects.companies.merge({
+   *     objectIdToMerge: 'objectIdToMerge',
+   *     primaryObjectId: 'primaryObjectId',
+   *   });
+   * ```
    */
   merge(body: CompanyMergeParams, options?: RequestOptions): APIPromise<ObjectsAPI.SimplePublicObject> {
     return this._client.post('/crm/v3/objects/companies/merge', { body, ...options });
   }
 
   /**
-   * Retrieve a company
+   * Retrieve a company by its ID (`companyId`) or by a unique property
+   * (`idProperty`). You can specify what is returned using the `properties` query
+   * parameter.
+   *
+   * @example
+   * ```ts
+   * const simplePublicObjectWithAssociations =
+   *   await client.crm.objects.companies.read('companyId');
+   * ```
    */
   read(
     companyID: string,
@@ -74,7 +130,15 @@ export class Companies extends APIResource {
   }
 
   /**
-   * Search for companies
+   * Search for companies by filtering on properties, searching through associations,
+   * and sorting results. Learn more about
+   * [CRM search](https://developers.hubspot.com/docs/guides/api/crm/search#make-a-search-request).
+   *
+   * @example
+   * ```ts
+   * const collectionResponseWithTotalSimplePublicObject =
+   *   await client.crm.objects.companies.search();
+   * ```
    */
   search(
     body: CompanySearchParams,
@@ -84,7 +148,17 @@ export class Companies extends APIResource {
   }
 
   /**
-   * Create or update a batch of companies by unique property values
+   * Create or update companies identified by a unique property value as specified by
+   * the `idProperty` query parameter. `idProperty` query param refers to a property
+   * whose values are unique for the object.
+   *
+   * @example
+   * ```ts
+   * const batchResponseSimplePublicUpsertObject =
+   *   await client.crm.objects.companies.upsert({
+   *     inputs: [{ id: 'id', properties: { foo: 'string' } }],
+   *   });
+   * ```
    */
   upsert(
     body: CompanyUpsertParams,
@@ -95,6 +169,9 @@ export class Companies extends APIResource {
 }
 
 export interface CompanyCreateParams {
+  /**
+   * The company property values to set.
+   */
   properties: { [key: string]: string };
 
   associations?: Array<ObjectsAPI.PublicAssociationsForObject>;
@@ -105,12 +182,30 @@ export interface CompanyUpdateParams {
 }
 
 export interface CompanyListParams extends PageParams {
+  /**
+   * Whether to return only results that have been archived.
+   */
   archived?: boolean;
 
+  /**
+   * A comma separated list of object types to retrieve associated IDs for. If any of
+   * the specified associations do not exist, they will be ignored.
+   */
   associations?: Array<string>;
 
+  /**
+   * A comma separated list of the properties to be returned in the response. If any
+   * of the specified properties are not present on the requested object(s), they
+   * will be ignored.
+   */
   properties?: Array<string>;
 
+  /**
+   * A comma separated list of the properties to be returned along with their history
+   * of previous values. If any of the specified properties are not present on the
+   * requested object(s), they will be ignored. Usage of this parameter will reduce
+   * the maximum number of companies that can be read by a single request.
+   */
   propertiesWithHistory?: Array<string>;
 }
 
@@ -119,34 +214,78 @@ export interface CompanyDeleteParams {
 }
 
 export interface CompanyMergeParams {
+  /**
+   * The ID of the company to merge into the primary.
+   */
   objectIdToMerge: string;
 
+  /**
+   * The ID of the primary company, which the other will merge into.
+   */
   primaryObjectId: string;
 }
 
 export interface CompanyReadParams {
+  /**
+   * Whether to return only results that have been archived.
+   */
   archived?: boolean;
 
+  /**
+   * A comma separated list of object types to retrieve associated IDs for. If any of
+   * the specified associations do not exist, they will be ignored.
+   */
   associations?: Array<string>;
 
+  /**
+   * The name of a property whose values are unique for this object
+   */
   idProperty?: string;
 
+  /**
+   * A comma separated list of the properties to be returned in the response. If any
+   * of the specified properties are not present on the requested object(s), they
+   * will be ignored.
+   */
   properties?: Array<string>;
 
+  /**
+   * A comma separated list of the properties to be returned along with their history
+   * of previous values. If any of the specified properties are not present on the
+   * requested object(s), they will be ignored.
+   */
   propertiesWithHistory?: Array<string>;
 }
 
 export interface CompanySearchParams {
+  /**
+   * A paging cursor token for retrieving subsequent pages.
+   */
   after?: string;
 
+  /**
+   * Up to 6 groups of filters defining additional query criteria.
+   */
   filterGroups?: Array<ObjectsAPI.FilterGroup>;
 
+  /**
+   * The maximum results to return, up to 200 objects.
+   */
   limit?: number;
 
+  /**
+   * A list of property names to include in the response.
+   */
   properties?: Array<string>;
 
+  /**
+   * The search query string, up to 3000 characters.
+   */
   query?: string;
 
+  /**
+   * Specifies sorting order based on object properties.
+   */
   sorts?: Array<string>;
 }
 

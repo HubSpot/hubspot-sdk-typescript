@@ -41,7 +41,22 @@ export class Associations extends APIResource {
   v4: V4API.V4 = new V4API.V4(this._client);
 
   /**
-   * Create a batch of associations
+   * Associate all pairs of objects identified in the request body.
+   *
+   * @example
+   * ```ts
+   * const batchResponsePublicAssociation =
+   *   await client.crm.associations.create('toObjectType', {
+   *     fromObjectType: 'fromObjectType',
+   *     inputs: [
+   *       {
+   *         from: { id: '53628' },
+   *         to: { id: '12726' },
+   *         type: 'contact_to_company',
+   *       },
+   *     ],
+   *   });
+   * ```
    */
   create(
     toObjectType: string,
@@ -56,7 +71,22 @@ export class Associations extends APIResource {
   }
 
   /**
-   * Archive a batch of associations
+   * Remove the associations between all pairs of objects identified in the request
+   * body.
+   *
+   * @example
+   * ```ts
+   * await client.crm.associations.delete('toObjectType', {
+   *   fromObjectType: 'fromObjectType',
+   *   inputs: [
+   *     {
+   *       from: { id: '53628' },
+   *       to: { id: '12726' },
+   *       type: 'contact_to_company',
+   *     },
+   *   ],
+   * });
+   * ```
    */
   delete(toObjectType: string, params: AssociationDeleteParams, options?: RequestOptions): APIPromise<void> {
     const { fromObjectType, ...body } = params;
@@ -68,7 +98,17 @@ export class Associations extends APIResource {
   }
 
   /**
-   * Read a batch of associations
+   * Get the IDs of all `{toObjectType}` objects associated with those specified in
+   * the request body.
+   *
+   * @example
+   * ```ts
+   * const batchResponsePublicAssociationMulti =
+   *   await client.crm.associations.read('toObjectType', {
+   *     fromObjectType: 'fromObjectType',
+   *     inputs: [{ id: '37295' }],
+   *   });
+   * ```
    */
   read(
     toObjectType: string,
@@ -138,8 +178,15 @@ export interface PublicAssociation {
 export interface PublicAssociationMulti {
   from: Shared.PublicObjectID;
 
+  /**
+   * The IDs of objects that are associated with the object identified by the ID in
+   * 'from'.
+   */
   to: Array<CRMAPI.AssociatedID>;
 
+  /**
+   * Contains information pagination of results.
+   */
   paging?: EmailsAPI.Paging;
 }
 

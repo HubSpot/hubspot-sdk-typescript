@@ -9,7 +9,15 @@ import { path } from '../internal/utils/path';
 
 export class Webhooks extends APIResource {
   /**
-   * Create an event subscription
+   * Create new event subscription for the specified app.
+   *
+   * @example
+   * ```ts
+   * const subscriptionResponse = await client.webhooks.create(
+   *   0,
+   *   { eventType: 'contact.propertyChange' },
+   * );
+   * ```
    */
   create(
     appID: number,
@@ -20,7 +28,15 @@ export class Webhooks extends APIResource {
   }
 
   /**
-   * Update an event subscription
+   * Update an existing event subscription by ID.
+   *
+   * @example
+   * ```ts
+   * const subscriptionResponse = await client.webhooks.update(
+   *   0,
+   *   { appId: 0 },
+   * );
+   * ```
    */
   update(
     subscriptionID: number,
@@ -35,14 +51,26 @@ export class Webhooks extends APIResource {
   }
 
   /**
-   * Read event subscriptions
+   * Retrieve event subscriptions for the specified app.
+   *
+   * @example
+   * ```ts
+   * const subscriptionListResponse = await client.webhooks.list(
+   *   0,
+   * );
+   * ```
    */
   list(appID: number, options?: RequestOptions): APIPromise<SubscriptionListResponse> {
     return this._client.get(path`/webhooks/v3/${appID}/subscriptions`, options);
   }
 
   /**
-   * Delete event subscription
+   * Delete an existing event subscription by ID.
+   *
+   * @example
+   * ```ts
+   * await client.webhooks.delete(0, { appId: 0 });
+   * ```
    */
   delete(subscriptionID: number, params: WebhookDeleteParams, options?: RequestOptions): APIPromise<void> {
     const { appId } = params;
@@ -53,7 +81,13 @@ export class Webhooks extends APIResource {
   }
 
   /**
-   * Delete webhook settings
+   * Delete the webhook settings for the specified app. Event subscriptions will not
+   * be deleted, but will be paused until another webhook is created.
+   *
+   * @example
+   * ```ts
+   * await client.webhooks.clear(0);
+   * ```
    */
   clear(appID: number, options?: RequestOptions): APIPromise<void> {
     return this._client.delete(path`/webhooks/v3/${appID}/settings`, {
@@ -63,7 +97,18 @@ export class Webhooks extends APIResource {
   }
 
   /**
-   * Update webhook settings
+   * Update webhook settings for the specified app.
+   *
+   * @example
+   * ```ts
+   * const settingsResponse = await client.webhooks.configure(
+   *   0,
+   *   {
+   *     targetUrl: 'https://www.example.com/hubspot/target',
+   *     throttling: { maxConcurrentRequests: 10 },
+   *   },
+   * );
+   * ```
    */
   configure(
     appID: number,
@@ -74,7 +119,14 @@ export class Webhooks extends APIResource {
   }
 
   /**
-   * Read an event subscription
+   * Retrieve a specific event subscription by ID.
+   *
+   * @example
+   * ```ts
+   * const subscriptionResponse = await client.webhooks.read(0, {
+   *   appId: 0,
+   * });
+   * ```
    */
   read(
     subscriptionID: number,
@@ -86,7 +138,15 @@ export class Webhooks extends APIResource {
   }
 
   /**
-   * Batch create event subscriptions
+   * Batch create event subscriptions for the specified app.
+   *
+   * @example
+   * ```ts
+   * const batchResponseSubscriptionResponse =
+   *   await client.webhooks.updateBatch(0, {
+   *     inputs: [{ id: 0, active: true }],
+   *   });
+   * ```
    */
   updateBatch(
     appID: number,
@@ -102,16 +162,35 @@ export interface BatchInputSubscriptionBatchUpdateRequest {
 }
 
 export interface BatchResponseSubscriptionResponse {
+  /**
+   * The date and time when the batch operation was completed.
+   */
   completedAt: string;
 
+  /**
+   * The list of results from the batch operation.
+   */
   results: Array<SubscriptionResponse>;
 
+  /**
+   * The date and time when the batch operation started.
+   */
   startedAt: string;
 
+  /**
+   * The current status of the batch operation, which can be PENDING, PROCESSING,
+   * CANCELED, or COMPLETE.
+   */
   status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
 
+  /**
+   * A collection of related links associated with the batch operation.
+   */
   links?: { [key: string]: string };
 
+  /**
+   * The date and time when the batch operation was requested.
+   */
   requestedAt?: string;
 }
 
@@ -133,19 +212,48 @@ export interface BatchResponseSubscriptionResponseWithErrors {
   requestedAt?: string;
 }
 
+/**
+ * New or updated webhook settings for an app.
+ */
 export interface SettingsChangeRequest {
+  /**
+   * A publicly available URL for HubSpot to call where event payloads will be
+   * delivered.
+   */
   targetUrl: string;
 
+  /**
+   * Configuration details for webhook throttling.
+   */
   throttling: ThrottlingSettings;
 }
 
+/**
+ * Webhook settings for an app.
+ */
 export interface SettingsResponse {
+  /**
+   * When this subscription was created. Formatted as milliseconds from the
+   * [Unix epoch](#).
+   */
   createdAt: string;
 
+  /**
+   * A publicly available URL for HubSpot to call where event payloads will be
+   * delivered. See [link-so-some-doc](#) for details about the format of these event
+   * payloads.
+   */
   targetUrl: string;
 
+  /**
+   * Configuration details for webhook throttling.
+   */
   throttling: ThrottlingSettings;
 
+  /**
+   * When this subscription was last updated. Formatted as milliseconds from the
+   * [Unix epoch](#).
+   */
   updatedAt?: string;
 }
 
@@ -155,7 +263,14 @@ export interface SubscriptionBatchUpdateRequest {
   active: boolean;
 }
 
+/**
+ * New webhook settings for an app.
+ */
 export interface SubscriptionCreateRequest {
+  /**
+   * Type of event to listen for. Can be one of `create`, `delete`,
+   * `deletedForPrivacy`, or `propertyChange`.
+   */
   eventType:
     | 'contact.propertyChange'
     | 'company.propertyChange'
@@ -205,28 +320,64 @@ export interface SubscriptionCreateRequest {
     | 'object.restore'
     | 'object.associationChange';
 
+  /**
+   * Determines if the subscription is active or paused. Defaults to false.
+   */
   active?: boolean;
 
   objectTypeId?: string;
 
+  /**
+   * The internal name of the property to monitor for changes. Only applies when
+   * `eventType` is `propertyChange`.
+   */
   propertyName?: string;
 }
 
+/**
+ * List of event subscriptions for your app
+ */
 export interface SubscriptionListResponse {
+  /**
+   * List of event subscriptions for your app
+   */
   results: Array<SubscriptionResponse>;
 }
 
+/**
+ * Updated details for the subscription.
+ */
 export interface SubscriptionPatchRequest {
+  /**
+   * Determines if the subscription is active or paused.
+   */
   active?: boolean;
 }
 
+/**
+ * Complete details for an event subscription.
+ */
 export interface SubscriptionResponse {
+  /**
+   * The unique ID of the subscription.
+   */
   id: string;
 
+  /**
+   * Determines if the subscription is active or paused.
+   */
   active: boolean;
 
+  /**
+   * When this subscription was created. Formatted as milliseconds from the
+   * [Unix epoch](#).
+   */
   createdAt: string;
 
+  /**
+   * Type of event to listen for. Can be one of `create`, `delete`,
+   * `deletedForPrivacy`, or `propertyChange`.
+   */
   eventType:
     | 'contact.propertyChange'
     | 'company.propertyChange'
@@ -276,18 +427,40 @@ export interface SubscriptionResponse {
     | 'object.restore'
     | 'object.associationChange';
 
+  /**
+   * The identifier of the object type associated with the subscription.
+   */
   objectTypeId?: string;
 
+  /**
+   * The internal name of the property being monitored for changes. Only applies when
+   * `eventType` is `propertyChange`.
+   */
   propertyName?: string;
 
+  /**
+   * When this subscription was last updated. Formatted as milliseconds from the
+   * [Unix epoch](#).
+   */
   updatedAt?: string;
 }
 
+/**
+ * Configuration details for webhook throttling.
+ */
 export interface ThrottlingSettings {
+  /**
+   * The maximum number of concurrent HTTP requests HubSpot will attempt to make to
+   * your app.
+   */
   maxConcurrentRequests: number;
 }
 
 export interface WebhookCreateParams {
+  /**
+   * Type of event to listen for. Can be one of `create`, `delete`,
+   * `deletedForPrivacy`, or `propertyChange`.
+   */
   eventType:
     | 'contact.propertyChange'
     | 'company.propertyChange'
@@ -337,36 +510,56 @@ export interface WebhookCreateParams {
     | 'object.restore'
     | 'object.associationChange';
 
+  /**
+   * Determines if the subscription is active or paused. Defaults to false.
+   */
   active?: boolean;
 
   objectTypeId?: string;
 
+  /**
+   * The internal name of the property to monitor for changes. Only applies when
+   * `eventType` is `propertyChange`.
+   */
   propertyName?: string;
 }
 
 export interface WebhookUpdateParams {
   /**
-   * Path param:
+   * Path param: The ID of the app.
    */
   appId: number;
 
   /**
-   * Body param:
+   * Body param: Determines if the subscription is active or paused.
    */
   active?: boolean;
 }
 
 export interface WebhookDeleteParams {
+  /**
+   * The ID of the app.
+   */
   appId: number;
 }
 
 export interface WebhookConfigureParams {
+  /**
+   * A publicly available URL for HubSpot to call where event payloads will be
+   * delivered.
+   */
   targetUrl: string;
 
+  /**
+   * Configuration details for webhook throttling.
+   */
   throttling: ThrottlingSettings;
 }
 
 export interface WebhookReadParams {
+  /**
+   * The ID of the app.
+   */
   appId: number;
 }
 

@@ -9,7 +9,8 @@ import { path } from '../../internal/utils/path';
 
 export class Domains extends APIResource {
   /**
-   * Get current domains
+   * Returns all existing domains that have been created. Results can be limited and
+   * filtered by creation or updated date.
    */
   list(
     query: DomainListParams | null | undefined = {},
@@ -19,7 +20,7 @@ export class Domains extends APIResource {
   }
 
   /**
-   * Get a single domain
+   * Returns a single domains with the id specified.
    */
   read(domainID: string, options?: RequestOptions): APIPromise<Domain> {
     return this._client.get(path`/cms/v3/domains/${domainID}`, options);
@@ -37,20 +38,44 @@ export interface CollectionResponseWithTotalDomainForwardPaging {
 }
 
 export interface Domain {
+  /**
+   * The unique ID of this domain.
+   */
   id: string;
 
+  /**
+   * The actual domain or sub-domain. e.g. www.hubspot.com
+   */
   domain: string;
 
+  /**
+   * Whether the DNS for this domain is optimally configured for use with HubSpot.
+   */
   isResolving: boolean;
 
+  /**
+   * Whether the domain is used for CMS blog posts.
+   */
   isUsedForBlogPost: boolean;
 
+  /**
+   * Whether the domain is used for CMS email web pages.
+   */
   isUsedForEmail: boolean;
 
+  /**
+   * Whether the domain is used for CMS knowledge pages.
+   */
   isUsedForKnowledge: boolean;
 
+  /**
+   * Whether the domain is used for CMS landing pages.
+   */
   isUsedForLandingPage: boolean;
 
+  /**
+   * Whether the domain is used for CMS site pages.
+   */
   isUsedForSitePage: boolean;
 
   correctCname?: string;
@@ -79,20 +104,41 @@ export interface Domain {
 }
 
 export interface DomainListParams extends PageParams {
+  /**
+   * Whether to return only results that have been archived.
+   */
   archived?: boolean;
 
+  /**
+   * Only return domains created after this date.
+   */
   createdAfter?: string;
 
+  /**
+   * Only return domains created at this date.
+   */
   createdAt?: string;
 
+  /**
+   * Only return domains created before this date.
+   */
   createdBefore?: string;
 
   sort?: Array<string>;
 
+  /**
+   * Only return domains updated after this date.
+   */
   updatedAfter?: string;
 
+  /**
+   * Only return domains updated at this date.
+   */
   updatedAt?: string;
 
+  /**
+   * Only return domains updated before this date.
+   */
   updatedBefore?: string;
 }
 

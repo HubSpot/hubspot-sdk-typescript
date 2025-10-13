@@ -13,7 +13,23 @@ import { path } from '../../../internal/utils/path';
 
 export class V4 extends APIResource {
   /**
-   * Create
+   * Set association labels between two records.
+   *
+   * @example
+   * ```ts
+   * const createdResponseLabelsBetweenObjectPair =
+   *   await client.crm.associations.v4.create('toObjectId', {
+   *     objectType: 'objectType',
+   *     objectId: 'objectId',
+   *     toObjectType: 'toObjectType',
+   *     body: [
+   *       {
+   *         associationCategory: 'HUBSPOT_DEFINED',
+   *         associationTypeId: 279,
+   *       },
+   *     ],
+   *   });
+   * ```
    */
   create(
     toObjectID: string,
@@ -28,7 +44,18 @@ export class V4 extends APIResource {
   }
 
   /**
-   * List
+   * List all associations of an object by object type. Limit 500 per call.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const multiAssociatedObjectWithLabel of client.crm.associations.v4.list(
+   *   'toObjectType',
+   *   { objectType: 'objectType', objectId: 'objectId' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     toObjectType: string,
@@ -44,7 +71,16 @@ export class V4 extends APIResource {
   }
 
   /**
-   * Delete
+   * deletes all associations between two records.
+   *
+   * @example
+   * ```ts
+   * await client.crm.associations.v4.delete('toObjectId', {
+   *   objectType: 'objectType',
+   *   objectId: 'objectId',
+   *   toObjectType: 'toObjectType',
+   * });
+   * ```
    */
   delete(toObjectID: string, params: V4DeleteParams, options?: RequestOptions): APIPromise<void> {
     const { objectType, objectId, toObjectType } = params;
@@ -55,7 +91,31 @@ export class V4 extends APIResource {
   }
 
   /**
-   * Delete Specific Labels
+   * Batch delete specific association labels for objects. Deleting an unlabeled
+   * association will also delete all labeled associations between those two objects
+   *
+   * @example
+   * ```ts
+   * const batchResponseVoid =
+   *   await client.crm.associations.v4.archiveLabels(
+   *     'toObjectType',
+   *     {
+   *       fromObjectType: 'fromObjectType',
+   *       inputs: [
+   *         {
+   *           from: { id: '37295' },
+   *           to: { id: '37295' },
+   *           types: [
+   *             {
+   *               associationCategory: 'HUBSPOT_DEFINED',
+   *               associationTypeId: 0,
+   *             },
+   *           ],
+   *         },
+   *       ],
+   *     },
+   *   );
+   * ```
    */
   archiveLabels(
     toObjectType: string,
@@ -70,7 +130,20 @@ export class V4 extends APIResource {
   }
 
   /**
-   * Create Default
+   * Create the default (most generic) association type between two object types
+   *
+   * @example
+   * ```ts
+   * const batchResponsePublicDefaultAssociation =
+   *   await client.crm.associations.v4.createDefault(
+   *     'toObjectId',
+   *     {
+   *       fromObjectType: 'fromObjectType',
+   *       fromObjectId: 'fromObjectId',
+   *       toObjectType: 'toObjectType',
+   *     },
+   *   );
+   * ```
    */
   createDefault(
     toObjectID: string,
@@ -85,16 +158,33 @@ export class V4 extends APIResource {
   }
 
   /**
-   * Report
+   * Requests a report of all objects in the portal which have a high usage of
+   * associations
+   *
+   * @example
+   * ```ts
+   * const reportCreationResponse =
+   *   await client.crm.associations.v4.request(0);
+   * ```
    */
   request(userID: number, options?: RequestOptions): APIPromise<ReportCreationResponse> {
     return this._client.post(path`/crm/v4/associations/usage/high-usage-report/${userID}`, options);
   }
 }
 
+/**
+ * Defines the type, direction, and details of the relationship between two CRM
+ * objects.
+ */
 export interface AssociationSpec1 {
+  /**
+   * The category of the association, such as "HUBSPOT_DEFINED".
+   */
   associationCategory: 'HUBSPOT_DEFINED' | 'USER_DEFINED' | 'INTEGRATOR_DEFINED';
 
+  /**
+   * The ID representing the specific type of association.
+   */
   associationTypeId: number;
 }
 
@@ -184,15 +274,35 @@ export interface DateTime {
   value: number;
 }
 
+/**
+ * Specifies the paging information needed to retrieve the next set of results in a
+ * paginated API response
+ */
 export interface NextPage1 {
+  /**
+   * A paging cursor token for retrieving subsequent pages.
+   */
   after: string;
 
+  /**
+   * A URL that can be used to retrieve the next page results.
+   */
   link?: string;
 }
 
+/**
+ * specifies the paging information needed to retrieve the previous set of results
+ * in a paginated API response
+ */
 export interface PreviousPage1 {
+  /**
+   * A paging cursor token for retrieving previous pages.
+   */
   before: string;
 
+  /**
+   * A URL that can be used to retrieve the previous pages' results.
+   */
   link?: string;
 }
 
@@ -215,6 +325,9 @@ export interface PublicAssociationMultiWithLabel {
 
   to: Array<CRMAPI.MultiAssociatedObjectWithLabel>;
 
+  /**
+   * Contains information pagination of results.
+   */
   paging?: EmailsAPI.Paging;
 }
 
@@ -238,21 +351,48 @@ export interface ReportCreationResponse {
   userId: number;
 }
 
+/**
+ * Ye olde error
+ */
 export interface StandardError1 {
+  /**
+   * The main category of the error.
+   */
   category: string;
 
+  /**
+   * Additional context-specific information related to the error.
+   */
   context: { [key: string]: Array<string> };
 
+  /**
+   * The detailed error objects.
+   */
   errors: Array<Shared.ErrorDetail>;
 
+  /**
+   * URLs linking to documentation or resources associated with the error.
+   */
   links: { [key: string]: string };
 
+  /**
+   * A human-readable string describing the error and possible remediation steps.
+   */
   message: string;
 
+  /**
+   * The HTTP status code associated with the error.
+   */
   status: string;
 
+  /**
+   * A unique ID for the error instance.
+   */
   id?: string;
 
+  /**
+   * A more specific error category within each main category.
+   */
   subCategory?: unknown;
 }
 

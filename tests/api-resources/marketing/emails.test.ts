@@ -10,7 +10,7 @@ const client = new HubSpot({
 describe('resource emails', () => {
   // Prism tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.marketing.emails.create({ name: 'name' });
+    const responsePromise = client.marketing.emails.create({ name: 'My subject' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,14 +23,15 @@ describe('resource emails', () => {
   // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.marketing.emails.create({
-      name: 'name',
-      activeDomain: 'activeDomain',
-      archived: true,
+      name: 'My subject',
+      activeDomain: 'test.hs-sites.com',
+      archived: false,
       businessUnitId: 0,
-      campaign: 'campaign',
+      campaign: '1b7f51a6-33c1-44d6-ba28-fe81f655dced',
       content: {
-        flexAreas: { foo: {} },
-        plainTextVersion: 'plainTextVersion',
+        flexAreas: { main: {} },
+        plainTextVersion:
+          'This is custom! View in browser ({{view_as_page_url}})\n\nHello {{ contact.firstname }},\n\nPlain text emails have minimal formatting so your reader can really focus on what you have to say. Introduce yourself and explain why you’re reaching out.\n\nEvery email should try to lead the reader to some kind of action. Use this space to describe why the reader should want to click on the link below. Put the link on its own line to really draw their eye to it.\n\nLink text\n\nNow it’s time to wrap up your email. Before your signature, thank the recipient for reading. You can also invite them to send this email to any of their colleagues who might be interested.\n\nAll the best,\n\nYour full name\n\nYour job title\n\nOther contact information\n\n{{site_settings.company_name}}, {{site_settings.company_street_address_1}}, {{site_settings.company_street_address_2}}, {{site_settings.company_city}}, {{site_settings.company_state}} {{site_settings.company_zip}}, {{site_settings.company_country}}, {{site_settings.company_phone}}\n\nUnsubscribe ({{unsubscribe_link_all}})\n\nManage preferences ({{unsubscribe_link}})',
         smartFields: { foo: {} },
         styleSettings: {
           backgroundColor: 'backgroundColor',
@@ -85,13 +86,13 @@ describe('resource emails', () => {
         templatePath: 'templatePath',
         themeSettingsValues: { foo: {} },
         widgetContainers: { foo: {} },
-        widgets: { foo: {} },
+        widgets: { 'module-0-1-1': {}, 'module-1-1-1': {}, module_160676180617911: {}, preview_text: {} },
       },
       feedbackSurveyId: 'feedbackSurveyId',
-      from: { customReplyTo: 'customReplyTo', fromName: 'fromName', replyTo: 'replyTo' },
+      from: { customReplyTo: 'customReplyTo', fromName: 'Bruce Wayne', replyTo: 'test@hubspot.com' },
       jitterSendTime: true,
       language: 'af',
-      publishDate: '2019-12-27T18:11:19.117Z',
+      publishDate: '2023-11-30T18:44:20.387Z',
       rssData: {
         blogEmailType: 'blogEmailType',
         blogImageMaxWidth: 0,
@@ -104,11 +105,11 @@ describe('resource emails', () => {
         useHeadlineAsSubject: true,
       },
       sendOnPublish: true,
-      state: 'AUTOMATED',
-      subcategory: 'ab_master',
-      subject: 'subject',
+      state: 'DRAFT',
+      subcategory: 'batch',
+      subject: 'My subject',
       subscriptionDetails: {
-        officeLocationId: 'officeLocationId',
+        officeLocationId: '5449392956',
         preferencesGroupId: 'preferencesGroupId',
         subscriptionId: 'subscriptionId',
       },
@@ -131,12 +132,12 @@ describe('resource emails', () => {
       webversion: {
         domain: 'domain',
         enabled: true,
-        expiresAt: '2019-12-27T18:11:19.117Z',
+        expiresAt: '2020-11-30T18:44:20.387Z',
         isPageRedirected: true,
-        metaDescription: 'metaDescription',
+        metaDescription: '',
         pageExpiryEnabled: true,
         redirectToPageId: 'redirectToPageId',
-        redirectToUrl: 'redirectToUrl',
+        redirectToUrl: 'http://www.example.org',
         slug: 'slug',
         title: 'title',
         url: 'url',
@@ -241,7 +242,7 @@ describe('resource emails', () => {
   // Prism tests are disabled
   test.skip('createAbTestVariation: only required params', async () => {
     const responsePromise = client.marketing.emails.createAbTestVariation({
-      contentId: 'contentId',
+      contentId: '7',
       variationName: 'variationName',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -256,7 +257,7 @@ describe('resource emails', () => {
   // Prism tests are disabled
   test.skip('createAbTestVariation: required and optional params', async () => {
     const response = await client.marketing.emails.createAbTestVariation({
-      contentId: 'contentId',
+      contentId: '7',
       variationName: 'variationName',
     });
   });

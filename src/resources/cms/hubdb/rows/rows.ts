@@ -15,7 +15,9 @@ export class Rows extends APIResource {
   draft: DraftAPI.Draft = new DraftAPI.Draft(this._client);
 
   /**
-   * Add a new row to a table
+   * Add a new row to a HubDB table. New rows will be added to the draft version of
+   * the table. Use the `/publish` endpoint to push these changes to published
+   * version.
    */
   create(
     tableIDOrName: string,
@@ -26,7 +28,16 @@ export class Rows extends APIResource {
   }
 
   /**
-   * Get rows for a table
+   * Returns a set of rows in the published version of the specified table. Row
+   * results can be filtered and sorted. Filtering and sorting options will be sent
+   * as query parameters to the API request. For example, by adding the query
+   * parameters `column1__gt=5&sort=-column1`, API returns the rows with values for
+   * column `column1` greater than 5 and in the descending order of `column1` values.
+   * Refer to the
+   * [overview section](https://developers.hubspot.com/docs/api/cms/hubdb#filtering-and-sorting-table-rows)
+   * for detailed filtering and sorting options. **Note:** This endpoint can be
+   * accessed without any authentication, if the table is set to be allowed for
+   * public access.
    */
   list(
     tableIDOrName: string,
@@ -40,7 +51,7 @@ export class Rows extends APIResource {
   }
 
   /**
-   * Clone a row
+   * Clones a single row in the draft version of a table.
    */
   cloneDraft(
     rowID: string,
@@ -55,7 +66,7 @@ export class Rows extends APIResource {
   }
 
   /**
-   * Permanently deletes a row
+   * Permanently deletes a row from a table's draft version.
    */
   deleteDraft(rowID: string, params: RowDeleteDraftParams, options?: RequestOptions): APIPromise<void> {
     const { tableIdOrName } = params;
@@ -66,7 +77,9 @@ export class Rows extends APIResource {
   }
 
   /**
-   * Get a table row
+   * Get a single row by ID from the published version of a table. **Note:** This
+   * endpoint can be accessed without any authentication, if the table is set to be
+   * allowed for public access.
    */
   get(rowID: string, params: RowGetParams, options?: RequestOptions): APIPromise<HubdbAPI.HubDBTableRowV3> {
     const { tableIdOrName, ...query } = params;
@@ -74,7 +87,7 @@ export class Rows extends APIResource {
   }
 
   /**
-   * Get a row from the draft table
+   * Get a single row by ID from a table's draft version.
    */
   getDraft(
     rowID: string,
@@ -89,7 +102,14 @@ export class Rows extends APIResource {
   }
 
   /**
-   * Get rows from draft table
+   * Returns rows in the draft version of the specified table. Row results can be
+   * filtered and sorted. Filtering and sorting options will be sent as query
+   * parameters to the API request. For example, by adding the query parameters
+   * `column1__gt=5&sort=-column1`, API returns the rows with values for column
+   * `column1` greater than 5 and in the descending order of `column1` values. Refer
+   * to the
+   * [overview section](https://developers.hubspot.com/docs/api/cms/hubdb#filtering-and-sorting-table-rows)
+   * for detailed filtering and sorting options.
    */
   listDraft(
     tableIDOrName: string,
@@ -100,7 +120,10 @@ export class Rows extends APIResource {
   }
 
   /**
-   * Replaces an existing row
+   * Replace a single row in the draft version of a table. All column values must be
+   * specified. If a column has a value in the target table and this request doesn't
+   * define that value, it will be deleted. See the "Create a row" endpoint for
+   * instructions on how to format the JSON row definitions.
    */
   replaceDraft(
     rowID: string,
@@ -115,7 +138,10 @@ export class Rows extends APIResource {
   }
 
   /**
-   * Updates an existing row
+   * Sparse updates a single row in the table's draft version. All the column values
+   * need not be specified. Only the columns or fields that needs to be modified can
+   * be specified. See the "Create a row" endpoint for instructions on how to format
+   * the JSON row definitions.
    */
   updateDraft(
     rowID: string,
@@ -131,14 +157,28 @@ export class Rows extends APIResource {
 }
 
 export interface RowCreateParams {
+  /**
+   * List of key value pairs with the column name and column value
+   */
   values: { [key: string]: HubdbAPI.Variant };
 
+  /**
+   * Specifies the value for the column child table id
+   */
   childTableId?: number;
 
   displayIndex?: number;
 
+  /**
+   * Specifies the value for `hs_name` column, which will be used as title in the
+   * dynamic pages
+   */
   name?: string;
 
+  /**
+   * Specifies the value for `hs_path` column, which will be used as slug in the
+   * dynamic pages
+   */
   path?: string;
 }
 
@@ -147,14 +187,22 @@ export interface RowListParams extends PageParams {
 
   offset?: number;
 
+  /**
+   * Specify the column names to get results containing only the required columns
+   * instead of all column details.
+   */
   properties?: Array<string>;
 
+  /**
+   * Specifies the column names to sort the results by. See the above description for
+   * more details.
+   */
   sort?: Array<string>;
 }
 
 export interface RowCloneDraftParams {
   /**
-   * Path param:
+   * Path param: The ID or name of the table
    */
   tableIdOrName: string;
 
@@ -165,12 +213,15 @@ export interface RowCloneDraftParams {
 }
 
 export interface RowDeleteDraftParams {
+  /**
+   * The ID or name of the table
+   */
   tableIdOrName: string;
 }
 
 export interface RowGetParams {
   /**
-   * Path param:
+   * Path param: The ID or name of the table
    */
   tableIdOrName: string;
 
@@ -182,7 +233,7 @@ export interface RowGetParams {
 
 export interface RowGetDraftParams {
   /**
-   * Path param:
+   * Path param: The ID or name of the table
    */
   tableIdOrName: string;
 
@@ -193,32 +244,47 @@ export interface RowGetDraftParams {
 }
 
 export interface RowListDraftParams {
+  /**
+   * The cursor token value to get the next set of results. You can get this from the
+   * `paging.next.after` JSON property of a paged response containing more results.
+   */
   after?: string;
 
   archived?: boolean;
 
+  /**
+   * The maximum number of results to return. Default is `1000`.
+   */
   limit?: number;
 
   offset?: number;
 
+  /**
+   * Specify the column names to get results containing only the required columns
+   * instead of all column details. If you want to include multiple columns in the
+   * result, use this query param as many times.
+   */
   properties?: Array<string>;
 
+  /**
+   * Specifies the column names to sort the results by.
+   */
   sort?: Array<string>;
 }
 
 export interface RowReplaceDraftParams {
   /**
-   * Path param:
+   * Path param: The ID or name of the table
    */
   tableIdOrName: string;
 
   /**
-   * Body param:
+   * Body param: List of key value pairs with the column name and column value
    */
   values: { [key: string]: HubdbAPI.Variant };
 
   /**
-   * Body param:
+   * Body param: Specifies the value for the column child table id
    */
   childTableId?: number;
 
@@ -228,29 +294,31 @@ export interface RowReplaceDraftParams {
   displayIndex?: number;
 
   /**
-   * Body param:
+   * Body param: Specifies the value for `hs_name` column, which will be used as
+   * title in the dynamic pages
    */
   name?: string;
 
   /**
-   * Body param:
+   * Body param: Specifies the value for `hs_path` column, which will be used as slug
+   * in the dynamic pages
    */
   path?: string;
 }
 
 export interface RowUpdateDraftParams {
   /**
-   * Path param:
+   * Path param: The ID or name of the table
    */
   tableIdOrName: string;
 
   /**
-   * Body param:
+   * Body param: List of key value pairs with the column name and column value
    */
   values: { [key: string]: HubdbAPI.Variant };
 
   /**
-   * Body param:
+   * Body param: Specifies the value for the column child table id
    */
   childTableId?: number;
 
@@ -260,12 +328,14 @@ export interface RowUpdateDraftParams {
   displayIndex?: number;
 
   /**
-   * Body param:
+   * Body param: Specifies the value for `hs_name` column, which will be used as
+   * title in the dynamic pages
    */
   name?: string;
 
   /**
-   * Body param:
+   * Body param: Specifies the value for `hs_path` column, which will be used as slug
+   * in the dynamic pages
    */
   path?: string;
 }

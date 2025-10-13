@@ -11,7 +11,7 @@ import { path } from '../../internal/utils/path';
 
 export class Actions extends APIResource {
   /**
-   * Create a new custom action definition
+   * Create a new custom workflow action.
    */
   create(
     appID: number,
@@ -22,7 +22,7 @@ export class Actions extends APIResource {
   }
 
   /**
-   * Update an existing action definition
+   * Update an existing action definition by ID.
    */
   update(
     definitionID: string,
@@ -34,7 +34,7 @@ export class Actions extends APIResource {
   }
 
   /**
-   * Retrieve revisions for a given definition
+   * Retrieve the versions of a definition by ID.
    */
   list(
     definitionID: string,
@@ -61,7 +61,7 @@ export class Actions extends APIResource {
   }
 
   /**
-   * Delete a function for a definition
+   * Delete a function within a given definition.
    */
   archiveByFunctionType(
     functionType:
@@ -80,7 +80,7 @@ export class Actions extends APIResource {
   }
 
   /**
-   * Completes a callback
+   * Complete a specific blocked action execution by ID.
    */
   complete(callbackID: string, body: ActionCompleteParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post(path`/automation/v4/actions/callbacks/${callbackID}/complete`, {
@@ -91,7 +91,7 @@ export class Actions extends APIResource {
   }
 
   /**
-   * Complete a batch of callbacks
+   * Complete a batch of blocked action executions.
    */
   completeBatch(body: ActionCompleteBatchParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/automation/v4/actions/callbacks/complete', {
@@ -102,7 +102,7 @@ export class Actions extends APIResource {
   }
 
   /**
-   * Update a function for a definition
+   * Update a function for a given definition by ID.
    */
   createOrReplace(
     functionID: string,
@@ -117,7 +117,7 @@ export class Actions extends APIResource {
   }
 
   /**
-   * Insert a function for a definition
+   * Add a function for a given definition.
    */
   createOrReplaceByFunctionType(
     functionType:
@@ -156,7 +156,7 @@ export class Actions extends APIResource {
   }
 
   /**
-   * Retrieve a function from a given definition
+   * Retrieve a specific function from a given definition.
    */
   read(
     functionID: string,
@@ -221,6 +221,8 @@ export interface FieldTypeDefinition {
     | 'currency_number'
     | 'json'
     | 'object_coordinates';
+
+  description?: string;
 
   externalOptionsReferenceType?: string;
 
@@ -421,17 +423,40 @@ export interface InputFieldDefinition {
   >;
 }
 
+/**
+ * A HubSpot property option
+ */
 export interface Option {
+  /**
+   * A description of the option.
+   */
+  description: string;
+
+  /**
+   * The position of the item relative to others in the list.
+   */
   displayOrder: number;
 
   doubleData: number;
 
+  /**
+   * Whether the option is displayed in HubSpot's UI.
+   */
   hidden: boolean;
 
+  /**
+   * A user-friendly label that identifies the option.
+   */
   label: string;
 
+  /**
+   * Whether the option is read-only.
+   */
   readOnly: boolean;
 
+  /**
+   * The actual value of the option.
+   */
   value: string;
 }
 
@@ -609,7 +634,7 @@ export interface ActionCreateParams {
 
 export interface ActionUpdateParams {
   /**
-   * Path param:
+   * Path param: The ID of the app.
    */
   appId: number;
 
@@ -661,7 +686,7 @@ export interface ActionUpdateParams {
 
 export interface ActionListParams extends PageParams {
   /**
-   * Path param:
+   * Path param: The ID of the app.
    */
   appId: number;
 }
@@ -675,8 +700,14 @@ export interface ActionDeleteParams {
 }
 
 export interface ActionArchiveByFunctionTypeParams {
+  /**
+   * The ID of the app.
+   */
   appId: number;
 
+  /**
+   * The ID of the definition.
+   */
   definitionId: string;
 }
 
@@ -690,17 +721,18 @@ export interface ActionCompleteBatchParams {
 
 export interface ActionCreateOrReplaceParams {
   /**
-   * Path param:
+   * Path param: The ID of the app.
    */
   appId: number;
 
   /**
-   * Path param:
+   * Path param: The ID of the definition.
    */
   definitionId: string;
 
   /**
-   * Path param:
+   * Path param: The type of function. Can be `PRE_ACTION_EXECUTION`,
+   * `PRE_FETCH_OPTIONS`, `POST_FETCH_OPTIONS`, `POST_ACTION_EXECUTION`.
    */
   functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION';
 
@@ -712,12 +744,12 @@ export interface ActionCreateOrReplaceParams {
 
 export interface ActionCreateOrReplaceByFunctionTypeParams {
   /**
-   * Path param:
+   * Path param: The ID of the app.
    */
   appId: number;
 
   /**
-   * Path param:
+   * Path param: The ID of the definition.
    */
   definitionId: string;
 
@@ -728,16 +760,32 @@ export interface ActionCreateOrReplaceByFunctionTypeParams {
 }
 
 export interface ActionGetByFunctionTypeParams {
+  /**
+   * The ID of the app.
+   */
   appId: number;
 
+  /**
+   * The ID of the definition.
+   */
   definitionId: string;
 }
 
 export interface ActionReadParams {
+  /**
+   * The ID of the app.
+   */
   appId: number;
 
+  /**
+   * The ID of the definition.
+   */
   definitionId: string;
 
+  /**
+   * The type of function. Can be `PRE_ACTION_EXECUTION`, `PRE_FETCH_OPTIONS`,
+   * `POST_FETCH_OPTIONS`, `POST_ACTION_EXECUTION`.
+   */
   functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION';
 }
 

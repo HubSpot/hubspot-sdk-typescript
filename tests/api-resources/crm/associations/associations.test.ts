@@ -12,7 +12,7 @@ describe('resource associations', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.crm.associations.create('toObjectType', {
       fromObjectType: 'fromObjectType',
-      inputs: [{ from: { id: 'id' }, to: { id: 'id' }, type: 'type' }],
+      inputs: [{ from: { id: '53628' }, to: { id: '12726' }, type: 'contact_to_company' }],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,7 +27,7 @@ describe('resource associations', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.crm.associations.create('toObjectType', {
       fromObjectType: 'fromObjectType',
-      inputs: [{ from: { id: 'id' }, to: { id: 'id' }, type: 'type' }],
+      inputs: [{ from: { id: '53628' }, to: { id: '12726' }, type: 'contact_to_company' }],
     });
   });
 
@@ -35,7 +35,7 @@ describe('resource associations', () => {
   test.skip('delete: only required params', async () => {
     const responsePromise = client.crm.associations.delete('toObjectType', {
       fromObjectType: 'fromObjectType',
-      inputs: [{ from: { id: 'id' }, to: { id: 'id' }, type: 'type' }],
+      inputs: [{ from: { id: '53628' }, to: { id: '12726' }, type: 'contact_to_company' }],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -50,7 +50,7 @@ describe('resource associations', () => {
   test.skip('delete: required and optional params', async () => {
     const response = await client.crm.associations.delete('toObjectType', {
       fromObjectType: 'fromObjectType',
-      inputs: [{ from: { id: 'id' }, to: { id: 'id' }, type: 'type' }],
+      inputs: [{ from: { id: '53628' }, to: { id: '12726' }, type: 'contact_to_company' }],
     });
   });
 
@@ -58,7 +58,7 @@ describe('resource associations', () => {
   test.skip('read: only required params', async () => {
     const responsePromise = client.crm.associations.read('toObjectType', {
       fromObjectType: 'fromObjectType',
-      inputs: [{ id: 'id' }],
+      inputs: [{ id: '37295' }],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -73,7 +73,7 @@ describe('resource associations', () => {
   test.skip('read: required and optional params', async () => {
     const response = await client.crm.associations.read('toObjectType', {
       fromObjectType: 'fromObjectType',
-      inputs: [{ id: 'id' }],
+      inputs: [{ id: '37295' }],
     });
   });
 });

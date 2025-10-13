@@ -10,7 +10,10 @@ const client = new HubSpot({
 describe('resource properties', () => {
   // Prism tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.crm.properties.create('objectType', { label: 'label', name: 'name' });
+    const responsePromise = client.crm.properties.create('objectType', {
+      label: 'My Property Group',
+      name: 'mypropertygroup',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,9 +26,9 @@ describe('resource properties', () => {
   // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.crm.properties.create('objectType', {
-      label: 'label',
-      name: 'name',
-      displayOrder: 0,
+      label: 'My Property Group',
+      name: 'mypropertygroup',
+      displayOrder: -1,
     });
   });
 
@@ -46,14 +49,18 @@ describe('resource properties', () => {
     const response = await client.crm.properties.update('propertyName', {
       objectType: 'objectType',
       calculationFormula: 'calculationFormula',
-      displayOrder: 0,
-      fieldType: 'booleancheckbox',
+      description: 'description',
+      displayOrder: 2,
+      fieldType: 'select',
       formField: true,
-      groupName: 'groupName',
-      hidden: true,
-      label: 'label',
-      options: [{ hidden: true, label: 'label', value: 'value', displayOrder: 0 }],
-      type: 'bool',
+      groupName: 'contactinformation',
+      hidden: false,
+      label: 'My Contact Property',
+      options: [
+        { hidden: false, label: 'Option A', value: 'A', description: 'Choice number one', displayOrder: 1 },
+        { hidden: false, label: 'Option B', value: 'B', description: 'Choice number two', displayOrder: 2 },
+      ],
+      type: 'enumeration',
     });
   });
 
@@ -111,7 +118,7 @@ describe('resource properties', () => {
   test.skip('read: only required params', async () => {
     const responsePromise = client.crm.properties.read('objectType', {
       archived: true,
-      inputs: [{ name: 'name' }],
+      inputs: [{ name: 'my_custom_property' }],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -126,7 +133,7 @@ describe('resource properties', () => {
   test.skip('read: required and optional params', async () => {
     const response = await client.crm.properties.read('objectType', {
       archived: true,
-      inputs: [{ name: 'name' }],
+      inputs: [{ name: 'my_custom_property' }],
       dataSensitivity: 'non_sensitive',
     });
   });

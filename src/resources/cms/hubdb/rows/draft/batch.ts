@@ -9,7 +9,8 @@ import { path } from '../../../../../internal/utils/path';
 
 export class Batch extends APIResource {
   /**
-   * Clone rows in batch
+   * Clones rows in the draft version of the specified table, given a set of row ids.
+   * Maximum of 100 row ids per call.
    */
   cloneBatch(
     tableIDOrName: string,
@@ -23,7 +24,9 @@ export class Batch extends APIResource {
   }
 
   /**
-   * Create rows in batch
+   * Creates rows in the draft version of the specified table, given an array of row
+   * objects. Maximum of 100 row object per call. See the overview section for more
+   * details with an example.
    */
   createBatch(
     tableIDOrName: string,
@@ -37,7 +40,8 @@ export class Batch extends APIResource {
   }
 
   /**
-   * Permanently deletes rows
+   * Permanently deletes rows from the draft version of the table, given a set of row
+   * IDs. Maximum of 100 row IDs per call.
    */
   purgeBatch(tableIDOrName: string, body: BatchPurgeBatchParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post(path`/cms/v3/hubdb/tables/${tableIDOrName}/rows/draft/batch/purge`, {
@@ -48,7 +52,9 @@ export class Batch extends APIResource {
   }
 
   /**
-   * Get a set of rows
+   * Returns rows in the published version of the specified table, given a set of row
+   * IDs. **Note:** This endpoint can be accessed without any authentication if the
+   * table is set to be allowed for public access.
    */
   readBatch(
     tableIDOrName: string,
@@ -62,7 +68,8 @@ export class Batch extends APIResource {
   }
 
   /**
-   * Get a set of rows from draft table
+   * Returns rows in the draft version of the specified table, given a set of row
+   * IDs.
    */
   readDraftBatch(
     tableIDOrName: string,
@@ -76,7 +83,10 @@ export class Batch extends APIResource {
   }
 
   /**
-   * Replace rows in batch in draft table
+   * Replaces multiple rows as a batch in the draft version of the table, with a
+   * maximum of 100 rows per call. See the endpoint
+   * `PUT /tables/{tableIdOrName}/rows/{rowId}/draft` for details on updating a
+   * single row.
    */
   replaceBatch(
     tableIDOrName: string,
@@ -90,7 +100,10 @@ export class Batch extends APIResource {
   }
 
   /**
-   * Update rows in batch in draft table
+   * Updates multiple rows as a batch in the draft version of the table, with a
+   * maximum of 100 rows per call. See the endpoint
+   * `PATCH /tables/{tableIdOrName}/rows/{rowId}/draft` for details on updating a
+   * single row.
    */
   updateBatch(
     tableIDOrName: string,
@@ -113,14 +126,23 @@ export interface BatchCreateBatchParams {
 }
 
 export interface BatchPurgeBatchParams {
+  /**
+   * Strings to input.
+   */
   inputs: Array<string>;
 }
 
 export interface BatchReadBatchParams {
+  /**
+   * Strings to input.
+   */
   inputs: Array<string>;
 }
 
 export interface BatchReadDraftBatchParams {
+  /**
+   * Strings to input.
+   */
   inputs: Array<string>;
 }
 
