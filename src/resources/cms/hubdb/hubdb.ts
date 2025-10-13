@@ -1076,7 +1076,7 @@ export interface Option {
 }
 
 export interface RandomAccessCollectionResponseWithTotalHubDBTableRowV3 {
-  results: Array<unknown>;
+  results: Array<Array<unknown>>;
 
   total: number;
 

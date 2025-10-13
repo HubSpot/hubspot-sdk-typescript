@@ -43,8 +43,8 @@ export class Rows extends APIResource {
     tableIDOrName: string,
     query: RowListParams | null | undefined = {},
     options?: RequestOptions,
-  ): PagePromise<RandomAccessCollectionResponseWithTotalHubDBTableRowV3ResultsPage, unknown> {
-    return this._client.getAPIList(path`/cms/v3/hubdb/tables/${tableIDOrName}/rows`, Page<unknown>, {
+  ): PagePromise<RandomAccessCollectionResponseWithTotalHubDBTableRowV3ResultsPage, Array<unknown>> {
+    return this._client.getAPIList(path`/cms/v3/hubdb/tables/${tableIDOrName}/rows`, Page<Array<unknown>>, {
       query,
       ...options,
     });
