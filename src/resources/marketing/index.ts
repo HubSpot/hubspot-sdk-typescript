@@ -13,7 +13,7 @@ export {
   type EmailStatisticsData,
   type EmailUpdateRequest,
   type Interval,
-  type MarketingEmailsPaging,
+  type Paging,
   type PublicButtonStyleSettings,
   type PublicDividerStyleSettings,
   type PublicEmail,

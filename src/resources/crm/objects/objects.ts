@@ -49,12 +49,13 @@ import {
 } from './contacts/contacts';
 import * as DealsAPI from './deals/deals';
 import {
-  DealCreateByObjectTypeIDParams,
-  DealGetByObjectTypeIDParams,
-  DealListByObjectTypeIDParams,
-  DealMergeByObjectTypeIDParams,
-  DealSearchByObjectTypeIDParams,
-  DealUpdateByObjectTypeIDParams,
+  DealCreateParams,
+  DealListParams,
+  DealMergeParams,
+  DealReadParams,
+  DealSearchParams,
+  DealUpdateParams,
+  DealUpsertParams,
   Deals,
 } from './deals/deals';
 import { Page } from '../../../core/pagination';
@@ -133,13 +134,13 @@ export interface BatchResponseSimplePublicUpsertObject {
 export interface CollectionResponseAssociatedID {
   results: Array<CRMAPI.AssociatedID>;
 
-  paging?: EmailsAPI.MarketingEmailsPaging;
+  paging?: EmailsAPI.Paging;
 }
 
 export interface CollectionResponseSimplePublicObjectWithAssociations {
   results: Array<SimplePublicObjectWithAssociations>;
 
-  paging?: EmailsAPI.MarketingEmailsPaging;
+  paging?: EmailsAPI.Paging;
 }
 
 export interface CollectionResponseWithTotalSimplePublicObject {
@@ -147,7 +148,7 @@ export interface CollectionResponseWithTotalSimplePublicObject {
 
   total: number;
 
-  paging?: EmailsAPI.MarketingEmailsPaging;
+  paging?: EmailsAPI.Paging;
 }
 
 export interface CreatedResponseSimplePublicObject {
@@ -394,12 +395,13 @@ export declare namespace Objects {
 
   export {
     Deals as Deals,
-    type DealCreateByObjectTypeIDParams as DealCreateByObjectTypeIDParams,
-    type DealGetByObjectTypeIDParams as DealGetByObjectTypeIDParams,
-    type DealListByObjectTypeIDParams as DealListByObjectTypeIDParams,
-    type DealMergeByObjectTypeIDParams as DealMergeByObjectTypeIDParams,
-    type DealSearchByObjectTypeIDParams as DealSearchByObjectTypeIDParams,
-    type DealUpdateByObjectTypeIDParams as DealUpdateByObjectTypeIDParams,
+    type DealCreateParams as DealCreateParams,
+    type DealUpdateParams as DealUpdateParams,
+    type DealListParams as DealListParams,
+    type DealMergeParams as DealMergeParams,
+    type DealReadParams as DealReadParams,
+    type DealSearchParams as DealSearchParams,
+    type DealUpsertParams as DealUpsertParams,
   };
 
   export {

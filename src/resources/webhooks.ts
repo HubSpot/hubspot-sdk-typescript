@@ -69,7 +69,7 @@ export class Webhooks extends APIResource {
     appID: number,
     body: WebhookConfigureParams,
     options?: RequestOptions,
-  ): APIPromise<WebhooksSettingsResponse> {
+  ): APIPromise<SettingsResponse> {
     return this._client.put(path`/webhooks/v3/${appID}/settings`, { body, ...options });
   }
 
@@ -137,6 +137,16 @@ export interface SettingsChangeRequest {
   targetUrl: string;
 
   throttling: ThrottlingSettings;
+}
+
+export interface SettingsResponse {
+  createdAt: string;
+
+  targetUrl: string;
+
+  throttling: ThrottlingSettings;
+
+  updatedAt?: string;
 }
 
 export interface SubscriptionBatchUpdateRequest {
@@ -277,16 +287,6 @@ export interface ThrottlingSettings {
   maxConcurrentRequests: number;
 }
 
-export interface WebhooksSettingsResponse {
-  createdAt: string;
-
-  targetUrl: string;
-
-  throttling: ThrottlingSettings;
-
-  updatedAt?: string;
-}
-
 export interface WebhookCreateParams {
   eventType:
     | 'contact.propertyChange'
@@ -380,13 +380,13 @@ export declare namespace Webhooks {
     type BatchResponseSubscriptionResponse as BatchResponseSubscriptionResponse,
     type BatchResponseSubscriptionResponseWithErrors as BatchResponseSubscriptionResponseWithErrors,
     type SettingsChangeRequest as SettingsChangeRequest,
+    type SettingsResponse as SettingsResponse,
     type SubscriptionBatchUpdateRequest as SubscriptionBatchUpdateRequest,
     type SubscriptionCreateRequest as SubscriptionCreateRequest,
     type SubscriptionListResponse as SubscriptionListResponse,
     type SubscriptionPatchRequest as SubscriptionPatchRequest,
     type SubscriptionResponse as SubscriptionResponse,
     type ThrottlingSettings as ThrottlingSettings,
-    type WebhooksSettingsResponse as WebhooksSettingsResponse,
     type WebhookCreateParams as WebhookCreateParams,
     type WebhookUpdateParams as WebhookUpdateParams,
     type WebhookDeleteParams as WebhookDeleteParams,
