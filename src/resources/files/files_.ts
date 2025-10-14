@@ -2,7 +2,9 @@
 
 import { APIResource } from '../../core/resource';
 import * as FilesAPI from './files';
+import { FilesPage } from './files';
 import { APIPromise } from '../../core/api-promise';
+import { Page, type PageParams, PagePromise } from '../../core/pagination';
 import { type Uploadable } from '../../core/uploads';
 import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
@@ -169,15 +171,17 @@ export class Files extends APIResource {
    *
    * @example
    * ```ts
-   * const collectionResponseFile =
-   *   await client.files.files.search();
+   * // Automatically fetches more pages as needed.
+   * for await (const file of client.files.files.search()) {
+   *   // ...
+   * }
    * ```
    */
   search(
     query: FileSearchParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<FilesAPI.CollectionResponseFile> {
-    return this._client.get('/files/v3/files/search', { query, ...options });
+  ): PagePromise<FilesPage, FilesAPI.File> {
+    return this._client.getAPIList('/files/v3/files/search', Page<FilesAPI.File>, { query, ...options });
   }
 
   /**
@@ -371,14 +375,7 @@ export interface FileReplaceParams {
   options?: string;
 }
 
-export interface FileSearchParams {
-  /**
-   * Offset search results by this value. The default offset is 0 and the maximum
-   * offset of items for a given search is 10,000. Narrow your search down if you are
-   * reaching this limit.
-   */
-  after?: string;
-
+export interface FileSearchParams extends PageParams {
   /**
    * Search files by access. If `true`, will show only public files. If `false`, will
    * show only private files.
@@ -467,11 +464,6 @@ export interface FileSearchParams {
    * `false`, shows files that should not be used in new content.
    */
   isUsableInContent?: boolean;
-
-  /**
-   * Number of items to return. Default limit is 10, maximum limit is 100.
-   */
-  limit?: number;
 
   /**
    * Search for files containing the given name.
@@ -607,3 +599,5 @@ export declare namespace Files {
     type FileUploadParams as FileUploadParams,
   };
 }
+
+export { type FilesPage };

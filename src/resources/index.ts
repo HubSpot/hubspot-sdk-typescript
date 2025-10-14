@@ -43,6 +43,8 @@ export {
   type ImportFromURLInput,
   type ImportFromURLTaskLocator,
   type SignedURL,
+  type FilesPage,
+  type FoldersPage,
 } from './files/files';
 export { Marketing } from './marketing/marketing';
 export { Scheduler } from './scheduler/scheduler';

@@ -97,6 +97,7 @@ export {
   type HubdbUpdateDraftTableParams,
   type HubdbUpdateDraftTableRowParams,
   type HubdbUpdateDraftTableRowsParams,
+  type HubDBTableV3sPage,
 } from './hubdb';
 export {
   URLRedirects,

@@ -17,6 +17,8 @@ export {
   type ImportFromURLInput,
   type ImportFromURLTaskLocator,
   type SignedURL,
+  type FilesPage,
+  type FoldersPage,
 } from './files';
 export {
   Folders,

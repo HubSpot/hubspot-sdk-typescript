@@ -2,9 +2,11 @@
 
 import { APIResource } from '../../core/resource';
 import * as Shared from '../shared';
+import { HubDBTableRowV3WrappersPage } from '../shared';
 import * as CRMAPI from '../crm/crm';
 import * as EmailsAPI from '../marketing/emails';
 import { APIPromise } from '../../core/api-promise';
+import { Page, type PageParams, PagePromise } from '../../core/pagination';
 import { type Uploadable } from '../../core/uploads';
 import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
@@ -291,8 +293,8 @@ export class Hubdb extends APIResource {
   getAllDraftTables(
     query: HubdbGetAllDraftTablesParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CollectionResponseWithTotalHubDBTableV3ForwardPaging> {
-    return this._client.get('/cms/v3/hubdb/tables/draft', { query, ...options });
+  ): PagePromise<HubDBTableV3sPage, HubDBTableV3> {
+    return this._client.getAPIList('/cms/v3/hubdb/tables/draft', Page<HubDBTableV3>, { query, ...options });
   }
 
   /**
@@ -302,8 +304,8 @@ export class Hubdb extends APIResource {
   getAllTables(
     query: HubdbGetAllTablesParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CollectionResponseWithTotalHubDBTableV3ForwardPaging> {
-    return this._client.get('/cms/v3/hubdb/tables', { query, ...options });
+  ): PagePromise<HubDBTableV3sPage, HubDBTableV3> {
+    return this._client.getAPIList('/cms/v3/hubdb/tables', Page<HubDBTableV3>, { query, ...options });
   }
 
   /**
@@ -394,8 +396,12 @@ export class Hubdb extends APIResource {
     tableIDOrName: string,
     query: HubdbGetTableRowsParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3> {
-    return this._client.get(path`/cms/v3/hubdb/tables/${tableIDOrName}/rows`, { query, ...options });
+  ): PagePromise<HubDBTableRowV3WrappersPage, Shared.HubDBTableRowV3Wrapper> {
+    return this._client.getAPIList(
+      path`/cms/v3/hubdb/tables/${tableIDOrName}/rows`,
+      Page<Shared.HubDBTableRowV3Wrapper>,
+      { query, ...options },
+    );
   }
 
   /**
@@ -859,6 +865,8 @@ export class Hubdb extends APIResource {
     });
   }
 }
+
+export type HubDBTableV3sPage = Page<HubDBTableV3>;
 
 export interface BatchInputHubDBTableRowBatchCloneRequest {
   inputs: Array<HubDBTableRowBatchCloneRequest>;
@@ -1797,13 +1805,7 @@ export interface HubdbGetParams {
   isGetLocalizedSchema?: boolean;
 }
 
-export interface HubdbGetAllDraftTablesParams {
-  /**
-   * The cursor token value to get the next set of results. You can get this from the
-   * `paging.next.after` JSON property of a paged response containing more results.
-   */
-  after?: string;
-
+export interface HubdbGetAllDraftTablesParams extends PageParams {
   /**
    * Specifies whether to return archived tables. Defaults to `false`.
    */
@@ -1827,11 +1829,6 @@ export interface HubdbGetAllDraftTablesParams {
   createdBefore?: string;
 
   isGetLocalizedSchema?: boolean;
-
-  /**
-   * The maximum number of results to return. Default is 1000.
-   */
-  limit?: number;
 
   /**
    * Specifies which fields to use for sorting results. Valid fields are `name`,
@@ -1856,13 +1853,7 @@ export interface HubdbGetAllDraftTablesParams {
   updatedBefore?: string;
 }
 
-export interface HubdbGetAllTablesParams {
-  /**
-   * The cursor token value to get the next set of results. You can get this from the
-   * `paging.next.after` JSON property of a paged response containing more results.
-   */
-  after?: string;
-
+export interface HubdbGetAllTablesParams extends PageParams {
   /**
    * Specifies whether to return archived tables. Defaults to `false`.
    */
@@ -1886,11 +1877,6 @@ export interface HubdbGetAllTablesParams {
   createdBefore?: string;
 
   isGetLocalizedSchema?: boolean;
-
-  /**
-   * The maximum number of results to return. Default is 1000.
-   */
-  limit?: number;
 
   /**
    * Specifies which fields to use for sorting results. Valid fields are `name`,
@@ -1981,19 +1967,8 @@ export interface HubdbGetTableRowParams {
   archived?: boolean;
 }
 
-export interface HubdbGetTableRowsParams {
-  /**
-   * The cursor token value to get the next set of results. You can get this from the
-   * `paging.next.after` JSON property of a paged response containing more results.
-   */
-  after?: string;
-
+export interface HubdbGetTableRowsParams extends PageParams {
   archived?: boolean;
-
-  /**
-   * The maximum number of results to return. Default is `1000`.
-   */
-  limit?: number;
 
   offset?: number;
 
@@ -2473,6 +2448,7 @@ export declare namespace Hubdb {
     type StreamingCollectionResponseWithTotalHubDBTableRowV3 as StreamingCollectionResponseWithTotalHubDBTableRowV3,
     type UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3 as UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3,
     type Variant as Variant,
+    type HubDBTableV3sPage as HubDBTableV3sPage,
     type HubdbCreateParams as HubdbCreateParams,
     type HubdbListParams as HubdbListParams,
     type HubdbCloneBatchParams as HubdbCloneBatchParams,
@@ -2528,3 +2504,5 @@ export declare namespace Hubdb {
     type HubdbUpdateDraftTableRowsParams as HubdbUpdateDraftTableRowsParams,
   };
 }
+
+export { type HubDBTableRowV3WrappersPage };
