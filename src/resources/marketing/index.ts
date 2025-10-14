@@ -39,6 +39,7 @@ export {
   type EmailGetHistogramParams,
   type EmailGetRevisionByIDParams,
   type EmailGetRevisionsParams,
+  type EmailListFullParams,
   type EmailReadParams,
   type EmailRestoreDraftRevisionParams,
   type EmailRestoreRevisionParams,

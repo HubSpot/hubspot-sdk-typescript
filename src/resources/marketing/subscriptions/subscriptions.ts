@@ -13,6 +13,8 @@ import {
   BatchResponsePublicStatusBulkResponseWithErrors,
   BatchResponsePublicWideStatusBulkResponse,
   BatchResponsePublicWideStatusBulkResponseWithErrors,
+  LinkGenerationRequest,
+  LinkGenerationResponse,
   PartialPublicStatusRequest,
   PublicBulkOptOutFromAllResponse,
   PublicStatus,
@@ -243,6 +245,9 @@ export interface SubscriptionDefinition {
    */
   updatedAt: string;
 
+  /**
+   * The ID of the business unit associated with the subscription definition.
+   */
   businessUnitId?: number;
 
   /**
@@ -351,6 +356,8 @@ export declare namespace Subscriptions {
     type BatchResponsePublicStatusBulkResponseWithErrors as BatchResponsePublicStatusBulkResponseWithErrors,
     type BatchResponsePublicWideStatusBulkResponse as BatchResponsePublicWideStatusBulkResponse,
     type BatchResponsePublicWideStatusBulkResponseWithErrors as BatchResponsePublicWideStatusBulkResponseWithErrors,
+    type LinkGenerationRequest as LinkGenerationRequest,
+    type LinkGenerationResponse as LinkGenerationResponse,
     type PartialPublicStatusRequest as PartialPublicStatusRequest,
     type PublicBulkOptOutFromAllResponse as PublicBulkOptOutFromAllResponse,
     type PublicStatus as PublicStatus,

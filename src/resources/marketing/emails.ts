@@ -226,6 +226,24 @@ export class Emails extends APIResource {
   }
 
   /**
+   * Use this endpoint to get aggregated statistics of emails sent in a specified
+   * time span. It also returns the list of emails that were sent during the time
+   * span.
+   *
+   * @example
+   * ```ts
+   * const aggregateEmailStatistics =
+   *   await client.marketing.emails.listFull();
+   * ```
+   */
+  listFull(
+    query: EmailListFullParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<AggregateEmailStatistics> {
+    return this._client.get('/marketing/v3/emails/statistics/list', { query, ...options });
+  }
+
+  /**
    * If you have a Marketing Hub Enterprise account or the transactional email
    * add-on, you can use this endpoint to publish an automated email or send/schedule
    * a regular email.
@@ -369,10 +387,13 @@ export type PublicEmailsPage = Page<PublicEmail>;
  */
 export interface AbTestCreateRequestVNext {
   /**
-   * ID of the object to test.
+   * ID of the email to test.
    */
   contentId: string;
 
+  /**
+   * Name of the variation to be created.
+   */
   variationName: string;
 }
 
@@ -436,7 +457,7 @@ export interface CollectionResponseWithTotalVersionPublicEmail {
   results: Array<VersionPublicEmail>;
 
   /**
-   * Total number of content emails.
+   * Total number of emails.
    */
   total: number;
 
@@ -498,6 +519,8 @@ export interface EmailCreateRequest {
    * The ID of the feedback survey linked to the email.
    */
   feedbackSurveyId?: string;
+
+  folderIdV2?: number;
 
   /**
    * Data structure representing the from fields on the email.
@@ -673,6 +696,7 @@ export interface EmailCreateRequest {
     | 'en-dk'
     | 'en-dm'
     | 'en-ee'
+    | 'en-eg'
     | 'en-er'
     | 'en-es'
     | 'en-fi'
@@ -1348,7 +1372,8 @@ export interface EmailCreateRequest {
     | 'AUTOMATED_AB_VARIANT'
     | 'AUTOMATED_DRAFT_AB'
     | 'AUTOMATED_DRAFT_ABVARIANT'
-    | 'AUTOMATED_LOSER_ABVARIANT';
+    | 'AUTOMATED_LOSER_ABVARIANT'
+    | 'AGENT_GENERATED';
 
   /**
    * The email subcategory.
@@ -1373,6 +1398,7 @@ export interface EmailCreateRequest {
     | 'automated_for_form_legacy'
     | 'automated_for_form_buffer'
     | 'automated_for_form_draft'
+    | 'automated_for_crm'
     | 'rss_to_email'
     | 'rss_to_email_child'
     | 'blog_email'
@@ -1506,6 +1532,8 @@ export interface EmailUpdateRequest {
    * Data structure representing the content of the email.
    */
   content?: PublicEmailContent;
+
+  folderIdV2?: number;
 
   /**
    * Data structure representing the from fields on the email.
@@ -1681,6 +1709,7 @@ export interface EmailUpdateRequest {
     | 'en-dk'
     | 'en-dm'
     | 'en-ee'
+    | 'en-eg'
     | 'en-er'
     | 'en-es'
     | 'en-fi'
@@ -2361,7 +2390,8 @@ export interface EmailUpdateRequest {
     | 'AUTOMATED_AB_VARIANT'
     | 'AUTOMATED_DRAFT_AB'
     | 'AUTOMATED_DRAFT_ABVARIANT'
-    | 'AUTOMATED_LOSER_ABVARIANT';
+    | 'AUTOMATED_LOSER_ABVARIANT'
+    | 'AGENT_GENERATED';
 
   /**
    * The email subcategory.
@@ -2386,6 +2416,7 @@ export interface EmailUpdateRequest {
     | 'automated_for_form_legacy'
     | 'automated_for_form_buffer'
     | 'automated_for_form_draft'
+    | 'automated_for_crm'
     | 'rss_to_email'
     | 'rss_to_email_child'
     | 'blog_email'
@@ -2568,7 +2599,8 @@ export interface PublicEmail {
     | 'AUTOMATED_AB_VARIANT'
     | 'AUTOMATED_DRAFT_AB'
     | 'AUTOMATED_DRAFT_ABVARIANT'
-    | 'AUTOMATED_LOSER_ABVARIANT';
+    | 'AUTOMATED_LOSER_ABVARIANT'
+    | 'AGENT_GENERATED';
 
   /**
    * The email subcategory.
@@ -2590,6 +2622,9 @@ export interface PublicEmail {
    */
   activeDomain?: string;
 
+  /**
+   * List of emailCampaignIds.
+   */
   allEmailCampaignIds?: Array<string>;
 
   /**
@@ -2633,12 +2668,18 @@ export interface PublicEmail {
 
   emailCampaignGroupId?: string;
 
+  emailTemplateMode?: 'DESIGN_MANAGER' | 'DRAG_AND_DROP';
+
   /**
    * The ID of the feedback survey linked to the email.
    */
   feedbackSurveyId?: string;
 
   folderId?: number;
+
+  folderIdV2?: number;
+
+  isAb?: boolean;
 
   /**
    * Returns the published status of the email. This is read only.
@@ -2819,6 +2860,7 @@ export interface PublicEmail {
     | 'en-dk'
     | 'en-dm'
     | 'en-ee'
+    | 'en-eg'
     | 'en-er'
     | 'en-es'
     | 'en-fi'
@@ -3444,6 +3486,10 @@ export interface PublicEmail {
     | 'zu'
     | 'zu-za';
 
+  previewKey?: string;
+
+  primaryEmailCampaignId?: string;
+
   /**
    * The date and time the email is scheduled for, in ISO8601 representation. This is
    * only used in local time or scheduled emails.
@@ -3455,6 +3501,9 @@ export interface PublicEmail {
    */
   publishedAt?: string;
 
+  /**
+   * Email of the user who published/sent the email.
+   */
   publishedByEmail?: string;
 
   /**
@@ -3462,6 +3511,9 @@ export interface PublicEmail {
    */
   publishedById?: string;
 
+  /**
+   * Name of the user who published the email.
+   */
   publishedByName?: string;
 
   /**
@@ -3517,6 +3569,8 @@ export interface PublicEmail {
     | 'MEMBERSHIP_OTP_LOGIN_EMAIL'
     | 'MEMBERSHIP_FOLLOW_UP_EMAIL'
     | 'MEMBERSHIP_VERIFICATION_EMAIL';
+
+  unpublishedAt?: string;
 
   /**
    * The date and time of the last update to the email, in ISO8601 representation.
@@ -3670,6 +3724,8 @@ export interface PublicEmailSubscriptionDetails {
    * ID of the subscription.
    */
   subscriptionId?: string;
+
+  subscriptionName?: string;
 }
 
 /**
@@ -3733,6 +3789,8 @@ export interface PublicEmailTestingDetails {
    */
   hoursToWait?: number;
 
+  isAbVariation?: boolean;
+
   /**
    * The ID of the AB test.
    */
@@ -3760,6 +3818,9 @@ export interface PublicEmailToDetails {
 
   limitSendFrequency?: boolean;
 
+  /**
+   * Whether to send to unengaged contacts (false) or not (true).
+   */
   suppressGraymail?: boolean;
 }
 
@@ -3886,6 +3947,8 @@ export interface EmailCreateParams {
    * The ID of the feedback survey linked to the email.
    */
   feedbackSurveyId?: string;
+
+  folderIdV2?: number;
 
   /**
    * Data structure representing the from fields on the email.
@@ -4061,6 +4124,7 @@ export interface EmailCreateParams {
     | 'en-dk'
     | 'en-dm'
     | 'en-ee'
+    | 'en-eg'
     | 'en-er'
     | 'en-es'
     | 'en-fi'
@@ -4736,7 +4800,8 @@ export interface EmailCreateParams {
     | 'AUTOMATED_AB_VARIANT'
     | 'AUTOMATED_DRAFT_AB'
     | 'AUTOMATED_DRAFT_ABVARIANT'
-    | 'AUTOMATED_LOSER_ABVARIANT';
+    | 'AUTOMATED_LOSER_ABVARIANT'
+    | 'AGENT_GENERATED';
 
   /**
    * The email subcategory.
@@ -4761,6 +4826,7 @@ export interface EmailCreateParams {
     | 'automated_for_form_legacy'
     | 'automated_for_form_buffer'
     | 'automated_for_form_draft'
+    | 'automated_for_crm'
     | 'rss_to_email'
     | 'rss_to_email_child'
     | 'blog_email'
@@ -4871,6 +4937,11 @@ export interface EmailUpdateParams {
    * Body param: Data structure representing the content of the email.
    */
   content?: PublicEmailContent;
+
+  /**
+   * Body param:
+   */
+  folderIdV2?: number;
 
   /**
    * Body param: Data structure representing the from fields on the email.
@@ -5052,6 +5123,7 @@ export interface EmailUpdateParams {
     | 'en-dk'
     | 'en-dm'
     | 'en-ee'
+    | 'en-eg'
     | 'en-er'
     | 'en-es'
     | 'en-fi'
@@ -5732,7 +5804,8 @@ export interface EmailUpdateParams {
     | 'AUTOMATED_AB_VARIANT'
     | 'AUTOMATED_DRAFT_AB'
     | 'AUTOMATED_DRAFT_ABVARIANT'
-    | 'AUTOMATED_LOSER_ABVARIANT';
+    | 'AUTOMATED_LOSER_ABVARIANT'
+    | 'AGENT_GENERATED';
 
   /**
    * Body param: The email subcategory.
@@ -5757,6 +5830,7 @@ export interface EmailUpdateParams {
     | 'automated_for_form_legacy'
     | 'automated_for_form_buffer'
     | 'automated_for_form_draft'
+    | 'automated_for_crm'
     | 'rss_to_email'
     | 'rss_to_email_child'
     | 'blog_email'
@@ -5978,10 +6052,13 @@ export interface EmailCloneParams {
 
 export interface EmailCreateAbTestVariationParams {
   /**
-   * ID of the object to test.
+   * ID of the email to test.
    */
   contentId: string;
 
+  /**
+   * Name of the variation to be created.
+   */
   variationName: string;
 }
 
@@ -6057,6 +6134,29 @@ export interface EmailGetRevisionsParams {
   limit?: number;
 }
 
+export interface EmailListFullParams {
+  /**
+   * Filter by email IDs. Only include statistics of emails with these IDs.
+   */
+  emailIds?: Array<number>;
+
+  /**
+   * The end timestamp of the time span, in ISO8601 representation.
+   */
+  endTimestamp?: string;
+
+  /**
+   * Specifies which email properties should be returned. All properties will be
+   * returned by default.
+   */
+  property?: string;
+
+  /**
+   * The start timestamp of the time span, in ISO8601 representation.
+   */
+  startTimestamp?: string;
+}
+
 export interface EmailReadParams {
   /**
    * Whether to return only results that have been archived.
@@ -6121,6 +6221,8 @@ export interface EmailUpsertDraftParams {
    * Data structure representing the content of the email.
    */
   content?: PublicEmailContent;
+
+  folderIdV2?: number;
 
   /**
    * Data structure representing the from fields on the email.
@@ -6296,6 +6398,7 @@ export interface EmailUpsertDraftParams {
     | 'en-dk'
     | 'en-dm'
     | 'en-ee'
+    | 'en-eg'
     | 'en-er'
     | 'en-es'
     | 'en-fi'
@@ -6976,7 +7079,8 @@ export interface EmailUpsertDraftParams {
     | 'AUTOMATED_AB_VARIANT'
     | 'AUTOMATED_DRAFT_AB'
     | 'AUTOMATED_DRAFT_ABVARIANT'
-    | 'AUTOMATED_LOSER_ABVARIANT';
+    | 'AUTOMATED_LOSER_ABVARIANT'
+    | 'AGENT_GENERATED';
 
   /**
    * The email subcategory.
@@ -7001,6 +7105,7 @@ export interface EmailUpsertDraftParams {
     | 'automated_for_form_legacy'
     | 'automated_for_form_buffer'
     | 'automated_for_form_draft'
+    | 'automated_for_crm'
     | 'rss_to_email'
     | 'rss_to_email_child'
     | 'blog_email'
@@ -7121,6 +7226,7 @@ export declare namespace Emails {
     type EmailGetHistogramParams as EmailGetHistogramParams,
     type EmailGetRevisionByIDParams as EmailGetRevisionByIDParams,
     type EmailGetRevisionsParams as EmailGetRevisionsParams,
+    type EmailListFullParams as EmailListFullParams,
     type EmailReadParams as EmailReadParams,
     type EmailRestoreDraftRevisionParams as EmailRestoreDraftRevisionParams,
     type EmailRestoreRevisionParams as EmailRestoreRevisionParams,

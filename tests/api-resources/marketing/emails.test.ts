@@ -89,6 +89,7 @@ describe('resource emails', () => {
         widgets: { 'module-0-1-1': {}, 'module-1-1-1': {}, module_160676180617911: {}, preview_text: {} },
       },
       feedbackSurveyId: 'feedbackSurveyId',
+      folderIdV2: 0,
       from: { customReplyTo: 'customReplyTo', fromName: 'Bruce Wayne', replyTo: 'test@hubspot.com' },
       jitterSendTime: true,
       language: 'af',
@@ -112,6 +113,7 @@ describe('resource emails', () => {
         officeLocationId: '5449392956',
         preferencesGroupId: 'preferencesGroupId',
         subscriptionId: 'subscriptionId',
+        subscriptionName: 'subscriptionName',
       },
       testing: {
         abSampleSizeDefault: 'master',
@@ -120,6 +122,7 @@ describe('resource emails', () => {
         abSuccessMetric: 'CLICKS_BY_OPENS',
         abTestPercentage: 0,
         hoursToWait: 0,
+        isAbVariation: true,
         testId: 'testId',
       },
       to: {
@@ -373,6 +376,34 @@ describe('resource emails', () => {
       client.marketing.emails.getRevisions(
         'emailId',
         { after: 'after', before: 'before', limit: 0 },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(HubSpot.NotFoundError);
+  });
+
+  // Prism tests are disabled
+  test.skip('listFull', async () => {
+    const responsePromise = client.marketing.emails.listFull();
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('listFull: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.marketing.emails.listFull(
+        {
+          emailIds: [0],
+          endTimestamp: 'endTimestamp',
+          property: 'property',
+          startTimestamp: 'startTimestamp',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(HubSpot.NotFoundError);
