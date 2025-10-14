@@ -25,11 +25,16 @@ import {
   Folders,
 } from './folders';
 import * as EmailsAPI from '../marketing/emails';
+import { Page } from '../../core/pagination';
 
 export class Files extends APIResource {
   files: FilesFilesAPI.Files = new FilesFilesAPI.Files(this._client);
   folders: FoldersAPI.Folders = new FoldersAPI.Folders(this._client);
 }
+
+export type FilesPage = Page<File>;
+
+export type FoldersPage = Page<Folder>;
 
 /**
  * Collections of files

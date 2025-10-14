@@ -1,5 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Page } from '../core/pagination';
+
 /**
  * Defines the type, direction, and details of the relationship between two CRM
  * objects.
@@ -225,3 +227,5 @@ export interface VersionUser {
    */
   fullName: string;
 }
+
+export type HubDBTableRowV3WrappersPage = Page<HubDBTableRowV3Wrapper>;

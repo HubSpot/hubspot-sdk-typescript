@@ -52,6 +52,7 @@ export {
   type PostUpdateDraftParams,
   type PostUpdateLangsParams,
   type BlogPostsPage,
+  type VersionBlogPostsPage,
 } from './posts';
 export {
   Tags,

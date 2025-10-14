@@ -45,6 +45,7 @@ export {
   type EmailRestoreRevisionParams,
   type EmailUpsertDraftParams,
   type PublicEmailsPage,
+  type VersionPublicEmailsPage,
 } from './emails';
 export {
   Forms,

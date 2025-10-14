@@ -124,8 +124,11 @@ export class Posts extends APIResource {
     objectID: string,
     query: PostGetPreviousVersionsParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CollectionResponseWithTotalVersionBlogPost> {
-    return this._client.get(path`/cms/v3/blogs/posts/${objectID}/revisions`, { query, ...options });
+  ): PagePromise<VersionBlogPostsPage, VersionBlogPost> {
+    return this._client.getAPIList(path`/cms/v3/blogs/posts/${objectID}/revisions`, Page<VersionBlogPost>, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -235,6 +238,8 @@ export class Posts extends APIResource {
 }
 
 export type BlogPostsPage = Page<BlogPost>;
+
+export type VersionBlogPostsPage = Page<VersionBlogPost>;
 
 export interface Angle {
   units: string;
@@ -4780,19 +4785,8 @@ export interface PostGetPreviousVersionParams {
   objectId: string;
 }
 
-export interface PostGetPreviousVersionsParams {
-  /**
-   * The cursor token value to get the next set of results. You can get this from the
-   * `paging.next.after` JSON property of a paged response containing more results.
-   */
-  after?: string;
-
+export interface PostGetPreviousVersionsParams extends PageParams {
   before?: string;
-
-  /**
-   * The maximum number of results to return. Default is 100.
-   */
-  limit?: number;
 }
 
 export interface PostReadParams {
@@ -5963,6 +5957,7 @@ export declare namespace Posts {
     type Styles as Styles,
     type VersionBlogPost as VersionBlogPost,
     type BlogPostsPage as BlogPostsPage,
+    type VersionBlogPostsPage as VersionBlogPostsPage,
     type PostCreateParams as PostCreateParams,
     type PostUpdateParams as PostUpdateParams,
     type PostListParams as PostListParams,

@@ -46,6 +46,7 @@ import {
   SideOrCorner,
   Styles,
   VersionBlogPost,
+  VersionBlogPostsPage,
 } from './posts';
 import * as TagsAPI from './tags';
 import {
@@ -943,6 +944,7 @@ export declare namespace Blogs {
     type Styles as Styles,
     type VersionBlogPost as VersionBlogPost,
     type BlogPostsPage as BlogPostsPage,
+    type VersionBlogPostsPage as VersionBlogPostsPage,
     type PostCreateParams as PostCreateParams,
     type PostUpdateParams as PostUpdateParams,
     type PostListParams as PostListParams,

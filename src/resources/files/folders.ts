@@ -2,7 +2,9 @@
 
 import { APIResource } from '../../core/resource';
 import * as FilesAPI from './files';
+import { FoldersPage } from './files';
 import { APIPromise } from '../../core/api-promise';
+import { Page, type PageParams, PagePromise } from '../../core/pagination';
 import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
@@ -106,15 +108,17 @@ export class Folders extends APIResource {
    *
    * @example
    * ```ts
-   * const collectionResponseFolder =
-   *   await client.files.folders.search();
+   * // Automatically fetches more pages as needed.
+   * for await (const folder of client.files.folders.search()) {
+   *   // ...
+   * }
    * ```
    */
   search(
     query: FolderSearchParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<FilesAPI.CollectionResponseFolder> {
-    return this._client.get('/files/v3/folders/search', { query, ...options });
+  ): PagePromise<FoldersPage, FilesAPI.Folder> {
+    return this._client.getAPIList('/files/v3/folders/search', Page<FilesAPI.Folder>, { query, ...options });
   }
 
   /**
@@ -188,14 +192,7 @@ export interface FolderGetByPathParams {
   properties?: Array<string>;
 }
 
-export interface FolderSearchParams {
-  /**
-   * Offset search results by this value. The default offset is 0 and the maximum
-   * offset of items for a given search is 10,000. Narrow your search down if you are
-   * reaching this limit.
-   */
-  after?: string;
-
+export interface FolderSearchParams extends PageParams {
   before?: string;
 
   /**
@@ -221,11 +218,6 @@ export interface FolderSearchParams {
   idLte?: number;
 
   ids?: Array<number>;
-
-  /**
-   * Number of items to return. Default limit is 10, maximum limit is 100.
-   */
-  limit?: number;
 
   /**
    * Search for folders containing the specified name.
@@ -316,3 +308,5 @@ export declare namespace Folders {
     type FolderUpdateByIDParams as FolderUpdateByIDParams,
   };
 }
+
+export { type FoldersPage };
