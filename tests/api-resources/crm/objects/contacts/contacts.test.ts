@@ -25,7 +25,7 @@ describe('resource contacts', () => {
     const response = await client.crm.objects.contacts.create({
       properties: { foo: 'string' },
       associations: [
-        { to: { id: '37295' }, types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 279 }] },
+        { to: { id: '37295' }, types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }] },
       ],
     });
   });

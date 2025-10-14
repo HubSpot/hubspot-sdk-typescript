@@ -15,14 +15,11 @@ export class Forms extends APIResource {
    * @example
    * ```ts
    * const formDefinitionBase =
-   *   await client.marketing.forms.create({
-   *     FormDefinitionCreateRequestBase: {},
-   *   });
+   *   await client.marketing.forms.create();
    * ```
    */
-  create(params: FormCreateParams, options?: RequestOptions): APIPromise<unknown> {
-    const { FormDefinitionCreateRequestBase } = params;
-    return this._client.post('/marketing/v3/forms/', { body: FormDefinitionCreateRequestBase, ...options });
+  create(body: FormCreateParams, options?: RequestOptions): APIPromise<FormDefinitionBase> {
+    return this._client.post('/marketing/v3/forms/', { body, ...options });
   }
 
   /**
@@ -34,7 +31,7 @@ export class Forms extends APIResource {
    *   await client.marketing.forms.update('formId');
    * ```
    */
-  update(formID: string, body: FormUpdateParams, options?: RequestOptions): APIPromise<unknown> {
+  update(formID: string, body: FormUpdateParams, options?: RequestOptions): APIPromise<FormDefinitionBase> {
     return this._client.patch(path`/marketing/v3/forms/${formID}`, { body, ...options });
   }
 
@@ -89,7 +86,7 @@ export class Forms extends APIResource {
     formID: string,
     query: FormReadParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<unknown> {
+  ): APIPromise<FormDefinitionBase> {
     return this._client.get(path`/marketing/v3/forms/${formID}`, { query, ...options });
   }
 
@@ -98,46 +95,11 @@ export class Forms extends APIResource {
    *
    * @example
    * ```ts
-   * const formDefinitionBase = await client.marketing.forms.replace('formId', {
-   *   id: 'id',
-   *   archived: true,
-   *   configuration: {
-   *     allowLinkToResetKnownValues: true,
-   *     archivable: true,
-   *     cloneable: true,
-   *     createNewContactForNewEmail: true,
-   *     editable: true,
-   *     language: 'af',
-   *     notifyContactOwner: true,
-   *     notifyRecipients: ['string'],
-   *     postSubmitAction: { ... },
-   *     prePopulateKnownValues: true,
-   *     recaptchaEnabled: true,
-   *   },
-   *   createdAt: '2019-12-27T18:11:19.117Z',
-   *   displayOptions: {
-   *     renderRawHtml: true,
-   *     style: { ... },
-   *     submitButtonText: 'submitButtonText',
-   *     theme: 'default_style',
-   *   },
-   *   fieldGroups: [
-   *     {
-   *       fields: [
-   *         { ... },
-   *       ],
-   *       groupType: 'default_group',
-   *       richTextType: 'text',
-   *     },
-   *   ],
-   *   formType: 'hubspot',
-   *   legalConsentOptions: { type: 'none' },
-   *   name: 'name',
-   *   updatedAt: '2019-12-27T18:11:19.117Z',
-   * });
+   * const formDefinitionBase =
+   *   await client.marketing.forms.replace('formId');
    * ```
    */
-  replace(formID: string, body: FormReplaceParams, options?: RequestOptions): APIPromise<unknown> {
+  replace(formID: string, body: FormReplaceParams, options?: RequestOptions): APIPromise<FormDefinitionBase> {
     return this._client.put(path`/marketing/v3/forms/${formID}`, { body, ...options });
   }
 }
@@ -546,9 +508,65 @@ export interface FileField {
   placeholder?: string;
 }
 
-export type FormDefinitionBase = unknown;
+export interface FormDefinitionBase {
+  id: string;
 
-export type FormDefinitionCreateRequestBase = unknown;
+  archived: boolean;
+
+  configuration: HubSpotFormConfiguration;
+
+  createdAt: string;
+
+  /**
+   * Options for styling the form.
+   */
+  displayOptions: FormDisplayOptions;
+
+  fieldGroups: Array<FieldGroup>;
+
+  formType: 'hubspot';
+
+  legalConsentOptions:
+    | LegalConsentOptionsNone
+    | LegalConsentOptionsLegitimateInterest
+    | LegalConsentOptionsExplicitConsentToProcess
+    | LegalConsentOptionsImplicitConsentToProcess;
+
+  name: string;
+
+  updatedAt: string;
+
+  archivedAt?: string;
+}
+
+export interface FormDefinitionCreateRequestBase {
+  archived: boolean;
+
+  configuration: HubSpotFormConfiguration;
+
+  createdAt: string;
+
+  /**
+   * Options for styling the form.
+   */
+  displayOptions: FormDisplayOptions;
+
+  fieldGroups: Array<FieldGroup>;
+
+  formType: 'hubspot';
+
+  legalConsentOptions:
+    | LegalConsentOptionsNone
+    | LegalConsentOptionsLegitimateInterest
+    | LegalConsentOptionsExplicitConsentToProcess
+    | LegalConsentOptionsImplicitConsentToProcess;
+
+  name: string;
+
+  updatedAt: string;
+
+  archivedAt?: string;
+}
 
 /**
  * Options for styling the form.
@@ -1437,9 +1455,7 @@ export interface SingleLineTextField {
   placeholder?: string;
 }
 
-export interface FormCreateParams {
-  FormDefinitionCreateRequestBase: FormDefinitionCreateRequestBase;
-}
+export interface FormCreateParams {}
 
 export interface FormUpdateParams {
   /**
@@ -1490,36 +1506,7 @@ export interface FormReadParams {
   archived?: boolean;
 }
 
-export interface FormReplaceParams {
-  id: string;
-
-  archived: boolean;
-
-  configuration: HubSpotFormConfiguration;
-
-  createdAt: string;
-
-  /**
-   * Options for styling the form.
-   */
-  displayOptions: FormDisplayOptions;
-
-  fieldGroups: Array<FieldGroup>;
-
-  formType: 'hubspot';
-
-  legalConsentOptions:
-    | LegalConsentOptionsNone
-    | LegalConsentOptionsLegitimateInterest
-    | LegalConsentOptionsExplicitConsentToProcess
-    | LegalConsentOptionsImplicitConsentToProcess;
-
-  name: string;
-
-  updatedAt: string;
-
-  archivedAt?: string;
-}
+export interface FormReplaceParams {}
 
 export declare namespace Forms {
   export {

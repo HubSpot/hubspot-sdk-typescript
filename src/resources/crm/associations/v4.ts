@@ -189,10 +189,19 @@ export interface AssociationSpec1 {
 }
 
 export interface AssociationSpecWithLabel1 {
+  /**
+   * The category of this association type (either HUBSPOT_DEFINED or USER_DEFINED)
+   */
   category: 'HUBSPOT_DEFINED' | 'USER_DEFINED' | 'INTEGRATOR_DEFINED';
 
+  /**
+   * The ID of this association type, unique within an association category
+   */
   typeId: number;
 
+  /**
+   * The label for this association type
+   */
   label?: string;
 }
 
@@ -221,7 +230,7 @@ export interface BatchResponseLabelsBetweenObjectPair {
 
   status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
 
-  errors?: Array<StandardError1>;
+  errors?: Array<Shared.StandardError>;
 
   links?: { [key: string]: string };
 
@@ -239,7 +248,7 @@ export interface BatchResponsePublicAssociationMultiWithLabel {
 
   status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
 
-  errors?: Array<StandardError1>;
+  errors?: Array<Shared.StandardError>;
 
   links?: { [key: string]: string };
 
@@ -257,7 +266,7 @@ export interface BatchResponseVoid {
 
   status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
 
-  errors?: Array<StandardError1>;
+  errors?: Array<Shared.StandardError>;
 
   links?: { [key: string]: string };
 
@@ -317,7 +326,7 @@ export interface PublicAssociationMultiPost {
 
   to: Shared.PublicObjectID;
 
-  types: Array<AssociationSpec1>;
+  types: Array<Shared.AssociationSpec>;
 }
 
 export interface PublicAssociationMultiWithLabel {
@@ -415,7 +424,7 @@ export interface V4CreateParams {
   /**
    * Body param:
    */
-  body: Array<Shared.AssociationSpec>;
+  body: Array<AssociationSpec1>;
 }
 
 export interface V4ListParams extends PageParams {

@@ -22,6 +22,8 @@ export {
   type BatchResponsePublicStatusBulkResponseWithErrors,
   type BatchResponsePublicWideStatusBulkResponse,
   type BatchResponsePublicWideStatusBulkResponseWithErrors,
+  type LinkGenerationRequest,
+  type LinkGenerationResponse,
   type PartialPublicStatusRequest,
   type PublicBulkOptOutFromAllResponse,
   type PublicStatus,

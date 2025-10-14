@@ -25,7 +25,7 @@ describe('resource companies', () => {
     const response = await client.crm.objects.companies.create({
       properties: { foo: 'string' },
       associations: [
-        { to: { id: '37295' }, types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 279 }] },
+        { to: { id: '37295' }, types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }] },
       ],
     });
   });
