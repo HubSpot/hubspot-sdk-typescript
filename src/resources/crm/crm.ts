@@ -133,10 +133,19 @@ export interface AssociatedID {
 }
 
 export interface AssociationSpecWithLabel {
+  /**
+   * The category of this association type (either HUBSPOT_DEFINED or USER_DEFINED)
+   */
   category: 'HUBSPOT_DEFINED' | 'USER_DEFINED' | 'INTEGRATOR_DEFINED';
 
+  /**
+   * The ID of this association type, unique within an association category
+   */
   typeId: number;
 
+  /**
+   * The label for this association type
+   */
   label?: string;
 }
 

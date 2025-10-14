@@ -901,6 +901,7 @@ export declare namespace HubSpot {
   export type Error = API.Error;
   export type ErrorDetail = API.ErrorDetail;
   export type ForwardPaging = API.ForwardPaging;
+  export type HubDBTableRowV3Wrapper = API.HubDBTableRowV3Wrapper;
   export type NextPage = API.NextPage;
   export type Paging = API.Paging;
   export type PreviousPage = API.PreviousPage;

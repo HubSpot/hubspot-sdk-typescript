@@ -31,7 +31,7 @@ describe('resource batch', () => {
           associations: [
             {
               to: { id: '37295' },
-              types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
+              types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 279 }],
             },
           ],
           objectWriteTraceId: 'objectWriteTraceId',
