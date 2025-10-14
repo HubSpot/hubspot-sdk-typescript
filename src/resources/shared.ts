@@ -103,6 +103,11 @@ export interface ForwardPaging {
 }
 
 /**
+ * HubDbTableRowV3Wrapper
+ */
+export type HubDBTableRowV3Wrapper = unknown;
+
+/**
  * Specifies the paging information needed to retrieve the next set of results in a
  * paginated API response
  */
