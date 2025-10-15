@@ -346,90 +346,113 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/cms/hubdb.ts">BatchInputHubDBTableRowBatchCloneRequest</a></code>
-- <code><a href="./src/resources/cms/hubdb.ts">BatchInputHubDBTableRowV3BatchUpdateRequest</a></code>
-- <code><a href="./src/resources/cms/hubdb.ts">BatchInputHubDBTableRowV3Request</a></code>
-- <code><a href="./src/resources/cms/hubdb.ts">BatchResponseHubDBTableRowV3</a></code>
-- <code><a href="./src/resources/cms/hubdb.ts">BatchResponseHubDBTableRowV3WithErrors</a></code>
-- <code><a href="./src/resources/cms/hubdb.ts">BoundedNextPage</a></code>
-- <code><a href="./src/resources/cms/hubdb.ts">BoundedPaging</a></code>
-- <code><a href="./src/resources/cms/hubdb.ts">CollectionResponseWithTotalHubDBTableV3ForwardPaging</a></code>
-- <code><a href="./src/resources/cms/hubdb.ts">Column</a></code>
-- <code><a href="./src/resources/cms/hubdb.ts">ColumnRequest</a></code>
-- <code><a href="./src/resources/cms/hubdb.ts">ForeignID</a></code>
-- <code><a href="./src/resources/cms/hubdb.ts">HubDBTableCloneRequest</a></code>
-- <code><a href="./src/resources/cms/hubdb.ts">HubDBTableRowBatchCloneRequest</a></code>
-- <code><a href="./src/resources/cms/hubdb.ts">HubDBTableRowV3</a></code>
-- <code><a href="./src/resources/cms/hubdb.ts">HubDBTableRowV3BatchUpdateRequest</a></code>
-- <code><a href="./src/resources/cms/hubdb.ts">HubDBTableRowV3Request</a></code>
-- <code><a href="./src/resources/cms/hubdb.ts">HubDBTableV3</a></code>
-- <code><a href="./src/resources/cms/hubdb.ts">HubDBTableV3Request</a></code>
-- <code><a href="./src/resources/cms/hubdb.ts">ImportResult</a></code>
-- <code><a href="./src/resources/cms/hubdb.ts">Option</a></code>
-- <code><a href="./src/resources/cms/hubdb.ts">RandomAccessCollectionResponseWithTotalHubDBTableRowV3</a></code>
-- <code><a href="./src/resources/cms/hubdb.ts">SimpleUser</a></code>
-- <code><a href="./src/resources/cms/hubdb.ts">StandardError</a></code>
-- <code><a href="./src/resources/cms/hubdb.ts">StreamingCollectionResponseWithTotalHubDBTableRowV3</a></code>
-- <code><a href="./src/resources/cms/hubdb.ts">UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3</a></code>
-- <code><a href="./src/resources/cms/hubdb.ts">Variant</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">BatchInputHubDBTableRowBatchCloneRequest</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">BatchInputHubDBTableRowV3BatchUpdateRequest</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">BatchInputHubDBTableRowV3Request</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">BatchResponseHubDBTableRowV3</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">BatchResponseHubDBTableRowV3WithErrors</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">BoundedNextPage</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">BoundedPaging</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">CollectionResponseWithTotalHubDBTableV3ForwardPaging</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">Column</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">ColumnRequest</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">ForeignID</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">HubDBTableCloneRequest</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">HubDBTableRowBatchCloneRequest</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">HubDBTableRowV3</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">HubDBTableRowV3BatchUpdateRequest</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">HubDBTableRowV3Request</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">HubDBTableV3</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">HubDBTableV3Request</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">ImportResult</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">Option</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">RandomAccessCollectionResponseWithTotalHubDBTableRowV3</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">SimpleUser</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">StandardError</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">StreamingCollectionResponseWithTotalHubDBTableRowV3</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">Variant</a></code>
 
 Methods:
 
-- <code title="post /cms/v3/hubdb/tables">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">create</a>({ ...params }) -> HubDBTableV3</code>
-- <code title="get /cms/v3/hubdb/tables">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">list</a>({ ...params }) -> CollectionResponseWithTotalHubDBTableV3ForwardPaging</code>
-- <code title="delete /cms/v3/hubdb/tables/{tableIdOrName}">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">archive</a>(tableIDOrName) -> void</code>
-- <code title="delete /cms/v3/hubdb/tables/{tableIdOrName}">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">archiveTable</a>(tableIDOrName) -> void</code>
-- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/clone">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">cloneBatch</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
-- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/draft/clone">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">cloneDraft</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
-- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/draft/clone">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">cloneDraftTable</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
-- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft/clone">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">cloneDraftTableRow</a>(rowID, { ...params }) -> HubDBTableRowV3</code>
-- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/clone">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">cloneDraftTableRows</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
-- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/create">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">createBatch</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
-- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/create">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">createDraftTableRows</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
-- <code title="post /cms/v3/hubdb/tables">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">createTable</a>({ ...params }) -> HubDBTableV3</code>
-- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">createTableRow</a>(tableIDOrName, { ...params }) -> HubDBTableRowV3</code>
-- <code title="delete /cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">deleteDraft</a>(rowID, { ...params }) -> void</code>
-- <code title="delete /cms/v3/hubdb/tables/{tableIdOrName}/versions/{versionId}">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">deleteVersion</a>(versionID, { ...params }) -> void</code>
-- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}/export">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">export</a>(tableIDOrName, { ...params }) -> Response</code>
-- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}/draft/export">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">exportDraft</a>(tableIDOrName, { ...params }) -> Response</code>
-- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}/draft/export">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">exportDraftTable</a>(tableIDOrName, { ...params }) -> Response</code>
-- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}/export">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">exportTable</a>(tableIDOrName, { ...params }) -> Response</code>
-- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">get</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
-- <code title="get /cms/v3/hubdb/tables/draft">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">getAllDraftTables</a>({ ...params }) -> HubDBTableV3sPage</code>
-- <code title="get /cms/v3/hubdb/tables">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">getAllTables</a>({ ...params }) -> HubDBTableV3sPage</code>
-- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}/draft">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">getDraft</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
-- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}/draft">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">getDraftTableDetailsByID</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
-- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">getDraftTableRowByID</a>(rowID, { ...params }) -> HubDBTableRowV3</code>
-- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">getTableDetails</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
-- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">getTableRow</a>(rowID, { ...params }) -> HubDBTableRowV3</code>
-- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}/rows">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">getTableRows</a>(tableIDOrName, { ...params }) -> HubDBTableRowV3WrappersPage</code>
-- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/draft/import">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">importDraft</a>(tableIDOrName, { ...params }) -> ImportResult</code>
-- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/draft/import">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">importDraftTable</a>(tableIDOrName, { ...params }) -> ImportResult</code>
-- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">listDraft</a>(tableIDOrName, { ...params }) -> UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3</code>
-- <code title="get /cms/v3/hubdb/tables/draft">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">listDrafts</a>({ ...params }) -> CollectionResponseWithTotalHubDBTableV3ForwardPaging</code>
-- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/draft/publish">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">publishDraft</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
-- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/draft/publish">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">publishDraftTable</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
-- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/purge">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">purgeBatch</a>(tableIDOrName, { ...params }) -> void</code>
-- <code title="delete /cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">purgeDraftTableRow</a>(rowID, { ...params }) -> void</code>
-- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/purge">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">purgeDraftTableRows</a>(tableIDOrName, { ...params }) -> void</code>
-- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/batch/read">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">readBatch</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
-- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/read">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">readDraftBatch</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
-- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/read">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">readDraftTableRows</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
-- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/batch/read">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">readTableRows</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
-- <code title="delete /cms/v3/hubdb/tables/{tableIdOrName}/versions/{versionId}">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">removeTableVersion</a>(versionID, { ...params }) -> void</code>
-- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/replace">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">replaceBatch</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
-- <code title="put /cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">replaceDraft</a>(rowID, { ...params }) -> HubDBTableRowV3</code>
-- <code title="put /cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">replaceDraftTableRow</a>(rowID, { ...params }) -> HubDBTableRowV3</code>
-- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/replace">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">replaceDraftTableRows</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
-- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/draft/reset">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">resetDraft</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
-- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/draft/reset">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">resetDraftTable</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
-- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/unpublish">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">unpublish</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
-- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/unpublish">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">unpublishTable</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
-- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/update">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">updateBatch</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
-- <code title="patch /cms/v3/hubdb/tables/{tableIdOrName}/draft">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">updateDraft</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
-- <code title="patch /cms/v3/hubdb/tables/{tableIdOrName}/draft">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">updateDraftTable</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
-- <code title="patch /cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">updateDraftTableRow</a>(rowID, { ...params }) -> HubDBTableRowV3</code>
-- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/update">client.cms.hubdb.<a href="./src/resources/cms/hubdb.ts">updateDraftTableRows</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
+- <code title="delete /cms/v3/hubdb/tables/{tableIdOrName}">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">archiveTable</a>(tableIDOrName) -> void</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/draft/clone">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">cloneDraftTable</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft/clone">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">cloneDraftTableRow</a>(rowID, { ...params }) -> HubDBTableRowV3</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/clone">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">cloneDraftTableRows</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/create">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">createDraftTableRows</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
+- <code title="post /cms/v3/hubdb/tables">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">createTable</a>({ ...params }) -> HubDBTableV3</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">createTableRow</a>(tableIDOrName, { ...params }) -> HubDBTableRowV3</code>
+- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}/draft/export">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">exportDraftTable</a>(tableIDOrName, { ...params }) -> Response</code>
+- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}/export">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">exportTable</a>(tableIDOrName, { ...params }) -> Response</code>
+- <code title="get /cms/v3/hubdb/tables/draft">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">getAllDraftTables</a>({ ...params }) -> HubDBTableV3sPage</code>
+- <code title="get /cms/v3/hubdb/tables">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">getAllTables</a>({ ...params }) -> HubDBTableV3sPage</code>
+- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}/draft">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">getDraftTableDetailsByID</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
+- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">getDraftTableRowByID</a>(rowID, { ...params }) -> HubDBTableRowV3</code>
+- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">getTableDetails</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
+- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">getTableRow</a>(rowID, { ...params }) -> HubDBTableRowV3</code>
+- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}/rows">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">getTableRows</a>(tableIDOrName, { ...params }) -> HubDBTableRowV3WrappersPage</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/draft/import">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">importDraftTable</a>(tableIDOrName, { ...params }) -> ImportResult</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/draft/publish">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">publishDraftTable</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
+- <code title="delete /cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">purgeDraftTableRow</a>(rowID, { ...params }) -> void</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/purge">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">purgeDraftTableRows</a>(tableIDOrName, { ...params }) -> void</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/read">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">readDraftTableRows</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/batch/read">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">readTableRows</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
+- <code title="delete /cms/v3/hubdb/tables/{tableIdOrName}/versions/{versionId}">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">removeTableVersion</a>(versionID, { ...params }) -> void</code>
+- <code title="put /cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">replaceDraftTableRow</a>(rowID, { ...params }) -> HubDBTableRowV3</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/replace">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">replaceDraftTableRows</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/draft/reset">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">resetDraftTable</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/unpublish">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">unpublishTable</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
+- <code title="patch /cms/v3/hubdb/tables/{tableIdOrName}/draft">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">updateDraftTable</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
+- <code title="patch /cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">updateDraftTableRow</a>(rowID, { ...params }) -> HubDBTableRowV3</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/update">client.cms.hubdb.<a href="./src/resources/cms/hubdb/hubdb.ts">updateDraftTableRows</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
+
+### Rows
+
+Methods:
+
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows/rows.ts">create</a>(tableIDOrName, { ...params }) -> HubDBTableRowV3</code>
+- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}/rows">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows/rows.ts">list</a>(tableIDOrName, { ...params }) -> UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft/clone">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows/rows.ts">cloneDraft</a>(rowID, { ...params }) -> HubDBTableRowV3</code>
+- <code title="delete /cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows/rows.ts">deleteDraft</a>(rowID, { ...params }) -> void</code>
+- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows/rows.ts">get</a>(rowID, { ...params }) -> HubDBTableRowV3</code>
+- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows/rows.ts">getDraft</a>(rowID, { ...params }) -> HubDBTableRowV3</code>
+- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows/rows.ts">listDrafts</a>(tableIDOrName, { ...params }) -> UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3</code>
+- <code title="put /cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows/rows.ts">replaceDraft</a>(rowID, { ...params }) -> HubDBTableRowV3</code>
+- <code title="patch /cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows/rows.ts">updateDraft</a>(rowID, { ...params }) -> HubDBTableRowV3</code>
+
+#### Draft
+
+##### Batch
+
+Methods:
+
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/clone">client.cms.hubdb.rows.draft.batch.<a href="./src/resources/cms/hubdb/rows/draft/batch.ts">cloneBatch</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/create">client.cms.hubdb.rows.draft.batch.<a href="./src/resources/cms/hubdb/rows/draft/batch.ts">createBatch</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/purge">client.cms.hubdb.rows.draft.batch.<a href="./src/resources/cms/hubdb/rows/draft/batch.ts">purgeBatch</a>(tableIDOrName, { ...params }) -> void</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/batch/read">client.cms.hubdb.rows.draft.batch.<a href="./src/resources/cms/hubdb/rows/draft/batch.ts">readBatch</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/read">client.cms.hubdb.rows.draft.batch.<a href="./src/resources/cms/hubdb/rows/draft/batch.ts">readDraftBatch</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/replace">client.cms.hubdb.rows.draft.batch.<a href="./src/resources/cms/hubdb/rows/draft/batch.ts">replaceBatch</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/update">client.cms.hubdb.rows.draft.batch.<a href="./src/resources/cms/hubdb/rows/draft/batch.ts">updateBatch</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
+
+### Tables
+
+Methods:
+
+- <code title="post /cms/v3/hubdb/tables">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">create</a>({ ...params }) -> HubDBTableV3</code>
+- <code title="get /cms/v3/hubdb/tables">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">list</a>({ ...params }) -> CollectionResponseWithTotalHubDBTableV3ForwardPaging</code>
+- <code title="delete /cms/v3/hubdb/tables/{tableIdOrName}">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">archive</a>(tableIDOrName) -> void</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/draft/clone">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">cloneDraft</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
+- <code title="delete /cms/v3/hubdb/tables/{tableIdOrName}/versions/{versionId}">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">deleteVersion</a>(versionID, { ...params }) -> void</code>
+- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}/export">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">export</a>(tableIDOrName, { ...params }) -> Response</code>
+- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}/draft/export">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">exportDraft</a>(tableIDOrName, { ...params }) -> Response</code>
+- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">get</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
+- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}/draft">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">getDraft</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/draft/import">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">importDraft</a>(tableIDOrName, { ...params }) -> ImportResult</code>
+- <code title="get /cms/v3/hubdb/tables/draft">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">listDrafts</a>({ ...params }) -> CollectionResponseWithTotalHubDBTableV3ForwardPaging</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/draft/publish">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">publishDraft</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/draft/reset">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">resetDraft</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
+- <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/unpublish">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">unpublish</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
+- <code title="patch /cms/v3/hubdb/tables/{tableIdOrName}/draft">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">updateDraft</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
 
 ## URLRedirects
 

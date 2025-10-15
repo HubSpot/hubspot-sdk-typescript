@@ -1,22 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  Blogs,
-  type AttachToLangPrimaryRequestVNext,
-  type BatchInputJsonNode,
-  type DetachFromLangGroupRequestVNext,
-  type SetNewLanguagePrimaryRequestVNext,
-  type UpdateLanguagesRequestVNext,
-} from './blogs/index';
-export { Cms } from './cms';
-export {
-  Domains,
-  type CollectionResponseWithTotalDomainForwardPaging,
-  type Domain,
-  type DomainListParams,
-  type DomainsPage,
-} from './domains';
-export {
   Hubdb,
   type BatchInputHubDBTableRowBatchCloneRequest,
   type BatchInputHubDBTableRowV3BatchUpdateRequest,
@@ -74,14 +58,33 @@ export {
   type HubdbUpdateDraftTableRowParams,
   type HubdbUpdateDraftTableRowsParams,
   type HubDBTableV3sPage,
-} from './hubdb/index';
+} from './hubdb';
 export {
-  URLRedirects,
-  type CollectionResponseWithTotalURLMappingForwardPaging,
-  type URLMapping,
-  type URLMappingCreateRequestBody,
-  type URLRedirectCreateParams,
-  type URLRedirectUpdateParams,
-  type URLRedirectListParams,
-  type URLMappingsPage,
-} from './url-redirects';
+  Rows,
+  type RowCreateParams,
+  type RowListParams,
+  type RowCloneDraftParams,
+  type RowDeleteDraftParams,
+  type RowGetParams,
+  type RowGetDraftParams,
+  type RowListDraftsParams,
+  type RowReplaceDraftParams,
+  type RowUpdateDraftParams,
+} from './rows/index';
+export {
+  Tables,
+  type TableCreateParams,
+  type TableListParams,
+  type TableCloneDraftParams,
+  type TableDeleteVersionParams,
+  type TableExportParams,
+  type TableExportDraftParams,
+  type TableGetParams,
+  type TableGetDraftParams,
+  type TableImportDraftParams,
+  type TableListDraftsParams,
+  type TablePublishDraftParams,
+  type TableResetDraftParams,
+  type TableUnpublishParams,
+  type TableUpdateDraftParams,
+} from './tables';
