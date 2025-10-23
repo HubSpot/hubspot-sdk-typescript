@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
-import * as CRMAPI from '../../crm/crm';
 import * as EmailsAPI from '../../marketing/emails';
 import * as TablesAPI from './tables';
 import {
@@ -192,7 +191,7 @@ export interface Column {
   /**
    * Options to choose for select and multi-select columns
    */
-  options?: Array<CRMAPI.Option>;
+  options?: Array<Shared.Option>;
 
   updatedAt?: string;
 
@@ -225,7 +224,7 @@ export interface ColumnRequest {
   /**
    * Options to choose for select and multi-select columns
    */
-  options: Array<CRMAPI.Option>;
+  options: Array<Shared.Option>;
 
   /**
    * Type of the column

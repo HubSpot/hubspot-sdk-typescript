@@ -46,6 +46,7 @@ export {
   type Variant,
   type HubDBTableV3sPage,
 } from './hubdb/index';
+export { MediaBridge } from './media-bridge/index';
 export {
   Pages,
   type AbTestEndRequestVNext,

@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
-import * as CRMAPI from '../crm';
-import * as PropertiesAPI from '../properties/properties';
+import * as Shared from '../../shared';
+import * as EventDefinitionsAPI from '../../events/event-definitions';
 import { APIPromise } from '../../../core/api-promise';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
@@ -135,7 +135,7 @@ export class Schemas extends APIResource {
     objectType: string,
     body: SchemaCreateAssociationParams,
     options?: RequestOptions,
-  ): APIPromise<AssociationDefinition> {
+  ): APIPromise<EventDefinitionsAPI.AssociationDefinition> {
     return this._client.post(path`/crm-object-schemas/v3/schemas/${objectType}/associations`, {
       body,
       ...options,
@@ -229,7 +229,7 @@ export interface ObjectSchema {
   /**
    * Associations defined for a given object type.
    */
-  associations: Array<AssociationDefinition>;
+  associations: Array<EventDefinitionsAPI.AssociationDefinition>;
 
   /**
    * Singular and plural labels for the object. Used in CRM display.
@@ -244,7 +244,7 @@ export interface ObjectSchema {
   /**
    * Properties defined for this object type.
    */
-  properties: Array<CRMAPI.Property>;
+  properties: Array<Shared.Property>;
 
   /**
    * The names of properties that should be **required** when creating an object of
@@ -534,7 +534,7 @@ export interface ObjectTypePropertyCreate {
    * A list of available options for the property. This field is only required for
    * enumerated properties.
    */
-  options?: Array<PropertiesAPI.OptionInput>;
+  options?: Array<Shared.OptionInput>;
 
   /**
    * Controls how the property options will be sorted in the HubSpot UI.
@@ -570,38 +570,6 @@ export interface ObjectTypePropertyCreate {
     | 'ip_address'
     | 'physical_address'
     | 'postal_code';
-}
-
-/**
- * Defines a enumeration property option
- */
-export interface OptionInput {
-  /**
-   * Options are shown in order starting with the lowest positive integer value.
-   * Values of -1 will cause the option to be displayed after any positive values.
-   */
-  displayOrder: number;
-
-  /**
-   * Hidden options won't be shown in HubSpot.
-   */
-  hidden: boolean;
-
-  /**
-   * A human-readable option label that will be shown in HubSpot.
-   */
-  label: string;
-
-  /**
-   * The internal value of the option, which must be used when setting the property
-   * value through the API.
-   */
-  value: string;
-
-  /**
-   * A description of the option.
-   */
-  description?: string;
 }
 
 export interface SchemaCreateParams {
@@ -738,7 +706,6 @@ export declare namespace Schemas {
     type ObjectTypeDefinitionLabels as ObjectTypeDefinitionLabels,
     type ObjectTypeDefinitionPatch as ObjectTypeDefinitionPatch,
     type ObjectTypePropertyCreate as ObjectTypePropertyCreate,
-    type OptionInput as OptionInput,
     type SchemaCreateParams as SchemaCreateParams,
     type SchemaUpdateParams as SchemaUpdateParams,
     type SchemaListParams as SchemaListParams,

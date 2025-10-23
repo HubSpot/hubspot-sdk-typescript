@@ -201,7 +201,7 @@ export interface BatchBatchCreateParams {
 
 export interface BatchBatchDeleteParams {
   /**
-   * Path param:
+   * Path param: Type of the fromObject for this association definition.
    */
   fromObjectType: string;
 
@@ -213,7 +213,7 @@ export interface BatchBatchDeleteParams {
 
 export interface BatchBatchDeleteLabelsParams {
   /**
-   * Path param:
+   * Path param: Type of the fromObject for this association definition.
    */
   fromObjectType: string;
 
@@ -225,7 +225,7 @@ export interface BatchBatchDeleteLabelsParams {
 
 export interface BatchBatchReadParams {
   /**
-   * Path param:
+   * Path param: Type of the fromObject for this association definition.
    */
   fromObjectType: string;
 

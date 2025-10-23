@@ -107,13 +107,33 @@ import {
   PublicObjectRequestOptions,
   PublicSingleFieldDependency,
 } from './actions/actions';
+import * as SequencesAPI from './sequences/sequences';
+import {
+  CollectionResponseWithTotalPublicSequenceLiteResponseForwardPaging,
+  EmailSettingsResponse,
+  MeetingSettingsResponse,
+  PublicEmailPatternResponse,
+  PublicSequenceEnrollmentLiteResponse,
+  PublicSequenceEnrollmentRequest,
+  PublicSequenceEnrollmentResponse,
+  PublicSequenceLiteResponse,
+  PublicSequenceResponse,
+  PublicSequenceSettingsResponse,
+  PublicSequenceStepDependencyResponse,
+  PublicSequenceStepResponse,
+  PublicTaskPatternResponse,
+  Sequences,
+  UnenrollmentSettingsResponse,
+} from './sequences/sequences';
 
 export class Automation extends APIResource {
   actions: ActionsAPI.Actions = new ActionsAPI.Actions(this._client);
+  sequences: SequencesAPI.Sequences = new SequencesAPI.Sequences(this._client);
   workflows: WorkflowsAPI.Workflows = new WorkflowsAPI.Workflows(this._client);
 }
 
 Automation.Actions = Actions;
+Automation.Sequences = Sequences;
 Automation.Workflows = Workflows;
 
 export declare namespace Automation {
@@ -140,6 +160,24 @@ export declare namespace Automation {
     type PublicExecutionTranslationRule as PublicExecutionTranslationRule,
     type PublicObjectRequestOptions as PublicObjectRequestOptions,
     type PublicSingleFieldDependency as PublicSingleFieldDependency,
+  };
+
+  export {
+    Sequences as Sequences,
+    type CollectionResponseWithTotalPublicSequenceLiteResponseForwardPaging as CollectionResponseWithTotalPublicSequenceLiteResponseForwardPaging,
+    type EmailSettingsResponse as EmailSettingsResponse,
+    type MeetingSettingsResponse as MeetingSettingsResponse,
+    type PublicEmailPatternResponse as PublicEmailPatternResponse,
+    type PublicSequenceEnrollmentLiteResponse as PublicSequenceEnrollmentLiteResponse,
+    type PublicSequenceEnrollmentRequest as PublicSequenceEnrollmentRequest,
+    type PublicSequenceEnrollmentResponse as PublicSequenceEnrollmentResponse,
+    type PublicSequenceLiteResponse as PublicSequenceLiteResponse,
+    type PublicSequenceResponse as PublicSequenceResponse,
+    type PublicSequenceSettingsResponse as PublicSequenceSettingsResponse,
+    type PublicSequenceStepDependencyResponse as PublicSequenceStepDependencyResponse,
+    type PublicSequenceStepResponse as PublicSequenceStepResponse,
+    type PublicTaskPatternResponse as PublicTaskPatternResponse,
+    type UnenrollmentSettingsResponse as UnenrollmentSettingsResponse,
   };
 
   export {

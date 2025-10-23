@@ -98,7 +98,6 @@ export {
   type ObjectTypeDefinitionLabels,
   type ObjectTypeDefinitionPatch,
   type ObjectTypePropertyCreate,
-  type OptionInput,
   type SchemaCreateParams,
   type SchemaUpdateParams,
   type SchemaListParams,

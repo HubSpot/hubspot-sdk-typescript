@@ -60,6 +60,23 @@ export {
   type VersionBlogPostsPage,
 } from './posts/index';
 export {
+  Settings,
+  type Blog,
+  type BlogLanguageCloneRequestVNext,
+  type CollectionResponseWithTotalBlogForwardPaging,
+  type CollectionResponseWithTotalVersionBlog,
+  type VersionBlog,
+  type SettingListParams,
+  type SettingAttachToLangGroupParams,
+  type SettingCreateLanguageVariationParams,
+  type SettingDetachFromLangGroupParams,
+  type SettingGetRevisionParams,
+  type SettingListRevisionsParams,
+  type SettingSetNewLangPrimaryParams,
+  type SettingUpdateLanguagesParams,
+  type BlogsPage,
+} from './settings';
+export {
   Tags,
   type BatchInputTag,
   type BatchResponseTag,
