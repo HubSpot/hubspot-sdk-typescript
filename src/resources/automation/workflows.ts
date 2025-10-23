@@ -3,8 +3,85 @@
 import { APIResource } from '../../core/resource';
 import * as Shared from '../shared';
 import * as EmailsAPI from '../marketing/emails';
+import { APIPromise } from '../../core/api-promise';
+import { Page, type PageParams, PagePromise } from '../../core/pagination';
+import { buildHeaders } from '../../internal/headers';
+import { RequestOptions } from '../../internal/request-options';
+import { path } from '../../internal/utils/path';
 
-export class Workflows extends APIResource {}
+export class Workflows extends APIResource {
+  /**
+   * Create a new workflow.
+   */
+  create(body: WorkflowCreateParams, options?: RequestOptions): APIPromise<APIFlow> {
+    return this._client.post('/automation/v4/flows', { body, ...options });
+  }
+
+  /**
+   * Update a workflow by ID.
+   */
+  update(flowID: string, body: WorkflowUpdateParams, options?: RequestOptions): APIPromise<APIFlow> {
+    return this._client.put(path`/automation/v4/flows/${flowID}`, { body, ...options });
+  }
+
+  /**
+   * Retrieve all workflows from an account.
+   */
+  list(
+    query: WorkflowListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<APIFlowListingsPage, APIFlowListing> {
+    return this._client.getAPIList('/automation/v4/flows', Page<APIFlowListing>, { query, ...options });
+  }
+
+  /**
+   * Fully delete a workflow by ID. Deleted workflows cannot be restored via the API.
+   * If you need to restore an accidentally deleted flow, you'll need to contact
+   * support.
+   */
+  delete(flowID: number, options?: RequestOptions): APIPromise<void> {
+    return this._client.delete(path`/automation/v4/flows/${flowID}`, {
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
+
+  /**
+   * Retrieve a batch of workflows by ID.
+   */
+  batchGet(body: WorkflowBatchGetParams, options?: RequestOptions): APIPromise<BatchResponseAPIFlow> {
+    return this._client.post('/automation/v4/flows/batch/read', { body, ...options });
+  }
+
+  /**
+   * Retrieve the IDs of v3 workflows that have been migrated to the v4 API.
+   */
+  batchGetIDMappings(
+    body: WorkflowBatchGetIDMappingsParams,
+    options?: RequestOptions,
+  ): APIPromise<BatchResponseFlowIDWorkflowIDMappingResponse> {
+    return this._client.post('/automation/v4/workflow-id-mappings/batch/read', { body, ...options });
+  }
+
+  /**
+   * Retrieve all details for a specific workflow by ID.
+   */
+  get(flowID: string, options?: RequestOptions): APIPromise<APIFlow> {
+    return this._client.get(path`/automation/v4/flows/${flowID}`, options);
+  }
+
+  /**
+   * Retrieve emails sent by a workflow by ID.
+   */
+  listEmailCampaigns(
+    query: WorkflowListEmailCampaignsParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<CollectionResponseAPIFlowEmailCampaign> {
+    return this._client.get('/automation/v4/flows/email-campaigns', { query, ...options });
+  }
+}
+
+export type APIFlowListingsPage = Page<APIFlowListing>;
 
 export interface APIAbTestBranchAction {
   /**
@@ -197,14 +274,14 @@ export interface APIContactFlow {
   eventAnchor?: APIContactPropertyAnchor | APIStaticDateAnchor;
 
   goalFilterBranch?:
-    | PublicOrFilterBranch
-    | PublicAndFilterBranch
-    | PublicNotAllFilterBranch
-    | PublicNotAnyFilterBranch
-    | PublicRestrictedFilterBranch
-    | PublicUnifiedEventsFilterBranch
-    | PublicPropertyAssociationFilterBranch
-    | PublicAssociationFilterBranch;
+    | Shared.PublicOrFilterBranch
+    | Shared.PublicAndFilterBranch
+    | Shared.PublicNotAllFilterBranch
+    | Shared.PublicNotAnyFilterBranch
+    | Shared.PublicRestrictedFilterBranch
+    | Shared.PublicUnifiedEventsFilterBranch
+    | Shared.PublicPropertyAssociationFilterBranch
+    | Shared.PublicAssociationFilterBranch;
 
   name?: string;
 
@@ -270,14 +347,14 @@ export interface APIContactFlowCreateRequest {
   eventAnchor?: APIContactPropertyAnchor | APIStaticDateAnchor;
 
   goalFilterBranch?:
-    | PublicOrFilterBranch
-    | PublicAndFilterBranch
-    | PublicNotAllFilterBranch
-    | PublicNotAnyFilterBranch
-    | PublicRestrictedFilterBranch
-    | PublicUnifiedEventsFilterBranch
-    | PublicPropertyAssociationFilterBranch
-    | PublicAssociationFilterBranch;
+    | Shared.PublicOrFilterBranch
+    | Shared.PublicAndFilterBranch
+    | Shared.PublicNotAllFilterBranch
+    | Shared.PublicNotAnyFilterBranch
+    | Shared.PublicRestrictedFilterBranch
+    | Shared.PublicUnifiedEventsFilterBranch
+    | Shared.PublicPropertyAssociationFilterBranch
+    | Shared.PublicAssociationFilterBranch;
 
   name?: string;
 
@@ -332,14 +409,14 @@ export interface APIContactFlowPutRequest {
   eventAnchor?: APIContactPropertyAnchor | APIStaticDateAnchor;
 
   goalFilterBranch?:
-    | PublicOrFilterBranch
-    | PublicAndFilterBranch
-    | PublicNotAllFilterBranch
-    | PublicNotAnyFilterBranch
-    | PublicRestrictedFilterBranch
-    | PublicUnifiedEventsFilterBranch
-    | PublicPropertyAssociationFilterBranch
-    | PublicAssociationFilterBranch;
+    | Shared.PublicOrFilterBranch
+    | Shared.PublicAndFilterBranch
+    | Shared.PublicNotAllFilterBranch
+    | Shared.PublicNotAnyFilterBranch
+    | Shared.PublicRestrictedFilterBranch
+    | Shared.PublicUnifiedEventsFilterBranch
+    | Shared.PublicPropertyAssociationFilterBranch
+    | Shared.PublicAssociationFilterBranch;
 
   name?: string;
 
@@ -464,7 +541,7 @@ export interface APIEnumerationOutputField {
 }
 
 export interface APIEventBasedEnrollmentCriteria {
-  eventFilterBranches: Array<PublicUnifiedEventsFilterBranch>;
+  eventFilterBranches: Array<Shared.PublicUnifiedEventsFilterBranch>;
 
   /**
    * If you want to listen to list-membership events (an object was added to a list,
@@ -473,14 +550,14 @@ export interface APIEventBasedEnrollmentCriteria {
    * because list membership events work differently.
    */
   listMembershipFilterBranches: Array<
-    | PublicOrFilterBranch
-    | PublicAndFilterBranch
-    | PublicNotAllFilterBranch
-    | PublicNotAnyFilterBranch
-    | PublicRestrictedFilterBranch
-    | PublicUnifiedEventsFilterBranch
-    | PublicPropertyAssociationFilterBranch
-    | PublicAssociationFilterBranch
+    | Shared.PublicOrFilterBranch
+    | Shared.PublicAndFilterBranch
+    | Shared.PublicNotAllFilterBranch
+    | Shared.PublicNotAnyFilterBranch
+    | Shared.PublicRestrictedFilterBranch
+    | Shared.PublicUnifiedEventsFilterBranch
+    | Shared.PublicPropertyAssociationFilterBranch
+    | Shared.PublicAssociationFilterBranch
   >;
 
   /**
@@ -498,14 +575,14 @@ export interface APIEventBasedEnrollmentCriteria {
    * List-based criteria to further refine which contacts will enroll in this flow.
    */
   refinementCriteria?:
-    | PublicOrFilterBranch
-    | PublicAndFilterBranch
-    | PublicNotAllFilterBranch
-    | PublicNotAnyFilterBranch
-    | PublicRestrictedFilterBranch
-    | PublicUnifiedEventsFilterBranch
-    | PublicPropertyAssociationFilterBranch
-    | PublicAssociationFilterBranch;
+    | Shared.PublicOrFilterBranch
+    | Shared.PublicAndFilterBranch
+    | Shared.PublicNotAllFilterBranch
+    | Shared.PublicNotAnyFilterBranch
+    | Shared.PublicRestrictedFilterBranch
+    | Shared.PublicUnifiedEventsFilterBranch
+    | Shared.PublicPropertyAssociationFilterBranch
+    | Shared.PublicAssociationFilterBranch;
 }
 
 export interface APIFetchedObjectPropertyValue {
@@ -661,28 +738,28 @@ export interface APIListBasedEnrollmentCriteria {
    * The list filter branch that represents the enrollment trigger to this flow.
    */
   listFilterBranch:
-    | PublicOrFilterBranch
-    | PublicAndFilterBranch
-    | PublicNotAllFilterBranch
-    | PublicNotAnyFilterBranch
-    | PublicRestrictedFilterBranch
-    | PublicUnifiedEventsFilterBranch
-    | PublicPropertyAssociationFilterBranch
-    | PublicAssociationFilterBranch;
+    | Shared.PublicOrFilterBranch
+    | Shared.PublicAndFilterBranch
+    | Shared.PublicNotAllFilterBranch
+    | Shared.PublicNotAnyFilterBranch
+    | Shared.PublicRestrictedFilterBranch
+    | Shared.PublicUnifiedEventsFilterBranch
+    | Shared.PublicPropertyAssociationFilterBranch
+    | Shared.PublicAssociationFilterBranch;
 
   /**
    * A list of filter branches to listen for in order to re-enroll objects into this
    * workflow.
    */
   reEnrollmentTriggersFilterBranches: Array<
-    | PublicOrFilterBranch
-    | PublicAndFilterBranch
-    | PublicNotAllFilterBranch
-    | PublicNotAnyFilterBranch
-    | PublicRestrictedFilterBranch
-    | PublicUnifiedEventsFilterBranch
-    | PublicPropertyAssociationFilterBranch
-    | PublicAssociationFilterBranch
+    | Shared.PublicOrFilterBranch
+    | Shared.PublicAndFilterBranch
+    | Shared.PublicNotAllFilterBranch
+    | Shared.PublicNotAnyFilterBranch
+    | Shared.PublicRestrictedFilterBranch
+    | Shared.PublicUnifiedEventsFilterBranch
+    | Shared.PublicPropertyAssociationFilterBranch
+    | Shared.PublicAssociationFilterBranch
   >;
 
   /**
@@ -716,14 +793,14 @@ export interface APIListBranch {
    * branch will execute.
    */
   filterBranch?:
-    | PublicOrFilterBranch
-    | PublicAndFilterBranch
-    | PublicNotAllFilterBranch
-    | PublicNotAnyFilterBranch
-    | PublicRestrictedFilterBranch
-    | PublicUnifiedEventsFilterBranch
-    | PublicPropertyAssociationFilterBranch
-    | PublicAssociationFilterBranch;
+    | Shared.PublicOrFilterBranch
+    | Shared.PublicAndFilterBranch
+    | Shared.PublicNotAllFilterBranch
+    | Shared.PublicNotAnyFilterBranch
+    | Shared.PublicRestrictedFilterBranch
+    | Shared.PublicUnifiedEventsFilterBranch
+    | Shared.PublicPropertyAssociationFilterBranch
+    | Shared.PublicAssociationFilterBranch;
 }
 
 export interface APIListBranchAction {
@@ -872,14 +949,14 @@ export interface APIPlatformFlow {
   startActionId?: string;
 
   suppressionFilterBranch?:
-    | PublicOrFilterBranch
-    | PublicAndFilterBranch
-    | PublicNotAllFilterBranch
-    | PublicNotAnyFilterBranch
-    | PublicRestrictedFilterBranch
-    | PublicUnifiedEventsFilterBranch
-    | PublicPropertyAssociationFilterBranch
-    | PublicAssociationFilterBranch;
+    | Shared.PublicOrFilterBranch
+    | Shared.PublicAndFilterBranch
+    | Shared.PublicNotAllFilterBranch
+    | Shared.PublicNotAnyFilterBranch
+    | Shared.PublicRestrictedFilterBranch
+    | Shared.PublicUnifiedEventsFilterBranch
+    | Shared.PublicPropertyAssociationFilterBranch
+    | Shared.PublicAssociationFilterBranch;
 
   uuid?: string;
 }
@@ -937,14 +1014,14 @@ export interface APIPlatformFlowCreateRequest {
   startActionId?: string;
 
   suppressionFilterBranch?:
-    | PublicOrFilterBranch
-    | PublicAndFilterBranch
-    | PublicNotAllFilterBranch
-    | PublicNotAnyFilterBranch
-    | PublicRestrictedFilterBranch
-    | PublicUnifiedEventsFilterBranch
-    | PublicPropertyAssociationFilterBranch
-    | PublicAssociationFilterBranch;
+    | Shared.PublicOrFilterBranch
+    | Shared.PublicAndFilterBranch
+    | Shared.PublicNotAllFilterBranch
+    | Shared.PublicNotAnyFilterBranch
+    | Shared.PublicRestrictedFilterBranch
+    | Shared.PublicUnifiedEventsFilterBranch
+    | Shared.PublicPropertyAssociationFilterBranch
+    | Shared.PublicAssociationFilterBranch;
 
   uuid?: string;
 }
@@ -991,14 +1068,14 @@ export interface APIPlatformFlowPutRequest {
   startActionId?: string;
 
   suppressionFilterBranch?:
-    | PublicOrFilterBranch
-    | PublicAndFilterBranch
-    | PublicNotAllFilterBranch
-    | PublicNotAnyFilterBranch
-    | PublicRestrictedFilterBranch
-    | PublicUnifiedEventsFilterBranch
-    | PublicPropertyAssociationFilterBranch
-    | PublicAssociationFilterBranch;
+    | Shared.PublicOrFilterBranch
+    | Shared.PublicAndFilterBranch
+    | Shared.PublicNotAllFilterBranch
+    | Shared.PublicNotAnyFilterBranch
+    | Shared.PublicRestrictedFilterBranch
+    | Shared.PublicUnifiedEventsFilterBranch
+    | Shared.PublicPropertyAssociationFilterBranch
+    | Shared.PublicAssociationFilterBranch;
 
   uuid?: string;
 }
@@ -1447,1336 +1524,55 @@ export interface FlowIDWorkflowIDMappingResponse {
   workflowId: number;
 }
 
-export interface PublicAbsoluteComparativeTimestampRefineBy {
-  comparison: string;
+export type WorkflowCreateParams =
+  | WorkflowCreateParams.APIContactFlowCreateRequest
+  | WorkflowCreateParams.APIPlatformFlowCreateRequest;
 
-  timestamp: number;
+export declare namespace WorkflowCreateParams {
+  export interface APIContactFlowCreateRequest {}
 
-  type: 'ABSOLUTE_COMPARATIVE';
+  export interface APIPlatformFlowCreateRequest {}
 }
 
-export interface PublicAbsoluteRangedTimestampRefineBy {
-  lowerTimestamp: number;
+export type WorkflowUpdateParams =
+  | WorkflowUpdateParams.APIContactFlowPutRequest
+  | WorkflowUpdateParams.APIPlatformFlowPutRequest;
 
-  rangeType: string;
+export declare namespace WorkflowUpdateParams {
+  export interface APIContactFlowPutRequest {}
 
-  type: 'ABSOLUTE_RANGED';
-
-  upperTimestamp: number;
-}
-
-export interface PublicAdsSearchFilter {
-  adNetwork: string;
-
-  entityType: string;
-
-  filterType: 'ADS_SEARCH';
-
-  operator: string;
-
-  searchTerms: Array<string>;
-
-  searchTermType: string;
-}
-
-export interface PublicAdsTimeFilter {
-  filterType: 'ADS_TIME';
-
-  pruningRefineBy:
-    | PublicNumOccurrencesRefineBy
-    | PublicSetOccurrencesRefineBy
-    | PublicRelativeComparativeTimestampRefineBy
-    | PublicRelativeRangedTimestampRefineBy
-    | PublicAbsoluteComparativeTimestampRefineBy
-    | PublicAbsoluteRangedTimestampRefineBy
-    | PublicAllHistoryRefineBy
-    | PublicTimePointOperation
-    | PublicRangedTimeOperation;
-}
-
-export interface PublicAllHistoryRefineBy {
-  type: 'ALL_HISTORY';
-}
-
-export interface PublicAllPropertyTypesOperation {
-  includeObjectsWithNoValueSet: boolean;
-
-  operationType: 'ALL_PROPERTY';
-
-  operator: string;
-}
-
-export interface PublicAndFilterBranch {
-  filterBranches: Array<
-    | PublicOrFilterBranch
-    | PublicAndFilterBranch
-    | PublicNotAllFilterBranch
-    | PublicNotAnyFilterBranch
-    | PublicRestrictedFilterBranch
-    | PublicUnifiedEventsFilterBranch
-    | PublicPropertyAssociationFilterBranch
-    | PublicAssociationFilterBranch
-  >;
-
-  filterBranchOperator: string;
-
-  filterBranchType: 'AND';
-
-  filters: Array<
-    | PublicPropertyFilter
-    | PublicAssociationInListFilter
-    | PublicPageViewAnalyticsFilter
-    | PublicCtaAnalyticsFilter
-    | PublicEventAnalyticsFilter
-    | PublicFormSubmissionFilter
-    | PublicFormSubmissionOnPageFilter
-    | PublicIntegrationEventFilter
-    | PublicEmailSubscriptionFilter
-    | PublicCommunicationSubscriptionFilter
-    | PublicCampaignInfluencedFilter
-    | PublicSurveyMonkeyFilter
-    | PublicSurveyMonkeyValueFilter
-    | PublicWebinarFilter
-    | PublicEmailEventFilter
-    | PublicPrivacyAnalyticsFilter
-    | PublicAdsSearchFilter
-    | PublicAdsTimeFilter
-    | PublicInListFilter
-    | PublicNumAssociationsFilter
-    | PublicUnifiedEventsFilter
-    | PublicPropertyAssociationInListFilter
-    | PublicConstantFilter
-  >;
-}
-
-export interface PublicAssociationFilterBranch {
-  associationCategory: string;
-
-  associationTypeId: number;
-
-  filterBranches: Array<
-    | PublicOrFilterBranch
-    | PublicAndFilterBranch
-    | PublicNotAllFilterBranch
-    | PublicNotAnyFilterBranch
-    | PublicRestrictedFilterBranch
-    | PublicUnifiedEventsFilterBranch
-    | PublicPropertyAssociationFilterBranch
-    | PublicAssociationFilterBranch
-  >;
-
-  filterBranchOperator: string;
-
-  filterBranchType: 'ASSOCIATION';
-
-  filters: Array<
-    | PublicPropertyFilter
-    | PublicAssociationInListFilter
-    | PublicPageViewAnalyticsFilter
-    | PublicCtaAnalyticsFilter
-    | PublicEventAnalyticsFilter
-    | PublicFormSubmissionFilter
-    | PublicFormSubmissionOnPageFilter
-    | PublicIntegrationEventFilter
-    | PublicEmailSubscriptionFilter
-    | PublicCommunicationSubscriptionFilter
-    | PublicCampaignInfluencedFilter
-    | PublicSurveyMonkeyFilter
-    | PublicSurveyMonkeyValueFilter
-    | PublicWebinarFilter
-    | PublicEmailEventFilter
-    | PublicPrivacyAnalyticsFilter
-    | PublicAdsSearchFilter
-    | PublicAdsTimeFilter
-    | PublicInListFilter
-    | PublicNumAssociationsFilter
-    | PublicUnifiedEventsFilter
-    | PublicPropertyAssociationInListFilter
-    | PublicConstantFilter
-  >;
-
-  objectTypeId: string;
-
-  operator: string;
-}
-
-export interface PublicAssociationInListFilter {
-  associationCategory: string;
-
-  associationTypeId: number;
-
-  coalescingRefineBy:
-    | PublicNumOccurrencesRefineBy
-    | PublicSetOccurrencesRefineBy
-    | PublicRelativeComparativeTimestampRefineBy
-    | PublicRelativeRangedTimestampRefineBy
-    | PublicAbsoluteComparativeTimestampRefineBy
-    | PublicAbsoluteRangedTimestampRefineBy
-    | PublicAllHistoryRefineBy
-    | PublicTimePointOperation
-    | PublicRangedTimeOperation;
-
-  filterType: 'ASSOCIATION';
-
-  listId: string;
-
-  operator: string;
-
-  toObjectType?: string;
-
-  toObjectTypeId?: string;
-}
-
-export interface PublicBoolPropertyOperation {
-  includeObjectsWithNoValueSet: boolean;
-
-  operationType: 'BOOL';
-
-  operator: string;
-
-  value: boolean;
-}
-
-export interface PublicCalendarDatePropertyOperation {
-  includeObjectsWithNoValueSet: boolean;
-
-  operationType: 'CALENDAR_DATE';
-
-  operator: string;
-
-  timeUnit: string;
-
-  fiscalYearStart?:
-    | 'JANUARY'
-    | 'FEBRUARY'
-    | 'MARCH'
-    | 'APRIL'
-    | 'MAY'
-    | 'JUNE'
-    | 'JULY'
-    | 'AUGUST'
-    | 'SEPTEMBER'
-    | 'OCTOBER'
-    | 'NOVEMBER'
-    | 'DECEMBER';
-
-  timeUnitCount?: number;
-
-  useFiscalYear?: boolean;
-}
-
-export interface PublicCampaignInfluencedFilter {
-  campaignId: string;
-
-  filterType: 'CAMPAIGN_INFLUENCED';
-}
-
-export interface PublicCommunicationSubscriptionFilter {
-  acceptedOptStates: Array<string>;
-
-  channel: string;
-
-  filterType: 'COMMUNICATION_SUBSCRIPTION';
-
-  subscriptionIds: Array<string>;
-
-  subscriptionType: string;
-
-  businessUnitId?: string;
-}
-
-export interface PublicComparativeDatePropertyOperation {
-  comparisonPropertyName: string;
-
-  includeObjectsWithNoValueSet: boolean;
-
-  operationType: 'COMPARATIVE_DATE';
-
-  operator: string;
-
-  defaultComparisonValue?: string;
-}
-
-export interface PublicComparativePropertyUpdatedOperation {
-  comparisonPropertyName: string;
-
-  includeObjectsWithNoValueSet: boolean;
-
-  operationType: 'COMPARATIVE_PROPERTY_UPDATED';
-
-  operator: string;
-
-  defaultComparisonValue?: string;
-}
-
-export interface PublicConstantFilter {
-  filterType: 'CONSTANT';
-
-  shouldAccept: boolean;
-
-  source?: string;
-}
-
-export interface PublicCtaAnalyticsFilter {
-  ctaName: string;
-
-  filterType: 'CTA';
-
-  operator: string;
-
-  coalescingRefineBy?:
-    | PublicNumOccurrencesRefineBy
-    | PublicSetOccurrencesRefineBy
-    | PublicRelativeComparativeTimestampRefineBy
-    | PublicRelativeRangedTimestampRefineBy
-    | PublicAbsoluteComparativeTimestampRefineBy
-    | PublicAbsoluteRangedTimestampRefineBy
-    | PublicAllHistoryRefineBy
-    | PublicTimePointOperation
-    | PublicRangedTimeOperation;
-
-  pruningRefineBy?:
-    | PublicNumOccurrencesRefineBy
-    | PublicSetOccurrencesRefineBy
-    | PublicRelativeComparativeTimestampRefineBy
-    | PublicRelativeRangedTimestampRefineBy
-    | PublicAbsoluteComparativeTimestampRefineBy
-    | PublicAbsoluteRangedTimestampRefineBy
-    | PublicAllHistoryRefineBy
-    | PublicTimePointOperation
-    | PublicRangedTimeOperation;
-}
-
-export interface PublicDatePoint {
-  day: number;
-
-  month: number;
-
-  timeType: 'DATE';
-
-  year: number;
-
-  zoneId: string;
-
-  hour?: number;
-
-  millisecond?: number;
-
-  minute?: number;
-
-  second?: number;
-
-  timezoneSource?: string;
-}
-
-export interface PublicDatePropertyOperation {
-  day: number;
-
-  includeObjectsWithNoValueSet: boolean;
-
-  month: string;
-
-  operationType: 'DATE';
-
-  operator: string;
-
-  year: number;
-}
-
-export interface PublicDateTimePropertyOperation {
-  includeObjectsWithNoValueSet: boolean;
-
-  operationType: 'DATETIME';
-
-  operator: string;
-
-  requiresTimeZoneConversion: boolean;
-
-  timestamp: number;
-}
-
-export interface PublicEmailEventFilter {
-  appId: string;
-
-  emailId: string;
-
-  filterType: 'EMAIL_EVENT';
-
-  level: string;
-
-  operator:
-    | 'LINK_CLICKED'
-    | 'MARKED_SPAM'
-    | 'OPENED'
-    | 'OPENED_BUT_LINK_NOT_CLICKED'
-    | 'OPENED_BUT_NOT_REPLIED'
-    | 'REPLIED'
-    | 'UNSUBSCRIBED'
-    | 'BOUNCED'
-    | 'RECEIVED'
-    | 'RECEIVED_BUT_NOT_OPENED'
-    | 'SENT'
-    | 'SENT_BUT_LINK_NOT_CLICKED'
-    | 'SENT_BUT_NOT_RECEIVED';
-
-  clickUrl?: string;
-
-  pruningRefineBy?:
-    | PublicNumOccurrencesRefineBy
-    | PublicSetOccurrencesRefineBy
-    | PublicRelativeComparativeTimestampRefineBy
-    | PublicRelativeRangedTimestampRefineBy
-    | PublicAbsoluteComparativeTimestampRefineBy
-    | PublicAbsoluteRangedTimestampRefineBy
-    | PublicAllHistoryRefineBy
-    | PublicTimePointOperation
-    | PublicRangedTimeOperation;
-}
-
-export interface PublicEmailSubscriptionFilter {
-  acceptedStatuses: Array<string>;
-
-  filterType: 'EMAIL_SUBSCRIPTION';
-
-  subscriptionIds: Array<string>;
-
-  subscriptionType?: string;
-}
-
-export interface PublicEnumerationPropertyOperation {
-  includeObjectsWithNoValueSet: boolean;
-
-  operationType: 'ENUMERATION';
-
-  operator: string;
-
-  values: Array<string>;
-}
-
-export interface PublicEventAnalyticsFilter {
-  eventId: string;
-
-  filterType: 'EVENT';
-
-  operator: string;
-
-  coalescingRefineBy?:
-    | PublicNumOccurrencesRefineBy
-    | PublicSetOccurrencesRefineBy
-    | PublicRelativeComparativeTimestampRefineBy
-    | PublicRelativeRangedTimestampRefineBy
-    | PublicAbsoluteComparativeTimestampRefineBy
-    | PublicAbsoluteRangedTimestampRefineBy
-    | PublicAllHistoryRefineBy
-    | PublicTimePointOperation
-    | PublicRangedTimeOperation;
-
-  pruningRefineBy?:
-    | PublicNumOccurrencesRefineBy
-    | PublicSetOccurrencesRefineBy
-    | PublicRelativeComparativeTimestampRefineBy
-    | PublicRelativeRangedTimestampRefineBy
-    | PublicAbsoluteComparativeTimestampRefineBy
-    | PublicAbsoluteRangedTimestampRefineBy
-    | PublicAllHistoryRefineBy
-    | PublicTimePointOperation
-    | PublicRangedTimeOperation;
-}
-
-export interface PublicEventFilterMetadata {
-  operation:
-    | PublicBoolPropertyOperation
-    | PublicNumberPropertyOperation
-    | PublicStringPropertyOperation
-    | PublicDateTimePropertyOperation
-    | PublicRangedDatePropertyOperation
-    | PublicComparativePropertyUpdatedOperation
-    | PublicComparativeDatePropertyOperation
-    | PublicRollingDateRangePropertyOperation
-    | PublicRollingPropertyUpdatedOperation
-    | PublicEnumerationPropertyOperation
-    | PublicAllPropertyTypesOperation
-    | PublicRangedNumberPropertyOperation
-    | PublicMultiStringPropertyOperation
-    | PublicDatePropertyOperation
-    | PublicCalendarDatePropertyOperation
-    | PublicTimePointOperation
-    | PublicRangedTimeOperation;
-
-  property: string;
-}
-
-export interface PublicFiscalQuarterReference {
-  day: number;
-
-  month: number;
-
-  referenceType: 'FISCAL_QUARTER';
-
-  hour?: number;
-
-  millisecond?: number;
-
-  minute?: number;
-
-  second?: number;
-}
-
-export interface PublicFiscalYearReference {
-  day: number;
-
-  month: number;
-
-  referenceType: 'FISCAL_YEAR';
-
-  hour?: number;
-
-  millisecond?: number;
-
-  minute?: number;
-
-  second?: number;
-}
-
-export interface PublicFormSubmissionFilter {
-  filterType: 'FORM_SUBMISSION';
-
-  operator: 'FILLED_OUT' | 'NOT_FILLED_OUT';
-
-  coalescingRefineBy?:
-    | PublicNumOccurrencesRefineBy
-    | PublicSetOccurrencesRefineBy
-    | PublicRelativeComparativeTimestampRefineBy
-    | PublicRelativeRangedTimestampRefineBy
-    | PublicAbsoluteComparativeTimestampRefineBy
-    | PublicAbsoluteRangedTimestampRefineBy
-    | PublicAllHistoryRefineBy
-    | PublicTimePointOperation
-    | PublicRangedTimeOperation;
-
-  formId?: string;
-
-  pruningRefineBy?:
-    | PublicNumOccurrencesRefineBy
-    | PublicSetOccurrencesRefineBy
-    | PublicRelativeComparativeTimestampRefineBy
-    | PublicRelativeRangedTimestampRefineBy
-    | PublicAbsoluteComparativeTimestampRefineBy
-    | PublicAbsoluteRangedTimestampRefineBy
-    | PublicAllHistoryRefineBy
-    | PublicTimePointOperation
-    | PublicRangedTimeOperation;
-}
-
-export interface PublicFormSubmissionOnPageFilter {
-  filterType: 'FORM_SUBMISSION_ON_PAGE';
-
-  operator: 'FILLED_OUT' | 'NOT_FILLED_OUT';
-
-  pageId: string;
-
-  coalescingRefineBy?:
-    | PublicNumOccurrencesRefineBy
-    | PublicSetOccurrencesRefineBy
-    | PublicRelativeComparativeTimestampRefineBy
-    | PublicRelativeRangedTimestampRefineBy
-    | PublicAbsoluteComparativeTimestampRefineBy
-    | PublicAbsoluteRangedTimestampRefineBy
-    | PublicAllHistoryRefineBy
-    | PublicTimePointOperation
-    | PublicRangedTimeOperation;
-
-  formId?: string;
-
-  pruningRefineBy?:
-    | PublicNumOccurrencesRefineBy
-    | PublicSetOccurrencesRefineBy
-    | PublicRelativeComparativeTimestampRefineBy
-    | PublicRelativeRangedTimestampRefineBy
-    | PublicAbsoluteComparativeTimestampRefineBy
-    | PublicAbsoluteRangedTimestampRefineBy
-    | PublicAllHistoryRefineBy
-    | PublicTimePointOperation
-    | PublicRangedTimeOperation;
-}
-
-export interface PublicIndexedTimePoint {
-  indexReference:
-    | PublicNowReference
-    | PublicTodayReference
-    | PublicWeekReference
-    | PublicFiscalQuarterReference
-    | PublicFiscalYearReference
-    | PublicYearReference
-    | PublicQuarterReference
-    | PublicMonthReference;
-
-  timeType: 'INDEXED';
-
-  zoneId: string;
-
-  offset?: PublicIndexOffset;
-
-  timezoneSource?: string;
-}
-
-export interface PublicIndexOffset {
-  days?: number;
-
-  hours?: number;
-
-  milliseconds?: number;
-
-  minutes?: number;
-
-  months?: number;
-
-  quarters?: number;
-
-  seconds?: number;
-
-  weeks?: number;
-
-  years?: number;
-}
-
-export interface PublicInListFilter {
-  filterType: 'IN_LIST';
-
-  listId: string;
-
-  operator: string;
-
-  metadata?: PublicInListFilterMetadata;
-}
-
-export interface PublicInListFilterMetadata {
-  id: string;
-
-  inListType: string;
-}
-
-export interface PublicIntegrationEventFilter {
-  eventTypeId: number;
-
-  filterLines: Array<PublicEventFilterMetadata>;
-
-  filterType: 'INTEGRATION_EVENT';
-}
-
-export interface PublicMonthReference {
-  day: number;
-
-  referenceType: 'MONTH';
-
-  hour?: number;
-
-  millisecond?: number;
-
-  minute?: number;
-
-  second?: number;
-}
-
-export interface PublicMultiStringPropertyOperation {
-  includeObjectsWithNoValueSet: boolean;
-
-  operationType: 'MULTISTRING';
-
-  operator: string;
-
-  values: Array<string>;
-}
-
-export interface PublicNotAllFilterBranch {
-  filterBranches: Array<
-    | PublicOrFilterBranch
-    | PublicAndFilterBranch
-    | PublicNotAllFilterBranch
-    | PublicNotAnyFilterBranch
-    | PublicRestrictedFilterBranch
-    | PublicUnifiedEventsFilterBranch
-    | PublicPropertyAssociationFilterBranch
-    | PublicAssociationFilterBranch
-  >;
-
-  filterBranchOperator: string;
-
-  filterBranchType: 'NOT_ALL';
-
-  filters: Array<
-    | PublicPropertyFilter
-    | PublicAssociationInListFilter
-    | PublicPageViewAnalyticsFilter
-    | PublicCtaAnalyticsFilter
-    | PublicEventAnalyticsFilter
-    | PublicFormSubmissionFilter
-    | PublicFormSubmissionOnPageFilter
-    | PublicIntegrationEventFilter
-    | PublicEmailSubscriptionFilter
-    | PublicCommunicationSubscriptionFilter
-    | PublicCampaignInfluencedFilter
-    | PublicSurveyMonkeyFilter
-    | PublicSurveyMonkeyValueFilter
-    | PublicWebinarFilter
-    | PublicEmailEventFilter
-    | PublicPrivacyAnalyticsFilter
-    | PublicAdsSearchFilter
-    | PublicAdsTimeFilter
-    | PublicInListFilter
-    | PublicNumAssociationsFilter
-    | PublicUnifiedEventsFilter
-    | PublicPropertyAssociationInListFilter
-    | PublicConstantFilter
-  >;
-}
-
-export interface PublicNotAnyFilterBranch {
-  filterBranches: Array<
-    | PublicOrFilterBranch
-    | PublicAndFilterBranch
-    | PublicNotAllFilterBranch
-    | PublicNotAnyFilterBranch
-    | PublicRestrictedFilterBranch
-    | PublicUnifiedEventsFilterBranch
-    | PublicPropertyAssociationFilterBranch
-    | PublicAssociationFilterBranch
-  >;
-
-  filterBranchOperator: string;
-
-  filterBranchType: 'NOT_ANY';
-
-  filters: Array<
-    | PublicPropertyFilter
-    | PublicAssociationInListFilter
-    | PublicPageViewAnalyticsFilter
-    | PublicCtaAnalyticsFilter
-    | PublicEventAnalyticsFilter
-    | PublicFormSubmissionFilter
-    | PublicFormSubmissionOnPageFilter
-    | PublicIntegrationEventFilter
-    | PublicEmailSubscriptionFilter
-    | PublicCommunicationSubscriptionFilter
-    | PublicCampaignInfluencedFilter
-    | PublicSurveyMonkeyFilter
-    | PublicSurveyMonkeyValueFilter
-    | PublicWebinarFilter
-    | PublicEmailEventFilter
-    | PublicPrivacyAnalyticsFilter
-    | PublicAdsSearchFilter
-    | PublicAdsTimeFilter
-    | PublicInListFilter
-    | PublicNumAssociationsFilter
-    | PublicUnifiedEventsFilter
-    | PublicPropertyAssociationInListFilter
-    | PublicConstantFilter
-  >;
-}
-
-export interface PublicNowReference {
-  referenceType: 'NOW';
-
-  hour?: number;
-
-  millisecond?: number;
-
-  minute?: number;
-
-  second?: number;
-}
-
-export interface PublicNumAssociationsFilter {
-  associationCategory: string;
-
-  associationTypeId: number;
-
-  coalescingRefineBy:
-    | PublicNumOccurrencesRefineBy
-    | PublicSetOccurrencesRefineBy
-    | PublicRelativeComparativeTimestampRefineBy
-    | PublicRelativeRangedTimestampRefineBy
-    | PublicAbsoluteComparativeTimestampRefineBy
-    | PublicAbsoluteRangedTimestampRefineBy
-    | PublicAllHistoryRefineBy
-    | PublicTimePointOperation
-    | PublicRangedTimeOperation;
-
-  filterType: 'NUM_ASSOCIATIONS';
-}
-
-export interface PublicNumberPropertyOperation {
-  includeObjectsWithNoValueSet: boolean;
-
-  operationType: 'NUMBER';
-
-  operator: string;
-
-  value: number;
-}
-
-export interface PublicNumOccurrencesRefineBy {
-  type: 'NUM_OCCURRENCES';
-
-  maxOccurrences?: number;
-
-  minOccurrences?: number;
-}
-
-export interface PublicOrFilterBranch {
-  filterBranches: Array<
-    | PublicOrFilterBranch
-    | PublicAndFilterBranch
-    | PublicNotAllFilterBranch
-    | PublicNotAnyFilterBranch
-    | PublicRestrictedFilterBranch
-    | PublicUnifiedEventsFilterBranch
-    | PublicPropertyAssociationFilterBranch
-    | PublicAssociationFilterBranch
-  >;
-
-  filterBranchOperator: string;
-
-  filterBranchType: 'OR';
-
-  filters: Array<
-    | PublicPropertyFilter
-    | PublicAssociationInListFilter
-    | PublicPageViewAnalyticsFilter
-    | PublicCtaAnalyticsFilter
-    | PublicEventAnalyticsFilter
-    | PublicFormSubmissionFilter
-    | PublicFormSubmissionOnPageFilter
-    | PublicIntegrationEventFilter
-    | PublicEmailSubscriptionFilter
-    | PublicCommunicationSubscriptionFilter
-    | PublicCampaignInfluencedFilter
-    | PublicSurveyMonkeyFilter
-    | PublicSurveyMonkeyValueFilter
-    | PublicWebinarFilter
-    | PublicEmailEventFilter
-    | PublicPrivacyAnalyticsFilter
-    | PublicAdsSearchFilter
-    | PublicAdsTimeFilter
-    | PublicInListFilter
-    | PublicNumAssociationsFilter
-    | PublicUnifiedEventsFilter
-    | PublicPropertyAssociationInListFilter
-    | PublicConstantFilter
-  >;
-}
-
-export interface PublicPageViewAnalyticsFilter {
-  filterType: 'PAGE_VIEW';
-
-  operator: string;
-
-  pageUrl: string;
-
-  coalescingRefineBy?:
-    | PublicNumOccurrencesRefineBy
-    | PublicSetOccurrencesRefineBy
-    | PublicRelativeComparativeTimestampRefineBy
-    | PublicRelativeRangedTimestampRefineBy
-    | PublicAbsoluteComparativeTimestampRefineBy
-    | PublicAbsoluteRangedTimestampRefineBy
-    | PublicAllHistoryRefineBy
-    | PublicTimePointOperation
-    | PublicRangedTimeOperation;
-
-  enableTracking?: boolean;
-
-  pruningRefineBy?:
-    | PublicNumOccurrencesRefineBy
-    | PublicSetOccurrencesRefineBy
-    | PublicRelativeComparativeTimestampRefineBy
-    | PublicRelativeRangedTimestampRefineBy
-    | PublicAbsoluteComparativeTimestampRefineBy
-    | PublicAbsoluteRangedTimestampRefineBy
-    | PublicAllHistoryRefineBy
-    | PublicTimePointOperation
-    | PublicRangedTimeOperation;
-}
-
-export interface PublicPrivacyAnalyticsFilter {
-  filterType: 'PRIVACY';
-
-  operator: string;
-
-  privacyName: string;
-}
-
-export interface PublicPropertyAssociationFilterBranch {
-  filterBranches: Array<
-    | PublicOrFilterBranch
-    | PublicAndFilterBranch
-    | PublicNotAllFilterBranch
-    | PublicNotAnyFilterBranch
-    | PublicRestrictedFilterBranch
-    | PublicUnifiedEventsFilterBranch
-    | PublicPropertyAssociationFilterBranch
-    | PublicAssociationFilterBranch
-  >;
-
-  filterBranchOperator: string;
-
-  filterBranchType: 'PROPERTY_ASSOCIATION';
-
-  filters: Array<
-    | PublicPropertyFilter
-    | PublicAssociationInListFilter
-    | PublicPageViewAnalyticsFilter
-    | PublicCtaAnalyticsFilter
-    | PublicEventAnalyticsFilter
-    | PublicFormSubmissionFilter
-    | PublicFormSubmissionOnPageFilter
-    | PublicIntegrationEventFilter
-    | PublicEmailSubscriptionFilter
-    | PublicCommunicationSubscriptionFilter
-    | PublicCampaignInfluencedFilter
-    | PublicSurveyMonkeyFilter
-    | PublicSurveyMonkeyValueFilter
-    | PublicWebinarFilter
-    | PublicEmailEventFilter
-    | PublicPrivacyAnalyticsFilter
-    | PublicAdsSearchFilter
-    | PublicAdsTimeFilter
-    | PublicInListFilter
-    | PublicNumAssociationsFilter
-    | PublicUnifiedEventsFilter
-    | PublicPropertyAssociationInListFilter
-    | PublicConstantFilter
-  >;
-
-  objectTypeId: string;
-
-  operator: string;
-
-  propertyWithObjectId: string;
-}
-
-export interface PublicPropertyAssociationInListFilter {
-  coalescingRefineBy:
-    | PublicNumOccurrencesRefineBy
-    | PublicSetOccurrencesRefineBy
-    | PublicRelativeComparativeTimestampRefineBy
-    | PublicRelativeRangedTimestampRefineBy
-    | PublicAbsoluteComparativeTimestampRefineBy
-    | PublicAbsoluteRangedTimestampRefineBy
-    | PublicAllHistoryRefineBy
-    | PublicTimePointOperation
-    | PublicRangedTimeOperation;
-
-  filterType: 'PROPERTY_ASSOCIATION';
-
-  listId: string;
-
-  operator: string;
-
-  propertyWithObjectId: string;
-
-  toObjectTypeId?: string;
-}
-
-export interface PublicPropertyFilter {
-  filterType: 'PROPERTY';
-
-  operation:
-    | PublicBoolPropertyOperation
-    | PublicNumberPropertyOperation
-    | PublicStringPropertyOperation
-    | PublicDateTimePropertyOperation
-    | PublicRangedDatePropertyOperation
-    | PublicComparativePropertyUpdatedOperation
-    | PublicComparativeDatePropertyOperation
-    | PublicRollingDateRangePropertyOperation
-    | PublicRollingPropertyUpdatedOperation
-    | PublicEnumerationPropertyOperation
-    | PublicAllPropertyTypesOperation
-    | PublicRangedNumberPropertyOperation
-    | PublicMultiStringPropertyOperation
-    | PublicDatePropertyOperation
-    | PublicCalendarDatePropertyOperation
-    | PublicTimePointOperation
-    | PublicRangedTimeOperation;
-
-  property: string;
-}
-
-export interface PublicPropertyReferencedTime {
-  property: string;
-
-  referenceType: string;
-
-  timeType: 'PROPERTY_REFERENCED';
-
-  zoneId: string;
-
-  timezoneSource?: string;
-}
-
-export interface PublicQuarterReference {
-  day: number;
-
-  month: number;
-
-  referenceType: 'QUARTER';
-
-  hour?: number;
-
-  millisecond?: number;
-
-  minute?: number;
-
-  second?: number;
-}
-
-export interface PublicRangedDatePropertyOperation {
-  includeObjectsWithNoValueSet: boolean;
-
-  lowerBound: number;
-
-  operationType: 'RANGED_DATE';
-
-  operator: string;
-
-  requiresTimeZoneConversion: boolean;
-
-  upperBound: number;
-}
-
-export interface PublicRangedNumberPropertyOperation {
-  includeObjectsWithNoValueSet: boolean;
-
-  lowerBound: number;
-
-  operationType: 'NUMBER_RANGED';
-
-  operator: string;
-
-  upperBound: number;
-}
-
-export interface PublicRangedTimeOperation {
-  includeObjectsWithNoValueSet: boolean;
-
-  lowerBoundTimePoint: PublicDatePoint | PublicIndexedTimePoint | PublicPropertyReferencedTime;
-
-  operationType: string;
-
-  operator: string;
-
-  type: 'TIME_RANGED';
-
-  upperBoundTimePoint: PublicDatePoint | PublicIndexedTimePoint | PublicPropertyReferencedTime;
-
-  lowerBoundEndpointBehavior?: string;
-
-  propertyParser?: string;
-
-  upperBoundEndpointBehavior?: string;
-}
-
-export interface PublicRelativeComparativeTimestampRefineBy {
-  comparison: string;
-
-  timeOffset: PublicTimeOffset;
-
-  type: 'RELATIVE_COMPARATIVE';
-}
-
-export interface PublicRelativeRangedTimestampRefineBy {
-  lowerBoundOffset: PublicTimeOffset;
-
-  rangeType: string;
-
-  type: 'RELATIVE_RANGED';
-
-  upperBoundOffset: PublicTimeOffset;
-}
-
-export interface PublicRestrictedFilterBranch {
-  filterBranches: Array<
-    | PublicOrFilterBranch
-    | PublicAndFilterBranch
-    | PublicNotAllFilterBranch
-    | PublicNotAnyFilterBranch
-    | PublicRestrictedFilterBranch
-    | PublicUnifiedEventsFilterBranch
-    | PublicPropertyAssociationFilterBranch
-    | PublicAssociationFilterBranch
-  >;
-
-  filterBranchOperator: string;
-
-  filterBranchType: 'RESTRICTED';
-
-  filters: Array<
-    | PublicPropertyFilter
-    | PublicAssociationInListFilter
-    | PublicPageViewAnalyticsFilter
-    | PublicCtaAnalyticsFilter
-    | PublicEventAnalyticsFilter
-    | PublicFormSubmissionFilter
-    | PublicFormSubmissionOnPageFilter
-    | PublicIntegrationEventFilter
-    | PublicEmailSubscriptionFilter
-    | PublicCommunicationSubscriptionFilter
-    | PublicCampaignInfluencedFilter
-    | PublicSurveyMonkeyFilter
-    | PublicSurveyMonkeyValueFilter
-    | PublicWebinarFilter
-    | PublicEmailEventFilter
-    | PublicPrivacyAnalyticsFilter
-    | PublicAdsSearchFilter
-    | PublicAdsTimeFilter
-    | PublicInListFilter
-    | PublicNumAssociationsFilter
-    | PublicUnifiedEventsFilter
-    | PublicPropertyAssociationInListFilter
-    | PublicConstantFilter
-  >;
-}
-
-export interface PublicRollingDateRangePropertyOperation {
-  includeObjectsWithNoValueSet: boolean;
-
-  numberOfDays: number;
-
-  operationType: 'ROLLING_DATE_RANGE';
-
-  operator: string;
-
-  requiresTimeZoneConversion: boolean;
-}
-
-export interface PublicRollingPropertyUpdatedOperation {
-  includeObjectsWithNoValueSet: boolean;
-
-  numberOfDays: number;
-
-  operationType: 'ROLLING_PROPERTY_UPDATED';
-
-  operator: string;
-}
-
-export interface PublicSetOccurrencesRefineBy {
-  setType: string;
-
-  type: 'SET_OCCURRENCES';
-}
-
-export interface PublicStringPropertyOperation {
-  includeObjectsWithNoValueSet: boolean;
-
-  operationType: 'STRING';
-
-  operator: string;
-
-  value: string;
-}
-
-export interface PublicSurveyMonkeyFilter {
-  filterType: 'SURVEY_MONKEY';
-
-  operator: string;
-
-  surveyId: string;
-}
-
-export interface PublicSurveyMonkeyValueFilter {
-  filterType: 'SURVEY_MONKEY_VALUE';
-
-  operator: string;
-
-  surveyId: string;
-
-  surveyQuestion: string;
-
-  valueComparison:
-    | PublicBoolPropertyOperation
-    | PublicNumberPropertyOperation
-    | PublicStringPropertyOperation
-    | PublicDateTimePropertyOperation
-    | PublicRangedDatePropertyOperation
-    | PublicComparativePropertyUpdatedOperation
-    | PublicComparativeDatePropertyOperation
-    | PublicRollingDateRangePropertyOperation
-    | PublicRollingPropertyUpdatedOperation
-    | PublicEnumerationPropertyOperation
-    | PublicAllPropertyTypesOperation
-    | PublicRangedNumberPropertyOperation
-    | PublicMultiStringPropertyOperation
-    | PublicDatePropertyOperation
-    | PublicCalendarDatePropertyOperation
-    | PublicTimePointOperation
-    | PublicRangedTimeOperation;
-
-  surveyAnswerColId?: string;
-
-  surveyAnswerRowId?: string;
-}
-
-export interface PublicTimeOffset {
-  amount: number;
-
-  offsetDirection: string;
-
-  timeUnit: string;
-}
-
-export interface PublicTimePointOperation {
-  includeObjectsWithNoValueSet: boolean;
-
-  operationType: 'TIME_POINT';
-
-  operator: string;
-
-  timePoint: PublicDatePoint | PublicIndexedTimePoint | PublicPropertyReferencedTime;
-
-  type: string;
-
-  endpointBehavior?: string;
-
-  propertyParser?: string;
-}
-
-export interface PublicTodayReference {
-  referenceType: 'TODAY';
-
-  hour?: number;
-
-  millisecond?: number;
-
-  minute?: number;
-
-  second?: number;
-}
-
-export interface PublicUnifiedEventsFilter {
-  filterLines: Array<PublicEventFilterMetadata>;
-
-  filterType: 'UNIFIED_EVENTS';
-
-  coalescingRefineBy?:
-    | PublicNumOccurrencesRefineBy
-    | PublicSetOccurrencesRefineBy
-    | PublicRelativeComparativeTimestampRefineBy
-    | PublicRelativeRangedTimestampRefineBy
-    | PublicAbsoluteComparativeTimestampRefineBy
-    | PublicAbsoluteRangedTimestampRefineBy
-    | PublicAllHistoryRefineBy
-    | PublicTimePointOperation
-    | PublicRangedTimeOperation;
-
-  eventTypeId?: string;
-
-  pruningRefineBy?:
-    | PublicNumOccurrencesRefineBy
-    | PublicSetOccurrencesRefineBy
-    | PublicRelativeComparativeTimestampRefineBy
-    | PublicRelativeRangedTimestampRefineBy
-    | PublicAbsoluteComparativeTimestampRefineBy
-    | PublicAbsoluteRangedTimestampRefineBy
-    | PublicAllHistoryRefineBy
-    | PublicTimePointOperation
-    | PublicRangedTimeOperation;
-}
-
-export interface PublicUnifiedEventsFilterBranch {
-  eventTypeId: string;
-
-  filterBranches: Array<
-    | PublicOrFilterBranch
-    | PublicAndFilterBranch
-    | PublicNotAllFilterBranch
-    | PublicNotAnyFilterBranch
-    | PublicRestrictedFilterBranch
-    | PublicUnifiedEventsFilterBranch
-    | PublicPropertyAssociationFilterBranch
-    | PublicAssociationFilterBranch
-  >;
-
-  filterBranchOperator: string;
-
-  filterBranchType: 'UNIFIED_EVENTS';
-
-  filters: Array<
-    | PublicPropertyFilter
-    | PublicAssociationInListFilter
-    | PublicPageViewAnalyticsFilter
-    | PublicCtaAnalyticsFilter
-    | PublicEventAnalyticsFilter
-    | PublicFormSubmissionFilter
-    | PublicFormSubmissionOnPageFilter
-    | PublicIntegrationEventFilter
-    | PublicEmailSubscriptionFilter
-    | PublicCommunicationSubscriptionFilter
-    | PublicCampaignInfluencedFilter
-    | PublicSurveyMonkeyFilter
-    | PublicSurveyMonkeyValueFilter
-    | PublicWebinarFilter
-    | PublicEmailEventFilter
-    | PublicPrivacyAnalyticsFilter
-    | PublicAdsSearchFilter
-    | PublicAdsTimeFilter
-    | PublicInListFilter
-    | PublicNumAssociationsFilter
-    | PublicUnifiedEventsFilter
-    | PublicPropertyAssociationInListFilter
-    | PublicConstantFilter
-  >;
-
-  operator: 'HAS_COMPLETED' | 'HAS_NOT_COMPLETED';
-
-  coalescingRefineBy?:
-    | PublicNumOccurrencesRefineBy
-    | PublicSetOccurrencesRefineBy
-    | PublicRelativeComparativeTimestampRefineBy
-    | PublicRelativeRangedTimestampRefineBy
-    | PublicAbsoluteComparativeTimestampRefineBy
-    | PublicAbsoluteRangedTimestampRefineBy
-    | PublicAllHistoryRefineBy
-    | PublicTimePointOperation
-    | PublicRangedTimeOperation;
+  export interface APIPlatformFlowPutRequest {}
 }
 
-export interface PublicWebinarFilter {
-  filterType: 'WEBINAR';
+export interface WorkflowListParams extends PageParams {}
 
-  operator: string;
-
-  webinarId?: string;
+export interface WorkflowBatchGetParams {
+  inputs: Array<APIFlowBatchFetchFlowIDCoordinate>;
 }
-
-export interface PublicWeekReference {
-  dayOfWeek: 'MONDAY' | 'TUESDAY' | 'WEDNESDAY' | 'THURSDAY' | 'FRIDAY' | 'SATURDAY' | 'SUNDAY';
 
-  referenceType: 'WEEK';
-
-  hour?: number;
-
-  millisecond?: number;
-
-  minute?: number;
-
-  second?: number;
+export interface WorkflowBatchGetIDMappingsParams {
+  inputs: Array<APIFlowBatchFetchMigrationFlowIDCoordinate | APIFlowBatchFetchMigrationWorkflowIDCoordinate>;
 }
-
-export interface PublicYearReference {
-  day: number;
-
-  month: number;
-
-  referenceType: 'YEAR';
 
-  hour?: number;
+export interface WorkflowListEmailCampaignsParams {
+  /**
+   * The paging cursor token of the last successfully read resource will be returned
+   * as the `paging.next.after` JSON property of a paged response containing more
+   * results.
+   */
+  after?: string;
 
-  millisecond?: number;
+  before?: string;
 
-  minute?: number;
+  /**
+   * The ID of the workflow.
+   */
+  flowId?: Array<string>;
 
-  second?: number;
+  /**
+   * The maximum number of results to display per page.
+   */
+  limit?: number;
 }
 
 export declare namespace Workflows {
@@ -2851,75 +1647,12 @@ export declare namespace Workflows {
     type CollectionResponseAPIFlowEmailCampaign as CollectionResponseAPIFlowEmailCampaign,
     type CollectionResponseAPIFlowListingForwardPaging as CollectionResponseAPIFlowListingForwardPaging,
     type FlowIDWorkflowIDMappingResponse as FlowIDWorkflowIDMappingResponse,
-    type PublicAbsoluteComparativeTimestampRefineBy as PublicAbsoluteComparativeTimestampRefineBy,
-    type PublicAbsoluteRangedTimestampRefineBy as PublicAbsoluteRangedTimestampRefineBy,
-    type PublicAdsSearchFilter as PublicAdsSearchFilter,
-    type PublicAdsTimeFilter as PublicAdsTimeFilter,
-    type PublicAllHistoryRefineBy as PublicAllHistoryRefineBy,
-    type PublicAllPropertyTypesOperation as PublicAllPropertyTypesOperation,
-    type PublicAndFilterBranch as PublicAndFilterBranch,
-    type PublicAssociationFilterBranch as PublicAssociationFilterBranch,
-    type PublicAssociationInListFilter as PublicAssociationInListFilter,
-    type PublicBoolPropertyOperation as PublicBoolPropertyOperation,
-    type PublicCalendarDatePropertyOperation as PublicCalendarDatePropertyOperation,
-    type PublicCampaignInfluencedFilter as PublicCampaignInfluencedFilter,
-    type PublicCommunicationSubscriptionFilter as PublicCommunicationSubscriptionFilter,
-    type PublicComparativeDatePropertyOperation as PublicComparativeDatePropertyOperation,
-    type PublicComparativePropertyUpdatedOperation as PublicComparativePropertyUpdatedOperation,
-    type PublicConstantFilter as PublicConstantFilter,
-    type PublicCtaAnalyticsFilter as PublicCtaAnalyticsFilter,
-    type PublicDatePoint as PublicDatePoint,
-    type PublicDatePropertyOperation as PublicDatePropertyOperation,
-    type PublicDateTimePropertyOperation as PublicDateTimePropertyOperation,
-    type PublicEmailEventFilter as PublicEmailEventFilter,
-    type PublicEmailSubscriptionFilter as PublicEmailSubscriptionFilter,
-    type PublicEnumerationPropertyOperation as PublicEnumerationPropertyOperation,
-    type PublicEventAnalyticsFilter as PublicEventAnalyticsFilter,
-    type PublicEventFilterMetadata as PublicEventFilterMetadata,
-    type PublicFiscalQuarterReference as PublicFiscalQuarterReference,
-    type PublicFiscalYearReference as PublicFiscalYearReference,
-    type PublicFormSubmissionFilter as PublicFormSubmissionFilter,
-    type PublicFormSubmissionOnPageFilter as PublicFormSubmissionOnPageFilter,
-    type PublicIndexedTimePoint as PublicIndexedTimePoint,
-    type PublicIndexOffset as PublicIndexOffset,
-    type PublicInListFilter as PublicInListFilter,
-    type PublicInListFilterMetadata as PublicInListFilterMetadata,
-    type PublicIntegrationEventFilter as PublicIntegrationEventFilter,
-    type PublicMonthReference as PublicMonthReference,
-    type PublicMultiStringPropertyOperation as PublicMultiStringPropertyOperation,
-    type PublicNotAllFilterBranch as PublicNotAllFilterBranch,
-    type PublicNotAnyFilterBranch as PublicNotAnyFilterBranch,
-    type PublicNowReference as PublicNowReference,
-    type PublicNumAssociationsFilter as PublicNumAssociationsFilter,
-    type PublicNumberPropertyOperation as PublicNumberPropertyOperation,
-    type PublicNumOccurrencesRefineBy as PublicNumOccurrencesRefineBy,
-    type PublicOrFilterBranch as PublicOrFilterBranch,
-    type PublicPageViewAnalyticsFilter as PublicPageViewAnalyticsFilter,
-    type PublicPrivacyAnalyticsFilter as PublicPrivacyAnalyticsFilter,
-    type PublicPropertyAssociationFilterBranch as PublicPropertyAssociationFilterBranch,
-    type PublicPropertyAssociationInListFilter as PublicPropertyAssociationInListFilter,
-    type PublicPropertyFilter as PublicPropertyFilter,
-    type PublicPropertyReferencedTime as PublicPropertyReferencedTime,
-    type PublicQuarterReference as PublicQuarterReference,
-    type PublicRangedDatePropertyOperation as PublicRangedDatePropertyOperation,
-    type PublicRangedNumberPropertyOperation as PublicRangedNumberPropertyOperation,
-    type PublicRangedTimeOperation as PublicRangedTimeOperation,
-    type PublicRelativeComparativeTimestampRefineBy as PublicRelativeComparativeTimestampRefineBy,
-    type PublicRelativeRangedTimestampRefineBy as PublicRelativeRangedTimestampRefineBy,
-    type PublicRestrictedFilterBranch as PublicRestrictedFilterBranch,
-    type PublicRollingDateRangePropertyOperation as PublicRollingDateRangePropertyOperation,
-    type PublicRollingPropertyUpdatedOperation as PublicRollingPropertyUpdatedOperation,
-    type PublicSetOccurrencesRefineBy as PublicSetOccurrencesRefineBy,
-    type PublicStringPropertyOperation as PublicStringPropertyOperation,
-    type PublicSurveyMonkeyFilter as PublicSurveyMonkeyFilter,
-    type PublicSurveyMonkeyValueFilter as PublicSurveyMonkeyValueFilter,
-    type PublicTimeOffset as PublicTimeOffset,
-    type PublicTimePointOperation as PublicTimePointOperation,
-    type PublicTodayReference as PublicTodayReference,
-    type PublicUnifiedEventsFilter as PublicUnifiedEventsFilter,
-    type PublicUnifiedEventsFilterBranch as PublicUnifiedEventsFilterBranch,
-    type PublicWebinarFilter as PublicWebinarFilter,
-    type PublicWeekReference as PublicWeekReference,
-    type PublicYearReference as PublicYearReference,
+    type APIFlowListingsPage as APIFlowListingsPage,
+    type WorkflowCreateParams as WorkflowCreateParams,
+    type WorkflowUpdateParams as WorkflowUpdateParams,
+    type WorkflowListParams as WorkflowListParams,
+    type WorkflowBatchGetParams as WorkflowBatchGetParams,
+    type WorkflowBatchGetIDMappingsParams as WorkflowBatchGetIDMappingsParams,
+    type WorkflowListEmailCampaignsParams as WorkflowListEmailCampaignsParams,
   };
 }

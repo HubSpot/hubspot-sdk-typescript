@@ -25,7 +25,7 @@ describe('resource contacts', () => {
     const response = await client.crm.objects.contacts.create({
       properties: { foo: 'string' },
       associations: [
-        { to: { id: '37295' }, types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 279 }] },
+        { to: { id: '37295' }, types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }] },
       ],
     });
   });
@@ -110,6 +110,55 @@ describe('resource contacts', () => {
   });
 
   // Prism tests are disabled
+  test.skip('gdprDelete: only required params', async () => {
+    const responsePromise = client.crm.objects.contacts.gdprDelete({ objectId: 'objectId' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('gdprDelete: required and optional params', async () => {
+    const response = await client.crm.objects.contacts.gdprDelete({
+      objectId: 'objectId',
+      idProperty: 'idProperty',
+    });
+  });
+
+  // Prism tests are disabled
+  test.skip('get', async () => {
+    const responsePromise = client.crm.objects.contacts.get('contactId');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('get: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.crm.objects.contacts.get(
+        'contactId',
+        {
+          archived: true,
+          associations: ['string'],
+          properties: ['string'],
+          propertiesWithHistory: ['string'],
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(HubSpot.NotFoundError);
+  });
+
+  // Prism tests are disabled
   test.skip('merge: only required params', async () => {
     const responsePromise = client.crm.objects.contacts.merge({
       objectIdToMerge: 'objectIdToMerge',
@@ -130,55 +179,6 @@ describe('resource contacts', () => {
       objectIdToMerge: 'objectIdToMerge',
       primaryObjectId: 'primaryObjectId',
     });
-  });
-
-  // Prism tests are disabled
-  test.skip('purge: only required params', async () => {
-    const responsePromise = client.crm.objects.contacts.purge({ objectId: 'objectId' });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('purge: required and optional params', async () => {
-    const response = await client.crm.objects.contacts.purge({
-      objectId: 'objectId',
-      idProperty: 'idProperty',
-    });
-  });
-
-  // Prism tests are disabled
-  test.skip('read', async () => {
-    const responsePromise = client.crm.objects.contacts.read('contactId');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('read: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.crm.objects.contacts.read(
-        'contactId',
-        {
-          archived: true,
-          associations: ['string'],
-          properties: ['string'],
-          propertiesWithHistory: ['string'],
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(HubSpot.NotFoundError);
   });
 
   // Prism tests are disabled

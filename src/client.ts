@@ -19,71 +19,19 @@ import { AbstractPage, type PageParams, PageResponse } from './core/pagination';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
-import {
-  BatchInputSubscriptionBatchUpdateRequest,
-  BatchResponseSubscriptionResponse,
-  BatchResponseSubscriptionResponseWithErrors,
-  SettingsChangeRequest,
-  SettingsResponse,
-  SubscriptionBatchUpdateRequest,
-  SubscriptionCreateRequest,
-  SubscriptionListResponse,
-  SubscriptionPatchRequest,
-  SubscriptionResponse,
-  ThrottlingSettings,
-  WebhookConfigureParams,
-  WebhookCreateParams,
-  WebhookDeleteParams,
-  WebhookReadParams,
-  WebhookUpdateBatchParams,
-  WebhookUpdateParams,
-  Webhooks,
-} from './resources/webhooks';
-import {
-  APIUsage,
-  Account,
-  CollectionResponseAPIUsage,
-  PortalInformationResponse,
-} from './resources/account/account';
+import { BusinessUnits } from './resources/business-units';
+import { Account } from './resources/account/account';
 import { Auth } from './resources/auth/auth';
 import { Automation } from './resources/automation/automation';
 import { Cms } from './resources/cms/cms';
 import { Conversations } from './resources/conversations/conversations';
-import {
-  AssociatedID,
-  AssociationSpecWithLabel,
-  BatchResponsePublicDefaultAssociation,
-  CRM,
-  CollectionResponseMultiAssociatedObjectWithLabel,
-  CreatedResponseLabelsBetweenObjectPair,
-  LabelsBetweenObjectPair,
-  MultiAssociatedObjectWithLabel,
-  Option,
-  Property,
-  PropertyModificationMetadata,
-  PublicDefaultAssociation,
-} from './resources/crm/crm';
-import {
-  CollectionResponseFile,
-  CollectionResponseFolder,
-  File,
-  FileActionResponse,
-  FileStat,
-  FileUpdateInput,
-  Files,
-  Folder,
-  FolderActionResponse,
-  FolderInput,
-  FolderUpdateInput,
-  FolderUpdateInputWithID,
-  FolderUpdateTaskLocator,
-  ImportFromURLInput,
-  ImportFromURLTaskLocator,
-  SignedURL,
-} from './resources/files/files';
+import { CRM } from './resources/crm/crm';
+import { Events } from './resources/events/events';
+import { Files } from './resources/files/files';
 import { Marketing } from './resources/marketing/marketing';
 import { Scheduler } from './resources/scheduler/scheduler';
 import { Settings } from './resources/settings/settings';
+import { Webhooks } from './resources/webhooks/webhooks';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
@@ -814,9 +762,11 @@ export class HubSpot {
   account: API.Account = new API.Account(this);
   auth: API.Auth = new API.Auth(this);
   automation: API.Automation = new API.Automation(this);
+  businessUnits: API.BusinessUnits = new API.BusinessUnits(this);
   cms: API.Cms = new API.Cms(this);
   conversations: API.Conversations = new API.Conversations(this);
   crm: API.CRM = new API.CRM(this);
+  events: API.Events = new API.Events(this);
   files: API.Files = new API.Files(this);
   marketing: API.Marketing = new API.Marketing(this);
   scheduler: API.Scheduler = new API.Scheduler(this);
@@ -827,9 +777,11 @@ export class HubSpot {
 HubSpot.Account = Account;
 HubSpot.Auth = Auth;
 HubSpot.Automation = Automation;
+HubSpot.BusinessUnits = BusinessUnits;
 HubSpot.Cms = Cms;
 HubSpot.Conversations = Conversations;
 HubSpot.CRM = CRM;
+HubSpot.Events = Events;
 HubSpot.Files = Files;
 HubSpot.Marketing = Marketing;
 HubSpot.Scheduler = Scheduler;
@@ -842,54 +794,23 @@ export declare namespace HubSpot {
   export import Page = Pagination.Page;
   export { type PageParams as PageParams, type PageResponse as PageResponse };
 
-  export {
-    Account as Account,
-    type APIUsage as APIUsage,
-    type CollectionResponseAPIUsage as CollectionResponseAPIUsage,
-    type PortalInformationResponse as PortalInformationResponse,
-  };
+  export { Account as Account };
 
   export { Auth as Auth };
 
   export { Automation as Automation };
 
+  export { BusinessUnits as BusinessUnits };
+
   export { Cms as Cms };
 
   export { Conversations as Conversations };
 
-  export {
-    CRM as CRM,
-    type AssociatedID as AssociatedID,
-    type AssociationSpecWithLabel as AssociationSpecWithLabel,
-    type BatchResponsePublicDefaultAssociation as BatchResponsePublicDefaultAssociation,
-    type CollectionResponseMultiAssociatedObjectWithLabel as CollectionResponseMultiAssociatedObjectWithLabel,
-    type CreatedResponseLabelsBetweenObjectPair as CreatedResponseLabelsBetweenObjectPair,
-    type LabelsBetweenObjectPair as LabelsBetweenObjectPair,
-    type MultiAssociatedObjectWithLabel as MultiAssociatedObjectWithLabel,
-    type Option as Option,
-    type Property as Property,
-    type PropertyModificationMetadata as PropertyModificationMetadata,
-    type PublicDefaultAssociation as PublicDefaultAssociation,
-  };
+  export { CRM as CRM };
 
-  export {
-    Files as Files,
-    type CollectionResponseFile as CollectionResponseFile,
-    type CollectionResponseFolder as CollectionResponseFolder,
-    type File as File,
-    type FileActionResponse as FileActionResponse,
-    type FileStat as FileStat,
-    type FileUpdateInput as FileUpdateInput,
-    type Folder as Folder,
-    type FolderActionResponse as FolderActionResponse,
-    type FolderInput as FolderInput,
-    type FolderUpdateInput as FolderUpdateInput,
-    type FolderUpdateInputWithID as FolderUpdateInputWithID,
-    type FolderUpdateTaskLocator as FolderUpdateTaskLocator,
-    type ImportFromURLInput as ImportFromURLInput,
-    type ImportFromURLTaskLocator as ImportFromURLTaskLocator,
-    type SignedURL as SignedURL,
-  };
+  export { Events as Events };
+
+  export { Files as Files };
 
   export { Marketing as Marketing };
 
@@ -897,27 +818,10 @@ export declare namespace HubSpot {
 
   export { Settings as Settings };
 
-  export {
-    Webhooks as Webhooks,
-    type BatchInputSubscriptionBatchUpdateRequest as BatchInputSubscriptionBatchUpdateRequest,
-    type BatchResponseSubscriptionResponse as BatchResponseSubscriptionResponse,
-    type BatchResponseSubscriptionResponseWithErrors as BatchResponseSubscriptionResponseWithErrors,
-    type SettingsChangeRequest as SettingsChangeRequest,
-    type SettingsResponse as SettingsResponse,
-    type SubscriptionBatchUpdateRequest as SubscriptionBatchUpdateRequest,
-    type SubscriptionCreateRequest as SubscriptionCreateRequest,
-    type SubscriptionListResponse as SubscriptionListResponse,
-    type SubscriptionPatchRequest as SubscriptionPatchRequest,
-    type SubscriptionResponse as SubscriptionResponse,
-    type ThrottlingSettings as ThrottlingSettings,
-    type WebhookCreateParams as WebhookCreateParams,
-    type WebhookUpdateParams as WebhookUpdateParams,
-    type WebhookDeleteParams as WebhookDeleteParams,
-    type WebhookConfigureParams as WebhookConfigureParams,
-    type WebhookReadParams as WebhookReadParams,
-    type WebhookUpdateBatchParams as WebhookUpdateBatchParams,
-  };
+  export { Webhooks as Webhooks };
 
+  export type AbTestCreateRequestVNext = API.AbTestCreateRequestVNext;
+  export type ActionResponse = API.ActionResponse;
   export type AssociationSpec = API.AssociationSpec;
   export type BatchInputString = API.BatchInputString;
   export type Error = API.Error;
@@ -927,7 +831,78 @@ export declare namespace HubSpot {
   export type NextPage = API.NextPage;
   export type Paging = API.Paging;
   export type PreviousPage = API.PreviousPage;
+  export type PublicAbsoluteComparativeTimestampRefineBy = API.PublicAbsoluteComparativeTimestampRefineBy;
+  export type PublicAbsoluteRangedTimestampRefineBy = API.PublicAbsoluteRangedTimestampRefineBy;
+  export type PublicAdsSearchFilter = API.PublicAdsSearchFilter;
+  export type PublicAdsTimeFilter = API.PublicAdsTimeFilter;
+  export type PublicAllHistoryRefineBy = API.PublicAllHistoryRefineBy;
+  export type PublicAllPropertyTypesOperation = API.PublicAllPropertyTypesOperation;
+  export type PublicAndFilterBranch = API.PublicAndFilterBranch;
+  export type PublicAssociationFilterBranch = API.PublicAssociationFilterBranch;
+  export type PublicAssociationInListFilter = API.PublicAssociationInListFilter;
+  export type PublicBoolPropertyOperation = API.PublicBoolPropertyOperation;
+  export type PublicCalendarDatePropertyOperation = API.PublicCalendarDatePropertyOperation;
+  export type PublicCampaignInfluencedFilter = API.PublicCampaignInfluencedFilter;
+  export type PublicCommunicationSubscriptionFilter = API.PublicCommunicationSubscriptionFilter;
+  export type PublicComparativeDatePropertyOperation = API.PublicComparativeDatePropertyOperation;
+  export type PublicComparativePropertyUpdatedOperation = API.PublicComparativePropertyUpdatedOperation;
+  export type PublicConstantFilter = API.PublicConstantFilter;
+  export type PublicCtaAnalyticsFilter = API.PublicCtaAnalyticsFilter;
+  export type PublicDatePoint = API.PublicDatePoint;
+  export type PublicDatePropertyOperation = API.PublicDatePropertyOperation;
+  export type PublicDateTimePropertyOperation = API.PublicDateTimePropertyOperation;
+  export type PublicEmailEventFilter = API.PublicEmailEventFilter;
+  export type PublicEmailSubscriptionFilter = API.PublicEmailSubscriptionFilter;
+  export type PublicEnumerationPropertyOperation = API.PublicEnumerationPropertyOperation;
+  export type PublicEventAnalyticsFilter = API.PublicEventAnalyticsFilter;
+  export type PublicEventFilterMetadata = API.PublicEventFilterMetadata;
+  export type PublicFiscalQuarterReference = API.PublicFiscalQuarterReference;
+  export type PublicFiscalYearReference = API.PublicFiscalYearReference;
+  export type PublicFormSubmissionFilter = API.PublicFormSubmissionFilter;
+  export type PublicFormSubmissionOnPageFilter = API.PublicFormSubmissionOnPageFilter;
+  export type PublicIndexedTimePoint = API.PublicIndexedTimePoint;
+  export type PublicIndexOffset = API.PublicIndexOffset;
+  export type PublicInListFilter = API.PublicInListFilter;
+  export type PublicInListFilterMetadata = API.PublicInListFilterMetadata;
+  export type PublicIntegrationEventFilter = API.PublicIntegrationEventFilter;
+  export type PublicMonthReference = API.PublicMonthReference;
+  export type PublicMultiStringPropertyOperation = API.PublicMultiStringPropertyOperation;
+  export type PublicNotAllFilterBranch = API.PublicNotAllFilterBranch;
+  export type PublicNotAnyFilterBranch = API.PublicNotAnyFilterBranch;
+  export type PublicNowReference = API.PublicNowReference;
+  export type PublicNumAssociationsFilter = API.PublicNumAssociationsFilter;
+  export type PublicNumberPropertyOperation = API.PublicNumberPropertyOperation;
+  export type PublicNumOccurrencesRefineBy = API.PublicNumOccurrencesRefineBy;
   export type PublicObjectID = API.PublicObjectID;
+  export type PublicOrFilterBranch = API.PublicOrFilterBranch;
+  export type PublicPageViewAnalyticsFilter = API.PublicPageViewAnalyticsFilter;
+  export type PublicPrivacyAnalyticsFilter = API.PublicPrivacyAnalyticsFilter;
+  export type PublicPropertyAssociationFilterBranch = API.PublicPropertyAssociationFilterBranch;
+  export type PublicPropertyAssociationInListFilter = API.PublicPropertyAssociationInListFilter;
+  export type PublicPropertyFilter = API.PublicPropertyFilter;
+  export type PublicPropertyReferencedTime = API.PublicPropertyReferencedTime;
+  export type PublicQuarterReference = API.PublicQuarterReference;
+  export type PublicRangedDatePropertyOperation = API.PublicRangedDatePropertyOperation;
+  export type PublicRangedNumberPropertyOperation = API.PublicRangedNumberPropertyOperation;
+  export type PublicRangedTimeOperation = API.PublicRangedTimeOperation;
+  export type PublicRelativeComparativeTimestampRefineBy = API.PublicRelativeComparativeTimestampRefineBy;
+  export type PublicRelativeRangedTimestampRefineBy = API.PublicRelativeRangedTimestampRefineBy;
+  export type PublicRestrictedFilterBranch = API.PublicRestrictedFilterBranch;
+  export type PublicRollingDateRangePropertyOperation = API.PublicRollingDateRangePropertyOperation;
+  export type PublicRollingPropertyUpdatedOperation = API.PublicRollingPropertyUpdatedOperation;
+  export type PublicSetOccurrencesRefineBy = API.PublicSetOccurrencesRefineBy;
+  export type PublicStringPropertyOperation = API.PublicStringPropertyOperation;
+  export type PublicSurveyMonkeyFilter = API.PublicSurveyMonkeyFilter;
+  export type PublicSurveyMonkeyValueFilter = API.PublicSurveyMonkeyValueFilter;
+  export type PublicTimeOffset = API.PublicTimeOffset;
+  export type PublicTimePointOperation = API.PublicTimePointOperation;
+  export type PublicTodayReference = API.PublicTodayReference;
+  export type PublicUnifiedEventsFilter = API.PublicUnifiedEventsFilter;
+  export type PublicUnifiedEventsFilterBranch = API.PublicUnifiedEventsFilterBranch;
+  export type PublicWebinarFilter = API.PublicWebinarFilter;
+  export type PublicWeekReference = API.PublicWeekReference;
+  export type PublicYearReference = API.PublicYearReference;
   export type StandardError = API.StandardError;
+  export type TaskLocator = API.TaskLocator;
   export type VersionUser = API.VersionUser;
 }

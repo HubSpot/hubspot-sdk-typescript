@@ -6,5 +6,5 @@ export {
   type AccessTokenInfoResponse,
   type RefreshTokenInfoResponse,
   type TokenResponseIf,
-  type OAuthCreateParams,
+  type OAuthCreateAccessTokenParams,
 } from './oauth';

@@ -106,7 +106,7 @@ export class Emails extends APIResource {
    * ```ts
    * const publicEmail =
    *   await client.marketing.emails.createAbTestVariation({
-   *     contentId: '7',
+   *     contentId: 'contentId',
    *     variationName: 'variationName',
    *   });
    * ```
@@ -231,24 +231,6 @@ export class Emails extends APIResource {
       Page<VersionPublicEmail>,
       { query, ...options },
     );
-  }
-
-  /**
-   * Use this endpoint to get aggregated statistics of emails sent in a specified
-   * time span. It also returns the list of emails that were sent during the time
-   * span.
-   *
-   * @example
-   * ```ts
-   * const aggregateEmailStatistics =
-   *   await client.marketing.emails.listFull();
-   * ```
-   */
-  listFull(
-    query: EmailListFullParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<AggregateEmailStatistics> {
-    return this._client.get('/marketing/v3/emails/statistics/list', { query, ...options });
   }
 
   /**
@@ -391,21 +373,6 @@ export class Emails extends APIResource {
 export type PublicEmailsPage = Page<PublicEmail>;
 
 export type VersionPublicEmailsPage = Page<VersionPublicEmail>;
-
-/**
- * Request body object for creating A/B tests.
- */
-export interface AbTestCreateRequestVNext {
-  /**
-   * ID of the email to test.
-   */
-  contentId: string;
-
-  /**
-   * Name of the variation to be created.
-   */
-  variationName: string;
-}
 
 /**
  * Aggregated statistics for the given interval, plus the IDs of emails that were
@@ -3538,6 +3505,8 @@ export interface PublicEmail {
    */
   subscriptionDetails?: PublicEmailSubscriptionDetails;
 
+  teamsWithAccess?: Array<string>;
+
   /**
    * AB testing related data. This property is only returned for AB type emails.
    */
@@ -3591,6 +3560,8 @@ export interface PublicEmail {
    * The ID of the user who last updated the email.
    */
   updatedById?: string;
+
+  usersWithAccess?: Array<string>;
 
   webversion?: PublicWebversionDetails;
 
@@ -6062,12 +6033,12 @@ export interface EmailCloneParams {
 
 export interface EmailCreateAbTestVariationParams {
   /**
-   * ID of the email to test.
+   * ID of the object to test.
    */
   contentId: string;
 
   /**
-   * Name of the variation to be created.
+   * Name of A/B test variation.
    */
   variationName: string;
 }
@@ -6131,29 +6102,6 @@ export interface EmailGetRevisionsParams extends PageParams {
    * results.
    */
   before?: string;
-}
-
-export interface EmailListFullParams {
-  /**
-   * Filter by email IDs. Only include statistics of emails with these IDs.
-   */
-  emailIds?: Array<number>;
-
-  /**
-   * The end timestamp of the time span, in ISO8601 representation.
-   */
-  endTimestamp?: string;
-
-  /**
-   * Specifies which email properties should be returned. All properties will be
-   * returned by default.
-   */
-  property?: string;
-
-  /**
-   * The start timestamp of the time span, in ISO8601 representation.
-   */
-  startTimestamp?: string;
 }
 
 export interface EmailReadParams {
@@ -7187,7 +7135,6 @@ export interface EmailUpsertDraftParams {
 
 export declare namespace Emails {
   export {
-    type AbTestCreateRequestVNext as AbTestCreateRequestVNext,
     type AggregateEmailStatistics as AggregateEmailStatistics,
     type CollectionResponseWithTotalEmailStatisticIntervalNoPaging as CollectionResponseWithTotalEmailStatisticIntervalNoPaging,
     type CollectionResponseWithTotalPublicEmailForwardPaging as CollectionResponseWithTotalPublicEmailForwardPaging,
@@ -7226,7 +7173,6 @@ export declare namespace Emails {
     type EmailGetHistogramParams as EmailGetHistogramParams,
     type EmailGetRevisionByIDParams as EmailGetRevisionByIDParams,
     type EmailGetRevisionsParams as EmailGetRevisionsParams,
-    type EmailListFullParams as EmailListFullParams,
     type EmailReadParams as EmailReadParams,
     type EmailRestoreDraftRevisionParams as EmailRestoreDraftRevisionParams,
     type EmailRestoreRevisionParams as EmailRestoreRevisionParams,

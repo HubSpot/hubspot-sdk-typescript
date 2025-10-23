@@ -5,32 +5,58 @@ export {
   type CompanyCreateParams,
   type CompanyUpdateParams,
   type CompanyListParams,
-  type CompanyDeleteParams,
+  type CompanyGetParams,
   type CompanyMergeParams,
-  type CompanyReadParams,
   type CompanySearchParams,
-  type CompanyUpsertParams,
-} from './companies';
+} from './companies/index';
 export {
   Contacts,
   type ContactCreateParams,
   type ContactUpdateParams,
   type ContactListParams,
+  type ContactGdprDeleteParams,
+  type ContactGetParams,
   type ContactMergeParams,
-  type ContactPurgeParams,
-  type ContactReadParams,
   type ContactSearchParams,
 } from './contacts/index';
+export {
+  Custom,
+  type CustomCreateParams,
+  type CustomUpdateParams,
+  type CustomListParams,
+  type CustomDeleteParams,
+  type CustomMergeParams,
+  type CustomReadParams,
+  type CustomSearchParams,
+} from './custom/index';
+export {
+  DealSplits,
+  type BatchResponseDealToDealSplits,
+  type BatchResponseDealToDealSplitsWithErrors,
+  type DealToDealSplits,
+  type PublicDealSplitInput,
+  type PublicDealSplitsBatchCreateRequest,
+  type PublicDealSplitsCreateRequest,
+  type DealSplitBatchReadParams,
+  type DealSplitBatchUpsertParams,
+} from './deal-splits';
 export {
   Deals,
   type DealCreateParams,
   type DealUpdateParams,
   type DealListParams,
+  type DealGetParams,
   type DealMergeParams,
-  type DealReadParams,
   type DealSearchParams,
-  type DealUpsertParams,
 } from './deals/index';
+export {
+  Meetings,
+  type MeetingCreateParams,
+  type MeetingUpdateParams,
+  type MeetingListParams,
+  type MeetingGetParams,
+  type MeetingSearchParams,
+} from './meetings/index';
 export {
   Objects,
   type BatchInputSimplePublicObjectBatchInput,
@@ -44,7 +70,6 @@ export {
   type CollectionResponseSimplePublicObjectWithAssociations,
   type CollectionResponseWithTotalSimplePublicObject,
   type CreatedResponseSimplePublicObject,
-  type Filter,
   type FilterGroup,
   type PublicAssociationsForObject,
   type PublicGdprDeleteInput,
@@ -81,3 +106,11 @@ export {
   type SchemaArchiveAssociationParams,
   type SchemaCreateAssociationParams,
 } from './schemas';
+export {
+  type ObjectCreateParams,
+  type ObjectUpdateParams,
+  type ObjectListParams,
+  type ObjectDeleteParams,
+  type ObjectReadParams,
+  type ObjectSearchParams,
+} from './objects_/index';

@@ -35,5 +35,5 @@ export {
   type ExternalUserBusyTimes,
   type ExternalUserProfile,
   type ExternalValidatedFormField,
-} from './meetings';
+} from './meetings/index';
 export { Scheduler } from './scheduler';

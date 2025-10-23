@@ -4,7 +4,7 @@ export {
   Batch,
   type BatchCreateParams,
   type BatchUpdateParams,
-  type BatchDeleteParams,
+  type BatchArchiveParams,
   type BatchReadParams,
   type BatchUpsertParams,
 } from './batch';
@@ -13,8 +13,8 @@ export {
   type ContactCreateParams,
   type ContactUpdateParams,
   type ContactListParams,
+  type ContactGdprDeleteParams,
+  type ContactGetParams,
   type ContactMergeParams,
-  type ContactPurgeParams,
-  type ContactReadParams,
   type ContactSearchParams,
 } from './contacts';

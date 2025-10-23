@@ -3,10 +3,15 @@
 import { APIResource } from '../../../../core/resource';
 import * as ObjectsAPI from '../objects';
 import { SimplePublicObjectWithAssociationsPage } from '../objects';
-import * as AssociationsAPI from './associations';
-import { Associations } from './associations';
 import * as BatchAPI from './batch';
-import { Batch } from './batch';
+import {
+  Batch,
+  BatchCreateParams,
+  BatchDeleteParams,
+  BatchReadParams,
+  BatchUpdateParams,
+  BatchUpsertParams,
+} from './batch';
 import { APIPromise } from '../../../../core/api-promise';
 import { Page, type PageParams, PagePromise } from '../../../../core/pagination';
 import { buildHeaders } from '../../../../internal/headers';
@@ -14,7 +19,6 @@ import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
 export class Deals extends APIResource {
-  associations: AssociationsAPI.Associations = new AssociationsAPI.Associations(this._client);
   batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
 
   /**
@@ -112,6 +116,26 @@ export class Deals extends APIResource {
   }
 
   /**
+   * Read an Object identified by `{dealId}`. `{dealId}` refers to the internal
+   * object ID by default, or optionally any unique property value as specified by
+   * the `idProperty` query param. Control what is returned via the `properties`
+   * query param.
+   *
+   * @example
+   * ```ts
+   * const simplePublicObjectWithAssociations =
+   *   await client.crm.objects.deals.get('dealId');
+   * ```
+   */
+  get(
+    dealID: string,
+    query: DealGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ObjectsAPI.SimplePublicObjectWithAssociations> {
+    return this._client.get(path`/crm/v3/objects/0-3/${dealID}`, { query, ...options });
+  }
+
+  /**
    * Merge two deals with same type
    *
    * @example
@@ -128,26 +152,6 @@ export class Deals extends APIResource {
   }
 
   /**
-   * Read an Object identified by `{dealId}`. `{dealId}` refers to the internal
-   * object ID by default, or optionally any unique property value as specified by
-   * the `idProperty` query param. Control what is returned via the `properties`
-   * query param.
-   *
-   * @example
-   * ```ts
-   * const simplePublicObjectWithAssociations =
-   *   await client.crm.objects.deals.read('dealId');
-   * ```
-   */
-  read(
-    dealID: string,
-    query: DealReadParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.SimplePublicObjectWithAssociations> {
-    return this._client.get(path`/crm/v3/objects/0-3/${dealID}`, { query, ...options });
-  }
-
-  /**
    * @example
    * ```ts
    * const collectionResponseWithTotalSimplePublicObject =
@@ -159,26 +163,6 @@ export class Deals extends APIResource {
     options?: RequestOptions,
   ): APIPromise<ObjectsAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/v3/objects/0-3/search', { body, ...options });
-  }
-
-  /**
-   * Create or update records identified by a unique property value as specified by
-   * the `idProperty` query param. `idProperty` query param refers to a property
-   * whose values are unique for the object.
-   *
-   * @example
-   * ```ts
-   * const batchResponseSimplePublicUpsertObject =
-   *   await client.crm.objects.deals.upsert({
-   *     inputs: [{ id: 'id', properties: { foo: 'string' } }],
-   *   });
-   * ```
-   */
-  upsert(
-    body: DealUpsertParams,
-    options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.BatchResponseSimplePublicUpsertObject> {
-    return this._client.post('/crm/v3/objects/0-3/batch/upsert', { body, ...options });
   }
 }
 
@@ -231,19 +215,7 @@ export interface DealListParams extends PageParams {
   propertiesWithHistory?: Array<string>;
 }
 
-export interface DealMergeParams {
-  /**
-   * The ID of the company to merge into the primary.
-   */
-  objectIdToMerge: string;
-
-  /**
-   * The ID of the primary company, which the other will merge into.
-   */
-  primaryObjectId: string;
-}
-
-export interface DealReadParams {
+export interface DealGetParams {
   /**
    * Whether to return only results that have been archived.
    */
@@ -273,6 +245,18 @@ export interface DealReadParams {
    * requested object(s), they will be ignored.
    */
   propertiesWithHistory?: Array<string>;
+}
+
+export interface DealMergeParams {
+  /**
+   * The ID of the company to merge into the primary.
+   */
+  objectIdToMerge: string;
+
+  /**
+   * The ID of the primary company, which the other will merge into.
+   */
+  primaryObjectId: string;
 }
 
 export interface DealSearchParams {
@@ -307,11 +291,6 @@ export interface DealSearchParams {
   sorts?: Array<string>;
 }
 
-export interface DealUpsertParams {
-  inputs: Array<ObjectsAPI.SimplePublicObjectBatchInputUpsert>;
-}
-
-Deals.Associations = Associations;
 Deals.Batch = Batch;
 
 export declare namespace Deals {
@@ -319,15 +298,19 @@ export declare namespace Deals {
     type DealCreateParams as DealCreateParams,
     type DealUpdateParams as DealUpdateParams,
     type DealListParams as DealListParams,
+    type DealGetParams as DealGetParams,
     type DealMergeParams as DealMergeParams,
-    type DealReadParams as DealReadParams,
     type DealSearchParams as DealSearchParams,
-    type DealUpsertParams as DealUpsertParams,
   };
 
-  export { Associations as Associations };
-
-  export { Batch as Batch };
+  export {
+    Batch as Batch,
+    type BatchCreateParams as BatchCreateParams,
+    type BatchUpdateParams as BatchUpdateParams,
+    type BatchDeleteParams as BatchDeleteParams,
+    type BatchReadParams as BatchReadParams,
+    type BatchUpsertParams as BatchUpsertParams,
+  };
 }
 
 export { type SimplePublicObjectWithAssociationsPage };

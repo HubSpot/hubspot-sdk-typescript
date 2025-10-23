@@ -31,7 +31,7 @@ describe('resource batch', () => {
           associations: [
             {
               to: { id: '37295' },
-              types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 279 }],
+              types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
             },
           ],
           objectWriteTraceId: 'objectWriteTraceId',
@@ -69,8 +69,8 @@ describe('resource batch', () => {
   });
 
   // Prism tests are disabled
-  test.skip('delete: only required params', async () => {
-    const responsePromise = client.crm.objects.contacts.batch.delete({ inputs: [{ id: 'id' }] });
+  test.skip('archive: only required params', async () => {
+    const responsePromise = client.crm.objects.contacts.batch.archive({ inputs: [{ id: 'id' }] });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -81,8 +81,8 @@ describe('resource batch', () => {
   });
 
   // Prism tests are disabled
-  test.skip('delete: required and optional params', async () => {
-    const response = await client.crm.objects.contacts.batch.delete({ inputs: [{ id: 'id' }] });
+  test.skip('archive: required and optional params', async () => {
+    const response = await client.crm.objects.contacts.batch.archive({ inputs: [{ id: 'id' }] });
   });
 
   // Prism tests are disabled

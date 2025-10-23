@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as CustomChannelsAPI from './custom-channels';
+import * as CustomChannelsAPI from './custom-channels/custom-channels';
 import {
   ChannelIntegrationMessageEgg,
   ChannelIntegrationParticipant,
@@ -15,6 +15,8 @@ import {
   ContactPhone,
   ContactProfile,
   ContactURL,
+  CustomChannelCreateParams,
+  CustomChannelUpdateParams,
   CustomChannels,
   FileAttachment,
   LocationAttachment,
@@ -50,7 +52,7 @@ import {
   SocialMetadata,
   SocialMetadataIntegrationAttachment,
   UnsupportedContentAttachment,
-} from './custom-channels';
+} from './custom-channels/custom-channels';
 
 export class Conversations extends APIResource {
   customChannels: CustomChannelsAPI.CustomChannels = new CustomChannelsAPI.CustomChannels(this._client);
@@ -107,5 +109,7 @@ export declare namespace Conversations {
     type SocialMetadata as SocialMetadata,
     type SocialMetadataIntegrationAttachment as SocialMetadataIntegrationAttachment,
     type UnsupportedContentAttachment as UnsupportedContentAttachment,
+    type CustomChannelCreateParams as CustomChannelCreateParams,
+    type CustomChannelUpdateParams as CustomChannelUpdateParams,
   };
 }

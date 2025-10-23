@@ -20,7 +20,7 @@ import {
   FolderGetByIDParams,
   FolderGetByPathParams,
   FolderSearchParams,
-  FolderUpdateAsyncParams,
+  FolderUpdateAsyncByIDParams,
   FolderUpdateByIDParams,
   Folders,
 } from './folders';
@@ -110,9 +110,6 @@ export interface File {
    */
   encoding?: string;
 
-  /**
-   * The timestamp indicating when the file will expire.
-   */
   expiresAt?: number;
 
   /**
@@ -156,9 +153,6 @@ export interface File {
    */
   size?: number;
 
-  /**
-   * The group from which the file originated.
-   */
   sourceGroup?: string;
 
   /**
@@ -253,14 +247,8 @@ export interface FileUpdateInput {
     | 'HIDDEN_SENSITIVE'
     | 'SENSITIVE';
 
-  /**
-   * Indicates whether the expiration date of the file should be cleared.
-   */
   clearExpires?: boolean;
 
-  /**
-   * Specifies the date and time when the file will expire.
-   */
   expiresAt?: string;
 
   /**
@@ -626,7 +614,7 @@ export declare namespace Files {
     type FolderGetByIDParams as FolderGetByIDParams,
     type FolderGetByPathParams as FolderGetByPathParams,
     type FolderSearchParams as FolderSearchParams,
-    type FolderUpdateAsyncParams as FolderUpdateAsyncParams,
+    type FolderUpdateAsyncByIDParams as FolderUpdateAsyncByIDParams,
     type FolderUpdateByIDParams as FolderUpdateByIDParams,
   };
 }

@@ -53,73 +53,34 @@ export interface CollectionResponsePublicOwnerForwardPaging {
 }
 
 export interface PublicOwner {
-  /**
-   * The unique ID for the owner.
-   */
   id: string;
 
-  /**
-   * Whether the owner is archived.
-   */
   archived: boolean;
 
-  /**
-   * The timestamp when the owner was created, in ISO 8601 format.
-   */
   createdAt: string;
 
-  /**
-   * The type of owner. Accepted values are: PERSON, QUEUE.
-   */
   type: 'PERSON' | 'QUEUE';
 
-  /**
-   * The timestamp when the owner was last updated, in ISO 8601 format.
-   */
   updatedAt: string;
 
-  /**
-   * The owner's email address.
-   */
   email?: string;
 
-  /**
-   * The owner's first name.
-   */
   firstName?: string;
 
-  /**
-   * The owner's last name.
-   */
   lastName?: string;
 
   teams?: Array<UsersAPI.PublicTeam>;
 
-  /**
-   * The ID of the active HubSpot user associated with the owner.
-   */
   userId?: number;
 
-  /**
-   * The user ID, including inactive users.
-   */
   userIdIncludingInactive?: number;
 }
 
 export interface PublicTeam {
-  /**
-   * The unique ID for the team.
-   */
   id: string;
 
-  /**
-   * The team's name.
-   */
   name: string;
 
-  /**
-   * Whether this is the owner's primary team.
-   */
   primary: boolean;
 }
 

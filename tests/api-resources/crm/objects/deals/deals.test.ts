@@ -25,7 +25,7 @@ describe('resource deals', () => {
     const response = await client.crm.objects.deals.create({
       properties: { foo: 'string' },
       associations: [
-        { to: { id: '37295' }, types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 279 }] },
+        { to: { id: '37295' }, types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }] },
       ],
     });
   });
@@ -111,6 +111,36 @@ describe('resource deals', () => {
   });
 
   // Prism tests are disabled
+  test.skip('get', async () => {
+    const responsePromise = client.crm.objects.deals.get('dealId');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('get: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.crm.objects.deals.get(
+        'dealId',
+        {
+          archived: true,
+          associations: ['string'],
+          idProperty: 'idProperty',
+          properties: ['string'],
+          propertiesWithHistory: ['string'],
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(HubSpot.NotFoundError);
+  });
+
+  // Prism tests are disabled
   test.skip('merge: only required params', async () => {
     const responsePromise = client.crm.objects.deals.merge({
       objectIdToMerge: 'objectIdToMerge',
@@ -134,36 +164,6 @@ describe('resource deals', () => {
   });
 
   // Prism tests are disabled
-  test.skip('read', async () => {
-    const responsePromise = client.crm.objects.deals.read('dealId');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('read: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.crm.objects.deals.read(
-        'dealId',
-        {
-          archived: true,
-          associations: ['string'],
-          idProperty: 'idProperty',
-          properties: ['string'],
-          propertiesWithHistory: ['string'],
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(HubSpot.NotFoundError);
-  });
-
-  // Prism tests are disabled
   test.skip('search', async () => {
     const responsePromise = client.crm.objects.deals.search({});
     const rawResponse = await responsePromise.asResponse();
@@ -173,33 +173,5 @@ describe('resource deals', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('upsert: only required params', async () => {
-    const responsePromise = client.crm.objects.deals.upsert({
-      inputs: [{ id: 'id', properties: { foo: 'string' } }],
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('upsert: required and optional params', async () => {
-    const response = await client.crm.objects.deals.upsert({
-      inputs: [
-        {
-          id: 'id',
-          properties: { foo: 'string' },
-          idProperty: 'idProperty',
-          objectWriteTraceId: 'objectWriteTraceId',
-        },
-      ],
-    });
   });
 });

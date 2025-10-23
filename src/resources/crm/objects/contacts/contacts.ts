@@ -6,8 +6,8 @@ import { SimplePublicObjectWithAssociationsPage } from '../objects';
 import * as BatchAPI from './batch';
 import {
   Batch,
+  BatchArchiveParams,
   BatchCreateParams,
-  BatchDeleteParams,
   BatchReadParams,
   BatchUpdateParams,
   BatchUpsertParams,
@@ -119,23 +119,6 @@ export class Contacts extends APIResource {
   }
 
   /**
-   * Merge two contact records. Learn more about
-   * [merging records](https://knowledge.hubspot.com/records/merge-records).
-   *
-   * @example
-   * ```ts
-   * const simplePublicObject =
-   *   await client.crm.objects.contacts.merge({
-   *     objectIdToMerge: 'objectIdToMerge',
-   *     primaryObjectId: 'primaryObjectId',
-   *   });
-   * ```
-   */
-  merge(body: ContactMergeParams, options?: RequestOptions): APIPromise<ObjectsAPI.SimplePublicObject> {
-    return this._client.post('/crm/v3/objects/contacts/merge', { body, ...options });
-  }
-
-  /**
    * Permanently delete a contact and all associated content to follow GDPR. Use
    * optional property `idProperty` set to `email` to identify contact by email
    * address. If email address is not found, the email address will be added to a
@@ -144,12 +127,12 @@ export class Contacts extends APIResource {
    *
    * @example
    * ```ts
-   * await client.crm.objects.contacts.purge({
+   * await client.crm.objects.contacts.gdprDelete({
    *   objectId: 'objectId',
    * });
    * ```
    */
-  purge(body: ContactPurgeParams, options?: RequestOptions): APIPromise<void> {
+  gdprDelete(body: ContactGdprDeleteParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/crm/v3/objects/contacts/gdpr-delete', {
       body,
       ...options,
@@ -165,15 +148,32 @@ export class Contacts extends APIResource {
    * @example
    * ```ts
    * const simplePublicObjectWithAssociations =
-   *   await client.crm.objects.contacts.read('contactId');
+   *   await client.crm.objects.contacts.get('contactId');
    * ```
    */
-  read(
+  get(
     contactID: string,
-    query: ContactReadParams | null | undefined = {},
+    query: ContactGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ObjectsAPI.SimplePublicObjectWithAssociations> {
     return this._client.get(path`/crm/v3/objects/contacts/${contactID}`, { query, ...options });
+  }
+
+  /**
+   * Merge two contact records. Learn more about
+   * [merging records](https://knowledge.hubspot.com/records/merge-records).
+   *
+   * @example
+   * ```ts
+   * const simplePublicObject =
+   *   await client.crm.objects.contacts.merge({
+   *     objectIdToMerge: 'objectIdToMerge',
+   *     primaryObjectId: 'primaryObjectId',
+   *   });
+   * ```
+   */
+  merge(body: ContactMergeParams, options?: RequestOptions): APIPromise<ObjectsAPI.SimplePublicObject> {
+    return this._client.post('/crm/v3/objects/contacts/merge', { body, ...options });
   }
 
   /**
@@ -239,19 +239,7 @@ export interface ContactListParams extends PageParams {
   propertiesWithHistory?: Array<string>;
 }
 
-export interface ContactMergeParams {
-  /**
-   * The ID of the company to merge into the primary.
-   */
-  objectIdToMerge: string;
-
-  /**
-   * The ID of the primary company, which the other will merge into.
-   */
-  primaryObjectId: string;
-}
-
-export interface ContactPurgeParams {
+export interface ContactGdprDeleteParams {
   /**
    * The ID of the company to delete.
    */
@@ -264,7 +252,7 @@ export interface ContactPurgeParams {
   idProperty?: string;
 }
 
-export interface ContactReadParams {
+export interface ContactGetParams {
   /**
    * Whether to return only results that have been archived.
    */
@@ -289,6 +277,18 @@ export interface ContactReadParams {
    * requested object(s), they will be ignored.
    */
   propertiesWithHistory?: Array<string>;
+}
+
+export interface ContactMergeParams {
+  /**
+   * The ID of the company to merge into the primary.
+   */
+  objectIdToMerge: string;
+
+  /**
+   * The ID of the primary company, which the other will merge into.
+   */
+  primaryObjectId: string;
 }
 
 export interface ContactSearchParams {
@@ -330,9 +330,9 @@ export declare namespace Contacts {
     type ContactCreateParams as ContactCreateParams,
     type ContactUpdateParams as ContactUpdateParams,
     type ContactListParams as ContactListParams,
+    type ContactGdprDeleteParams as ContactGdprDeleteParams,
+    type ContactGetParams as ContactGetParams,
     type ContactMergeParams as ContactMergeParams,
-    type ContactPurgeParams as ContactPurgeParams,
-    type ContactReadParams as ContactReadParams,
     type ContactSearchParams as ContactSearchParams,
   };
 
@@ -340,7 +340,7 @@ export declare namespace Contacts {
     Batch as Batch,
     type BatchCreateParams as BatchCreateParams,
     type BatchUpdateParams as BatchUpdateParams,
-    type BatchDeleteParams as BatchDeleteParams,
+    type BatchArchiveParams as BatchArchiveParams,
     type BatchReadParams as BatchReadParams,
     type BatchUpsertParams as BatchUpsertParams,
   };

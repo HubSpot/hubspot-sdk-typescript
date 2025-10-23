@@ -2,7 +2,9 @@
 
 import { APIResource } from '../../../core/resource';
 import * as HubdbAPI from './hubdb';
+import { HubDBTableV3sPage } from './hubdb';
 import { APIPromise } from '../../../core/api-promise';
+import { Page, type PageParams, PagePromise } from '../../../core/pagination';
 import { type Uploadable } from '../../../core/uploads';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
@@ -25,15 +27,18 @@ export class Tables extends APIResource {
   list(
     query: TableListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<HubdbAPI.CollectionResponseWithTotalHubDBTableV3ForwardPaging> {
-    return this._client.get('/cms/v3/hubdb/tables', { query, ...options });
+  ): PagePromise<HubDBTableV3sPage, HubdbAPI.HubDBTableV3> {
+    return this._client.getAPIList('/cms/v3/hubdb/tables', Page<HubdbAPI.HubDBTableV3>, {
+      query,
+      ...options,
+    });
   }
 
   /**
    * Archive (soft delete) an existing HubDB table. This archives both the published
    * and draft versions.
    */
-  archive(tableIDOrName: string, options?: RequestOptions): APIPromise<void> {
+  delete(tableIDOrName: string, options?: RequestOptions): APIPromise<void> {
     return this._client.delete(path`/cms/v3/hubdb/tables/${tableIDOrName}`, {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
@@ -156,8 +161,8 @@ export class Tables extends APIResource {
    * Returns the details for each draft table defined in the specified account,
    * including column definitions.
    */
-  listDrafts(
-    query: TableListDraftsParams | null | undefined = {},
+  listDraft(
+    query: TableListDraftParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<HubdbAPI.CollectionResponseWithTotalHubDBTableV3ForwardPaging> {
     return this._client.get('/cms/v3/hubdb/tables/draft', { query, ...options });
@@ -281,13 +286,7 @@ export interface TableCreateParams {
   useForPages?: boolean;
 }
 
-export interface TableListParams {
-  /**
-   * The cursor token value to get the next set of results. You can get this from the
-   * `paging.next.after` JSON property of a paged response containing more results.
-   */
-  after?: string;
-
+export interface TableListParams extends PageParams {
   /**
    * Specifies whether to return archived tables. Defaults to `false`.
    */
@@ -311,11 +310,6 @@ export interface TableListParams {
   createdBefore?: string;
 
   isGetLocalizedSchema?: boolean;
-
-  /**
-   * The maximum number of results to return. Default is 1000.
-   */
-  limit?: number;
 
   /**
    * Specifies which fields to use for sorting results. Valid fields are `name`,
@@ -411,7 +405,7 @@ export interface TableImportDraftParams {
   file?: Uploadable;
 }
 
-export interface TableListDraftsParams {
+export interface TableListDraftParams {
   /**
    * The cursor token value to get the next set of results. You can get this from the
    * `paging.next.after` JSON property of a paged response containing more results.
@@ -563,10 +557,12 @@ export declare namespace Tables {
     type TableGetParams as TableGetParams,
     type TableGetDraftParams as TableGetDraftParams,
     type TableImportDraftParams as TableImportDraftParams,
-    type TableListDraftsParams as TableListDraftsParams,
+    type TableListDraftParams as TableListDraftParams,
     type TablePublishDraftParams as TablePublishDraftParams,
     type TableResetDraftParams as TableResetDraftParams,
     type TableUnpublishParams as TableUnpublishParams,
     type TableUpdateDraftParams as TableUpdateDraftParams,
   };
 }
+
+export { type HubDBTableV3sPage };

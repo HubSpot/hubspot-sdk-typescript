@@ -3,7 +3,6 @@
 export {
   Associations,
   type BatchInputPublicAssociation,
-  type BatchInputPublicObjectID,
   type BatchResponsePublicAssociation,
   type BatchResponsePublicAssociationMulti,
   type PublicAssociation,
@@ -12,6 +11,12 @@ export {
   type AssociationDeleteParams,
   type AssociationReadParams,
 } from './associations';
+export {
+  Schema,
+  type CollectionResponsePublicAssociationDefinitionNoPaging,
+  type PublicAssociationDefinition,
+  type SchemaListParams,
+} from './schema/index';
 export {
   V4,
   type AssociationSpec1,
@@ -33,9 +38,8 @@ export {
   type PublicFetchAssociationsBatchRequest,
   type ReportCreationResponse,
   type StandardError1,
-  type V4CreateParams,
-  type V4ListParams,
-  type V4DeleteParams,
-  type V4ArchiveLabelsParams,
-  type V4CreateDefaultParams,
-} from './v4';
+  type V4CreateDefaultAssociationParams,
+  type V4DeleteAssociationParams,
+  type V4ListAssociationsByTypeParams,
+  type V4UpdateAssociationLabelsParams,
+} from './v4/index';

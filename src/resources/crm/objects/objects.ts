@@ -4,18 +4,18 @@ import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
 import * as CRMAPI from '../crm';
 import * as EmailsAPI from '../../marketing/emails';
-import * as CompaniesAPI from './companies';
+import * as DealSplitsAPI from './deal-splits';
 import {
-  Companies,
-  CompanyCreateParams,
-  CompanyDeleteParams,
-  CompanyListParams,
-  CompanyMergeParams,
-  CompanyReadParams,
-  CompanySearchParams,
-  CompanyUpdateParams,
-  CompanyUpsertParams,
-} from './companies';
+  BatchResponseDealToDealSplits,
+  BatchResponseDealToDealSplitsWithErrors,
+  DealSplitBatchReadParams,
+  DealSplitBatchUpsertParams,
+  DealSplits,
+  DealToDealSplits,
+  PublicDealSplitInput,
+  PublicDealSplitsBatchCreateRequest,
+  PublicDealSplitsCreateRequest,
+} from './deal-splits';
 import * as SchemasAPI from './schemas';
 import {
   AssociationDefinition,
@@ -36,34 +36,77 @@ import {
   SchemaUpdateParams,
   Schemas,
 } from './schemas';
+import * as CompaniesAPI from './companies/companies';
+import {
+  Companies,
+  CompanyCreateParams,
+  CompanyGetParams,
+  CompanyListParams,
+  CompanyMergeParams,
+  CompanySearchParams,
+  CompanyUpdateParams,
+} from './companies/companies';
 import * as ContactsAPI from './contacts/contacts';
 import {
   ContactCreateParams,
+  ContactGdprDeleteParams,
+  ContactGetParams,
   ContactListParams,
   ContactMergeParams,
-  ContactPurgeParams,
-  ContactReadParams,
   ContactSearchParams,
   ContactUpdateParams,
   Contacts,
 } from './contacts/contacts';
+import * as CustomAPI from './custom/custom';
+import {
+  Custom,
+  CustomCreateParams,
+  CustomDeleteParams,
+  CustomListParams,
+  CustomMergeParams,
+  CustomReadParams,
+  CustomSearchParams,
+  CustomUpdateParams,
+} from './custom/custom';
 import * as DealsAPI from './deals/deals';
 import {
   DealCreateParams,
+  DealGetParams,
   DealListParams,
   DealMergeParams,
-  DealReadParams,
   DealSearchParams,
   DealUpdateParams,
-  DealUpsertParams,
   Deals,
 } from './deals/deals';
+import * as MeetingsAPI from './meetings/meetings';
+import {
+  MeetingCreateParams,
+  MeetingGetParams,
+  MeetingListParams,
+  MeetingSearchParams,
+  MeetingUpdateParams,
+  Meetings,
+} from './meetings/meetings';
+import * as ObjectsObjectsAPI from './objects_/objects_';
+import {
+  ObjectCreateParams,
+  ObjectDeleteParams,
+  ObjectListParams,
+  ObjectReadParams,
+  ObjectSearchParams,
+  ObjectUpdateParams,
+  Objects as ObjectsAPIObjects,
+} from './objects_/objects_';
 import { Page } from '../../../core/pagination';
 
 export class Objects extends APIResource {
   companies: CompaniesAPI.Companies = new CompaniesAPI.Companies(this._client);
   contacts: ContactsAPI.Contacts = new ContactsAPI.Contacts(this._client);
+  custom: CustomAPI.Custom = new CustomAPI.Custom(this._client);
+  dealSplits: DealSplitsAPI.DealSplits = new DealSplitsAPI.DealSplits(this._client);
   deals: DealsAPI.Deals = new DealsAPI.Deals(this._client);
+  meetings: MeetingsAPI.Meetings = new MeetingsAPI.Meetings(this._client);
+  objects: ObjectsObjectsAPI.Objects = new ObjectsObjectsAPI.Objects(this._client);
   schemas: SchemasAPI.Schemas = new SchemasAPI.Schemas(this._client);
 }
 
@@ -228,53 +271,8 @@ export interface CreatedResponseSimplePublicObject {
   location?: string;
 }
 
-/**
- * Defines a single condition for searching CRM objects, specifying the property to
- * filter on, the operator to use (such as equals, greater than, or contains), and
- * the value(s) to compare against.
- */
-export interface Filter {
-  /**
-   * null
-   */
-  operator:
-    | 'EQ'
-    | 'NEQ'
-    | 'LT'
-    | 'LTE'
-    | 'GT'
-    | 'GTE'
-    | 'BETWEEN'
-    | 'IN'
-    | 'NOT_IN'
-    | 'HAS_PROPERTY'
-    | 'NOT_HAS_PROPERTY'
-    | 'CONTAINS_TOKEN'
-    | 'NOT_CONTAINS_TOKEN';
-
-  /**
-   * The name of the property to apply the filter to.
-   */
-  propertyName: string;
-
-  /**
-   * The upper boundary value when using ranged-based filters.
-   */
-  highValue?: string;
-
-  /**
-   * The value to match against the property.
-   */
-  value?: string;
-
-  /**
-   * The values to match against the property.
-   */
-  values?: Array<string>;
-}
-
 export interface FilterGroup {
-  filters: Array<Filter>;
+  filters: Array<CRMAPI.Filter>;
 }
 
 export interface PublicAssociationsForObject {
@@ -615,7 +613,11 @@ export interface ValueWithTimestamp {
 
 Objects.Companies = Companies;
 Objects.Contacts = Contacts;
+Objects.Custom = Custom;
+Objects.DealSplits = DealSplits;
 Objects.Deals = Deals;
+Objects.Meetings = Meetings;
+Objects.Objects = ObjectsAPIObjects;
 Objects.Schemas = Schemas;
 
 export declare namespace Objects {
@@ -631,7 +633,6 @@ export declare namespace Objects {
     type CollectionResponseSimplePublicObjectWithAssociations as CollectionResponseSimplePublicObjectWithAssociations,
     type CollectionResponseWithTotalSimplePublicObject as CollectionResponseWithTotalSimplePublicObject,
     type CreatedResponseSimplePublicObject as CreatedResponseSimplePublicObject,
-    type Filter as Filter,
     type FilterGroup as FilterGroup,
     type PublicAssociationsForObject as PublicAssociationsForObject,
     type PublicGdprDeleteInput as PublicGdprDeleteInput,
@@ -654,11 +655,9 @@ export declare namespace Objects {
     type CompanyCreateParams as CompanyCreateParams,
     type CompanyUpdateParams as CompanyUpdateParams,
     type CompanyListParams as CompanyListParams,
-    type CompanyDeleteParams as CompanyDeleteParams,
+    type CompanyGetParams as CompanyGetParams,
     type CompanyMergeParams as CompanyMergeParams,
-    type CompanyReadParams as CompanyReadParams,
     type CompanySearchParams as CompanySearchParams,
-    type CompanyUpsertParams as CompanyUpsertParams,
   };
 
   export {
@@ -666,10 +665,33 @@ export declare namespace Objects {
     type ContactCreateParams as ContactCreateParams,
     type ContactUpdateParams as ContactUpdateParams,
     type ContactListParams as ContactListParams,
+    type ContactGdprDeleteParams as ContactGdprDeleteParams,
+    type ContactGetParams as ContactGetParams,
     type ContactMergeParams as ContactMergeParams,
-    type ContactPurgeParams as ContactPurgeParams,
-    type ContactReadParams as ContactReadParams,
     type ContactSearchParams as ContactSearchParams,
+  };
+
+  export {
+    Custom as Custom,
+    type CustomCreateParams as CustomCreateParams,
+    type CustomUpdateParams as CustomUpdateParams,
+    type CustomListParams as CustomListParams,
+    type CustomDeleteParams as CustomDeleteParams,
+    type CustomMergeParams as CustomMergeParams,
+    type CustomReadParams as CustomReadParams,
+    type CustomSearchParams as CustomSearchParams,
+  };
+
+  export {
+    DealSplits as DealSplits,
+    type BatchResponseDealToDealSplits as BatchResponseDealToDealSplits,
+    type BatchResponseDealToDealSplitsWithErrors as BatchResponseDealToDealSplitsWithErrors,
+    type DealToDealSplits as DealToDealSplits,
+    type PublicDealSplitInput as PublicDealSplitInput,
+    type PublicDealSplitsBatchCreateRequest as PublicDealSplitsBatchCreateRequest,
+    type PublicDealSplitsCreateRequest as PublicDealSplitsCreateRequest,
+    type DealSplitBatchReadParams as DealSplitBatchReadParams,
+    type DealSplitBatchUpsertParams as DealSplitBatchUpsertParams,
   };
 
   export {
@@ -677,10 +699,28 @@ export declare namespace Objects {
     type DealCreateParams as DealCreateParams,
     type DealUpdateParams as DealUpdateParams,
     type DealListParams as DealListParams,
+    type DealGetParams as DealGetParams,
     type DealMergeParams as DealMergeParams,
-    type DealReadParams as DealReadParams,
     type DealSearchParams as DealSearchParams,
-    type DealUpsertParams as DealUpsertParams,
+  };
+
+  export {
+    Meetings as Meetings,
+    type MeetingCreateParams as MeetingCreateParams,
+    type MeetingUpdateParams as MeetingUpdateParams,
+    type MeetingListParams as MeetingListParams,
+    type MeetingGetParams as MeetingGetParams,
+    type MeetingSearchParams as MeetingSearchParams,
+  };
+
+  export {
+    ObjectsAPIObjects as Objects,
+    type ObjectCreateParams as ObjectCreateParams,
+    type ObjectUpdateParams as ObjectUpdateParams,
+    type ObjectListParams as ObjectListParams,
+    type ObjectDeleteParams as ObjectDeleteParams,
+    type ObjectReadParams as ObjectReadParams,
+    type ObjectSearchParams as ObjectSearchParams,
   };
 
   export {

@@ -1,14 +1,19 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Associations } from './associations';
-export { Batch } from './batch';
+export {
+  Batch,
+  type BatchCreateParams,
+  type BatchUpdateParams,
+  type BatchDeleteParams,
+  type BatchReadParams,
+  type BatchUpsertParams,
+} from './batch';
 export {
   Deals,
   type DealCreateParams,
   type DealUpdateParams,
   type DealListParams,
+  type DealGetParams,
   type DealMergeParams,
-  type DealReadParams,
   type DealSearchParams,
-  type DealUpsertParams,
 } from './deals';
