@@ -83,6 +83,8 @@ import {
   UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3,
   Variant,
 } from './hubdb/hubdb';
+import * as MediaBridgeAPI from './media-bridge/media-bridge';
+import { MediaBridge } from './media-bridge/media-bridge';
 import * as PagesAPI from './pages/pages';
 import {
   AbTestEndRequestVNext,
@@ -112,6 +114,7 @@ export class Cms extends APIResource {
   blogs: BlogsAPI.Blogs = new BlogsAPI.Blogs(this._client);
   domains: DomainsAPI.Domains = new DomainsAPI.Domains(this._client);
   hubdb: HubdbAPI.Hubdb = new HubdbAPI.Hubdb(this._client);
+  mediaBridge: MediaBridgeAPI.MediaBridge = new MediaBridgeAPI.MediaBridge(this._client);
   pages: PagesAPI.Pages = new PagesAPI.Pages(this._client);
   siteSearch: SiteSearchAPI.SiteSearch = new SiteSearchAPI.SiteSearch(this._client);
   sourceCode: SourceCodeAPI.SourceCode = new SourceCodeAPI.SourceCode(this._client);
@@ -342,6 +345,7 @@ Cms.AuditLogs = AuditLogs;
 Cms.Blogs = Blogs;
 Cms.Domains = Domains;
 Cms.Hubdb = Hubdb;
+Cms.MediaBridge = MediaBridge;
 Cms.Pages = Pages;
 Cms.SiteSearch = SiteSearch;
 Cms.SourceCode = SourceCode;
@@ -415,6 +419,8 @@ export declare namespace Cms {
     type UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3 as UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3,
     type Variant as Variant,
   };
+
+  export { MediaBridge as MediaBridge };
 
   export {
     Pages as Pages,

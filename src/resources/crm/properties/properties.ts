@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
-import * as CRMAPI from '../crm';
 import * as EmailsAPI from '../../marketing/emails';
 import * as BatchAPI from './batch';
 import { Batch, BatchCreateParams, BatchDeleteParams, BatchReadParams } from './batch';
@@ -56,7 +55,7 @@ export class Properties extends APIResource {
     propertyName: string,
     params: PropertyUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<CRMAPI.Property> {
+  ): APIPromise<Shared.Property> {
     const { objectType, ...body } = params;
     return this._client.patch(path`/crm/v3/properties/${objectType}/${propertyName}`, { body, ...options });
   }
@@ -111,7 +110,7 @@ export class Properties extends APIResource {
     propertyName: string,
     params: PropertyGetParams,
     options?: RequestOptions,
-  ): APIPromise<CRMAPI.Property> {
+  ): APIPromise<Shared.Property> {
     const { objectType, ...query } = params;
     return this._client.get(path`/crm/v3/properties/${objectType}/${propertyName}`, { query, ...options });
   }
@@ -136,7 +135,7 @@ export interface BatchReadInputPropertyName {
 export interface BatchResponseProperty {
   completedAt: string;
 
-  results: Array<CRMAPI.Property>;
+  results: Array<Shared.Property>;
 
   startedAt: string;
 
@@ -152,7 +151,7 @@ export interface BatchResponseProperty {
 }
 
 export interface CollectionResponseProperty {
-  results: Array<CRMAPI.Property>;
+  results: Array<Shared.Property>;
 
   /**
    * Contains information pagination of results.
@@ -175,7 +174,7 @@ export interface CreatedResponseProperty {
   /**
    * Defines a property
    */
-  entity: CRMAPI.Property;
+  entity: Shared.Property;
 
   location?: string;
 }
@@ -308,7 +307,7 @@ export interface PropertyCreate {
    * A list of valid options for the property. This field is required for enumerated
    * properties.
    */
-  options?: Array<OptionInput>;
+  options?: Array<Shared.OptionInput>;
 
   /**
    * Should be set to 'OWNER' when 'externalOptions' is true, which causes the
@@ -441,7 +440,7 @@ export interface PropertyUpdate {
   /**
    * A list of valid options for the property.
    */
-  options?: Array<OptionInput>;
+  options?: Array<Shared.OptionInput>;
 
   /**
    * The data type of the property.
@@ -535,7 +534,7 @@ export interface PropertyCreateParams {
    * A list of valid options for the property. This field is required for enumerated
    * properties.
    */
-  options?: Array<OptionInput>;
+  options?: Array<Shared.OptionInput>;
 
   /**
    * Should be set to 'OWNER' when 'externalOptions' is true, which causes the
@@ -608,7 +607,7 @@ export interface PropertyUpdateParams {
   /**
    * Body param: A list of valid options for the property.
    */
-  options?: Array<OptionInput>;
+  options?: Array<Shared.OptionInput>;
 
   /**
    * Body param: The data type of the property.

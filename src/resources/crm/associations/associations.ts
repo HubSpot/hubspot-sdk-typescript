@@ -48,8 +48,6 @@ export class Associations extends APIResource {
   v4: V4API.V4 = new V4API.V4(this._client);
 
   /**
-   * Associate all pairs of objects identified in the request body.
-   *
    * @example
    * ```ts
    * const batchResponsePublicAssociation =
@@ -78,9 +76,6 @@ export class Associations extends APIResource {
   }
 
   /**
-   * Remove the associations between all pairs of objects identified in the request
-   * body.
-   *
    * @example
    * ```ts
    * await client.crm.associations.delete('toObjectType', {
@@ -105,9 +100,6 @@ export class Associations extends APIResource {
   }
 
   /**
-   * Get the IDs of all `{toObjectType}` objects associated with those specified in
-   * the request body.
-   *
    * @example
    * ```ts
    * const batchResponsePublicAssociationMulti =
@@ -195,7 +187,7 @@ export interface PublicAssociationMulti {
 
 export interface AssociationCreateParams {
   /**
-   * Path param:
+   * Path param: The type of the object from which associations will be created.
    */
   fromObjectType: string;
 
@@ -207,7 +199,7 @@ export interface AssociationCreateParams {
 
 export interface AssociationDeleteParams {
   /**
-   * Path param:
+   * Path param: The type of the object from which associations will be removed.
    */
   fromObjectType: string;
 
@@ -219,7 +211,7 @@ export interface AssociationDeleteParams {
 
 export interface AssociationReadParams {
   /**
-   * Path param:
+   * Path param: The type of the object from which associations will be read.
    */
   fromObjectType: string;
 

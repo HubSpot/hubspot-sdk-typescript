@@ -7,17 +7,12 @@ const client = new HubSpot({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource schemas', () => {
+describe('resource eventDefinitions', () => {
   // Prism tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.crm.objects.schemas.create({
-      associatedObjects: ['CONTACT'],
-      labels: {},
-      name: 'my_object',
-      properties: [
-        { fieldType: 'select', label: 'My object property', name: 'my_object_property', type: 'enumeration' },
-      ],
-      requiredProperties: ['my_object_property'],
+    const responsePromise = client.events.eventDefinitions.create({
+      label: 'label',
+      propertyDefinitions: [{ label: 'label', type: 'type' }],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -30,23 +25,14 @@ describe('resource schemas', () => {
 
   // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
-    const response = await client.crm.objects.schemas.create({
-      associatedObjects: ['CONTACT'],
-      labels: { plural: 'My objects', singular: 'My object' },
-      name: 'my_object',
-      properties: [
+    const response = await client.events.eventDefinitions.create({
+      label: 'label',
+      propertyDefinitions: [
         {
-          fieldType: 'select',
-          label: 'My object property',
-          name: 'my_object_property',
-          type: 'enumeration',
+          label: 'label',
+          type: 'type',
           description: 'description',
-          displayOrder: 2,
-          formField: true,
-          groupName: 'my_object_information',
-          hasUniqueValue: false,
-          hidden: true,
-          numberDisplayHint: 'unformatted',
+          name: 'name',
           options: [
             {
               displayOrder: 1,
@@ -55,32 +41,18 @@ describe('resource schemas', () => {
               value: 'A',
               description: 'Choice number one',
             },
-            {
-              displayOrder: 2,
-              hidden: false,
-              label: 'Option B',
-              value: 'B',
-              description: 'Choice number two',
-            },
           ],
-          optionSortStrategy: 'DISPLAY_ORDER',
-          referencedObjectType: 'referencedObjectType',
-          searchableInGlobalSearch: true,
-          showCurrencySymbol: true,
-          textDisplayHint: 'unformatted_single_line',
         },
       ],
-      requiredProperties: ['my_object_property'],
       description: 'description',
-      primaryDisplayProperty: 'my_object_property',
-      searchableProperties: ['string'],
-      secondaryDisplayProperties: ['string'],
+      name: 'name',
+      primaryObject: 'primaryObject',
     });
   });
 
   // Prism tests are disabled
   test.skip('update', async () => {
-    const responsePromise = client.crm.objects.schemas.update('objectType', {});
+    const responsePromise = client.events.eventDefinitions.update('eventName', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -92,7 +64,7 @@ describe('resource schemas', () => {
 
   // Prism tests are disabled
   test.skip('list', async () => {
-    const responsePromise = client.crm.objects.schemas.list();
+    const responsePromise = client.events.eventDefinitions.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -106,38 +78,36 @@ describe('resource schemas', () => {
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.crm.objects.schemas.list({ archived: true }, { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(HubSpot.NotFoundError);
-  });
-
-  // Prism tests are disabled
-  test.skip('delete', async () => {
-    const responsePromise = client.crm.objects.schemas.delete('objectType');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('delete: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.crm.objects.schemas.delete(
-        'objectType',
-        { archived: true },
+      client.events.eventDefinitions.list(
+        {
+          after: 'after',
+          includeProperties: true,
+          limit: 0,
+          searchString: 'searchString',
+          sortOrder: 'sortOrder',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(HubSpot.NotFoundError);
   });
 
   // Prism tests are disabled
-  test.skip('archiveAssociation: only required params', async () => {
-    const responsePromise = client.crm.objects.schemas.archiveAssociation('associationIdentifier', {
-      objectType: 'objectType',
+  test.skip('delete', async () => {
+    const responsePromise = client.events.eventDefinitions.delete('eventName');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('createProperty: only required params', async () => {
+    const responsePromise = client.events.eventDefinitions.createProperty('eventName', {
+      label: 'label',
+      type: 'type',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -149,17 +119,22 @@ describe('resource schemas', () => {
   });
 
   // Prism tests are disabled
-  test.skip('archiveAssociation: required and optional params', async () => {
-    const response = await client.crm.objects.schemas.archiveAssociation('associationIdentifier', {
-      objectType: 'objectType',
+  test.skip('createProperty: required and optional params', async () => {
+    const response = await client.events.eventDefinitions.createProperty('eventName', {
+      label: 'label',
+      type: 'type',
+      description: 'description',
+      name: 'name',
+      options: [
+        { displayOrder: 1, hidden: false, label: 'Option A', value: 'A', description: 'Choice number one' },
+      ],
     });
   });
 
   // Prism tests are disabled
-  test.skip('createAssociation: only required params', async () => {
-    const responsePromise = client.crm.objects.schemas.createAssociation('objectType', {
-      fromObjectTypeId: '2-123456',
-      toObjectTypeId: 'contact',
+  test.skip('deleteProperty: only required params', async () => {
+    const responsePromise = client.events.eventDefinitions.deleteProperty('propertyName', {
+      eventName: 'eventName',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -171,17 +146,15 @@ describe('resource schemas', () => {
   });
 
   // Prism tests are disabled
-  test.skip('createAssociation: required and optional params', async () => {
-    const response = await client.crm.objects.schemas.createAssociation('objectType', {
-      fromObjectTypeId: '2-123456',
-      toObjectTypeId: 'contact',
-      name: 'my_object_to_contact',
+  test.skip('deleteProperty: required and optional params', async () => {
+    const response = await client.events.eventDefinitions.deleteProperty('propertyName', {
+      eventName: 'eventName',
     });
   });
 
   // Prism tests are disabled
-  test.skip('read', async () => {
-    const responsePromise = client.crm.objects.schemas.read('objectType');
+  test.skip('get', async () => {
+    const responsePromise = client.events.eventDefinitions.get('eventName');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -189,5 +162,31 @@ describe('resource schemas', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('updateProperty: only required params', async () => {
+    const responsePromise = client.events.eventDefinitions.updateProperty('propertyName', {
+      eventName: 'eventName',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('updateProperty: required and optional params', async () => {
+    const response = await client.events.eventDefinitions.updateProperty('propertyName', {
+      eventName: 'eventName',
+      description: 'description',
+      label: 'label',
+      options: [
+        { displayOrder: 1, hidden: false, label: 'Option A', value: 'A', description: 'Choice number one' },
+      ],
+    });
   });
 });

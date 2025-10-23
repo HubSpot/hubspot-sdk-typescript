@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
-import * as CRMAPI from '../../crm/crm';
 import * as CallbacksAPI from './callbacks';
 import { CallbackCompleteBatchParams, CallbackCompleteParams, Callbacks } from './callbacks';
 import * as DefinitionsAPI from './definitions';
@@ -75,7 +74,7 @@ export interface FieldTypeDefinition {
 
   name: string;
 
-  options: Array<CRMAPI.Option>;
+  options: Array<Shared.Option>;
 
   type:
     | 'string'

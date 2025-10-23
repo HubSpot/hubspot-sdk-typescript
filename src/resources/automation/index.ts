@@ -28,6 +28,23 @@ export {
 } from './actions/index';
 export { Automation } from './automation';
 export {
+  Sequences,
+  type CollectionResponseWithTotalPublicSequenceLiteResponseForwardPaging,
+  type EmailSettingsResponse,
+  type MeetingSettingsResponse,
+  type PublicEmailPatternResponse,
+  type PublicSequenceEnrollmentLiteResponse,
+  type PublicSequenceEnrollmentRequest,
+  type PublicSequenceEnrollmentResponse,
+  type PublicSequenceLiteResponse,
+  type PublicSequenceResponse,
+  type PublicSequenceSettingsResponse,
+  type PublicSequenceStepDependencyResponse,
+  type PublicSequenceStepResponse,
+  type PublicTaskPatternResponse,
+  type UnenrollmentSettingsResponse,
+} from './sequences/index';
+export {
   Workflows,
   type APIAbTestBranchAction,
   type APIActionDataValue,

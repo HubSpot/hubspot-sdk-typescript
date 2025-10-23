@@ -829,8 +829,12 @@ export declare namespace HubSpot {
   export type ForwardPaging = API.ForwardPaging;
   export type HubDBTableRowV3Wrapper = API.HubDBTableRowV3Wrapper;
   export type NextPage = API.NextPage;
+  export type Option = API.Option;
+  export type OptionInput = API.OptionInput;
   export type Paging = API.Paging;
   export type PreviousPage = API.PreviousPage;
+  export type Property = API.Property;
+  export type PropertyModificationMetadata = API.PropertyModificationMetadata;
   export type PublicAbsoluteComparativeTimestampRefineBy = API.PublicAbsoluteComparativeTimestampRefineBy;
   export type PublicAbsoluteRangedTimestampRefineBy = API.PublicAbsoluteRangedTimestampRefineBy;
   export type PublicAdsSearchFilter = API.PublicAdsSearchFilter;

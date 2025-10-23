@@ -26,6 +26,24 @@ import {
   BlogAuthorsPage,
   CollectionResponseWithTotalBlogAuthorForwardPaging,
 } from './authors';
+import * as SettingsAPI from './settings';
+import {
+  Blog,
+  BlogLanguageCloneRequestVNext,
+  BlogsPage,
+  CollectionResponseWithTotalBlogForwardPaging,
+  CollectionResponseWithTotalVersionBlog,
+  SettingAttachToLangGroupParams,
+  SettingCreateLanguageVariationParams,
+  SettingDetachFromLangGroupParams,
+  SettingGetRevisionParams,
+  SettingListParams,
+  SettingListRevisionsParams,
+  SettingSetNewLangPrimaryParams,
+  SettingUpdateLanguagesParams,
+  Settings,
+  VersionBlog,
+} from './settings';
 import * as TagsAPI from './tags';
 import {
   BatchInputTag,
@@ -90,11 +108,13 @@ import {
 export class Blogs extends APIResource {
   authors: AuthorsAPI.Authors = new AuthorsAPI.Authors(this._client);
   posts: PostsAPI.Posts = new PostsAPI.Posts(this._client);
+  settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
   tags: TagsAPI.Tags = new TagsAPI.Tags(this._client);
 }
 
 Blogs.Authors = Authors;
 Blogs.Posts = Posts;
+Blogs.Settings = Settings;
 Blogs.Tags = Tags;
 
 export declare namespace Blogs {
@@ -156,6 +176,24 @@ export declare namespace Blogs {
     type PostSetLangPrimaryParams as PostSetLangPrimaryParams,
     type PostUpdateDraftParams as PostUpdateDraftParams,
     type PostUpdateLangsParams as PostUpdateLangsParams,
+  };
+
+  export {
+    Settings as Settings,
+    type Blog as Blog,
+    type BlogLanguageCloneRequestVNext as BlogLanguageCloneRequestVNext,
+    type CollectionResponseWithTotalBlogForwardPaging as CollectionResponseWithTotalBlogForwardPaging,
+    type CollectionResponseWithTotalVersionBlog as CollectionResponseWithTotalVersionBlog,
+    type VersionBlog as VersionBlog,
+    type BlogsPage as BlogsPage,
+    type SettingListParams as SettingListParams,
+    type SettingAttachToLangGroupParams as SettingAttachToLangGroupParams,
+    type SettingCreateLanguageVariationParams as SettingCreateLanguageVariationParams,
+    type SettingDetachFromLangGroupParams as SettingDetachFromLangGroupParams,
+    type SettingGetRevisionParams as SettingGetRevisionParams,
+    type SettingListRevisionsParams as SettingListRevisionsParams,
+    type SettingSetNewLangPrimaryParams as SettingSetNewLangPrimaryParams,
+    type SettingUpdateLanguagesParams as SettingUpdateLanguagesParams,
   };
 
   export {

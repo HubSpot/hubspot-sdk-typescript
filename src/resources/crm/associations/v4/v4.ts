@@ -363,10 +363,19 @@ export interface StandardError1 {
 }
 
 export interface V4CreateDefaultAssociationParams {
+  /**
+   * The type of the source object for the default association.
+   */
   fromObjectType: string;
 
+  /**
+   * The unique identifier of the source object for the default association.
+   */
   fromObjectId: string;
 
+  /**
+   * The type of the target object for the default association.
+   */
   toObjectType: string;
 }
 

@@ -7,10 +7,14 @@ const client = new HubSpot({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource events', () => {
+describe('resource enrollments', () => {
   // Prism tests are disabled
-  test.skip('list', async () => {
-    const responsePromise = client.events.list();
+  test.skip('enroll: only required params', async () => {
+    const responsePromise = client.automation.sequences.enrollments.enroll({
+      contactId: 'contactId',
+      senderEmail: 'senderEmail',
+      sequenceId: 'sequenceId',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,32 +25,18 @@ describe('resource events', () => {
   });
 
   // Prism tests are disabled
-  test.skip('list: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.events.list(
-        {
-          id: ['string'],
-          after: 'after',
-          before: 'before',
-          eventType: 'eventType',
-          limit: 0,
-          objectId: 0,
-          objectProperty: { '{propname}': {} },
-          objectType: 'objectType',
-          occurredAfter: '2019-12-27T18:11:19.117Z',
-          occurredBefore: '2019-12-27T18:11:19.117Z',
-          property: { '{propname}': {} },
-          sort: ['string'],
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(HubSpot.NotFoundError);
+  test.skip('enroll: required and optional params', async () => {
+    const response = await client.automation.sequences.enrollments.enroll({
+      contactId: 'contactId',
+      senderEmail: 'senderEmail',
+      sequenceId: 'sequenceId',
+      senderAliasAddress: 'senderAliasAddress',
+    });
   });
 
   // Prism tests are disabled
-  test.skip('listEventTypes', async () => {
-    const responsePromise = client.events.listEventTypes();
+  test.skip('getByContactID', async () => {
+    const responsePromise = client.automation.sequences.enrollments.getByContactID('contactId');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

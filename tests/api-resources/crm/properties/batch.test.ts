@@ -50,18 +50,18 @@ describe('resource batch', () => {
           hidden: false,
           options: [
             {
+              displayOrder: 1,
               hidden: false,
               label: 'Option A',
               value: 'A',
               description: 'Choice number one',
-              displayOrder: 1,
             },
             {
+              displayOrder: 2,
               hidden: false,
               label: 'Option B',
               value: 'B',
               description: 'Choice number two',
-              displayOrder: 2,
             },
           ],
           referencedObjectType: 'referencedObjectType',

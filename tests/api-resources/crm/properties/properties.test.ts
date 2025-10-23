@@ -43,8 +43,8 @@ describe('resource properties', () => {
       hasUniqueValue: false,
       hidden: false,
       options: [
-        { hidden: false, label: 'Option A', value: 'A', description: 'Choice number one', displayOrder: 1 },
-        { hidden: false, label: 'Option B', value: 'B', description: 'Choice number two', displayOrder: 2 },
+        { displayOrder: 1, hidden: false, label: 'Option A', value: 'A', description: 'Choice number one' },
+        { displayOrder: 2, hidden: false, label: 'Option B', value: 'B', description: 'Choice number two' },
       ],
       referencedObjectType: 'referencedObjectType',
     });
@@ -75,8 +75,8 @@ describe('resource properties', () => {
       hidden: false,
       label: 'My Contact Property',
       options: [
-        { hidden: false, label: 'Option A', value: 'A', description: 'Choice number one', displayOrder: 1 },
-        { hidden: false, label: 'Option B', value: 'B', description: 'Choice number two', displayOrder: 2 },
+        { displayOrder: 1, hidden: false, label: 'Option A', value: 'A', description: 'Choice number one' },
+        { displayOrder: 2, hidden: false, label: 'Option B', value: 'B', description: 'Choice number two' },
       ],
       type: 'enumeration',
     });

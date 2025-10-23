@@ -11,8 +11,12 @@ Types:
 - <code><a href="./src/resources/shared.ts">ForwardPaging</a></code>
 - <code><a href="./src/resources/shared.ts">HubDBTableRowV3Wrapper</a></code>
 - <code><a href="./src/resources/shared.ts">NextPage</a></code>
+- <code><a href="./src/resources/shared.ts">Option</a></code>
+- <code><a href="./src/resources/shared.ts">OptionInput</a></code>
 - <code><a href="./src/resources/shared.ts">Paging</a></code>
 - <code><a href="./src/resources/shared.ts">PreviousPage</a></code>
+- <code><a href="./src/resources/shared.ts">Property</a></code>
+- <code><a href="./src/resources/shared.ts">PropertyModificationMetadata</a></code>
 - <code><a href="./src/resources/shared.ts">PublicAbsoluteComparativeTimestampRefineBy</a></code>
 - <code><a href="./src/resources/shared.ts">PublicAbsoluteRangedTimestampRefineBy</a></code>
 - <code><a href="./src/resources/shared.ts">PublicAdsSearchFilter</a></code>
@@ -203,6 +207,37 @@ Methods:
 
 - <code title="get /automation/v4/actions/{appId}/{definitionId}/revisions">client.automation.actions.revisions.<a href="./src/resources/automation/actions/revisions.ts">list</a>(definitionID, { ...params }) -> PublicActionRevisionsPage</code>
 - <code title="get /automation/v4/actions/{appId}/{definitionId}/revisions/{revisionId}">client.automation.actions.revisions.<a href="./src/resources/automation/actions/revisions.ts">read</a>(revisionID, { ...params }) -> PublicActionRevision</code>
+
+## Sequences
+
+Types:
+
+- <code><a href="./src/resources/automation/sequences/sequences.ts">CollectionResponseWithTotalPublicSequenceLiteResponseForwardPaging</a></code>
+- <code><a href="./src/resources/automation/sequences/sequences.ts">EmailSettingsResponse</a></code>
+- <code><a href="./src/resources/automation/sequences/sequences.ts">MeetingSettingsResponse</a></code>
+- <code><a href="./src/resources/automation/sequences/sequences.ts">PublicEmailPatternResponse</a></code>
+- <code><a href="./src/resources/automation/sequences/sequences.ts">PublicSequenceEnrollmentLiteResponse</a></code>
+- <code><a href="./src/resources/automation/sequences/sequences.ts">PublicSequenceEnrollmentRequest</a></code>
+- <code><a href="./src/resources/automation/sequences/sequences.ts">PublicSequenceEnrollmentResponse</a></code>
+- <code><a href="./src/resources/automation/sequences/sequences.ts">PublicSequenceLiteResponse</a></code>
+- <code><a href="./src/resources/automation/sequences/sequences.ts">PublicSequenceResponse</a></code>
+- <code><a href="./src/resources/automation/sequences/sequences.ts">PublicSequenceSettingsResponse</a></code>
+- <code><a href="./src/resources/automation/sequences/sequences.ts">PublicSequenceStepDependencyResponse</a></code>
+- <code><a href="./src/resources/automation/sequences/sequences.ts">PublicSequenceStepResponse</a></code>
+- <code><a href="./src/resources/automation/sequences/sequences.ts">PublicTaskPatternResponse</a></code>
+- <code><a href="./src/resources/automation/sequences/sequences.ts">UnenrollmentSettingsResponse</a></code>
+
+Methods:
+
+- <code title="get /automation/v4/sequences/">client.automation.sequences.<a href="./src/resources/automation/sequences/sequences.ts">list</a>() -> CollectionResponseWithTotalPublicSequenceLiteResponseForwardPaging</code>
+- <code title="get /automation/v4/sequences/{sequenceId}">client.automation.sequences.<a href="./src/resources/automation/sequences/sequences.ts">get</a>(sequenceID) -> PublicSequenceResponse</code>
+
+### Enrollments
+
+Methods:
+
+- <code title="post /automation/v4/sequences/enrollments">client.automation.sequences.enrollments.<a href="./src/resources/automation/sequences/enrollments.ts">enroll</a>({ ...params }) -> PublicSequenceEnrollmentLiteResponse</code>
+- <code title="get /automation/v4/sequences/enrollments/contact/{contactId}">client.automation.sequences.enrollments.<a href="./src/resources/automation/sequences/enrollments.ts">getByContactID</a>(contactID) -> PublicSequenceEnrollmentResponse</code>
 
 ## Workflows
 
@@ -414,6 +449,28 @@ Methods:
 - <code title="post /cms/v3/blogs/posts/batch/archive">client.cms.blogs.posts.batch.<a href="./src/resources/cms/blogs/posts/batch.ts">delete</a>({ ...params }) -> void</code>
 - <code title="post /cms/v3/blogs/posts/batch/read">client.cms.blogs.posts.batch.<a href="./src/resources/cms/blogs/posts/batch.ts">read</a>({ ...params }) -> BatchResponseBlogPost</code>
 
+### Settings
+
+Types:
+
+- <code><a href="./src/resources/cms/blogs/settings.ts">Blog</a></code>
+- <code><a href="./src/resources/cms/blogs/settings.ts">BlogLanguageCloneRequestVNext</a></code>
+- <code><a href="./src/resources/cms/blogs/settings.ts">CollectionResponseWithTotalBlogForwardPaging</a></code>
+- <code><a href="./src/resources/cms/blogs/settings.ts">CollectionResponseWithTotalVersionBlog</a></code>
+- <code><a href="./src/resources/cms/blogs/settings.ts">VersionBlog</a></code>
+
+Methods:
+
+- <code title="get /cms/v3/blog-settings/settings">client.cms.blogs.settings.<a href="./src/resources/cms/blogs/settings.ts">list</a>({ ...params }) -> BlogsPage</code>
+- <code title="post /cms/v3/blog-settings/settings/multi-language/attach-to-lang-group">client.cms.blogs.settings.<a href="./src/resources/cms/blogs/settings.ts">attachToLangGroup</a>({ ...params }) -> void</code>
+- <code title="post /cms/v3/blog-settings/settings/multi-language/create-language-variation">client.cms.blogs.settings.<a href="./src/resources/cms/blogs/settings.ts">createLanguageVariation</a>({ ...params }) -> Blog</code>
+- <code title="post /cms/v3/blog-settings/settings/multi-language/detach-from-lang-group">client.cms.blogs.settings.<a href="./src/resources/cms/blogs/settings.ts">detachFromLangGroup</a>({ ...params }) -> void</code>
+- <code title="get /cms/v3/blog-settings/settings/{blogId}">client.cms.blogs.settings.<a href="./src/resources/cms/blogs/settings.ts">get</a>(blogID) -> Blog</code>
+- <code title="get /cms/v3/blog-settings/settings/{blogId}/revisions/{revisionId}">client.cms.blogs.settings.<a href="./src/resources/cms/blogs/settings.ts">getRevision</a>(revisionID, { ...params }) -> VersionBlog</code>
+- <code title="get /cms/v3/blog-settings/settings/{blogId}/revisions">client.cms.blogs.settings.<a href="./src/resources/cms/blogs/settings.ts">listRevisions</a>(blogID, { ...params }) -> CollectionResponseWithTotalVersionBlog</code>
+- <code title="put /cms/v3/blog-settings/settings/multi-language/set-new-lang-primary">client.cms.blogs.settings.<a href="./src/resources/cms/blogs/settings.ts">setNewLangPrimary</a>({ ...params }) -> void</code>
+- <code title="post /cms/v3/blog-settings/settings/multi-language/update-languages">client.cms.blogs.settings.<a href="./src/resources/cms/blogs/settings.ts">updateLanguages</a>({ ...params }) -> void</code>
+
 ### Tags
 
 Types:
@@ -530,6 +587,18 @@ Methods:
 - <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/draft/reset">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">resetDraft</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
 - <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/unpublish">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">unpublish</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
 - <code title="patch /cms/v3/hubdb/tables/{tableIdOrName}/draft">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">updateDraft</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
+
+## MediaBridge
+
+### Events
+
+### Groups
+
+### IntegratorSettings
+
+### Properties
+
+### Schemas
 
 ## Pages
 
@@ -775,10 +844,13 @@ Types:
 - <code><a href="./src/resources/crm/crm.ts">Filter</a></code>
 - <code><a href="./src/resources/crm/crm.ts">LabelsBetweenObjectPair</a></code>
 - <code><a href="./src/resources/crm/crm.ts">MultiAssociatedObjectWithLabel</a></code>
-- <code><a href="./src/resources/crm/crm.ts">Option</a></code>
-- <code><a href="./src/resources/crm/crm.ts">Property</a></code>
-- <code><a href="./src/resources/crm/crm.ts">PropertyModificationMetadata</a></code>
 - <code><a href="./src/resources/crm/crm.ts">PublicDefaultAssociation</a></code>
+
+## AppUninstalls
+
+Methods:
+
+- <code title="delete /appinstalls/v3/external-install">client.crm.appUninstalls.<a href="./src/resources/crm/app-uninstalls.ts">uninstall</a>() -> void</code>
 
 ## Associations
 
@@ -1294,7 +1366,6 @@ Types:
 - <code><a href="./src/resources/crm/objects/schemas.ts">ObjectTypeDefinitionLabels</a></code>
 - <code><a href="./src/resources/crm/objects/schemas.ts">ObjectTypeDefinitionPatch</a></code>
 - <code><a href="./src/resources/crm/objects/schemas.ts">ObjectTypePropertyCreate</a></code>
-- <code><a href="./src/resources/crm/objects/schemas.ts">OptionInput</a></code>
 
 Methods:
 
@@ -1452,18 +1523,90 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/events/events.ts">BatchedBehavioralEventHTTPCompletionRequest</a></code>
-- <code><a href="./src/resources/events/events.ts">BehavioralEventHTTPCompletionRequest</a></code>
+- <code><a href="./src/resources/events/events.ts">CollectionResponseExternalUnifiedEvent</a></code>
+- <code><a href="./src/resources/events/events.ts">ExternalUnifiedEvent</a></code>
+- <code><a href="./src/resources/events/events.ts">VisibleExternalEventTypeNames</a></code>
 
 Methods:
 
-- <code title="post /events/v3/send">client.events.<a href="./src/resources/events/events.ts">send</a>({ ...params }) -> void</code>
+- <code title="get /events/v3/events/">client.events.<a href="./src/resources/events/events.ts">list</a>({ ...params }) -> ExternalUnifiedEventsPage</code>
+- <code title="get /events/v3/events/event-types">client.events.<a href="./src/resources/events/events.ts">listEventTypes</a>() -> VisibleExternalEventTypeNames</code>
 
-## Batch
+## EventDefinitions
+
+Types:
+
+- <code><a href="./src/resources/events/event-definitions.ts">AbsoluteComparativeTimestampRefineBy</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">AbsoluteRangedTimestampRefineBy</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">AllHistoryRefineBy</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">AllPropertyTypesOperation</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">AssociationDefinition</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">BehavioralEventTypeDefinitionLabels</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">BoolPropertyOperation</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">CalendarDatePropertyOperation</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">CollectionResponseWithTotalExternalBehavioralEventTypeDefinitionForwardPaging</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">ComboEventRule</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">ComboEventRuleBranch</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">ComparativeDatePropertyOperation</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">ComparativePropertyUpdatedOperation</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">DatePoint</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">DatePropertyOperation</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">DateTimePropertyOperation</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">EnumerationPropertyOperation</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">ExternalBehavioralEventPropertyCreate</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">ExternalBehavioralEventPropertyDefinitionPatch</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">ExternalBehavioralEventTypeDefinition</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">ExternalBehavioralEventTypeDefinitionEgg</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">ExternalBehavioralEventTypeDefinitionPatch</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">FiscalQuarter</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">FiscalYear</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">IndexedTimePoint</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">IndexOffset</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">MonthReference</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">MultiStringPropertyOperation</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">NowReference</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">NumberPropertyOperation</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">NumOccurrencesRefineBy</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">PropertyFilter</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">PropertyReferencedTime</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">QuarterReference</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">RangedDatePropertyOperation</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">RangedNumberPropertyOperation</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">RangedTimeOperation</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">RelativeComparativeTimestampRefineBy</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">RelativeRangedTimestampRefineBy</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">RollingDateRangePropertyOperation</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">RollingPropertyUpdatedOperation</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">SetOccurrencesRefineBy</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">StringPropertyOperation</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">TimeOffset</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">TimePointOperation</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">TodayReference</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">WeekReference</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">YearReference</a></code>
 
 Methods:
 
-- <code title="post /events/v3/send/batch">client.events.batch.<a href="./src/resources/events/batch.ts">send</a>({ ...params }) -> void</code>
+- <code title="post /events/v3/event-definitions">client.events.eventDefinitions.<a href="./src/resources/events/event-definitions.ts">create</a>({ ...params }) -> ExternalBehavioralEventTypeDefinition</code>
+- <code title="patch /events/v3/event-definitions/{eventName}">client.events.eventDefinitions.<a href="./src/resources/events/event-definitions.ts">update</a>(eventName, { ...params }) -> ExternalBehavioralEventTypeDefinition</code>
+- <code title="get /events/v3/event-definitions">client.events.eventDefinitions.<a href="./src/resources/events/event-definitions.ts">list</a>({ ...params }) -> ExternalBehavioralEventTypeDefinitionsPage</code>
+- <code title="delete /events/v3/event-definitions/{eventName}">client.events.eventDefinitions.<a href="./src/resources/events/event-definitions.ts">delete</a>(eventName) -> void</code>
+- <code title="post /events/v3/event-definitions/{eventName}/property">client.events.eventDefinitions.<a href="./src/resources/events/event-definitions.ts">createProperty</a>(eventName, { ...params }) -> Property</code>
+- <code title="delete /events/v3/event-definitions/{eventName}/property/{propertyName}">client.events.eventDefinitions.<a href="./src/resources/events/event-definitions.ts">deleteProperty</a>(propertyName, { ...params }) -> void</code>
+- <code title="get /events/v3/event-definitions/{eventName}">client.events.eventDefinitions.<a href="./src/resources/events/event-definitions.ts">get</a>(eventName) -> ExternalBehavioralEventTypeDefinition</code>
+- <code title="patch /events/v3/event-definitions/{eventName}/property/{propertyName}">client.events.eventDefinitions.<a href="./src/resources/events/event-definitions.ts">updateProperty</a>(propertyName, { ...params }) -> Property</code>
+
+## Send
+
+Types:
+
+- <code><a href="./src/resources/events/send.ts">BatchedBehavioralEventHTTPCompletionRequest</a></code>
+- <code><a href="./src/resources/events/send.ts">BehavioralEventHTTPCompletionRequest</a></code>
+
+Methods:
+
+- <code title="post /events/v3/send">client.events.send.<a href="./src/resources/events/send.ts">send</a>({ ...params }) -> void</code>
+- <code title="post /events/v3/send/batch">client.events.send.<a href="./src/resources/events/send.ts">sendBatch</a>({ ...params }) -> void</code>
 
 # Files
 
