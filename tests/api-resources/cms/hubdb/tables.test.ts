@@ -91,8 +91,8 @@ describe('resource tables', () => {
   });
 
   // Prism tests are disabled
-  test.skip('archive', async () => {
-    const responsePromise = client.cms.hubdb.tables.archive('tableIdOrName');
+  test.skip('delete', async () => {
+    const responsePromise = client.cms.hubdb.tables.delete('tableIdOrName');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -239,8 +239,8 @@ describe('resource tables', () => {
   });
 
   // Prism tests are disabled
-  test.skip('listDrafts', async () => {
-    const responsePromise = client.cms.hubdb.tables.listDrafts();
+  test.skip('listDraft', async () => {
+    const responsePromise = client.cms.hubdb.tables.listDraft();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -251,10 +251,10 @@ describe('resource tables', () => {
   });
 
   // Prism tests are disabled
-  test.skip('listDrafts: request options and params are passed correctly', async () => {
+  test.skip('listDraft: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.cms.hubdb.tables.listDrafts(
+      client.cms.hubdb.tables.listDraft(
         {
           after: 'after',
           archived: true,

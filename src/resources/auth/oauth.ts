@@ -22,8 +22,8 @@ export class OAuth extends APIResource {
    * encoded in them changes over time. It's recommended to allow for tokens to be up
    * to 300 characters to account for any potential changes.
    */
-  create(
-    body: OAuthCreateParams | null | undefined = {},
+  createAccessToken(
+    body: OAuthCreateAccessTokenParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<TokenResponseIf> {
     return this._client.post('/oauth/v1/token', {
@@ -40,11 +40,23 @@ export class OAuth extends APIResource {
    * This will not uninstall the application from HubSpot or inhibit data syncing
    * between an account and the app.
    */
-  delete(token: string, options?: RequestOptions): APIPromise<void> {
+  deleteRefreshToken(token: string, options?: RequestOptions): APIPromise<void> {
     return this._client.delete(path`/oauth/v1/refresh-tokens/${token}`, {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
+  }
+
+  /**
+   * Retrieve a token's metadata, including the email address of the user that the
+   * token was created for and the ID of the account it's associated with.
+   *
+   * Note: HubSpot access tokens will fluctuate in size as the information that's
+   * encoded in them changes over time. It's recommended to allow for tokens to be up
+   * to 300 characters to account for any potential changes.
+   */
+  getAccessToken(token: string, options?: RequestOptions): APIPromise<AccessTokenInfoResponse> {
+    return this._client.get(path`/oauth/v1/access-tokens/${token}`, options);
   }
 
   /**
@@ -53,7 +65,7 @@ export class OAuth extends APIResource {
    * Learn more about
    * [refresh tokens](https://developers.hubspot.com/docs/guides/api/app-management/oauth-tokens#generate-initial-access-and-refresh-tokens).
    */
-  get(token: string, options?: RequestOptions): APIPromise<RefreshTokenInfoResponse> {
+  getRefreshToken(token: string, options?: RequestOptions): APIPromise<RefreshTokenInfoResponse> {
     return this._client.get(path`/oauth/v1/refresh-tokens/${token}`, options);
   }
 }
@@ -108,7 +120,7 @@ export interface TokenResponseIf {
   id_token?: string;
 }
 
-export interface OAuthCreateParams {
+export interface OAuthCreateAccessTokenParams {
   client_id?: string;
 
   client_secret?: string;
@@ -127,6 +139,6 @@ export declare namespace OAuth {
     type AccessTokenInfoResponse as AccessTokenInfoResponse,
     type RefreshTokenInfoResponse as RefreshTokenInfoResponse,
     type TokenResponseIf as TokenResponseIf,
-    type OAuthCreateParams as OAuthCreateParams,
+    type OAuthCreateAccessTokenParams as OAuthCreateAccessTokenParams,
   };
 }

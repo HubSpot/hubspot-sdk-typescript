@@ -9,8 +9,8 @@ const client = new HubSpot({
 
 describe('resource oauth', () => {
   // Prism tests are disabled
-  test.skip('create', async () => {
-    const responsePromise = client.auth.oauth.create();
+  test.skip('createAccessToken', async () => {
+    const responsePromise = client.auth.oauth.createAccessToken();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,10 +21,10 @@ describe('resource oauth', () => {
   });
 
   // Prism tests are disabled
-  test.skip('create: request options and params are passed correctly', async () => {
+  test.skip('createAccessToken: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.auth.oauth.create(
+      client.auth.oauth.createAccessToken(
         {
           client_id: 'client_id',
           client_secret: 'client_secret',
@@ -39,8 +39,8 @@ describe('resource oauth', () => {
   });
 
   // Prism tests are disabled
-  test.skip('delete', async () => {
-    const responsePromise = client.auth.oauth.delete('token');
+  test.skip('deleteRefreshToken', async () => {
+    const responsePromise = client.auth.oauth.deleteRefreshToken('token');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -51,8 +51,20 @@ describe('resource oauth', () => {
   });
 
   // Prism tests are disabled
-  test.skip('get', async () => {
-    const responsePromise = client.auth.oauth.get('token');
+  test.skip('getAccessToken', async () => {
+    const responsePromise = client.auth.oauth.getAccessToken('token');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('getRefreshToken', async () => {
+    const responsePromise = client.auth.oauth.getRefreshToken('token');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

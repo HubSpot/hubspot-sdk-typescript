@@ -89,8 +89,8 @@ describe('resource files', () => {
   });
 
   // Prism tests are disabled
-  test.skip('getImportFromURLAsyncStatus', async () => {
-    const responsePromise = client.files.files.getImportFromURLAsyncStatus('taskId');
+  test.skip('getImportTaskStatus', async () => {
+    const responsePromise = client.files.files.getImportTaskStatus('taskId');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

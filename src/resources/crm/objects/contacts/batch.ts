@@ -59,12 +59,12 @@ export class Batch extends APIResource {
    *
    * @example
    * ```ts
-   * await client.crm.objects.contacts.batch.delete({
+   * await client.crm.objects.contacts.batch.archive({
    *   inputs: [{ id: 'id' }],
    * });
    * ```
    */
-  delete(body: BatchDeleteParams, options?: RequestOptions): APIPromise<void> {
+  archive(body: BatchArchiveParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/crm/v3/objects/contacts/batch/archive', {
       body,
       ...options,
@@ -126,7 +126,7 @@ export interface BatchUpdateParams {
   inputs: Array<ObjectsAPI.SimplePublicObjectBatchInput>;
 }
 
-export interface BatchDeleteParams {
+export interface BatchArchiveParams {
   inputs: Array<ObjectsAPI.SimplePublicObjectID>;
 }
 
@@ -167,7 +167,7 @@ export declare namespace Batch {
   export {
     type BatchCreateParams as BatchCreateParams,
     type BatchUpdateParams as BatchUpdateParams,
-    type BatchDeleteParams as BatchDeleteParams,
+    type BatchArchiveParams as BatchArchiveParams,
     type BatchReadParams as BatchReadParams,
     type BatchUpsertParams as BatchUpsertParams,
   };

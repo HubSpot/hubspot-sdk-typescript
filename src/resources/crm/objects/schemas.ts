@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import * as CRMAPI from '../crm';
-import * as PropertiesAPI from '../properties';
+import * as PropertiesAPI from '../properties/properties';
 import { APIPromise } from '../../../core/api-promise';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';

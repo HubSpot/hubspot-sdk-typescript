@@ -94,15 +94,10 @@ export class Files extends APIResource {
    * @example
    * ```ts
    * const fileActionResponse =
-   *   await client.files.files.getImportFromURLAsyncStatus(
-   *     'taskId',
-   *   );
+   *   await client.files.files.getImportTaskStatus('taskId');
    * ```
    */
-  getImportFromURLAsyncStatus(
-    taskID: string,
-    options?: RequestOptions,
-  ): APIPromise<FilesAPI.FileActionResponse> {
+  getImportTaskStatus(taskID: string, options?: RequestOptions): APIPromise<FilesAPI.FileActionResponse> {
     return this._client.get(path`/files/v3/files/import-from-url/async/tasks/${taskID}/status`, options);
   }
 
@@ -219,14 +214,8 @@ export interface FileUpdateParams {
     | 'HIDDEN_SENSITIVE'
     | 'SENSITIVE';
 
-  /**
-   * Indicates whether the expiration date of the file should be cleared.
-   */
   clearExpires?: boolean;
 
-  /**
-   * Specifies the date and time when the file will expire.
-   */
   expiresAt?: string;
 
   /**

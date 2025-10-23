@@ -2,6 +2,33 @@
 
 import { APIResource } from '../../core/resource';
 import * as Shared from '../shared';
+import * as ExportsAPI from './exports';
+import {
+  ActionResponseWithSingleResultUri,
+  ExportCreateParams,
+  Exports,
+  PublicCRMSearchRequest,
+  PublicExportListRequest,
+  PublicExportRequest,
+  PublicExportViewRequest,
+} from './exports';
+import * as ImportsAPI from './imports';
+import {
+  CollectionResponsePublicImportErrorForwardPaging,
+  CollectionResponsePublicImportResponse,
+  ImportCreateParams,
+  ImportListErrorsParams,
+  ImportListParams,
+  ImportRowCore,
+  ImportTemplate,
+  Imports,
+  PropertyValue,
+  PublicImportError,
+  PublicImportMetadata,
+  PublicImportResponse,
+  PublicImportResponsesPage,
+  PublicObjectListRecord,
+} from './imports';
 import * as OwnersAPI from './owners';
 import {
   CollectionResponsePublicOwnerForwardPaging,
@@ -12,50 +39,6 @@ import {
   PublicOwnersPage,
   PublicTeam,
 } from './owners';
-import * as PipelinesAPI from './pipelines';
-import {
-  CollectionResponsePipelineNoPaging,
-  CollectionResponsePipelineStageNoPaging,
-  CollectionResponsePublicAuditInfoNoPaging,
-  Pipeline,
-  PipelineCreateParams,
-  PipelineDeleteParams,
-  PipelineGetAuditParams,
-  PipelineInput,
-  PipelinePatchInput,
-  PipelineReadParams,
-  PipelineReplaceParams,
-  PipelineStage,
-  PipelineStageInput,
-  PipelineStagePatchInput,
-  PipelineUpdateParams,
-  Pipelines,
-  PublicAuditInfo,
-} from './pipelines';
-import * as PropertiesAPI from './properties';
-import {
-  BatchInputPropertyCreate,
-  BatchInputPropertyName,
-  BatchReadInputPropertyName,
-  BatchResponseProperty,
-  CollectionResponseProperty,
-  CollectionResponsePropertyGroup,
-  CreatedResponseProperty,
-  CreatedResponsePropertyGroup,
-  OptionInput,
-  Properties,
-  PropertyCreate,
-  PropertyCreateParams,
-  PropertyDeleteParams,
-  PropertyGetByNameParams,
-  PropertyGroup,
-  PropertyGroupCreate,
-  PropertyGroupUpdate,
-  PropertyName,
-  PropertyReadParams,
-  PropertyUpdate,
-  PropertyUpdateParams,
-} from './properties';
 import * as EmailsAPI from '../marketing/emails';
 import * as AssociationsAPI from './associations/associations';
 import {
@@ -64,15 +47,54 @@ import {
   AssociationReadParams,
   Associations,
   BatchInputPublicAssociation,
-  BatchInputPublicObjectID,
   BatchResponsePublicAssociation,
   BatchResponsePublicAssociationMulti,
   PublicAssociation,
   PublicAssociationMulti,
 } from './associations/associations';
-import * as V4API from './associations/v4';
 import * as ExtensionsAPI from './extensions/extensions';
 import { Extensions } from './extensions/extensions';
+import * as ListsAPI from './lists/lists';
+import {
+  APICollectionResponseJoinTimeAndRecordID,
+  APICollectionResponseRecordListMembershipNoPaging,
+  JoinTimeAndRecordID,
+  ListCreateParams,
+  ListCreateRequest,
+  ListCreateResponse,
+  ListFetchResponse,
+  ListFilterUpdateRequest,
+  ListFolderCreateRequest,
+  ListFolderCreateResponse,
+  ListFolderFetchResponse,
+  ListGetByObjectTypeIDAndNameParams,
+  ListGetParams,
+  ListListParams,
+  ListMoveRequest,
+  ListScheduleConversionParams,
+  ListSearchParams,
+  ListSearchRequest,
+  ListSearchResponse,
+  ListUpdateFiltersParams,
+  ListUpdateNameParams,
+  ListUpdateResponse,
+  Lists,
+  ListsByIDResponse,
+  MembershipChangeRequest,
+  MembershipsUpdateResponse,
+  PublicBatchMigrationMapping,
+  PublicListConversionDate,
+  PublicListConversionInactivity,
+  PublicListConversionResponse,
+  PublicListConversionTime,
+  PublicListFolder,
+  PublicListPermissions,
+  PublicMembershipSettings,
+  PublicMigrationMapping,
+  PublicObjectList,
+  PublicObjectListSearchResult,
+  RecordListMembership,
+} from './lists/lists';
 import * as ObjectsAPI from './objects/objects';
 import {
   BatchInputSimplePublicObjectBatchInput,
@@ -86,7 +108,6 @@ import {
   CollectionResponseSimplePublicObjectWithAssociations,
   CollectionResponseWithTotalSimplePublicObject,
   CreatedResponseSimplePublicObject,
-  Filter,
   FilterGroup,
   Objects,
   PublicAssociationsForObject,
@@ -104,18 +125,82 @@ import {
   SimplePublicUpsertObject,
   ValueWithTimestamp,
 } from './objects/objects';
-import { Page } from '../../core/pagination';
+import * as PipelinesAPI from './pipelines/pipelines';
+import {
+  CollectionResponsePipelineNoPaging,
+  CollectionResponsePipelineStageNoPaging,
+  CollectionResponsePublicAuditInfoNoPaging,
+  Pipeline,
+  PipelineCreateParams,
+  PipelineDeleteParams,
+  PipelineGetAuditParams,
+  PipelineGetParams,
+  PipelineInput,
+  PipelinePatchInput,
+  PipelineReplaceParams,
+  PipelineStage,
+  PipelineStageInput,
+  PipelineStagePatchInput,
+  PipelineUpdateParams,
+  Pipelines,
+  PublicAuditInfo,
+} from './pipelines/pipelines';
+import * as PropertiesAPI from './properties/properties';
+import {
+  BatchInputPropertyCreate,
+  BatchInputPropertyName,
+  BatchReadInputPropertyName,
+  BatchResponseProperty,
+  CollectionResponseProperty,
+  CollectionResponsePropertyGroup,
+  CreatedResponseProperty,
+  CreatedResponsePropertyGroup,
+  OptionInput,
+  Properties,
+  PropertyCreate,
+  PropertyCreateParams,
+  PropertyDeleteParams,
+  PropertyGetParams,
+  PropertyGroup,
+  PropertyGroupCreate,
+  PropertyGroupUpdate,
+  PropertyListParams,
+  PropertyName,
+  PropertyUpdate,
+  PropertyUpdateParams,
+} from './properties/properties';
+import * as TimelineAPI from './timeline/timeline';
+import {
+  BatchInputTimelineEvent,
+  BatchResponseTimelineEventResponse,
+  BatchResponseTimelineEventResponseWithErrors,
+  CollectionResponseTimelineEventTemplateNoPaging,
+  EventDetail,
+  Timeline,
+  TimelineEvent,
+  TimelineEventIFrame,
+  TimelineEventResponse,
+  TimelineEventTemplate,
+  TimelineEventTemplateCreateRequest,
+  TimelineEventTemplateToken,
+  TimelineEventTemplateTokenOption,
+  TimelineEventTemplateTokenUpdateRequest,
+  TimelineEventTemplateUpdateRequest,
+} from './timeline/timeline';
+import * as V4API from './associations/v4/v4';
 
 export class CRM extends APIResource {
   associations: AssociationsAPI.Associations = new AssociationsAPI.Associations(this._client);
+  exports: ExportsAPI.Exports = new ExportsAPI.Exports(this._client);
   extensions: ExtensionsAPI.Extensions = new ExtensionsAPI.Extensions(this._client);
+  imports: ImportsAPI.Imports = new ImportsAPI.Imports(this._client);
+  lists: ListsAPI.Lists = new ListsAPI.Lists(this._client);
   objects: ObjectsAPI.Objects = new ObjectsAPI.Objects(this._client);
   owners: OwnersAPI.Owners = new OwnersAPI.Owners(this._client);
   pipelines: PipelinesAPI.Pipelines = new PipelinesAPI.Pipelines(this._client);
   properties: PropertiesAPI.Properties = new PropertiesAPI.Properties(this._client);
+  timeline: TimelineAPI.Timeline = new TimelineAPI.Timeline(this._client);
 }
-
-export type MultiAssociatedObjectWithLabelsPage = Page<MultiAssociatedObjectWithLabel>;
 
 /**
  * Contains the id and type of an association
@@ -133,20 +218,15 @@ export interface AssociatedID {
 }
 
 export interface AssociationSpecWithLabel {
-  /**
-   * The category of this association type (either HUBSPOT_DEFINED or USER_DEFINED)
-   */
   category: 'HUBSPOT_DEFINED' | 'USER_DEFINED' | 'INTEGRATOR_DEFINED';
 
-  /**
-   * The ID of this association type, unique within an association category
-   */
   typeId: number;
 
-  /**
-   * The label for this association type
-   */
   label?: string;
+}
+
+export interface BatchInputPublicObjectID {
+  inputs: Array<Shared.PublicObjectID>;
 }
 
 export interface BatchResponsePublicDefaultAssociation {
@@ -182,6 +262,49 @@ export interface CreatedResponseLabelsBetweenObjectPair {
   entity: LabelsBetweenObjectPair;
 
   location?: string;
+}
+
+/**
+ * Defines a single condition for searching CRM objects, specifying the property to
+ * filter on, the operator to use (such as equals, greater than, or contains), and
+ * the value(s) to compare against.
+ */
+export interface Filter {
+  /**
+   * The comparison operator used in the filter, such as "EQ" or "GT".
+   */
+  operator:
+    | 'EQ'
+    | 'NEQ'
+    | 'LT'
+    | 'LTE'
+    | 'GT'
+    | 'GTE'
+    | 'BETWEEN'
+    | 'IN'
+    | 'NOT_IN'
+    | 'HAS_PROPERTY'
+    | 'NOT_HAS_PROPERTY';
+
+  /**
+   * The name of the property to apply the filter to.
+   */
+  propertyName: string;
+
+  /**
+   * The upper boundary value when using ranged-based filters.
+   */
+  highValue?: string;
+
+  /**
+   * The value to match against the property.
+   */
+  value?: string;
+
+  /**
+   * The values to match against the property.
+   */
+  values?: Array<string>;
 }
 
 export interface LabelsBetweenObjectPair {
@@ -403,19 +526,25 @@ export interface PublicDefaultAssociation {
 }
 
 CRM.Associations = Associations;
+CRM.Exports = Exports;
 CRM.Extensions = Extensions;
+CRM.Imports = Imports;
+CRM.Lists = Lists;
 CRM.Objects = Objects;
 CRM.Owners = Owners;
 CRM.Pipelines = Pipelines;
 CRM.Properties = Properties;
+CRM.Timeline = Timeline;
 
 export declare namespace CRM {
   export {
     type AssociatedID as AssociatedID,
     type AssociationSpecWithLabel as AssociationSpecWithLabel,
+    type BatchInputPublicObjectID as BatchInputPublicObjectID,
     type BatchResponsePublicDefaultAssociation as BatchResponsePublicDefaultAssociation,
     type CollectionResponseMultiAssociatedObjectWithLabel as CollectionResponseMultiAssociatedObjectWithLabel,
     type CreatedResponseLabelsBetweenObjectPair as CreatedResponseLabelsBetweenObjectPair,
+    type Filter as Filter,
     type LabelsBetweenObjectPair as LabelsBetweenObjectPair,
     type MultiAssociatedObjectWithLabel as MultiAssociatedObjectWithLabel,
     type Option as Option,
@@ -427,7 +556,6 @@ export declare namespace CRM {
   export {
     Associations as Associations,
     type BatchInputPublicAssociation as BatchInputPublicAssociation,
-    type BatchInputPublicObjectID as BatchInputPublicObjectID,
     type BatchResponsePublicAssociation as BatchResponsePublicAssociation,
     type BatchResponsePublicAssociationMulti as BatchResponsePublicAssociationMulti,
     type PublicAssociation as PublicAssociation,
@@ -437,7 +565,75 @@ export declare namespace CRM {
     type AssociationReadParams as AssociationReadParams,
   };
 
+  export {
+    Exports as Exports,
+    type ActionResponseWithSingleResultUri as ActionResponseWithSingleResultUri,
+    type PublicCRMSearchRequest as PublicCRMSearchRequest,
+    type PublicExportListRequest as PublicExportListRequest,
+    type PublicExportRequest as PublicExportRequest,
+    type PublicExportViewRequest as PublicExportViewRequest,
+    type ExportCreateParams as ExportCreateParams,
+  };
+
   export { Extensions as Extensions };
+
+  export {
+    Imports as Imports,
+    type CollectionResponsePublicImportErrorForwardPaging as CollectionResponsePublicImportErrorForwardPaging,
+    type CollectionResponsePublicImportResponse as CollectionResponsePublicImportResponse,
+    type ImportRowCore as ImportRowCore,
+    type ImportTemplate as ImportTemplate,
+    type PropertyValue as PropertyValue,
+    type PublicImportError as PublicImportError,
+    type PublicImportMetadata as PublicImportMetadata,
+    type PublicImportResponse as PublicImportResponse,
+    type PublicObjectListRecord as PublicObjectListRecord,
+    type PublicImportResponsesPage as PublicImportResponsesPage,
+    type ImportCreateParams as ImportCreateParams,
+    type ImportListParams as ImportListParams,
+    type ImportListErrorsParams as ImportListErrorsParams,
+  };
+
+  export {
+    Lists as Lists,
+    type APICollectionResponseJoinTimeAndRecordID as APICollectionResponseJoinTimeAndRecordID,
+    type APICollectionResponseRecordListMembershipNoPaging as APICollectionResponseRecordListMembershipNoPaging,
+    type JoinTimeAndRecordID as JoinTimeAndRecordID,
+    type ListCreateRequest as ListCreateRequest,
+    type ListCreateResponse as ListCreateResponse,
+    type ListFetchResponse as ListFetchResponse,
+    type ListFilterUpdateRequest as ListFilterUpdateRequest,
+    type ListFolderCreateRequest as ListFolderCreateRequest,
+    type ListFolderCreateResponse as ListFolderCreateResponse,
+    type ListFolderFetchResponse as ListFolderFetchResponse,
+    type ListMoveRequest as ListMoveRequest,
+    type ListsByIDResponse as ListsByIDResponse,
+    type ListSearchRequest as ListSearchRequest,
+    type ListSearchResponse as ListSearchResponse,
+    type ListUpdateResponse as ListUpdateResponse,
+    type MembershipChangeRequest as MembershipChangeRequest,
+    type MembershipsUpdateResponse as MembershipsUpdateResponse,
+    type PublicBatchMigrationMapping as PublicBatchMigrationMapping,
+    type PublicListConversionDate as PublicListConversionDate,
+    type PublicListConversionInactivity as PublicListConversionInactivity,
+    type PublicListConversionResponse as PublicListConversionResponse,
+    type PublicListConversionTime as PublicListConversionTime,
+    type PublicListFolder as PublicListFolder,
+    type PublicListPermissions as PublicListPermissions,
+    type PublicMembershipSettings as PublicMembershipSettings,
+    type PublicMigrationMapping as PublicMigrationMapping,
+    type PublicObjectList as PublicObjectList,
+    type PublicObjectListSearchResult as PublicObjectListSearchResult,
+    type RecordListMembership as RecordListMembership,
+    type ListCreateParams as ListCreateParams,
+    type ListListParams as ListListParams,
+    type ListGetParams as ListGetParams,
+    type ListGetByObjectTypeIDAndNameParams as ListGetByObjectTypeIDAndNameParams,
+    type ListScheduleConversionParams as ListScheduleConversionParams,
+    type ListSearchParams as ListSearchParams,
+    type ListUpdateFiltersParams as ListUpdateFiltersParams,
+    type ListUpdateNameParams as ListUpdateNameParams,
+  };
 
   export {
     Objects as Objects,
@@ -452,7 +648,6 @@ export declare namespace CRM {
     type CollectionResponseSimplePublicObjectWithAssociations as CollectionResponseSimplePublicObjectWithAssociations,
     type CollectionResponseWithTotalSimplePublicObject as CollectionResponseWithTotalSimplePublicObject,
     type CreatedResponseSimplePublicObject as CreatedResponseSimplePublicObject,
-    type Filter as Filter,
     type FilterGroup as FilterGroup,
     type PublicAssociationsForObject as PublicAssociationsForObject,
     type PublicGdprDeleteInput as PublicGdprDeleteInput,
@@ -495,8 +690,8 @@ export declare namespace CRM {
     type PipelineCreateParams as PipelineCreateParams,
     type PipelineUpdateParams as PipelineUpdateParams,
     type PipelineDeleteParams as PipelineDeleteParams,
+    type PipelineGetParams as PipelineGetParams,
     type PipelineGetAuditParams as PipelineGetAuditParams,
-    type PipelineReadParams as PipelineReadParams,
     type PipelineReplaceParams as PipelineReplaceParams,
   };
 
@@ -519,8 +714,26 @@ export declare namespace CRM {
     type PropertyUpdate as PropertyUpdate,
     type PropertyCreateParams as PropertyCreateParams,
     type PropertyUpdateParams as PropertyUpdateParams,
+    type PropertyListParams as PropertyListParams,
     type PropertyDeleteParams as PropertyDeleteParams,
-    type PropertyGetByNameParams as PropertyGetByNameParams,
-    type PropertyReadParams as PropertyReadParams,
+    type PropertyGetParams as PropertyGetParams,
+  };
+
+  export {
+    Timeline as Timeline,
+    type BatchInputTimelineEvent as BatchInputTimelineEvent,
+    type BatchResponseTimelineEventResponse as BatchResponseTimelineEventResponse,
+    type BatchResponseTimelineEventResponseWithErrors as BatchResponseTimelineEventResponseWithErrors,
+    type CollectionResponseTimelineEventTemplateNoPaging as CollectionResponseTimelineEventTemplateNoPaging,
+    type EventDetail as EventDetail,
+    type TimelineEvent as TimelineEvent,
+    type TimelineEventIFrame as TimelineEventIFrame,
+    type TimelineEventResponse as TimelineEventResponse,
+    type TimelineEventTemplate as TimelineEventTemplate,
+    type TimelineEventTemplateCreateRequest as TimelineEventTemplateCreateRequest,
+    type TimelineEventTemplateToken as TimelineEventTemplateToken,
+    type TimelineEventTemplateTokenOption as TimelineEventTemplateTokenOption,
+    type TimelineEventTemplateTokenUpdateRequest as TimelineEventTemplateTokenUpdateRequest,
+    type TimelineEventTemplateUpdateRequest as TimelineEventTemplateUpdateRequest,
   };
 }

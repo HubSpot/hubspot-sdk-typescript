@@ -4,7 +4,14 @@ import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
 import * as CRMAPI from '../crm';
 import * as EmailsAPI from '../../marketing/emails';
-import * as V4API from './v4';
+import * as SchemaAPI from './schema/schema';
+import {
+  CollectionResponsePublicAssociationDefinitionNoPaging,
+  PublicAssociationDefinition,
+  Schema,
+  SchemaListParams,
+} from './schema/schema';
+import * as V4API from './v4/v4';
 import {
   AssociationSpec1,
   AssociationSpecWithLabel1,
@@ -26,18 +33,18 @@ import {
   ReportCreationResponse,
   StandardError1,
   V4,
-  V4ArchiveLabelsParams,
-  V4CreateDefaultParams,
-  V4CreateParams,
-  V4DeleteParams,
-  V4ListParams,
-} from './v4';
+  V4CreateDefaultAssociationParams,
+  V4DeleteAssociationParams,
+  V4ListAssociationsByTypeParams,
+  V4UpdateAssociationLabelsParams,
+} from './v4/v4';
 import { APIPromise } from '../../../core/api-promise';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
 export class Associations extends APIResource {
+  schema: SchemaAPI.Schema = new SchemaAPI.Schema(this._client);
   v4: V4API.V4 = new V4API.V4(this._client);
 
   /**
@@ -125,10 +132,6 @@ export class Associations extends APIResource {
 
 export interface BatchInputPublicAssociation {
   inputs: Array<PublicAssociation>;
-}
-
-export interface BatchInputPublicObjectID {
-  inputs: Array<Shared.PublicObjectID>;
 }
 
 export interface BatchResponsePublicAssociation {
@@ -226,12 +229,12 @@ export interface AssociationReadParams {
   inputs: Array<Shared.PublicObjectID>;
 }
 
+Associations.Schema = Schema;
 Associations.V4 = V4;
 
 export declare namespace Associations {
   export {
     type BatchInputPublicAssociation as BatchInputPublicAssociation,
-    type BatchInputPublicObjectID as BatchInputPublicObjectID,
     type BatchResponsePublicAssociation as BatchResponsePublicAssociation,
     type BatchResponsePublicAssociationMulti as BatchResponsePublicAssociationMulti,
     type PublicAssociation as PublicAssociation,
@@ -239,6 +242,13 @@ export declare namespace Associations {
     type AssociationCreateParams as AssociationCreateParams,
     type AssociationDeleteParams as AssociationDeleteParams,
     type AssociationReadParams as AssociationReadParams,
+  };
+
+  export {
+    Schema as Schema,
+    type CollectionResponsePublicAssociationDefinitionNoPaging as CollectionResponsePublicAssociationDefinitionNoPaging,
+    type PublicAssociationDefinition as PublicAssociationDefinition,
+    type SchemaListParams as SchemaListParams,
   };
 
   export {
@@ -262,10 +272,9 @@ export declare namespace Associations {
     type PublicFetchAssociationsBatchRequest as PublicFetchAssociationsBatchRequest,
     type ReportCreationResponse as ReportCreationResponse,
     type StandardError1 as StandardError1,
-    type V4CreateParams as V4CreateParams,
-    type V4ListParams as V4ListParams,
-    type V4DeleteParams as V4DeleteParams,
-    type V4ArchiveLabelsParams as V4ArchiveLabelsParams,
-    type V4CreateDefaultParams as V4CreateDefaultParams,
+    type V4CreateDefaultAssociationParams as V4CreateDefaultAssociationParams,
+    type V4DeleteAssociationParams as V4DeleteAssociationParams,
+    type V4ListAssociationsByTypeParams as V4ListAssociationsByTypeParams,
+    type V4UpdateAssociationLabelsParams as V4UpdateAssociationLabelsParams,
   };
 }

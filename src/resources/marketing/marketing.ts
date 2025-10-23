@@ -3,7 +3,6 @@
 import { APIResource } from '../../core/resource';
 import * as EmailsAPI from './emails';
 import {
-  AbTestCreateRequestVNext,
   AggregateEmailStatistics,
   CollectionResponseWithTotalEmailStatisticIntervalNoPaging,
   CollectionResponseWithTotalPublicEmailForwardPaging,
@@ -18,7 +17,6 @@ import {
   EmailGetHistogramParams,
   EmailGetRevisionByIDParams,
   EmailGetRevisionsParams,
-  EmailListFullParams,
   EmailListParams,
   EmailReadParams,
   EmailRestoreDraftRevisionParams,
@@ -95,6 +93,73 @@ import {
   SingleCheckboxField,
   SingleLineTextField,
 } from './forms';
+import * as MarketingEventsAPI from './marketing-events/marketing-events';
+import {
+  AppInfo,
+  AttendanceCounters,
+  BatchInputMarketingEventCreateRequestParams,
+  BatchInputMarketingEventEmailSubscriber,
+  BatchInputMarketingEventExternalUniqueIdentifier,
+  BatchInputMarketingEventPublicObjectIDDeleteRequest,
+  BatchInputMarketingEventPublicUpdateRequestFullV2,
+  BatchInputMarketingEventSubscriber,
+  BatchResponseMarketingEventPublicDefaultResponse,
+  BatchResponseMarketingEventPublicDefaultResponseV2,
+  BatchResponseMarketingEventPublicDefaultResponseV2WithErrors,
+  BatchResponseSubscriberEmailResponse,
+  BatchResponseSubscriberVidResponse,
+  CRMPropertyWrapper,
+  CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging,
+  CollectionResponseSearchPublicResponseWrapperNoPaging,
+  CollectionResponseWithTotalMarketingEventIdentifiersResponseNoPaging,
+  CollectionResponseWithTotalParticipationBreakdownForwardPaging,
+  CollectionResponseWithTotalPublicListNoPaging,
+  ContactAssociation,
+  EventDetailSettings,
+  EventDetailSettingsURL,
+  MarketingEventAssociation,
+  MarketingEventCancelByExternalEventIDParams,
+  MarketingEventCompleteByExternalEventIDParams,
+  MarketingEventCompleteRequestParams,
+  MarketingEventCreateParams,
+  MarketingEventCreateRequestParams,
+  MarketingEventDefaultResponse,
+  MarketingEventDeleteBatchByExternalEventIDParams,
+  MarketingEventDeleteBatchParams,
+  MarketingEventDeleteByExternalEventIDParams,
+  MarketingEventEmailSubscriber,
+  MarketingEventExternalUniqueIdentifier,
+  MarketingEventGetByExternalEventIDParams,
+  MarketingEventIdentifiersResponse,
+  MarketingEventListParams,
+  MarketingEventPublicDefaultResponse,
+  MarketingEventPublicDefaultResponseV2,
+  MarketingEventPublicObjectIDDeleteRequest,
+  MarketingEventPublicReadResponse,
+  MarketingEventPublicReadResponseV2,
+  MarketingEventPublicReadResponseV2sPage,
+  MarketingEventPublicUpdateRequestFullV2,
+  MarketingEventPublicUpdateRequestV2,
+  MarketingEventSearchByExternalEventIDParams,
+  MarketingEventSubscriber,
+  MarketingEventUpdateBatchParams,
+  MarketingEventUpdateByExternalEventIDParams,
+  MarketingEventUpdateParams,
+  MarketingEventUpdateRequestParams,
+  MarketingEventUpsertBatchParams,
+  MarketingEventUpsertByExternalEventIDParams,
+  MarketingEventUpsertSubscriberStateByEmailParams,
+  MarketingEventUpsertSubscriberStateByIDParams,
+  MarketingEvents,
+  ParticipationAssociations,
+  ParticipationBreakdown,
+  ParticipationProperties,
+  PropertyValue,
+  PublicList,
+  SearchPublicResponseWrapper,
+  SubscriberEmailResponse,
+  SubscriberVidResponse,
+} from './marketing-events/marketing-events';
 import * as SubscriptionsAPI from './subscriptions/subscriptions';
 import {
   PublicSubscriptionStatus,
@@ -106,21 +171,35 @@ import {
   SubscriptionUnsubscribeParams,
   Subscriptions,
 } from './subscriptions/subscriptions';
+import * as TransactionalAPI from './transactional/transactional';
+import {
+  CollectionResponseSmtpAPITokenViewForwardPaging,
+  EmailSendStatusView,
+  EventIDView,
+  PublicSingleSendEmail,
+  PublicSingleSendRequestEgg,
+  SmtpAPITokenRequestEgg,
+  SmtpAPITokenView,
+  Transactional,
+} from './transactional/transactional';
 
 export class Marketing extends APIResource {
   emails: EmailsAPI.Emails = new EmailsAPI.Emails(this._client);
   forms: FormsAPI.Forms = new FormsAPI.Forms(this._client);
+  marketingEvents: MarketingEventsAPI.MarketingEvents = new MarketingEventsAPI.MarketingEvents(this._client);
   subscriptions: SubscriptionsAPI.Subscriptions = new SubscriptionsAPI.Subscriptions(this._client);
+  transactional: TransactionalAPI.Transactional = new TransactionalAPI.Transactional(this._client);
 }
 
 Marketing.Emails = Emails;
 Marketing.Forms = Forms;
+Marketing.MarketingEvents = MarketingEvents;
 Marketing.Subscriptions = Subscriptions;
+Marketing.Transactional = Transactional;
 
 export declare namespace Marketing {
   export {
     Emails as Emails,
-    type AbTestCreateRequestVNext as AbTestCreateRequestVNext,
     type AggregateEmailStatistics as AggregateEmailStatistics,
     type CollectionResponseWithTotalEmailStatisticIntervalNoPaging as CollectionResponseWithTotalEmailStatisticIntervalNoPaging,
     type CollectionResponseWithTotalPublicEmailForwardPaging as CollectionResponseWithTotalPublicEmailForwardPaging,
@@ -159,7 +238,6 @@ export declare namespace Marketing {
     type EmailGetHistogramParams as EmailGetHistogramParams,
     type EmailGetRevisionByIDParams as EmailGetRevisionByIDParams,
     type EmailGetRevisionsParams as EmailGetRevisionsParams,
-    type EmailListFullParams as EmailListFullParams,
     type EmailReadParams as EmailReadParams,
     type EmailRestoreDraftRevisionParams as EmailRestoreDraftRevisionParams,
     type EmailRestoreRevisionParams as EmailRestoreRevisionParams,
@@ -213,6 +291,73 @@ export declare namespace Marketing {
   };
 
   export {
+    MarketingEvents as MarketingEvents,
+    type AppInfo as AppInfo,
+    type AttendanceCounters as AttendanceCounters,
+    type BatchInputMarketingEventCreateRequestParams as BatchInputMarketingEventCreateRequestParams,
+    type BatchInputMarketingEventEmailSubscriber as BatchInputMarketingEventEmailSubscriber,
+    type BatchInputMarketingEventExternalUniqueIdentifier as BatchInputMarketingEventExternalUniqueIdentifier,
+    type BatchInputMarketingEventPublicObjectIDDeleteRequest as BatchInputMarketingEventPublicObjectIDDeleteRequest,
+    type BatchInputMarketingEventPublicUpdateRequestFullV2 as BatchInputMarketingEventPublicUpdateRequestFullV2,
+    type BatchInputMarketingEventSubscriber as BatchInputMarketingEventSubscriber,
+    type BatchResponseMarketingEventPublicDefaultResponse as BatchResponseMarketingEventPublicDefaultResponse,
+    type BatchResponseMarketingEventPublicDefaultResponseV2 as BatchResponseMarketingEventPublicDefaultResponseV2,
+    type BatchResponseMarketingEventPublicDefaultResponseV2WithErrors as BatchResponseMarketingEventPublicDefaultResponseV2WithErrors,
+    type BatchResponseSubscriberEmailResponse as BatchResponseSubscriberEmailResponse,
+    type BatchResponseSubscriberVidResponse as BatchResponseSubscriberVidResponse,
+    type CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging as CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging,
+    type CollectionResponseSearchPublicResponseWrapperNoPaging as CollectionResponseSearchPublicResponseWrapperNoPaging,
+    type CollectionResponseWithTotalMarketingEventIdentifiersResponseNoPaging as CollectionResponseWithTotalMarketingEventIdentifiersResponseNoPaging,
+    type CollectionResponseWithTotalParticipationBreakdownForwardPaging as CollectionResponseWithTotalParticipationBreakdownForwardPaging,
+    type CollectionResponseWithTotalPublicListNoPaging as CollectionResponseWithTotalPublicListNoPaging,
+    type ContactAssociation as ContactAssociation,
+    type CRMPropertyWrapper as CRMPropertyWrapper,
+    type EventDetailSettings as EventDetailSettings,
+    type EventDetailSettingsURL as EventDetailSettingsURL,
+    type MarketingEventAssociation as MarketingEventAssociation,
+    type MarketingEventCompleteRequestParams as MarketingEventCompleteRequestParams,
+    type MarketingEventCreateRequestParams as MarketingEventCreateRequestParams,
+    type MarketingEventDefaultResponse as MarketingEventDefaultResponse,
+    type MarketingEventEmailSubscriber as MarketingEventEmailSubscriber,
+    type MarketingEventExternalUniqueIdentifier as MarketingEventExternalUniqueIdentifier,
+    type MarketingEventIdentifiersResponse as MarketingEventIdentifiersResponse,
+    type MarketingEventPublicDefaultResponse as MarketingEventPublicDefaultResponse,
+    type MarketingEventPublicDefaultResponseV2 as MarketingEventPublicDefaultResponseV2,
+    type MarketingEventPublicObjectIDDeleteRequest as MarketingEventPublicObjectIDDeleteRequest,
+    type MarketingEventPublicReadResponse as MarketingEventPublicReadResponse,
+    type MarketingEventPublicReadResponseV2 as MarketingEventPublicReadResponseV2,
+    type MarketingEventPublicUpdateRequestFullV2 as MarketingEventPublicUpdateRequestFullV2,
+    type MarketingEventPublicUpdateRequestV2 as MarketingEventPublicUpdateRequestV2,
+    type MarketingEventSubscriber as MarketingEventSubscriber,
+    type MarketingEventUpdateRequestParams as MarketingEventUpdateRequestParams,
+    type ParticipationAssociations as ParticipationAssociations,
+    type ParticipationBreakdown as ParticipationBreakdown,
+    type ParticipationProperties as ParticipationProperties,
+    type PropertyValue as PropertyValue,
+    type PublicList as PublicList,
+    type SearchPublicResponseWrapper as SearchPublicResponseWrapper,
+    type SubscriberEmailResponse as SubscriberEmailResponse,
+    type SubscriberVidResponse as SubscriberVidResponse,
+    type MarketingEventPublicReadResponseV2sPage as MarketingEventPublicReadResponseV2sPage,
+    type MarketingEventCreateParams as MarketingEventCreateParams,
+    type MarketingEventUpdateParams as MarketingEventUpdateParams,
+    type MarketingEventListParams as MarketingEventListParams,
+    type MarketingEventCancelByExternalEventIDParams as MarketingEventCancelByExternalEventIDParams,
+    type MarketingEventCompleteByExternalEventIDParams as MarketingEventCompleteByExternalEventIDParams,
+    type MarketingEventDeleteBatchParams as MarketingEventDeleteBatchParams,
+    type MarketingEventDeleteBatchByExternalEventIDParams as MarketingEventDeleteBatchByExternalEventIDParams,
+    type MarketingEventDeleteByExternalEventIDParams as MarketingEventDeleteByExternalEventIDParams,
+    type MarketingEventGetByExternalEventIDParams as MarketingEventGetByExternalEventIDParams,
+    type MarketingEventSearchByExternalEventIDParams as MarketingEventSearchByExternalEventIDParams,
+    type MarketingEventUpdateBatchParams as MarketingEventUpdateBatchParams,
+    type MarketingEventUpdateByExternalEventIDParams as MarketingEventUpdateByExternalEventIDParams,
+    type MarketingEventUpsertBatchParams as MarketingEventUpsertBatchParams,
+    type MarketingEventUpsertByExternalEventIDParams as MarketingEventUpsertByExternalEventIDParams,
+    type MarketingEventUpsertSubscriberStateByEmailParams as MarketingEventUpsertSubscriberStateByEmailParams,
+    type MarketingEventUpsertSubscriberStateByIDParams as MarketingEventUpsertSubscriberStateByIDParams,
+  };
+
+  export {
     Subscriptions as Subscriptions,
     type PublicSubscriptionStatus as PublicSubscriptionStatus,
     type PublicSubscriptionStatusesResponse as PublicSubscriptionStatusesResponse,
@@ -221,5 +366,16 @@ export declare namespace Marketing {
     type SubscriptionDefinitionsResponse as SubscriptionDefinitionsResponse,
     type SubscriptionSubscribeParams as SubscriptionSubscribeParams,
     type SubscriptionUnsubscribeParams as SubscriptionUnsubscribeParams,
+  };
+
+  export {
+    Transactional as Transactional,
+    type CollectionResponseSmtpAPITokenViewForwardPaging as CollectionResponseSmtpAPITokenViewForwardPaging,
+    type EmailSendStatusView as EmailSendStatusView,
+    type EventIDView as EventIDView,
+    type PublicSingleSendEmail as PublicSingleSendEmail,
+    type PublicSingleSendRequestEgg as PublicSingleSendRequestEgg,
+    type SmtpAPITokenRequestEgg as SmtpAPITokenRequestEgg,
+    type SmtpAPITokenView as SmtpAPITokenView,
   };
 }

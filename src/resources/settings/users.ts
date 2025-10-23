@@ -25,6 +25,22 @@ export class Users extends APIResource {
   }
 
   /**
+   * Modifies a user identified by `userId`. `userId` refers to the user's ID by
+   * default, or optionally email as specified by the `IdProperty` query param.
+   *
+   * @example
+   * ```ts
+   * const publicUser = await client.settings.users.update(
+   *   'userId',
+   * );
+   * ```
+   */
+  update(userID: string, params: UserUpdateParams, options?: RequestOptions): APIPromise<PublicUser> {
+    const { idProperty, ...body } = params;
+    return this._client.put(path`/settings/v3/users/${userID}`, { query: { idProperty }, body, ...options });
+  }
+
+  /**
    * Retrieves a list of users from an account
    *
    * @example
@@ -70,33 +86,43 @@ export class Users extends APIResource {
    *
    * @example
    * ```ts
-   * const publicUser = await client.settings.users.read(
+   * const publicUser = await client.settings.users.get(
    *   'userId',
    * );
    * ```
    */
-  read(
+  get(
     userID: string,
-    query: UserReadParams | null | undefined = {},
+    query: UserGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<PublicUser> {
     return this._client.get(path`/settings/v3/users/${userID}`, { query, ...options });
   }
 
   /**
-   * Modifies a user identified by `userId`. `userId` refers to the user's ID by
-   * default, or optionally email as specified by the `IdProperty` query param.
+   * Retrieves the roles on an account
    *
    * @example
    * ```ts
-   * const publicUser = await client.settings.users.replace(
-   *   'userId',
-   * );
+   * const collectionResponsePublicPermissionSetNoPaging =
+   *   await client.settings.users.listRoles();
    * ```
    */
-  replace(userID: string, params: UserReplaceParams, options?: RequestOptions): APIPromise<PublicUser> {
-    const { idProperty, ...body } = params;
-    return this._client.put(path`/settings/v3/users/${userID}`, { query: { idProperty }, body, ...options });
+  listRoles(options?: RequestOptions): APIPromise<CollectionResponsePublicPermissionSetNoPaging> {
+    return this._client.get('/settings/v3/users/roles', options);
+  }
+
+  /**
+   * View teams for this account
+   *
+   * @example
+   * ```ts
+   * const collectionResponsePublicTeamNoPaging =
+   *   await client.settings.users.listTeams();
+   * ```
+   */
+  listTeams(options?: RequestOptions): APIPromise<CollectionResponsePublicTeamNoPaging> {
+    return this._client.get('/settings/v3/users/teams', options);
   }
 }
 
@@ -291,25 +317,7 @@ export interface UserCreateParams {
   sendWelcomeEmail?: boolean;
 }
 
-export interface UserListParams extends PageParams {}
-
-export interface UserDeleteParams {
-  /**
-   * The name of a property with unique user values. Valid values are
-   * `USER_ID`(default) or `EMAIL`
-   */
-  idProperty?: 'USER_ID' | 'EMAIL';
-}
-
-export interface UserReadParams {
-  /**
-   * The name of a property with unique user values. Valid values are
-   * `USER_ID`(default) or `EMAIL`
-   */
-  idProperty?: 'USER_ID' | 'EMAIL';
-}
-
-export interface UserReplaceParams {
+export interface UserUpdateParams {
   /**
    * Query param: The name of a property with unique user values. Valid values are
    * `USER_ID`(default) or `EMAIL`
@@ -342,6 +350,24 @@ export interface UserReplaceParams {
   secondaryTeamIds?: Array<string>;
 }
 
+export interface UserListParams extends PageParams {}
+
+export interface UserDeleteParams {
+  /**
+   * The name of a property with unique user values. Valid values are
+   * `USER_ID`(default) or `EMAIL`
+   */
+  idProperty?: 'USER_ID' | 'EMAIL';
+}
+
+export interface UserGetParams {
+  /**
+   * The name of a property with unique user values. Valid values are
+   * `USER_ID`(default) or `EMAIL`
+   */
+  idProperty?: 'USER_ID' | 'EMAIL';
+}
+
 export declare namespace Users {
   export {
     type CollectionResponsePublicPermissionSetNoPaging as CollectionResponsePublicPermissionSetNoPaging,
@@ -354,9 +380,9 @@ export declare namespace Users {
     type UserProvisionRequest as UserProvisionRequest,
     type PublicUsersPage as PublicUsersPage,
     type UserCreateParams as UserCreateParams,
+    type UserUpdateParams as UserUpdateParams,
     type UserListParams as UserListParams,
     type UserDeleteParams as UserDeleteParams,
-    type UserReadParams as UserReadParams,
-    type UserReplaceParams as UserReplaceParams,
+    type UserGetParams as UserGetParams,
   };
 }

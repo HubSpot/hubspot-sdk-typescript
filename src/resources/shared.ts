@@ -3,6 +3,33 @@
 import { Page } from '../core/pagination';
 
 /**
+ * Request body object for creating A/B tests.
+ */
+export interface AbTestCreateRequestVNext {
+  /**
+   * ID of the object to test.
+   */
+  contentId: string;
+
+  /**
+   * Name of A/B test variation.
+   */
+  variationName: string;
+}
+
+export interface ActionResponse {
+  completedAt: string;
+
+  startedAt: string;
+
+  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+
+  links?: { [key: string]: string };
+
+  requestedAt?: string;
+}
+
+/**
  * Defines the type, direction, and details of the relationship between two CRM
  * objects.
  */
@@ -155,11 +182,1343 @@ export interface PreviousPage {
   link?: string;
 }
 
+export interface PublicAbsoluteComparativeTimestampRefineBy {
+  comparison: string;
+
+  timestamp: number;
+
+  type: 'ABSOLUTE_COMPARATIVE';
+}
+
+export interface PublicAbsoluteRangedTimestampRefineBy {
+  lowerTimestamp: number;
+
+  rangeType: string;
+
+  type: 'ABSOLUTE_RANGED';
+
+  upperTimestamp: number;
+}
+
+export interface PublicAdsSearchFilter {
+  adNetwork: string;
+
+  entityType: string;
+
+  filterType: 'ADS_SEARCH';
+
+  operator: string;
+
+  searchTerms: Array<string>;
+
+  searchTermType: string;
+}
+
+export interface PublicAdsTimeFilter {
+  filterType: 'ADS_TIME';
+
+  pruningRefineBy:
+    | PublicNumOccurrencesRefineBy
+    | PublicSetOccurrencesRefineBy
+    | PublicRelativeComparativeTimestampRefineBy
+    | PublicRelativeRangedTimestampRefineBy
+    | PublicAbsoluteComparativeTimestampRefineBy
+    | PublicAbsoluteRangedTimestampRefineBy
+    | PublicAllHistoryRefineBy
+    | PublicTimePointOperation
+    | PublicRangedTimeOperation;
+}
+
+export interface PublicAllHistoryRefineBy {
+  type: 'ALL_HISTORY';
+}
+
+export interface PublicAllPropertyTypesOperation {
+  includeObjectsWithNoValueSet: boolean;
+
+  operationType: 'ALL_PROPERTY';
+
+  operator: string;
+}
+
+export interface PublicAndFilterBranch {
+  filterBranches: Array<
+    | PublicOrFilterBranch
+    | PublicAndFilterBranch
+    | PublicNotAllFilterBranch
+    | PublicNotAnyFilterBranch
+    | PublicRestrictedFilterBranch
+    | PublicUnifiedEventsFilterBranch
+    | PublicPropertyAssociationFilterBranch
+    | PublicAssociationFilterBranch
+  >;
+
+  filterBranchOperator: string;
+
+  filterBranchType: 'AND';
+
+  filters: Array<
+    | PublicPropertyFilter
+    | PublicAssociationInListFilter
+    | PublicPageViewAnalyticsFilter
+    | PublicCtaAnalyticsFilter
+    | PublicEventAnalyticsFilter
+    | PublicFormSubmissionFilter
+    | PublicFormSubmissionOnPageFilter
+    | PublicIntegrationEventFilter
+    | PublicEmailSubscriptionFilter
+    | PublicCommunicationSubscriptionFilter
+    | PublicCampaignInfluencedFilter
+    | PublicSurveyMonkeyFilter
+    | PublicSurveyMonkeyValueFilter
+    | PublicWebinarFilter
+    | PublicEmailEventFilter
+    | PublicPrivacyAnalyticsFilter
+    | PublicAdsSearchFilter
+    | PublicAdsTimeFilter
+    | PublicInListFilter
+    | PublicNumAssociationsFilter
+    | PublicUnifiedEventsFilter
+    | PublicPropertyAssociationInListFilter
+    | PublicConstantFilter
+  >;
+}
+
+export interface PublicAssociationFilterBranch {
+  associationCategory: string;
+
+  associationTypeId: number;
+
+  filterBranches: Array<
+    | PublicOrFilterBranch
+    | PublicAndFilterBranch
+    | PublicNotAllFilterBranch
+    | PublicNotAnyFilterBranch
+    | PublicRestrictedFilterBranch
+    | PublicUnifiedEventsFilterBranch
+    | PublicPropertyAssociationFilterBranch
+    | PublicAssociationFilterBranch
+  >;
+
+  filterBranchOperator: string;
+
+  filterBranchType: 'ASSOCIATION';
+
+  filters: Array<
+    | PublicPropertyFilter
+    | PublicAssociationInListFilter
+    | PublicPageViewAnalyticsFilter
+    | PublicCtaAnalyticsFilter
+    | PublicEventAnalyticsFilter
+    | PublicFormSubmissionFilter
+    | PublicFormSubmissionOnPageFilter
+    | PublicIntegrationEventFilter
+    | PublicEmailSubscriptionFilter
+    | PublicCommunicationSubscriptionFilter
+    | PublicCampaignInfluencedFilter
+    | PublicSurveyMonkeyFilter
+    | PublicSurveyMonkeyValueFilter
+    | PublicWebinarFilter
+    | PublicEmailEventFilter
+    | PublicPrivacyAnalyticsFilter
+    | PublicAdsSearchFilter
+    | PublicAdsTimeFilter
+    | PublicInListFilter
+    | PublicNumAssociationsFilter
+    | PublicUnifiedEventsFilter
+    | PublicPropertyAssociationInListFilter
+    | PublicConstantFilter
+  >;
+
+  objectTypeId: string;
+
+  operator: string;
+}
+
+export interface PublicAssociationInListFilter {
+  associationCategory: string;
+
+  associationTypeId: number;
+
+  coalescingRefineBy:
+    | PublicNumOccurrencesRefineBy
+    | PublicSetOccurrencesRefineBy
+    | PublicRelativeComparativeTimestampRefineBy
+    | PublicRelativeRangedTimestampRefineBy
+    | PublicAbsoluteComparativeTimestampRefineBy
+    | PublicAbsoluteRangedTimestampRefineBy
+    | PublicAllHistoryRefineBy
+    | PublicTimePointOperation
+    | PublicRangedTimeOperation;
+
+  filterType: 'ASSOCIATION';
+
+  listId: string;
+
+  operator: string;
+
+  toObjectType?: string;
+
+  toObjectTypeId?: string;
+}
+
+export interface PublicBoolPropertyOperation {
+  includeObjectsWithNoValueSet: boolean;
+
+  operationType: 'BOOL';
+
+  operator: string;
+
+  value: boolean;
+}
+
+export interface PublicCalendarDatePropertyOperation {
+  includeObjectsWithNoValueSet: boolean;
+
+  operationType: 'CALENDAR_DATE';
+
+  operator: string;
+
+  timeUnit: string;
+
+  fiscalYearStart?:
+    | 'JANUARY'
+    | 'FEBRUARY'
+    | 'MARCH'
+    | 'APRIL'
+    | 'MAY'
+    | 'JUNE'
+    | 'JULY'
+    | 'AUGUST'
+    | 'SEPTEMBER'
+    | 'OCTOBER'
+    | 'NOVEMBER'
+    | 'DECEMBER';
+
+  timeUnitCount?: number;
+
+  useFiscalYear?: boolean;
+}
+
+export interface PublicCampaignInfluencedFilter {
+  campaignId: string;
+
+  filterType: 'CAMPAIGN_INFLUENCED';
+}
+
+export interface PublicCommunicationSubscriptionFilter {
+  acceptedOptStates: Array<string>;
+
+  channel: string;
+
+  filterType: 'COMMUNICATION_SUBSCRIPTION';
+
+  subscriptionIds: Array<string>;
+
+  subscriptionType: string;
+
+  businessUnitId?: string;
+}
+
+export interface PublicComparativeDatePropertyOperation {
+  comparisonPropertyName: string;
+
+  includeObjectsWithNoValueSet: boolean;
+
+  operationType: 'COMPARATIVE_DATE';
+
+  operator: string;
+
+  defaultComparisonValue?: string;
+}
+
+export interface PublicComparativePropertyUpdatedOperation {
+  comparisonPropertyName: string;
+
+  includeObjectsWithNoValueSet: boolean;
+
+  operationType: 'COMPARATIVE_PROPERTY_UPDATED';
+
+  operator: string;
+
+  defaultComparisonValue?: string;
+}
+
+export interface PublicConstantFilter {
+  filterType: 'CONSTANT';
+
+  shouldAccept: boolean;
+
+  source?: string;
+}
+
+export interface PublicCtaAnalyticsFilter {
+  ctaName: string;
+
+  filterType: 'CTA';
+
+  operator: string;
+
+  coalescingRefineBy?:
+    | PublicNumOccurrencesRefineBy
+    | PublicSetOccurrencesRefineBy
+    | PublicRelativeComparativeTimestampRefineBy
+    | PublicRelativeRangedTimestampRefineBy
+    | PublicAbsoluteComparativeTimestampRefineBy
+    | PublicAbsoluteRangedTimestampRefineBy
+    | PublicAllHistoryRefineBy
+    | PublicTimePointOperation
+    | PublicRangedTimeOperation;
+
+  pruningRefineBy?:
+    | PublicNumOccurrencesRefineBy
+    | PublicSetOccurrencesRefineBy
+    | PublicRelativeComparativeTimestampRefineBy
+    | PublicRelativeRangedTimestampRefineBy
+    | PublicAbsoluteComparativeTimestampRefineBy
+    | PublicAbsoluteRangedTimestampRefineBy
+    | PublicAllHistoryRefineBy
+    | PublicTimePointOperation
+    | PublicRangedTimeOperation;
+}
+
+export interface PublicDatePoint {
+  day: number;
+
+  month: number;
+
+  timeType: 'DATE';
+
+  year: number;
+
+  zoneId: string;
+
+  hour?: number;
+
+  millisecond?: number;
+
+  minute?: number;
+
+  second?: number;
+
+  timezoneSource?: string;
+}
+
+export interface PublicDatePropertyOperation {
+  day: number;
+
+  includeObjectsWithNoValueSet: boolean;
+
+  month: string;
+
+  operationType: 'DATE';
+
+  operator: string;
+
+  year: number;
+}
+
+export interface PublicDateTimePropertyOperation {
+  includeObjectsWithNoValueSet: boolean;
+
+  operationType: 'DATETIME';
+
+  operator: string;
+
+  requiresTimeZoneConversion: boolean;
+
+  timestamp: number;
+}
+
+export interface PublicEmailEventFilter {
+  appId: string;
+
+  emailId: string;
+
+  filterType: 'EMAIL_EVENT';
+
+  level: string;
+
+  operator:
+    | 'LINK_CLICKED'
+    | 'MARKED_SPAM'
+    | 'OPENED'
+    | 'OPENED_BUT_LINK_NOT_CLICKED'
+    | 'OPENED_BUT_NOT_REPLIED'
+    | 'REPLIED'
+    | 'UNSUBSCRIBED'
+    | 'BOUNCED'
+    | 'RECEIVED'
+    | 'RECEIVED_BUT_NOT_OPENED'
+    | 'SENT'
+    | 'SENT_BUT_LINK_NOT_CLICKED'
+    | 'SENT_BUT_NOT_RECEIVED';
+
+  clickUrl?: string;
+
+  pruningRefineBy?:
+    | PublicNumOccurrencesRefineBy
+    | PublicSetOccurrencesRefineBy
+    | PublicRelativeComparativeTimestampRefineBy
+    | PublicRelativeRangedTimestampRefineBy
+    | PublicAbsoluteComparativeTimestampRefineBy
+    | PublicAbsoluteRangedTimestampRefineBy
+    | PublicAllHistoryRefineBy
+    | PublicTimePointOperation
+    | PublicRangedTimeOperation;
+}
+
+export interface PublicEmailSubscriptionFilter {
+  acceptedStatuses: Array<string>;
+
+  filterType: 'EMAIL_SUBSCRIPTION';
+
+  subscriptionIds: Array<string>;
+
+  subscriptionType?: string;
+}
+
+export interface PublicEnumerationPropertyOperation {
+  includeObjectsWithNoValueSet: boolean;
+
+  operationType: 'ENUMERATION';
+
+  operator: string;
+
+  values: Array<string>;
+}
+
+export interface PublicEventAnalyticsFilter {
+  eventId: string;
+
+  filterType: 'EVENT';
+
+  operator: string;
+
+  coalescingRefineBy?:
+    | PublicNumOccurrencesRefineBy
+    | PublicSetOccurrencesRefineBy
+    | PublicRelativeComparativeTimestampRefineBy
+    | PublicRelativeRangedTimestampRefineBy
+    | PublicAbsoluteComparativeTimestampRefineBy
+    | PublicAbsoluteRangedTimestampRefineBy
+    | PublicAllHistoryRefineBy
+    | PublicTimePointOperation
+    | PublicRangedTimeOperation;
+
+  pruningRefineBy?:
+    | PublicNumOccurrencesRefineBy
+    | PublicSetOccurrencesRefineBy
+    | PublicRelativeComparativeTimestampRefineBy
+    | PublicRelativeRangedTimestampRefineBy
+    | PublicAbsoluteComparativeTimestampRefineBy
+    | PublicAbsoluteRangedTimestampRefineBy
+    | PublicAllHistoryRefineBy
+    | PublicTimePointOperation
+    | PublicRangedTimeOperation;
+}
+
+export interface PublicEventFilterMetadata {
+  operation:
+    | PublicBoolPropertyOperation
+    | PublicNumberPropertyOperation
+    | PublicStringPropertyOperation
+    | PublicDateTimePropertyOperation
+    | PublicRangedDatePropertyOperation
+    | PublicComparativePropertyUpdatedOperation
+    | PublicComparativeDatePropertyOperation
+    | PublicRollingDateRangePropertyOperation
+    | PublicRollingPropertyUpdatedOperation
+    | PublicEnumerationPropertyOperation
+    | PublicAllPropertyTypesOperation
+    | PublicRangedNumberPropertyOperation
+    | PublicMultiStringPropertyOperation
+    | PublicDatePropertyOperation
+    | PublicCalendarDatePropertyOperation
+    | PublicTimePointOperation
+    | PublicRangedTimeOperation;
+
+  property: string;
+}
+
+export interface PublicFiscalQuarterReference {
+  day: number;
+
+  month: number;
+
+  referenceType: 'FISCAL_QUARTER';
+
+  hour?: number;
+
+  millisecond?: number;
+
+  minute?: number;
+
+  second?: number;
+}
+
+export interface PublicFiscalYearReference {
+  day: number;
+
+  month: number;
+
+  referenceType: 'FISCAL_YEAR';
+
+  hour?: number;
+
+  millisecond?: number;
+
+  minute?: number;
+
+  second?: number;
+}
+
+export interface PublicFormSubmissionFilter {
+  filterType: 'FORM_SUBMISSION';
+
+  operator: 'FILLED_OUT' | 'NOT_FILLED_OUT';
+
+  coalescingRefineBy?:
+    | PublicNumOccurrencesRefineBy
+    | PublicSetOccurrencesRefineBy
+    | PublicRelativeComparativeTimestampRefineBy
+    | PublicRelativeRangedTimestampRefineBy
+    | PublicAbsoluteComparativeTimestampRefineBy
+    | PublicAbsoluteRangedTimestampRefineBy
+    | PublicAllHistoryRefineBy
+    | PublicTimePointOperation
+    | PublicRangedTimeOperation;
+
+  formId?: string;
+
+  pruningRefineBy?:
+    | PublicNumOccurrencesRefineBy
+    | PublicSetOccurrencesRefineBy
+    | PublicRelativeComparativeTimestampRefineBy
+    | PublicRelativeRangedTimestampRefineBy
+    | PublicAbsoluteComparativeTimestampRefineBy
+    | PublicAbsoluteRangedTimestampRefineBy
+    | PublicAllHistoryRefineBy
+    | PublicTimePointOperation
+    | PublicRangedTimeOperation;
+}
+
+export interface PublicFormSubmissionOnPageFilter {
+  filterType: 'FORM_SUBMISSION_ON_PAGE';
+
+  operator: 'FILLED_OUT' | 'NOT_FILLED_OUT';
+
+  pageId: string;
+
+  coalescingRefineBy?:
+    | PublicNumOccurrencesRefineBy
+    | PublicSetOccurrencesRefineBy
+    | PublicRelativeComparativeTimestampRefineBy
+    | PublicRelativeRangedTimestampRefineBy
+    | PublicAbsoluteComparativeTimestampRefineBy
+    | PublicAbsoluteRangedTimestampRefineBy
+    | PublicAllHistoryRefineBy
+    | PublicTimePointOperation
+    | PublicRangedTimeOperation;
+
+  formId?: string;
+
+  pruningRefineBy?:
+    | PublicNumOccurrencesRefineBy
+    | PublicSetOccurrencesRefineBy
+    | PublicRelativeComparativeTimestampRefineBy
+    | PublicRelativeRangedTimestampRefineBy
+    | PublicAbsoluteComparativeTimestampRefineBy
+    | PublicAbsoluteRangedTimestampRefineBy
+    | PublicAllHistoryRefineBy
+    | PublicTimePointOperation
+    | PublicRangedTimeOperation;
+}
+
+export interface PublicIndexedTimePoint {
+  indexReference:
+    | PublicNowReference
+    | PublicTodayReference
+    | PublicWeekReference
+    | PublicFiscalQuarterReference
+    | PublicFiscalYearReference
+    | PublicYearReference
+    | PublicQuarterReference
+    | PublicMonthReference;
+
+  timeType: 'INDEXED';
+
+  zoneId: string;
+
+  offset?: PublicIndexOffset;
+
+  timezoneSource?: string;
+}
+
+export interface PublicIndexOffset {
+  days?: number;
+
+  hours?: number;
+
+  milliseconds?: number;
+
+  minutes?: number;
+
+  months?: number;
+
+  quarters?: number;
+
+  seconds?: number;
+
+  weeks?: number;
+
+  years?: number;
+}
+
+export interface PublicInListFilter {
+  filterType: 'IN_LIST';
+
+  listId: string;
+
+  operator: string;
+
+  metadata?: PublicInListFilterMetadata;
+}
+
+export interface PublicInListFilterMetadata {
+  id: string;
+
+  inListType: string;
+}
+
+export interface PublicIntegrationEventFilter {
+  eventTypeId: number;
+
+  filterLines: Array<PublicEventFilterMetadata>;
+
+  filterType: 'INTEGRATION_EVENT';
+}
+
+export interface PublicMonthReference {
+  day: number;
+
+  referenceType: 'MONTH';
+
+  hour?: number;
+
+  millisecond?: number;
+
+  minute?: number;
+
+  second?: number;
+}
+
+export interface PublicMultiStringPropertyOperation {
+  includeObjectsWithNoValueSet: boolean;
+
+  operationType: 'MULTISTRING';
+
+  operator: string;
+
+  values: Array<string>;
+}
+
+export interface PublicNotAllFilterBranch {
+  filterBranches: Array<
+    | PublicOrFilterBranch
+    | PublicAndFilterBranch
+    | PublicNotAllFilterBranch
+    | PublicNotAnyFilterBranch
+    | PublicRestrictedFilterBranch
+    | PublicUnifiedEventsFilterBranch
+    | PublicPropertyAssociationFilterBranch
+    | PublicAssociationFilterBranch
+  >;
+
+  filterBranchOperator: string;
+
+  filterBranchType: 'NOT_ALL';
+
+  filters: Array<
+    | PublicPropertyFilter
+    | PublicAssociationInListFilter
+    | PublicPageViewAnalyticsFilter
+    | PublicCtaAnalyticsFilter
+    | PublicEventAnalyticsFilter
+    | PublicFormSubmissionFilter
+    | PublicFormSubmissionOnPageFilter
+    | PublicIntegrationEventFilter
+    | PublicEmailSubscriptionFilter
+    | PublicCommunicationSubscriptionFilter
+    | PublicCampaignInfluencedFilter
+    | PublicSurveyMonkeyFilter
+    | PublicSurveyMonkeyValueFilter
+    | PublicWebinarFilter
+    | PublicEmailEventFilter
+    | PublicPrivacyAnalyticsFilter
+    | PublicAdsSearchFilter
+    | PublicAdsTimeFilter
+    | PublicInListFilter
+    | PublicNumAssociationsFilter
+    | PublicUnifiedEventsFilter
+    | PublicPropertyAssociationInListFilter
+    | PublicConstantFilter
+  >;
+}
+
+export interface PublicNotAnyFilterBranch {
+  filterBranches: Array<
+    | PublicOrFilterBranch
+    | PublicAndFilterBranch
+    | PublicNotAllFilterBranch
+    | PublicNotAnyFilterBranch
+    | PublicRestrictedFilterBranch
+    | PublicUnifiedEventsFilterBranch
+    | PublicPropertyAssociationFilterBranch
+    | PublicAssociationFilterBranch
+  >;
+
+  filterBranchOperator: string;
+
+  filterBranchType: 'NOT_ANY';
+
+  filters: Array<
+    | PublicPropertyFilter
+    | PublicAssociationInListFilter
+    | PublicPageViewAnalyticsFilter
+    | PublicCtaAnalyticsFilter
+    | PublicEventAnalyticsFilter
+    | PublicFormSubmissionFilter
+    | PublicFormSubmissionOnPageFilter
+    | PublicIntegrationEventFilter
+    | PublicEmailSubscriptionFilter
+    | PublicCommunicationSubscriptionFilter
+    | PublicCampaignInfluencedFilter
+    | PublicSurveyMonkeyFilter
+    | PublicSurveyMonkeyValueFilter
+    | PublicWebinarFilter
+    | PublicEmailEventFilter
+    | PublicPrivacyAnalyticsFilter
+    | PublicAdsSearchFilter
+    | PublicAdsTimeFilter
+    | PublicInListFilter
+    | PublicNumAssociationsFilter
+    | PublicUnifiedEventsFilter
+    | PublicPropertyAssociationInListFilter
+    | PublicConstantFilter
+  >;
+}
+
+export interface PublicNowReference {
+  referenceType: 'NOW';
+
+  hour?: number;
+
+  millisecond?: number;
+
+  minute?: number;
+
+  second?: number;
+}
+
+export interface PublicNumAssociationsFilter {
+  associationCategory: string;
+
+  associationTypeId: number;
+
+  coalescingRefineBy:
+    | PublicNumOccurrencesRefineBy
+    | PublicSetOccurrencesRefineBy
+    | PublicRelativeComparativeTimestampRefineBy
+    | PublicRelativeRangedTimestampRefineBy
+    | PublicAbsoluteComparativeTimestampRefineBy
+    | PublicAbsoluteRangedTimestampRefineBy
+    | PublicAllHistoryRefineBy
+    | PublicTimePointOperation
+    | PublicRangedTimeOperation;
+
+  filterType: 'NUM_ASSOCIATIONS';
+}
+
+export interface PublicNumberPropertyOperation {
+  includeObjectsWithNoValueSet: boolean;
+
+  operationType: 'NUMBER';
+
+  operator: string;
+
+  value: number;
+}
+
+export interface PublicNumOccurrencesRefineBy {
+  type: 'NUM_OCCURRENCES';
+
+  maxOccurrences?: number;
+
+  minOccurrences?: number;
+}
+
 export interface PublicObjectID {
   /**
    * The unique ID that identifies an object.
    */
   id: string;
+}
+
+export interface PublicOrFilterBranch {
+  filterBranches: Array<
+    | PublicOrFilterBranch
+    | PublicAndFilterBranch
+    | PublicNotAllFilterBranch
+    | PublicNotAnyFilterBranch
+    | PublicRestrictedFilterBranch
+    | PublicUnifiedEventsFilterBranch
+    | PublicPropertyAssociationFilterBranch
+    | PublicAssociationFilterBranch
+  >;
+
+  filterBranchOperator: string;
+
+  filterBranchType: 'OR';
+
+  filters: Array<
+    | PublicPropertyFilter
+    | PublicAssociationInListFilter
+    | PublicPageViewAnalyticsFilter
+    | PublicCtaAnalyticsFilter
+    | PublicEventAnalyticsFilter
+    | PublicFormSubmissionFilter
+    | PublicFormSubmissionOnPageFilter
+    | PublicIntegrationEventFilter
+    | PublicEmailSubscriptionFilter
+    | PublicCommunicationSubscriptionFilter
+    | PublicCampaignInfluencedFilter
+    | PublicSurveyMonkeyFilter
+    | PublicSurveyMonkeyValueFilter
+    | PublicWebinarFilter
+    | PublicEmailEventFilter
+    | PublicPrivacyAnalyticsFilter
+    | PublicAdsSearchFilter
+    | PublicAdsTimeFilter
+    | PublicInListFilter
+    | PublicNumAssociationsFilter
+    | PublicUnifiedEventsFilter
+    | PublicPropertyAssociationInListFilter
+    | PublicConstantFilter
+  >;
+}
+
+export interface PublicPageViewAnalyticsFilter {
+  filterType: 'PAGE_VIEW';
+
+  operator: string;
+
+  pageUrl: string;
+
+  coalescingRefineBy?:
+    | PublicNumOccurrencesRefineBy
+    | PublicSetOccurrencesRefineBy
+    | PublicRelativeComparativeTimestampRefineBy
+    | PublicRelativeRangedTimestampRefineBy
+    | PublicAbsoluteComparativeTimestampRefineBy
+    | PublicAbsoluteRangedTimestampRefineBy
+    | PublicAllHistoryRefineBy
+    | PublicTimePointOperation
+    | PublicRangedTimeOperation;
+
+  enableTracking?: boolean;
+
+  pruningRefineBy?:
+    | PublicNumOccurrencesRefineBy
+    | PublicSetOccurrencesRefineBy
+    | PublicRelativeComparativeTimestampRefineBy
+    | PublicRelativeRangedTimestampRefineBy
+    | PublicAbsoluteComparativeTimestampRefineBy
+    | PublicAbsoluteRangedTimestampRefineBy
+    | PublicAllHistoryRefineBy
+    | PublicTimePointOperation
+    | PublicRangedTimeOperation;
+}
+
+export interface PublicPrivacyAnalyticsFilter {
+  filterType: 'PRIVACY';
+
+  operator: string;
+
+  privacyName: string;
+}
+
+export interface PublicPropertyAssociationFilterBranch {
+  filterBranches: Array<
+    | PublicOrFilterBranch
+    | PublicAndFilterBranch
+    | PublicNotAllFilterBranch
+    | PublicNotAnyFilterBranch
+    | PublicRestrictedFilterBranch
+    | PublicUnifiedEventsFilterBranch
+    | PublicPropertyAssociationFilterBranch
+    | PublicAssociationFilterBranch
+  >;
+
+  filterBranchOperator: string;
+
+  filterBranchType: 'PROPERTY_ASSOCIATION';
+
+  filters: Array<
+    | PublicPropertyFilter
+    | PublicAssociationInListFilter
+    | PublicPageViewAnalyticsFilter
+    | PublicCtaAnalyticsFilter
+    | PublicEventAnalyticsFilter
+    | PublicFormSubmissionFilter
+    | PublicFormSubmissionOnPageFilter
+    | PublicIntegrationEventFilter
+    | PublicEmailSubscriptionFilter
+    | PublicCommunicationSubscriptionFilter
+    | PublicCampaignInfluencedFilter
+    | PublicSurveyMonkeyFilter
+    | PublicSurveyMonkeyValueFilter
+    | PublicWebinarFilter
+    | PublicEmailEventFilter
+    | PublicPrivacyAnalyticsFilter
+    | PublicAdsSearchFilter
+    | PublicAdsTimeFilter
+    | PublicInListFilter
+    | PublicNumAssociationsFilter
+    | PublicUnifiedEventsFilter
+    | PublicPropertyAssociationInListFilter
+    | PublicConstantFilter
+  >;
+
+  objectTypeId: string;
+
+  operator: string;
+
+  propertyWithObjectId: string;
+}
+
+export interface PublicPropertyAssociationInListFilter {
+  coalescingRefineBy:
+    | PublicNumOccurrencesRefineBy
+    | PublicSetOccurrencesRefineBy
+    | PublicRelativeComparativeTimestampRefineBy
+    | PublicRelativeRangedTimestampRefineBy
+    | PublicAbsoluteComparativeTimestampRefineBy
+    | PublicAbsoluteRangedTimestampRefineBy
+    | PublicAllHistoryRefineBy
+    | PublicTimePointOperation
+    | PublicRangedTimeOperation;
+
+  filterType: 'PROPERTY_ASSOCIATION';
+
+  listId: string;
+
+  operator: string;
+
+  propertyWithObjectId: string;
+
+  toObjectTypeId?: string;
+}
+
+export interface PublicPropertyFilter {
+  filterType: 'PROPERTY';
+
+  operation:
+    | PublicBoolPropertyOperation
+    | PublicNumberPropertyOperation
+    | PublicStringPropertyOperation
+    | PublicDateTimePropertyOperation
+    | PublicRangedDatePropertyOperation
+    | PublicComparativePropertyUpdatedOperation
+    | PublicComparativeDatePropertyOperation
+    | PublicRollingDateRangePropertyOperation
+    | PublicRollingPropertyUpdatedOperation
+    | PublicEnumerationPropertyOperation
+    | PublicAllPropertyTypesOperation
+    | PublicRangedNumberPropertyOperation
+    | PublicMultiStringPropertyOperation
+    | PublicDatePropertyOperation
+    | PublicCalendarDatePropertyOperation
+    | PublicTimePointOperation
+    | PublicRangedTimeOperation;
+
+  property: string;
+}
+
+export interface PublicPropertyReferencedTime {
+  property: string;
+
+  referenceType: string;
+
+  timeType: 'PROPERTY_REFERENCED';
+
+  zoneId: string;
+
+  timezoneSource?: string;
+}
+
+export interface PublicQuarterReference {
+  day: number;
+
+  month: number;
+
+  referenceType: 'QUARTER';
+
+  hour?: number;
+
+  millisecond?: number;
+
+  minute?: number;
+
+  second?: number;
+}
+
+export interface PublicRangedDatePropertyOperation {
+  includeObjectsWithNoValueSet: boolean;
+
+  lowerBound: number;
+
+  operationType: 'RANGED_DATE';
+
+  operator: string;
+
+  requiresTimeZoneConversion: boolean;
+
+  upperBound: number;
+}
+
+export interface PublicRangedNumberPropertyOperation {
+  includeObjectsWithNoValueSet: boolean;
+
+  lowerBound: number;
+
+  operationType: 'NUMBER_RANGED';
+
+  operator: string;
+
+  upperBound: number;
+}
+
+export interface PublicRangedTimeOperation {
+  includeObjectsWithNoValueSet: boolean;
+
+  lowerBoundTimePoint: PublicDatePoint | PublicIndexedTimePoint | PublicPropertyReferencedTime;
+
+  operationType: string;
+
+  operator: string;
+
+  type: 'TIME_RANGED';
+
+  upperBoundTimePoint: PublicDatePoint | PublicIndexedTimePoint | PublicPropertyReferencedTime;
+
+  lowerBoundEndpointBehavior?: string;
+
+  propertyParser?: string;
+
+  upperBoundEndpointBehavior?: string;
+}
+
+export interface PublicRelativeComparativeTimestampRefineBy {
+  comparison: string;
+
+  timeOffset: PublicTimeOffset;
+
+  type: 'RELATIVE_COMPARATIVE';
+}
+
+export interface PublicRelativeRangedTimestampRefineBy {
+  lowerBoundOffset: PublicTimeOffset;
+
+  rangeType: string;
+
+  type: 'RELATIVE_RANGED';
+
+  upperBoundOffset: PublicTimeOffset;
+}
+
+export interface PublicRestrictedFilterBranch {
+  filterBranches: Array<
+    | PublicOrFilterBranch
+    | PublicAndFilterBranch
+    | PublicNotAllFilterBranch
+    | PublicNotAnyFilterBranch
+    | PublicRestrictedFilterBranch
+    | PublicUnifiedEventsFilterBranch
+    | PublicPropertyAssociationFilterBranch
+    | PublicAssociationFilterBranch
+  >;
+
+  filterBranchOperator: string;
+
+  filterBranchType: 'RESTRICTED';
+
+  filters: Array<
+    | PublicPropertyFilter
+    | PublicAssociationInListFilter
+    | PublicPageViewAnalyticsFilter
+    | PublicCtaAnalyticsFilter
+    | PublicEventAnalyticsFilter
+    | PublicFormSubmissionFilter
+    | PublicFormSubmissionOnPageFilter
+    | PublicIntegrationEventFilter
+    | PublicEmailSubscriptionFilter
+    | PublicCommunicationSubscriptionFilter
+    | PublicCampaignInfluencedFilter
+    | PublicSurveyMonkeyFilter
+    | PublicSurveyMonkeyValueFilter
+    | PublicWebinarFilter
+    | PublicEmailEventFilter
+    | PublicPrivacyAnalyticsFilter
+    | PublicAdsSearchFilter
+    | PublicAdsTimeFilter
+    | PublicInListFilter
+    | PublicNumAssociationsFilter
+    | PublicUnifiedEventsFilter
+    | PublicPropertyAssociationInListFilter
+    | PublicConstantFilter
+  >;
+}
+
+export interface PublicRollingDateRangePropertyOperation {
+  includeObjectsWithNoValueSet: boolean;
+
+  numberOfDays: number;
+
+  operationType: 'ROLLING_DATE_RANGE';
+
+  operator: string;
+
+  requiresTimeZoneConversion: boolean;
+}
+
+export interface PublicRollingPropertyUpdatedOperation {
+  includeObjectsWithNoValueSet: boolean;
+
+  numberOfDays: number;
+
+  operationType: 'ROLLING_PROPERTY_UPDATED';
+
+  operator: string;
+}
+
+export interface PublicSetOccurrencesRefineBy {
+  setType: string;
+
+  type: 'SET_OCCURRENCES';
+}
+
+export interface PublicStringPropertyOperation {
+  includeObjectsWithNoValueSet: boolean;
+
+  operationType: 'STRING';
+
+  operator: string;
+
+  value: string;
+}
+
+export interface PublicSurveyMonkeyFilter {
+  filterType: 'SURVEY_MONKEY';
+
+  operator: string;
+
+  surveyId: string;
+}
+
+export interface PublicSurveyMonkeyValueFilter {
+  filterType: 'SURVEY_MONKEY_VALUE';
+
+  operator: string;
+
+  surveyId: string;
+
+  surveyQuestion: string;
+
+  valueComparison:
+    | PublicBoolPropertyOperation
+    | PublicNumberPropertyOperation
+    | PublicStringPropertyOperation
+    | PublicDateTimePropertyOperation
+    | PublicRangedDatePropertyOperation
+    | PublicComparativePropertyUpdatedOperation
+    | PublicComparativeDatePropertyOperation
+    | PublicRollingDateRangePropertyOperation
+    | PublicRollingPropertyUpdatedOperation
+    | PublicEnumerationPropertyOperation
+    | PublicAllPropertyTypesOperation
+    | PublicRangedNumberPropertyOperation
+    | PublicMultiStringPropertyOperation
+    | PublicDatePropertyOperation
+    | PublicCalendarDatePropertyOperation
+    | PublicTimePointOperation
+    | PublicRangedTimeOperation;
+
+  surveyAnswerColId?: string;
+
+  surveyAnswerRowId?: string;
+}
+
+export interface PublicTimeOffset {
+  amount: number;
+
+  offsetDirection: string;
+
+  timeUnit: string;
+}
+
+export interface PublicTimePointOperation {
+  includeObjectsWithNoValueSet: boolean;
+
+  operationType: 'TIME_POINT';
+
+  operator: string;
+
+  timePoint: PublicDatePoint | PublicIndexedTimePoint | PublicPropertyReferencedTime;
+
+  type: string;
+
+  endpointBehavior?: string;
+
+  propertyParser?: string;
+}
+
+export interface PublicTodayReference {
+  referenceType: 'TODAY';
+
+  hour?: number;
+
+  millisecond?: number;
+
+  minute?: number;
+
+  second?: number;
+}
+
+export interface PublicUnifiedEventsFilter {
+  filterLines: Array<PublicEventFilterMetadata>;
+
+  filterType: 'UNIFIED_EVENTS';
+
+  coalescingRefineBy?:
+    | PublicNumOccurrencesRefineBy
+    | PublicSetOccurrencesRefineBy
+    | PublicRelativeComparativeTimestampRefineBy
+    | PublicRelativeRangedTimestampRefineBy
+    | PublicAbsoluteComparativeTimestampRefineBy
+    | PublicAbsoluteRangedTimestampRefineBy
+    | PublicAllHistoryRefineBy
+    | PublicTimePointOperation
+    | PublicRangedTimeOperation;
+
+  eventTypeId?: string;
+
+  pruningRefineBy?:
+    | PublicNumOccurrencesRefineBy
+    | PublicSetOccurrencesRefineBy
+    | PublicRelativeComparativeTimestampRefineBy
+    | PublicRelativeRangedTimestampRefineBy
+    | PublicAbsoluteComparativeTimestampRefineBy
+    | PublicAbsoluteRangedTimestampRefineBy
+    | PublicAllHistoryRefineBy
+    | PublicTimePointOperation
+    | PublicRangedTimeOperation;
+}
+
+export interface PublicUnifiedEventsFilterBranch {
+  eventTypeId: string;
+
+  filterBranches: Array<
+    | PublicOrFilterBranch
+    | PublicAndFilterBranch
+    | PublicNotAllFilterBranch
+    | PublicNotAnyFilterBranch
+    | PublicRestrictedFilterBranch
+    | PublicUnifiedEventsFilterBranch
+    | PublicPropertyAssociationFilterBranch
+    | PublicAssociationFilterBranch
+  >;
+
+  filterBranchOperator: string;
+
+  filterBranchType: 'UNIFIED_EVENTS';
+
+  filters: Array<
+    | PublicPropertyFilter
+    | PublicAssociationInListFilter
+    | PublicPageViewAnalyticsFilter
+    | PublicCtaAnalyticsFilter
+    | PublicEventAnalyticsFilter
+    | PublicFormSubmissionFilter
+    | PublicFormSubmissionOnPageFilter
+    | PublicIntegrationEventFilter
+    | PublicEmailSubscriptionFilter
+    | PublicCommunicationSubscriptionFilter
+    | PublicCampaignInfluencedFilter
+    | PublicSurveyMonkeyFilter
+    | PublicSurveyMonkeyValueFilter
+    | PublicWebinarFilter
+    | PublicEmailEventFilter
+    | PublicPrivacyAnalyticsFilter
+    | PublicAdsSearchFilter
+    | PublicAdsTimeFilter
+    | PublicInListFilter
+    | PublicNumAssociationsFilter
+    | PublicUnifiedEventsFilter
+    | PublicPropertyAssociationInListFilter
+    | PublicConstantFilter
+  >;
+
+  operator: 'HAS_COMPLETED' | 'HAS_NOT_COMPLETED';
+
+  coalescingRefineBy?:
+    | PublicNumOccurrencesRefineBy
+    | PublicSetOccurrencesRefineBy
+    | PublicRelativeComparativeTimestampRefineBy
+    | PublicRelativeRangedTimestampRefineBy
+    | PublicAbsoluteComparativeTimestampRefineBy
+    | PublicAbsoluteRangedTimestampRefineBy
+    | PublicAllHistoryRefineBy
+    | PublicTimePointOperation
+    | PublicRangedTimeOperation;
+}
+
+export interface PublicWebinarFilter {
+  filterType: 'WEBINAR';
+
+  operator: string;
+
+  webinarId?: string;
+}
+
+export interface PublicWeekReference {
+  dayOfWeek: 'MONDAY' | 'TUESDAY' | 'WEDNESDAY' | 'THURSDAY' | 'FRIDAY' | 'SATURDAY' | 'SUNDAY';
+
+  referenceType: 'WEEK';
+
+  hour?: number;
+
+  millisecond?: number;
+
+  minute?: number;
+
+  second?: number;
+}
+
+export interface PublicYearReference {
+  day: number;
+
+  month: number;
+
+  referenceType: 'YEAR';
+
+  hour?: number;
+
+  millisecond?: number;
+
+  minute?: number;
+
+  second?: number;
 }
 
 /**
@@ -205,6 +1564,12 @@ export interface StandardError {
    * A more specific error category within each main category.
    */
   subCategory?: unknown;
+}
+
+export interface TaskLocator {
+  id: string;
+
+  links?: { [key: string]: string };
 }
 
 /**

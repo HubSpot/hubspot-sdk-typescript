@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
-import * as V4API from './v4';
+import * as V4API from './v4/v4';
 import {
   ActionResponseWithResultsPublicStatus,
   ActionResponseWithResultsPublicWideStatus,
@@ -24,7 +24,7 @@ import {
   PublicWideStatus,
   PublicWideStatusBulkResponse,
   V4,
-} from './v4';
+} from './v4/v4';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';

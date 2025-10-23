@@ -49,4 +49,6 @@ export {
   type SocialMetadata,
   type SocialMetadataIntegrationAttachment,
   type UnsupportedContentAttachment,
-} from './custom-channels';
+  type CustomChannelCreateParams,
+  type CustomChannelUpdateParams,
+} from './custom-channels/index';

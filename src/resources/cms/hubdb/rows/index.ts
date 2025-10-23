@@ -1,6 +1,15 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Draft } from './draft/index';
+export {
+  Batch,
+  type BatchCloneBatchParams,
+  type BatchCreateBatchParams,
+  type BatchGetBatchParams,
+  type BatchGetDraftBatchParams,
+  type BatchPurgeBatchParams,
+  type BatchReplaceBatchParams,
+  type BatchUpdateBatchParams,
+} from './batch';
 export {
   Rows,
   type RowCreateParams,
@@ -9,7 +18,7 @@ export {
   type RowDeleteDraftParams,
   type RowGetParams,
   type RowGetDraftParams,
-  type RowListDraftsParams,
+  type RowListDraftParams,
   type RowReplaceDraftParams,
   type RowUpdateDraftParams,
 } from './rows';

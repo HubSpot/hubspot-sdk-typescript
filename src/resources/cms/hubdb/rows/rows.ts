@@ -1,16 +1,28 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
+import * as Shared from '../../../shared';
+import { HubDBTableRowV3WrappersPage } from '../../../shared';
 import * as HubdbAPI from '../hubdb';
-import * as DraftAPI from './draft/draft';
-import { Draft } from './draft/draft';
+import * as BatchAPI from './batch';
+import {
+  Batch,
+  BatchCloneBatchParams,
+  BatchCreateBatchParams,
+  BatchGetBatchParams,
+  BatchGetDraftBatchParams,
+  BatchPurgeBatchParams,
+  BatchReplaceBatchParams,
+  BatchUpdateBatchParams,
+} from './batch';
 import { APIPromise } from '../../../../core/api-promise';
+import { Page, type PageParams, PagePromise } from '../../../../core/pagination';
 import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
 export class Rows extends APIResource {
-  draft: DraftAPI.Draft = new DraftAPI.Draft(this._client);
+  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
 
   /**
    * Add a new row to a HubDB table. New rows will be added to the draft version of
@@ -41,8 +53,12 @@ export class Rows extends APIResource {
     tableIDOrName: string,
     query: RowListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<HubdbAPI.UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3> {
-    return this._client.get(path`/cms/v3/hubdb/tables/${tableIDOrName}/rows`, { query, ...options });
+  ): PagePromise<HubDBTableRowV3WrappersPage, Shared.HubDBTableRowV3Wrapper> {
+    return this._client.getAPIList(
+      path`/cms/v3/hubdb/tables/${tableIDOrName}/rows`,
+      Page<Shared.HubDBTableRowV3Wrapper>,
+      { query, ...options },
+    );
   }
 
   /**
@@ -106,9 +122,9 @@ export class Rows extends APIResource {
    * [overview section](https://developers.hubspot.com/docs/api/cms/hubdb#filtering-and-sorting-table-rows)
    * for detailed filtering and sorting options.
    */
-  listDrafts(
+  listDraft(
     tableIDOrName: string,
-    query: RowListDraftsParams | null | undefined = {},
+    query: RowListDraftParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<HubdbAPI.UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3> {
     return this._client.get(path`/cms/v3/hubdb/tables/${tableIDOrName}/rows/draft`, { query, ...options });
@@ -177,19 +193,8 @@ export interface RowCreateParams {
   path?: string;
 }
 
-export interface RowListParams {
-  /**
-   * The cursor token value to get the next set of results. You can get this from the
-   * `paging.next.after` JSON property of a paged response containing more results.
-   */
-  after?: string;
-
+export interface RowListParams extends PageParams {
   archived?: boolean;
-
-  /**
-   * The maximum number of results to return. Default is `1000`.
-   */
-  limit?: number;
 
   offset?: number;
 
@@ -249,7 +254,7 @@ export interface RowGetDraftParams {
   archived?: boolean;
 }
 
-export interface RowListDraftsParams {
+export interface RowListDraftParams {
   /**
    * The cursor token value to get the next set of results. You can get this from the
    * `paging.next.after` JSON property of a paged response containing more results.
@@ -346,7 +351,7 @@ export interface RowUpdateDraftParams {
   path?: string;
 }
 
-Rows.Draft = Draft;
+Rows.Batch = Batch;
 
 export declare namespace Rows {
   export {
@@ -356,10 +361,21 @@ export declare namespace Rows {
     type RowDeleteDraftParams as RowDeleteDraftParams,
     type RowGetParams as RowGetParams,
     type RowGetDraftParams as RowGetDraftParams,
-    type RowListDraftsParams as RowListDraftsParams,
+    type RowListDraftParams as RowListDraftParams,
     type RowReplaceDraftParams as RowReplaceDraftParams,
     type RowUpdateDraftParams as RowUpdateDraftParams,
   };
 
-  export { Draft as Draft };
+  export {
+    Batch as Batch,
+    type BatchCloneBatchParams as BatchCloneBatchParams,
+    type BatchCreateBatchParams as BatchCreateBatchParams,
+    type BatchGetBatchParams as BatchGetBatchParams,
+    type BatchGetDraftBatchParams as BatchGetDraftBatchParams,
+    type BatchPurgeBatchParams as BatchPurgeBatchParams,
+    type BatchReplaceBatchParams as BatchReplaceBatchParams,
+    type BatchUpdateBatchParams as BatchUpdateBatchParams,
+  };
 }
+
+export { type HubDBTableRowV3WrappersPage };

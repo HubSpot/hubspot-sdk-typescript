@@ -155,8 +155,8 @@ describe('resource folders', () => {
   });
 
   // Prism tests are disabled
-  test.skip('updateAsync: only required params', async () => {
-    const responsePromise = client.files.folders.updateAsync({ id: 'id' });
+  test.skip('updateAsyncByID: only required params', async () => {
+    const responsePromise = client.files.folders.updateAsyncByID({ id: 'id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -167,8 +167,12 @@ describe('resource folders', () => {
   });
 
   // Prism tests are disabled
-  test.skip('updateAsync: required and optional params', async () => {
-    const response = await client.files.folders.updateAsync({ id: 'id', name: 'name', parentFolderId: 0 });
+  test.skip('updateAsyncByID: required and optional params', async () => {
+    const response = await client.files.folders.updateAsyncByID({
+      id: 'id',
+      name: 'name',
+      parentFolderId: 0,
+    });
   });
 
   // Prism tests are disabled

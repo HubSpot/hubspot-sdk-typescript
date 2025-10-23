@@ -128,11 +128,11 @@ export class Folders extends APIResource {
    * @example
    * ```ts
    * const folderUpdateTaskLocator =
-   *   await client.files.folders.updateAsync({ id: 'id' });
+   *   await client.files.folders.updateAsyncByID({ id: 'id' });
    * ```
    */
-  updateAsync(
-    body: FolderUpdateAsyncParams,
+  updateAsyncByID(
+    body: FolderUpdateAsyncByIDParams,
     options?: RequestOptions,
   ): APIPromise<FilesAPI.FolderUpdateTaskLocator> {
     return this._client.post('/files/v3/folders/update/async', { body, ...options });
@@ -264,7 +264,7 @@ export interface FolderSearchParams extends PageParams {
   updatedAtLte?: string;
 }
 
-export interface FolderUpdateAsyncParams {
+export interface FolderUpdateAsyncByIDParams {
   /**
    * The unique identifier of the folder to be updated.
    */
@@ -304,7 +304,7 @@ export declare namespace Folders {
     type FolderGetByIDParams as FolderGetByIDParams,
     type FolderGetByPathParams as FolderGetByPathParams,
     type FolderSearchParams as FolderSearchParams,
-    type FolderUpdateAsyncParams as FolderUpdateAsyncParams,
+    type FolderUpdateAsyncByIDParams as FolderUpdateAsyncByIDParams,
     type FolderUpdateByIDParams as FolderUpdateByIDParams,
   };
 }

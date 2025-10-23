@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as MeetingsAPI from './meetings';
+import * as MeetingsAPI from './meetings/meetings';
 import {
   CollectionResponseWithTotalExternalLinkMetadataForwardPaging,
   ExternalAssociationCreateRequest,
@@ -37,7 +37,7 @@ import {
   ExternalUserProfile,
   ExternalValidatedFormField,
   Meetings,
-} from './meetings';
+} from './meetings/meetings';
 
 export class Scheduler extends APIResource {
   meetings: MeetingsAPI.Meetings = new MeetingsAPI.Meetings(this._client);
