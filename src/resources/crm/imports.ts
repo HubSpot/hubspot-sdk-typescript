@@ -2,8 +2,7 @@
 
 import { APIResource } from '../../core/resource';
 import * as Shared from '../shared';
-import * as MarketingEventsAPI from '../marketing/marketing-events';
-import * as EmailsAPI from '../marketing/emails/emails';
+import * as MarketingAPI from '../marketing/marketing';
 import { APIPromise } from '../../core/api-promise';
 import { Page, type PageParams, PagePromise } from '../../core/pagination';
 import { type Uploadable } from '../../core/uploads';
@@ -104,10 +103,7 @@ export interface CollectionResponsePublicImportErrorForwardPaging {
 export interface CollectionResponsePublicImportResponse {
   results: Array<PublicImportResponse>;
 
-  /**
-   * Contains information pagination of results.
-   */
-  paging?: EmailsAPI.Paging;
+  paging?: Shared.Paging;
 }
 
 export interface ImportRowCore {
@@ -389,7 +385,7 @@ export interface PublicImportError {
    * value, metadata (like source, timestamp, and sensitivity), and related audit
    * information for tracking changes.
    */
-  invalidPropertyValue?: MarketingEventsAPI.PropertyValue;
+  invalidPropertyValue?: MarketingAPI.PropertyValue;
 
   invalidValue?: string;
 

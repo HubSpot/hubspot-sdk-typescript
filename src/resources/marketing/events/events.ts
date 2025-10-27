@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
-import * as MarketingEventsAPI from '../marketing-events';
-import { MarketingEventPublicReadResponseV2sPage } from '../marketing-events';
+import * as MarketingAPI from '../marketing';
+import { MarketingEventPublicReadResponseV2sPage } from '../marketing';
 import * as AssociationsAPI from './associations';
 import {
   AssociationAssociateByExternalAccountParams,
@@ -59,7 +59,7 @@ export class Events extends APIResource {
   create(
     body: EventCreateParams,
     options?: RequestOptions,
-  ): APIPromise<MarketingEventsAPI.MarketingEventDefaultResponse> {
+  ): APIPromise<MarketingAPI.MarketingEventDefaultResponse> {
     return this._client.post('/marketing/v3/marketing-events/events', { body, ...options });
   }
 
@@ -86,7 +86,7 @@ export class Events extends APIResource {
     objectID: string,
     body: EventUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<MarketingEventsAPI.MarketingEventPublicDefaultResponseV2> {
+  ): APIPromise<MarketingAPI.MarketingEventPublicDefaultResponseV2> {
     return this._client.patch(path`/marketing/v3/marketing-events/${objectID}`, { body, ...options });
   }
 
@@ -108,13 +108,10 @@ export class Events extends APIResource {
   list(
     query: EventListParams | null | undefined = {},
     options?: RequestOptions,
-  ): PagePromise<
-    MarketingEventPublicReadResponseV2sPage,
-    MarketingEventsAPI.MarketingEventPublicReadResponseV2
-  > {
+  ): PagePromise<MarketingEventPublicReadResponseV2sPage, MarketingAPI.MarketingEventPublicReadResponseV2> {
     return this._client.getAPIList(
       '/marketing/v3/marketing-events/',
-      Page<MarketingEventsAPI.MarketingEventPublicReadResponseV2>,
+      Page<MarketingAPI.MarketingEventPublicReadResponseV2>,
       { query, ...options },
     );
   }
@@ -150,7 +147,7 @@ export class Events extends APIResource {
     externalEventID: string,
     params: EventCancelByExternalEventIDParams,
     options?: RequestOptions,
-  ): APIPromise<MarketingEventsAPI.MarketingEventDefaultResponse> {
+  ): APIPromise<MarketingAPI.MarketingEventDefaultResponse> {
     const { externalAccountId } = params;
     return this._client.post(path`/marketing/v3/marketing-events/events/${externalEventID}/cancel`, {
       query: { externalAccountId },
@@ -178,7 +175,7 @@ export class Events extends APIResource {
     externalEventID: string,
     params: EventCompleteByExternalEventIDParams,
     options?: RequestOptions,
-  ): APIPromise<MarketingEventsAPI.MarketingEventDefaultResponse> {
+  ): APIPromise<MarketingAPI.MarketingEventDefaultResponse> {
     const { externalAccountId, ...body } = params;
     return this._client.post(path`/marketing/v3/marketing-events/events/${externalEventID}/complete`, {
       query: { externalAccountId },
@@ -288,7 +285,7 @@ export class Events extends APIResource {
   get(
     objectID: string,
     options?: RequestOptions,
-  ): APIPromise<MarketingEventsAPI.MarketingEventPublicReadResponseV2> {
+  ): APIPromise<MarketingAPI.MarketingEventPublicReadResponseV2> {
     return this._client.get(path`/marketing/v3/marketing-events/${objectID}`, options);
   }
 
@@ -312,7 +309,7 @@ export class Events extends APIResource {
     externalEventID: string,
     query: EventGetByExternalEventIDParams,
     options?: RequestOptions,
-  ): APIPromise<MarketingEventsAPI.MarketingEventPublicReadResponse> {
+  ): APIPromise<MarketingAPI.MarketingEventPublicReadResponse> {
     return this._client.get(path`/marketing/v3/marketing-events/events/${externalEventID}`, {
       query,
       ...options,
@@ -336,7 +333,7 @@ export class Events extends APIResource {
   searchByExternalEventID(
     query: EventSearchByExternalEventIDParams,
     options?: RequestOptions,
-  ): APIPromise<MarketingEventsAPI.CollectionResponseSearchPublicResponseWrapperNoPaging> {
+  ): APIPromise<MarketingAPI.CollectionResponseSearchPublicResponseWrapperNoPaging> {
     return this._client.get('/marketing/v3/marketing-events/events/search', { query, ...options });
   }
 
@@ -364,7 +361,7 @@ export class Events extends APIResource {
   searchIdentifiersByExternalEventID(
     externalEventID: string,
     options?: RequestOptions,
-  ): APIPromise<MarketingEventsAPI.CollectionResponseWithTotalMarketingEventIdentifiersResponseNoPaging> {
+  ): APIPromise<MarketingAPI.CollectionResponseWithTotalMarketingEventIdentifiersResponseNoPaging> {
     return this._client.get(path`/marketing/v3/marketing-events/${externalEventID}/identifiers`, options);
   }
 
@@ -395,7 +392,7 @@ export class Events extends APIResource {
   updateBatch(
     body: EventUpdateBatchParams,
     options?: RequestOptions,
-  ): APIPromise<MarketingEventsAPI.BatchResponseMarketingEventPublicDefaultResponseV2> {
+  ): APIPromise<MarketingAPI.BatchResponseMarketingEventPublicDefaultResponseV2> {
     return this._client.post('/marketing/v3/marketing-events/batch/update', { body, ...options });
   }
 
@@ -418,7 +415,7 @@ export class Events extends APIResource {
     externalEventID: string,
     params: EventUpdateByExternalEventIDParams,
     options?: RequestOptions,
-  ): APIPromise<MarketingEventsAPI.MarketingEventPublicDefaultResponse> {
+  ): APIPromise<MarketingAPI.MarketingEventPublicDefaultResponse> {
     const { externalAccountId, ...body } = params;
     return this._client.patch(path`/marketing/v3/marketing-events/events/${externalEventID}`, {
       query: { externalAccountId },
@@ -451,7 +448,7 @@ export class Events extends APIResource {
   upsertBatch(
     body: EventUpsertBatchParams,
     options?: RequestOptions,
-  ): APIPromise<MarketingEventsAPI.BatchResponseMarketingEventPublicDefaultResponse> {
+  ): APIPromise<MarketingAPI.BatchResponseMarketingEventPublicDefaultResponse> {
     return this._client.post('/marketing/v3/marketing-events/events/upsert', { body, ...options });
   }
 
@@ -477,7 +474,7 @@ export class Events extends APIResource {
     externalEventID: string,
     body: EventUpsertByExternalEventIDParams,
     options?: RequestOptions,
-  ): APIPromise<MarketingEventsAPI.MarketingEventPublicDefaultResponse> {
+  ): APIPromise<MarketingAPI.MarketingEventPublicDefaultResponse> {
     return this._client.put(path`/marketing/v3/marketing-events/events/${externalEventID}`, {
       body,
       ...options,
@@ -597,7 +594,7 @@ export interface EventCreateParams {
    * default properties on the MarketingEvent object as that will apply to all
    * HubSpot accounts.
    */
-  customProperties?: Array<MarketingEventsAPI.PropertyValue>;
+  customProperties?: Array<MarketingAPI.PropertyValue>;
 
   /**
    * The end date and time of the marketing event.
@@ -635,7 +632,7 @@ export interface EventCreateParams {
 }
 
 export interface EventUpdateParams {
-  customProperties: Array<MarketingEventsAPI.PropertyValue>;
+  customProperties: Array<MarketingAPI.PropertyValue>;
 
   endDateTime?: string;
 
@@ -683,11 +680,11 @@ export interface EventCompleteByExternalEventIDParams {
 }
 
 export interface EventDeleteBatchParams {
-  inputs: Array<MarketingEventsAPI.MarketingEventPublicObjectIDDeleteRequest>;
+  inputs: Array<MarketingAPI.MarketingEventPublicObjectIDDeleteRequest>;
 }
 
 export interface EventDeleteBatchByExternalEventIDParams {
-  inputs: Array<MarketingEventsAPI.MarketingEventExternalUniqueIdentifier>;
+  inputs: Array<MarketingAPI.MarketingEventExternalUniqueIdentifier>;
 }
 
 export interface EventDeleteByExternalEventIDParams {
@@ -715,7 +712,7 @@ export interface EventSearchByExternalEventIDParams {
 }
 
 export interface EventUpdateBatchParams {
-  inputs: Array<MarketingEventsAPI.MarketingEventPublicUpdateRequestFullV2>;
+  inputs: Array<MarketingAPI.MarketingEventPublicUpdateRequestFullV2>;
 }
 
 export interface EventUpdateByExternalEventIDParams {
@@ -735,7 +732,7 @@ export interface EventUpdateByExternalEventIDParams {
    * not create any new default properties on the MarketingEvent object as that will
    * apply to all HubSpot accounts.
    */
-  customProperties?: Array<MarketingEventsAPI.PropertyValue>;
+  customProperties?: Array<MarketingAPI.PropertyValue>;
 
   /**
    * Body param: The end date and time of the marketing event.
@@ -787,7 +784,7 @@ export interface EventUpdateByExternalEventIDParams {
 }
 
 export interface EventUpsertBatchParams {
-  inputs: Array<MarketingEventsAPI.MarketingEventCreateRequestParams>;
+  inputs: Array<MarketingAPI.MarketingEventCreateRequestParams>;
 }
 
 export interface EventUpsertByExternalEventIDParams {
@@ -822,7 +819,7 @@ export interface EventUpsertByExternalEventIDParams {
    * default properties on the MarketingEvent object as that will apply to all
    * HubSpot accounts.
    */
-  customProperties?: Array<MarketingEventsAPI.PropertyValue>;
+  customProperties?: Array<MarketingAPI.PropertyValue>;
 
   /**
    * The end date and time of the marketing event.
@@ -874,7 +871,7 @@ export interface EventUpsertSubscriberStateByEmailParams {
   /**
    * Body param: List of marketing event details to create or update
    */
-  inputs: Array<MarketingEventsAPI.MarketingEventEmailSubscriber>;
+  inputs: Array<MarketingAPI.MarketingEventEmailSubscriber>;
 }
 
 export interface EventUpsertSubscriberStateByIDParams {
@@ -892,7 +889,7 @@ export interface EventUpsertSubscriberStateByIDParams {
   /**
    * Body param: List of HubSpot contacts to subscribe to the marketing event
    */
-  inputs: Array<MarketingEventsAPI.MarketingEventSubscriber>;
+  inputs: Array<MarketingAPI.MarketingEventSubscriber>;
 }
 
 Events.Associations = Associations;

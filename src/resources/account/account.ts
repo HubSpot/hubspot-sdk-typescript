@@ -13,7 +13,6 @@ import * as DetailsAPI from './details';
 import { Details } from './details';
 import * as UsageAPI from './usage';
 import { Usage } from './usage';
-import * as EmailsAPI from '../marketing/emails/emails';
 
 export class Account extends APIResource {
   activity: ActivityAPI.Activity = new ActivityAPI.Activity(this._client);
@@ -71,10 +70,7 @@ export interface APIUsage {
 export interface CollectionResponseAPIUsage {
   results: Array<APIUsage>;
 
-  /**
-   * Contains information pagination of results.
-   */
-  paging?: EmailsAPI.Paging;
+  paging?: Shared.Paging;
 }
 
 export interface CollectionResponseHydratedCriticalActionForwardPaging {

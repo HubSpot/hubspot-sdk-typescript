@@ -6,7 +6,6 @@ import * as BatchAPI from './batch';
 import { Batch, BatchCreateParams, BatchDeleteParams, BatchReadParams } from './batch';
 import * as GroupsAPI from './groups';
 import { GroupCreateParams, GroupDeleteParams, GroupGetParams, GroupUpdateParams, Groups } from './groups';
-import * as EmailsAPI from '../../marketing/emails/emails';
 import { APIPromise } from '../../../core/api-promise';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
@@ -127,19 +126,13 @@ export interface BatchReadInputPropertyName {
 export interface CollectionResponseProperty {
   results: Array<Shared.Property>;
 
-  /**
-   * Contains information pagination of results.
-   */
-  paging?: EmailsAPI.Paging;
+  paging?: Shared.Paging;
 }
 
 export interface CollectionResponsePropertyGroup {
   results: Array<PropertyGroup>;
 
-  /**
-   * Contains information pagination of results.
-   */
-  paging?: EmailsAPI.Paging;
+  paging?: Shared.Paging;
 }
 
 export interface CreatedResponseProperty {

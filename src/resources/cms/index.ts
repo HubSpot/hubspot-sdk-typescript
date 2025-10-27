@@ -171,6 +171,7 @@ export {
 } from './media-bridge/index';
 export {
   Pages,
+  type AbTestCreateRequestVNext,
   type AbTestEndRequestVNext,
   type AbTestRerunRequestVNext,
   type BatchInputContentFolder,

@@ -209,6 +209,7 @@ import {
 } from './media-bridge/media-bridge';
 import * as PagesAPI from './pages/pages';
 import {
+  AbTestCreateRequestVNext,
   AbTestEndRequestVNext,
   AbTestRerunRequestVNext,
   BatchInputContentFolder,
@@ -463,6 +464,27 @@ export interface UpdateLanguagesRequestVNext {
   primaryId: string;
 }
 
+/**
+ * Model definition for a version user. Contains addition information about the
+ * user who created a version.
+ */
+export interface VersionUser {
+  /**
+   * The unique ID of the User.
+   */
+  id: string;
+
+  /**
+   * The email address of the user.
+   */
+  email: string;
+
+  /**
+   * The first and last name of the User.
+   */
+  fullName: string;
+}
+
 Cms.AuditLogs = AuditLogs;
 Cms.Blogs = Blogs;
 Cms.Domains = Domains;
@@ -492,6 +514,7 @@ export declare namespace Cms {
     type SideOrCorner as SideOrCorner,
     type Styles as Styles,
     type UpdateLanguagesRequestVNext as UpdateLanguagesRequestVNext,
+    type VersionUser as VersionUser,
   };
 
   export {
@@ -668,6 +691,7 @@ export declare namespace Cms {
 
   export {
     Pages as Pages,
+    type AbTestCreateRequestVNext as AbTestCreateRequestVNext,
     type AbTestEndRequestVNext as AbTestEndRequestVNext,
     type AbTestRerunRequestVNext as AbTestRerunRequestVNext,
     type BatchInputContentFolder as BatchInputContentFolder,

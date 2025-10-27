@@ -17,6 +17,39 @@ export {
   type CallSearchParams,
 } from './calls/index';
 export {
+  Carts,
+  type CartCreateParams,
+  type CartUpdateParams,
+  type CartListParams,
+  type CartGetParams,
+  type CartSearchParams,
+} from './carts/index';
+export {
+  CommercePayments,
+  type CommercePaymentCreateParams,
+  type CommercePaymentUpdateParams,
+  type CommercePaymentListParams,
+  type CommercePaymentGetParams,
+  type CommercePaymentSearchParams,
+} from './commerce-payments/index';
+export {
+  CommerceSubscriptions,
+  type BatchReadInputSimplePublicObjectID,
+  type BatchResponseSimplePublicObject,
+  type BatchResponseSimplePublicUpsertObject,
+  type PauseSubscriptionRequest,
+  type SimplePublicObjectBatchInputForCreate,
+  type UnpauseRequest,
+} from './commerce-subscriptions';
+export {
+  Communications,
+  type CommunicationCreateParams,
+  type CommunicationUpdateParams,
+  type CommunicationListParams,
+  type CommunicationReadParams,
+  type CommunicationSearchParams,
+} from './communications/index';
+export {
   Companies,
   type CompanyCreateParams,
   type CompanyUpdateParams,
@@ -35,6 +68,22 @@ export {
   type ContactMergeParams,
   type ContactSearchParams,
 } from './contacts/index';
+export {
+  Contracts,
+  type ContractCreateParams,
+  type ContractUpdateParams,
+  type ContractListParams,
+  type ContractGetParams,
+  type ContractSearchParams,
+} from './contracts/index';
+export {
+  Courses,
+  type CourseCreateParams,
+  type CourseUpdateParams,
+  type CourseListParams,
+  type CourseGetParams,
+  type CourseSearchParams,
+} from './courses/index';
 export {
   Custom,
   type CustomCreateParams,
@@ -66,6 +115,14 @@ export {
   type DealSearchParams,
 } from './deals/index';
 export {
+  Discounts,
+  type DiscountCreateParams,
+  type DiscountUpdateParams,
+  type DiscountListParams,
+  type DiscountGetParams,
+  type DiscountSearchParams,
+} from './discounts/index';
+export {
   Emails,
   type EmailCreateParams,
   type EmailUpdateParams,
@@ -79,6 +136,22 @@ export {
   type FeedbackSubmissionGetParams,
   type FeedbackSubmissionSearchParams,
 } from './feedback-submissions/index';
+export {
+  Fees,
+  type FeeCreateParams,
+  type FeeUpdateParams,
+  type FeeListParams,
+  type FeeGetParams,
+  type FeeSearchParams,
+} from './fees/index';
+export {
+  GoalTargets,
+  type GoalTargetCreateParams,
+  type GoalTargetUpdateParams,
+  type GoalTargetListParams,
+  type GoalTargetGetParams,
+  type GoalTargetSearchParams,
+} from './goal-targets/index';
 export {
   Invoices,
   type InvoiceCreateParams,
@@ -104,6 +177,14 @@ export {
   type LineItemSearchParams,
 } from './line-items/index';
 export {
+  Listings,
+  type ListingCreateParams,
+  type ListingUpdateParams,
+  type ListingListParams,
+  type ListingGetParams,
+  type ListingSearchParams,
+} from './listings/index';
+export {
   Meetings,
   type MeetingCreateParams,
   type MeetingUpdateParams,
@@ -121,12 +202,51 @@ export {
 } from './notes/index';
 export { Objects } from './objects';
 export {
+  Orders,
+  type OrderCreateParams,
+  type OrderUpdateParams,
+  type OrderListParams,
+  type OrderGetParams,
+  type OrderSearchParams,
+} from './orders/index';
+export {
   PartnerClients,
   type PartnerClientUpdateParams,
   type PartnerClientListParams,
   type PartnerClientGetParams,
   type PartnerClientSearchParams,
 } from './partner-clients/index';
+export {
+  PartnerServices,
+  type PartnerServiceUpdateParams,
+  type PartnerServiceListParams,
+  type PartnerServiceGetParams,
+  type PartnerServiceSearchParams,
+} from './partner-services/index';
+export {
+  PostalMail,
+  type PostalMailCreateParams,
+  type PostalMailUpdateParams,
+  type PostalMailListParams,
+  type PostalMailGetParams,
+  type PostalMailSearchParams,
+} from './postal-mail/index';
+export {
+  Products,
+  type ProductCreateParams,
+  type ProductUpdateParams,
+  type ProductListParams,
+  type ProductGetParams,
+  type ProductSearchParams,
+} from './products/index';
+export {
+  Quotes,
+  type QuoteCreateParams,
+  type QuoteUpdateParams,
+  type QuoteListParams,
+  type QuoteGetParams,
+  type QuoteSearchParams,
+} from './quotes/index';
 export {
   Schemas,
   type ObjectSchema,

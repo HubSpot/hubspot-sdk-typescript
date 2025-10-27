@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as EmailsAPI from '../marketing/emails/emails';
+import * as Shared from '../shared';
 import { Page, type PageParams, PagePromise } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 
@@ -33,10 +33,7 @@ export type PublicAuditLogsPage = Page<PublicAuditLog>;
 export interface CollectionResponsePublicAuditLog {
   results: Array<PublicAuditLog>;
 
-  /**
-   * Contains information pagination of results.
-   */
-  paging?: EmailsAPI.Paging;
+  paging?: Shared.Paging;
 }
 
 export interface PublicAuditLog {
