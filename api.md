@@ -2,6 +2,7 @@
 
 Types:
 
+- <code><a href="./src/resources/shared.ts">AbTestCreateRequestVNext</a></code>
 - <code><a href="./src/resources/shared.ts">ActionResponse</a></code>
 - <code><a href="./src/resources/shared.ts">AssociationDefinition</a></code>
 - <code><a href="./src/resources/shared.ts">AssociationDefinitionEgg</a></code>
@@ -101,23 +102,27 @@ Types:
 - <code><a href="./src/resources/shared.ts">PublicYearReference</a></code>
 - <code><a href="./src/resources/shared.ts">StandardError</a></code>
 - <code><a href="./src/resources/shared.ts">TaskLocator</a></code>
+- <code><a href="./src/resources/shared.ts">VersionUser</a></code>
 
 # Account
 
 Types:
 
-- <code><a href="./src/resources/account/account.ts">ActingUser</a></code>
 - <code><a href="./src/resources/account/account.ts">APIUsage</a></code>
 - <code><a href="./src/resources/account/account.ts">CollectionResponseAPIUsage</a></code>
-- <code><a href="./src/resources/account/account.ts">CollectionResponseHydratedCriticalActionForwardPaging</a></code>
-- <code><a href="./src/resources/account/account.ts">CollectionResponsePublicAPIUserActionEventForwardPaging</a></code>
-- <code><a href="./src/resources/account/account.ts">CollectionResponsePublicLoginAuditForwardPaging</a></code>
-- <code><a href="./src/resources/account/account.ts">HydratedCriticalAction</a></code>
 - <code><a href="./src/resources/account/account.ts">PortalInformationResponse</a></code>
-- <code><a href="./src/resources/account/account.ts">PublicAPIUserActionEvent</a></code>
-- <code><a href="./src/resources/account/account.ts">PublicLoginAudit</a></code>
 
 ## Activity
+
+Types:
+
+- <code><a href="./src/resources/account/activity.ts">ActingUser</a></code>
+- <code><a href="./src/resources/account/activity.ts">CollectionResponseHydratedCriticalActionForwardPaging</a></code>
+- <code><a href="./src/resources/account/activity.ts">CollectionResponsePublicAPIUserActionEventForwardPaging</a></code>
+- <code><a href="./src/resources/account/activity.ts">CollectionResponsePublicLoginAuditForwardPaging</a></code>
+- <code><a href="./src/resources/account/activity.ts">HydratedCriticalAction</a></code>
+- <code><a href="./src/resources/account/activity.ts">PublicAPIUserActionEvent</a></code>
+- <code><a href="./src/resources/account/activity.ts">PublicLoginAudit</a></code>
 
 Methods:
 
@@ -367,7 +372,6 @@ Types:
 - <code><a href="./src/resources/cms/cms.ts">SideOrCorner</a></code>
 - <code><a href="./src/resources/cms/cms.ts">Styles</a></code>
 - <code><a href="./src/resources/cms/cms.ts">UpdateLanguagesRequestVNext</a></code>
-- <code><a href="./src/resources/cms/cms.ts">VersionUser</a></code>
 
 ## AuditLogs
 
@@ -784,7 +788,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/cms/pages/pages.ts">AbTestCreateRequestVNext</a></code>
 - <code><a href="./src/resources/cms/pages/pages.ts">AbTestEndRequestVNext</a></code>
 - <code><a href="./src/resources/cms/pages/pages.ts">AbTestRerunRequestVNext</a></code>
 - <code><a href="./src/resources/cms/pages/pages.ts">BatchInputContentFolder</a></code>
@@ -2633,56 +2636,10 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/marketing/marketing.ts">AppInfo</a></code>
-- <code><a href="./src/resources/marketing/marketing.ts">AttendanceCounters</a></code>
-- <code><a href="./src/resources/marketing/marketing.ts">BatchInputMarketingEventCreateRequestParams</a></code>
-- <code><a href="./src/resources/marketing/marketing.ts">BatchInputMarketingEventEmailSubscriber</a></code>
-- <code><a href="./src/resources/marketing/marketing.ts">BatchInputMarketingEventExternalUniqueIdentifier</a></code>
-- <code><a href="./src/resources/marketing/marketing.ts">BatchInputMarketingEventPublicObjectIDDeleteRequest</a></code>
-- <code><a href="./src/resources/marketing/marketing.ts">BatchInputMarketingEventPublicUpdateRequestFullV2</a></code>
-- <code><a href="./src/resources/marketing/marketing.ts">BatchInputMarketingEventSubscriber</a></code>
-- <code><a href="./src/resources/marketing/marketing.ts">BatchResponseMarketingEventPublicDefaultResponse</a></code>
-- <code><a href="./src/resources/marketing/marketing.ts">BatchResponseMarketingEventPublicDefaultResponseV2</a></code>
-- <code><a href="./src/resources/marketing/marketing.ts">BatchResponseMarketingEventPublicDefaultResponseV2WithErrors</a></code>
-- <code><a href="./src/resources/marketing/marketing.ts">BatchResponseSubscriberEmailResponse</a></code>
-- <code><a href="./src/resources/marketing/marketing.ts">BatchResponseSubscriberVidResponse</a></code>
-- <code><a href="./src/resources/marketing/marketing.ts">CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging</a></code>
-- <code><a href="./src/resources/marketing/marketing.ts">CollectionResponseSearchPublicResponseWrapperNoPaging</a></code>
-- <code><a href="./src/resources/marketing/marketing.ts">CollectionResponseWithTotalMarketingEventIdentifiersResponseNoPaging</a></code>
-- <code><a href="./src/resources/marketing/marketing.ts">CollectionResponseWithTotalParticipationBreakdownForwardPaging</a></code>
-- <code><a href="./src/resources/marketing/marketing.ts">CollectionResponseWithTotalPublicListNoPaging</a></code>
-- <code><a href="./src/resources/marketing/marketing.ts">ContactAssociation</a></code>
-- <code><a href="./src/resources/marketing/marketing.ts">CRMPropertyWrapper</a></code>
 - <code><a href="./src/resources/marketing/marketing.ts">EmailSendStatusView</a></code>
-- <code><a href="./src/resources/marketing/marketing.ts">EventDetailSettings</a></code>
-- <code><a href="./src/resources/marketing/marketing.ts">EventDetailSettingsURL</a></code>
 - <code><a href="./src/resources/marketing/marketing.ts">EventIDView</a></code>
-- <code><a href="./src/resources/marketing/marketing.ts">MarketingEventAssociation</a></code>
-- <code><a href="./src/resources/marketing/marketing.ts">MarketingEventCompleteRequestParams</a></code>
-- <code><a href="./src/resources/marketing/marketing.ts">MarketingEventCreateRequestParams</a></code>
-- <code><a href="./src/resources/marketing/marketing.ts">MarketingEventDefaultResponse</a></code>
-- <code><a href="./src/resources/marketing/marketing.ts">MarketingEventEmailSubscriber</a></code>
-- <code><a href="./src/resources/marketing/marketing.ts">MarketingEventExternalUniqueIdentifier</a></code>
-- <code><a href="./src/resources/marketing/marketing.ts">MarketingEventIdentifiersResponse</a></code>
-- <code><a href="./src/resources/marketing/marketing.ts">MarketingEventPublicDefaultResponse</a></code>
-- <code><a href="./src/resources/marketing/marketing.ts">MarketingEventPublicDefaultResponseV2</a></code>
-- <code><a href="./src/resources/marketing/marketing.ts">MarketingEventPublicObjectIDDeleteRequest</a></code>
-- <code><a href="./src/resources/marketing/marketing.ts">MarketingEventPublicReadResponse</a></code>
-- <code><a href="./src/resources/marketing/marketing.ts">MarketingEventPublicReadResponseV2</a></code>
-- <code><a href="./src/resources/marketing/marketing.ts">MarketingEventPublicUpdateRequestFullV2</a></code>
-- <code><a href="./src/resources/marketing/marketing.ts">MarketingEventPublicUpdateRequestV2</a></code>
-- <code><a href="./src/resources/marketing/marketing.ts">MarketingEventSubscriber</a></code>
-- <code><a href="./src/resources/marketing/marketing.ts">MarketingEventUpdateRequestParams</a></code>
-- <code><a href="./src/resources/marketing/marketing.ts">ParticipationAssociations</a></code>
-- <code><a href="./src/resources/marketing/marketing.ts">ParticipationBreakdown</a></code>
-- <code><a href="./src/resources/marketing/marketing.ts">ParticipationProperties</a></code>
-- <code><a href="./src/resources/marketing/marketing.ts">PropertyValue</a></code>
-- <code><a href="./src/resources/marketing/marketing.ts">PublicList</a></code>
 - <code><a href="./src/resources/marketing/marketing.ts">PublicSingleSendEmail</a></code>
 - <code><a href="./src/resources/marketing/marketing.ts">PublicSingleSendRequestEgg</a></code>
-- <code><a href="./src/resources/marketing/marketing.ts">SearchPublicResponseWrapper</a></code>
-- <code><a href="./src/resources/marketing/marketing.ts">SubscriberEmailResponse</a></code>
-- <code><a href="./src/resources/marketing/marketing.ts">SubscriberVidResponse</a></code>
 
 ## Campaigns
 
@@ -2771,15 +2728,112 @@ Methods:
 
 ## Emails
 
-### SingleSend
+Types:
+
+- <code><a href="./src/resources/marketing/emails/emails.ts">AggregateEmailStatistics</a></code>
+- <code><a href="./src/resources/marketing/emails/emails.ts">CollectionResponseWithTotalEmailStatisticIntervalNoPaging</a></code>
+- <code><a href="./src/resources/marketing/emails/emails.ts">CollectionResponseWithTotalPublicEmailForwardPaging</a></code>
+- <code><a href="./src/resources/marketing/emails/emails.ts">CollectionResponseWithTotalVersionPublicEmail</a></code>
+- <code><a href="./src/resources/marketing/emails/emails.ts">EmailCloneRequestVNext</a></code>
+- <code><a href="./src/resources/marketing/emails/emails.ts">EmailCreateRequest</a></code>
+- <code><a href="./src/resources/marketing/emails/emails.ts">EmailStatisticInterval</a></code>
+- <code><a href="./src/resources/marketing/emails/emails.ts">EmailStatisticsData</a></code>
+- <code><a href="./src/resources/marketing/emails/emails.ts">EmailUpdateRequest</a></code>
+- <code><a href="./src/resources/marketing/emails/emails.ts">Interval</a></code>
+- <code><a href="./src/resources/marketing/emails/emails.ts">Paging</a></code>
+- <code><a href="./src/resources/marketing/emails/emails.ts">PublicButtonStyleSettings</a></code>
+- <code><a href="./src/resources/marketing/emails/emails.ts">PublicDividerStyleSettings</a></code>
+- <code><a href="./src/resources/marketing/emails/emails.ts">PublicEmail</a></code>
+- <code><a href="./src/resources/marketing/emails/emails.ts">PublicEmailContent</a></code>
+- <code><a href="./src/resources/marketing/emails/emails.ts">PublicEmailFromDetails</a></code>
+- <code><a href="./src/resources/marketing/emails/emails.ts">PublicEmailRecipients</a></code>
+- <code><a href="./src/resources/marketing/emails/emails.ts">PublicEmailStyleSettings</a></code>
+- <code><a href="./src/resources/marketing/emails/emails.ts">PublicEmailSubscriptionDetails</a></code>
+- <code><a href="./src/resources/marketing/emails/emails.ts">PublicEmailTestingDetails</a></code>
+- <code><a href="./src/resources/marketing/emails/emails.ts">PublicEmailToDetails</a></code>
+- <code><a href="./src/resources/marketing/emails/emails.ts">PublicFontStyle</a></code>
+- <code><a href="./src/resources/marketing/emails/emails.ts">PublicRssEmailDetails</a></code>
+- <code><a href="./src/resources/marketing/emails/emails.ts">PublicWebversionDetails</a></code>
+- <code><a href="./src/resources/marketing/emails/emails.ts">SmartEmailField</a></code>
+- <code><a href="./src/resources/marketing/emails/emails.ts">VersionPublicEmail</a></code>
 
 Methods:
 
-- <code title="post /marketing/v4/email/single-send">client.marketing.emails.singleSend.<a href="./src/resources/marketing/emails/single-send.ts">send</a>({ ...params }) -> EmailSendStatusView</code>
+- <code title="post /marketing/v3/emails/">client.marketing.emails.<a href="./src/resources/marketing/emails/emails.ts">create</a>({ ...params }) -> PublicEmail</code>
+- <code title="patch /marketing/v3/emails/{emailId}">client.marketing.emails.<a href="./src/resources/marketing/emails/emails.ts">update</a>(emailID, { ...params }) -> PublicEmail</code>
+- <code title="get /marketing/v3/emails/">client.marketing.emails.<a href="./src/resources/marketing/emails/emails.ts">list</a>({ ...params }) -> PublicEmailsPage</code>
+- <code title="delete /marketing/v3/emails/{emailId}">client.marketing.emails.<a href="./src/resources/marketing/emails/emails.ts">delete</a>(emailID, { ...params }) -> void</code>
+- <code title="post /marketing/v3/emails/clone">client.marketing.emails.<a href="./src/resources/marketing/emails/emails.ts">clone</a>({ ...params }) -> PublicEmail</code>
+- <code title="post /marketing/v3/emails/ab-test/create-variation">client.marketing.emails.<a href="./src/resources/marketing/emails/emails.ts">createAbTestVariation</a>({ ...params }) -> PublicEmail</code>
+- <code title="get /marketing/v3/emails/{emailId}">client.marketing.emails.<a href="./src/resources/marketing/emails/emails.ts">get</a>(emailID, { ...params }) -> PublicEmail</code>
+- <code title="get /marketing/v3/emails/{emailId}/ab-test/get-variation">client.marketing.emails.<a href="./src/resources/marketing/emails/emails.ts">getAbTestVariation</a>(emailID) -> PublicEmail</code>
+- <code title="get /marketing/v3/emails/{emailId}/draft">client.marketing.emails.<a href="./src/resources/marketing/emails/emails.ts">getDraft</a>(emailID) -> PublicEmail</code>
+- <code title="get /marketing/v3/emails/{emailId}/revisions/{revisionId}">client.marketing.emails.<a href="./src/resources/marketing/emails/emails.ts">getRevision</a>(revisionID, { ...params }) -> VersionPublicEmail</code>
+- <code title="get /marketing/v3/emails/{emailId}/revisions">client.marketing.emails.<a href="./src/resources/marketing/emails/emails.ts">listRevisions</a>(emailID, { ...params }) -> CollectionResponseWithTotalVersionPublicEmail</code>
+- <code title="post /marketing/v3/emails/{emailId}/publish">client.marketing.emails.<a href="./src/resources/marketing/emails/emails.ts">publish</a>(emailID) -> void</code>
+- <code title="post /marketing/v3/emails/{emailId}/draft/reset">client.marketing.emails.<a href="./src/resources/marketing/emails/emails.ts">resetDraft</a>(emailID) -> void</code>
+- <code title="post /marketing/v3/emails/{emailId}/revisions/{revisionId}/restore">client.marketing.emails.<a href="./src/resources/marketing/emails/emails.ts">restoreRevision</a>(revisionID, { ...params }) -> void</code>
+- <code title="post /marketing/v3/emails/{emailId}/revisions/{revisionId}/restore-to-draft">client.marketing.emails.<a href="./src/resources/marketing/emails/emails.ts">restoreRevisionToDraft</a>(revisionID, { ...params }) -> PublicEmail</code>
+- <code title="post /marketing/v3/emails/{emailId}/unpublish">client.marketing.emails.<a href="./src/resources/marketing/emails/emails.ts">unpublish</a>(emailID) -> void</code>
+- <code title="patch /marketing/v3/emails/{emailId}/draft">client.marketing.emails.<a href="./src/resources/marketing/emails/emails.ts">updateDraft</a>(emailID, { ...params }) -> PublicEmail</code>
 
 ### Statistics
 
+Methods:
+
+- <code title="get /marketing/v3/emails/statistics/list">client.marketing.emails.statistics.<a href="./src/resources/marketing/emails/statistics.ts">get</a>({ ...params }) -> AggregateEmailStatistics</code>
+- <code title="get /marketing/v3/emails/statistics/histogram">client.marketing.emails.statistics.<a href="./src/resources/marketing/emails/statistics.ts">getHistogram</a>({ ...params }) -> CollectionResponseWithTotalEmailStatisticIntervalNoPaging</code>
+
 ## Events
+
+Types:
+
+- <code><a href="./src/resources/marketing/events/events.ts">AppInfo</a></code>
+- <code><a href="./src/resources/marketing/events/events.ts">AttendanceCounters</a></code>
+- <code><a href="./src/resources/marketing/events/events.ts">BatchInputMarketingEventCreateRequestParams</a></code>
+- <code><a href="./src/resources/marketing/events/events.ts">BatchInputMarketingEventEmailSubscriber</a></code>
+- <code><a href="./src/resources/marketing/events/events.ts">BatchInputMarketingEventExternalUniqueIdentifier</a></code>
+- <code><a href="./src/resources/marketing/events/events.ts">BatchInputMarketingEventPublicObjectIDDeleteRequest</a></code>
+- <code><a href="./src/resources/marketing/events/events.ts">BatchInputMarketingEventPublicUpdateRequestFullV2</a></code>
+- <code><a href="./src/resources/marketing/events/events.ts">BatchInputMarketingEventSubscriber</a></code>
+- <code><a href="./src/resources/marketing/events/events.ts">BatchResponseMarketingEventPublicDefaultResponse</a></code>
+- <code><a href="./src/resources/marketing/events/events.ts">BatchResponseMarketingEventPublicDefaultResponseV2</a></code>
+- <code><a href="./src/resources/marketing/events/events.ts">BatchResponseMarketingEventPublicDefaultResponseV2WithErrors</a></code>
+- <code><a href="./src/resources/marketing/events/events.ts">BatchResponseSubscriberEmailResponse</a></code>
+- <code><a href="./src/resources/marketing/events/events.ts">BatchResponseSubscriberVidResponse</a></code>
+- <code><a href="./src/resources/marketing/events/events.ts">CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging</a></code>
+- <code><a href="./src/resources/marketing/events/events.ts">CollectionResponseSearchPublicResponseWrapperNoPaging</a></code>
+- <code><a href="./src/resources/marketing/events/events.ts">CollectionResponseWithTotalMarketingEventIdentifiersResponseNoPaging</a></code>
+- <code><a href="./src/resources/marketing/events/events.ts">CollectionResponseWithTotalParticipationBreakdownForwardPaging</a></code>
+- <code><a href="./src/resources/marketing/events/events.ts">CollectionResponseWithTotalPublicListNoPaging</a></code>
+- <code><a href="./src/resources/marketing/events/events.ts">ContactAssociation</a></code>
+- <code><a href="./src/resources/marketing/events/events.ts">CRMPropertyWrapper</a></code>
+- <code><a href="./src/resources/marketing/events/events.ts">EventDetailSettings</a></code>
+- <code><a href="./src/resources/marketing/events/events.ts">EventDetailSettingsURL</a></code>
+- <code><a href="./src/resources/marketing/events/events.ts">MarketingEventAssociation</a></code>
+- <code><a href="./src/resources/marketing/events/events.ts">MarketingEventCompleteRequestParams</a></code>
+- <code><a href="./src/resources/marketing/events/events.ts">MarketingEventCreateRequestParams</a></code>
+- <code><a href="./src/resources/marketing/events/events.ts">MarketingEventDefaultResponse</a></code>
+- <code><a href="./src/resources/marketing/events/events.ts">MarketingEventEmailSubscriber</a></code>
+- <code><a href="./src/resources/marketing/events/events.ts">MarketingEventExternalUniqueIdentifier</a></code>
+- <code><a href="./src/resources/marketing/events/events.ts">MarketingEventIdentifiersResponse</a></code>
+- <code><a href="./src/resources/marketing/events/events.ts">MarketingEventPublicDefaultResponse</a></code>
+- <code><a href="./src/resources/marketing/events/events.ts">MarketingEventPublicDefaultResponseV2</a></code>
+- <code><a href="./src/resources/marketing/events/events.ts">MarketingEventPublicObjectIDDeleteRequest</a></code>
+- <code><a href="./src/resources/marketing/events/events.ts">MarketingEventPublicReadResponse</a></code>
+- <code><a href="./src/resources/marketing/events/events.ts">MarketingEventPublicReadResponseV2</a></code>
+- <code><a href="./src/resources/marketing/events/events.ts">MarketingEventPublicUpdateRequestFullV2</a></code>
+- <code><a href="./src/resources/marketing/events/events.ts">MarketingEventPublicUpdateRequestV2</a></code>
+- <code><a href="./src/resources/marketing/events/events.ts">MarketingEventSubscriber</a></code>
+- <code><a href="./src/resources/marketing/events/events.ts">MarketingEventUpdateRequestParams</a></code>
+- <code><a href="./src/resources/marketing/events/events.ts">ParticipationAssociations</a></code>
+- <code><a href="./src/resources/marketing/events/events.ts">ParticipationBreakdown</a></code>
+- <code><a href="./src/resources/marketing/events/events.ts">ParticipationProperties</a></code>
+- <code><a href="./src/resources/marketing/events/events.ts">PropertyValue</a></code>
+- <code><a href="./src/resources/marketing/events/events.ts">PublicList</a></code>
+- <code><a href="./src/resources/marketing/events/events.ts">SearchPublicResponseWrapper</a></code>
+- <code><a href="./src/resources/marketing/events/events.ts">SubscriberEmailResponse</a></code>
+- <code><a href="./src/resources/marketing/events/events.ts">SubscriberVidResponse</a></code>
 
 Methods:
 
@@ -2889,6 +2943,12 @@ Methods:
 - <code title="delete /marketing/v3/forms/{formId}">client.marketing.forms.<a href="./src/resources/marketing/forms.ts">delete</a>(formID) -> void</code>
 - <code title="get /marketing/v3/forms/{formId}">client.marketing.forms.<a href="./src/resources/marketing/forms.ts">read</a>(formID, { ...params }) -> FormDefinitionBase</code>
 - <code title="put /marketing/v3/forms/{formId}">client.marketing.forms.<a href="./src/resources/marketing/forms.ts">replace</a>(formID) -> FormDefinitionBase</code>
+
+## SingleSend
+
+Methods:
+
+- <code title="post /marketing/v4/email/single-send">client.marketing.singleSend.<a href="./src/resources/marketing/single-send.ts">send</a>({ ...params }) -> EmailSendStatusView</code>
 
 ## Subscriptions
 

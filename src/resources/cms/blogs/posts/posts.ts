@@ -4,6 +4,7 @@ import { APIResource } from '../../../../core/resource';
 import * as Shared from '../../../shared';
 import * as CmsAPI from '../../cms';
 import * as PagesAPI from '../../pages/pages';
+import * as EmailsAPI from '../../../marketing/emails/emails';
 import * as BatchAPI from './batch';
 import { Batch, BatchCreateParams, BatchDeleteParams, BatchReadParams, BatchUpdateParams } from './batch';
 import { APIPromise } from '../../../../core/api-promise';
@@ -1817,7 +1818,10 @@ export interface CollectionResponseWithTotalVersionBlogPost {
    */
   total: number;
 
-  paging?: Shared.Paging;
+  /**
+   * Contains information pagination of results.
+   */
+  paging?: EmailsAPI.Paging;
 }
 
 export interface ContentLanguageVariation {
@@ -1876,7 +1880,7 @@ export interface VersionBlogPost {
    * Model definition for a version user. Contains addition information about the
    * user who created a version.
    */
-  user: CmsAPI.VersionUser;
+  user: Shared.VersionUser;
 }
 
 export interface PostCreateParams {

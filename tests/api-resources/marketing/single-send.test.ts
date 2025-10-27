@@ -10,7 +10,7 @@ const client = new HubSpot({
 describe('resource singleSend', () => {
   // Prism tests are disabled
   test.skip('send: only required params', async () => {
-    const responsePromise = client.marketing.emails.singleSend.send({ emailId: 0, message: { to: 'to' } });
+    const responsePromise = client.marketing.singleSend.send({ emailId: 0, message: { to: 'to' } });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,7 +22,7 @@ describe('resource singleSend', () => {
 
   // Prism tests are disabled
   test.skip('send: required and optional params', async () => {
-    const response = await client.marketing.emails.singleSend.send({
+    const response = await client.marketing.singleSend.send({
       emailId: 0,
       message: {
         to: 'to',

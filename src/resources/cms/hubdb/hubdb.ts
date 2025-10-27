@@ -20,6 +20,7 @@ import {
   TableUpdateDraftParams,
   Tables,
 } from './tables';
+import * as EmailsAPI from '../../marketing/emails/emails';
 import * as RowsAPI from './rows/rows';
 import {
   RowCloneDraftParams,
@@ -675,7 +676,10 @@ export interface StreamingCollectionResponseWithTotalHubDBTableRowV3 {
 
   type: 'STREAMING';
 
-  paging?: Shared.Paging;
+  /**
+   * Contains information pagination of results.
+   */
+  paging?: EmailsAPI.Paging;
 }
 
 export type UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3 =

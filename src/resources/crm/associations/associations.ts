@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
 import * as CRMAPI from '../crm';
+import * as EmailsAPI from '../../marketing/emails/emails';
 import * as SchemaAPI from './schema/schema';
 import {
   CollectionResponsePublicAssociationDefinitionNoPaging,
@@ -178,7 +179,10 @@ export interface PublicAssociationMulti {
    */
   to: Array<CRMAPI.AssociatedID>;
 
-  paging?: Shared.Paging;
+  /**
+   * Contains information pagination of results.
+   */
+  paging?: EmailsAPI.Paging;
 }
 
 export interface AssociationCreateParams {

@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../core/resource';
 import * as Shared from '../shared';
+import * as EmailsAPI from '../marketing/emails/emails';
 import { APIPromise } from '../../core/api-promise';
 import { Page, type PageParams, PagePromise } from '../../core/pagination';
 import { buildHeaders } from '../../internal/headers';
@@ -1505,7 +1506,10 @@ export interface BatchResponseFlowIDWorkflowIDMappingResponseWithErrors {
 export interface CollectionResponseAPIFlowEmailCampaign {
   results: Array<APIFlowEmailCampaign>;
 
-  paging?: Shared.Paging;
+  /**
+   * Contains information pagination of results.
+   */
+  paging?: EmailsAPI.Paging;
 }
 
 export interface CollectionResponseAPIFlowListingForwardPaging {
