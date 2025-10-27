@@ -3,7 +3,6 @@
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
 import * as CmsAPI from '../cms';
-import * as EmailsAPI from '../../marketing/emails';
 import * as LandingPagesAPI from './landing-pages';
 import {
   LandingPageAttachToLangGroupParams,
@@ -72,6 +71,7 @@ import {
   SitePageUpdateParams,
   SitePages,
 } from './site-pages';
+import * as EmailsAPI from '../../marketing/emails/emails';
 import { Page as PaginationPage } from '../../../core/pagination';
 
 export class Pages extends APIResource {

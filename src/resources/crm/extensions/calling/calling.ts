@@ -16,6 +16,17 @@ import {
 } from './recording-settings';
 import * as SettingsAPI from './settings';
 import { SettingCreateParams, SettingUpdateParams, Settings } from './settings';
+import * as TranscriptsAPI from './transcripts';
+import {
+  Speaker,
+  TranscriptCreateParams,
+  TranscriptCreateRequest,
+  TranscriptCreateResponse,
+  TranscriptCreateUtterance,
+  TranscriptResponse,
+  TranscriptUtterance,
+  Transcripts,
+} from './transcripts';
 
 export class Calling extends APIResource {
   channelConnectionSettings: ChannelConnectionSettingsAPI.ChannelConnectionSettings =
@@ -24,6 +35,7 @@ export class Calling extends APIResource {
     this._client,
   );
   settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
+  transcripts: TranscriptsAPI.Transcripts = new TranscriptsAPI.Transcripts(this._client);
 }
 
 export interface ChannelConnectionSettingsPatchRequest {
@@ -257,6 +269,7 @@ export interface SettingsResponse {
 Calling.ChannelConnectionSettings = ChannelConnectionSettings;
 Calling.RecordingSettings = RecordingSettings;
 Calling.Settings = Settings;
+Calling.Transcripts = Transcripts;
 
 export declare namespace Calling {
   export {
@@ -289,5 +302,16 @@ export declare namespace Calling {
     Settings as Settings,
     type SettingCreateParams as SettingCreateParams,
     type SettingUpdateParams as SettingUpdateParams,
+  };
+
+  export {
+    Transcripts as Transcripts,
+    type Speaker as Speaker,
+    type TranscriptCreateRequest as TranscriptCreateRequest,
+    type TranscriptCreateResponse as TranscriptCreateResponse,
+    type TranscriptCreateUtterance as TranscriptCreateUtterance,
+    type TranscriptResponse as TranscriptResponse,
+    type TranscriptUtterance as TranscriptUtterance,
+    type TranscriptCreateParams as TranscriptCreateParams,
   };
 }

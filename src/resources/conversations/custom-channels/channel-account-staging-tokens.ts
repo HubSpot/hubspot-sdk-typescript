@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as ConversationsAPI from '../conversations';
 import * as CustomChannelsAPI from './custom-channels';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
@@ -52,7 +53,7 @@ export interface ChannelAccountStagingTokenUpdateParams {
   /**
    * Body param:
    */
-  deliveryIdentifier: CustomChannelsAPI.PublicDeliveryIdentifier;
+  deliveryIdentifier: ConversationsAPI.PublicDeliveryIdentifier;
 }
 
 export declare namespace ChannelAccountStagingTokens {

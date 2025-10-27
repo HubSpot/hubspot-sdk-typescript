@@ -11,11 +11,11 @@ describe('resource properties', () => {
   // Prism tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.crm.properties.create('objectType', {
-      fieldType: 'select',
-      groupName: 'contactinformation',
-      label: 'My Contact Property',
-      name: 'my_contact_property',
-      type: 'enumeration',
+      fieldType: 'booleancheckbox',
+      groupName: 'groupName',
+      label: 'label',
+      name: 'name',
+      type: 'bool',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,22 +29,21 @@ describe('resource properties', () => {
   // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.crm.properties.create('objectType', {
-      fieldType: 'select',
-      groupName: 'contactinformation',
-      label: 'My Contact Property',
-      name: 'my_contact_property',
-      type: 'enumeration',
+      fieldType: 'booleancheckbox',
+      groupName: 'groupName',
+      label: 'label',
+      name: 'name',
+      type: 'bool',
       calculationFormula: 'calculationFormula',
       dataSensitivity: 'non_sensitive',
       description: 'description',
-      displayOrder: 2,
+      displayOrder: 0,
       externalOptions: true,
       formField: true,
-      hasUniqueValue: false,
-      hidden: false,
+      hasUniqueValue: true,
+      hidden: true,
       options: [
-        { displayOrder: 1, hidden: false, label: 'Option A', value: 'A', description: 'Choice number one' },
-        { displayOrder: 2, hidden: false, label: 'Option B', value: 'B', description: 'Choice number two' },
+        { displayOrder: 0, hidden: true, label: 'label', value: 'value', description: 'description' },
       ],
       referencedObjectType: 'referencedObjectType',
     });

@@ -25,3 +25,13 @@ export {
   type RecordingSettingMarkReadyParams,
 } from './recording-settings';
 export { Settings, type SettingCreateParams, type SettingUpdateParams } from './settings';
+export {
+  Transcripts,
+  type Speaker,
+  type TranscriptCreateRequest,
+  type TranscriptCreateResponse,
+  type TranscriptCreateUtterance,
+  type TranscriptResponse,
+  type TranscriptUtterance,
+  type TranscriptCreateParams,
+} from './transcripts';

@@ -13,7 +13,7 @@ import * as DetailsAPI from './details';
 import { Details } from './details';
 import * as UsageAPI from './usage';
 import { Usage } from './usage';
-import * as EmailsAPI from '../marketing/emails';
+import * as EmailsAPI from '../marketing/emails/emails';
 
 export class Account extends APIResource {
   activity: ActivityAPI.Activity = new ActivityAPI.Activity(this._client);

@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
-import * as EmailsAPI from '../../marketing/emails';
 import * as TablesAPI from './tables';
 import {
   TableCloneDraftParams,
@@ -21,6 +20,7 @@ import {
   TableUpdateDraftParams,
   Tables,
 } from './tables';
+import * as EmailsAPI from '../../marketing/emails/emails';
 import * as RowsAPI from './rows/rows';
 import {
   RowCloneDraftParams,

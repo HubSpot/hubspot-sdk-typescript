@@ -3,7 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
 import * as CRMAPI from '../crm';
-import * as EmailsAPI from '../../marketing/emails';
+import * as EmailsAPI from '../../marketing/emails/emails';
 import * as SchemaAPI from './schema/schema';
 import {
   CollectionResponsePublicAssociationDefinitionNoPaging,

@@ -1,13 +1,21 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as EmailsAPI from '../marketing/emails';
+import * as EmailsAPI from '../marketing/emails/emails';
 import { Page, type PageParams, PagePromise } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 
 export class AuditLogs extends APIResource {
   /**
    * Returns audit logs based on filters.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const publicAuditLog of client.cms.auditLogs.list()) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     query: AuditLogListParams | null | undefined = {},

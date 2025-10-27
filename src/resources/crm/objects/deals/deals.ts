@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
-import * as ObjectsAPI from '../objects';
-import { SimplePublicObjectWithAssociationsPage } from '../objects';
+import * as CRMAPI from '../../crm';
+import { SimplePublicObjectWithAssociationsPage } from '../../crm';
 import * as BatchAPI from './batch';
 import {
   Batch,
@@ -37,7 +37,7 @@ export class Deals extends APIResource {
   create(
     body: DealCreateParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CreatedResponseSimplePublicObject> {
+  ): APIPromise<CRMAPI.CreatedResponseSimplePublicObject> {
     return this._client.post('/crm/v3/objects/0-3', { body, ...options });
   }
 
@@ -69,7 +69,7 @@ export class Deals extends APIResource {
     dealID: string,
     params: DealUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.SimplePublicObject> {
+  ): APIPromise<CRMAPI.SimplePublicObject> {
     const { idProperty, ...body } = params;
     return this._client.patch(path`/crm/v3/objects/0-3/${dealID}`, {
       query: { idProperty },
@@ -92,12 +92,11 @@ export class Deals extends APIResource {
   list(
     query: DealListParams | null | undefined = {},
     options?: RequestOptions,
-  ): PagePromise<SimplePublicObjectWithAssociationsPage, ObjectsAPI.SimplePublicObjectWithAssociations> {
-    return this._client.getAPIList(
-      '/crm/v3/objects/0-3',
-      Page<ObjectsAPI.SimplePublicObjectWithAssociations>,
-      { query, ...options },
-    );
+  ): PagePromise<SimplePublicObjectWithAssociationsPage, CRMAPI.SimplePublicObjectWithAssociations> {
+    return this._client.getAPIList('/crm/v3/objects/0-3', Page<CRMAPI.SimplePublicObjectWithAssociations>, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -131,7 +130,7 @@ export class Deals extends APIResource {
     dealID: string,
     query: DealGetParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.SimplePublicObjectWithAssociations> {
+  ): APIPromise<CRMAPI.SimplePublicObjectWithAssociations> {
     return this._client.get(path`/crm/v3/objects/0-3/${dealID}`, { query, ...options });
   }
 
@@ -147,7 +146,7 @@ export class Deals extends APIResource {
    *   });
    * ```
    */
-  merge(body: DealMergeParams, options?: RequestOptions): APIPromise<ObjectsAPI.SimplePublicObject> {
+  merge(body: DealMergeParams, options?: RequestOptions): APIPromise<CRMAPI.SimplePublicObject> {
     return this._client.post('/crm/v3/objects/0-3/merge', { body, ...options });
   }
 
@@ -161,23 +160,23 @@ export class Deals extends APIResource {
   search(
     body: DealSearchParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CollectionResponseWithTotalSimplePublicObject> {
+  ): APIPromise<CRMAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/v3/objects/0-3/search', { body, ...options });
   }
 }
 
 export interface DealCreateParams {
   /**
-   * The company property values to set.
+   * Key-value pairs for setting properties for the new object.
    */
   properties: { [key: string]: string };
 
-  associations?: Array<ObjectsAPI.PublicAssociationsForObject>;
+  associations?: Array<CRMAPI.PublicAssociationsForObject>;
 }
 
 export interface DealUpdateParams {
   /**
-   * Body param: The company property values to set.
+   * Body param: Key value pairs representing the properties of the object.
    */
   properties: { [key: string]: string };
 
@@ -248,14 +247,8 @@ export interface DealGetParams {
 }
 
 export interface DealMergeParams {
-  /**
-   * The ID of the company to merge into the primary.
-   */
   objectIdToMerge: string;
 
-  /**
-   * The ID of the primary company, which the other will merge into.
-   */
   primaryObjectId: string;
 }
 
@@ -268,7 +261,7 @@ export interface DealSearchParams {
   /**
    * Up to 6 groups of filters defining additional query criteria.
    */
-  filterGroups?: Array<ObjectsAPI.FilterGroup>;
+  filterGroups?: Array<CRMAPI.FilterGroup>;
 
   /**
    * The maximum results to return, up to 200 objects.

@@ -1,5 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import * as SchemasAPI from './crm/objects/schemas';
 import { Page } from '../core/pagination';
 
 /**
@@ -30,6 +31,50 @@ export interface ActionResponse {
 }
 
 /**
+ * The definition of an association
+ */
+export interface AssociationDefinition {
+  /**
+   * The unique ID of the associated object (e.g., a contact ID).
+   */
+  id: string;
+
+  /**
+   * The ID of the source object type (e.g., 0-1 for contacts).
+   */
+  fromObjectTypeId: string;
+
+  /**
+   * The ID of the destination object type (e.g., 0-3 for deals).
+   */
+  toObjectTypeId: string;
+
+  /**
+   * The timestamp when the association was created, in ISO 8601 format.
+   */
+  createdAt?: string;
+
+  /**
+   * For labeled association types, the internal name of the association.
+   */
+  name?: string;
+
+  /**
+   * The timestamp when the last update was made to an association, in ISO 8601
+   * format.
+   */
+  updatedAt?: string;
+}
+
+export interface AssociationDefinitionEgg {
+  fromObjectTypeId: string;
+
+  toObjectTypeId: string;
+
+  name?: string;
+}
+
+/**
  * Defines the type, direction, and details of the relationship between two CRM
  * objects.
  */
@@ -45,6 +90,18 @@ export interface AssociationSpec {
   associationTypeId: number;
 }
 
+export interface BatchInputPropertyCreate {
+  inputs: Array<PropertyCreate>;
+}
+
+export interface BatchInputPropertyName {
+  inputs: Array<PropertyName>;
+}
+
+export interface BatchInputPublicObjectID {
+  inputs: Array<PublicObjectID>;
+}
+
 /**
  * Wrapper for providing an array of strings as inputs.
  */
@@ -53,6 +110,24 @@ export interface BatchInputString {
    * Strings to input.
    */
   inputs: Array<string>;
+}
+
+export interface BatchResponseProperty {
+  completedAt: string;
+
+  results: Array<Property>;
+
+  startedAt: string;
+
+  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+
+  links?: { [key: string]: string };
+
+  requestedAt?: string;
+}
+
+export interface CollectionResponseObjectSchemaNoPaging {
+  results: Array<SchemasAPI.ObjectSchema>;
 }
 
 export interface Error {
@@ -152,67 +227,58 @@ export interface NextPage {
   link?: string;
 }
 
-/**
- * The options available when a property is an enumeration
- */
-export interface Option {
-  /**
-   * Hidden options will not be displayed in HubSpot.
-   */
-  hidden: boolean;
+export interface ObjectTypeDefinitionLabels {
+  plural?: string;
 
-  /**
-   * A human-readable option label that will be shown in HubSpot.
-   */
-  label: string;
-
-  /**
-   * The internal value of the option, which must be used when setting the property
-   * value through the API.
-   */
-  value: string;
-
-  /**
-   * A description of the option.
-   */
-  description?: string;
-
-  /**
-   * Options are displayed in order starting with the lowest positive integer value.
-   * Values of -1 will cause the option to be displayed after any positive values.
-   */
-  displayOrder?: number;
+  singular?: string;
 }
 
 /**
- * Defines a enumeration property option
+ * A HubSpot property option
  */
-export interface OptionInput {
+export interface Option {
   /**
-   * Options are shown in order starting with the lowest positive integer value.
-   * Values of -1 will cause the option to be displayed after any positive values.
+   * A description of the option.
+   */
+  description: string;
+
+  /**
+   * The position of the item relative to others in the list.
    */
   displayOrder: number;
 
+  doubleData: number;
+
   /**
-   * Hidden options won't be shown in HubSpot.
+   * Whether the option is displayed in HubSpot's UI.
    */
   hidden: boolean;
 
   /**
-   * A human-readable option label that will be shown in HubSpot.
+   * A user-friendly label that identifies the option.
    */
   label: string;
 
   /**
-   * The internal value of the option, which must be used when setting the property
-   * value through the API.
+   * Whether the option is read-only.
    */
-  value: string;
+  readOnly: boolean;
 
   /**
-   * A description of the option.
+   * The actual value of the option.
    */
+  value: string;
+}
+
+export interface OptionInput {
+  displayOrder: number;
+
+  hidden: boolean;
+
+  label: string;
+
+  value: string;
+
   description?: string;
 }
 
@@ -392,6 +458,64 @@ export interface Property {
   updatedUserId?: string;
 }
 
+export interface PropertyCreate {
+  fieldType:
+    | 'booleancheckbox'
+    | 'calculation_equation'
+    | 'checkbox'
+    | 'date'
+    | 'file'
+    | 'html'
+    | 'number'
+    | 'phonenumber'
+    | 'radio'
+    | 'select'
+    | 'text'
+    | 'textarea';
+
+  groupName: string;
+
+  label: string;
+
+  name: string;
+
+  type: 'bool' | 'date' | 'datetime' | 'enumeration' | 'number' | 'phone_number' | 'string';
+
+  calculationFormula?: string;
+
+  dataSensitivity?: 'non_sensitive' | 'sensitive' | 'highly_sensitive';
+
+  description?: string;
+
+  displayOrder?: number;
+
+  externalOptions?: boolean;
+
+  formField?: boolean;
+
+  hasUniqueValue?: boolean;
+
+  hidden?: boolean;
+
+  options?: Array<OptionInput>;
+
+  referencedObjectType?: string;
+}
+
+export interface PropertyGroupCreate {
+  label: string;
+
+  name: string;
+
+  displayOrder?: number;
+}
+
+export interface PropertyGroupUpdate {
+  displayOrder?: number;
+
+  label?: string;
+}
+
 export interface PropertyModificationMetadata {
   archivable: boolean;
 
@@ -400,6 +524,10 @@ export interface PropertyModificationMetadata {
   readOnlyValue: boolean;
 
   readOnlyOptions?: boolean;
+}
+
+export interface PropertyName {
+  name: string;
 }
 
 export interface PublicAbsoluteComparativeTimestampRefineBy {

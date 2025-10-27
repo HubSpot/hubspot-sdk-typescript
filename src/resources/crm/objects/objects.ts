@@ -1,9 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
-import * as Shared from '../../shared';
-import * as CRMAPI from '../crm';
-import * as EmailsAPI from '../../marketing/emails';
 import * as DealSplitsAPI from './deal-splits';
 import {
   BatchResponseDealToDealSplits,
@@ -18,13 +15,9 @@ import {
 } from './deal-splits';
 import * as SchemasAPI from './schemas';
 import {
-  AssociationDefinition,
-  AssociationDefinitionEgg,
-  CollectionResponseObjectSchemaNoPaging,
   ObjectSchema,
   ObjectSchemaEgg,
   ObjectTypeDefinition,
-  ObjectTypeDefinitionLabels,
   ObjectTypeDefinitionPatch,
   ObjectTypePropertyCreate,
   SchemaArchiveAssociationParams,
@@ -35,6 +28,24 @@ import {
   SchemaUpdateParams,
   Schemas,
 } from './schemas';
+import * as AppointmentsAPI from './appointments/appointments';
+import {
+  AppointmentCreateParams,
+  AppointmentGetParams,
+  AppointmentListParams,
+  AppointmentSearchParams,
+  AppointmentUpdateParams,
+  Appointments,
+} from './appointments/appointments';
+import * as CallsAPI from './calls/calls';
+import {
+  CallCreateParams,
+  CallGetParams,
+  CallListParams,
+  CallSearchParams,
+  CallUpdateParams,
+  Calls,
+} from './calls/calls';
 import * as CompaniesAPI from './companies/companies';
 import {
   Companies,
@@ -77,6 +88,49 @@ import {
   DealUpdateParams,
   Deals,
 } from './deals/deals';
+import * as EmailsAPI from './emails/emails';
+import {
+  EmailCreateParams,
+  EmailListParams,
+  EmailReadParams,
+  EmailSearchParams,
+  EmailUpdateParams,
+  Emails,
+} from './emails/emails';
+import * as FeedbackSubmissionsAPI from './feedback-submissions/feedback-submissions';
+import {
+  FeedbackSubmissionGetParams,
+  FeedbackSubmissionListParams,
+  FeedbackSubmissionSearchParams,
+  FeedbackSubmissions,
+} from './feedback-submissions/feedback-submissions';
+import * as InvoicesAPI from './invoices/invoices';
+import {
+  InvoiceCreateParams,
+  InvoiceGetParams,
+  InvoiceListParams,
+  InvoiceSearchParams,
+  InvoiceUpdateParams,
+  Invoices,
+} from './invoices/invoices';
+import * as LeadsAPI from './leads/leads';
+import {
+  LeadCreateParams,
+  LeadGetParams,
+  LeadListParams,
+  LeadSearchParams,
+  LeadUpdateParams,
+  Leads,
+} from './leads/leads';
+import * as LineItemsAPI from './line-items/line-items';
+import {
+  LineItemCreateParams,
+  LineItemGetParams,
+  LineItemListParams,
+  LineItemSearchParams,
+  LineItemUpdateParams,
+  LineItems,
+} from './line-items/line-items';
 import * as MeetingsAPI from './meetings/meetings';
 import {
   MeetingCreateParams,
@@ -86,7 +140,16 @@ import {
   MeetingUpdateParams,
   Meetings,
 } from './meetings/meetings';
-import * as ObjectsObjectsAPI from './objects_/objects_';
+import * as NotesAPI from './notes/notes';
+import {
+  NoteCreateParams,
+  NoteGetParams,
+  NoteListParams,
+  NoteSearchParams,
+  NoteUpdateParams,
+  Notes,
+} from './notes/notes';
+import * as ObjectsAPI from './objects_/objects_';
 import {
   ObjectCreateParams,
   ObjectDeleteParams,
@@ -96,557 +159,116 @@ import {
   ObjectUpdateParams,
   Objects as ObjectsAPIObjects,
 } from './objects_/objects_';
-import { Page } from '../../../core/pagination';
+import * as PartnerClientsAPI from './partner-clients/partner-clients';
+import {
+  PartnerClientGetParams,
+  PartnerClientListParams,
+  PartnerClientSearchParams,
+  PartnerClientUpdateParams,
+  PartnerClients,
+} from './partner-clients/partner-clients';
+import * as ServicesAPI from './services/services';
+import {
+  ServiceCreateParams,
+  ServiceGetParams,
+  ServiceListParams,
+  ServiceSearchParams,
+  ServiceUpdateParams,
+  Services,
+} from './services/services';
+import * as TasksAPI from './tasks/tasks';
+import {
+  TaskCreateParams,
+  TaskGetParams,
+  TaskListParams,
+  TaskSearchParams,
+  TaskUpdateParams,
+  Tasks,
+} from './tasks/tasks';
+import * as TaxesAPI from './taxes/taxes';
+import {
+  TaxCreateParams,
+  TaxGetParams,
+  TaxListParams,
+  TaxSearchParams,
+  TaxUpdateParams,
+  Taxes,
+} from './taxes/taxes';
+import * as TicketsAPI from './tickets/tickets';
+import {
+  TicketCreateParams,
+  TicketGetParams,
+  TicketListParams,
+  TicketMergeParams,
+  TicketSearchParams,
+  TicketUpdateParams,
+  Tickets,
+} from './tickets/tickets';
 
 export class Objects extends APIResource {
+  appointments: AppointmentsAPI.Appointments = new AppointmentsAPI.Appointments(this._client);
+  calls: CallsAPI.Calls = new CallsAPI.Calls(this._client);
   companies: CompaniesAPI.Companies = new CompaniesAPI.Companies(this._client);
   contacts: ContactsAPI.Contacts = new ContactsAPI.Contacts(this._client);
   custom: CustomAPI.Custom = new CustomAPI.Custom(this._client);
   dealSplits: DealSplitsAPI.DealSplits = new DealSplitsAPI.DealSplits(this._client);
   deals: DealsAPI.Deals = new DealsAPI.Deals(this._client);
+  emails: EmailsAPI.Emails = new EmailsAPI.Emails(this._client);
+  feedbackSubmissions: FeedbackSubmissionsAPI.FeedbackSubmissions =
+    new FeedbackSubmissionsAPI.FeedbackSubmissions(this._client);
+  invoices: InvoicesAPI.Invoices = new InvoicesAPI.Invoices(this._client);
+  leads: LeadsAPI.Leads = new LeadsAPI.Leads(this._client);
+  lineItems: LineItemsAPI.LineItems = new LineItemsAPI.LineItems(this._client);
   meetings: MeetingsAPI.Meetings = new MeetingsAPI.Meetings(this._client);
-  objects: ObjectsObjectsAPI.Objects = new ObjectsObjectsAPI.Objects(this._client);
+  notes: NotesAPI.Notes = new NotesAPI.Notes(this._client);
+  objects: ObjectsAPI.Objects = new ObjectsAPI.Objects(this._client);
+  partnerClients: PartnerClientsAPI.PartnerClients = new PartnerClientsAPI.PartnerClients(this._client);
   schemas: SchemasAPI.Schemas = new SchemasAPI.Schemas(this._client);
+  services: ServicesAPI.Services = new ServicesAPI.Services(this._client);
+  tasks: TasksAPI.Tasks = new TasksAPI.Tasks(this._client);
+  taxes: TaxesAPI.Taxes = new TaxesAPI.Taxes(this._client);
+  tickets: TicketsAPI.Tickets = new TicketsAPI.Tickets(this._client);
 }
 
-export type SimplePublicObjectWithAssociationsPage = Page<SimplePublicObjectWithAssociations>;
-
-export interface BatchInputSimplePublicObjectBatchInput {
-  inputs: Array<SimplePublicObjectBatchInput>;
-}
-
-export interface BatchInputSimplePublicObjectBatchInputForCreate {
-  inputs: Array<SimplePublicObjectBatchInputForCreate>;
-}
-
-export interface BatchInputSimplePublicObjectBatchInputUpsert {
-  inputs: Array<SimplePublicObjectBatchInputUpsert>;
-}
-
-export interface BatchInputSimplePublicObjectID {
-  inputs: Array<SimplePublicObjectID>;
-}
-
-/**
- * Specifies the input for reading a batch of CRM objects, including arrays of
- * object IDs, requested property names (with optional history), and an optional
- * unique identifying property.
- */
-export interface BatchReadInputSimplePublicObjectID {
-  inputs: Array<SimplePublicObjectID>;
-
-  /**
-   * Key-value pairs for setting properties for the new object.
-   */
-  properties: Array<string>;
-
-  /**
-   * Key-value pairs for setting properties for the new object and their histories.
-   */
-  propertiesWithHistory: Array<string>;
-
-  /**
-   * When using a custom unique value property to retrieve records, the name of the
-   * property. Do not include this parameter if retrieving by record ID.
-   */
-  idProperty?: string;
-}
-
-/**
- * A public object batch response object
- */
-export interface BatchResponseSimplePublicObject {
-  /**
-   * The timestamp when the batch processing was completed, in ISO 8601 format.
-   */
-  completedAt: string;
-
-  results: Array<SimplePublicObject>;
-
-  /**
-   * The timestamp when the batch processing began, in ISO 8601 format.
-   */
-  startedAt: string;
-
-  /**
-   * The status of the batch processing request: "PENDING", "PROCESSING",
-   * "CANCELLED", or "COMPLETE"
-   */
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
-
-  errors?: Array<Shared.StandardError>;
-
-  /**
-   * An object containing relevant links related to the batch request.
-   */
-  links?: { [key: string]: string };
-
-  numErrors?: number;
-
-  /**
-   * The timestamp when the batch request was initially made, in ISO 8601 format.
-   */
-  requestedAt?: string;
-}
-
-/**
- * Represents the result of a batch upsert operation, including the operation’s
- * status, timestamps, and a list of successfully created or updated objects.
- */
-export interface BatchResponseSimplePublicUpsertObject {
-  /**
-   * The timestamp when the batch process was completed, in ISO 8601 format.
-   */
-  completedAt: string;
-
-  results: Array<SimplePublicUpsertObject>;
-
-  /**
-   * The timestamp when the batch process began execution, in ISO 8601 format.
-   */
-  startedAt: string;
-
-  /**
-   * The status of the batch processing request. Can be: "PENDING", "PROCESSING",
-   * "CANCELED", or "COMPLETE".
-   */
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
-
-  errors?: Array<Shared.StandardError>;
-
-  /**
-   * An object containing relevant links related to the batch request.
-   */
-  links?: { [key: string]: string };
-
-  numErrors?: number;
-
-  /**
-   * The timestamp when the batch process was initiated, in ISO 8601 format.
-   */
-  requestedAt?: string;
-}
-
-export interface CollectionResponseAssociatedID {
-  results: Array<CRMAPI.AssociatedID>;
-
-  /**
-   * Contains information pagination of results.
-   */
-  paging?: EmailsAPI.Paging;
-}
-
-export interface CollectionResponseSimplePublicObjectWithAssociations {
-  results: Array<SimplePublicObjectWithAssociations>;
-
-  /**
-   * Contains information pagination of results.
-   */
-  paging?: EmailsAPI.Paging;
-}
-
-export interface CollectionResponseWithTotalSimplePublicObject {
-  results: Array<SimplePublicObject>;
-
-  /**
-   * The number of available results
-   */
-  total: number;
-
-  /**
-   * Contains information pagination of results.
-   */
-  paging?: EmailsAPI.Paging;
-}
-
-export interface CreatedResponseSimplePublicObject {
-  createdResourceId: string;
-
-  /**
-   * A simple public object.
-   */
-  entity: SimplePublicObject;
-
-  location?: string;
-}
-
-export interface FilterGroup {
-  filters: Array<CRMAPI.Filter>;
-}
-
-export interface PublicAssociationsForObject {
-  to: Shared.PublicObjectID;
-
-  types: Array<Shared.AssociationSpec>;
-}
-
-export interface PublicGdprDeleteInput {
-  /**
-   * The ID of the company to delete.
-   */
-  objectId: string;
-
-  /**
-   * The name of a unique property, when identifying records by property instead of
-   * ID.
-   */
-  idProperty?: string;
-}
-
-export interface PublicMergeInput {
-  /**
-   * The ID of the company to merge into the primary.
-   */
-  objectIdToMerge: string;
-
-  /**
-   * The ID of the primary company, which the other will merge into.
-   */
-  primaryObjectId: string;
-}
-
-/**
- * Describes a search request
- */
-export interface PublicObjectSearchRequest {
-  /**
-   * A paging cursor token for retrieving subsequent pages.
-   */
-  after?: string;
-
-  /**
-   * Up to 6 groups of filters defining additional query criteria.
-   */
-  filterGroups?: Array<FilterGroup>;
-
-  /**
-   * The maximum results to return, up to 200 objects.
-   */
-  limit?: number;
-
-  /**
-   * A list of property names to include in the response.
-   */
-  properties?: Array<string>;
-
-  /**
-   * The search query string, up to 3000 characters.
-   */
-  query?: string;
-
-  /**
-   * Specifies sorting order based on object properties.
-   */
-  sorts?: Array<string>;
-}
-
-/**
- * A simple public object.
- */
-export interface SimplePublicObject {
-  /**
-   * The unique ID of the object.
-   */
-  id: string;
-
-  /**
-   * The timestamp when the object was created, in ISO 8601 format.
-   */
-  createdAt: string;
-
-  /**
-   * Key-value pairs representing the properties of the object.
-   */
-  properties: { [key: string]: string | null };
-
-  /**
-   * The timestamp when the object was last updated, in ISO 8601 format.
-   */
-  updatedAt: string;
-
-  /**
-   * Whether the object is archived.
-   */
-  archived?: boolean;
-
-  /**
-   * The timestamp when the object was archived, in ISO 8601 format.
-   */
-  archivedAt?: string;
-
-  objectWriteTraceId?: string;
-
-  /**
-   * Key-value pairs representing the properties of the object along with their
-   * history.
-   */
-  propertiesWithHistory?: { [key: string]: Array<ValueWithTimestamp> };
-}
-
-/**
- * Contains an array of CRM object records to be processed in a batch operation,
- * each defined by their ID and properties.
- */
-export interface SimplePublicObjectBatchInput {
-  /**
-   * The ID to be updated. This can be the object ID, or the unique property value of
-   * the `idProperty` property.
-   */
-  id: string;
-
-  /**
-   * The company property values to set.
-   */
-  properties: { [key: string]: string };
-
-  /**
-   * The name of a property whose values are unique for this object
-   */
-  idProperty?: string;
-
-  /**
-   * In each input object, set this field to a unique ID value to enable more
-   * granular debugging for error responses. Learn more about
-   * [multi-status errors](https://developers.hubspot.com/docs/reference/api/other-resources/error-handling#multi-status-errors).
-   */
-  objectWriteTraceId?: string;
-}
-
-export interface SimplePublicObjectBatchInputForCreate {
-  properties: { [key: string]: string };
-
-  associations?: Array<PublicAssociationsForObject>;
-
-  objectWriteTraceId?: string;
-}
-
-/**
- * Represents an object used in batch upsert operations, containing an object’s
- * unique identifier, its properties, and optionally the unique property name and a
- * write trace ID.
- */
-export interface SimplePublicObjectBatchInputUpsert {
-  /**
-   * The ID of the company to update.
-   */
-  id: string;
-
-  /**
-   * The company property values to set.
-   */
-  properties: { [key: string]: string };
-
-  /**
-   * The name of a property whose values are unique for this object
-   */
-  idProperty?: string;
-
-  /**
-   * In each input object, set this field to a unique ID value to enable more
-   * granular debugging for error responses. Learn more about
-   * [multi-status errors](https://developers.hubspot.com/docs/reference/api/other-resources/error-handling#multi-status-errors).
-   */
-  objectWriteTraceId?: string;
-}
-
-export interface SimplePublicObjectID {
-  id: string;
-}
-
-/**
- * Represents the input required to create or update a CRM object, containing an
- * object with property names and their corresponding values.
- */
-export interface SimplePublicObjectInput {
-  /**
-   * The company property values to set.
-   */
-  properties: { [key: string]: string };
-}
-
-/**
- * Is the input object used to create a new CRM object, containing the properties
- * to be set and optional associations to link the new record with other CRM
- * objects.
- */
-export interface SimplePublicObjectInputForCreate {
-  /**
-   * The company property values to set.
-   */
-  properties: { [key: string]: string };
-
-  associations?: Array<PublicAssociationsForObject>;
-}
-
-/**
- * Represents a CRM object along with its properties, timestamps, and a set of
- * associated object IDs grouped by association type.
- */
-export interface SimplePublicObjectWithAssociations {
-  /**
-   * The unique ID of the object.
-   */
-  id: string;
-
-  /**
-   * The timestamp when the object was created, in ISO 8601 format.
-   */
-  createdAt: string;
-
-  /**
-   * Key value pairs representing the properties of the object.
-   */
-  properties: { [key: string]: string | null };
-
-  /**
-   * The timestamp when the object was last updated, in ISO 8601 format.
-   */
-  updatedAt: string;
-
-  /**
-   * Whether the object is archived.
-   */
-  archived?: boolean;
-
-  /**
-   * The timestamp when the object was archived, in ISO 8601 format.
-   */
-  archivedAt?: string;
-
-  /**
-   * A list defining relationships with other objects.
-   */
-  associations?: { [key: string]: CollectionResponseAssociatedID };
-
-  objectWriteTraceId?: string;
-
-  /**
-   * Key-value pairs representing the properties of the object along with their
-   * history.
-   */
-  propertiesWithHistory?: { [key: string]: Array<ValueWithTimestamp> };
-}
-
-/**
- * Represents a CRM object that has either been created or updated (upserted)
- */
-export interface SimplePublicUpsertObject {
-  /**
-   * The unique ID of the object.
-   */
-  id: string;
-
-  /**
-   * The timestamp when the object was created, in ISO 8601 format.
-   */
-  createdAt: string;
-
-  /**
-   * Whether the property is new.
-   */
-  new: boolean;
-
-  /**
-   * Key value pairs representing the properties of the object.
-   */
-  properties: { [key: string]: string };
-
-  /**
-   * The timestamp when the object was last updated, in ISO 8601 format.
-   */
-  updatedAt: string;
-
-  /**
-   * Whether the object is archived.
-   */
-  archived?: boolean;
-
-  /**
-   * The timestamp when the object was archived, in ISO 8601 format.
-   */
-  archivedAt?: string;
-
-  objectWriteTraceId?: string;
-
-  /**
-   * Key-value pairs representing the properties of the object along with their
-   * history.
-   */
-  propertiesWithHistory?: { [key: string]: Array<ValueWithTimestamp> };
-}
-
-/**
- * Property model that includes timestamp.
- */
-export interface ValueWithTimestamp {
-  /**
-   * The property type.
-   */
-  sourceType: string;
-
-  /**
-   * The timestamp when the property was updated, in ISO 8601 format.
-   */
-  timestamp: string;
-
-  /**
-   * The property value.
-   */
-  value: string;
-
-  /**
-   * The unique ID of the property.
-   */
-  sourceId?: string;
-
-  /**
-   * A human-readable label.
-   */
-  sourceLabel?: string;
-
-  /**
-   * The ID of the user who last updated the property.
-   */
-  updatedByUserId?: number;
-}
-
+Objects.Appointments = Appointments;
+Objects.Calls = Calls;
 Objects.Companies = Companies;
 Objects.Contacts = Contacts;
 Objects.Custom = Custom;
 Objects.DealSplits = DealSplits;
 Objects.Deals = Deals;
+Objects.Emails = Emails;
+Objects.FeedbackSubmissions = FeedbackSubmissions;
+Objects.Invoices = Invoices;
+Objects.Leads = Leads;
+Objects.LineItems = LineItems;
 Objects.Meetings = Meetings;
+Objects.Notes = Notes;
 Objects.Objects = ObjectsAPIObjects;
+Objects.PartnerClients = PartnerClients;
 Objects.Schemas = Schemas;
+Objects.Services = Services;
+Objects.Tasks = Tasks;
+Objects.Taxes = Taxes;
+Objects.Tickets = Tickets;
 
 export declare namespace Objects {
   export {
-    type BatchInputSimplePublicObjectBatchInput as BatchInputSimplePublicObjectBatchInput,
-    type BatchInputSimplePublicObjectBatchInputForCreate as BatchInputSimplePublicObjectBatchInputForCreate,
-    type BatchInputSimplePublicObjectBatchInputUpsert as BatchInputSimplePublicObjectBatchInputUpsert,
-    type BatchInputSimplePublicObjectID as BatchInputSimplePublicObjectID,
-    type BatchReadInputSimplePublicObjectID as BatchReadInputSimplePublicObjectID,
-    type BatchResponseSimplePublicObject as BatchResponseSimplePublicObject,
-    type BatchResponseSimplePublicUpsertObject as BatchResponseSimplePublicUpsertObject,
-    type CollectionResponseAssociatedID as CollectionResponseAssociatedID,
-    type CollectionResponseSimplePublicObjectWithAssociations as CollectionResponseSimplePublicObjectWithAssociations,
-    type CollectionResponseWithTotalSimplePublicObject as CollectionResponseWithTotalSimplePublicObject,
-    type CreatedResponseSimplePublicObject as CreatedResponseSimplePublicObject,
-    type FilterGroup as FilterGroup,
-    type PublicAssociationsForObject as PublicAssociationsForObject,
-    type PublicGdprDeleteInput as PublicGdprDeleteInput,
-    type PublicMergeInput as PublicMergeInput,
-    type PublicObjectSearchRequest as PublicObjectSearchRequest,
-    type SimplePublicObject as SimplePublicObject,
-    type SimplePublicObjectBatchInput as SimplePublicObjectBatchInput,
-    type SimplePublicObjectBatchInputForCreate as SimplePublicObjectBatchInputForCreate,
-    type SimplePublicObjectBatchInputUpsert as SimplePublicObjectBatchInputUpsert,
-    type SimplePublicObjectID as SimplePublicObjectID,
-    type SimplePublicObjectInput as SimplePublicObjectInput,
-    type SimplePublicObjectInputForCreate as SimplePublicObjectInputForCreate,
-    type SimplePublicObjectWithAssociations as SimplePublicObjectWithAssociations,
-    type SimplePublicUpsertObject as SimplePublicUpsertObject,
-    type ValueWithTimestamp as ValueWithTimestamp,
+    Appointments as Appointments,
+    type AppointmentCreateParams as AppointmentCreateParams,
+    type AppointmentUpdateParams as AppointmentUpdateParams,
+    type AppointmentListParams as AppointmentListParams,
+    type AppointmentGetParams as AppointmentGetParams,
+    type AppointmentSearchParams as AppointmentSearchParams,
+  };
+
+  export {
+    Calls as Calls,
+    type CallCreateParams as CallCreateParams,
+    type CallUpdateParams as CallUpdateParams,
+    type CallListParams as CallListParams,
+    type CallGetParams as CallGetParams,
+    type CallSearchParams as CallSearchParams,
   };
 
   export {
@@ -704,12 +326,64 @@ export declare namespace Objects {
   };
 
   export {
+    Emails as Emails,
+    type EmailCreateParams as EmailCreateParams,
+    type EmailUpdateParams as EmailUpdateParams,
+    type EmailListParams as EmailListParams,
+    type EmailReadParams as EmailReadParams,
+    type EmailSearchParams as EmailSearchParams,
+  };
+
+  export {
+    FeedbackSubmissions as FeedbackSubmissions,
+    type FeedbackSubmissionListParams as FeedbackSubmissionListParams,
+    type FeedbackSubmissionGetParams as FeedbackSubmissionGetParams,
+    type FeedbackSubmissionSearchParams as FeedbackSubmissionSearchParams,
+  };
+
+  export {
+    Invoices as Invoices,
+    type InvoiceCreateParams as InvoiceCreateParams,
+    type InvoiceUpdateParams as InvoiceUpdateParams,
+    type InvoiceListParams as InvoiceListParams,
+    type InvoiceGetParams as InvoiceGetParams,
+    type InvoiceSearchParams as InvoiceSearchParams,
+  };
+
+  export {
+    Leads as Leads,
+    type LeadCreateParams as LeadCreateParams,
+    type LeadUpdateParams as LeadUpdateParams,
+    type LeadListParams as LeadListParams,
+    type LeadGetParams as LeadGetParams,
+    type LeadSearchParams as LeadSearchParams,
+  };
+
+  export {
+    LineItems as LineItems,
+    type LineItemCreateParams as LineItemCreateParams,
+    type LineItemUpdateParams as LineItemUpdateParams,
+    type LineItemListParams as LineItemListParams,
+    type LineItemGetParams as LineItemGetParams,
+    type LineItemSearchParams as LineItemSearchParams,
+  };
+
+  export {
     Meetings as Meetings,
     type MeetingCreateParams as MeetingCreateParams,
     type MeetingUpdateParams as MeetingUpdateParams,
     type MeetingListParams as MeetingListParams,
     type MeetingGetParams as MeetingGetParams,
     type MeetingSearchParams as MeetingSearchParams,
+  };
+
+  export {
+    Notes as Notes,
+    type NoteCreateParams as NoteCreateParams,
+    type NoteUpdateParams as NoteUpdateParams,
+    type NoteListParams as NoteListParams,
+    type NoteGetParams as NoteGetParams,
+    type NoteSearchParams as NoteSearchParams,
   };
 
   export {
@@ -723,14 +397,18 @@ export declare namespace Objects {
   };
 
   export {
+    PartnerClients as PartnerClients,
+    type PartnerClientUpdateParams as PartnerClientUpdateParams,
+    type PartnerClientListParams as PartnerClientListParams,
+    type PartnerClientGetParams as PartnerClientGetParams,
+    type PartnerClientSearchParams as PartnerClientSearchParams,
+  };
+
+  export {
     Schemas as Schemas,
-    type AssociationDefinition as AssociationDefinition,
-    type AssociationDefinitionEgg as AssociationDefinitionEgg,
-    type CollectionResponseObjectSchemaNoPaging as CollectionResponseObjectSchemaNoPaging,
     type ObjectSchema as ObjectSchema,
     type ObjectSchemaEgg as ObjectSchemaEgg,
     type ObjectTypeDefinition as ObjectTypeDefinition,
-    type ObjectTypeDefinitionLabels as ObjectTypeDefinitionLabels,
     type ObjectTypeDefinitionPatch as ObjectTypeDefinitionPatch,
     type ObjectTypePropertyCreate as ObjectTypePropertyCreate,
     type SchemaCreateParams as SchemaCreateParams,
@@ -739,5 +417,42 @@ export declare namespace Objects {
     type SchemaDeleteParams as SchemaDeleteParams,
     type SchemaArchiveAssociationParams as SchemaArchiveAssociationParams,
     type SchemaCreateAssociationParams as SchemaCreateAssociationParams,
+  };
+
+  export {
+    Services as Services,
+    type ServiceCreateParams as ServiceCreateParams,
+    type ServiceUpdateParams as ServiceUpdateParams,
+    type ServiceListParams as ServiceListParams,
+    type ServiceGetParams as ServiceGetParams,
+    type ServiceSearchParams as ServiceSearchParams,
+  };
+
+  export {
+    Tasks as Tasks,
+    type TaskCreateParams as TaskCreateParams,
+    type TaskUpdateParams as TaskUpdateParams,
+    type TaskListParams as TaskListParams,
+    type TaskGetParams as TaskGetParams,
+    type TaskSearchParams as TaskSearchParams,
+  };
+
+  export {
+    Taxes as Taxes,
+    type TaxCreateParams as TaxCreateParams,
+    type TaxUpdateParams as TaxUpdateParams,
+    type TaxListParams as TaxListParams,
+    type TaxGetParams as TaxGetParams,
+    type TaxSearchParams as TaxSearchParams,
+  };
+
+  export {
+    Tickets as Tickets,
+    type TicketCreateParams as TicketCreateParams,
+    type TicketUpdateParams as TicketUpdateParams,
+    type TicketListParams as TicketListParams,
+    type TicketGetParams as TicketGetParams,
+    type TicketMergeParams as TicketMergeParams,
+    type TicketSearchParams as TicketSearchParams,
   };
 }

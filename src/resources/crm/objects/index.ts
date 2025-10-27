@@ -1,6 +1,22 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
+  Appointments,
+  type AppointmentCreateParams,
+  type AppointmentUpdateParams,
+  type AppointmentListParams,
+  type AppointmentGetParams,
+  type AppointmentSearchParams,
+} from './appointments/index';
+export {
+  Calls,
+  type CallCreateParams,
+  type CallUpdateParams,
+  type CallListParams,
+  type CallGetParams,
+  type CallSearchParams,
+} from './calls/index';
+export {
   Companies,
   type CompanyCreateParams,
   type CompanyUpdateParams,
@@ -50,6 +66,44 @@ export {
   type DealSearchParams,
 } from './deals/index';
 export {
+  Emails,
+  type EmailCreateParams,
+  type EmailUpdateParams,
+  type EmailListParams,
+  type EmailReadParams,
+  type EmailSearchParams,
+} from './emails/index';
+export {
+  FeedbackSubmissions,
+  type FeedbackSubmissionListParams,
+  type FeedbackSubmissionGetParams,
+  type FeedbackSubmissionSearchParams,
+} from './feedback-submissions/index';
+export {
+  Invoices,
+  type InvoiceCreateParams,
+  type InvoiceUpdateParams,
+  type InvoiceListParams,
+  type InvoiceGetParams,
+  type InvoiceSearchParams,
+} from './invoices/index';
+export {
+  Leads,
+  type LeadCreateParams,
+  type LeadUpdateParams,
+  type LeadListParams,
+  type LeadGetParams,
+  type LeadSearchParams,
+} from './leads/index';
+export {
+  LineItems,
+  type LineItemCreateParams,
+  type LineItemUpdateParams,
+  type LineItemListParams,
+  type LineItemGetParams,
+  type LineItemSearchParams,
+} from './line-items/index';
+export {
   Meetings,
   type MeetingCreateParams,
   type MeetingUpdateParams,
@@ -58,44 +112,26 @@ export {
   type MeetingSearchParams,
 } from './meetings/index';
 export {
-  Objects,
-  type BatchInputSimplePublicObjectBatchInput,
-  type BatchInputSimplePublicObjectBatchInputForCreate,
-  type BatchInputSimplePublicObjectBatchInputUpsert,
-  type BatchInputSimplePublicObjectID,
-  type BatchReadInputSimplePublicObjectID,
-  type BatchResponseSimplePublicObject,
-  type BatchResponseSimplePublicUpsertObject,
-  type CollectionResponseAssociatedID,
-  type CollectionResponseSimplePublicObjectWithAssociations,
-  type CollectionResponseWithTotalSimplePublicObject,
-  type CreatedResponseSimplePublicObject,
-  type FilterGroup,
-  type PublicAssociationsForObject,
-  type PublicGdprDeleteInput,
-  type PublicMergeInput,
-  type PublicObjectSearchRequest,
-  type SimplePublicObject,
-  type SimplePublicObjectBatchInput,
-  type SimplePublicObjectBatchInputForCreate,
-  type SimplePublicObjectBatchInputUpsert,
-  type SimplePublicObjectID,
-  type SimplePublicObjectInput,
-  type SimplePublicObjectInputForCreate,
-  type SimplePublicObjectWithAssociations,
-  type SimplePublicUpsertObject,
-  type ValueWithTimestamp,
-  type SimplePublicObjectWithAssociationsPage,
-} from './objects';
+  Notes,
+  type NoteCreateParams,
+  type NoteUpdateParams,
+  type NoteListParams,
+  type NoteGetParams,
+  type NoteSearchParams,
+} from './notes/index';
+export { Objects } from './objects';
+export {
+  PartnerClients,
+  type PartnerClientUpdateParams,
+  type PartnerClientListParams,
+  type PartnerClientGetParams,
+  type PartnerClientSearchParams,
+} from './partner-clients/index';
 export {
   Schemas,
-  type AssociationDefinition,
-  type AssociationDefinitionEgg,
-  type CollectionResponseObjectSchemaNoPaging,
   type ObjectSchema,
   type ObjectSchemaEgg,
   type ObjectTypeDefinition,
-  type ObjectTypeDefinitionLabels,
   type ObjectTypeDefinitionPatch,
   type ObjectTypePropertyCreate,
   type SchemaCreateParams,
@@ -105,6 +141,39 @@ export {
   type SchemaArchiveAssociationParams,
   type SchemaCreateAssociationParams,
 } from './schemas';
+export {
+  Services,
+  type ServiceCreateParams,
+  type ServiceUpdateParams,
+  type ServiceListParams,
+  type ServiceGetParams,
+  type ServiceSearchParams,
+} from './services/index';
+export {
+  Tasks,
+  type TaskCreateParams,
+  type TaskUpdateParams,
+  type TaskListParams,
+  type TaskGetParams,
+  type TaskSearchParams,
+} from './tasks/index';
+export {
+  Taxes,
+  type TaxCreateParams,
+  type TaxUpdateParams,
+  type TaxListParams,
+  type TaxGetParams,
+  type TaxSearchParams,
+} from './taxes/index';
+export {
+  Tickets,
+  type TicketCreateParams,
+  type TicketUpdateParams,
+  type TicketListParams,
+  type TicketGetParams,
+  type TicketMergeParams,
+  type TicketSearchParams,
+} from './tickets/index';
 export {
   type ObjectCreateParams,
   type ObjectUpdateParams,

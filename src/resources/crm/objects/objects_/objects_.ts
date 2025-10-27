@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
-import * as ObjectsAPI from '../objects';
-import { SimplePublicObjectWithAssociationsPage } from '../objects';
+import * as CRMAPI from '../../crm';
+import { SimplePublicObjectWithAssociationsPage } from '../../crm';
 import * as BatchAPI from './batch';
 import {
   Batch,
@@ -38,7 +38,7 @@ export class Objects extends APIResource {
     objectType: string,
     body: ObjectCreateParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CreatedResponseSimplePublicObject> {
+  ): APIPromise<CRMAPI.CreatedResponseSimplePublicObject> {
     return this._client.post(path`/crm/v3/objects/${objectType}`, { body, ...options });
   }
 
@@ -71,7 +71,7 @@ export class Objects extends APIResource {
     objectID: string,
     params: ObjectUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.SimplePublicObject> {
+  ): APIPromise<CRMAPI.SimplePublicObject> {
     const { objectType, idProperty, ...body } = params;
     return this._client.patch(path`/crm/v3/objects/${objectType}/${objectID}`, {
       query: { idProperty },
@@ -98,10 +98,10 @@ export class Objects extends APIResource {
     objectType: string,
     query: ObjectListParams | null | undefined = {},
     options?: RequestOptions,
-  ): PagePromise<SimplePublicObjectWithAssociationsPage, ObjectsAPI.SimplePublicObjectWithAssociations> {
+  ): PagePromise<SimplePublicObjectWithAssociationsPage, CRMAPI.SimplePublicObjectWithAssociations> {
     return this._client.getAPIList(
       path`/crm/v3/objects/${objectType}`,
-      Page<ObjectsAPI.SimplePublicObjectWithAssociations>,
+      Page<CRMAPI.SimplePublicObjectWithAssociations>,
       { query, ...options },
     );
   }
@@ -142,7 +142,7 @@ export class Objects extends APIResource {
     objectID: string,
     params: ObjectReadParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.SimplePublicObjectWithAssociations> {
+  ): APIPromise<CRMAPI.SimplePublicObjectWithAssociations> {
     const { objectType, ...query } = params;
     return this._client.get(path`/crm/v3/objects/${objectType}/${objectID}`, { query, ...options });
   }
@@ -158,18 +158,18 @@ export class Objects extends APIResource {
     objectType: string,
     body: ObjectSearchParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CollectionResponseWithTotalSimplePublicObject> {
+  ): APIPromise<CRMAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post(path`/crm/v3/objects/${objectType}/search`, { body, ...options });
   }
 }
 
 export interface ObjectCreateParams {
   /**
-   * The company property values to set.
+   * Key-value pairs for setting properties for the new object.
    */
   properties: { [key: string]: string };
 
-  associations?: Array<ObjectsAPI.PublicAssociationsForObject>;
+  associations?: Array<CRMAPI.PublicAssociationsForObject>;
 }
 
 export interface ObjectUpdateParams {
@@ -179,7 +179,7 @@ export interface ObjectUpdateParams {
   objectType: string;
 
   /**
-   * Body param: The company property values to set.
+   * Body param: Key value pairs representing the properties of the object.
    */
   properties: { [key: string]: string };
 
@@ -267,7 +267,7 @@ export interface ObjectSearchParams {
   /**
    * Up to 6 groups of filters defining additional query criteria.
    */
-  filterGroups?: Array<ObjectsAPI.FilterGroup>;
+  filterGroups?: Array<CRMAPI.FilterGroup>;
 
   /**
    * The maximum results to return, up to 200 objects.

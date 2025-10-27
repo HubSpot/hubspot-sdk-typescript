@@ -1,52 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as EmailsAPI from './emails';
-import {
-  AggregateEmailStatistics,
-  CollectionResponseWithTotalEmailStatisticIntervalNoPaging,
-  CollectionResponseWithTotalPublicEmailForwardPaging,
-  CollectionResponseWithTotalVersionPublicEmail,
-  EmailCloneParams,
-  EmailCloneRequestVNext,
-  EmailCreateAbTestVariationParams,
-  EmailCreateParams,
-  EmailCreateRequest,
-  EmailDeleteParams,
-  EmailGetEmailsListParams,
-  EmailGetHistogramParams,
-  EmailGetRevisionByIDParams,
-  EmailGetRevisionsParams,
-  EmailListParams,
-  EmailReadParams,
-  EmailRestoreDraftRevisionParams,
-  EmailRestoreRevisionParams,
-  EmailStatisticInterval,
-  EmailStatisticsData,
-  EmailUpdateParams,
-  EmailUpdateRequest,
-  EmailUpsertDraftParams,
-  Emails,
-  Interval,
-  Paging,
-  PublicButtonStyleSettings,
-  PublicDividerStyleSettings,
-  PublicEmail,
-  PublicEmailContent,
-  PublicEmailFromDetails,
-  PublicEmailRecipients,
-  PublicEmailStyleSettings,
-  PublicEmailSubscriptionDetails,
-  PublicEmailTestingDetails,
-  PublicEmailToDetails,
-  PublicEmailsPage,
-  PublicFontStyle,
-  PublicRssEmailDetails,
-  PublicWebversionDetails,
-  SmartEmailField,
-  VersionPublicEmail,
-  VersionPublicEmailsPage,
-} from './emails';
 import * as FormsAPI from './forms';
 import {
   CollectionResponseFormDefinitionBaseForwardPaging,
@@ -93,7 +47,7 @@ import {
   SingleCheckboxField,
   SingleLineTextField,
 } from './forms';
-import * as MarketingEventsAPI from './marketing-events/marketing-events';
+import * as MarketingEventsAPI from './marketing-events';
 import {
   AppInfo,
   AttendanceCounters,
@@ -118,38 +72,21 @@ import {
   EventDetailSettings,
   EventDetailSettingsURL,
   MarketingEventAssociation,
-  MarketingEventCancelByExternalEventIDParams,
-  MarketingEventCompleteByExternalEventIDParams,
   MarketingEventCompleteRequestParams,
-  MarketingEventCreateParams,
   MarketingEventCreateRequestParams,
   MarketingEventDefaultResponse,
-  MarketingEventDeleteBatchByExternalEventIDParams,
-  MarketingEventDeleteBatchParams,
-  MarketingEventDeleteByExternalEventIDParams,
   MarketingEventEmailSubscriber,
   MarketingEventExternalUniqueIdentifier,
-  MarketingEventGetByExternalEventIDParams,
   MarketingEventIdentifiersResponse,
-  MarketingEventListParams,
   MarketingEventPublicDefaultResponse,
   MarketingEventPublicDefaultResponseV2,
   MarketingEventPublicObjectIDDeleteRequest,
   MarketingEventPublicReadResponse,
   MarketingEventPublicReadResponseV2,
-  MarketingEventPublicReadResponseV2sPage,
   MarketingEventPublicUpdateRequestFullV2,
   MarketingEventPublicUpdateRequestV2,
-  MarketingEventSearchByExternalEventIDParams,
   MarketingEventSubscriber,
-  MarketingEventUpdateBatchParams,
-  MarketingEventUpdateByExternalEventIDParams,
-  MarketingEventUpdateParams,
   MarketingEventUpdateRequestParams,
-  MarketingEventUpsertBatchParams,
-  MarketingEventUpsertByExternalEventIDParams,
-  MarketingEventUpsertSubscriberStateByEmailParams,
-  MarketingEventUpsertSubscriberStateByIDParams,
   MarketingEvents,
   ParticipationAssociations,
   ParticipationBreakdown,
@@ -159,7 +96,107 @@ import {
   SearchPublicResponseWrapper,
   SubscriberEmailResponse,
   SubscriberVidResponse,
-} from './marketing-events/marketing-events';
+} from './marketing-events';
+import * as CampaignsAPI from './campaigns/campaigns';
+import {
+  BatchInputPublicCampaignBatchUpdateItem,
+  BatchInputPublicCampaignDeleteInput,
+  BatchInputPublicCampaignInput,
+  BatchInputPublicCampaignReadInput,
+  BatchResponsePublicCampaign,
+  BatchResponsePublicCampaignWithAssets,
+  BatchResponsePublicCampaignWithAssetsWithErrors,
+  BatchResponsePublicCampaignWithErrors,
+  CampaignCreateParams,
+  CampaignGetParams,
+  CampaignListParams,
+  CampaignUpdateParams,
+  Campaigns,
+  CollectionResponseContactReferenceForwardPaging,
+  CollectionResponsePublicCampaignAsset,
+  CollectionResponsePublicCampaignAssetForwardPaging,
+  CollectionResponseWithTotalPublicCampaignForwardPaging,
+  ContactReference,
+  MetricsCounters,
+  PublicBudgetItem,
+  PublicBudgetItemInput,
+  PublicBudgetTotals,
+  PublicBusinessUnit,
+  PublicCampaign,
+  PublicCampaignAsset,
+  PublicCampaignBatchUpdateItem,
+  PublicCampaignDeleteInput,
+  PublicCampaignInput,
+  PublicCampaignReadInput,
+  PublicCampaignWithAssets,
+  PublicCampaignsPage,
+  PublicSpendItem,
+  PublicSpendItemInput,
+  RevenueAttributionAggregate,
+} from './campaigns/campaigns';
+import * as EmailsAPI from './emails/emails';
+import {
+  AggregateEmailStatistics,
+  CollectionResponseWithTotalEmailStatisticIntervalNoPaging,
+  CollectionResponseWithTotalPublicEmailForwardPaging,
+  CollectionResponseWithTotalVersionPublicEmail,
+  EmailCloneParams,
+  EmailCloneRequestVNext,
+  EmailCreateAbTestVariationParams,
+  EmailCreateParams,
+  EmailCreateRequest,
+  EmailDeleteParams,
+  EmailGetParams,
+  EmailGetRevisionParams,
+  EmailListParams,
+  EmailListRevisionsParams,
+  EmailRestoreRevisionParams,
+  EmailRestoreRevisionToDraftParams,
+  EmailStatisticInterval,
+  EmailStatisticsData,
+  EmailUpdateDraftParams,
+  EmailUpdateParams,
+  EmailUpdateRequest,
+  Emails,
+  Interval,
+  Paging,
+  PublicButtonStyleSettings,
+  PublicDividerStyleSettings,
+  PublicEmail,
+  PublicEmailContent,
+  PublicEmailFromDetails,
+  PublicEmailRecipients,
+  PublicEmailStyleSettings,
+  PublicEmailSubscriptionDetails,
+  PublicEmailTestingDetails,
+  PublicEmailToDetails,
+  PublicEmailsPage,
+  PublicFontStyle,
+  PublicRssEmailDetails,
+  PublicWebversionDetails,
+  SmartEmailField,
+  VersionPublicEmail,
+} from './emails/emails';
+import * as EventsAPI from './events/events';
+import {
+  EventCancelByExternalEventIDParams,
+  EventCompleteByExternalEventIDParams,
+  EventCreateParams,
+  EventDeleteBatchByExternalEventIDParams,
+  EventDeleteBatchParams,
+  EventDeleteByExternalEventIDParams,
+  EventGetByExternalEventIDParams,
+  EventListParams,
+  EventSearchByExternalEventIDParams,
+  EventUpdateBatchParams,
+  EventUpdateByExternalEventIDParams,
+  EventUpdateParams,
+  EventUpsertBatchParams,
+  EventUpsertByExternalEventIDParams,
+  EventUpsertSubscriberStateByEmailParams,
+  EventUpsertSubscriberStateByIDParams,
+  Events,
+} from './events/events';
 import * as SubscriptionsAPI from './subscriptions/subscriptions';
 import {
   PublicSubscriptionStatus,
@@ -174,30 +211,246 @@ import {
 import * as TransactionalAPI from './transactional/transactional';
 import {
   CollectionResponseSmtpAPITokenViewForwardPaging,
-  EmailSendStatusView,
-  EventIDView,
-  PublicSingleSendEmail,
-  PublicSingleSendRequestEgg,
   SmtpAPITokenRequestEgg,
   SmtpAPITokenView,
   Transactional,
 } from './transactional/transactional';
 
 export class Marketing extends APIResource {
+  campaigns: CampaignsAPI.Campaigns = new CampaignsAPI.Campaigns(this._client);
   emails: EmailsAPI.Emails = new EmailsAPI.Emails(this._client);
+  events: EventsAPI.Events = new EventsAPI.Events(this._client);
   forms: FormsAPI.Forms = new FormsAPI.Forms(this._client);
   marketingEvents: MarketingEventsAPI.MarketingEvents = new MarketingEventsAPI.MarketingEvents(this._client);
   subscriptions: SubscriptionsAPI.Subscriptions = new SubscriptionsAPI.Subscriptions(this._client);
   transactional: TransactionalAPI.Transactional = new TransactionalAPI.Transactional(this._client);
 }
 
+/**
+ * Describes the status of an email send request.
+ */
+export interface EmailSendStatusView {
+  /**
+   * Status of the send request.
+   */
+  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+
+  /**
+   * Identifier used to query the status of the send.
+   */
+  statusId: string;
+
+  /**
+   * Time when the send was completed.
+   */
+  completedAt?: string;
+
+  /**
+   * The ID of a send event.
+   */
+  eventId?: EventIDView;
+
+  message?: string;
+
+  /**
+   * Time when the send was requested.
+   */
+  requestedAt?: string;
+
+  /**
+   * Result of the send.
+   */
+  sendResult?:
+    | 'SENT'
+    | 'IDEMPOTENT_IGNORE'
+    | 'QUEUED'
+    | 'IDEMPOTENT_FAIL'
+    | 'THROTTLED'
+    | 'EMAIL_DISABLED'
+    | 'PORTAL_SUSPENDED'
+    | 'INVALID_TO_ADDRESS'
+    | 'BLOCKED_DOMAIN'
+    | 'PREVIOUSLY_BOUNCED'
+    | 'EMAIL_UNCONFIRMED'
+    | 'PREVIOUS_SPAM'
+    | 'PREVIOUSLY_UNSUBSCRIBED_MESSAGE'
+    | 'PREVIOUSLY_UNSUBSCRIBED_PORTAL'
+    | 'INVALID_FROM_ADDRESS'
+    | 'CAMPAIGN_CANCELLED'
+    | 'VALIDATION_FAILED'
+    | 'MTA_IGNORE'
+    | 'BLOCKED_ADDRESS'
+    | 'PORTAL_OVER_LIMIT'
+    | 'PORTAL_EXPIRED'
+    | 'PORTAL_MISSING_MARKETING_SCOPE'
+    | 'MISSING_TEMPLATE_PROPERTIES'
+    | 'MISSING_REQUIRED_PARAMETER'
+    | 'PORTAL_AUTHENTICATION_FAILURE'
+    | 'MISSING_CONTENT'
+    | 'CORRUPT_INPUT'
+    | 'TEMPLATE_RENDER_EXCEPTION'
+    | 'GRAYMAIL_SUPPRESSED'
+    | 'UNCONFIGURED_SENDING_DOMAIN'
+    | 'UNDELIVERABLE'
+    | 'CANCELLED_ABUSE'
+    | 'QUARANTINED_ADDRESS'
+    | 'ADDRESS_ONLY_ACCEPTED_ON_PROD'
+    | 'PORTAL_NOT_AUTHORIZED_FOR_APPLICATION'
+    | 'ADDRESS_LIST_BOMBED'
+    | 'ADDRESS_OPTED_OUT'
+    | 'RECIPIENT_FATIGUE_SUPPRESSED'
+    | 'TOO_MANY_RECIPIENTS'
+    | 'PREVIOUSLY_UNSUBSCRIBED_BRAND'
+    | 'NON_MARKETABLE_CONTACT'
+    | 'PREVIOUSLY_UNSUBSCRIBED_BUSINESS_UNIT'
+    | 'GDPR_DOI_ENABLED'
+    | 'HUBL_LIMIT_EXCEEDED'
+    | 'LOW_CONTACT_QUALITY_SCORE';
+
+  /**
+   * Time when the send began processing.
+   */
+  startedAt?: string;
+}
+
+/**
+ * The ID of a send event.
+ */
+export interface EventIDView {
+  /**
+   * Identifier of event.
+   */
+  id: string;
+
+  /**
+   * Time of event creation.
+   */
+  created: string;
+}
+
+/**
+ * A JSON object containing anything you want to override.
+ */
+export interface PublicSingleSendEmail {
+  /**
+   * The recipient of the email.
+   */
+  to: string;
+
+  /**
+   * List of email addresses to send as Bcc.
+   */
+  bcc?: Array<string>;
+
+  /**
+   * List of email addresses to send as Cc.
+   */
+  cc?: Array<string>;
+
+  /**
+   * The From header for the email.
+   */
+  from?: string;
+
+  /**
+   * List of Reply-To header values for the email.
+   */
+  replyTo?: Array<string>;
+
+  /**
+   * ID for a particular send. No more than one email will be sent per sendId.
+   */
+  sendId?: string;
+}
+
+/**
+ * A request to send a single email asynchronously.
+ */
+export interface PublicSingleSendRequestEgg {
+  /**
+   * The content ID for the email, which can be found in email tool UI.
+   */
+  emailId: number;
+
+  /**
+   * A JSON object containing anything you want to override.
+   */
+  message: PublicSingleSendEmail;
+
+  /**
+   * The contactProperties field is a map of contact property values. Each contact
+   * property value contains a name and value property. Each property will get set on
+   * the contact record and will be visible in the template under {{ contact.NAME }}.
+   * Use these properties when you want to set a contact property while you’re
+   * sending the email. For example, when sending a receipt you may want to set a
+   * last_paid_date property, as the sending of the receipt will have information
+   * about the last payment.
+   */
+  contactProperties?: { [key: string]: string };
+
+  /**
+   * The customProperties field is a map of property values. Each property value
+   * contains a name and value property. Each property will be visible in the
+   * template under {{ custom.NAME }}. Note: Custom properties do not currently
+   * support arrays. To provide a listing in an email, one workaround is to build an
+   * HTML list (either with tables or ul) and specify it as a custom property.
+   */
+  customProperties?: { [key: string]: unknown };
+}
+
+Marketing.Campaigns = Campaigns;
 Marketing.Emails = Emails;
+Marketing.Events = Events;
 Marketing.Forms = Forms;
 Marketing.MarketingEvents = MarketingEvents;
 Marketing.Subscriptions = Subscriptions;
 Marketing.Transactional = Transactional;
 
 export declare namespace Marketing {
+  export {
+    type EmailSendStatusView as EmailSendStatusView,
+    type EventIDView as EventIDView,
+    type PublicSingleSendEmail as PublicSingleSendEmail,
+    type PublicSingleSendRequestEgg as PublicSingleSendRequestEgg,
+  };
+
+  export {
+    Campaigns as Campaigns,
+    type BatchInputPublicCampaignBatchUpdateItem as BatchInputPublicCampaignBatchUpdateItem,
+    type BatchInputPublicCampaignDeleteInput as BatchInputPublicCampaignDeleteInput,
+    type BatchInputPublicCampaignInput as BatchInputPublicCampaignInput,
+    type BatchInputPublicCampaignReadInput as BatchInputPublicCampaignReadInput,
+    type BatchResponsePublicCampaign as BatchResponsePublicCampaign,
+    type BatchResponsePublicCampaignWithAssets as BatchResponsePublicCampaignWithAssets,
+    type BatchResponsePublicCampaignWithAssetsWithErrors as BatchResponsePublicCampaignWithAssetsWithErrors,
+    type BatchResponsePublicCampaignWithErrors as BatchResponsePublicCampaignWithErrors,
+    type CollectionResponseContactReferenceForwardPaging as CollectionResponseContactReferenceForwardPaging,
+    type CollectionResponsePublicCampaignAsset as CollectionResponsePublicCampaignAsset,
+    type CollectionResponsePublicCampaignAssetForwardPaging as CollectionResponsePublicCampaignAssetForwardPaging,
+    type CollectionResponseWithTotalPublicCampaignForwardPaging as CollectionResponseWithTotalPublicCampaignForwardPaging,
+    type ContactReference as ContactReference,
+    type MetricsCounters as MetricsCounters,
+    type PublicBudgetItem as PublicBudgetItem,
+    type PublicBudgetItemInput as PublicBudgetItemInput,
+    type PublicBudgetTotals as PublicBudgetTotals,
+    type PublicBusinessUnit as PublicBusinessUnit,
+    type PublicCampaign as PublicCampaign,
+    type PublicCampaignAsset as PublicCampaignAsset,
+    type PublicCampaignBatchUpdateItem as PublicCampaignBatchUpdateItem,
+    type PublicCampaignDeleteInput as PublicCampaignDeleteInput,
+    type PublicCampaignInput as PublicCampaignInput,
+    type PublicCampaignReadInput as PublicCampaignReadInput,
+    type PublicCampaignWithAssets as PublicCampaignWithAssets,
+    type PublicSpendItem as PublicSpendItem,
+    type PublicSpendItemInput as PublicSpendItemInput,
+    type RevenueAttributionAggregate as RevenueAttributionAggregate,
+    type PublicCampaignsPage as PublicCampaignsPage,
+    type CampaignCreateParams as CampaignCreateParams,
+    type CampaignUpdateParams as CampaignUpdateParams,
+    type CampaignListParams as CampaignListParams,
+    type CampaignGetParams as CampaignGetParams,
+  };
+
   export {
     Emails as Emails,
     type AggregateEmailStatistics as AggregateEmailStatistics,
@@ -227,21 +480,38 @@ export declare namespace Marketing {
     type SmartEmailField as SmartEmailField,
     type VersionPublicEmail as VersionPublicEmail,
     type PublicEmailsPage as PublicEmailsPage,
-    type VersionPublicEmailsPage as VersionPublicEmailsPage,
     type EmailCreateParams as EmailCreateParams,
     type EmailUpdateParams as EmailUpdateParams,
     type EmailListParams as EmailListParams,
     type EmailDeleteParams as EmailDeleteParams,
     type EmailCloneParams as EmailCloneParams,
     type EmailCreateAbTestVariationParams as EmailCreateAbTestVariationParams,
-    type EmailGetEmailsListParams as EmailGetEmailsListParams,
-    type EmailGetHistogramParams as EmailGetHistogramParams,
-    type EmailGetRevisionByIDParams as EmailGetRevisionByIDParams,
-    type EmailGetRevisionsParams as EmailGetRevisionsParams,
-    type EmailReadParams as EmailReadParams,
-    type EmailRestoreDraftRevisionParams as EmailRestoreDraftRevisionParams,
+    type EmailGetParams as EmailGetParams,
+    type EmailGetRevisionParams as EmailGetRevisionParams,
+    type EmailListRevisionsParams as EmailListRevisionsParams,
     type EmailRestoreRevisionParams as EmailRestoreRevisionParams,
-    type EmailUpsertDraftParams as EmailUpsertDraftParams,
+    type EmailRestoreRevisionToDraftParams as EmailRestoreRevisionToDraftParams,
+    type EmailUpdateDraftParams as EmailUpdateDraftParams,
+  };
+
+  export {
+    Events as Events,
+    type EventCreateParams as EventCreateParams,
+    type EventUpdateParams as EventUpdateParams,
+    type EventListParams as EventListParams,
+    type EventCancelByExternalEventIDParams as EventCancelByExternalEventIDParams,
+    type EventCompleteByExternalEventIDParams as EventCompleteByExternalEventIDParams,
+    type EventDeleteBatchParams as EventDeleteBatchParams,
+    type EventDeleteBatchByExternalEventIDParams as EventDeleteBatchByExternalEventIDParams,
+    type EventDeleteByExternalEventIDParams as EventDeleteByExternalEventIDParams,
+    type EventGetByExternalEventIDParams as EventGetByExternalEventIDParams,
+    type EventSearchByExternalEventIDParams as EventSearchByExternalEventIDParams,
+    type EventUpdateBatchParams as EventUpdateBatchParams,
+    type EventUpdateByExternalEventIDParams as EventUpdateByExternalEventIDParams,
+    type EventUpsertBatchParams as EventUpsertBatchParams,
+    type EventUpsertByExternalEventIDParams as EventUpsertByExternalEventIDParams,
+    type EventUpsertSubscriberStateByEmailParams as EventUpsertSubscriberStateByEmailParams,
+    type EventUpsertSubscriberStateByIDParams as EventUpsertSubscriberStateByIDParams,
   };
 
   export {
@@ -338,23 +608,6 @@ export declare namespace Marketing {
     type SearchPublicResponseWrapper as SearchPublicResponseWrapper,
     type SubscriberEmailResponse as SubscriberEmailResponse,
     type SubscriberVidResponse as SubscriberVidResponse,
-    type MarketingEventPublicReadResponseV2sPage as MarketingEventPublicReadResponseV2sPage,
-    type MarketingEventCreateParams as MarketingEventCreateParams,
-    type MarketingEventUpdateParams as MarketingEventUpdateParams,
-    type MarketingEventListParams as MarketingEventListParams,
-    type MarketingEventCancelByExternalEventIDParams as MarketingEventCancelByExternalEventIDParams,
-    type MarketingEventCompleteByExternalEventIDParams as MarketingEventCompleteByExternalEventIDParams,
-    type MarketingEventDeleteBatchParams as MarketingEventDeleteBatchParams,
-    type MarketingEventDeleteBatchByExternalEventIDParams as MarketingEventDeleteBatchByExternalEventIDParams,
-    type MarketingEventDeleteByExternalEventIDParams as MarketingEventDeleteByExternalEventIDParams,
-    type MarketingEventGetByExternalEventIDParams as MarketingEventGetByExternalEventIDParams,
-    type MarketingEventSearchByExternalEventIDParams as MarketingEventSearchByExternalEventIDParams,
-    type MarketingEventUpdateBatchParams as MarketingEventUpdateBatchParams,
-    type MarketingEventUpdateByExternalEventIDParams as MarketingEventUpdateByExternalEventIDParams,
-    type MarketingEventUpsertBatchParams as MarketingEventUpsertBatchParams,
-    type MarketingEventUpsertByExternalEventIDParams as MarketingEventUpsertByExternalEventIDParams,
-    type MarketingEventUpsertSubscriberStateByEmailParams as MarketingEventUpsertSubscriberStateByEmailParams,
-    type MarketingEventUpsertSubscriberStateByIDParams as MarketingEventUpsertSubscriberStateByIDParams,
   };
 
   export {
@@ -371,10 +624,6 @@ export declare namespace Marketing {
   export {
     Transactional as Transactional,
     type CollectionResponseSmtpAPITokenViewForwardPaging as CollectionResponseSmtpAPITokenViewForwardPaging,
-    type EmailSendStatusView as EmailSendStatusView,
-    type EventIDView as EventIDView,
-    type PublicSingleSendEmail as PublicSingleSendEmail,
-    type PublicSingleSendRequestEgg as PublicSingleSendRequestEgg,
     type SmtpAPITokenRequestEgg as SmtpAPITokenRequestEgg,
     type SmtpAPITokenView as SmtpAPITokenView,
   };

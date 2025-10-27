@@ -2,11 +2,11 @@
 
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
-import * as EmailsAPI from '../../marketing/emails';
 import * as BatchAPI from './batch';
 import { Batch, BatchCreateParams, BatchDeleteParams, BatchReadParams } from './batch';
 import * as GroupsAPI from './groups';
 import { GroupCreateParams, GroupDeleteParams, GroupGetParams, GroupUpdateParams, Groups } from './groups';
+import * as EmailsAPI from '../../marketing/emails/emails';
 import { APIPromise } from '../../../core/api-promise';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
@@ -23,11 +23,11 @@ export class Properties extends APIResource {
    * ```ts
    * const createdResponseProperty =
    *   await client.crm.properties.create('objectType', {
-   *     fieldType: 'select',
-   *     groupName: 'contactinformation',
-   *     label: 'My Contact Property',
-   *     name: 'my_contact_property',
-   *     type: 'enumeration',
+   *     fieldType: 'booleancheckbox',
+   *     groupName: 'groupName',
+   *     label: 'label',
+   *     name: 'name',
+   *     type: 'bool',
    *   });
    * ```
    */
@@ -116,38 +116,12 @@ export class Properties extends APIResource {
   }
 }
 
-export interface BatchInputPropertyCreate {
-  inputs: Array<PropertyCreate>;
-}
-
-export interface BatchInputPropertyName {
-  inputs: Array<PropertyName>;
-}
-
 export interface BatchReadInputPropertyName {
   archived: boolean;
 
-  inputs: Array<PropertyName>;
+  inputs: Array<Shared.PropertyName>;
 
   dataSensitivity?: 'non_sensitive' | 'sensitive' | 'highly_sensitive';
-}
-
-export interface BatchResponseProperty {
-  completedAt: string;
-
-  results: Array<Shared.Property>;
-
-  startedAt: string;
-
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
-
-  errors?: Array<Shared.StandardError>;
-
-  links?: { [key: string]: string };
-
-  numErrors?: number;
-
-  requestedAt?: string;
 }
 
 export interface CollectionResponseProperty {
@@ -221,101 +195,6 @@ export interface OptionInput {
   displayOrder?: number;
 }
 
-export interface PropertyCreate {
-  /**
-   * Controls how the property appears in HubSpot.
-   */
-  fieldType:
-    | 'booleancheckbox'
-    | 'calculation_equation'
-    | 'checkbox'
-    | 'date'
-    | 'file'
-    | 'html'
-    | 'number'
-    | 'phonenumber'
-    | 'radio'
-    | 'select'
-    | 'text'
-    | 'textarea';
-
-  /**
-   * The name of the property group the property belongs to.
-   */
-  groupName: string;
-
-  /**
-   * A human-readable property label that will be shown in HubSpot.
-   */
-  label: string;
-
-  /**
-   * The internal property name, which must be used when referencing the property via
-   * the API.
-   */
-  name: string;
-
-  /**
-   * The data type of the property.
-   */
-  type: 'bool' | 'date' | 'datetime' | 'enumeration' | 'number' | 'phone_number' | 'string';
-
-  /**
-   * Represents a formula that is used to compute a calculated property.
-   */
-  calculationFormula?: string;
-
-  dataSensitivity?: 'non_sensitive' | 'sensitive' | 'highly_sensitive';
-
-  /**
-   * A description of the property that will be shown as help text in HubSpot.
-   */
-  description?: string;
-
-  /**
-   * Properties are displayed in order starting with the lowest positive integer
-   * value. Values of -1 will cause the property to be displayed after any positive
-   * values.
-   */
-  displayOrder?: number;
-
-  /**
-   * Applicable only for 'enumeration' type properties. Should be set to true in
-   * conjunction with a 'referencedObjectType' of 'OWNER'. Otherwise false.
-   */
-  externalOptions?: boolean;
-
-  /**
-   * Whether or not the property can be used in a HubSpot form.
-   */
-  formField?: boolean;
-
-  /**
-   * Whether or not the property's value must be unique. Once set, this can't be
-   * changed.
-   */
-  hasUniqueValue?: boolean;
-
-  /**
-   * If true, the option will not be shown in forms, bots, or meeting scheduling
-   * pages. Supported for contact, company, ticket, and custom object enumeration
-   * properties.
-   */
-  hidden?: boolean;
-
-  /**
-   * A list of valid options for the property. This field is required for enumerated
-   * properties.
-   */
-  options?: Array<Shared.OptionInput>;
-
-  /**
-   * Should be set to 'OWNER' when 'externalOptions' is true, which causes the
-   * property to dynamically pull option values from the current HubSpot users.
-   */
-  referencedObjectType?: string;
-}
-
 /**
  * An ID for a group of properties
  */
@@ -337,47 +216,6 @@ export interface PropertyGroup {
   /**
    * The internal property group name, which must be used when referencing the
    * property group via the API.
-   */
-  name: string;
-}
-
-export interface PropertyGroupCreate {
-  /**
-   * A human-readable label that will be shown in HubSpot.
-   */
-  label: string;
-
-  /**
-   * The internal property group name, which must be used when referencing the
-   * property group via the API.
-   */
-  name: string;
-
-  /**
-   * Property groups are displayed in order starting with the lowest positive integer
-   * value. Values of -1 will cause the property group to be displayed after any
-   * positive values.
-   */
-  displayOrder?: number;
-}
-
-export interface PropertyGroupUpdate {
-  /**
-   * Property groups are displayed in order starting with the lowest positive integer
-   * value. Values of -1 will cause the property group to be displayed after any
-   * positive values.
-   */
-  displayOrder?: number;
-
-  /**
-   * A human-readable label that will be shown in HubSpot.
-   */
-  label?: string;
-}
-
-export interface PropertyName {
-  /**
-   * The name of the property to read or modify.
    */
   name: string;
 }
@@ -449,9 +287,6 @@ export interface PropertyUpdate {
 }
 
 export interface PropertyCreateParams {
-  /**
-   * Controls how the property appears in HubSpot.
-   */
   fieldType:
     | 'booleancheckbox'
     | 'calculation_equation'
@@ -466,80 +301,32 @@ export interface PropertyCreateParams {
     | 'text'
     | 'textarea';
 
-  /**
-   * The name of the property group the property belongs to.
-   */
   groupName: string;
 
-  /**
-   * A human-readable property label that will be shown in HubSpot.
-   */
   label: string;
 
-  /**
-   * The internal property name, which must be used when referencing the property via
-   * the API.
-   */
   name: string;
 
-  /**
-   * The data type of the property.
-   */
   type: 'bool' | 'date' | 'datetime' | 'enumeration' | 'number' | 'phone_number' | 'string';
 
-  /**
-   * Represents a formula that is used to compute a calculated property.
-   */
   calculationFormula?: string;
 
   dataSensitivity?: 'non_sensitive' | 'sensitive' | 'highly_sensitive';
 
-  /**
-   * A description of the property that will be shown as help text in HubSpot.
-   */
   description?: string;
 
-  /**
-   * Properties are displayed in order starting with the lowest positive integer
-   * value. Values of -1 will cause the property to be displayed after any positive
-   * values.
-   */
   displayOrder?: number;
 
-  /**
-   * Applicable only for 'enumeration' type properties. Should be set to true in
-   * conjunction with a 'referencedObjectType' of 'OWNER'. Otherwise false.
-   */
   externalOptions?: boolean;
 
-  /**
-   * Whether or not the property can be used in a HubSpot form.
-   */
   formField?: boolean;
 
-  /**
-   * Whether or not the property's value must be unique. Once set, this can't be
-   * changed.
-   */
   hasUniqueValue?: boolean;
 
-  /**
-   * If true, the option will not be shown in forms, bots, or meeting scheduling
-   * pages. Supported for contact, company, ticket, and custom object enumeration
-   * properties.
-   */
   hidden?: boolean;
 
-  /**
-   * A list of valid options for the property. This field is required for enumerated
-   * properties.
-   */
   options?: Array<Shared.OptionInput>;
 
-  /**
-   * Should be set to 'OWNER' when 'externalOptions' is true, which causes the
-   * property to dynamically pull option values from the current HubSpot users.
-   */
   referencedObjectType?: string;
 }
 
@@ -650,20 +437,13 @@ Properties.Groups = Groups;
 
 export declare namespace Properties {
   export {
-    type BatchInputPropertyCreate as BatchInputPropertyCreate,
-    type BatchInputPropertyName as BatchInputPropertyName,
     type BatchReadInputPropertyName as BatchReadInputPropertyName,
-    type BatchResponseProperty as BatchResponseProperty,
     type CollectionResponseProperty as CollectionResponseProperty,
     type CollectionResponsePropertyGroup as CollectionResponsePropertyGroup,
     type CreatedResponseProperty as CreatedResponseProperty,
     type CreatedResponsePropertyGroup as CreatedResponsePropertyGroup,
     type OptionInput as OptionInput,
-    type PropertyCreate as PropertyCreate,
     type PropertyGroup as PropertyGroup,
-    type PropertyGroupCreate as PropertyGroupCreate,
-    type PropertyGroupUpdate as PropertyGroupUpdate,
-    type PropertyName as PropertyName,
     type PropertyUpdate as PropertyUpdate,
     type PropertyCreateParams as PropertyCreateParams,
     type PropertyUpdateParams as PropertyUpdateParams,

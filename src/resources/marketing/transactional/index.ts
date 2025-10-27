@@ -5,10 +5,6 @@ export { SmtpTokens, type SmtpTokenCreateParams, type SmtpTokenListParams } from
 export {
   Transactional,
   type CollectionResponseSmtpAPITokenViewForwardPaging,
-  type EmailSendStatusView,
-  type EventIDView,
-  type PublicSingleSendEmail,
-  type PublicSingleSendRequestEgg,
   type SmtpAPITokenRequestEgg,
   type SmtpAPITokenView,
   type SmtpAPITokenViewsPage,

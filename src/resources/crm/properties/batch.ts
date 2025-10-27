@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
-import * as PropertiesAPI from './properties';
+import * as Shared from '../../shared';
 import { APIPromise } from '../../../core/api-promise';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
@@ -18,11 +18,11 @@ export class Batch extends APIResource {
    *   await client.crm.properties.batch.create('objectType', {
    *     inputs: [
    *       {
-   *         fieldType: 'select',
-   *         groupName: 'contactinformation',
-   *         label: 'My Contact Property',
-   *         name: 'my_contact_property',
-   *         type: 'enumeration',
+   *         fieldType: 'booleancheckbox',
+   *         groupName: 'groupName',
+   *         label: 'label',
+   *         name: 'name',
+   *         type: 'bool',
    *       },
    *     ],
    *   });
@@ -32,7 +32,7 @@ export class Batch extends APIResource {
     objectType: string,
     body: BatchCreateParams,
     options?: RequestOptions,
-  ): APIPromise<PropertiesAPI.BatchResponseProperty> {
+  ): APIPromise<Shared.BatchResponseProperty> {
     return this._client.post(path`/crm/v3/properties/${objectType}/batch/create`, { body, ...options });
   }
 
@@ -44,7 +44,7 @@ export class Batch extends APIResource {
    * @example
    * ```ts
    * await client.crm.properties.batch.delete('objectType', {
-   *   inputs: [{ name: 'my_custom_property' }],
+   *   inputs: [{ name: 'name' }],
    * });
    * ```
    */
@@ -64,7 +64,7 @@ export class Batch extends APIResource {
    * const batchResponseProperty =
    *   await client.crm.properties.batch.read('objectType', {
    *     archived: true,
-   *     inputs: [{ name: 'my_custom_property' }],
+   *     inputs: [{ name: 'name' }],
    *   });
    * ```
    */
@@ -72,23 +72,23 @@ export class Batch extends APIResource {
     objectType: string,
     body: BatchReadParams,
     options?: RequestOptions,
-  ): APIPromise<PropertiesAPI.BatchResponseProperty> {
+  ): APIPromise<Shared.BatchResponseProperty> {
     return this._client.post(path`/crm/v3/properties/${objectType}/batch/read`, { body, ...options });
   }
 }
 
 export interface BatchCreateParams {
-  inputs: Array<PropertiesAPI.PropertyCreate>;
+  inputs: Array<Shared.PropertyCreate>;
 }
 
 export interface BatchDeleteParams {
-  inputs: Array<PropertiesAPI.PropertyName>;
+  inputs: Array<Shared.PropertyName>;
 }
 
 export interface BatchReadParams {
   archived: boolean;
 
-  inputs: Array<PropertiesAPI.PropertyName>;
+  inputs: Array<Shared.PropertyName>;
 
   dataSensitivity?: 'non_sensitive' | 'sensitive' | 'highly_sensitive';
 }

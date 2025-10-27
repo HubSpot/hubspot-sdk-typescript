@@ -47,7 +47,7 @@ const client = new HubSpot({
 });
 
 const params: HubSpot.CRM.Objects.ContactCreateParams = { properties: { email: 'mark.s@lumon.industries' } };
-const createdResponseSimplePublicObject: HubSpot.CRM.CreatedResponseSimplePublicObject =
+const createdResponseSimplePublicObject: HubSpot.CreatedResponseSimplePublicObject =
   await client.crm.objects.contacts.create(params);
 ```
 

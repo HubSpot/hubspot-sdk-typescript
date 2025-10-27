@@ -11,6 +11,14 @@ export class Domains extends APIResource {
   /**
    * Returns all existing domains that have been created. Results can be limited and
    * filtered by creation or updated date.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const domain of client.cms.domains.list()) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     query: DomainListParams | null | undefined = {},
@@ -21,6 +29,11 @@ export class Domains extends APIResource {
 
   /**
    * Returns a single domains with the id specified.
+   *
+   * @example
+   * ```ts
+   * const domain = await client.cms.domains.read('domainId');
+   * ```
    */
   read(domainID: string, options?: RequestOptions): APIPromise<Domain> {
     return this._client.get(path`/cms/v3/domains/${domainID}`, options);

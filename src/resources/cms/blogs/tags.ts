@@ -11,6 +11,19 @@ import { path } from '../../../internal/utils/path';
 export class Tags extends APIResource {
   /**
    * Create a new Blog Tag.
+   *
+   * @example
+   * ```ts
+   * const tag = await client.cms.blogs.tags.create({
+   *   id: 'id',
+   *   created: '2019-12-27T18:11:19.117Z',
+   *   deletedAt: '2019-12-27T18:11:19.117Z',
+   *   language: 'af',
+   *   name: 'name',
+   *   translatedFromId: 0,
+   *   updated: '2019-12-27T18:11:19.117Z',
+   * });
+   * ```
    */
   create(body: TagCreateParams, options?: RequestOptions): APIPromise<Tag> {
     return this._client.post('/cms/v3/blogs/tags', { body, ...options });
@@ -20,6 +33,19 @@ export class Tags extends APIResource {
    * Sparse updates a single Blog Tag object identified by the id in the path. All
    * the column values need not be specified. Only the that need to be modified can
    * be specified.
+   *
+   * @example
+   * ```ts
+   * const tag = await client.cms.blogs.tags.update('objectId', {
+   *   id: 'id',
+   *   created: '2019-12-27T18:11:19.117Z',
+   *   deletedAt: '2019-12-27T18:11:19.117Z',
+   *   language: 'af',
+   *   name: 'name',
+   *   translatedFromId: 0,
+   *   updated: '2019-12-27T18:11:19.117Z',
+   * });
+   * ```
    */
   update(objectID: string, params: TagUpdateParams, options?: RequestOptions): APIPromise<Tag> {
     const { archived, ...body } = params;
@@ -34,6 +60,14 @@ export class Tags extends APIResource {
    * Get the list of blog tags. Supports paging and filtering. This method would be
    * useful for an integration that examined these models and used an external
    * service to suggest edits.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const tag of client.cms.blogs.tags.list()) {
+   *   // ...
+   * }
+   * ```
    */
   list(query: TagListParams | null | undefined = {}, options?: RequestOptions): PagePromise<TagsPage, Tag> {
     return this._client.getAPIList('/cms/v3/blogs/tags', Page<Tag>, { query, ...options });
@@ -41,6 +75,11 @@ export class Tags extends APIResource {
 
   /**
    * Delete the Blog Tag object identified by the id in the path.
+   *
+   * @example
+   * ```ts
+   * await client.cms.blogs.tags.delete('objectId');
+   * ```
    */
   delete(
     objectID: string,
@@ -57,6 +96,13 @@ export class Tags extends APIResource {
 
   /**
    * Delete the Blog Tag objects identified in the request body.
+   *
+   * @example
+   * ```ts
+   * await client.cms.blogs.tags.archiveBatch({
+   *   inputs: ['string'],
+   * });
+   * ```
    */
   archiveBatch(body: TagArchiveBatchParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/cms/v3/blogs/tags/batch/archive', {
@@ -68,6 +114,15 @@ export class Tags extends APIResource {
 
   /**
    * Attach a Blog Tag to a multi-language group.
+   *
+   * @example
+   * ```ts
+   * await client.cms.blogs.tags.attachToLangGroup({
+   *   id: 'id',
+   *   language: 'language',
+   *   primaryId: 'primaryId',
+   * });
+   * ```
    */
   attachToLangGroup(body: TagAttachToLangGroupParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/cms/v3/blogs/tags/multi-language/attach-to-lang-group', {
@@ -79,6 +134,24 @@ export class Tags extends APIResource {
 
   /**
    * Create the Blog Tag objects detailed in the request body.
+   *
+   * @example
+   * ```ts
+   * const batchResponseTag =
+   *   await client.cms.blogs.tags.createBatch({
+   *     inputs: [
+   *       {
+   *         id: 'id',
+   *         created: '2019-12-27T18:11:19.117Z',
+   *         deletedAt: '2019-12-27T18:11:19.117Z',
+   *         language: 'af',
+   *         name: 'name',
+   *         translatedFromId: 0,
+   *         updated: '2019-12-27T18:11:19.117Z',
+   *       },
+   *     ],
+   *   });
+   * ```
    */
   createBatch(body: TagCreateBatchParams, options?: RequestOptions): APIPromise<BatchResponseTag> {
     return this._client.post('/cms/v3/blogs/tags/batch/create', { body, ...options });
@@ -86,6 +159,13 @@ export class Tags extends APIResource {
 
   /**
    * Create a new language variation from an existing Blog Tag
+   *
+   * @example
+   * ```ts
+   * const tag = await client.cms.blogs.tags.createLangVariation(
+   *   { id: 'id', name: 'name' },
+   * );
+   * ```
    */
   createLangVariation(body: TagCreateLangVariationParams, options?: RequestOptions): APIPromise<Tag> {
     return this._client.post('/cms/v3/blogs/tags/multi-language/create-language-variation', {
@@ -96,6 +176,13 @@ export class Tags extends APIResource {
 
   /**
    * Detach a Blog Tag from a multi-language group.
+   *
+   * @example
+   * ```ts
+   * await client.cms.blogs.tags.detachFromLangGroup({
+   *   id: 'id',
+   * });
+   * ```
    */
   detachFromLangGroup(body: TagDetachFromLangGroupParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/cms/v3/blogs/tags/multi-language/detach-from-lang-group', {
@@ -107,6 +194,11 @@ export class Tags extends APIResource {
 
   /**
    * Retrieve the Blog Tag object identified by the id in the path.
+   *
+   * @example
+   * ```ts
+   * const tag = await client.cms.blogs.tags.read('objectId');
+   * ```
    */
   read(
     objectID: string,
@@ -118,6 +210,14 @@ export class Tags extends APIResource {
 
   /**
    * Retrieve the Blog Tag objects identified in the request body.
+   *
+   * @example
+   * ```ts
+   * const batchResponseTag =
+   *   await client.cms.blogs.tags.readBatch({
+   *     inputs: ['string'],
+   *   });
+   * ```
    */
   readBatch(params: TagReadBatchParams, options?: RequestOptions): APIPromise<BatchResponseTag> {
     const { archived, ...body } = params;
@@ -126,6 +226,11 @@ export class Tags extends APIResource {
 
   /**
    * Set a Blog Tag as the primary language of a multi-language group.
+   *
+   * @example
+   * ```ts
+   * await client.cms.blogs.tags.setLangPrimary({ id: 'id' });
+   * ```
    */
   setLangPrimary(body: TagSetLangPrimaryParams, options?: RequestOptions): APIPromise<void> {
     return this._client.put('/cms/v3/blogs/tags/multi-language/set-new-lang-primary', {
@@ -137,6 +242,12 @@ export class Tags extends APIResource {
 
   /**
    * Update the Blog Tag objects identified in the request body.
+   *
+   * @example
+   * ```ts
+   * const batchResponseTag =
+   *   await client.cms.blogs.tags.updateBatch({ inputs: [{}] });
+   * ```
    */
   updateBatch(params: TagUpdateBatchParams, options?: RequestOptions): APIPromise<BatchResponseTag> {
     const { archived, ...body } = params;
@@ -145,6 +256,14 @@ export class Tags extends APIResource {
 
   /**
    * Explicitly set new languages for each Blog Tag in a multi-language group.
+   *
+   * @example
+   * ```ts
+   * await client.cms.blogs.tags.updateLangs({
+   *   languages: { foo: 'string' },
+   *   primaryId: 'primaryId',
+   * });
+   * ```
    */
   updateLangs(body: TagUpdateLangsParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/cms/v3/blogs/tags/multi-language/update-languages', {

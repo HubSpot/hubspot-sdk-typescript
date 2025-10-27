@@ -10,7 +10,6 @@ export {
   type CollectionResponsePublicActionRevisionForwardPaging,
   type FieldTypeDefinition,
   type InputFieldDefinition,
-  type Option,
   type OutputFieldDefinition,
   type PublicActionDefinition,
   type PublicActionDefinitionEgg,

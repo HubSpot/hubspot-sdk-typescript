@@ -3,7 +3,7 @@
 import { APIResource } from '../../../../core/resource';
 import * as Shared from '../../../shared';
 import * as CRMAPI from '../../crm';
-import * as EmailsAPI from '../../../marketing/emails';
+import * as EmailsAPI from '../../../marketing/emails/emails';
 import * as BatchAPI from './batch';
 import {
   Batch,
@@ -118,7 +118,7 @@ export class V4 extends APIResource {
    *       body: [
    *         {
    *           associationCategory: 'HUBSPOT_DEFINED',
-   *           associationTypeId: 279,
+   *           associationTypeId: 0,
    *         },
    *       ],
    *     },
@@ -187,7 +187,7 @@ export interface BatchResponseLabelsBetweenObjectPair {
 
   status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
 
-  errors?: Array<Shared.StandardError>;
+  errors?: Array<StandardError1>;
 
   links?: { [key: string]: string };
 
@@ -205,7 +205,7 @@ export interface BatchResponsePublicAssociationMultiWithLabel {
 
   status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
 
-  errors?: Array<Shared.StandardError>;
+  errors?: Array<StandardError1>;
 
   links?: { [key: string]: string };
 
@@ -223,7 +223,7 @@ export interface BatchResponseVoid {
 
   status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
 
-  errors?: Array<Shared.StandardError>;
+  errors?: Array<StandardError1>;
 
   links?: { [key: string]: string };
 
@@ -283,7 +283,7 @@ export interface PublicAssociationMultiPost {
 
   to: Shared.PublicObjectID;
 
-  types: Array<Shared.AssociationSpec>;
+  types: Array<AssociationSpec1>;
 }
 
 export interface PublicAssociationMultiWithLabel {
@@ -430,7 +430,7 @@ export interface V4UpdateAssociationLabelsParams {
   /**
    * Body param:
    */
-  body: Array<AssociationSpec1>;
+  body: Array<Shared.AssociationSpec>;
 }
 
 V4.Batch = Batch;

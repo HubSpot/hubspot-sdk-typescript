@@ -81,35 +81,11 @@ export {
   type JoinTimeAndRecordIDsPage,
 } from './lists/index';
 export {
-  Objects,
-  type BatchInputSimplePublicObjectBatchInput,
-  type BatchInputSimplePublicObjectBatchInputForCreate,
-  type BatchInputSimplePublicObjectBatchInputUpsert,
-  type BatchInputSimplePublicObjectID,
-  type BatchReadInputSimplePublicObjectID,
-  type BatchResponseSimplePublicObject,
-  type BatchResponseSimplePublicUpsertObject,
-  type CollectionResponseAssociatedID,
-  type CollectionResponseSimplePublicObjectWithAssociations,
-  type CollectionResponseWithTotalSimplePublicObject,
-  type CreatedResponseSimplePublicObject,
-  type FilterGroup,
-  type PublicAssociationsForObject,
-  type PublicGdprDeleteInput,
-  type PublicMergeInput,
-  type PublicObjectSearchRequest,
-  type SimplePublicObject,
-  type SimplePublicObjectBatchInput,
-  type SimplePublicObjectBatchInputForCreate,
-  type SimplePublicObjectBatchInputUpsert,
-  type SimplePublicObjectID,
-  type SimplePublicObjectInput,
-  type SimplePublicObjectInputForCreate,
-  type SimplePublicObjectWithAssociations,
-  type SimplePublicUpsertObject,
-  type ValueWithTimestamp,
-  type SimplePublicObjectWithAssociationsPage,
-} from './objects/index';
+  ObjectLibrary,
+  type ObjectTypeEnablementPublicResponse,
+  type PortalObjectTypeEnablementPublicResponse,
+} from './object-library/index';
+export { Objects } from './objects/index';
 export {
   Owners,
   type CollectionResponsePublicOwnerForwardPaging,
@@ -140,20 +116,13 @@ export {
 } from './pipelines/index';
 export {
   Properties,
-  type BatchInputPropertyCreate,
-  type BatchInputPropertyName,
   type BatchReadInputPropertyName,
-  type BatchResponseProperty,
   type CollectionResponseProperty,
   type CollectionResponsePropertyGroup,
   type CreatedResponseProperty,
   type CreatedResponsePropertyGroup,
   type OptionInput,
-  type PropertyCreate,
   type PropertyGroup,
-  type PropertyGroupCreate,
-  type PropertyGroupUpdate,
-  type PropertyName,
   type PropertyUpdate,
   type PropertyCreateParams,
   type PropertyUpdateParams,
@@ -178,3 +147,11 @@ export {
   type TimelineEventTemplateTokenUpdateRequest,
   type TimelineEventTemplateUpdateRequest,
 } from './timeline/index';
+export {
+  Users,
+  type UserCreateParams,
+  type UserUpdateParams,
+  type UserListParams,
+  type UserGetParams,
+  type UserSearchParams,
+} from './users/index';

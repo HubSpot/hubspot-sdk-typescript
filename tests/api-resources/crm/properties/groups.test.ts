@@ -11,8 +11,8 @@ describe('resource groups', () => {
   // Prism tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.crm.properties.groups.create('objectType', {
-      label: 'My Property Group',
-      name: 'mypropertygroup',
+      label: 'label',
+      name: 'name',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -26,9 +26,9 @@ describe('resource groups', () => {
   // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.crm.properties.groups.create('objectType', {
-      label: 'My Property Group',
-      name: 'mypropertygroup',
-      displayOrder: -1,
+      label: 'label',
+      name: 'name',
+      displayOrder: 0,
     });
   });
 
@@ -48,8 +48,8 @@ describe('resource groups', () => {
   test.skip('update: required and optional params', async () => {
     const response = await client.crm.properties.groups.update('groupName', {
       objectType: 'objectType',
-      displayOrder: -1,
-      label: 'My Property Group',
+      displayOrder: 0,
+      label: 'label',
     });
   });
 

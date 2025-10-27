@@ -11,6 +11,15 @@ export class Batch extends APIResource {
   /**
    * Clones rows in the draft version of the specified table, given a set of row ids.
    * Maximum of 100 row ids per call.
+   *
+   * @example
+   * ```ts
+   * const batchResponseHubDBTableRowV3 =
+   *   await client.cms.hubdb.rows.batch.cloneBatch(
+   *     'tableIdOrName',
+   *     { inputs: [{ id: 'id' }] },
+   *   );
+   * ```
    */
   cloneBatch(
     tableIDOrName: string,
@@ -27,6 +36,15 @@ export class Batch extends APIResource {
    * Creates rows in the draft version of the specified table, given an array of row
    * objects. Maximum of 100 row object per call. See the overview section for more
    * details with an example.
+   *
+   * @example
+   * ```ts
+   * const batchResponseHubDBTableRowV3 =
+   *   await client.cms.hubdb.rows.batch.createBatch(
+   *     'tableIdOrName',
+   *     { inputs: [{ values: { foo: {} } }] },
+   *   );
+   * ```
    */
   createBatch(
     tableIDOrName: string,
@@ -43,6 +61,15 @@ export class Batch extends APIResource {
    * Returns rows in the published version of the specified table, given a set of row
    * IDs. **Note:** This endpoint can be accessed without any authentication if the
    * table is set to be allowed for public access.
+   *
+   * @example
+   * ```ts
+   * const batchResponseHubDBTableRowV3 =
+   *   await client.cms.hubdb.rows.batch.getBatch(
+   *     'tableIdOrName',
+   *     { inputs: ['string'] },
+   *   );
+   * ```
    */
   getBatch(
     tableIDOrName: string,
@@ -58,6 +85,15 @@ export class Batch extends APIResource {
   /**
    * Returns rows in the draft version of the specified table, given a set of row
    * IDs.
+   *
+   * @example
+   * ```ts
+   * const batchResponseHubDBTableRowV3 =
+   *   await client.cms.hubdb.rows.batch.getDraftBatch(
+   *     'tableIdOrName',
+   *     { inputs: ['string'] },
+   *   );
+   * ```
    */
   getDraftBatch(
     tableIDOrName: string,
@@ -73,6 +109,14 @@ export class Batch extends APIResource {
   /**
    * Permanently deletes rows from the draft version of the table, given a set of row
    * IDs. Maximum of 100 row IDs per call.
+   *
+   * @example
+   * ```ts
+   * await client.cms.hubdb.rows.batch.purgeBatch(
+   *   'tableIdOrName',
+   *   { inputs: ['string'] },
+   * );
+   * ```
    */
   purgeBatch(tableIDOrName: string, body: BatchPurgeBatchParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post(path`/cms/v3/hubdb/tables/${tableIDOrName}/rows/draft/batch/purge`, {
@@ -87,6 +131,15 @@ export class Batch extends APIResource {
    * maximum of 100 rows per call. See the endpoint
    * `PUT /tables/{tableIdOrName}/rows/{rowId}/draft` for details on updating a
    * single row.
+   *
+   * @example
+   * ```ts
+   * const batchResponseHubDBTableRowV3 =
+   *   await client.cms.hubdb.rows.batch.replaceBatch(
+   *     'tableIdOrName',
+   *     { inputs: [{ id: 'id', values: { foo: {} } }] },
+   *   );
+   * ```
    */
   replaceBatch(
     tableIDOrName: string,
@@ -104,6 +157,15 @@ export class Batch extends APIResource {
    * maximum of 100 rows per call. See the endpoint
    * `PATCH /tables/{tableIdOrName}/rows/{rowId}/draft` for details on updating a
    * single row.
+   *
+   * @example
+   * ```ts
+   * const batchResponseHubDBTableRowV3 =
+   *   await client.cms.hubdb.rows.batch.updateBatch(
+   *     'tableIdOrName',
+   *     { inputs: [{ id: 'id', values: { foo: {} } }] },
+   *   );
+   * ```
    */
   updateBatch(
     tableIDOrName: string,
