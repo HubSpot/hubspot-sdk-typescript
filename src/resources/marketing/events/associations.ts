@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
-import * as MarketingAPI from '../marketing';
+import * as EventsAPI from './events';
 import { APIPromise } from '../../../core/api-promise';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
@@ -22,7 +22,7 @@ export class Associations extends APIResource {
   list(
     marketingEventID: string,
     options?: RequestOptions,
-  ): APIPromise<MarketingAPI.CollectionResponseWithTotalPublicListNoPaging> {
+  ): APIPromise<EventsAPI.CollectionResponseWithTotalPublicListNoPaging> {
     return this._client.get(
       path`/marketing/v3/marketing-events/associations/${marketingEventID}/lists`,
       options,
@@ -139,7 +139,7 @@ export class Associations extends APIResource {
     externalEventID: string,
     params: AssociationListByExternalAccountParams,
     options?: RequestOptions,
-  ): APIPromise<MarketingAPI.CollectionResponseWithTotalPublicListNoPaging> {
+  ): APIPromise<EventsAPI.CollectionResponseWithTotalPublicListNoPaging> {
     const { externalAccountId } = params;
     return this._client.get(
       path`/marketing/v3/marketing-events/associations/${externalAccountId}/${externalEventID}/lists`,

@@ -3,6 +3,7 @@
 import { APIResource } from '../../../../core/resource';
 import * as Shared from '../../../shared';
 import * as CRMAPI from '../../crm';
+import * as EmailsAPI from '../../../marketing/emails/emails';
 import * as BatchAPI from './batch';
 import {
   Batch,
@@ -290,7 +291,10 @@ export interface PublicAssociationMultiWithLabel {
 
   to: Array<CRMAPI.MultiAssociatedObjectWithLabel>;
 
-  paging?: Shared.Paging;
+  /**
+   * Contains information pagination of results.
+   */
+  paging?: EmailsAPI.Paging;
 }
 
 export interface PublicDefaultAssociationMultiPost {

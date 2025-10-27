@@ -24,6 +24,7 @@ import {
   MembershipRemoveParams,
   Memberships,
 } from './memberships';
+import * as EmailsAPI from '../../marketing/emails/emails';
 import { APIPromise } from '../../../core/api-promise';
 import { Page } from '../../../core/pagination';
 import { buildHeaders } from '../../../internal/headers';
@@ -269,7 +270,10 @@ export type JoinTimeAndRecordIDsPage = Page<JoinTimeAndRecordID>;
 export interface APICollectionResponseJoinTimeAndRecordID {
   results: Array<JoinTimeAndRecordID>;
 
-  paging?: Shared.Paging;
+  /**
+   * Contains information pagination of results.
+   */
+  paging?: EmailsAPI.Paging;
 
   total?: number;
 }

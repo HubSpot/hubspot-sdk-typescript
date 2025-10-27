@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
-import * as MarketingAPI from '../marketing';
+import * as EventsAPI from './events';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -36,7 +36,7 @@ export class Attendance extends APIResource {
     subscriberState: string,
     params: AttendanceCreateByEventIDAndContactIDParams,
     options?: RequestOptions,
-  ): APIPromise<MarketingAPI.BatchResponseSubscriberVidResponse> {
+  ): APIPromise<EventsAPI.BatchResponseSubscriberVidResponse> {
     const { objectId, ...body } = params;
     return this._client.post(
       path`/marketing/v3/marketing-events/${objectId}/attendance/${subscriberState}/create`,
@@ -77,7 +77,7 @@ export class Attendance extends APIResource {
     subscriberState: string,
     params: AttendanceCreateByEventIDAndEmailParams,
     options?: RequestOptions,
-  ): APIPromise<MarketingAPI.BatchResponseSubscriberEmailResponse> {
+  ): APIPromise<EventsAPI.BatchResponseSubscriberEmailResponse> {
     const { objectId, ...body } = params;
     return this._client.post(
       path`/marketing/v3/marketing-events/${objectId}/attendance/${subscriberState}/email-create`,
@@ -114,7 +114,7 @@ export class Attendance extends APIResource {
     subscriberState: string,
     params: AttendanceCreateByExternalEventIDAndContactIDParams,
     options?: RequestOptions,
-  ): APIPromise<MarketingAPI.BatchResponseSubscriberVidResponse> {
+  ): APIPromise<EventsAPI.BatchResponseSubscriberVidResponse> {
     const { externalEventId, externalAccountId, ...body } = params;
     return this._client.post(
       path`/marketing/v3/marketing-events/attendance/${externalEventId}/${subscriberState}/create`,
@@ -155,7 +155,7 @@ export class Attendance extends APIResource {
     subscriberState: string,
     params: AttendanceCreateByExternalEventIDAndEmailParams,
     options?: RequestOptions,
-  ): APIPromise<MarketingAPI.BatchResponseSubscriberEmailResponse> {
+  ): APIPromise<EventsAPI.BatchResponseSubscriberEmailResponse> {
     const { externalEventId, externalAccountId, ...body } = params;
     return this._client.post(
       path`/marketing/v3/marketing-events/attendance/${externalEventId}/${subscriberState}/email-create`,
@@ -173,7 +173,7 @@ export interface AttendanceCreateByEventIDAndContactIDParams {
   /**
    * Body param: List of HubSpot contacts to subscribe to the marketing event
    */
-  inputs: Array<MarketingAPI.MarketingEventSubscriber>;
+  inputs: Array<EventsAPI.MarketingEventSubscriber>;
 }
 
 export interface AttendanceCreateByEventIDAndEmailParams {
@@ -185,7 +185,7 @@ export interface AttendanceCreateByEventIDAndEmailParams {
   /**
    * Body param: List of marketing event details to create or update
    */
-  inputs: Array<MarketingAPI.MarketingEventEmailSubscriber>;
+  inputs: Array<EventsAPI.MarketingEventEmailSubscriber>;
 }
 
 export interface AttendanceCreateByExternalEventIDAndContactIDParams {
@@ -197,7 +197,7 @@ export interface AttendanceCreateByExternalEventIDAndContactIDParams {
   /**
    * Body param: List of HubSpot contacts to subscribe to the marketing event
    */
-  inputs: Array<MarketingAPI.MarketingEventSubscriber>;
+  inputs: Array<EventsAPI.MarketingEventSubscriber>;
 
   /**
    * Query param: The accountId that is associated with this marketing event in the
@@ -215,7 +215,7 @@ export interface AttendanceCreateByExternalEventIDAndEmailParams {
   /**
    * Body param: List of marketing event details to create or update
    */
-  inputs: Array<MarketingAPI.MarketingEventEmailSubscriber>;
+  inputs: Array<EventsAPI.MarketingEventEmailSubscriber>;
 
   /**
    * Query param: The accountId that is associated with this marketing event in the

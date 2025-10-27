@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
-import * as MarketingAPI from '../marketing';
+import * as EventsAPI from './events';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -22,7 +22,7 @@ export class Settings extends APIResource {
     appID: number,
     body: SettingCreateOrUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<MarketingAPI.EventDetailSettings> {
+  ): APIPromise<EventsAPI.EventDetailSettings> {
     return this._client.post(path`/marketing/v3/marketing-events/${appID}/settings`, { body, ...options });
   }
 
@@ -35,7 +35,7 @@ export class Settings extends APIResource {
    *   await client.marketing.events.settings.get(0);
    * ```
    */
-  get(appID: number, options?: RequestOptions): APIPromise<MarketingAPI.EventDetailSettings> {
+  get(appID: number, options?: RequestOptions): APIPromise<EventsAPI.EventDetailSettings> {
     return this._client.get(path`/marketing/v3/marketing-events/${appID}/settings`, options);
   }
 }

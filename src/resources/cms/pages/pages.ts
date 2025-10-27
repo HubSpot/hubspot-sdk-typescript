@@ -71,6 +71,7 @@ import {
   SitePageUpdateParams,
   SitePages,
 } from './site-pages';
+import * as EmailsAPI from '../../marketing/emails/emails';
 import { Page as PaginationPage } from '../../../core/pagination';
 
 export class Pages extends APIResource {
@@ -79,21 +80,6 @@ export class Pages extends APIResource {
 }
 
 export type PagesPage = PaginationPage<Page>;
-
-/**
- * Request body object for creating A/B tests.
- */
-export interface AbTestCreateRequestVNext {
-  /**
-   * ID of the object to test.
-   */
-  contentId: string;
-
-  /**
-   * Name of A/B test variation.
-   */
-  variationName: string;
-}
 
 /**
  * Request body object for ending A/B tests.
@@ -318,7 +304,10 @@ export interface CollectionResponseWithTotalVersionContentFolder {
    */
   total: number;
 
-  paging?: Shared.Paging;
+  /**
+   * Contains information pagination of results.
+   */
+  paging?: EmailsAPI.Paging;
 }
 
 /**
@@ -335,7 +324,10 @@ export interface CollectionResponseWithTotalVersionPage {
    */
   total: number;
 
-  paging?: Shared.Paging;
+  /**
+   * Contains information pagination of results.
+   */
+  paging?: EmailsAPI.Paging;
 }
 
 /**
@@ -1519,7 +1511,7 @@ export interface VersionContentFolder {
    * Model definition for a version user. Contains addition information about the
    * user who created a version.
    */
-  user: CmsAPI.VersionUser;
+  user: Shared.VersionUser;
 }
 
 /**
@@ -1544,7 +1536,7 @@ export interface VersionPage {
    * Model definition for a version user. Contains addition information about the
    * user who created a version.
    */
-  user: CmsAPI.VersionUser;
+  user: Shared.VersionUser;
 }
 
 Pages.LandingPages = LandingPages;
@@ -1552,7 +1544,6 @@ Pages.SitePages = SitePages;
 
 export declare namespace Pages {
   export {
-    type AbTestCreateRequestVNext as AbTestCreateRequestVNext,
     type AbTestEndRequestVNext as AbTestEndRequestVNext,
     type AbTestRerunRequestVNext as AbTestRerunRequestVNext,
     type BatchInputContentFolder as BatchInputContentFolder,

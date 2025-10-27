@@ -3,6 +3,21 @@
 import * as SchemasAPI from './crm/objects/schemas';
 import { Page } from '../core/pagination';
 
+/**
+ * Request body object for creating A/B tests.
+ */
+export interface AbTestCreateRequestVNext {
+  /**
+   * ID of the object to test.
+   */
+  contentId: string;
+
+  /**
+   * Name of A/B test variation.
+   */
+  variationName: string;
+}
+
 export interface ActionResponse {
   completedAt: string;
 
@@ -1903,6 +1918,27 @@ export interface TaskLocator {
   id: string;
 
   links?: { [key: string]: string };
+}
+
+/**
+ * Model definition for a version user. Contains addition information about the
+ * user who created a version.
+ */
+export interface VersionUser {
+  /**
+   * The unique ID of the User.
+   */
+  id: string;
+
+  /**
+   * The email address of the user.
+   */
+  email: string;
+
+  /**
+   * The first and last name of the User.
+   */
+  fullName: string;
 }
 
 export type HubDBTableRowV3WrappersPage = Page<HubDBTableRowV3Wrapper>;

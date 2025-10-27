@@ -3,6 +3,13 @@
 export { Account } from './account';
 export {
   Activity,
+  type ActingUser,
+  type CollectionResponseHydratedCriticalActionForwardPaging,
+  type CollectionResponsePublicAPIUserActionEventForwardPaging,
+  type CollectionResponsePublicLoginAuditForwardPaging,
+  type HydratedCriticalAction,
+  type PublicAPIUserActionEvent,
+  type PublicLoginAudit,
   type ActivityListAuditLogsParams,
   type ActivityListLoginActivitiesParams,
   type ActivityListSecurityActivitiesParams,

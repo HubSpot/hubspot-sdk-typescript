@@ -1,5 +1,45 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Emails } from './emails';
-export { SingleSend, type SingleSendSendParams } from './single-send';
-export { Statistics } from './statistics';
+export {
+  Emails,
+  type AggregateEmailStatistics,
+  type CollectionResponseWithTotalEmailStatisticIntervalNoPaging,
+  type CollectionResponseWithTotalPublicEmailForwardPaging,
+  type CollectionResponseWithTotalVersionPublicEmail,
+  type EmailCloneRequestVNext,
+  type EmailCreateRequest,
+  type EmailStatisticInterval,
+  type EmailStatisticsData,
+  type EmailUpdateRequest,
+  type Interval,
+  type Paging,
+  type PublicButtonStyleSettings,
+  type PublicDividerStyleSettings,
+  type PublicEmail,
+  type PublicEmailContent,
+  type PublicEmailFromDetails,
+  type PublicEmailRecipients,
+  type PublicEmailStyleSettings,
+  type PublicEmailSubscriptionDetails,
+  type PublicEmailTestingDetails,
+  type PublicEmailToDetails,
+  type PublicFontStyle,
+  type PublicRssEmailDetails,
+  type PublicWebversionDetails,
+  type SmartEmailField,
+  type VersionPublicEmail,
+  type EmailCreateParams,
+  type EmailUpdateParams,
+  type EmailListParams,
+  type EmailDeleteParams,
+  type EmailCloneParams,
+  type EmailCreateAbTestVariationParams,
+  type EmailGetParams,
+  type EmailGetRevisionParams,
+  type EmailListRevisionsParams,
+  type EmailRestoreRevisionParams,
+  type EmailRestoreRevisionToDraftParams,
+  type EmailUpdateDraftParams,
+  type PublicEmailsPage,
+} from './emails';
+export { Statistics, type StatisticGetParams, type StatisticGetHistogramParams } from './statistics';

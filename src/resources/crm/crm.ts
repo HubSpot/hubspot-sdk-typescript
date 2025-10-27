@@ -211,6 +211,7 @@ import {
   UserUpdateParams,
   Users,
 } from './users/users';
+import * as EmailsAPI from '../marketing/emails/emails';
 import * as V4API from './associations/v4/v4';
 import { Page } from '../../core/pagination';
 
@@ -398,19 +399,28 @@ export interface BatchResponseSimplePublicUpsertObject {
 export interface CollectionResponseAssociatedID {
   results: Array<AssociatedID>;
 
-  paging?: Shared.Paging;
+  /**
+   * Contains information pagination of results.
+   */
+  paging?: EmailsAPI.Paging;
 }
 
 export interface CollectionResponseMultiAssociatedObjectWithLabel {
   results: Array<MultiAssociatedObjectWithLabel>;
 
-  paging?: Shared.Paging;
+  /**
+   * Contains information pagination of results.
+   */
+  paging?: EmailsAPI.Paging;
 }
 
 export interface CollectionResponseSimplePublicObjectWithAssociations {
   results: Array<SimplePublicObjectWithAssociations>;
 
-  paging?: Shared.Paging;
+  /**
+   * Contains information pagination of results.
+   */
+  paging?: EmailsAPI.Paging;
 }
 
 export interface CollectionResponseWithTotalSimplePublicObject {
@@ -421,7 +431,10 @@ export interface CollectionResponseWithTotalSimplePublicObject {
    */
   total: number;
 
-  paging?: Shared.Paging;
+  /**
+   * Contains information pagination of results.
+   */
+  paging?: EmailsAPI.Paging;
 }
 
 export interface CreatedResponseLabelsBetweenObjectPair {

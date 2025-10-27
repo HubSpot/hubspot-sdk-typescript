@@ -23,6 +23,7 @@ import {
 } from './reports';
 import * as SpendAPI from './spend';
 import { Spend, SpendCreateParams, SpendDeleteParams, SpendGetParams, SpendUpdateParams } from './spend';
+import * as EmailsAPI from '../emails/emails';
 import { APIPromise } from '../../../core/api-promise';
 import { Page, type PageParams, PagePromise } from '../../../core/pagination';
 import { buildHeaders } from '../../../internal/headers';
@@ -224,7 +225,10 @@ export interface CollectionResponseContactReferenceForwardPaging {
 export interface CollectionResponsePublicCampaignAsset {
   results: Array<PublicCampaignAsset>;
 
-  paging?: Shared.Paging;
+  /**
+   * Contains information pagination of results.
+   */
+  paging?: EmailsAPI.Paging;
 }
 
 export interface CollectionResponsePublicCampaignAssetForwardPaging {

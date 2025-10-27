@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../core/resource';
-import * as MarketingAPI from '../marketing';
-import { APIPromise } from '../../../core/api-promise';
-import { RequestOptions } from '../../../internal/request-options';
+import { APIResource } from '../../core/resource';
+import * as MarketingAPI from './marketing';
+import { APIPromise } from '../../core/api-promise';
+import { RequestOptions } from '../../internal/request-options';
 
 export class SingleSend extends APIResource {
   /**
@@ -12,7 +12,7 @@ export class SingleSend extends APIResource {
    * @example
    * ```ts
    * const emailSendStatusView =
-   *   await client.marketing.emails.singleSend.send({
+   *   await client.marketing.singleSend.send({
    *     emailId: 0,
    *     message: { to: 'to' },
    *   });

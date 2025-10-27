@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
-import * as MarketingAPI from '../marketing';
+import * as EventsAPI from './events';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -24,7 +24,7 @@ export class Participations extends APIResource {
     externalEventID: string,
     params: ParticipationGetByExternalAccountAndEventIDParams,
     options?: RequestOptions,
-  ): APIPromise<MarketingAPI.AttendanceCounters> {
+  ): APIPromise<EventsAPI.AttendanceCounters> {
     const { externalAccountId } = params;
     return this._client.get(
       path`/marketing/v3/marketing-events/participations/${externalAccountId}/${externalEventID}`,
@@ -42,7 +42,7 @@ export class Participations extends APIResource {
    *   await client.marketing.events.participations.getByID(0);
    * ```
    */
-  getByID(marketingEventID: number, options?: RequestOptions): APIPromise<MarketingAPI.AttendanceCounters> {
+  getByID(marketingEventID: number, options?: RequestOptions): APIPromise<EventsAPI.AttendanceCounters> {
     return this._client.get(path`/marketing/v3/marketing-events/participations/${marketingEventID}`, options);
   }
 
@@ -61,7 +61,7 @@ export class Participations extends APIResource {
     contactIdentifier: string,
     query: ParticipationListBreakdownByContactParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<MarketingAPI.CollectionResponseWithTotalParticipationBreakdownForwardPaging> {
+  ): APIPromise<EventsAPI.CollectionResponseWithTotalParticipationBreakdownForwardPaging> {
     return this._client.get(
       path`/marketing/v3/marketing-events/participations/contacts/${contactIdentifier}/breakdown`,
       { query, ...options },
@@ -85,7 +85,7 @@ export class Participations extends APIResource {
     externalEventID: string,
     params: ParticipationListBreakdownByExternalAccountAndEventIDParams,
     options?: RequestOptions,
-  ): APIPromise<MarketingAPI.CollectionResponseWithTotalParticipationBreakdownForwardPaging> {
+  ): APIPromise<EventsAPI.CollectionResponseWithTotalParticipationBreakdownForwardPaging> {
     const { externalAccountId, ...query } = params;
     return this._client.get(
       path`/marketing/v3/marketing-events/participations/${externalAccountId}/${externalEventID}/breakdown`,
@@ -109,7 +109,7 @@ export class Participations extends APIResource {
     marketingEventID: number,
     query: ParticipationListBreakdownByIDParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<MarketingAPI.CollectionResponseWithTotalParticipationBreakdownForwardPaging> {
+  ): APIPromise<EventsAPI.CollectionResponseWithTotalParticipationBreakdownForwardPaging> {
     return this._client.get(
       path`/marketing/v3/marketing-events/participations/${marketingEventID}/breakdown`,
       { query, ...options },

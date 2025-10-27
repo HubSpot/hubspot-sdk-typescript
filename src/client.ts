@@ -820,6 +820,7 @@ export declare namespace HubSpot {
 
   export { Webhooks as Webhooks };
 
+  export type AbTestCreateRequestVNext = API.AbTestCreateRequestVNext;
   export type ActionResponse = API.ActionResponse;
   export type AssociationDefinition = API.AssociationDefinition;
   export type AssociationDefinitionEgg = API.AssociationDefinitionEgg;
@@ -919,4 +920,5 @@ export declare namespace HubSpot {
   export type PublicYearReference = API.PublicYearReference;
   export type StandardError = API.StandardError;
   export type TaskLocator = API.TaskLocator;
+  export type VersionUser = API.VersionUser;
 }
