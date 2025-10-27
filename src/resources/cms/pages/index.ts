@@ -41,6 +41,7 @@ export {
 } from './landing-pages';
 export {
   Pages,
+  type AbTestCreateRequestVNext,
   type AbTestEndRequestVNext,
   type AbTestRerunRequestVNext,
   type BatchInputContentFolder,

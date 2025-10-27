@@ -3,7 +3,6 @@
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
 import * as CmsAPI from '../cms';
-import * as EmailsAPI from '../../marketing/emails/emails';
 import { APIPromise } from '../../../core/api-promise';
 import { Page, type PageParams, PagePromise } from '../../../core/pagination';
 import { buildHeaders } from '../../../internal/headers';
@@ -1060,10 +1059,7 @@ export interface CollectionResponseWithTotalVersionBlog {
    */
   total: number;
 
-  /**
-   * Contains information pagination of results.
-   */
-  paging?: EmailsAPI.Paging;
+  paging?: Shared.Paging;
 }
 
 /**
@@ -1084,7 +1080,7 @@ export interface VersionBlog {
    * Model definition for a version user. Contains addition information about the
    * user who created a version.
    */
-  user: Shared.VersionUser;
+  user: CmsAPI.VersionUser;
 }
 
 export interface SettingListParams extends PageParams {

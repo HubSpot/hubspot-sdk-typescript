@@ -31,6 +31,28 @@ import {
   PublicImportResponsesPage,
   PublicObjectListRecord,
 } from './imports';
+import * as LimitsAPI from './limits';
+import {
+  AssociationLabelLimitResponse,
+  AssociationRecordLimitResponse,
+  AtLimitRecordSample,
+  CalculatedPropertyLimitResponse,
+  CollectionResponseAssociationLabelLimitResponseNoPaging,
+  CollectionResponseObjectTypeNearOrAtAssociationLimitNoPaging,
+  CustomObjectLimitResponse,
+  CustomObjectRecordLimitResponse,
+  CustomPropertyLimitResponse,
+  LimitAndUsageForObjectType,
+  LimitGetAssociationLabelLimitsParams,
+  LimitGetAssociationRecordsLimitsByObjectTypeParams,
+  Limits,
+  NearLimitRecordSample,
+  ObjectTypeDefinition,
+  ObjectTypeNearOrAtAssociationLimit,
+  PipelineLimitResponse,
+  RecordLimitResponse,
+  UsageForObjectType,
+} from './limits';
 import * as OwnersAPI from './owners';
 import {
   CollectionResponsePublicOwnerForwardPaging,
@@ -41,6 +63,15 @@ import {
   PublicOwnersPage,
   PublicTeam,
 } from './owners';
+import * as PropertyValidationsAPI from './property-validations';
+import {
+  CollectionResponsePublicPropertyValidationRuleMapNoPaging,
+  CollectionResponsePublicPropertyValidationRuleNoPaging,
+  PropertyValidationGetParams,
+  PropertyValidations,
+  PublicPropertyValidationRule,
+  PublicPropertyValidationRuleMap,
+} from './property-validations';
 import * as AssociationsAPI from './associations/associations';
 import {
   AssociationCreateParams,
@@ -55,6 +86,18 @@ import {
 } from './associations/associations';
 import * as ExtensionsAPI from './extensions/extensions';
 import { Extensions } from './extensions/extensions';
+import * as FeatureFlagsAPI from './feature-flags/feature-flags';
+import {
+  BatchPortalEntry,
+  FeatureFlags,
+  FlagPutRequest,
+  FlagResponse,
+  PortalFlagStateBatchDeleteRequest,
+  PortalFlagStateBatchPutRequest,
+  PortalFlagStateBatchResponse,
+  PortalFlagStatePutRequest,
+  PortalFlagStateResponse,
+} from './feature-flags/feature-flags';
 import * as ListsAPI from './lists/lists';
 import {
   APICollectionResponseJoinTimeAndRecordID,
@@ -168,7 +211,6 @@ import {
   UserUpdateParams,
   Users,
 } from './users/users';
-import * as EmailsAPI from '../marketing/emails/emails';
 import * as V4API from './associations/v4/v4';
 import { Page } from '../../core/pagination';
 
@@ -177,13 +219,17 @@ export class CRM extends APIResource {
   associations: AssociationsAPI.Associations = new AssociationsAPI.Associations(this._client);
   exports: ExportsAPI.Exports = new ExportsAPI.Exports(this._client);
   extensions: ExtensionsAPI.Extensions = new ExtensionsAPI.Extensions(this._client);
+  featureFlags: FeatureFlagsAPI.FeatureFlags = new FeatureFlagsAPI.FeatureFlags(this._client);
   imports: ImportsAPI.Imports = new ImportsAPI.Imports(this._client);
+  limits: LimitsAPI.Limits = new LimitsAPI.Limits(this._client);
   lists: ListsAPI.Lists = new ListsAPI.Lists(this._client);
   objectLibrary: ObjectLibraryAPI.ObjectLibrary = new ObjectLibraryAPI.ObjectLibrary(this._client);
   objects: ObjectsAPI.Objects = new ObjectsAPI.Objects(this._client);
   owners: OwnersAPI.Owners = new OwnersAPI.Owners(this._client);
   pipelines: PipelinesAPI.Pipelines = new PipelinesAPI.Pipelines(this._client);
   properties: PropertiesAPI.Properties = new PropertiesAPI.Properties(this._client);
+  propertyValidations: PropertyValidationsAPI.PropertyValidations =
+    new PropertyValidationsAPI.PropertyValidations(this._client);
   timeline: TimelineAPI.Timeline = new TimelineAPI.Timeline(this._client);
   users: UsersAPI.Users = new UsersAPI.Users(this._client);
 }
@@ -352,28 +398,19 @@ export interface BatchResponseSimplePublicUpsertObject {
 export interface CollectionResponseAssociatedID {
   results: Array<AssociatedID>;
 
-  /**
-   * Contains information pagination of results.
-   */
-  paging?: EmailsAPI.Paging;
+  paging?: Shared.Paging;
 }
 
 export interface CollectionResponseMultiAssociatedObjectWithLabel {
   results: Array<MultiAssociatedObjectWithLabel>;
 
-  /**
-   * Contains information pagination of results.
-   */
-  paging?: EmailsAPI.Paging;
+  paging?: Shared.Paging;
 }
 
 export interface CollectionResponseSimplePublicObjectWithAssociations {
   results: Array<SimplePublicObjectWithAssociations>;
 
-  /**
-   * Contains information pagination of results.
-   */
-  paging?: EmailsAPI.Paging;
+  paging?: Shared.Paging;
 }
 
 export interface CollectionResponseWithTotalSimplePublicObject {
@@ -384,10 +421,7 @@ export interface CollectionResponseWithTotalSimplePublicObject {
    */
   total: number;
 
-  /**
-   * Contains information pagination of results.
-   */
-  paging?: EmailsAPI.Paging;
+  paging?: Shared.Paging;
 }
 
 export interface CreatedResponseLabelsBetweenObjectPair {
@@ -812,13 +846,16 @@ CRM.AppUninstalls = AppUninstalls;
 CRM.Associations = Associations;
 CRM.Exports = Exports;
 CRM.Extensions = Extensions;
+CRM.FeatureFlags = FeatureFlags;
 CRM.Imports = Imports;
+CRM.Limits = Limits;
 CRM.Lists = Lists;
 CRM.ObjectLibrary = ObjectLibrary;
 CRM.Objects = Objects;
 CRM.Owners = Owners;
 CRM.Pipelines = Pipelines;
 CRM.Properties = Properties;
+CRM.PropertyValidations = PropertyValidations;
 CRM.Timeline = Timeline;
 CRM.Users = Users;
 
@@ -888,6 +925,18 @@ export declare namespace CRM {
   export { Extensions as Extensions };
 
   export {
+    FeatureFlags as FeatureFlags,
+    type BatchPortalEntry as BatchPortalEntry,
+    type FlagPutRequest as FlagPutRequest,
+    type FlagResponse as FlagResponse,
+    type PortalFlagStateBatchDeleteRequest as PortalFlagStateBatchDeleteRequest,
+    type PortalFlagStateBatchPutRequest as PortalFlagStateBatchPutRequest,
+    type PortalFlagStateBatchResponse as PortalFlagStateBatchResponse,
+    type PortalFlagStatePutRequest as PortalFlagStatePutRequest,
+    type PortalFlagStateResponse as PortalFlagStateResponse,
+  };
+
+  export {
     Imports as Imports,
     type CollectionResponsePublicImportErrorForwardPaging as CollectionResponsePublicImportErrorForwardPaging,
     type CollectionResponsePublicImportResponse as CollectionResponsePublicImportResponse,
@@ -902,6 +951,28 @@ export declare namespace CRM {
     type ImportCreateParams as ImportCreateParams,
     type ImportListParams as ImportListParams,
     type ImportListErrorsParams as ImportListErrorsParams,
+  };
+
+  export {
+    Limits as Limits,
+    type AssociationLabelLimitResponse as AssociationLabelLimitResponse,
+    type AssociationRecordLimitResponse as AssociationRecordLimitResponse,
+    type AtLimitRecordSample as AtLimitRecordSample,
+    type CalculatedPropertyLimitResponse as CalculatedPropertyLimitResponse,
+    type CollectionResponseAssociationLabelLimitResponseNoPaging as CollectionResponseAssociationLabelLimitResponseNoPaging,
+    type CollectionResponseObjectTypeNearOrAtAssociationLimitNoPaging as CollectionResponseObjectTypeNearOrAtAssociationLimitNoPaging,
+    type CustomObjectLimitResponse as CustomObjectLimitResponse,
+    type CustomObjectRecordLimitResponse as CustomObjectRecordLimitResponse,
+    type CustomPropertyLimitResponse as CustomPropertyLimitResponse,
+    type LimitAndUsageForObjectType as LimitAndUsageForObjectType,
+    type NearLimitRecordSample as NearLimitRecordSample,
+    type ObjectTypeDefinition as ObjectTypeDefinition,
+    type ObjectTypeNearOrAtAssociationLimit as ObjectTypeNearOrAtAssociationLimit,
+    type PipelineLimitResponse as PipelineLimitResponse,
+    type RecordLimitResponse as RecordLimitResponse,
+    type UsageForObjectType as UsageForObjectType,
+    type LimitGetAssociationLabelLimitsParams as LimitGetAssociationLabelLimitsParams,
+    type LimitGetAssociationRecordsLimitsByObjectTypeParams as LimitGetAssociationRecordsLimitsByObjectTypeParams,
   };
 
   export {
@@ -998,6 +1069,15 @@ export declare namespace CRM {
     type PropertyListParams as PropertyListParams,
     type PropertyDeleteParams as PropertyDeleteParams,
     type PropertyGetParams as PropertyGetParams,
+  };
+
+  export {
+    PropertyValidations as PropertyValidations,
+    type CollectionResponsePublicPropertyValidationRuleMapNoPaging as CollectionResponsePublicPropertyValidationRuleMapNoPaging,
+    type CollectionResponsePublicPropertyValidationRuleNoPaging as CollectionResponsePublicPropertyValidationRuleNoPaging,
+    type PublicPropertyValidationRule as PublicPropertyValidationRule,
+    type PublicPropertyValidationRuleMap as PublicPropertyValidationRuleMap,
+    type PropertyValidationGetParams as PropertyValidationGetParams,
   };
 
   export {

@@ -24,6 +24,17 @@ export {
 } from './exports';
 export { Extensions } from './extensions/index';
 export {
+  FeatureFlags,
+  type BatchPortalEntry,
+  type FlagPutRequest,
+  type FlagResponse,
+  type PortalFlagStateBatchDeleteRequest,
+  type PortalFlagStateBatchPutRequest,
+  type PortalFlagStateBatchResponse,
+  type PortalFlagStatePutRequest,
+  type PortalFlagStateResponse,
+} from './feature-flags/index';
+export {
   Imports,
   type CollectionResponsePublicImportErrorForwardPaging,
   type CollectionResponsePublicImportResponse,
@@ -39,6 +50,27 @@ export {
   type ImportListErrorsParams,
   type PublicImportResponsesPage,
 } from './imports';
+export {
+  Limits,
+  type AssociationLabelLimitResponse,
+  type AssociationRecordLimitResponse,
+  type AtLimitRecordSample,
+  type CalculatedPropertyLimitResponse,
+  type CollectionResponseAssociationLabelLimitResponseNoPaging,
+  type CollectionResponseObjectTypeNearOrAtAssociationLimitNoPaging,
+  type CustomObjectLimitResponse,
+  type CustomObjectRecordLimitResponse,
+  type CustomPropertyLimitResponse,
+  type LimitAndUsageForObjectType,
+  type NearLimitRecordSample,
+  type ObjectTypeDefinition,
+  type ObjectTypeNearOrAtAssociationLimit,
+  type PipelineLimitResponse,
+  type RecordLimitResponse,
+  type UsageForObjectType,
+  type LimitGetAssociationLabelLimitsParams,
+  type LimitGetAssociationRecordsLimitsByObjectTypeParams,
+} from './limits';
 export {
   Lists,
   type APICollectionResponseJoinTimeAndRecordID,
@@ -130,6 +162,14 @@ export {
   type PropertyDeleteParams,
   type PropertyGetParams,
 } from './properties/index';
+export {
+  PropertyValidations,
+  type CollectionResponsePublicPropertyValidationRuleMapNoPaging,
+  type CollectionResponsePublicPropertyValidationRuleNoPaging,
+  type PublicPropertyValidationRule,
+  type PublicPropertyValidationRuleMap,
+  type PropertyValidationGetParams,
+} from './property-validations';
 export {
   Timeline,
   type BatchInputTimelineEvent,

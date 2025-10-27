@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as Shared from '../shared';
 import * as EventDefinitionsAPI from './event-definitions';
 import {
   AbsoluteComparativeTimestampRefineBy,
@@ -68,7 +69,6 @@ import {
   SendSendBatchParams,
   SendSendParams,
 } from './send';
-import * as EmailsAPI from '../marketing/emails/emails';
 import { APIPromise } from '../../core/api-promise';
 import { Page, type PageParams, PagePromise } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
@@ -122,10 +122,7 @@ export type ExternalUnifiedEventsPage = Page<ExternalUnifiedEvent>;
 export interface CollectionResponseExternalUnifiedEvent {
   results: Array<ExternalUnifiedEvent>;
 
-  /**
-   * Contains information pagination of results.
-   */
-  paging?: EmailsAPI.Paging;
+  paging?: Shared.Paging;
 }
 
 export interface ExternalUnifiedEvent {
