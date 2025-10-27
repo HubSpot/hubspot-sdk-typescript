@@ -15,6 +15,14 @@ export class Tables extends APIResource {
   /**
    * Creates a new draft HubDB table given a JSON schema. The table name and label
    * should be unique for each account.
+   *
+   * @example
+   * ```ts
+   * const hubDBTableV3 = await client.cms.hubdb.tables.create({
+   *   label: 'label',
+   *   name: 'name',
+   * });
+   * ```
    */
   create(body: TableCreateParams, options?: RequestOptions): APIPromise<HubdbAPI.HubDBTableV3> {
     return this._client.post('/cms/v3/hubdb/tables', { body, ...options });
@@ -23,6 +31,14 @@ export class Tables extends APIResource {
   /**
    * Returns the details for the published version of each table defined in an
    * account, including column definitions.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const hubDBTableV3 of client.cms.hubdb.tables.list()) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     query: TableListParams | null | undefined = {},
@@ -37,6 +53,11 @@ export class Tables extends APIResource {
   /**
    * Archive (soft delete) an existing HubDB table. This archives both the published
    * and draft versions.
+   *
+   * @example
+   * ```ts
+   * await client.cms.hubdb.tables.delete('tableIdOrName');
+   * ```
    */
   delete(tableIDOrName: string, options?: RequestOptions): APIPromise<void> {
     return this._client.delete(path`/cms/v3/hubdb/tables/${tableIDOrName}`, {
@@ -49,6 +70,15 @@ export class Tables extends APIResource {
    * Clone an existing HubDB table. The `newName` and `newLabel` of the new table can
    * be sent as JSON in the request body. This will create the cloned table as a
    * draft.
+   *
+   * @example
+   * ```ts
+   * const hubDBTableV3 =
+   *   await client.cms.hubdb.tables.cloneDraft(
+   *     'tableIdOrName',
+   *     { copyRows: true, isHubspotDefined: true },
+   *   );
+   * ```
    */
   cloneDraft(
     tableIDOrName: string,
@@ -60,6 +90,13 @@ export class Tables extends APIResource {
 
   /**
    * Delete a specific version of a table
+   *
+   * @example
+   * ```ts
+   * await client.cms.hubdb.tables.deleteVersion(0, {
+   *   tableIdOrName: 'tableIdOrName',
+   * });
+   * ```
    */
   deleteVersion(
     versionID: number,
@@ -75,6 +112,16 @@ export class Tables extends APIResource {
 
   /**
    * Exports the published version of a table in a specified format.
+   *
+   * @example
+   * ```ts
+   * const response = await client.cms.hubdb.tables.export(
+   *   'tableIdOrName',
+   * );
+   *
+   * const content = await response.blob();
+   * console.log(content);
+   * ```
    */
   export(
     tableIDOrName: string,
@@ -91,6 +138,16 @@ export class Tables extends APIResource {
 
   /**
    * Exports the draft version of a table to CSV / EXCEL format.
+   *
+   * @example
+   * ```ts
+   * const response = await client.cms.hubdb.tables.exportDraft(
+   *   'tableIdOrName',
+   * );
+   *
+   * const content = await response.blob();
+   * console.log(content);
+   * ```
    */
   exportDraft(
     tableIDOrName: string,
@@ -113,6 +170,13 @@ export class Tables extends APIResource {
    * **Note:** This endpoint can be accessed without any authentication if the table
    * is set to be allowed for public access. To do so, you'll need to include the
    * HubSpot account ID in a `portalId` query parameter.
+   *
+   * @example
+   * ```ts
+   * const hubDBTableV3 = await client.cms.hubdb.tables.get(
+   *   'tableIdOrName',
+   * );
+   * ```
    */
   get(
     tableIDOrName: string,
@@ -126,6 +190,13 @@ export class Tables extends APIResource {
    * Get the details for the draft version of a specific HubDB table. This will
    * include the definitions for the columns in the table and the number of rows in
    * the table.
+   *
+   * @example
+   * ```ts
+   * const hubDBTableV3 = await client.cms.hubdb.tables.getDraft(
+   *   'tableIdOrName',
+   * );
+   * ```
    */
   getDraft(
     tableIDOrName: string,
@@ -145,6 +216,14 @@ export class Tables extends APIResource {
    * name as `file`. Refer the
    * [overview section](https://developers.hubspot.com/docs/api/cms/hubdb#importing-tables)
    * to check the details and format of the JSON-formatted options for the import.
+   *
+   * @example
+   * ```ts
+   * const importResult =
+   *   await client.cms.hubdb.tables.importDraft(
+   *     'tableIdOrName',
+   *   );
+   * ```
    */
   importDraft(
     tableIDOrName: string,
@@ -160,6 +239,12 @@ export class Tables extends APIResource {
   /**
    * Returns the details for each draft table defined in the specified account,
    * including column definitions.
+   *
+   * @example
+   * ```ts
+   * const collectionResponseWithTotalHubDBTableV3ForwardPaging =
+   *   await client.cms.hubdb.tables.listDraft();
+   * ```
    */
   listDraft(
     query: TableListDraftParams | null | undefined = {},
@@ -172,6 +257,14 @@ export class Tables extends APIResource {
    * Publishes the table by copying the data and table schema changes from draft
    * version to the published version, meaning any website pages using data from the
    * table will be updated.
+   *
+   * @example
+   * ```ts
+   * const hubDBTableV3 =
+   *   await client.cms.hubdb.tables.publishDraft(
+   *     'tableIdOrName',
+   *   );
+   * ```
    */
   publishDraft(
     tableIDOrName: string,
@@ -189,6 +282,12 @@ export class Tables extends APIResource {
    * Replaces the data in the draft version of the table with values from the
    * published version. Any unpublished changes in the draft will be lost after this
    * call is made.
+   *
+   * @example
+   * ```ts
+   * const hubDBTableV3 =
+   *   await client.cms.hubdb.tables.resetDraft('tableIdOrName');
+   * ```
    */
   resetDraft(
     tableIDOrName: string,
@@ -205,6 +304,12 @@ export class Tables extends APIResource {
   /**
    * Unpublishes the table, meaning any website pages using data from the table will
    * not render any data.
+   *
+   * @example
+   * ```ts
+   * const hubDBTableV3 =
+   *   await client.cms.hubdb.tables.unpublish('tableIdOrName');
+   * ```
    */
   unpublish(
     tableIDOrName: string,
@@ -227,6 +332,15 @@ export class Tables extends APIResource {
    * body. **Note:** You need to include all the columns in the input when you are
    * adding/removing/updating a column. If you do not include an already existing
    * column in the request, it will be deleted.
+   *
+   * @example
+   * ```ts
+   * const hubDBTableV3 =
+   *   await client.cms.hubdb.tables.updateDraft(
+   *     'tableIdOrName',
+   *     { label: 'label', name: 'name' },
+   *   );
+   * ```
    */
   updateDraft(
     tableIDOrName: string,

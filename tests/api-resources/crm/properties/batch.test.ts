@@ -12,13 +12,7 @@ describe('resource batch', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.crm.properties.batch.create('objectType', {
       inputs: [
-        {
-          fieldType: 'select',
-          groupName: 'contactinformation',
-          label: 'My Contact Property',
-          name: 'my_contact_property',
-          type: 'enumeration',
-        },
+        { fieldType: 'booleancheckbox', groupName: 'groupName', label: 'label', name: 'name', type: 'bool' },
       ],
     });
     const rawResponse = await responsePromise.asResponse();
@@ -35,34 +29,21 @@ describe('resource batch', () => {
     const response = await client.crm.properties.batch.create('objectType', {
       inputs: [
         {
-          fieldType: 'select',
-          groupName: 'contactinformation',
-          label: 'My Contact Property',
-          name: 'my_contact_property',
-          type: 'enumeration',
+          fieldType: 'booleancheckbox',
+          groupName: 'groupName',
+          label: 'label',
+          name: 'name',
+          type: 'bool',
           calculationFormula: 'calculationFormula',
           dataSensitivity: 'non_sensitive',
           description: 'description',
-          displayOrder: 2,
+          displayOrder: 0,
           externalOptions: true,
           formField: true,
-          hasUniqueValue: false,
-          hidden: false,
+          hasUniqueValue: true,
+          hidden: true,
           options: [
-            {
-              displayOrder: 1,
-              hidden: false,
-              label: 'Option A',
-              value: 'A',
-              description: 'Choice number one',
-            },
-            {
-              displayOrder: 2,
-              hidden: false,
-              label: 'Option B',
-              value: 'B',
-              description: 'Choice number two',
-            },
+            { displayOrder: 0, hidden: true, label: 'label', value: 'value', description: 'description' },
           ],
           referencedObjectType: 'referencedObjectType',
         },
@@ -72,9 +53,7 @@ describe('resource batch', () => {
 
   // Prism tests are disabled
   test.skip('delete: only required params', async () => {
-    const responsePromise = client.crm.properties.batch.delete('objectType', {
-      inputs: [{ name: 'my_custom_property' }],
-    });
+    const responsePromise = client.crm.properties.batch.delete('objectType', { inputs: [{ name: 'name' }] });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -86,16 +65,14 @@ describe('resource batch', () => {
 
   // Prism tests are disabled
   test.skip('delete: required and optional params', async () => {
-    const response = await client.crm.properties.batch.delete('objectType', {
-      inputs: [{ name: 'my_custom_property' }],
-    });
+    const response = await client.crm.properties.batch.delete('objectType', { inputs: [{ name: 'name' }] });
   });
 
   // Prism tests are disabled
   test.skip('read: only required params', async () => {
     const responsePromise = client.crm.properties.batch.read('objectType', {
       archived: true,
-      inputs: [{ name: 'my_custom_property' }],
+      inputs: [{ name: 'name' }],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -110,7 +87,7 @@ describe('resource batch', () => {
   test.skip('read: required and optional params', async () => {
     const response = await client.crm.properties.batch.read('objectType', {
       archived: true,
-      inputs: [{ name: 'my_custom_property' }],
+      inputs: [{ name: 'name' }],
       dataSensitivity: 'non_sensitive',
     });
   });

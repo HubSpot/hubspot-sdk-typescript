@@ -34,13 +34,7 @@ describe('resource eventDefinitions', () => {
           description: 'description',
           name: 'name',
           options: [
-            {
-              displayOrder: 1,
-              hidden: false,
-              label: 'Option A',
-              value: 'A',
-              description: 'Choice number one',
-            },
+            { displayOrder: 0, hidden: true, label: 'label', value: 'value', description: 'description' },
           ],
         },
       ],
@@ -126,7 +120,7 @@ describe('resource eventDefinitions', () => {
       description: 'description',
       name: 'name',
       options: [
-        { displayOrder: 1, hidden: false, label: 'Option A', value: 'A', description: 'Choice number one' },
+        { displayOrder: 0, hidden: true, label: 'label', value: 'value', description: 'description' },
       ],
     });
   });
@@ -185,7 +179,7 @@ describe('resource eventDefinitions', () => {
       description: 'description',
       label: 'label',
       options: [
-        { displayOrder: 1, hidden: false, label: 'Option A', value: 'A', description: 'Choice number one' },
+        { displayOrder: 0, hidden: true, label: 'label', value: 'value', description: 'description' },
       ],
     });
   });

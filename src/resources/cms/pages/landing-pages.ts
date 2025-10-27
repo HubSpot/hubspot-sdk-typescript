@@ -13,6 +13,73 @@ import { path } from '../../../internal/utils/path';
 export class LandingPages extends APIResource {
   /**
    * Create a new Landing Page
+   *
+   * @example
+   * ```ts
+   * await client.cms.pages.landingPages.create({
+   *   id: 'id',
+   *   abStatus: 'master',
+   *   abTestId: 'abTestId',
+   *   archivedAt: '2019-12-27T18:11:19.117Z',
+   *   archivedInDashboard: true,
+   *   attachedStylesheets: [{ foo: {} }],
+   *   authorName: 'authorName',
+   *   campaign: 'campaign',
+   *   categoryId: 0,
+   *   contentGroupId: 'contentGroupId',
+   *   contentTypeCategory: '0',
+   *   created: '2019-12-27T18:11:19.117Z',
+   *   createdById: 'createdById',
+   *   currentlyPublished: true,
+   *   currentState: 'AUTOMATED',
+   *   domain: 'domain',
+   *   dynamicPageDataSourceId: 'dynamicPageDataSourceId',
+   *   dynamicPageDataSourceType: 0,
+   *   dynamicPageHubDbTableId: 'dynamicPageHubDbTableId',
+   *   enableDomainStylesheets: true,
+   *   enableLayoutStylesheets: true,
+   *   featuredImage: 'featuredImage',
+   *   featuredImageAltText: 'featuredImageAltText',
+   *   folderId: 'folderId',
+   *   footerHtml: 'footerHtml',
+   *   headHtml: 'headHtml',
+   *   htmlTitle: 'htmlTitle',
+   *   includeDefaultCustomCss: true,
+   *   language: 'af',
+   *   layoutSections: {
+   *     foo: { ... },
+   *   },
+   *   linkRelCanonicalUrl: 'linkRelCanonicalUrl',
+   *   mabExperimentId: 'mabExperimentId',
+   *   metaDescription: 'metaDescription',
+   *   name: 'name',
+   *   pageExpiryDate: 0,
+   *   pageExpiryEnabled: true,
+   *   pageExpiryRedirectId: 0,
+   *   pageExpiryRedirectUrl: 'pageExpiryRedirectUrl',
+   *   pageRedirected: true,
+   *   password: 'password',
+   *   publicAccessRules: [{}],
+   *   publicAccessRulesEnabled: true,
+   *   publishDate: '2019-12-27T18:11:19.117Z',
+   *   publishImmediately: true,
+   *   slug: 'slug',
+   *   state: 'state',
+   *   subcategory: 'subcategory',
+   *   templatePath: 'templatePath',
+   *   themeSettingsValues: { foo: {} },
+   *   translatedFromId: 'translatedFromId',
+   *   translations: {
+   *     foo: { ... },
+   *   },
+   *   updated: '2019-12-27T18:11:19.117Z',
+   *   updatedById: 'updatedById',
+   *   url: 'url',
+   *   useFeaturedImage: true,
+   *   widgetContainers: { foo: {} },
+   *   widgets: { foo: {} },
+   * });
+   * ```
    */
   create(body: LandingPageCreateParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/cms/v3/pages/landing-pages', {
@@ -25,6 +92,73 @@ export class LandingPages extends APIResource {
   /**
    * Sparse updates a single Landing Page object identified by the id in the path.
    * You only need to specify the column values that you are modifying.
+   *
+   * @example
+   * ```ts
+   * const page = await client.cms.pages.landingPages.update('objectId', {
+   *   id: 'id',
+   *   abStatus: 'master',
+   *   abTestId: 'abTestId',
+   *   archivedAt: '2019-12-27T18:11:19.117Z',
+   *   archivedInDashboard: true,
+   *   attachedStylesheets: [{ foo: {} }],
+   *   authorName: 'authorName',
+   *   campaign: 'campaign',
+   *   categoryId: 0,
+   *   contentGroupId: 'contentGroupId',
+   *   contentTypeCategory: '0',
+   *   created: '2019-12-27T18:11:19.117Z',
+   *   createdById: 'createdById',
+   *   currentlyPublished: true,
+   *   currentState: 'AUTOMATED',
+   *   domain: 'domain',
+   *   dynamicPageDataSourceId: 'dynamicPageDataSourceId',
+   *   dynamicPageDataSourceType: 0,
+   *   dynamicPageHubDbTableId: 'dynamicPageHubDbTableId',
+   *   enableDomainStylesheets: true,
+   *   enableLayoutStylesheets: true,
+   *   featuredImage: 'featuredImage',
+   *   featuredImageAltText: 'featuredImageAltText',
+   *   folderId: 'folderId',
+   *   footerHtml: 'footerHtml',
+   *   headHtml: 'headHtml',
+   *   htmlTitle: 'htmlTitle',
+   *   includeDefaultCustomCss: true,
+   *   language: 'af',
+   *   layoutSections: {
+   *     foo: { ... },
+   *   },
+   *   linkRelCanonicalUrl: 'linkRelCanonicalUrl',
+   *   mabExperimentId: 'mabExperimentId',
+   *   metaDescription: 'metaDescription',
+   *   name: 'name',
+   *   pageExpiryDate: 0,
+   *   pageExpiryEnabled: true,
+   *   pageExpiryRedirectId: 0,
+   *   pageExpiryRedirectUrl: 'pageExpiryRedirectUrl',
+   *   pageRedirected: true,
+   *   password: 'password',
+   *   publicAccessRules: [{}],
+   *   publicAccessRulesEnabled: true,
+   *   publishDate: '2019-12-27T18:11:19.117Z',
+   *   publishImmediately: true,
+   *   slug: 'slug',
+   *   state: 'state',
+   *   subcategory: 'subcategory',
+   *   templatePath: 'templatePath',
+   *   themeSettingsValues: { foo: {} },
+   *   translatedFromId: 'translatedFromId',
+   *   translations: {
+   *     foo: { ... },
+   *   },
+   *   updated: '2019-12-27T18:11:19.117Z',
+   *   updatedById: 'updatedById',
+   *   url: 'url',
+   *   useFeaturedImage: true,
+   *   widgetContainers: { foo: {} },
+   *   widgets: { foo: {} },
+   * });
+   * ```
    */
   update(
     objectID: string,
@@ -43,6 +177,14 @@ export class LandingPages extends APIResource {
    * Get the list of landing pages. Supports paging and filtering. This method would
    * be useful for an integration that examined these models and used an external
    * service to suggest edits.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const page of client.cms.pages.landingPages.list()) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     query: LandingPageListParams | null | undefined = {},
@@ -53,6 +195,11 @@ export class LandingPages extends APIResource {
 
   /**
    * Delete the Landing Page object identified by the id in the path.
+   *
+   * @example
+   * ```ts
+   * await client.cms.pages.landingPages.delete('objectId');
+   * ```
    */
   delete(
     objectID: string,
@@ -69,6 +216,15 @@ export class LandingPages extends APIResource {
 
   /**
    * Attach a landing page to a multi-language group.
+   *
+   * @example
+   * ```ts
+   * await client.cms.pages.landingPages.attachToLangGroup({
+   *   id: 'id',
+   *   language: 'language',
+   *   primaryId: 'primaryId',
+   * });
+   * ```
    */
   attachToLangGroup(body: LandingPageAttachToLangGroupParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/cms/v3/pages/landing-pages/multi-language/attach-to-lang-group', {
@@ -80,6 +236,13 @@ export class LandingPages extends APIResource {
 
   /**
    * Clone a Landing Page
+   *
+   * @example
+   * ```ts
+   * const page = await client.cms.pages.landingPages.clone({
+   *   id: 'id',
+   * });
+   * ```
    */
   clone(body: LandingPageCloneParams, options?: RequestOptions): APIPromise<PagesAPI.Page> {
     return this._client.post('/cms/v3/pages/landing-pages/clone', { body, ...options });
@@ -88,6 +251,17 @@ export class LandingPages extends APIResource {
   /**
    * Create a new A/B test variation based on the information provided in the request
    * body.
+   *
+   * @example
+   * ```ts
+   * const page =
+   *   await client.cms.pages.landingPages.createAbTestVariation(
+   *     {
+   *       contentId: 'contentId',
+   *       variationName: 'variationName',
+   *     },
+   *   );
+   * ```
    */
   createAbTestVariation(
     body: LandingPageCreateAbTestVariationParams,
@@ -98,6 +272,75 @@ export class LandingPages extends APIResource {
 
   /**
    * Create the Landing Page objects detailed in the request body.
+   *
+   * @example
+   * ```ts
+   * const batchResponsePage = await client.cms.pages.landingPages.createBatch({
+   *   inputs: [
+   *     {
+   *       id: 'id',
+   *       abStatus: 'master',
+   *       abTestId: 'abTestId',
+   *       archivedAt: '2019-12-27T18:11:19.117Z',
+   *       archivedInDashboard: true,
+   *       attachedStylesheets: [
+   *         { ... },
+   *       ],
+   *       authorName: 'authorName',
+   *       campaign: 'campaign',
+   *       categoryId: 0,
+   *       contentGroupId: 'contentGroupId',
+   *       contentTypeCategory: '0',
+   *       created: '2019-12-27T18:11:19.117Z',
+   *       createdById: 'createdById',
+   *       currentlyPublished: true,
+   *       currentState: 'AUTOMATED',
+   *       domain: 'domain',
+   *       dynamicPageDataSourceId: 'dynamicPageDataSourceId',
+   *       dynamicPageDataSourceType: 0,
+   *       dynamicPageHubDbTableId: 'dynamicPageHubDbTableId',
+   *       enableDomainStylesheets: true,
+   *       enableLayoutStylesheets: true,
+   *       featuredImage: 'featuredImage',
+   *       featuredImageAltText: 'featuredImageAltText',
+   *       folderId: 'folderId',
+   *       footerHtml: 'footerHtml',
+   *       headHtml: 'headHtml',
+   *       htmlTitle: 'htmlTitle',
+   *       includeDefaultCustomCss: true,
+   *       language: 'af',
+   *       layoutSections: { ... },
+   *       linkRelCanonicalUrl: 'linkRelCanonicalUrl',
+   *       mabExperimentId: 'mabExperimentId',
+   *       metaDescription: 'metaDescription',
+   *       name: 'name',
+   *       pageExpiryDate: 0,
+   *       pageExpiryEnabled: true,
+   *       pageExpiryRedirectId: 0,
+   *       pageExpiryRedirectUrl: 'pageExpiryRedirectUrl',
+   *       pageRedirected: true,
+   *       password: 'password',
+   *       publicAccessRules: [{}],
+   *       publicAccessRulesEnabled: true,
+   *       publishDate: '2019-12-27T18:11:19.117Z',
+   *       publishImmediately: true,
+   *       slug: 'slug',
+   *       state: 'state',
+   *       subcategory: 'subcategory',
+   *       templatePath: 'templatePath',
+   *       themeSettingsValues: { ... },
+   *       translatedFromId: 'translatedFromId',
+   *       translations: { ... },
+   *       updated: '2019-12-27T18:11:19.117Z',
+   *       updatedById: 'updatedById',
+   *       url: 'url',
+   *       useFeaturedImage: true,
+   *       widgetContainers: { ... },
+   *       widgets: { ... },
+   *     },
+   *   ],
+   * });
+   * ```
    */
   createBatch(
     body: LandingPageCreateBatchParams,
@@ -108,6 +351,20 @@ export class LandingPages extends APIResource {
 
   /**
    * Create a new Folder
+   *
+   * @example
+   * ```ts
+   * const contentFolder =
+   *   await client.cms.pages.landingPages.createFolder({
+   *     id: 'id',
+   *     category: 0,
+   *     created: '2019-12-27T18:11:19.117Z',
+   *     deletedAt: '2019-12-27T18:11:19.117Z',
+   *     name: 'name',
+   *     parentFolderId: 0,
+   *     updated: '2019-12-27T18:11:19.117Z',
+   *   });
+   * ```
    */
   createFolder(
     body: LandingPageCreateFolderParams,
@@ -118,6 +375,24 @@ export class LandingPages extends APIResource {
 
   /**
    * Create the Folder objects detailed in the request body.
+   *
+   * @example
+   * ```ts
+   * const batchResponseContentFolder =
+   *   await client.cms.pages.landingPages.createFoldersBatch({
+   *     inputs: [
+   *       {
+   *         id: 'id',
+   *         category: 0,
+   *         created: '2019-12-27T18:11:19.117Z',
+   *         deletedAt: '2019-12-27T18:11:19.117Z',
+   *         name: 'name',
+   *         parentFolderId: 0,
+   *         updated: '2019-12-27T18:11:19.117Z',
+   *       },
+   *     ],
+   *   });
+   * ```
    */
   createFoldersBatch(
     body: LandingPageCreateFoldersBatchParams,
@@ -128,6 +403,14 @@ export class LandingPages extends APIResource {
 
   /**
    * Create a new language variation from an existing landing page
+   *
+   * @example
+   * ```ts
+   * const page =
+   *   await client.cms.pages.landingPages.createLanguageVariation(
+   *     { id: 'id' },
+   *   );
+   * ```
    */
   createLanguageVariation(
     body: LandingPageCreateLanguageVariationParams,
@@ -144,6 +427,13 @@ export class LandingPages extends APIResource {
    * not the same as the dashboard `archive` function. To perform a dashboard
    * `archive` send an normal update with the `archivedInDashboard` field set to
    * true.
+   *
+   * @example
+   * ```ts
+   * await client.cms.pages.landingPages.deleteBatch({
+   *   inputs: ['string'],
+   * });
+   * ```
    */
   deleteBatch(body: LandingPageDeleteBatchParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/cms/v3/pages/landing-pages/batch/archive', {
@@ -155,6 +445,13 @@ export class LandingPages extends APIResource {
 
   /**
    * Delete the Folder object identified by the id in the path.
+   *
+   * @example
+   * ```ts
+   * await client.cms.pages.landingPages.deleteFolder(
+   *   'objectId',
+   * );
+   * ```
    */
   deleteFolder(
     objectID: string,
@@ -171,6 +468,13 @@ export class LandingPages extends APIResource {
 
   /**
    * Delete the Folder objects identified in the request body.
+   *
+   * @example
+   * ```ts
+   * await client.cms.pages.landingPages.deleteFoldersBatch({
+   *   inputs: ['string'],
+   * });
+   * ```
    */
   deleteFoldersBatch(body: LandingPageDeleteFoldersBatchParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/cms/v3/pages/landing-pages/folders/batch/archive', {
@@ -182,6 +486,13 @@ export class LandingPages extends APIResource {
 
   /**
    * Detach a landing page from a multi-language group.
+   *
+   * @example
+   * ```ts
+   * await client.cms.pages.landingPages.detachFromLangGroup({
+   *   id: 'id',
+   * });
+   * ```
    */
   detachFromLangGroup(
     body: LandingPageDetachFromLangGroupParams,
@@ -196,6 +507,14 @@ export class LandingPages extends APIResource {
 
   /**
    * End an active A/B test and designate a winner.
+   *
+   * @example
+   * ```ts
+   * await client.cms.pages.landingPages.endAbTest({
+   *   abTestId: 'abTestId',
+   *   winnerId: 'winnerId',
+   * });
+   * ```
    */
   endAbTest(body: LandingPageEndAbTestParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/cms/v3/pages/landing-pages/ab-test/end', {
@@ -207,6 +526,13 @@ export class LandingPages extends APIResource {
 
   /**
    * Retrieve the Landing Page object identified by the id in the path.
+   *
+   * @example
+   * ```ts
+   * const page = await client.cms.pages.landingPages.get(
+   *   'objectId',
+   * );
+   * ```
    */
   get(
     objectID: string,
@@ -218,6 +544,14 @@ export class LandingPages extends APIResource {
 
   /**
    * Retrieve the Landing Page objects identified in the request body.
+   *
+   * @example
+   * ```ts
+   * const batchResponsePage =
+   *   await client.cms.pages.landingPages.getBatch({
+   *     inputs: ['string'],
+   *   });
+   * ```
    */
   getBatch(
     params: LandingPageGetBatchParams,
@@ -233,6 +567,13 @@ export class LandingPages extends APIResource {
 
   /**
    * Retrieve the full draft version of the Landing Page.
+   *
+   * @example
+   * ```ts
+   * const page = await client.cms.pages.landingPages.getDraft(
+   *   'objectId',
+   * );
+   * ```
    */
   getDraft(objectID: string, options?: RequestOptions): APIPromise<PagesAPI.Page> {
     return this._client.get(path`/cms/v3/pages/landing-pages/${objectID}/draft`, options);
@@ -240,6 +581,12 @@ export class LandingPages extends APIResource {
 
   /**
    * Retrieve the Folder object identified by the id in the path.
+   *
+   * @example
+   * ```ts
+   * const contentFolder =
+   *   await client.cms.pages.landingPages.getFolder('objectId');
+   * ```
    */
   getFolder(
     objectID: string,
@@ -251,6 +598,15 @@ export class LandingPages extends APIResource {
 
   /**
    * Retrieves a previous version of a Folder
+   *
+   * @example
+   * ```ts
+   * const versionContentFolder =
+   *   await client.cms.pages.landingPages.getFolderRevision(
+   *     'revisionId',
+   *     { objectId: 'objectId' },
+   *   );
+   * ```
    */
   getFolderRevision(
     revisionID: string,
@@ -266,6 +622,14 @@ export class LandingPages extends APIResource {
 
   /**
    * Update the Folder objects identified in the request body.
+   *
+   * @example
+   * ```ts
+   * const batchResponseContentFolder =
+   *   await client.cms.pages.landingPages.getFoldersBatch({
+   *     inputs: ['string'],
+   *   });
+   * ```
    */
   getFoldersBatch(
     params: LandingPageGetFoldersBatchParams,
@@ -281,6 +645,15 @@ export class LandingPages extends APIResource {
 
   /**
    * Retrieves a previous version of a Landing Page
+   *
+   * @example
+   * ```ts
+   * const versionPage =
+   *   await client.cms.pages.landingPages.getRevision(
+   *     'revisionId',
+   *     { objectId: 'objectId' },
+   *   );
+   * ```
    */
   getRevision(
     revisionID: string,
@@ -293,6 +666,14 @@ export class LandingPages extends APIResource {
 
   /**
    * Retrieves all the previous versions of a Folder.
+   *
+   * @example
+   * ```ts
+   * const collectionResponseWithTotalVersionContentFolder =
+   *   await client.cms.pages.landingPages.listFolderRevisions(
+   *     'objectId',
+   *   );
+   * ```
    */
   listFolderRevisions(
     objectID: string,
@@ -309,6 +690,12 @@ export class LandingPages extends APIResource {
    * Get the list of Landing Page Folders. Supports paging and filtering. This method
    * would be useful for an integration that examined these models and used an
    * external service to suggest edits.
+   *
+   * @example
+   * ```ts
+   * const collectionResponseWithTotalContentFolderForwardPaging =
+   *   await client.cms.pages.landingPages.listFolders();
+   * ```
    */
   listFolders(
     query: LandingPageListFoldersParams | null | undefined = {},
@@ -319,6 +706,14 @@ export class LandingPages extends APIResource {
 
   /**
    * Retrieves all the previous versions of a Landing Page.
+   *
+   * @example
+   * ```ts
+   * const collectionResponseWithTotalVersionPage =
+   *   await client.cms.pages.landingPages.listRevisions(
+   *     'objectId',
+   *   );
+   * ```
    */
   listRevisions(
     objectID: string,
@@ -331,6 +726,13 @@ export class LandingPages extends APIResource {
   /**
    * Take any changes from the draft version of the Landing Page and apply them to
    * the live version.
+   *
+   * @example
+   * ```ts
+   * await client.cms.pages.landingPages.publishDraft(
+   *   'objectId',
+   * );
+   * ```
    */
   publishDraft(objectID: string, options?: RequestOptions): APIPromise<void> {
     return this._client.post(path`/cms/v3/pages/landing-pages/${objectID}/draft/push-live`, {
@@ -341,6 +743,14 @@ export class LandingPages extends APIResource {
 
   /**
    * Rerun a previous A/B test.
+   *
+   * @example
+   * ```ts
+   * await client.cms.pages.landingPages.rerunAbTest({
+   *   abTestId: 'abTestId',
+   *   variationId: 'variationId',
+   * });
+   * ```
    */
   rerunAbTest(body: LandingPageRerunAbTestParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/cms/v3/pages/landing-pages/ab-test/rerun', {
@@ -352,6 +762,11 @@ export class LandingPages extends APIResource {
 
   /**
    * Discards any edits and resets the draft to the live version.
+   *
+   * @example
+   * ```ts
+   * await client.cms.pages.landingPages.resetDraft('objectId');
+   * ```
    */
   resetDraft(objectID: string, options?: RequestOptions): APIPromise<void> {
     return this._client.post(path`/cms/v3/pages/landing-pages/${objectID}/draft/reset`, {
@@ -362,6 +777,15 @@ export class LandingPages extends APIResource {
 
   /**
    * Takes a specified version of a Folder and restores it.
+   *
+   * @example
+   * ```ts
+   * const contentFolder =
+   *   await client.cms.pages.landingPages.restoreFolderRevision(
+   *     'revisionId',
+   *     { objectId: 'objectId' },
+   *   );
+   * ```
    */
   restoreFolderRevision(
     revisionID: string,
@@ -377,6 +801,15 @@ export class LandingPages extends APIResource {
 
   /**
    * Takes a specified version of a Landing Page and restores it.
+   *
+   * @example
+   * ```ts
+   * const page =
+   *   await client.cms.pages.landingPages.restoreRevision(
+   *     'revisionId',
+   *     { objectId: 'objectId' },
+   *   );
+   * ```
    */
   restoreRevision(
     revisionID: string,
@@ -393,6 +826,15 @@ export class LandingPages extends APIResource {
   /**
    * Takes a specified version of a Landing Page, sets it as the new draft version of
    * the Landing Page.
+   *
+   * @example
+   * ```ts
+   * const page =
+   *   await client.cms.pages.landingPages.restoreRevisionToDraft(
+   *     0,
+   *     { objectId: 'objectId' },
+   *   );
+   * ```
    */
   restoreRevisionToDraft(
     revisionID: number,
@@ -408,6 +850,14 @@ export class LandingPages extends APIResource {
 
   /**
    * Schedule a Landing Page to be Published
+   *
+   * @example
+   * ```ts
+   * await client.cms.pages.landingPages.schedule({
+   *   id: 'id',
+   *   publishDate: '2019-12-27T18:11:19.117Z',
+   * });
+   * ```
    */
   schedule(body: LandingPageScheduleParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/cms/v3/pages/landing-pages/schedule', {
@@ -419,6 +869,13 @@ export class LandingPages extends APIResource {
 
   /**
    * Set a landing page as the primary language of a multi-language group.
+   *
+   * @example
+   * ```ts
+   * await client.cms.pages.landingPages.setNewLangPrimary({
+   *   id: 'id',
+   * });
+   * ```
    */
   setNewLangPrimary(body: LandingPageSetNewLangPrimaryParams, options?: RequestOptions): APIPromise<void> {
     return this._client.put('/cms/v3/pages/landing-pages/multi-language/set-new-lang-primary', {
@@ -430,6 +887,14 @@ export class LandingPages extends APIResource {
 
   /**
    * Update the Landing Page objects identified in the request body.
+   *
+   * @example
+   * ```ts
+   * const batchResponsePage =
+   *   await client.cms.pages.landingPages.updateBatch({
+   *     inputs: [{}],
+   *   });
+   * ```
    */
   updateBatch(
     params: LandingPageUpdateBatchParams,
@@ -447,6 +912,73 @@ export class LandingPages extends APIResource {
    * Sparse updates the draft version of a single Landing Page object identified by
    * the id in the path. You only need to specify the column values that you are
    * modifying.
+   *
+   * @example
+   * ```ts
+   * const page = await client.cms.pages.landingPages.updateDraft('objectId', {
+   *   id: 'id',
+   *   abStatus: 'master',
+   *   abTestId: 'abTestId',
+   *   archivedAt: '2019-12-27T18:11:19.117Z',
+   *   archivedInDashboard: true,
+   *   attachedStylesheets: [{ foo: {} }],
+   *   authorName: 'authorName',
+   *   campaign: 'campaign',
+   *   categoryId: 0,
+   *   contentGroupId: 'contentGroupId',
+   *   contentTypeCategory: '0',
+   *   created: '2019-12-27T18:11:19.117Z',
+   *   createdById: 'createdById',
+   *   currentlyPublished: true,
+   *   currentState: 'AUTOMATED',
+   *   domain: 'domain',
+   *   dynamicPageDataSourceId: 'dynamicPageDataSourceId',
+   *   dynamicPageDataSourceType: 0,
+   *   dynamicPageHubDbTableId: 'dynamicPageHubDbTableId',
+   *   enableDomainStylesheets: true,
+   *   enableLayoutStylesheets: true,
+   *   featuredImage: 'featuredImage',
+   *   featuredImageAltText: 'featuredImageAltText',
+   *   folderId: 'folderId',
+   *   footerHtml: 'footerHtml',
+   *   headHtml: 'headHtml',
+   *   htmlTitle: 'htmlTitle',
+   *   includeDefaultCustomCss: true,
+   *   language: 'af',
+   *   layoutSections: {
+   *     foo: { ... },
+   *   },
+   *   linkRelCanonicalUrl: 'linkRelCanonicalUrl',
+   *   mabExperimentId: 'mabExperimentId',
+   *   metaDescription: 'metaDescription',
+   *   name: 'name',
+   *   pageExpiryDate: 0,
+   *   pageExpiryEnabled: true,
+   *   pageExpiryRedirectId: 0,
+   *   pageExpiryRedirectUrl: 'pageExpiryRedirectUrl',
+   *   pageRedirected: true,
+   *   password: 'password',
+   *   publicAccessRules: [{}],
+   *   publicAccessRulesEnabled: true,
+   *   publishDate: '2019-12-27T18:11:19.117Z',
+   *   publishImmediately: true,
+   *   slug: 'slug',
+   *   state: 'state',
+   *   subcategory: 'subcategory',
+   *   templatePath: 'templatePath',
+   *   themeSettingsValues: { foo: {} },
+   *   translatedFromId: 'translatedFromId',
+   *   translations: {
+   *     foo: { ... },
+   *   },
+   *   updated: '2019-12-27T18:11:19.117Z',
+   *   updatedById: 'updatedById',
+   *   url: 'url',
+   *   useFeaturedImage: true,
+   *   widgetContainers: { foo: {} },
+   *   widgets: { foo: {} },
+   * });
+   * ```
    */
   updateDraft(
     objectID: string,
@@ -459,6 +991,23 @@ export class LandingPages extends APIResource {
   /**
    * Sparse updates a single Folder object identified by the id in the path. You only
    * need to specify the column values that you are modifying.
+   *
+   * @example
+   * ```ts
+   * const contentFolder =
+   *   await client.cms.pages.landingPages.updateFolder(
+   *     'objectId',
+   *     {
+   *       id: 'id',
+   *       category: 0,
+   *       created: '2019-12-27T18:11:19.117Z',
+   *       deletedAt: '2019-12-27T18:11:19.117Z',
+   *       name: 'name',
+   *       parentFolderId: 0,
+   *       updated: '2019-12-27T18:11:19.117Z',
+   *     },
+   *   );
+   * ```
    */
   updateFolder(
     objectID: string,
@@ -475,6 +1024,14 @@ export class LandingPages extends APIResource {
 
   /**
    * Update the Folder objects identified in the request body.
+   *
+   * @example
+   * ```ts
+   * const batchResponseContentFolder =
+   *   await client.cms.pages.landingPages.updateFoldersBatch({
+   *     inputs: [{}],
+   *   });
+   * ```
    */
   updateFoldersBatch(
     params: LandingPageUpdateFoldersBatchParams,
@@ -490,6 +1047,14 @@ export class LandingPages extends APIResource {
 
   /**
    * Explicitly set new languages for each landing page in a multi-language group.
+   *
+   * @example
+   * ```ts
+   * await client.cms.pages.landingPages.updateLanguages({
+   *   languages: { foo: 'string' },
+   *   primaryId: 'primaryId',
+   * });
+   * ```
    */
   updateLanguages(body: LandingPageUpdateLanguagesParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/cms/v3/pages/landing-pages/multi-language/update-languages', {

@@ -3,7 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
 import * as CmsAPI from '../cms';
-import * as EmailsAPI from '../../marketing/emails';
+import * as EmailsAPI from '../../marketing/emails/emails';
 import { APIPromise } from '../../../core/api-promise';
 import { Page, type PageParams, PagePromise } from '../../../core/pagination';
 import { buildHeaders } from '../../../internal/headers';
@@ -15,6 +15,14 @@ export class Settings extends APIResource {
    * Get the list of Blogs. Supports paging and filtering. This method would be
    * useful for an integration that examined these models and used an external
    * service to suggest edits.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const blog of client.cms.blogs.settings.list()) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     query: SettingListParams | null | undefined = {},
@@ -25,6 +33,15 @@ export class Settings extends APIResource {
 
   /**
    * Attach a blog to a multi-language group.
+   *
+   * @example
+   * ```ts
+   * await client.cms.blogs.settings.attachToLangGroup({
+   *   id: 'id',
+   *   language: 'language',
+   *   primaryId: 'primaryId',
+   * });
+   * ```
    */
   attachToLangGroup(body: SettingAttachToLangGroupParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/cms/v3/blog-settings/settings/multi-language/attach-to-lang-group', {
@@ -36,6 +53,14 @@ export class Settings extends APIResource {
 
   /**
    * Create a new language variation from an existing blog
+   *
+   * @example
+   * ```ts
+   * const blog =
+   *   await client.cms.blogs.settings.createLanguageVariation({
+   *     id: 'id',
+   *   });
+   * ```
    */
   createLanguageVariation(
     body: SettingCreateLanguageVariationParams,
@@ -49,6 +74,13 @@ export class Settings extends APIResource {
 
   /**
    * Detach a blog from a multi-language group.
+   *
+   * @example
+   * ```ts
+   * await client.cms.blogs.settings.detachFromLangGroup({
+   *   id: 'id',
+   * });
+   * ```
    */
   detachFromLangGroup(body: SettingDetachFromLangGroupParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/cms/v3/blog-settings/settings/multi-language/detach-from-lang-group', {
@@ -60,6 +92,11 @@ export class Settings extends APIResource {
 
   /**
    * Retrieve the Blog object identified by the id in the path.
+   *
+   * @example
+   * ```ts
+   * const blog = await client.cms.blogs.settings.get('blogId');
+   * ```
    */
   get(blogID: string, options?: RequestOptions): APIPromise<Blog> {
     return this._client.get(path`/cms/v3/blog-settings/settings/${blogID}`, options);
@@ -67,6 +104,15 @@ export class Settings extends APIResource {
 
   /**
    * Retrieves a previous version of a Blog
+   *
+   * @example
+   * ```ts
+   * const versionBlog =
+   *   await client.cms.blogs.settings.getRevision(
+   *     'revisionId',
+   *     { blogId: 'blogId' },
+   *   );
+   * ```
    */
   getRevision(
     revisionID: string,
@@ -79,6 +125,12 @@ export class Settings extends APIResource {
 
   /**
    * Retrieves all the previous versions of a Blog
+   *
+   * @example
+   * ```ts
+   * const collectionResponseWithTotalVersionBlog =
+   *   await client.cms.blogs.settings.listRevisions('blogId');
+   * ```
    */
   listRevisions(
     blogID: string,
@@ -90,6 +142,13 @@ export class Settings extends APIResource {
 
   /**
    * Set a blog as the primary language of a multi-language group.
+   *
+   * @example
+   * ```ts
+   * await client.cms.blogs.settings.setNewLangPrimary({
+   *   id: 'id',
+   * });
+   * ```
    */
   setNewLangPrimary(body: SettingSetNewLangPrimaryParams, options?: RequestOptions): APIPromise<void> {
     return this._client.put('/cms/v3/blog-settings/settings/multi-language/set-new-lang-primary', {
@@ -101,6 +160,14 @@ export class Settings extends APIResource {
 
   /**
    * Explicitly set new languages for each blog in a multi-language group.
+   *
+   * @example
+   * ```ts
+   * await client.cms.blogs.settings.updateLanguages({
+   *   languages: { foo: 'string' },
+   *   primaryId: 'primaryId',
+   * });
+   * ```
    */
   updateLanguages(body: SettingUpdateLanguagesParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/cms/v3/blog-settings/settings/multi-language/update-languages', {

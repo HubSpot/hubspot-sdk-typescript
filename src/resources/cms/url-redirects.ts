@@ -11,6 +11,15 @@ import { path } from '../../internal/utils/path';
 export class URLRedirects extends APIResource {
   /**
    * Creates and configures a new URL redirect.
+   *
+   * @example
+   * ```ts
+   * const urlMapping = await client.cms.urlRedirects.create({
+   *   destination: 'destination',
+   *   redirectStyle: 0,
+   *   routePrefix: 'routePrefix',
+   * });
+   * ```
    */
   create(body: URLRedirectCreateParams, options?: RequestOptions): APIPromise<URLMapping> {
     return this._client.post('/cms/v3/url-redirects/', { body, ...options });
@@ -18,6 +27,26 @@ export class URLRedirects extends APIResource {
 
   /**
    * Updates the settings for an existing URL redirect.
+   *
+   * @example
+   * ```ts
+   * const urlMapping = await client.cms.urlRedirects.update(
+   *   'urlRedirectId',
+   *   {
+   *     id: 'id',
+   *     destination: 'destination',
+   *     isMatchFullUrl: true,
+   *     isMatchQueryString: true,
+   *     isOnlyAfterNotFound: true,
+   *     isPattern: true,
+   *     isProtocolAgnostic: true,
+   *     isTrailingSlashOptional: true,
+   *     precedence: 0,
+   *     redirectStyle: 0,
+   *     routePrefix: 'routePrefix',
+   *   },
+   * );
+   * ```
    */
   update(
     urlRedirectID: string,
@@ -30,6 +59,14 @@ export class URLRedirects extends APIResource {
   /**
    * Returns all existing URL redirects. Results can be limited and filtered by
    * creation or updated date.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const urlMapping of client.cms.urlRedirects.list()) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     query: URLRedirectListParams | null | undefined = {},
@@ -40,6 +77,11 @@ export class URLRedirects extends APIResource {
 
   /**
    * Delete one existing redirect, so it is no longer mapped.
+   *
+   * @example
+   * ```ts
+   * await client.cms.urlRedirects.delete('urlRedirectId');
+   * ```
    */
   delete(urlRedirectID: string, options?: RequestOptions): APIPromise<void> {
     return this._client.delete(path`/cms/v3/url-redirects/${urlRedirectID}`, {
@@ -50,6 +92,13 @@ export class URLRedirects extends APIResource {
 
   /**
    * Returns the details for a single existing URL redirect by ID.
+   *
+   * @example
+   * ```ts
+   * const urlMapping = await client.cms.urlRedirects.read(
+   *   'urlRedirectId',
+   * );
+   * ```
    */
   read(urlRedirectID: string, options?: RequestOptions): APIPromise<URLMapping> {
     return this._client.get(path`/cms/v3/url-redirects/${urlRedirectID}`, options);

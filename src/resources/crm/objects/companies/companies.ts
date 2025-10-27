@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
-import * as ObjectsAPI from '../objects';
-import { SimplePublicObjectWithAssociationsPage } from '../objects';
+import * as CRMAPI from '../../crm';
+import { SimplePublicObjectWithAssociationsPage } from '../../crm';
 import * as BatchAPI from './batch';
 import {
   Batch,
@@ -39,7 +39,7 @@ export class Companies extends APIResource {
   create(
     body: CompanyCreateParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CreatedResponseSimplePublicObject> {
+  ): APIPromise<CRMAPI.CreatedResponseSimplePublicObject> {
     return this._client.post('/crm/v3/objects/companies', { body, ...options });
   }
 
@@ -69,7 +69,7 @@ export class Companies extends APIResource {
     companyID: string,
     params: CompanyUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.SimplePublicObject> {
+  ): APIPromise<CRMAPI.SimplePublicObject> {
     const { idProperty, ...body } = params;
     return this._client.patch(path`/crm/v3/objects/companies/${companyID}`, {
       query: { idProperty },
@@ -93,10 +93,10 @@ export class Companies extends APIResource {
   list(
     query: CompanyListParams | null | undefined = {},
     options?: RequestOptions,
-  ): PagePromise<SimplePublicObjectWithAssociationsPage, ObjectsAPI.SimplePublicObjectWithAssociations> {
+  ): PagePromise<SimplePublicObjectWithAssociationsPage, CRMAPI.SimplePublicObjectWithAssociations> {
     return this._client.getAPIList(
       '/crm/v3/objects/companies',
-      Page<ObjectsAPI.SimplePublicObjectWithAssociations>,
+      Page<CRMAPI.SimplePublicObjectWithAssociations>,
       { query, ...options },
     );
   }
@@ -133,7 +133,7 @@ export class Companies extends APIResource {
     companyID: string,
     query: CompanyGetParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.SimplePublicObjectWithAssociations> {
+  ): APIPromise<CRMAPI.SimplePublicObjectWithAssociations> {
     return this._client.get(path`/crm/v3/objects/companies/${companyID}`, { query, ...options });
   }
 
@@ -150,7 +150,7 @@ export class Companies extends APIResource {
    *   });
    * ```
    */
-  merge(body: CompanyMergeParams, options?: RequestOptions): APIPromise<ObjectsAPI.SimplePublicObject> {
+  merge(body: CompanyMergeParams, options?: RequestOptions): APIPromise<CRMAPI.SimplePublicObject> {
     return this._client.post('/crm/v3/objects/companies/merge', { body, ...options });
   }
 
@@ -168,23 +168,23 @@ export class Companies extends APIResource {
   search(
     body: CompanySearchParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CollectionResponseWithTotalSimplePublicObject> {
+  ): APIPromise<CRMAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/v3/objects/companies/search', { body, ...options });
   }
 }
 
 export interface CompanyCreateParams {
   /**
-   * The company property values to set.
+   * Key-value pairs for setting properties for the new object.
    */
   properties: { [key: string]: string };
 
-  associations?: Array<ObjectsAPI.PublicAssociationsForObject>;
+  associations?: Array<CRMAPI.PublicAssociationsForObject>;
 }
 
 export interface CompanyUpdateParams {
   /**
-   * Body param: The company property values to set.
+   * Body param: Key value pairs representing the properties of the object.
    */
   properties: { [key: string]: string };
 
@@ -255,14 +255,8 @@ export interface CompanyGetParams {
 }
 
 export interface CompanyMergeParams {
-  /**
-   * The ID of the company to merge into the primary.
-   */
   objectIdToMerge: string;
 
-  /**
-   * The ID of the primary company, which the other will merge into.
-   */
   primaryObjectId: string;
 }
 
@@ -275,7 +269,7 @@ export interface CompanySearchParams {
   /**
    * Up to 6 groups of filters defining additional query criteria.
    */
-  filterGroups?: Array<ObjectsAPI.FilterGroup>;
+  filterGroups?: Array<CRMAPI.FilterGroup>;
 
   /**
    * The maximum results to return, up to 200 objects.

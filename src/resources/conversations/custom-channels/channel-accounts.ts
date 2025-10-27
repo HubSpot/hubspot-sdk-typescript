@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
-import * as CustomChannelsAPI from './custom-channels';
+import * as ConversationsAPI from '../conversations';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -24,7 +24,7 @@ export class ChannelAccounts extends APIResource {
     channelID: string,
     body: ChannelAccountCreateParams,
     options?: RequestOptions,
-  ): APIPromise<CustomChannelsAPI.PublicChannelAccount> {
+  ): APIPromise<ConversationsAPI.PublicChannelAccount> {
     return this._client.post(path`/conversations/v3/custom-channels/${channelID}/channel-accounts`, {
       body,
       ...options,
@@ -48,7 +48,7 @@ export class ChannelAccounts extends APIResource {
     channelAccountID: string,
     params: ChannelAccountUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<CustomChannelsAPI.PublicChannelAccount> {
+  ): APIPromise<ConversationsAPI.PublicChannelAccount> {
     const { channelId, ...body } = params;
     return this._client.patch(
       path`/conversations/v3/custom-channels/${channelId}/channel-accounts/${channelAccountID}`,
@@ -70,7 +70,7 @@ export class ChannelAccounts extends APIResource {
   list(
     channelID: string,
     options?: RequestOptions,
-  ): APIPromise<CustomChannelsAPI.CollectionResponseWithTotalPublicChannelAccountForwardPaging> {
+  ): APIPromise<ConversationsAPI.CollectionResponseWithTotalPublicChannelAccountForwardPaging> {
     return this._client.get(path`/conversations/v3/custom-channels/${channelID}/channel-accounts`, options);
   }
 
@@ -92,7 +92,7 @@ export class ChannelAccounts extends APIResource {
     channelAccountID: string,
     params: ChannelAccountGetParams,
     options?: RequestOptions,
-  ): APIPromise<CustomChannelsAPI.PublicChannelAccount> {
+  ): APIPromise<ConversationsAPI.PublicChannelAccount> {
     const { channelId } = params;
     return this._client.get(
       path`/conversations/v3/custom-channels/${channelId}/channel-accounts/${channelAccountID}`,
@@ -108,7 +108,7 @@ export interface ChannelAccountCreateParams {
 
   name: string;
 
-  deliveryIdentifier?: CustomChannelsAPI.PublicDeliveryIdentifier;
+  deliveryIdentifier?: ConversationsAPI.PublicDeliveryIdentifier;
 }
 
 export interface ChannelAccountUpdateParams {

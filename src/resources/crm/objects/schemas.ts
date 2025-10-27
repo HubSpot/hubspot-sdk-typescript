@@ -66,7 +66,7 @@ export class Schemas extends APIResource {
   list(
     query: SchemaListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CollectionResponseObjectSchemaNoPaging> {
+  ): APIPromise<Shared.CollectionResponseObjectSchemaNoPaging> {
     return this._client.get('/crm-object-schemas/v3/schemas', { query, ...options });
   }
 
@@ -125,8 +125,8 @@ export class Schemas extends APIResource {
    *   await client.crm.objects.schemas.createAssociation(
    *     'objectType',
    *     {
-   *       fromObjectTypeId: '2-123456',
-   *       toObjectTypeId: 'contact',
+   *       fromObjectTypeId: 'fromObjectTypeId',
+   *       toObjectTypeId: 'toObjectTypeId',
    *     },
    *   );
    * ```
@@ -158,65 +158,6 @@ export class Schemas extends APIResource {
 }
 
 /**
- * Defines an association between two object types.
- */
-export interface AssociationDefinition {
-  /**
-   * A unique ID for this association.
-   */
-  id: string;
-
-  /**
-   * ID of the primary object type to link from.
-   */
-  fromObjectTypeId: string;
-
-  /**
-   * ID of the target object type to link to.
-   */
-  toObjectTypeId: string;
-
-  /**
-   * When the association was defined.
-   */
-  createdAt?: string;
-
-  /**
-   * A unique name for this association.
-   */
-  name?: string;
-
-  /**
-   * When the association was last updated.
-   */
-  updatedAt?: string;
-}
-
-/**
- * Defines an association between two object types.
- */
-export interface AssociationDefinitionEgg {
-  /**
-   * ID of the primary object type to link from.
-   */
-  fromObjectTypeId: string;
-
-  /**
-   * ID of the target object type to link to.
-   */
-  toObjectTypeId: string;
-
-  /**
-   * A unique name for this association.
-   */
-  name?: string;
-}
-
-export interface CollectionResponseObjectSchemaNoPaging {
-  results: Array<ObjectSchema>;
-}
-
-/**
  * Defines an object schema, including its properties and associations.
  */
 export interface ObjectSchema {
@@ -231,10 +172,7 @@ export interface ObjectSchema {
    */
   associations: Array<EventDefinitionsAPI.AssociationDefinition>;
 
-  /**
-   * Singular and plural labels for the object. Used in CRM display.
-   */
-  labels: ObjectTypeDefinitionLabels;
+  labels: Shared.ObjectTypeDefinitionLabels;
 
   /**
    * A unique name for the schema's object type.
@@ -305,10 +243,7 @@ export interface ObjectSchemaEgg {
    */
   associatedObjects: Array<string>;
 
-  /**
-   * Singular and plural labels for the object. Used in CRM display.
-   */
-  labels: ObjectTypeDefinitionLabels;
+  labels: Shared.ObjectTypeDefinitionLabels;
 
   /**
    * A unique name for this object. For internal use only.
@@ -356,10 +291,7 @@ export interface ObjectTypeDefinition {
    */
   id: string;
 
-  /**
-   * Singular and plural labels for the object. Used in CRM display.
-   */
-  labels: ObjectTypeDefinitionLabels;
+  labels: Shared.ObjectTypeDefinitionLabels;
 
   /**
    * A unique name for this object. For internal use only.
@@ -415,21 +347,6 @@ export interface ObjectTypeDefinition {
 }
 
 /**
- * Singular and plural labels for the object. Used in CRM display.
- */
-export interface ObjectTypeDefinitionLabels {
-  /**
-   * The word for multiple objects. (There’s no way to change this later.)
-   */
-  plural?: string;
-
-  /**
-   * The word for one object. (There’s no way to change this later.)
-   */
-  singular?: string;
-}
-
-/**
  * Defines attributes to update on an object type.
  */
 export interface ObjectTypeDefinitionPatch {
@@ -437,10 +354,7 @@ export interface ObjectTypeDefinitionPatch {
 
   description?: string;
 
-  /**
-   * Singular and plural labels for the object. Used in CRM display.
-   */
-  labels?: ObjectTypeDefinitionLabels;
+  labels?: Shared.ObjectTypeDefinitionLabels;
 
   /**
    * The name of the primary property for this object. This will be displayed as
@@ -578,10 +492,7 @@ export interface SchemaCreateParams {
    */
   associatedObjects: Array<string>;
 
-  /**
-   * Singular and plural labels for the object. Used in CRM display.
-   */
-  labels: ObjectTypeDefinitionLabels;
+  labels: Shared.ObjectTypeDefinitionLabels;
 
   /**
    * A unique name for this object. For internal use only.
@@ -625,10 +536,7 @@ export interface SchemaUpdateParams {
 
   description?: string;
 
-  /**
-   * Singular and plural labels for the object. Used in CRM display.
-   */
-  labels?: ObjectTypeDefinitionLabels;
+  labels?: Shared.ObjectTypeDefinitionLabels;
 
   /**
    * The name of the primary property for this object. This will be displayed as
@@ -679,31 +587,18 @@ export interface SchemaArchiveAssociationParams {
 }
 
 export interface SchemaCreateAssociationParams {
-  /**
-   * ID of the primary object type to link from.
-   */
   fromObjectTypeId: string;
 
-  /**
-   * ID of the target object type to link to.
-   */
   toObjectTypeId: string;
 
-  /**
-   * A unique name for this association.
-   */
   name?: string;
 }
 
 export declare namespace Schemas {
   export {
-    type AssociationDefinition as AssociationDefinition,
-    type AssociationDefinitionEgg as AssociationDefinitionEgg,
-    type CollectionResponseObjectSchemaNoPaging as CollectionResponseObjectSchemaNoPaging,
     type ObjectSchema as ObjectSchema,
     type ObjectSchemaEgg as ObjectSchemaEgg,
     type ObjectTypeDefinition as ObjectTypeDefinition,
-    type ObjectTypeDefinitionLabels as ObjectTypeDefinitionLabels,
     type ObjectTypeDefinitionPatch as ObjectTypeDefinitionPatch,
     type ObjectTypePropertyCreate as ObjectTypePropertyCreate,
     type SchemaCreateParams as SchemaCreateParams,

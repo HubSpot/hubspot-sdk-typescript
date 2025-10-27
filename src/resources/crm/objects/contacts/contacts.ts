@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
-import * as ObjectsAPI from '../objects';
-import { SimplePublicObjectWithAssociationsPage } from '../objects';
+import * as CRMAPI from '../../crm';
+import { SimplePublicObjectWithAssociationsPage } from '../../crm';
 import * as BatchAPI from './batch';
 import {
   Batch,
@@ -39,7 +39,7 @@ export class Contacts extends APIResource {
   create(
     body: ContactCreateParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CreatedResponseSimplePublicObject> {
+  ): APIPromise<CRMAPI.CreatedResponseSimplePublicObject> {
     return this._client.post('/crm/v3/objects/contacts', { body, ...options });
   }
 
@@ -72,7 +72,7 @@ export class Contacts extends APIResource {
     contactID: string,
     body: ContactUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.SimplePublicObject> {
+  ): APIPromise<CRMAPI.SimplePublicObject> {
     return this._client.patch(path`/crm/v3/objects/contacts/${contactID}`, { body, ...options });
   }
 
@@ -91,10 +91,10 @@ export class Contacts extends APIResource {
   list(
     query: ContactListParams | null | undefined = {},
     options?: RequestOptions,
-  ): PagePromise<SimplePublicObjectWithAssociationsPage, ObjectsAPI.SimplePublicObjectWithAssociations> {
+  ): PagePromise<SimplePublicObjectWithAssociationsPage, CRMAPI.SimplePublicObjectWithAssociations> {
     return this._client.getAPIList(
       '/crm/v3/objects/contacts',
-      Page<ObjectsAPI.SimplePublicObjectWithAssociations>,
+      Page<CRMAPI.SimplePublicObjectWithAssociations>,
       { query, ...options },
     );
   }
@@ -155,7 +155,7 @@ export class Contacts extends APIResource {
     contactID: string,
     query: ContactGetParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.SimplePublicObjectWithAssociations> {
+  ): APIPromise<CRMAPI.SimplePublicObjectWithAssociations> {
     return this._client.get(path`/crm/v3/objects/contacts/${contactID}`, { query, ...options });
   }
 
@@ -172,7 +172,7 @@ export class Contacts extends APIResource {
    *   });
    * ```
    */
-  merge(body: ContactMergeParams, options?: RequestOptions): APIPromise<ObjectsAPI.SimplePublicObject> {
+  merge(body: ContactMergeParams, options?: RequestOptions): APIPromise<CRMAPI.SimplePublicObject> {
     return this._client.post('/crm/v3/objects/contacts/merge', { body, ...options });
   }
 
@@ -190,23 +190,23 @@ export class Contacts extends APIResource {
   search(
     body: ContactSearchParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CollectionResponseWithTotalSimplePublicObject> {
+  ): APIPromise<CRMAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/v3/objects/contacts/search', { body, ...options });
   }
 }
 
 export interface ContactCreateParams {
   /**
-   * The company property values to set.
+   * Key-value pairs for setting properties for the new object.
    */
   properties: { [key: string]: string };
 
-  associations?: Array<ObjectsAPI.PublicAssociationsForObject>;
+  associations?: Array<CRMAPI.PublicAssociationsForObject>;
 }
 
 export interface ContactUpdateParams {
   /**
-   * The company property values to set.
+   * Key value pairs representing the properties of the object.
    */
   properties: { [key: string]: string };
 }
@@ -240,14 +240,10 @@ export interface ContactListParams extends PageParams {
 }
 
 export interface ContactGdprDeleteParams {
-  /**
-   * The ID of the company to delete.
-   */
   objectId: string;
 
   /**
-   * The name of a unique property, when identifying records by property instead of
-   * ID.
+   * The name of a property whose values are unique for this object
    */
   idProperty?: string;
 }
@@ -280,14 +276,8 @@ export interface ContactGetParams {
 }
 
 export interface ContactMergeParams {
-  /**
-   * The ID of the company to merge into the primary.
-   */
   objectIdToMerge: string;
 
-  /**
-   * The ID of the primary company, which the other will merge into.
-   */
   primaryObjectId: string;
 }
 
@@ -300,7 +290,7 @@ export interface ContactSearchParams {
   /**
    * Up to 6 groups of filters defining additional query criteria.
    */
-  filterGroups?: Array<ObjectsAPI.FilterGroup>;
+  filterGroups?: Array<CRMAPI.FilterGroup>;
 
   /**
    * The maximum results to return, up to 200 objects.

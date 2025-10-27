@@ -50,14 +50,14 @@ describe('resource schemas', () => {
           options: [
             {
               displayOrder: 1,
-              hidden: false,
+              hidden: true,
               label: 'Option A',
               value: 'A',
               description: 'Choice number one',
             },
             {
               displayOrder: 2,
-              hidden: false,
+              hidden: true,
               label: 'Option B',
               value: 'B',
               description: 'Choice number two',
@@ -158,8 +158,8 @@ describe('resource schemas', () => {
   // Prism tests are disabled
   test.skip('createAssociation: only required params', async () => {
     const responsePromise = client.crm.objects.schemas.createAssociation('objectType', {
-      fromObjectTypeId: '2-123456',
-      toObjectTypeId: 'contact',
+      fromObjectTypeId: 'fromObjectTypeId',
+      toObjectTypeId: 'toObjectTypeId',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -173,9 +173,9 @@ describe('resource schemas', () => {
   // Prism tests are disabled
   test.skip('createAssociation: required and optional params', async () => {
     const response = await client.crm.objects.schemas.createAssociation('objectType', {
-      fromObjectTypeId: '2-123456',
-      toObjectTypeId: 'contact',
-      name: 'my_object_to_contact',
+      fromObjectTypeId: 'fromObjectTypeId',
+      toObjectTypeId: 'toObjectTypeId',
+      name: 'name',
     });
   });
 

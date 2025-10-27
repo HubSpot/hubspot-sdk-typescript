@@ -11,6 +11,29 @@ import { path } from '../../../internal/utils/path';
 export class Authors extends APIResource {
   /**
    * Create a new Blog Author.
+   *
+   * @example
+   * ```ts
+   * const blogAuthor = await client.cms.blogs.authors.create({
+   *   id: 'id',
+   *   avatar: 'avatar',
+   *   bio: 'bio',
+   *   created: '2019-12-27T18:11:19.117Z',
+   *   deletedAt: '2019-12-27T18:11:19.117Z',
+   *   displayName: 'displayName',
+   *   email: 'email',
+   *   facebook: 'facebook',
+   *   fullName: 'fullName',
+   *   language: 'af',
+   *   linkedin: 'linkedin',
+   *   name: 'name',
+   *   slug: 'slug',
+   *   translatedFromId: 0,
+   *   twitter: 'twitter',
+   *   updated: '2019-12-27T18:11:19.117Z',
+   *   website: 'website',
+   * });
+   * ```
    */
   create(body: AuthorCreateParams, options?: RequestOptions): APIPromise<BlogAuthor> {
     return this._client.post('/cms/v3/blogs/authors', { body, ...options });
@@ -20,6 +43,32 @@ export class Authors extends APIResource {
    * Sparse updates a single Blog Author object identified by the id in the path. All
    * the column values need not be specified. Only the that need to be modified can
    * be specified.
+   *
+   * @example
+   * ```ts
+   * const blogAuthor = await client.cms.blogs.authors.update(
+   *   'objectId',
+   *   {
+   *     id: 'id',
+   *     avatar: 'avatar',
+   *     bio: 'bio',
+   *     created: '2019-12-27T18:11:19.117Z',
+   *     deletedAt: '2019-12-27T18:11:19.117Z',
+   *     displayName: 'displayName',
+   *     email: 'email',
+   *     facebook: 'facebook',
+   *     fullName: 'fullName',
+   *     language: 'af',
+   *     linkedin: 'linkedin',
+   *     name: 'name',
+   *     slug: 'slug',
+   *     translatedFromId: 0,
+   *     twitter: 'twitter',
+   *     updated: '2019-12-27T18:11:19.117Z',
+   *     website: 'website',
+   *   },
+   * );
+   * ```
    */
   update(objectID: string, params: AuthorUpdateParams, options?: RequestOptions): APIPromise<BlogAuthor> {
     const { archived, ...body } = params;
@@ -34,6 +83,14 @@ export class Authors extends APIResource {
    * Get the list of blog authors. Supports paging and filtering. This method would
    * be useful for an integration that examined these models and used an external
    * service to suggest edits.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const blogAuthor of client.cms.blogs.authors.list()) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     query: AuthorListParams | null | undefined = {},
@@ -44,6 +101,11 @@ export class Authors extends APIResource {
 
   /**
    * Delete the Blog Author object identified by the id in the path.
+   *
+   * @example
+   * ```ts
+   * await client.cms.blogs.authors.delete('objectId');
+   * ```
    */
   delete(
     objectID: string,
@@ -60,6 +122,15 @@ export class Authors extends APIResource {
 
   /**
    * Attach a Blog Author to a multi-language group.
+   *
+   * @example
+   * ```ts
+   * await client.cms.blogs.authors.attachToLangGroup({
+   *   id: 'id',
+   *   language: 'language',
+   *   primaryId: 'primaryId',
+   * });
+   * ```
    */
   attachToLangGroup(body: AuthorAttachToLangGroupParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/cms/v3/blogs/authors/multi-language/attach-to-lang-group', {
@@ -71,6 +142,34 @@ export class Authors extends APIResource {
 
   /**
    * Create the Blog Author objects detailed in the request body.
+   *
+   * @example
+   * ```ts
+   * const batchResponseBlogAuthor =
+   *   await client.cms.blogs.authors.createBatch({
+   *     inputs: [
+   *       {
+   *         id: 'id',
+   *         avatar: 'avatar',
+   *         bio: 'bio',
+   *         created: '2019-12-27T18:11:19.117Z',
+   *         deletedAt: '2019-12-27T18:11:19.117Z',
+   *         displayName: 'displayName',
+   *         email: 'email',
+   *         facebook: 'facebook',
+   *         fullName: 'fullName',
+   *         language: 'af',
+   *         linkedin: 'linkedin',
+   *         name: 'name',
+   *         slug: 'slug',
+   *         translatedFromId: 0,
+   *         twitter: 'twitter',
+   *         updated: '2019-12-27T18:11:19.117Z',
+   *         website: 'website',
+   *       },
+   *     ],
+   *   });
+   * ```
    */
   createBatch(body: AuthorCreateBatchParams, options?: RequestOptions): APIPromise<BatchResponseBlogAuthor> {
     return this._client.post('/cms/v3/blogs/authors/batch/create', { body, ...options });
@@ -78,6 +177,33 @@ export class Authors extends APIResource {
 
   /**
    * Create a new language variation from an existing Blog Author.
+   *
+   * @example
+   * ```ts
+   * const blogAuthor =
+   *   await client.cms.blogs.authors.createLanguageVariation({
+   *     id: 'id',
+   *     blogAuthor: {
+   *       id: 'id',
+   *       avatar: 'avatar',
+   *       bio: 'bio',
+   *       created: '2019-12-27T18:11:19.117Z',
+   *       deletedAt: '2019-12-27T18:11:19.117Z',
+   *       displayName: 'displayName',
+   *       email: 'email',
+   *       facebook: 'facebook',
+   *       fullName: 'fullName',
+   *       language: 'af',
+   *       linkedin: 'linkedin',
+   *       name: 'name',
+   *       slug: 'slug',
+   *       translatedFromId: 0,
+   *       twitter: 'twitter',
+   *       updated: '2019-12-27T18:11:19.117Z',
+   *       website: 'website',
+   *     },
+   *   });
+   * ```
    */
   createLanguageVariation(
     body: AuthorCreateLanguageVariationParams,
@@ -91,6 +217,13 @@ export class Authors extends APIResource {
 
   /**
    * Delete the Blog Author objects identified in the request body.
+   *
+   * @example
+   * ```ts
+   * await client.cms.blogs.authors.deleteBatch({
+   *   inputs: ['string'],
+   * });
+   * ```
    */
   deleteBatch(body: AuthorDeleteBatchParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/cms/v3/blogs/authors/batch/archive', {
@@ -102,6 +235,13 @@ export class Authors extends APIResource {
 
   /**
    * Detach a Blog Author from a multi-language group.
+   *
+   * @example
+   * ```ts
+   * await client.cms.blogs.authors.detachFromLangGroup({
+   *   id: 'id',
+   * });
+   * ```
    */
   detachFromLangGroup(body: AuthorDetachFromLangGroupParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/cms/v3/blogs/authors/multi-language/detach-from-lang-group', {
@@ -113,6 +253,13 @@ export class Authors extends APIResource {
 
   /**
    * Retrieve the Blog Author object identified by the id in the path.
+   *
+   * @example
+   * ```ts
+   * const blogAuthor = await client.cms.blogs.authors.get(
+   *   'objectId',
+   * );
+   * ```
    */
   get(
     objectID: string,
@@ -124,6 +271,14 @@ export class Authors extends APIResource {
 
   /**
    * Retrieve the Blog Author objects identified in the request body.
+   *
+   * @example
+   * ```ts
+   * const batchResponseBlogAuthor =
+   *   await client.cms.blogs.authors.getBatch({
+   *     inputs: ['string'],
+   *   });
+   * ```
    */
   getBatch(params: AuthorGetBatchParams, options?: RequestOptions): APIPromise<BatchResponseBlogAuthor> {
     const { archived, ...body } = params;
@@ -132,6 +287,13 @@ export class Authors extends APIResource {
 
   /**
    * Set a Blog Author as the primary language of a multi-language group.
+   *
+   * @example
+   * ```ts
+   * await client.cms.blogs.authors.setNewLangPrimary({
+   *   id: 'id',
+   * });
+   * ```
    */
   setNewLangPrimary(body: AuthorSetNewLangPrimaryParams, options?: RequestOptions): APIPromise<void> {
     return this._client.put('/cms/v3/blogs/authors/multi-language/set-new-lang-primary', {
@@ -143,6 +305,14 @@ export class Authors extends APIResource {
 
   /**
    * Update the Blog Author objects identified in the request body.
+   *
+   * @example
+   * ```ts
+   * const batchResponseBlogAuthor =
+   *   await client.cms.blogs.authors.updateBatch({
+   *     inputs: [{}],
+   *   });
+   * ```
    */
   updateBatch(
     params: AuthorUpdateBatchParams,
@@ -154,6 +324,14 @@ export class Authors extends APIResource {
 
   /**
    * Explicitly set new languages for each Blog Author in a multi-language group.
+   *
+   * @example
+   * ```ts
+   * await client.cms.blogs.authors.updateLanguages({
+   *   languages: { foo: 'string' },
+   *   primaryId: 'primaryId',
+   * });
+   * ```
    */
   updateLanguages(body: AuthorUpdateLanguagesParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/cms/v3/blogs/authors/multi-language/update-languages', {

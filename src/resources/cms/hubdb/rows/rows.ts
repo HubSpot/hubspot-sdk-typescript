@@ -28,6 +28,14 @@ export class Rows extends APIResource {
    * Add a new row to a HubDB table. New rows will be added to the draft version of
    * the table. Use the `/publish` endpoint to push these changes to published
    * version.
+   *
+   * @example
+   * ```ts
+   * const hubDBTableRowV3 = await client.cms.hubdb.rows.create(
+   *   'tableIdOrName',
+   *   { values: { foo: {} } },
+   * );
+   * ```
    */
   create(
     tableIDOrName: string,
@@ -48,6 +56,16 @@ export class Rows extends APIResource {
    * for detailed filtering and sorting options. **Note:** This endpoint can be
    * accessed without any authentication, if the table is set to be allowed for
    * public access.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const hubDBTableRowV3Wrapper of client.cms.hubdb.rows.list(
+   *   'tableIdOrName',
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     tableIDOrName: string,
@@ -63,6 +81,14 @@ export class Rows extends APIResource {
 
   /**
    * Clones a single row in the draft version of a table.
+   *
+   * @example
+   * ```ts
+   * const hubDBTableRowV3 =
+   *   await client.cms.hubdb.rows.cloneDraft('321669910225', {
+   *     tableIdOrName: 'tableIdOrName',
+   *   });
+   * ```
    */
   cloneDraft(
     rowID: string,
@@ -78,6 +104,13 @@ export class Rows extends APIResource {
 
   /**
    * Permanently deletes a row from a table's draft version.
+   *
+   * @example
+   * ```ts
+   * await client.cms.hubdb.rows.deleteDraft('321669910225', {
+   *   tableIdOrName: 'tableIdOrName',
+   * });
+   * ```
    */
   deleteDraft(rowID: string, params: RowDeleteDraftParams, options?: RequestOptions): APIPromise<void> {
     const { tableIdOrName } = params;
@@ -91,6 +124,14 @@ export class Rows extends APIResource {
    * Get a single row by ID from the published version of a table. **Note:** This
    * endpoint can be accessed without any authentication, if the table is set to be
    * allowed for public access.
+   *
+   * @example
+   * ```ts
+   * const hubDBTableRowV3 = await client.cms.hubdb.rows.get(
+   *   '321669910225',
+   *   { tableIdOrName: 'tableIdOrName' },
+   * );
+   * ```
    */
   get(rowID: string, params: RowGetParams, options?: RequestOptions): APIPromise<HubdbAPI.HubDBTableRowV3> {
     const { tableIdOrName, ...query } = params;
@@ -99,6 +140,14 @@ export class Rows extends APIResource {
 
   /**
    * Get a single row by ID from a table's draft version.
+   *
+   * @example
+   * ```ts
+   * const hubDBTableRowV3 =
+   *   await client.cms.hubdb.rows.getDraft('321669910225', {
+   *     tableIdOrName: 'tableIdOrName',
+   *   });
+   * ```
    */
   getDraft(
     rowID: string,
@@ -121,6 +170,12 @@ export class Rows extends APIResource {
    * to the
    * [overview section](https://developers.hubspot.com/docs/api/cms/hubdb#filtering-and-sorting-table-rows)
    * for detailed filtering and sorting options.
+   *
+   * @example
+   * ```ts
+   * const unifiedCollectionResponseWithTotalBaseHubDBTableRowV3 =
+   *   await client.cms.hubdb.rows.listDraft('tableIdOrName');
+   * ```
    */
   listDraft(
     tableIDOrName: string,
@@ -135,6 +190,15 @@ export class Rows extends APIResource {
    * specified. If a column has a value in the target table and this request doesn't
    * define that value, it will be deleted. See the "Create a row" endpoint for
    * instructions on how to format the JSON row definitions.
+   *
+   * @example
+   * ```ts
+   * const hubDBTableRowV3 =
+   *   await client.cms.hubdb.rows.replaceDraft('321669910225', {
+   *     tableIdOrName: 'tableIdOrName',
+   *     values: { foo: {} },
+   *   });
+   * ```
    */
   replaceDraft(
     rowID: string,
@@ -153,6 +217,15 @@ export class Rows extends APIResource {
    * need not be specified. Only the columns or fields that needs to be modified can
    * be specified. See the "Create a row" endpoint for instructions on how to format
    * the JSON row definitions.
+   *
+   * @example
+   * ```ts
+   * const hubDBTableRowV3 =
+   *   await client.cms.hubdb.rows.updateDraft('321669910225', {
+   *     tableIdOrName: 'tableIdOrName',
+   *     values: { foo: {} },
+   *   });
+   * ```
    */
   updateDraft(
     rowID: string,

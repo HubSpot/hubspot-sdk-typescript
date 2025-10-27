@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
-import * as ObjectsAPI from '../objects';
+import * as CRMAPI from '../../crm';
 import { APIPromise } from '../../../../core/api-promise';
 import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
@@ -21,7 +21,7 @@ export class Batch extends APIResource {
   create(
     body: BatchCreateParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.BatchResponseSimplePublicObject> {
+  ): APIPromise<CRMAPI.BatchResponseSimplePublicObject> {
     return this._client.post('/crm/v3/objects/0-3/batch/create', { body, ...options });
   }
 
@@ -39,7 +39,7 @@ export class Batch extends APIResource {
   update(
     body: BatchUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.BatchResponseSimplePublicObject> {
+  ): APIPromise<CRMAPI.BatchResponseSimplePublicObject> {
     return this._client.post('/crm/v3/objects/0-3/batch/update', { body, ...options });
   }
 
@@ -78,7 +78,7 @@ export class Batch extends APIResource {
   read(
     params: BatchReadParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.BatchResponseSimplePublicObject> {
+  ): APIPromise<CRMAPI.BatchResponseSimplePublicObject> {
     const { archived, ...body } = params;
     return this._client.post('/crm/v3/objects/0-3/batch/read', { query: { archived }, body, ...options });
   }
@@ -99,28 +99,28 @@ export class Batch extends APIResource {
   upsert(
     body: BatchUpsertParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.BatchResponseSimplePublicUpsertObject> {
+  ): APIPromise<CRMAPI.BatchResponseSimplePublicUpsertObject> {
     return this._client.post('/crm/v3/objects/0-3/batch/upsert', { body, ...options });
   }
 }
 
 export interface BatchCreateParams {
-  inputs: Array<ObjectsAPI.SimplePublicObjectBatchInputForCreate>;
+  inputs: Array<CRMAPI.SimplePublicObjectBatchInputForCreate>;
 }
 
 export interface BatchUpdateParams {
-  inputs: Array<ObjectsAPI.SimplePublicObjectBatchInput>;
+  inputs: Array<CRMAPI.SimplePublicObjectBatchInput>;
 }
 
 export interface BatchDeleteParams {
-  inputs: Array<ObjectsAPI.SimplePublicObjectID>;
+  inputs: Array<CRMAPI.SimplePublicObjectID>;
 }
 
 export interface BatchReadParams {
   /**
    * Body param:
    */
-  inputs: Array<ObjectsAPI.SimplePublicObjectID>;
+  inputs: Array<CRMAPI.SimplePublicObjectID>;
 
   /**
    * Body param: Key-value pairs for setting properties for the new object.
@@ -146,7 +146,7 @@ export interface BatchReadParams {
 }
 
 export interface BatchUpsertParams {
-  inputs: Array<ObjectsAPI.SimplePublicObjectBatchInputUpsert>;
+  inputs: Array<CRMAPI.SimplePublicObjectBatchInputUpsert>;
 }
 
 export declare namespace Batch {

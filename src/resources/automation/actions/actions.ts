@@ -289,43 +289,6 @@ export interface InputFieldDefinition {
   >;
 }
 
-/**
- * A HubSpot property option
- */
-export interface Option {
-  /**
-   * A description of the option.
-   */
-  description: string;
-
-  /**
-   * The position of the item relative to others in the list.
-   */
-  displayOrder: number;
-
-  doubleData: number;
-
-  /**
-   * Whether the option is displayed in HubSpot's UI.
-   */
-  hidden: boolean;
-
-  /**
-   * A user-friendly label that identifies the option.
-   */
-  label: string;
-
-  /**
-   * Whether the option is read-only.
-   */
-  readOnly: boolean;
-
-  /**
-   * The actual value of the option.
-   */
-  value: string;
-}
-
 export interface OutputFieldDefinition {
   typeDefinition: FieldTypeDefinition;
 }
@@ -489,7 +452,6 @@ export declare namespace Actions {
     type CollectionResponsePublicActionRevisionForwardPaging as CollectionResponsePublicActionRevisionForwardPaging,
     type FieldTypeDefinition as FieldTypeDefinition,
     type InputFieldDefinition as InputFieldDefinition,
-    type Option as Option,
     type OutputFieldDefinition as OutputFieldDefinition,
     type PublicActionDefinition as PublicActionDefinition,
     type PublicActionDefinitionEgg as PublicActionDefinitionEgg,

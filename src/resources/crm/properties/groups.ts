@@ -15,8 +15,8 @@ export class Groups extends APIResource {
    * ```ts
    * const createdResponsePropertyGroup =
    *   await client.crm.properties.groups.create('objectType', {
-   *     label: 'My Property Group',
-   *     name: 'mypropertygroup',
+   *     label: 'label',
+   *     name: 'name',
    *   });
    * ```
    */
@@ -109,22 +109,10 @@ export class Groups extends APIResource {
 }
 
 export interface GroupCreateParams {
-  /**
-   * A human-readable label that will be shown in HubSpot.
-   */
   label: string;
 
-  /**
-   * The internal property group name, which must be used when referencing the
-   * property group via the API.
-   */
   name: string;
 
-  /**
-   * Property groups are displayed in order starting with the lowest positive integer
-   * value. Values of -1 will cause the property group to be displayed after any
-   * positive values.
-   */
   displayOrder?: number;
 }
 
@@ -135,14 +123,12 @@ export interface GroupUpdateParams {
   objectType: string;
 
   /**
-   * Body param: Property groups are displayed in order starting with the lowest
-   * positive integer value. Values of -1 will cause the property group to be
-   * displayed after any positive values.
+   * Body param:
    */
   displayOrder?: number;
 
   /**
-   * Body param: A human-readable label that will be shown in HubSpot.
+   * Body param:
    */
   label?: string;
 }

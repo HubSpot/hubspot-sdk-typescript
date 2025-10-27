@@ -10,6 +10,12 @@ export class SiteSearch extends APIResource {
    * For a given account and document ID (page ID, blog post ID, HubDB row ID, etc.),
    * return all indexed data for that document. This is useful when debugging why a
    * particular document is not returned from a custom search.
+   *
+   * @example
+   * ```ts
+   * const indexedData =
+   *   await client.cms.siteSearch.getIndexedData('contentId');
+   * ```
    */
   getIndexedData(
     contentID: string,
@@ -22,6 +28,12 @@ export class SiteSearch extends APIResource {
   /**
    * Returns any website content matching the given search criteria for a given
    * HubSpot account. Searches can be filtered by content type, domain, or URL path.
+   *
+   * @example
+   * ```ts
+   * const publicSearchResults =
+   *   await client.cms.siteSearch.search();
+   * ```
    */
   search(
     query: SiteSearchSearchParams | null | undefined = {},

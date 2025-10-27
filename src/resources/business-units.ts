@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as CampaignsAPI from './marketing/campaigns/campaigns';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
@@ -25,7 +26,7 @@ export interface CollectionResponsePublicBusinessUnitNoPaging {
   /**
    * The collection of Business Units
    */
-  results: Array<PublicBusinessUnit>;
+  results: Array<CampaignsAPI.PublicBusinessUnit>;
 }
 
 /**

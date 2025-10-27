@@ -24,7 +24,7 @@ import {
   FolderUpdateByIDParams,
   Folders,
 } from './folders';
-import * as EmailsAPI from '../marketing/emails';
+import * as EmailsAPI from '../marketing/emails/emails';
 import { Page } from '../../core/pagination';
 
 export class Files extends APIResource {

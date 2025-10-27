@@ -2,8 +2,8 @@
 
 import { APIResource } from '../../core/resource';
 import * as Shared from '../shared';
-import * as EmailsAPI from '../marketing/emails';
-import * as MarketingEventsAPI from '../marketing/marketing-events/marketing-events';
+import * as MarketingEventsAPI from '../marketing/marketing-events';
+import * as EmailsAPI from '../marketing/emails/emails';
 import { APIPromise } from '../../core/api-promise';
 import { Page, type PageParams, PagePromise } from '../../core/pagination';
 import { type Uploadable } from '../../core/uploads';

@@ -13,6 +13,73 @@ import { path } from '../../../internal/utils/path';
 export class SitePages extends APIResource {
   /**
    * Create a new Site Page
+   *
+   * @example
+   * ```ts
+   * await client.cms.pages.sitePages.create({
+   *   id: 'id',
+   *   abStatus: 'master',
+   *   abTestId: 'abTestId',
+   *   archivedAt: '2019-12-27T18:11:19.117Z',
+   *   archivedInDashboard: true,
+   *   attachedStylesheets: [{ foo: {} }],
+   *   authorName: 'authorName',
+   *   campaign: 'campaign',
+   *   categoryId: 0,
+   *   contentGroupId: 'contentGroupId',
+   *   contentTypeCategory: '0',
+   *   created: '2019-12-27T18:11:19.117Z',
+   *   createdById: 'createdById',
+   *   currentlyPublished: true,
+   *   currentState: 'AUTOMATED',
+   *   domain: 'domain',
+   *   dynamicPageDataSourceId: 'dynamicPageDataSourceId',
+   *   dynamicPageDataSourceType: 0,
+   *   dynamicPageHubDbTableId: 'dynamicPageHubDbTableId',
+   *   enableDomainStylesheets: true,
+   *   enableLayoutStylesheets: true,
+   *   featuredImage: 'featuredImage',
+   *   featuredImageAltText: 'featuredImageAltText',
+   *   folderId: 'folderId',
+   *   footerHtml: 'footerHtml',
+   *   headHtml: 'headHtml',
+   *   htmlTitle: 'htmlTitle',
+   *   includeDefaultCustomCss: true,
+   *   language: 'af',
+   *   layoutSections: {
+   *     foo: { ... },
+   *   },
+   *   linkRelCanonicalUrl: 'linkRelCanonicalUrl',
+   *   mabExperimentId: 'mabExperimentId',
+   *   metaDescription: 'metaDescription',
+   *   name: 'name',
+   *   pageExpiryDate: 0,
+   *   pageExpiryEnabled: true,
+   *   pageExpiryRedirectId: 0,
+   *   pageExpiryRedirectUrl: 'pageExpiryRedirectUrl',
+   *   pageRedirected: true,
+   *   password: 'password',
+   *   publicAccessRules: [{}],
+   *   publicAccessRulesEnabled: true,
+   *   publishDate: '2019-12-27T18:11:19.117Z',
+   *   publishImmediately: true,
+   *   slug: 'slug',
+   *   state: 'state',
+   *   subcategory: 'subcategory',
+   *   templatePath: 'templatePath',
+   *   themeSettingsValues: { foo: {} },
+   *   translatedFromId: 'translatedFromId',
+   *   translations: {
+   *     foo: { ... },
+   *   },
+   *   updated: '2019-12-27T18:11:19.117Z',
+   *   updatedById: 'updatedById',
+   *   url: 'url',
+   *   useFeaturedImage: true,
+   *   widgetContainers: { foo: {} },
+   *   widgets: { foo: {} },
+   * });
+   * ```
    */
   create(body: SitePageCreateParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/cms/v3/pages/site-pages', {
@@ -25,6 +92,73 @@ export class SitePages extends APIResource {
   /**
    * Sparse updates a single Site Page object identified by the id in the path. You
    * only need to specify the column values that you are modifying.
+   *
+   * @example
+   * ```ts
+   * const page = await client.cms.pages.sitePages.update('objectId', {
+   *   id: 'id',
+   *   abStatus: 'master',
+   *   abTestId: 'abTestId',
+   *   archivedAt: '2019-12-27T18:11:19.117Z',
+   *   archivedInDashboard: true,
+   *   attachedStylesheets: [{ foo: {} }],
+   *   authorName: 'authorName',
+   *   campaign: 'campaign',
+   *   categoryId: 0,
+   *   contentGroupId: 'contentGroupId',
+   *   contentTypeCategory: '0',
+   *   created: '2019-12-27T18:11:19.117Z',
+   *   createdById: 'createdById',
+   *   currentlyPublished: true,
+   *   currentState: 'AUTOMATED',
+   *   domain: 'domain',
+   *   dynamicPageDataSourceId: 'dynamicPageDataSourceId',
+   *   dynamicPageDataSourceType: 0,
+   *   dynamicPageHubDbTableId: 'dynamicPageHubDbTableId',
+   *   enableDomainStylesheets: true,
+   *   enableLayoutStylesheets: true,
+   *   featuredImage: 'featuredImage',
+   *   featuredImageAltText: 'featuredImageAltText',
+   *   folderId: 'folderId',
+   *   footerHtml: 'footerHtml',
+   *   headHtml: 'headHtml',
+   *   htmlTitle: 'htmlTitle',
+   *   includeDefaultCustomCss: true,
+   *   language: 'af',
+   *   layoutSections: {
+   *     foo: { ... },
+   *   },
+   *   linkRelCanonicalUrl: 'linkRelCanonicalUrl',
+   *   mabExperimentId: 'mabExperimentId',
+   *   metaDescription: 'metaDescription',
+   *   name: 'name',
+   *   pageExpiryDate: 0,
+   *   pageExpiryEnabled: true,
+   *   pageExpiryRedirectId: 0,
+   *   pageExpiryRedirectUrl: 'pageExpiryRedirectUrl',
+   *   pageRedirected: true,
+   *   password: 'password',
+   *   publicAccessRules: [{}],
+   *   publicAccessRulesEnabled: true,
+   *   publishDate: '2019-12-27T18:11:19.117Z',
+   *   publishImmediately: true,
+   *   slug: 'slug',
+   *   state: 'state',
+   *   subcategory: 'subcategory',
+   *   templatePath: 'templatePath',
+   *   themeSettingsValues: { foo: {} },
+   *   translatedFromId: 'translatedFromId',
+   *   translations: {
+   *     foo: { ... },
+   *   },
+   *   updated: '2019-12-27T18:11:19.117Z',
+   *   updatedById: 'updatedById',
+   *   url: 'url',
+   *   useFeaturedImage: true,
+   *   widgetContainers: { foo: {} },
+   *   widgets: { foo: {} },
+   * });
+   * ```
    */
   update(
     objectID: string,
@@ -43,6 +177,14 @@ export class SitePages extends APIResource {
    * Get the list of site pages. Supports paging and filtering. This method would be
    * useful for an integration that examined these models and used an external
    * service to suggest edits.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const page of client.cms.pages.sitePages.list()) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     query: SitePageListParams | null | undefined = {},
@@ -53,6 +195,11 @@ export class SitePages extends APIResource {
 
   /**
    * Delete the Site Page object identified by the id in the path.
+   *
+   * @example
+   * ```ts
+   * await client.cms.pages.sitePages.delete('objectId');
+   * ```
    */
   delete(
     objectID: string,
@@ -69,6 +216,15 @@ export class SitePages extends APIResource {
 
   /**
    * Attach a site page to a multi-language group.
+   *
+   * @example
+   * ```ts
+   * await client.cms.pages.sitePages.attachToLangGroup({
+   *   id: 'id',
+   *   language: 'language',
+   *   primaryId: 'primaryId',
+   * });
+   * ```
    */
   attachToLangGroup(body: SitePageAttachToLangGroupParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/cms/v3/pages/site-pages/multi-language/attach-to-lang-group', {
@@ -80,6 +236,13 @@ export class SitePages extends APIResource {
 
   /**
    * Clone a Site Page
+   *
+   * @example
+   * ```ts
+   * const page = await client.cms.pages.sitePages.clone({
+   *   id: 'id',
+   * });
+   * ```
    */
   clone(body: SitePageCloneParams, options?: RequestOptions): APIPromise<PagesAPI.Page> {
     return this._client.post('/cms/v3/pages/site-pages/clone', { body, ...options });
@@ -88,6 +251,15 @@ export class SitePages extends APIResource {
   /**
    * Create a new A/B test variation based on the information provided in the request
    * body.
+   *
+   * @example
+   * ```ts
+   * const page =
+   *   await client.cms.pages.sitePages.createAbTestVariation({
+   *     contentId: 'contentId',
+   *     variationName: 'variationName',
+   *   });
+   * ```
    */
   createAbTestVariation(
     body: SitePageCreateAbTestVariationParams,
@@ -98,6 +270,75 @@ export class SitePages extends APIResource {
 
   /**
    * Create the Site Page objects detailed in the request body.
+   *
+   * @example
+   * ```ts
+   * const batchResponsePage = await client.cms.pages.sitePages.createBatch({
+   *   inputs: [
+   *     {
+   *       id: 'id',
+   *       abStatus: 'master',
+   *       abTestId: 'abTestId',
+   *       archivedAt: '2019-12-27T18:11:19.117Z',
+   *       archivedInDashboard: true,
+   *       attachedStylesheets: [
+   *         { ... },
+   *       ],
+   *       authorName: 'authorName',
+   *       campaign: 'campaign',
+   *       categoryId: 0,
+   *       contentGroupId: 'contentGroupId',
+   *       contentTypeCategory: '0',
+   *       created: '2019-12-27T18:11:19.117Z',
+   *       createdById: 'createdById',
+   *       currentlyPublished: true,
+   *       currentState: 'AUTOMATED',
+   *       domain: 'domain',
+   *       dynamicPageDataSourceId: 'dynamicPageDataSourceId',
+   *       dynamicPageDataSourceType: 0,
+   *       dynamicPageHubDbTableId: 'dynamicPageHubDbTableId',
+   *       enableDomainStylesheets: true,
+   *       enableLayoutStylesheets: true,
+   *       featuredImage: 'featuredImage',
+   *       featuredImageAltText: 'featuredImageAltText',
+   *       folderId: 'folderId',
+   *       footerHtml: 'footerHtml',
+   *       headHtml: 'headHtml',
+   *       htmlTitle: 'htmlTitle',
+   *       includeDefaultCustomCss: true,
+   *       language: 'af',
+   *       layoutSections: { ... },
+   *       linkRelCanonicalUrl: 'linkRelCanonicalUrl',
+   *       mabExperimentId: 'mabExperimentId',
+   *       metaDescription: 'metaDescription',
+   *       name: 'name',
+   *       pageExpiryDate: 0,
+   *       pageExpiryEnabled: true,
+   *       pageExpiryRedirectId: 0,
+   *       pageExpiryRedirectUrl: 'pageExpiryRedirectUrl',
+   *       pageRedirected: true,
+   *       password: 'password',
+   *       publicAccessRules: [{}],
+   *       publicAccessRulesEnabled: true,
+   *       publishDate: '2019-12-27T18:11:19.117Z',
+   *       publishImmediately: true,
+   *       slug: 'slug',
+   *       state: 'state',
+   *       subcategory: 'subcategory',
+   *       templatePath: 'templatePath',
+   *       themeSettingsValues: { ... },
+   *       translatedFromId: 'translatedFromId',
+   *       translations: { ... },
+   *       updated: '2019-12-27T18:11:19.117Z',
+   *       updatedById: 'updatedById',
+   *       url: 'url',
+   *       useFeaturedImage: true,
+   *       widgetContainers: { ... },
+   *       widgets: { ... },
+   *     },
+   *   ],
+   * });
+   * ```
    */
   createBatch(
     body: SitePageCreateBatchParams,
@@ -108,6 +349,14 @@ export class SitePages extends APIResource {
 
   /**
    * Create a new language variation from an existing site page
+   *
+   * @example
+   * ```ts
+   * const page =
+   *   await client.cms.pages.sitePages.createLanguageVariation({
+   *     id: 'id',
+   *   });
+   * ```
    */
   createLanguageVariation(
     body: SitePageCreateLanguageVariationParams,
@@ -123,6 +372,13 @@ export class SitePages extends APIResource {
    * Delete the Site Page objects identified in the request body. Note: This is not
    * the same as the dashboard `archive` function. To perform a dashboard `archive`
    * send an normal update with the `archivedInDashboard` field set to true.
+   *
+   * @example
+   * ```ts
+   * await client.cms.pages.sitePages.deleteBatch({
+   *   inputs: ['string'],
+   * });
+   * ```
    */
   deleteBatch(body: SitePageDeleteBatchParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/cms/v3/pages/site-pages/batch/archive', {
@@ -134,6 +390,13 @@ export class SitePages extends APIResource {
 
   /**
    * Detach a site page from a multi-language group.
+   *
+   * @example
+   * ```ts
+   * await client.cms.pages.sitePages.detachFromLangGroup({
+   *   id: 'id',
+   * });
+   * ```
    */
   detachFromLangGroup(body: SitePageDetachFromLangGroupParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/cms/v3/pages/site-pages/multi-language/detach-from-lang-group', {
@@ -145,6 +408,14 @@ export class SitePages extends APIResource {
 
   /**
    * End an active A/B test and designate a winner.
+   *
+   * @example
+   * ```ts
+   * await client.cms.pages.sitePages.endAbTest({
+   *   abTestId: 'abTestId',
+   *   winnerId: 'winnerId',
+   * });
+   * ```
    */
   endAbTest(body: SitePageEndAbTestParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/cms/v3/pages/site-pages/ab-test/end', {
@@ -156,6 +427,13 @@ export class SitePages extends APIResource {
 
   /**
    * Retrieve the Site Page object identified by the id in the path.
+   *
+   * @example
+   * ```ts
+   * const page = await client.cms.pages.sitePages.get(
+   *   'objectId',
+   * );
+   * ```
    */
   get(
     objectID: string,
@@ -167,6 +445,14 @@ export class SitePages extends APIResource {
 
   /**
    * Retrieve the Site Page objects identified in the request body.
+   *
+   * @example
+   * ```ts
+   * const batchResponsePage =
+   *   await client.cms.pages.sitePages.getBatch({
+   *     inputs: ['string'],
+   *   });
+   * ```
    */
   getBatch(params: SitePageGetBatchParams, options?: RequestOptions): APIPromise<PagesAPI.BatchResponsePage> {
     const { archived, ...body } = params;
@@ -179,6 +465,13 @@ export class SitePages extends APIResource {
 
   /**
    * Retrieve the full draft version of the Site Page.
+   *
+   * @example
+   * ```ts
+   * const page = await client.cms.pages.sitePages.getDraft(
+   *   'objectId',
+   * );
+   * ```
    */
   getDraft(objectID: string, options?: RequestOptions): APIPromise<PagesAPI.Page> {
     return this._client.get(path`/cms/v3/pages/site-pages/${objectID}/draft`, options);
@@ -186,6 +479,15 @@ export class SitePages extends APIResource {
 
   /**
    * Retrieves a previous version of a Site Page
+   *
+   * @example
+   * ```ts
+   * const versionPage =
+   *   await client.cms.pages.sitePages.getRevision(
+   *     'revisionId',
+   *     { objectId: 'objectId' },
+   *   );
+   * ```
    */
   getRevision(
     revisionID: string,
@@ -198,6 +500,14 @@ export class SitePages extends APIResource {
 
   /**
    * Retrieves all the previous versions of a Site Page.
+   *
+   * @example
+   * ```ts
+   * const collectionResponseWithTotalVersionPage =
+   *   await client.cms.pages.sitePages.listRevisions(
+   *     'objectId',
+   *   );
+   * ```
    */
   listRevisions(
     objectID: string,
@@ -210,6 +520,11 @@ export class SitePages extends APIResource {
   /**
    * Take any changes from the draft version of the Site Page and apply them to the
    * live version.
+   *
+   * @example
+   * ```ts
+   * await client.cms.pages.sitePages.publishDraft('objectId');
+   * ```
    */
   publishDraft(objectID: string, options?: RequestOptions): APIPromise<void> {
     return this._client.post(path`/cms/v3/pages/site-pages/${objectID}/draft/push-live`, {
@@ -220,6 +535,14 @@ export class SitePages extends APIResource {
 
   /**
    * Rerun a previous A/B test.
+   *
+   * @example
+   * ```ts
+   * await client.cms.pages.sitePages.rerunAbTest({
+   *   abTestId: 'abTestId',
+   *   variationId: 'variationId',
+   * });
+   * ```
    */
   rerunAbTest(body: SitePageRerunAbTestParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/cms/v3/pages/site-pages/ab-test/rerun', {
@@ -231,6 +554,11 @@ export class SitePages extends APIResource {
 
   /**
    * Discards any edits and resets the draft to the live version.
+   *
+   * @example
+   * ```ts
+   * await client.cms.pages.sitePages.resetDraft('objectId');
+   * ```
    */
   resetDraft(objectID: string, options?: RequestOptions): APIPromise<void> {
     return this._client.post(path`/cms/v3/pages/site-pages/${objectID}/draft/reset`, {
@@ -241,6 +569,15 @@ export class SitePages extends APIResource {
 
   /**
    * Takes a specified version of a Site Page and restores it.
+   *
+   * @example
+   * ```ts
+   * const page =
+   *   await client.cms.pages.sitePages.restoreRevision(
+   *     'revisionId',
+   *     { objectId: 'objectId' },
+   *   );
+   * ```
    */
   restoreRevision(
     revisionID: string,
@@ -257,6 +594,15 @@ export class SitePages extends APIResource {
   /**
    * Takes a specified version of a Site Page, sets it as the new draft version of
    * the Site Page.
+   *
+   * @example
+   * ```ts
+   * const page =
+   *   await client.cms.pages.sitePages.restoreRevisionToDraft(
+   *     0,
+   *     { objectId: 'objectId' },
+   *   );
+   * ```
    */
   restoreRevisionToDraft(
     revisionID: number,
@@ -272,6 +618,14 @@ export class SitePages extends APIResource {
 
   /**
    * Schedule a Site Page to be Published
+   *
+   * @example
+   * ```ts
+   * await client.cms.pages.sitePages.schedule({
+   *   id: 'id',
+   *   publishDate: '2019-12-27T18:11:19.117Z',
+   * });
+   * ```
    */
   schedule(body: SitePageScheduleParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/cms/v3/pages/site-pages/schedule', {
@@ -283,6 +637,13 @@ export class SitePages extends APIResource {
 
   /**
    * Set a site page as the primary language of a multi-language group.
+   *
+   * @example
+   * ```ts
+   * await client.cms.pages.sitePages.setNewLangPrimary({
+   *   id: 'id',
+   * });
+   * ```
    */
   setNewLangPrimary(body: SitePageSetNewLangPrimaryParams, options?: RequestOptions): APIPromise<void> {
     return this._client.put('/cms/v3/pages/site-pages/multi-language/set-new-lang-primary', {
@@ -294,6 +655,14 @@ export class SitePages extends APIResource {
 
   /**
    * Update the Site Page objects identified in the request body.
+   *
+   * @example
+   * ```ts
+   * const batchResponsePage =
+   *   await client.cms.pages.sitePages.updateBatch({
+   *     inputs: [{}],
+   *   });
+   * ```
    */
   updateBatch(
     params: SitePageUpdateBatchParams,
@@ -311,6 +680,73 @@ export class SitePages extends APIResource {
    * Sparse updates the draft version of a single Site Page object identified by the
    * id in the path. You only need to specify the column values that you are
    * modifying.
+   *
+   * @example
+   * ```ts
+   * const page = await client.cms.pages.sitePages.updateDraft('objectId', {
+   *   id: 'id',
+   *   abStatus: 'master',
+   *   abTestId: 'abTestId',
+   *   archivedAt: '2019-12-27T18:11:19.117Z',
+   *   archivedInDashboard: true,
+   *   attachedStylesheets: [{ foo: {} }],
+   *   authorName: 'authorName',
+   *   campaign: 'campaign',
+   *   categoryId: 0,
+   *   contentGroupId: 'contentGroupId',
+   *   contentTypeCategory: '0',
+   *   created: '2019-12-27T18:11:19.117Z',
+   *   createdById: 'createdById',
+   *   currentlyPublished: true,
+   *   currentState: 'AUTOMATED',
+   *   domain: 'domain',
+   *   dynamicPageDataSourceId: 'dynamicPageDataSourceId',
+   *   dynamicPageDataSourceType: 0,
+   *   dynamicPageHubDbTableId: 'dynamicPageHubDbTableId',
+   *   enableDomainStylesheets: true,
+   *   enableLayoutStylesheets: true,
+   *   featuredImage: 'featuredImage',
+   *   featuredImageAltText: 'featuredImageAltText',
+   *   folderId: 'folderId',
+   *   footerHtml: 'footerHtml',
+   *   headHtml: 'headHtml',
+   *   htmlTitle: 'htmlTitle',
+   *   includeDefaultCustomCss: true,
+   *   language: 'af',
+   *   layoutSections: {
+   *     foo: { ... },
+   *   },
+   *   linkRelCanonicalUrl: 'linkRelCanonicalUrl',
+   *   mabExperimentId: 'mabExperimentId',
+   *   metaDescription: 'metaDescription',
+   *   name: 'name',
+   *   pageExpiryDate: 0,
+   *   pageExpiryEnabled: true,
+   *   pageExpiryRedirectId: 0,
+   *   pageExpiryRedirectUrl: 'pageExpiryRedirectUrl',
+   *   pageRedirected: true,
+   *   password: 'password',
+   *   publicAccessRules: [{}],
+   *   publicAccessRulesEnabled: true,
+   *   publishDate: '2019-12-27T18:11:19.117Z',
+   *   publishImmediately: true,
+   *   slug: 'slug',
+   *   state: 'state',
+   *   subcategory: 'subcategory',
+   *   templatePath: 'templatePath',
+   *   themeSettingsValues: { foo: {} },
+   *   translatedFromId: 'translatedFromId',
+   *   translations: {
+   *     foo: { ... },
+   *   },
+   *   updated: '2019-12-27T18:11:19.117Z',
+   *   updatedById: 'updatedById',
+   *   url: 'url',
+   *   useFeaturedImage: true,
+   *   widgetContainers: { foo: {} },
+   *   widgets: { foo: {} },
+   * });
+   * ```
    */
   updateDraft(
     objectID: string,
@@ -322,6 +758,14 @@ export class SitePages extends APIResource {
 
   /**
    * Explicitly set new languages for each site page in a multi-language group.
+   *
+   * @example
+   * ```ts
+   * await client.cms.pages.sitePages.updateLanguages({
+   *   languages: { foo: 'string' },
+   *   primaryId: 'primaryId',
+   * });
+   * ```
    */
   updateLanguages(body: SitePageUpdateLanguagesParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/cms/v3/pages/site-pages/multi-language/update-languages', {

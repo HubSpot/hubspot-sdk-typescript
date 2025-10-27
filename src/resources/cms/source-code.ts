@@ -31,6 +31,13 @@ export class SourceCode extends APIResource {
 
   /**
    * Deletes the file at the specified path in the specified environment.
+   *
+   * @example
+   * ```ts
+   * await client.cms.sourceCode.delete('path', {
+   *   environment: 'environment',
+   * });
+   * ```
    */
   delete(path_: string, params: SourceCodeDeleteParams, options?: RequestOptions): APIPromise<void> {
     const { environment } = params;
@@ -43,6 +50,14 @@ export class SourceCode extends APIResource {
   /**
    * Extract a zip file in the developer file system. Extraction status can be
    * checked with the `/extract/async/tasks/taskId/status` endpoint below.
+   *
+   * @example
+   * ```ts
+   * const taskLocator =
+   *   await client.cms.sourceCode.extractAsync({
+   *     path: 'path',
+   *   });
+   * ```
    */
   extractAsync(body: SourceCodeExtractAsyncParams, options?: RequestOptions): APIPromise<Shared.TaskLocator> {
     return this._client.post('/cms/v3/source-code/extract/async', { body, ...options });
@@ -51,6 +66,16 @@ export class SourceCode extends APIResource {
   /**
    * Downloads the byte contents of the file at the specified path in the specified
    * environment.
+   *
+   * @example
+   * ```ts
+   * const sourceCode = await client.cms.sourceCode.get('path', {
+   *   environment: 'environment',
+   * });
+   *
+   * const content = await sourceCode.blob();
+   * console.log(content);
+   * ```
    */
   get(path_: string, params: SourceCodeGetParams, options?: RequestOptions): APIPromise<Response> {
     const { environment } = params;
@@ -64,6 +89,12 @@ export class SourceCode extends APIResource {
   /**
    * Get the status of an extraction by the `taskId` returned from the initial
    * `extract/async` request.
+   *
+   * @example
+   * ```ts
+   * const actionResponse =
+   *   await client.cms.sourceCode.getExtractionStatus(0);
+   * ```
    */
   getExtractionStatus(taskID: number, options?: RequestOptions): APIPromise<Shared.ActionResponse> {
     return this._client.get(path`/cms/v3/source-code/extract/async/tasks/${taskID}/status`, options);
@@ -72,6 +103,14 @@ export class SourceCode extends APIResource {
   /**
    * Gets the metadata object for the file at the specified path in the specified
    * environment.
+   *
+   * @example
+   * ```ts
+   * const assetFileMetadata =
+   *   await client.cms.sourceCode.getMetadata('path', {
+   *     environment: 'environment',
+   *   });
+   * ```
    */
   getMetadata(
     path_: string,
@@ -88,6 +127,14 @@ export class SourceCode extends APIResource {
   /**
    * Upserts a file at the specified path in the specified environment. Accepts
    * multipart/form-data content type.
+   *
+   * @example
+   * ```ts
+   * const assetFileMetadata =
+   *   await client.cms.sourceCode.upsert('path', {
+   *     environment: 'environment',
+   *   });
+   * ```
    */
   upsert(
     path_: string,
@@ -104,6 +151,17 @@ export class SourceCode extends APIResource {
   /**
    * Validates the file contents passed to the endpoint given a specified path and
    * environment. Accepts multipart/form-data content type.
+   *
+   * @example
+   * ```ts
+   * const response = await client.cms.sourceCode.validate(
+   *   'path',
+   *   { environment: 'environment' },
+   * );
+   *
+   * const content = await response.blob();
+   * console.log(content);
+   * ```
    */
   validate(path_: string, params: SourceCodeValidateParams, options?: RequestOptions): APIPromise<Response> {
     const { environment, ...body } = params;

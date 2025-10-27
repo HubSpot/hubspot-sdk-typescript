@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
-import * as EmailsAPI from '../../marketing/emails';
 import * as FoldersAPI from './folders';
 import {
   FolderCreateParams,
@@ -25,6 +24,7 @@ import {
   MembershipRemoveParams,
   Memberships,
 } from './memberships';
+import * as EmailsAPI from '../../marketing/emails/emails';
 import { APIPromise } from '../../../core/api-promise';
 import { Page } from '../../../core/pagination';
 import { buildHeaders } from '../../../internal/headers';

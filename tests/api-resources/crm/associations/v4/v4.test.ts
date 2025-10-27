@@ -89,7 +89,7 @@ describe('resource v4', () => {
       objectType: 'objectType',
       objectId: 'objectId',
       toObjectType: 'toObjectType',
-      body: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 279 }],
+      body: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -106,7 +106,7 @@ describe('resource v4', () => {
       objectType: 'objectType',
       objectId: 'objectId',
       toObjectType: 'toObjectType',
-      body: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 279 }],
+      body: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
     });
   });
 });

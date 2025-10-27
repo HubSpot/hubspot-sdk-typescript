@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as ConversationsAPI from '../conversations';
 import * as CustomChannelsAPI from './custom-channels';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
@@ -46,7 +47,7 @@ export class Messages extends APIResource {
     channelID: string,
     body: MessageCreateParams,
     options?: RequestOptions,
-  ): APIPromise<CustomChannelsAPI.PublicConversationsMessage> {
+  ): APIPromise<ConversationsAPI.PublicConversationsMessage> {
     return this._client.post(path`/conversations/v3/custom-channels/${channelID}/messages`, {
       body,
       ...options,
@@ -71,7 +72,7 @@ export class Messages extends APIResource {
     messageID: string,
     params: MessageUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<CustomChannelsAPI.PublicConversationsMessage> {
+  ): APIPromise<ConversationsAPI.PublicConversationsMessage> {
     const { channelId, ...body } = params;
     return this._client.patch(path`/conversations/v3/custom-channels/${channelId}/messages/${messageID}`, {
       body,
@@ -95,7 +96,7 @@ export class Messages extends APIResource {
     messageID: string,
     params: MessageGetParams,
     options?: RequestOptions,
-  ): APIPromise<CustomChannelsAPI.PublicConversationsMessage> {
+  ): APIPromise<ConversationsAPI.PublicConversationsMessage> {
     const { channelId } = params;
     return this._client.get(
       path`/conversations/v3/custom-channels/${channelId}/messages/${messageID}`,

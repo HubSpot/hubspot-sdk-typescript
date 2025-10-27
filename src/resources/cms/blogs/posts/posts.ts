@@ -3,8 +3,8 @@
 import { APIResource } from '../../../../core/resource';
 import * as Shared from '../../../shared';
 import * as CmsAPI from '../../cms';
-import * as EmailsAPI from '../../../marketing/emails';
 import * as PagesAPI from '../../pages/pages';
+import * as EmailsAPI from '../../../marketing/emails/emails';
 import * as BatchAPI from './batch';
 import { Batch, BatchCreateParams, BatchDeleteParams, BatchReadParams, BatchUpdateParams } from './batch';
 import { APIPromise } from '../../../../core/api-promise';
@@ -18,6 +18,77 @@ export class Posts extends APIResource {
 
   /**
    * Create a new blog post, specifying its content in the request body.
+   *
+   * @example
+   * ```ts
+   * const blogPost = await client.cms.blogs.posts.create({
+   *   id: 'id',
+   *   abStatus: 'master',
+   *   abTestId: 'abTestId',
+   *   archivedAt: 0,
+   *   archivedInDashboard: true,
+   *   attachedStylesheets: [{ foo: {} }],
+   *   authorName: 'authorName',
+   *   blogAuthorId: 'blogAuthorId',
+   *   campaign: 'campaign',
+   *   categoryId: 0,
+   *   contentGroupId: 'contentGroupId',
+   *   contentTypeCategory: '0',
+   *   created: '2019-12-27T18:11:19.117Z',
+   *   createdById: 'createdById',
+   *   currentlyPublished: true,
+   *   currentState: 'AUTOMATED',
+   *   domain: 'domain',
+   *   dynamicPageDataSourceId: 'dynamicPageDataSourceId',
+   *   dynamicPageDataSourceType: 0,
+   *   dynamicPageHubDbTableId: 'dynamicPageHubDbTableId',
+   *   enableDomainStylesheets: true,
+   *   enableGoogleAmpOutputOverride: true,
+   *   enableLayoutStylesheets: true,
+   *   featuredImage: 'featuredImage',
+   *   featuredImageAltText: 'featuredImageAltText',
+   *   folderId: 'folderId',
+   *   footerHtml: 'footerHtml',
+   *   headHtml: 'headHtml',
+   *   htmlTitle: 'htmlTitle',
+   *   includeDefaultCustomCss: true,
+   *   language: 'af',
+   *   layoutSections: {
+   *     foo: { ... },
+   *   },
+   *   linkRelCanonicalUrl: 'linkRelCanonicalUrl',
+   *   mabExperimentId: 'mabExperimentId',
+   *   metaDescription: 'metaDescription',
+   *   name: 'name',
+   *   pageExpiryDate: 0,
+   *   pageExpiryEnabled: true,
+   *   pageExpiryRedirectId: 0,
+   *   pageExpiryRedirectUrl: 'pageExpiryRedirectUrl',
+   *   password: 'password',
+   *   postBody: 'postBody',
+   *   postSummary: 'postSummary',
+   *   publicAccessRules: [{}],
+   *   publicAccessRulesEnabled: true,
+   *   publishDate: '2019-12-27T18:11:19.117Z',
+   *   publishImmediately: true,
+   *   rssBody: 'rssBody',
+   *   rssSummary: 'rssSummary',
+   *   slug: 'slug',
+   *   state: 'state',
+   *   tagIds: [0],
+   *   themeSettingsValues: { foo: {} },
+   *   translatedFromId: 'translatedFromId',
+   *   translations: {
+   *     foo: { ... },
+   *   },
+   *   updated: '2019-12-27T18:11:19.117Z',
+   *   updatedById: 'updatedById',
+   *   url: 'url',
+   *   useFeaturedImage: true,
+   *   widgetContainers: { foo: {} },
+   *   widgets: { foo: {} },
+   * });
+   * ```
    */
   create(body: PostCreateParams, options?: RequestOptions): APIPromise<BlogPost> {
     return this._client.post('/cms/v3/blogs/posts', { body, ...options });
@@ -26,6 +97,77 @@ export class Posts extends APIResource {
   /**
    * Partially updates a single blog post by ID. You only need to specify the values
    * that you want to update.
+   *
+   * @example
+   * ```ts
+   * const blogPost = await client.cms.blogs.posts.update('objectId', {
+   *   id: 'id',
+   *   abStatus: 'master',
+   *   abTestId: 'abTestId',
+   *   archivedAt: 0,
+   *   archivedInDashboard: true,
+   *   attachedStylesheets: [{ foo: {} }],
+   *   authorName: 'authorName',
+   *   blogAuthorId: 'blogAuthorId',
+   *   campaign: 'campaign',
+   *   categoryId: 0,
+   *   contentGroupId: 'contentGroupId',
+   *   contentTypeCategory: '0',
+   *   created: '2019-12-27T18:11:19.117Z',
+   *   createdById: 'createdById',
+   *   currentlyPublished: true,
+   *   currentState: 'AUTOMATED',
+   *   domain: 'domain',
+   *   dynamicPageDataSourceId: 'dynamicPageDataSourceId',
+   *   dynamicPageDataSourceType: 0,
+   *   dynamicPageHubDbTableId: 'dynamicPageHubDbTableId',
+   *   enableDomainStylesheets: true,
+   *   enableGoogleAmpOutputOverride: true,
+   *   enableLayoutStylesheets: true,
+   *   featuredImage: 'featuredImage',
+   *   featuredImageAltText: 'featuredImageAltText',
+   *   folderId: 'folderId',
+   *   footerHtml: 'footerHtml',
+   *   headHtml: 'headHtml',
+   *   htmlTitle: 'htmlTitle',
+   *   includeDefaultCustomCss: true,
+   *   language: 'af',
+   *   layoutSections: {
+   *     foo: { ... },
+   *   },
+   *   linkRelCanonicalUrl: 'linkRelCanonicalUrl',
+   *   mabExperimentId: 'mabExperimentId',
+   *   metaDescription: 'metaDescription',
+   *   name: 'name',
+   *   pageExpiryDate: 0,
+   *   pageExpiryEnabled: true,
+   *   pageExpiryRedirectId: 0,
+   *   pageExpiryRedirectUrl: 'pageExpiryRedirectUrl',
+   *   password: 'password',
+   *   postBody: 'postBody',
+   *   postSummary: 'postSummary',
+   *   publicAccessRules: [{}],
+   *   publicAccessRulesEnabled: true,
+   *   publishDate: '2019-12-27T18:11:19.117Z',
+   *   publishImmediately: true,
+   *   rssBody: 'rssBody',
+   *   rssSummary: 'rssSummary',
+   *   slug: 'slug',
+   *   state: 'state',
+   *   tagIds: [0],
+   *   themeSettingsValues: { foo: {} },
+   *   translatedFromId: 'translatedFromId',
+   *   translations: {
+   *     foo: { ... },
+   *   },
+   *   updated: '2019-12-27T18:11:19.117Z',
+   *   updatedById: 'updatedById',
+   *   url: 'url',
+   *   useFeaturedImage: true,
+   *   widgetContainers: { foo: {} },
+   *   widgets: { foo: {} },
+   * });
+   * ```
    */
   update(objectID: string, params: PostUpdateParams, options?: RequestOptions): APIPromise<BlogPost> {
     const { archived, ...body } = params;
@@ -39,6 +181,14 @@ export class Posts extends APIResource {
   /**
    * Retrieve all blog posts, with paging and filtering options. This method would be
    * useful for an integration that ingests posts and suggests edits.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const blogPost of client.cms.blogs.posts.list()) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     query: PostListParams | null | undefined = {},
@@ -49,6 +199,11 @@ export class Posts extends APIResource {
 
   /**
    * Delete a blog post by ID.
+   *
+   * @example
+   * ```ts
+   * await client.cms.blogs.posts.delete('objectId');
+   * ```
    */
   delete(
     objectID: string,
@@ -66,6 +221,15 @@ export class Posts extends APIResource {
   /**
    * Attach a blog post to a
    * [multi-language group](https://developers.hubspot.com/docs/guides/cms/content/multi-language-content).
+   *
+   * @example
+   * ```ts
+   * await client.cms.blogs.posts.attachToLangGroup({
+   *   id: 'id',
+   *   language: 'language',
+   *   primaryId: 'primaryId',
+   * });
+   * ```
    */
   attachToLangGroup(body: PostAttachToLangGroupParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/cms/v3/blogs/posts/multi-language/attach-to-lang-group', {
@@ -77,6 +241,13 @@ export class Posts extends APIResource {
 
   /**
    * Clone a blog post, making a copy of it in a new blog post.
+   *
+   * @example
+   * ```ts
+   * const blogPost = await client.cms.blogs.posts.clone({
+   *   id: 'id',
+   * });
+   * ```
    */
   clone(body: PostCloneParams, options?: RequestOptions): APIPromise<BlogPost> {
     return this._client.post('/cms/v3/blogs/posts/clone', { body, ...options });
@@ -84,6 +255,14 @@ export class Posts extends APIResource {
 
   /**
    * Create a new language variation from an existing blog post
+   *
+   * @example
+   * ```ts
+   * const blogPost =
+   *   await client.cms.blogs.posts.createLangVariation({
+   *     id: 'id',
+   *   });
+   * ```
    */
   createLangVariation(body: PostCreateLangVariationParams, options?: RequestOptions): APIPromise<BlogPost> {
     return this._client.post('/cms/v3/blogs/posts/multi-language/create-language-variation', {
@@ -95,6 +274,13 @@ export class Posts extends APIResource {
   /**
    * Detach a blog post from a
    * [multi-language group](https://developers.hubspot.com/docs/guides/cms/content/multi-language-content).
+   *
+   * @example
+   * ```ts
+   * await client.cms.blogs.posts.detachFromLangGroup({
+   *   id: 'id',
+   * });
+   * ```
    */
   detachFromLangGroup(body: PostDetachFromLangGroupParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/cms/v3/blogs/posts/multi-language/detach-from-lang-group', {
@@ -106,6 +292,13 @@ export class Posts extends APIResource {
 
   /**
    * Retrieve the full draft version of a blog post.
+   *
+   * @example
+   * ```ts
+   * const blogPost = await client.cms.blogs.posts.getDraftByID(
+   *   'objectId',
+   * );
+   * ```
    */
   getDraftByID(objectID: string, options?: RequestOptions): APIPromise<BlogPost> {
     return this._client.get(path`/cms/v3/blogs/posts/${objectID}/draft`, options);
@@ -113,6 +306,15 @@ export class Posts extends APIResource {
 
   /**
    * Retrieve a previous version of a blog post.
+   *
+   * @example
+   * ```ts
+   * const versionBlogPost =
+   *   await client.cms.blogs.posts.getPreviousVersion(
+   *     'revisionId',
+   *     { objectId: 'objectId' },
+   *   );
+   * ```
    */
   getPreviousVersion(
     revisionID: string,
@@ -125,6 +327,16 @@ export class Posts extends APIResource {
 
   /**
    * Retrieve all the previous versions of a blog post.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const versionBlogPost of client.cms.blogs.posts.getPreviousVersions(
+   *   'objectId',
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   getPreviousVersions(
     objectID: string,
@@ -140,6 +352,11 @@ export class Posts extends APIResource {
   /**
    * Publish the draft version of the blog post, sending its content to the live
    * page.
+   *
+   * @example
+   * ```ts
+   * await client.cms.blogs.posts.pushLive('objectId');
+   * ```
    */
   pushLive(objectID: string, options?: RequestOptions): APIPromise<void> {
     return this._client.post(path`/cms/v3/blogs/posts/${objectID}/draft/push-live`, {
@@ -150,6 +367,13 @@ export class Posts extends APIResource {
 
   /**
    * Retrieve a blog post by the post ID.
+   *
+   * @example
+   * ```ts
+   * const blogPost = await client.cms.blogs.posts.read(
+   *   'objectId',
+   * );
+   * ```
    */
   read(
     objectID: string,
@@ -162,6 +386,11 @@ export class Posts extends APIResource {
   /**
    * Discard all drafted content, resetting the draft to contain the content in the
    * currently published version.
+   *
+   * @example
+   * ```ts
+   * await client.cms.blogs.posts.resetDraft('objectId');
+   * ```
    */
   resetDraft(objectID: string, options?: RequestOptions): APIPromise<void> {
     return this._client.post(path`/cms/v3/blogs/posts/${objectID}/draft/reset`, {
@@ -172,6 +401,15 @@ export class Posts extends APIResource {
 
   /**
    * Restores a blog post to one of its previous versions.
+   *
+   * @example
+   * ```ts
+   * const blogPost =
+   *   await client.cms.blogs.posts.restorePreviousVersion(
+   *     'revisionId',
+   *     { objectId: 'objectId' },
+   *   );
+   * ```
    */
   restorePreviousVersion(
     revisionID: string,
@@ -185,6 +423,15 @@ export class Posts extends APIResource {
   /**
    * Takes a specified version of a blog post, sets it as the new draft version of
    * the blog post.
+   *
+   * @example
+   * ```ts
+   * const blogPost =
+   *   await client.cms.blogs.posts.restorePreviousVersionToDraft(
+   *     0,
+   *     { objectId: 'objectId' },
+   *   );
+   * ```
    */
   restorePreviousVersionToDraft(
     revisionID: number,
@@ -200,6 +447,14 @@ export class Posts extends APIResource {
 
   /**
    * Schedule a blog post to be published at a specified time.
+   *
+   * @example
+   * ```ts
+   * await client.cms.blogs.posts.schedule({
+   *   id: 'id',
+   *   publishDate: '2019-12-27T18:11:19.117Z',
+   * });
+   * ```
    */
   schedule(body: PostScheduleParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/cms/v3/blogs/posts/schedule', {
@@ -213,6 +468,11 @@ export class Posts extends APIResource {
    * Set the primary language of a
    * [multi-language group](https://developers.hubspot.com/docs/guides/cms/content/multi-language-content)
    * to the language of the provided post (specified as an ID in the request body)
+   *
+   * @example
+   * ```ts
+   * await client.cms.blogs.posts.setLangPrimary({ id: 'id' });
+   * ```
    */
   setLangPrimary(body: PostSetLangPrimaryParams, options?: RequestOptions): APIPromise<void> {
     return this._client.put('/cms/v3/blogs/posts/multi-language/set-new-lang-primary', {
@@ -225,6 +485,77 @@ export class Posts extends APIResource {
   /**
    * Partially updates the draft version of a single blog post by ID. You only need
    * to specify the values that you want to update.
+   *
+   * @example
+   * ```ts
+   * const blogPost = await client.cms.blogs.posts.updateDraft('objectId', {
+   *   id: 'id',
+   *   abStatus: 'master',
+   *   abTestId: 'abTestId',
+   *   archivedAt: 0,
+   *   archivedInDashboard: true,
+   *   attachedStylesheets: [{ foo: {} }],
+   *   authorName: 'authorName',
+   *   blogAuthorId: 'blogAuthorId',
+   *   campaign: 'campaign',
+   *   categoryId: 0,
+   *   contentGroupId: 'contentGroupId',
+   *   contentTypeCategory: '0',
+   *   created: '2019-12-27T18:11:19.117Z',
+   *   createdById: 'createdById',
+   *   currentlyPublished: true,
+   *   currentState: 'AUTOMATED',
+   *   domain: 'domain',
+   *   dynamicPageDataSourceId: 'dynamicPageDataSourceId',
+   *   dynamicPageDataSourceType: 0,
+   *   dynamicPageHubDbTableId: 'dynamicPageHubDbTableId',
+   *   enableDomainStylesheets: true,
+   *   enableGoogleAmpOutputOverride: true,
+   *   enableLayoutStylesheets: true,
+   *   featuredImage: 'featuredImage',
+   *   featuredImageAltText: 'featuredImageAltText',
+   *   folderId: 'folderId',
+   *   footerHtml: 'footerHtml',
+   *   headHtml: 'headHtml',
+   *   htmlTitle: 'htmlTitle',
+   *   includeDefaultCustomCss: true,
+   *   language: 'af',
+   *   layoutSections: {
+   *     foo: { ... },
+   *   },
+   *   linkRelCanonicalUrl: 'linkRelCanonicalUrl',
+   *   mabExperimentId: 'mabExperimentId',
+   *   metaDescription: 'metaDescription',
+   *   name: 'name',
+   *   pageExpiryDate: 0,
+   *   pageExpiryEnabled: true,
+   *   pageExpiryRedirectId: 0,
+   *   pageExpiryRedirectUrl: 'pageExpiryRedirectUrl',
+   *   password: 'password',
+   *   postBody: 'postBody',
+   *   postSummary: 'postSummary',
+   *   publicAccessRules: [{}],
+   *   publicAccessRulesEnabled: true,
+   *   publishDate: '2019-12-27T18:11:19.117Z',
+   *   publishImmediately: true,
+   *   rssBody: 'rssBody',
+   *   rssSummary: 'rssSummary',
+   *   slug: 'slug',
+   *   state: 'state',
+   *   tagIds: [0],
+   *   themeSettingsValues: { foo: {} },
+   *   translatedFromId: 'translatedFromId',
+   *   translations: {
+   *     foo: { ... },
+   *   },
+   *   updated: '2019-12-27T18:11:19.117Z',
+   *   updatedById: 'updatedById',
+   *   url: 'url',
+   *   useFeaturedImage: true,
+   *   widgetContainers: { foo: {} },
+   *   widgets: { foo: {} },
+   * });
+   * ```
    */
   updateDraft(objectID: string, body: PostUpdateDraftParams, options?: RequestOptions): APIPromise<BlogPost> {
     return this._client.patch(path`/cms/v3/blogs/posts/${objectID}/draft`, { body, ...options });
@@ -233,6 +564,14 @@ export class Posts extends APIResource {
   /**
    * Explicitly set new languages for each post in a
    * [multi-language group](https://developers.hubspot.com/docs/guides/cms/content/multi-language-content).
+   *
+   * @example
+   * ```ts
+   * await client.cms.blogs.posts.updateLangs({
+   *   languages: { foo: 'string' },
+   *   primaryId: 'primaryId',
+   * });
+   * ```
    */
   updateLangs(body: PostUpdateLangsParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/cms/v3/blogs/posts/multi-language/update-languages', {
