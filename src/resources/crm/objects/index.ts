@@ -33,15 +33,6 @@ export {
   type CommercePaymentSearchParams,
 } from './commerce-payments/index';
 export {
-  CommerceSubscriptions,
-  type BatchReadInputSimplePublicObjectID,
-  type BatchResponseSimplePublicObject,
-  type BatchResponseSimplePublicUpsertObject,
-  type PauseSubscriptionRequest,
-  type SimplePublicObjectBatchInputForCreate,
-  type UnpauseRequest,
-} from './commerce-subscriptions';
-export {
   Communications,
   type CommunicationCreateParams,
   type CommunicationUpdateParams,
