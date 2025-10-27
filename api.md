@@ -1663,17 +1663,6 @@ Methods:
 - <code title="post /crm/v3/objects/commerce_payments/batch/read">client.crm.objects.commercePayments.batch.<a href="./src/resources/crm/objects/commerce-payments/batch.ts">get</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
 - <code title="post /crm/v3/objects/commerce_payments/batch/upsert">client.crm.objects.commercePayments.batch.<a href="./src/resources/crm/objects/commerce-payments/batch.ts">upsert</a>({ ...params }) -> BatchResponseSimplePublicUpsertObject</code>
 
-### CommerceSubscriptions
-
-Types:
-
-- <code><a href="./src/resources/crm/objects/commerce-subscriptions.ts">BatchReadInputSimplePublicObjectID</a></code>
-- <code><a href="./src/resources/crm/objects/commerce-subscriptions.ts">BatchResponseSimplePublicObject</a></code>
-- <code><a href="./src/resources/crm/objects/commerce-subscriptions.ts">BatchResponseSimplePublicUpsertObject</a></code>
-- <code><a href="./src/resources/crm/objects/commerce-subscriptions.ts">PauseSubscriptionRequest</a></code>
-- <code><a href="./src/resources/crm/objects/commerce-subscriptions.ts">SimplePublicObjectBatchInputForCreate</a></code>
-- <code><a href="./src/resources/crm/objects/commerce-subscriptions.ts">UnpauseRequest</a></code>
-
 ### Communications
 
 Methods:

@@ -1,16 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
-import * as CommerceSubscriptionsAPI from './commerce-subscriptions';
-import {
-  BatchReadInputSimplePublicObjectID,
-  BatchResponseSimplePublicObject,
-  BatchResponseSimplePublicUpsertObject,
-  CommerceSubscriptions,
-  PauseSubscriptionRequest,
-  SimplePublicObjectBatchInputForCreate,
-  UnpauseRequest,
-} from './commerce-subscriptions';
 import * as DealSplitsAPI from './deal-splits';
 import {
   BatchResponseDealToDealSplits,
@@ -347,8 +337,6 @@ export class Objects extends APIResource {
   commercePayments: CommercePaymentsAPI.CommercePayments = new CommercePaymentsAPI.CommercePayments(
     this._client,
   );
-  commerceSubscriptions: CommerceSubscriptionsAPI.CommerceSubscriptions =
-    new CommerceSubscriptionsAPI.CommerceSubscriptions(this._client);
   communications: CommunicationsAPI.Communications = new CommunicationsAPI.Communications(this._client);
   companies: CompaniesAPI.Companies = new CompaniesAPI.Companies(this._client);
   contacts: ContactsAPI.Contacts = new ContactsAPI.Contacts(this._client);
@@ -387,7 +375,6 @@ Objects.Appointments = Appointments;
 Objects.Calls = Calls;
 Objects.Carts = Carts;
 Objects.CommercePayments = CommercePayments;
-Objects.CommerceSubscriptions = CommerceSubscriptions;
 Objects.Communications = Communications;
 Objects.Companies = Companies;
 Objects.Contacts = Contacts;
@@ -455,16 +442,6 @@ export declare namespace Objects {
     type CommercePaymentListParams as CommercePaymentListParams,
     type CommercePaymentGetParams as CommercePaymentGetParams,
     type CommercePaymentSearchParams as CommercePaymentSearchParams,
-  };
-
-  export {
-    CommerceSubscriptions as CommerceSubscriptions,
-    type BatchReadInputSimplePublicObjectID as BatchReadInputSimplePublicObjectID,
-    type BatchResponseSimplePublicObject as BatchResponseSimplePublicObject,
-    type BatchResponseSimplePublicUpsertObject as BatchResponseSimplePublicUpsertObject,
-    type PauseSubscriptionRequest as PauseSubscriptionRequest,
-    type SimplePublicObjectBatchInputForCreate as SimplePublicObjectBatchInputForCreate,
-    type UnpauseRequest as UnpauseRequest,
   };
 
   export {
