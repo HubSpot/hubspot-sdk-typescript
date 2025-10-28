@@ -121,8 +121,8 @@ describe('resource objects', () => {
   });
 
   // Prism tests are disabled
-  test.skip('read: only required params', async () => {
-    const responsePromise = client.crm.objects.objects.read('objectId', { objectType: 'objectType' });
+  test.skip('get: only required params', async () => {
+    const responsePromise = client.crm.objects.objects.get('objectId', { objectType: 'objectType' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -133,8 +133,8 @@ describe('resource objects', () => {
   });
 
   // Prism tests are disabled
-  test.skip('read: required and optional params', async () => {
-    const response = await client.crm.objects.objects.read('objectId', {
+  test.skip('get: required and optional params', async () => {
+    const response = await client.crm.objects.objects.get('objectId', {
       objectType: 'objectType',
       archived: true,
       associations: ['string'],

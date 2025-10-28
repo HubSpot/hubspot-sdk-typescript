@@ -706,6 +706,30 @@ describe('resource posts', () => {
   });
 
   // Prism tests are disabled
+  test.skip('get', async () => {
+    const responsePromise = client.cms.blogs.posts.get('objectId');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('get: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.cms.blogs.posts.get(
+        'objectId',
+        { archived: true, property: 'property' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(HubSpot.NotFoundError);
+  });
+
+  // Prism tests are disabled
   test.skip('getDraftByID', async () => {
     const responsePromise = client.cms.blogs.posts.getDraftByID('objectId');
     const rawResponse = await responsePromise.asResponse();
@@ -768,30 +792,6 @@ describe('resource posts', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('read', async () => {
-    const responsePromise = client.cms.blogs.posts.read('objectId');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('read: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.cms.blogs.posts.read(
-        'objectId',
-        { archived: true, property: 'property' },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(HubSpot.NotFoundError);
   });
 
   // Prism tests are disabled

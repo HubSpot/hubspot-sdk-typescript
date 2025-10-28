@@ -130,8 +130,8 @@ describe('resource urlRedirects', () => {
   });
 
   // Prism tests are disabled
-  test.skip('read', async () => {
-    const responsePromise = client.cms.urlRedirects.read('urlRedirectId');
+  test.skip('get', async () => {
+    const responsePromise = client.cms.urlRedirects.get('urlRedirectId');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

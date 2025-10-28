@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Batch, type BatchCreateParams, type BatchDeleteParams, type BatchReadParams } from './batch';
+export { Batch, type BatchCreateParams, type BatchDeleteParams, type BatchGetParams } from './batch';
 export {
   Groups,
   type GroupCreateParams,

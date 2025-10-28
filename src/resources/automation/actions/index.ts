@@ -32,16 +32,16 @@ export {
   type DefinitionUpdateParams,
   type DefinitionListParams,
   type DefinitionDeleteParams,
-  type DefinitionReadParams,
+  type DefinitionGetParams,
 } from './definitions';
 export {
   Functions,
   type FunctionListParams,
   type FunctionDeleteParams,
-  type FunctionArchiveByFunctionTypeParams,
   type FunctionCreateOrReplaceParams,
   type FunctionCreateOrReplaceByFunctionTypeParams,
+  type FunctionDeleteByFunctionTypeParams,
+  type FunctionGetParams,
   type FunctionGetByFunctionTypeParams,
-  type FunctionReadParams,
 } from './functions';
-export { Revisions, type RevisionListParams, type RevisionReadParams } from './revisions';
+export { Revisions, type RevisionListParams, type RevisionGetParams } from './revisions';

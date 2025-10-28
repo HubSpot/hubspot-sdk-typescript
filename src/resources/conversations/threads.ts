@@ -48,10 +48,10 @@ export class Threads extends APIResource {
    *
    * @example
    * ```ts
-   * await client.conversations.threads.archive('threadId');
+   * await client.conversations.threads.delete('threadId');
    * ```
    */
-  archive(threadID: string, options?: RequestOptions): APIPromise<void> {
+  delete(threadID: string, options?: RequestOptions): APIPromise<void> {
     return this._client.delete(path`/conversations/v3/conversations/threads/${threadID}`, {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),

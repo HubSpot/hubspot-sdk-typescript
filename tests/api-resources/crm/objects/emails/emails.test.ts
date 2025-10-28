@@ -111,8 +111,8 @@ describe('resource emails', () => {
   });
 
   // Prism tests are disabled
-  test.skip('read', async () => {
-    const responsePromise = client.crm.objects.emails.read('emailId');
+  test.skip('get', async () => {
+    const responsePromise = client.crm.objects.emails.get('emailId');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -123,10 +123,10 @@ describe('resource emails', () => {
   });
 
   // Prism tests are disabled
-  test.skip('read: request options and params are passed correctly', async () => {
+  test.skip('get: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.crm.objects.emails.read(
+      client.crm.objects.emails.get(
         'emailId',
         {
           archived: true,

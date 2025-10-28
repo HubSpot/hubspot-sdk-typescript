@@ -8,7 +8,7 @@ import {
   Batch,
   BatchCreateParams,
   BatchDeleteParams,
-  BatchReadParams,
+  BatchGetParams,
   BatchUpdateParams,
   BatchUpsertParams,
 } from './batch';
@@ -309,7 +309,7 @@ export declare namespace Companies {
     type BatchCreateParams as BatchCreateParams,
     type BatchUpdateParams as BatchUpdateParams,
     type BatchDeleteParams as BatchDeleteParams,
-    type BatchReadParams as BatchReadParams,
+    type BatchGetParams as BatchGetParams,
     type BatchUpsertParams as BatchUpsertParams,
   };
 }

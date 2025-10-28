@@ -333,8 +333,8 @@ describe('resource batch', () => {
   });
 
   // Prism tests are disabled
-  test.skip('read: only required params', async () => {
-    const responsePromise = client.cms.blogs.posts.batch.read({ inputs: ['string'] });
+  test.skip('get: only required params', async () => {
+    const responsePromise = client.cms.blogs.posts.batch.get({ inputs: ['string'] });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -345,7 +345,7 @@ describe('resource batch', () => {
   });
 
   // Prism tests are disabled
-  test.skip('read: required and optional params', async () => {
-    const response = await client.cms.blogs.posts.batch.read({ inputs: ['string'], archived: true });
+  test.skip('get: required and optional params', async () => {
+    const response = await client.cms.blogs.posts.batch.get({ inputs: ['string'], archived: true });
   });
 });

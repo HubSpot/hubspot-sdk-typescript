@@ -93,29 +93,6 @@ export class Schemas extends APIResource {
   }
 
   /**
-   * Removes an existing association from a schema.
-   *
-   * @example
-   * ```ts
-   * await client.crm.objects.schemas.archiveAssociation(
-   *   'associationIdentifier',
-   *   { objectType: 'objectType' },
-   * );
-   * ```
-   */
-  archiveAssociation(
-    associationIdentifier: string,
-    params: SchemaArchiveAssociationParams,
-    options?: RequestOptions,
-  ): APIPromise<void> {
-    const { objectType } = params;
-    return this._client.delete(
-      path`/crm-object-schemas/v3/schemas/${objectType}/associations/${associationIdentifier}`,
-      { ...options, headers: buildHeaders([{ Accept: '*/*' }, options?.headers]) },
-    );
-  }
-
-  /**
    * Defines a new association between the primary schema's object type and other
    * object types.
    *
@@ -143,16 +120,39 @@ export class Schemas extends APIResource {
   }
 
   /**
+   * Removes an existing association from a schema.
+   *
+   * @example
+   * ```ts
+   * await client.crm.objects.schemas.deleteAssociation(
+   *   'associationIdentifier',
+   *   { objectType: 'objectType' },
+   * );
+   * ```
+   */
+  deleteAssociation(
+    associationIdentifier: string,
+    params: SchemaDeleteAssociationParams,
+    options?: RequestOptions,
+  ): APIPromise<void> {
+    const { objectType } = params;
+    return this._client.delete(
+      path`/crm-object-schemas/v3/schemas/${objectType}/associations/${associationIdentifier}`,
+      { ...options, headers: buildHeaders([{ Accept: '*/*' }, options?.headers]) },
+    );
+  }
+
+  /**
    * Returns an existing object schema.
    *
    * @example
    * ```ts
-   * const objectSchema = await client.crm.objects.schemas.read(
+   * const objectSchema = await client.crm.objects.schemas.get(
    *   'objectType',
    * );
    * ```
    */
-  read(objectType: string, options?: RequestOptions): APIPromise<ObjectSchema> {
+  get(objectType: string, options?: RequestOptions): APIPromise<ObjectSchema> {
     return this._client.get(path`/crm-object-schemas/v3/schemas/${objectType}`, options);
   }
 }
@@ -579,19 +579,19 @@ export interface SchemaDeleteParams {
   archived?: boolean;
 }
 
-export interface SchemaArchiveAssociationParams {
-  /**
-   * Fully qualified name or object type ID of your schema.
-   */
-  objectType: string;
-}
-
 export interface SchemaCreateAssociationParams {
   fromObjectTypeId: string;
 
   toObjectTypeId: string;
 
   name?: string;
+}
+
+export interface SchemaDeleteAssociationParams {
+  /**
+   * Fully qualified name or object type ID of your schema.
+   */
+  objectType: string;
 }
 
 export declare namespace Schemas {
@@ -605,7 +605,7 @@ export declare namespace Schemas {
     type SchemaUpdateParams as SchemaUpdateParams,
     type SchemaListParams as SchemaListParams,
     type SchemaDeleteParams as SchemaDeleteParams,
-    type SchemaArchiveAssociationParams as SchemaArchiveAssociationParams,
     type SchemaCreateAssociationParams as SchemaCreateAssociationParams,
+    type SchemaDeleteAssociationParams as SchemaDeleteAssociationParams,
   };
 }

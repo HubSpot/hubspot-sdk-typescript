@@ -95,12 +95,12 @@ export class URLRedirects extends APIResource {
    *
    * @example
    * ```ts
-   * const urlMapping = await client.cms.urlRedirects.read(
+   * const urlMapping = await client.cms.urlRedirects.get(
    *   'urlRedirectId',
    * );
    * ```
    */
-  read(urlRedirectID: string, options?: RequestOptions): APIPromise<URLMapping> {
+  get(urlRedirectID: string, options?: RequestOptions): APIPromise<URLMapping> {
     return this._client.get(path`/cms/v3/url-redirects/${urlRedirectID}`, options);
   }
 }

@@ -8,7 +8,7 @@ import {
   Batch,
   BatchCreateParams,
   BatchDeleteParams,
-  BatchReadParams,
+  BatchGetParams,
   BatchUpdateParams,
   BatchUpsertParams,
 } from './batch';
@@ -125,6 +125,29 @@ export class Custom extends APIResource {
   }
 
   /**
+   * Read an Object identified by `{objectId}`. `{objectId}` refers to the internal
+   * object ID by default, or optionally any unique property value as specified by
+   * the `idProperty` query param. Control what is returned via the `properties`
+   * query param.
+   *
+   * @example
+   * ```ts
+   * const simplePublicObjectWithAssociations =
+   *   await client.crm.objects.custom.get('objectId', {
+   *     objectType: 'objectType',
+   *   });
+   * ```
+   */
+  get(
+    objectID: string,
+    params: CustomGetParams,
+    options?: RequestOptions,
+  ): APIPromise<CRMAPI.SimplePublicObjectWithAssociations> {
+    const { objectType, ...query } = params;
+    return this._client.get(path`/crm/v3/objects/${objectType}/${objectID}`, { query, ...options });
+  }
+
+  /**
    * Merge two objects with same type
    *
    * @example
@@ -142,29 +165,6 @@ export class Custom extends APIResource {
     options?: RequestOptions,
   ): APIPromise<CRMAPI.SimplePublicObject> {
     return this._client.post(path`/crm/v3/objects/${objectType}/merge`, { body, ...options });
-  }
-
-  /**
-   * Read an Object identified by `{objectId}`. `{objectId}` refers to the internal
-   * object ID by default, or optionally any unique property value as specified by
-   * the `idProperty` query param. Control what is returned via the `properties`
-   * query param.
-   *
-   * @example
-   * ```ts
-   * const simplePublicObjectWithAssociations =
-   *   await client.crm.objects.custom.read('objectId', {
-   *     objectType: 'objectType',
-   *   });
-   * ```
-   */
-  read(
-    objectID: string,
-    params: CustomReadParams,
-    options?: RequestOptions,
-  ): APIPromise<CRMAPI.SimplePublicObjectWithAssociations> {
-    const { objectType, ...query } = params;
-    return this._client.get(path`/crm/v3/objects/${objectType}/${objectID}`, { query, ...options });
   }
 
   /**
@@ -241,13 +241,7 @@ export interface CustomDeleteParams {
   objectType: string;
 }
 
-export interface CustomMergeParams {
-  objectIdToMerge: string;
-
-  primaryObjectId: string;
-}
-
-export interface CustomReadParams {
+export interface CustomGetParams {
   /**
    * Path param:
    */
@@ -282,6 +276,12 @@ export interface CustomReadParams {
    * present on the requested object(s), they will be ignored.
    */
   propertiesWithHistory?: Array<string>;
+}
+
+export interface CustomMergeParams {
+  objectIdToMerge: string;
+
+  primaryObjectId: string;
 }
 
 export interface CustomSearchParams {
@@ -324,8 +324,8 @@ export declare namespace Custom {
     type CustomUpdateParams as CustomUpdateParams,
     type CustomListParams as CustomListParams,
     type CustomDeleteParams as CustomDeleteParams,
+    type CustomGetParams as CustomGetParams,
     type CustomMergeParams as CustomMergeParams,
-    type CustomReadParams as CustomReadParams,
     type CustomSearchParams as CustomSearchParams,
   };
 
@@ -334,7 +334,7 @@ export declare namespace Custom {
     type BatchCreateParams as BatchCreateParams,
     type BatchUpdateParams as BatchUpdateParams,
     type BatchDeleteParams as BatchDeleteParams,
-    type BatchReadParams as BatchReadParams,
+    type BatchGetParams as BatchGetParams,
     type BatchUpsertParams as BatchUpsertParams,
   };
 }

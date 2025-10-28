@@ -30,8 +30,8 @@ describe('resource revisions', () => {
   });
 
   // Prism tests are disabled
-  test.skip('read: only required params', async () => {
-    const responsePromise = client.automation.actions.revisions.read('revisionId', {
+  test.skip('get: only required params', async () => {
+    const responsePromise = client.automation.actions.revisions.get('revisionId', {
       appId: 0,
       definitionId: 'definitionId',
     });
@@ -45,8 +45,8 @@ describe('resource revisions', () => {
   });
 
   // Prism tests are disabled
-  test.skip('read: required and optional params', async () => {
-    const response = await client.automation.actions.revisions.read('revisionId', {
+  test.skip('get: required and optional params', async () => {
+    const response = await client.automation.actions.revisions.get('revisionId', {
       appId: 0,
       definitionId: 'definitionId',
     });

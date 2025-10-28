@@ -8,24 +8,24 @@ import * as DefinitionsAPI from './definitions';
 import {
   DefinitionCreateParams,
   DefinitionDeleteParams,
+  DefinitionGetParams,
   DefinitionListParams,
-  DefinitionReadParams,
   DefinitionUpdateParams,
   Definitions,
 } from './definitions';
 import * as FunctionsAPI from './functions';
 import {
-  FunctionArchiveByFunctionTypeParams,
   FunctionCreateOrReplaceByFunctionTypeParams,
   FunctionCreateOrReplaceParams,
+  FunctionDeleteByFunctionTypeParams,
   FunctionDeleteParams,
   FunctionGetByFunctionTypeParams,
+  FunctionGetParams,
   FunctionListParams,
-  FunctionReadParams,
   Functions,
 } from './functions';
 import * as RevisionsAPI from './revisions';
-import { RevisionListParams, RevisionReadParams, Revisions } from './revisions';
+import { RevisionGetParams, RevisionListParams, Revisions } from './revisions';
 import { Page } from '../../../core/pagination';
 
 export class Actions extends APIResource {
@@ -478,23 +478,23 @@ export declare namespace Actions {
     type DefinitionUpdateParams as DefinitionUpdateParams,
     type DefinitionListParams as DefinitionListParams,
     type DefinitionDeleteParams as DefinitionDeleteParams,
-    type DefinitionReadParams as DefinitionReadParams,
+    type DefinitionGetParams as DefinitionGetParams,
   };
 
   export {
     Functions as Functions,
     type FunctionListParams as FunctionListParams,
     type FunctionDeleteParams as FunctionDeleteParams,
-    type FunctionArchiveByFunctionTypeParams as FunctionArchiveByFunctionTypeParams,
     type FunctionCreateOrReplaceParams as FunctionCreateOrReplaceParams,
     type FunctionCreateOrReplaceByFunctionTypeParams as FunctionCreateOrReplaceByFunctionTypeParams,
+    type FunctionDeleteByFunctionTypeParams as FunctionDeleteByFunctionTypeParams,
+    type FunctionGetParams as FunctionGetParams,
     type FunctionGetByFunctionTypeParams as FunctionGetByFunctionTypeParams,
-    type FunctionReadParams as FunctionReadParams,
   };
 
   export {
     Revisions as Revisions,
     type RevisionListParams as RevisionListParams,
-    type RevisionReadParams as RevisionReadParams,
+    type RevisionGetParams as RevisionGetParams,
   };
 }

@@ -132,14 +132,14 @@ export class Communications extends APIResource {
    * @example
    * ```ts
    * const simplePublicObjectWithAssociations =
-   *   await client.crm.objects.communications.read(
+   *   await client.crm.objects.communications.get(
    *     'communicationId',
    *   );
    * ```
    */
-  read(
+  get(
     communicationID: string,
-    query: CommunicationReadParams | null | undefined = {},
+    query: CommunicationGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<CRMAPI.SimplePublicObjectWithAssociations> {
     return this._client.get(path`/crm/v3/objects/communications/${communicationID}`, { query, ...options });
@@ -213,7 +213,7 @@ export interface CommunicationListParams extends PageParams {
   propertiesWithHistory?: Array<string>;
 }
 
-export interface CommunicationReadParams {
+export interface CommunicationGetParams {
   /**
    * Whether to return only results that have been archived.
    */
@@ -284,7 +284,7 @@ export declare namespace Communications {
     type CommunicationCreateParams as CommunicationCreateParams,
     type CommunicationUpdateParams as CommunicationUpdateParams,
     type CommunicationListParams as CommunicationListParams,
-    type CommunicationReadParams as CommunicationReadParams,
+    type CommunicationGetParams as CommunicationGetParams,
     type CommunicationSearchParams as CommunicationSearchParams,
   };
 

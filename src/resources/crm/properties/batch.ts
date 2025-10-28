@@ -62,15 +62,15 @@ export class Batch extends APIResource {
    * @example
    * ```ts
    * const batchResponseProperty =
-   *   await client.crm.properties.batch.read('objectType', {
+   *   await client.crm.properties.batch.get('objectType', {
    *     archived: true,
    *     inputs: [{ name: 'name' }],
    *   });
    * ```
    */
-  read(
+  get(
     objectType: string,
-    body: BatchReadParams,
+    body: BatchGetParams,
     options?: RequestOptions,
   ): APIPromise<Shared.BatchResponseProperty> {
     return this._client.post(path`/crm/v3/properties/${objectType}/batch/read`, { body, ...options });
@@ -85,7 +85,7 @@ export interface BatchDeleteParams {
   inputs: Array<Shared.PropertyName>;
 }
 
-export interface BatchReadParams {
+export interface BatchGetParams {
   archived: boolean;
 
   inputs: Array<Shared.PropertyName>;
@@ -97,6 +97,6 @@ export declare namespace Batch {
   export {
     type BatchCreateParams as BatchCreateParams,
     type BatchDeleteParams as BatchDeleteParams,
-    type BatchReadParams as BatchReadParams,
+    type BatchGetParams as BatchGetParams,
   };
 }

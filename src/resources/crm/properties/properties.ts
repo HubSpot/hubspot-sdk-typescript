@@ -3,7 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
 import * as BatchAPI from './batch';
-import { Batch, BatchCreateParams, BatchDeleteParams, BatchReadParams } from './batch';
+import { Batch, BatchCreateParams, BatchDeleteParams, BatchGetParams } from './batch';
 import * as GroupsAPI from './groups';
 import { GroupCreateParams, GroupDeleteParams, GroupGetParams, GroupUpdateParams, Groups } from './groups';
 import * as EmailsAPI from '../../marketing/emails/emails';
@@ -456,7 +456,7 @@ export declare namespace Properties {
     Batch as Batch,
     type BatchCreateParams as BatchCreateParams,
     type BatchDeleteParams as BatchDeleteParams,
-    type BatchReadParams as BatchReadParams,
+    type BatchGetParams as BatchGetParams,
   };
 
   export {

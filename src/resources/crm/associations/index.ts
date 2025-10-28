@@ -7,10 +7,8 @@ export {
   type BatchResponsePublicAssociationMulti,
   type PublicAssociation,
   type PublicAssociationMulti,
-  type AssociationCreateParams,
-  type AssociationDeleteParams,
-  type AssociationReadParams,
 } from './associations';
+export { Batch, type BatchCreateParams, type BatchDeleteParams, type BatchGetParams } from './batch';
 export {
   Schema,
   type CollectionResponsePublicAssociationDefinitionNoPaging,
@@ -38,8 +36,8 @@ export {
   type PublicFetchAssociationsBatchRequest,
   type ReportCreationResponse,
   type StandardError1,
-  type V4CreateDefaultAssociationParams,
-  type V4DeleteAssociationParams,
-  type V4ListAssociationsByTypeParams,
-  type V4UpdateAssociationLabelsParams,
+  type V4CreateParams,
+  type V4UpdateParams,
+  type V4ListParams,
+  type V4DeleteParams,
 } from './v4/index';

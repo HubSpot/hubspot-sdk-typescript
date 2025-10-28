@@ -8,7 +8,7 @@ import {
   Batch,
   BatchCreateParams,
   BatchDeleteParams,
-  BatchReadParams,
+  BatchGetParams,
   BatchUpdateParams,
   BatchUpsertParams,
 } from './batch';
@@ -125,12 +125,12 @@ export class Emails extends APIResource {
    * @example
    * ```ts
    * const simplePublicObjectWithAssociations =
-   *   await client.crm.objects.emails.read('emailId');
+   *   await client.crm.objects.emails.get('emailId');
    * ```
    */
-  read(
+  get(
     emailID: string,
-    query: EmailReadParams | null | undefined = {},
+    query: EmailGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<CRMAPI.SimplePublicObjectWithAssociations> {
     return this._client.get(path`/crm/v3/objects/emails/${emailID}`, { query, ...options });
@@ -200,7 +200,7 @@ export interface EmailListParams extends PageParams {
   propertiesWithHistory?: Array<string>;
 }
 
-export interface EmailReadParams {
+export interface EmailGetParams {
   /**
    * Whether to return only results that have been archived.
    */
@@ -271,7 +271,7 @@ export declare namespace Emails {
     type EmailCreateParams as EmailCreateParams,
     type EmailUpdateParams as EmailUpdateParams,
     type EmailListParams as EmailListParams,
-    type EmailReadParams as EmailReadParams,
+    type EmailGetParams as EmailGetParams,
     type EmailSearchParams as EmailSearchParams,
   };
 
@@ -280,7 +280,7 @@ export declare namespace Emails {
     type BatchCreateParams as BatchCreateParams,
     type BatchUpdateParams as BatchUpdateParams,
     type BatchDeleteParams as BatchDeleteParams,
-    type BatchReadParams as BatchReadParams,
+    type BatchGetParams as BatchGetParams,
     type BatchUpsertParams as BatchUpsertParams,
   };
 }

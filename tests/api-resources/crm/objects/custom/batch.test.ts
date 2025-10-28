@@ -86,8 +86,8 @@ describe('resource batch', () => {
   });
 
   // Prism tests are disabled
-  test.skip('read: only required params', async () => {
-    const responsePromise = client.crm.objects.custom.batch.read('objectType', {
+  test.skip('get: only required params', async () => {
+    const responsePromise = client.crm.objects.custom.batch.get('objectType', {
       inputs: [{ id: 'id' }],
       properties: ['string'],
       propertiesWithHistory: ['string'],
@@ -102,8 +102,8 @@ describe('resource batch', () => {
   });
 
   // Prism tests are disabled
-  test.skip('read: required and optional params', async () => {
-    const response = await client.crm.objects.custom.batch.read('objectType', {
+  test.skip('get: required and optional params', async () => {
+    const response = await client.crm.objects.custom.batch.get('objectType', {
       inputs: [{ id: 'id' }],
       properties: ['string'],
       propertiesWithHistory: ['string'],

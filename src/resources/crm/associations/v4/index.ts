@@ -2,11 +2,11 @@
 
 export {
   Batch,
-  type BatchBatchAssociateDefaultParams,
-  type BatchBatchCreateParams,
-  type BatchBatchDeleteParams,
-  type BatchBatchDeleteLabelsParams,
-  type BatchBatchReadParams,
+  type BatchCreateParams,
+  type BatchDeleteParams,
+  type BatchCreateDefaultParams,
+  type BatchDeleteLabelsParams,
+  type BatchGetParams,
 } from './batch';
 export { Report } from './report';
 export {
@@ -30,8 +30,8 @@ export {
   type PublicFetchAssociationsBatchRequest,
   type ReportCreationResponse,
   type StandardError1,
-  type V4CreateDefaultAssociationParams,
-  type V4DeleteAssociationParams,
-  type V4ListAssociationsByTypeParams,
-  type V4UpdateAssociationLabelsParams,
+  type V4CreateParams,
+  type V4UpdateParams,
+  type V4ListParams,
+  type V4DeleteParams,
 } from './v4';

@@ -33,8 +33,8 @@ describe('resource threads', () => {
   });
 
   // Prism tests are disabled
-  test.skip('archive', async () => {
-    const responsePromise = client.conversations.threads.archive('threadId');
+  test.skip('delete', async () => {
+    const responsePromise = client.conversations.threads.delete('threadId');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

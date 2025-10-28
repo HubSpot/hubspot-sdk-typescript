@@ -51,29 +51,6 @@ describe('resource functions', () => {
   });
 
   // Prism tests are disabled
-  test.skip('archiveByFunctionType: only required params', async () => {
-    const responsePromise = client.automation.actions.functions.archiveByFunctionType(
-      'PRE_ACTION_EXECUTION',
-      { appId: 0, definitionId: 'definitionId' },
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('archiveByFunctionType: required and optional params', async () => {
-    const response = await client.automation.actions.functions.archiveByFunctionType('PRE_ACTION_EXECUTION', {
-      appId: 0,
-      definitionId: 'definitionId',
-    });
-  });
-
-  // Prism tests are disabled
   test.skip('createOrReplace: only required params', async () => {
     const responsePromise = client.automation.actions.functions.createOrReplace('functionId', {
       appId: 0,
@@ -124,6 +101,54 @@ describe('resource functions', () => {
   });
 
   // Prism tests are disabled
+  test.skip('deleteByFunctionType: only required params', async () => {
+    const responsePromise = client.automation.actions.functions.deleteByFunctionType('PRE_ACTION_EXECUTION', {
+      appId: 0,
+      definitionId: 'definitionId',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('deleteByFunctionType: required and optional params', async () => {
+    const response = await client.automation.actions.functions.deleteByFunctionType('PRE_ACTION_EXECUTION', {
+      appId: 0,
+      definitionId: 'definitionId',
+    });
+  });
+
+  // Prism tests are disabled
+  test.skip('get: only required params', async () => {
+    const responsePromise = client.automation.actions.functions.get('functionId', {
+      appId: 0,
+      definitionId: 'definitionId',
+      functionType: 'PRE_ACTION_EXECUTION',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('get: required and optional params', async () => {
+    const response = await client.automation.actions.functions.get('functionId', {
+      appId: 0,
+      definitionId: 'definitionId',
+      functionType: 'PRE_ACTION_EXECUTION',
+    });
+  });
+
+  // Prism tests are disabled
   test.skip('getByFunctionType: only required params', async () => {
     const responsePromise = client.automation.actions.functions.getByFunctionType('PRE_ACTION_EXECUTION', {
       appId: 0,
@@ -143,31 +168,6 @@ describe('resource functions', () => {
     const response = await client.automation.actions.functions.getByFunctionType('PRE_ACTION_EXECUTION', {
       appId: 0,
       definitionId: 'definitionId',
-    });
-  });
-
-  // Prism tests are disabled
-  test.skip('read: only required params', async () => {
-    const responsePromise = client.automation.actions.functions.read('functionId', {
-      appId: 0,
-      definitionId: 'definitionId',
-      functionType: 'PRE_ACTION_EXECUTION',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('read: required and optional params', async () => {
-    const response = await client.automation.actions.functions.read('functionId', {
-      appId: 0,
-      definitionId: 'definitionId',
-      functionType: 'PRE_ACTION_EXECUTION',
     });
   });
 });

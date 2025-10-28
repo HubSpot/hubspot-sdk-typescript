@@ -68,8 +68,8 @@ describe('resource forms', () => {
   });
 
   // Prism tests are disabled
-  test.skip('read', async () => {
-    const responsePromise = client.marketing.forms.read('formId');
+  test.skip('get', async () => {
+    const responsePromise = client.marketing.forms.get('formId');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -80,10 +80,10 @@ describe('resource forms', () => {
   });
 
   // Prism tests are disabled
-  test.skip('read: request options and params are passed correctly', async () => {
+  test.skip('get: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.marketing.forms.read('formId', { archived: true }, { path: '/_stainless_unknown_path' }),
+      client.marketing.forms.get('formId', { archived: true }, { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(HubSpot.NotFoundError);
   });
 

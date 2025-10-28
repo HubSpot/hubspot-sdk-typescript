@@ -37,7 +37,7 @@ export {
   type CommunicationCreateParams,
   type CommunicationUpdateParams,
   type CommunicationListParams,
-  type CommunicationReadParams,
+  type CommunicationGetParams,
   type CommunicationSearchParams,
 } from './communications/index';
 export {
@@ -81,8 +81,8 @@ export {
   type CustomUpdateParams,
   type CustomListParams,
   type CustomDeleteParams,
+  type CustomGetParams,
   type CustomMergeParams,
-  type CustomReadParams,
   type CustomSearchParams,
 } from './custom/index';
 export {
@@ -118,7 +118,7 @@ export {
   type EmailCreateParams,
   type EmailUpdateParams,
   type EmailListParams,
-  type EmailReadParams,
+  type EmailGetParams,
   type EmailSearchParams,
 } from './emails/index';
 export {
@@ -249,8 +249,8 @@ export {
   type SchemaUpdateParams,
   type SchemaListParams,
   type SchemaDeleteParams,
-  type SchemaArchiveAssociationParams,
   type SchemaCreateAssociationParams,
+  type SchemaDeleteAssociationParams,
 } from './schemas';
 export {
   Services,
@@ -290,6 +290,6 @@ export {
   type ObjectUpdateParams,
   type ObjectListParams,
   type ObjectDeleteParams,
-  type ObjectReadParams,
+  type ObjectGetParams,
   type ObjectSearchParams,
 } from './objects_/index';

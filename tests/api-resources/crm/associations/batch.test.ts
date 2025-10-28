@@ -7,10 +7,10 @@ const client = new HubSpot({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource associations', () => {
+describe('resource batch', () => {
   // Prism tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.crm.associations.create('toObjectType', {
+    const responsePromise = client.crm.associations.batch.create('toObjectType', {
       fromObjectType: 'fromObjectType',
       inputs: [{ from: { id: '53628' }, to: { id: '12726' }, type: 'contact_to_company' }],
     });
@@ -25,7 +25,7 @@ describe('resource associations', () => {
 
   // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
-    const response = await client.crm.associations.create('toObjectType', {
+    const response = await client.crm.associations.batch.create('toObjectType', {
       fromObjectType: 'fromObjectType',
       inputs: [{ from: { id: '53628' }, to: { id: '12726' }, type: 'contact_to_company' }],
     });
@@ -33,7 +33,7 @@ describe('resource associations', () => {
 
   // Prism tests are disabled
   test.skip('delete: only required params', async () => {
-    const responsePromise = client.crm.associations.delete('toObjectType', {
+    const responsePromise = client.crm.associations.batch.delete('toObjectType', {
       fromObjectType: 'fromObjectType',
       inputs: [{ from: { id: '53628' }, to: { id: '12726' }, type: 'contact_to_company' }],
     });
@@ -48,15 +48,15 @@ describe('resource associations', () => {
 
   // Prism tests are disabled
   test.skip('delete: required and optional params', async () => {
-    const response = await client.crm.associations.delete('toObjectType', {
+    const response = await client.crm.associations.batch.delete('toObjectType', {
       fromObjectType: 'fromObjectType',
       inputs: [{ from: { id: '53628' }, to: { id: '12726' }, type: 'contact_to_company' }],
     });
   });
 
   // Prism tests are disabled
-  test.skip('read: only required params', async () => {
-    const responsePromise = client.crm.associations.read('toObjectType', {
+  test.skip('get: only required params', async () => {
+    const responsePromise = client.crm.associations.batch.get('toObjectType', {
       fromObjectType: 'fromObjectType',
       inputs: [{ id: '37295' }],
     });
@@ -70,8 +70,8 @@ describe('resource associations', () => {
   });
 
   // Prism tests are disabled
-  test.skip('read: required and optional params', async () => {
-    const response = await client.crm.associations.read('toObjectType', {
+  test.skip('get: required and optional params', async () => {
+    const response = await client.crm.associations.batch.get('toObjectType', {
       fromObjectType: 'fromObjectType',
       inputs: [{ id: '37295' }],
     });

@@ -5,7 +5,7 @@ export {
   type BatchCreateParams,
   type BatchUpdateParams,
   type BatchDeleteParams,
-  type BatchReadParams,
+  type BatchGetParams,
   type BatchUpsertParams,
 } from './batch';
 export {
@@ -13,6 +13,6 @@ export {
   type EmailCreateParams,
   type EmailUpdateParams,
   type EmailListParams,
-  type EmailReadParams,
+  type EmailGetParams,
   type EmailSearchParams,
 } from './emails';

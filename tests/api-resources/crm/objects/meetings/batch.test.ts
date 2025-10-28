@@ -69,8 +69,8 @@ describe('resource batch', () => {
   });
 
   // Prism tests are disabled
-  test.skip('archive: only required params', async () => {
-    const responsePromise = client.crm.objects.meetings.batch.archive({ inputs: [{ id: 'id' }] });
+  test.skip('delete: only required params', async () => {
+    const responsePromise = client.crm.objects.meetings.batch.delete({ inputs: [{ id: 'id' }] });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -81,13 +81,13 @@ describe('resource batch', () => {
   });
 
   // Prism tests are disabled
-  test.skip('archive: required and optional params', async () => {
-    const response = await client.crm.objects.meetings.batch.archive({ inputs: [{ id: 'id' }] });
+  test.skip('delete: required and optional params', async () => {
+    const response = await client.crm.objects.meetings.batch.delete({ inputs: [{ id: 'id' }] });
   });
 
   // Prism tests are disabled
-  test.skip('read: only required params', async () => {
-    const responsePromise = client.crm.objects.meetings.batch.read({
+  test.skip('get: only required params', async () => {
+    const responsePromise = client.crm.objects.meetings.batch.get({
       inputs: [{ id: 'id' }],
       properties: ['string'],
       propertiesWithHistory: ['string'],
@@ -102,8 +102,8 @@ describe('resource batch', () => {
   });
 
   // Prism tests are disabled
-  test.skip('read: required and optional params', async () => {
-    const response = await client.crm.objects.meetings.batch.read({
+  test.skip('get: required and optional params', async () => {
+    const response = await client.crm.objects.meetings.batch.get({
       inputs: [{ id: 'id' }],
       properties: ['string'],
       propertiesWithHistory: ['string'],

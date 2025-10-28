@@ -129,12 +129,12 @@ export class Batch extends APIResource {
    * @example
    * ```ts
    * const batchResponseBlogPost =
-   *   await client.cms.blogs.posts.batch.read({
+   *   await client.cms.blogs.posts.batch.get({
    *     inputs: ['string'],
    *   });
    * ```
    */
-  read(params: BatchReadParams, options?: RequestOptions): APIPromise<PostsAPI.BatchResponseBlogPost> {
+  get(params: BatchGetParams, options?: RequestOptions): APIPromise<PostsAPI.BatchResponseBlogPost> {
     const { archived, ...body } = params;
     return this._client.post('/cms/v3/blogs/posts/batch/read', { query: { archived }, body, ...options });
   }
@@ -167,7 +167,7 @@ export interface BatchDeleteParams {
   inputs: Array<string>;
 }
 
-export interface BatchReadParams {
+export interface BatchGetParams {
   /**
    * Body param: Strings to input.
    */
@@ -184,6 +184,6 @@ export declare namespace Batch {
     type BatchCreateParams as BatchCreateParams,
     type BatchUpdateParams as BatchUpdateParams,
     type BatchDeleteParams as BatchDeleteParams,
-    type BatchReadParams as BatchReadParams,
+    type BatchGetParams as BatchGetParams,
   };
 }

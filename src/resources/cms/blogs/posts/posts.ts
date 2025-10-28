@@ -6,7 +6,7 @@ import * as CmsAPI from '../../cms';
 import * as PagesAPI from '../../pages/pages';
 import * as EmailsAPI from '../../../marketing/emails/emails';
 import * as BatchAPI from './batch';
-import { Batch, BatchCreateParams, BatchDeleteParams, BatchReadParams, BatchUpdateParams } from './batch';
+import { Batch, BatchCreateParams, BatchDeleteParams, BatchGetParams, BatchUpdateParams } from './batch';
 import { APIPromise } from '../../../../core/api-promise';
 import { Page, type PageParams, PagePromise } from '../../../../core/pagination';
 import { buildHeaders } from '../../../../internal/headers';
@@ -291,6 +291,24 @@ export class Posts extends APIResource {
   }
 
   /**
+   * Retrieve a blog post by the post ID.
+   *
+   * @example
+   * ```ts
+   * const blogPost = await client.cms.blogs.posts.get(
+   *   'objectId',
+   * );
+   * ```
+   */
+  get(
+    objectID: string,
+    query: PostGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<BlogPost> {
+    return this._client.get(path`/cms/v3/blogs/posts/${objectID}`, { query, ...options });
+  }
+
+  /**
    * Retrieve the full draft version of a blog post.
    *
    * @example
@@ -363,24 +381,6 @@ export class Posts extends APIResource {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
-  }
-
-  /**
-   * Retrieve a blog post by the post ID.
-   *
-   * @example
-   * ```ts
-   * const blogPost = await client.cms.blogs.posts.read(
-   *   'objectId',
-   * );
-   * ```
-   */
-  read(
-    objectID: string,
-    query: PostReadParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<BlogPost> {
-    return this._client.get(path`/cms/v3/blogs/posts/${objectID}`, { query, ...options });
   }
 
   /**
@@ -4217,18 +4217,7 @@ export interface PostDetachFromLangGroupParams {
   id: string;
 }
 
-export interface PostGetPreviousVersionParams {
-  /**
-   * The ID of the blog post.
-   */
-  objectId: string;
-}
-
-export interface PostGetPreviousVersionsParams extends PageParams {
-  before?: string;
-}
-
-export interface PostReadParams {
+export interface PostGetParams {
   /**
    * Specifies whether to return deleted blog posts. Defaults to `false`.
    */
@@ -4238,6 +4227,17 @@ export interface PostReadParams {
    * Specific properties to return.
    */
   property?: string;
+}
+
+export interface PostGetPreviousVersionParams {
+  /**
+   * The ID of the blog post.
+   */
+  objectId: string;
+}
+
+export interface PostGetPreviousVersionsParams extends PageParams {
+  before?: string;
 }
 
 export interface PostRestorePreviousVersionParams {
@@ -5395,9 +5395,9 @@ export declare namespace Posts {
     type PostCloneParams as PostCloneParams,
     type PostCreateLangVariationParams as PostCreateLangVariationParams,
     type PostDetachFromLangGroupParams as PostDetachFromLangGroupParams,
+    type PostGetParams as PostGetParams,
     type PostGetPreviousVersionParams as PostGetPreviousVersionParams,
     type PostGetPreviousVersionsParams as PostGetPreviousVersionsParams,
-    type PostReadParams as PostReadParams,
     type PostRestorePreviousVersionParams as PostRestorePreviousVersionParams,
     type PostRestorePreviousVersionToDraftParams as PostRestorePreviousVersionToDraftParams,
     type PostScheduleParams as PostScheduleParams,
@@ -5411,6 +5411,6 @@ export declare namespace Posts {
     type BatchCreateParams as BatchCreateParams,
     type BatchUpdateParams as BatchUpdateParams,
     type BatchDeleteParams as BatchDeleteParams,
-    type BatchReadParams as BatchReadParams,
+    type BatchGetParams as BatchGetParams,
   };
 }

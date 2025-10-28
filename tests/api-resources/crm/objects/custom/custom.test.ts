@@ -119,6 +119,30 @@ describe('resource custom', () => {
   });
 
   // Prism tests are disabled
+  test.skip('get: only required params', async () => {
+    const responsePromise = client.crm.objects.custom.get('objectId', { objectType: 'objectType' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('get: required and optional params', async () => {
+    const response = await client.crm.objects.custom.get('objectId', {
+      objectType: 'objectType',
+      archived: true,
+      associations: ['string'],
+      idProperty: 'idProperty',
+      properties: ['string'],
+      propertiesWithHistory: ['string'],
+    });
+  });
+
+  // Prism tests are disabled
   test.skip('merge: only required params', async () => {
     const responsePromise = client.crm.objects.custom.merge('objectType', {
       objectIdToMerge: 'objectIdToMerge',
@@ -138,30 +162,6 @@ describe('resource custom', () => {
     const response = await client.crm.objects.custom.merge('objectType', {
       objectIdToMerge: 'objectIdToMerge',
       primaryObjectId: 'primaryObjectId',
-    });
-  });
-
-  // Prism tests are disabled
-  test.skip('read: only required params', async () => {
-    const responsePromise = client.crm.objects.custom.read('objectId', { objectType: 'objectType' });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('read: required and optional params', async () => {
-    const response = await client.crm.objects.custom.read('objectId', {
-      objectType: 'objectType',
-      archived: true,
-      associations: ['string'],
-      idProperty: 'idProperty',
-      properties: ['string'],
-      propertiesWithHistory: ['string'],
     });
   });
 

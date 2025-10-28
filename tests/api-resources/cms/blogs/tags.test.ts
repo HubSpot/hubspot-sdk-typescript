@@ -131,23 +131,6 @@ describe('resource tags', () => {
   });
 
   // Prism tests are disabled
-  test.skip('archiveBatch: only required params', async () => {
-    const responsePromise = client.cms.blogs.tags.archiveBatch({ inputs: ['string'] });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('archiveBatch: required and optional params', async () => {
-    const response = await client.cms.blogs.tags.archiveBatch({ inputs: ['string'] });
-  });
-
-  // Prism tests are disabled
   test.skip('attachToLangGroup: only required params', async () => {
     const responsePromise = client.cms.blogs.tags.attachToLangGroup({
       id: 'id',
@@ -237,6 +220,23 @@ describe('resource tags', () => {
   });
 
   // Prism tests are disabled
+  test.skip('deleteBatch: only required params', async () => {
+    const responsePromise = client.cms.blogs.tags.deleteBatch({ inputs: ['string'] });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('deleteBatch: required and optional params', async () => {
+    const response = await client.cms.blogs.tags.deleteBatch({ inputs: ['string'] });
+  });
+
+  // Prism tests are disabled
   test.skip('detachFromLangGroup: only required params', async () => {
     const responsePromise = client.cms.blogs.tags.detachFromLangGroup({ id: 'id' });
     const rawResponse = await responsePromise.asResponse();
@@ -254,8 +254,8 @@ describe('resource tags', () => {
   });
 
   // Prism tests are disabled
-  test.skip('read', async () => {
-    const responsePromise = client.cms.blogs.tags.read('objectId');
+  test.skip('get', async () => {
+    const responsePromise = client.cms.blogs.tags.get('objectId');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -266,10 +266,10 @@ describe('resource tags', () => {
   });
 
   // Prism tests are disabled
-  test.skip('read: request options and params are passed correctly', async () => {
+  test.skip('get: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.cms.blogs.tags.read(
+      client.cms.blogs.tags.get(
         'objectId',
         { archived: true, property: 'property' },
         { path: '/_stainless_unknown_path' },
@@ -278,8 +278,8 @@ describe('resource tags', () => {
   });
 
   // Prism tests are disabled
-  test.skip('readBatch: only required params', async () => {
-    const responsePromise = client.cms.blogs.tags.readBatch({ inputs: ['string'] });
+  test.skip('getBatch: only required params', async () => {
+    const responsePromise = client.cms.blogs.tags.getBatch({ inputs: ['string'] });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -290,8 +290,8 @@ describe('resource tags', () => {
   });
 
   // Prism tests are disabled
-  test.skip('readBatch: required and optional params', async () => {
-    const response = await client.cms.blogs.tags.readBatch({ inputs: ['string'], archived: true });
+  test.skip('getBatch: required and optional params', async () => {
+    const response = await client.cms.blogs.tags.getBatch({ inputs: ['string'], archived: true });
   });
 
   // Prism tests are disabled

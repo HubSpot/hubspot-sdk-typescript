@@ -3,6 +3,8 @@
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
 import * as CRMAPI from '../crm';
+import * as BatchAPI from './batch';
+import { Batch, BatchCreateParams, BatchDeleteParams, BatchGetParams } from './batch';
 import * as EmailsAPI from '../../marketing/emails/emails';
 import * as SchemaAPI from './schema/schema';
 import {
@@ -33,93 +35,16 @@ import {
   ReportCreationResponse,
   StandardError1,
   V4,
-  V4CreateDefaultAssociationParams,
-  V4DeleteAssociationParams,
-  V4ListAssociationsByTypeParams,
-  V4UpdateAssociationLabelsParams,
+  V4CreateParams,
+  V4DeleteParams,
+  V4ListParams,
+  V4UpdateParams,
 } from './v4/v4';
-import { APIPromise } from '../../../core/api-promise';
-import { buildHeaders } from '../../../internal/headers';
-import { RequestOptions } from '../../../internal/request-options';
-import { path } from '../../../internal/utils/path';
 
 export class Associations extends APIResource {
+  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
   schema: SchemaAPI.Schema = new SchemaAPI.Schema(this._client);
   v4: V4API.V4 = new V4API.V4(this._client);
-
-  /**
-   * @example
-   * ```ts
-   * const batchResponsePublicAssociation =
-   *   await client.crm.associations.create('toObjectType', {
-   *     fromObjectType: 'fromObjectType',
-   *     inputs: [
-   *       {
-   *         from: { id: '53628' },
-   *         to: { id: '12726' },
-   *         type: 'contact_to_company',
-   *       },
-   *     ],
-   *   });
-   * ```
-   */
-  create(
-    toObjectType: string,
-    params: AssociationCreateParams,
-    options?: RequestOptions,
-  ): APIPromise<BatchResponsePublicAssociation> {
-    const { fromObjectType, ...body } = params;
-    return this._client.post(path`/crm/v3/associations/${fromObjectType}/${toObjectType}/batch/create`, {
-      body,
-      ...options,
-    });
-  }
-
-  /**
-   * @example
-   * ```ts
-   * await client.crm.associations.delete('toObjectType', {
-   *   fromObjectType: 'fromObjectType',
-   *   inputs: [
-   *     {
-   *       from: { id: '53628' },
-   *       to: { id: '12726' },
-   *       type: 'contact_to_company',
-   *     },
-   *   ],
-   * });
-   * ```
-   */
-  delete(toObjectType: string, params: AssociationDeleteParams, options?: RequestOptions): APIPromise<void> {
-    const { fromObjectType, ...body } = params;
-    return this._client.post(path`/crm/v3/associations/${fromObjectType}/${toObjectType}/batch/archive`, {
-      body,
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
-  }
-
-  /**
-   * @example
-   * ```ts
-   * const batchResponsePublicAssociationMulti =
-   *   await client.crm.associations.read('toObjectType', {
-   *     fromObjectType: 'fromObjectType',
-   *     inputs: [{ id: '37295' }],
-   *   });
-   * ```
-   */
-  read(
-    toObjectType: string,
-    params: AssociationReadParams,
-    options?: RequestOptions,
-  ): APIPromise<BatchResponsePublicAssociationMulti> {
-    const { fromObjectType, ...body } = params;
-    return this._client.post(path`/crm/v3/associations/${fromObjectType}/${toObjectType}/batch/read`, {
-      body,
-      ...options,
-    });
-  }
 }
 
 export interface BatchInputPublicAssociation {
@@ -185,42 +110,7 @@ export interface PublicAssociationMulti {
   paging?: EmailsAPI.Paging;
 }
 
-export interface AssociationCreateParams {
-  /**
-   * Path param: The type of the object from which associations will be created.
-   */
-  fromObjectType: string;
-
-  /**
-   * Body param:
-   */
-  inputs: Array<PublicAssociation>;
-}
-
-export interface AssociationDeleteParams {
-  /**
-   * Path param: The type of the object from which associations will be removed.
-   */
-  fromObjectType: string;
-
-  /**
-   * Body param:
-   */
-  inputs: Array<PublicAssociation>;
-}
-
-export interface AssociationReadParams {
-  /**
-   * Path param: The type of the object from which associations will be read.
-   */
-  fromObjectType: string;
-
-  /**
-   * Body param:
-   */
-  inputs: Array<Shared.PublicObjectID>;
-}
-
+Associations.Batch = Batch;
 Associations.Schema = Schema;
 Associations.V4 = V4;
 
@@ -231,9 +121,13 @@ export declare namespace Associations {
     type BatchResponsePublicAssociationMulti as BatchResponsePublicAssociationMulti,
     type PublicAssociation as PublicAssociation,
     type PublicAssociationMulti as PublicAssociationMulti,
-    type AssociationCreateParams as AssociationCreateParams,
-    type AssociationDeleteParams as AssociationDeleteParams,
-    type AssociationReadParams as AssociationReadParams,
+  };
+
+  export {
+    Batch as Batch,
+    type BatchCreateParams as BatchCreateParams,
+    type BatchDeleteParams as BatchDeleteParams,
+    type BatchGetParams as BatchGetParams,
   };
 
   export {
@@ -264,9 +158,9 @@ export declare namespace Associations {
     type PublicFetchAssociationsBatchRequest as PublicFetchAssociationsBatchRequest,
     type ReportCreationResponse as ReportCreationResponse,
     type StandardError1 as StandardError1,
-    type V4CreateDefaultAssociationParams as V4CreateDefaultAssociationParams,
-    type V4DeleteAssociationParams as V4DeleteAssociationParams,
-    type V4ListAssociationsByTypeParams as V4ListAssociationsByTypeParams,
-    type V4UpdateAssociationLabelsParams as V4UpdateAssociationLabelsParams,
+    type V4CreateParams as V4CreateParams,
+    type V4UpdateParams as V4UpdateParams,
+    type V4ListParams as V4ListParams,
+    type V4DeleteParams as V4DeleteParams,
   };
 }
