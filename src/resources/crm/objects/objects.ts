@@ -20,9 +20,9 @@ import {
   ObjectTypeDefinition,
   ObjectTypeDefinitionPatch,
   ObjectTypePropertyCreate,
-  SchemaArchiveAssociationParams,
   SchemaCreateAssociationParams,
   SchemaCreateParams,
+  SchemaDeleteAssociationParams,
   SchemaDeleteParams,
   SchemaListParams,
   SchemaUpdateParams,
@@ -67,8 +67,8 @@ import {
 import * as CommunicationsAPI from './communications/communications';
 import {
   CommunicationCreateParams,
+  CommunicationGetParams,
   CommunicationListParams,
-  CommunicationReadParams,
   CommunicationSearchParams,
   CommunicationUpdateParams,
   Communications,
@@ -117,9 +117,9 @@ import {
   Custom,
   CustomCreateParams,
   CustomDeleteParams,
+  CustomGetParams,
   CustomListParams,
   CustomMergeParams,
-  CustomReadParams,
   CustomSearchParams,
   CustomUpdateParams,
 } from './custom/custom';
@@ -145,8 +145,8 @@ import {
 import * as EmailsAPI from './emails/emails';
 import {
   EmailCreateParams,
+  EmailGetParams,
   EmailListParams,
-  EmailReadParams,
   EmailSearchParams,
   EmailUpdateParams,
   Emails,
@@ -234,8 +234,8 @@ import * as ObjectsAPI from './objects_/objects_';
 import {
   ObjectCreateParams,
   ObjectDeleteParams,
+  ObjectGetParams,
   ObjectListParams,
-  ObjectReadParams,
   ObjectSearchParams,
   ObjectUpdateParams,
   Objects as ObjectsAPIObjects,
@@ -449,7 +449,7 @@ export declare namespace Objects {
     type CommunicationCreateParams as CommunicationCreateParams,
     type CommunicationUpdateParams as CommunicationUpdateParams,
     type CommunicationListParams as CommunicationListParams,
-    type CommunicationReadParams as CommunicationReadParams,
+    type CommunicationGetParams as CommunicationGetParams,
     type CommunicationSearchParams as CommunicationSearchParams,
   };
 
@@ -498,8 +498,8 @@ export declare namespace Objects {
     type CustomUpdateParams as CustomUpdateParams,
     type CustomListParams as CustomListParams,
     type CustomDeleteParams as CustomDeleteParams,
+    type CustomGetParams as CustomGetParams,
     type CustomMergeParams as CustomMergeParams,
-    type CustomReadParams as CustomReadParams,
     type CustomSearchParams as CustomSearchParams,
   };
 
@@ -539,7 +539,7 @@ export declare namespace Objects {
     type EmailCreateParams as EmailCreateParams,
     type EmailUpdateParams as EmailUpdateParams,
     type EmailListParams as EmailListParams,
-    type EmailReadParams as EmailReadParams,
+    type EmailGetParams as EmailGetParams,
     type EmailSearchParams as EmailSearchParams,
   };
 
@@ -628,7 +628,7 @@ export declare namespace Objects {
     type ObjectUpdateParams as ObjectUpdateParams,
     type ObjectListParams as ObjectListParams,
     type ObjectDeleteParams as ObjectDeleteParams,
-    type ObjectReadParams as ObjectReadParams,
+    type ObjectGetParams as ObjectGetParams,
     type ObjectSearchParams as ObjectSearchParams,
   };
 
@@ -695,8 +695,8 @@ export declare namespace Objects {
     type SchemaUpdateParams as SchemaUpdateParams,
     type SchemaListParams as SchemaListParams,
     type SchemaDeleteParams as SchemaDeleteParams,
-    type SchemaArchiveAssociationParams as SchemaArchiveAssociationParams,
     type SchemaCreateAssociationParams as SchemaCreateAssociationParams,
+    type SchemaDeleteAssociationParams as SchemaDeleteAssociationParams,
   };
 
   export {

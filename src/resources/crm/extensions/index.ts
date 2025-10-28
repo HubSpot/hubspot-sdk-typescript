@@ -41,4 +41,5 @@ export {
   type CardGetParams,
 } from './cards';
 export { Extensions } from './extensions';
-export { Videoconferencing, type ExternalSettings } from './videoconferencing/index';
+export { VideoConferencing } from './video-conferencing/index';
+export { Videoconferencing, type ExternalSettings } from './videoconferencing';

@@ -8,9 +8,6 @@ export {
   type BatchResponsePublicAssociationMulti,
   type PublicAssociation,
   type PublicAssociationMulti,
-  type AssociationCreateParams,
-  type AssociationDeleteParams,
-  type AssociationReadParams,
 } from './associations/index';
 export { CRM } from './crm';
 export {

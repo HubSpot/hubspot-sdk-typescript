@@ -5,7 +5,7 @@ export {
   type BatchCreateParams,
   type BatchUpdateParams,
   type BatchDeleteParams,
-  type BatchReadParams,
+  type BatchGetParams,
   type BatchUpsertParams,
 } from './batch';
 export {
@@ -14,7 +14,7 @@ export {
   type CustomUpdateParams,
   type CustomListParams,
   type CustomDeleteParams,
+  type CustomGetParams,
   type CustomMergeParams,
-  type CustomReadParams,
   type CustomSearchParams,
 } from './custom';

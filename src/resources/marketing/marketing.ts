@@ -17,9 +17,9 @@ import {
   FormDefinitionBase,
   FormDefinitionCreateRequestBase,
   FormDisplayOptions,
+  FormGetParams,
   FormListParams,
   FormPostSubmitAction,
-  FormReadParams,
   FormReplaceParams,
   FormStyle,
   FormUpdateParams,
@@ -602,7 +602,7 @@ export declare namespace Marketing {
     type FormCreateParams as FormCreateParams,
     type FormUpdateParams as FormUpdateParams,
     type FormListParams as FormListParams,
-    type FormReadParams as FormReadParams,
+    type FormGetParams as FormGetParams,
     type FormReplaceParams as FormReplaceParams,
   };
 

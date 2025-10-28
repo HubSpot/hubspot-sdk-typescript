@@ -28,9 +28,9 @@ export class Revisions extends APIResource {
   /**
    * Retrieve a specific revision of a definition by revision ID.
    */
-  read(
+  get(
     revisionID: string,
-    params: RevisionReadParams,
+    params: RevisionGetParams,
     options?: RequestOptions,
   ): APIPromise<ActionsAPI.PublicActionRevision> {
     const { appId, definitionId } = params;
@@ -48,7 +48,7 @@ export interface RevisionListParams extends PageParams {
   appId: number;
 }
 
-export interface RevisionReadParams {
+export interface RevisionGetParams {
   /**
    * The ID of the app.
    */
@@ -61,7 +61,7 @@ export interface RevisionReadParams {
 }
 
 export declare namespace Revisions {
-  export { type RevisionListParams as RevisionListParams, type RevisionReadParams as RevisionReadParams };
+  export { type RevisionListParams as RevisionListParams, type RevisionGetParams as RevisionGetParams };
 }
 
 export { type PublicActionRevisionsPage };

@@ -5,7 +5,7 @@ export {
   type BatchCreateParams,
   type BatchUpdateParams,
   type BatchDeleteParams,
-  type BatchReadParams,
+  type BatchGetParams,
 } from './batch';
 export {
   Posts,
@@ -29,9 +29,9 @@ export {
   type PostCloneParams,
   type PostCreateLangVariationParams,
   type PostDetachFromLangGroupParams,
+  type PostGetParams,
   type PostGetPreviousVersionParams,
   type PostGetPreviousVersionsParams,
-  type PostReadParams,
   type PostRestorePreviousVersionParams,
   type PostRestorePreviousVersionToDraftParams,
   type PostScheduleParams,

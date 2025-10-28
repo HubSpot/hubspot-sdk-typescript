@@ -59,12 +59,12 @@ export class Batch extends APIResource {
    *
    * @example
    * ```ts
-   * await client.crm.objects.contacts.batch.archive({
+   * await client.crm.objects.contacts.batch.delete({
    *   inputs: [{ id: 'id' }],
    * });
    * ```
    */
-  archive(body: BatchArchiveParams, options?: RequestOptions): APIPromise<void> {
+  delete(body: BatchDeleteParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/crm/v3/objects/contacts/batch/archive', {
       body,
       ...options,
@@ -79,17 +79,14 @@ export class Batch extends APIResource {
    * @example
    * ```ts
    * const batchResponseSimplePublicObject =
-   *   await client.crm.objects.contacts.batch.read({
+   *   await client.crm.objects.contacts.batch.get({
    *     inputs: [{ id: 'id' }],
    *     properties: ['string'],
    *     propertiesWithHistory: ['string'],
    *   });
    * ```
    */
-  read(
-    params: BatchReadParams,
-    options?: RequestOptions,
-  ): APIPromise<CRMAPI.BatchResponseSimplePublicObject> {
+  get(params: BatchGetParams, options?: RequestOptions): APIPromise<CRMAPI.BatchResponseSimplePublicObject> {
     const { archived, ...body } = params;
     return this._client.post('/crm/v3/objects/contacts/batch/read', {
       query: { archived },
@@ -126,11 +123,11 @@ export interface BatchUpdateParams {
   inputs: Array<CRMAPI.SimplePublicObjectBatchInput>;
 }
 
-export interface BatchArchiveParams {
+export interface BatchDeleteParams {
   inputs: Array<CRMAPI.SimplePublicObjectID>;
 }
 
-export interface BatchReadParams {
+export interface BatchGetParams {
   /**
    * Body param:
    */
@@ -167,8 +164,8 @@ export declare namespace Batch {
   export {
     type BatchCreateParams as BatchCreateParams,
     type BatchUpdateParams as BatchUpdateParams,
-    type BatchArchiveParams as BatchArchiveParams,
-    type BatchReadParams as BatchReadParams,
+    type BatchDeleteParams as BatchDeleteParams,
+    type BatchGetParams as BatchGetParams,
     type BatchUpsertParams as BatchUpsertParams,
   };
 }

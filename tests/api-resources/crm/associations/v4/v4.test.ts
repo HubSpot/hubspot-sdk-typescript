@@ -9,8 +9,8 @@ const client = new HubSpot({
 
 describe('resource v4', () => {
   // Prism tests are disabled
-  test.skip('createDefaultAssociation: only required params', async () => {
-    const responsePromise = client.crm.associations.v4.createDefaultAssociation('toObjectId', {
+  test.skip('create: only required params', async () => {
+    const responsePromise = client.crm.associations.v4.create('toObjectId', {
       fromObjectType: 'fromObjectType',
       fromObjectId: 'fromObjectId',
       toObjectType: 'toObjectType',
@@ -25,8 +25,8 @@ describe('resource v4', () => {
   });
 
   // Prism tests are disabled
-  test.skip('createDefaultAssociation: required and optional params', async () => {
-    const response = await client.crm.associations.v4.createDefaultAssociation('toObjectId', {
+  test.skip('create: required and optional params', async () => {
+    const response = await client.crm.associations.v4.create('toObjectId', {
       fromObjectType: 'fromObjectType',
       fromObjectId: 'fromObjectId',
       toObjectType: 'toObjectType',
@@ -34,11 +34,12 @@ describe('resource v4', () => {
   });
 
   // Prism tests are disabled
-  test.skip('deleteAssociation: only required params', async () => {
-    const responsePromise = client.crm.associations.v4.deleteAssociation('toObjectId', {
+  test.skip('update: only required params', async () => {
+    const responsePromise = client.crm.associations.v4.update('toObjectId', {
       objectType: 'objectType',
       objectId: 'objectId',
       toObjectType: 'toObjectType',
+      body: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -50,17 +51,18 @@ describe('resource v4', () => {
   });
 
   // Prism tests are disabled
-  test.skip('deleteAssociation: required and optional params', async () => {
-    const response = await client.crm.associations.v4.deleteAssociation('toObjectId', {
+  test.skip('update: required and optional params', async () => {
+    const response = await client.crm.associations.v4.update('toObjectId', {
       objectType: 'objectType',
       objectId: 'objectId',
       toObjectType: 'toObjectType',
+      body: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
     });
   });
 
   // Prism tests are disabled
-  test.skip('listAssociationsByType: only required params', async () => {
-    const responsePromise = client.crm.associations.v4.listAssociationsByType('toObjectType', {
+  test.skip('list: only required params', async () => {
+    const responsePromise = client.crm.associations.v4.list('toObjectType', {
       objectType: 'objectType',
       objectId: 'objectId',
     });
@@ -74,8 +76,8 @@ describe('resource v4', () => {
   });
 
   // Prism tests are disabled
-  test.skip('listAssociationsByType: required and optional params', async () => {
-    const response = await client.crm.associations.v4.listAssociationsByType('toObjectType', {
+  test.skip('list: required and optional params', async () => {
+    const response = await client.crm.associations.v4.list('toObjectType', {
       objectType: 'objectType',
       objectId: 'objectId',
       after: 'after',
@@ -84,12 +86,11 @@ describe('resource v4', () => {
   });
 
   // Prism tests are disabled
-  test.skip('updateAssociationLabels: only required params', async () => {
-    const responsePromise = client.crm.associations.v4.updateAssociationLabels('toObjectId', {
+  test.skip('delete: only required params', async () => {
+    const responsePromise = client.crm.associations.v4.delete('toObjectId', {
       objectType: 'objectType',
       objectId: 'objectId',
       toObjectType: 'toObjectType',
-      body: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -101,12 +102,11 @@ describe('resource v4', () => {
   });
 
   // Prism tests are disabled
-  test.skip('updateAssociationLabels: required and optional params', async () => {
-    const response = await client.crm.associations.v4.updateAssociationLabels('toObjectId', {
+  test.skip('delete: required and optional params', async () => {
+    const response = await client.crm.associations.v4.delete('toObjectId', {
       objectType: 'objectType',
       objectId: 'objectId',
       toObjectType: 'toObjectType',
-      body: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
     });
   });
 });

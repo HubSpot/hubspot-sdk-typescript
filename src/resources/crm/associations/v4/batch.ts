@@ -9,41 +9,12 @@ import { path } from '../../../../internal/utils/path';
 
 export class Batch extends APIResource {
   /**
-   * Create the default (most generic) association type between two object types
-   *
-   * @example
-   * ```ts
-   * const batchResponsePublicDefaultAssociation =
-   *   await client.crm.associations.v4.batch.batchAssociateDefault(
-   *     'toObjectType',
-   *     {
-   *       fromObjectType: 'fromObjectType',
-   *       inputs: [
-   *         { from: { id: '37295' }, to: { id: '37295' } },
-   *       ],
-   *     },
-   *   );
-   * ```
-   */
-  batchAssociateDefault(
-    toObjectType: string,
-    params: BatchBatchAssociateDefaultParams,
-    options?: RequestOptions,
-  ): APIPromise<CRMAPI.BatchResponsePublicDefaultAssociation> {
-    const { fromObjectType, ...body } = params;
-    return this._client.post(
-      path`/crm/v4/associations/${fromObjectType}/${toObjectType}/batch/associate/default`,
-      { body, ...options },
-    );
-  }
-
-  /**
    * Batch create associations for objects
    *
    * @example
    * ```ts
    * const batchResponseLabelsBetweenObjectPair =
-   *   await client.crm.associations.v4.batch.batchCreate(
+   *   await client.crm.associations.v4.batch.create(
    *     'toObjectType',
    *     {
    *       fromObjectType: 'fromObjectType',
@@ -63,9 +34,9 @@ export class Batch extends APIResource {
    *   );
    * ```
    */
-  batchCreate(
+  create(
     toObjectType: string,
-    params: BatchBatchCreateParams,
+    params: BatchCreateParams,
     options?: RequestOptions,
   ): APIPromise<V4API.BatchResponseLabelsBetweenObjectPair> {
     const { fromObjectType, ...body } = params;
@@ -81,7 +52,7 @@ export class Batch extends APIResource {
    * @example
    * ```ts
    * const batchResponseVoid =
-   *   await client.crm.associations.v4.batch.batchDelete(
+   *   await client.crm.associations.v4.batch.delete(
    *     'toObjectType',
    *     {
    *       fromObjectType: 'fromObjectType',
@@ -92,9 +63,9 @@ export class Batch extends APIResource {
    *   );
    * ```
    */
-  batchDelete(
+  delete(
     toObjectType: string,
-    params: BatchBatchDeleteParams,
+    params: BatchDeleteParams,
     options?: RequestOptions,
   ): APIPromise<V4API.BatchResponseVoid> {
     const { fromObjectType, ...body } = params;
@@ -105,13 +76,42 @@ export class Batch extends APIResource {
   }
 
   /**
+   * Create the default (most generic) association type between two object types
+   *
+   * @example
+   * ```ts
+   * const batchResponsePublicDefaultAssociation =
+   *   await client.crm.associations.v4.batch.createDefault(
+   *     'toObjectType',
+   *     {
+   *       fromObjectType: 'fromObjectType',
+   *       inputs: [
+   *         { from: { id: '37295' }, to: { id: '37295' } },
+   *       ],
+   *     },
+   *   );
+   * ```
+   */
+  createDefault(
+    toObjectType: string,
+    params: BatchCreateDefaultParams,
+    options?: RequestOptions,
+  ): APIPromise<CRMAPI.BatchResponsePublicDefaultAssociation> {
+    const { fromObjectType, ...body } = params;
+    return this._client.post(
+      path`/crm/v4/associations/${fromObjectType}/${toObjectType}/batch/associate/default`,
+      { body, ...options },
+    );
+  }
+
+  /**
    * Batch delete specific association labels for objects. Deleting an unlabeled
    * association will also delete all labeled associations between those two objects
    *
    * @example
    * ```ts
    * const batchResponseVoid =
-   *   await client.crm.associations.v4.batch.batchDeleteLabels(
+   *   await client.crm.associations.v4.batch.deleteLabels(
    *     'toObjectType',
    *     {
    *       fromObjectType: 'fromObjectType',
@@ -131,9 +131,9 @@ export class Batch extends APIResource {
    *   );
    * ```
    */
-  batchDeleteLabels(
+  deleteLabels(
     toObjectType: string,
-    params: BatchBatchDeleteLabelsParams,
+    params: BatchDeleteLabelsParams,
     options?: RequestOptions,
   ): APIPromise<V4API.BatchResponseVoid> {
     const { fromObjectType, ...body } = params;
@@ -153,7 +153,7 @@ export class Batch extends APIResource {
    * @example
    * ```ts
    * const batchResponsePublicAssociationMultiWithLabel =
-   *   await client.crm.associations.v4.batch.batchRead(
+   *   await client.crm.associations.v4.batch.get(
    *     'toObjectType',
    *     {
    *       fromObjectType: 'fromObjectType',
@@ -162,9 +162,9 @@ export class Batch extends APIResource {
    *   );
    * ```
    */
-  batchRead(
+  get(
     toObjectType: string,
-    params: BatchBatchReadParams,
+    params: BatchGetParams,
     options?: RequestOptions,
   ): APIPromise<V4API.BatchResponsePublicAssociationMultiWithLabel> {
     const { fromObjectType, ...body } = params;
@@ -175,19 +175,7 @@ export class Batch extends APIResource {
   }
 }
 
-export interface BatchBatchAssociateDefaultParams {
-  /**
-   * Path param: Type of the toObject for this association definition (ex. "0-2")
-   */
-  fromObjectType: string;
-
-  /**
-   * Body param:
-   */
-  inputs: Array<V4API.PublicDefaultAssociationMultiPost>;
-}
-
-export interface BatchBatchCreateParams {
+export interface BatchCreateParams {
   /**
    * Path param: Type of the toObject for this association definition (ex. "0-2")
    */
@@ -199,7 +187,7 @@ export interface BatchBatchCreateParams {
   inputs: Array<V4API.PublicAssociationMultiPost>;
 }
 
-export interface BatchBatchDeleteParams {
+export interface BatchDeleteParams {
   /**
    * Path param: Type of the fromObject for this association definition.
    */
@@ -211,7 +199,19 @@ export interface BatchBatchDeleteParams {
   inputs: Array<V4API.PublicAssociationMultiArchive>;
 }
 
-export interface BatchBatchDeleteLabelsParams {
+export interface BatchCreateDefaultParams {
+  /**
+   * Path param: Type of the toObject for this association definition (ex. "0-2")
+   */
+  fromObjectType: string;
+
+  /**
+   * Body param:
+   */
+  inputs: Array<V4API.PublicDefaultAssociationMultiPost>;
+}
+
+export interface BatchDeleteLabelsParams {
   /**
    * Path param: Type of the fromObject for this association definition.
    */
@@ -223,7 +223,7 @@ export interface BatchBatchDeleteLabelsParams {
   inputs: Array<V4API.PublicAssociationMultiPost>;
 }
 
-export interface BatchBatchReadParams {
+export interface BatchGetParams {
   /**
    * Path param: Type of the fromObject for this association definition.
    */
@@ -237,10 +237,10 @@ export interface BatchBatchReadParams {
 
 export declare namespace Batch {
   export {
-    type BatchBatchAssociateDefaultParams as BatchBatchAssociateDefaultParams,
-    type BatchBatchCreateParams as BatchBatchCreateParams,
-    type BatchBatchDeleteParams as BatchBatchDeleteParams,
-    type BatchBatchDeleteLabelsParams as BatchBatchDeleteLabelsParams,
-    type BatchBatchReadParams as BatchBatchReadParams,
+    type BatchCreateParams as BatchCreateParams,
+    type BatchDeleteParams as BatchDeleteParams,
+    type BatchCreateDefaultParams as BatchCreateDefaultParams,
+    type BatchDeleteLabelsParams as BatchDeleteLabelsParams,
+    type BatchGetParams as BatchGetParams,
   };
 }

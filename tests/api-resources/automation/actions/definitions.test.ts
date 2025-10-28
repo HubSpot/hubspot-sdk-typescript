@@ -280,8 +280,8 @@ describe('resource definitions', () => {
   });
 
   // Prism tests are disabled
-  test.skip('read: only required params', async () => {
-    const responsePromise = client.automation.actions.definitions.read('definitionId', { appId: 0 });
+  test.skip('get: only required params', async () => {
+    const responsePromise = client.automation.actions.definitions.get('definitionId', { appId: 0 });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -292,8 +292,8 @@ describe('resource definitions', () => {
   });
 
   // Prism tests are disabled
-  test.skip('read: required and optional params', async () => {
-    const response = await client.automation.actions.definitions.read('definitionId', {
+  test.skip('get: required and optional params', async () => {
+    const response = await client.automation.actions.definitions.get('definitionId', {
       appId: 0,
       archived: true,
     });

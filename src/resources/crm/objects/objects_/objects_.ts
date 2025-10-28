@@ -8,7 +8,7 @@ import {
   Batch,
   BatchCreateParams,
   BatchDeleteParams,
-  BatchReadParams,
+  BatchGetParams,
   BatchUpdateParams,
   BatchUpsertParams,
 } from './batch';
@@ -133,14 +133,14 @@ export class Objects extends APIResource {
    * @example
    * ```ts
    * const simplePublicObjectWithAssociations =
-   *   await client.crm.objects.objects.read('objectId', {
+   *   await client.crm.objects.objects.get('objectId', {
    *     objectType: 'objectType',
    *   });
    * ```
    */
-  read(
+  get(
     objectID: string,
-    params: ObjectReadParams,
+    params: ObjectGetParams,
     options?: RequestOptions,
   ): APIPromise<CRMAPI.SimplePublicObjectWithAssociations> {
     const { objectType, ...query } = params;
@@ -221,7 +221,7 @@ export interface ObjectDeleteParams {
   objectType: string;
 }
 
-export interface ObjectReadParams {
+export interface ObjectGetParams {
   /**
    * Path param:
    */
@@ -298,7 +298,7 @@ export declare namespace Objects {
     type ObjectUpdateParams as ObjectUpdateParams,
     type ObjectListParams as ObjectListParams,
     type ObjectDeleteParams as ObjectDeleteParams,
-    type ObjectReadParams as ObjectReadParams,
+    type ObjectGetParams as ObjectGetParams,
     type ObjectSearchParams as ObjectSearchParams,
   };
 
@@ -307,7 +307,7 @@ export declare namespace Objects {
     type BatchCreateParams as BatchCreateParams,
     type BatchUpdateParams as BatchUpdateParams,
     type BatchDeleteParams as BatchDeleteParams,
-    type BatchReadParams as BatchReadParams,
+    type BatchGetParams as BatchGetParams,
     type BatchUpsertParams as BatchUpsertParams,
   };
 }

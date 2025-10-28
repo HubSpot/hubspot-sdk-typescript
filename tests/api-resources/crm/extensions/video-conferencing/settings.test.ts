@@ -10,7 +10,7 @@ const client = new HubSpot({
 describe('resource settings', () => {
   // Prism tests are disabled
   test.skip('update: only required params', async () => {
-    const responsePromise = client.crm.extensions.videoconferencing.settings.update(0, {
+    const responsePromise = client.crm.extensions.videoConferencing.settings.update(0, {
       createMeetingUrl: 'https://example.com/create-meeting',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -24,7 +24,7 @@ describe('resource settings', () => {
 
   // Prism tests are disabled
   test.skip('update: required and optional params', async () => {
-    const response = await client.crm.extensions.videoconferencing.settings.update(0, {
+    const response = await client.crm.extensions.videoConferencing.settings.update(0, {
       createMeetingUrl: 'https://example.com/create-meeting',
       deleteMeetingUrl: 'https://example.com/delete-meeting',
       fetchAccountsUri: 'fetchAccountsUri',
@@ -35,7 +35,7 @@ describe('resource settings', () => {
 
   // Prism tests are disabled
   test.skip('delete', async () => {
-    const responsePromise = client.crm.extensions.videoconferencing.settings.delete(0);
+    const responsePromise = client.crm.extensions.videoConferencing.settings.delete(0);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -47,7 +47,7 @@ describe('resource settings', () => {
 
   // Prism tests are disabled
   test.skip('get', async () => {
-    const responsePromise = client.crm.extensions.videoconferencing.settings.get(0);
+    const responsePromise = client.crm.extensions.videoConferencing.settings.get(0);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

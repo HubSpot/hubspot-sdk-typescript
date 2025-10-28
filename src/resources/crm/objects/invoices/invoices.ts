@@ -6,9 +6,9 @@ import { SimplePublicObjectWithAssociationsPage } from '../../crm';
 import * as BatchAPI from './batch';
 import {
   Batch,
-  BatchArchiveParams,
   BatchCreateParams,
-  BatchReadParams,
+  BatchDeleteParams,
+  BatchGetParams,
   BatchUpdateParams,
   BatchUpsertParams,
 } from './batch';
@@ -280,8 +280,8 @@ export declare namespace Invoices {
     Batch as Batch,
     type BatchCreateParams as BatchCreateParams,
     type BatchUpdateParams as BatchUpdateParams,
-    type BatchArchiveParams as BatchArchiveParams,
-    type BatchReadParams as BatchReadParams,
+    type BatchDeleteParams as BatchDeleteParams,
+    type BatchGetParams as BatchGetParams,
     type BatchUpsertParams as BatchUpsertParams,
   };
 }

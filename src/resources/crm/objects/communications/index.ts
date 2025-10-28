@@ -13,6 +13,6 @@ export {
   type CommunicationCreateParams,
   type CommunicationUpdateParams,
   type CommunicationListParams,
-  type CommunicationReadParams,
+  type CommunicationGetParams,
   type CommunicationSearchParams,
 } from './communications';

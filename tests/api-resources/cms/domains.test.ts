@@ -43,8 +43,8 @@ describe('resource domains', () => {
   });
 
   // Prism tests are disabled
-  test.skip('read', async () => {
-    const responsePromise = client.cms.domains.read('domainId');
+  test.skip('get', async () => {
+    const responsePromise = client.cms.domains.get('domainId');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

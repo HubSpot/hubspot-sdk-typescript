@@ -135,27 +135,6 @@ describe('resource schemas', () => {
   });
 
   // Prism tests are disabled
-  test.skip('archiveAssociation: only required params', async () => {
-    const responsePromise = client.crm.objects.schemas.archiveAssociation('associationIdentifier', {
-      objectType: 'objectType',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('archiveAssociation: required and optional params', async () => {
-    const response = await client.crm.objects.schemas.archiveAssociation('associationIdentifier', {
-      objectType: 'objectType',
-    });
-  });
-
-  // Prism tests are disabled
   test.skip('createAssociation: only required params', async () => {
     const responsePromise = client.crm.objects.schemas.createAssociation('objectType', {
       fromObjectTypeId: 'fromObjectTypeId',
@@ -180,8 +159,29 @@ describe('resource schemas', () => {
   });
 
   // Prism tests are disabled
-  test.skip('read', async () => {
-    const responsePromise = client.crm.objects.schemas.read('objectType');
+  test.skip('deleteAssociation: only required params', async () => {
+    const responsePromise = client.crm.objects.schemas.deleteAssociation('associationIdentifier', {
+      objectType: 'objectType',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('deleteAssociation: required and optional params', async () => {
+    const response = await client.crm.objects.schemas.deleteAssociation('associationIdentifier', {
+      objectType: 'objectType',
+    });
+  });
+
+  // Prism tests are disabled
+  test.skip('get', async () => {
+    const responsePromise = client.crm.objects.schemas.get('objectType');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

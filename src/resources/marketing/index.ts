@@ -185,7 +185,7 @@ export {
   type FormCreateParams,
   type FormUpdateParams,
   type FormListParams,
-  type FormReadParams,
+  type FormGetParams,
   type FormReplaceParams,
   type HubSpotFormDefinitionsPage,
 } from './forms';

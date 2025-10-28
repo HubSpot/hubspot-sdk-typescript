@@ -78,13 +78,14 @@ export class Forms extends APIResource {
    *
    * @example
    * ```ts
-   * const formDefinitionBase =
-   *   await client.marketing.forms.read('formId');
+   * const formDefinitionBase = await client.marketing.forms.get(
+   *   'formId',
+   * );
    * ```
    */
-  read(
+  get(
     formID: string,
-    query: FormReadParams | null | undefined = {},
+    query: FormGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<FormDefinitionBase> {
     return this._client.get(path`/marketing/v3/forms/${formID}`, { query, ...options });
@@ -1499,7 +1500,7 @@ export interface FormListParams extends PageParams {
   formTypes?: Array<'hubspot' | 'captured' | 'flow' | 'blog_comment' | 'all'>;
 }
 
-export interface FormReadParams {
+export interface FormGetParams {
   /**
    * Whether to return only results that have been archived.
    */
@@ -1550,7 +1551,7 @@ export declare namespace Forms {
     type FormCreateParams as FormCreateParams,
     type FormUpdateParams as FormUpdateParams,
     type FormListParams as FormListParams,
-    type FormReadParams as FormReadParams,
+    type FormGetParams as FormGetParams,
     type FormReplaceParams as FormReplaceParams,
   };
 }

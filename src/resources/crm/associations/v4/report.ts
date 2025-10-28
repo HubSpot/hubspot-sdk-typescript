@@ -14,12 +14,12 @@ export class Report extends APIResource {
    * @example
    * ```ts
    * const reportCreationResponse =
-   *   await client.crm.associations.v4.report.requestHighUsageReport(
+   *   await client.crm.associations.v4.report.getHighUsageReport(
    *     0,
    *   );
    * ```
    */
-  requestHighUsageReport(userID: number, options?: RequestOptions): APIPromise<V4API.ReportCreationResponse> {
+  getHighUsageReport(userID: number, options?: RequestOptions): APIPromise<V4API.ReportCreationResponse> {
     return this._client.post(path`/crm/v4/associations/usage/high-usage-report/${userID}`, options);
   }
 }

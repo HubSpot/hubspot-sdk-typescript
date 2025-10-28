@@ -95,24 +95,6 @@ export class Tags extends APIResource {
   }
 
   /**
-   * Delete the Blog Tag objects identified in the request body.
-   *
-   * @example
-   * ```ts
-   * await client.cms.blogs.tags.archiveBatch({
-   *   inputs: ['string'],
-   * });
-   * ```
-   */
-  archiveBatch(body: TagArchiveBatchParams, options?: RequestOptions): APIPromise<void> {
-    return this._client.post('/cms/v3/blogs/tags/batch/archive', {
-      body,
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
-  }
-
-  /**
    * Attach a Blog Tag to a multi-language group.
    *
    * @example
@@ -175,6 +157,24 @@ export class Tags extends APIResource {
   }
 
   /**
+   * Delete the Blog Tag objects identified in the request body.
+   *
+   * @example
+   * ```ts
+   * await client.cms.blogs.tags.deleteBatch({
+   *   inputs: ['string'],
+   * });
+   * ```
+   */
+  deleteBatch(body: TagDeleteBatchParams, options?: RequestOptions): APIPromise<void> {
+    return this._client.post('/cms/v3/blogs/tags/batch/archive', {
+      body,
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
+
+  /**
    * Detach a Blog Tag from a multi-language group.
    *
    * @example
@@ -197,12 +197,12 @@ export class Tags extends APIResource {
    *
    * @example
    * ```ts
-   * const tag = await client.cms.blogs.tags.read('objectId');
+   * const tag = await client.cms.blogs.tags.get('objectId');
    * ```
    */
-  read(
+  get(
     objectID: string,
-    query: TagReadParams | null | undefined = {},
+    query: TagGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<Tag> {
     return this._client.get(path`/cms/v3/blogs/tags/${objectID}`, { query, ...options });
@@ -214,12 +214,12 @@ export class Tags extends APIResource {
    * @example
    * ```ts
    * const batchResponseTag =
-   *   await client.cms.blogs.tags.readBatch({
+   *   await client.cms.blogs.tags.getBatch({
    *     inputs: ['string'],
    *   });
    * ```
    */
-  readBatch(params: TagReadBatchParams, options?: RequestOptions): APIPromise<BatchResponseTag> {
+  getBatch(params: TagGetBatchParams, options?: RequestOptions): APIPromise<BatchResponseTag> {
     const { archived, ...body } = params;
     return this._client.post('/cms/v3/blogs/tags/batch/read', { query: { archived }, body, ...options });
   }
@@ -2830,13 +2830,6 @@ export interface TagDeleteParams {
   archived?: boolean;
 }
 
-export interface TagArchiveBatchParams {
-  /**
-   * Strings to input.
-   */
-  inputs: Array<string>;
-}
-
 export interface TagAttachToLangGroupParams {
   /**
    * ID of the object to add to a multi-language group.
@@ -2888,6 +2881,13 @@ export interface TagCreateLangVariationParams {
   primaryLanguage?: string;
 }
 
+export interface TagDeleteBatchParams {
+  /**
+   * Strings to input.
+   */
+  inputs: Array<string>;
+}
+
 export interface TagDetachFromLangGroupParams {
   /**
    * ID of the object to remove from a multi-language group.
@@ -2895,7 +2895,7 @@ export interface TagDetachFromLangGroupParams {
   id: string;
 }
 
-export interface TagReadParams {
+export interface TagGetParams {
   /**
    * Specifies whether to return deleted Blog Tags. Defaults to `false`.
    */
@@ -2904,7 +2904,7 @@ export interface TagReadParams {
   property?: string;
 }
 
-export interface TagReadBatchParams {
+export interface TagGetBatchParams {
   /**
    * Body param: Strings to input.
    */
@@ -2960,13 +2960,13 @@ export declare namespace Tags {
     type TagUpdateParams as TagUpdateParams,
     type TagListParams as TagListParams,
     type TagDeleteParams as TagDeleteParams,
-    type TagArchiveBatchParams as TagArchiveBatchParams,
     type TagAttachToLangGroupParams as TagAttachToLangGroupParams,
     type TagCreateBatchParams as TagCreateBatchParams,
     type TagCreateLangVariationParams as TagCreateLangVariationParams,
+    type TagDeleteBatchParams as TagDeleteBatchParams,
     type TagDetachFromLangGroupParams as TagDetachFromLangGroupParams,
-    type TagReadParams as TagReadParams,
-    type TagReadBatchParams as TagReadBatchParams,
+    type TagGetParams as TagGetParams,
+    type TagGetBatchParams as TagGetBatchParams,
     type TagSetLangPrimaryParams as TagSetLangPrimaryParams,
     type TagUpdateBatchParams as TagUpdateBatchParams,
     type TagUpdateLangsParams as TagUpdateLangsParams,

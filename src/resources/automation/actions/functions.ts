@@ -32,25 +32,6 @@ export class Functions extends APIResource {
   }
 
   /**
-   * Delete a function within a given definition.
-   */
-  archiveByFunctionType(
-    functionType:
-      | 'PRE_ACTION_EXECUTION'
-      | 'PRE_FETCH_OPTIONS'
-      | 'POST_FETCH_OPTIONS'
-      | 'POST_ACTION_EXECUTION',
-    params: FunctionArchiveByFunctionTypeParams,
-    options?: RequestOptions,
-  ): APIPromise<void> {
-    const { appId, definitionId } = params;
-    return this._client.delete(
-      path`/automation/v4/actions/${appId}/${definitionId}/functions/${functionType}`,
-      { ...options, headers: buildHeaders([{ Accept: '*/*' }, options?.headers]) },
-    );
-  }
-
-  /**
    * Update a function for a given definition by ID.
    */
   createOrReplace(
@@ -86,6 +67,40 @@ export class Functions extends APIResource {
   }
 
   /**
+   * Delete a function within a given definition.
+   */
+  deleteByFunctionType(
+    functionType:
+      | 'PRE_ACTION_EXECUTION'
+      | 'PRE_FETCH_OPTIONS'
+      | 'POST_FETCH_OPTIONS'
+      | 'POST_ACTION_EXECUTION',
+    params: FunctionDeleteByFunctionTypeParams,
+    options?: RequestOptions,
+  ): APIPromise<void> {
+    const { appId, definitionId } = params;
+    return this._client.delete(
+      path`/automation/v4/actions/${appId}/${definitionId}/functions/${functionType}`,
+      { ...options, headers: buildHeaders([{ Accept: '*/*' }, options?.headers]) },
+    );
+  }
+
+  /**
+   * Retrieve a specific function from a given definition.
+   */
+  get(
+    functionID: string,
+    params: FunctionGetParams,
+    options?: RequestOptions,
+  ): APIPromise<ActionsAPI.PublicActionFunction> {
+    const { appId, definitionId, functionType } = params;
+    return this._client.get(
+      path`/automation/v4/actions/${appId}/${definitionId}/functions/${functionType}/${functionID}`,
+      options,
+    );
+  }
+
+  /**
    * Retrieve functions by a type for a given definition
    */
   getByFunctionType(
@@ -100,21 +115,6 @@ export class Functions extends APIResource {
     const { appId, definitionId } = params;
     return this._client.get(
       path`/automation/v4/actions/${appId}/${definitionId}/functions/${functionType}`,
-      options,
-    );
-  }
-
-  /**
-   * Retrieve a specific function from a given definition.
-   */
-  read(
-    functionID: string,
-    params: FunctionReadParams,
-    options?: RequestOptions,
-  ): APIPromise<ActionsAPI.PublicActionFunction> {
-    const { appId, definitionId, functionType } = params;
-    return this._client.get(
-      path`/automation/v4/actions/${appId}/${definitionId}/functions/${functionType}/${functionID}`,
       options,
     );
   }
@@ -133,18 +133,6 @@ export interface FunctionDeleteParams {
   definitionId: string;
 
   functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION';
-}
-
-export interface FunctionArchiveByFunctionTypeParams {
-  /**
-   * The ID of the app.
-   */
-  appId: number;
-
-  /**
-   * The ID of the definition.
-   */
-  definitionId: string;
 }
 
 export interface FunctionCreateOrReplaceParams {
@@ -187,7 +175,7 @@ export interface FunctionCreateOrReplaceByFunctionTypeParams {
   body: string;
 }
 
-export interface FunctionGetByFunctionTypeParams {
+export interface FunctionDeleteByFunctionTypeParams {
   /**
    * The ID of the app.
    */
@@ -199,7 +187,7 @@ export interface FunctionGetByFunctionTypeParams {
   definitionId: string;
 }
 
-export interface FunctionReadParams {
+export interface FunctionGetParams {
   /**
    * The ID of the app.
    */
@@ -217,14 +205,26 @@ export interface FunctionReadParams {
   functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION';
 }
 
+export interface FunctionGetByFunctionTypeParams {
+  /**
+   * The ID of the app.
+   */
+  appId: number;
+
+  /**
+   * The ID of the definition.
+   */
+  definitionId: string;
+}
+
 export declare namespace Functions {
   export {
     type FunctionListParams as FunctionListParams,
     type FunctionDeleteParams as FunctionDeleteParams,
-    type FunctionArchiveByFunctionTypeParams as FunctionArchiveByFunctionTypeParams,
     type FunctionCreateOrReplaceParams as FunctionCreateOrReplaceParams,
     type FunctionCreateOrReplaceByFunctionTypeParams as FunctionCreateOrReplaceByFunctionTypeParams,
+    type FunctionDeleteByFunctionTypeParams as FunctionDeleteByFunctionTypeParams,
+    type FunctionGetParams as FunctionGetParams,
     type FunctionGetByFunctionTypeParams as FunctionGetByFunctionTypeParams,
-    type FunctionReadParams as FunctionReadParams,
   };
 }

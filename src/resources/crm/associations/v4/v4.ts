@@ -3,19 +3,21 @@
 import { APIResource } from '../../../../core/resource';
 import * as Shared from '../../../shared';
 import * as CRMAPI from '../../crm';
+import { MultiAssociatedObjectWithLabelsPage } from '../../crm';
 import * as EmailsAPI from '../../../marketing/emails/emails';
 import * as BatchAPI from './batch';
 import {
   Batch,
-  BatchBatchAssociateDefaultParams,
-  BatchBatchCreateParams,
-  BatchBatchDeleteLabelsParams,
-  BatchBatchDeleteParams,
-  BatchBatchReadParams,
+  BatchCreateDefaultParams,
+  BatchCreateParams,
+  BatchDeleteLabelsParams,
+  BatchDeleteParams,
+  BatchGetParams,
 } from './batch';
 import * as ReportAPI from './report';
 import { Report } from './report';
 import { APIPromise } from '../../../../core/api-promise';
+import { Page, type PageParams, PagePromise } from '../../../../core/pagination';
 import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
@@ -30,19 +32,16 @@ export class V4 extends APIResource {
    * @example
    * ```ts
    * const batchResponsePublicDefaultAssociation =
-   *   await client.crm.associations.v4.createDefaultAssociation(
-   *     'toObjectId',
-   *     {
-   *       fromObjectType: 'fromObjectType',
-   *       fromObjectId: 'fromObjectId',
-   *       toObjectType: 'toObjectType',
-   *     },
-   *   );
+   *   await client.crm.associations.v4.create('toObjectId', {
+   *     fromObjectType: 'fromObjectType',
+   *     fromObjectId: 'fromObjectId',
+   *     toObjectType: 'toObjectType',
+   *   });
    * ```
    */
-  createDefaultAssociation(
+  create(
     toObjectID: string,
-    params: V4CreateDefaultAssociationParams,
+    params: V4CreateParams,
     options?: RequestOptions,
   ): APIPromise<CRMAPI.BatchResponsePublicDefaultAssociation> {
     const { fromObjectType, fromObjectId, toObjectType } = params;
@@ -53,29 +52,33 @@ export class V4 extends APIResource {
   }
 
   /**
-   * deletes all associations between two records.
+   * Set association labels between two records.
    *
    * @example
    * ```ts
-   * await client.crm.associations.v4.deleteAssociation(
-   *   'toObjectId',
-   *   {
+   * const createdResponseLabelsBetweenObjectPair =
+   *   await client.crm.associations.v4.update('toObjectId', {
    *     objectType: 'objectType',
    *     objectId: 'objectId',
    *     toObjectType: 'toObjectType',
-   *   },
-   * );
+   *     body: [
+   *       {
+   *         associationCategory: 'HUBSPOT_DEFINED',
+   *         associationTypeId: 0,
+   *       },
+   *     ],
+   *   });
    * ```
    */
-  deleteAssociation(
+  update(
     toObjectID: string,
-    params: V4DeleteAssociationParams,
+    params: V4UpdateParams,
     options?: RequestOptions,
-  ): APIPromise<void> {
-    const { objectType, objectId, toObjectType } = params;
-    return this._client.delete(
+  ): APIPromise<CRMAPI.CreatedResponseLabelsBetweenObjectPair> {
+    const { objectType, objectId, toObjectType, body } = params;
+    return this._client.put(
       path`/crm/v4/objects/${objectType}/${objectId}/associations/${toObjectType}/${toObjectID}`,
-      { ...options, headers: buildHeaders([{ Accept: '*/*' }, options?.headers]) },
+      { body: body, ...options },
     );
   }
 
@@ -84,56 +87,45 @@ export class V4 extends APIResource {
    *
    * @example
    * ```ts
-   * const collectionResponseMultiAssociatedObjectWithLabel =
-   *   await client.crm.associations.v4.listAssociationsByType(
-   *     'toObjectType',
-   *     { objectType: 'objectType', objectId: 'objectId' },
-   *   );
+   * // Automatically fetches more pages as needed.
+   * for await (const multiAssociatedObjectWithLabel of client.crm.associations.v4.list(
+   *   'toObjectType',
+   *   { objectType: 'objectType', objectId: 'objectId' },
+   * )) {
+   *   // ...
+   * }
    * ```
    */
-  listAssociationsByType(
+  list(
     toObjectType: string,
-    params: V4ListAssociationsByTypeParams,
+    params: V4ListParams,
     options?: RequestOptions,
-  ): APIPromise<CRMAPI.CollectionResponseMultiAssociatedObjectWithLabel> {
+  ): PagePromise<MultiAssociatedObjectWithLabelsPage, CRMAPI.MultiAssociatedObjectWithLabel> {
     const { objectType, objectId, ...query } = params;
-    return this._client.get(path`/crm/v4/objects/${objectType}/${objectId}/associations/${toObjectType}`, {
-      query,
-      ...options,
-    });
+    return this._client.getAPIList(
+      path`/crm/v4/objects/${objectType}/${objectId}/associations/${toObjectType}`,
+      Page<CRMAPI.MultiAssociatedObjectWithLabel>,
+      { query, ...options },
+    );
   }
 
   /**
-   * Set association labels between two records.
+   * deletes all associations between two records.
    *
    * @example
    * ```ts
-   * const createdResponseLabelsBetweenObjectPair =
-   *   await client.crm.associations.v4.updateAssociationLabels(
-   *     'toObjectId',
-   *     {
-   *       objectType: 'objectType',
-   *       objectId: 'objectId',
-   *       toObjectType: 'toObjectType',
-   *       body: [
-   *         {
-   *           associationCategory: 'HUBSPOT_DEFINED',
-   *           associationTypeId: 0,
-   *         },
-   *       ],
-   *     },
-   *   );
+   * await client.crm.associations.v4.delete('toObjectId', {
+   *   objectType: 'objectType',
+   *   objectId: 'objectId',
+   *   toObjectType: 'toObjectType',
+   * });
    * ```
    */
-  updateAssociationLabels(
-    toObjectID: string,
-    params: V4UpdateAssociationLabelsParams,
-    options?: RequestOptions,
-  ): APIPromise<CRMAPI.CreatedResponseLabelsBetweenObjectPair> {
-    const { objectType, objectId, toObjectType, body } = params;
-    return this._client.put(
+  delete(toObjectID: string, params: V4DeleteParams, options?: RequestOptions): APIPromise<void> {
+    const { objectType, objectId, toObjectType } = params;
+    return this._client.delete(
       path`/crm/v4/objects/${objectType}/${objectId}/associations/${toObjectType}/${toObjectID}`,
-      { body: body, ...options },
+      { ...options, headers: buildHeaders([{ Accept: '*/*' }, options?.headers]) },
     );
   }
 }
@@ -362,7 +354,7 @@ export interface StandardError1 {
   subCategory?: unknown;
 }
 
-export interface V4CreateDefaultAssociationParams {
+export interface V4CreateParams {
   /**
    * The type of the source object for the default association.
    */
@@ -379,39 +371,7 @@ export interface V4CreateDefaultAssociationParams {
   toObjectType: string;
 }
 
-export interface V4DeleteAssociationParams {
-  objectType: string;
-
-  objectId: string;
-
-  toObjectType: string;
-}
-
-export interface V4ListAssociationsByTypeParams {
-  /**
-   * Path param:
-   */
-  objectType: string;
-
-  /**
-   * Path param:
-   */
-  objectId: string;
-
-  /**
-   * Query param: The paging cursor token of the last successfully read resource will
-   * be returned as the `paging.next.after` JSON property of a paged response
-   * containing more results.
-   */
-  after?: string;
-
-  /**
-   * Query param: The maximum number of results to display per page.
-   */
-  limit?: number;
-}
-
-export interface V4UpdateAssociationLabelsParams {
+export interface V4UpdateParams {
   /**
    * Path param:
    */
@@ -431,6 +391,26 @@ export interface V4UpdateAssociationLabelsParams {
    * Body param:
    */
   body: Array<Shared.AssociationSpec>;
+}
+
+export interface V4ListParams extends PageParams {
+  /**
+   * Path param:
+   */
+  objectType: string;
+
+  /**
+   * Path param:
+   */
+  objectId: string;
+}
+
+export interface V4DeleteParams {
+  objectType: string;
+
+  objectId: string;
+
+  toObjectType: string;
 }
 
 V4.Batch = Batch;
@@ -457,20 +437,22 @@ export declare namespace V4 {
     type PublicFetchAssociationsBatchRequest as PublicFetchAssociationsBatchRequest,
     type ReportCreationResponse as ReportCreationResponse,
     type StandardError1 as StandardError1,
-    type V4CreateDefaultAssociationParams as V4CreateDefaultAssociationParams,
-    type V4DeleteAssociationParams as V4DeleteAssociationParams,
-    type V4ListAssociationsByTypeParams as V4ListAssociationsByTypeParams,
-    type V4UpdateAssociationLabelsParams as V4UpdateAssociationLabelsParams,
+    type V4CreateParams as V4CreateParams,
+    type V4UpdateParams as V4UpdateParams,
+    type V4ListParams as V4ListParams,
+    type V4DeleteParams as V4DeleteParams,
   };
 
   export {
     Batch as Batch,
-    type BatchBatchAssociateDefaultParams as BatchBatchAssociateDefaultParams,
-    type BatchBatchCreateParams as BatchBatchCreateParams,
-    type BatchBatchDeleteParams as BatchBatchDeleteParams,
-    type BatchBatchDeleteLabelsParams as BatchBatchDeleteLabelsParams,
-    type BatchBatchReadParams as BatchBatchReadParams,
+    type BatchCreateParams as BatchCreateParams,
+    type BatchDeleteParams as BatchDeleteParams,
+    type BatchCreateDefaultParams as BatchCreateDefaultParams,
+    type BatchDeleteLabelsParams as BatchDeleteLabelsParams,
+    type BatchGetParams as BatchGetParams,
   };
 
   export { Report as Report };
 }
+
+export { type MultiAssociatedObjectWithLabelsPage };

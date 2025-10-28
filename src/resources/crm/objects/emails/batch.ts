@@ -68,17 +68,14 @@ export class Batch extends APIResource {
    * @example
    * ```ts
    * const batchResponseSimplePublicObject =
-   *   await client.crm.objects.emails.batch.read({
+   *   await client.crm.objects.emails.batch.get({
    *     inputs: [{ id: 'id' }],
    *     properties: ['string'],
    *     propertiesWithHistory: ['string'],
    *   });
    * ```
    */
-  read(
-    params: BatchReadParams,
-    options?: RequestOptions,
-  ): APIPromise<CRMAPI.BatchResponseSimplePublicObject> {
+  get(params: BatchGetParams, options?: RequestOptions): APIPromise<CRMAPI.BatchResponseSimplePublicObject> {
     const { archived, ...body } = params;
     return this._client.post('/crm/v3/objects/emails/batch/read', { query: { archived }, body, ...options });
   }
@@ -116,7 +113,7 @@ export interface BatchDeleteParams {
   inputs: Array<CRMAPI.SimplePublicObjectID>;
 }
 
-export interface BatchReadParams {
+export interface BatchGetParams {
   /**
    * Body param:
    */
@@ -154,7 +151,7 @@ export declare namespace Batch {
     type BatchCreateParams as BatchCreateParams,
     type BatchUpdateParams as BatchUpdateParams,
     type BatchDeleteParams as BatchDeleteParams,
-    type BatchReadParams as BatchReadParams,
+    type BatchGetParams as BatchGetParams,
     type BatchUpsertParams as BatchUpsertParams,
   };
 }

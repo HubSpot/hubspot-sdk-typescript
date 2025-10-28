@@ -74,9 +74,6 @@ import {
 } from './property-validations';
 import * as AssociationsAPI from './associations/associations';
 import {
-  AssociationCreateParams,
-  AssociationDeleteParams,
-  AssociationReadParams,
   Associations,
   BatchInputPublicAssociation,
   BatchResponsePublicAssociation,
@@ -234,6 +231,8 @@ export class CRM extends APIResource {
   timeline: TimelineAPI.Timeline = new TimelineAPI.Timeline(this._client);
   users: UsersAPI.Users = new UsersAPI.Users(this._client);
 }
+
+export type MultiAssociatedObjectWithLabelsPage = Page<MultiAssociatedObjectWithLabel>;
 
 export type SimplePublicObjectWithAssociationsPage = Page<SimplePublicObjectWithAssociations>;
 
@@ -920,9 +919,6 @@ export declare namespace CRM {
     type BatchResponsePublicAssociationMulti as BatchResponsePublicAssociationMulti,
     type PublicAssociation as PublicAssociation,
     type PublicAssociationMulti as PublicAssociationMulti,
-    type AssociationCreateParams as AssociationCreateParams,
-    type AssociationDeleteParams as AssociationDeleteParams,
-    type AssociationReadParams as AssociationReadParams,
   };
 
   export {

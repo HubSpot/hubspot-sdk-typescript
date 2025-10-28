@@ -4,7 +4,7 @@ export {
   Batch,
   type BatchCreateParams,
   type BatchUpdateParams,
-  type BatchArchiveParams,
+  type BatchDeleteParams,
   type BatchGetParams,
 } from './batch';
 export {

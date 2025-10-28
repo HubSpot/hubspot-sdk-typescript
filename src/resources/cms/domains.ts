@@ -32,10 +32,10 @@ export class Domains extends APIResource {
    *
    * @example
    * ```ts
-   * const domain = await client.cms.domains.read('domainId');
+   * const domain = await client.cms.domains.get('domainId');
    * ```
    */
-  read(domainID: string, options?: RequestOptions): APIPromise<Domain> {
+  get(domainID: string, options?: RequestOptions): APIPromise<Domain> {
     return this._client.get(path`/cms/v3/domains/${domainID}`, options);
   }
 }

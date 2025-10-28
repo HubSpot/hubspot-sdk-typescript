@@ -62,9 +62,9 @@ export class Definitions extends APIResource {
   /**
    * Retrieve a custom workflow action definition by ID.
    */
-  read(
+  get(
     definitionID: string,
-    params: DefinitionReadParams,
+    params: DefinitionGetParams,
     options?: RequestOptions,
   ): APIPromise<ActionsAPI.PublicActionDefinition> {
     const { appId, ...query } = params;
@@ -166,7 +166,7 @@ export interface DefinitionDeleteParams {
   appId: number;
 }
 
-export interface DefinitionReadParams {
+export interface DefinitionGetParams {
   /**
    * Path param: The ID of the app.
    */
@@ -184,7 +184,7 @@ export declare namespace Definitions {
     type DefinitionUpdateParams as DefinitionUpdateParams,
     type DefinitionListParams as DefinitionListParams,
     type DefinitionDeleteParams as DefinitionDeleteParams,
-    type DefinitionReadParams as DefinitionReadParams,
+    type DefinitionGetParams as DefinitionGetParams,
   };
 }
 
