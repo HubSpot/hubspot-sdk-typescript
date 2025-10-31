@@ -3,7 +3,7 @@
 import Hubspot, { toFile } from 'hubspot-sdk';
 
 const client = new Hubspot({
-  accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
+  accessToken: 'pat-na1-xxxxxxxx-xxxx',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
