@@ -1,13 +1,27 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as AppointmentsAPI from './appointments';
+import {
+  Appointments,
+  PublicObjectSearchRequest,
+  SimplePublicObject,
+  SimplePublicObjectBatchInputForCreate,
+  SimplePublicObjectInputForCreate,
+  SimplePublicObjectWithAssociations,
+  SimplePublicUpsertObject,
+} from './appointments';
 import * as DealSplitsAPI from './deal-splits';
 import {
+  BatchResponseDealToDealSplits,
+  BatchResponseDealToDealSplitsWithErrors,
   DealSplitBatchReadParams,
-  DealSplitBatchReadResponse,
   DealSplitBatchUpsertParams,
-  DealSplitBatchUpsertResponse,
   DealSplits,
+  DealToDealSplits,
+  PublicDealSplitInput,
+  PublicDealSplitsBatchCreateRequest,
+  PublicDealSplitsCreateRequest,
 } from './deal-splits';
 import * as SchemasAPI from './schemas';
 import {
@@ -17,7 +31,6 @@ import {
   ObjectTypeDefinitionPatch,
   ObjectTypePropertyCreate,
   SchemaCreateAssociationParams,
-  SchemaCreateAssociationResponse,
   SchemaCreateParams,
   SchemaDeleteAssociationParams,
   SchemaDeleteParams,
@@ -319,6 +332,7 @@ import {
 } from './tickets/tickets';
 
 export class Objects extends APIResource {
+  appointments: AppointmentsAPI.Appointments = new AppointmentsAPI.Appointments(this._client);
   calls: CallsAPI.Calls = new CallsAPI.Calls(this._client);
   carts: CartsAPI.Carts = new CartsAPI.Carts(this._client);
   commercePayments: CommercePaymentsAPI.CommercePayments = new CommercePaymentsAPI.CommercePayments(
@@ -358,6 +372,7 @@ export class Objects extends APIResource {
   tickets: TicketsAPI.Tickets = new TicketsAPI.Tickets(this._client);
 }
 
+Objects.Appointments = Appointments;
 Objects.Calls = Calls;
 Objects.Carts = Carts;
 Objects.CommercePayments = CommercePayments;
@@ -394,6 +409,16 @@ Objects.Taxes = Taxes;
 Objects.Tickets = Tickets;
 
 export declare namespace Objects {
+  export {
+    Appointments as Appointments,
+    type PublicObjectSearchRequest as PublicObjectSearchRequest,
+    type SimplePublicObject as SimplePublicObject,
+    type SimplePublicObjectBatchInputForCreate as SimplePublicObjectBatchInputForCreate,
+    type SimplePublicObjectInputForCreate as SimplePublicObjectInputForCreate,
+    type SimplePublicObjectWithAssociations as SimplePublicObjectWithAssociations,
+    type SimplePublicUpsertObject as SimplePublicUpsertObject,
+  };
+
   export {
     Calls as Calls,
     type CallCreateParams as CallCreateParams,
@@ -482,8 +507,12 @@ export declare namespace Objects {
 
   export {
     DealSplits as DealSplits,
-    type DealSplitBatchReadResponse as DealSplitBatchReadResponse,
-    type DealSplitBatchUpsertResponse as DealSplitBatchUpsertResponse,
+    type BatchResponseDealToDealSplits as BatchResponseDealToDealSplits,
+    type BatchResponseDealToDealSplitsWithErrors as BatchResponseDealToDealSplitsWithErrors,
+    type DealToDealSplits as DealToDealSplits,
+    type PublicDealSplitInput as PublicDealSplitInput,
+    type PublicDealSplitsBatchCreateRequest as PublicDealSplitsBatchCreateRequest,
+    type PublicDealSplitsCreateRequest as PublicDealSplitsCreateRequest,
     type DealSplitBatchReadParams as DealSplitBatchReadParams,
     type DealSplitBatchUpsertParams as DealSplitBatchUpsertParams,
   };
@@ -664,7 +693,6 @@ export declare namespace Objects {
     type ObjectTypeDefinition as ObjectTypeDefinition,
     type ObjectTypeDefinitionPatch as ObjectTypeDefinitionPatch,
     type ObjectTypePropertyCreate as ObjectTypePropertyCreate,
-    type SchemaCreateAssociationResponse as SchemaCreateAssociationResponse,
     type SchemaCreateParams as SchemaCreateParams,
     type SchemaUpdateParams as SchemaUpdateParams,
     type SchemaListParams as SchemaListParams,

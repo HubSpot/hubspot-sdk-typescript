@@ -9,9 +9,6 @@ import { path } from '../../../../internal/utils/path';
 
 export class RecordingSettings extends APIResource {
   /**
-   * Register an external URL that HubSpot will use to retrieve
-   * [call recordings](https://developers.hubspot.com/docs/guides/apps/extensions/calling-extensions/recordings-and-transcriptions#register-your-app-s-endpoint-with-hubspot-using-the-calling-settings-api).
-   *
    * @example
    * ```ts
    * const recordingSettingsResponse =
@@ -36,9 +33,6 @@ export class RecordingSettings extends APIResource {
   }
 
   /**
-   * Update the URL that HubSpot will use to retrieve
-   * [call recordings](https://developers.hubspot.com/docs/guides/apps/extensions/calling-extensions/recordings-and-transcriptions#register-your-app-s-endpoint-with-hubspot-using-the-calling-settings-api).
-   *
    * @example
    * ```ts
    * const recordingSettingsResponse =
@@ -59,9 +53,6 @@ export class RecordingSettings extends APIResource {
   }
 
   /**
-   * Retrieve the URL that is registered for
-   * [call recording](https://developers.hubspot.com/docs/guides/apps/extensions/calling-extensions/recordings-and-transcriptions#register-your-app-s-endpoint-with-hubspot-using-the-calling-settings-api).
-   *
    * @example
    * ```ts
    * const recordingSettingsResponse =
@@ -75,9 +66,6 @@ export class RecordingSettings extends APIResource {
   }
 
   /**
-   * Mark a call recording as ready for transcription, specifying the call by its ID
-   * (`engagementid`).
-   *
    * @example
    * ```ts
    * await client.crm.extensions.calling.recordingSettings.markReady(

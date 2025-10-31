@@ -12,10 +12,6 @@ import { path } from '../../../internal/utils/path';
 
 export class Settings extends APIResource {
   /**
-   * Get the list of Blogs. Supports paging and filtering. This method would be
-   * useful for an integration that examined these models and used an external
-   * service to suggest edits.
-   *
    * @example
    * ```ts
    * // Automatically fetches more pages as needed.
@@ -32,8 +28,6 @@ export class Settings extends APIResource {
   }
 
   /**
-   * Attach a blog to a multi-language group.
-   *
    * @example
    * ```ts
    * await client.cms.blogs.settings.attachToLangGroup({
@@ -52,8 +46,6 @@ export class Settings extends APIResource {
   }
 
   /**
-   * Create a new language variation from an existing blog
-   *
    * @example
    * ```ts
    * const blog =
@@ -73,8 +65,6 @@ export class Settings extends APIResource {
   }
 
   /**
-   * Detach a blog from a multi-language group.
-   *
    * @example
    * ```ts
    * await client.cms.blogs.settings.detachFromLangGroup({
@@ -91,8 +81,6 @@ export class Settings extends APIResource {
   }
 
   /**
-   * Retrieve the Blog object identified by the id in the path.
-   *
    * @example
    * ```ts
    * const blog = await client.cms.blogs.settings.get('blogId');
@@ -103,8 +91,6 @@ export class Settings extends APIResource {
   }
 
   /**
-   * Retrieves a previous version of a Blog
-   *
    * @example
    * ```ts
    * const versionBlog =
@@ -124,8 +110,6 @@ export class Settings extends APIResource {
   }
 
   /**
-   * Retrieves all the previous versions of a Blog
-   *
    * @example
    * ```ts
    * const collectionResponseWithTotalVersionBlog =
@@ -141,8 +125,6 @@ export class Settings extends APIResource {
   }
 
   /**
-   * Set a blog as the primary language of a multi-language group.
-   *
    * @example
    * ```ts
    * await client.cms.blogs.settings.setNewLangPrimary({
@@ -159,8 +141,6 @@ export class Settings extends APIResource {
   }
 
   /**
-   * Explicitly set new languages for each blog in a multi-language group.
-   *
    * @example
    * ```ts
    * await client.cms.blogs.settings.updateLanguages({
@@ -1088,45 +1068,20 @@ export interface VersionBlog {
 }
 
 export interface SettingListParams extends PageParams {
-  /**
-   * Specifies whether to return archived Blogs. Defaults to `false`.
-   */
   archived?: boolean;
 
-  /**
-   * Only return Blogs created after the specified time.
-   */
   createdAfter?: string;
 
-  /**
-   * Only return Blogs created at exactly the specified time.
-   */
   createdAt?: string;
 
-  /**
-   * Only return Blogs created before the specified time.
-   */
   createdBefore?: string;
 
-  /**
-   * Specifies which fields to use for sorting results. Valid fields are `name` and
-   * `id`
-   */
   sort?: Array<string>;
 
-  /**
-   * Only return Blogs last updated after the specified time.
-   */
   updatedAfter?: string;
 
-  /**
-   * Only return Blogs last updated at exactly the specified time.
-   */
   updatedAt?: string;
 
-  /**
-   * Only return Blogs last updated before the specified time.
-   */
   updatedBefore?: string;
 }
 
@@ -1182,24 +1137,14 @@ export interface SettingDetachFromLangGroupParams {
 }
 
 export interface SettingGetRevisionParams {
-  /**
-   * The Blog id.
-   */
   blogId: string;
 }
 
 export interface SettingListRevisionsParams {
-  /**
-   * The cursor token value to get the next set of results. You can get this from the
-   * `paging.next.after` JSON property of a paged response containing more results.
-   */
   after?: string;
 
   before?: string;
 
-  /**
-   * The maximum number of results to return. Default is 100.
-   */
   limit?: number;
 }
 

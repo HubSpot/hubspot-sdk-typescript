@@ -9,10 +9,6 @@ import { path } from '../../../../internal/utils/path';
 
 export class ChannelConnectionSettings extends APIResource {
   /**
-   * Configure
-   * [channel connection settings](https://developers.hubspot.com/docs/guides/api/crm/extensions/third-party-calling#create-channel-connection-settings)
-   * for the app.
-   *
    * @example
    * ```ts
    * const channelConnectionSettingsResponse =
@@ -34,10 +30,6 @@ export class ChannelConnectionSettings extends APIResource {
   }
 
   /**
-   * Update existing
-   * [channel connection settings](https://developers.hubspot.com/docs/guides/api/crm/extensions/third-party-calling#manage-the-webhook-settings-for-channel-connection)
-   * for your app.
-   *
    * @example
    * ```ts
    * const channelConnectionSettingsResponse =
@@ -58,10 +50,6 @@ export class ChannelConnectionSettings extends APIResource {
   }
 
   /**
-   * Delete the
-   * [channel connection settings](https://developers.hubspot.com/docs/guides/api/crm/extensions/third-party-calling#delete-existing-channel-connection-settings)
-   * for the app.
-   *
    * @example
    * ```ts
    * await client.crm.extensions.calling.channelConnectionSettings.delete(
@@ -77,9 +65,6 @@ export class ChannelConnectionSettings extends APIResource {
   }
 
   /**
-   * Retrieve the settings related to the app's
-   * [channel connection](https://developers.hubspot.com/docs/guides/api/crm/extensions/third-party-calling#fetch-existing-channel-connection-settings).
-   *
    * @example
    * ```ts
    * const channelConnectionSettingsResponse =
@@ -94,26 +79,14 @@ export class ChannelConnectionSettings extends APIResource {
 }
 
 export interface ChannelConnectionSettingCreateParams {
-  /**
-   * If true, this app will be considered to support channel connection
-   */
   isReady: boolean;
 
-  /**
-   * The URL to fetch phone numbers available for channel connection
-   */
   url: string;
 }
 
 export interface ChannelConnectionSettingUpdateParams {
-  /**
-   * If true, this app will be considered to support channel connection
-   */
   isReady?: boolean;
 
-  /**
-   * The URL to fetch phone numbers available for channel connection
-   */
   url?: string;
 }
 

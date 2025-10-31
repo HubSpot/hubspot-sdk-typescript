@@ -8,7 +8,8 @@ import { RequestOptions } from '../../../../internal/request-options';
 
 export class Batch extends APIResource {
   /**
-   * Create a batch of emails
+   * Create a batch of emails with specified properties and return the created
+   * objects.
    *
    * @example
    * ```ts
@@ -26,7 +27,7 @@ export class Batch extends APIResource {
   }
 
   /**
-   * Update a batch of emails by internal ID, or unique property values
+   * Update a batch of emails using their internal IDs or unique property values.
    *
    * @example
    * ```ts
@@ -44,7 +45,7 @@ export class Batch extends APIResource {
   }
 
   /**
-   * Archive a batch of emails by ID
+   * Archive a batch of emails identified by their IDs.
    *
    * @example
    * ```ts

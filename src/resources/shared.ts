@@ -1307,9 +1307,6 @@ export interface PublicNumOccurrencesRefineBy {
 }
 
 export interface PublicObjectID {
-  /**
-   * The unique ID that identifies an object.
-   */
   id: string;
 }
 

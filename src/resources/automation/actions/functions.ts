@@ -21,7 +21,7 @@ export class Functions extends APIResource {
   }
 
   /**
-   * Archive a function for a definition
+   * Archive a function for a specific definition.
    */
   delete(functionID: string, params: FunctionDeleteParams, options?: RequestOptions): APIPromise<void> {
     const { appId, definitionId, functionType } = params;
@@ -101,7 +101,7 @@ export class Functions extends APIResource {
   }
 
   /**
-   * Retrieve functions by a type for a given definition
+   * Retrieve functions of a specific type for a given definition.
    */
   getByFunctionType(
     functionType:

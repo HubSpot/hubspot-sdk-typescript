@@ -22,9 +22,8 @@ export class PostalMail extends APIResource {
   batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
 
   /**
-   * Create a postal mail with the given properties and return a copy of the object,
-   * including the ID. Documentation and examples for creating standard postal mail
-   * is provided.
+   * Create a postal mail object with the given properties and return a copy of the
+   * object, including the ID.
    *
    * @example
    * ```ts
@@ -42,14 +41,6 @@ export class PostalMail extends APIResource {
   }
 
   /**
-   * Perform a partial update of an Object identified by `{postalMailId}`or
-   * optionally a unique property value as specified by the `idProperty` query param.
-   * `{postalMailId}` refers to the internal object ID by default, and the
-   * `idProperty` query param refers to a property whose values are unique for the
-   * object. Provided property values will be overwritten. Read-only and non-existent
-   * properties will result in an error. Properties values can be cleared by passing
-   * an empty string.
-   *
    * @example
    * ```ts
    * const simplePublicObject =
@@ -84,9 +75,6 @@ export class PostalMail extends APIResource {
   }
 
   /**
-   * Read a page of postal mail. Control what is returned via the `properties` query
-   * param.
-   *
    * @example
    * ```ts
    * // Automatically fetches more pages as needed.
@@ -107,7 +95,7 @@ export class PostalMail extends APIResource {
   }
 
   /**
-   * Move an Object identified by `{postalMailId}` to the recycling bin.
+   * Move the postal mail object with the ID `{postalMailId}` to the recycling bin.
    *
    * @example
    * ```ts
@@ -122,11 +110,6 @@ export class PostalMail extends APIResource {
   }
 
   /**
-   * Read an Object identified by `{postalMailId}`. `{postalMailId}` refers to the
-   * internal object ID by default, or optionally any unique property value as
-   * specified by the `idProperty` query param. Control what is returned via the
-   * `properties` query param.
-   *
    * @example
    * ```ts
    * const simplePublicObjectWithAssociations =
@@ -142,6 +125,8 @@ export class PostalMail extends APIResource {
   }
 
   /**
+   * Search for postal mail objects using specific criteria in the request.
+   *
    * @example
    * ```ts
    * const collectionResponseWithTotalSimplePublicObject =
@@ -172,68 +157,30 @@ export interface PostalMailUpdateParams {
   properties: { [key: string]: string };
 
   /**
-   * Query param: The name of a property whose values are unique for this object
+   * Query param:
    */
   idProperty?: string;
 }
 
 export interface PostalMailListParams extends PageParams {
-  /**
-   * Whether to return only results that have been archived.
-   */
   archived?: boolean;
 
-  /**
-   * A comma separated list of object types to retrieve associated IDs for. If any of
-   * the specified associations do not exist, they will be ignored.
-   */
   associations?: Array<string>;
 
-  /**
-   * A comma separated list of the properties to be returned in the response. If any
-   * of the specified properties are not present on the requested object(s), they
-   * will be ignored.
-   */
   properties?: Array<string>;
 
-  /**
-   * A comma separated list of the properties to be returned along with their history
-   * of previous values. If any of the specified properties are not present on the
-   * requested object(s), they will be ignored. Usage of this parameter will reduce
-   * the maximum number of postal mail that can be read by a single request.
-   */
   propertiesWithHistory?: Array<string>;
 }
 
 export interface PostalMailGetParams {
-  /**
-   * Whether to return only results that have been archived.
-   */
   archived?: boolean;
 
-  /**
-   * A comma separated list of object types to retrieve associated IDs for. If any of
-   * the specified associations do not exist, they will be ignored.
-   */
   associations?: Array<string>;
 
-  /**
-   * The name of a property whose values are unique for this object
-   */
   idProperty?: string;
 
-  /**
-   * A comma separated list of the properties to be returned in the response. If any
-   * of the specified properties are not present on the requested object(s), they
-   * will be ignored.
-   */
   properties?: Array<string>;
 
-  /**
-   * A comma separated list of the properties to be returned along with their history
-   * of previous values. If any of the specified properties are not present on the
-   * requested object(s), they will be ignored.
-   */
   propertiesWithHistory?: Array<string>;
 }
 

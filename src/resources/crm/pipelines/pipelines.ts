@@ -79,7 +79,7 @@ export class Pipelines extends APIResource {
   }
 
   /**
-   * Delete the pipeline identified by `{pipelineId}`.
+   * Delete a pipeline
    *
    * @example
    * ```ts
@@ -135,9 +135,7 @@ export class Pipelines extends APIResource {
   }
 
   /**
-   * Replace all the properties of an existing pipeline with the values provided.
-   * This will overwrite any existing pipeline stages. The updated pipeline will be
-   * returned in the response.
+   * Replace a pipeline
    *
    * @example
    * ```ts
@@ -331,6 +329,10 @@ export interface PipelineStage {
    */
   metadata?: { [key: string]: string };
 
+  /**
+   * Defines the level of write access for the pipeline stage, with possible values
+   * being CRM_PERMISSIONS_ENFORCEMENT, READ_ONLY, or INTERNAL_ONLY.
+   */
   writePermissions?: 'CRM_PERMISSIONS_ENFORCEMENT' | 'READ_ONLY' | 'INTERNAL_ONLY';
 }
 
@@ -404,18 +406,39 @@ export interface PipelineStagePatchInput {
 }
 
 export interface PublicAuditInfo {
+  /**
+   * The action performed that triggered the audit event.
+   */
   action: string;
 
+  /**
+   * A unique string identifier for the audit event.
+   */
   identifier: string;
 
+  /**
+   * The unique identifier for the HubSpot portal where the audit event occurred.
+   */
   portalId: number;
 
+  /**
+   * The ID of the user who initiated the audit event.
+   */
   fromUserId?: number;
 
+  /**
+   * A descriptive message related to the audit event.
+   */
   message?: string;
 
+  /**
+   * An object containing the raw data associated with the audit event.
+   */
   rawObject?: unknown;
 
+  /**
+   * The date and time when the audit event took place.
+   */
   timestamp?: string;
 }
 

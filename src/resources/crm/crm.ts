@@ -65,24 +65,50 @@ import {
 } from './owners';
 import * as PropertyValidationsAPI from './property-validations';
 import {
+  CollectionResponsePublicPropertyValidationRuleMapNoPaging,
+  CollectionResponsePublicPropertyValidationRuleNoPaging,
   PropertyValidationGetParams,
-  PropertyValidationGetResponse,
-  PropertyValidationListResponse,
   PropertyValidations,
+  PublicPropertyValidationRule,
+  PublicPropertyValidationRuleMap,
 } from './property-validations';
 import * as AssociationsAPI from './associations/associations';
 import {
   Associations,
   BatchInputPublicAssociation,
+  BatchInputPublicAssociationMultiArchive,
+  BatchInputPublicAssociationMultiPost,
+  BatchInputPublicDefaultAssociationMultiPost,
+  BatchInputPublicFetchAssociationsBatchRequest,
+  BatchResponseLabelsBetweenObjectPair,
   BatchResponsePublicAssociation,
   BatchResponsePublicAssociationMulti,
+  BatchResponsePublicAssociationMultiWithLabel,
+  BatchResponseVoid,
+  DateTime,
   PublicAssociation,
   PublicAssociationMulti,
+  PublicAssociationMultiArchive,
+  PublicAssociationMultiPost,
+  PublicAssociationMultiWithLabel,
+  PublicDefaultAssociationMultiPost,
+  PublicFetchAssociationsBatchRequest,
+  ReportCreationResponse,
 } from './associations/associations';
 import * as ExtensionsAPI from './extensions/extensions';
 import { Extensions } from './extensions/extensions';
 import * as FeatureFlagsAPI from './feature-flags/feature-flags';
-import { FeatureFlags } from './feature-flags/feature-flags';
+import {
+  BatchPortalEntry,
+  FeatureFlags,
+  FlagPutRequest,
+  FlagResponse,
+  PortalFlagStateBatchDeleteRequest,
+  PortalFlagStateBatchPutRequest,
+  PortalFlagStateBatchResponse,
+  PortalFlagStatePutRequest,
+  PortalFlagStateResponse,
+} from './feature-flags/feature-flags';
 import * as ListsAPI from './lists/lists';
 import {
   APICollectionResponseJoinTimeAndRecordID,
@@ -125,7 +151,11 @@ import {
   RecordListMembership,
 } from './lists/lists';
 import * as ObjectLibraryAPI from './object-library/object-library';
-import { ObjectLibrary } from './object-library/object-library';
+import {
+  ObjectLibrary,
+  ObjectTypeEnablementPublicResponse,
+  PortalObjectTypeEnablementPublicResponse,
+} from './object-library/object-library';
 import * as ObjectsAPI from './objects/objects';
 import { Objects } from './objects/objects';
 import * as PipelinesAPI from './pipelines/pipelines';
@@ -193,7 +223,6 @@ import {
   Users,
 } from './users/users';
 import * as EmailsAPI from '../marketing/emails/emails';
-import * as V4API from './associations/v4/v4';
 import { Page } from '../../core/pagination';
 
 export class CRM extends APIResource {
@@ -295,7 +324,7 @@ export interface BatchResponsePublicDefaultAssociation {
 
   status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
 
-  errors?: Array<V4API.StandardError1>;
+  errors?: Array<Shared.StandardError>;
 
   links?: { [key: string]: string };
 
@@ -429,6 +458,9 @@ export interface CreatedResponseLabelsBetweenObjectPair {
 }
 
 export interface CreatedResponseSimplePublicObject {
+  /**
+   * The unique identifier of the newly created resource.
+   */
   createdResourceId: string;
 
   /**
@@ -436,6 +468,9 @@ export interface CreatedResponseSimplePublicObject {
    */
   entity: SimplePublicObject;
 
+  /**
+   * The URL location of the newly created resource.
+   */
   location?: string;
 }
 
@@ -499,7 +534,7 @@ export interface LabelsBetweenObjectPair {
 }
 
 export interface MultiAssociatedObjectWithLabel {
-  associationTypes: Array<V4API.AssociationSpecWithLabel1>;
+  associationTypes: Array<AssociationSpecWithLabel>;
 
   toObjectId: string;
 }
@@ -515,7 +550,7 @@ export interface PublicDefaultAssociation {
    * Defines the type, direction, and details of the relationship between two CRM
    * objects.
    */
-  associationSpec: V4API.AssociationSpec1;
+  associationSpec: Shared.AssociationSpec;
 
   from: Shared.PublicObjectID;
 
@@ -899,10 +934,24 @@ export declare namespace CRM {
   export {
     Associations as Associations,
     type BatchInputPublicAssociation as BatchInputPublicAssociation,
+    type BatchInputPublicAssociationMultiArchive as BatchInputPublicAssociationMultiArchive,
+    type BatchInputPublicAssociationMultiPost as BatchInputPublicAssociationMultiPost,
+    type BatchInputPublicDefaultAssociationMultiPost as BatchInputPublicDefaultAssociationMultiPost,
+    type BatchInputPublicFetchAssociationsBatchRequest as BatchInputPublicFetchAssociationsBatchRequest,
+    type BatchResponseLabelsBetweenObjectPair as BatchResponseLabelsBetweenObjectPair,
     type BatchResponsePublicAssociation as BatchResponsePublicAssociation,
     type BatchResponsePublicAssociationMulti as BatchResponsePublicAssociationMulti,
+    type BatchResponsePublicAssociationMultiWithLabel as BatchResponsePublicAssociationMultiWithLabel,
+    type BatchResponseVoid as BatchResponseVoid,
+    type DateTime as DateTime,
     type PublicAssociation as PublicAssociation,
     type PublicAssociationMulti as PublicAssociationMulti,
+    type PublicAssociationMultiArchive as PublicAssociationMultiArchive,
+    type PublicAssociationMultiPost as PublicAssociationMultiPost,
+    type PublicAssociationMultiWithLabel as PublicAssociationMultiWithLabel,
+    type PublicDefaultAssociationMultiPost as PublicDefaultAssociationMultiPost,
+    type PublicFetchAssociationsBatchRequest as PublicFetchAssociationsBatchRequest,
+    type ReportCreationResponse as ReportCreationResponse,
   };
 
   export {
@@ -917,7 +966,17 @@ export declare namespace CRM {
 
   export { Extensions as Extensions };
 
-  export { FeatureFlags as FeatureFlags };
+  export {
+    FeatureFlags as FeatureFlags,
+    type BatchPortalEntry as BatchPortalEntry,
+    type FlagPutRequest as FlagPutRequest,
+    type FlagResponse as FlagResponse,
+    type PortalFlagStateBatchDeleteRequest as PortalFlagStateBatchDeleteRequest,
+    type PortalFlagStateBatchPutRequest as PortalFlagStateBatchPutRequest,
+    type PortalFlagStateBatchResponse as PortalFlagStateBatchResponse,
+    type PortalFlagStatePutRequest as PortalFlagStatePutRequest,
+    type PortalFlagStateResponse as PortalFlagStateResponse,
+  };
 
   export {
     Imports as Imports,
@@ -999,7 +1058,11 @@ export declare namespace CRM {
     type ListUpdateNameParams as ListUpdateNameParams,
   };
 
-  export { ObjectLibrary as ObjectLibrary };
+  export {
+    ObjectLibrary as ObjectLibrary,
+    type ObjectTypeEnablementPublicResponse as ObjectTypeEnablementPublicResponse,
+    type PortalObjectTypeEnablementPublicResponse as PortalObjectTypeEnablementPublicResponse,
+  };
 
   export { Objects as Objects };
 
@@ -1052,8 +1115,10 @@ export declare namespace CRM {
 
   export {
     PropertyValidations as PropertyValidations,
-    type PropertyValidationListResponse as PropertyValidationListResponse,
-    type PropertyValidationGetResponse as PropertyValidationGetResponse,
+    type CollectionResponsePublicPropertyValidationRuleMapNoPaging as CollectionResponsePublicPropertyValidationRuleMapNoPaging,
+    type CollectionResponsePublicPropertyValidationRuleNoPaging as CollectionResponsePublicPropertyValidationRuleNoPaging,
+    type PublicPropertyValidationRule as PublicPropertyValidationRule,
+    type PublicPropertyValidationRuleMap as PublicPropertyValidationRuleMap,
     type PropertyValidationGetParams as PropertyValidationGetParams,
   };
 

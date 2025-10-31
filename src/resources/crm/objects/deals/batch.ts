@@ -8,7 +8,7 @@ import { RequestOptions } from '../../../../internal/request-options';
 
 export class Batch extends APIResource {
   /**
-   * Create a batch of deals
+   * Create multiple deals in a single request.
    *
    * @example
    * ```ts
@@ -26,7 +26,7 @@ export class Batch extends APIResource {
   }
 
   /**
-   * Update a batch of deals by internal ID, or unique property values
+   * Update multiple deals using their internal IDs or unique property values.
    *
    * @example
    * ```ts
@@ -44,7 +44,7 @@ export class Batch extends APIResource {
   }
 
   /**
-   * Archive a batch of deals by ID
+   * Archive multiple deals using their IDs.
    *
    * @example
    * ```ts

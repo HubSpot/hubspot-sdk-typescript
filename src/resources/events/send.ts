@@ -11,9 +11,7 @@ export class Send extends APIResource {
    *
    * @example
    * ```ts
-   * await client.events.send.send({
-   *   eventName: 'pe123456_account_login',
-   * });
+   * await client.events.send.send({ eventName: 'eventName' });
    * ```
    */
   send(body: SendSendParams, options?: RequestOptions): APIPromise<void> {
@@ -30,7 +28,7 @@ export class Send extends APIResource {
    * @example
    * ```ts
    * await client.events.send.sendBatch({
-   *   inputs: [{ eventName: 'pe123456_account_login' }],
+   *   inputs: [{ eventName: 'eventName' }],
    * });
    * ```
    */

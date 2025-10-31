@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import * as ConversationsAPI from '../conversations';
+import * as CustomChannelsAPI from './custom-channels';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -14,7 +15,7 @@ export class ChannelAccountStagingTokens extends APIResource {
    *
    * @example
    * ```ts
-   * const channelAccountStagingToken =
+   * const publicChannelAccountStagingToken =
    *   await client.conversations.customChannels.channelAccountStagingTokens.update(
    *     'accountToken',
    *     {
@@ -29,29 +30,13 @@ export class ChannelAccountStagingTokens extends APIResource {
     accountToken: string,
     params: ChannelAccountStagingTokenUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<ChannelAccountStagingTokenUpdateResponse> {
+  ): APIPromise<CustomChannelsAPI.PublicChannelAccountStagingToken> {
     const { channelId, ...body } = params;
     return this._client.patch(
       path`/conversations/v3/custom-channels/${channelId}/channel-account-staging-tokens/${accountToken}`,
       { body, ...options },
     );
   }
-}
-
-export interface ChannelAccountStagingTokenUpdateResponse {
-  accountToken: string;
-
-  createdAt: string;
-
-  genericChannelId: number;
-
-  inboxId: number;
-
-  userId: number;
-
-  accountName?: string;
-
-  deliveryIdentifier?: ConversationsAPI.PublicDeliveryIdentifier;
 }
 
 export interface ChannelAccountStagingTokenUpdateParams {
@@ -72,8 +57,5 @@ export interface ChannelAccountStagingTokenUpdateParams {
 }
 
 export declare namespace ChannelAccountStagingTokens {
-  export {
-    type ChannelAccountStagingTokenUpdateResponse as ChannelAccountStagingTokenUpdateResponse,
-    type ChannelAccountStagingTokenUpdateParams as ChannelAccountStagingTokenUpdateParams,
-  };
+  export { type ChannelAccountStagingTokenUpdateParams as ChannelAccountStagingTokenUpdateParams };
 }

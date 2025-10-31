@@ -2,7 +2,6 @@
 
 export {
   ChannelAccountStagingTokens,
-  type ChannelAccountStagingTokenUpdateResponse,
   type ChannelAccountStagingTokenUpdateParams,
 } from './channel-account-staging-tokens';
 export {
@@ -13,10 +12,30 @@ export {
 } from './channel-accounts';
 export {
   CustomChannels,
-  type CustomChannelCreateResponse,
-  type CustomChannelUpdateResponse,
-  type CustomChannelListResponse,
-  type CustomChannelGetResponse,
+  type ChannelIntegrationMessageEgg,
+  type ChannelIntegrationParticipant,
+  type CollectionResponseWithTotalPublicChannelIntegrationChannelForwardPaging,
+  type ContactAttachment,
+  type FileAttachment,
+  type LocationAttachment,
+  type MessageHeaderAttachment,
+  type PreResolvedContact,
+  type PreResolvedContacts,
+  type PublicChannelAccount,
+  type PublicChannelAccountEgg,
+  type PublicChannelAccountStagingToken,
+  type PublicChannelAccountStagingTokenUpdateRequest,
+  type PublicChannelAccountUpdateRequest,
+  type PublicChannelIntegrationChannel,
+  type PublicChannelIntegrationChannelCreate,
+  type PublicChannelIntegrationChannelPatch,
+  type PublicChannelIntegrationMessageUpdateRequest,
+  type PublicClient,
+  type PublicConversationsMessage,
+  type PublicFile,
+  type QuickRepliesAttachment,
+  type SocialMetadataIntegrationAttachment,
+  type UnsupportedContentAttachment,
   type CustomChannelCreateParams,
   type CustomChannelUpdateParams,
 } from './custom-channels';

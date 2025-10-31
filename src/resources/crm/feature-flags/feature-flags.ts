@@ -2,29 +2,14 @@
 
 import { APIResource } from '../../../core/resource';
 import * as AppsAPI from './apps';
-import {
-  AppDeleteParams,
-  AppDeleteResponse,
-  AppGetParams,
-  AppGetResponse,
-  AppListPortalsParams,
-  AppListPortalsResponse,
-  AppUpdateParams,
-  AppUpdateResponse,
-  Apps,
-} from './apps';
+import { AppDeleteParams, AppGetParams, AppListPortalsParams, AppUpdateParams, Apps } from './apps';
 import * as PortalsAPI from './portals';
 import {
   PortalBatchDeleteParams,
-  PortalBatchDeleteResponse,
   PortalBatchUpsertParams,
-  PortalBatchUpsertResponse,
   PortalDeleteParams,
-  PortalDeleteResponse,
   PortalGetParams,
-  PortalGetResponse,
   PortalUpdateParams,
-  PortalUpdateResponse,
   Portals,
 } from './portals';
 
@@ -33,16 +18,71 @@ export class FeatureFlags extends APIResource {
   portals: PortalsAPI.Portals = new PortalsAPI.Portals(this._client);
 }
 
+export interface BatchPortalEntry {
+  flagState: 'OFF' | 'ON' | 'ABSENT';
+
+  portalId: number;
+}
+
+export interface FlagPutRequest {
+  defaultState: 'OFF' | 'ON' | 'ABSENT';
+
+  overrideState?: 'OFF' | 'ON' | 'ABSENT';
+}
+
+export interface FlagResponse {
+  appId: number;
+
+  defaultState: 'OFF' | 'ON' | 'ABSENT';
+
+  flagName: string;
+
+  overrideState?: 'OFF' | 'ON' | 'ABSENT';
+}
+
+export interface PortalFlagStateBatchDeleteRequest {
+  portalIds: Array<number>;
+}
+
+export interface PortalFlagStateBatchPutRequest {
+  portalStates: Array<BatchPortalEntry>;
+}
+
+export interface PortalFlagStateBatchResponse {
+  portalFlagStates: Array<PortalFlagStateResponse>;
+}
+
+export interface PortalFlagStatePutRequest {
+  flagState: 'OFF' | 'ON' | 'ABSENT';
+}
+
+export interface PortalFlagStateResponse {
+  appId: number;
+
+  flagName: string;
+
+  flagState: 'OFF' | 'ON' | 'ABSENT';
+
+  portalId: number;
+}
+
 FeatureFlags.Apps = Apps;
 FeatureFlags.Portals = Portals;
 
 export declare namespace FeatureFlags {
   export {
+    type BatchPortalEntry as BatchPortalEntry,
+    type FlagPutRequest as FlagPutRequest,
+    type FlagResponse as FlagResponse,
+    type PortalFlagStateBatchDeleteRequest as PortalFlagStateBatchDeleteRequest,
+    type PortalFlagStateBatchPutRequest as PortalFlagStateBatchPutRequest,
+    type PortalFlagStateBatchResponse as PortalFlagStateBatchResponse,
+    type PortalFlagStatePutRequest as PortalFlagStatePutRequest,
+    type PortalFlagStateResponse as PortalFlagStateResponse,
+  };
+
+  export {
     Apps as Apps,
-    type AppUpdateResponse as AppUpdateResponse,
-    type AppDeleteResponse as AppDeleteResponse,
-    type AppGetResponse as AppGetResponse,
-    type AppListPortalsResponse as AppListPortalsResponse,
     type AppUpdateParams as AppUpdateParams,
     type AppDeleteParams as AppDeleteParams,
     type AppGetParams as AppGetParams,
@@ -51,11 +91,6 @@ export declare namespace FeatureFlags {
 
   export {
     Portals as Portals,
-    type PortalUpdateResponse as PortalUpdateResponse,
-    type PortalDeleteResponse as PortalDeleteResponse,
-    type PortalBatchDeleteResponse as PortalBatchDeleteResponse,
-    type PortalBatchUpsertResponse as PortalBatchUpsertResponse,
-    type PortalGetResponse as PortalGetResponse,
     type PortalUpdateParams as PortalUpdateParams,
     type PortalDeleteParams as PortalDeleteParams,
     type PortalBatchDeleteParams as PortalBatchDeleteParams,

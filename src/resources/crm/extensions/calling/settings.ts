@@ -9,15 +9,12 @@ import { path } from '../../../../internal/utils/path';
 
 export class Settings extends APIResource {
   /**
-   * Set the menu label, target iframe URL, and dimensions for your calling
-   * extension.
-   *
    * @example
    * ```ts
    * const settingsResponse =
    *   await client.crm.extensions.calling.settings.create(0, {
-   *     name: 'HubPhone',
-   *     url: 'https://www.example.com/hubspot/iframe',
+   *     name: 'name',
+   *     url: 'url',
    *   });
    * ```
    */
@@ -30,8 +27,6 @@ export class Settings extends APIResource {
   }
 
   /**
-   * Update existing calling extension settings.
-   *
    * @example
    * ```ts
    * const settingsResponse =
@@ -47,9 +42,6 @@ export class Settings extends APIResource {
   }
 
   /**
-   * Delete a calling extension. This will remove your service as an option for all
-   * connected accounts.
-   *
    * @example
    * ```ts
    * await client.crm.extensions.calling.settings.delete(0);
@@ -63,8 +55,6 @@ export class Settings extends APIResource {
   }
 
   /**
-   * Retrieve the settings configured for the app.
-   *
    * @example
    * ```ts
    * const settingsResponse =
@@ -77,106 +67,42 @@ export class Settings extends APIResource {
 }
 
 export interface SettingCreateParams {
-  /**
-   * The name of your calling service to display to users.
-   */
   name: string;
 
-  /**
-   * The URL to your phone/calling UI, built with the [Calling SDK](#).
-   */
   url: string;
 
-  /**
-   * The target height of the iframe that will contain your phone/calling UI.
-   */
   height?: number;
 
-  /**
-   * When true, this indicates that your calling app is ready for production. Users
-   * will be able to select your calling app as their provider and can then click to
-   * dial within HubSpot.
-   */
   isReady?: boolean;
 
-  /**
-   * When true, users will be able to click to dial from custom objects.
-   */
   supportsCustomObjects?: boolean;
 
-  /**
-   * When true, this indicates that your calling app supports inbound calling within
-   * HubSpot.
-   */
   supportsInboundCalling?: boolean;
 
-  /**
-   * When false, this indicates that your calling app does not require the use of the
-   * separate calling window to hold the call connection.
-   */
   usesCallingWindow?: boolean;
 
-  /**
-   * When false, this indicates that your calling app does not use the anchored
-   * calling remote within the HubSpot app.
-   */
   usesRemote?: boolean;
 
-  /**
-   * The target width of the iframe that will contain your phone/calling UI.
-   */
   width?: number;
 }
 
 export interface SettingUpdateParams {
-  /**
-   * The target height of the iframe that will contain your phone/calling UI.
-   */
   height?: number;
 
-  /**
-   * When true, this indicates that your calling app is ready for production. Users
-   * will be able to select your calling app as their provider and can then click to
-   * dial within HubSpot.
-   */
   isReady?: boolean;
 
-  /**
-   * The name of your calling service to display to users.
-   */
   name?: string;
 
-  /**
-   * When true, users will be able to click to dial from custom objects.
-   */
   supportsCustomObjects?: boolean;
 
-  /**
-   * When true, this indicates that your calling app supports inbound calling within
-   * HubSpot.
-   */
   supportsInboundCalling?: boolean;
 
-  /**
-   * The URL to your phone/calling UI, built with the [Calling SDK](#).
-   */
   url?: string;
 
-  /**
-   * When false, this indicates that your calling app does not require the use of the
-   * separate calling window to hold the call connection.
-   */
   usesCallingWindow?: boolean;
 
-  /**
-   * When false, this indicates that your calling app does not use the anchored
-   * calling remote within the HubSpot app.
-   */
   usesRemote?: boolean;
 
-  /**
-   * The target width of the iframe that will contain your phone/calling UI.
-   */
   width?: number;
 }
 

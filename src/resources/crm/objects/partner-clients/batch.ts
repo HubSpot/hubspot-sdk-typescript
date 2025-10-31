@@ -7,8 +7,6 @@ import { RequestOptions } from '../../../../internal/request-options';
 
 export class Batch extends APIResource {
   /**
-   * Read a batch of objects by internal ID, or unique property values
-   *
    * @example
    * ```ts
    * const batchResponseSimplePublicObject =
@@ -32,8 +30,6 @@ export class Batch extends APIResource {
   }
 
   /**
-   * Update a batch of objects
-   *
    * @example
    * ```ts
    * const batchResponseSimplePublicObject =
@@ -70,7 +66,7 @@ export interface BatchBatchGetParams {
   propertiesWithHistory: Array<string>;
 
   /**
-   * Query param: Whether to return only results that have been archived.
+   * Query param:
    */
   archived?: boolean;
 
