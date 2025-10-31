@@ -1,8 +1,8 @@
-# Hub Spot TypeScript API Library
+# Hubspot TypeScript API Library
 
 [![NPM version](<https://img.shields.io/npm/v/hubspot-sdk.svg?label=npm%20(stable)>)](https://npmjs.org/package/hubspot-sdk) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/hubspot-sdk)
 
-This library provides convenient access to the Hub Spot REST API from server-side TypeScript or JavaScript.
+This library provides convenient access to the Hubspot REST API from server-side TypeScript or JavaScript.
 
 The REST API documentation can be found on [developers.hubspot.com](https://developers.hubspot.com/docs/api-reference/overview). The full API of this library can be found in [api.md](api.md).
 
@@ -23,9 +23,9 @@ The full API of this library can be found in [api.md](api.md).
 
 <!-- prettier-ignore -->
 ```js
-import HubSpot from 'hubspot-sdk';
+import Hubspot from 'hubspot-sdk';
 
-const client = new HubSpot({
+const client = new Hubspot({
   accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
 });
 
@@ -40,14 +40,14 @@ This library includes TypeScript definitions for all request params and response
 
 <!-- prettier-ignore -->
 ```ts
-import HubSpot from 'hubspot-sdk';
+import Hubspot from 'hubspot-sdk';
 
-const client = new HubSpot({
+const client = new Hubspot({
   accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
 });
 
-const params: HubSpot.CRM.Objects.ContactCreateParams = { properties: { email: 'mark.s@lumon.industries' } };
-const createdResponseSimplePublicObject: HubSpot.CreatedResponseSimplePublicObject =
+const params: Hubspot.CRM.Objects.ContactCreateParams = { properties: { email: 'mark.s@lumon.industries' } };
+const createdResponseSimplePublicObject: Hubspot.CreatedResponseSimplePublicObject =
   await client.crm.objects.contacts.create(params);
 ```
 
@@ -64,9 +64,9 @@ Request parameters that correspond to file uploads can be passed in many differe
 
 ```ts
 import fs from 'fs';
-import HubSpot, { toFile } from 'hubspot-sdk';
+import Hubspot, { toFile } from 'hubspot-sdk';
 
-const client = new HubSpot();
+const client = new Hubspot();
 
 // If you have access to Node `fs` we recommend using `fs.createReadStream()`:
 await client.cms.hubdb.tables.importDraft('tableIdOrName', { file: fs.createReadStream('/path/to/file') });
@@ -97,7 +97,7 @@ a subclass of `APIError` will be thrown:
 const createdResponseSimplePublicObject = await client.crm.objects.contacts
   .create({ properties: { email: 'mark.s@lumon.industries' } })
   .catch(async (err) => {
-    if (err instanceof HubSpot.APIError) {
+    if (err instanceof Hubspot.APIError) {
       console.log(err.status); // 400
       console.log(err.name); // BadRequestError
       console.log(err.headers); // {server: 'nginx', ...}
@@ -131,7 +131,7 @@ You can use the `maxRetries` option to configure or disable this:
 <!-- prettier-ignore -->
 ```js
 // Configure the default for all requests:
-const client = new HubSpot({
+const client = new Hubspot({
   maxRetries: 0, // default is 2
 });
 
@@ -148,7 +148,7 @@ Requests time out after 1 minute by default. You can configure this with a `time
 <!-- prettier-ignore -->
 ```ts
 // Configure the default for all requests:
-const client = new HubSpot({
+const client = new Hubspot({
   timeout: 20 * 1000, // 20 seconds (default is 1 minute)
 });
 
@@ -164,7 +164,7 @@ Note that requests which time out will be [retried twice by default](#retries).
 
 ## Auto-pagination
 
-List methods in the HubSpot API are paginated.
+List methods in the Hubspot API are paginated.
 You can use the `for await … of` syntax to iterate through items across all pages:
 
 ```ts
@@ -205,7 +205,7 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 
 <!-- prettier-ignore -->
 ```ts
-const client = new HubSpot();
+const client = new Hubspot();
 
 const response = await client.crm.objects.contacts
   .create({ properties: { email: 'mark.s@lumon.industries' } })
@@ -230,13 +230,13 @@ console.log(createdResponseSimplePublicObject.createdResourceId);
 
 The log level can be configured in two ways:
 
-1. Via the `HUB_SPOT_LOG` environment variable
+1. Via the `HUBSPOT_LOG` environment variable
 2. Using the `logLevel` client option (overrides the environment variable if set)
 
 ```ts
-import HubSpot from 'hubspot-sdk';
+import Hubspot from 'hubspot-sdk';
 
-const client = new HubSpot({
+const client = new Hubspot({
   logLevel: 'debug', // Show all log messages
 });
 ```
@@ -262,13 +262,13 @@ When providing a custom logger, the `logLevel` option still controls which messa
 below the configured level will not be sent to your logger.
 
 ```ts
-import HubSpot from 'hubspot-sdk';
+import Hubspot from 'hubspot-sdk';
 import pino from 'pino';
 
 const logger = pino();
 
-const client = new HubSpot({
-  logger: logger.child({ name: 'HubSpot' }),
+const client = new Hubspot({
+  logger: logger.child({ name: 'Hubspot' }),
   logLevel: 'debug', // Send all messages to pino, allowing it to filter
 });
 ```
@@ -331,10 +331,10 @@ globalThis.fetch = fetch;
 Or pass it to the client:
 
 ```ts
-import HubSpot from 'hubspot-sdk';
+import Hubspot from 'hubspot-sdk';
 import fetch from 'my-fetch';
 
-const client = new HubSpot({ fetch });
+const client = new Hubspot({ fetch });
 ```
 
 ### Fetch options
@@ -342,9 +342,9 @@ const client = new HubSpot({ fetch });
 If you want to set custom `fetch` options without overriding the `fetch` function, you can provide a `fetchOptions` object when instantiating the client or making a request. (Request-specific options override client options.)
 
 ```ts
-import HubSpot from 'hubspot-sdk';
+import Hubspot from 'hubspot-sdk';
 
-const client = new HubSpot({
+const client = new Hubspot({
   fetchOptions: {
     // `RequestInit` options
   },
@@ -359,11 +359,11 @@ options to requests:
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/node.svg" align="top" width="18" height="21"> **Node** <sup>[[docs](https://github.com/nodejs/undici/blob/main/docs/docs/api/ProxyAgent.md#example---proxyagent-with-fetch)]</sup>
 
 ```ts
-import HubSpot from 'hubspot-sdk';
+import Hubspot from 'hubspot-sdk';
 import * as undici from 'undici';
 
 const proxyAgent = new undici.ProxyAgent('http://localhost:8888');
-const client = new HubSpot({
+const client = new Hubspot({
   fetchOptions: {
     dispatcher: proxyAgent,
   },
@@ -373,9 +373,9 @@ const client = new HubSpot({
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/bun.svg" align="top" width="18" height="21"> **Bun** <sup>[[docs](https://bun.sh/guides/http/proxy)]</sup>
 
 ```ts
-import HubSpot from 'hubspot-sdk';
+import Hubspot from 'hubspot-sdk';
 
-const client = new HubSpot({
+const client = new Hubspot({
   fetchOptions: {
     proxy: 'http://localhost:8888',
   },
@@ -385,10 +385,10 @@ const client = new HubSpot({
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/deno.svg" align="top" width="18" height="21"> **Deno** <sup>[[docs](https://docs.deno.com/api/deno/~/Deno.createHttpClient)]</sup>
 
 ```ts
-import HubSpot from 'npm:hubspot-sdk';
+import Hubspot from 'npm:hubspot-sdk';
 
 const httpClient = Deno.createHttpClient({ proxy: { url: 'http://localhost:8888' } });
-const client = new HubSpot({
+const client = new Hubspot({
   fetchOptions: {
     client: httpClient,
   },

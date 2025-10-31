@@ -73,7 +73,7 @@ export interface ClientOptions {
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
    *
-   * Defaults to process.env['HUB_SPOT_BASE_URL'].
+   * Defaults to process.env['HUBSPOT_BASE_URL'].
    */
   baseURL?: string | null | undefined;
 
@@ -127,7 +127,7 @@ export interface ClientOptions {
   /**
    * Set the log level.
    *
-   * Defaults to process.env['HUB_SPOT_LOG'] or 'warn' if it isn't set.
+   * Defaults to process.env['HUBSPOT_LOG'] or 'warn' if it isn't set.
    */
   logLevel?: LogLevel | undefined;
 
@@ -140,9 +140,9 @@ export interface ClientOptions {
 }
 
 /**
- * API Client for interfacing with the Hub Spot API.
+ * API Client for interfacing with the Hubspot API.
  */
-export class HubSpot {
+export class Hubspot {
   accessToken: string | null;
   developerAPIKey: string | null;
 
@@ -159,11 +159,11 @@ export class HubSpot {
   private _options: ClientOptions;
 
   /**
-   * API Client for interfacing with the Hub Spot API.
+   * API Client for interfacing with the Hubspot API.
    *
    * @param {string | null | undefined} [opts.accessToken]
    * @param {string | null | undefined} [opts.developerAPIKey]
-   * @param {string} [opts.baseURL=process.env['HUB_SPOT_BASE_URL'] ?? https://api.hubapi.com] - Override the default base URL for the API.
+   * @param {string} [opts.baseURL=process.env['HUBSPOT_BASE_URL'] ?? https://api.hubapi.com] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
    * @param {Fetch} [opts.fetch] - Specify a custom `fetch` function implementation.
@@ -172,7 +172,7 @@ export class HubSpot {
    * @param {Record<string, string | undefined>} opts.defaultQuery - Default query parameters to include with every request to the API.
    */
   constructor({
-    baseURL = readEnv('HUB_SPOT_BASE_URL'),
+    baseURL = readEnv('HUBSPOT_BASE_URL'),
     accessToken = null,
     developerAPIKey = null,
     ...opts
@@ -187,14 +187,14 @@ export class HubSpot {
     validateSingleAuth(accessToken, developerAPIKey);
 
     this.baseURL = options.baseURL!;
-    this.timeout = options.timeout ?? HubSpot.DEFAULT_TIMEOUT /* 1 minute */;
+    this.timeout = options.timeout ?? Hubspot.DEFAULT_TIMEOUT /* 1 minute */;
     this.logger = options.logger ?? console;
     const defaultLogLevel = 'warn';
     // Set default logLevel early so that we can log a warning in parseLogLevel.
     this.logLevel = defaultLogLevel;
     this.logLevel =
       parseLogLevel(options.logLevel, 'ClientOptions.logLevel', this) ??
-      parseLogLevel(readEnv('HUB_SPOT_LOG'), "process.env['HUB_SPOT_LOG']", this) ??
+      parseLogLevel(readEnv('HUBSPOT_LOG'), "process.env['HUBSPOT_LOG']", this) ??
       defaultLogLevel;
     this.fetchOptions = options.fetchOptions;
     this.maxRetries = options.maxRetries ?? 2;
@@ -524,7 +524,7 @@ export class HubSpot {
     options: FinalRequestOptions,
   ): Pagination.PagePromise<PageClass, Item> {
     const request = this.makeRequest(options, null, undefined);
-    return new Pagination.PagePromise<PageClass, Item>(this as any as HubSpot, request, Page);
+    return new Pagination.PagePromise<PageClass, Item>(this as any as Hubspot, request, Page);
   }
 
   async fetchWithTimeout(
@@ -740,10 +740,10 @@ export class HubSpot {
     }
   }
 
-  static HubSpot = this;
+  static Hubspot = this;
   static DEFAULT_TIMEOUT = 60000; // 1 minute
 
-  static HubSpotError = Errors.HubSpotError;
+  static HubspotError = Errors.HubspotError;
   static APIError = Errors.APIError;
   static APIConnectionError = Errors.APIConnectionError;
   static APIConnectionTimeoutError = Errors.APIConnectionTimeoutError;
@@ -774,21 +774,21 @@ export class HubSpot {
   webhooks: API.Webhooks = new API.Webhooks(this);
 }
 
-HubSpot.Account = Account;
-HubSpot.Auth = Auth;
-HubSpot.Automation = Automation;
-HubSpot.BusinessUnits = BusinessUnits;
-HubSpot.Cms = Cms;
-HubSpot.Conversations = Conversations;
-HubSpot.CRM = CRM;
-HubSpot.Events = Events;
-HubSpot.Files = Files;
-HubSpot.Marketing = Marketing;
-HubSpot.Scheduler = Scheduler;
-HubSpot.Settings = Settings;
-HubSpot.Webhooks = Webhooks;
+Hubspot.Account = Account;
+Hubspot.Auth = Auth;
+Hubspot.Automation = Automation;
+Hubspot.BusinessUnits = BusinessUnits;
+Hubspot.Cms = Cms;
+Hubspot.Conversations = Conversations;
+Hubspot.CRM = CRM;
+Hubspot.Events = Events;
+Hubspot.Files = Files;
+Hubspot.Marketing = Marketing;
+Hubspot.Scheduler = Scheduler;
+Hubspot.Settings = Settings;
+Hubspot.Webhooks = Webhooks;
 
-export declare namespace HubSpot {
+export declare namespace Hubspot {
   export type RequestOptions = Opts.RequestOptions;
 
   export import Page = Pagination.Page;

@@ -6,30 +6,10 @@ export { Channels } from './channels';
 export { Conversations } from './conversations';
 export {
   CustomChannels,
-  type ChannelIntegrationMessageEgg,
-  type ChannelIntegrationParticipant,
-  type CollectionResponseWithTotalPublicChannelIntegrationChannelForwardPaging,
-  type ContactAttachment,
-  type FileAttachment,
-  type LocationAttachment,
-  type MessageHeaderAttachment,
-  type PreResolvedContact,
-  type PreResolvedContacts,
-  type PublicChannelAccount,
-  type PublicChannelAccountEgg,
-  type PublicChannelAccountStagingToken,
-  type PublicChannelAccountStagingTokenUpdateRequest,
-  type PublicChannelAccountUpdateRequest,
-  type PublicChannelIntegrationChannel,
-  type PublicChannelIntegrationChannelCreate,
-  type PublicChannelIntegrationChannelPatch,
-  type PublicChannelIntegrationMessageUpdateRequest,
-  type PublicClient,
-  type PublicConversationsMessage,
-  type PublicFile,
-  type QuickRepliesAttachment,
-  type SocialMetadataIntegrationAttachment,
-  type UnsupportedContentAttachment,
+  type CustomChannelCreateResponse,
+  type CustomChannelUpdateResponse,
+  type CustomChannelListResponse,
+  type CustomChannelGetResponse,
   type CustomChannelCreateParams,
   type CustomChannelUpdateParams,
 } from './custom-channels/index';
@@ -43,7 +23,6 @@ export {
 export { Threads, type ThreadUpdateParams } from './threads';
 export {
   VisitorIdentification,
-  type IdentificationTokenGenerationRequest,
-  type IdentificationTokenResponse,
+  type VisitorIdentificationGenerateTokenResponse,
   type VisitorIdentificationGenerateTokenParams,
 } from './visitor-identification';

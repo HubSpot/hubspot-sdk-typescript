@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import HubSpot, { toFile } from 'hubspot-sdk';
+import Hubspot, { toFile } from 'hubspot-sdk';
 
-const client = new HubSpot({
+const client = new Hubspot({
   accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
@@ -89,7 +89,7 @@ describe('resource tables', () => {
         },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(HubSpot.NotFoundError);
+    ).rejects.toThrow(Hubspot.NotFoundError);
   });
 
   // Prism tests are disabled
@@ -154,7 +154,7 @@ describe('resource tables', () => {
         { format: 'format' },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(HubSpot.NotFoundError);
+    ).rejects.toThrow(Hubspot.NotFoundError);
   });
 
   test('exportDraft: request options and params are passed correctly', async () => {
@@ -165,7 +165,7 @@ describe('resource tables', () => {
         { format: 'format' },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(HubSpot.NotFoundError);
+    ).rejects.toThrow(Hubspot.NotFoundError);
   });
 
   // Prism tests are disabled
@@ -189,7 +189,7 @@ describe('resource tables', () => {
         { archived: true, includeForeignIds: true, isGetLocalizedSchema: true },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(HubSpot.NotFoundError);
+    ).rejects.toThrow(Hubspot.NotFoundError);
   });
 
   // Prism tests are disabled
@@ -213,7 +213,7 @@ describe('resource tables', () => {
         { archived: true, includeForeignIds: true, isGetLocalizedSchema: true },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(HubSpot.NotFoundError);
+    ).rejects.toThrow(Hubspot.NotFoundError);
   });
 
   // Prism tests are disabled
@@ -237,7 +237,7 @@ describe('resource tables', () => {
         { config: 'config', file: await toFile(Buffer.from('# my file contents'), 'README.md') },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(HubSpot.NotFoundError);
+    ).rejects.toThrow(Hubspot.NotFoundError);
   });
 
   // Prism tests are disabled
@@ -273,7 +273,7 @@ describe('resource tables', () => {
         },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(HubSpot.NotFoundError);
+    ).rejects.toThrow(Hubspot.NotFoundError);
   });
 
   // Prism tests are disabled
@@ -297,7 +297,7 @@ describe('resource tables', () => {
         { includeForeignIds: true },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(HubSpot.NotFoundError);
+    ).rejects.toThrow(Hubspot.NotFoundError);
   });
 
   // Prism tests are disabled
@@ -321,7 +321,7 @@ describe('resource tables', () => {
         { includeForeignIds: true },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(HubSpot.NotFoundError);
+    ).rejects.toThrow(Hubspot.NotFoundError);
   });
 
   // Prism tests are disabled
@@ -345,7 +345,7 @@ describe('resource tables', () => {
         { includeForeignIds: true },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(HubSpot.NotFoundError);
+    ).rejects.toThrow(Hubspot.NotFoundError);
   });
 
   // Prism tests are disabled

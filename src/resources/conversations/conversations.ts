@@ -16,36 +16,19 @@ import * as ThreadsAPI from './threads';
 import { ThreadUpdateParams, Threads } from './threads';
 import * as VisitorIdentificationAPI from './visitor-identification';
 import {
-  IdentificationTokenGenerationRequest,
-  IdentificationTokenResponse,
   VisitorIdentification,
   VisitorIdentificationGenerateTokenParams,
+  VisitorIdentificationGenerateTokenResponse,
 } from './visitor-identification';
 import * as CustomChannelsAPI from './custom-channels/custom-channels';
 import {
-  ChannelIntegrationMessageEgg,
-  ChannelIntegrationParticipant,
-  CollectionResponseWithTotalPublicChannelIntegrationChannelForwardPaging,
-  ContactAttachment,
   CustomChannelCreateParams,
+  CustomChannelCreateResponse,
+  CustomChannelGetResponse,
+  CustomChannelListResponse,
   CustomChannelUpdateParams,
+  CustomChannelUpdateResponse,
   CustomChannels,
-  FileAttachment,
-  LocationAttachment,
-  MessageHeaderAttachment,
-  PreResolvedContact,
-  PreResolvedContacts,
-  PublicChannelAccountEgg,
-  PublicChannelAccountStagingToken,
-  PublicChannelAccountStagingTokenUpdateRequest,
-  PublicChannelAccountUpdateRequest,
-  PublicChannelIntegrationChannel,
-  PublicChannelIntegrationChannelCreate,
-  PublicChannelIntegrationChannelPatch,
-  PublicChannelIntegrationMessageUpdateRequest,
-  QuickRepliesAttachment,
-  SocialMetadataIntegrationAttachment,
-  UnsupportedContentAttachment,
 } from './custom-channels/custom-channels';
 
 export class Conversations extends APIResource {
@@ -935,26 +918,10 @@ export declare namespace Conversations {
 
   export {
     CustomChannels as CustomChannels,
-    type ChannelIntegrationMessageEgg as ChannelIntegrationMessageEgg,
-    type ChannelIntegrationParticipant as ChannelIntegrationParticipant,
-    type CollectionResponseWithTotalPublicChannelIntegrationChannelForwardPaging as CollectionResponseWithTotalPublicChannelIntegrationChannelForwardPaging,
-    type ContactAttachment as ContactAttachment,
-    type FileAttachment as FileAttachment,
-    type LocationAttachment as LocationAttachment,
-    type MessageHeaderAttachment as MessageHeaderAttachment,
-    type PreResolvedContact as PreResolvedContact,
-    type PreResolvedContacts as PreResolvedContacts,
-    type PublicChannelAccountEgg as PublicChannelAccountEgg,
-    type PublicChannelAccountStagingToken as PublicChannelAccountStagingToken,
-    type PublicChannelAccountStagingTokenUpdateRequest as PublicChannelAccountStagingTokenUpdateRequest,
-    type PublicChannelAccountUpdateRequest as PublicChannelAccountUpdateRequest,
-    type PublicChannelIntegrationChannel as PublicChannelIntegrationChannel,
-    type PublicChannelIntegrationChannelCreate as PublicChannelIntegrationChannelCreate,
-    type PublicChannelIntegrationChannelPatch as PublicChannelIntegrationChannelPatch,
-    type PublicChannelIntegrationMessageUpdateRequest as PublicChannelIntegrationMessageUpdateRequest,
-    type QuickRepliesAttachment as QuickRepliesAttachment,
-    type SocialMetadataIntegrationAttachment as SocialMetadataIntegrationAttachment,
-    type UnsupportedContentAttachment as UnsupportedContentAttachment,
+    type CustomChannelCreateResponse as CustomChannelCreateResponse,
+    type CustomChannelUpdateResponse as CustomChannelUpdateResponse,
+    type CustomChannelListResponse as CustomChannelListResponse,
+    type CustomChannelGetResponse as CustomChannelGetResponse,
     type CustomChannelCreateParams as CustomChannelCreateParams,
     type CustomChannelUpdateParams as CustomChannelUpdateParams,
   };
@@ -972,8 +939,7 @@ export declare namespace Conversations {
 
   export {
     VisitorIdentification as VisitorIdentification,
-    type IdentificationTokenGenerationRequest as IdentificationTokenGenerationRequest,
-    type IdentificationTokenResponse as IdentificationTokenResponse,
+    type VisitorIdentificationGenerateTokenResponse as VisitorIdentificationGenerateTokenResponse,
     type VisitorIdentificationGenerateTokenParams as VisitorIdentificationGenerateTokenParams,
   };
 }

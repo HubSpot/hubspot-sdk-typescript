@@ -24,4 +24,4 @@ export {
   type PublicAssociationDefinitionUpdateRequest,
   type PublicAssociationDefinitionUserConfiguration,
   type PublicAssociationSpec,
-} from './v4/index';
+} from './v4';

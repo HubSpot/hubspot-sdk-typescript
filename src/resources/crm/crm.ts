@@ -65,12 +65,10 @@ import {
 } from './owners';
 import * as PropertyValidationsAPI from './property-validations';
 import {
-  CollectionResponsePublicPropertyValidationRuleMapNoPaging,
-  CollectionResponsePublicPropertyValidationRuleNoPaging,
   PropertyValidationGetParams,
+  PropertyValidationGetResponse,
+  PropertyValidationListResponse,
   PropertyValidations,
-  PublicPropertyValidationRule,
-  PublicPropertyValidationRuleMap,
 } from './property-validations';
 import * as AssociationsAPI from './associations/associations';
 import {
@@ -84,17 +82,7 @@ import {
 import * as ExtensionsAPI from './extensions/extensions';
 import { Extensions } from './extensions/extensions';
 import * as FeatureFlagsAPI from './feature-flags/feature-flags';
-import {
-  BatchPortalEntry,
-  FeatureFlags,
-  FlagPutRequest,
-  FlagResponse,
-  PortalFlagStateBatchDeleteRequest,
-  PortalFlagStateBatchPutRequest,
-  PortalFlagStateBatchResponse,
-  PortalFlagStatePutRequest,
-  PortalFlagStateResponse,
-} from './feature-flags/feature-flags';
+import { FeatureFlags } from './feature-flags/feature-flags';
 import * as ListsAPI from './lists/lists';
 import {
   APICollectionResponseJoinTimeAndRecordID,
@@ -137,11 +125,7 @@ import {
   RecordListMembership,
 } from './lists/lists';
 import * as ObjectLibraryAPI from './object-library/object-library';
-import {
-  ObjectLibrary,
-  ObjectTypeEnablementPublicResponse,
-  PortalObjectTypeEnablementPublicResponse,
-} from './object-library/object-library';
+import { ObjectLibrary } from './object-library/object-library';
 import * as ObjectsAPI from './objects/objects';
 import { Objects } from './objects/objects';
 import * as PipelinesAPI from './pipelines/pipelines';
@@ -933,17 +917,7 @@ export declare namespace CRM {
 
   export { Extensions as Extensions };
 
-  export {
-    FeatureFlags as FeatureFlags,
-    type BatchPortalEntry as BatchPortalEntry,
-    type FlagPutRequest as FlagPutRequest,
-    type FlagResponse as FlagResponse,
-    type PortalFlagStateBatchDeleteRequest as PortalFlagStateBatchDeleteRequest,
-    type PortalFlagStateBatchPutRequest as PortalFlagStateBatchPutRequest,
-    type PortalFlagStateBatchResponse as PortalFlagStateBatchResponse,
-    type PortalFlagStatePutRequest as PortalFlagStatePutRequest,
-    type PortalFlagStateResponse as PortalFlagStateResponse,
-  };
+  export { FeatureFlags as FeatureFlags };
 
   export {
     Imports as Imports,
@@ -1025,11 +999,7 @@ export declare namespace CRM {
     type ListUpdateNameParams as ListUpdateNameParams,
   };
 
-  export {
-    ObjectLibrary as ObjectLibrary,
-    type ObjectTypeEnablementPublicResponse as ObjectTypeEnablementPublicResponse,
-    type PortalObjectTypeEnablementPublicResponse as PortalObjectTypeEnablementPublicResponse,
-  };
+  export { ObjectLibrary as ObjectLibrary };
 
   export { Objects as Objects };
 
@@ -1082,10 +1052,8 @@ export declare namespace CRM {
 
   export {
     PropertyValidations as PropertyValidations,
-    type CollectionResponsePublicPropertyValidationRuleMapNoPaging as CollectionResponsePublicPropertyValidationRuleMapNoPaging,
-    type CollectionResponsePublicPropertyValidationRuleNoPaging as CollectionResponsePublicPropertyValidationRuleNoPaging,
-    type PublicPropertyValidationRule as PublicPropertyValidationRule,
-    type PublicPropertyValidationRuleMap as PublicPropertyValidationRuleMap,
+    type PropertyValidationListResponse as PropertyValidationListResponse,
+    type PropertyValidationGetResponse as PropertyValidationGetResponse,
     type PropertyValidationGetParams as PropertyValidationGetParams,
   };
 

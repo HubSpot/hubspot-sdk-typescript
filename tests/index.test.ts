@@ -3,7 +3,7 @@
 import { APIPromise } from 'hubspot-sdk/core/api-promise';
 
 import util from 'node:util';
-import HubSpot from 'hubspot-sdk';
+import Hubspot from 'hubspot-sdk';
 import { APIUserAbortError } from 'hubspot-sdk';
 const defaultFetch = fetch;
 
@@ -20,7 +20,7 @@ describe('instantiate client', () => {
   });
 
   describe('defaultHeaders', () => {
-    const client = new HubSpot({
+    const client = new Hubspot({
       baseURL: 'http://localhost:5000/',
       defaultHeaders: { 'X-My-Default-Header': '2' },
       accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
@@ -54,14 +54,14 @@ describe('instantiate client', () => {
 
     beforeEach(() => {
       process.env = { ...env };
-      process.env['HUB_SPOT_LOG'] = undefined;
+      process.env['HUBSPOT_LOG'] = undefined;
     });
 
     afterEach(() => {
       process.env = env;
     });
 
-    const forceAPIResponseForClient = async (client: HubSpot) => {
+    const forceAPIResponseForClient = async (client: Hubspot) => {
       await new APIPromise(
         client,
         Promise.resolve({
@@ -87,7 +87,7 @@ describe('instantiate client', () => {
         error: jest.fn(),
       };
 
-      const client = new HubSpot({
+      const client = new Hubspot({
         logger: logger,
         logLevel: 'debug',
         accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
@@ -98,7 +98,7 @@ describe('instantiate client', () => {
     });
 
     test('default logLevel is warn', async () => {
-      const client = new HubSpot({ accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' });
+      const client = new Hubspot({ accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' });
       expect(client.logLevel).toBe('warn');
     });
 
@@ -111,7 +111,7 @@ describe('instantiate client', () => {
         error: jest.fn(),
       };
 
-      const client = new HubSpot({
+      const client = new Hubspot({
         logger: logger,
         logLevel: 'info',
         accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
@@ -130,8 +130,8 @@ describe('instantiate client', () => {
         error: jest.fn(),
       };
 
-      process.env['HUB_SPOT_LOG'] = 'debug';
-      const client = new HubSpot({
+      process.env['HUBSPOT_LOG'] = 'debug';
+      const client = new Hubspot({
         logger: logger,
         accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
       });
@@ -150,14 +150,14 @@ describe('instantiate client', () => {
         error: jest.fn(),
       };
 
-      process.env['HUB_SPOT_LOG'] = 'not a log level';
-      const client = new HubSpot({
+      process.env['HUBSPOT_LOG'] = 'not a log level';
+      const client = new Hubspot({
         logger: logger,
         accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
       });
       expect(client.logLevel).toBe('warn');
       expect(warnMock).toHaveBeenCalledWith(
-        'process.env[\'HUB_SPOT_LOG\'] was set to "not a log level", expected one of ["off","error","warn","info","debug"]',
+        'process.env[\'HUBSPOT_LOG\'] was set to "not a log level", expected one of ["off","error","warn","info","debug"]',
       );
     });
 
@@ -170,8 +170,8 @@ describe('instantiate client', () => {
         error: jest.fn(),
       };
 
-      process.env['HUB_SPOT_LOG'] = 'debug';
-      const client = new HubSpot({
+      process.env['HUBSPOT_LOG'] = 'debug';
+      const client = new Hubspot({
         logger: logger,
         logLevel: 'off',
         accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
@@ -190,8 +190,8 @@ describe('instantiate client', () => {
         error: jest.fn(),
       };
 
-      process.env['HUB_SPOT_LOG'] = 'not a log level';
-      const client = new HubSpot({
+      process.env['HUBSPOT_LOG'] = 'not a log level';
+      const client = new Hubspot({
         logger: logger,
         logLevel: 'debug',
         accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
@@ -203,7 +203,7 @@ describe('instantiate client', () => {
 
   describe('defaultQuery', () => {
     test('with null query params given', () => {
-      const client = new HubSpot({
+      const client = new Hubspot({
         baseURL: 'http://localhost:5000/',
         defaultQuery: { apiVersion: 'foo' },
         accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
@@ -212,7 +212,7 @@ describe('instantiate client', () => {
     });
 
     test('multiple default query params', () => {
-      const client = new HubSpot({
+      const client = new Hubspot({
         baseURL: 'http://localhost:5000/',
         defaultQuery: { apiVersion: 'foo', hello: 'world' },
         accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
@@ -221,7 +221,7 @@ describe('instantiate client', () => {
     });
 
     test('overriding with `undefined`', () => {
-      const client = new HubSpot({
+      const client = new Hubspot({
         baseURL: 'http://localhost:5000/',
         defaultQuery: { hello: 'world' },
         accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
@@ -231,7 +231,7 @@ describe('instantiate client', () => {
   });
 
   test('custom fetch', async () => {
-    const client = new HubSpot({
+    const client = new Hubspot({
       baseURL: 'http://localhost:5000/',
       accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
       fetch: (url) => {
@@ -249,7 +249,7 @@ describe('instantiate client', () => {
 
   test('explicit global fetch', async () => {
     // make sure the global fetch type is assignable to our Fetch type
-    const client = new HubSpot({
+    const client = new Hubspot({
       baseURL: 'http://localhost:5000/',
       accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
       fetch: defaultFetch,
@@ -257,7 +257,7 @@ describe('instantiate client', () => {
   });
 
   test('custom signal', async () => {
-    const client = new HubSpot({
+    const client = new Hubspot({
       baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
       accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
       fetch: (...args) => {
@@ -289,7 +289,7 @@ describe('instantiate client', () => {
       return new Response(JSON.stringify({}), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new HubSpot({
+    const client = new Hubspot({
       baseURL: 'http://localhost:5000/',
       accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
       fetch: testFetch,
@@ -301,7 +301,7 @@ describe('instantiate client', () => {
 
   describe('baseUrl', () => {
     test('trailing slash', () => {
-      const client = new HubSpot({
+      const client = new Hubspot({
         baseURL: 'http://localhost:5000/custom/path/',
         accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
       });
@@ -309,7 +309,7 @@ describe('instantiate client', () => {
     });
 
     test('no trailing slash', () => {
-      const client = new HubSpot({
+      const client = new Hubspot({
         baseURL: 'http://localhost:5000/custom/path',
         accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
       });
@@ -317,11 +317,11 @@ describe('instantiate client', () => {
     });
 
     afterEach(() => {
-      process.env['HUB_SPOT_BASE_URL'] = undefined;
+      process.env['HUBSPOT_BASE_URL'] = undefined;
     });
 
     test('explicit option', () => {
-      const client = new HubSpot({
+      const client = new Hubspot({
         baseURL: 'https://example.com',
         accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
       });
@@ -329,32 +329,32 @@ describe('instantiate client', () => {
     });
 
     test('env variable', () => {
-      process.env['HUB_SPOT_BASE_URL'] = 'https://example.com/from_env';
-      const client = new HubSpot({ accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' });
+      process.env['HUBSPOT_BASE_URL'] = 'https://example.com/from_env';
+      const client = new Hubspot({ accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' });
       expect(client.baseURL).toEqual('https://example.com/from_env');
     });
 
     test('empty env variable', () => {
-      process.env['HUB_SPOT_BASE_URL'] = ''; // empty
-      const client = new HubSpot({ accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' });
+      process.env['HUBSPOT_BASE_URL'] = ''; // empty
+      const client = new Hubspot({ accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' });
       expect(client.baseURL).toEqual('https://api.hubapi.com');
     });
 
     test('blank env variable', () => {
-      process.env['HUB_SPOT_BASE_URL'] = '  '; // blank
-      const client = new HubSpot({ accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' });
+      process.env['HUBSPOT_BASE_URL'] = '  '; // blank
+      const client = new Hubspot({ accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' });
       expect(client.baseURL).toEqual('https://api.hubapi.com');
     });
 
     test('in request options', () => {
-      const client = new HubSpot({ accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' });
+      const client = new Hubspot({ accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' });
       expect(client.buildURL('/foo', null, 'http://localhost:5000/option')).toEqual(
         'http://localhost:5000/option/foo',
       );
     });
 
     test('in request options overridden by client options', () => {
-      const client = new HubSpot({
+      const client = new Hubspot({
         accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
         baseURL: 'http://localhost:5000/client',
       });
@@ -364,8 +364,8 @@ describe('instantiate client', () => {
     });
 
     test('in request options overridden by env variable', () => {
-      process.env['HUB_SPOT_BASE_URL'] = 'http://localhost:5000/env';
-      const client = new HubSpot({ accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' });
+      process.env['HUBSPOT_BASE_URL'] = 'http://localhost:5000/env';
+      const client = new Hubspot({ accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' });
       expect(client.buildURL('/foo', null, 'http://localhost:5000/option')).toEqual(
         'http://localhost:5000/env/foo',
       );
@@ -373,20 +373,20 @@ describe('instantiate client', () => {
   });
 
   test('maxRetries option is correctly set', () => {
-    const client = new HubSpot({
+    const client = new Hubspot({
       maxRetries: 4,
       accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
     });
     expect(client.maxRetries).toEqual(4);
 
     // default
-    const client2 = new HubSpot({ accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' });
+    const client2 = new Hubspot({ accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' });
     expect(client2.maxRetries).toEqual(2);
   });
 
   describe('withOptions', () => {
     test('creates a new client with overridden options', async () => {
-      const client = new HubSpot({
+      const client = new Hubspot({
         baseURL: 'http://localhost:5000/',
         maxRetries: 3,
         accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
@@ -411,7 +411,7 @@ describe('instantiate client', () => {
     });
 
     test('inherits options from the parent client', async () => {
-      const client = new HubSpot({
+      const client = new Hubspot({
         baseURL: 'http://localhost:5000/',
         defaultHeaders: { 'X-Test-Header': 'test-value' },
         defaultQuery: { 'test-param': 'test-value' },
@@ -430,7 +430,7 @@ describe('instantiate client', () => {
     });
 
     test('respects runtime property changes when creating new client', () => {
-      const client = new HubSpot({
+      const client = new Hubspot({
         baseURL: 'http://localhost:5000/',
         timeout: 1000,
         accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
@@ -471,7 +471,7 @@ describe('instantiate client', () => {
 });
 
 describe('request building', () => {
-  const client = new HubSpot({ accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' });
+  const client = new Hubspot({ accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' });
 
   describe('custom headers', () => {
     test('handles undefined', async () => {
@@ -490,7 +490,7 @@ describe('request building', () => {
 });
 
 describe('default encoder', () => {
-  const client = new HubSpot({ accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' });
+  const client = new Hubspot({ accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' });
 
   class Serializable {
     toJSON() {
@@ -575,7 +575,7 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new HubSpot({
+    const client = new Hubspot({
       accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
       timeout: 10,
       fetch: testFetch,
@@ -609,7 +609,7 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new HubSpot({
+    const client = new Hubspot({
       accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
       fetch: testFetch,
       maxRetries: 4,
@@ -637,7 +637,7 @@ describe('retries', () => {
       capturedRequest = init;
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
-    const client = new HubSpot({
+    const client = new Hubspot({
       accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
       fetch: testFetch,
       maxRetries: 4,
@@ -670,7 +670,7 @@ describe('retries', () => {
       capturedRequest = init;
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
-    const client = new HubSpot({
+    const client = new Hubspot({
       accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
       fetch: testFetch,
       maxRetries: 4,
@@ -703,7 +703,7 @@ describe('retries', () => {
       capturedRequest = init;
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
-    const client = new HubSpot({
+    const client = new Hubspot({
       accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
       fetch: testFetch,
       maxRetries: 4,
@@ -737,7 +737,7 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new HubSpot({
+    const client = new Hubspot({
       accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
       fetch: testFetch,
     });
@@ -770,7 +770,7 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new HubSpot({
+    const client = new Hubspot({
       accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
       fetch: testFetch,
     });

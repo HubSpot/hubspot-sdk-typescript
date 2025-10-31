@@ -20,17 +20,7 @@ export {
   type ExportCreateParams,
 } from './exports';
 export { Extensions } from './extensions/index';
-export {
-  FeatureFlags,
-  type BatchPortalEntry,
-  type FlagPutRequest,
-  type FlagResponse,
-  type PortalFlagStateBatchDeleteRequest,
-  type PortalFlagStateBatchPutRequest,
-  type PortalFlagStateBatchResponse,
-  type PortalFlagStatePutRequest,
-  type PortalFlagStateResponse,
-} from './feature-flags/index';
+export { FeatureFlags } from './feature-flags/index';
 export {
   Imports,
   type CollectionResponsePublicImportErrorForwardPaging,
@@ -109,11 +99,7 @@ export {
   type ListUpdateNameParams,
   type JoinTimeAndRecordIDsPage,
 } from './lists/index';
-export {
-  ObjectLibrary,
-  type ObjectTypeEnablementPublicResponse,
-  type PortalObjectTypeEnablementPublicResponse,
-} from './object-library/index';
+export { ObjectLibrary } from './object-library/index';
 export { Objects } from './objects/index';
 export {
   Owners,
@@ -161,10 +147,8 @@ export {
 } from './properties/index';
 export {
   PropertyValidations,
-  type CollectionResponsePublicPropertyValidationRuleMapNoPaging,
-  type CollectionResponsePublicPropertyValidationRuleNoPaging,
-  type PublicPropertyValidationRule,
-  type PublicPropertyValidationRuleMap,
+  type PropertyValidationListResponse,
+  type PropertyValidationGetResponse,
   type PropertyValidationGetParams,
 } from './property-validations';
 export {

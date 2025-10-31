@@ -14,7 +14,7 @@ export class BusinessUnits extends APIResource {
     userID: string,
     query: BusinessUnitGetByUserIDParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CollectionResponsePublicBusinessUnitNoPaging> {
+  ): APIPromise<BusinessUnitGetByUserIDResponse> {
     return this._client.get(path`/business-units/v3/business-units/user/${userID}`, { query, ...options });
   }
 }
@@ -22,51 +22,11 @@ export class BusinessUnits extends APIResource {
 /**
  * A response object containing a collection of Business Units
  */
-export interface CollectionResponsePublicBusinessUnitNoPaging {
+export interface BusinessUnitGetByUserIDResponse {
   /**
    * The collection of Business Units
    */
   results: Array<CampaignsAPI.PublicBusinessUnit>;
-}
-
-/**
- * A Business Unit
- */
-export interface PublicBusinessUnit {
-  /**
-   * The Business Unit's unique ID
-   */
-  id: string;
-
-  /**
-   * The Business Unit's name
-   */
-  name: string;
-
-  /**
-   * A Business Unit's logo metadata
-   */
-  logoMetadata?: PublicBusinessUnitLogoMetadata;
-}
-
-/**
- * A Business Unit's logo metadata
- */
-export interface PublicBusinessUnitLogoMetadata {
-  /**
-   * The logo's alt text
-   */
-  logoAltText?: string;
-
-  /**
-   * The logo's url
-   */
-  logoUrl?: string;
-
-  /**
-   * The logo's resized url
-   */
-  resizedUrl?: string;
 }
 
 export interface BusinessUnitGetByUserIDParams {
@@ -85,9 +45,7 @@ export interface BusinessUnitGetByUserIDParams {
 
 export declare namespace BusinessUnits {
   export {
-    type CollectionResponsePublicBusinessUnitNoPaging as CollectionResponsePublicBusinessUnitNoPaging,
-    type PublicBusinessUnit as PublicBusinessUnit,
-    type PublicBusinessUnitLogoMetadata as PublicBusinessUnitLogoMetadata,
+    type BusinessUnitGetByUserIDResponse as BusinessUnitGetByUserIDResponse,
     type BusinessUnitGetByUserIDParams as BusinessUnitGetByUserIDParams,
   };
 }
