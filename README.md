@@ -26,7 +26,7 @@ The full API of this library can be found in [api.md](api.md).
 import Hubspot from 'hubspot-sdk';
 
 const client = new Hubspot({
-  accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
+  accessToken: 'pat-na1-xxxxxxxx-xxxx',
 });
 
 const result = await client.crm.objects.contacts.create({ properties: { email: 'mark.s@lumon.industries' } });
@@ -43,7 +43,7 @@ This library includes TypeScript definitions for all request params and response
 import Hubspot from 'hubspot-sdk';
 
 const client = new Hubspot({
-  accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
+  accessToken: 'pat-na1-xxxxxxxx-xxxx',
 });
 
 const params: Hubspot.CRM.Objects.ContactCreateParams = { properties: { email: 'mark.s@lumon.industries' } };
