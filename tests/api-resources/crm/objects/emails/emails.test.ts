@@ -25,7 +25,7 @@ describe('resource emails', () => {
     const response = await client.crm.objects.emails.create({
       properties: { foo: 'string' },
       associations: [
-        { to: { id: '37295' }, types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }] },
+        { to: { id: 'id' }, types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }] },
       ],
     });
   });

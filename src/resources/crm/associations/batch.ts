@@ -70,7 +70,7 @@ export class Batch extends APIResource {
    * const batchResponsePublicAssociationMulti =
    *   await client.crm.associations.batch.get('toObjectType', {
    *     fromObjectType: 'fromObjectType',
-   *     inputs: [{ id: '37295' }],
+   *     inputs: [{ id: 'id' }],
    *   });
    * ```
    */
@@ -89,7 +89,7 @@ export class Batch extends APIResource {
 
 export interface BatchCreateParams {
   /**
-   * Path param: The type of the object from which associations will be created.
+   * Path param:
    */
   fromObjectType: string;
 
@@ -101,7 +101,7 @@ export interface BatchCreateParams {
 
 export interface BatchDeleteParams {
   /**
-   * Path param: The type of the object from which associations will be removed.
+   * Path param:
    */
   fromObjectType: string;
 
@@ -113,7 +113,7 @@ export interface BatchDeleteParams {
 
 export interface BatchGetParams {
   /**
-   * Path param: The type of the object from which associations will be read.
+   * Path param:
    */
   fromObjectType: string;
 

@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as FeatureFlagsAPI from './feature-flags';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -12,13 +13,18 @@ export class Apps extends APIResource {
    *
    * @example
    * ```ts
-   * const app = await client.crm.featureFlags.apps.update(
-   *   'flagName',
-   *   { appId: 0, defaultState: 'OFF' },
-   * );
+   * const flagResponse =
+   *   await client.crm.featureFlags.apps.update('flagName', {
+   *     appId: 0,
+   *     defaultState: 'OFF',
+   *   });
    * ```
    */
-  update(flagName: string, params: AppUpdateParams, options?: RequestOptions): APIPromise<AppUpdateResponse> {
+  update(
+    flagName: string,
+    params: AppUpdateParams,
+    options?: RequestOptions,
+  ): APIPromise<FeatureFlagsAPI.FlagResponse> {
     const { appId, ...body } = params;
     return this._client.put(path`/feature-flags/v3/${appId}/flags/${flagName}`, { body, ...options });
   }
@@ -29,13 +35,17 @@ export class Apps extends APIResource {
    *
    * @example
    * ```ts
-   * const app = await client.crm.featureFlags.apps.delete(
-   *   'flagName',
-   *   { appId: 0 },
-   * );
+   * const flagResponse =
+   *   await client.crm.featureFlags.apps.delete('flagName', {
+   *     appId: 0,
+   *   });
    * ```
    */
-  delete(flagName: string, params: AppDeleteParams, options?: RequestOptions): APIPromise<AppDeleteResponse> {
+  delete(
+    flagName: string,
+    params: AppDeleteParams,
+    options?: RequestOptions,
+  ): APIPromise<FeatureFlagsAPI.FlagResponse> {
     const { appId } = params;
     return this._client.delete(path`/feature-flags/v3/${appId}/flags/${flagName}`, options);
   }
@@ -46,13 +56,17 @@ export class Apps extends APIResource {
    *
    * @example
    * ```ts
-   * const app = await client.crm.featureFlags.apps.get(
+   * const flagResponse = await client.crm.featureFlags.apps.get(
    *   'flagName',
    *   { appId: 0 },
    * );
    * ```
    */
-  get(flagName: string, params: AppGetParams, options?: RequestOptions): APIPromise<AppGetResponse> {
+  get(
+    flagName: string,
+    params: AppGetParams,
+    options?: RequestOptions,
+  ): APIPromise<FeatureFlagsAPI.FlagResponse> {
     const { appId } = params;
     return this._client.get(path`/feature-flags/v3/${appId}/flags/${flagName}`, options);
   }
@@ -63,7 +77,7 @@ export class Apps extends APIResource {
    *
    * @example
    * ```ts
-   * const response =
+   * const portalFlagStateBatchResponse =
    *   await client.crm.featureFlags.apps.listPortals(
    *     'flagName',
    *     { appId: 0 },
@@ -74,58 +88,12 @@ export class Apps extends APIResource {
     flagName: string,
     params: AppListPortalsParams,
     options?: RequestOptions,
-  ): APIPromise<AppListPortalsResponse> {
+  ): APIPromise<FeatureFlagsAPI.PortalFlagStateBatchResponse> {
     const { appId, ...query } = params;
     return this._client.get(path`/feature-flags/v3/${appId}/flags/${flagName}/portals`, {
       query,
       ...options,
     });
-  }
-}
-
-export interface AppUpdateResponse {
-  appId: number;
-
-  defaultState: 'OFF' | 'ON' | 'ABSENT';
-
-  flagName: string;
-
-  overrideState?: 'OFF' | 'ON' | 'ABSENT';
-}
-
-export interface AppDeleteResponse {
-  appId: number;
-
-  defaultState: 'OFF' | 'ON' | 'ABSENT';
-
-  flagName: string;
-
-  overrideState?: 'OFF' | 'ON' | 'ABSENT';
-}
-
-export interface AppGetResponse {
-  appId: number;
-
-  defaultState: 'OFF' | 'ON' | 'ABSENT';
-
-  flagName: string;
-
-  overrideState?: 'OFF' | 'ON' | 'ABSENT';
-}
-
-export interface AppListPortalsResponse {
-  portalFlagStates: Array<AppListPortalsResponse.PortalFlagState>;
-}
-
-export namespace AppListPortalsResponse {
-  export interface PortalFlagState {
-    appId: number;
-
-    flagName: string;
-
-    flagState: 'OFF' | 'ON' | 'ABSENT';
-
-    portalId: number;
   }
 }
 
@@ -179,10 +147,6 @@ export interface AppListPortalsParams {
 
 export declare namespace Apps {
   export {
-    type AppUpdateResponse as AppUpdateResponse,
-    type AppDeleteResponse as AppDeleteResponse,
-    type AppGetResponse as AppGetResponse,
-    type AppListPortalsResponse as AppListPortalsResponse,
     type AppUpdateParams as AppUpdateParams,
     type AppDeleteParams as AppDeleteParams,
     type AppGetParams as AppGetParams,

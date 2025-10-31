@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
+import * as MediaBridgeAPI from './media-bridge';
 import { APIPromise } from '../../../core/api-promise';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
@@ -65,7 +66,7 @@ export class Properties extends APIResource {
    *
    * @example
    * ```ts
-   * const properties =
+   * const collectionResponsePropertyNoPaging =
    *   await client.cms.mediaBridge.properties.list(
    *     'objectType',
    *     { appId: 'appId' },
@@ -76,7 +77,7 @@ export class Properties extends APIResource {
     objectType: string,
     params: PropertyListParams,
     options?: RequestOptions,
-  ): APIPromise<PropertyListResponse> {
+  ): APIPromise<MediaBridgeAPI.CollectionResponsePropertyNoPaging> {
     const { appId } = params;
     return this._client.get(path`/media-bridge/v1/${appId}/properties/${objectType}`, options);
   }
@@ -209,82 +210,6 @@ export class Properties extends APIResource {
       body,
       ...options,
     });
-  }
-}
-
-export interface PropertyListResponse {
-  results: Array<PropertyListResponse.Result>;
-}
-
-export namespace PropertyListResponse {
-  export interface Result {
-    description: string;
-
-    fieldType: string;
-
-    groupName: string;
-
-    label: string;
-
-    name: string;
-
-    options: Array<Result.Option>;
-
-    type: string;
-
-    archived?: boolean;
-
-    archivedAt?: string;
-
-    calculated?: boolean;
-
-    calculationFormula?: string;
-
-    createdAt?: string;
-
-    createdUserId?: string;
-
-    dataSensitivity?: 'non_sensitive' | 'sensitive' | 'highly_sensitive';
-
-    dateDisplayHint?: 'absolute' | 'absolute_with_relative' | 'time_since' | 'time_until';
-
-    displayOrder?: number;
-
-    externalOptions?: boolean;
-
-    formField?: boolean;
-
-    hasUniqueValue?: boolean;
-
-    hidden?: boolean;
-
-    hubspotDefined?: boolean;
-
-    modificationMetadata?: Shared.PropertyModificationMetadata;
-
-    referencedObjectType?: string;
-
-    sensitiveDataCategories?: Array<string>;
-
-    showCurrencySymbol?: boolean;
-
-    updatedAt?: string;
-
-    updatedUserId?: string;
-  }
-
-  export namespace Result {
-    export interface Option {
-      hidden: boolean;
-
-      label: string;
-
-      value: string;
-
-      description?: string;
-
-      displayOrder?: number;
-    }
   }
 }
 
@@ -525,7 +450,6 @@ export interface PropertyGetBatchParams {
 
 export declare namespace Properties {
   export {
-    type PropertyListResponse as PropertyListResponse,
     type PropertyCreateParams as PropertyCreateParams,
     type PropertyUpdateParams as PropertyUpdateParams,
     type PropertyListParams as PropertyListParams,

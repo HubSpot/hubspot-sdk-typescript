@@ -6,13 +6,9 @@ import { RequestOptions } from '../../internal/request-options';
 
 export class VisitorIdentification extends APIResource {
   /**
-   * Generates a new visitor identification token. This token will be unique every
-   * time this endpoint is called, even if called with the same email address. This
-   * token is temporary and will expire after 12 hours
-   *
    * @example
    * ```ts
-   * const response =
+   * const identificationTokenResponse =
    *   await client.conversations.visitorIdentification.generateToken(
    *     { email: 'visitor-email@example.com' },
    *   );
@@ -21,16 +17,40 @@ export class VisitorIdentification extends APIResource {
   generateToken(
     body: VisitorIdentificationGenerateTokenParams,
     options?: RequestOptions,
-  ): APIPromise<VisitorIdentificationGenerateTokenResponse> {
+  ): APIPromise<IdentificationTokenResponse> {
     return this._client.post('/visitor-identification/v3/tokens/create', { body, ...options });
   }
+}
+
+/**
+ * Information used to generate a token
+ */
+export interface IdentificationTokenGenerationRequest {
+  /**
+   * The email of the visitor that you wish to identify
+   */
+  email: string;
+
+  /**
+   * The first name of the visitor that you wish to identify. This value will only be
+   * set in HubSpot for new contacts and existing contacts where first name is
+   * unknown. Optional.
+   */
+  firstName?: string;
+
+  /**
+   * The last name of the visitor that you wish to identify. This value will only be
+   * set in HubSpot for new contacts and existing contacts where last name is
+   * unknown. Optional.
+   */
+  lastName?: string;
 }
 
 /**
  * The identification token to be passed to the Conversations JS API to identify
  * the visitor
  */
-export interface VisitorIdentificationGenerateTokenResponse {
+export interface IdentificationTokenResponse {
   token: string;
 }
 
@@ -57,7 +77,8 @@ export interface VisitorIdentificationGenerateTokenParams {
 
 export declare namespace VisitorIdentification {
   export {
-    type VisitorIdentificationGenerateTokenResponse as VisitorIdentificationGenerateTokenResponse,
+    type IdentificationTokenGenerationRequest as IdentificationTokenGenerationRequest,
+    type IdentificationTokenResponse as IdentificationTokenResponse,
     type VisitorIdentificationGenerateTokenParams as VisitorIdentificationGenerateTokenParams,
   };
 }

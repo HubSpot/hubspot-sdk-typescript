@@ -88,7 +88,7 @@ describe('resource workflows', () => {
   // Prism tests are disabled
   test.skip('batchGetIDMappings: only required params', async () => {
     const responsePromise = client.automation.workflows.batchGetIDMappings({
-      inputs: [{ flowMigrationStatuses: '12345', type: 'FLOW_ID' }],
+      inputs: [{ flowMigrationStatuses: 'flowMigrationStatuses', type: 'FLOW_ID' }],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -102,7 +102,7 @@ describe('resource workflows', () => {
   // Prism tests are disabled
   test.skip('batchGetIDMappings: required and optional params', async () => {
     const response = await client.automation.workflows.batchGetIDMappings({
-      inputs: [{ flowMigrationStatuses: '12345', type: 'FLOW_ID' }],
+      inputs: [{ flowMigrationStatuses: 'flowMigrationStatuses', type: 'FLOW_ID' }],
     });
   });
 

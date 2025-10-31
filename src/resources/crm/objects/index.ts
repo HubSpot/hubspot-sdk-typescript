@@ -1,6 +1,15 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
+  Appointments,
+  type PublicObjectSearchRequest,
+  type SimplePublicObject,
+  type SimplePublicObjectBatchInputForCreate,
+  type SimplePublicObjectInputForCreate,
+  type SimplePublicObjectWithAssociations,
+  type SimplePublicUpsertObject,
+} from './appointments';
+export {
   Calls,
   type CallCreateParams,
   type CallUpdateParams,
@@ -79,8 +88,12 @@ export {
 } from './custom/index';
 export {
   DealSplits,
-  type DealSplitBatchReadResponse,
-  type DealSplitBatchUpsertResponse,
+  type BatchResponseDealToDealSplits,
+  type BatchResponseDealToDealSplitsWithErrors,
+  type DealToDealSplits,
+  type PublicDealSplitInput,
+  type PublicDealSplitsBatchCreateRequest,
+  type PublicDealSplitsCreateRequest,
   type DealSplitBatchReadParams,
   type DealSplitBatchUpsertParams,
 } from './deal-splits';
@@ -233,7 +246,6 @@ export {
   type ObjectTypeDefinition,
   type ObjectTypeDefinitionPatch,
   type ObjectTypePropertyCreate,
-  type SchemaCreateAssociationResponse,
   type SchemaCreateParams,
   type SchemaUpdateParams,
   type SchemaListParams,

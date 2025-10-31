@@ -137,6 +137,9 @@ export class Listings extends APIResource {
   }
 
   /**
+   * Execute a search query to find listings based on specified filters and
+   * properties.
+   *
    * @example
    * ```ts
    * const collectionResponseWithTotalSimplePublicObject =

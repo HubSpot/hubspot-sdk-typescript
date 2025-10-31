@@ -10,10 +10,7 @@ const client = new Hubspot({
 describe('resource settings', () => {
   // Prism tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.crm.extensions.calling.settings.create(0, {
-      name: 'HubPhone',
-      url: 'https://www.example.com/hubspot/iframe',
-    });
+    const responsePromise = client.crm.extensions.calling.settings.create(0, { name: 'name', url: 'url' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -26,15 +23,15 @@ describe('resource settings', () => {
   // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.crm.extensions.calling.settings.create(0, {
-      name: 'HubPhone',
-      url: 'https://www.example.com/hubspot/iframe',
-      height: 350,
+      name: 'name',
+      url: 'url',
+      height: 0,
       isReady: true,
       supportsCustomObjects: true,
       supportsInboundCalling: true,
       usesCallingWindow: true,
       usesRemote: true,
-      width: 200,
+      width: 0,
     });
   });
 

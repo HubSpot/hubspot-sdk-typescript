@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as FeatureFlagsAPI from './feature-flags';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -11,17 +12,19 @@ export class Portals extends APIResource {
    *
    * @example
    * ```ts
-   * const portal = await client.crm.featureFlags.portals.update(
-   *   0,
-   *   { appId: 0, flagName: 'flagName', flagState: 'OFF' },
-   * );
+   * const portalFlagStateResponse =
+   *   await client.crm.featureFlags.portals.update(0, {
+   *     appId: 0,
+   *     flagName: 'flagName',
+   *     flagState: 'OFF',
+   *   });
    * ```
    */
   update(
     portalID: number,
     params: PortalUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<PortalUpdateResponse> {
+  ): APIPromise<FeatureFlagsAPI.PortalFlagStateResponse> {
     const { appId, flagName, ...body } = params;
     return this._client.put(path`/feature-flags/v3/${appId}/flags/${flagName}/portals/${portalID}`, {
       body,
@@ -35,17 +38,18 @@ export class Portals extends APIResource {
    *
    * @example
    * ```ts
-   * const portal = await client.crm.featureFlags.portals.delete(
-   *   0,
-   *   { appId: 0, flagName: 'flagName' },
-   * );
+   * const portalFlagStateResponse =
+   *   await client.crm.featureFlags.portals.delete(0, {
+   *     appId: 0,
+   *     flagName: 'flagName',
+   *   });
    * ```
    */
   delete(
     portalID: number,
     params: PortalDeleteParams,
     options?: RequestOptions,
-  ): APIPromise<PortalDeleteResponse> {
+  ): APIPromise<FeatureFlagsAPI.PortalFlagStateResponse> {
     const { appId, flagName } = params;
     return this._client.delete(
       path`/feature-flags/v3/${appId}/flags/${flagName}/portals/${portalID}`,
@@ -59,7 +63,7 @@ export class Portals extends APIResource {
    *
    * @example
    * ```ts
-   * const response =
+   * const portalFlagStateBatchResponse =
    *   await client.crm.featureFlags.portals.batchDelete(
    *     'flagName',
    *     { appId: 0, portalIds: [0] },
@@ -70,7 +74,7 @@ export class Portals extends APIResource {
     flagName: string,
     params: PortalBatchDeleteParams,
     options?: RequestOptions,
-  ): APIPromise<PortalBatchDeleteResponse> {
+  ): APIPromise<FeatureFlagsAPI.PortalFlagStateBatchResponse> {
     const { appId, ...body } = params;
     return this._client.post(path`/feature-flags/v3/${appId}/flags/${flagName}/portals/batch/delete`, {
       body,
@@ -84,7 +88,7 @@ export class Portals extends APIResource {
    *
    * @example
    * ```ts
-   * const response =
+   * const portalFlagStateBatchResponse =
    *   await client.crm.featureFlags.portals.batchUpsert(
    *     'flagName',
    *     {
@@ -98,7 +102,7 @@ export class Portals extends APIResource {
     flagName: string,
     params: PortalBatchUpsertParams,
     options?: RequestOptions,
-  ): APIPromise<PortalBatchUpsertResponse> {
+  ): APIPromise<FeatureFlagsAPI.PortalFlagStateBatchResponse> {
     const { appId, ...body } = params;
     return this._client.post(path`/feature-flags/v3/${appId}/flags/${flagName}/portals/batch/upsert`, {
       body,
@@ -111,78 +115,21 @@ export class Portals extends APIResource {
    *
    * @example
    * ```ts
-   * const portal = await client.crm.featureFlags.portals.get(
-   *   0,
-   *   { appId: 0, flagName: 'flagName' },
-   * );
+   * const portalFlagStateResponse =
+   *   await client.crm.featureFlags.portals.get(0, {
+   *     appId: 0,
+   *     flagName: 'flagName',
+   *   });
    * ```
    */
-  get(portalID: number, params: PortalGetParams, options?: RequestOptions): APIPromise<PortalGetResponse> {
+  get(
+    portalID: number,
+    params: PortalGetParams,
+    options?: RequestOptions,
+  ): APIPromise<FeatureFlagsAPI.PortalFlagStateResponse> {
     const { appId, flagName } = params;
     return this._client.get(path`/feature-flags/v3/${appId}/flags/${flagName}/portals/${portalID}`, options);
   }
-}
-
-export interface PortalUpdateResponse {
-  appId: number;
-
-  flagName: string;
-
-  flagState: 'OFF' | 'ON' | 'ABSENT';
-
-  portalId: number;
-}
-
-export interface PortalDeleteResponse {
-  appId: number;
-
-  flagName: string;
-
-  flagState: 'OFF' | 'ON' | 'ABSENT';
-
-  portalId: number;
-}
-
-export interface PortalBatchDeleteResponse {
-  portalFlagStates: Array<PortalBatchDeleteResponse.PortalFlagState>;
-}
-
-export namespace PortalBatchDeleteResponse {
-  export interface PortalFlagState {
-    appId: number;
-
-    flagName: string;
-
-    flagState: 'OFF' | 'ON' | 'ABSENT';
-
-    portalId: number;
-  }
-}
-
-export interface PortalBatchUpsertResponse {
-  portalFlagStates: Array<PortalBatchUpsertResponse.PortalFlagState>;
-}
-
-export namespace PortalBatchUpsertResponse {
-  export interface PortalFlagState {
-    appId: number;
-
-    flagName: string;
-
-    flagState: 'OFF' | 'ON' | 'ABSENT';
-
-    portalId: number;
-  }
-}
-
-export interface PortalGetResponse {
-  appId: number;
-
-  flagName: string;
-
-  flagState: 'OFF' | 'ON' | 'ABSENT';
-
-  portalId: number;
 }
 
 export interface PortalUpdateParams {
@@ -236,15 +183,7 @@ export interface PortalBatchUpsertParams {
   /**
    * Body param:
    */
-  portalStates: Array<PortalBatchUpsertParams.PortalState>;
-}
-
-export namespace PortalBatchUpsertParams {
-  export interface PortalState {
-    flagState: 'OFF' | 'ON' | 'ABSENT';
-
-    portalId: number;
-  }
+  portalStates: Array<FeatureFlagsAPI.BatchPortalEntry>;
 }
 
 export interface PortalGetParams {
@@ -261,11 +200,6 @@ export interface PortalGetParams {
 
 export declare namespace Portals {
   export {
-    type PortalUpdateResponse as PortalUpdateResponse,
-    type PortalDeleteResponse as PortalDeleteResponse,
-    type PortalBatchDeleteResponse as PortalBatchDeleteResponse,
-    type PortalBatchUpsertResponse as PortalBatchUpsertResponse,
-    type PortalGetResponse as PortalGetResponse,
     type PortalUpdateParams as PortalUpdateParams,
     type PortalDeleteParams as PortalDeleteParams,
     type PortalBatchDeleteParams as PortalBatchDeleteParams,

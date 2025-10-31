@@ -53,26 +53,56 @@ export interface CollectionResponsePublicOwnerForwardPaging {
 }
 
 export interface PublicOwner {
+  /**
+   * The unique identifier of the owner.
+   */
   id: string;
 
+  /**
+   * Indicates whether the owner is archived.
+   */
   archived: boolean;
 
+  /**
+   * The date and time when the owner was created.
+   */
   createdAt: string;
 
+  /**
+   * The type of the owner, which can be either PERSON or QUEUE.
+   */
   type: 'PERSON' | 'QUEUE';
 
+  /**
+   * The date and time when the owner was last updated.
+   */
   updatedAt: string;
 
+  /**
+   * The email address of the owner.
+   */
   email?: string;
 
+  /**
+   * The first name of the owner.
+   */
   firstName?: string;
 
+  /**
+   * The last name of the owner.
+   */
   lastName?: string;
 
   teams?: Array<UsersAPI.PublicTeam>;
 
+  /**
+   * The user ID of the owner.
+   */
   userId?: number;
 
+  /**
+   * The user ID of the owner, including inactive users.
+   */
   userIdIncludingInactive?: number;
 }
 
@@ -85,26 +115,14 @@ export interface PublicTeam {
 }
 
 export interface OwnerListParams extends PageParams {
-  /**
-   * Whether to return only results that have been archived.
-   */
   archived?: boolean;
 
-  /**
-   * Filter by email address (optional).
-   */
   email?: string;
 }
 
 export interface OwnerGetParams {
-  /**
-   * Whether to return only results that have been archived.
-   */
   archived?: boolean;
 
-  /**
-   * Specifies whether to use 'id' or 'userId' as the identifier for the owner.
-   */
   idProperty?: 'id' | 'userId';
 }
 

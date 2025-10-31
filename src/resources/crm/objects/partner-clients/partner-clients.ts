@@ -22,12 +22,6 @@ export class PartnerClients extends APIResource {
   batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
 
   /**
-   * Perform a partial update of an Object identified by `{objectId}`. `{objectId}`
-   * refers to the internal object ID by default, or optionally any unique property
-   * value as specified by the `idProperty` query param. Provided property values
-   * will be overwritten. Read-only and non-existent properties will be ignored.
-   * Properties values can be cleared by passing an empty string.
-   *
    * @example
    * ```ts
    * const simplePublicObject =
@@ -62,9 +56,6 @@ export class PartnerClients extends APIResource {
   }
 
   /**
-   * Read a page of objects. Control what is returned via the `properties` query
-   * param.
-   *
    * @example
    * ```ts
    * // Automatically fetches more pages as needed.
@@ -85,11 +76,6 @@ export class PartnerClients extends APIResource {
   }
 
   /**
-   * Read an Object identified by `{objectId}`. `{objectId}` refers to the internal
-   * object ID by default, or optionally any unique property value as specified by
-   * the `idProperty` query param. Control what is returned via the `properties`
-   * query param.
-   *
    * @example
    * ```ts
    * const simplePublicObjectWithAssociations =
@@ -128,68 +114,30 @@ export interface PartnerClientUpdateParams {
   properties: { [key: string]: string };
 
   /**
-   * Query param: The name of a property whose values are unique for this object
+   * Query param:
    */
   idProperty?: string;
 }
 
 export interface PartnerClientListParams extends PageParams {
-  /**
-   * Whether to return only results that have been archived.
-   */
   archived?: boolean;
 
-  /**
-   * A comma separated list of object types to retrieve associated IDs for. If any of
-   * the specified associations do not exist, they will be ignored.
-   */
   associations?: Array<string>;
 
-  /**
-   * A comma separated list of the properties to be returned in the response. If any
-   * of the specified properties are not present on the requested object(s), they
-   * will be ignored.
-   */
   properties?: Array<string>;
 
-  /**
-   * A comma separated list of the properties to be returned along with their history
-   * of previous values. If any of the specified properties are not present on the
-   * requested object(s), they will be ignored. Usage of this parameter will reduce
-   * the maximum number of partner clients that can be read by a single request.
-   */
   propertiesWithHistory?: Array<string>;
 }
 
 export interface PartnerClientGetParams {
-  /**
-   * Whether to return only results that have been archived.
-   */
   archived?: boolean;
 
-  /**
-   * A comma separated list of object types to retrieve associated IDs for. If any of
-   * the specified associations do not exist, they will be ignored.
-   */
   associations?: Array<string>;
 
-  /**
-   * The name of a property whose values are unique for this object
-   */
   idProperty?: string;
 
-  /**
-   * A comma separated list of the properties to be returned in the response. If any
-   * of the specified properties are not present on the requested object(s), they
-   * will be ignored.
-   */
   properties?: Array<string>;
 
-  /**
-   * A comma separated list of the properties to be returned along with their history
-   * of previous values. If any of the specified properties are not present on the
-   * requested object(s), they will be ignored.
-   */
   propertiesWithHistory?: Array<string>;
 }
 

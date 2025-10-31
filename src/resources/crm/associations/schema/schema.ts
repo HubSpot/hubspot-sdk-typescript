@@ -7,11 +7,9 @@ import {
   BatchInputPublicAssociationDefinitionConfigurationUpdateRequest,
   BatchInputPublicAssociationSpec,
   BatchResponsePublicAssociationDefinitionConfigurationUpdateResult,
-  BatchResponsePublicAssociationDefinitionConfigurationUpdateResultWithErrors,
   BatchResponsePublicAssociationDefinitionUserConfiguration,
-  BatchResponsePublicAssociationDefinitionUserConfigurationWithErrors,
-  CollectionResponseAssociationSpecWithLabelNoPaging,
-  CollectionResponsePublicAssociationDefinitionUserConfigurationNoPaging,
+  CollectionResponseAssociationSpecWithLabel,
+  CollectionResponsePublicAssociationDefinitionUserConfiguration,
   PublicAssociationDefinitionConfigurationCreateRequest,
   PublicAssociationDefinitionConfigurationUpdateRequest,
   PublicAssociationDefinitionConfigurationUpdateResult,
@@ -29,8 +27,6 @@ export class Schema extends APIResource {
   v4: V4API.V4 = new V4API.V4(this._client);
 
   /**
-   * List all the valid association types available between two object types
-   *
    * @example
    * ```ts
    * const collectionResponsePublicAssociationDefinitionNoPaging =
@@ -79,11 +75,9 @@ export declare namespace Schema {
     type BatchInputPublicAssociationDefinitionConfigurationUpdateRequest as BatchInputPublicAssociationDefinitionConfigurationUpdateRequest,
     type BatchInputPublicAssociationSpec as BatchInputPublicAssociationSpec,
     type BatchResponsePublicAssociationDefinitionConfigurationUpdateResult as BatchResponsePublicAssociationDefinitionConfigurationUpdateResult,
-    type BatchResponsePublicAssociationDefinitionConfigurationUpdateResultWithErrors as BatchResponsePublicAssociationDefinitionConfigurationUpdateResultWithErrors,
     type BatchResponsePublicAssociationDefinitionUserConfiguration as BatchResponsePublicAssociationDefinitionUserConfiguration,
-    type BatchResponsePublicAssociationDefinitionUserConfigurationWithErrors as BatchResponsePublicAssociationDefinitionUserConfigurationWithErrors,
-    type CollectionResponseAssociationSpecWithLabelNoPaging as CollectionResponseAssociationSpecWithLabelNoPaging,
-    type CollectionResponsePublicAssociationDefinitionUserConfigurationNoPaging as CollectionResponsePublicAssociationDefinitionUserConfigurationNoPaging,
+    type CollectionResponseAssociationSpecWithLabel as CollectionResponseAssociationSpecWithLabel,
+    type CollectionResponsePublicAssociationDefinitionUserConfiguration as CollectionResponsePublicAssociationDefinitionUserConfiguration,
     type PublicAssociationDefinitionConfigurationCreateRequest as PublicAssociationDefinitionConfigurationCreateRequest,
     type PublicAssociationDefinitionConfigurationUpdateRequest as PublicAssociationDefinitionConfigurationUpdateRequest,
     type PublicAssociationDefinitionConfigurationUpdateResult as PublicAssociationDefinitionConfigurationUpdateResult,

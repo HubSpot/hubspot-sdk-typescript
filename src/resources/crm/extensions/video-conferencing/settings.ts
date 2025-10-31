@@ -9,8 +9,6 @@ import { path } from '../../../../internal/utils/path';
 
 export class Settings extends APIResource {
   /**
-   * Updates the settings for a video conference application with the specified ID.
-   *
    * @example
    * ```ts
    * const externalSettings =
@@ -35,8 +33,6 @@ export class Settings extends APIResource {
   }
 
   /**
-   * Deletes the settings for a video conference application with the specified ID.
-   *
    * @example
    * ```ts
    * await client.crm.extensions.videoConferencing.settings.delete(
@@ -52,8 +48,6 @@ export class Settings extends APIResource {
   }
 
   /**
-   * Return the settings for a video conference application with the specified ID.
-   *
    * @example
    * ```ts
    * const externalSettings =

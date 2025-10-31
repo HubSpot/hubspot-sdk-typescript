@@ -135,7 +135,7 @@ export class Deals extends APIResource {
   }
 
   /**
-   * Merge two deals with same type
+   * Combine two deals of the same type into a single deal.
    *
    * @example
    * ```ts
@@ -151,6 +151,8 @@ export class Deals extends APIResource {
   }
 
   /**
+   * Search for deals using specified criteria and filters.
+   *
    * @example
    * ```ts
    * const collectionResponseWithTotalSimplePublicObject =

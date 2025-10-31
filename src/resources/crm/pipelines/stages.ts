@@ -9,9 +9,7 @@ import { path } from '../../../internal/utils/path';
 
 export class Stages extends APIResource {
   /**
-   * Create a new stage associated with the pipeline identified by `{pipelineId}`.
-   * The entire stage object, including its unique ID, will be returned in the
-   * response.
+   * Create a pipeline stage
    *
    * @example
    * ```ts
@@ -36,11 +34,6 @@ export class Stages extends APIResource {
   }
 
   /**
-   * Perform a partial update of the pipeline stage identified by `{stageId}`
-   * associated with the pipeline identified by `{pipelineId}`. Any properties not
-   * included in this update will keep their existing values. The updated stage will
-   * be returned in the response.
-   *
    * @example
    * ```ts
    * const pipelineStage =
@@ -83,8 +76,7 @@ export class Stages extends APIResource {
   }
 
   /**
-   * Delete the pipeline stage identified by `{stageId}` associated with the pipeline
-   * identified by `{pipelineId}`.
+   * Delete a pipeline stage
    *
    * @example
    * ```ts
@@ -103,8 +95,7 @@ export class Stages extends APIResource {
   }
 
   /**
-   * Return the stage identified by `{stageId}` associated with the pipeline
-   * identified by `{pipelineId}`.
+   * Return a pipeline stage by ID
    *
    * @example
    * ```ts

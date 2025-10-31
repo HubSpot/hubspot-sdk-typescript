@@ -3,6 +3,7 @@
 import { APIResource } from '../../../../core/resource';
 import * as Shared from '../../../shared';
 import * as CRMAPI from '../../crm';
+import * as EmailsAPI from '../../../marketing/emails/emails';
 
 export class V4 extends APIResource {}
 
@@ -19,20 +20,6 @@ export interface BatchInputPublicAssociationSpec {
 }
 
 export interface BatchResponsePublicAssociationDefinitionConfigurationUpdateResult {
-  completedAt: string;
-
-  results: Array<PublicAssociationDefinitionConfigurationUpdateResult>;
-
-  startedAt: string;
-
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
-
-  links?: { [key: string]: string };
-
-  requestedAt?: string;
-}
-
-export interface BatchResponsePublicAssociationDefinitionConfigurationUpdateResultWithErrors {
   completedAt: string;
 
   results: Array<PublicAssociationDefinitionConfigurationUpdateResult>;
@@ -59,20 +46,6 @@ export interface BatchResponsePublicAssociationDefinitionUserConfiguration {
 
   status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
 
-  links?: { [key: string]: string };
-
-  requestedAt?: string;
-}
-
-export interface BatchResponsePublicAssociationDefinitionUserConfigurationWithErrors {
-  completedAt: string;
-
-  results: Array<PublicAssociationDefinitionUserConfiguration>;
-
-  startedAt: string;
-
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
-
   errors?: Array<Shared.StandardError>;
 
   links?: { [key: string]: string };
@@ -82,12 +55,22 @@ export interface BatchResponsePublicAssociationDefinitionUserConfigurationWithEr
   requestedAt?: string;
 }
 
-export interface CollectionResponseAssociationSpecWithLabelNoPaging {
+export interface CollectionResponseAssociationSpecWithLabel {
   results: Array<CRMAPI.AssociationSpecWithLabel>;
+
+  /**
+   * Contains information pagination of results.
+   */
+  paging?: EmailsAPI.Paging;
 }
 
-export interface CollectionResponsePublicAssociationDefinitionUserConfigurationNoPaging {
+export interface CollectionResponsePublicAssociationDefinitionUserConfiguration {
   results: Array<PublicAssociationDefinitionUserConfiguration>;
+
+  /**
+   * Contains information pagination of results.
+   */
+  paging?: EmailsAPI.Paging;
 }
 
 export interface PublicAssociationDefinitionConfigurationCreateRequest {
@@ -152,11 +135,9 @@ export declare namespace V4 {
     type BatchInputPublicAssociationDefinitionConfigurationUpdateRequest as BatchInputPublicAssociationDefinitionConfigurationUpdateRequest,
     type BatchInputPublicAssociationSpec as BatchInputPublicAssociationSpec,
     type BatchResponsePublicAssociationDefinitionConfigurationUpdateResult as BatchResponsePublicAssociationDefinitionConfigurationUpdateResult,
-    type BatchResponsePublicAssociationDefinitionConfigurationUpdateResultWithErrors as BatchResponsePublicAssociationDefinitionConfigurationUpdateResultWithErrors,
     type BatchResponsePublicAssociationDefinitionUserConfiguration as BatchResponsePublicAssociationDefinitionUserConfiguration,
-    type BatchResponsePublicAssociationDefinitionUserConfigurationWithErrors as BatchResponsePublicAssociationDefinitionUserConfigurationWithErrors,
-    type CollectionResponseAssociationSpecWithLabelNoPaging as CollectionResponseAssociationSpecWithLabelNoPaging,
-    type CollectionResponsePublicAssociationDefinitionUserConfigurationNoPaging as CollectionResponsePublicAssociationDefinitionUserConfigurationNoPaging,
+    type CollectionResponseAssociationSpecWithLabel as CollectionResponseAssociationSpecWithLabel,
+    type CollectionResponsePublicAssociationDefinitionUserConfiguration as CollectionResponsePublicAssociationDefinitionUserConfiguration,
     type PublicAssociationDefinitionConfigurationCreateRequest as PublicAssociationDefinitionConfigurationCreateRequest,
     type PublicAssociationDefinitionConfigurationUpdateRequest as PublicAssociationDefinitionConfigurationUpdateRequest,
     type PublicAssociationDefinitionConfigurationUpdateResult as PublicAssociationDefinitionConfigurationUpdateResult,

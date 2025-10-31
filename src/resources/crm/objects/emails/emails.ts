@@ -137,6 +137,9 @@ export class Emails extends APIResource {
   }
 
   /**
+   * Perform a search for emails based on the provided query parameters and return
+   * matching results.
+   *
    * @example
    * ```ts
    * const collectionResponseWithTotalSimplePublicObject =

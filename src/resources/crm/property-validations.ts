@@ -11,11 +11,14 @@ export class PropertyValidations extends APIResource {
    *
    * @example
    * ```ts
-   * const propertyValidations =
+   * const collectionResponsePublicPropertyValidationRuleMapNoPaging =
    *   await client.crm.propertyValidations.list('objectTypeId');
    * ```
    */
-  list(objectTypeID: string, options?: RequestOptions): APIPromise<PropertyValidationListResponse> {
+  list(
+    objectTypeID: string,
+    options?: RequestOptions,
+  ): APIPromise<CollectionResponsePublicPropertyValidationRuleMapNoPaging> {
     return this._client.get(path`/crm/v3/property-validations/${objectTypeID}`, options);
   }
 
@@ -24,7 +27,7 @@ export class PropertyValidations extends APIResource {
    *
    * @example
    * ```ts
-   * const propertyValidation =
+   * const collectionResponsePublicPropertyValidationRuleNoPaging =
    *   await client.crm.propertyValidations.get('propertyName', {
    *     objectTypeId: 'objectTypeId',
    *   });
@@ -34,42 +37,30 @@ export class PropertyValidations extends APIResource {
     propertyName: string,
     params: PropertyValidationGetParams,
     options?: RequestOptions,
-  ): APIPromise<PropertyValidationGetResponse> {
+  ): APIPromise<CollectionResponsePublicPropertyValidationRuleNoPaging> {
     const { objectTypeId } = params;
     return this._client.get(path`/crm/v3/property-validations/${objectTypeId}/${propertyName}`, options);
   }
 }
 
-export interface PropertyValidationListResponse {
-  results: Array<PropertyValidationListResponse.Result>;
+export interface CollectionResponsePublicPropertyValidationRuleMapNoPaging {
+  results: Array<PublicPropertyValidationRuleMap>;
 }
 
-export namespace PropertyValidationListResponse {
-  export interface Result {
-    propertyName: string;
-
-    propertyValidationRules: Array<Result.PropertyValidationRule>;
-  }
-
-  export namespace Result {
-    export interface PropertyValidationRule {
-      ruleArguments: Array<string>;
-
-      ruleType: string;
-    }
-  }
+export interface CollectionResponsePublicPropertyValidationRuleNoPaging {
+  results: Array<PublicPropertyValidationRule>;
 }
 
-export interface PropertyValidationGetResponse {
-  results: Array<PropertyValidationGetResponse.Result>;
+export interface PublicPropertyValidationRule {
+  ruleArguments: Array<string>;
+
+  ruleType: string;
 }
 
-export namespace PropertyValidationGetResponse {
-  export interface Result {
-    ruleArguments: Array<string>;
+export interface PublicPropertyValidationRuleMap {
+  propertyName: string;
 
-    ruleType: string;
-  }
+  propertyValidationRules: Array<PublicPropertyValidationRule>;
 }
 
 export interface PropertyValidationGetParams {
@@ -78,8 +69,10 @@ export interface PropertyValidationGetParams {
 
 export declare namespace PropertyValidations {
   export {
-    type PropertyValidationListResponse as PropertyValidationListResponse,
-    type PropertyValidationGetResponse as PropertyValidationGetResponse,
+    type CollectionResponsePublicPropertyValidationRuleMapNoPaging as CollectionResponsePublicPropertyValidationRuleMapNoPaging,
+    type CollectionResponsePublicPropertyValidationRuleNoPaging as CollectionResponsePublicPropertyValidationRuleNoPaging,
+    type PublicPropertyValidationRule as PublicPropertyValidationRule,
+    type PublicPropertyValidationRuleMap as PublicPropertyValidationRuleMap,
     type PropertyValidationGetParams as PropertyValidationGetParams,
   };
 }

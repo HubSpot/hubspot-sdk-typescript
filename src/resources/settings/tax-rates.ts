@@ -13,10 +13,11 @@ export class TaxRates extends APIResource {
    *
    * @example
    * ```ts
-   * const taxRates = await client.settings.taxRates.list();
+   * const collectionResponsePublicTaxRateGroupForwardPaging =
+   *   await client.settings.taxRates.list();
    * ```
    */
-  list(options?: RequestOptions): APIPromise<TaxRateListResponse> {
+  list(options?: RequestOptions): APIPromise<CollectionResponsePublicTaxRateGroupForwardPaging> {
     return this._client.get('/tax-rates/v1/tax-rates', options);
   }
 
@@ -25,41 +26,22 @@ export class TaxRates extends APIResource {
    *
    * @example
    * ```ts
-   * const taxRate = await client.settings.taxRates.get(
-   *   'taxRateGroupId',
-   * );
+   * const publicTaxRateGroup =
+   *   await client.settings.taxRates.get('taxRateGroupId');
    * ```
    */
-  get(taxRateGroupID: string, options?: RequestOptions): APIPromise<TaxRateGetResponse> {
+  get(taxRateGroupID: string, options?: RequestOptions): APIPromise<PublicTaxRateGroup> {
     return this._client.get(path`/tax-rates/v1/tax-rates/${taxRateGroupID}`, options);
   }
 }
 
-export interface TaxRateListResponse {
-  results: Array<TaxRateListResponse.Result>;
+export interface CollectionResponsePublicTaxRateGroupForwardPaging {
+  results: Array<PublicTaxRateGroup>;
 
   paging?: Shared.ForwardPaging;
 }
 
-export namespace TaxRateListResponse {
-  export interface Result {
-    id: string;
-
-    active: boolean;
-
-    createdAt: string;
-
-    label: string;
-
-    name: string;
-
-    percentageRate: number;
-
-    updatedAt: string;
-  }
-}
-
-export interface TaxRateGetResponse {
+export interface PublicTaxRateGroup {
   id: string;
 
   active: boolean;
@@ -76,5 +58,8 @@ export interface TaxRateGetResponse {
 }
 
 export declare namespace TaxRates {
-  export { type TaxRateListResponse as TaxRateListResponse, type TaxRateGetResponse as TaxRateGetResponse };
+  export {
+    type CollectionResponsePublicTaxRateGroupForwardPaging as CollectionResponsePublicTaxRateGroupForwardPaging,
+    type PublicTaxRateGroup as PublicTaxRateGroup,
+  };
 }
