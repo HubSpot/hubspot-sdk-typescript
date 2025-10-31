@@ -21,7 +21,7 @@ export class SourceCode extends APIResource {
     path_: string,
     params: SourceCodeCreateParams,
     options?: RequestOptions,
-  ): APIPromise<AssetFileMetadata> {
+  ): APIPromise<SourceCodeCreateResponse> {
     const { environment, ...body } = params;
     return this._client.post(
       path`/cms/v3/source-code/${environment}/content/${path_}`,
@@ -106,17 +106,17 @@ export class SourceCode extends APIResource {
    *
    * @example
    * ```ts
-   * const assetFileMetadata =
-   *   await client.cms.sourceCode.getMetadata('path', {
-   *     environment: 'environment',
-   *   });
+   * const response = await client.cms.sourceCode.getMetadata(
+   *   'path',
+   *   { environment: 'environment' },
+   * );
    * ```
    */
   getMetadata(
     path_: string,
     params: SourceCodeGetMetadataParams,
     options?: RequestOptions,
-  ): APIPromise<AssetFileMetadata> {
+  ): APIPromise<SourceCodeGetMetadataResponse> {
     const { environment, ...query } = params;
     return this._client.get(path`/cms/v3/source-code/${environment}/metadata/${path_}`, {
       query,
@@ -130,17 +130,17 @@ export class SourceCode extends APIResource {
    *
    * @example
    * ```ts
-   * const assetFileMetadata =
-   *   await client.cms.sourceCode.upsert('path', {
-   *     environment: 'environment',
-   *   });
+   * const response = await client.cms.sourceCode.upsert(
+   *   'path',
+   *   { environment: 'environment' },
+   * );
    * ```
    */
   upsert(
     path_: string,
     params: SourceCodeUpsertParams,
     options?: RequestOptions,
-  ): APIPromise<AssetFileMetadata> {
+  ): APIPromise<SourceCodeUpsertResponse> {
     const { environment, ...body } = params;
     return this._client.put(
       path`/cms/v3/source-code/${environment}/content/${path_}`,
@@ -180,7 +180,7 @@ export class SourceCode extends APIResource {
   }
 }
 
-export interface AssetFileMetadata {
+export interface SourceCodeCreateResponse {
   /**
    * The path of the file in the CMS Developer File System.
    */
@@ -220,8 +220,84 @@ export interface AssetFileMetadata {
   hash?: string;
 }
 
-export interface FileExtractRequest {
-  path: string;
+export interface SourceCodeGetMetadataResponse {
+  /**
+   * The path of the file in the CMS Developer File System.
+   */
+  id: string;
+
+  /**
+   * Timestamp of when the object was first created.
+   */
+  createdAt: number;
+
+  /**
+   * Determines whether or not this path points to a folder.
+   */
+  folder: boolean;
+
+  /**
+   * The name of the file.
+   */
+  name: string;
+
+  /**
+   * Timestamp of when the object was last updated.
+   */
+  updatedAt: number;
+
+  /**
+   * Timestamp of when the object was archived (deleted).
+   */
+  archivedAt?: number;
+
+  /**
+   * If the object is a folder, contains the filenames of the files within the
+   * folder.
+   */
+  children?: Array<string>;
+
+  hash?: string;
+}
+
+export interface SourceCodeUpsertResponse {
+  /**
+   * The path of the file in the CMS Developer File System.
+   */
+  id: string;
+
+  /**
+   * Timestamp of when the object was first created.
+   */
+  createdAt: number;
+
+  /**
+   * Determines whether or not this path points to a folder.
+   */
+  folder: boolean;
+
+  /**
+   * The name of the file.
+   */
+  name: string;
+
+  /**
+   * Timestamp of when the object was last updated.
+   */
+  updatedAt: number;
+
+  /**
+   * Timestamp of when the object was archived (deleted).
+   */
+  archivedAt?: number;
+
+  /**
+   * If the object is a folder, contains the filenames of the files within the
+   * folder.
+   */
+  children?: Array<string>;
+
+  hash?: string;
 }
 
 export interface SourceCodeCreateParams {
@@ -292,8 +368,9 @@ export interface SourceCodeValidateParams {
 
 export declare namespace SourceCode {
   export {
-    type AssetFileMetadata as AssetFileMetadata,
-    type FileExtractRequest as FileExtractRequest,
+    type SourceCodeCreateResponse as SourceCodeCreateResponse,
+    type SourceCodeGetMetadataResponse as SourceCodeGetMetadataResponse,
+    type SourceCodeUpsertResponse as SourceCodeUpsertResponse,
     type SourceCodeCreateParams as SourceCodeCreateParams,
     type SourceCodeDeleteParams as SourceCodeDeleteParams,
     type SourceCodeExtractAsyncParams as SourceCodeExtractAsyncParams,

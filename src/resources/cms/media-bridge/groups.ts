@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
-import * as MediaBridgeAPI from './media-bridge';
 import * as PropertiesAPI from '../../crm/properties/properties';
 import { APIPromise } from '../../../core/api-promise';
 import { buildHeaders } from '../../../internal/headers';
@@ -39,17 +38,13 @@ export class Groups extends APIResource {
    *
    * @example
    * ```ts
-   * const collectionResponsePropertyGroupNoPaging =
-   *   await client.cms.mediaBridge.groups.list('objectType', {
-   *     appId: 'appId',
-   *   });
+   * const groups = await client.cms.mediaBridge.groups.list(
+   *   'objectType',
+   *   { appId: 'appId' },
+   * );
    * ```
    */
-  list(
-    objectType: string,
-    params: GroupListParams,
-    options?: RequestOptions,
-  ): APIPromise<MediaBridgeAPI.CollectionResponsePropertyGroupNoPaging> {
+  list(objectType: string, params: GroupListParams, options?: RequestOptions): APIPromise<GroupListResponse> {
     const { appId } = params;
     return this._client.get(path`/media-bridge/v1/${appId}/properties/${objectType}/groups`, options);
   }
@@ -126,6 +121,10 @@ export class Groups extends APIResource {
   }
 }
 
+export interface GroupListResponse {
+  results: Array<PropertiesAPI.PropertyGroup>;
+}
+
 export interface GroupCreateParams {
   /**
    * Path param:
@@ -188,6 +187,7 @@ export interface GroupUpdateByNameParams {
 
 export declare namespace Groups {
   export {
+    type GroupListResponse as GroupListResponse,
     type GroupCreateParams as GroupCreateParams,
     type GroupListParams as GroupListParams,
     type GroupDeleteByNameParams as GroupDeleteByNameParams,

@@ -3,15 +3,11 @@
 import { APIResource } from '../../../core/resource';
 import * as DealSplitsAPI from './deal-splits';
 import {
-  BatchResponseDealToDealSplits,
-  BatchResponseDealToDealSplitsWithErrors,
   DealSplitBatchReadParams,
+  DealSplitBatchReadResponse,
   DealSplitBatchUpsertParams,
+  DealSplitBatchUpsertResponse,
   DealSplits,
-  DealToDealSplits,
-  PublicDealSplitInput,
-  PublicDealSplitsBatchCreateRequest,
-  PublicDealSplitsCreateRequest,
 } from './deal-splits';
 import * as SchemasAPI from './schemas';
 import {
@@ -21,6 +17,7 @@ import {
   ObjectTypeDefinitionPatch,
   ObjectTypePropertyCreate,
   SchemaCreateAssociationParams,
+  SchemaCreateAssociationResponse,
   SchemaCreateParams,
   SchemaDeleteAssociationParams,
   SchemaDeleteParams,
@@ -28,15 +25,6 @@ import {
   SchemaUpdateParams,
   Schemas,
 } from './schemas';
-import * as AppointmentsAPI from './appointments/appointments';
-import {
-  AppointmentCreateParams,
-  AppointmentGetParams,
-  AppointmentListParams,
-  AppointmentSearchParams,
-  AppointmentUpdateParams,
-  Appointments,
-} from './appointments/appointments';
 import * as CallsAPI from './calls/calls';
 import {
   CallCreateParams,
@@ -331,7 +319,6 @@ import {
 } from './tickets/tickets';
 
 export class Objects extends APIResource {
-  appointments: AppointmentsAPI.Appointments = new AppointmentsAPI.Appointments(this._client);
   calls: CallsAPI.Calls = new CallsAPI.Calls(this._client);
   carts: CartsAPI.Carts = new CartsAPI.Carts(this._client);
   commercePayments: CommercePaymentsAPI.CommercePayments = new CommercePaymentsAPI.CommercePayments(
@@ -371,7 +358,6 @@ export class Objects extends APIResource {
   tickets: TicketsAPI.Tickets = new TicketsAPI.Tickets(this._client);
 }
 
-Objects.Appointments = Appointments;
 Objects.Calls = Calls;
 Objects.Carts = Carts;
 Objects.CommercePayments = CommercePayments;
@@ -408,15 +394,6 @@ Objects.Taxes = Taxes;
 Objects.Tickets = Tickets;
 
 export declare namespace Objects {
-  export {
-    Appointments as Appointments,
-    type AppointmentCreateParams as AppointmentCreateParams,
-    type AppointmentUpdateParams as AppointmentUpdateParams,
-    type AppointmentListParams as AppointmentListParams,
-    type AppointmentGetParams as AppointmentGetParams,
-    type AppointmentSearchParams as AppointmentSearchParams,
-  };
-
   export {
     Calls as Calls,
     type CallCreateParams as CallCreateParams,
@@ -505,12 +482,8 @@ export declare namespace Objects {
 
   export {
     DealSplits as DealSplits,
-    type BatchResponseDealToDealSplits as BatchResponseDealToDealSplits,
-    type BatchResponseDealToDealSplitsWithErrors as BatchResponseDealToDealSplitsWithErrors,
-    type DealToDealSplits as DealToDealSplits,
-    type PublicDealSplitInput as PublicDealSplitInput,
-    type PublicDealSplitsBatchCreateRequest as PublicDealSplitsBatchCreateRequest,
-    type PublicDealSplitsCreateRequest as PublicDealSplitsCreateRequest,
+    type DealSplitBatchReadResponse as DealSplitBatchReadResponse,
+    type DealSplitBatchUpsertResponse as DealSplitBatchUpsertResponse,
     type DealSplitBatchReadParams as DealSplitBatchReadParams,
     type DealSplitBatchUpsertParams as DealSplitBatchUpsertParams,
   };
@@ -691,6 +664,7 @@ export declare namespace Objects {
     type ObjectTypeDefinition as ObjectTypeDefinition,
     type ObjectTypeDefinitionPatch as ObjectTypeDefinitionPatch,
     type ObjectTypePropertyCreate as ObjectTypePropertyCreate,
+    type SchemaCreateAssociationResponse as SchemaCreateAssociationResponse,
     type SchemaCreateParams as SchemaCreateParams,
     type SchemaUpdateParams as SchemaUpdateParams,
     type SchemaListParams as SchemaListParams,

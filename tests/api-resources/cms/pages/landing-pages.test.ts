@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import HubSpot from 'hubspot-sdk';
+import Hubspot from 'hubspot-sdk';
 
-const client = new HubSpot({
+const client = new Hubspot({
   accessToken: 'pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
@@ -589,7 +589,7 @@ describe('resource landingPages', () => {
         },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(HubSpot.NotFoundError);
+    ).rejects.toThrow(Hubspot.NotFoundError);
   });
 
   // Prism tests are disabled
@@ -613,7 +613,7 @@ describe('resource landingPages', () => {
         { archived: true },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(HubSpot.NotFoundError);
+    ).rejects.toThrow(Hubspot.NotFoundError);
   });
 
   // Prism tests are disabled
@@ -1097,7 +1097,7 @@ describe('resource landingPages', () => {
         { archived: true },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(HubSpot.NotFoundError);
+    ).rejects.toThrow(Hubspot.NotFoundError);
   });
 
   // Prism tests are disabled
@@ -1178,7 +1178,7 @@ describe('resource landingPages', () => {
         { archived: true, property: 'property' },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(HubSpot.NotFoundError);
+    ).rejects.toThrow(Hubspot.NotFoundError);
   });
 
   // Prism tests are disabled
@@ -1231,7 +1231,7 @@ describe('resource landingPages', () => {
         { archived: true, property: 'property' },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(HubSpot.NotFoundError);
+    ).rejects.toThrow(Hubspot.NotFoundError);
   });
 
   // Prism tests are disabled
@@ -1313,7 +1313,7 @@ describe('resource landingPages', () => {
         { after: 'after', before: 'before', limit: 0 },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(HubSpot.NotFoundError);
+    ).rejects.toThrow(Hubspot.NotFoundError);
   });
 
   // Prism tests are disabled
@@ -1348,7 +1348,7 @@ describe('resource landingPages', () => {
         },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(HubSpot.NotFoundError);
+    ).rejects.toThrow(Hubspot.NotFoundError);
   });
 
   // Prism tests are disabled
@@ -1372,7 +1372,7 @@ describe('resource landingPages', () => {
         { after: 'after', before: 'before', limit: 0 },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(HubSpot.NotFoundError);
+    ).rejects.toThrow(Hubspot.NotFoundError);
   });
 
   // Prism tests are disabled

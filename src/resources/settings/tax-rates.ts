@@ -13,11 +13,10 @@ export class TaxRates extends APIResource {
    *
    * @example
    * ```ts
-   * const collectionResponsePublicTaxRateGroupForwardPaging =
-   *   await client.settings.taxRates.list();
+   * const taxRates = await client.settings.taxRates.list();
    * ```
    */
-  list(options?: RequestOptions): APIPromise<CollectionResponsePublicTaxRateGroupForwardPaging> {
+  list(options?: RequestOptions): APIPromise<TaxRateListResponse> {
     return this._client.get('/tax-rates/v1/tax-rates', options);
   }
 
@@ -26,22 +25,41 @@ export class TaxRates extends APIResource {
    *
    * @example
    * ```ts
-   * const publicTaxRateGroup =
-   *   await client.settings.taxRates.get('taxRateGroupId');
+   * const taxRate = await client.settings.taxRates.get(
+   *   'taxRateGroupId',
+   * );
    * ```
    */
-  get(taxRateGroupID: string, options?: RequestOptions): APIPromise<PublicTaxRateGroup> {
+  get(taxRateGroupID: string, options?: RequestOptions): APIPromise<TaxRateGetResponse> {
     return this._client.get(path`/tax-rates/v1/tax-rates/${taxRateGroupID}`, options);
   }
 }
 
-export interface CollectionResponsePublicTaxRateGroupForwardPaging {
-  results: Array<PublicTaxRateGroup>;
+export interface TaxRateListResponse {
+  results: Array<TaxRateListResponse.Result>;
 
   paging?: Shared.ForwardPaging;
 }
 
-export interface PublicTaxRateGroup {
+export namespace TaxRateListResponse {
+  export interface Result {
+    id: string;
+
+    active: boolean;
+
+    createdAt: string;
+
+    label: string;
+
+    name: string;
+
+    percentageRate: number;
+
+    updatedAt: string;
+  }
+}
+
+export interface TaxRateGetResponse {
   id: string;
 
   active: boolean;
@@ -58,8 +76,5 @@ export interface PublicTaxRateGroup {
 }
 
 export declare namespace TaxRates {
-  export {
-    type CollectionResponsePublicTaxRateGroupForwardPaging as CollectionResponsePublicTaxRateGroupForwardPaging,
-    type PublicTaxRateGroup as PublicTaxRateGroup,
-  };
+  export { type TaxRateListResponse as TaxRateListResponse, type TaxRateGetResponse as TaxRateGetResponse };
 }

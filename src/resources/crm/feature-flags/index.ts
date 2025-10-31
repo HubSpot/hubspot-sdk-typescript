@@ -2,24 +2,23 @@
 
 export {
   Apps,
+  type AppUpdateResponse,
+  type AppDeleteResponse,
+  type AppGetResponse,
+  type AppListPortalsResponse,
   type AppUpdateParams,
   type AppDeleteParams,
   type AppGetParams,
   type AppListPortalsParams,
 } from './apps';
-export {
-  FeatureFlags,
-  type BatchPortalEntry,
-  type FlagPutRequest,
-  type FlagResponse,
-  type PortalFlagStateBatchDeleteRequest,
-  type PortalFlagStateBatchPutRequest,
-  type PortalFlagStateBatchResponse,
-  type PortalFlagStatePutRequest,
-  type PortalFlagStateResponse,
-} from './feature-flags';
+export { FeatureFlags } from './feature-flags';
 export {
   Portals,
+  type PortalUpdateResponse,
+  type PortalDeleteResponse,
+  type PortalBatchDeleteResponse,
+  type PortalBatchUpsertResponse,
+  type PortalGetResponse,
   type PortalUpdateParams,
   type PortalDeleteParams,
   type PortalBatchDeleteParams,

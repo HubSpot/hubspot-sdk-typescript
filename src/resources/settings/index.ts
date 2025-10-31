@@ -28,11 +28,7 @@ export {
   type CurrencyUpdateVisibilityParams,
 } from './currencies/index';
 export { Settings } from './settings';
-export {
-  TaxRates,
-  type CollectionResponsePublicTaxRateGroupForwardPaging,
-  type PublicTaxRateGroup,
-} from './tax-rates';
+export { TaxRates, type TaxRateListResponse, type TaxRateGetResponse } from './tax-rates';
 export {
   Users,
   type CollectionResponsePublicPermissionSetNoPaging,

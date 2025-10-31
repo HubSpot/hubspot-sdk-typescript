@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../core/resource';
 import * as ConversationsAPI from '../conversations';
-import * as CustomChannelsAPI from './custom-channels';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -107,13 +106,13 @@ export class Messages extends APIResource {
 
 export interface MessageCreateParams {
   attachments: Array<
-    | CustomChannelsAPI.FileAttachment
-    | CustomChannelsAPI.LocationAttachment
-    | CustomChannelsAPI.ContactAttachment
-    | CustomChannelsAPI.UnsupportedContentAttachment
-    | CustomChannelsAPI.MessageHeaderAttachment
-    | CustomChannelsAPI.QuickRepliesAttachment
-    | CustomChannelsAPI.SocialMetadataIntegrationAttachment
+    | MessageCreateParams.ConversationsCustomchannelsFileAttachment
+    | MessageCreateParams.ConversationsCustomchannelsLocationAttachment
+    | MessageCreateParams.ConversationsCustomchannelsContactAttachment
+    | MessageCreateParams.ConversationsCustomchannelsUnsupportedContentAttachment
+    | MessageCreateParams.ConversationsCustomchannelsMessageHeaderAttachment
+    | MessageCreateParams.ConversationsCustomchannelsQuickRepliesAttachment
+    | MessageCreateParams.ConversationsCustomchannelsSocialMetadataIntegrationAttachment
   >;
 
   channelAccountId: string;
@@ -122,9 +121,9 @@ export interface MessageCreateParams {
 
   messageDirection: 'INCOMING' | 'OUTGOING';
 
-  recipients: Array<CustomChannelsAPI.ChannelIntegrationParticipant>;
+  recipients: Array<MessageCreateParams.Recipient>;
 
-  senders: Array<CustomChannelsAPI.ChannelIntegrationParticipant>;
+  senders: Array<MessageCreateParams.Sender>;
 
   text: string;
 
@@ -134,9 +133,87 @@ export interface MessageCreateParams {
 
   integrationIdempotencyId?: string;
 
-  preResolvedContacts?: CustomChannelsAPI.PreResolvedContacts;
+  preResolvedContacts?: MessageCreateParams.PreResolvedContacts;
 
   richText?: string;
+}
+
+export namespace MessageCreateParams {
+  export interface ConversationsCustomchannelsFileAttachment {
+    fileId: string;
+
+    type: 'FILE';
+
+    fileUsageType?: string;
+  }
+
+  export interface ConversationsCustomchannelsLocationAttachment {
+    latitude: number;
+
+    longitude: number;
+
+    type: 'LOCATION';
+
+    address?: string;
+
+    name?: string;
+
+    url?: string;
+  }
+
+  export interface ConversationsCustomchannelsContactAttachment {
+    contactProfile: ConversationsAPI.ContactProfile;
+
+    type: 'CONTACT';
+  }
+
+  export interface ConversationsCustomchannelsUnsupportedContentAttachment {
+    type: 'UNSUPPORTED_CONTENT';
+  }
+
+  export interface ConversationsCustomchannelsMessageHeaderAttachment {
+    type: 'MESSAGE_HEADER';
+
+    fileId?: number;
+
+    text?: string;
+  }
+
+  export interface ConversationsCustomchannelsQuickRepliesAttachment {
+    quickReplies: Array<ConversationsAPI.QuickReply>;
+
+    type: 'QUICK_REPLIES';
+  }
+
+  export interface ConversationsCustomchannelsSocialMetadataIntegrationAttachment {
+    socialMetadata: ConversationsAPI.SocialMetadata;
+
+    type: 'SOCIAL_MEDIA_METADATA';
+  }
+
+  export interface Recipient {
+    deliveryIdentifier: ConversationsAPI.PublicDeliveryIdentifier;
+
+    name?: string;
+  }
+
+  export interface Sender {
+    deliveryIdentifier: ConversationsAPI.PublicDeliveryIdentifier;
+
+    name?: string;
+  }
+
+  export interface PreResolvedContacts {
+    contacts: Array<PreResolvedContacts.Contact>;
+  }
+
+  export namespace PreResolvedContacts {
+    export interface Contact {
+      contactPropertiesLeadingToMatch: Array<string>;
+
+      contactVid: number;
+    }
+  }
 }
 
 export interface MessageUpdateParams {

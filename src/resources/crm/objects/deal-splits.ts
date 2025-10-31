@@ -12,7 +12,7 @@ export class DealSplits extends APIResource {
    *
    * @example
    * ```ts
-   * const batchResponseDealToDealSplits =
+   * const response =
    *   await client.crm.objects.dealSplits.batchRead({
    *     inputs: [{ id: '37295' }],
    *   });
@@ -21,7 +21,7 @@ export class DealSplits extends APIResource {
   batchRead(
     body: DealSplitBatchReadParams,
     options?: RequestOptions,
-  ): APIPromise<BatchResponseDealToDealSplits> {
+  ): APIPromise<DealSplitBatchReadResponse> {
     return this._client.post('/crm/v3/objects/deals/splits/batch/read', { body, ...options });
   }
 
@@ -32,7 +32,7 @@ export class DealSplits extends APIResource {
    *
    * @example
    * ```ts
-   * const batchResponseDealToDealSplits =
+   * const response =
    *   await client.crm.objects.dealSplits.batchUpsert({
    *     inputs: [
    *       { id: 0, splits: [{ ownerId: 0, percentage: 0 }] },
@@ -43,15 +43,15 @@ export class DealSplits extends APIResource {
   batchUpsert(
     body: DealSplitBatchUpsertParams,
     options?: RequestOptions,
-  ): APIPromise<BatchResponseDealToDealSplits> {
+  ): APIPromise<DealSplitBatchUpsertResponse> {
     return this._client.post('/crm/v3/objects/deals/splits/batch/upsert', { body, ...options });
   }
 }
 
-export interface BatchResponseDealToDealSplits {
+export interface DealSplitBatchReadResponse {
   completedAt: string;
 
-  results: Array<DealToDealSplits>;
+  results: Array<DealSplitBatchReadResponse.Result>;
 
   startedAt: string;
 
@@ -62,44 +62,34 @@ export interface BatchResponseDealToDealSplits {
   requestedAt?: string;
 }
 
-export interface BatchResponseDealToDealSplitsWithErrors {
+export namespace DealSplitBatchReadResponse {
+  export interface Result {
+    id: string;
+
+    splits: Array<CRMAPI.SimplePublicObject>;
+  }
+}
+
+export interface DealSplitBatchUpsertResponse {
   completedAt: string;
 
-  results: Array<DealToDealSplits>;
+  results: Array<DealSplitBatchUpsertResponse.Result>;
 
   startedAt: string;
 
   status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
 
-  errors?: Array<Shared.StandardError>;
-
   links?: { [key: string]: string };
-
-  numErrors?: number;
 
   requestedAt?: string;
 }
 
-export interface DealToDealSplits {
-  id: string;
+export namespace DealSplitBatchUpsertResponse {
+  export interface Result {
+    id: string;
 
-  splits: Array<CRMAPI.SimplePublicObject>;
-}
-
-export interface PublicDealSplitInput {
-  ownerId: number;
-
-  percentage: number;
-}
-
-export interface PublicDealSplitsBatchCreateRequest {
-  inputs: Array<PublicDealSplitsCreateRequest>;
-}
-
-export interface PublicDealSplitsCreateRequest {
-  id: number;
-
-  splits: Array<PublicDealSplitInput>;
+    splits: Array<CRMAPI.SimplePublicObject>;
+  }
 }
 
 export interface DealSplitBatchReadParams {
@@ -107,17 +97,29 @@ export interface DealSplitBatchReadParams {
 }
 
 export interface DealSplitBatchUpsertParams {
-  inputs: Array<PublicDealSplitsCreateRequest>;
+  inputs: Array<DealSplitBatchUpsertParams.Input>;
+}
+
+export namespace DealSplitBatchUpsertParams {
+  export interface Input {
+    id: number;
+
+    splits: Array<Input.Split>;
+  }
+
+  export namespace Input {
+    export interface Split {
+      ownerId: number;
+
+      percentage: number;
+    }
+  }
 }
 
 export declare namespace DealSplits {
   export {
-    type BatchResponseDealToDealSplits as BatchResponseDealToDealSplits,
-    type BatchResponseDealToDealSplitsWithErrors as BatchResponseDealToDealSplitsWithErrors,
-    type DealToDealSplits as DealToDealSplits,
-    type PublicDealSplitInput as PublicDealSplitInput,
-    type PublicDealSplitsBatchCreateRequest as PublicDealSplitsBatchCreateRequest,
-    type PublicDealSplitsCreateRequest as PublicDealSplitsCreateRequest,
+    type DealSplitBatchReadResponse as DealSplitBatchReadResponse,
+    type DealSplitBatchUpsertResponse as DealSplitBatchUpsertResponse,
     type DealSplitBatchReadParams as DealSplitBatchReadParams,
     type DealSplitBatchUpsertParams as DealSplitBatchUpsertParams,
   };

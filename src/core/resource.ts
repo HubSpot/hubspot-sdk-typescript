@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import type { HubSpot } from '../client';
+import type { Hubspot } from '../client';
 
 export abstract class APIResource {
-  protected _client: HubSpot;
+  protected _client: Hubspot;
 
-  constructor(client: HubSpot) {
+  constructor(client: Hubspot) {
     this._client = client;
   }
 }

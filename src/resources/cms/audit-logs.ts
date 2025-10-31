@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as EmailsAPI from '../marketing/emails/emails';
 import { Page, type PageParams, PagePromise } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 
@@ -12,7 +11,7 @@ export class AuditLogs extends APIResource {
    * @example
    * ```ts
    * // Automatically fetches more pages as needed.
-   * for await (const publicAuditLog of client.cms.auditLogs.list()) {
+   * for await (const auditLogListResponse of client.cms.auditLogs.list()) {
    *   // ...
    * }
    * ```
@@ -20,26 +19,14 @@ export class AuditLogs extends APIResource {
   list(
     query: AuditLogListParams | null | undefined = {},
     options?: RequestOptions,
-  ): PagePromise<PublicAuditLogsPage, PublicAuditLog> {
-    return this._client.getAPIList('/cms/v3/audit-logs/', Page<PublicAuditLog>, { query, ...options });
+  ): PagePromise<AuditLogListResponsesPage, AuditLogListResponse> {
+    return this._client.getAPIList('/cms/v3/audit-logs/', Page<AuditLogListResponse>, { query, ...options });
   }
 }
 
-export type PublicAuditLogsPage = Page<PublicAuditLog>;
+export type AuditLogListResponsesPage = Page<AuditLogListResponse>;
 
-/**
- * The collection of audit logs.
- */
-export interface CollectionResponsePublicAuditLog {
-  results: Array<PublicAuditLog>;
-
-  /**
-   * Contains information pagination of results.
-   */
-  paging?: EmailsAPI.Paging;
-}
-
-export interface PublicAuditLog {
+export interface AuditLogListResponse {
   /**
    * The type of event that took place (CREATED, UPDATED, PUBLISHED, DELETED,
    * UNPUBLISHED).
@@ -135,9 +122,8 @@ export interface AuditLogListParams extends PageParams {
 
 export declare namespace AuditLogs {
   export {
-    type CollectionResponsePublicAuditLog as CollectionResponsePublicAuditLog,
-    type PublicAuditLog as PublicAuditLog,
-    type PublicAuditLogsPage as PublicAuditLogsPage,
+    type AuditLogListResponse as AuditLogListResponse,
+    type AuditLogListResponsesPage as AuditLogListResponsesPage,
     type AuditLogListParams as AuditLogListParams,
   };
 }

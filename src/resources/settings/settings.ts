@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../core/resource';
 import * as TaxRatesAPI from './tax-rates';
-import { CollectionResponsePublicTaxRateGroupForwardPaging, PublicTaxRateGroup, TaxRates } from './tax-rates';
+import { TaxRateGetResponse, TaxRateListResponse, TaxRates } from './tax-rates';
 import * as UsersAPI from './users';
 import {
   CollectionResponsePublicPermissionSetNoPaging,
@@ -91,8 +91,8 @@ export declare namespace Settings {
 
   export {
     TaxRates as TaxRates,
-    type CollectionResponsePublicTaxRateGroupForwardPaging as CollectionResponsePublicTaxRateGroupForwardPaging,
-    type PublicTaxRateGroup as PublicTaxRateGroup,
+    type TaxRateListResponse as TaxRateListResponse,
+    type TaxRateGetResponse as TaxRateGetResponse,
   };
 
   export {
