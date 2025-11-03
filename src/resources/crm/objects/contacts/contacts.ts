@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
-import * as CRMAPI from '../../crm';
+import * as CrmAPI from '../../crm';
 import { SimplePublicObjectWithAssociationsPage } from '../../crm';
 import * as BatchAPI from './batch';
 import {
@@ -39,7 +39,7 @@ export class Contacts extends APIResource {
   create(
     body: ContactCreateParams,
     options?: RequestOptions,
-  ): APIPromise<CRMAPI.CreatedResponseSimplePublicObject> {
+  ): APIPromise<CrmAPI.CreatedResponseSimplePublicObject> {
     return this._client.post('/crm/v3/objects/contacts', { body, ...options });
   }
 
@@ -72,7 +72,7 @@ export class Contacts extends APIResource {
     contactID: string,
     body: ContactUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<CRMAPI.SimplePublicObject> {
+  ): APIPromise<CrmAPI.SimplePublicObject> {
     return this._client.patch(path`/crm/v3/objects/contacts/${contactID}`, { body, ...options });
   }
 
@@ -91,10 +91,10 @@ export class Contacts extends APIResource {
   list(
     query: ContactListParams | null | undefined = {},
     options?: RequestOptions,
-  ): PagePromise<SimplePublicObjectWithAssociationsPage, CRMAPI.SimplePublicObjectWithAssociations> {
+  ): PagePromise<SimplePublicObjectWithAssociationsPage, CrmAPI.SimplePublicObjectWithAssociations> {
     return this._client.getAPIList(
       '/crm/v3/objects/contacts',
-      Page<CRMAPI.SimplePublicObjectWithAssociations>,
+      Page<CrmAPI.SimplePublicObjectWithAssociations>,
       { query, ...options },
     );
   }
@@ -155,7 +155,7 @@ export class Contacts extends APIResource {
     contactID: string,
     query: ContactGetParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CRMAPI.SimplePublicObjectWithAssociations> {
+  ): APIPromise<CrmAPI.SimplePublicObjectWithAssociations> {
     return this._client.get(path`/crm/v3/objects/contacts/${contactID}`, { query, ...options });
   }
 
@@ -172,7 +172,7 @@ export class Contacts extends APIResource {
    *   });
    * ```
    */
-  merge(body: ContactMergeParams, options?: RequestOptions): APIPromise<CRMAPI.SimplePublicObject> {
+  merge(body: ContactMergeParams, options?: RequestOptions): APIPromise<CrmAPI.SimplePublicObject> {
     return this._client.post('/crm/v3/objects/contacts/merge', { body, ...options });
   }
 
@@ -190,7 +190,7 @@ export class Contacts extends APIResource {
   search(
     body: ContactSearchParams,
     options?: RequestOptions,
-  ): APIPromise<CRMAPI.CollectionResponseWithTotalSimplePublicObject> {
+  ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/v3/objects/contacts/search', { body, ...options });
   }
 }
@@ -201,7 +201,7 @@ export interface ContactCreateParams {
    */
   properties: { [key: string]: string };
 
-  associations?: Array<CRMAPI.PublicAssociationsForObject>;
+  associations?: Array<CrmAPI.PublicAssociationsForObject>;
 }
 
 export interface ContactUpdateParams {
@@ -290,7 +290,7 @@ export interface ContactSearchParams {
   /**
    * Up to 6 groups of filters defining additional query criteria.
    */
-  filterGroups?: Array<CRMAPI.FilterGroup>;
+  filterGroups?: Array<CrmAPI.FilterGroup>;
 
   /**
    * The maximum results to return, up to 200 objects.

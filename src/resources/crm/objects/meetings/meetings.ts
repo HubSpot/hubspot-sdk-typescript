@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
-import * as CRMAPI from '../../crm';
+import * as CrmAPI from '../../crm';
 import { SimplePublicObjectWithAssociationsPage } from '../../crm';
 import * as BatchAPI from './batch';
 import {
@@ -37,7 +37,7 @@ export class Meetings extends APIResource {
   create(
     body: MeetingCreateParams,
     options?: RequestOptions,
-  ): APIPromise<CRMAPI.CreatedResponseSimplePublicObject> {
+  ): APIPromise<CrmAPI.CreatedResponseSimplePublicObject> {
     return this._client.post('/crm/v3/objects/meetings', { body, ...options });
   }
 
@@ -70,7 +70,7 @@ export class Meetings extends APIResource {
     meetingID: string,
     params: MeetingUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<CRMAPI.SimplePublicObject> {
+  ): APIPromise<CrmAPI.SimplePublicObject> {
     const { idProperty, ...body } = params;
     return this._client.patch(path`/crm/v3/objects/meetings/${meetingID}`, {
       query: { idProperty },
@@ -94,10 +94,10 @@ export class Meetings extends APIResource {
   list(
     query: MeetingListParams | null | undefined = {},
     options?: RequestOptions,
-  ): PagePromise<SimplePublicObjectWithAssociationsPage, CRMAPI.SimplePublicObjectWithAssociations> {
+  ): PagePromise<SimplePublicObjectWithAssociationsPage, CrmAPI.SimplePublicObjectWithAssociations> {
     return this._client.getAPIList(
       '/crm/v3/objects/meetings',
-      Page<CRMAPI.SimplePublicObjectWithAssociations>,
+      Page<CrmAPI.SimplePublicObjectWithAssociations>,
       { query, ...options },
     );
   }
@@ -133,7 +133,7 @@ export class Meetings extends APIResource {
     meetingID: string,
     query: MeetingGetParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CRMAPI.SimplePublicObjectWithAssociations> {
+  ): APIPromise<CrmAPI.SimplePublicObjectWithAssociations> {
     return this._client.get(path`/crm/v3/objects/meetings/${meetingID}`, { query, ...options });
   }
 
@@ -147,7 +147,7 @@ export class Meetings extends APIResource {
   search(
     body: MeetingSearchParams,
     options?: RequestOptions,
-  ): APIPromise<CRMAPI.CollectionResponseWithTotalSimplePublicObject> {
+  ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/v3/objects/meetings/search', { body, ...options });
   }
 }
@@ -158,7 +158,7 @@ export interface MeetingCreateParams {
    */
   properties: { [key: string]: string };
 
-  associations?: Array<CRMAPI.PublicAssociationsForObject>;
+  associations?: Array<CrmAPI.PublicAssociationsForObject>;
 }
 
 export interface MeetingUpdateParams {
@@ -242,7 +242,7 @@ export interface MeetingSearchParams {
   /**
    * Up to 6 groups of filters defining additional query criteria.
    */
-  filterGroups?: Array<CRMAPI.FilterGroup>;
+  filterGroups?: Array<CrmAPI.FilterGroup>;
 
   /**
    * The maximum results to return, up to 200 objects.

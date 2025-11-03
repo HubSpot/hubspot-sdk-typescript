@@ -1112,7 +1112,7 @@ Methods:
 
 - <code title="post /visitor-identification/v3/tokens/create">client.conversations.visitorIdentification.<a href="./src/resources/conversations/visitor-identification.ts">generateToken</a>({ ...params }) -> IdentificationTokenResponse</code>
 
-# CRM
+# Crm
 
 Types:
 
@@ -1257,7 +1257,7 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/crm/exports.ts">ActionResponseWithSingleResultUri</a></code>
-- <code><a href="./src/resources/crm/exports.ts">PublicCRMSearchRequest</a></code>
+- <code><a href="./src/resources/crm/exports.ts">PublicCrmSearchRequest</a></code>
 - <code><a href="./src/resources/crm/exports.ts">PublicExportListRequest</a></code>
 - <code><a href="./src/resources/crm/exports.ts">PublicExportRequest</a></code>
 - <code><a href="./src/resources/crm/exports.ts">PublicExportViewRequest</a></code>
@@ -2768,7 +2768,7 @@ Types:
 - <code><a href="./src/resources/marketing/events/events.ts">CollectionResponseWithTotalParticipationBreakdownForwardPaging</a></code>
 - <code><a href="./src/resources/marketing/events/events.ts">CollectionResponseWithTotalPublicListNoPaging</a></code>
 - <code><a href="./src/resources/marketing/events/events.ts">ContactAssociation</a></code>
-- <code><a href="./src/resources/marketing/events/events.ts">CRMPropertyWrapper</a></code>
+- <code><a href="./src/resources/marketing/events/events.ts">CrmPropertyWrapper</a></code>
 - <code><a href="./src/resources/marketing/events/events.ts">EventDetailSettings</a></code>
 - <code><a href="./src/resources/marketing/events/events.ts">EventDetailSettingsURL</a></code>
 - <code><a href="./src/resources/marketing/events/events.ts">MarketingEventAssociation</a></code>

@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../core/resource';
 import * as Shared from '../shared';
-import * as CRMAPI from './crm';
+import * as CrmAPI from './crm';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
@@ -53,8 +53,8 @@ export interface ActionResponseWithSingleResultUri {
   result?: string;
 }
 
-export interface PublicCRMSearchRequest {
-  filters: Array<CRMAPI.Filter>;
+export interface PublicCrmSearchRequest {
+  filters: Array<CrmAPI.Filter>;
 
   query: string;
 
@@ -132,7 +132,7 @@ export interface PublicExportViewRequest {
 
   associatedObjectType?: string;
 
-  publicCrmSearchRequest?: PublicCRMSearchRequest;
+  publicCrmSearchRequest?: PublicCrmSearchRequest;
 }
 
 export type ExportCreateParams =
@@ -148,7 +148,7 @@ export declare namespace ExportCreateParams {
 export declare namespace Exports {
   export {
     type ActionResponseWithSingleResultUri as ActionResponseWithSingleResultUri,
-    type PublicCRMSearchRequest as PublicCRMSearchRequest,
+    type PublicCrmSearchRequest as PublicCrmSearchRequest,
     type PublicExportListRequest as PublicExportListRequest,
     type PublicExportRequest as PublicExportRequest,
     type PublicExportViewRequest as PublicExportViewRequest,

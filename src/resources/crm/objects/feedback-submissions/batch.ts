@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
-import * as CRMAPI from '../../crm';
+import * as CrmAPI from '../../crm';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 
@@ -20,7 +20,7 @@ export class Batch extends APIResource {
    *   });
    * ```
    */
-  get(params: BatchGetParams, options?: RequestOptions): APIPromise<CRMAPI.BatchResponseSimplePublicObject> {
+  get(params: BatchGetParams, options?: RequestOptions): APIPromise<CrmAPI.BatchResponseSimplePublicObject> {
     const { archived, ...body } = params;
     return this._client.post('/crm/v3/objects/feedback_submissions/batch/read', {
       query: { archived },
@@ -34,7 +34,7 @@ export interface BatchGetParams {
   /**
    * Body param:
    */
-  inputs: Array<CRMAPI.SimplePublicObjectID>;
+  inputs: Array<CrmAPI.SimplePublicObjectID>;
 
   /**
    * Body param: Key-value pairs for setting properties for the new object.

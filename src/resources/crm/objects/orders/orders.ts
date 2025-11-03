@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
-import * as CRMAPI from '../../crm';
+import * as CrmAPI from '../../crm';
 import { SimplePublicObjectWithAssociationsPage } from '../../crm';
 import * as BatchAPI from './batch';
 import {
@@ -37,7 +37,7 @@ export class Orders extends APIResource {
   create(
     body: OrderCreateParams,
     options?: RequestOptions,
-  ): APIPromise<CRMAPI.CreatedResponseSimplePublicObject> {
+  ): APIPromise<CrmAPI.CreatedResponseSimplePublicObject> {
     return this._client.post('/crm/v3/objects/orders', { body, ...options });
   }
 
@@ -69,7 +69,7 @@ export class Orders extends APIResource {
     orderID: string,
     params: OrderUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<CRMAPI.SimplePublicObject> {
+  ): APIPromise<CrmAPI.SimplePublicObject> {
     const { idProperty, ...body } = params;
     return this._client.patch(path`/crm/v3/objects/orders/${orderID}`, {
       query: { idProperty },
@@ -93,10 +93,10 @@ export class Orders extends APIResource {
   list(
     query: OrderListParams | null | undefined = {},
     options?: RequestOptions,
-  ): PagePromise<SimplePublicObjectWithAssociationsPage, CRMAPI.SimplePublicObjectWithAssociations> {
+  ): PagePromise<SimplePublicObjectWithAssociationsPage, CrmAPI.SimplePublicObjectWithAssociations> {
     return this._client.getAPIList(
       '/crm/v3/objects/orders',
-      Page<CRMAPI.SimplePublicObjectWithAssociations>,
+      Page<CrmAPI.SimplePublicObjectWithAssociations>,
       { query, ...options },
     );
   }
@@ -132,7 +132,7 @@ export class Orders extends APIResource {
     orderID: string,
     query: OrderGetParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CRMAPI.SimplePublicObjectWithAssociations> {
+  ): APIPromise<CrmAPI.SimplePublicObjectWithAssociations> {
     return this._client.get(path`/crm/v3/objects/orders/${orderID}`, { query, ...options });
   }
 
@@ -146,7 +146,7 @@ export class Orders extends APIResource {
   search(
     body: OrderSearchParams,
     options?: RequestOptions,
-  ): APIPromise<CRMAPI.CollectionResponseWithTotalSimplePublicObject> {
+  ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/v3/objects/orders/search', { body, ...options });
   }
 }
@@ -157,7 +157,7 @@ export interface OrderCreateParams {
    */
   properties: { [key: string]: string };
 
-  associations?: Array<CRMAPI.PublicAssociationsForObject>;
+  associations?: Array<CrmAPI.PublicAssociationsForObject>;
 }
 
 export interface OrderUpdateParams {
@@ -241,7 +241,7 @@ export interface OrderSearchParams {
   /**
    * Up to 6 groups of filters defining additional query criteria.
    */
-  filterGroups?: Array<CRMAPI.FilterGroup>;
+  filterGroups?: Array<CrmAPI.FilterGroup>;
 
   /**
    * The maximum results to return, up to 200 objects.

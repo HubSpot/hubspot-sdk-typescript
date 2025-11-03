@@ -25,7 +25,7 @@ import { Auth } from './resources/auth/auth';
 import { Automation } from './resources/automation/automation';
 import { Cms } from './resources/cms/cms';
 import { Conversations } from './resources/conversations/conversations';
-import { CRM } from './resources/crm/crm';
+import { Crm } from './resources/crm/crm';
 import { Events } from './resources/events/events';
 import { Files } from './resources/files/files';
 import { Marketing } from './resources/marketing/marketing';
@@ -765,7 +765,7 @@ export class Hubspot {
   businessUnits: API.BusinessUnits = new API.BusinessUnits(this);
   cms: API.Cms = new API.Cms(this);
   conversations: API.Conversations = new API.Conversations(this);
-  crm: API.CRM = new API.CRM(this);
+  crm: API.Crm = new API.Crm(this);
   events: API.Events = new API.Events(this);
   files: API.Files = new API.Files(this);
   marketing: API.Marketing = new API.Marketing(this);
@@ -780,7 +780,7 @@ Hubspot.Automation = Automation;
 Hubspot.BusinessUnits = BusinessUnits;
 Hubspot.Cms = Cms;
 Hubspot.Conversations = Conversations;
-Hubspot.CRM = CRM;
+Hubspot.Crm = Crm;
 Hubspot.Events = Events;
 Hubspot.Files = Files;
 Hubspot.Marketing = Marketing;
@@ -806,7 +806,7 @@ export declare namespace Hubspot {
 
   export { Conversations as Conversations };
 
-  export { CRM as CRM };
+  export { Crm as Crm };
 
   export { Events as Events };
 

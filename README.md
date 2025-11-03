@@ -46,7 +46,7 @@ const client = new Hubspot({
   accessToken: 'pat-na1-xxxxxxxx-xxxx',
 });
 
-const params: Hubspot.CRM.Objects.ContactCreateParams = { properties: { email: 'mark.s@lumon.industries' } };
+const params: Hubspot.Crm.Objects.ContactCreateParams = { properties: { email: 'mark.s@lumon.industries' } };
 const createdResponseSimplePublicObject: Hubspot.CreatedResponseSimplePublicObject =
   await client.crm.objects.contacts.create(params);
 ```

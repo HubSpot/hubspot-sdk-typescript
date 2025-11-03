@@ -9,7 +9,7 @@ import {
   ActionResponseWithSingleResultUri,
   ExportCreateParams,
   Exports,
-  PublicCRMSearchRequest,
+  PublicCrmSearchRequest,
   PublicExportListRequest,
   PublicExportRequest,
   PublicExportViewRequest,
@@ -225,7 +225,7 @@ import {
 import * as EmailsAPI from '../marketing/emails/emails';
 import { Page } from '../../core/pagination';
 
-export class CRM extends APIResource {
+export class Crm extends APIResource {
   appUninstalls: AppUninstallsAPI.AppUninstalls = new AppUninstallsAPI.AppUninstalls(this._client);
   associations: AssociationsAPI.Associations = new AssociationsAPI.Associations(this._client);
   exports: ExportsAPI.Exports = new ExportsAPI.Exports(this._client);
@@ -873,24 +873,24 @@ export interface ValueWithTimestamp {
   updatedByUserId?: number;
 }
 
-CRM.AppUninstalls = AppUninstalls;
-CRM.Associations = Associations;
-CRM.Exports = Exports;
-CRM.Extensions = Extensions;
-CRM.FeatureFlags = FeatureFlags;
-CRM.Imports = Imports;
-CRM.Limits = Limits;
-CRM.Lists = Lists;
-CRM.ObjectLibrary = ObjectLibrary;
-CRM.Objects = Objects;
-CRM.Owners = Owners;
-CRM.Pipelines = Pipelines;
-CRM.Properties = Properties;
-CRM.PropertyValidations = PropertyValidations;
-CRM.Timeline = Timeline;
-CRM.Users = Users;
+Crm.AppUninstalls = AppUninstalls;
+Crm.Associations = Associations;
+Crm.Exports = Exports;
+Crm.Extensions = Extensions;
+Crm.FeatureFlags = FeatureFlags;
+Crm.Imports = Imports;
+Crm.Limits = Limits;
+Crm.Lists = Lists;
+Crm.ObjectLibrary = ObjectLibrary;
+Crm.Objects = Objects;
+Crm.Owners = Owners;
+Crm.Pipelines = Pipelines;
+Crm.Properties = Properties;
+Crm.PropertyValidations = PropertyValidations;
+Crm.Timeline = Timeline;
+Crm.Users = Users;
 
-export declare namespace CRM {
+export declare namespace Crm {
   export {
     type AssociatedID as AssociatedID,
     type AssociationSpecWithLabel as AssociationSpecWithLabel,
@@ -957,7 +957,7 @@ export declare namespace CRM {
   export {
     Exports as Exports,
     type ActionResponseWithSingleResultUri as ActionResponseWithSingleResultUri,
-    type PublicCRMSearchRequest as PublicCRMSearchRequest,
+    type PublicCrmSearchRequest as PublicCrmSearchRequest,
     type PublicExportListRequest as PublicExportListRequest,
     type PublicExportRequest as PublicExportRequest,
     type PublicExportViewRequest as PublicExportViewRequest,

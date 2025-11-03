@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
-import * as CRMAPI from '../crm';
+import * as CrmAPI from '../crm';
 
 export class Appointments extends APIResource {}
 
@@ -17,7 +17,7 @@ export interface PublicObjectSearchRequest {
   /**
    * Up to 6 groups of filters defining additional query criteria.
    */
-  filterGroups: Array<CRMAPI.FilterGroup>;
+  filterGroups: Array<CrmAPI.FilterGroup>;
 
   /**
    * The maximum results to return, up to 200 objects.
@@ -80,13 +80,13 @@ export interface SimplePublicObject {
    * Key-value pairs representing the properties of the object along with their
    * history.
    */
-  propertiesWithHistory?: { [key: string]: Array<CRMAPI.ValueWithTimestamp> };
+  propertiesWithHistory?: { [key: string]: Array<CrmAPI.ValueWithTimestamp> };
 
   url?: string;
 }
 
 export interface SimplePublicObjectBatchInputForCreate {
-  associations: Array<CRMAPI.PublicAssociationsForObject>;
+  associations: Array<CrmAPI.PublicAssociationsForObject>;
 
   properties: { [key: string]: string };
 
@@ -99,7 +99,7 @@ export interface SimplePublicObjectBatchInputForCreate {
  * objects.
  */
 export interface SimplePublicObjectInputForCreate {
-  associations: Array<CRMAPI.PublicAssociationsForObject>;
+  associations: Array<CrmAPI.PublicAssociationsForObject>;
 
   /**
    * Key-value pairs for setting properties for the new object.
@@ -145,7 +145,7 @@ export interface SimplePublicObjectWithAssociations {
   /**
    * A list defining relationships with other objects.
    */
-  associations?: { [key: string]: CRMAPI.CollectionResponseAssociatedID };
+  associations?: { [key: string]: CrmAPI.CollectionResponseAssociatedID };
 
   objectWriteTraceId?: string;
 
@@ -153,7 +153,7 @@ export interface SimplePublicObjectWithAssociations {
    * Key-value pairs representing the properties of the object along with their
    * history.
    */
-  propertiesWithHistory?: { [key: string]: Array<CRMAPI.ValueWithTimestamp> };
+  propertiesWithHistory?: { [key: string]: Array<CrmAPI.ValueWithTimestamp> };
 
   url?: string;
 }
@@ -203,7 +203,7 @@ export interface SimplePublicUpsertObject {
    * Key-value pairs representing the properties of the object along with their
    * history.
    */
-  propertiesWithHistory?: { [key: string]: Array<CRMAPI.ValueWithTimestamp> };
+  propertiesWithHistory?: { [key: string]: Array<CrmAPI.ValueWithTimestamp> };
 
   url?: string;
 }

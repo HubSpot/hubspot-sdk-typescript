@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
-import * as CRMAPI from '../../crm';
+import * as CrmAPI from '../../crm';
 import { AssociatedIDsPage } from '../../crm';
 import { APIPromise } from '../../../../core/api-promise';
 import { Page, type PageParams, PagePromise } from '../../../../core/pagination';
@@ -30,7 +30,7 @@ export class Associations extends APIResource {
     associationType: string,
     params: AssociationUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<CRMAPI.SimplePublicObjectWithAssociations> {
+  ): APIPromise<CrmAPI.SimplePublicObjectWithAssociations> {
     const { partnerServiceId, toObjectType, toObjectId } = params;
     return this._client.put(
       path`/crm/v3/objects/partner_services/${partnerServiceId}/associations/${toObjectType}/${toObjectId}/${associationType}`,
@@ -56,11 +56,11 @@ export class Associations extends APIResource {
     toObjectType: string,
     params: AssociationListParams,
     options?: RequestOptions,
-  ): PagePromise<AssociatedIDsPage, CRMAPI.AssociatedID> {
+  ): PagePromise<AssociatedIDsPage, CrmAPI.AssociatedID> {
     const { partnerServiceId, ...query } = params;
     return this._client.getAPIList(
       path`/crm/v3/objects/partner_services/${partnerServiceId}/associations/${toObjectType}`,
-      Page<CRMAPI.AssociatedID>,
+      Page<CrmAPI.AssociatedID>,
       { query, ...options },
     );
   }

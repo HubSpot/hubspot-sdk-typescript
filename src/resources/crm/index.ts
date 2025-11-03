@@ -23,11 +23,11 @@ export {
   type PublicFetchAssociationsBatchRequest,
   type ReportCreationResponse,
 } from './associations/index';
-export { CRM } from './crm';
+export { Crm } from './crm';
 export {
   Exports,
   type ActionResponseWithSingleResultUri,
-  type PublicCRMSearchRequest,
+  type PublicCrmSearchRequest,
   type PublicExportListRequest,
   type PublicExportRequest,
   type PublicExportViewRequest,

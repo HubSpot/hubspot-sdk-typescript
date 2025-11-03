@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
-import * as CRMAPI from '../../crm';
+import * as CrmAPI from '../../crm';
 import { SimplePublicObjectWithAssociationsPage } from '../../crm';
 import * as BatchAPI from './batch';
 import {
@@ -37,7 +37,7 @@ export class Fees extends APIResource {
   create(
     body: FeeCreateParams,
     options?: RequestOptions,
-  ): APIPromise<CRMAPI.CreatedResponseSimplePublicObject> {
+  ): APIPromise<CrmAPI.CreatedResponseSimplePublicObject> {
     return this._client.post('/crm/v3/objects/fees', { body, ...options });
   }
 
@@ -69,7 +69,7 @@ export class Fees extends APIResource {
     feeID: string,
     params: FeeUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<CRMAPI.SimplePublicObject> {
+  ): APIPromise<CrmAPI.SimplePublicObject> {
     const { idProperty, ...body } = params;
     return this._client.patch(path`/crm/v3/objects/fees/${feeID}`, {
       query: { idProperty },
@@ -92,8 +92,8 @@ export class Fees extends APIResource {
   list(
     query: FeeListParams | null | undefined = {},
     options?: RequestOptions,
-  ): PagePromise<SimplePublicObjectWithAssociationsPage, CRMAPI.SimplePublicObjectWithAssociations> {
-    return this._client.getAPIList('/crm/v3/objects/fees', Page<CRMAPI.SimplePublicObjectWithAssociations>, {
+  ): PagePromise<SimplePublicObjectWithAssociationsPage, CrmAPI.SimplePublicObjectWithAssociations> {
+    return this._client.getAPIList('/crm/v3/objects/fees', Page<CrmAPI.SimplePublicObjectWithAssociations>, {
       query,
       ...options,
     });
@@ -130,7 +130,7 @@ export class Fees extends APIResource {
     feeID: string,
     query: FeeGetParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CRMAPI.SimplePublicObjectWithAssociations> {
+  ): APIPromise<CrmAPI.SimplePublicObjectWithAssociations> {
     return this._client.get(path`/crm/v3/objects/fees/${feeID}`, { query, ...options });
   }
 
@@ -144,7 +144,7 @@ export class Fees extends APIResource {
   search(
     body: FeeSearchParams,
     options?: RequestOptions,
-  ): APIPromise<CRMAPI.CollectionResponseWithTotalSimplePublicObject> {
+  ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/v3/objects/fees/search', { body, ...options });
   }
 }
@@ -155,7 +155,7 @@ export interface FeeCreateParams {
    */
   properties: { [key: string]: string };
 
-  associations?: Array<CRMAPI.PublicAssociationsForObject>;
+  associations?: Array<CrmAPI.PublicAssociationsForObject>;
 }
 
 export interface FeeUpdateParams {
@@ -239,7 +239,7 @@ export interface FeeSearchParams {
   /**
    * Up to 6 groups of filters defining additional query criteria.
    */
-  filterGroups?: Array<CRMAPI.FilterGroup>;
+  filterGroups?: Array<CrmAPI.FilterGroup>;
 
   /**
    * The maximum results to return, up to 200 objects.

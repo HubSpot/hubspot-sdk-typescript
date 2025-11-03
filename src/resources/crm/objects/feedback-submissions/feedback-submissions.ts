@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
-import * as CRMAPI from '../../crm';
+import * as CrmAPI from '../../crm';
 import { SimplePublicObjectWithAssociationsPage } from '../../crm';
 import * as BatchAPI from './batch';
 import { Batch, BatchGetParams } from './batch';
@@ -28,10 +28,10 @@ export class FeedbackSubmissions extends APIResource {
   list(
     query: FeedbackSubmissionListParams | null | undefined = {},
     options?: RequestOptions,
-  ): PagePromise<SimplePublicObjectWithAssociationsPage, CRMAPI.SimplePublicObjectWithAssociations> {
+  ): PagePromise<SimplePublicObjectWithAssociationsPage, CrmAPI.SimplePublicObjectWithAssociations> {
     return this._client.getAPIList(
       '/crm/v3/objects/feedback_submissions',
-      Page<CRMAPI.SimplePublicObjectWithAssociations>,
+      Page<CrmAPI.SimplePublicObjectWithAssociations>,
       { query, ...options },
     );
   }
@@ -54,7 +54,7 @@ export class FeedbackSubmissions extends APIResource {
     feedbackSubmissionID: string,
     query: FeedbackSubmissionGetParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CRMAPI.SimplePublicObjectWithAssociations> {
+  ): APIPromise<CrmAPI.SimplePublicObjectWithAssociations> {
     return this._client.get(path`/crm/v3/objects/feedback_submissions/${feedbackSubmissionID}`, {
       query,
       ...options,
@@ -71,7 +71,7 @@ export class FeedbackSubmissions extends APIResource {
   search(
     body: FeedbackSubmissionSearchParams,
     options?: RequestOptions,
-  ): APIPromise<CRMAPI.CollectionResponseWithTotalSimplePublicObject> {
+  ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/v3/objects/feedback_submissions/search', { body, ...options });
   }
 }
@@ -145,7 +145,7 @@ export interface FeedbackSubmissionSearchParams {
   /**
    * Up to 6 groups of filters defining additional query criteria.
    */
-  filterGroups?: Array<CRMAPI.FilterGroup>;
+  filterGroups?: Array<CrmAPI.FilterGroup>;
 
   /**
    * The maximum results to return, up to 200 objects.
