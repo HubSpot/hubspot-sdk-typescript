@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as Shared from '../../../shared';
-import * as CRMAPI from '../../crm';
+import * as CrmAPI from '../../crm';
 import { MultiAssociatedObjectWithLabelsPage } from '../../crm';
 import * as BatchAPI from './batch';
 import {
@@ -42,7 +42,7 @@ export class V4 extends APIResource {
     toObjectID: string,
     params: V4CreateParams,
     options?: RequestOptions,
-  ): APIPromise<CRMAPI.BatchResponsePublicDefaultAssociation> {
+  ): APIPromise<CrmAPI.BatchResponsePublicDefaultAssociation> {
     const { fromObjectType, fromObjectId, toObjectType } = params;
     return this._client.put(
       path`/crm/v4/objects/${fromObjectType}/${fromObjectId}/associations/default/${toObjectType}/${toObjectID}`,
@@ -73,7 +73,7 @@ export class V4 extends APIResource {
     toObjectID: string,
     params: V4UpdateParams,
     options?: RequestOptions,
-  ): APIPromise<CRMAPI.CreatedResponseLabelsBetweenObjectPair> {
+  ): APIPromise<CrmAPI.CreatedResponseLabelsBetweenObjectPair> {
     const { objectType, objectId, toObjectType, body } = params;
     return this._client.put(
       path`/crm/v4/objects/${objectType}/${objectId}/associations/${toObjectType}/${toObjectID}`,
@@ -99,11 +99,11 @@ export class V4 extends APIResource {
     toObjectType: string,
     params: V4ListParams,
     options?: RequestOptions,
-  ): PagePromise<MultiAssociatedObjectWithLabelsPage, CRMAPI.MultiAssociatedObjectWithLabel> {
+  ): PagePromise<MultiAssociatedObjectWithLabelsPage, CrmAPI.MultiAssociatedObjectWithLabel> {
     const { objectType, objectId, ...query } = params;
     return this._client.getAPIList(
       path`/crm/v4/objects/${objectType}/${objectId}/associations/${toObjectType}`,
-      Page<CRMAPI.MultiAssociatedObjectWithLabel>,
+      Page<CrmAPI.MultiAssociatedObjectWithLabel>,
       { query, ...options },
     );
   }

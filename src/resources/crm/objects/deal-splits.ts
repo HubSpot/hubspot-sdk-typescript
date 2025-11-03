@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
-import * as CRMAPI from '../crm';
+import * as CrmAPI from '../crm';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
@@ -83,7 +83,7 @@ export interface BatchResponseDealToDealSplitsWithErrors {
 export interface DealToDealSplits {
   id: string;
 
-  splits: Array<CRMAPI.SimplePublicObject>;
+  splits: Array<CrmAPI.SimplePublicObject>;
 }
 
 export interface PublicDealSplitInput {

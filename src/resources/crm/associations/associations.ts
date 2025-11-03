@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
-import * as CRMAPI from '../crm';
+import * as CrmAPI from '../crm';
 import * as BatchAPI from './batch';
 import { Batch, BatchCreateParams, BatchDeleteParams, BatchGetParams } from './batch';
 import * as EmailsAPI from '../../marketing/emails/emails';
@@ -55,7 +55,7 @@ export interface BatchInputPublicFetchAssociationsBatchRequest {
 export interface BatchResponseLabelsBetweenObjectPair {
   completedAt: string;
 
-  results: Array<CRMAPI.LabelsBetweenObjectPair>;
+  results: Array<CrmAPI.LabelsBetweenObjectPair>;
 
   startedAt: string;
 
@@ -165,7 +165,7 @@ export interface PublicAssociationMulti {
    * The IDs of objects that are associated with the object identified by the ID in
    * 'from'.
    */
-  to: Array<CRMAPI.AssociatedID>;
+  to: Array<CrmAPI.AssociatedID>;
 
   /**
    * Contains information pagination of results.
@@ -190,7 +190,7 @@ export interface PublicAssociationMultiPost {
 export interface PublicAssociationMultiWithLabel {
   from: Shared.PublicObjectID;
 
-  to: Array<CRMAPI.MultiAssociatedObjectWithLabel>;
+  to: Array<CrmAPI.MultiAssociatedObjectWithLabel>;
 
   /**
    * Contains information pagination of results.

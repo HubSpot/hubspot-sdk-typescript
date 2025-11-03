@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
-import * as CRMAPI from '../../crm';
+import * as CrmAPI from '../../crm';
 import * as AssociationsAPI from '../associations';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
@@ -92,7 +92,7 @@ export class Batch extends APIResource {
     toObjectType: string,
     params: BatchCreateDefaultParams,
     options?: RequestOptions,
-  ): APIPromise<CRMAPI.BatchResponsePublicDefaultAssociation> {
+  ): APIPromise<CrmAPI.BatchResponsePublicDefaultAssociation> {
     const { fromObjectType, ...body } = params;
     return this._client.post(
       path`/crm/v4/associations/${fromObjectType}/${toObjectType}/batch/associate/default`,

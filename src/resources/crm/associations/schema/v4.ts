@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as Shared from '../../../shared';
-import * as CRMAPI from '../../crm';
+import * as CrmAPI from '../../crm';
 import * as EmailsAPI from '../../../marketing/emails/emails';
 
 export class V4 extends APIResource {}
@@ -56,7 +56,7 @@ export interface BatchResponsePublicAssociationDefinitionUserConfiguration {
 }
 
 export interface CollectionResponseAssociationSpecWithLabel {
-  results: Array<CRMAPI.AssociationSpecWithLabel>;
+  results: Array<CrmAPI.AssociationSpecWithLabel>;
 
   /**
    * Contains information pagination of results.

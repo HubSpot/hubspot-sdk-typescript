@@ -36,7 +36,7 @@ export {
   type CollectionResponseWithTotalParticipationBreakdownForwardPaging,
   type CollectionResponseWithTotalPublicListNoPaging,
   type ContactAssociation,
-  type CRMPropertyWrapper,
+  type CrmPropertyWrapper,
   type EventDetailSettings,
   type EventDetailSettingsURL,
   type MarketingEventAssociation,

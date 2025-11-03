@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
-import * as CRMAPI from '../../crm';
+import * as CrmAPI from '../../crm';
 import { SimplePublicObjectWithAssociationsPage } from '../../crm';
 import * as BatchAPI from './batch';
 import {
@@ -37,7 +37,7 @@ export class Deals extends APIResource {
   create(
     body: DealCreateParams,
     options?: RequestOptions,
-  ): APIPromise<CRMAPI.CreatedResponseSimplePublicObject> {
+  ): APIPromise<CrmAPI.CreatedResponseSimplePublicObject> {
     return this._client.post('/crm/v3/objects/0-3', { body, ...options });
   }
 
@@ -69,7 +69,7 @@ export class Deals extends APIResource {
     dealID: string,
     params: DealUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<CRMAPI.SimplePublicObject> {
+  ): APIPromise<CrmAPI.SimplePublicObject> {
     const { idProperty, ...body } = params;
     return this._client.patch(path`/crm/v3/objects/0-3/${dealID}`, {
       query: { idProperty },
@@ -92,8 +92,8 @@ export class Deals extends APIResource {
   list(
     query: DealListParams | null | undefined = {},
     options?: RequestOptions,
-  ): PagePromise<SimplePublicObjectWithAssociationsPage, CRMAPI.SimplePublicObjectWithAssociations> {
-    return this._client.getAPIList('/crm/v3/objects/0-3', Page<CRMAPI.SimplePublicObjectWithAssociations>, {
+  ): PagePromise<SimplePublicObjectWithAssociationsPage, CrmAPI.SimplePublicObjectWithAssociations> {
+    return this._client.getAPIList('/crm/v3/objects/0-3', Page<CrmAPI.SimplePublicObjectWithAssociations>, {
       query,
       ...options,
     });
@@ -130,7 +130,7 @@ export class Deals extends APIResource {
     dealID: string,
     query: DealGetParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CRMAPI.SimplePublicObjectWithAssociations> {
+  ): APIPromise<CrmAPI.SimplePublicObjectWithAssociations> {
     return this._client.get(path`/crm/v3/objects/0-3/${dealID}`, { query, ...options });
   }
 
@@ -146,7 +146,7 @@ export class Deals extends APIResource {
    *   });
    * ```
    */
-  merge(body: DealMergeParams, options?: RequestOptions): APIPromise<CRMAPI.SimplePublicObject> {
+  merge(body: DealMergeParams, options?: RequestOptions): APIPromise<CrmAPI.SimplePublicObject> {
     return this._client.post('/crm/v3/objects/0-3/merge', { body, ...options });
   }
 
@@ -162,7 +162,7 @@ export class Deals extends APIResource {
   search(
     body: DealSearchParams,
     options?: RequestOptions,
-  ): APIPromise<CRMAPI.CollectionResponseWithTotalSimplePublicObject> {
+  ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/v3/objects/0-3/search', { body, ...options });
   }
 }
@@ -173,7 +173,7 @@ export interface DealCreateParams {
    */
   properties: { [key: string]: string };
 
-  associations?: Array<CRMAPI.PublicAssociationsForObject>;
+  associations?: Array<CrmAPI.PublicAssociationsForObject>;
 }
 
 export interface DealUpdateParams {
@@ -263,7 +263,7 @@ export interface DealSearchParams {
   /**
    * Up to 6 groups of filters defining additional query criteria.
    */
-  filterGroups?: Array<CRMAPI.FilterGroup>;
+  filterGroups?: Array<CrmAPI.FilterGroup>;
 
   /**
    * The maximum results to return, up to 200 objects.

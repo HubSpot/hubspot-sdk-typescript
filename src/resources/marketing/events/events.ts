@@ -729,7 +729,7 @@ export interface ContactAssociation {
   lastname?: string;
 }
 
-export interface CRMPropertyWrapper {
+export interface CrmPropertyWrapper {
   name: string;
 
   value: string;
@@ -1014,7 +1014,7 @@ export interface MarketingEventPublicDefaultResponse {
 export interface MarketingEventPublicDefaultResponseV2 {
   createdAt: string;
 
-  customProperties: Array<CRMPropertyWrapper>;
+  customProperties: Array<CrmPropertyWrapper>;
 
   eventName: string;
 
@@ -1140,7 +1140,7 @@ export interface MarketingEventPublicReadResponse {
 export interface MarketingEventPublicReadResponseV2 {
   createdAt: string;
 
-  customProperties: Array<CRMPropertyWrapper>;
+  customProperties: Array<CrmPropertyWrapper>;
 
   eventName: string;
 
@@ -1910,7 +1910,7 @@ export declare namespace Events {
     type CollectionResponseWithTotalParticipationBreakdownForwardPaging as CollectionResponseWithTotalParticipationBreakdownForwardPaging,
     type CollectionResponseWithTotalPublicListNoPaging as CollectionResponseWithTotalPublicListNoPaging,
     type ContactAssociation as ContactAssociation,
-    type CRMPropertyWrapper as CRMPropertyWrapper,
+    type CrmPropertyWrapper as CrmPropertyWrapper,
     type EventDetailSettings as EventDetailSettings,
     type EventDetailSettingsURL as EventDetailSettingsURL,
     type MarketingEventAssociation as MarketingEventAssociation,
