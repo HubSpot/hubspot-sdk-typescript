@@ -153,7 +153,7 @@ export interface AssociationLabelLimitResponse {
   /**
    * Defines an object type.
    */
-  fromObjectType: SchemasAPI.ObjectTypeDefinition;
+  fromObjectType: SchemasAPI.ObjectsSchemasObjectTypeDefinition;
 
   limit: number;
 
@@ -162,7 +162,7 @@ export interface AssociationLabelLimitResponse {
   /**
    * Defines an object type.
    */
-  toObjectType: SchemasAPI.ObjectTypeDefinition;
+  toObjectType: SchemasAPI.ObjectsSchemasObjectTypeDefinition;
 
   usage: number;
 }

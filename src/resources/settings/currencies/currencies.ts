@@ -40,7 +40,7 @@ export class Currencies extends APIResource {
    * ```ts
    * const batchResponseExchangeRate =
    *   await client.settings.currencies.batchGet({
-   *     inputs: [{ id: 'id' }],
+   *     inputs: [{ id: '37295' }],
    *   });
    * ```
    */

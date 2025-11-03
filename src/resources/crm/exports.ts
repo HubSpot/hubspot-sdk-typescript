@@ -54,14 +54,18 @@ export interface ActionResponseWithSingleResultUri {
 }
 
 export interface PublicCrmSearchRequest {
+  filterGroups: Array<CrmAPI.FilterGroup>;
+
   filters: Array<CrmAPI.Filter>;
 
-  query: string;
-
   sorts: Array<string>;
+
+  query?: string;
 }
 
 export interface PublicExportListRequest {
+  associatedObjectType: Array<string>;
+
   exportInternalValuesOptions: Array<'NAMES' | 'VALUES'>;
 
   exportName: string;
@@ -69,6 +73,10 @@ export interface PublicExportListRequest {
   exportType: 'LIST';
 
   format: 'XLS' | 'XLSX' | 'CSV';
+
+  includeLabeledAssociations: boolean;
+
+  includePrimaryDisplayPropertyForAssociatedObjects: boolean;
 
   language:
     | 'EN'
@@ -93,13 +101,42 @@ export interface PublicExportListRequest {
   objectType: string;
 
   overrideAssociatedObjectsPerDefinitionPerRowLimit: boolean;
-
-  associatedObjectType?: string;
 }
 
 export type PublicExportRequest = PublicExportViewRequest | PublicExportListRequest;
 
+export interface PublicExportResponse {
+  id: string;
+
+  createdAt: string;
+
+  exportState:
+    | 'ENQUEUED'
+    | 'PROCESSING'
+    | 'DONE'
+    | 'FAILED'
+    | 'CANCELED'
+    | 'CONFLICT'
+    | 'DELETED'
+    | 'DEFERRED'
+    | 'PENDING_APPROVAL';
+
+  exportType: 'VIEW' | 'LIST';
+
+  objectProperties: Array<string>;
+
+  objectType: string;
+
+  updatedAt: string;
+
+  exportName?: string;
+
+  recordCount?: number;
+}
+
 export interface PublicExportViewRequest {
+  associatedObjectType: Array<string>;
+
   exportInternalValuesOptions: Array<'NAMES' | 'VALUES'>;
 
   exportName: string;
@@ -107,6 +144,10 @@ export interface PublicExportViewRequest {
   exportType: 'VIEW';
 
   format: 'XLS' | 'XLSX' | 'CSV';
+
+  includeLabeledAssociations: boolean;
+
+  includePrimaryDisplayPropertyForAssociatedObjects: boolean;
 
   language:
     | 'EN'
@@ -130,8 +171,6 @@ export interface PublicExportViewRequest {
 
   overrideAssociatedObjectsPerDefinitionPerRowLimit: boolean;
 
-  associatedObjectType?: string;
-
   publicCrmSearchRequest?: PublicCrmSearchRequest;
 }
 
@@ -151,6 +190,7 @@ export declare namespace Exports {
     type PublicCrmSearchRequest as PublicCrmSearchRequest,
     type PublicExportListRequest as PublicExportListRequest,
     type PublicExportRequest as PublicExportRequest,
+    type PublicExportResponse as PublicExportResponse,
     type PublicExportViewRequest as PublicExportViewRequest,
     type ExportCreateParams as ExportCreateParams,
   };

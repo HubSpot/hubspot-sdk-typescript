@@ -2107,7 +2107,7 @@ export interface LandingPageCreateParams {
    */
   translatedFromId: string;
 
-  translations: { [key: string]: PagesAPI.ContentLanguageVariation };
+  translations: { [key: string]: PagesAPI.PagesContentLanguageVariation };
 
   updated: string;
 
@@ -3208,7 +3208,7 @@ export interface LandingPageUpdateParams {
   /**
    * Body param:
    */
-  translations: { [key: string]: PagesAPI.ContentLanguageVariation };
+  translations: { [key: string]: PagesAPI.PagesContentLanguageVariation };
 
   /**
    * Body param:
@@ -4702,7 +4702,7 @@ export interface LandingPageUpdateDraftParams {
    */
   translatedFromId: string;
 
-  translations: { [key: string]: PagesAPI.ContentLanguageVariation };
+  translations: { [key: string]: PagesAPI.PagesContentLanguageVariation };
 
   updated: string;
 

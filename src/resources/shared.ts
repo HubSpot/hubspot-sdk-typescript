@@ -90,6 +90,43 @@ export interface AssociationSpec {
   associationTypeId: number;
 }
 
+/**
+ * A HubSpot property option
+ */
+export interface AutomationActionsOption {
+  /**
+   * A description of the option.
+   */
+  description: string;
+
+  /**
+   * The position of the item relative to others in the list.
+   */
+  displayOrder: number;
+
+  doubleData: number;
+
+  /**
+   * Whether the option is displayed in HubSpot's UI.
+   */
+  hidden: boolean;
+
+  /**
+   * A user-friendly label that identifies the option.
+   */
+  label: string;
+
+  /**
+   * Whether the option is read-only.
+   */
+  readOnly: boolean;
+
+  /**
+   * The actual value of the option.
+   */
+  value: string;
+}
+
 export interface BatchInputPropertyCreate {
   inputs: Array<PropertyCreate>;
 }
@@ -234,40 +271,35 @@ export interface ObjectTypeDefinitionLabels {
 }
 
 /**
- * A HubSpot property option
+ * The options available when a property is an enumeration
  */
 export interface Option {
   /**
-   * A description of the option.
-   */
-  description: string;
-
-  /**
-   * The position of the item relative to others in the list.
-   */
-  displayOrder: number;
-
-  doubleData: number;
-
-  /**
-   * Whether the option is displayed in HubSpot's UI.
+   * Hidden options will not be displayed in HubSpot.
    */
   hidden: boolean;
 
   /**
-   * A user-friendly label that identifies the option.
+   * A human-readable option label that will be shown in HubSpot.
    */
   label: string;
 
   /**
-   * Whether the option is read-only.
-   */
-  readOnly: boolean;
-
-  /**
-   * The actual value of the option.
+   * The internal value of the option, which must be used when setting the property
+   * value through the API.
    */
   value: string;
+
+  /**
+   * A description of the option.
+   */
+  description?: string;
+
+  /**
+   * Options are displayed in order starting with the lowest positive integer value.
+   * Values of -1 will cause the option to be displayed after any positive values.
+   */
+  displayOrder?: number;
 }
 
 export interface OptionInput {
@@ -1307,6 +1339,9 @@ export interface PublicNumOccurrencesRefineBy {
 }
 
 export interface PublicObjectID {
+  /**
+   * The unique ID that identifies an object.
+   */
   id: string;
 }
 

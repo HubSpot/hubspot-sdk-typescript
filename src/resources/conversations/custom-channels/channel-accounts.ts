@@ -13,7 +13,7 @@ export class ChannelAccounts extends APIResource {
    *
    * @example
    * ```ts
-   * const publicChannelAccount =
+   * const conversationsPublicChannelAccount =
    *   await client.conversations.customChannels.channelAccounts.create(
    *     'channelId',
    *     { authorized: true, inboxId: 'inboxId', name: 'name' },
@@ -24,7 +24,7 @@ export class ChannelAccounts extends APIResource {
     channelID: string,
     body: ChannelAccountCreateParams,
     options?: RequestOptions,
-  ): APIPromise<ConversationsAPI.PublicChannelAccount> {
+  ): APIPromise<ConversationsAPI.ConversationsPublicChannelAccount> {
     return this._client.post(path`/conversations/v3/custom-channels/${channelID}/channel-accounts`, {
       body,
       ...options,
@@ -37,7 +37,7 @@ export class ChannelAccounts extends APIResource {
    *
    * @example
    * ```ts
-   * const publicChannelAccount =
+   * const conversationsPublicChannelAccount =
    *   await client.conversations.customChannels.channelAccounts.update(
    *     'channelAccountId',
    *     { channelId: 'channelId' },
@@ -48,7 +48,7 @@ export class ChannelAccounts extends APIResource {
     channelAccountID: string,
     params: ChannelAccountUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<ConversationsAPI.PublicChannelAccount> {
+  ): APIPromise<ConversationsAPI.ConversationsPublicChannelAccount> {
     const { channelId, ...body } = params;
     return this._client.patch(
       path`/conversations/v3/custom-channels/${channelId}/channel-accounts/${channelAccountID}`,
@@ -81,7 +81,7 @@ export class ChannelAccounts extends APIResource {
    *
    * @example
    * ```ts
-   * const publicChannelAccount =
+   * const conversationsPublicChannelAccount =
    *   await client.conversations.customChannels.channelAccounts.get(
    *     'channelAccountId',
    *     { channelId: 'channelId' },
@@ -92,7 +92,7 @@ export class ChannelAccounts extends APIResource {
     channelAccountID: string,
     params: ChannelAccountGetParams,
     options?: RequestOptions,
-  ): APIPromise<ConversationsAPI.PublicChannelAccount> {
+  ): APIPromise<ConversationsAPI.ConversationsPublicChannelAccount> {
     const { channelId } = params;
     return this._client.get(
       path`/conversations/v3/custom-channels/${channelId}/channel-accounts/${channelAccountID}`,

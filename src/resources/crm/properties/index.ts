@@ -15,7 +15,7 @@ export {
   type CollectionResponsePropertyGroup,
   type CreatedResponseProperty,
   type CreatedResponsePropertyGroup,
-  type OptionInput,
+  type PropertiesOptionInput,
   type PropertyGroup,
   type PropertyUpdate,
   type PropertyCreateParams,

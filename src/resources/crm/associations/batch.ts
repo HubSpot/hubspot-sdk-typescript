@@ -70,7 +70,7 @@ export class Batch extends APIResource {
    * const batchResponsePublicAssociationMulti =
    *   await client.crm.associations.batch.get('toObjectType', {
    *     fromObjectType: 'fromObjectType',
-   *     inputs: [{ id: 'id' }],
+   *     inputs: [{ id: '37295' }],
    *   });
    * ```
    */

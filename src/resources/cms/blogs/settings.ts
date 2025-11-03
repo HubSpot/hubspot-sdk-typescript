@@ -1043,7 +1043,7 @@ export interface CollectionResponseWithTotalVersionBlog {
   /**
    * Contains information pagination of results.
    */
-  paging?: EmailsAPI.Paging;
+  paging?: EmailsAPI.EmailsPaging;
 }
 
 /**

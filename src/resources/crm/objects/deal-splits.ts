@@ -14,7 +14,7 @@ export class DealSplits extends APIResource {
    * ```ts
    * const batchResponseDealToDealSplits =
    *   await client.crm.objects.dealSplits.batchRead({
-   *     inputs: [{ id: 'id' }],
+   *     inputs: [{ id: '37295' }],
    *   });
    * ```
    */

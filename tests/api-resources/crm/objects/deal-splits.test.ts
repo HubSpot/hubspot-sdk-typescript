@@ -10,7 +10,7 @@ const client = new Hubspot({
 describe('resource dealSplits', () => {
   // Prism tests are disabled
   test.skip('batchRead: only required params', async () => {
-    const responsePromise = client.crm.objects.dealSplits.batchRead({ inputs: [{ id: 'id' }] });
+    const responsePromise = client.crm.objects.dealSplits.batchRead({ inputs: [{ id: '37295' }] });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,7 +22,7 @@ describe('resource dealSplits', () => {
 
   // Prism tests are disabled
   test.skip('batchRead: required and optional params', async () => {
-    const response = await client.crm.objects.dealSplits.batchRead({ inputs: [{ id: 'id' }] });
+    const response = await client.crm.objects.dealSplits.batchRead({ inputs: [{ id: '37295' }] });
   });
 
   // Prism tests are disabled

@@ -13,7 +13,7 @@ export class Messages extends APIResource {
    *
    * @example
    * ```ts
-   * const publicConversationsMessage =
+   * const conversationsPublicConversationsMessage =
    *   await client.conversations.customChannels.messages.create(
    *     'channelId',
    *     {
@@ -47,7 +47,7 @@ export class Messages extends APIResource {
     channelID: string,
     body: MessageCreateParams,
     options?: RequestOptions,
-  ): APIPromise<ConversationsAPI.PublicConversationsMessage> {
+  ): APIPromise<ConversationsAPI.ConversationsPublicConversationsMessage> {
     return this._client.post(path`/conversations/v3/custom-channels/${channelID}/messages`, {
       body,
       ...options,
@@ -61,7 +61,7 @@ export class Messages extends APIResource {
    *
    * @example
    * ```ts
-   * const publicConversationsMessage =
+   * const conversationsPublicConversationsMessage =
    *   await client.conversations.customChannels.messages.update(
    *     'messageId',
    *     { channelId: 'channelId', statusType: 'SENT' },
@@ -72,7 +72,7 @@ export class Messages extends APIResource {
     messageID: string,
     params: MessageUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<ConversationsAPI.PublicConversationsMessage> {
+  ): APIPromise<ConversationsAPI.ConversationsPublicConversationsMessage> {
     const { channelId, ...body } = params;
     return this._client.patch(path`/conversations/v3/custom-channels/${channelId}/messages/${messageID}`, {
       body,
@@ -85,7 +85,7 @@ export class Messages extends APIResource {
    *
    * @example
    * ```ts
-   * const publicConversationsMessage =
+   * const conversationsPublicConversationsMessage =
    *   await client.conversations.customChannels.messages.get(
    *     'messageId',
    *     { channelId: 'channelId' },
@@ -96,7 +96,7 @@ export class Messages extends APIResource {
     messageID: string,
     params: MessageGetParams,
     options?: RequestOptions,
-  ): APIPromise<ConversationsAPI.PublicConversationsMessage> {
+  ): APIPromise<ConversationsAPI.ConversationsPublicConversationsMessage> {
     const { channelId } = params;
     return this._client.get(
       path`/conversations/v3/custom-channels/${channelId}/messages/${messageID}`,

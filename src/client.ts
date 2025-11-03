@@ -803,6 +803,7 @@ export declare namespace Hubspot {
   export type AssociationDefinition = API.AssociationDefinition;
   export type AssociationDefinitionEgg = API.AssociationDefinitionEgg;
   export type AssociationSpec = API.AssociationSpec;
+  export type AutomationActionsOption = API.AutomationActionsOption;
   export type BatchInputPropertyCreate = API.BatchInputPropertyCreate;
   export type BatchInputPropertyName = API.BatchInputPropertyName;
   export type BatchInputPublicObjectID = API.BatchInputPublicObjectID;

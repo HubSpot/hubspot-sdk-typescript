@@ -30,11 +30,14 @@ import {
   CustomChannelCreateParams,
   CustomChannelUpdateParams,
   CustomChannels,
+  CustomChannelsPublicClient,
+  CustomChannelsPublicFile,
   FileAttachment,
   LocationAttachment,
   MessageHeaderAttachment,
   PreResolvedContact,
   PreResolvedContacts,
+  PublicChannelAccount,
   PublicChannelAccountEgg,
   PublicChannelAccountStagingToken,
   PublicChannelAccountStagingTokenUpdateRequest,
@@ -43,6 +46,7 @@ import {
   PublicChannelIntegrationChannelCreate,
   PublicChannelIntegrationChannelPatch,
   PublicChannelIntegrationMessageUpdateRequest,
+  PublicConversationsMessage,
   QuickRepliesAttachment,
   SocialMetadataIntegrationAttachment,
   UnsupportedContentAttachment,
@@ -116,7 +120,7 @@ export interface BotActor {
 
 export interface CollectionResponsePublicMessageForwardPaging {
   results: Array<
-    | PublicConversationsMessage
+    | ConversationsPublicConversationsMessage
     | PublicComment
     | PublicWelcomeMessage
     | PublicAssignmentMessage
@@ -134,7 +138,7 @@ export interface CollectionResponsePublicThreadForwardPaging {
 }
 
 export interface CollectionResponseWithTotalPublicChannelAccountForwardPaging {
-  results: Array<PublicChannelAccount>;
+  results: Array<ConversationsPublicChannelAccount>;
 
   total: number;
 
@@ -225,6 +229,94 @@ export interface ContactURL {
   type?: 'HOME' | 'WORK';
 }
 
+export interface ConversationsPublicChannelAccount {
+  archived: boolean;
+
+  /**
+   * The ID of the channel account.
+   */
+  id?: string;
+
+  /**
+   * Whether the channel account is turned on.
+   */
+  active?: boolean;
+
+  archivedAt?: string;
+
+  authorized?: boolean;
+
+  /**
+   * The ID of the channel that the channel account is an instance of.
+   */
+  channelId?: string;
+
+  createdAt?: string;
+
+  deliveryIdentifier?: PublicDeliveryIdentifier;
+
+  /**
+   * The ID of the conversations inbox that contains the channel account.
+   */
+  inboxId?: string;
+
+  /**
+   * The name of the channel account.
+   */
+  name?: string;
+}
+
+export interface ConversationsPublicConversationsMessage {
+  id: string;
+
+  archived: boolean;
+
+  attachments: Array<
+    | PublicFile
+    | PublicLocation
+    | PublicContact
+    | PublicUnsupportedContent
+    | PublicMessageHeader
+    | PublicQuickReplies
+    | PublicWhatsAppTemplateMetadata
+    | PublicSocialMetadataAttachment
+  >;
+
+  channelAccountId: string;
+
+  channelId: string;
+
+  client: PublicClient;
+
+  conversationsThreadId: string;
+
+  createdAt: string;
+
+  createdBy: string;
+
+  direction: 'INCOMING' | 'OUTGOING';
+
+  recipients: Array<PublicRecipient>;
+
+  senders: Array<PublicSender>;
+
+  text: string;
+
+  truncationStatus: 'NOT_TRUNCATED' | 'TRUNCATED_TO_MOST_RECENT_REPLY' | 'TRUNCATED';
+
+  type: 'MESSAGE';
+
+  inReplyToId?: string;
+
+  richText?: string;
+
+  status?: PublicMessageStatus;
+
+  subject?: string;
+
+  updatedAt?: string;
+}
+
 export interface EmailActor {
   id: string;
 
@@ -300,43 +392,6 @@ export interface PublicChannel {
   name?: string;
 }
 
-export interface PublicChannelAccount {
-  archived: boolean;
-
-  /**
-   * The ID of the channel account.
-   */
-  id?: string;
-
-  /**
-   * Whether the channel account is turned on.
-   */
-  active?: boolean;
-
-  archivedAt?: string;
-
-  authorized?: boolean;
-
-  /**
-   * The ID of the channel that the channel account is an instance of.
-   */
-  channelId?: string;
-
-  createdAt?: string;
-
-  deliveryIdentifier?: PublicDeliveryIdentifier;
-
-  /**
-   * The ID of the conversations inbox that contains the channel account.
-   */
-  inboxId?: string;
-
-  /**
-   * The name of the channel account.
-   */
-  name?: string;
-}
-
 export interface PublicClient {
   /**
    * The type of the client.
@@ -400,57 +455,6 @@ export interface PublicContact {
   contactProfile: ContactProfile;
 
   type: 'CONTACT';
-}
-
-export interface PublicConversationsMessage {
-  id: string;
-
-  archived: boolean;
-
-  attachments: Array<
-    | PublicFile
-    | PublicLocation
-    | PublicContact
-    | PublicUnsupportedContent
-    | PublicMessageHeader
-    | PublicQuickReplies
-    | PublicWhatsAppTemplateMetadata
-    | PublicSocialMetadataAttachment
-  >;
-
-  channelAccountId: string;
-
-  channelId: string;
-
-  client: PublicClient;
-
-  conversationsThreadId: string;
-
-  createdAt: string;
-
-  createdBy: string;
-
-  direction: 'INCOMING' | 'OUTGOING';
-
-  recipients: Array<PublicRecipient>;
-
-  senders: Array<PublicSender>;
-
-  text: string;
-
-  truncationStatus: 'NOT_TRUNCATED' | 'TRUNCATED_TO_MOST_RECENT_REPLY' | 'TRUNCATED';
-
-  type: 'MESSAGE';
-
-  inReplyToId?: string;
-
-  richText?: string;
-
-  status?: PublicMessageStatus;
-
-  subject?: string;
-
-  updatedAt?: string;
 }
 
 export interface PublicConversationsMessageEgg {
@@ -541,7 +545,7 @@ export interface PublicLocation {
 }
 
 export type PublicMessage =
-  | PublicConversationsMessage
+  | ConversationsPublicConversationsMessage
   | PublicComment
   | PublicWelcomeMessage
   | PublicAssignmentMessage
@@ -882,18 +886,18 @@ export declare namespace Conversations {
     type ContactPhone as ContactPhone,
     type ContactProfile as ContactProfile,
     type ContactURL as ContactURL,
+    type ConversationsPublicChannelAccount as ConversationsPublicChannelAccount,
+    type ConversationsPublicConversationsMessage as ConversationsPublicConversationsMessage,
     type EmailActor as EmailActor,
     type IntegratorActor as IntegratorActor,
     type LlmActor as LlmActor,
     type PublicActor as PublicActor,
     type PublicAssignmentMessage as PublicAssignmentMessage,
     type PublicChannel as PublicChannel,
-    type PublicChannelAccount as PublicChannelAccount,
     type PublicClient as PublicClient,
     type PublicComment as PublicComment,
     type PublicCommentEgg as PublicCommentEgg,
     type PublicContact as PublicContact,
-    type PublicConversationsMessage as PublicConversationsMessage,
     type PublicConversationsMessageEgg as PublicConversationsMessageEgg,
     type PublicDeliveryIdentifier as PublicDeliveryIdentifier,
     type PublicFile as PublicFile,
@@ -939,11 +943,14 @@ export declare namespace Conversations {
     type ChannelIntegrationParticipant as ChannelIntegrationParticipant,
     type CollectionResponseWithTotalPublicChannelIntegrationChannelForwardPaging as CollectionResponseWithTotalPublicChannelIntegrationChannelForwardPaging,
     type ContactAttachment as ContactAttachment,
+    type CustomChannelsPublicClient as CustomChannelsPublicClient,
+    type CustomChannelsPublicFile as CustomChannelsPublicFile,
     type FileAttachment as FileAttachment,
     type LocationAttachment as LocationAttachment,
     type MessageHeaderAttachment as MessageHeaderAttachment,
     type PreResolvedContact as PreResolvedContact,
     type PreResolvedContacts as PreResolvedContacts,
+    type PublicChannelAccount as PublicChannelAccount,
     type PublicChannelAccountEgg as PublicChannelAccountEgg,
     type PublicChannelAccountStagingToken as PublicChannelAccountStagingToken,
     type PublicChannelAccountStagingTokenUpdateRequest as PublicChannelAccountStagingTokenUpdateRequest,
@@ -952,6 +959,7 @@ export declare namespace Conversations {
     type PublicChannelIntegrationChannelCreate as PublicChannelIntegrationChannelCreate,
     type PublicChannelIntegrationChannelPatch as PublicChannelIntegrationChannelPatch,
     type PublicChannelIntegrationMessageUpdateRequest as PublicChannelIntegrationMessageUpdateRequest,
+    type PublicConversationsMessage as PublicConversationsMessage,
     type QuickRepliesAttachment as QuickRepliesAttachment,
     type SocialMetadataIntegrationAttachment as SocialMetadataIntegrationAttachment,
     type UnsupportedContentAttachment as UnsupportedContentAttachment,

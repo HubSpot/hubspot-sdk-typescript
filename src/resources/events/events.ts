@@ -125,7 +125,7 @@ export interface CollectionResponseExternalUnifiedEvent {
   /**
    * Contains information pagination of results.
    */
-  paging?: EmailsAPI.Paging;
+  paging?: EmailsAPI.EmailsPaging;
 }
 
 export interface ExternalUnifiedEvent {

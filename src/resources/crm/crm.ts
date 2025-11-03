@@ -12,6 +12,7 @@ import {
   PublicCrmSearchRequest,
   PublicExportListRequest,
   PublicExportRequest,
+  PublicExportResponse,
   PublicExportViewRequest,
 } from './exports';
 import * as ImportsAPI from './imports';
@@ -76,24 +77,10 @@ import * as AssociationsAPI from './associations/associations';
 import {
   Associations,
   BatchInputPublicAssociation,
-  BatchInputPublicAssociationMultiArchive,
-  BatchInputPublicAssociationMultiPost,
-  BatchInputPublicDefaultAssociationMultiPost,
-  BatchInputPublicFetchAssociationsBatchRequest,
-  BatchResponseLabelsBetweenObjectPair,
   BatchResponsePublicAssociation,
   BatchResponsePublicAssociationMulti,
-  BatchResponsePublicAssociationMultiWithLabel,
-  BatchResponseVoid,
-  DateTime,
   PublicAssociation,
   PublicAssociationMulti,
-  PublicAssociationMultiArchive,
-  PublicAssociationMultiPost,
-  PublicAssociationMultiWithLabel,
-  PublicDefaultAssociationMultiPost,
-  PublicFetchAssociationsBatchRequest,
-  ReportCreationResponse,
 } from './associations/associations';
 import * as ExtensionsAPI from './extensions/extensions';
 import { Extensions } from './extensions/extensions';
@@ -185,8 +172,8 @@ import {
   CollectionResponsePropertyGroup,
   CreatedResponseProperty,
   CreatedResponsePropertyGroup,
-  OptionInput,
   Properties,
+  PropertiesOptionInput,
   PropertyCreateParams,
   PropertyDeleteParams,
   PropertyGetParams,
@@ -223,6 +210,7 @@ import {
   Users,
 } from './users/users';
 import * as EmailsAPI from '../marketing/emails/emails';
+import * as V4API from './associations/v4/v4';
 import { Page } from '../../core/pagination';
 
 export class Crm extends APIResource {
@@ -324,7 +312,7 @@ export interface BatchResponsePublicDefaultAssociation {
 
   status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
 
-  errors?: Array<Shared.StandardError>;
+  errors?: Array<V4API.StandardError1>;
 
   links?: { [key: string]: string };
 
@@ -414,7 +402,7 @@ export interface CollectionResponseAssociatedID {
   /**
    * Contains information pagination of results.
    */
-  paging?: EmailsAPI.Paging;
+  paging?: EmailsAPI.EmailsPaging;
 }
 
 export interface CollectionResponseMultiAssociatedObjectWithLabel {
@@ -423,7 +411,7 @@ export interface CollectionResponseMultiAssociatedObjectWithLabel {
   /**
    * Contains information pagination of results.
    */
-  paging?: EmailsAPI.Paging;
+  paging?: EmailsAPI.EmailsPaging;
 }
 
 export interface CollectionResponseSimplePublicObjectWithAssociations {
@@ -432,7 +420,7 @@ export interface CollectionResponseSimplePublicObjectWithAssociations {
   /**
    * Contains information pagination of results.
    */
-  paging?: EmailsAPI.Paging;
+  paging?: EmailsAPI.EmailsPaging;
 }
 
 export interface CollectionResponseWithTotalSimplePublicObject {
@@ -446,7 +434,7 @@ export interface CollectionResponseWithTotalSimplePublicObject {
   /**
    * Contains information pagination of results.
    */
-  paging?: EmailsAPI.Paging;
+  paging?: EmailsAPI.EmailsPaging;
 }
 
 export interface CreatedResponseLabelsBetweenObjectPair {
@@ -458,9 +446,6 @@ export interface CreatedResponseLabelsBetweenObjectPair {
 }
 
 export interface CreatedResponseSimplePublicObject {
-  /**
-   * The unique identifier of the newly created resource.
-   */
   createdResourceId: string;
 
   /**
@@ -468,9 +453,6 @@ export interface CreatedResponseSimplePublicObject {
    */
   entity: SimplePublicObject;
 
-  /**
-   * The URL location of the newly created resource.
-   */
   location?: string;
 }
 
@@ -494,7 +476,9 @@ export interface Filter {
     | 'IN'
     | 'NOT_IN'
     | 'HAS_PROPERTY'
-    | 'NOT_HAS_PROPERTY';
+    | 'NOT_HAS_PROPERTY'
+    | 'CONTAINS_TOKEN'
+    | 'NOT_CONTAINS_TOKEN';
 
   /**
    * The name of the property to apply the filter to.
@@ -522,14 +506,29 @@ export interface FilterGroup {
 }
 
 export interface LabelsBetweenObjectPair {
+  /**
+   * The ID of the source object in the association.
+   */
   fromObjectId: string;
 
+  /**
+   * The type ID of the source object in the association.
+   */
   fromObjectTypeId: string;
 
+  /**
+   * An array of labels associated with the relationship between the objects.
+   */
   labels: Array<string>;
 
+  /**
+   * The ID of the target object in the association.
+   */
   toObjectId: string;
 
+  /**
+   * The type ID of the target object in the association.
+   */
   toObjectTypeId: string;
 }
 
@@ -550,7 +549,7 @@ export interface PublicDefaultAssociation {
    * Defines the type, direction, and details of the relationship between two CRM
    * objects.
    */
-  associationSpec: Shared.AssociationSpec;
+  associationSpec: V4API.AssociationSpec1;
 
   from: Shared.PublicObjectID;
 
@@ -934,24 +933,10 @@ export declare namespace Crm {
   export {
     Associations as Associations,
     type BatchInputPublicAssociation as BatchInputPublicAssociation,
-    type BatchInputPublicAssociationMultiArchive as BatchInputPublicAssociationMultiArchive,
-    type BatchInputPublicAssociationMultiPost as BatchInputPublicAssociationMultiPost,
-    type BatchInputPublicDefaultAssociationMultiPost as BatchInputPublicDefaultAssociationMultiPost,
-    type BatchInputPublicFetchAssociationsBatchRequest as BatchInputPublicFetchAssociationsBatchRequest,
-    type BatchResponseLabelsBetweenObjectPair as BatchResponseLabelsBetweenObjectPair,
     type BatchResponsePublicAssociation as BatchResponsePublicAssociation,
     type BatchResponsePublicAssociationMulti as BatchResponsePublicAssociationMulti,
-    type BatchResponsePublicAssociationMultiWithLabel as BatchResponsePublicAssociationMultiWithLabel,
-    type BatchResponseVoid as BatchResponseVoid,
-    type DateTime as DateTime,
     type PublicAssociation as PublicAssociation,
     type PublicAssociationMulti as PublicAssociationMulti,
-    type PublicAssociationMultiArchive as PublicAssociationMultiArchive,
-    type PublicAssociationMultiPost as PublicAssociationMultiPost,
-    type PublicAssociationMultiWithLabel as PublicAssociationMultiWithLabel,
-    type PublicDefaultAssociationMultiPost as PublicDefaultAssociationMultiPost,
-    type PublicFetchAssociationsBatchRequest as PublicFetchAssociationsBatchRequest,
-    type ReportCreationResponse as ReportCreationResponse,
   };
 
   export {
@@ -960,6 +945,7 @@ export declare namespace Crm {
     type PublicCrmSearchRequest as PublicCrmSearchRequest,
     type PublicExportListRequest as PublicExportListRequest,
     type PublicExportRequest as PublicExportRequest,
+    type PublicExportResponse as PublicExportResponse,
     type PublicExportViewRequest as PublicExportViewRequest,
     type ExportCreateParams as ExportCreateParams,
   };
@@ -1103,7 +1089,7 @@ export declare namespace Crm {
     type CollectionResponsePropertyGroup as CollectionResponsePropertyGroup,
     type CreatedResponseProperty as CreatedResponseProperty,
     type CreatedResponsePropertyGroup as CreatedResponsePropertyGroup,
-    type OptionInput as OptionInput,
+    type PropertiesOptionInput as PropertiesOptionInput,
     type PropertyGroup as PropertyGroup,
     type PropertyUpdate as PropertyUpdate,
     type PropertyCreateParams as PropertyCreateParams,

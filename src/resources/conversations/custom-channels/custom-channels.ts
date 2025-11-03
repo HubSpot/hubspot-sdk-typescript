@@ -176,6 +176,24 @@ export interface ContactAttachment {
   type: 'CONTACT';
 }
 
+export interface CustomChannelsPublicClient {
+  clientType: 'HUBSPOT' | 'SYSTEM' | 'INTEGRATION' | 'UNKNOWN';
+
+  integrationAppId?: number;
+}
+
+export interface CustomChannelsPublicFile {
+  fileId: string;
+
+  fileUsageType: string;
+
+  type: 'FILE';
+
+  name?: string;
+
+  url?: string;
+}
+
 export interface FileAttachment {
   fileId: string;
 
@@ -331,12 +349,6 @@ export interface PublicChannelIntegrationMessageUpdateRequest {
   errorMessage?: string;
 }
 
-export interface PublicClient {
-  clientType: 'HUBSPOT' | 'SYSTEM' | 'INTEGRATION' | 'UNKNOWN';
-
-  integrationAppId?: number;
-}
-
 export interface PublicConversationsMessage {
   id: string;
 
@@ -386,18 +398,6 @@ export interface PublicConversationsMessage {
   subject?: string;
 
   updatedAt?: string;
-}
-
-export interface PublicFile {
-  fileId: string;
-
-  fileUsageType: string;
-
-  type: 'FILE';
-
-  name?: string;
-
-  url?: string;
 }
 
 export interface QuickRepliesAttachment {
@@ -454,6 +454,8 @@ export declare namespace CustomChannels {
     type ChannelIntegrationParticipant as ChannelIntegrationParticipant,
     type CollectionResponseWithTotalPublicChannelIntegrationChannelForwardPaging as CollectionResponseWithTotalPublicChannelIntegrationChannelForwardPaging,
     type ContactAttachment as ContactAttachment,
+    type CustomChannelsPublicClient as CustomChannelsPublicClient,
+    type CustomChannelsPublicFile as CustomChannelsPublicFile,
     type FileAttachment as FileAttachment,
     type LocationAttachment as LocationAttachment,
     type MessageHeaderAttachment as MessageHeaderAttachment,
@@ -468,9 +470,7 @@ export declare namespace CustomChannels {
     type PublicChannelIntegrationChannelCreate as PublicChannelIntegrationChannelCreate,
     type PublicChannelIntegrationChannelPatch as PublicChannelIntegrationChannelPatch,
     type PublicChannelIntegrationMessageUpdateRequest as PublicChannelIntegrationMessageUpdateRequest,
-    type PublicClient as PublicClient,
     type PublicConversationsMessage as PublicConversationsMessage,
-    type PublicFile as PublicFile,
     type QuickRepliesAttachment as QuickRepliesAttachment,
     type SocialMetadataIntegrationAttachment as SocialMetadataIntegrationAttachment,
     type UnsupportedContentAttachment as UnsupportedContentAttachment,
