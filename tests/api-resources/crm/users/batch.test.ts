@@ -27,7 +27,10 @@ describe('resource batch', () => {
         {
           properties: { foo: 'string' },
           associations: [
-            { to: { id: 'id' }, types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }] },
+            {
+              to: { id: '37295' },
+              types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
+            },
           ],
           objectWriteTraceId: 'objectWriteTraceId',
         },

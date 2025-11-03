@@ -15,7 +15,7 @@ export class Schemas extends APIResource {
    *
    * @example
    * ```ts
-   * const objectTypeDefinition =
+   * const objectsSchemasObjectTypeDefinition =
    *   await client.cms.mediaBridge.schemas.update(
    *     'objectType',
    *     { appId: 'appId' },
@@ -26,7 +26,7 @@ export class Schemas extends APIResource {
     objectType: string,
     params: SchemaUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsSchemasAPI.ObjectTypeDefinition> {
+  ): APIPromise<ObjectsSchemasAPI.ObjectsSchemasObjectTypeDefinition> {
     const { appId, ...body } = params;
     return this._client.patch(path`/media-bridge/v1/${appId}/schemas/${objectType}`, { body, ...options });
   }

@@ -1818,7 +1818,7 @@ export interface SitePageCreateParams {
    */
   translatedFromId: string;
 
-  translations: { [key: string]: PagesAPI.ContentLanguageVariation };
+  translations: { [key: string]: PagesAPI.PagesContentLanguageVariation };
 
   updated: string;
 
@@ -2919,7 +2919,7 @@ export interface SitePageUpdateParams {
   /**
    * Body param:
    */
-  translations: { [key: string]: PagesAPI.ContentLanguageVariation };
+  translations: { [key: string]: PagesAPI.PagesContentLanguageVariation };
 
   /**
    * Body param:
@@ -4254,7 +4254,7 @@ export interface SitePageUpdateDraftParams {
    */
   translatedFromId: string;
 
-  translations: { [key: string]: PagesAPI.ContentLanguageVariation };
+  translations: { [key: string]: PagesAPI.PagesContentLanguageVariation };
 
   updated: string;
 

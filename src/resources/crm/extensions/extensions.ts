@@ -29,8 +29,6 @@ import {
   PublicCardResponse,
   TopLevelActions,
 } from './cards';
-import * as VideoconferencingAPI from './videoconferencing';
-import { ExternalSettings, Videoconferencing } from './videoconferencing';
 import * as CallingAPI from './calling/calling';
 import {
   Calling,
@@ -46,7 +44,7 @@ import {
   SettingsResponse,
 } from './calling/calling';
 import * as VideoConferencingAPI from './video-conferencing/video-conferencing';
-import { VideoConferencing } from './video-conferencing/video-conferencing';
+import { ExternalSettings, VideoConferencing } from './video-conferencing/video-conferencing';
 
 export class Extensions extends APIResource {
   calling: CallingAPI.Calling = new CallingAPI.Calling(this._client);
@@ -54,15 +52,11 @@ export class Extensions extends APIResource {
   videoConferencing: VideoConferencingAPI.VideoConferencing = new VideoConferencingAPI.VideoConferencing(
     this._client,
   );
-  videoconferencing: VideoconferencingAPI.Videoconferencing = new VideoconferencingAPI.Videoconferencing(
-    this._client,
-  );
 }
 
 Extensions.Calling = Calling;
 Extensions.Cards = Cards;
 Extensions.VideoConferencing = VideoConferencing;
-Extensions.Videoconferencing = Videoconferencing;
 
 export declare namespace Extensions {
   export {
@@ -107,7 +101,5 @@ export declare namespace Extensions {
     type CardGetParams as CardGetParams,
   };
 
-  export { VideoConferencing as VideoConferencing };
-
-  export { Videoconferencing as Videoconferencing, type ExternalSettings as ExternalSettings };
+  export { VideoConferencing as VideoConferencing, type ExternalSettings as ExternalSettings };
 }

@@ -25,7 +25,7 @@ describe('resource postalMail', () => {
     const response = await client.crm.objects.postalMail.create({
       properties: { foo: 'string' },
       associations: [
-        { to: { id: 'id' }, types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }] },
+        { to: { id: '37295' }, types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }] },
       ],
     });
   });

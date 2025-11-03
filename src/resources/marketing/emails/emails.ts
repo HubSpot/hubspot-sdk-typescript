@@ -399,7 +399,7 @@ export interface CollectionResponseWithTotalVersionPublicEmail {
   /**
    * Contains information pagination of results.
    */
-  paging?: Paging;
+  paging?: EmailsPaging;
 }
 
 export interface EmailCloneRequestVNext {
@@ -1412,6 +1412,23 @@ export interface EmailCreateRequest {
   to?: PublicEmailToDetails;
 
   webversion?: PublicWebversionDetails;
+}
+
+/**
+ * Contains information pagination of results.
+ */
+export interface EmailsPaging {
+  /**
+   * Specifies the paging information needed to retrieve the next set of results in a
+   * paginated API response
+   */
+  next: Shared.NextPage;
+
+  /**
+   * specifies the paging information needed to retrieve the previous set of results
+   * in a paginated API response
+   */
+  prev?: Shared.PreviousPage;
 }
 
 export interface EmailStatisticInterval {
@@ -2436,23 +2453,6 @@ export interface Interval {
   end: string;
 
   start: string;
-}
-
-/**
- * Contains information pagination of results.
- */
-export interface Paging {
-  /**
-   * Specifies the paging information needed to retrieve the next set of results in a
-   * paginated API response
-   */
-  next: Shared.NextPage;
-
-  /**
-   * specifies the paging information needed to retrieve the previous set of results
-   * in a paginated API response
-   */
-  prev?: Shared.PreviousPage;
 }
 
 export interface PublicButtonStyleSettings {
@@ -7067,11 +7067,11 @@ export declare namespace Emails {
     type CollectionResponseWithTotalVersionPublicEmail as CollectionResponseWithTotalVersionPublicEmail,
     type EmailCloneRequestVNext as EmailCloneRequestVNext,
     type EmailCreateRequest as EmailCreateRequest,
+    type EmailsPaging as EmailsPaging,
     type EmailStatisticInterval as EmailStatisticInterval,
     type EmailStatisticsData as EmailStatisticsData,
     type EmailUpdateRequest as EmailUpdateRequest,
     type Interval as Interval,
-    type Paging as Paging,
     type PublicButtonStyleSettings as PublicButtonStyleSettings,
     type PublicDividerStyleSettings as PublicDividerStyleSettings,
     type PublicEmail as PublicEmail,

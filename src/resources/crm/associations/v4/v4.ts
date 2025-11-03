@@ -4,6 +4,7 @@ import { APIResource } from '../../../../core/resource';
 import * as Shared from '../../../shared';
 import * as CrmAPI from '../../crm';
 import { MultiAssociatedObjectWithLabelsPage } from '../../crm';
+import * as EmailsAPI from '../../../marketing/emails/emails';
 import * as BatchAPI from './batch';
 import {
   Batch,
@@ -145,6 +146,84 @@ export interface AssociationSpec1 {
   associationTypeId: number;
 }
 
+export interface BatchInputPublicAssociationMultiArchive {
+  inputs: Array<PublicAssociationMultiArchive>;
+}
+
+export interface BatchInputPublicAssociationMultiPost {
+  inputs: Array<PublicAssociationMultiPost>;
+}
+
+export interface BatchInputPublicDefaultAssociationMultiPost {
+  inputs: Array<PublicDefaultAssociationMultiPost>;
+}
+
+export interface BatchInputPublicFetchAssociationsBatchRequest {
+  inputs: Array<PublicFetchAssociationsBatchRequest>;
+}
+
+export interface BatchResponseLabelsBetweenObjectPair {
+  completedAt: string;
+
+  results: Array<CrmAPI.LabelsBetweenObjectPair>;
+
+  startedAt: string;
+
+  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+
+  errors?: Array<StandardError1>;
+
+  links?: { [key: string]: string };
+
+  numErrors?: number;
+
+  requestedAt?: string;
+}
+
+export interface BatchResponsePublicAssociationMultiWithLabel {
+  completedAt: string;
+
+  results: Array<PublicAssociationMultiWithLabel>;
+
+  startedAt: string;
+
+  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+
+  errors?: Array<StandardError1>;
+
+  links?: { [key: string]: string };
+
+  numErrors?: number;
+
+  requestedAt?: string;
+}
+
+export interface BatchResponseVoid {
+  completedAt: string;
+
+  results: Array<unknown>;
+
+  startedAt: string;
+
+  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+
+  errors?: Array<StandardError1>;
+
+  links?: { [key: string]: string };
+
+  numErrors?: number;
+
+  requestedAt?: string;
+}
+
+export interface DateTime {
+  dateOnly: boolean;
+
+  timeZoneShift: number;
+
+  value: number;
+}
+
 /**
  * Specifies the paging information needed to retrieve the next set of results in a
  * paginated API response
@@ -175,6 +254,51 @@ export interface PreviousPage1 {
    * A URL that can be used to retrieve the previous pages' results.
    */
   link?: string;
+}
+
+export interface PublicAssociationMultiArchive {
+  from: Shared.PublicObjectID;
+
+  to: Array<Shared.PublicObjectID>;
+}
+
+export interface PublicAssociationMultiPost {
+  from: Shared.PublicObjectID;
+
+  to: Shared.PublicObjectID;
+
+  types: Array<AssociationSpec1>;
+}
+
+export interface PublicAssociationMultiWithLabel {
+  from: Shared.PublicObjectID;
+
+  to: Array<CrmAPI.MultiAssociatedObjectWithLabel>;
+
+  /**
+   * Contains information pagination of results.
+   */
+  paging?: EmailsAPI.EmailsPaging;
+}
+
+export interface PublicDefaultAssociationMultiPost {
+  from: Shared.PublicObjectID;
+
+  to: Shared.PublicObjectID;
+}
+
+export interface PublicFetchAssociationsBatchRequest {
+  id: string;
+
+  after?: string;
+}
+
+export interface ReportCreationResponse {
+  enqueueTime: DateTime;
+
+  userEmail: string;
+
+  userId: number;
 }
 
 /**
@@ -249,7 +373,7 @@ export interface V4UpdateParams {
   /**
    * Body param:
    */
-  body: Array<AssociationSpec1>;
+  body: Array<Shared.AssociationSpec>;
 }
 
 export interface V4ListParams extends PageParams {
@@ -278,8 +402,22 @@ V4.Report = Report;
 export declare namespace V4 {
   export {
     type AssociationSpec1 as AssociationSpec1,
+    type BatchInputPublicAssociationMultiArchive as BatchInputPublicAssociationMultiArchive,
+    type BatchInputPublicAssociationMultiPost as BatchInputPublicAssociationMultiPost,
+    type BatchInputPublicDefaultAssociationMultiPost as BatchInputPublicDefaultAssociationMultiPost,
+    type BatchInputPublicFetchAssociationsBatchRequest as BatchInputPublicFetchAssociationsBatchRequest,
+    type BatchResponseLabelsBetweenObjectPair as BatchResponseLabelsBetweenObjectPair,
+    type BatchResponsePublicAssociationMultiWithLabel as BatchResponsePublicAssociationMultiWithLabel,
+    type BatchResponseVoid as BatchResponseVoid,
+    type DateTime as DateTime,
     type NextPage1 as NextPage1,
     type PreviousPage1 as PreviousPage1,
+    type PublicAssociationMultiArchive as PublicAssociationMultiArchive,
+    type PublicAssociationMultiPost as PublicAssociationMultiPost,
+    type PublicAssociationMultiWithLabel as PublicAssociationMultiWithLabel,
+    type PublicDefaultAssociationMultiPost as PublicDefaultAssociationMultiPost,
+    type PublicFetchAssociationsBatchRequest as PublicFetchAssociationsBatchRequest,
+    type ReportCreationResponse as ReportCreationResponse,
     type StandardError1 as StandardError1,
     type V4CreateParams as V4CreateParams,
     type V4UpdateParams as V4UpdateParams,

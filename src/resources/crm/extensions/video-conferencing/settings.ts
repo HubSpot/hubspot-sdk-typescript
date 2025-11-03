@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
-import * as VideoconferencingAPI from '../videoconferencing';
+import * as VideoConferencingAPI from './video-conferencing';
 import { APIPromise } from '../../../../core/api-promise';
 import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
@@ -25,7 +25,7 @@ export class Settings extends APIResource {
     appID: number,
     body: SettingUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<VideoconferencingAPI.ExternalSettings> {
+  ): APIPromise<VideoConferencingAPI.ExternalSettings> {
     return this._client.put(path`/crm/v3/extensions/videoconferencing/settings/${appID}`, {
       body,
       ...options,
@@ -56,7 +56,7 @@ export class Settings extends APIResource {
    *   );
    * ```
    */
-  get(appID: number, options?: RequestOptions): APIPromise<VideoconferencingAPI.ExternalSettings> {
+  get(appID: number, options?: RequestOptions): APIPromise<VideoConferencingAPI.ExternalSettings> {
     return this._client.get(path`/crm/v3/extensions/videoconferencing/settings/${appID}`, options);
   }
 }

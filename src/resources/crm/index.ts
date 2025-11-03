@@ -4,24 +4,10 @@ export { AppUninstalls } from './app-uninstalls';
 export {
   Associations,
   type BatchInputPublicAssociation,
-  type BatchInputPublicAssociationMultiArchive,
-  type BatchInputPublicAssociationMultiPost,
-  type BatchInputPublicDefaultAssociationMultiPost,
-  type BatchInputPublicFetchAssociationsBatchRequest,
-  type BatchResponseLabelsBetweenObjectPair,
   type BatchResponsePublicAssociation,
   type BatchResponsePublicAssociationMulti,
-  type BatchResponsePublicAssociationMultiWithLabel,
-  type BatchResponseVoid,
-  type DateTime,
   type PublicAssociation,
   type PublicAssociationMulti,
-  type PublicAssociationMultiArchive,
-  type PublicAssociationMultiPost,
-  type PublicAssociationMultiWithLabel,
-  type PublicDefaultAssociationMultiPost,
-  type PublicFetchAssociationsBatchRequest,
-  type ReportCreationResponse,
 } from './associations/index';
 export { Crm } from './crm';
 export {
@@ -30,6 +16,7 @@ export {
   type PublicCrmSearchRequest,
   type PublicExportListRequest,
   type PublicExportRequest,
+  type PublicExportResponse,
   type PublicExportViewRequest,
   type ExportCreateParams,
 } from './exports';
@@ -164,7 +151,7 @@ export {
   type CollectionResponsePropertyGroup,
   type CreatedResponseProperty,
   type CreatedResponsePropertyGroup,
-  type OptionInput,
+  type PropertiesOptionInput,
   type PropertyGroup,
   type PropertyUpdate,
   type PropertyCreateParams,

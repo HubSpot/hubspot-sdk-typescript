@@ -307,7 +307,7 @@ export interface CollectionResponseWithTotalVersionContentFolder {
   /**
    * Contains information pagination of results.
    */
-  paging?: EmailsAPI.Paging;
+  paging?: EmailsAPI.EmailsPaging;
 }
 
 /**
@@ -327,7 +327,7 @@ export interface CollectionResponseWithTotalVersionPage {
   /**
    * Contains information pagination of results.
    */
-  paging?: EmailsAPI.Paging;
+  paging?: EmailsAPI.EmailsPaging;
 }
 
 /**
@@ -382,36 +382,6 @@ export interface ContentLanguageCloneRequestVNext {
    * Language of primary content to clone.
    */
   primaryLanguage?: string;
-}
-
-export interface ContentLanguageVariation {
-  id: number;
-
-  archivedInDashboard: boolean;
-
-  authorName: string;
-
-  campaign: string;
-
-  created: string;
-
-  name: string;
-
-  password: string;
-
-  publicAccessRules: Array<CmsAPI.PublicAccessRule>;
-
-  publicAccessRulesEnabled: boolean;
-
-  publishDate: string;
-
-  slug: string;
-
-  state: string;
-
-  updated: string;
-
-  tagIds?: Array<number>;
 }
 
 /**
@@ -1459,7 +1429,7 @@ export interface Page {
    */
   translatedFromId: string;
 
-  translations: { [key: string]: ContentLanguageVariation };
+  translations: { [key: string]: PagesContentLanguageVariation };
 
   updated: string;
 
@@ -1488,6 +1458,36 @@ export interface Page {
    * A data structure containing the data for all the modules for this page.
    */
   widgets: { [key: string]: unknown };
+}
+
+export interface PagesContentLanguageVariation {
+  id: number;
+
+  archivedInDashboard: boolean;
+
+  authorName: string;
+
+  campaign: string;
+
+  created: string;
+
+  name: string;
+
+  password: string;
+
+  publicAccessRules: Array<CmsAPI.PublicAccessRule>;
+
+  publicAccessRulesEnabled: boolean;
+
+  publishDate: string;
+
+  slug: string;
+
+  state: string;
+
+  updated: string;
+
+  tagIds?: Array<number>;
 }
 
 /**
@@ -1558,8 +1558,8 @@ export declare namespace Pages {
     type CollectionResponseWithTotalVersionPage as CollectionResponseWithTotalVersionPage,
     type ContentFolder as ContentFolder,
     type ContentLanguageCloneRequestVNext as ContentLanguageCloneRequestVNext,
-    type ContentLanguageVariation as ContentLanguageVariation,
     type Page as Page,
+    type PagesContentLanguageVariation as PagesContentLanguageVariation,
     type VersionContentFolder as VersionContentFolder,
     type VersionPage as VersionPage,
   };

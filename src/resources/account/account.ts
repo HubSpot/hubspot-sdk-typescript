@@ -68,7 +68,7 @@ export interface CollectionResponseAPIUsage {
   /**
    * Contains information pagination of results.
    */
-  paging?: EmailsAPI.Paging;
+  paging?: EmailsAPI.EmailsPaging;
 }
 
 export interface PortalInformationResponse {

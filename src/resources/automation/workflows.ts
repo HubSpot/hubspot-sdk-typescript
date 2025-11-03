@@ -1140,7 +1140,7 @@ export interface CollectionResponseAPIFlowEmailCampaign {
   /**
    * Contains information pagination of results.
    */
-  paging?: EmailsAPI.Paging;
+  paging?: EmailsAPI.EmailsPaging;
 }
 
 export interface CollectionResponseAPIFlowListingForwardPaging {

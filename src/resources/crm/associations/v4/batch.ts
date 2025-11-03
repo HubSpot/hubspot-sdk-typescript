@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as CrmAPI from '../../crm';
-import * as AssociationsAPI from '../associations';
+import * as V4API from './v4';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
@@ -20,8 +20,8 @@ export class Batch extends APIResource {
    *       fromObjectType: 'fromObjectType',
    *       inputs: [
    *         {
-   *           from: { id: 'id' },
-   *           to: { id: 'id' },
+   *           from: { id: '37295' },
+   *           to: { id: '37295' },
    *           types: [
    *             {
    *               associationCategory: 'HUBSPOT_DEFINED',
@@ -38,7 +38,7 @@ export class Batch extends APIResource {
     toObjectType: string,
     params: BatchCreateParams,
     options?: RequestOptions,
-  ): APIPromise<AssociationsAPI.BatchResponseLabelsBetweenObjectPair> {
+  ): APIPromise<V4API.BatchResponseLabelsBetweenObjectPair> {
     const { fromObjectType, ...body } = params;
     return this._client.post(path`/crm/v4/associations/${fromObjectType}/${toObjectType}/batch/create`, {
       body,
@@ -56,7 +56,9 @@ export class Batch extends APIResource {
    *     'toObjectType',
    *     {
    *       fromObjectType: 'fromObjectType',
-   *       inputs: [{ from: { id: 'id' }, to: [{ id: 'id' }] }],
+   *       inputs: [
+   *         { from: { id: '37295' }, to: [{ id: '37295' }] },
+   *       ],
    *     },
    *   );
    * ```
@@ -65,7 +67,7 @@ export class Batch extends APIResource {
     toObjectType: string,
     params: BatchDeleteParams,
     options?: RequestOptions,
-  ): APIPromise<AssociationsAPI.BatchResponseVoid> {
+  ): APIPromise<V4API.BatchResponseVoid> {
     const { fromObjectType, ...body } = params;
     return this._client.post(path`/crm/v4/associations/${fromObjectType}/${toObjectType}/batch/archive`, {
       body,
@@ -83,7 +85,9 @@ export class Batch extends APIResource {
    *     'toObjectType',
    *     {
    *       fromObjectType: 'fromObjectType',
-   *       inputs: [{ from: { id: 'id' }, to: { id: 'id' } }],
+   *       inputs: [
+   *         { from: { id: '37295' }, to: { id: '37295' } },
+   *       ],
    *     },
    *   );
    * ```
@@ -113,8 +117,8 @@ export class Batch extends APIResource {
    *       fromObjectType: 'fromObjectType',
    *       inputs: [
    *         {
-   *           from: { id: 'id' },
-   *           to: { id: 'id' },
+   *           from: { id: '37295' },
+   *           to: { id: '37295' },
    *           types: [
    *             {
    *               associationCategory: 'HUBSPOT_DEFINED',
@@ -131,7 +135,7 @@ export class Batch extends APIResource {
     toObjectType: string,
     params: BatchDeleteLabelsParams,
     options?: RequestOptions,
-  ): APIPromise<AssociationsAPI.BatchResponseVoid> {
+  ): APIPromise<V4API.BatchResponseVoid> {
     const { fromObjectType, ...body } = params;
     return this._client.post(
       path`/crm/v4/associations/${fromObjectType}/${toObjectType}/batch/labels/archive`,
@@ -162,7 +166,7 @@ export class Batch extends APIResource {
     toObjectType: string,
     params: BatchGetParams,
     options?: RequestOptions,
-  ): APIPromise<AssociationsAPI.BatchResponsePublicAssociationMultiWithLabel> {
+  ): APIPromise<V4API.BatchResponsePublicAssociationMultiWithLabel> {
     const { fromObjectType, ...body } = params;
     return this._client.post(path`/crm/v4/associations/${fromObjectType}/${toObjectType}/batch/read`, {
       body,
@@ -180,7 +184,7 @@ export interface BatchCreateParams {
   /**
    * Body param:
    */
-  inputs: Array<AssociationsAPI.PublicAssociationMultiPost>;
+  inputs: Array<V4API.PublicAssociationMultiPost>;
 }
 
 export interface BatchDeleteParams {
@@ -192,7 +196,7 @@ export interface BatchDeleteParams {
   /**
    * Body param:
    */
-  inputs: Array<AssociationsAPI.PublicAssociationMultiArchive>;
+  inputs: Array<V4API.PublicAssociationMultiArchive>;
 }
 
 export interface BatchCreateDefaultParams {
@@ -204,7 +208,7 @@ export interface BatchCreateDefaultParams {
   /**
    * Body param:
    */
-  inputs: Array<AssociationsAPI.PublicDefaultAssociationMultiPost>;
+  inputs: Array<V4API.PublicDefaultAssociationMultiPost>;
 }
 
 export interface BatchDeleteLabelsParams {
@@ -216,7 +220,7 @@ export interface BatchDeleteLabelsParams {
   /**
    * Body param:
    */
-  inputs: Array<AssociationsAPI.PublicAssociationMultiPost>;
+  inputs: Array<V4API.PublicAssociationMultiPost>;
 }
 
 export interface BatchGetParams {
@@ -228,7 +232,7 @@ export interface BatchGetParams {
   /**
    * Body param:
    */
-  inputs: Array<AssociationsAPI.PublicFetchAssociationsBatchRequest>;
+  inputs: Array<V4API.PublicFetchAssociationsBatchRequest>;
 }
 
 export declare namespace Batch {

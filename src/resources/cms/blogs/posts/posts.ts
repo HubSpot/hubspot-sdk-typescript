@@ -1732,7 +1732,7 @@ export interface BlogPost {
    */
   translatedFromId: string;
 
-  translations: { [key: string]: PagesAPI.ContentLanguageVariation };
+  translations: { [key: string]: PagesAPI.PagesContentLanguageVariation };
 
   updated: string;
 
@@ -1821,7 +1821,7 @@ export interface CollectionResponseWithTotalVersionBlogPost {
   /**
    * Contains information pagination of results.
    */
-  paging?: EmailsAPI.Paging;
+  paging?: EmailsAPI.EmailsPaging;
 }
 
 export interface ContentLanguageVariation {
@@ -2936,7 +2936,7 @@ export interface PostCreateParams {
    */
   translatedFromId: string;
 
-  translations: { [key: string]: PagesAPI.ContentLanguageVariation };
+  translations: { [key: string]: PagesAPI.PagesContentLanguageVariation };
 
   updated: string;
 
@@ -4070,7 +4070,7 @@ export interface PostUpdateParams {
   /**
    * Body param:
    */
-  translations: { [key: string]: PagesAPI.ContentLanguageVariation };
+  translations: { [key: string]: PagesAPI.PagesContentLanguageVariation };
 
   /**
    * Body param:
@@ -5326,7 +5326,7 @@ export interface PostUpdateDraftParams {
    */
   translatedFromId: string;
 
-  translations: { [key: string]: PagesAPI.ContentLanguageVariation };
+  translations: { [key: string]: PagesAPI.PagesContentLanguageVariation };
 
   updated: string;
 

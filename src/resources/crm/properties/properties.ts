@@ -130,7 +130,7 @@ export interface CollectionResponseProperty {
   /**
    * Contains information pagination of results.
    */
-  paging?: EmailsAPI.Paging;
+  paging?: EmailsAPI.EmailsPaging;
 }
 
 export interface CollectionResponsePropertyGroup {
@@ -139,7 +139,7 @@ export interface CollectionResponsePropertyGroup {
   /**
    * Contains information pagination of results.
    */
-  paging?: EmailsAPI.Paging;
+  paging?: EmailsAPI.EmailsPaging;
 }
 
 export interface CreatedResponseProperty {
@@ -164,7 +164,7 @@ export interface CreatedResponsePropertyGroup {
   location?: string;
 }
 
-export interface OptionInput {
+export interface PropertiesOptionInput {
   /**
    * If true, the option will not be shown in forms, bots, or meeting scheduling
    * pages. Supported for contact, company, ticket, and custom object enumeration
@@ -442,7 +442,7 @@ export declare namespace Properties {
     type CollectionResponsePropertyGroup as CollectionResponsePropertyGroup,
     type CreatedResponseProperty as CreatedResponseProperty,
     type CreatedResponsePropertyGroup as CreatedResponsePropertyGroup,
-    type OptionInput as OptionInput,
+    type PropertiesOptionInput as PropertiesOptionInput,
     type PropertyGroup as PropertyGroup,
     type PropertyUpdate as PropertyUpdate,
     type PropertyCreateParams as PropertyCreateParams,

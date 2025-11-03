@@ -45,7 +45,7 @@ export interface CollectionResponseFile {
   /**
    * Contains information pagination of results.
    */
-  paging?: EmailsAPI.Paging;
+  paging?: EmailsAPI.EmailsPaging;
 }
 
 export interface CollectionResponseFolder {
@@ -54,7 +54,7 @@ export interface CollectionResponseFolder {
   /**
    * Contains information pagination of results.
    */
-  paging?: EmailsAPI.Paging;
+  paging?: EmailsAPI.EmailsPaging;
 }
 
 /**

@@ -1,15 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  Appointments,
-  type PublicObjectSearchRequest,
-  type SimplePublicObject,
-  type SimplePublicObjectBatchInputForCreate,
-  type SimplePublicObjectInputForCreate,
-  type SimplePublicObjectWithAssociations,
-  type SimplePublicUpsertObject,
-} from './appointments';
-export {
   Calls,
   type CallCreateParams,
   type CallUpdateParams,
@@ -243,7 +234,7 @@ export {
   Schemas,
   type ObjectSchema,
   type ObjectSchemaEgg,
-  type ObjectTypeDefinition,
+  type ObjectsSchemasObjectTypeDefinition,
   type ObjectTypeDefinitionPatch,
   type ObjectTypePropertyCreate,
   type SchemaCreateParams,

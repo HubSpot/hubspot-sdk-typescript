@@ -276,6 +276,53 @@ export interface ForeignID {
   type: string;
 }
 
+/**
+ * Ye olde error
+ */
+export interface HubdbStandardError {
+  /**
+   * Specifies the main category of the error, determining the broad area of issue.
+   */
+  category: string;
+
+  /**
+   * An object containing context-specific information pertinent to the error.
+   */
+  context: { [key: string]: Array<string> };
+
+  /**
+   * The detailed error objects.
+   */
+  errors: Array<Shared.ErrorDetail>;
+
+  /**
+   * An object containing links related to the error, such as documentation URLs or
+   * support contact pages.
+   */
+  links: { [key: string]: string };
+
+  /**
+   * A detailed message describing the error.
+   */
+  message: string;
+
+  /**
+   * The HTTP status code associated with the error.
+   */
+  status: string;
+
+  /**
+   * Identifies the subcategory of the error, providing more specific context within
+   * the main category.
+   */
+  subCategory: unknown;
+
+  /**
+   * The unique ID of the error instance.
+   */
+  id?: string;
+}
+
 export interface HubDBTableCloneRequest {
   /**
    * Specifies whether to copy the rows during clone
@@ -622,53 +669,6 @@ export interface SimpleUser {
   lastName: string;
 }
 
-/**
- * Ye olde error
- */
-export interface StandardError {
-  /**
-   * Specifies the main category of the error, determining the broad area of issue.
-   */
-  category: string;
-
-  /**
-   * An object containing context-specific information pertinent to the error.
-   */
-  context: { [key: string]: Array<string> };
-
-  /**
-   * The detailed error objects.
-   */
-  errors: Array<Shared.ErrorDetail>;
-
-  /**
-   * An object containing links related to the error, such as documentation URLs or
-   * support contact pages.
-   */
-  links: { [key: string]: string };
-
-  /**
-   * A detailed message describing the error.
-   */
-  message: string;
-
-  /**
-   * The HTTP status code associated with the error.
-   */
-  status: string;
-
-  /**
-   * Identifies the subcategory of the error, providing more specific context within
-   * the main category.
-   */
-  subCategory: unknown;
-
-  /**
-   * The unique ID of the error instance.
-   */
-  id?: string;
-}
-
 export interface StreamingCollectionResponseWithTotalHubDBTableRowV3 {
   results: Array<Shared.HubDBTableRowV3Wrapper>;
 
@@ -679,7 +679,7 @@ export interface StreamingCollectionResponseWithTotalHubDBTableRowV3 {
   /**
    * Contains information pagination of results.
    */
-  paging?: EmailsAPI.Paging;
+  paging?: EmailsAPI.EmailsPaging;
 }
 
 export type UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3 =
@@ -704,6 +704,7 @@ export declare namespace Hubdb {
     type Column as Column,
     type ColumnRequest as ColumnRequest,
     type ForeignID as ForeignID,
+    type HubdbStandardError as HubdbStandardError,
     type HubDBTableCloneRequest as HubDBTableCloneRequest,
     type HubDBTableRowBatchCloneRequest as HubDBTableRowBatchCloneRequest,
     type HubDBTableRowV3 as HubDBTableRowV3,
@@ -715,7 +716,6 @@ export declare namespace Hubdb {
     type Option as Option,
     type RandomAccessCollectionResponseWithTotalHubDBTableRowV3 as RandomAccessCollectionResponseWithTotalHubDBTableRowV3,
     type SimpleUser as SimpleUser,
-    type StandardError as StandardError,
     type StreamingCollectionResponseWithTotalHubDBTableRowV3 as StreamingCollectionResponseWithTotalHubDBTableRowV3,
     type UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3 as UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3,
     type Variant as Variant,

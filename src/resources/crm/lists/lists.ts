@@ -273,7 +273,7 @@ export interface APICollectionResponseJoinTimeAndRecordID {
   /**
    * Contains information pagination of results.
    */
-  paging?: EmailsAPI.Paging;
+  paging?: EmailsAPI.EmailsPaging;
 
   total?: number;
 }

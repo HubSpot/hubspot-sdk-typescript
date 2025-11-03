@@ -58,7 +58,7 @@ describe('resource batch', () => {
   test.skip('get: only required params', async () => {
     const responsePromise = client.crm.associations.batch.get('toObjectType', {
       fromObjectType: 'fromObjectType',
-      inputs: [{ id: 'id' }],
+      inputs: [{ id: '37295' }],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -73,7 +73,7 @@ describe('resource batch', () => {
   test.skip('get: required and optional params', async () => {
     const response = await client.crm.associations.batch.get('toObjectType', {
       fromObjectType: 'fromObjectType',
-      inputs: [{ id: 'id' }],
+      inputs: [{ id: '37295' }],
     });
   });
 });

@@ -31,7 +31,7 @@ describe('resource currencies', () => {
 
   // Prism tests are disabled
   test.skip('batchGet: only required params', async () => {
-    const responsePromise = client.settings.currencies.batchGet({ inputs: [{ id: 'id' }] });
+    const responsePromise = client.settings.currencies.batchGet({ inputs: [{ id: '37295' }] });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -43,7 +43,7 @@ describe('resource currencies', () => {
 
   // Prism tests are disabled
   test.skip('batchGet: required and optional params', async () => {
-    const response = await client.settings.currencies.batchGet({ inputs: [{ id: 'id' }] });
+    const response = await client.settings.currencies.batchGet({ inputs: [{ id: '37295' }] });
   });
 
   // Prism tests are disabled

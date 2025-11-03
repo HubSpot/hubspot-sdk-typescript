@@ -36,7 +36,7 @@ export class Schemas extends APIResource {
   /**
    * @example
    * ```ts
-   * const objectTypeDefinition =
+   * const objectsSchemasObjectTypeDefinition =
    *   await client.crm.objects.schemas.update('objectType');
    * ```
    */
@@ -44,7 +44,7 @@ export class Schemas extends APIResource {
     objectType: string,
     body: SchemaUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectTypeDefinition> {
+  ): APIPromise<ObjectsSchemasObjectTypeDefinition> {
     return this._client.patch(path`/crm-object-schemas/v3/schemas/${objectType}`, { body, ...options });
   }
 
@@ -267,7 +267,7 @@ export interface ObjectSchemaEgg {
 /**
  * Defines an object type.
  */
-export interface ObjectTypeDefinition {
+export interface ObjectsSchemasObjectTypeDefinition {
   /**
    * A unique ID for this object type. Will be defined as {meta-type}-{unique ID}.
    */
@@ -580,7 +580,7 @@ export declare namespace Schemas {
   export {
     type ObjectSchema as ObjectSchema,
     type ObjectSchemaEgg as ObjectSchemaEgg,
-    type ObjectTypeDefinition as ObjectTypeDefinition,
+    type ObjectsSchemasObjectTypeDefinition as ObjectsSchemasObjectTypeDefinition,
     type ObjectTypeDefinitionPatch as ObjectTypeDefinitionPatch,
     type ObjectTypePropertyCreate as ObjectTypePropertyCreate,
     type SchemaCreateParams as SchemaCreateParams,

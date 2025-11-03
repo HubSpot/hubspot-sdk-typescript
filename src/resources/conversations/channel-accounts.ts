@@ -27,13 +27,16 @@ export class ChannelAccounts extends APIResource {
    *
    * @example
    * ```ts
-   * const publicChannelAccount =
+   * const conversationsPublicChannelAccount =
    *   await client.conversations.channelAccounts.get(
    *     'channelAccountId',
    *   );
    * ```
    */
-  get(channelAccountID: string, options?: RequestOptions): APIPromise<ConversationsAPI.PublicChannelAccount> {
+  get(
+    channelAccountID: string,
+    options?: RequestOptions,
+  ): APIPromise<ConversationsAPI.ConversationsPublicChannelAccount> {
     return this._client.get(
       path`/conversations/v3/conversations/channel-accounts/${channelAccountID}`,
       options,

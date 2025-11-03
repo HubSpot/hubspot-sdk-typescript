@@ -1,16 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
-import * as AppointmentsAPI from './appointments';
-import {
-  Appointments,
-  PublicObjectSearchRequest,
-  SimplePublicObject,
-  SimplePublicObjectBatchInputForCreate,
-  SimplePublicObjectInputForCreate,
-  SimplePublicObjectWithAssociations,
-  SimplePublicUpsertObject,
-} from './appointments';
 import * as DealSplitsAPI from './deal-splits';
 import {
   BatchResponseDealToDealSplits,
@@ -27,9 +17,9 @@ import * as SchemasAPI from './schemas';
 import {
   ObjectSchema,
   ObjectSchemaEgg,
-  ObjectTypeDefinition,
   ObjectTypeDefinitionPatch,
   ObjectTypePropertyCreate,
+  ObjectsSchemasObjectTypeDefinition,
   SchemaCreateAssociationParams,
   SchemaCreateParams,
   SchemaDeleteAssociationParams,
@@ -332,7 +322,6 @@ import {
 } from './tickets/tickets';
 
 export class Objects extends APIResource {
-  appointments: AppointmentsAPI.Appointments = new AppointmentsAPI.Appointments(this._client);
   calls: CallsAPI.Calls = new CallsAPI.Calls(this._client);
   carts: CartsAPI.Carts = new CartsAPI.Carts(this._client);
   commercePayments: CommercePaymentsAPI.CommercePayments = new CommercePaymentsAPI.CommercePayments(
@@ -372,7 +361,6 @@ export class Objects extends APIResource {
   tickets: TicketsAPI.Tickets = new TicketsAPI.Tickets(this._client);
 }
 
-Objects.Appointments = Appointments;
 Objects.Calls = Calls;
 Objects.Carts = Carts;
 Objects.CommercePayments = CommercePayments;
@@ -409,16 +397,6 @@ Objects.Taxes = Taxes;
 Objects.Tickets = Tickets;
 
 export declare namespace Objects {
-  export {
-    Appointments as Appointments,
-    type PublicObjectSearchRequest as PublicObjectSearchRequest,
-    type SimplePublicObject as SimplePublicObject,
-    type SimplePublicObjectBatchInputForCreate as SimplePublicObjectBatchInputForCreate,
-    type SimplePublicObjectInputForCreate as SimplePublicObjectInputForCreate,
-    type SimplePublicObjectWithAssociations as SimplePublicObjectWithAssociations,
-    type SimplePublicUpsertObject as SimplePublicUpsertObject,
-  };
-
   export {
     Calls as Calls,
     type CallCreateParams as CallCreateParams,
@@ -690,7 +668,7 @@ export declare namespace Objects {
     Schemas as Schemas,
     type ObjectSchema as ObjectSchema,
     type ObjectSchemaEgg as ObjectSchemaEgg,
-    type ObjectTypeDefinition as ObjectTypeDefinition,
+    type ObjectsSchemasObjectTypeDefinition as ObjectsSchemasObjectTypeDefinition,
     type ObjectTypeDefinitionPatch as ObjectTypeDefinitionPatch,
     type ObjectTypePropertyCreate as ObjectTypePropertyCreate,
     type SchemaCreateParams as SchemaCreateParams,
