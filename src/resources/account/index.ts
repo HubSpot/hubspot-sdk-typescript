@@ -13,6 +13,9 @@ export {
   type ActivityListAuditLogsParams,
   type ActivityListLoginActivitiesParams,
   type ActivityListSecurityActivitiesParams,
+  type PublicAPIUserActionEventsPage,
+  type PublicLoginAuditsPage,
+  type HydratedCriticalActionsPage,
 } from './activity';
 export { Details } from './details';
 export { Usage } from './usage';

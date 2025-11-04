@@ -2,7 +2,9 @@
 
 import { APIResource } from '../../../core/resource';
 import * as EventsAPI from './events';
+import { ParticipationBreakdownsPage } from './events';
 import { APIPromise } from '../../../core/api-promise';
+import { Page, type PageParams, PagePromise } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -51,19 +53,22 @@ export class Participations extends APIResource {
    *
    * @example
    * ```ts
-   * const collectionResponseWithTotalParticipationBreakdownForwardPaging =
-   *   await client.marketing.events.participations.listBreakdownByContact(
-   *     'contactIdentifier',
-   *   );
+   * // Automatically fetches more pages as needed.
+   * for await (const participationBreakdown of client.marketing.events.participations.listBreakdownByContact(
+   *   'contactIdentifier',
+   * )) {
+   *   // ...
+   * }
    * ```
    */
   listBreakdownByContact(
     contactIdentifier: string,
     query: ParticipationListBreakdownByContactParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<EventsAPI.CollectionResponseWithTotalParticipationBreakdownForwardPaging> {
-    return this._client.get(
+  ): PagePromise<ParticipationBreakdownsPage, EventsAPI.ParticipationBreakdown> {
+    return this._client.getAPIList(
       path`/marketing/v3/marketing-events/participations/contacts/${contactIdentifier}/breakdown`,
+      Page<EventsAPI.ParticipationBreakdown>,
       { query, ...options },
     );
   }
@@ -74,21 +79,24 @@ export class Participations extends APIResource {
    *
    * @example
    * ```ts
-   * const collectionResponseWithTotalParticipationBreakdownForwardPaging =
-   *   await client.marketing.events.participations.listBreakdownByExternalAccountAndEventID(
-   *     'externalEventId',
-   *     { externalAccountId: 'externalAccountId' },
-   *   );
+   * // Automatically fetches more pages as needed.
+   * for await (const participationBreakdown of client.marketing.events.participations.listBreakdownByExternalAccountAndEventID(
+   *   'externalEventId',
+   *   { externalAccountId: 'externalAccountId' },
+   * )) {
+   *   // ...
+   * }
    * ```
    */
   listBreakdownByExternalAccountAndEventID(
     externalEventID: string,
     params: ParticipationListBreakdownByExternalAccountAndEventIDParams,
     options?: RequestOptions,
-  ): APIPromise<EventsAPI.CollectionResponseWithTotalParticipationBreakdownForwardPaging> {
+  ): PagePromise<ParticipationBreakdownsPage, EventsAPI.ParticipationBreakdown> {
     const { externalAccountId, ...query } = params;
-    return this._client.get(
+    return this._client.getAPIList(
       path`/marketing/v3/marketing-events/participations/${externalAccountId}/${externalEventID}/breakdown`,
+      Page<EventsAPI.ParticipationBreakdown>,
       { query, ...options },
     );
   }
@@ -99,19 +107,22 @@ export class Participations extends APIResource {
    *
    * @example
    * ```ts
-   * const collectionResponseWithTotalParticipationBreakdownForwardPaging =
-   *   await client.marketing.events.participations.listBreakdownByID(
-   *     0,
-   *   );
+   * // Automatically fetches more pages as needed.
+   * for await (const participationBreakdown of client.marketing.events.participations.listBreakdownByID(
+   *   0,
+   * )) {
+   *   // ...
+   * }
    * ```
    */
   listBreakdownByID(
     marketingEventID: number,
     query: ParticipationListBreakdownByIDParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<EventsAPI.CollectionResponseWithTotalParticipationBreakdownForwardPaging> {
-    return this._client.get(
+  ): PagePromise<ParticipationBreakdownsPage, EventsAPI.ParticipationBreakdown> {
+    return this._client.getAPIList(
       path`/marketing/v3/marketing-events/participations/${marketingEventID}/breakdown`,
+      Page<EventsAPI.ParticipationBreakdown>,
       { query, ...options },
     );
   }
@@ -125,17 +136,7 @@ export interface ParticipationGetByExternalAccountAndEventIDParams {
   externalAccountId: string;
 }
 
-export interface ParticipationListBreakdownByContactParams {
-  /**
-   * The cursor indicating the position of the last retrieved item.
-   */
-  after?: string;
-
-  /**
-   * The limit for response size. The default value is 10, the max number is 100
-   */
-  limit?: number;
-
+export interface ParticipationListBreakdownByContactParams extends PageParams {
   /**
    * The participation state value. It may be REGISTERED, CANCELLED, ATTENDED,
    * NO_SHOW
@@ -143,7 +144,7 @@ export interface ParticipationListBreakdownByContactParams {
   state?: string;
 }
 
-export interface ParticipationListBreakdownByExternalAccountAndEventIDParams {
+export interface ParticipationListBreakdownByExternalAccountAndEventIDParams extends PageParams {
   /**
    * Path param: The accountId that is associated with this marketing event in the
    * external event application.
@@ -151,20 +152,9 @@ export interface ParticipationListBreakdownByExternalAccountAndEventIDParams {
   externalAccountId: string;
 
   /**
-   * Query param: The cursor indicating the position of the last retrieved item.
-   */
-  after?: string;
-
-  /**
    * Query param: The identifier of the Contact. It may be email or internal id.
    */
   contactIdentifier?: string;
-
-  /**
-   * Query param: The limit for response size. The default value is 10, the max
-   * number is 100
-   */
-  limit?: number;
 
   /**
    * Query param: The participation state value. It may be REGISTERED, CANCELLED,
@@ -173,21 +163,11 @@ export interface ParticipationListBreakdownByExternalAccountAndEventIDParams {
   state?: string;
 }
 
-export interface ParticipationListBreakdownByIDParams {
-  /**
-   * The cursor indicating the position of the last retrieved item.
-   */
-  after?: string;
-
+export interface ParticipationListBreakdownByIDParams extends PageParams {
   /**
    * The identifier of the Contact. It may be email or internal id.
    */
   contactIdentifier?: string;
-
-  /**
-   * The limit for response size. The default value is 10, the max number is 100
-   */
-  limit?: number;
 
   /**
    * The participation state value. It may be REGISTERED, CANCELLED, ATTENDED,
@@ -204,3 +184,5 @@ export declare namespace Participations {
     type ParticipationListBreakdownByIDParams as ParticipationListBreakdownByIDParams,
   };
 }
+
+export { type ParticipationBreakdownsPage };

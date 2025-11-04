@@ -112,16 +112,24 @@ export class Settings extends APIResource {
   /**
    * @example
    * ```ts
-   * const collectionResponseWithTotalVersionBlog =
-   *   await client.cms.blogs.settings.listRevisions('blogId');
+   * // Automatically fetches more pages as needed.
+   * for await (const versionBlog of client.cms.blogs.settings.listRevisions(
+   *   'blogId',
+   * )) {
+   *   // ...
+   * }
    * ```
    */
   listRevisions(
     blogID: string,
     query: SettingListRevisionsParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CollectionResponseWithTotalVersionBlog> {
-    return this._client.get(path`/cms/v3/blog-settings/settings/${blogID}/revisions`, { query, ...options });
+  ): PagePromise<VersionBlogsPage, VersionBlog> {
+    return this._client.getAPIList(
+      path`/cms/v3/blog-settings/settings/${blogID}/revisions`,
+      Page<VersionBlog>,
+      { query, ...options },
+    );
   }
 
   /**
@@ -159,6 +167,8 @@ export class Settings extends APIResource {
 }
 
 export type BlogsPage = Page<Blog>;
+
+export type VersionBlogsPage = Page<VersionBlog>;
 
 export interface Blog {
   /**
@@ -1140,12 +1150,8 @@ export interface SettingGetRevisionParams {
   blogId: string;
 }
 
-export interface SettingListRevisionsParams {
-  after?: string;
-
+export interface SettingListRevisionsParams extends PageParams {
   before?: string;
-
-  limit?: number;
 }
 
 export interface SettingSetNewLangPrimaryParams {
@@ -1175,6 +1181,7 @@ export declare namespace Settings {
     type CollectionResponseWithTotalVersionBlog as CollectionResponseWithTotalVersionBlog,
     type VersionBlog as VersionBlog,
     type BlogsPage as BlogsPage,
+    type VersionBlogsPage as VersionBlogsPage,
     type SettingListParams as SettingListParams,
     type SettingAttachToLangGroupParams as SettingAttachToLangGroupParams,
     type SettingCreateLanguageVariationParams as SettingCreateLanguageVariationParams,

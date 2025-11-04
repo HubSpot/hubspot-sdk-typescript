@@ -128,6 +128,7 @@ import {
   PublicWebversionDetails,
   SmartEmailField,
   VersionPublicEmail,
+  VersionPublicEmailsPage,
 } from './emails/emails';
 import * as EventsAPI from './events/events';
 import {
@@ -479,6 +480,7 @@ export declare namespace Marketing {
     type SmartEmailField as SmartEmailField,
     type VersionPublicEmail as VersionPublicEmail,
     type PublicEmailsPage as PublicEmailsPage,
+    type VersionPublicEmailsPage as VersionPublicEmailsPage,
     type EmailCreateParams as EmailCreateParams,
     type EmailUpdateParams as EmailUpdateParams,
     type EmailListParams as EmailListParams,

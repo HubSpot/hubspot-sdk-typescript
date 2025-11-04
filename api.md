@@ -127,9 +127,9 @@ Types:
 
 Methods:
 
-- <code title="get /account-info/v3/activity/audit-logs">client.account.activity.<a href="./src/resources/account/activity.ts">listAuditLogs</a>({ ...params }) -> CollectionResponsePublicAPIUserActionEventForwardPaging</code>
-- <code title="get /account-info/v3/activity/login">client.account.activity.<a href="./src/resources/account/activity.ts">listLoginActivities</a>({ ...params }) -> CollectionResponsePublicLoginAuditForwardPaging</code>
-- <code title="get /account-info/v3/activity/security">client.account.activity.<a href="./src/resources/account/activity.ts">listSecurityActivities</a>({ ...params }) -> CollectionResponseHydratedCriticalActionForwardPaging</code>
+- <code title="get /account-info/v3/activity/audit-logs">client.account.activity.<a href="./src/resources/account/activity.ts">listAuditLogs</a>({ ...params }) -> PublicAPIUserActionEventsPage</code>
+- <code title="get /account-info/v3/activity/login">client.account.activity.<a href="./src/resources/account/activity.ts">listLoginActivities</a>({ ...params }) -> PublicLoginAuditsPage</code>
+- <code title="get /account-info/v3/activity/security">client.account.activity.<a href="./src/resources/account/activity.ts">listSecurityActivities</a>({ ...params }) -> HydratedCriticalActionsPage</code>
 
 ## Details
 
@@ -338,7 +338,7 @@ Methods:
 - <code title="post /automation/v4/flows/batch/read">client.automation.workflows.<a href="./src/resources/automation/workflows.ts">batchGet</a>({ ...params }) -> BatchResponseAPIFlow</code>
 - <code title="post /automation/v4/workflow-id-mappings/batch/read">client.automation.workflows.<a href="./src/resources/automation/workflows.ts">batchGetIDMappings</a>({ ...params }) -> BatchResponseFlowIDWorkflowIDMappingResponse</code>
 - <code title="get /automation/v4/flows/{flowId}">client.automation.workflows.<a href="./src/resources/automation/workflows.ts">get</a>(flowID) -> APIFlow</code>
-- <code title="get /automation/v4/flows/email-campaigns">client.automation.workflows.<a href="./src/resources/automation/workflows.ts">listEmailCampaigns</a>({ ...params }) -> CollectionResponseAPIFlowEmailCampaign</code>
+- <code title="get /automation/v4/flows/email-campaigns">client.automation.workflows.<a href="./src/resources/automation/workflows.ts">listEmailCampaigns</a>({ ...params }) -> APIFlowEmailCampaignsPage</code>
 
 # BusinessUnits
 
@@ -482,7 +482,7 @@ Methods:
 - <code title="post /cms/v3/blog-settings/settings/multi-language/detach-from-lang-group">client.cms.blogs.settings.<a href="./src/resources/cms/blogs/settings.ts">detachFromLangGroup</a>({ ...params }) -> void</code>
 - <code title="get /cms/v3/blog-settings/settings/{blogId}">client.cms.blogs.settings.<a href="./src/resources/cms/blogs/settings.ts">get</a>(blogID) -> Blog</code>
 - <code title="get /cms/v3/blog-settings/settings/{blogId}/revisions/{revisionId}">client.cms.blogs.settings.<a href="./src/resources/cms/blogs/settings.ts">getRevision</a>(revisionID, { ...params }) -> VersionBlog</code>
-- <code title="get /cms/v3/blog-settings/settings/{blogId}/revisions">client.cms.blogs.settings.<a href="./src/resources/cms/blogs/settings.ts">listRevisions</a>(blogID, { ...params }) -> CollectionResponseWithTotalVersionBlog</code>
+- <code title="get /cms/v3/blog-settings/settings/{blogId}/revisions">client.cms.blogs.settings.<a href="./src/resources/cms/blogs/settings.ts">listRevisions</a>(blogID, { ...params }) -> VersionBlogsPage</code>
 - <code title="put /cms/v3/blog-settings/settings/multi-language/set-new-lang-primary">client.cms.blogs.settings.<a href="./src/resources/cms/blogs/settings.ts">setNewLangPrimary</a>({ ...params }) -> void</code>
 - <code title="post /cms/v3/blog-settings/settings/multi-language/update-languages">client.cms.blogs.settings.<a href="./src/resources/cms/blogs/settings.ts">updateLanguages</a>({ ...params }) -> void</code>
 
@@ -567,7 +567,7 @@ Methods:
 - <code title="delete /cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows/rows.ts">deleteDraft</a>(rowID, { ...params }) -> void</code>
 - <code title="get /cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows/rows.ts">get</a>(rowID, { ...params }) -> HubDBTableRowV3</code>
 - <code title="get /cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows/rows.ts">getDraft</a>(rowID, { ...params }) -> HubDBTableRowV3</code>
-- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows/rows.ts">listDraft</a>(tableIDOrName, { ...params }) -> UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3</code>
+- <code title="get /cms/v3/hubdb/tables/{tableIdOrName}/rows/draft">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows/rows.ts">listDraft</a>(tableIDOrName, { ...params }) -> HubDBTableRowV3WrappersPage</code>
 - <code title="put /cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows/rows.ts">replaceDraft</a>(rowID, { ...params }) -> HubDBTableRowV3</code>
 - <code title="patch /cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows/rows.ts">updateDraft</a>(rowID, { ...params }) -> HubDBTableRowV3</code>
 
@@ -597,7 +597,7 @@ Methods:
 - <code title="get /cms/v3/hubdb/tables/{tableIdOrName}">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">get</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
 - <code title="get /cms/v3/hubdb/tables/{tableIdOrName}/draft">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">getDraft</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
 - <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/draft/import">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">importDraft</a>(tableIDOrName, { ...params }) -> ImportResult</code>
-- <code title="get /cms/v3/hubdb/tables/draft">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">listDraft</a>({ ...params }) -> CollectionResponseWithTotalHubDBTableV3ForwardPaging</code>
+- <code title="get /cms/v3/hubdb/tables/draft">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">listDraft</a>({ ...params }) -> HubDBTableV3sPage</code>
 - <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/draft/publish">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">publishDraft</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
 - <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/draft/reset">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">resetDraft</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
 - <code title="post /cms/v3/hubdb/tables/{tableIdOrName}/unpublish">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">unpublish</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
@@ -835,9 +835,9 @@ Methods:
 - <code title="get /cms/v3/pages/landing-pages/folders/{objectId}/revisions/{revisionId}">client.cms.pages.landingPages.<a href="./src/resources/cms/pages/landing-pages.ts">getFolderRevision</a>(revisionID, { ...params }) -> VersionContentFolder</code>
 - <code title="post /cms/v3/pages/landing-pages/folders/batch/read">client.cms.pages.landingPages.<a href="./src/resources/cms/pages/landing-pages.ts">getFoldersBatch</a>({ ...params }) -> BatchResponseContentFolder</code>
 - <code title="get /cms/v3/pages/landing-pages/{objectId}/revisions/{revisionId}">client.cms.pages.landingPages.<a href="./src/resources/cms/pages/landing-pages.ts">getRevision</a>(revisionID, { ...params }) -> VersionPage</code>
-- <code title="get /cms/v3/pages/landing-pages/folders/{objectId}/revisions">client.cms.pages.landingPages.<a href="./src/resources/cms/pages/landing-pages.ts">listFolderRevisions</a>(objectID, { ...params }) -> CollectionResponseWithTotalVersionContentFolder</code>
-- <code title="get /cms/v3/pages/landing-pages/folders">client.cms.pages.landingPages.<a href="./src/resources/cms/pages/landing-pages.ts">listFolders</a>({ ...params }) -> CollectionResponseWithTotalContentFolderForwardPaging</code>
-- <code title="get /cms/v3/pages/landing-pages/{objectId}/revisions">client.cms.pages.landingPages.<a href="./src/resources/cms/pages/landing-pages.ts">listRevisions</a>(objectID, { ...params }) -> CollectionResponseWithTotalVersionPage</code>
+- <code title="get /cms/v3/pages/landing-pages/folders/{objectId}/revisions">client.cms.pages.landingPages.<a href="./src/resources/cms/pages/landing-pages.ts">listFolderRevisions</a>(objectID, { ...params }) -> VersionContentFoldersPage</code>
+- <code title="get /cms/v3/pages/landing-pages/folders">client.cms.pages.landingPages.<a href="./src/resources/cms/pages/landing-pages.ts">listFolders</a>({ ...params }) -> ContentFoldersPage</code>
+- <code title="get /cms/v3/pages/landing-pages/{objectId}/revisions">client.cms.pages.landingPages.<a href="./src/resources/cms/pages/landing-pages.ts">listRevisions</a>(objectID, { ...params }) -> VersionPagesPage</code>
 - <code title="post /cms/v3/pages/landing-pages/{objectId}/draft/push-live">client.cms.pages.landingPages.<a href="./src/resources/cms/pages/landing-pages.ts">publishDraft</a>(objectID) -> void</code>
 - <code title="post /cms/v3/pages/landing-pages/ab-test/rerun">client.cms.pages.landingPages.<a href="./src/resources/cms/pages/landing-pages.ts">rerunAbTest</a>({ ...params }) -> void</code>
 - <code title="post /cms/v3/pages/landing-pages/{objectId}/draft/reset">client.cms.pages.landingPages.<a href="./src/resources/cms/pages/landing-pages.ts">resetDraft</a>(objectID) -> void</code>
@@ -872,7 +872,7 @@ Methods:
 - <code title="post /cms/v3/pages/site-pages/batch/read">client.cms.pages.sitePages.<a href="./src/resources/cms/pages/site-pages.ts">getBatch</a>({ ...params }) -> BatchResponsePage</code>
 - <code title="get /cms/v3/pages/site-pages/{objectId}/draft">client.cms.pages.sitePages.<a href="./src/resources/cms/pages/site-pages.ts">getDraft</a>(objectID) -> Page</code>
 - <code title="get /cms/v3/pages/site-pages/{objectId}/revisions/{revisionId}">client.cms.pages.sitePages.<a href="./src/resources/cms/pages/site-pages.ts">getRevision</a>(revisionID, { ...params }) -> VersionPage</code>
-- <code title="get /cms/v3/pages/site-pages/{objectId}/revisions">client.cms.pages.sitePages.<a href="./src/resources/cms/pages/site-pages.ts">listRevisions</a>(objectID, { ...params }) -> CollectionResponseWithTotalVersionPage</code>
+- <code title="get /cms/v3/pages/site-pages/{objectId}/revisions">client.cms.pages.sitePages.<a href="./src/resources/cms/pages/site-pages.ts">listRevisions</a>(objectID, { ...params }) -> VersionPagesPage</code>
 - <code title="post /cms/v3/pages/site-pages/{objectId}/draft/push-live">client.cms.pages.sitePages.<a href="./src/resources/cms/pages/site-pages.ts">publishDraft</a>(objectID) -> void</code>
 - <code title="post /cms/v3/pages/site-pages/ab-test/rerun">client.cms.pages.sitePages.<a href="./src/resources/cms/pages/site-pages.ts">rerunAbTest</a>({ ...params }) -> void</code>
 - <code title="post /cms/v3/pages/site-pages/{objectId}/draft/reset">client.cms.pages.sitePages.<a href="./src/resources/cms/pages/site-pages.ts">resetDraft</a>(objectID) -> void</code>
@@ -1411,7 +1411,7 @@ Methods:
 - <code title="get /crm/v3/imports/">client.crm.imports.<a href="./src/resources/crm/imports.ts">list</a>({ ...params }) -> PublicImportResponsesPage</code>
 - <code title="post /crm/v3/imports/{importId}/cancel">client.crm.imports.<a href="./src/resources/crm/imports.ts">cancel</a>(importID) -> ActionResponse</code>
 - <code title="get /crm/v3/imports/{importId}">client.crm.imports.<a href="./src/resources/crm/imports.ts">get</a>(importID) -> PublicImportResponse</code>
-- <code title="get /crm/v3/imports/{importId}/errors">client.crm.imports.<a href="./src/resources/crm/imports.ts">listErrors</a>(importID, { ...params }) -> CollectionResponsePublicImportErrorForwardPaging</code>
+- <code title="get /crm/v3/imports/{importId}/errors">client.crm.imports.<a href="./src/resources/crm/imports.ts">listErrors</a>(importID, { ...params }) -> PublicImportErrorsPage</code>
 
 ## Limits
 
@@ -2648,7 +2648,7 @@ Methods:
 
 - <code title="get /marketing/v3/campaigns/{campaignGuid}/reports/metrics">client.marketing.campaigns.reports.<a href="./src/resources/marketing/campaigns/reports.ts">getAttributionMetrics</a>(campaignGuid, { ...params }) -> MetricsCounters</code>
 - <code title="get /marketing/v3/campaigns/{campaignGuid}/reports/revenue">client.marketing.campaigns.reports.<a href="./src/resources/marketing/campaigns/reports.ts">getRevenueAttribution</a>(campaignGuid, { ...params }) -> RevenueAttributionAggregate</code>
-- <code title="get /marketing/v3/campaigns/{campaignGuid}/reports/contacts/{contactType}">client.marketing.campaigns.reports.<a href="./src/resources/marketing/campaigns/reports.ts">listContactIDsByType</a>(contactType, { ...params }) -> CollectionResponseContactReferenceForwardPaging</code>
+- <code title="get /marketing/v3/campaigns/{campaignGuid}/reports/contacts/{contactType}">client.marketing.campaigns.reports.<a href="./src/resources/marketing/campaigns/reports.ts">listContactIDsByType</a>(contactType, { ...params }) -> ContactReferencesPage</code>
 
 ### Spend
 
@@ -2702,7 +2702,7 @@ Methods:
 - <code title="get /marketing/v3/emails/{emailId}/ab-test/get-variation">client.marketing.emails.<a href="./src/resources/marketing/emails/emails.ts">getAbTestVariation</a>(emailID) -> PublicEmail</code>
 - <code title="get /marketing/v3/emails/{emailId}/draft">client.marketing.emails.<a href="./src/resources/marketing/emails/emails.ts">getDraft</a>(emailID) -> PublicEmail</code>
 - <code title="get /marketing/v3/emails/{emailId}/revisions/{revisionId}">client.marketing.emails.<a href="./src/resources/marketing/emails/emails.ts">getRevision</a>(revisionID, { ...params }) -> VersionPublicEmail</code>
-- <code title="get /marketing/v3/emails/{emailId}/revisions">client.marketing.emails.<a href="./src/resources/marketing/emails/emails.ts">listRevisions</a>(emailID, { ...params }) -> CollectionResponseWithTotalVersionPublicEmail</code>
+- <code title="get /marketing/v3/emails/{emailId}/revisions">client.marketing.emails.<a href="./src/resources/marketing/emails/emails.ts">listRevisions</a>(emailID, { ...params }) -> VersionPublicEmailsPage</code>
 - <code title="post /marketing/v3/emails/{emailId}/publish">client.marketing.emails.<a href="./src/resources/marketing/emails/emails.ts">publish</a>(emailID) -> void</code>
 - <code title="post /marketing/v3/emails/{emailId}/draft/reset">client.marketing.emails.<a href="./src/resources/marketing/emails/emails.ts">resetDraft</a>(emailID) -> void</code>
 - <code title="post /marketing/v3/emails/{emailId}/revisions/{revisionId}/restore">client.marketing.emails.<a href="./src/resources/marketing/emails/emails.ts">restoreRevision</a>(revisionID, { ...params }) -> void</code>
@@ -2816,9 +2816,9 @@ Methods:
 
 - <code title="get /marketing/v3/marketing-events/participations/{externalAccountId}/{externalEventId}">client.marketing.events.participations.<a href="./src/resources/marketing/events/participations.ts">getByExternalAccountAndEventID</a>(externalEventID, { ...params }) -> AttendanceCounters</code>
 - <code title="get /marketing/v3/marketing-events/participations/{marketingEventId}">client.marketing.events.participations.<a href="./src/resources/marketing/events/participations.ts">getByID</a>(marketingEventID) -> AttendanceCounters</code>
-- <code title="get /marketing/v3/marketing-events/participations/contacts/{contactIdentifier}/breakdown">client.marketing.events.participations.<a href="./src/resources/marketing/events/participations.ts">listBreakdownByContact</a>(contactIdentifier, { ...params }) -> CollectionResponseWithTotalParticipationBreakdownForwardPaging</code>
-- <code title="get /marketing/v3/marketing-events/participations/{externalAccountId}/{externalEventId}/breakdown">client.marketing.events.participations.<a href="./src/resources/marketing/events/participations.ts">listBreakdownByExternalAccountAndEventID</a>(externalEventID, { ...params }) -> CollectionResponseWithTotalParticipationBreakdownForwardPaging</code>
-- <code title="get /marketing/v3/marketing-events/participations/{marketingEventId}/breakdown">client.marketing.events.participations.<a href="./src/resources/marketing/events/participations.ts">listBreakdownByID</a>(marketingEventID, { ...params }) -> CollectionResponseWithTotalParticipationBreakdownForwardPaging</code>
+- <code title="get /marketing/v3/marketing-events/participations/contacts/{contactIdentifier}/breakdown">client.marketing.events.participations.<a href="./src/resources/marketing/events/participations.ts">listBreakdownByContact</a>(contactIdentifier, { ...params }) -> ParticipationBreakdownsPage</code>
+- <code title="get /marketing/v3/marketing-events/participations/{externalAccountId}/{externalEventId}/breakdown">client.marketing.events.participations.<a href="./src/resources/marketing/events/participations.ts">listBreakdownByExternalAccountAndEventID</a>(externalEventID, { ...params }) -> ParticipationBreakdownsPage</code>
+- <code title="get /marketing/v3/marketing-events/participations/{marketingEventId}/breakdown">client.marketing.events.participations.<a href="./src/resources/marketing/events/participations.ts">listBreakdownByID</a>(marketingEventID, { ...params }) -> ParticipationBreakdownsPage</code>
 
 ### Settings
 

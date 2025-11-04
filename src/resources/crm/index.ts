@@ -47,6 +47,7 @@ export {
   type ImportListParams,
   type ImportListErrorsParams,
   type PublicImportResponsesPage,
+  type PublicImportErrorsPage,
 } from './imports';
 export {
   Limits,

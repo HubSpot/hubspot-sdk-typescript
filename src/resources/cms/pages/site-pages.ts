@@ -3,7 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as CmsAPI from '../cms';
 import * as PagesAPI from './pages';
-import { PagesPage } from './pages';
+import { PagesPage, VersionPagesPage } from './pages';
 import { APIPromise } from '../../../core/api-promise';
 import { Page, type PageParams, PagePromise } from '../../../core/pagination';
 import { buildHeaders } from '../../../internal/headers';
@@ -503,18 +503,24 @@ export class SitePages extends APIResource {
    *
    * @example
    * ```ts
-   * const collectionResponseWithTotalVersionPage =
-   *   await client.cms.pages.sitePages.listRevisions(
-   *     'objectId',
-   *   );
+   * // Automatically fetches more pages as needed.
+   * for await (const versionPage of client.cms.pages.sitePages.listRevisions(
+   *   'objectId',
+   * )) {
+   *   // ...
+   * }
    * ```
    */
   listRevisions(
     objectID: string,
     query: SitePageListRevisionsParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<PagesAPI.CollectionResponseWithTotalVersionPage> {
-    return this._client.get(path`/cms/v3/pages/site-pages/${objectID}/revisions`, { query, ...options });
+  ): PagePromise<VersionPagesPage, PagesAPI.VersionPage> {
+    return this._client.getAPIList(
+      path`/cms/v3/pages/site-pages/${objectID}/revisions`,
+      Page<PagesAPI.VersionPage>,
+      { query, ...options },
+    );
   }
 
   /**
@@ -3139,19 +3145,8 @@ export interface SitePageGetRevisionParams {
   objectId: string;
 }
 
-export interface SitePageListRevisionsParams {
-  /**
-   * The cursor token value to get the next set of results. You can get this from the
-   * `paging.next.after` JSON property of a paged response containing more results.
-   */
-  after?: string;
-
+export interface SitePageListRevisionsParams extends PageParams {
   before?: string;
-
-  /**
-   * The maximum number of results to return. Default is 100.
-   */
-  limit?: number;
 }
 
 export interface SitePageRerunAbTestParams {
@@ -4326,4 +4321,4 @@ export declare namespace SitePages {
   };
 }
 
-export { type PagesPage };
+export { type PagesPage, type VersionPagesPage };

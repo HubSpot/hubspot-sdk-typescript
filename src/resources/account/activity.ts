@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../core/resource';
 import * as Shared from '../shared';
-import { APIPromise } from '../../core/api-promise';
+import { Page, type PageParams, PagePromise } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 
 export class Activity extends APIResource {
@@ -15,8 +15,11 @@ export class Activity extends APIResource {
   listAuditLogs(
     query: ActivityListAuditLogsParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CollectionResponsePublicAPIUserActionEventForwardPaging> {
-    return this._client.get('/account-info/v3/activity/audit-logs', { query, ...options });
+  ): PagePromise<PublicAPIUserActionEventsPage, PublicAPIUserActionEvent> {
+    return this._client.getAPIList('/account-info/v3/activity/audit-logs', Page<PublicAPIUserActionEvent>, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -26,8 +29,11 @@ export class Activity extends APIResource {
   listLoginActivities(
     query: ActivityListLoginActivitiesParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CollectionResponsePublicLoginAuditForwardPaging> {
-    return this._client.get('/account-info/v3/activity/login', { query, ...options });
+  ): PagePromise<PublicLoginAuditsPage, PublicLoginAudit> {
+    return this._client.getAPIList('/account-info/v3/activity/login', Page<PublicLoginAudit>, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -37,10 +43,19 @@ export class Activity extends APIResource {
   listSecurityActivities(
     query: ActivityListSecurityActivitiesParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CollectionResponseHydratedCriticalActionForwardPaging> {
-    return this._client.get('/account-info/v3/activity/security', { query, ...options });
+  ): PagePromise<HydratedCriticalActionsPage, HydratedCriticalAction> {
+    return this._client.getAPIList('/account-info/v3/activity/security', Page<HydratedCriticalAction>, {
+      query,
+      ...options,
+    });
   }
 }
+
+export type PublicAPIUserActionEventsPage = Page<PublicAPIUserActionEvent>;
+
+export type PublicLoginAuditsPage = Page<PublicLoginAudit>;
+
+export type HydratedCriticalActionsPage = Page<HydratedCriticalAction>;
 
 export interface ActingUser {
   /**
@@ -215,23 +230,11 @@ export interface PublicLoginAudit {
   userId?: number;
 }
 
-export interface ActivityListAuditLogsParams {
+export interface ActivityListAuditLogsParams extends PageParams {
   /**
    * The ID of a user, for retrieving user-specific logs.
    */
   actingUserId?: Array<number>;
-
-  /**
-   * The paging cursor token of the last successfully read resource will be returned
-   * as the `paging.next.after` JSON property of a paged response containing more
-   * results.
-   */
-  after?: string;
-
-  /**
-   * The maximum number of results to display per page.
-   */
-  limit?: number;
 
   /**
    * A timestamp, as a starting point for retrieving activity logs.
@@ -250,40 +253,18 @@ export interface ActivityListAuditLogsParams {
   sort?: Array<string>;
 }
 
-export interface ActivityListLoginActivitiesParams {
-  /**
-   * The cursor token value to get the next set of results. You can get this from the
-   * `paging.next.after` JSON property of a paged response containing more results.
-   */
-  after?: string;
-
-  /**
-   * The maximum number of results to display per page. Max value of limit is 200.
-   */
-  limit?: number;
-
+export interface ActivityListLoginActivitiesParams extends PageParams {
   /**
    * The ID of a user, for retrieving user-specific logs.
    */
   userId?: number;
 }
 
-export interface ActivityListSecurityActivitiesParams {
-  /**
-   * The cursor token value to get the next set of results. You can get this from the
-   * `paging.next.after` JSON property of a paged response containing more results.
-   */
-  after?: string;
-
+export interface ActivityListSecurityActivitiesParams extends PageParams {
   /**
    * The start time, for retrieving logs within a specific timeframe.
    */
   fromTimestamp?: number;
-
-  /**
-   * The maximum number of results to display per page. Max value of limit is 200.
-   */
-  limit?: number;
 
   /**
    * The end time, for retrieving logs within a specific timeframe.
@@ -305,6 +286,9 @@ export declare namespace Activity {
     type HydratedCriticalAction as HydratedCriticalAction,
     type PublicAPIUserActionEvent as PublicAPIUserActionEvent,
     type PublicLoginAudit as PublicLoginAudit,
+    type PublicAPIUserActionEventsPage as PublicAPIUserActionEventsPage,
+    type PublicLoginAuditsPage as PublicLoginAuditsPage,
+    type HydratedCriticalActionsPage as HydratedCriticalActionsPage,
     type ActivityListAuditLogsParams as ActivityListAuditLogsParams,
     type ActivityListLoginActivitiesParams as ActivityListLoginActivitiesParams,
     type ActivityListSecurityActivitiesParams as ActivityListSecurityActivitiesParams,

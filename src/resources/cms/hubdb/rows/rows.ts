@@ -173,16 +173,24 @@ export class Rows extends APIResource {
    *
    * @example
    * ```ts
-   * const unifiedCollectionResponseWithTotalBaseHubDBTableRowV3 =
-   *   await client.cms.hubdb.rows.listDraft('tableIdOrName');
+   * // Automatically fetches more pages as needed.
+   * for await (const hubDBTableRowV3Wrapper of client.cms.hubdb.rows.listDraft(
+   *   'tableIdOrName',
+   * )) {
+   *   // ...
+   * }
    * ```
    */
   listDraft(
     tableIDOrName: string,
     query: RowListDraftParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<HubdbAPI.UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3> {
-    return this._client.get(path`/cms/v3/hubdb/tables/${tableIDOrName}/rows/draft`, { query, ...options });
+  ): PagePromise<HubDBTableRowV3WrappersPage, Shared.HubDBTableRowV3Wrapper> {
+    return this._client.getAPIList(
+      path`/cms/v3/hubdb/tables/${tableIDOrName}/rows/draft`,
+      Page<Shared.HubDBTableRowV3Wrapper>,
+      { query, ...options },
+    );
   }
 
   /**
@@ -327,19 +335,8 @@ export interface RowGetDraftParams {
   archived?: boolean;
 }
 
-export interface RowListDraftParams {
-  /**
-   * The cursor token value to get the next set of results. You can get this from the
-   * `paging.next.after` JSON property of a paged response containing more results.
-   */
-  after?: string;
-
+export interface RowListDraftParams extends PageParams {
   archived?: boolean;
-
-  /**
-   * The maximum number of results to return. Default is `1000`.
-   */
-  limit?: number;
 
   offset?: number;
 

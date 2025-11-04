@@ -41,5 +41,6 @@ export {
   type EmailRestoreRevisionToDraftParams,
   type EmailUpdateDraftParams,
   type PublicEmailsPage,
+  type VersionPublicEmailsPage,
 } from './emails';
 export { Statistics, type StatisticGetParams, type StatisticGetHistogramParams } from './statistics';

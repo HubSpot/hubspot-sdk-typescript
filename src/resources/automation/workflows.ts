@@ -50,12 +50,17 @@ export class Workflows extends APIResource {
   listEmailCampaigns(
     query: WorkflowListEmailCampaignsParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CollectionResponseAPIFlowEmailCampaign> {
-    return this._client.get('/automation/v4/flows/email-campaigns', { query, ...options });
+  ): PagePromise<APIFlowEmailCampaignsPage, APIFlowEmailCampaign> {
+    return this._client.getAPIList('/automation/v4/flows/email-campaigns', Page<APIFlowEmailCampaign>, {
+      query,
+      ...options,
+    });
   }
 }
 
 export type APIFlowListingsPage = Page<APIFlowListing>;
+
+export type APIFlowEmailCampaignsPage = Page<APIFlowEmailCampaign>;
 
 export interface APIAbTestBranchAction {
   actionId: string;
@@ -1185,14 +1190,10 @@ export interface WorkflowBatchGetIDMappingsParams {
   inputs: Array<APIFlowBatchFetchMigrationFlowIDCoordinate | APIFlowBatchFetchMigrationWorkflowIDCoordinate>;
 }
 
-export interface WorkflowListEmailCampaignsParams {
-  after?: string;
-
+export interface WorkflowListEmailCampaignsParams extends PageParams {
   before?: string;
 
   flowId?: Array<string>;
-
-  limit?: number;
 }
 
 export declare namespace Workflows {
@@ -1268,6 +1269,7 @@ export declare namespace Workflows {
     type CollectionResponseAPIFlowListingForwardPaging as CollectionResponseAPIFlowListingForwardPaging,
     type FlowIDWorkflowIDMappingResponse as FlowIDWorkflowIDMappingResponse,
     type APIFlowListingsPage as APIFlowListingsPage,
+    type APIFlowEmailCampaignsPage as APIFlowEmailCampaignsPage,
     type WorkflowCreateParams as WorkflowCreateParams,
     type WorkflowUpdateParams as WorkflowUpdateParams,
     type WorkflowListParams as WorkflowListParams,

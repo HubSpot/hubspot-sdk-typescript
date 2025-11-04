@@ -242,15 +242,20 @@ export class Tables extends APIResource {
    *
    * @example
    * ```ts
-   * const collectionResponseWithTotalHubDBTableV3ForwardPaging =
-   *   await client.cms.hubdb.tables.listDraft();
+   * // Automatically fetches more pages as needed.
+   * for await (const hubDBTableV3 of client.cms.hubdb.tables.listDraft()) {
+   *   // ...
+   * }
    * ```
    */
   listDraft(
     query: TableListDraftParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<HubdbAPI.CollectionResponseWithTotalHubDBTableV3ForwardPaging> {
-    return this._client.get('/cms/v3/hubdb/tables/draft', { query, ...options });
+  ): PagePromise<HubDBTableV3sPage, HubdbAPI.HubDBTableV3> {
+    return this._client.getAPIList('/cms/v3/hubdb/tables/draft', Page<HubdbAPI.HubDBTableV3>, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -519,13 +524,7 @@ export interface TableImportDraftParams {
   file?: Uploadable;
 }
 
-export interface TableListDraftParams {
-  /**
-   * The cursor token value to get the next set of results. You can get this from the
-   * `paging.next.after` JSON property of a paged response containing more results.
-   */
-  after?: string;
-
+export interface TableListDraftParams extends PageParams {
   /**
    * Specifies whether to return archived tables. Defaults to `false`.
    */
@@ -549,11 +548,6 @@ export interface TableListDraftParams {
   createdBefore?: string;
 
   isGetLocalizedSchema?: boolean;
-
-  /**
-   * The maximum number of results to return. Default is 1000.
-   */
-  limit?: number;
 
   /**
    * Specifies which fields to use for sorting results. Valid fields are `name`,

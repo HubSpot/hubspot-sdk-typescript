@@ -80,20 +80,29 @@ export class Imports extends APIResource {
   /**
    * @example
    * ```ts
-   * const collectionResponsePublicImportErrorForwardPaging =
-   *   await client.crm.imports.listErrors(0);
+   * // Automatically fetches more pages as needed.
+   * for await (const publicImportError of client.crm.imports.listErrors(
+   *   0,
+   * )) {
+   *   // ...
+   * }
    * ```
    */
   listErrors(
     importID: number,
     query: ImportListErrorsParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CollectionResponsePublicImportErrorForwardPaging> {
-    return this._client.get(path`/crm/v3/imports/${importID}/errors`, { query, ...options });
+  ): PagePromise<PublicImportErrorsPage, PublicImportError> {
+    return this._client.getAPIList(path`/crm/v3/imports/${importID}/errors`, Page<PublicImportError>, {
+      query,
+      ...options,
+    });
   }
 }
 
 export type PublicImportResponsesPage = Page<PublicImportResponse>;
+
+export type PublicImportErrorsPage = Page<PublicImportError>;
 
 export interface CollectionResponsePublicImportErrorForwardPaging {
   results: Array<PublicImportError>;
@@ -633,14 +642,7 @@ export interface ImportListParams extends PageParams {
   before?: string;
 }
 
-export interface ImportListErrorsParams {
-  /**
-   * The paging cursor token of the last successfully read resource will be returned
-   * as the `paging.next.after` JSON property of a paged response containing more
-   * results.
-   */
-  after?: string;
-
+export interface ImportListErrorsParams extends PageParams {
   /**
    * Set to True to receive a message explaining the error.
    */
@@ -650,11 +652,6 @@ export interface ImportListErrorsParams {
    * Set to True to receive the data values for the errored row.
    */
   includeRowData?: boolean;
-
-  /**
-   * The maximum number of results to display per page.
-   */
-  limit?: number;
 }
 
 export declare namespace Imports {
@@ -669,6 +666,7 @@ export declare namespace Imports {
     type PublicImportResponse as PublicImportResponse,
     type PublicObjectListRecord as PublicObjectListRecord,
     type PublicImportResponsesPage as PublicImportResponsesPage,
+    type PublicImportErrorsPage as PublicImportErrorsPage,
     type ImportCreateParams as ImportCreateParams,
     type ImportListParams as ImportListParams,
     type ImportListErrorsParams as ImportListErrorsParams,

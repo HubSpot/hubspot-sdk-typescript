@@ -49,6 +49,7 @@ export {
   type CampaignUpdateParams,
   type CampaignListParams,
   type CampaignGetParams,
+  type ContactReferencesPage,
   type PublicCampaignsPage,
 } from './campaigns';
 export {

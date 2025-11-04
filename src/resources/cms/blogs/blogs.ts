@@ -43,6 +43,7 @@ import {
   SettingUpdateLanguagesParams,
   Settings,
   VersionBlog,
+  VersionBlogsPage,
 } from './settings';
 import * as TagsAPI from './tags';
 import {
@@ -186,6 +187,7 @@ export declare namespace Blogs {
     type CollectionResponseWithTotalVersionBlog as CollectionResponseWithTotalVersionBlog,
     type VersionBlog as VersionBlog,
     type BlogsPage as BlogsPage,
+    type VersionBlogsPage as VersionBlogsPage,
     type SettingListParams as SettingListParams,
     type SettingAttachToLangGroupParams as SettingAttachToLangGroupParams,
     type SettingCreateLanguageVariationParams as SettingCreateLanguageVariationParams,

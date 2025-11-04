@@ -557,6 +557,8 @@ export class Events extends APIResource {
 
 export type MarketingEventPublicReadResponseV2sPage = Page<MarketingEventPublicReadResponseV2>;
 
+export type ParticipationBreakdownsPage = Page<ParticipationBreakdown>;
+
 export interface AppInfo {
   id: string;
 

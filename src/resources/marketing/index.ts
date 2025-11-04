@@ -34,6 +34,7 @@ export {
   type CampaignUpdateParams,
   type CampaignListParams,
   type CampaignGetParams,
+  type ContactReferencesPage,
   type PublicCampaignsPage,
 } from './campaigns/index';
 export {
@@ -77,6 +78,7 @@ export {
   type EmailRestoreRevisionToDraftParams,
   type EmailUpdateDraftParams,
   type PublicEmailsPage,
+  type VersionPublicEmailsPage,
 } from './emails/index';
 export {
   Events,
@@ -142,6 +144,7 @@ export {
   type EventUpsertByExternalEventIDParams,
   type EventUpsertSubscriberStateByEmailParams,
   type EventUpsertSubscriberStateByIDParams,
+  type ParticipationBreakdownsPage,
   type MarketingEventPublicReadResponseV2sPage,
 } from './events/index';
 export {
