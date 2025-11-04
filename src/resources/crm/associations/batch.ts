@@ -41,6 +41,9 @@ export class Batch extends APIResource {
   }
 
   /**
+   * This endpoint allows you to archive multiple associations between specified
+   * 'from' and 'to' object types in a single batch request.
+   *
    * @example
    * ```ts
    * await client.crm.associations.batch.delete('toObjectType', {
@@ -101,7 +104,7 @@ export interface BatchCreateParams {
 
 export interface BatchDeleteParams {
   /**
-   * Path param:
+   * Path param: The type of the source object in the association.
    */
   fromObjectType: string;
 

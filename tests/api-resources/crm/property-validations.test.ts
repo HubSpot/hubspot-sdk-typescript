@@ -21,6 +21,31 @@ describe('resource propertyValidations', () => {
   });
 
   // Prism tests are disabled
+  test.skip('crmV3PropertyValidationsObjectTypeIDPropertyNameRuleTypeRuleType: only required params', async () => {
+    const responsePromise =
+      client.crm.propertyValidations.crmV3PropertyValidationsObjectTypeIDPropertyNameRuleTypeRuleType(
+        'FORMAT',
+        { objectTypeId: 'objectTypeId', propertyName: 'propertyName', ruleArguments: ['string'] },
+      );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('crmV3PropertyValidationsObjectTypeIDPropertyNameRuleTypeRuleType: required and optional params', async () => {
+    const response =
+      await client.crm.propertyValidations.crmV3PropertyValidationsObjectTypeIDPropertyNameRuleTypeRuleType(
+        'FORMAT',
+        { objectTypeId: 'objectTypeId', propertyName: 'propertyName', ruleArguments: ['string'] },
+      );
+  });
+
+  // Prism tests are disabled
   test.skip('get: only required params', async () => {
     const responsePromise = client.crm.propertyValidations.get('propertyName', {
       objectTypeId: 'objectTypeId',

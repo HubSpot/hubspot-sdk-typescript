@@ -7,7 +7,7 @@ import { AppUninstalls } from './app-uninstalls';
 import * as ExportsAPI from './exports';
 import {
   ActionResponseWithSingleResultUri,
-  ExportCreateParams,
+  ExportCreateAsyncParams,
   Exports,
   PublicCrmSearchRequest,
   PublicExportListRequest,
@@ -68,10 +68,12 @@ import * as PropertyValidationsAPI from './property-validations';
 import {
   CollectionResponsePublicPropertyValidationRuleMapNoPaging,
   CollectionResponsePublicPropertyValidationRuleNoPaging,
+  PropertyValidationCrmV3PropertyValidationsObjectTypeIDPropertyNameRuleTypeRuleTypeParams,
   PropertyValidationGetParams,
   PropertyValidations,
   PublicPropertyValidationRule,
   PublicPropertyValidationRuleMap,
+  PublicPropertyValidationRuleUpdate,
 } from './property-validations';
 import * as AssociationsAPI from './associations/associations';
 import {
@@ -233,8 +235,6 @@ export class Crm extends APIResource {
   users: UsersAPI.Users = new UsersAPI.Users(this._client);
 }
 
-export type MultiAssociatedObjectWithLabelsPage = Page<MultiAssociatedObjectWithLabel>;
-
 export type SimplePublicObjectWithAssociationsPage = Page<SimplePublicObjectWithAssociations>;
 
 export type AssociatedIDsPage = Page<AssociatedID>;
@@ -296,10 +296,6 @@ export interface BatchReadInputSimplePublicObjectID {
    */
   propertiesWithHistory: Array<string>;
 
-  /**
-   * When using a custom unique value property to retrieve records, the name of the
-   * property. Do not include this parameter if retrieving by record ID.
-   */
   idProperty?: string;
 }
 
@@ -343,7 +339,7 @@ export interface BatchResponseSimplePublicObject {
    */
   status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
 
-  errors?: Array<Shared.StandardError>;
+  errors?: Array<V4API.StandardError1>;
 
   /**
    * An object containing relevant links related to the batch request.
@@ -381,7 +377,7 @@ export interface BatchResponseSimplePublicUpsertObject {
    */
   status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
 
-  errors?: Array<Shared.StandardError>;
+  errors?: Array<V4API.StandardError1>;
 
   /**
    * An object containing relevant links related to the batch request.
@@ -426,9 +422,6 @@ export interface CollectionResponseSimplePublicObjectWithAssociations {
 export interface CollectionResponseWithTotalSimplePublicObject {
   results: Array<SimplePublicObject>;
 
-  /**
-   * The number of available results
-   */
   total: number;
 
   /**
@@ -541,7 +534,7 @@ export interface MultiAssociatedObjectWithLabel {
 export interface PublicAssociationsForObject {
   to: Shared.PublicObjectID;
 
-  types: Array<Shared.AssociationSpec>;
+  types: Array<V4API.AssociationSpec1>;
 }
 
 export interface PublicDefaultAssociation {
@@ -559,9 +552,6 @@ export interface PublicDefaultAssociation {
 export interface PublicGdprDeleteInput {
   objectId: string;
 
-  /**
-   * The name of a property whose values are unique for this object
-   */
   idProperty?: string;
 }
 
@@ -655,8 +645,7 @@ export interface SimplePublicObject {
  */
 export interface SimplePublicObjectBatchInput {
   /**
-   * The id to be updated. This can be the object id, or the unique property value of
-   * the idProperty property
+   * The unique ID of the object.
    */
   id: string;
 
@@ -666,7 +655,8 @@ export interface SimplePublicObjectBatchInput {
   properties: { [key: string]: string };
 
   /**
-   * The name of a property whose values are unique for this object
+   * The name of a unique identifier property, which can be used for identifying
+   * objects instead of the object ID.
    */
   idProperty?: string;
 
@@ -701,7 +691,8 @@ export interface SimplePublicObjectBatchInputUpsert {
   properties: { [key: string]: string };
 
   /**
-   * The name of a property whose values are unique for this object
+   * The name of a unique identifier property, which can be used for identifying
+   * objects instead of the object ID.
    */
   idProperty?: string;
 
@@ -947,7 +938,7 @@ export declare namespace Crm {
     type PublicExportRequest as PublicExportRequest,
     type PublicExportResponse as PublicExportResponse,
     type PublicExportViewRequest as PublicExportViewRequest,
-    type ExportCreateParams as ExportCreateParams,
+    type ExportCreateAsyncParams as ExportCreateAsyncParams,
   };
 
   export { Extensions as Extensions };
@@ -1105,6 +1096,8 @@ export declare namespace Crm {
     type CollectionResponsePublicPropertyValidationRuleNoPaging as CollectionResponsePublicPropertyValidationRuleNoPaging,
     type PublicPropertyValidationRule as PublicPropertyValidationRule,
     type PublicPropertyValidationRuleMap as PublicPropertyValidationRuleMap,
+    type PublicPropertyValidationRuleUpdate as PublicPropertyValidationRuleUpdate,
+    type PropertyValidationCrmV3PropertyValidationsObjectTypeIDPropertyNameRuleTypeRuleTypeParams as PropertyValidationCrmV3PropertyValidationsObjectTypeIDPropertyNameRuleTypeRuleTypeParams,
     type PropertyValidationGetParams as PropertyValidationGetParams,
   };
 

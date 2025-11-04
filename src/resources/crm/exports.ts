@@ -13,11 +13,23 @@ export class Exports extends APIResource {
    *
    * @example
    * ```ts
-   * const taskLocator = await client.crm.exports.create();
+   * const taskLocator = await client.crm.exports.createAsync();
    * ```
    */
-  create(body: ExportCreateParams, options?: RequestOptions): APIPromise<Shared.TaskLocator> {
+  createAsync(body: ExportCreateAsyncParams, options?: RequestOptions): APIPromise<Shared.TaskLocator> {
     return this._client.post('/crm/v3/exports/export/async', { body, ...options });
+  }
+
+  /**
+   * @example
+   * ```ts
+   * const publicExportResponse = await client.crm.exports.get(
+   *   0,
+   * );
+   * ```
+   */
+  get(exportID: number, options?: RequestOptions): APIPromise<PublicExportResponse> {
+    return this._client.get(path`/crm/v3/exports/export/${exportID}`, options);
   }
 
   /**
@@ -174,11 +186,11 @@ export interface PublicExportViewRequest {
   publicCrmSearchRequest?: PublicCrmSearchRequest;
 }
 
-export type ExportCreateParams =
-  | ExportCreateParams.PublicExportViewRequest
-  | ExportCreateParams.PublicExportListRequest;
+export type ExportCreateAsyncParams =
+  | ExportCreateAsyncParams.PublicExportViewRequest
+  | ExportCreateAsyncParams.PublicExportListRequest;
 
-export declare namespace ExportCreateParams {
+export declare namespace ExportCreateAsyncParams {
   export interface PublicExportViewRequest {}
 
   export interface PublicExportListRequest {}
@@ -192,6 +204,6 @@ export declare namespace Exports {
     type PublicExportRequest as PublicExportRequest,
     type PublicExportResponse as PublicExportResponse,
     type PublicExportViewRequest as PublicExportViewRequest,
-    type ExportCreateParams as ExportCreateParams,
+    type ExportCreateAsyncParams as ExportCreateAsyncParams,
   };
 }

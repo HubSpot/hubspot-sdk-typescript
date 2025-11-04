@@ -18,6 +18,12 @@ export {
 export {
   V4,
   type AssociationSpec1,
+  type AssociationsV4PublicObjectSearchRequest,
+  type AssociationsV4SimplePublicObject,
+  type AssociationsV4SimplePublicObjectBatchInputForCreate,
+  type AssociationsV4SimplePublicObjectInputForCreate,
+  type AssociationsV4SimplePublicObjectWithAssociations,
+  type AssociationsV4SimplePublicUpsertObject,
   type BatchInputPublicAssociationMultiArchive,
   type BatchInputPublicAssociationMultiPost,
   type BatchInputPublicDefaultAssociationMultiPost,
@@ -35,8 +41,4 @@ export {
   type PublicFetchAssociationsBatchRequest,
   type ReportCreationResponse,
   type StandardError1,
-  type V4CreateParams,
-  type V4UpdateParams,
-  type V4ListParams,
-  type V4DeleteParams,
 } from './v4/index';

@@ -56,15 +56,7 @@ export class Contacts extends APIResource {
    * ```ts
    * const simplePublicObject =
    *   await client.crm.objects.contacts.update('contactId', {
-   *     properties: {
-   *       property_checkbox: 'false',
-   *       property_date: '1572480000000',
-   *       property_dropdown: 'choice_b',
-   *       property_multiple_checkboxes: 'chocolate;strawberry',
-   *       property_number: '17',
-   *       property_radio: 'option_1',
-   *       property_string: 'value',
-   *     },
+   *     properties: { foo: 'string' },
    *   });
    * ```
    */
@@ -242,9 +234,6 @@ export interface ContactListParams extends PageParams {
 export interface ContactGdprDeleteParams {
   objectId: string;
 
-  /**
-   * The name of a property whose values are unique for this object
-   */
   idProperty?: string;
 }
 

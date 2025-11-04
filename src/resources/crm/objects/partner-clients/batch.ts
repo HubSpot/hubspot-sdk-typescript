@@ -71,8 +71,7 @@ export interface BatchBatchGetParams {
   archived?: boolean;
 
   /**
-   * Body param: When using a custom unique value property to retrieve records, the
-   * name of the property. Do not include this parameter if retrieving by record ID.
+   * Body param:
    */
   idProperty?: string;
 }

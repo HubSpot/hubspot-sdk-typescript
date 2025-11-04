@@ -1193,6 +1193,12 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/crm/associations/v4/v4.ts">AssociationSpec1</a></code>
+- <code><a href="./src/resources/crm/associations/v4/v4.ts">AssociationsV4PublicObjectSearchRequest</a></code>
+- <code><a href="./src/resources/crm/associations/v4/v4.ts">AssociationsV4SimplePublicObject</a></code>
+- <code><a href="./src/resources/crm/associations/v4/v4.ts">AssociationsV4SimplePublicObjectBatchInputForCreate</a></code>
+- <code><a href="./src/resources/crm/associations/v4/v4.ts">AssociationsV4SimplePublicObjectInputForCreate</a></code>
+- <code><a href="./src/resources/crm/associations/v4/v4.ts">AssociationsV4SimplePublicObjectWithAssociations</a></code>
+- <code><a href="./src/resources/crm/associations/v4/v4.ts">AssociationsV4SimplePublicUpsertObject</a></code>
 - <code><a href="./src/resources/crm/associations/v4/v4.ts">BatchInputPublicAssociationMultiArchive</a></code>
 - <code><a href="./src/resources/crm/associations/v4/v4.ts">BatchInputPublicAssociationMultiPost</a></code>
 - <code><a href="./src/resources/crm/associations/v4/v4.ts">BatchInputPublicDefaultAssociationMultiPost</a></code>
@@ -1210,13 +1216,6 @@ Types:
 - <code><a href="./src/resources/crm/associations/v4/v4.ts">PublicFetchAssociationsBatchRequest</a></code>
 - <code><a href="./src/resources/crm/associations/v4/v4.ts">ReportCreationResponse</a></code>
 - <code><a href="./src/resources/crm/associations/v4/v4.ts">StandardError1</a></code>
-
-Methods:
-
-- <code title="put /crm/v4/objects/{fromObjectType}/{fromObjectId}/associations/default/{toObjectType}/{toObjectId}">client.crm.associations.v4.<a href="./src/resources/crm/associations/v4/v4.ts">create</a>(toObjectID, { ...params }) -> BatchResponsePublicDefaultAssociation</code>
-- <code title="put /crm/v4/objects/{objectType}/{objectId}/associations/{toObjectType}/{toObjectId}">client.crm.associations.v4.<a href="./src/resources/crm/associations/v4/v4.ts">update</a>(toObjectID, [ ...body ]) -> CreatedResponseLabelsBetweenObjectPair</code>
-- <code title="get /crm/v4/objects/{objectType}/{objectId}/associations/{toObjectType}">client.crm.associations.v4.<a href="./src/resources/crm/associations/v4/v4.ts">list</a>(toObjectType, { ...params }) -> MultiAssociatedObjectWithLabelsPage</code>
-- <code title="delete /crm/v4/objects/{objectType}/{objectId}/associations/{toObjectType}/{toObjectId}">client.crm.associations.v4.<a href="./src/resources/crm/associations/v4/v4.ts">delete</a>(toObjectID, { ...params }) -> void</code>
 
 #### Batch
 
@@ -1247,7 +1246,8 @@ Types:
 
 Methods:
 
-- <code title="post /crm/v3/exports/export/async">client.crm.exports.<a href="./src/resources/crm/exports.ts">create</a>() -> TaskLocator</code>
+- <code title="post /crm/v3/exports/export/async">client.crm.exports.<a href="./src/resources/crm/exports.ts">createAsync</a>() -> TaskLocator</code>
+- <code title="get /crm/v3/exports/export/{exportId}">client.crm.exports.<a href="./src/resources/crm/exports.ts">get</a>(exportID) -> PublicExportResponse</code>
 - <code title="get /crm/v3/exports/export/async/tasks/{taskId}/status">client.crm.exports.<a href="./src/resources/crm/exports.ts">getStatus</a>(taskID) -> ActionResponseWithSingleResultUri</code>
 
 ## Extensions
@@ -2351,10 +2351,12 @@ Types:
 - <code><a href="./src/resources/crm/property-validations.ts">CollectionResponsePublicPropertyValidationRuleNoPaging</a></code>
 - <code><a href="./src/resources/crm/property-validations.ts">PublicPropertyValidationRule</a></code>
 - <code><a href="./src/resources/crm/property-validations.ts">PublicPropertyValidationRuleMap</a></code>
+- <code><a href="./src/resources/crm/property-validations.ts">PublicPropertyValidationRuleUpdate</a></code>
 
 Methods:
 
 - <code title="get /crm/v3/property-validations/{objectTypeId}">client.crm.propertyValidations.<a href="./src/resources/crm/property-validations.ts">list</a>(objectTypeID) -> CollectionResponsePublicPropertyValidationRuleMapNoPaging</code>
+- <code title="put /crm/v3/property-validations/{objectTypeId}/{propertyName}/rule-type/{ruleType}">client.crm.propertyValidations.<a href="./src/resources/crm/property-validations.ts">crmV3PropertyValidationsObjectTypeIDPropertyNameRuleTypeRuleType</a>(ruleType, { ...params }) -> void</code>
 - <code title="get /crm/v3/property-validations/{objectTypeId}/{propertyName}">client.crm.propertyValidations.<a href="./src/resources/crm/property-validations.ts">get</a>(propertyName, { ...params }) -> CollectionResponsePublicPropertyValidationRuleNoPaging</code>
 
 ## Timeline

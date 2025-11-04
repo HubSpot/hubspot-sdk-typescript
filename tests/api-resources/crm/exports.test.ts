@@ -9,8 +9,20 @@ const client = new Hubspot({
 
 describe('resource exports', () => {
   // Prism tests are disabled
-  test.skip('create', async () => {
-    const responsePromise = client.crm.exports.create({});
+  test.skip('createAsync', async () => {
+    const responsePromise = client.crm.exports.createAsync({});
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('get', async () => {
+    const responsePromise = client.crm.exports.get(0);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
