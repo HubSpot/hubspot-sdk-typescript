@@ -58,7 +58,7 @@ function validateSingleAuth(
   }
 
   if (provided.length > 1) {
-    throw new Errors.HubSpotError(
+    throw new Errors.HubspotError(
       `You provided multiple authentication methods (${provided.join(', ')}), ` +
         `but only one can be used at a time. Please use only one of: accessToken or developerAPIKey.`,
     );
