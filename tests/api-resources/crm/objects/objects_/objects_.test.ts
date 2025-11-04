@@ -36,15 +36,7 @@ describe('resource objects', () => {
   test.skip('update: only required params', async () => {
     const responsePromise = client.crm.objects.objects.update('objectId', {
       objectType: 'objectType',
-      properties: {
-        property_checkbox: 'false',
-        property_date: '1572480000000',
-        property_dropdown: 'choice_b',
-        property_multiple_checkboxes: 'chocolate;strawberry',
-        property_number: '17',
-        property_radio: 'option_1',
-        property_string: 'value',
-      },
+      properties: { foo: 'string' },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -59,15 +51,7 @@ describe('resource objects', () => {
   test.skip('update: required and optional params', async () => {
     const response = await client.crm.objects.objects.update('objectId', {
       objectType: 'objectType',
-      properties: {
-        property_checkbox: 'false',
-        property_date: '1572480000000',
-        property_dropdown: 'choice_b',
-        property_multiple_checkboxes: 'chocolate;strawberry',
-        property_number: '17',
-        property_radio: 'option_1',
-        property_string: 'value',
-      },
+      properties: { foo: 'string' },
       idProperty: 'idProperty',
     });
   });

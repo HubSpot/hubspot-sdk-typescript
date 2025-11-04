@@ -16,6 +16,12 @@ import * as EmailsAPI from '../../marketing/emails/emails';
 import * as V4API from './v4/v4';
 import {
   AssociationSpec1,
+  AssociationsV4PublicObjectSearchRequest,
+  AssociationsV4SimplePublicObject,
+  AssociationsV4SimplePublicObjectBatchInputForCreate,
+  AssociationsV4SimplePublicObjectInputForCreate,
+  AssociationsV4SimplePublicObjectWithAssociations,
+  AssociationsV4SimplePublicUpsertObject,
   BatchInputPublicAssociationMultiArchive,
   BatchInputPublicAssociationMultiPost,
   BatchInputPublicDefaultAssociationMultiPost,
@@ -34,10 +40,6 @@ import {
   ReportCreationResponse,
   StandardError1,
   V4,
-  V4CreateParams,
-  V4DeleteParams,
-  V4ListParams,
-  V4UpdateParams,
 } from './v4/v4';
 
 export class Associations extends APIResource {
@@ -139,6 +141,12 @@ export declare namespace Associations {
   export {
     V4 as V4,
     type AssociationSpec1 as AssociationSpec1,
+    type AssociationsV4PublicObjectSearchRequest as AssociationsV4PublicObjectSearchRequest,
+    type AssociationsV4SimplePublicObject as AssociationsV4SimplePublicObject,
+    type AssociationsV4SimplePublicObjectBatchInputForCreate as AssociationsV4SimplePublicObjectBatchInputForCreate,
+    type AssociationsV4SimplePublicObjectInputForCreate as AssociationsV4SimplePublicObjectInputForCreate,
+    type AssociationsV4SimplePublicObjectWithAssociations as AssociationsV4SimplePublicObjectWithAssociations,
+    type AssociationsV4SimplePublicUpsertObject as AssociationsV4SimplePublicUpsertObject,
     type BatchInputPublicAssociationMultiArchive as BatchInputPublicAssociationMultiArchive,
     type BatchInputPublicAssociationMultiPost as BatchInputPublicAssociationMultiPost,
     type BatchInputPublicDefaultAssociationMultiPost as BatchInputPublicDefaultAssociationMultiPost,
@@ -156,9 +164,5 @@ export declare namespace Associations {
     type PublicFetchAssociationsBatchRequest as PublicFetchAssociationsBatchRequest,
     type ReportCreationResponse as ReportCreationResponse,
     type StandardError1 as StandardError1,
-    type V4CreateParams as V4CreateParams,
-    type V4UpdateParams as V4UpdateParams,
-    type V4ListParams as V4ListParams,
-    type V4DeleteParams as V4DeleteParams,
   };
 }

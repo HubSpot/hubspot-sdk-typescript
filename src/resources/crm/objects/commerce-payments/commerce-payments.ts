@@ -55,18 +55,7 @@ export class CommercePayments extends APIResource {
    * const simplePublicObject =
    *   await client.crm.objects.commercePayments.update(
    *     'commercePaymentId',
-   *     {
-   *       properties: {
-   *         property_checkbox: 'false',
-   *         property_date: '1572480000000',
-   *         property_dropdown: 'choice_b',
-   *         property_multiple_checkboxes:
-   *           'chocolate;strawberry',
-   *         property_number: '17',
-   *         property_radio: 'option_1',
-   *         property_string: 'value',
-   *       },
-   *     },
+   *     { properties: { foo: 'string' } },
    *   );
    * ```
    */

@@ -53,15 +53,7 @@ export class Calls extends APIResource {
    * ```ts
    * const simplePublicObject =
    *   await client.crm.objects.calls.update('callId', {
-   *     properties: {
-   *       property_checkbox: 'false',
-   *       property_date: '1572480000000',
-   *       property_dropdown: 'choice_b',
-   *       property_multiple_checkboxes: 'chocolate;strawberry',
-   *       property_number: '17',
-   *       property_radio: 'option_1',
-   *       property_string: 'value',
-   *     },
+   *     properties: { foo: 'string' },
    *   });
    * ```
    */

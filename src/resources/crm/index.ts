@@ -18,7 +18,7 @@ export {
   type PublicExportRequest,
   type PublicExportResponse,
   type PublicExportViewRequest,
-  type ExportCreateParams,
+  type ExportCreateAsyncParams,
 } from './exports';
 export { Extensions } from './extensions/index';
 export {
@@ -166,6 +166,8 @@ export {
   type CollectionResponsePublicPropertyValidationRuleNoPaging,
   type PublicPropertyValidationRule,
   type PublicPropertyValidationRuleMap,
+  type PublicPropertyValidationRuleUpdate,
+  type PropertyValidationCrmV3PropertyValidationsObjectTypeIDPropertyNameRuleTypeRuleTypeParams,
   type PropertyValidationGetParams,
 } from './property-validations';
 export {
