@@ -79,6 +79,7 @@ export {
   type EventUpsertByExternalEventIDParams,
   type EventUpsertSubscriberStateByEmailParams,
   type EventUpsertSubscriberStateByIDParams,
+  type ParticipationBreakdownsPage,
   type MarketingEventPublicReadResponseV2sPage,
 } from './events';
 export {

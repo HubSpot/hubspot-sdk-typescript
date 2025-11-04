@@ -12,8 +12,11 @@ import {
   CollectionResponsePublicAPIUserActionEventForwardPaging,
   CollectionResponsePublicLoginAuditForwardPaging,
   HydratedCriticalAction,
+  HydratedCriticalActionsPage,
   PublicAPIUserActionEvent,
+  PublicAPIUserActionEventsPage,
   PublicLoginAudit,
+  PublicLoginAuditsPage,
 } from './activity';
 import * as DetailsAPI from './details';
 import { Details } from './details';
@@ -111,6 +114,9 @@ export declare namespace Account {
     type HydratedCriticalAction as HydratedCriticalAction,
     type PublicAPIUserActionEvent as PublicAPIUserActionEvent,
     type PublicLoginAudit as PublicLoginAudit,
+    type PublicAPIUserActionEventsPage as PublicAPIUserActionEventsPage,
+    type PublicLoginAuditsPage as PublicLoginAuditsPage,
+    type HydratedCriticalActionsPage as HydratedCriticalActionsPage,
     type ActivityListAuditLogsParams as ActivityListAuditLogsParams,
     type ActivityListLoginActivitiesParams as ActivityListLoginActivitiesParams,
     type ActivityListSecurityActivitiesParams as ActivityListSecurityActivitiesParams,

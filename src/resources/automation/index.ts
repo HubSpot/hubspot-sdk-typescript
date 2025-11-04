@@ -122,4 +122,5 @@ export {
   type WorkflowBatchGetIDMappingsParams,
   type WorkflowListEmailCampaignsParams,
   type APIFlowListingsPage,
+  type APIFlowEmailCampaignsPage,
 } from './workflows';

@@ -199,16 +199,24 @@ export class Emails extends APIResource {
    *
    * @example
    * ```ts
-   * const collectionResponseWithTotalVersionPublicEmail =
-   *   await client.marketing.emails.listRevisions('emailId');
+   * // Automatically fetches more pages as needed.
+   * for await (const versionPublicEmail of client.marketing.emails.listRevisions(
+   *   'emailId',
+   * )) {
+   *   // ...
+   * }
    * ```
    */
   listRevisions(
     emailID: string,
     query: EmailListRevisionsParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CollectionResponseWithTotalVersionPublicEmail> {
-    return this._client.get(path`/marketing/v3/emails/${emailID}/revisions`, { query, ...options });
+  ): PagePromise<VersionPublicEmailsPage, VersionPublicEmail> {
+    return this._client.getAPIList(
+      path`/marketing/v3/emails/${emailID}/revisions`,
+      Page<VersionPublicEmail>,
+      { query, ...options },
+    );
   }
 
   /**
@@ -331,6 +339,8 @@ export class Emails extends APIResource {
 }
 
 export type PublicEmailsPage = Page<PublicEmail>;
+
+export type VersionPublicEmailsPage = Page<VersionPublicEmail>;
 
 /**
  * Aggregated statistics for the given interval, plus the IDs of emails that were
@@ -6036,24 +6046,13 @@ export interface EmailGetRevisionParams {
   emailId: string;
 }
 
-export interface EmailListRevisionsParams {
-  /**
-   * The cursor token value to get the next set of results. You can get this from the
-   * `paging.next.after` JSON property of a paged response containing more results.
-   */
-  after?: string;
-
+export interface EmailListRevisionsParams extends PageParams {
   /**
    * The cursor token value to get the previous set of results. You can get this from
    * the `paging.prev.before` JSON property of a paged response containing more
    * results.
    */
   before?: string;
-
-  /**
-   * The maximum number of results to return. Default is 10.
-   */
-  limit?: number;
 }
 
 export interface EmailRestoreRevisionParams {
@@ -7088,6 +7087,7 @@ export declare namespace Emails {
     type SmartEmailField as SmartEmailField,
     type VersionPublicEmail as VersionPublicEmail,
     type PublicEmailsPage as PublicEmailsPage,
+    type VersionPublicEmailsPage as VersionPublicEmailsPage,
     type EmailCreateParams as EmailCreateParams,
     type EmailUpdateParams as EmailUpdateParams,
     type EmailListParams as EmailListParams,

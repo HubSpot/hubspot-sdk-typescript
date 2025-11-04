@@ -3,7 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as CmsAPI from '../cms';
 import * as PagesAPI from './pages';
-import { PagesPage } from './pages';
+import { ContentFoldersPage, PagesPage, VersionContentFoldersPage, VersionPagesPage } from './pages';
 import { APIPromise } from '../../../core/api-promise';
 import { Page, type PageParams, PagePromise } from '../../../core/pagination';
 import { buildHeaders } from '../../../internal/headers';
@@ -669,21 +669,24 @@ export class LandingPages extends APIResource {
    *
    * @example
    * ```ts
-   * const collectionResponseWithTotalVersionContentFolder =
-   *   await client.cms.pages.landingPages.listFolderRevisions(
-   *     'objectId',
-   *   );
+   * // Automatically fetches more pages as needed.
+   * for await (const versionContentFolder of client.cms.pages.landingPages.listFolderRevisions(
+   *   'objectId',
+   * )) {
+   *   // ...
+   * }
    * ```
    */
   listFolderRevisions(
     objectID: string,
     query: LandingPageListFolderRevisionsParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<PagesAPI.CollectionResponseWithTotalVersionContentFolder> {
-    return this._client.get(path`/cms/v3/pages/landing-pages/folders/${objectID}/revisions`, {
-      query,
-      ...options,
-    });
+  ): PagePromise<VersionContentFoldersPage, PagesAPI.VersionContentFolder> {
+    return this._client.getAPIList(
+      path`/cms/v3/pages/landing-pages/folders/${objectID}/revisions`,
+      Page<PagesAPI.VersionContentFolder>,
+      { query, ...options },
+    );
   }
 
   /**
@@ -693,15 +696,20 @@ export class LandingPages extends APIResource {
    *
    * @example
    * ```ts
-   * const collectionResponseWithTotalContentFolderForwardPaging =
-   *   await client.cms.pages.landingPages.listFolders();
+   * // Automatically fetches more pages as needed.
+   * for await (const contentFolder of client.cms.pages.landingPages.listFolders()) {
+   *   // ...
+   * }
    * ```
    */
   listFolders(
     query: LandingPageListFoldersParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<PagesAPI.CollectionResponseWithTotalContentFolderForwardPaging> {
-    return this._client.get('/cms/v3/pages/landing-pages/folders', { query, ...options });
+  ): PagePromise<ContentFoldersPage, PagesAPI.ContentFolder> {
+    return this._client.getAPIList('/cms/v3/pages/landing-pages/folders', Page<PagesAPI.ContentFolder>, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -709,18 +717,24 @@ export class LandingPages extends APIResource {
    *
    * @example
    * ```ts
-   * const collectionResponseWithTotalVersionPage =
-   *   await client.cms.pages.landingPages.listRevisions(
-   *     'objectId',
-   *   );
+   * // Automatically fetches more pages as needed.
+   * for await (const versionPage of client.cms.pages.landingPages.listRevisions(
+   *   'objectId',
+   * )) {
+   *   // ...
+   * }
    * ```
    */
   listRevisions(
     objectID: string,
     query: LandingPageListRevisionsParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<PagesAPI.CollectionResponseWithTotalVersionPage> {
-    return this._client.get(path`/cms/v3/pages/landing-pages/${objectID}/revisions`, { query, ...options });
+  ): PagePromise<VersionPagesPage, PagesAPI.VersionPage> {
+    return this._client.getAPIList(
+      path`/cms/v3/pages/landing-pages/${objectID}/revisions`,
+      Page<PagesAPI.VersionPage>,
+      { query, ...options },
+    );
   }
 
   /**
@@ -3508,28 +3522,11 @@ export interface LandingPageGetRevisionParams {
   objectId: string;
 }
 
-export interface LandingPageListFolderRevisionsParams {
-  /**
-   * The cursor token value to get the next set of results. You can get this from the
-   * `paging.next.after` JSON property of a paged response containing more results.
-   */
-  after?: string;
-
+export interface LandingPageListFolderRevisionsParams extends PageParams {
   before?: string;
-
-  /**
-   * The maximum number of results to return. Default is 100.
-   */
-  limit?: number;
 }
 
-export interface LandingPageListFoldersParams {
-  /**
-   * The cursor token value to get the next set of results. You can get this from the
-   * `paging.next.after` JSON property of a paged response containing more results.
-   */
-  after?: string;
-
+export interface LandingPageListFoldersParams extends PageParams {
   /**
    * Specifies whether to return deleted Folders. Defaults to `false`.
    */
@@ -3549,11 +3546,6 @@ export interface LandingPageListFoldersParams {
    * Only return Folders created before the specified time.
    */
   createdBefore?: string;
-
-  /**
-   * The maximum number of results to return. Default is 100.
-   */
-  limit?: number;
 
   property?: string;
 
@@ -3580,19 +3572,8 @@ export interface LandingPageListFoldersParams {
   updatedBefore?: string;
 }
 
-export interface LandingPageListRevisionsParams {
-  /**
-   * The cursor token value to get the next set of results. You can get this from the
-   * `paging.next.after` JSON property of a paged response containing more results.
-   */
-  after?: string;
-
+export interface LandingPageListRevisionsParams extends PageParams {
   before?: string;
-
-  /**
-   * The maximum number of results to return. Default is 100.
-   */
-  limit?: number;
 }
 
 export interface LandingPageRerunAbTestParams {
@@ -4841,4 +4822,4 @@ export declare namespace LandingPages {
   };
 }
 
-export { type PagesPage };
+export { type PagesPage, type VersionContentFoldersPage, type ContentFoldersPage, type VersionPagesPage };

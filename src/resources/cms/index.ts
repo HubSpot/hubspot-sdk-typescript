@@ -190,6 +190,9 @@ export {
   type VersionContentFolder,
   type VersionPage,
   type PagesPage,
+  type VersionContentFoldersPage,
+  type ContentFoldersPage,
+  type VersionPagesPage,
 } from './pages/index';
 export {
   SiteSearch,

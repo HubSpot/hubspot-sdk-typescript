@@ -75,6 +75,7 @@ export {
   type SettingSetNewLangPrimaryParams,
   type SettingUpdateLanguagesParams,
   type BlogsPage,
+  type VersionBlogsPage,
 } from './settings';
 export {
   Tags,

@@ -136,6 +136,8 @@ export class Campaigns extends APIResource {
 
 export type PublicCampaignsPage = Page<PublicCampaign>;
 
+export type ContactReferencesPage = Page<ContactReference>;
+
 export interface BatchInputPublicCampaignBatchUpdateItem {
   inputs: Array<PublicCampaignBatchUpdateItem>;
 }

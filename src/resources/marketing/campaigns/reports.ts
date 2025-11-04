@@ -2,7 +2,9 @@
 
 import { APIResource } from '../../../core/resource';
 import * as CampaignsAPI from './campaigns';
+import { ContactReferencesPage } from './campaigns';
 import { APIPromise } from '../../../core/api-promise';
+import { Page, type PageParams, PagePromise } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -57,23 +59,26 @@ export class Reports extends APIResource {
    *
    * @example
    * ```ts
-   * const collectionResponseContactReferenceForwardPaging =
-   *   await client.marketing.campaigns.reports.listContactIDsByType(
-   *     'contactType',
-   *     { campaignGuid: 'campaignGuid' },
-   *   );
+   * // Automatically fetches more pages as needed.
+   * for await (const contactReference of client.marketing.campaigns.reports.listContactIDsByType(
+   *   'contactType',
+   *   { campaignGuid: 'campaignGuid' },
+   * )) {
+   *   // ...
+   * }
    * ```
    */
   listContactIDsByType(
     contactType: string,
     params: ReportListContactIDsByTypeParams,
     options?: RequestOptions,
-  ): APIPromise<CampaignsAPI.CollectionResponseContactReferenceForwardPaging> {
+  ): PagePromise<ContactReferencesPage, CampaignsAPI.ContactReference> {
     const { campaignGuid, ...query } = params;
-    return this._client.get(path`/marketing/v3/campaigns/${campaignGuid}/reports/contacts/${contactType}`, {
-      query,
-      ...options,
-    });
+    return this._client.getAPIList(
+      path`/marketing/v3/campaigns/${campaignGuid}/reports/contacts/${contactType}`,
+      Page<CampaignsAPI.ContactReference>,
+      { query, ...options },
+    );
   }
 }
 
@@ -111,28 +116,17 @@ export interface ReportGetRevenueAttributionParams {
   startDate?: string;
 }
 
-export interface ReportListContactIDsByTypeParams {
+export interface ReportListContactIDsByTypeParams extends PageParams {
   /**
    * Path param: Unique identifier for the campaign, formatted as a UUID.
    */
   campaignGuid: string;
 
   /**
-   * Query param: A cursor for pagination. If provided, the results will start after
-   * the given cursor. Example: NTI1Cg%3D%3D
-   */
-  after?: string;
-
-  /**
    * Query param: End date for the report data, formatted as YYYY-MM-DD. Default
    * value: Current date
    */
   endDate?: string;
-
-  /**
-   * Query param: Limit for the number of contacts to fetch Default: 100
-   */
-  limit?: number;
 
   /**
    * Query param: The start date for the report data, formatted as YYYY-MM-DD.
@@ -148,3 +142,5 @@ export declare namespace Reports {
     type ReportListContactIDsByTypeParams as ReportListContactIDsByTypeParams,
   };
 }
+
+export { type ContactReferencesPage };

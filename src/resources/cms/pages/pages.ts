@@ -81,6 +81,12 @@ export class Pages extends APIResource {
 
 export type PagesPage = PaginationPage<Page>;
 
+export type VersionContentFoldersPage = PaginationPage<VersionContentFolder>;
+
+export type ContentFoldersPage = PaginationPage<ContentFolder>;
+
+export type VersionPagesPage = PaginationPage<VersionPage>;
+
 /**
  * Request body object for ending A/B tests.
  */
