@@ -11,6 +11,9 @@ describe('resource objects', () => {
   // Prism tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.crm.objects.objects.create('objectType', {
+      associations: [
+        { to: { id: '37295' }, types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }] },
+      ],
       properties: { foo: 'string' },
     });
     const rawResponse = await responsePromise.asResponse();
@@ -25,10 +28,10 @@ describe('resource objects', () => {
   // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.crm.objects.objects.create('objectType', {
-      properties: { foo: 'string' },
       associations: [
         { to: { id: '37295' }, types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }] },
       ],
+      properties: { foo: 'string' },
     });
   });
 
@@ -129,8 +132,14 @@ describe('resource objects', () => {
   });
 
   // Prism tests are disabled
-  test.skip('search', async () => {
-    const responsePromise = client.crm.objects.objects.search('objectType', {});
+  test.skip('search: only required params', async () => {
+    const responsePromise = client.crm.objects.objects.search('objectType', {
+      after: 'after',
+      filterGroups: [{ filters: [{ operator: 'EQ', propertyName: 'propertyName' }] }],
+      limit: 0,
+      properties: ['string'],
+      sorts: ['string'],
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -138,5 +147,29 @@ describe('resource objects', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('search: required and optional params', async () => {
+    const response = await client.crm.objects.objects.search('objectType', {
+      after: 'after',
+      filterGroups: [
+        {
+          filters: [
+            {
+              operator: 'EQ',
+              propertyName: 'propertyName',
+              highValue: 'highValue',
+              value: 'value',
+              values: ['string'],
+            },
+          ],
+        },
+      ],
+      limit: 0,
+      properties: ['string'],
+      sorts: ['string'],
+      query: 'query',
+    });
   });
 });

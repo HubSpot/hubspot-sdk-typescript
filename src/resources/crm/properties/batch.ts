@@ -64,16 +64,22 @@ export class Batch extends APIResource {
    * const batchResponseProperty =
    *   await client.crm.properties.batch.get('objectType', {
    *     archived: true,
+   *     dataSensitivity: 'non_sensitive',
    *     inputs: [{ name: 'name' }],
    *   });
    * ```
    */
   get(
     objectType: string,
-    body: BatchGetParams,
+    params: BatchGetParams,
     options?: RequestOptions,
   ): APIPromise<Shared.BatchResponseProperty> {
-    return this._client.post(path`/crm/v3/properties/${objectType}/batch/read`, { body, ...options });
+    const { locale, ...body } = params;
+    return this._client.post(path`/crm/v3/properties/${objectType}/batch/read`, {
+      query: { locale },
+      body,
+      ...options,
+    });
   }
 }
 
@@ -86,11 +92,25 @@ export interface BatchDeleteParams {
 }
 
 export interface BatchGetParams {
+  /**
+   * Body param:
+   */
   archived: boolean;
 
+  /**
+   * Body param:
+   */
+  dataSensitivity: 'non_sensitive' | 'sensitive' | 'highly_sensitive';
+
+  /**
+   * Body param:
+   */
   inputs: Array<Shared.PropertyName>;
 
-  dataSensitivity?: 'non_sensitive' | 'sensitive' | 'highly_sensitive';
+  /**
+   * Query param:
+   */
+  locale?: string;
 }
 
 export declare namespace Batch {

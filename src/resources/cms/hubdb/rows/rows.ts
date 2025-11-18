@@ -33,7 +33,7 @@ export class Rows extends APIResource {
    * ```ts
    * const hubDBTableRowV3 = await client.cms.hubdb.rows.create(
    *   'tableIdOrName',
-   *   { values: { foo: {} } },
+   *   { childTableId: 0, displayIndex: 0, values: { foo: {} } },
    * );
    * ```
    */
@@ -204,6 +204,8 @@ export class Rows extends APIResource {
    * const hubDBTableRowV3 =
    *   await client.cms.hubdb.rows.replaceDraft('321669910225', {
    *     tableIdOrName: 'tableIdOrName',
+   *     childTableId: 0,
+   *     displayIndex: 0,
    *     values: { foo: {} },
    *   });
    * ```
@@ -231,6 +233,8 @@ export class Rows extends APIResource {
    * const hubDBTableRowV3 =
    *   await client.cms.hubdb.rows.updateDraft('321669910225', {
    *     tableIdOrName: 'tableIdOrName',
+   *     childTableId: 0,
+   *     displayIndex: 0,
    *     values: { foo: {} },
    *   });
    * ```
@@ -250,16 +254,16 @@ export class Rows extends APIResource {
 
 export interface RowCreateParams {
   /**
+   * Specifies the value for the column child table id
+   */
+  childTableId: number;
+
+  displayIndex: number;
+
+  /**
    * List of key value pairs with the column name and column value
    */
   values: { [key: string]: HubdbAPI.Variant };
-
-  /**
-   * Specifies the value for the column child table id
-   */
-  childTableId?: number;
-
-  displayIndex?: number;
 
   /**
    * Specifies the value for `hs_name` column, which will be used as title in the
@@ -360,19 +364,19 @@ export interface RowReplaceDraftParams {
   tableIdOrName: string;
 
   /**
-   * Body param: List of key value pairs with the column name and column value
-   */
-  values: { [key: string]: HubdbAPI.Variant };
-
-  /**
    * Body param: Specifies the value for the column child table id
    */
-  childTableId?: number;
+  childTableId: number;
 
   /**
    * Body param:
    */
-  displayIndex?: number;
+  displayIndex: number;
+
+  /**
+   * Body param: List of key value pairs with the column name and column value
+   */
+  values: { [key: string]: HubdbAPI.Variant };
 
   /**
    * Body param: Specifies the value for `hs_name` column, which will be used as
@@ -394,19 +398,19 @@ export interface RowUpdateDraftParams {
   tableIdOrName: string;
 
   /**
-   * Body param: List of key value pairs with the column name and column value
-   */
-  values: { [key: string]: HubdbAPI.Variant };
-
-  /**
    * Body param: Specifies the value for the column child table id
    */
-  childTableId?: number;
+  childTableId: number;
 
   /**
    * Body param:
    */
-  displayIndex?: number;
+  displayIndex: number;
+
+  /**
+   * Body param: List of key value pairs with the column name and column value
+   */
+  values: { [key: string]: HubdbAPI.Variant };
 
   /**
    * Body param: Specifies the value for `hs_name` column, which will be used as

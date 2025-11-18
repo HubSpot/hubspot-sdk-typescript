@@ -30,6 +30,17 @@ export class Custom extends APIResource {
    * ```ts
    * const createdResponseSimplePublicObject =
    *   await client.crm.objects.custom.create('objectType', {
+   *     associations: [
+   *       {
+   *         to: { id: '37295' },
+   *         types: [
+   *           {
+   *             associationCategory: 'HUBSPOT_DEFINED',
+   *             associationTypeId: 0,
+   *           },
+   *         ],
+   *       },
+   *     ],
    *     properties: { foo: 'string' },
    *   });
    * ```
@@ -163,7 +174,19 @@ export class Custom extends APIResource {
    * @example
    * ```ts
    * const collectionResponseWithTotalSimplePublicObject =
-   *   await client.crm.objects.custom.search('objectType');
+   *   await client.crm.objects.custom.search('objectType', {
+   *     after: 'after',
+   *     filterGroups: [
+   *       {
+   *         filters: [
+   *           { operator: 'EQ', propertyName: 'propertyName' },
+   *         ],
+   *       },
+   *     ],
+   *     limit: 0,
+   *     properties: ['string'],
+   *     sorts: ['string'],
+   *   });
    * ```
    */
   search(
@@ -176,12 +199,12 @@ export class Custom extends APIResource {
 }
 
 export interface CustomCreateParams {
+  associations: Array<CrmAPI.PublicAssociationsForObject>;
+
   /**
    * Key-value pairs for setting properties for the new object.
    */
   properties: { [key: string]: string };
-
-  associations?: Array<CrmAPI.PublicAssociationsForObject>;
 }
 
 export interface CustomUpdateParams {
@@ -271,8 +294,15 @@ export interface CustomGetParams {
 }
 
 export interface CustomMergeParams {
+  /**
+   * The unique identifier of the CRM object that will be merged into the primary
+   * object.
+   */
   objectIdToMerge: string;
 
+  /**
+   * The unique identifier of the CRM object that will remain after the merge.
+   */
   primaryObjectId: string;
 }
 
@@ -280,32 +310,32 @@ export interface CustomSearchParams {
   /**
    * A paging cursor token for retrieving subsequent pages.
    */
-  after?: string;
+  after: string;
 
   /**
    * Up to 6 groups of filters defining additional query criteria.
    */
-  filterGroups?: Array<CrmAPI.FilterGroup>;
+  filterGroups: Array<CrmAPI.FilterGroup>;
 
   /**
    * The maximum results to return, up to 200 objects.
    */
-  limit?: number;
+  limit: number;
 
   /**
    * A list of property names to include in the response.
    */
-  properties?: Array<string>;
+  properties: Array<string>;
+
+  /**
+   * Specifies sorting order based on object properties.
+   */
+  sorts: Array<string>;
 
   /**
    * The search query string, up to 3000 characters.
    */
   query?: string;
-
-  /**
-   * Specifies sorting order based on object properties.
-   */
-  sorts?: Array<string>;
 }
 
 Custom.Batch = Batch;

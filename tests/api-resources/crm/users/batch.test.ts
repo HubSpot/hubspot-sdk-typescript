@@ -10,7 +10,19 @@ const client = new Hubspot({
 describe('resource batch', () => {
   // Prism tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.crm.users.batch.create({ inputs: [{ properties: { foo: 'string' } }] });
+    const responsePromise = client.crm.users.batch.create({
+      inputs: [
+        {
+          associations: [
+            {
+              to: { id: '37295' },
+              types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
+            },
+          ],
+          properties: { foo: 'string' },
+        },
+      ],
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -25,13 +37,13 @@ describe('resource batch', () => {
     const response = await client.crm.users.batch.create({
       inputs: [
         {
-          properties: { foo: 'string' },
           associations: [
             {
               to: { id: '37295' },
               types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
             },
           ],
+          properties: { foo: 'string' },
           objectWriteTraceId: 'objectWriteTraceId',
         },
       ],

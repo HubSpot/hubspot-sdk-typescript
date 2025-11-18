@@ -46,13 +46,35 @@ export class Events extends APIResource {
    *
    * @example
    * ```ts
-   * const marketingEventDefaultResponse =
-   *   await client.marketing.events.create({
-   *     eventName: 'eventName',
-   *     eventOrganizer: 'eventOrganizer',
-   *     externalAccountId: 'externalAccountId',
-   *     externalEventId: 'externalEventId',
-   *   });
+   * const marketingEventDefaultResponse = await client.marketing.events.create({
+   *   customProperties: [
+   *     {
+   *       dataSensitivity: 'none',
+   *       isEncrypted: true,
+   *       isLargeValue: true,
+   *       name: 'name',
+   *       persistenceTimestamp: 0,
+   *       requestId: 'requestId',
+   *       selectedByUser: true,
+   *       selectedByUserTimestamp: 0,
+   *       source: 'UNKNOWN',
+   *       sourceId: 'sourceId',
+   *       sourceLabel: 'sourceLabel',
+   *       sourceMetadata: 'sourceMetadata',
+   *       sourceUpstreamDeployable: 'sourceUpstreamDeployable',
+   *       sourceVid: [0],
+   *       timestamp: 0,
+   *       unit: 'unit',
+   *       updatedByUserId: 0,
+   *       useTimestampAsPersistenceTimestamp: true,
+   *       value: 'value',
+   *     },
+   *   ],
+   *   eventName: 'eventName',
+   *   eventOrganizer: 'eventOrganizer',
+   *   externalAccountId: 'externalAccountId',
+   *   externalEventId: 'externalEventId',
+   * });
    * ```
    */
   create(body: EventCreateParams, options?: RequestOptions): APIPromise<MarketingEventDefaultResponse> {
@@ -69,10 +91,26 @@ export class Events extends APIResource {
    *   await client.marketing.events.update('objectId', {
    *     customProperties: [
    *       {
-   *         name: '',
+   *         dataSensitivity: 'none',
+   *         isEncrypted: true,
+   *         isLargeValue: true,
+   *         name: 'name',
+   *         persistenceTimestamp: 0,
+   *         requestId: 'requestId',
+   *         selectedByUser: true,
+   *         selectedByUserTimestamp: 0,
+   *         source: 'UNKNOWN',
+   *         sourceId: 'sourceId',
+   *         sourceLabel: 'sourceLabel',
+   *         sourceMetadata: 'sourceMetadata',
    *         sourceUpstreamDeployable:
    *           'sourceUpstreamDeployable',
-   *         value: '',
+   *         sourceVid: [0],
+   *         timestamp: 0,
+   *         unit: 'unit',
+   *         updatedByUserId: 0,
+   *         useTimestampAsPersistenceTimestamp: true,
+   *         value: 'value',
    *       },
    *     ],
    *   });
@@ -369,12 +407,7 @@ export class Events extends APIResource {
    *     inputs: [
    *       {
    *         customProperties: [
-   *           {
-   *             name: '',
-   *             sourceUpstreamDeployable:
-   *               'sourceUpstreamDeployable',
-   *             value: '',
-   *           },
+   *           { ... },
    *         ],
    *         objectId: 'objectId',
    *       },
@@ -398,10 +431,32 @@ export class Events extends APIResource {
    * @example
    * ```ts
    * const marketingEventPublicDefaultResponse =
-   *   await client.marketing.events.updateByExternalEventID(
-   *     'externalEventId',
-   *     { externalAccountId: 'externalAccountId' },
-   *   );
+   *   await client.marketing.events.updateByExternalEventID('externalEventId', {
+   *     externalAccountId: 'externalAccountId',
+   *     customProperties: [
+   *       {
+   *         dataSensitivity: 'none',
+   *         isEncrypted: true,
+   *         isLargeValue: true,
+   *         name: 'name',
+   *         persistenceTimestamp: 0,
+   *         requestId: 'requestId',
+   *         selectedByUser: true,
+   *         selectedByUserTimestamp: 0,
+   *         source: 'UNKNOWN',
+   *         sourceId: 'sourceId',
+   *         sourceLabel: 'sourceLabel',
+   *         sourceMetadata: 'sourceMetadata',
+   *         sourceUpstreamDeployable: 'sourceUpstreamDeployable',
+   *         sourceVid: [0],
+   *         timestamp: 0,
+   *         unit: 'unit',
+   *         updatedByUserId: 0,
+   *         useTimestampAsPersistenceTimestamp: true,
+   *         value: 'value',
+   *       },
+   *     ],
+   *   });
    * ```
    */
   updateByExternalEventID(
@@ -429,6 +484,9 @@ export class Events extends APIResource {
    *   await client.marketing.events.upsertBatch({
    *     inputs: [
    *       {
+   *         customProperties: [
+   *           { ... },
+   *         ],
    *         eventName: 'eventName',
    *         eventOrganizer: 'eventOrganizer',
    *         externalAccountId: 'externalAccountId',
@@ -452,15 +510,35 @@ export class Events extends APIResource {
    * @example
    * ```ts
    * const marketingEventPublicDefaultResponse =
-   *   await client.marketing.events.upsertByExternalEventID(
-   *     'externalEventId',
-   *     {
-   *       eventName: 'eventName',
-   *       eventOrganizer: 'eventOrganizer',
-   *       externalAccountId: 'externalAccountId',
-   *       body_externalEventId: 'externalEventId',
-   *     },
-   *   );
+   *   await client.marketing.events.upsertByExternalEventID('externalEventId', {
+   *     customProperties: [
+   *       {
+   *         dataSensitivity: 'none',
+   *         isEncrypted: true,
+   *         isLargeValue: true,
+   *         name: 'name',
+   *         persistenceTimestamp: 0,
+   *         requestId: 'requestId',
+   *         selectedByUser: true,
+   *         selectedByUserTimestamp: 0,
+   *         source: 'UNKNOWN',
+   *         sourceId: 'sourceId',
+   *         sourceLabel: 'sourceLabel',
+   *         sourceMetadata: 'sourceMetadata',
+   *         sourceUpstreamDeployable: 'sourceUpstreamDeployable',
+   *         sourceVid: [0],
+   *         timestamp: 0,
+   *         unit: 'unit',
+   *         updatedByUserId: 0,
+   *         useTimestampAsPersistenceTimestamp: true,
+   *         value: 'value',
+   *       },
+   *     ],
+   *     eventName: 'eventName',
+   *     eventOrganizer: 'eventOrganizer',
+   *     externalAccountId: 'externalAccountId',
+   *     body_externalEventId: 'externalEventId',
+   *   });
    * ```
    */
   upsertByExternalEventID(
@@ -489,7 +567,14 @@ export class Events extends APIResource {
    *     {
    *       externalEventId: 'externalEventId',
    *       externalAccountId: 'externalAccountId',
-   *       inputs: [{ email: 'email', interactionDateTime: 0 }],
+   *       inputs: [
+   *         {
+   *           contactProperties: { foo: 'string' },
+   *           email: 'email',
+   *           interactionDateTime: 0,
+   *           properties: { foo: 'string' },
+   *         },
+   *       ],
    *     },
    *   );
    *
@@ -528,7 +613,13 @@ export class Events extends APIResource {
    *     {
    *       externalEventId: 'externalEventId',
    *       externalAccountId: 'externalAccountId',
-   *       inputs: [{ interactionDateTime: 0 }],
+   *       inputs: [
+   *         {
+   *           interactionDateTime: 0,
+   *           properties: { foo: 'string' },
+   *           vid: 0,
+   *         },
+   *       ],
    *     },
    *   );
    *
@@ -776,6 +867,18 @@ export interface MarketingEventCompleteRequestParams {
 
 export interface MarketingEventCreateRequestParams {
   /**
+   * A list of PropertyValues. These can be whatever kind of property names and
+   * values you want. However, they must already exist on the HubSpot account's
+   * definition of the MarketingEvent Object. If they don't they will be filtered out
+   * and not set. In order to do this you'll need to create a new PropertyGroup on
+   * the HubSpot account's MarketingEvent object for your specific app and create the
+   * Custom Property you want to track on that HubSpot account. Do not create any new
+   * default properties on the MarketingEvent object as that will apply to all
+   * HubSpot accounts.
+   */
+  customProperties: Array<PropertyValue>;
+
+  /**
    * The name of the marketing event.
    */
   eventName: string;
@@ -795,18 +898,6 @@ export interface MarketingEventCreateRequestParams {
    * The id of the marketing event in the external event application.
    */
   externalEventId: string;
-
-  /**
-   * A list of PropertyValues. These can be whatever kind of property names and
-   * values you want. However, they must already exist on the HubSpot account's
-   * definition of the MarketingEvent Object. If they don't they will be filtered out
-   * and not set. In order to do this you'll need to create a new PropertyGroup on
-   * the HubSpot account's MarketingEvent object for your specific app and create the
-   * Custom Property you want to track on that HubSpot account. Do not create any new
-   * default properties on the MarketingEvent object as that will apply to all
-   * HubSpot accounts.
-   */
-  customProperties?: Array<PropertyValue>;
 
   /**
    * The end date and time of the marketing event.
@@ -845,16 +936,6 @@ export interface MarketingEventCreateRequestParams {
 
 export interface MarketingEventDefaultResponse {
   /**
-   * The name of the marketing event.
-   */
-  eventName: string;
-
-  /**
-   * The name of the organizer of the marketing event.
-   */
-  eventOrganizer: string;
-
-  /**
    * A list of PropertyValues. These can be whatever kind of property names and
    * values you want. However, they must already exist on the HubSpot account's
    * definition of the MarketingEvent Object. If they don't they will be filtered out
@@ -864,7 +945,17 @@ export interface MarketingEventDefaultResponse {
    * default properties on the MarketingEvent object as that will apply to all
    * HubSpot accounts.
    */
-  customProperties?: Array<PropertyValue>;
+  customProperties: Array<PropertyValue>;
+
+  /**
+   * The name of the marketing event.
+   */
+  eventName: string;
+
+  /**
+   * The name of the organizer of the marketing event.
+   */
+  eventOrganizer: string;
 
   /**
    * The end date and time of the marketing event.
@@ -903,6 +994,8 @@ export interface MarketingEventDefaultResponse {
 }
 
 export interface MarketingEventEmailSubscriber {
+  contactProperties: { [key: string]: string };
+
   /**
    * The email address of the contact in HubSpot to associate with the event.
    */
@@ -913,9 +1006,7 @@ export interface MarketingEventEmailSubscriber {
    */
   interactionDateTime: number;
 
-  contactProperties?: { [key: string]: string };
-
-  properties?: { [key: string]: string };
+  properties: { [key: string]: string };
 }
 
 export interface MarketingEventExternalUniqueIdentifier {
@@ -954,6 +1045,18 @@ export interface MarketingEventPublicDefaultResponse {
   createdAt: string;
 
   /**
+   * A list of PropertyValues. These can be whatever kind of property names and
+   * values you want. However, they must already exist on the HubSpot account's
+   * definition of the MarketingEvent Object. If they don't they will be filtered out
+   * and not set. In order to do this you'll need to create a new PropertyGroup on
+   * the HubSpot account's MarketingEvent object for your specific app and create the
+   * Custom Property you want to track on that HubSpot account. Do not create any new
+   * default properties on the MarketingEvent object as that will apply to all
+   * HubSpot accounts.
+   */
+  customProperties: Array<PropertyValue>;
+
+  /**
    * The name of the marketing event.
    */
   eventName: string;
@@ -964,18 +1067,6 @@ export interface MarketingEventPublicDefaultResponse {
   eventOrganizer: string;
 
   updatedAt: string;
-
-  /**
-   * A list of PropertyValues. These can be whatever kind of property names and
-   * values you want. However, they must already exist on the HubSpot account's
-   * definition of the MarketingEvent Object. If they don't they will be filtered out
-   * and not set. In order to do this you'll need to create a new PropertyGroup on
-   * the HubSpot account's MarketingEvent object for your specific app and create the
-   * Custom Property you want to track on that HubSpot account. Do not create any new
-   * default properties on the MarketingEvent object as that will apply to all
-   * HubSpot accounts.
-   */
-  customProperties?: Array<PropertyValue>;
 
   /**
    * The end date and time of the marketing event.
@@ -1064,6 +1155,18 @@ export interface MarketingEventPublicReadResponse {
   createdAt: string;
 
   /**
+   * A list of PropertyValues. These can be whatever kind of property names and
+   * values you want. However, they must already exist on the HubSpot account's
+   * definition of the MarketingEvent Object. If they don't they will be filtered out
+   * and not set. In order to do this you'll need to create a new PropertyGroup on
+   * the HubSpot account's MarketingEvent object for your specific app and create the
+   * Custom Property you want to track on that HubSpot account. Do not create any new
+   * default properties on the MarketingEvent object as that will apply to all
+   * HubSpot accounts.
+   */
+  customProperties: Array<PropertyValue>;
+
+  /**
    * The name of the marketing event.
    */
   eventName: string;
@@ -1090,18 +1193,6 @@ export interface MarketingEventPublicReadResponse {
   registrants: number;
 
   updatedAt: string;
-
-  /**
-   * A list of PropertyValues. These can be whatever kind of property names and
-   * values you want. However, they must already exist on the HubSpot account's
-   * definition of the MarketingEvent Object. If they don't they will be filtered out
-   * and not set. In order to do this you'll need to create a new PropertyGroup on
-   * the HubSpot account's MarketingEvent object for your specific app and create the
-   * Custom Property you want to track on that HubSpot account. Do not create any new
-   * default properties on the MarketingEvent object as that will apply to all
-   * HubSpot accounts.
-   */
-  customProperties?: Array<PropertyValue>;
 
   /**
    * The end date and time of the marketing event.
@@ -1229,9 +1320,9 @@ export interface MarketingEventSubscriber {
    */
   interactionDateTime: number;
 
-  properties?: { [key: string]: string };
+  properties: { [key: string]: string };
 
-  vid?: number;
+  vid: number;
 }
 
 export interface MarketingEventUpdateRequestParams {
@@ -1245,7 +1336,7 @@ export interface MarketingEventUpdateRequestParams {
    * default properties on the MarketingEvent object as that will apply to all
    * HubSpot accounts.
    */
-  customProperties?: Array<PropertyValue>;
+  customProperties: Array<PropertyValue>;
 
   /**
    * The end date and time of the marketing event.
@@ -1325,51 +1416,44 @@ export interface ParticipationProperties {
  */
 export interface PropertyValue {
   /**
-   * Name of custom property
-   */
-  name: string;
-
-  sourceUpstreamDeployable: string;
-
-  /**
-   * Custom property value
-   */
-  value: string;
-
-  /**
    * The sensitivity level of the property, such as "non_sensitive", "sensitive", and
    * "highly_sensitive".
    */
-  dataSensitivity?: 'none' | 'standard' | 'high';
+  dataSensitivity: 'none' | 'standard' | 'high';
 
   /**
    * Whether the property value is encrypted.
    */
-  isEncrypted?: boolean;
+  isEncrypted: boolean;
 
-  isLargeValue?: boolean;
+  isLargeValue: boolean;
 
-  persistenceTimestamp?: number;
+  /**
+   * Name of custom property
+   */
+  name: string;
+
+  persistenceTimestamp: number;
 
   /**
    * A unique ID associated with this request.
    */
-  requestId?: string;
+  requestId: string;
 
   /**
    * Whether the value was selected by a user.
    */
-  selectedByUser?: boolean;
+  selectedByUser: boolean;
 
   /**
    * The timestamp when the value was selected by a user, if applicable.
    */
-  selectedByUserTimestamp?: number;
+  selectedByUserTimestamp: number;
 
   /**
    * The origin of the property value, such as "IMPORT" or "API".
    */
-  source?:
+  source:
     | 'UNKNOWN'
     | 'IMPORT'
     | 'API'
@@ -1473,39 +1557,46 @@ export interface PropertyValue {
   /**
    * The ID of the property source indicating where it was created.
    */
-  sourceId?: string;
+  sourceId: string;
 
   /**
    * A human-readable label.
    */
-  sourceLabel?: string;
+  sourceLabel: string;
 
   /**
    * Source metadata encoded as a base64 string. For example: `ZXhhbXBsZSBzdHJpbmc=`
    */
-  sourceMetadata?: string;
+  sourceMetadata: string;
+
+  sourceUpstreamDeployable: string;
 
   /**
    * The unique identifier associated with the source.
    */
-  sourceVid?: Array<number>;
+  sourceVid: Array<number>;
 
   /**
    * When the value was set, as a 64-bit integer.
    */
-  timestamp?: number;
+  timestamp: number;
 
   /**
    * The unit of measurement or context for the value.
    */
-  unit?: string;
+  unit: string;
 
   /**
    * The ID of the user who updated the property.
    */
-  updatedByUserId?: number;
+  updatedByUserId: number;
 
-  useTimestampAsPersistenceTimestamp?: boolean;
+  useTimestampAsPersistenceTimestamp: boolean;
+
+  /**
+   * Custom property value
+   */
+  value: string;
 }
 
 export interface PublicList {
@@ -1558,6 +1649,18 @@ export interface SubscriberVidResponse {
 
 export interface EventCreateParams {
   /**
+   * A list of PropertyValues. These can be whatever kind of property names and
+   * values you want. However, they must already exist on the HubSpot account's
+   * definition of the MarketingEvent Object. If they don't they will be filtered out
+   * and not set. In order to do this you'll need to create a new PropertyGroup on
+   * the HubSpot account's MarketingEvent object for your specific app and create the
+   * Custom Property you want to track on that HubSpot account. Do not create any new
+   * default properties on the MarketingEvent object as that will apply to all
+   * HubSpot accounts.
+   */
+  customProperties: Array<PropertyValue>;
+
+  /**
    * The name of the marketing event.
    */
   eventName: string;
@@ -1577,18 +1680,6 @@ export interface EventCreateParams {
    * The id of the marketing event in the external event application.
    */
   externalEventId: string;
-
-  /**
-   * A list of PropertyValues. These can be whatever kind of property names and
-   * values you want. However, they must already exist on the HubSpot account's
-   * definition of the MarketingEvent Object. If they don't they will be filtered out
-   * and not set. In order to do this you'll need to create a new PropertyGroup on
-   * the HubSpot account's MarketingEvent object for your specific app and create the
-   * Custom Property you want to track on that HubSpot account. Do not create any new
-   * default properties on the MarketingEvent object as that will apply to all
-   * HubSpot accounts.
-   */
-  customProperties?: Array<PropertyValue>;
 
   /**
    * The end date and time of the marketing event.
@@ -1726,7 +1817,7 @@ export interface EventUpdateByExternalEventIDParams {
    * not create any new default properties on the MarketingEvent object as that will
    * apply to all HubSpot accounts.
    */
-  customProperties?: Array<PropertyValue>;
+  customProperties: Array<PropertyValue>;
 
   /**
    * Body param: The end date and time of the marketing event.
@@ -1783,6 +1874,18 @@ export interface EventUpsertBatchParams {
 
 export interface EventUpsertByExternalEventIDParams {
   /**
+   * A list of PropertyValues. These can be whatever kind of property names and
+   * values you want. However, they must already exist on the HubSpot account's
+   * definition of the MarketingEvent Object. If they don't they will be filtered out
+   * and not set. In order to do this you'll need to create a new PropertyGroup on
+   * the HubSpot account's MarketingEvent object for your specific app and create the
+   * Custom Property you want to track on that HubSpot account. Do not create any new
+   * default properties on the MarketingEvent object as that will apply to all
+   * HubSpot accounts.
+   */
+  customProperties: Array<PropertyValue>;
+
+  /**
    * The name of the marketing event.
    */
   eventName: string;
@@ -1802,18 +1905,6 @@ export interface EventUpsertByExternalEventIDParams {
    * The id of the marketing event in the external event application.
    */
   body_externalEventId: string;
-
-  /**
-   * A list of PropertyValues. These can be whatever kind of property names and
-   * values you want. However, they must already exist on the HubSpot account's
-   * definition of the MarketingEvent Object. If they don't they will be filtered out
-   * and not set. In order to do this you'll need to create a new PropertyGroup on
-   * the HubSpot account's MarketingEvent object for your specific app and create the
-   * Custom Property you want to track on that HubSpot account. Do not create any new
-   * default properties on the MarketingEvent object as that will apply to all
-   * HubSpot accounts.
-   */
-  customProperties?: Array<PropertyValue>;
 
   /**
    * The end date and time of the marketing event.

@@ -7,20 +7,42 @@ import { RequestOptions } from '../../../internal/request-options';
 
 export class Calendar extends APIResource {
   create(
-    body: CalendarCreateParams,
+    params: CalendarCreateParams,
     options?: RequestOptions,
   ): APIPromise<MeetingsAPI.ExternalCalenderMeetingEventResponse> {
-    return this._client.post('/scheduler/v3/meetings/calendar', { body, ...options });
+    const { organizerUserId, ...body } = params;
+    return this._client.post('/scheduler/v3/meetings/calendar', {
+      query: { organizerUserId },
+      body,
+      ...options,
+    });
   }
 }
 
 export interface CalendarCreateParams {
+  /**
+   * Query param:
+   */
+  organizerUserId: string;
+
+  /**
+   * Body param:
+   */
   associations: Array<MeetingsAPI.ExternalAssociationCreateRequest>;
 
+  /**
+   * Body param:
+   */
   emailReminderSchedule: MeetingsAPI.ExternalEmailReminderSchedule;
 
+  /**
+   * Body param:
+   */
   properties: MeetingsAPI.ExternalCalendarMeetingEventCreateProperties;
 
+  /**
+   * Body param:
+   */
   timezone: string;
 }
 

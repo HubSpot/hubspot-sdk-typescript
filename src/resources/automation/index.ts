@@ -42,6 +42,9 @@ export {
   type PublicSequenceStepResponse,
   type PublicTaskPatternResponse,
   type UnenrollmentSettingsResponse,
+  type SequenceListParams,
+  type SequenceGetParams,
+  type PublicSequenceLiteResponsesPage,
 } from './sequences/index';
 export {
   Workflows,
@@ -102,8 +105,8 @@ export {
   type APIStaticValue,
   type APITimeDelay,
   type APITimeOfDay,
-  type APITimestampValue,
   type APITimeWindow,
+  type APITimestampValue,
   type APIUnEnrollmentSetting,
   type APIWebhookAction,
   type APIWeeklyEnrollmentSchedule,

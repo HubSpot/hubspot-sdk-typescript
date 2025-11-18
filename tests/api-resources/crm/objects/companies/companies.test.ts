@@ -10,7 +10,12 @@ const client = new Hubspot({
 describe('resource companies', () => {
   // Prism tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.crm.objects.companies.create({ properties: { foo: 'string' } });
+    const responsePromise = client.crm.objects.companies.create({
+      associations: [
+        { to: { id: '37295' }, types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }] },
+      ],
+      properties: { foo: 'string' },
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,10 +28,10 @@ describe('resource companies', () => {
   // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.crm.objects.companies.create({
-      properties: { foo: 'string' },
       associations: [
         { to: { id: '37295' }, types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }] },
       ],
+      properties: { foo: 'string' },
     });
   });
 
@@ -148,8 +153,14 @@ describe('resource companies', () => {
   });
 
   // Prism tests are disabled
-  test.skip('search', async () => {
-    const responsePromise = client.crm.objects.companies.search({});
+  test.skip('search: only required params', async () => {
+    const responsePromise = client.crm.objects.companies.search({
+      after: 'after',
+      filterGroups: [{ filters: [{ operator: 'EQ', propertyName: 'propertyName' }] }],
+      limit: 0,
+      properties: ['string'],
+      sorts: ['string'],
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -157,5 +168,29 @@ describe('resource companies', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('search: required and optional params', async () => {
+    const response = await client.crm.objects.companies.search({
+      after: 'after',
+      filterGroups: [
+        {
+          filters: [
+            {
+              operator: 'EQ',
+              propertyName: 'propertyName',
+              highValue: 'highValue',
+              value: 'value',
+              values: ['string'],
+            },
+          ],
+        },
+      ],
+      limit: 0,
+      properties: ['string'],
+      sorts: ['string'],
+      query: 'query',
+    });
   });
 });

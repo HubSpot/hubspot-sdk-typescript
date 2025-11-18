@@ -353,8 +353,11 @@ describe('resource lists', () => {
   });
 
   // Prism tests are disabled
-  test.skip('search', async () => {
-    const responsePromise = client.crm.lists.search({});
+  test.skip('search: only required params', async () => {
+    const responsePromise = client.crm.lists.search({
+      additionalProperties: ['hs_list_size_week_delta'],
+      offset: 0,
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -362,6 +365,19 @@ describe('resource lists', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('search: required and optional params', async () => {
+    const response = await client.crm.lists.search({
+      additionalProperties: ['hs_list_size_week_delta'],
+      offset: 0,
+      count: 100,
+      listIds: ['string'],
+      processingTypes: ['string'],
+      query: 'Test',
+      sort: 'sort',
+    });
   });
 
   // Prism tests are disabled

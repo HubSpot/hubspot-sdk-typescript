@@ -10,7 +10,11 @@ const client = new Hubspot({
 describe('resource rows', () => {
   // Prism tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.cms.hubdb.rows.create('tableIdOrName', { values: { foo: {} } });
+    const responsePromise = client.cms.hubdb.rows.create('tableIdOrName', {
+      childTableId: 0,
+      displayIndex: 0,
+      values: { foo: {} },
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,9 +27,9 @@ describe('resource rows', () => {
   // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.cms.hubdb.rows.create('tableIdOrName', {
-      values: { foo: {} },
       childTableId: 0,
       displayIndex: 0,
+      values: { foo: {} },
       name: 'name',
       path: 'path',
     });
@@ -168,6 +172,8 @@ describe('resource rows', () => {
   test.skip('replaceDraft: only required params', async () => {
     const responsePromise = client.cms.hubdb.rows.replaceDraft('321669910225', {
       tableIdOrName: 'tableIdOrName',
+      childTableId: 0,
+      displayIndex: 0,
       values: { foo: {} },
     });
     const rawResponse = await responsePromise.asResponse();
@@ -183,9 +189,9 @@ describe('resource rows', () => {
   test.skip('replaceDraft: required and optional params', async () => {
     const response = await client.cms.hubdb.rows.replaceDraft('321669910225', {
       tableIdOrName: 'tableIdOrName',
-      values: { foo: {} },
       childTableId: 0,
       displayIndex: 0,
+      values: { foo: {} },
       name: 'name',
       path: 'path',
     });
@@ -195,6 +201,8 @@ describe('resource rows', () => {
   test.skip('updateDraft: only required params', async () => {
     const responsePromise = client.cms.hubdb.rows.updateDraft('321669910225', {
       tableIdOrName: 'tableIdOrName',
+      childTableId: 0,
+      displayIndex: 0,
       values: { foo: {} },
     });
     const rawResponse = await responsePromise.asResponse();
@@ -210,9 +218,9 @@ describe('resource rows', () => {
   test.skip('updateDraft: required and optional params', async () => {
     const response = await client.cms.hubdb.rows.updateDraft('321669910225', {
       tableIdOrName: 'tableIdOrName',
-      values: { foo: {} },
       childTableId: 0,
       displayIndex: 0,
+      values: { foo: {} },
       name: 'name',
       path: 'path',
     });

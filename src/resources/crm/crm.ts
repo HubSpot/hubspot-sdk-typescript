@@ -82,6 +82,7 @@ import {
   BatchInputPublicAssociation,
   BatchResponsePublicAssociation,
   BatchResponsePublicAssociationMulti,
+  BatchResponseVoid,
   PublicAssociation,
   PublicAssociationMulti,
 } from './associations/associations';
@@ -170,7 +171,6 @@ import {
 } from './pipelines/pipelines';
 import * as PropertiesAPI from './properties/properties';
 import {
-  BatchReadInputPropertyName,
   CollectionResponseProperty,
   CollectionResponsePropertyGroup,
   CreatedResponseProperty,
@@ -212,8 +212,6 @@ import {
   UserUpdateParams,
   Users,
 } from './users/users';
-import * as EmailsAPI from '../marketing/emails/emails';
-import * as V4API from './associations/v4/v4';
 import { Page } from '../../core/pagination';
 
 export class Crm extends APIResource {
@@ -297,24 +295,46 @@ export interface BatchReadInputSimplePublicObjectID {
    */
   propertiesWithHistory: Array<string>;
 
+  /**
+   * A unique property used to identify objects instead of the default ID.
+   */
   idProperty?: string;
 }
 
 export interface BatchResponsePublicDefaultAssociation {
+  /**
+   * The timestamp when the batch process was completed, in ISO 8601 format.
+   */
   completedAt: string;
 
   results: Array<PublicDefaultAssociation>;
 
+  /**
+   * The timestamp when the batch process began execution, in ISO 8601 format.
+   */
   startedAt: string;
 
+  /**
+   * The status of the batch processing request: "PENDING", "PROCESSING",
+   * "CANCELLED", or "COMPLETE".
+   */
   status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
 
-  errors?: Array<V4API.StandardError1>;
+  errors?: Array<Shared.StandardError>;
 
+  /**
+   * An object containing relevant links related to the batch request.
+   */
   links?: { [key: string]: string };
 
+  /**
+   * The number of errors encountered during the batch processing.
+   */
   numErrors?: number;
 
+  /**
+   * The timestamp when the batch process was initiated, in ISO 8601 format.
+   */
   requestedAt?: string;
 }
 
@@ -340,13 +360,16 @@ export interface BatchResponseSimplePublicObject {
    */
   status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
 
-  errors?: Array<V4API.StandardError1>;
+  errors?: Array<Shared.StandardError>;
 
   /**
    * An object containing relevant links related to the batch request.
    */
   links?: { [key: string]: string };
 
+  /**
+   * The number of errors encountered during the batch processing.
+   */
   numErrors?: number;
 
   /**
@@ -378,13 +401,16 @@ export interface BatchResponseSimplePublicUpsertObject {
    */
   status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
 
-  errors?: Array<V4API.StandardError1>;
+  errors?: Array<Shared.StandardError>;
 
   /**
    * An object containing relevant links related to the batch request.
    */
   links?: { [key: string]: string };
 
+  /**
+   * The number of errors
+   */
   numErrors?: number;
 
   /**
@@ -396,50 +422,50 @@ export interface BatchResponseSimplePublicUpsertObject {
 export interface CollectionResponseAssociatedID {
   results: Array<AssociatedID>;
 
-  /**
-   * Contains information pagination of results.
-   */
-  paging?: EmailsAPI.EmailsPaging;
+  paging?: Shared.Paging;
 }
 
 export interface CollectionResponseMultiAssociatedObjectWithLabel {
   results: Array<MultiAssociatedObjectWithLabel>;
 
-  /**
-   * Contains information pagination of results.
-   */
-  paging?: EmailsAPI.EmailsPaging;
+  paging?: Shared.Paging;
 }
 
 export interface CollectionResponseSimplePublicObjectWithAssociations {
   results: Array<SimplePublicObjectWithAssociations>;
 
-  /**
-   * Contains information pagination of results.
-   */
-  paging?: EmailsAPI.EmailsPaging;
+  paging?: Shared.Paging;
 }
 
 export interface CollectionResponseWithTotalSimplePublicObject {
   results: Array<SimplePublicObject>;
 
+  /**
+   * The total number of objects in the collection.
+   */
   total: number;
 
-  /**
-   * Contains information pagination of results.
-   */
-  paging?: EmailsAPI.EmailsPaging;
+  paging?: Shared.Paging;
 }
 
 export interface CreatedResponseLabelsBetweenObjectPair {
+  /**
+   * The unique identifier of the newly created resource.
+   */
   createdResourceId: string;
 
   entity: LabelsBetweenObjectPair;
 
+  /**
+   * The URL location of the newly created resource.
+   */
   location?: string;
 }
 
 export interface CreatedResponseSimplePublicObject {
+  /**
+   * The unique identifier of the newly created resource.
+   */
   createdResourceId: string;
 
   /**
@@ -447,6 +473,9 @@ export interface CreatedResponseSimplePublicObject {
    */
   entity: SimplePublicObject;
 
+  /**
+   * The URL location of the newly created resource.
+   */
   location?: string;
 }
 
@@ -529,13 +558,16 @@ export interface LabelsBetweenObjectPair {
 export interface MultiAssociatedObjectWithLabel {
   associationTypes: Array<AssociationSpecWithLabel>;
 
+  /**
+   * The unique identifier for the target object in the association.
+   */
   toObjectId: string;
 }
 
 export interface PublicAssociationsForObject {
   to: Shared.PublicObjectID;
 
-  types: Array<V4API.AssociationSpec1>;
+  types: Array<Shared.AssociationSpec>;
 }
 
 export interface PublicDefaultAssociation {
@@ -543,7 +575,7 @@ export interface PublicDefaultAssociation {
    * Defines the type, direction, and details of the relationship between two CRM
    * objects.
    */
-  associationSpec: V4API.AssociationSpec1;
+  associationSpec: Shared.AssociationSpec;
 
   from: Shared.PublicObjectID;
 
@@ -551,14 +583,27 @@ export interface PublicDefaultAssociation {
 }
 
 export interface PublicGdprDeleteInput {
+  /**
+   * ID of the object
+   */
   objectId: string;
 
+  /**
+   * ID property
+   */
   idProperty?: string;
 }
 
 export interface PublicMergeInput {
+  /**
+   * The unique identifier of the CRM object that will be merged into the primary
+   * object.
+   */
   objectIdToMerge: string;
 
+  /**
+   * The unique identifier of the CRM object that will remain after the merge.
+   */
   primaryObjectId: string;
 }
 
@@ -569,32 +614,32 @@ export interface PublicObjectSearchRequest {
   /**
    * A paging cursor token for retrieving subsequent pages.
    */
-  after?: string;
+  after: string;
 
   /**
    * Up to 6 groups of filters defining additional query criteria.
    */
-  filterGroups?: Array<FilterGroup>;
+  filterGroups: Array<FilterGroup>;
 
   /**
    * The maximum results to return, up to 200 objects.
    */
-  limit?: number;
+  limit: number;
 
   /**
    * A list of property names to include in the response.
    */
-  properties?: Array<string>;
+  properties: Array<string>;
+
+  /**
+   * Specifies sorting order based on object properties.
+   */
+  sorts: Array<string>;
 
   /**
    * The search query string, up to 3000 characters.
    */
   query?: string;
-
-  /**
-   * Specifies sorting order based on object properties.
-   */
-  sorts?: Array<string>;
 }
 
 /**
@@ -605,6 +650,11 @@ export interface SimplePublicObject {
    * The unique ID of the object.
    */
   id: string;
+
+  /**
+   * Whether the object is archived.
+   */
+  archived: boolean;
 
   /**
    * The timestamp when the object was created, in ISO 8601 format.
@@ -622,15 +672,13 @@ export interface SimplePublicObject {
   updatedAt: string;
 
   /**
-   * Whether the object is archived.
-   */
-  archived?: boolean;
-
-  /**
    * The timestamp when the object was archived, in ISO 8601 format.
    */
   archivedAt?: string;
 
+  /**
+   * A unique identifier for tracing the creation request.
+   */
   objectWriteTraceId?: string;
 
   /**
@@ -638,6 +686,8 @@ export interface SimplePublicObject {
    * history.
    */
   propertiesWithHistory?: { [key: string]: Array<ValueWithTimestamp> };
+
+  url?: string;
 }
 
 /**
@@ -668,10 +718,16 @@ export interface SimplePublicObjectBatchInput {
 }
 
 export interface SimplePublicObjectBatchInputForCreate {
+  associations: Array<PublicAssociationsForObject>;
+
+  /**
+   * Key-value pairs representing the properties of the object.
+   */
   properties: { [key: string]: string };
 
-  associations?: Array<PublicAssociationsForObject>;
-
+  /**
+   * A unique identifier for tracing the creation request.
+   */
   objectWriteTraceId?: string;
 }
 
@@ -704,6 +760,9 @@ export interface SimplePublicObjectBatchInputUpsert {
 }
 
 export interface SimplePublicObjectID {
+  /**
+   * Object ID
+   */
   id: string;
 }
 
@@ -724,12 +783,12 @@ export interface SimplePublicObjectInput {
  * objects.
  */
 export interface SimplePublicObjectInputForCreate {
+  associations: Array<PublicAssociationsForObject>;
+
   /**
    * Key-value pairs for setting properties for the new object.
    */
   properties: { [key: string]: string };
-
-  associations?: Array<PublicAssociationsForObject>;
 }
 
 /**
@@ -741,6 +800,11 @@ export interface SimplePublicObjectWithAssociations {
    * The unique ID of the object.
    */
   id: string;
+
+  /**
+   * Whether the object is archived.
+   */
+  archived: boolean;
 
   /**
    * The timestamp when the object was created, in ISO 8601 format.
@@ -758,11 +822,6 @@ export interface SimplePublicObjectWithAssociations {
   updatedAt: string;
 
   /**
-   * Whether the object is archived.
-   */
-  archived?: boolean;
-
-  /**
    * The timestamp when the object was archived, in ISO 8601 format.
    */
   archivedAt?: string;
@@ -772,6 +831,9 @@ export interface SimplePublicObjectWithAssociations {
    */
   associations?: { [key: string]: CollectionResponseAssociatedID };
 
+  /**
+   * A unique identifier for tracing the creation request.
+   */
   objectWriteTraceId?: string;
 
   /**
@@ -779,6 +841,8 @@ export interface SimplePublicObjectWithAssociations {
    * history.
    */
   propertiesWithHistory?: { [key: string]: Array<ValueWithTimestamp> };
+
+  url?: string;
 }
 
 /**
@@ -789,6 +853,11 @@ export interface SimplePublicUpsertObject {
    * The unique ID of the object.
    */
   id: string;
+
+  /**
+   * Whether the object is archived.
+   */
+  archived: boolean;
 
   /**
    * The timestamp when the object was created, in ISO 8601 format.
@@ -811,15 +880,13 @@ export interface SimplePublicUpsertObject {
   updatedAt: string;
 
   /**
-   * Whether the object is archived.
-   */
-  archived?: boolean;
-
-  /**
    * The timestamp when the object was archived, in ISO 8601 format.
    */
   archivedAt?: string;
 
+  /**
+   * A unique identifier for tracing the creation or update request.
+   */
   objectWriteTraceId?: string;
 
   /**
@@ -827,6 +894,8 @@ export interface SimplePublicUpsertObject {
    * history.
    */
   propertiesWithHistory?: { [key: string]: Array<ValueWithTimestamp> };
+
+  url?: string;
 }
 
 /**
@@ -927,6 +996,7 @@ export declare namespace Crm {
     type BatchInputPublicAssociation as BatchInputPublicAssociation,
     type BatchResponsePublicAssociation as BatchResponsePublicAssociation,
     type BatchResponsePublicAssociationMulti as BatchResponsePublicAssociationMulti,
+    type BatchResponseVoid as BatchResponseVoid,
     type PublicAssociation as PublicAssociation,
     type PublicAssociationMulti as PublicAssociationMulti,
   };
@@ -1009,10 +1079,10 @@ export declare namespace Crm {
     type ListFolderCreateResponse as ListFolderCreateResponse,
     type ListFolderFetchResponse as ListFolderFetchResponse,
     type ListMoveRequest as ListMoveRequest,
-    type ListsByIDResponse as ListsByIDResponse,
     type ListSearchRequest as ListSearchRequest,
     type ListSearchResponse as ListSearchResponse,
     type ListUpdateResponse as ListUpdateResponse,
+    type ListsByIDResponse as ListsByIDResponse,
     type MembershipChangeRequest as MembershipChangeRequest,
     type MembershipsUpdateResponse as MembershipsUpdateResponse,
     type PublicBatchMigrationMapping as PublicBatchMigrationMapping,
@@ -1077,7 +1147,6 @@ export declare namespace Crm {
 
   export {
     Properties as Properties,
-    type BatchReadInputPropertyName as BatchReadInputPropertyName,
     type CollectionResponseProperty as CollectionResponseProperty,
     type CollectionResponsePropertyGroup as CollectionResponsePropertyGroup,
     type CreatedResponseProperty as CreatedResponseProperty,

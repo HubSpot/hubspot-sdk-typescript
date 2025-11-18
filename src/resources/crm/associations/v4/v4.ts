@@ -3,7 +3,6 @@
 import { APIResource } from '../../../../core/resource';
 import * as Shared from '../../../shared';
 import * as CrmAPI from '../../crm';
-import * as EmailsAPI from '../../../marketing/emails/emails';
 import * as BatchAPI from './batch';
 import {
   Batch,
@@ -12,226 +11,37 @@ import {
   BatchDeleteLabelsParams,
   BatchDeleteParams,
   BatchGetParams,
+  BatchUpsertParams,
 } from './batch';
 import * as ReportAPI from './report';
 import { Report } from './report';
+import { APIPromise } from '../../../../core/api-promise';
+import { RequestOptions } from '../../../../internal/request-options';
+import { path } from '../../../../internal/utils/path';
 
 export class V4 extends APIResource {
   batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
   report: ReportAPI.Report = new ReportAPI.Report(this._client);
-}
-
-/**
- * Defines the type, direction, and details of the relationship between two CRM
- * objects.
- */
-export interface AssociationSpec1 {
-  /**
-   * The category of the association, such as "HUBSPOT_DEFINED".
-   */
-  associationCategory: 'HUBSPOT_DEFINED' | 'USER_DEFINED' | 'INTEGRATOR_DEFINED';
 
   /**
-   * The ID representing the specific type of association.
+   * Merge two CRM objects of the specified type into one.
+   *
+   * @example
+   * ```ts
+   * const simplePublicObject =
+   *   await client.crm.associations.v4.merge('objectType', {
+   *     objectIdToMerge: 'objectIdToMerge',
+   *     primaryObjectId: 'primaryObjectId',
+   *   });
+   * ```
    */
-  associationTypeId: number;
-}
-
-/**
- * Describes a search request
- */
-export interface AssociationsV4PublicObjectSearchRequest {
-  /**
-   * A paging cursor token for retrieving subsequent pages.
-   */
-  after: string;
-
-  /**
-   * Up to 6 groups of filters defining additional query criteria.
-   */
-  filterGroups: Array<CrmAPI.FilterGroup>;
-
-  /**
-   * The maximum results to return, up to 200 objects.
-   */
-  limit: number;
-
-  /**
-   * A list of property names to include in the response.
-   */
-  properties: Array<string>;
-
-  /**
-   * Specifies sorting order based on object properties.
-   */
-  sorts: Array<string>;
-
-  /**
-   * The search query string, up to 3000 characters.
-   */
-  query?: string;
-}
-
-/**
- * A simple public object.
- */
-export interface AssociationsV4SimplePublicObject {
-  /**
-   * The unique ID of the object.
-   */
-  id: string;
-
-  /**
-   * Whether the object is archived.
-   */
-  archived: boolean;
-
-  /**
-   * The timestamp when the object was created, in ISO 8601 format.
-   */
-  createdAt: string;
-
-  /**
-   * Key-value pairs representing the properties of the object.
-   */
-  properties: { [key: string]: string | null };
-
-  /**
-   * The timestamp when the object was last updated, in ISO 8601 format.
-   */
-  updatedAt: string;
-
-  /**
-   * The timestamp when the object was archived, in ISO 8601 format.
-   */
-  archivedAt?: string;
-
-  objectWriteTraceId?: string;
-
-  /**
-   * Key-value pairs representing the properties of the object along with their
-   * history.
-   */
-  propertiesWithHistory?: { [key: string]: Array<CrmAPI.ValueWithTimestamp> };
-}
-
-export interface AssociationsV4SimplePublicObjectBatchInputForCreate {
-  associations: Array<CrmAPI.PublicAssociationsForObject>;
-
-  properties: { [key: string]: string };
-
-  objectWriteTraceId?: string;
-}
-
-/**
- * Is the input object used to create a new CRM object, containing the properties
- * to be set and optional associations to link the new record with other CRM
- * objects.
- */
-export interface AssociationsV4SimplePublicObjectInputForCreate {
-  associations: Array<CrmAPI.PublicAssociationsForObject>;
-
-  /**
-   * Key-value pairs for setting properties for the new object.
-   */
-  properties: { [key: string]: string };
-}
-
-/**
- * Represents a CRM object along with its properties, timestamps, and a set of
- * associated object IDs grouped by association type.
- */
-export interface AssociationsV4SimplePublicObjectWithAssociations {
-  /**
-   * The unique ID of the object.
-   */
-  id: string;
-
-  /**
-   * Whether the object is archived.
-   */
-  archived: boolean;
-
-  /**
-   * The timestamp when the object was created, in ISO 8601 format.
-   */
-  createdAt: string;
-
-  /**
-   * Key value pairs representing the properties of the object.
-   */
-  properties: { [key: string]: string | null };
-
-  /**
-   * The timestamp when the object was last updated, in ISO 8601 format.
-   */
-  updatedAt: string;
-
-  /**
-   * The timestamp when the object was archived, in ISO 8601 format.
-   */
-  archivedAt?: string;
-
-  /**
-   * A list defining relationships with other objects.
-   */
-  associations?: { [key: string]: CrmAPI.CollectionResponseAssociatedID };
-
-  objectWriteTraceId?: string;
-
-  /**
-   * Key-value pairs representing the properties of the object along with their
-   * history.
-   */
-  propertiesWithHistory?: { [key: string]: Array<CrmAPI.ValueWithTimestamp> };
-}
-
-/**
- * Represents a CRM object that has either been created or updated (upserted)
- */
-export interface AssociationsV4SimplePublicUpsertObject {
-  /**
-   * The unique ID of the object.
-   */
-  id: string;
-
-  /**
-   * Whether the object is archived.
-   */
-  archived: boolean;
-
-  /**
-   * The timestamp when the object was created, in ISO 8601 format.
-   */
-  createdAt: string;
-
-  /**
-   * Whether the property is new.
-   */
-  new: boolean;
-
-  /**
-   * Key value pairs representing the properties of the object.
-   */
-  properties: { [key: string]: string };
-
-  /**
-   * The timestamp when the object was last updated, in ISO 8601 format.
-   */
-  updatedAt: string;
-
-  /**
-   * The timestamp when the object was archived, in ISO 8601 format.
-   */
-  archivedAt?: string;
-
-  objectWriteTraceId?: string;
-
-  /**
-   * Key-value pairs representing the properties of the object along with their
-   * history.
-   */
-  propertiesWithHistory?: { [key: string]: Array<CrmAPI.ValueWithTimestamp> };
+  merge(
+    objectType: string,
+    body: V4MergeParams,
+    options?: RequestOptions,
+  ): APIPromise<CrmAPI.SimplePublicObject> {
+    return this._client.post(path`/crm/v4/objects/${objectType}/merge`, { body, ...options });
+  }
 }
 
 export interface BatchInputPublicAssociationMultiArchive {
@@ -251,97 +61,96 @@ export interface BatchInputPublicFetchAssociationsBatchRequest {
 }
 
 export interface BatchResponseLabelsBetweenObjectPair {
+  /**
+   * The timestamp when the batch processing was completed, in ISO 8601 format.
+   */
   completedAt: string;
 
   results: Array<CrmAPI.LabelsBetweenObjectPair>;
 
+  /**
+   * The timestamp when the batch processing began, in ISO 8601 format.
+   */
   startedAt: string;
 
+  /**
+   * The status of the batch processing request: "PENDING", "PROCESSING",
+   * "CANCELLED", or "COMPLETE".
+   */
   status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
 
   errors?: Array<Shared.StandardError>;
 
+  /**
+   * An object containing relevant links related to the batch request.
+   */
   links?: { [key: string]: string };
 
+  /**
+   * The number of errors encountered during the batch processing.
+   */
   numErrors?: number;
 
+  /**
+   * The timestamp when the batch request was initially made, in ISO 8601 format.
+   */
   requestedAt?: string;
 }
 
 export interface BatchResponsePublicAssociationMultiWithLabel {
+  /**
+   * The timestamp when the batch processing was completed, in ISO 8601 format.
+   */
   completedAt: string;
 
   results: Array<PublicAssociationMultiWithLabel>;
 
+  /**
+   * The timestamp when the batch processing began, in ISO 8601 format.
+   */
   startedAt: string;
 
+  /**
+   * The status of the batch processing request: "PENDING", "PROCESSING", "CANCELED",
+   * or "COMPLETE".
+   */
   status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
 
   errors?: Array<Shared.StandardError>;
 
+  /**
+   * An object containing relevant links related to the batch request.
+   */
   links?: { [key: string]: string };
 
+  /**
+   * The number of errors encountered during the batch processing.
+   */
   numErrors?: number;
 
-  requestedAt?: string;
-}
-
-export interface BatchResponseVoid {
-  completedAt: string;
-
-  results: Array<unknown>;
-
-  startedAt: string;
-
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
-
-  errors?: Array<Shared.StandardError>;
-
-  links?: { [key: string]: string };
-
-  numErrors?: number;
-
+  /**
+   * The timestamp when the batch request was initially made, in ISO 8601 format.
+   */
   requestedAt?: string;
 }
 
 export interface DateTime {
+  /**
+   * Indicates whether the DateTime value represents only a date without a time
+   * component.
+   */
   dateOnly: boolean;
 
+  /**
+   * The integer value representing the shift in minutes from UTC for the DateTime
+   * value.
+   */
   timeZoneShift: number;
 
+  /**
+   * The integer value representing a specific point in time.
+   */
   value: number;
-}
-
-/**
- * Specifies the paging information needed to retrieve the next set of results in a
- * paginated API response
- */
-export interface NextPage1 {
-  /**
-   * A paging cursor token for retrieving subsequent pages.
-   */
-  after: string;
-
-  /**
-   * A URL that can be used to retrieve the next page results.
-   */
-  link?: string;
-}
-
-/**
- * specifies the paging information needed to retrieve the previous set of results
- * in a paginated API response
- */
-export interface PreviousPage1 {
-  /**
-   * A paging cursor token for retrieving previous pages.
-   */
-  before: string;
-
-  /**
-   * A URL that can be used to retrieve the previous pages' results.
-   */
-  link?: string;
 }
 
 export interface PublicAssociationMultiArchive {
@@ -363,10 +172,7 @@ export interface PublicAssociationMultiWithLabel {
 
   to: Array<CrmAPI.MultiAssociatedObjectWithLabel>;
 
-  /**
-   * Contains information pagination of results.
-   */
-  paging?: EmailsAPI.EmailsPaging;
+  paging?: Shared.Paging;
 }
 
 export interface PublicDefaultAssociationMultiPost {
@@ -376,62 +182,43 @@ export interface PublicDefaultAssociationMultiPost {
 }
 
 export interface PublicFetchAssociationsBatchRequest {
+  /**
+   * The unique identifier for the object whose associations are being fetched.
+   */
   id: string;
 
+  /**
+   * A paging cursor token used to retrieve the next set of results in a paginated
+   * response.
+   */
   after?: string;
 }
 
 export interface ReportCreationResponse {
   enqueueTime: DateTime;
 
+  /**
+   * Email of the user
+   */
   userEmail: string;
 
+  /**
+   * ID of the user
+   */
   userId: number;
 }
 
-/**
- * Ye olde error
- */
-export interface StandardError1 {
+export interface V4MergeParams {
   /**
-   * The main category of the error.
+   * The unique identifier of the CRM object that will be merged into the primary
+   * object.
    */
-  category: string;
+  objectIdToMerge: string;
 
   /**
-   * Additional context-specific information related to the error.
+   * The unique identifier of the CRM object that will remain after the merge.
    */
-  context: { [key: string]: Array<string> };
-
-  /**
-   * The detailed error objects.
-   */
-  errors: Array<Shared.ErrorDetail>;
-
-  /**
-   * URLs linking to documentation or resources associated with the error.
-   */
-  links: { [key: string]: string };
-
-  /**
-   * A human-readable string describing the error and possible remediation steps.
-   */
-  message: string;
-
-  /**
-   * The HTTP status code associated with the error.
-   */
-  status: string;
-
-  /**
-   * A unique ID for the error instance.
-   */
-  id?: string;
-
-  /**
-   * A more specific error category within each main category.
-   */
-  subCategory?: unknown;
+  primaryObjectId: string;
 }
 
 V4.Batch = Batch;
@@ -439,30 +226,20 @@ V4.Report = Report;
 
 export declare namespace V4 {
   export {
-    type AssociationSpec1 as AssociationSpec1,
-    type AssociationsV4PublicObjectSearchRequest as AssociationsV4PublicObjectSearchRequest,
-    type AssociationsV4SimplePublicObject as AssociationsV4SimplePublicObject,
-    type AssociationsV4SimplePublicObjectBatchInputForCreate as AssociationsV4SimplePublicObjectBatchInputForCreate,
-    type AssociationsV4SimplePublicObjectInputForCreate as AssociationsV4SimplePublicObjectInputForCreate,
-    type AssociationsV4SimplePublicObjectWithAssociations as AssociationsV4SimplePublicObjectWithAssociations,
-    type AssociationsV4SimplePublicUpsertObject as AssociationsV4SimplePublicUpsertObject,
     type BatchInputPublicAssociationMultiArchive as BatchInputPublicAssociationMultiArchive,
     type BatchInputPublicAssociationMultiPost as BatchInputPublicAssociationMultiPost,
     type BatchInputPublicDefaultAssociationMultiPost as BatchInputPublicDefaultAssociationMultiPost,
     type BatchInputPublicFetchAssociationsBatchRequest as BatchInputPublicFetchAssociationsBatchRequest,
     type BatchResponseLabelsBetweenObjectPair as BatchResponseLabelsBetweenObjectPair,
     type BatchResponsePublicAssociationMultiWithLabel as BatchResponsePublicAssociationMultiWithLabel,
-    type BatchResponseVoid as BatchResponseVoid,
     type DateTime as DateTime,
-    type NextPage1 as NextPage1,
-    type PreviousPage1 as PreviousPage1,
     type PublicAssociationMultiArchive as PublicAssociationMultiArchive,
     type PublicAssociationMultiPost as PublicAssociationMultiPost,
     type PublicAssociationMultiWithLabel as PublicAssociationMultiWithLabel,
     type PublicDefaultAssociationMultiPost as PublicDefaultAssociationMultiPost,
     type PublicFetchAssociationsBatchRequest as PublicFetchAssociationsBatchRequest,
     type ReportCreationResponse as ReportCreationResponse,
-    type StandardError1 as StandardError1,
+    type V4MergeParams as V4MergeParams,
   };
 
   export {
@@ -472,6 +249,7 @@ export declare namespace V4 {
     type BatchCreateDefaultParams as BatchCreateDefaultParams,
     type BatchDeleteLabelsParams as BatchDeleteLabelsParams,
     type BatchGetParams as BatchGetParams,
+    type BatchUpsertParams as BatchUpsertParams,
   };
 
   export { Report as Report };

@@ -23,8 +23,10 @@ import * as IntegratorSettingsAPI from './integrator-settings';
 import {
   IntegratorSettingCreateObjectDefinitionParams,
   IntegratorSettingCreateOembedDomainParams,
+  IntegratorSettingDeleteOembedDomainParams,
   IntegratorSettingGetObjectDefinitionsByMediaTypeParams,
   IntegratorSettingGetOembedDomainParams,
+  IntegratorSettingListOembedDomainsParams,
   IntegratorSettingRegisterAppNameParams,
   IntegratorSettingUpdateAppNameParams,
   IntegratorSettingUpdateEventVisibilitySettingsParams,
@@ -34,9 +36,9 @@ import {
 import * as PropertiesAPI from './properties';
 import {
   Properties,
-  PropertyArchiveBatchParams,
   PropertyCreateBatchParams,
   PropertyCreateParams,
+  PropertyDeleteBatchParams,
   PropertyDeleteParams,
   PropertyGetBatchParams,
   PropertyGetParams,
@@ -48,6 +50,7 @@ import {
   SchemaCreateAssociationParams,
   SchemaDeleteAssociationParams,
   SchemaGetParams,
+  SchemaListParams,
   SchemaUpdateParams,
   Schemas,
 } from './schemas';
@@ -585,14 +588,6 @@ export interface AttentionSpanEventRequest {
   pageUrl?: string;
 
   rawDataString?: string;
-}
-
-export interface BatchReadInputPropertyName {
-  archived: boolean;
-
-  dataSensitivity: 'non_sensitive' | 'sensitive' | 'highly_sensitive';
-
-  inputs: Array<Shared.PropertyName>;
 }
 
 export interface BatchResponsePropertyWithErrors {
@@ -3348,18 +3343,6 @@ export interface InboundDBObjectType {
   writeScopeName?: string;
 }
 
-export interface IntegratorObjectCreationRequest {
-  mediaTypes: Array<'VIDEO' | 'AUDIO' | 'DOCUMENT' | 'OTHER' | 'IMAGE'>;
-}
-
-export interface IntegratorObjectCreationResponse {
-  objectType: InboundDBObjectType;
-
-  properties: Array<PropertyDefinition>;
-
-  propertyGroups: Array<Group>;
-}
-
 export interface IntegratorOEmbedDomainModel {
   id: number;
 
@@ -3380,6 +3363,18 @@ export interface IntegratorOEmbedDomainRequest {
   endpoints: Endpoints;
 
   portalId?: number;
+}
+
+export interface IntegratorObjectCreationRequest {
+  mediaTypes: Array<'VIDEO' | 'AUDIO' | 'DOCUMENT' | 'OTHER' | 'IMAGE'>;
+}
+
+export interface IntegratorObjectCreationResponse {
+  objectType: InboundDBObjectType;
+
+  properties: Array<PropertyDefinition>;
+
+  propertyGroups: Array<Group>;
 }
 
 export interface IsEngagementType {
@@ -5114,6 +5109,12 @@ export interface NumberToString {
   value?: string;
 }
 
+export interface OEmbedDomainsCollectionResponse {
+  results: Array<IntegratorOEmbedDomainModel>;
+
+  totalCount?: number;
+}
+
 export interface ObjectDefinitionResponse {
   objectTypeId: string;
 
@@ -5220,12 +5221,6 @@ export interface ObjectTypeIDProto {
   innerId: number;
 
   metaTypeId: number;
-}
-
-export interface OEmbedDomainsCollectionResponse {
-  results: Array<IntegratorOEmbedDomainModel>;
-
-  totalCount?: number;
 }
 
 export interface Option1 {
@@ -8126,7 +8121,6 @@ export declare namespace MediaBridge {
     type AttentionSpanCalculatedValues as AttentionSpanCalculatedValues,
     type AttentionSpanEvent as AttentionSpanEvent,
     type AttentionSpanEventRequest as AttentionSpanEventRequest,
-    type BatchReadInputPropertyName as BatchReadInputPropertyName,
     type BatchResponsePropertyWithErrors as BatchResponsePropertyWithErrors,
     type BeginsWith as BeginsWith,
     type BooleanPropertyVariable as BooleanPropertyVariable,
@@ -8168,10 +8162,10 @@ export declare namespace MediaBridge {
     type IfNumber as IfNumber,
     type IfString as IfString,
     type InboundDBObjectType as InboundDBObjectType,
-    type IntegratorObjectCreationRequest as IntegratorObjectCreationRequest,
-    type IntegratorObjectCreationResponse as IntegratorObjectCreationResponse,
     type IntegratorOEmbedDomainModel as IntegratorOEmbedDomainModel,
     type IntegratorOEmbedDomainRequest as IntegratorOEmbedDomainRequest,
+    type IntegratorObjectCreationRequest as IntegratorObjectCreationRequest,
+    type IntegratorObjectCreationResponse as IntegratorObjectCreationResponse,
     type IsEngagementType as IsEngagementType,
     type IsPipelineStageClosed as IsPipelineStageClosed,
     type IsPresent as IsPresent,
@@ -8197,12 +8191,12 @@ export declare namespace MediaBridge {
     type NumberPropertyVariable as NumberPropertyVariable,
     type NumberTargetPropertyVariable as NumberTargetPropertyVariable,
     type NumberToString as NumberToString,
+    type OEmbedDomainsCollectionResponse as OEmbedDomainsCollectionResponse,
     type ObjectDefinitionResponse as ObjectDefinitionResponse,
     type ObjectSchema as ObjectSchema,
     type ObjectTypeDefinition as ObjectTypeDefinition,
     type ObjectTypeDefinitionPatch as ObjectTypeDefinitionPatch,
     type ObjectTypeIDProto as ObjectTypeIDProto,
-    type OEmbedDomainsCollectionResponse as OEmbedDomainsCollectionResponse,
     type Option1 as Option1,
     type OptionDecorations as OptionDecorations,
     type OptionDecoratorsExtensionData as OptionDecoratorsExtensionData,
@@ -8261,8 +8255,10 @@ export declare namespace MediaBridge {
     IntegratorSettings as IntegratorSettings,
     type IntegratorSettingCreateObjectDefinitionParams as IntegratorSettingCreateObjectDefinitionParams,
     type IntegratorSettingCreateOembedDomainParams as IntegratorSettingCreateOembedDomainParams,
+    type IntegratorSettingDeleteOembedDomainParams as IntegratorSettingDeleteOembedDomainParams,
     type IntegratorSettingGetObjectDefinitionsByMediaTypeParams as IntegratorSettingGetObjectDefinitionsByMediaTypeParams,
     type IntegratorSettingGetOembedDomainParams as IntegratorSettingGetOembedDomainParams,
+    type IntegratorSettingListOembedDomainsParams as IntegratorSettingListOembedDomainsParams,
     type IntegratorSettingRegisterAppNameParams as IntegratorSettingRegisterAppNameParams,
     type IntegratorSettingUpdateAppNameParams as IntegratorSettingUpdateAppNameParams,
     type IntegratorSettingUpdateEventVisibilitySettingsParams as IntegratorSettingUpdateEventVisibilitySettingsParams,
@@ -8275,8 +8271,8 @@ export declare namespace MediaBridge {
     type PropertyUpdateParams as PropertyUpdateParams,
     type PropertyListParams as PropertyListParams,
     type PropertyDeleteParams as PropertyDeleteParams,
-    type PropertyArchiveBatchParams as PropertyArchiveBatchParams,
     type PropertyCreateBatchParams as PropertyCreateBatchParams,
+    type PropertyDeleteBatchParams as PropertyDeleteBatchParams,
     type PropertyGetParams as PropertyGetParams,
     type PropertyGetBatchParams as PropertyGetBatchParams,
   };
@@ -8284,6 +8280,7 @@ export declare namespace MediaBridge {
   export {
     Schemas as Schemas,
     type SchemaUpdateParams as SchemaUpdateParams,
+    type SchemaListParams as SchemaListParams,
     type SchemaCreateAssociationParams as SchemaCreateAssociationParams,
     type SchemaDeleteAssociationParams as SchemaDeleteAssociationParams,
     type SchemaGetParams as SchemaGetParams,

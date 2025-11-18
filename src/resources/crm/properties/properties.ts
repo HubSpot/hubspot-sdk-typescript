@@ -5,8 +5,14 @@ import * as Shared from '../../shared';
 import * as BatchAPI from './batch';
 import { Batch, BatchCreateParams, BatchDeleteParams, BatchGetParams } from './batch';
 import * as GroupsAPI from './groups';
-import { GroupCreateParams, GroupDeleteParams, GroupGetParams, GroupUpdateParams, Groups } from './groups';
-import * as EmailsAPI from '../../marketing/emails/emails';
+import {
+  GroupCreateParams,
+  GroupDeleteParams,
+  GroupGetParams,
+  GroupListParams,
+  GroupUpdateParams,
+  Groups,
+} from './groups';
 import { APIPromise } from '../../../core/api-promise';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
@@ -116,30 +122,16 @@ export class Properties extends APIResource {
   }
 }
 
-export interface BatchReadInputPropertyName {
-  archived: boolean;
-
-  inputs: Array<Shared.PropertyName>;
-
-  dataSensitivity?: 'non_sensitive' | 'sensitive' | 'highly_sensitive';
-}
-
 export interface CollectionResponseProperty {
   results: Array<Shared.Property>;
 
-  /**
-   * Contains information pagination of results.
-   */
-  paging?: EmailsAPI.EmailsPaging;
+  paging?: Shared.Paging;
 }
 
 export interface CollectionResponsePropertyGroup {
   results: Array<PropertyGroup>;
 
-  /**
-   * Contains information pagination of results.
-   */
-  paging?: EmailsAPI.EmailsPaging;
+  paging?: Shared.Paging;
 }
 
 export interface CreatedResponseProperty {
@@ -408,6 +400,10 @@ export interface PropertyListParams {
    */
   archived?: boolean;
 
+  dataSensitivity?: 'non_sensitive' | 'sensitive' | 'highly_sensitive';
+
+  locale?: string;
+
   properties?: string;
 }
 
@@ -429,6 +425,16 @@ export interface PropertyGetParams {
   /**
    * Query param:
    */
+  dataSensitivity?: 'non_sensitive' | 'sensitive' | 'highly_sensitive';
+
+  /**
+   * Query param:
+   */
+  locale?: string;
+
+  /**
+   * Query param:
+   */
   properties?: string;
 }
 
@@ -437,7 +443,6 @@ Properties.Groups = Groups;
 
 export declare namespace Properties {
   export {
-    type BatchReadInputPropertyName as BatchReadInputPropertyName,
     type CollectionResponseProperty as CollectionResponseProperty,
     type CollectionResponsePropertyGroup as CollectionResponsePropertyGroup,
     type CreatedResponseProperty as CreatedResponseProperty,
@@ -463,6 +468,7 @@ export declare namespace Properties {
     Groups as Groups,
     type GroupCreateParams as GroupCreateParams,
     type GroupUpdateParams as GroupUpdateParams,
+    type GroupListParams as GroupListParams,
     type GroupDeleteParams as GroupDeleteParams,
     type GroupGetParams as GroupGetParams,
   };

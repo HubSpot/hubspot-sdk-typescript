@@ -9,7 +9,7 @@ import { path } from '../../../internal/utils/path';
 
 export class Stages extends APIResource {
   /**
-   * Create a pipeline stage
+   * Create a new stage within the specified pipeline.
    *
    * @example
    * ```ts
@@ -18,6 +18,7 @@ export class Stages extends APIResource {
    *     objectType: 'objectType',
    *     displayOrder: 1,
    *     label: 'Done',
+   *     metadata: { ticketState: 'CLOSED' },
    *   });
    * ```
    */
@@ -34,12 +35,15 @@ export class Stages extends APIResource {
   }
 
   /**
+   * Perform a partial update on a specific stage of a pipeline.
+   *
    * @example
    * ```ts
    * const pipelineStage =
    *   await client.crm.pipelines.stages.update('stageId', {
    *     objectType: 'objectType',
    *     pipelineId: 'pipelineId',
+   *     metadata: { ticketState: 'CLOSED' },
    *   });
    * ```
    */
@@ -76,7 +80,7 @@ export class Stages extends APIResource {
   }
 
   /**
-   * Delete a pipeline stage
+   * Delete a specific stage from a pipeline.
    *
    * @example
    * ```ts
@@ -95,7 +99,7 @@ export class Stages extends APIResource {
   }
 
   /**
-   * Return a pipeline stage by ID
+   * Retrieve a specific stage from a pipeline using its ID.
    *
    * @example
    * ```ts
@@ -151,6 +155,7 @@ export class Stages extends APIResource {
    *     pipelineId: 'pipelineId',
    *     displayOrder: 1,
    *     label: 'Done',
+   *     metadata: { ticketState: 'CLOSED' },
    *   });
    * ```
    */
@@ -169,7 +174,7 @@ export class Stages extends APIResource {
 
 export interface StageCreateParams {
   /**
-   * Path param:
+   * Path param: The object type of the stage being created (ex. deals or tickets)
    */
   objectType: string;
 
@@ -198,19 +203,35 @@ export interface StageCreateParams {
    * has been closed by a member of your Support team. Possible values are `OPEN` or
    * `CLOSED`.
    */
-  metadata?: { [key: string]: string };
+  metadata: { [key: string]: string };
 }
 
 export interface StageUpdateParams {
   /**
-   * Path param:
+   * Path param: The object type of the stage being updated (ex. deals or tickets)
    */
   objectType: string;
 
   /**
-   * Path param:
+   * Path param: The unique identifier of the pipeline containing the stage to be
+   * updated.
    */
   pipelineId: string;
+
+  /**
+   * Body param: A JSON object containing properties that are not present on all
+   * object pipelines.
+   *
+   * For `deals` pipelines, the `probability` field is required
+   * (`{ "probability": 0.5 }`), and represents the likelihood a deal will close.
+   * Possible values are between 0.0 and 1.0 in increments of 0.1.
+   *
+   * For `tickets` pipelines, the `ticketState` field is optional
+   * (`{ "ticketState": "OPEN" }`), and represents whether the ticket remains open or
+   * has been closed by a member of your Support team. Possible values are `OPEN` or
+   * `CLOSED`.
+   */
+  metadata: { [key: string]: string };
 
   /**
    * Body param: Whether the pipeline is archived.
@@ -228,40 +249,43 @@ export interface StageUpdateParams {
    * pipeline stage's label must be unique within that pipeline.
    */
   label?: string;
-
-  /**
-   * Body param: A JSON object containing properties that are not present on all
-   * object pipelines.
-   *
-   * For `deals` pipelines, the `probability` field is required
-   * (`{ "probability": 0.5 }`), and represents the likelihood a deal will close.
-   * Possible values are between 0.0 and 1.0 in increments of 0.1.
-   *
-   * For `tickets` pipelines, the `ticketState` field is optional
-   * (`{ "ticketState": "OPEN" }`), and represents whether the ticket remains open or
-   * has been closed by a member of your Support team. Possible values are `OPEN` or
-   * `CLOSED`.
-   */
-  metadata?: { [key: string]: string };
 }
 
 export interface StageListParams {
+  /**
+   * The object type of the stages being retrieved (ex. deals or tickets)
+   */
   objectType: string;
 }
 
 export interface StageDeleteParams {
+  /**
+   * The object type of the stage being deleted (ex. deals or tickets)
+   */
   objectType: string;
 
+  /**
+   * The unique identifier of the pipeline from which the stage will be deleted.
+   */
   pipelineId: string;
 }
 
 export interface StageGetParams {
+  /**
+   * The object type of the stage being retrieved (ex. deals or tickets)
+   */
   objectType: string;
 
+  /**
+   * The unique identifier of the pipeline containing the stage to be retrieved.
+   */
   pipelineId: string;
 }
 
 export interface StageGetAuditParams {
+  /**
+   * The object type of the stage audit being retrieved (ex. deals or tickets)
+   */
   objectType: string;
 
   pipelineId: string;
@@ -269,12 +293,12 @@ export interface StageGetAuditParams {
 
 export interface StageReplaceParams {
   /**
-   * Path param:
+   * Path param: The object type of the pipeline being updated (ex. deals or tickets)
    */
   objectType: string;
 
   /**
-   * Path param:
+   * Path param: The unique identifier of the pipeline to which the stage belongs.
    */
   pipelineId: string;
 
@@ -303,7 +327,7 @@ export interface StageReplaceParams {
    * has been closed by a member of your Support team. Possible values are `OPEN` or
    * `CLOSED`.
    */
-  metadata?: { [key: string]: string };
+  metadata: { [key: string]: string };
 }
 
 export declare namespace Stages {

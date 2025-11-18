@@ -265,70 +265,6 @@ export interface ObjectSchemaEgg {
 }
 
 /**
- * Defines an object type.
- */
-export interface ObjectsSchemasObjectTypeDefinition {
-  /**
-   * A unique ID for this object type. Will be defined as {meta-type}-{unique ID}.
-   */
-  id: string;
-
-  labels: Shared.ObjectTypeDefinitionLabels;
-
-  /**
-   * A unique name for this object. For internal use only.
-   */
-  name: string;
-
-  /**
-   * The names of properties that should be **required** when creating an object of
-   * this type.
-   */
-  requiredProperties: Array<string>;
-
-  archived?: boolean;
-
-  /**
-   * When the object type was created.
-   */
-  createdAt?: string;
-
-  description?: string;
-
-  fullyQualifiedName?: string;
-
-  objectTypeId?: string;
-
-  /**
-   * The ID of the account that this object type is specific to.
-   */
-  portalId?: number;
-
-  /**
-   * The name of the primary property for this object. This will be displayed as
-   * primary on the HubSpot record page for this object type.
-   */
-  primaryDisplayProperty?: string;
-
-  /**
-   * Names of properties that will be indexed for this object type in by HubSpot's
-   * product search.
-   */
-  searchableProperties?: Array<string>;
-
-  /**
-   * The names of secondary properties for this object. These will be displayed as
-   * secondary on the HubSpot record page for this object type.
-   */
-  secondaryDisplayProperties?: Array<string>;
-
-  /**
-   * When the object type was last updated.
-   */
-  updatedAt?: string;
-}
-
-/**
  * Defines attributes to update on an object type.
  */
 export interface ObjectTypeDefinitionPatch {
@@ -468,6 +404,70 @@ export interface ObjectTypePropertyCreate {
     | 'postal_code';
 }
 
+/**
+ * Defines an object type.
+ */
+export interface ObjectsSchemasObjectTypeDefinition {
+  /**
+   * A unique ID for this object type. Will be defined as {meta-type}-{unique ID}.
+   */
+  id: string;
+
+  labels: Shared.ObjectTypeDefinitionLabels;
+
+  /**
+   * A unique name for this object. For internal use only.
+   */
+  name: string;
+
+  /**
+   * The names of properties that should be **required** when creating an object of
+   * this type.
+   */
+  requiredProperties: Array<string>;
+
+  archived?: boolean;
+
+  /**
+   * When the object type was created.
+   */
+  createdAt?: string;
+
+  description?: string;
+
+  fullyQualifiedName?: string;
+
+  objectTypeId?: string;
+
+  /**
+   * The ID of the account that this object type is specific to.
+   */
+  portalId?: number;
+
+  /**
+   * The name of the primary property for this object. This will be displayed as
+   * primary on the HubSpot record page for this object type.
+   */
+  primaryDisplayProperty?: string;
+
+  /**
+   * Names of properties that will be indexed for this object type in by HubSpot's
+   * product search.
+   */
+  searchableProperties?: Array<string>;
+
+  /**
+   * The names of secondary properties for this object. These will be displayed as
+   * secondary on the HubSpot record page for this object type.
+   */
+  secondaryDisplayProperties?: Array<string>;
+
+  /**
+   * When the object type was last updated.
+   */
+  updatedAt?: string;
+}
+
 export interface SchemaCreateParams {
   /**
    * Associations defined for this object type.
@@ -580,9 +580,9 @@ export declare namespace Schemas {
   export {
     type ObjectSchema as ObjectSchema,
     type ObjectSchemaEgg as ObjectSchemaEgg,
-    type ObjectsSchemasObjectTypeDefinition as ObjectsSchemasObjectTypeDefinition,
     type ObjectTypeDefinitionPatch as ObjectTypeDefinitionPatch,
     type ObjectTypePropertyCreate as ObjectTypePropertyCreate,
+    type ObjectsSchemasObjectTypeDefinition as ObjectsSchemasObjectTypeDefinition,
     type SchemaCreateParams as SchemaCreateParams,
     type SchemaUpdateParams as SchemaUpdateParams,
     type SchemaListParams as SchemaListParams,

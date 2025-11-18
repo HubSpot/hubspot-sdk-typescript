@@ -5,6 +5,7 @@ import * as Shared from '../../shared';
 import * as EnrollmentsAPI from './enrollments';
 import { EnrollmentEnrollParams, Enrollments } from './enrollments';
 import { APIPromise } from '../../../core/api-promise';
+import { Page, type PageParams, PagePromise } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -15,18 +16,28 @@ export class Sequences extends APIResource {
    * Retrieve a list of sequences that belong to a specific user.
    */
   list(
+    query: SequenceListParams,
     options?: RequestOptions,
-  ): APIPromise<CollectionResponseWithTotalPublicSequenceLiteResponseForwardPaging> {
-    return this._client.get('/automation/v4/sequences/', options);
+  ): PagePromise<PublicSequenceLiteResponsesPage, PublicSequenceLiteResponse> {
+    return this._client.getAPIList('/automation/v4/sequences/', Page<PublicSequenceLiteResponse>, {
+      query,
+      ...options,
+    });
   }
 
   /**
    * Retrieve details of a specific sequence by its ID.
    */
-  get(sequenceID: string, options?: RequestOptions): APIPromise<PublicSequenceResponse> {
-    return this._client.get(path`/automation/v4/sequences/${sequenceID}`, options);
+  get(
+    sequenceID: string,
+    query: SequenceGetParams,
+    options?: RequestOptions,
+  ): APIPromise<PublicSequenceResponse> {
+    return this._client.get(path`/automation/v4/sequences/${sequenceID}`, { query, ...options });
   }
 }
+
+export type PublicSequenceLiteResponsesPage = Page<PublicSequenceLiteResponse>;
 
 export interface CollectionResponseWithTotalPublicSequenceLiteResponseForwardPaging {
   results: Array<PublicSequenceLiteResponse>;
@@ -218,6 +229,16 @@ export interface UnenrollmentSettingsResponse {
   meetingSettings: MeetingSettingsResponse;
 }
 
+export interface SequenceListParams extends PageParams {
+  userId: string;
+
+  name?: string;
+}
+
+export interface SequenceGetParams {
+  userId: string;
+}
+
 Sequences.Enrollments = Enrollments;
 
 export declare namespace Sequences {
@@ -236,6 +257,9 @@ export declare namespace Sequences {
     type PublicSequenceStepResponse as PublicSequenceStepResponse,
     type PublicTaskPatternResponse as PublicTaskPatternResponse,
     type UnenrollmentSettingsResponse as UnenrollmentSettingsResponse,
+    type PublicSequenceLiteResponsesPage as PublicSequenceLiteResponsesPage,
+    type SequenceListParams as SequenceListParams,
+    type SequenceGetParams as SequenceGetParams,
   };
 
   export { Enrollments as Enrollments, type EnrollmentEnrollParams as EnrollmentEnrollParams };

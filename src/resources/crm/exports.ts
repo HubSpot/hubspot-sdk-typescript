@@ -21,6 +21,9 @@ export class Exports extends APIResource {
   }
 
   /**
+   * Retrieve detailed information about a specific CRM export, including its current
+   * state and properties.
+   *
    * @example
    * ```ts
    * const publicExportResponse = await client.crm.exports.get(
@@ -48,20 +51,42 @@ export class Exports extends APIResource {
 }
 
 export interface ActionResponseWithSingleResultUri {
+  /**
+   * The timestamp when the export was completed, in ISO 8601 format.
+   */
   completedAt: string;
 
+  /**
+   * The timestamp when the export process started, in ISO 8601 format.
+   */
   startedAt: string;
 
+  /**
+   * The current status of the export, which can be PENDING, PROCESSING, COMPLETE or
+   * CANCELED.
+   */
   status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
 
   errors?: Array<Shared.StandardError>;
 
+  /**
+   * A collection of related links associated with the export.
+   */
   links?: { [key: string]: string };
 
+  /**
+   * The number of errors encountered during the export process.
+   */
   numErrors?: number;
 
+  /**
+   * The timestamp when the export request was made, in ISO 8601 format.
+   */
   requestedAt?: string;
 
+  /**
+   * The URL of the resulting file if the export status is COMPLETE.
+   */
   result?: string;
 }
 
@@ -70,8 +95,14 @@ export interface PublicCrmSearchRequest {
 
   filters: Array<CrmAPI.Filter>;
 
+  /**
+   * Defines the order in which the CRM records should be returned.
+   */
   sorts: Array<string>;
 
+  /**
+   * The search query string, to filter CRM records.
+   */
   query?: string;
 }
 
@@ -118,10 +149,19 @@ export interface PublicExportListRequest {
 export type PublicExportRequest = PublicExportViewRequest | PublicExportListRequest;
 
 export interface PublicExportResponse {
+  /**
+   * The unique ID of the export.
+   */
   id: string;
 
+  /**
+   * The timestamp when the export was created, in ISO 8601 format.
+   */
   createdAt: string;
 
+  /**
+   * The current state of the export process.
+   */
   exportState:
     | 'ENQUEUED'
     | 'PROCESSING'
@@ -133,16 +173,34 @@ export interface PublicExportResponse {
     | 'DEFERRED'
     | 'PENDING_APPROVAL';
 
+  /**
+   * The type of export, which can be either VIEW or LIST.
+   */
   exportType: 'VIEW' | 'LIST';
 
+  /**
+   * The list of properties exported for the associated object.
+   */
   objectProperties: Array<string>;
 
+  /**
+   * The associated CRM object being exported.
+   */
   objectType: string;
 
+  /**
+   * The timestamp when the export was last updated, in ISO 8601 format.
+   */
   updatedAt: string;
 
+  /**
+   * The name assigned to the export.
+   */
   exportName?: string;
 
+  /**
+   * The total number of records included in the export.
+   */
   recordCount?: number;
 }
 

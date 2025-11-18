@@ -193,17 +193,23 @@ export interface PublicTeam {
  */
 export interface PublicUser {
   /**
-   * The user's unique ID
+   * The user's unique ID.
    */
   id: string;
 
   /**
-   * The user's email
+   * The user's email.
    */
   email: string;
 
+  /**
+   * The user's first name.
+   */
   firstName?: string;
 
+  /**
+   * The user's last name.
+   */
   lastName?: string;
 
   /**
@@ -212,19 +218,29 @@ export interface PublicUser {
   primaryTeamId?: string;
 
   /**
-   * The user's role
+   * The user's role.
    */
   roleId?: string;
 
+  /**
+   * A list of role IDs assigned to the user.
+   */
   roleIds?: Array<string>;
 
   /**
-   * The user's additional teams
+   * The user's additional teams.
    */
   secondaryTeamIds?: Array<string>;
 
+  /**
+   * Whether a welcome email was sent to the user. This value will only be populated
+   * in response to a provisioning request. Subsequent queries will be false.
+   */
   sendWelcomeEmail?: boolean;
 
+  /**
+   * Whether the user has super admin privileges.
+   */
   superAdmin?: boolean;
 }
 
@@ -232,22 +248,28 @@ export interface PublicUser {
  * A user to update
  */
 export interface PublicUserUpdate {
+  /**
+   * The first name of the user.
+   */
   firstName?: string;
 
+  /**
+   * The last name of the user.
+   */
   lastName?: string;
 
   /**
-   * The user's primary team
+   * The user's primary team.
    */
   primaryTeamId?: string;
 
   /**
-   * The user's role
+   * The user's role.
    */
   roleId?: string;
 
   /**
-   * The user's additional teams
+   * The user's additional teams.
    */
   secondaryTeamIds?: Array<string>;
 }
@@ -257,62 +279,74 @@ export interface PublicUserUpdate {
  */
 export interface UserProvisionRequest {
   /**
-   * The created user's email
+   * The user's email.
    */
   email: string;
 
+  /**
+   * The user's first name.
+   */
   firstName?: string;
 
+  /**
+   * The user's last name.
+   */
   lastName?: string;
 
   /**
-   * The user's primary team
+   * The user's primary team.
    */
   primaryTeamId?: string;
 
   /**
-   * The user's role
+   * The user's role.
    */
   roleId?: string;
 
   /**
-   * The user's additional teams
+   * The user's additional teams.
    */
   secondaryTeamIds?: Array<string>;
 
   /**
-   * Whether to send a welcome email
+   * Whether to send a welcome email.
    */
   sendWelcomeEmail?: boolean;
 }
 
 export interface UserCreateParams {
   /**
-   * The created user's email
+   * The user's email.
    */
   email: string;
 
+  /**
+   * The user's first name.
+   */
   firstName?: string;
 
+  /**
+   * The user's last name.
+   */
   lastName?: string;
 
   /**
-   * The user's primary team
+   * The user's primary team.
    */
   primaryTeamId?: string;
 
   /**
-   * The user's role
+   * The user's role.
    */
   roleId?: string;
 
   /**
-   * The user's additional teams
+   * The user's additional teams.
    */
   secondaryTeamIds?: Array<string>;
 
   /**
-   * Whether to send a welcome email
+   * Whether to send a welcome email.
    */
   sendWelcomeEmail?: boolean;
 }
@@ -325,27 +359,27 @@ export interface UserUpdateParams {
   idProperty?: 'USER_ID' | 'EMAIL';
 
   /**
-   * Body param:
+   * Body param: The first name of the user.
    */
   firstName?: string;
 
   /**
-   * Body param:
+   * Body param: The last name of the user.
    */
   lastName?: string;
 
   /**
-   * Body param: The user's primary team
+   * Body param: The user's primary team.
    */
   primaryTeamId?: string;
 
   /**
-   * Body param: The user's role
+   * Body param: The user's role.
    */
   roleId?: string;
 
   /**
-   * Body param: The user's additional teams
+   * Body param: The user's additional teams.
    */
   secondaryTeamIds?: Array<string>;
 }

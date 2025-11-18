@@ -91,8 +91,14 @@ describe('resource partnerClients', () => {
   });
 
   // Prism tests are disabled
-  test.skip('search', async () => {
-    const responsePromise = client.crm.objects.partnerClients.search({});
+  test.skip('search: only required params', async () => {
+    const responsePromise = client.crm.objects.partnerClients.search({
+      after: 'after',
+      filterGroups: [{ filters: [{ operator: 'EQ', propertyName: 'propertyName' }] }],
+      limit: 0,
+      properties: ['string'],
+      sorts: ['string'],
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -100,5 +106,29 @@ describe('resource partnerClients', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('search: required and optional params', async () => {
+    const response = await client.crm.objects.partnerClients.search({
+      after: 'after',
+      filterGroups: [
+        {
+          filters: [
+            {
+              operator: 'EQ',
+              propertyName: 'propertyName',
+              highValue: 'highValue',
+              value: 'value',
+              values: ['string'],
+            },
+          ],
+        },
+      ],
+      limit: 0,
+      properties: ['string'],
+      sorts: ['string'],
+      query: 'query',
+    });
   });
 });

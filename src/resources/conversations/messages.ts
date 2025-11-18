@@ -2,7 +2,9 @@
 
 import { APIResource } from '../../core/resource';
 import * as ConversationsAPI from './conversations';
+import { CollectionResponsePublicMessageForwardPagingResultsPage } from './conversations';
 import { APIPromise } from '../../core/api-promise';
+import { Page, type PageParams, PagePromise } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
@@ -13,11 +15,11 @@ export class Messages extends APIResource {
    * @example
    * ```ts
    * const publicMessage =
-   *   await client.conversations.messages.create('threadId');
+   *   await client.conversations.messages.create(0);
    * ```
    */
   create(
-    threadID: string,
+    threadID: number,
     body: MessageCreateParams,
     options?: RequestOptions,
   ): APIPromise<ConversationsAPI.PublicMessage> {
@@ -32,15 +34,39 @@ export class Messages extends APIResource {
    *
    * @example
    * ```ts
-   * const collectionResponsePublicMessageForwardPaging =
-   *   await client.conversations.messages.list('threadId');
+   * // Automatically fetches more pages as needed.
+   * for await (const message of client.conversations.messages.list(
+   *   0,
+   * )) {
+   *   // ...
+   * }
    * ```
    */
   list(
-    threadID: string,
+    threadID: number,
+    query: MessageListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<ConversationsAPI.CollectionResponsePublicMessageForwardPaging> {
-    return this._client.get(path`/conversations/v3/conversations/threads/${threadID}/messages`, options);
+  ): PagePromise<
+    CollectionResponsePublicMessageForwardPagingResultsPage,
+    | ConversationsAPI.ConversationsPublicConversationsMessage
+    | ConversationsAPI.PublicComment
+    | ConversationsAPI.PublicWelcomeMessage
+    | ConversationsAPI.PublicAssignmentMessage
+    | ConversationsAPI.PublicThreadStatusChange
+    | ConversationsAPI.PublicThreadInboxChange
+  > {
+    return this._client.getAPIList(
+      path`/conversations/v3/conversations/threads/${threadID}/messages`,
+      Page<
+        | ConversationsAPI.ConversationsPublicConversationsMessage
+        | ConversationsAPI.PublicComment
+        | ConversationsAPI.PublicWelcomeMessage
+        | ConversationsAPI.PublicAssignmentMessage
+        | ConversationsAPI.PublicThreadStatusChange
+        | ConversationsAPI.PublicThreadInboxChange
+      >,
+      { query, ...options },
+    );
   }
 
   /**
@@ -50,7 +76,7 @@ export class Messages extends APIResource {
    * ```ts
    * const publicMessage =
    *   await client.conversations.messages.get('messageId', {
-   *     threadId: 'threadId',
+   *     threadId: 0,
    *   });
    * ```
    */
@@ -59,11 +85,11 @@ export class Messages extends APIResource {
     params: MessageGetParams,
     options?: RequestOptions,
   ): APIPromise<ConversationsAPI.PublicMessage> {
-    const { threadId } = params;
-    return this._client.get(
-      path`/conversations/v3/conversations/threads/${threadId}/messages/${messageID}`,
-      options,
-    );
+    const { threadId, ...query } = params;
+    return this._client.get(path`/conversations/v3/conversations/threads/${threadId}/messages/${messageID}`, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -76,7 +102,7 @@ export class Messages extends APIResource {
    * const publicMessageContent =
    *   await client.conversations.messages.getOriginalContent(
    *     'messageId',
-   *     { threadId: 'threadId' },
+   *     { threadId: 0 },
    *   );
    * ```
    */
@@ -85,10 +111,10 @@ export class Messages extends APIResource {
     params: MessageGetOriginalContentParams,
     options?: RequestOptions,
   ): APIPromise<ConversationsAPI.PublicMessageContent> {
-    const { threadId } = params;
+    const { threadId, ...query } = params;
     return this._client.get(
       path`/conversations/v3/conversations/threads/${threadId}/messages/${messageID}/original-content`,
-      options,
+      { query, ...options },
     );
   }
 }
@@ -103,18 +129,55 @@ export declare namespace MessageCreateParams {
   export interface PublicCommentEgg {}
 }
 
+export interface MessageListParams extends PageParams {
+  /**
+   * Whether to return only results that have been archived.
+   */
+  archived?: boolean;
+
+  /**
+   * A specific property to include in the message response.
+   */
+  property?: string;
+
+  /**
+   * Sort direction. Valid options are `createdAt` (ascending), and `-createdAt`
+   * (descending, default)
+   */
+  sort?: Array<string>;
+}
+
 export interface MessageGetParams {
-  threadId: string;
+  /**
+   * Path param: The unique ID of the thread.
+   */
+  threadId: number;
+
+  /**
+   * Query param: A specific property to include in the message response.
+   */
+  property?: string;
 }
 
 export interface MessageGetOriginalContentParams {
-  threadId: string;
+  /**
+   * Path param: The unique ID of the thread.
+   */
+  threadId: number;
+
+  /**
+   * Query param: A specific property to include in the original content response.
+   */
+  property?: string;
 }
 
 export declare namespace Messages {
   export {
     type MessageCreateParams as MessageCreateParams,
+    type MessageListParams as MessageListParams,
     type MessageGetParams as MessageGetParams,
     type MessageGetOriginalContentParams as MessageGetOriginalContentParams,
   };
 }
+
+export { type CollectionResponsePublicMessageForwardPagingResultsPage };

@@ -42,7 +42,15 @@ export class Batch extends APIResource {
    * const batchResponseHubDBTableRowV3 =
    *   await client.cms.hubdb.rows.batch.createBatch(
    *     'tableIdOrName',
-   *     { inputs: [{ values: { foo: {} } }] },
+   *     {
+   *       inputs: [
+   *         {
+   *           childTableId: 0,
+   *           displayIndex: 0,
+   *           values: { foo: {} },
+   *         },
+   *       ],
+   *     },
    *   );
    * ```
    */
@@ -137,7 +145,15 @@ export class Batch extends APIResource {
    * const batchResponseHubDBTableRowV3 =
    *   await client.cms.hubdb.rows.batch.replaceBatch(
    *     'tableIdOrName',
-   *     { inputs: [{ id: 'id', values: { foo: {} } }] },
+   *     {
+   *       inputs: [
+   *         {
+   *           childTableId: 0,
+   *           displayIndex: 0,
+   *           values: { foo: {} },
+   *         },
+   *       ],
+   *     },
    *   );
    * ```
    */
@@ -163,7 +179,15 @@ export class Batch extends APIResource {
    * const batchResponseHubDBTableRowV3 =
    *   await client.cms.hubdb.rows.batch.updateBatch(
    *     'tableIdOrName',
-   *     { inputs: [{ id: 'id', values: { foo: {} } }] },
+   *     {
+   *       inputs: [
+   *         {
+   *           childTableId: 0,
+   *           displayIndex: 0,
+   *           values: { foo: {} },
+   *         },
+   *       ],
+   *     },
    *   );
    * ```
    */

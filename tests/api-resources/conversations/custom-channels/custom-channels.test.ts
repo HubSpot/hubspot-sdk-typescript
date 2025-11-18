@@ -37,10 +37,13 @@ describe('resource customChannels', () => {
 
   // Prism tests are disabled
   test.skip('update: only required params', async () => {
-    const responsePromise = client.conversations.customChannels.update('channelId', {
+    const responsePromise = client.conversations.customChannels.update(0, {
       capabilities: { foo: {} },
+      channelAccountConnectionRedirectUrl: {},
       channelDescription: {},
       channelLogoUrl: {},
+      name: {},
+      webhookUrl: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -53,11 +56,11 @@ describe('resource customChannels', () => {
 
   // Prism tests are disabled
   test.skip('update: required and optional params', async () => {
-    const response = await client.conversations.customChannels.update('channelId', {
+    const response = await client.conversations.customChannels.update(0, {
       capabilities: { foo: {} },
+      channelAccountConnectionRedirectUrl: {},
       channelDescription: {},
       channelLogoUrl: {},
-      channelAccountConnectionRedirectUrl: {},
       name: {},
       webhookUrl: {},
     });
@@ -76,8 +79,19 @@ describe('resource customChannels', () => {
   });
 
   // Prism tests are disabled
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.conversations.customChannels.list(
+        { after: 'after', defaultPageLength: 0, limit: 0, sort: ['string'] },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Hubspot.NotFoundError);
+  });
+
+  // Prism tests are disabled
   test.skip('delete', async () => {
-    const responsePromise = client.conversations.customChannels.delete('channelId');
+    const responsePromise = client.conversations.customChannels.delete(0);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -89,7 +103,7 @@ describe('resource customChannels', () => {
 
   // Prism tests are disabled
   test.skip('get', async () => {
-    const responsePromise = client.conversations.customChannels.get('channelId');
+    const responsePromise = client.conversations.customChannels.get(0);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

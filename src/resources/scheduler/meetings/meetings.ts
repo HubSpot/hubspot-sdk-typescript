@@ -5,12 +5,21 @@ import * as Shared from '../../shared';
 import * as CalendarAPI from './calendar';
 import { Calendar, CalendarCreateParams } from './calendar';
 import * as MeetingsLinksAPI from './meetings-links';
-import { MeetingsLinkBookParams, MeetingsLinks } from './meetings-links';
+import {
+  MeetingsLinkBookParams,
+  MeetingsLinkGetAvailabilityBySlugParams,
+  MeetingsLinkGetBookingInfoBySlugParams,
+  MeetingsLinkListParams,
+  MeetingsLinks,
+} from './meetings-links';
+import { Page } from '../../../core/pagination';
 
 export class Meetings extends APIResource {
   calendar: CalendarAPI.Calendar = new CalendarAPI.Calendar(this._client);
   meetingsLinks: MeetingsLinksAPI.MeetingsLinks = new MeetingsLinksAPI.MeetingsLinks(this._client);
 }
+
+export type ExternalLinkMetadataPage = Page<ExternalLinkMetadata>;
 
 export interface CollectionResponseWithTotalExternalLinkMetadataForwardPaging {
   results: Array<ExternalLinkMetadata>;
@@ -99,6 +108,8 @@ export interface ExternalCalendarMeetingEventCreateProperties {
 
   hs_timestamp: string;
 
+  hubspot_owner_id: string;
+
   hs_activity_type?: string;
 
   hs_attachment_ids?: Array<string>;
@@ -112,8 +123,6 @@ export interface ExternalCalendarMeetingEventCreateProperties {
   hs_meeting_location?: string;
 
   hs_meeting_location_type?: string;
-
-  hubspot_owner_id?: string;
 }
 
 export interface ExternalCalendarMeetingEventCreateRequest {
@@ -636,5 +645,11 @@ export declare namespace Meetings {
 
   export { Calendar as Calendar, type CalendarCreateParams as CalendarCreateParams };
 
-  export { MeetingsLinks as MeetingsLinks, type MeetingsLinkBookParams as MeetingsLinkBookParams };
+  export {
+    MeetingsLinks as MeetingsLinks,
+    type MeetingsLinkListParams as MeetingsLinkListParams,
+    type MeetingsLinkBookParams as MeetingsLinkBookParams,
+    type MeetingsLinkGetAvailabilityBySlugParams as MeetingsLinkGetAvailabilityBySlugParams,
+    type MeetingsLinkGetBookingInfoBySlugParams as MeetingsLinkGetBookingInfoBySlugParams,
+  };
 }

@@ -8,13 +8,28 @@ import { RequestOptions } from '../../../../internal/request-options';
 
 export class Batch extends APIResource {
   /**
-   * Create a batch of orders
+   * Create a batch of orders in the system.
    *
    * @example
    * ```ts
    * const batchResponseSimplePublicObject =
    *   await client.crm.objects.orders.batch.create({
-   *     inputs: [{ properties: { foo: 'string' } }],
+   *     inputs: [
+   *       {
+   *         associations: [
+   *           {
+   *             to: { id: '37295' },
+   *             types: [
+   *               {
+   *                 associationCategory: 'HUBSPOT_DEFINED',
+   *                 associationTypeId: 0,
+   *               },
+   *             ],
+   *           },
+   *         ],
+   *         properties: { foo: 'string' },
+   *       },
+   *     ],
    *   });
    * ```
    */
@@ -26,7 +41,7 @@ export class Batch extends APIResource {
   }
 
   /**
-   * Update a batch of orders by internal ID, or unique property values
+   * Update a batch of orders using their internal IDs or unique property values.
    *
    * @example
    * ```ts
@@ -44,7 +59,7 @@ export class Batch extends APIResource {
   }
 
   /**
-   * Archive a batch of orders by ID
+   * Archive a batch of orders identified by their IDs.
    *
    * @example
    * ```ts
@@ -136,7 +151,8 @@ export interface BatchGetParams {
   archived?: boolean;
 
   /**
-   * Body param:
+   * Body param: A unique property used to identify objects instead of the default
+   * ID.
    */
   idProperty?: string;
 }

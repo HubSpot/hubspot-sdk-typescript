@@ -8,6 +8,9 @@ import { path } from '../../../internal/utils/path';
 
 export class Enablement extends APIResource {
   /**
+   * For all object types supporting enablement, returns whether they're enabled or
+   * disabled
+   *
    * @example
    * ```ts
    * const portalObjectTypeEnablementPublicResponse =
@@ -19,6 +22,8 @@ export class Enablement extends APIResource {
   }
 
   /**
+   * Fetch whether object type is enabled
+   *
    * @example
    * ```ts
    * const objectTypeEnablementPublicResponse =

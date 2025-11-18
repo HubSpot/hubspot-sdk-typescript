@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as Shared from '../shared';
 import * as ActivityAPI from './activity';
 import {
   ActingUser,
@@ -22,7 +23,6 @@ import * as DetailsAPI from './details';
 import { Details } from './details';
 import * as UsageAPI from './usage';
 import { Usage } from './usage';
-import * as EmailsAPI from '../marketing/emails/emails';
 
 export class Account extends APIResource {
   activity: ActivityAPI.Activity = new ActivityAPI.Activity(this._client);
@@ -68,10 +68,7 @@ export interface APIUsage {
 export interface CollectionResponseAPIUsage {
   results: Array<APIUsage>;
 
-  /**
-   * Contains information pagination of results.
-   */
-  paging?: EmailsAPI.EmailsPaging;
+  paging?: Shared.Paging;
 }
 
 export interface PortalInformationResponse {

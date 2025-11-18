@@ -9,10 +9,16 @@ export class ObjectLibrary extends APIResource {
 }
 
 export interface ObjectTypeEnablementPublicResponse {
+  /**
+   * Whether the object type is enabled or not
+   */
   enablement: boolean;
 }
 
 export interface PortalObjectTypeEnablementPublicResponse {
+  /**
+   * A map of objectTypeId to whether that object type is enabled or not
+   */
   enablementByObjectTypeId: { [key: string]: boolean };
 }
 

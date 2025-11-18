@@ -36,5 +36,12 @@ export {
   type ExternalUserBusyTimes,
   type ExternalUserProfile,
   type ExternalValidatedFormField,
+  type ExternalLinkMetadataPage,
 } from './meetings';
-export { MeetingsLinks, type MeetingsLinkBookParams } from './meetings-links';
+export {
+  MeetingsLinks,
+  type MeetingsLinkListParams,
+  type MeetingsLinkBookParams,
+  type MeetingsLinkGetAvailabilityBySlugParams,
+  type MeetingsLinkGetBookingInfoBySlugParams,
+} from './meetings-links';

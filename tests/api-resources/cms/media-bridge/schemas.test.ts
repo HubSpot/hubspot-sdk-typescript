@@ -10,7 +10,7 @@ const client = new Hubspot({
 describe('resource schemas', () => {
   // Prism tests are disabled
   test.skip('update: only required params', async () => {
-    const responsePromise = client.cms.mediaBridge.schemas.update('objectType', { appId: 'appId' });
+    const responsePromise = client.cms.mediaBridge.schemas.update('objectType', { appId: 0 });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,7 +23,7 @@ describe('resource schemas', () => {
   // Prism tests are disabled
   test.skip('update: required and optional params', async () => {
     const response = await client.cms.mediaBridge.schemas.update('objectType', {
-      appId: 'appId',
+      appId: 0,
       clearDescription: true,
       description: 'description',
       labels: { plural: 'plural', singular: 'singular' },
@@ -37,7 +37,7 @@ describe('resource schemas', () => {
 
   // Prism tests are disabled
   test.skip('list', async () => {
-    const responsePromise = client.cms.mediaBridge.schemas.list('appId');
+    const responsePromise = client.cms.mediaBridge.schemas.list(0);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -48,9 +48,17 @@ describe('resource schemas', () => {
   });
 
   // Prism tests are disabled
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.cms.mediaBridge.schemas.list(0, { archived: true }, { path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Hubspot.NotFoundError);
+  });
+
+  // Prism tests are disabled
   test.skip('createAssociation: only required params', async () => {
     const responsePromise = client.cms.mediaBridge.schemas.createAssociation('objectType', {
-      appId: 'appId',
+      appId: 0,
       fromObjectTypeId: 'fromObjectTypeId',
       toObjectTypeId: 'toObjectTypeId',
     });
@@ -66,7 +74,7 @@ describe('resource schemas', () => {
   // Prism tests are disabled
   test.skip('createAssociation: required and optional params', async () => {
     const response = await client.cms.mediaBridge.schemas.createAssociation('objectType', {
-      appId: 'appId',
+      appId: 0,
       fromObjectTypeId: 'fromObjectTypeId',
       toObjectTypeId: 'toObjectTypeId',
       name: 'name',
@@ -76,7 +84,7 @@ describe('resource schemas', () => {
   // Prism tests are disabled
   test.skip('deleteAssociation: only required params', async () => {
     const responsePromise = client.cms.mediaBridge.schemas.deleteAssociation('associationId', {
-      appId: 'appId',
+      appId: 0,
       objectType: 'objectType',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -91,14 +99,14 @@ describe('resource schemas', () => {
   // Prism tests are disabled
   test.skip('deleteAssociation: required and optional params', async () => {
     const response = await client.cms.mediaBridge.schemas.deleteAssociation('associationId', {
-      appId: 'appId',
+      appId: 0,
       objectType: 'objectType',
     });
   });
 
   // Prism tests are disabled
   test.skip('get: only required params', async () => {
-    const responsePromise = client.cms.mediaBridge.schemas.get('objectType', { appId: 'appId' });
+    const responsePromise = client.cms.mediaBridge.schemas.get('objectType', { appId: 0 });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -110,6 +118,6 @@ describe('resource schemas', () => {
 
   // Prism tests are disabled
   test.skip('get: required and optional params', async () => {
-    const response = await client.cms.mediaBridge.schemas.get('objectType', { appId: 'appId' });
+    const response = await client.cms.mediaBridge.schemas.get('objectType', { appId: 0 });
   });
 });

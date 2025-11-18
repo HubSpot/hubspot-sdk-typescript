@@ -7,6 +7,9 @@ import { RequestOptions } from '../../../internal/request-options';
 
 export class CentralFxRates extends APIResource {
   /**
+   * Create a new currency with central exchange rates in the portal. Unsupported
+   * currencies cannot be added here.
+   *
    * @example
    * ```ts
    * const exchangeRate =
@@ -23,6 +26,9 @@ export class CentralFxRates extends APIResource {
   }
 
   /**
+   * Retrieve details on whether the central exchange rates feature is enabled for
+   * the portal.
+   *
    * @example
    * ```ts
    * const centralExchangeRatesInformation =
@@ -34,6 +40,9 @@ export class CentralFxRates extends APIResource {
   }
 
   /**
+   * Retrieve a list of currency codes that are not supported by the central exchange
+   * rates. Unsupported currencies will need to be manually updated.
+   *
    * @example
    * ```ts
    * const collectionResponseCurrencyCodeInfoNoPaging =

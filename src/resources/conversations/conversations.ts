@@ -3,17 +3,23 @@
 import { APIResource } from '../../core/resource';
 import * as Shared from '../shared';
 import * as ActorsAPI from './actors';
-import { ActorBatchReadParams, Actors } from './actors';
+import { ActorBatchReadParams, ActorGetParams, Actors } from './actors';
 import * as ChannelAccountsAPI from './channel-accounts';
-import { ChannelAccounts } from './channel-accounts';
+import { ChannelAccountGetParams, ChannelAccountListParams, ChannelAccounts } from './channel-accounts';
 import * as ChannelsAPI from './channels';
-import { Channels } from './channels';
+import { ChannelListParams, Channels } from './channels';
 import * as InboxesAPI from './inboxes';
-import { Inboxes } from './inboxes';
+import { InboxGetParams, InboxListParams, Inboxes } from './inboxes';
 import * as MessagesAPI from './messages';
-import { MessageCreateParams, MessageGetOriginalContentParams, MessageGetParams, Messages } from './messages';
+import {
+  MessageCreateParams,
+  MessageGetOriginalContentParams,
+  MessageGetParams,
+  MessageListParams,
+  Messages,
+} from './messages';
 import * as ThreadsAPI from './threads';
-import { ThreadUpdateParams, Threads } from './threads';
+import { ThreadGetParams, ThreadListParams, ThreadUpdateParams, Threads } from './threads';
 import * as VisitorIdentificationAPI from './visitor-identification';
 import {
   IdentificationTokenGenerationRequest,
@@ -28,16 +34,14 @@ import {
   CollectionResponseWithTotalPublicChannelIntegrationChannelForwardPaging,
   ContactAttachment,
   CustomChannelCreateParams,
+  CustomChannelListParams,
   CustomChannelUpdateParams,
   CustomChannels,
-  CustomChannelsPublicClient,
-  CustomChannelsPublicFile,
   FileAttachment,
   LocationAttachment,
   MessageHeaderAttachment,
   PreResolvedContact,
   PreResolvedContacts,
-  PublicChannelAccount,
   PublicChannelAccountEgg,
   PublicChannelAccountStagingToken,
   PublicChannelAccountStagingTokenUpdateRequest,
@@ -45,12 +49,14 @@ import {
   PublicChannelIntegrationChannel,
   PublicChannelIntegrationChannelCreate,
   PublicChannelIntegrationChannelPatch,
+  PublicChannelIntegrationChannelsPage,
   PublicChannelIntegrationMessageUpdateRequest,
   PublicConversationsMessage,
   QuickRepliesAttachment,
   SocialMetadataIntegrationAttachment,
   UnsupportedContentAttachment,
 } from './custom-channels/custom-channels';
+import { Page } from '../../core/pagination';
 
 export class Conversations extends APIResource {
   actors: ActorsAPI.Actors = new ActorsAPI.Actors(this._client);
@@ -63,6 +69,14 @@ export class Conversations extends APIResource {
   visitorIdentification: VisitorIdentificationAPI.VisitorIdentification =
     new VisitorIdentificationAPI.VisitorIdentification(this._client);
 }
+
+export type PublicChannelAccountsPage = Page<PublicChannelAccount>;
+
+export type PublicChannelsPage = Page<PublicChannel>;
+
+export type PublicInboxesPage = Page<PublicInbox>;
+
+export type PublicThreadsPage = Page<PublicThread>;
 
 export interface AgentActor {
   id: string;
@@ -138,7 +152,7 @@ export interface CollectionResponsePublicThreadForwardPaging {
 }
 
 export interface CollectionResponseWithTotalPublicChannelAccountForwardPaging {
-  results: Array<ConversationsPublicChannelAccount>;
+  results: Array<PublicChannelAccount>;
 
   total: number;
 
@@ -227,43 +241,6 @@ export interface ContactURL {
   url: string;
 
   type?: 'HOME' | 'WORK';
-}
-
-export interface ConversationsPublicChannelAccount {
-  archived: boolean;
-
-  /**
-   * The ID of the channel account.
-   */
-  id?: string;
-
-  /**
-   * Whether the channel account is turned on.
-   */
-  active?: boolean;
-
-  archivedAt?: string;
-
-  authorized?: boolean;
-
-  /**
-   * The ID of the channel that the channel account is an instance of.
-   */
-  channelId?: string;
-
-  createdAt?: string;
-
-  deliveryIdentifier?: PublicDeliveryIdentifier;
-
-  /**
-   * The ID of the conversations inbox that contains the channel account.
-   */
-  inboxId?: string;
-
-  /**
-   * The name of the channel account.
-   */
-  name?: string;
 }
 
 export interface ConversationsPublicConversationsMessage {
@@ -384,23 +361,39 @@ export interface PublicChannel {
   /**
    * The ID of the channel.
    */
-  id?: string;
+  id: string;
 
   /**
    * The name of the channel.
    */
-  name?: string;
+  name: string;
+}
+
+export interface PublicChannelAccount {
+  id: string;
+
+  active: boolean;
+
+  archived: boolean;
+
+  authorized: boolean;
+
+  channelId: string;
+
+  createdAt: string;
+
+  inboxId: string;
+
+  name: string;
+
+  archivedAt?: string;
+
+  deliveryIdentifier?: PublicDeliveryIdentifier;
 }
 
 export interface PublicClient {
-  /**
-   * The type of the client.
-   */
-  clientType?: 'HUBSPOT' | 'SYSTEM' | 'INTEGRATION' | 'UNKNOWN';
+  clientType: 'HUBSPOT' | 'SYSTEM' | 'INTEGRATION' | 'UNKNOWN';
 
-  /**
-   * The ID of the client if the client is an integration.
-   */
   integrationAppId?: number;
 }
 
@@ -490,9 +483,9 @@ export interface PublicFile {
 
   type: 'FILE';
 
-  url: string;
-
   name?: string;
+
+  url?: string;
 }
 
 export interface PublicFileEgg {
@@ -502,7 +495,22 @@ export interface PublicFileEgg {
 }
 
 export interface PublicInbox {
+  /**
+   * The ID of the inbox.
+   */
+  id: string;
+
   archived: boolean;
+
+  /**
+   * When the inbox was created.
+   */
+  createdAt: string;
+
+  /**
+   * The name of the inbox.
+   */
+  name: string;
 
   /**
    * Specifies whether this refers to a Conversations Inbox or to the Help Desk.
@@ -510,24 +518,9 @@ export interface PublicInbox {
    */
   type: string;
 
-  /**
-   * The ID of the inbox.
-   */
-  id?: string;
+  updatedAt: string;
 
   archivedAt?: string;
-
-  /**
-   * When the inbox was created.
-   */
-  createdAt?: string;
-
-  /**
-   * The name of the inbox.
-   */
-  name?: string;
-
-  updatedAt?: string;
 }
 
 export interface PublicLocation {
@@ -647,6 +640,11 @@ export interface PublicThread {
   id: string;
 
   /**
+   * Whether this thread is archived.
+   */
+  archived: boolean;
+
+  /**
    * The ID of the associated Contact in the CRM. If the Contact for the thread has
    * not yet been added or created, the `associatedContactId` returned will be a
    * visitorID and cannot be used to search for the Contact in the CRM.
@@ -676,11 +674,6 @@ export interface PublicThread {
    * The thread's status: `OPEN` or `CLOSED`.
    */
   status: 'OPEN' | 'CLOSED';
-
-  /**
-   * Whether this thread is archived.
-   */
-  archived?: boolean;
 
   assignedTo?: string;
 
@@ -886,7 +879,6 @@ export declare namespace Conversations {
     type ContactPhone as ContactPhone,
     type ContactProfile as ContactProfile,
     type ContactURL as ContactURL,
-    type ConversationsPublicChannelAccount as ConversationsPublicChannelAccount,
     type ConversationsPublicConversationsMessage as ConversationsPublicConversationsMessage,
     type EmailActor as EmailActor,
     type IntegratorActor as IntegratorActor,
@@ -894,6 +886,7 @@ export declare namespace Conversations {
     type PublicActor as PublicActor,
     type PublicAssignmentMessage as PublicAssignmentMessage,
     type PublicChannel as PublicChannel,
+    type PublicChannelAccount as PublicChannelAccount,
     type PublicClient as PublicClient,
     type PublicComment as PublicComment,
     type PublicCommentEgg as PublicCommentEgg,
@@ -931,11 +924,19 @@ export declare namespace Conversations {
     type VisitorActor as VisitorActor,
   };
 
-  export { Actors as Actors, type ActorBatchReadParams as ActorBatchReadParams };
+  export {
+    Actors as Actors,
+    type ActorBatchReadParams as ActorBatchReadParams,
+    type ActorGetParams as ActorGetParams,
+  };
 
-  export { ChannelAccounts as ChannelAccounts };
+  export {
+    ChannelAccounts as ChannelAccounts,
+    type ChannelAccountListParams as ChannelAccountListParams,
+    type ChannelAccountGetParams as ChannelAccountGetParams,
+  };
 
-  export { Channels as Channels };
+  export { Channels as Channels, type ChannelListParams as ChannelListParams };
 
   export {
     CustomChannels as CustomChannels,
@@ -943,14 +944,11 @@ export declare namespace Conversations {
     type ChannelIntegrationParticipant as ChannelIntegrationParticipant,
     type CollectionResponseWithTotalPublicChannelIntegrationChannelForwardPaging as CollectionResponseWithTotalPublicChannelIntegrationChannelForwardPaging,
     type ContactAttachment as ContactAttachment,
-    type CustomChannelsPublicClient as CustomChannelsPublicClient,
-    type CustomChannelsPublicFile as CustomChannelsPublicFile,
     type FileAttachment as FileAttachment,
     type LocationAttachment as LocationAttachment,
     type MessageHeaderAttachment as MessageHeaderAttachment,
     type PreResolvedContact as PreResolvedContact,
     type PreResolvedContacts as PreResolvedContacts,
-    type PublicChannelAccount as PublicChannelAccount,
     type PublicChannelAccountEgg as PublicChannelAccountEgg,
     type PublicChannelAccountStagingToken as PublicChannelAccountStagingToken,
     type PublicChannelAccountStagingTokenUpdateRequest as PublicChannelAccountStagingTokenUpdateRequest,
@@ -963,20 +961,32 @@ export declare namespace Conversations {
     type QuickRepliesAttachment as QuickRepliesAttachment,
     type SocialMetadataIntegrationAttachment as SocialMetadataIntegrationAttachment,
     type UnsupportedContentAttachment as UnsupportedContentAttachment,
+    type PublicChannelIntegrationChannelsPage as PublicChannelIntegrationChannelsPage,
     type CustomChannelCreateParams as CustomChannelCreateParams,
     type CustomChannelUpdateParams as CustomChannelUpdateParams,
+    type CustomChannelListParams as CustomChannelListParams,
   };
 
-  export { Inboxes as Inboxes };
+  export {
+    Inboxes as Inboxes,
+    type InboxListParams as InboxListParams,
+    type InboxGetParams as InboxGetParams,
+  };
 
   export {
     Messages as Messages,
     type MessageCreateParams as MessageCreateParams,
+    type MessageListParams as MessageListParams,
     type MessageGetParams as MessageGetParams,
     type MessageGetOriginalContentParams as MessageGetOriginalContentParams,
   };
 
-  export { Threads as Threads, type ThreadUpdateParams as ThreadUpdateParams };
+  export {
+    Threads as Threads,
+    type ThreadUpdateParams as ThreadUpdateParams,
+    type ThreadListParams as ThreadListParams,
+    type ThreadGetParams as ThreadGetParams,
+  };
 
   export {
     VisitorIdentification as VisitorIdentification,

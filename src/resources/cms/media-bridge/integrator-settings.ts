@@ -15,13 +15,13 @@ export class IntegratorSettings extends APIResource {
    * ```ts
    * const bulkIntegratorObjectCreationResponse =
    *   await client.cms.mediaBridge.integratorSettings.createObjectDefinition(
-   *     'appId',
+   *     0,
    *     { mediaTypes: ['VIDEO'] },
    *   );
    * ```
    */
   createObjectDefinition(
-    appID: string,
+    appID: number,
     body: IntegratorSettingCreateObjectDefinitionParams,
     options?: RequestOptions,
   ): APIPromise<MediaBridgeAPI.BulkIntegratorObjectCreationResponse> {
@@ -38,7 +38,7 @@ export class IntegratorSettings extends APIResource {
    * ```ts
    * const integratorOEmbedDomainModel =
    *   await client.cms.mediaBridge.integratorSettings.createOembedDomain(
-   *     'appId',
+   *     0,
    *     {
    *       endpoints: {
    *         discovery: true,
@@ -50,7 +50,7 @@ export class IntegratorSettings extends APIResource {
    * ```
    */
   createOembedDomain(
-    appID: string,
+    appID: number,
     body: IntegratorSettingCreateOembedDomainParams,
     options?: RequestOptions,
   ): APIPromise<MediaBridgeAPI.IntegratorOEmbedDomainModel> {
@@ -63,12 +63,18 @@ export class IntegratorSettings extends APIResource {
    * @example
    * ```ts
    * await client.cms.mediaBridge.integratorSettings.deleteOembedDomain(
-   *   'appId',
+   *   0,
    * );
    * ```
    */
-  deleteOembedDomain(appID: string, options?: RequestOptions): APIPromise<void> {
+  deleteOembedDomain(
+    appID: number,
+    params: IntegratorSettingDeleteOembedDomainParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<void> {
+    const { id, domainPortalId } = params ?? {};
     return this._client.delete(path`/media-bridge/v1/${appID}/settings/oembed-domains`, {
+      query: { id, domainPortalId },
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
@@ -81,12 +87,12 @@ export class IntegratorSettings extends APIResource {
    * ```ts
    * const eventVisibilityResponse =
    *   await client.cms.mediaBridge.integratorSettings.getEventVisibilitySettings(
-   *     'appId',
+   *     0,
    *   );
    * ```
    */
   getEventVisibilitySettings(
-    appID: string,
+    appID: number,
     options?: RequestOptions,
   ): APIPromise<MediaBridgeAPI.EventVisibilityResponse> {
     return this._client.get(path`/media-bridge/v1/${appID}/settings/event-visibility`, options);
@@ -99,21 +105,21 @@ export class IntegratorSettings extends APIResource {
    * ```ts
    * const objectDefinitionResponse =
    *   await client.cms.mediaBridge.integratorSettings.getObjectDefinitionsByMediaType(
-   *     'mediaType',
-   *     { appId: 'appId' },
+   *     'VIDEO',
+   *     { appId: 0 },
    *   );
    * ```
    */
   getObjectDefinitionsByMediaType(
-    mediaType: string,
+    mediaType: 'VIDEO' | 'AUDIO' | 'DOCUMENT' | 'OTHER' | 'IMAGE',
     params: IntegratorSettingGetObjectDefinitionsByMediaTypeParams,
     options?: RequestOptions,
   ): APIPromise<MediaBridgeAPI.ObjectDefinitionResponse> {
-    const { appId } = params;
-    return this._client.get(
-      path`/media-bridge/v1/${appId}/settings/object-definitions/${mediaType}`,
-      options,
-    );
+    const { appId, ...query } = params;
+    return this._client.get(path`/media-bridge/v1/${appId}/settings/object-definitions/${mediaType}`, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -124,7 +130,7 @@ export class IntegratorSettings extends APIResource {
    * const integratorOEmbedDomainModel =
    *   await client.cms.mediaBridge.integratorSettings.getOembedDomain(
    *     'oEmbedDomainId',
-   *     { appId: 'appId' },
+   *     { appId: 0 },
    *   );
    * ```
    */
@@ -147,15 +153,16 @@ export class IntegratorSettings extends APIResource {
    * ```ts
    * const oEmbedDomainsCollectionResponse =
    *   await client.cms.mediaBridge.integratorSettings.listOembedDomains(
-   *     'appId',
+   *     0,
    *   );
    * ```
    */
   listOembedDomains(
-    appID: string,
+    appID: number,
+    query: IntegratorSettingListOembedDomainsParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<MediaBridgeAPI.OEmbedDomainsCollectionResponse> {
-    return this._client.get(path`/media-bridge/v1/${appID}/settings/oembed-domains`, options);
+    return this._client.get(path`/media-bridge/v1/${appID}/settings/oembed-domains`, { query, ...options });
   }
 
   /**
@@ -165,7 +172,7 @@ export class IntegratorSettings extends APIResource {
    * @deprecated
    */
   registerAppName(
-    appID: string,
+    appID: number,
     body: IntegratorSettingRegisterAppNameParams,
     options?: RequestOptions,
   ): APIPromise<MediaBridgeAPI.MediaBridgeProviderRegistrationResponse> {
@@ -180,13 +187,13 @@ export class IntegratorSettings extends APIResource {
    * ```ts
    * const mediaBridgeProviderRegistrationResponse =
    *   await client.cms.mediaBridge.integratorSettings.updateAppName(
-   *     'appId',
+   *     0,
    *     { updatedAt: 0 },
    *   );
    * ```
    */
   updateAppName(
-    appID: string,
+    appID: number,
     body: IntegratorSettingUpdateAppNameParams,
     options?: RequestOptions,
   ): APIPromise<MediaBridgeAPI.MediaBridgeProviderRegistrationResponse> {
@@ -200,13 +207,13 @@ export class IntegratorSettings extends APIResource {
    * ```ts
    * const eventVisibilityChange =
    *   await client.cms.mediaBridge.integratorSettings.updateEventVisibilitySettings(
-   *     'appId',
+   *     0,
    *     { eventType: 'ALL', updatedAt: 0 },
    *   );
    * ```
    */
   updateEventVisibilitySettings(
-    appID: string,
+    appID: number,
     body: IntegratorSettingUpdateEventVisibilitySettingsParams,
     options?: RequestOptions,
   ): APIPromise<MediaBridgeAPI.EventVisibilityChange> {
@@ -225,7 +232,7 @@ export class IntegratorSettings extends APIResource {
    *   await client.cms.mediaBridge.integratorSettings.updateOembedDomain(
    *     'oEmbedDomainId',
    *     {
-   *       appId: 'appId',
+   *       appId: 0,
    *       endpoints: {
    *         discovery: true,
    *         schemes: ['string'],
@@ -258,12 +265,44 @@ export interface IntegratorSettingCreateOembedDomainParams {
   portalId?: number;
 }
 
+export interface IntegratorSettingDeleteOembedDomainParams {
+  /**
+   * The ID of the oEmbed to delete.
+   */
+  id?: number;
+
+  /**
+   * Filter response by Hub ID.
+   */
+  domainPortalId?: number;
+}
+
 export interface IntegratorSettingGetObjectDefinitionsByMediaTypeParams {
-  appId: string;
+  /**
+   * Path param: The appId for the media bridge app. It is possible to have multiple
+   * apps in your developer account that use the media bridge.
+   */
+  appId: number;
+
+  /**
+   * Query param: Include the full definition in the response.
+   */
+  includeFullDefinition?: boolean;
 }
 
 export interface IntegratorSettingGetOembedDomainParams {
-  appId: string;
+  /**
+   * The appId for the media bridge app. It is possible to have multiple apps in your
+   * developer account that use the media bridge.
+   */
+  appId: number;
+}
+
+export interface IntegratorSettingListOembedDomainsParams {
+  /**
+   * Filter response by Hub ID.
+   */
+  domainPortalId?: number;
 }
 
 export interface IntegratorSettingRegisterAppNameParams {
@@ -292,9 +331,10 @@ export interface IntegratorSettingUpdateEventVisibilitySettingsParams {
 
 export interface IntegratorSettingUpdateOembedDomainParams {
   /**
-   * Path param:
+   * Path param: The appId for the media bridge app. It is possible to have multiple
+   * apps in your developer account that use the media bridge.
    */
-  appId: string;
+  appId: number;
 
   /**
    * Body param:
@@ -311,8 +351,10 @@ export declare namespace IntegratorSettings {
   export {
     type IntegratorSettingCreateObjectDefinitionParams as IntegratorSettingCreateObjectDefinitionParams,
     type IntegratorSettingCreateOembedDomainParams as IntegratorSettingCreateOembedDomainParams,
+    type IntegratorSettingDeleteOembedDomainParams as IntegratorSettingDeleteOembedDomainParams,
     type IntegratorSettingGetObjectDefinitionsByMediaTypeParams as IntegratorSettingGetObjectDefinitionsByMediaTypeParams,
     type IntegratorSettingGetOembedDomainParams as IntegratorSettingGetOembedDomainParams,
+    type IntegratorSettingListOembedDomainsParams as IntegratorSettingListOembedDomainsParams,
     type IntegratorSettingRegisterAppNameParams as IntegratorSettingRegisterAppNameParams,
     type IntegratorSettingUpdateAppNameParams as IntegratorSettingUpdateAppNameParams,
     type IntegratorSettingUpdateEventVisibilitySettingsParams as IntegratorSettingUpdateEventVisibilitySettingsParams,

@@ -9,8 +9,8 @@ const client = new Hubspot({
 
 describe('resource sequences', () => {
   // Prism tests are disabled
-  test.skip('list', async () => {
-    const responsePromise = client.automation.sequences.list();
+  test.skip('list: only required params', async () => {
+    const responsePromise = client.automation.sequences.list({ userId: 'userId' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,8 +21,18 @@ describe('resource sequences', () => {
   });
 
   // Prism tests are disabled
-  test.skip('get', async () => {
-    const responsePromise = client.automation.sequences.get('sequenceId');
+  test.skip('list: required and optional params', async () => {
+    const response = await client.automation.sequences.list({
+      userId: 'userId',
+      after: 'after',
+      limit: 0,
+      name: 'name',
+    });
+  });
+
+  // Prism tests are disabled
+  test.skip('get: only required params', async () => {
+    const responsePromise = client.automation.sequences.get('sequenceId', { userId: 'userId' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -30,5 +40,10 @@ describe('resource sequences', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('get: required and optional params', async () => {
+    const response = await client.automation.sequences.get('sequenceId', { userId: 'userId' });
   });
 });

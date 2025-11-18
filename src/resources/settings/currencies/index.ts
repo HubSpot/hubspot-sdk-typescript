@@ -24,7 +24,9 @@ export {
   type CurrencyBatchGetParams,
   type CurrencyBatchUpdateParams,
   type CurrencyCreateExchangeRateParams,
+  type CurrencyListExchangeRatesParams,
   type CurrencyUpdateCompanyCurrencyParams,
   type CurrencyUpdateExchangeRateParams,
   type CurrencyUpdateVisibilityParams,
+  type ExchangeRatesPage,
 } from './currencies';

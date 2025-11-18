@@ -22,7 +22,10 @@ describe('resource actors', () => {
 
   // Prism tests are disabled
   test.skip('batchRead: required and optional params', async () => {
-    const response = await client.conversations.actors.batchRead({ inputs: ['string'] });
+    const response = await client.conversations.actors.batchRead({
+      inputs: ['string'],
+      property: 'property',
+    });
   });
 
   // Prism tests are disabled
@@ -35,5 +38,17 @@ describe('resource actors', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('get: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.conversations.actors.get(
+        'actorId',
+        { property: 'property' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Hubspot.NotFoundError);
   });
 });

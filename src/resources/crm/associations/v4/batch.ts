@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as CrmAPI from '../../crm';
+import * as AssociationsAPI from '../associations';
 import * as V4API from './v4';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
@@ -67,7 +68,7 @@ export class Batch extends APIResource {
     toObjectType: string,
     params: BatchDeleteParams,
     options?: RequestOptions,
-  ): APIPromise<V4API.BatchResponseVoid> {
+  ): APIPromise<AssociationsAPI.BatchResponseVoid> {
     const { fromObjectType, ...body } = params;
     return this._client.post(path`/crm/v4/associations/${fromObjectType}/${toObjectType}/batch/archive`, {
       body,
@@ -135,7 +136,7 @@ export class Batch extends APIResource {
     toObjectType: string,
     params: BatchDeleteLabelsParams,
     options?: RequestOptions,
-  ): APIPromise<V4API.BatchResponseVoid> {
+  ): APIPromise<AssociationsAPI.BatchResponseVoid> {
     const { fromObjectType, ...body } = params;
     return this._client.post(
       path`/crm/v4/associations/${fromObjectType}/${toObjectType}/batch/labels/archive`,
@@ -173,11 +174,34 @@ export class Batch extends APIResource {
       ...options,
     });
   }
+
+  /**
+   * Upsert a batch of CRM objects, creating new records or updating existing ones
+   * based on their internal IDs or unique property values.
+   *
+   * @example
+   * ```ts
+   * const batchResponseSimplePublicUpsertObject =
+   *   await client.crm.associations.v4.batch.upsert(
+   *     'objectType',
+   *     {
+   *       inputs: [{ id: 'id', properties: { foo: 'string' } }],
+   *     },
+   *   );
+   * ```
+   */
+  upsert(
+    objectType: string,
+    body: BatchUpsertParams,
+    options?: RequestOptions,
+  ): APIPromise<CrmAPI.BatchResponseSimplePublicUpsertObject> {
+    return this._client.post(path`/crm/v4/objects/${objectType}/batch/upsert`, { body, ...options });
+  }
 }
 
 export interface BatchCreateParams {
   /**
-   * Path param:
+   * Path param: The type of the from Object
    */
   fromObjectType: string;
 
@@ -189,7 +213,8 @@ export interface BatchCreateParams {
 
 export interface BatchDeleteParams {
   /**
-   * Path param:
+   * Path param: Specifies the type of the source object in the batch association
+   * deletion.
    */
   fromObjectType: string;
 
@@ -201,7 +226,7 @@ export interface BatchDeleteParams {
 
 export interface BatchCreateDefaultParams {
   /**
-   * Path param:
+   * Path param: Specifies the type of the source object in the association.
    */
   fromObjectType: string;
 
@@ -213,7 +238,7 @@ export interface BatchCreateDefaultParams {
 
 export interface BatchDeleteLabelsParams {
   /**
-   * Path param:
+   * Path param: The type of the from Object
    */
   fromObjectType: string;
 
@@ -225,7 +250,7 @@ export interface BatchDeleteLabelsParams {
 
 export interface BatchGetParams {
   /**
-   * Path param:
+   * Path param: The type of the from Object
    */
   fromObjectType: string;
 
@@ -235,6 +260,10 @@ export interface BatchGetParams {
   inputs: Array<V4API.PublicFetchAssociationsBatchRequest>;
 }
 
+export interface BatchUpsertParams {
+  inputs: Array<CrmAPI.SimplePublicObjectBatchInputUpsert>;
+}
+
 export declare namespace Batch {
   export {
     type BatchCreateParams as BatchCreateParams,
@@ -242,5 +271,6 @@ export declare namespace Batch {
     type BatchCreateDefaultParams as BatchCreateDefaultParams,
     type BatchDeleteLabelsParams as BatchDeleteLabelsParams,
     type BatchGetParams as BatchGetParams,
+    type BatchUpsertParams as BatchUpsertParams,
   };
 }

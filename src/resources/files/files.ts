@@ -24,7 +24,6 @@ import {
   FolderUpdateByIDParams,
   Folders,
 } from './folders';
-import * as EmailsAPI from '../marketing/emails/emails';
 import { Page } from '../../core/pagination';
 
 export class Files extends APIResource {
@@ -42,19 +41,13 @@ export type FoldersPage = Page<Folder>;
 export interface CollectionResponseFile {
   results: Array<File>;
 
-  /**
-   * Contains information pagination of results.
-   */
-  paging?: EmailsAPI.EmailsPaging;
+  paging?: Shared.Paging;
 }
 
 export interface CollectionResponseFolder {
   results: Array<Folder>;
 
-  /**
-   * Contains information pagination of results.
-   */
-  paging?: EmailsAPI.EmailsPaging;
+  paging?: Shared.Paging;
 }
 
 /**

@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as Shared from '../shared';
 import * as EventDefinitionsAPI from './event-definitions';
 import {
   AbsoluteComparativeTimestampRefineBy,
@@ -68,7 +69,6 @@ import {
   SendSendBatchParams,
   SendSendParams,
 } from './send';
-import * as EmailsAPI from '../marketing/emails/emails';
 import { APIPromise } from '../../core/api-promise';
 import { Page, type PageParams, PagePromise } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
@@ -122,10 +122,7 @@ export type ExternalUnifiedEventsPage = Page<ExternalUnifiedEvent>;
 export interface CollectionResponseExternalUnifiedEvent {
   results: Array<ExternalUnifiedEvent>;
 
-  /**
-   * Contains information pagination of results.
-   */
-  paging?: EmailsAPI.EmailsPaging;
+  paging?: Shared.Paging;
 }
 
 export interface ExternalUnifiedEvent {
@@ -160,7 +157,7 @@ export interface ExternalUnifiedEvent {
    * A key-value map of event-specific properties. The available properties depend on
    * the event type definition.
    */
-  properties?: { [key: string]: string };
+  properties: { [key: string]: string };
 }
 
 export interface VisibleExternalEventTypeNames {
@@ -278,13 +275,13 @@ export declare namespace Events {
     type ExternalBehavioralEventTypeDefinitionPatch as ExternalBehavioralEventTypeDefinitionPatch,
     type FiscalQuarter as FiscalQuarter,
     type FiscalYear as FiscalYear,
-    type IndexedTimePoint as IndexedTimePoint,
     type IndexOffset as IndexOffset,
+    type IndexedTimePoint as IndexedTimePoint,
     type MonthReference as MonthReference,
     type MultiStringPropertyOperation as MultiStringPropertyOperation,
     type NowReference as NowReference,
-    type NumberPropertyOperation as NumberPropertyOperation,
     type NumOccurrencesRefineBy as NumOccurrencesRefineBy,
+    type NumberPropertyOperation as NumberPropertyOperation,
     type PropertyFilter as PropertyFilter,
     type PropertyReferencedTime as PropertyReferencedTime,
     type QuarterReference as QuarterReference,

@@ -2,7 +2,13 @@
 
 import { APIResource } from '../../core/resource';
 import * as TaxRatesAPI from './tax-rates';
-import { CollectionResponsePublicTaxRateGroupForwardPaging, PublicTaxRateGroup, TaxRates } from './tax-rates';
+import {
+  CollectionResponsePublicTaxRateGroupForwardPaging,
+  PublicTaxRateGroup,
+  PublicTaxRateGroupsPage,
+  TaxRateListParams,
+  TaxRates,
+} from './tax-rates';
 import * as UsersAPI from './users';
 import {
   CollectionResponsePublicPermissionSetNoPaging,
@@ -40,6 +46,7 @@ import {
   CurrencyCodeInfo,
   CurrencyCreateExchangeRateParams,
   CurrencyCreateRequest,
+  CurrencyListExchangeRatesParams,
   CurrencyPairUpdate,
   CurrencyUpdateCompanyCurrencyParams,
   CurrencyUpdateExchangeRateParams,
@@ -48,6 +55,7 @@ import {
   ExchangeRateCreateRequest,
   ExchangeRateMultiplier,
   ExchangeRateUpdateRequest,
+  ExchangeRatesPage,
 } from './currencies/currencies';
 
 export class Settings extends APIResource {
@@ -80,10 +88,12 @@ export declare namespace Settings {
     type ExchangeRateCreateRequest as ExchangeRateCreateRequest,
     type ExchangeRateMultiplier as ExchangeRateMultiplier,
     type ExchangeRateUpdateRequest as ExchangeRateUpdateRequest,
+    type ExchangeRatesPage as ExchangeRatesPage,
     type CurrencyBatchCreateParams as CurrencyBatchCreateParams,
     type CurrencyBatchGetParams as CurrencyBatchGetParams,
     type CurrencyBatchUpdateParams as CurrencyBatchUpdateParams,
     type CurrencyCreateExchangeRateParams as CurrencyCreateExchangeRateParams,
+    type CurrencyListExchangeRatesParams as CurrencyListExchangeRatesParams,
     type CurrencyUpdateCompanyCurrencyParams as CurrencyUpdateCompanyCurrencyParams,
     type CurrencyUpdateExchangeRateParams as CurrencyUpdateExchangeRateParams,
     type CurrencyUpdateVisibilityParams as CurrencyUpdateVisibilityParams,
@@ -93,6 +103,8 @@ export declare namespace Settings {
     TaxRates as TaxRates,
     type CollectionResponsePublicTaxRateGroupForwardPaging as CollectionResponsePublicTaxRateGroupForwardPaging,
     type PublicTaxRateGroup as PublicTaxRateGroup,
+    type PublicTaxRateGroupsPage as PublicTaxRateGroupsPage,
+    type TaxRateListParams as TaxRateListParams,
   };
 
   export {

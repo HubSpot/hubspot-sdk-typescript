@@ -11,7 +11,17 @@ describe('resource batch', () => {
   // Prism tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.crm.objects.contracts.batch.create({
-      inputs: [{ properties: { foo: 'string' } }],
+      inputs: [
+        {
+          associations: [
+            {
+              to: { id: '37295' },
+              types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
+            },
+          ],
+          properties: { foo: 'string' },
+        },
+      ],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,13 +37,13 @@ describe('resource batch', () => {
     const response = await client.crm.objects.contracts.batch.create({
       inputs: [
         {
-          properties: { foo: 'string' },
           associations: [
             {
               to: { id: '37295' },
               types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
             },
           ],
+          properties: { foo: 'string' },
           objectWriteTraceId: 'objectWriteTraceId',
         },
       ],

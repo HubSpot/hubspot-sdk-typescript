@@ -13,8 +13,15 @@ export class Settings extends APIResource {
    * ```ts
    * const settingsResponse =
    *   await client.crm.extensions.calling.settings.create(0, {
+   *     height: 0,
+   *     isReady: true,
    *     name: 'name',
+   *     supportsCustomObjects: true,
+   *     supportsInboundCalling: true,
    *     url: 'url',
+   *     usesCallingWindow: true,
+   *     usesRemote: true,
+   *     width: 0,
    *   });
    * ```
    */
@@ -67,23 +74,23 @@ export class Settings extends APIResource {
 }
 
 export interface SettingCreateParams {
+  height: number;
+
+  isReady: boolean;
+
   name: string;
+
+  supportsCustomObjects: boolean;
+
+  supportsInboundCalling: boolean;
 
   url: string;
 
-  height?: number;
+  usesCallingWindow: boolean;
 
-  isReady?: boolean;
+  usesRemote: boolean;
 
-  supportsCustomObjects?: boolean;
-
-  supportsInboundCalling?: boolean;
-
-  usesCallingWindow?: boolean;
-
-  usesRemote?: boolean;
-
-  width?: number;
+  width: number;
 }
 
 export interface SettingUpdateParams {

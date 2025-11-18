@@ -12,11 +12,7 @@ describe('resource channelAccountStagingTokens', () => {
   test.skip('update: only required params', async () => {
     const responsePromise = client.conversations.customChannels.channelAccountStagingTokens.update(
       'accountToken',
-      {
-        channelId: 'channelId',
-        accountName: 'accountName',
-        deliveryIdentifier: { type: 'type', value: 'value' },
-      },
+      { channelId: 0, accountName: 'accountName', deliveryIdentifier: { type: 'type', value: 'value' } },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -31,11 +27,7 @@ describe('resource channelAccountStagingTokens', () => {
   test.skip('update: required and optional params', async () => {
     const response = await client.conversations.customChannels.channelAccountStagingTokens.update(
       'accountToken',
-      {
-        channelId: 'channelId',
-        accountName: 'accountName',
-        deliveryIdentifier: { type: 'type', value: 'value' },
-      },
+      { channelId: 0, accountName: 'accountName', deliveryIdentifier: { type: 'type', value: 'value' } },
     );
   });
 });

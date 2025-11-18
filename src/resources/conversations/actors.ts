@@ -19,10 +19,15 @@ export class Actors extends APIResource {
    * ```
    */
   batchRead(
-    body: ActorBatchReadParams,
+    params: ActorBatchReadParams,
     options?: RequestOptions,
   ): APIPromise<ConversationsAPI.BatchResponsePublicActor> {
-    return this._client.post('/conversations/v3/conversations/actors/batch/read', { body, ...options });
+    const { property, ...body } = params;
+    return this._client.post('/conversations/v3/conversations/actors/batch/read', {
+      query: { property },
+      body,
+      ...options,
+    });
   }
 
   /**
@@ -35,18 +40,34 @@ export class Actors extends APIResource {
    * );
    * ```
    */
-  get(actorID: string, options?: RequestOptions): APIPromise<ConversationsAPI.PublicActor> {
-    return this._client.get(path`/conversations/v3/conversations/actors/${actorID}`, options);
+  get(
+    actorID: string,
+    query: ActorGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ConversationsAPI.PublicActor> {
+    return this._client.get(path`/conversations/v3/conversations/actors/${actorID}`, { query, ...options });
   }
 }
 
 export interface ActorBatchReadParams {
   /**
-   * Strings to input.
+   * Body param: Strings to input.
    */
   inputs: Array<string>;
+
+  /**
+   * Query param: A specific property to include in the actor response.
+   */
+  property?: string;
+}
+
+export interface ActorGetParams {
+  /**
+   * A specific property to include in the actor response.
+   */
+  property?: string;
 }
 
 export declare namespace Actors {
-  export { type ActorBatchReadParams as ActorBatchReadParams };
+  export { type ActorBatchReadParams as ActorBatchReadParams, type ActorGetParams as ActorGetParams };
 }

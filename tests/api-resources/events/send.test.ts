@@ -10,7 +10,10 @@ const client = new Hubspot({
 describe('resource send', () => {
   // Prism tests are disabled
   test.skip('send: only required params', async () => {
-    const responsePromise = client.events.send.send({ eventName: 'eventName' });
+    const responsePromise = client.events.send.send({
+      eventName: 'eventName',
+      properties: { foo: 'string' },
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,10 +27,10 @@ describe('resource send', () => {
   test.skip('send: required and optional params', async () => {
     const response = await client.events.send.send({
       eventName: 'eventName',
+      properties: { foo: 'string' },
       email: 'email',
       objectId: 'objectId',
       occurredAt: '2019-12-27T18:11:19.117Z',
-      properties: { foo: 'string' },
       utk: 'utk',
       uuid: 'uuid',
     });
@@ -35,7 +38,9 @@ describe('resource send', () => {
 
   // Prism tests are disabled
   test.skip('sendBatch: only required params', async () => {
-    const responsePromise = client.events.send.sendBatch({ inputs: [{ eventName: 'eventName' }] });
+    const responsePromise = client.events.send.sendBatch({
+      inputs: [{ eventName: 'eventName', properties: { foo: 'string' } }],
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -51,10 +56,10 @@ describe('resource send', () => {
       inputs: [
         {
           eventName: 'eventName',
+          properties: { foo: 'string' },
           email: 'email',
           objectId: 'objectId',
           occurredAt: '2019-12-27T18:11:19.117Z',
-          properties: { foo: 'string' },
           utk: 'utk',
           uuid: 'uuid',
         },

@@ -32,8 +32,16 @@ export class Pipelines extends APIResource {
    *     displayOrder: 0,
    *     label: 'My replaced pipeline',
    *     stages: [
-   *       { displayOrder: 0, label: 'In Progress' },
-   *       { displayOrder: 1, label: 'Done' },
+   *       {
+   *         displayOrder: 0,
+   *         label: 'In Progress',
+   *         metadata: { ticketState: 'OPEN' },
+   *       },
+   *       {
+   *         displayOrder: 1,
+   *         label: 'Done',
+   *         metadata: { ticketState: 'CLOSED' },
+   *       },
    *     ],
    *   },
    * );
@@ -79,7 +87,7 @@ export class Pipelines extends APIResource {
   }
 
   /**
-   * Delete a pipeline
+   * Delete a pipeline identified by its unique pipelineId
    *
    * @example
    * ```ts
@@ -135,7 +143,7 @@ export class Pipelines extends APIResource {
   }
 
   /**
-   * Replace a pipeline
+   * Replace all properties of an existing pipeline with the provided values.
    *
    * @example
    * ```ts
@@ -146,8 +154,16 @@ export class Pipelines extends APIResource {
    *     displayOrder: 0,
    *     label: 'My replaced pipeline',
    *     stages: [
-   *       { displayOrder: 0, label: 'In Progress' },
-   *       { displayOrder: 1, label: 'Done' },
+   *       {
+   *         displayOrder: 0,
+   *         label: 'In Progress',
+   *         metadata: { ticketState: 'OPEN' },
+   *       },
+   *       {
+   *         displayOrder: 1,
+   *         label: 'Done',
+   *         metadata: { ticketState: 'CLOSED' },
+   *       },
    *     ],
    *   },
    * );
@@ -304,17 +320,6 @@ export interface PipelineStage {
   label: string;
 
   /**
-   * The date the pipeline stage was last updated.
-   */
-  updatedAt: string;
-
-  /**
-   * The date the pipeline was archived. `archivedAt` will only be present if the
-   * pipeline is archived.
-   */
-  archivedAt?: string;
-
-  /**
    * A JSON object containing properties that are not present on all object
    * pipelines.
    *
@@ -327,7 +332,18 @@ export interface PipelineStage {
    * has been closed by a member of your Support team. Possible values are `OPEN` or
    * `CLOSED`.
    */
-  metadata?: { [key: string]: string };
+  metadata: { [key: string]: string };
+
+  /**
+   * The date the pipeline stage was last updated.
+   */
+  updatedAt: string;
+
+  /**
+   * The date the pipeline was archived. `archivedAt` will only be present if the
+   * pipeline is archived.
+   */
+  archivedAt?: string;
 
   /**
    * Defines the level of write access for the pipeline stage, with possible values
@@ -365,13 +381,28 @@ export interface PipelineStageInput {
    * has been closed by a member of your Support team. Possible values are `OPEN` or
    * `CLOSED`.
    */
-  metadata?: { [key: string]: string };
+  metadata: { [key: string]: string };
 }
 
 /**
  * An input used to update some properties on a pipeline definition.
  */
 export interface PipelineStagePatchInput {
+  /**
+   * A JSON object containing properties that are not present on all object
+   * pipelines.
+   *
+   * For `deals` pipelines, the `probability` field is required
+   * (`{ "probability": 0.5 }`), and represents the likelihood a deal will close.
+   * Possible values are between 0.0 and 1.0 in increments of 0.1.
+   *
+   * For `tickets` pipelines, the `ticketState` field is optional
+   * (`{ "ticketState": "OPEN" }`), and represents whether the ticket remains open or
+   * has been closed by a member of your Support team. Possible values are `OPEN` or
+   * `CLOSED`.
+   */
+  metadata: { [key: string]: string };
+
   /**
    * Whether the pipeline is archived.
    */
@@ -388,21 +419,6 @@ export interface PipelineStagePatchInput {
    * label must be unique within that pipeline.
    */
   label?: string;
-
-  /**
-   * A JSON object containing properties that are not present on all object
-   * pipelines.
-   *
-   * For `deals` pipelines, the `probability` field is required
-   * (`{ "probability": 0.5 }`), and represents the likelihood a deal will close.
-   * Possible values are between 0.0 and 1.0 in increments of 0.1.
-   *
-   * For `tickets` pipelines, the `ticketState` field is optional
-   * (`{ "ticketState": "OPEN" }`), and represents whether the ticket remains open or
-   * has been closed by a member of your Support team. Possible values are `OPEN` or
-   * `CLOSED`.
-   */
-  metadata?: { [key: string]: string };
 }
 
 export interface PublicAuditInfo {
@@ -462,17 +478,19 @@ export interface PipelineCreateParams {
 
 export interface PipelineUpdateParams {
   /**
-   * Path param:
+   * Path param: The object type of the pipeline being updated (ex. deals or tickets)
    */
   objectType: string;
 
   /**
-   * Query param:
+   * Query param: Indicates whether to validate deal stage usages before deleting the
+   * pipeline.
    */
   validateDealStageUsagesBeforeDelete?: boolean;
 
   /**
-   * Query param:
+   * Query param: Indicates whether to validate references before deleting the
+   * pipeline.
    */
   validateReferencesBeforeDelete?: boolean;
 
@@ -497,32 +515,41 @@ export interface PipelineUpdateParams {
 
 export interface PipelineDeleteParams {
   /**
-   * Path param:
+   * Path param: The object type of the pipeline being deleted (ex. deals or tickets)
    */
   objectType: string;
 
   /**
-   * Query param:
+   * Query param: Indicates whether to validate deal stage usages before deleting the
+   * pipeline.
    */
   validateDealStageUsagesBeforeDelete?: boolean;
 
   /**
-   * Query param:
+   * Query param: Indicates whether to validate references before deleting the
+   * pipeline.
    */
   validateReferencesBeforeDelete?: boolean;
 }
 
 export interface PipelineGetParams {
+  /**
+   * The object type of the pipeline being retrieved (ex. deals or tickets)
+   */
   objectType: string;
 }
 
 export interface PipelineGetAuditParams {
+  /**
+   * The object type of the pipeline audit being retrieved (ex. deals or tickets)
+   */
   objectType: string;
 }
 
 export interface PipelineReplaceParams {
   /**
-   * Path param:
+   * Path param: The object type of the pipeline being replaced (ex. deals or
+   * tickets)
    */
   objectType: string;
 
@@ -544,12 +571,14 @@ export interface PipelineReplaceParams {
   stages: Array<PipelineStageInput>;
 
   /**
-   * Query param:
+   * Query param: Indicates whether to validate deal stage usages before deleting the
+   * pipeline.
    */
   validateDealStageUsagesBeforeDelete?: boolean;
 
   /**
-   * Query param:
+   * Query param: Indicates whether to validate references before deleting the
+   * pipeline.
    */
   validateReferencesBeforeDelete?: boolean;
 }

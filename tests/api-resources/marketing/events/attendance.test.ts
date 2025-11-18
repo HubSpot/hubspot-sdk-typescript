@@ -12,7 +12,7 @@ describe('resource attendance', () => {
   test.skip('createByEventIDAndContactID: only required params', async () => {
     const responsePromise = client.marketing.events.attendance.createByEventIDAndContactID(
       'subscriberState',
-      { objectId: 'objectId', inputs: [{ interactionDateTime: 0 }] },
+      { objectId: 'objectId', inputs: [{ interactionDateTime: 0, properties: { foo: 'string' }, vid: 0 }] },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -35,7 +35,14 @@ describe('resource attendance', () => {
   test.skip('createByEventIDAndEmail: only required params', async () => {
     const responsePromise = client.marketing.events.attendance.createByEventIDAndEmail('subscriberState', {
       objectId: 'objectId',
-      inputs: [{ email: 'email', interactionDateTime: 0 }],
+      inputs: [
+        {
+          contactProperties: { foo: 'string' },
+          email: 'email',
+          interactionDateTime: 0,
+          properties: { foo: 'string' },
+        },
+      ],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -52,9 +59,9 @@ describe('resource attendance', () => {
       objectId: 'objectId',
       inputs: [
         {
+          contactProperties: { foo: 'string' },
           email: 'email',
           interactionDateTime: 0,
-          contactProperties: { foo: 'string' },
           properties: { foo: 'string' },
         },
       ],
@@ -65,7 +72,10 @@ describe('resource attendance', () => {
   test.skip('createByExternalEventIDAndContactID: only required params', async () => {
     const responsePromise = client.marketing.events.attendance.createByExternalEventIDAndContactID(
       'subscriberState',
-      { externalEventId: 'externalEventId', inputs: [{ interactionDateTime: 0 }] },
+      {
+        externalEventId: 'externalEventId',
+        inputs: [{ interactionDateTime: 0, properties: { foo: 'string' }, vid: 0 }],
+      },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -92,7 +102,17 @@ describe('resource attendance', () => {
   test.skip('createByExternalEventIDAndEmail: only required params', async () => {
     const responsePromise = client.marketing.events.attendance.createByExternalEventIDAndEmail(
       'subscriberState',
-      { externalEventId: 'externalEventId', inputs: [{ email: 'email', interactionDateTime: 0 }] },
+      {
+        externalEventId: 'externalEventId',
+        inputs: [
+          {
+            contactProperties: { foo: 'string' },
+            email: 'email',
+            interactionDateTime: 0,
+            properties: { foo: 'string' },
+          },
+        ],
+      },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -111,9 +131,9 @@ describe('resource attendance', () => {
         externalEventId: 'externalEventId',
         inputs: [
           {
+            contactProperties: { foo: 'string' },
             email: 'email',
             interactionDateTime: 0,
-            contactProperties: { foo: 'string' },
             properties: { foo: 'string' },
           },
         ],

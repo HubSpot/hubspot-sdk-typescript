@@ -27,7 +27,13 @@ export class Attendance extends APIResource {
    *     'subscriberState',
    *     {
    *       objectId: 'objectId',
-   *       inputs: [{ interactionDateTime: 0 }],
+   *       inputs: [
+   *         {
+   *           interactionDateTime: 0,
+   *           properties: { foo: 'string' },
+   *           vid: 0,
+   *         },
+   *       ],
    *     },
    *   );
    * ```
@@ -68,7 +74,14 @@ export class Attendance extends APIResource {
    *     'subscriberState',
    *     {
    *       objectId: 'objectId',
-   *       inputs: [{ email: 'email', interactionDateTime: 0 }],
+   *       inputs: [
+   *         {
+   *           contactProperties: { foo: 'string' },
+   *           email: 'email',
+   *           interactionDateTime: 0,
+   *           properties: { foo: 'string' },
+   *         },
+   *       ],
    *     },
    *   );
    * ```
@@ -105,7 +118,13 @@ export class Attendance extends APIResource {
    *     'subscriberState',
    *     {
    *       externalEventId: 'externalEventId',
-   *       inputs: [{ interactionDateTime: 0 }],
+   *       inputs: [
+   *         {
+   *           interactionDateTime: 0,
+   *           properties: { foo: 'string' },
+   *           vid: 0,
+   *         },
+   *       ],
    *     },
    *   );
    * ```
@@ -146,7 +165,14 @@ export class Attendance extends APIResource {
    *     'subscriberState',
    *     {
    *       externalEventId: 'externalEventId',
-   *       inputs: [{ email: 'email', interactionDateTime: 0 }],
+   *       inputs: [
+   *         {
+   *           contactProperties: { foo: 'string' },
+   *           email: 'email',
+   *           interactionDateTime: 0,
+   *           properties: { foo: 'string' },
+   *         },
+   *       ],
    *     },
    *   );
    * ```

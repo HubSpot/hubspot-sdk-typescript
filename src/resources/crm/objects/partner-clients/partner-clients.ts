@@ -85,7 +85,19 @@ export class PartnerClients extends APIResource {
    * @example
    * ```ts
    * const collectionResponseWithTotalSimplePublicObject =
-   *   await client.crm.objects.partnerClients.search();
+   *   await client.crm.objects.partnerClients.search({
+   *     after: 'after',
+   *     filterGroups: [
+   *       {
+   *         filters: [
+   *           { operator: 'EQ', propertyName: 'propertyName' },
+   *         ],
+   *       },
+   *     ],
+   *     limit: 0,
+   *     properties: ['string'],
+   *     sorts: ['string'],
+   *   });
    * ```
    */
   search(
@@ -134,32 +146,32 @@ export interface PartnerClientSearchParams {
   /**
    * A paging cursor token for retrieving subsequent pages.
    */
-  after?: string;
+  after: string;
 
   /**
    * Up to 6 groups of filters defining additional query criteria.
    */
-  filterGroups?: Array<CrmAPI.FilterGroup>;
+  filterGroups: Array<CrmAPI.FilterGroup>;
 
   /**
    * The maximum results to return, up to 200 objects.
    */
-  limit?: number;
+  limit: number;
 
   /**
    * A list of property names to include in the response.
    */
-  properties?: Array<string>;
+  properties: Array<string>;
+
+  /**
+   * Specifies sorting order based on object properties.
+   */
+  sorts: Array<string>;
 
   /**
    * The search query string, up to 3000 characters.
    */
   query?: string;
-
-  /**
-   * Specifies sorting order based on object properties.
-   */
-  sorts?: Array<string>;
 }
 
 PartnerClients.Associations = Associations;

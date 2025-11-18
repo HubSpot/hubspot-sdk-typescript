@@ -100,23 +100,23 @@ export interface SettingsPatchRequest {
 }
 
 export interface SettingsRequest {
+  height: number;
+
+  isReady: boolean;
+
   name: string;
+
+  supportsCustomObjects: boolean;
+
+  supportsInboundCalling: boolean;
 
   url: string;
 
-  height?: number;
+  usesCallingWindow: boolean;
 
-  isReady?: boolean;
+  usesRemote: boolean;
 
-  supportsCustomObjects?: boolean;
-
-  supportsInboundCalling?: boolean;
-
-  usesCallingWindow?: boolean;
-
-  usesRemote?: boolean;
-
-  width?: number;
+  width: number;
 }
 
 export interface SettingsResponse {

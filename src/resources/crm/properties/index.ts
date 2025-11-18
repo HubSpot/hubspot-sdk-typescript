@@ -5,12 +5,12 @@ export {
   Groups,
   type GroupCreateParams,
   type GroupUpdateParams,
+  type GroupListParams,
   type GroupDeleteParams,
   type GroupGetParams,
 } from './groups';
 export {
   Properties,
-  type BatchReadInputPropertyName,
   type CollectionResponseProperty,
   type CollectionResponsePropertyGroup,
   type CreatedResponseProperty,

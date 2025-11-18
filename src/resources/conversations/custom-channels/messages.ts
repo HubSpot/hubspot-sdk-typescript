@@ -15,11 +15,10 @@ export class Messages extends APIResource {
    * ```ts
    * const conversationsPublicConversationsMessage =
    *   await client.conversations.customChannels.messages.create(
-   *     'channelId',
+   *     0,
    *     {
    *       attachments: [{ fileId: 'fileId', type: 'FILE' }],
    *       channelAccountId: 'channelAccountId',
-   *       integrationThreadId: 'integrationThreadId',
    *       messageDirection: 'INCOMING',
    *       recipients: [
    *         {
@@ -44,7 +43,7 @@ export class Messages extends APIResource {
    * ```
    */
   create(
-    channelID: string,
+    channelID: number,
     body: MessageCreateParams,
     options?: RequestOptions,
   ): APIPromise<ConversationsAPI.ConversationsPublicConversationsMessage> {
@@ -64,7 +63,7 @@ export class Messages extends APIResource {
    * const conversationsPublicConversationsMessage =
    *   await client.conversations.customChannels.messages.update(
    *     'messageId',
-   *     { channelId: 'channelId', statusType: 'SENT' },
+   *     { channelId: 0, statusType: 'SENT' },
    *   );
    * ```
    */
@@ -88,7 +87,7 @@ export class Messages extends APIResource {
    * const conversationsPublicConversationsMessage =
    *   await client.conversations.customChannels.messages.get(
    *     'messageId',
-   *     { channelId: 'channelId' },
+   *     { channelId: 0 },
    *   );
    * ```
    */
@@ -118,8 +117,6 @@ export interface MessageCreateParams {
 
   channelAccountId: string;
 
-  integrationThreadId: string;
-
   messageDirection: 'INCOMING' | 'OUTGOING';
 
   recipients: Array<CustomChannelsAPI.ChannelIntegrationParticipant>;
@@ -134,6 +131,8 @@ export interface MessageCreateParams {
 
   integrationIdempotencyId?: string;
 
+  integrationThreadId?: string;
+
   preResolvedContacts?: CustomChannelsAPI.PreResolvedContacts;
 
   richText?: string;
@@ -141,9 +140,9 @@ export interface MessageCreateParams {
 
 export interface MessageUpdateParams {
   /**
-   * Path param:
+   * Path param: The channel the message was sent over
    */
-  channelId: string;
+  channelId: number;
 
   /**
    * Body param: Valid status are SENT, FAILED, and READ
@@ -157,7 +156,10 @@ export interface MessageUpdateParams {
 }
 
 export interface MessageGetParams {
-  channelId: string;
+  /**
+   * The channel the message was sent over
+   */
+  channelId: number;
 }
 
 export declare namespace Messages {

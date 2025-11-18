@@ -152,6 +152,17 @@ describe('resource currencies', () => {
   });
 
   // Prism tests are disabled
+  test.skip('listExchangeRates: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.settings.currencies.listExchangeRates(
+        { after: 'after', fromCurrencyCode: 'AED', limit: 0, toCurrencyCode: 'AED' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Hubspot.NotFoundError);
+  });
+
+  // Prism tests are disabled
   test.skip('updateCompanyCurrency: only required params', async () => {
     const responsePromise = client.settings.currencies.updateCompanyCurrency({ currencyCode: 'AED' });
     const rawResponse = await responsePromise.asResponse();

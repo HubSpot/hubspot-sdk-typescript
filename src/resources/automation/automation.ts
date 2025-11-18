@@ -117,11 +117,14 @@ import {
   PublicSequenceEnrollmentRequest,
   PublicSequenceEnrollmentResponse,
   PublicSequenceLiteResponse,
+  PublicSequenceLiteResponsesPage,
   PublicSequenceResponse,
   PublicSequenceSettingsResponse,
   PublicSequenceStepDependencyResponse,
   PublicSequenceStepResponse,
   PublicTaskPatternResponse,
+  SequenceGetParams,
+  SequenceListParams,
   Sequences,
   UnenrollmentSettingsResponse,
 } from './sequences/sequences';
@@ -177,6 +180,9 @@ export declare namespace Automation {
     type PublicSequenceStepResponse as PublicSequenceStepResponse,
     type PublicTaskPatternResponse as PublicTaskPatternResponse,
     type UnenrollmentSettingsResponse as UnenrollmentSettingsResponse,
+    type PublicSequenceLiteResponsesPage as PublicSequenceLiteResponsesPage,
+    type SequenceListParams as SequenceListParams,
+    type SequenceGetParams as SequenceGetParams,
   };
 
   export {
@@ -238,8 +244,8 @@ export declare namespace Automation {
     type APIStaticValue as APIStaticValue,
     type APITimeDelay as APITimeDelay,
     type APITimeOfDay as APITimeOfDay,
-    type APITimestampValue as APITimestampValue,
     type APITimeWindow as APITimeWindow,
+    type APITimestampValue as APITimestampValue,
     type APIUnEnrollmentSetting as APIUnEnrollmentSetting,
     type APIWebhookAction as APIWebhookAction,
     type APIWeeklyEnrollmentSchedule as APIWeeklyEnrollmentSchedule,

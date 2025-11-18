@@ -99,7 +99,7 @@ describe('resource properties', () => {
     await expect(
       client.crm.properties.list(
         'objectType',
-        { archived: true, properties: 'properties' },
+        { archived: true, dataSensitivity: 'non_sensitive', locale: 'locale', properties: 'properties' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Hubspot.NotFoundError);
@@ -139,6 +139,8 @@ describe('resource properties', () => {
     const response = await client.crm.properties.get('propertyName', {
       objectType: 'objectType',
       archived: true,
+      dataSensitivity: 'non_sensitive',
+      locale: 'locale',
       properties: 'properties',
     });
   });

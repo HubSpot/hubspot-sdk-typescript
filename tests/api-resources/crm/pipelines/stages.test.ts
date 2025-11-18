@@ -14,6 +14,7 @@ describe('resource stages', () => {
       objectType: 'objectType',
       displayOrder: 1,
       label: 'Done',
+      metadata: { ticketState: 'CLOSED' },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -39,6 +40,7 @@ describe('resource stages', () => {
     const responsePromise = client.crm.pipelines.stages.update('stageId', {
       objectType: 'objectType',
       pipelineId: 'pipelineId',
+      metadata: { ticketState: 'CLOSED' },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -54,10 +56,10 @@ describe('resource stages', () => {
     const response = await client.crm.pipelines.stages.update('stageId', {
       objectType: 'objectType',
       pipelineId: 'pipelineId',
+      metadata: { ticketState: 'CLOSED' },
       archived: true,
       displayOrder: 1,
       label: 'Done',
-      metadata: { ticketState: 'CLOSED' },
     });
   });
 
@@ -154,6 +156,7 @@ describe('resource stages', () => {
       pipelineId: 'pipelineId',
       displayOrder: 1,
       label: 'Done',
+      metadata: { ticketState: 'CLOSED' },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);

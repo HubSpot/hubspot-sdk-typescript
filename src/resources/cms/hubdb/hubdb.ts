@@ -20,7 +20,6 @@ import {
   TableUpdateDraftParams,
   Tables,
 } from './tables';
-import * as EmailsAPI from '../../marketing/emails/emails';
 import * as RowsAPI from './rows/rows';
 import {
   RowCloneDraftParams,
@@ -56,17 +55,17 @@ export interface BatchInputHubDBTableRowV3Request {
 }
 
 export interface BatchResponseHubDBTableRowV3 {
-  completedAt?: string;
+  completedAt: string;
+
+  results: Array<HubDBTableRowV3>;
+
+  startedAt: string;
+
+  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
 
   links?: { [key: string]: string };
 
   requestedAt?: string;
-
-  results?: Array<HubDBTableRowV3>;
-
-  startedAt?: string;
-
-  status?: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
 }
 
 export interface BatchResponseHubDBTableRowV3WithErrors {
@@ -107,6 +106,15 @@ export interface CollectionResponseWithTotalHubDBTableV3ForwardPaging {
 
 export interface Column {
   /**
+   * Column Id
+   */
+  id: string;
+
+  deleted: boolean;
+
+  description: string;
+
+  /**
    * Label of the column
    */
   label: string;
@@ -143,20 +151,11 @@ export interface Column {
     | 'HUBSPOT_VIDEO'
     | 'EMBED';
 
-  /**
-   * Column Id
-   */
-  id?: string;
-
   createdAt?: string;
 
   createdBy?: SimpleUser;
 
   createdByUserId?: number;
-
-  deleted?: boolean;
-
-  description?: string;
 
   /**
    * Foreign Column id
@@ -276,53 +275,6 @@ export interface ForeignID {
   type: string;
 }
 
-/**
- * Ye olde error
- */
-export interface HubdbStandardError {
-  /**
-   * Specifies the main category of the error, determining the broad area of issue.
-   */
-  category: string;
-
-  /**
-   * An object containing context-specific information pertinent to the error.
-   */
-  context: { [key: string]: Array<string> };
-
-  /**
-   * The detailed error objects.
-   */
-  errors: Array<Shared.ErrorDetail>;
-
-  /**
-   * An object containing links related to the error, such as documentation URLs or
-   * support contact pages.
-   */
-  links: { [key: string]: string };
-
-  /**
-   * A detailed message describing the error.
-   */
-  message: string;
-
-  /**
-   * The HTTP status code associated with the error.
-   */
-  status: string;
-
-  /**
-   * Identifies the subcategory of the error, providing more specific context within
-   * the main category.
-   */
-  subCategory: unknown;
-
-  /**
-   * The unique ID of the error instance.
-   */
-  id?: string;
-}
-
 export interface HubDBTableCloneRequest {
   /**
    * Specifies whether to copy the rows during clone
@@ -350,50 +302,52 @@ export interface HubDBTableRowBatchCloneRequest {
 
 export interface HubDBTableRowV3 {
   /**
-   * List of key value pairs with the column name and column value
-   */
-  values: { [key: string]: unknown };
-
-  /**
    * The id of the table row
    */
-  id?: string;
+  id: string;
 
   /**
    * Specifies the value for the column child table id
    */
-  childTableId?: string;
+  childTableId: string;
 
   /**
    * Timestamp at which the row is created
    */
-  createdAt?: string;
+  createdAt: string;
 
   /**
    * Specifies the value for `hs_name` column, which will be used as title in the
    * dynamic pages
    */
-  name?: string;
+  name: string;
 
   /**
    * Specifies the value for `hs_path` column, which will be used as slug in the
    * dynamic pages
    */
-  path?: string;
+  path: string;
 
-  publishedAt?: string;
+  publishedAt: string;
 
   /**
    * Timestamp at which the row is updated last time
    */
-  updatedAt?: string;
+  updatedAt: string;
+
+  /**
+   * List of key value pairs with the column name and column value
+   */
+  values: { [key: string]: unknown };
 }
 
 export interface HubDBTableRowV3BatchUpdateRequest {
   /**
-   * The id of the table row
+   * Specifies the value for the column child table id
    */
-  id: string;
+  childTableId: number;
+
+  displayIndex: number;
 
   /**
    * List of key value pairs with the column name and column value
@@ -401,11 +355,9 @@ export interface HubDBTableRowV3BatchUpdateRequest {
   values: { [key: string]: Variant };
 
   /**
-   * Specifies the value for the column child table id
+   * The id of the table row
    */
-  childTableId?: number;
-
-  displayIndex?: number;
+  id?: string;
 
   /**
    * Specifies the value for `hs_name` column, which will be used as title in the
@@ -422,16 +374,16 @@ export interface HubDBTableRowV3BatchUpdateRequest {
 
 export interface HubDBTableRowV3Request {
   /**
+   * Specifies the value for the column child table id
+   */
+  childTableId: number;
+
+  displayIndex: number;
+
+  /**
    * List of key value pairs with the column name and column value
    */
   values: { [key: string]: Variant };
-
-  /**
-   * Specifies the value for the column child table id
-   */
-  childTableId?: number;
-
-  displayIndex?: number;
 
   /**
    * Specifies the value for `hs_name` column, which will be used as title in the
@@ -447,92 +399,119 @@ export interface HubDBTableRowV3Request {
 }
 
 export interface HubDBTableV3 {
-  deletedAt: string;
-
-  /**
-   * Label of the table
-   */
-  label: string;
-
-  /**
-   * Name of the table
-   */
-  name: string;
-
   /**
    * Id of the table
    */
-  id?: string;
+  id: string;
 
   /**
    * Specifies whether child tables can be created
    */
-  allowChildTables?: boolean;
+  allowChildTables: boolean;
 
   /**
    * Specifies whether the table can be read by public without authorization
    */
-  allowPublicApiAccess?: boolean;
+  allowPublicApiAccess: boolean;
 
   /**
    * Number of columns including deleted
    */
-  columnCount?: number;
+  columnCount: number;
 
   /**
    * List of columns in the table
    */
-  columns?: Array<Column>;
+  columns: Array<Column>;
 
   /**
    * Timestamp at which the table is created
    */
-  createdAt?: string;
+  createdAt: string;
 
-  createdBy?: SimpleUser;
+  deleted: boolean;
 
-  deleted?: boolean;
+  deletedAt: string;
 
   /**
    * Specifies the key value pairs of the
    * [metadata fields](https://developers.hubspot.com/docs/cms/guides/dynamic-pages/hubdb#dynamic-pages)
    * with the associated column IDs.
    */
-  dynamicMetaTags?: { [key: string]: number };
+  dynamicMetaTags: { [key: string]: number };
 
   /**
    * Specifies creation of multi-level dynamic pages using child tables
    */
-  enableChildTablePages?: boolean;
+  enableChildTablePages: boolean;
 
-  isOrderedManually?: boolean;
+  /**
+   * Label of the table
+   */
+  label: string;
 
-  published?: boolean;
+  /**
+   * Name of the table
+   */
+  name: string;
+
+  published: boolean;
 
   /**
    * Timestamp at which the table is published recently
    */
-  publishedAt?: string;
+  publishedAt: string;
 
   /**
    * Number of rows in the table
    */
-  rowCount?: number;
+  rowCount: number;
 
   /**
    * Timestamp at which the table is updated recently
    */
-  updatedAt?: string;
-
-  updatedBy?: SimpleUser;
+  updatedAt: string;
 
   /**
    * Specifies whether the table can be used for creation of dynamic pages
    */
-  useForPages?: boolean;
+  useForPages: boolean;
+
+  createdBy?: SimpleUser;
+
+  isOrderedManually?: boolean;
+
+  updatedBy?: SimpleUser;
 }
 
 export interface HubDBTableV3Request {
+  /**
+   * Specifies whether child tables can be created
+   */
+  allowChildTables: boolean;
+
+  /**
+   * Specifies whether the table can be read by public without authorization
+   */
+  allowPublicApiAccess: boolean;
+
+  /**
+   * List of columns in the table
+   */
+  columns: Array<ColumnRequest>;
+
+  /**
+   * Specifies the key value pairs of the
+   * [metadata fields](https://developers.hubspot.com/docs/cms/guides/dynamic-pages/hubdb#dynamic-pages)
+   * with the associated column IDs.
+   */
+  dynamicMetaTags: { [key: string]: number };
+
+  /**
+   * Specifies creation of multi-level dynamic pages using child tables
+   */
+  enableChildTablePages: boolean;
+
   /**
    * Label of the table
    */
@@ -544,36 +523,9 @@ export interface HubDBTableV3Request {
   name: string;
 
   /**
-   * Specifies whether child tables can be created
-   */
-  allowChildTables?: boolean;
-
-  /**
-   * Specifies whether the table can be read by public without authorization
-   */
-  allowPublicApiAccess?: boolean;
-
-  /**
-   * List of columns in the table
-   */
-  columns?: Array<ColumnRequest>;
-
-  /**
-   * Specifies the key value pairs of the
-   * [metadata fields](https://developers.hubspot.com/docs/cms/guides/dynamic-pages/hubdb#dynamic-pages)
-   * with the associated column IDs.
-   */
-  dynamicMetaTags?: { [key: string]: number };
-
-  /**
-   * Specifies creation of multi-level dynamic pages using child tables
-   */
-  enableChildTablePages?: boolean;
-
-  /**
    * Specifies whether the table can be used for creation of dynamic pages
    */
-  useForPages?: boolean;
+  useForPages: boolean;
 }
 
 export interface ImportResult {
@@ -613,6 +565,11 @@ export interface Option {
   createdAt: string;
 
   /**
+   * A user-friendly label that identifies the option.
+   */
+  label: string;
+
+  /**
    * An internal name assigned to the option, distinct from the label.
    */
   name: string;
@@ -635,11 +592,6 @@ export interface Option {
    * The ID of the user who created the option.
    */
   createdByUserId?: number;
-
-  /**
-   * A user-friendly label that identifies the option.
-   */
-  label?: string;
 
   updatedBy?: SimpleUser;
 
@@ -676,10 +628,7 @@ export interface StreamingCollectionResponseWithTotalHubDBTableRowV3 {
 
   type: 'STREAMING';
 
-  /**
-   * Contains information pagination of results.
-   */
-  paging?: EmailsAPI.EmailsPaging;
+  paging?: Shared.Paging;
 }
 
 export type UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3 =
@@ -704,7 +653,6 @@ export declare namespace Hubdb {
     type Column as Column,
     type ColumnRequest as ColumnRequest,
     type ForeignID as ForeignID,
-    type HubdbStandardError as HubdbStandardError,
     type HubDBTableCloneRequest as HubDBTableCloneRequest,
     type HubDBTableRowBatchCloneRequest as HubDBTableRowBatchCloneRequest,
     type HubDBTableRowV3 as HubDBTableRowV3,

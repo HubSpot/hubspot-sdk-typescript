@@ -19,8 +19,24 @@ export class Tables extends APIResource {
    * @example
    * ```ts
    * const hubDBTableV3 = await client.cms.hubdb.tables.create({
+   *   allowChildTables: true,
+   *   allowPublicApiAccess: true,
+   *   columns: [
+   *     {
+   *       id: 0,
+   *       label: 'label',
+   *       name: 'name',
+   *       options: [
+   *         { hidden: false, label: 'Option A', value: 'A' },
+   *       ],
+   *       type: 'NULL',
+   *     },
+   *   ],
+   *   dynamicMetaTags: { foo: 0 },
+   *   enableChildTablePages: true,
    *   label: 'label',
    *   name: 'name',
+   *   useForPages: true,
    * });
    * ```
    */
@@ -343,7 +359,30 @@ export class Tables extends APIResource {
    * const hubDBTableV3 =
    *   await client.cms.hubdb.tables.updateDraft(
    *     'tableIdOrName',
-   *     { label: 'label', name: 'name' },
+   *     {
+   *       allowChildTables: true,
+   *       allowPublicApiAccess: true,
+   *       columns: [
+   *         {
+   *           id: 0,
+   *           label: 'label',
+   *           name: 'name',
+   *           options: [
+   *             {
+   *               hidden: false,
+   *               label: 'Option A',
+   *               value: 'A',
+   *             },
+   *           ],
+   *           type: 'NULL',
+   *         },
+   *       ],
+   *       dynamicMetaTags: { foo: 0 },
+   *       enableChildTablePages: true,
+   *       label: 'label',
+   *       name: 'name',
+   *       useForPages: true,
+   *     },
    *   );
    * ```
    */
@@ -363,6 +402,33 @@ export class Tables extends APIResource {
 
 export interface TableCreateParams {
   /**
+   * Specifies whether child tables can be created
+   */
+  allowChildTables: boolean;
+
+  /**
+   * Specifies whether the table can be read by public without authorization
+   */
+  allowPublicApiAccess: boolean;
+
+  /**
+   * List of columns in the table
+   */
+  columns: Array<HubdbAPI.ColumnRequest>;
+
+  /**
+   * Specifies the key value pairs of the
+   * [metadata fields](https://developers.hubspot.com/docs/cms/guides/dynamic-pages/hubdb#dynamic-pages)
+   * with the associated column IDs.
+   */
+  dynamicMetaTags: { [key: string]: number };
+
+  /**
+   * Specifies creation of multi-level dynamic pages using child tables
+   */
+  enableChildTablePages: boolean;
+
+  /**
    * Label of the table
    */
   label: string;
@@ -373,36 +439,9 @@ export interface TableCreateParams {
   name: string;
 
   /**
-   * Specifies whether child tables can be created
-   */
-  allowChildTables?: boolean;
-
-  /**
-   * Specifies whether the table can be read by public without authorization
-   */
-  allowPublicApiAccess?: boolean;
-
-  /**
-   * List of columns in the table
-   */
-  columns?: Array<HubdbAPI.ColumnRequest>;
-
-  /**
-   * Specifies the key value pairs of the
-   * [metadata fields](https://developers.hubspot.com/docs/cms/guides/dynamic-pages/hubdb#dynamic-pages)
-   * with the associated column IDs.
-   */
-  dynamicMetaTags?: { [key: string]: number };
-
-  /**
-   * Specifies creation of multi-level dynamic pages using child tables
-   */
-  enableChildTablePages?: boolean;
-
-  /**
    * Specifies whether the table can be used for creation of dynamic pages
    */
-  useForPages?: boolean;
+  useForPages: boolean;
 }
 
 export interface TableListParams extends PageParams {
@@ -595,6 +634,34 @@ export interface TableUnpublishParams {
 
 export interface TableUpdateDraftParams {
   /**
+   * Body param: Specifies whether child tables can be created
+   */
+  allowChildTables: boolean;
+
+  /**
+   * Body param: Specifies whether the table can be read by public without
+   * authorization
+   */
+  allowPublicApiAccess: boolean;
+
+  /**
+   * Body param: List of columns in the table
+   */
+  columns: Array<HubdbAPI.ColumnRequest>;
+
+  /**
+   * Body param: Specifies the key value pairs of the
+   * [metadata fields](https://developers.hubspot.com/docs/cms/guides/dynamic-pages/hubdb#dynamic-pages)
+   * with the associated column IDs.
+   */
+  dynamicMetaTags: { [key: string]: number };
+
+  /**
+   * Body param: Specifies creation of multi-level dynamic pages using child tables
+   */
+  enableChildTablePages: boolean;
+
+  /**
    * Body param: Label of the table
    */
   label: string;
@@ -603,6 +670,12 @@ export interface TableUpdateDraftParams {
    * Body param: Name of the table
    */
   name: string;
+
+  /**
+   * Body param: Specifies whether the table can be used for creation of dynamic
+   * pages
+   */
+  useForPages: boolean;
 
   /**
    * Query param: Specifies whether to return archived tables. Defaults to `false`.
@@ -618,40 +691,6 @@ export interface TableUpdateDraftParams {
    * Query param:
    */
   isGetLocalizedSchema?: boolean;
-
-  /**
-   * Body param: Specifies whether child tables can be created
-   */
-  allowChildTables?: boolean;
-
-  /**
-   * Body param: Specifies whether the table can be read by public without
-   * authorization
-   */
-  allowPublicApiAccess?: boolean;
-
-  /**
-   * Body param: List of columns in the table
-   */
-  columns?: Array<HubdbAPI.ColumnRequest>;
-
-  /**
-   * Body param: Specifies the key value pairs of the
-   * [metadata fields](https://developers.hubspot.com/docs/cms/guides/dynamic-pages/hubdb#dynamic-pages)
-   * with the associated column IDs.
-   */
-  dynamicMetaTags?: { [key: string]: number };
-
-  /**
-   * Body param: Specifies creation of multi-level dynamic pages using child tables
-   */
-  enableChildTablePages?: boolean;
-
-  /**
-   * Body param: Specifies whether the table can be used for creation of dynamic
-   * pages
-   */
-  useForPages?: boolean;
 }
 
 export declare namespace Tables {

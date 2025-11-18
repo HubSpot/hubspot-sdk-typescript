@@ -10,10 +10,9 @@ const client = new Hubspot({
 describe('resource messages', () => {
   // Prism tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.conversations.customChannels.messages.create('channelId', {
+    const responsePromise = client.conversations.customChannels.messages.create(0, {
       attachments: [{ fileId: 'fileId', type: 'FILE' }],
       channelAccountId: 'channelAccountId',
-      integrationThreadId: 'integrationThreadId',
       messageDirection: 'INCOMING',
       recipients: [{ deliveryIdentifier: { type: 'type', value: 'value' } }],
       senders: [{ deliveryIdentifier: { type: 'type', value: 'value' } }],
@@ -31,10 +30,9 @@ describe('resource messages', () => {
 
   // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
-    const response = await client.conversations.customChannels.messages.create('channelId', {
+    const response = await client.conversations.customChannels.messages.create(0, {
       attachments: [{ fileId: 'fileId', type: 'FILE', fileUsageType: 'fileUsageType' }],
       channelAccountId: 'channelAccountId',
-      integrationThreadId: 'integrationThreadId',
       messageDirection: 'INCOMING',
       recipients: [{ deliveryIdentifier: { type: 'type', value: 'value' }, name: 'name' }],
       senders: [{ deliveryIdentifier: { type: 'type', value: 'value' }, name: 'name' }],
@@ -42,6 +40,7 @@ describe('resource messages', () => {
       timestamp: '2019-12-27T18:11:19.117Z',
       inReplyToId: 'inReplyToId',
       integrationIdempotencyId: 'integrationIdempotencyId',
+      integrationThreadId: 'integrationThreadId',
       preResolvedContacts: { contacts: [{ contactPropertiesLeadingToMatch: ['string'], contactVid: 0 }] },
       richText: 'richText',
     });
@@ -50,7 +49,7 @@ describe('resource messages', () => {
   // Prism tests are disabled
   test.skip('update: only required params', async () => {
     const responsePromise = client.conversations.customChannels.messages.update('messageId', {
-      channelId: 'channelId',
+      channelId: 0,
       statusType: 'SENT',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -65,7 +64,7 @@ describe('resource messages', () => {
   // Prism tests are disabled
   test.skip('update: required and optional params', async () => {
     const response = await client.conversations.customChannels.messages.update('messageId', {
-      channelId: 'channelId',
+      channelId: 0,
       statusType: 'SENT',
       errorMessage: 'errorMessage',
     });
@@ -73,9 +72,7 @@ describe('resource messages', () => {
 
   // Prism tests are disabled
   test.skip('get: only required params', async () => {
-    const responsePromise = client.conversations.customChannels.messages.get('messageId', {
-      channelId: 'channelId',
-    });
+    const responsePromise = client.conversations.customChannels.messages.get('messageId', { channelId: 0 });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -87,8 +84,6 @@ describe('resource messages', () => {
 
   // Prism tests are disabled
   test.skip('get: required and optional params', async () => {
-    const response = await client.conversations.customChannels.messages.get('messageId', {
-      channelId: 'channelId',
-    });
+    const response = await client.conversations.customChannels.messages.get('messageId', { channelId: 0 });
   });
 });

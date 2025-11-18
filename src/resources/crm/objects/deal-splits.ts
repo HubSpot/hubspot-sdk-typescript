@@ -86,6 +86,47 @@ export interface DealToDealSplits {
   splits: Array<CrmAPI.SimplePublicObject>;
 }
 
+/**
+ * A simple public object.
+ */
+export interface ObjectsDealSplitsSimplePublicObject {
+  /**
+   * The unique ID of the object.
+   */
+  id: string;
+
+  /**
+   * The timestamp when the object was created, in ISO 8601 format.
+   */
+  createdAt: string;
+
+  /**
+   * Key-value pairs representing the properties of the object.
+   */
+  properties: { [key: string]: string | null };
+
+  /**
+   * The timestamp when the object was last updated, in ISO 8601 format.
+   */
+  updatedAt: string;
+
+  /**
+   * Whether the object is archived.
+   */
+  archived?: boolean;
+
+  /**
+   * The timestamp when the object was archived, in ISO 8601 format.
+   */
+  archivedAt?: string;
+
+  /**
+   * Key-value pairs representing the properties of the object along with their
+   * history.
+   */
+  propertiesWithHistory?: { [key: string]: Array<CrmAPI.ValueWithTimestamp> };
+}
+
 export interface PublicDealSplitInput {
   ownerId: number;
 
@@ -115,6 +156,7 @@ export declare namespace DealSplits {
     type BatchResponseDealToDealSplits as BatchResponseDealToDealSplits,
     type BatchResponseDealToDealSplitsWithErrors as BatchResponseDealToDealSplitsWithErrors,
     type DealToDealSplits as DealToDealSplits,
+    type ObjectsDealSplitsSimplePublicObject as ObjectsDealSplitsSimplePublicObject,
     type PublicDealSplitInput as PublicDealSplitInput,
     type PublicDealSplitsBatchCreateRequest as PublicDealSplitsBatchCreateRequest,
     type PublicDealSplitsCreateRequest as PublicDealSplitsCreateRequest,

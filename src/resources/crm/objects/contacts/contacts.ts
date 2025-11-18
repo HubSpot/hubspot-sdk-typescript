@@ -32,6 +32,17 @@ export class Contacts extends APIResource {
    * ```ts
    * const createdResponseSimplePublicObject =
    *   await client.crm.objects.contacts.create({
+   *     associations: [
+   *       {
+   *         to: { id: '37295' },
+   *         types: [
+   *           {
+   *             associationCategory: 'HUBSPOT_DEFINED',
+   *             associationTypeId: 0,
+   *           },
+   *         ],
+   *       },
+   *     ],
    *     properties: { foo: 'string' },
    *   });
    * ```
@@ -62,10 +73,15 @@ export class Contacts extends APIResource {
    */
   update(
     contactID: string,
-    body: ContactUpdateParams,
+    params: ContactUpdateParams,
     options?: RequestOptions,
   ): APIPromise<CrmAPI.SimplePublicObject> {
-    return this._client.patch(path`/crm/v3/objects/contacts/${contactID}`, { body, ...options });
+    const { idProperty, ...body } = params;
+    return this._client.patch(path`/crm/v3/objects/contacts/${contactID}`, {
+      query: { idProperty },
+      body,
+      ...options,
+    });
   }
 
   /**
@@ -176,7 +192,19 @@ export class Contacts extends APIResource {
    * @example
    * ```ts
    * const collectionResponseWithTotalSimplePublicObject =
-   *   await client.crm.objects.contacts.search();
+   *   await client.crm.objects.contacts.search({
+   *     after: 'after',
+   *     filterGroups: [
+   *       {
+   *         filters: [
+   *           { operator: 'EQ', propertyName: 'propertyName' },
+   *         ],
+   *       },
+   *     ],
+   *     limit: 0,
+   *     properties: ['string'],
+   *     sorts: ['string'],
+   *   });
    * ```
    */
   search(
@@ -188,19 +216,24 @@ export class Contacts extends APIResource {
 }
 
 export interface ContactCreateParams {
+  associations: Array<CrmAPI.PublicAssociationsForObject>;
+
   /**
    * Key-value pairs for setting properties for the new object.
    */
   properties: { [key: string]: string };
-
-  associations?: Array<CrmAPI.PublicAssociationsForObject>;
 }
 
 export interface ContactUpdateParams {
   /**
-   * Key value pairs representing the properties of the object.
+   * Body param: Key value pairs representing the properties of the object.
    */
   properties: { [key: string]: string };
+
+  /**
+   * Query param: The name of a property whose values are unique for this object.
+   */
+  idProperty?: string;
 }
 
 export interface ContactListParams extends PageParams {
@@ -232,8 +265,14 @@ export interface ContactListParams extends PageParams {
 }
 
 export interface ContactGdprDeleteParams {
+  /**
+   * ID of the object
+   */
   objectId: string;
 
+  /**
+   * ID property
+   */
   idProperty?: string;
 }
 
@@ -248,6 +287,11 @@ export interface ContactGetParams {
    * the specified associations do not exist, they will be ignored.
    */
   associations?: Array<string>;
+
+  /**
+   * The name of a property whose values are unique for this object
+   */
+  idProperty?: string;
 
   /**
    * A comma separated list of the properties to be returned in the response. If any
@@ -265,8 +309,15 @@ export interface ContactGetParams {
 }
 
 export interface ContactMergeParams {
+  /**
+   * The unique identifier of the CRM object that will be merged into the primary
+   * object.
+   */
   objectIdToMerge: string;
 
+  /**
+   * The unique identifier of the CRM object that will remain after the merge.
+   */
   primaryObjectId: string;
 }
 
@@ -274,32 +325,32 @@ export interface ContactSearchParams {
   /**
    * A paging cursor token for retrieving subsequent pages.
    */
-  after?: string;
+  after: string;
 
   /**
    * Up to 6 groups of filters defining additional query criteria.
    */
-  filterGroups?: Array<CrmAPI.FilterGroup>;
+  filterGroups: Array<CrmAPI.FilterGroup>;
 
   /**
    * The maximum results to return, up to 200 objects.
    */
-  limit?: number;
+  limit: number;
 
   /**
    * A list of property names to include in the response.
    */
-  properties?: Array<string>;
+  properties: Array<string>;
+
+  /**
+   * Specifies sorting order based on object properties.
+   */
+  sorts: Array<string>;
 
   /**
    * The search query string, up to 3000 characters.
    */
   query?: string;
-
-  /**
-   * Specifies sorting order based on object properties.
-   */
-  sorts?: Array<string>;
 }
 
 Contacts.Batch = Batch;

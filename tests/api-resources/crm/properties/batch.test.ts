@@ -72,6 +72,7 @@ describe('resource batch', () => {
   test.skip('get: only required params', async () => {
     const responsePromise = client.crm.properties.batch.get('objectType', {
       archived: true,
+      dataSensitivity: 'non_sensitive',
       inputs: [{ name: 'name' }],
     });
     const rawResponse = await responsePromise.asResponse();
@@ -87,8 +88,9 @@ describe('resource batch', () => {
   test.skip('get: required and optional params', async () => {
     const response = await client.crm.properties.batch.get('objectType', {
       archived: true,
-      inputs: [{ name: 'name' }],
       dataSensitivity: 'non_sensitive',
+      inputs: [{ name: 'name' }],
+      locale: 'locale',
     });
   });
 });

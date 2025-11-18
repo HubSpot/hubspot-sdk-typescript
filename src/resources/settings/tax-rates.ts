@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as Shared from '../shared';
 import { APIPromise } from '../../core/api-promise';
+import { Page, type PageParams, PagePromise } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
@@ -13,12 +14,20 @@ export class TaxRates extends APIResource {
    *
    * @example
    * ```ts
-   * const collectionResponsePublicTaxRateGroupForwardPaging =
-   *   await client.settings.taxRates.list();
+   * // Automatically fetches more pages as needed.
+   * for await (const publicTaxRateGroup of client.settings.taxRates.list()) {
+   *   // ...
+   * }
    * ```
    */
-  list(options?: RequestOptions): APIPromise<CollectionResponsePublicTaxRateGroupForwardPaging> {
-    return this._client.get('/tax-rates/v1/tax-rates', options);
+  list(
+    query: TaxRateListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<PublicTaxRateGroupsPage, PublicTaxRateGroup> {
+    return this._client.getAPIList('/tax-rates/v1/tax-rates', Page<PublicTaxRateGroup>, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -34,6 +43,8 @@ export class TaxRates extends APIResource {
     return this._client.get(path`/tax-rates/v1/tax-rates/${taxRateGroupID}`, options);
   }
 }
+
+export type PublicTaxRateGroupsPage = Page<PublicTaxRateGroup>;
 
 export interface CollectionResponsePublicTaxRateGroupForwardPaging {
   results: Array<PublicTaxRateGroup>;
@@ -57,9 +68,18 @@ export interface PublicTaxRateGroup {
   updatedAt: string;
 }
 
+export interface TaxRateListParams extends PageParams {
+  /**
+   * Include inactive rates.
+   */
+  active?: boolean;
+}
+
 export declare namespace TaxRates {
   export {
     type CollectionResponsePublicTaxRateGroupForwardPaging as CollectionResponsePublicTaxRateGroupForwardPaging,
     type PublicTaxRateGroup as PublicTaxRateGroup,
+    type PublicTaxRateGroupsPage as PublicTaxRateGroupsPage,
+    type TaxRateListParams as TaxRateListParams,
   };
 }

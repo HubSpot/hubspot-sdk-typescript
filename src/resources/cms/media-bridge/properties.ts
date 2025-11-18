@@ -18,7 +18,7 @@ export class Properties extends APIResource {
    *   await client.cms.mediaBridge.properties.create(
    *     'objectType',
    *     {
-   *       appId: 'appId',
+   *       appId: 0,
    *       fieldType: 'booleancheckbox',
    *       groupName: 'groupName',
    *       label: 'label',
@@ -45,7 +45,7 @@ export class Properties extends APIResource {
    * const property =
    *   await client.cms.mediaBridge.properties.update(
    *     'propertyName',
-   *     { appId: 'appId', objectType: 'objectType' },
+   *     { appId: 0, objectType: 'objectType' },
    *   );
    * ```
    */
@@ -69,7 +69,7 @@ export class Properties extends APIResource {
    * const collectionResponsePropertyNoPaging =
    *   await client.cms.mediaBridge.properties.list(
    *     'objectType',
-   *     { appId: 'appId' },
+   *     { appId: 0 },
    *   );
    * ```
    */
@@ -78,8 +78,8 @@ export class Properties extends APIResource {
     params: PropertyListParams,
     options?: RequestOptions,
   ): APIPromise<MediaBridgeAPI.CollectionResponsePropertyNoPaging> {
-    const { appId } = params;
-    return this._client.get(path`/media-bridge/v1/${appId}/properties/${objectType}`, options);
+    const { appId, ...query } = params;
+    return this._client.get(path`/media-bridge/v1/${appId}/properties/${objectType}`, { query, ...options });
   }
 
   /**
@@ -89,37 +89,13 @@ export class Properties extends APIResource {
    * ```ts
    * await client.cms.mediaBridge.properties.delete(
    *   'propertyName',
-   *   { appId: 'appId', objectType: 'objectType' },
+   *   { appId: 0, objectType: 'objectType' },
    * );
    * ```
    */
   delete(propertyName: string, params: PropertyDeleteParams, options?: RequestOptions): APIPromise<void> {
     const { appId, objectType } = params;
     return this._client.delete(path`/media-bridge/v1/${appId}/properties/${objectType}/${propertyName}`, {
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
-  }
-
-  /**
-   * Archive a batch of existing properties for the specified types.
-   *
-   * @example
-   * ```ts
-   * await client.cms.mediaBridge.properties.archiveBatch(
-   *   'objectType',
-   *   { appId: 'appId', inputs: [{ name: 'name' }] },
-   * );
-   * ```
-   */
-  archiveBatch(
-    objectType: string,
-    params: PropertyArchiveBatchParams,
-    options?: RequestOptions,
-  ): APIPromise<void> {
-    const { appId, ...body } = params;
-    return this._client.post(path`/media-bridge/v1/${appId}/properties/${objectType}/batch/archive`, {
-      body,
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
@@ -134,7 +110,7 @@ export class Properties extends APIResource {
    *   await client.cms.mediaBridge.properties.createBatch(
    *     'objectType',
    *     {
-   *       appId: 'appId',
+   *       appId: 0,
    *       inputs: [
    *         {
    *           fieldType: 'booleancheckbox',
@@ -161,6 +137,30 @@ export class Properties extends APIResource {
   }
 
   /**
+   * Archive a batch of existing properties for the specified types.
+   *
+   * @example
+   * ```ts
+   * await client.cms.mediaBridge.properties.deleteBatch(
+   *   'objectType',
+   *   { appId: 0, inputs: [{ name: 'name' }] },
+   * );
+   * ```
+   */
+  deleteBatch(
+    objectType: string,
+    params: PropertyDeleteBatchParams,
+    options?: RequestOptions,
+  ): APIPromise<void> {
+    const { appId, ...body } = params;
+    return this._client.post(path`/media-bridge/v1/${appId}/properties/${objectType}/batch/archive`, {
+      body,
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
+
+  /**
    * Get the details for an existing property by name.
    *
    * @example
@@ -168,7 +168,7 @@ export class Properties extends APIResource {
    * const property =
    *   await client.cms.mediaBridge.properties.get(
    *     'propertyName',
-   *     { appId: 'appId', objectType: 'objectType' },
+   *     { appId: 0, objectType: 'objectType' },
    *   );
    * ```
    */
@@ -177,11 +177,11 @@ export class Properties extends APIResource {
     params: PropertyGetParams,
     options?: RequestOptions,
   ): APIPromise<Shared.Property> {
-    const { appId, objectType } = params;
-    return this._client.get(
-      path`/media-bridge/v1/${appId}/properties/${objectType}/${propertyName}`,
-      options,
-    );
+    const { appId, objectType, ...query } = params;
+    return this._client.get(path`/media-bridge/v1/${appId}/properties/${objectType}/${propertyName}`, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -193,8 +193,9 @@ export class Properties extends APIResource {
    *   await client.cms.mediaBridge.properties.getBatch(
    *     'objectType',
    *     {
-   *       appId: 'appId',
+   *       appId: 0,
    *       archived: true,
+   *       dataSensitivity: 'non_sensitive',
    *       inputs: [{ name: 'name' }],
    *     },
    *   );
@@ -215,9 +216,10 @@ export class Properties extends APIResource {
 
 export interface PropertyCreateParams {
   /**
-   * Path param:
+   * Path param: The appId for the media bridge app. It is possible to have multiple
+   * apps in your developer account that use the media bridge.
    */
-  appId: string;
+  appId: number;
 
   /**
    * Body param:
@@ -309,12 +311,13 @@ export interface PropertyCreateParams {
 
 export interface PropertyUpdateParams {
   /**
-   * Path param:
+   * Path param: The appId for the media bridge app. It is possible to have multiple
+   * apps in your developer account that use the media bridge.
    */
-  appId: string;
+  appId: number;
 
   /**
-   * Path param:
+   * Path param: The object type for the property to be updated.
    */
   objectType: string;
 
@@ -387,32 +390,42 @@ export interface PropertyUpdateParams {
 }
 
 export interface PropertyListParams {
-  appId: string;
+  /**
+   * Path param: The appId for the media bridge app. It is possible to have multiple
+   * apps in your developer account that use the media bridge.
+   */
+  appId: number;
+
+  /**
+   * Query param: Whether to return only results that have been archived.
+   */
+  archived?: boolean;
+
+  /**
+   * Query param: Filter the response to the specified properties.
+   */
+  properties?: string;
 }
 
 export interface PropertyDeleteParams {
-  appId: string;
+  /**
+   * The appId for the media bridge app. It is possible to have multiple apps in your
+   * developer account that use the media bridge.
+   */
+  appId: number;
 
+  /**
+   * The object type for the property to delete.
+   */
   objectType: string;
-}
-
-export interface PropertyArchiveBatchParams {
-  /**
-   * Path param:
-   */
-  appId: string;
-
-  /**
-   * Body param:
-   */
-  inputs: Array<Shared.PropertyName>;
 }
 
 export interface PropertyCreateBatchParams {
   /**
-   * Path param:
+   * Path param: The appId for the media bridge app. It is possible to have multiple
+   * apps in your developer account that use the media bridge.
    */
-  appId: string;
+  appId: number;
 
   /**
    * Body param:
@@ -420,17 +433,48 @@ export interface PropertyCreateBatchParams {
   inputs: Array<Shared.PropertyCreate>;
 }
 
-export interface PropertyGetParams {
-  appId: string;
+export interface PropertyDeleteBatchParams {
+  /**
+   * Path param: The appId for the media bridge app. It is possible to have multiple
+   * apps in your developer account that use the media bridge.
+   */
+  appId: number;
 
+  /**
+   * Body param:
+   */
+  inputs: Array<Shared.PropertyName>;
+}
+
+export interface PropertyGetParams {
+  /**
+   * Path param: The appId for the media bridge app. It is possible to have multiple
+   * apps in your developer account that use the media bridge.
+   */
+  appId: number;
+
+  /**
+   * Path param: The object type for the property.
+   */
   objectType: string;
+
+  /**
+   * Query param: Whether to return only results that have been archived.
+   */
+  archived?: boolean;
+
+  /**
+   * Query param: Limit the response to only include the specified properties.
+   */
+  properties?: string;
 }
 
 export interface PropertyGetBatchParams {
   /**
-   * Path param:
+   * Path param: The appId for the media bridge app. It is possible to have multiple
+   * apps in your developer account that use the media bridge.
    */
-  appId: string;
+  appId: number;
 
   /**
    * Body param:
@@ -440,12 +484,12 @@ export interface PropertyGetBatchParams {
   /**
    * Body param:
    */
-  inputs: Array<Shared.PropertyName>;
+  dataSensitivity: 'non_sensitive' | 'sensitive' | 'highly_sensitive';
 
   /**
    * Body param:
    */
-  dataSensitivity?: 'non_sensitive' | 'sensitive' | 'highly_sensitive';
+  inputs: Array<Shared.PropertyName>;
 }
 
 export declare namespace Properties {
@@ -454,8 +498,8 @@ export declare namespace Properties {
     type PropertyUpdateParams as PropertyUpdateParams,
     type PropertyListParams as PropertyListParams,
     type PropertyDeleteParams as PropertyDeleteParams,
-    type PropertyArchiveBatchParams as PropertyArchiveBatchParams,
     type PropertyCreateBatchParams as PropertyCreateBatchParams,
+    type PropertyDeleteBatchParams as PropertyDeleteBatchParams,
     type PropertyGetParams as PropertyGetParams,
     type PropertyGetBatchParams as PropertyGetBatchParams,
   };
