@@ -12,6 +12,7 @@ Types:
 - <code><a href="./src/resources/shared.ts">BatchInputPropertyName</a></code>
 - <code><a href="./src/resources/shared.ts">BatchInputPublicObjectID</a></code>
 - <code><a href="./src/resources/shared.ts">BatchInputString</a></code>
+- <code><a href="./src/resources/shared.ts">BatchReadInputPropertyName</a></code>
 - <code><a href="./src/resources/shared.ts">BatchResponseProperty</a></code>
 - <code><a href="./src/resources/shared.ts">CollectionResponseObjectSchemaNoPaging</a></code>
 - <code><a href="./src/resources/shared.ts">Error</a></code>
@@ -59,10 +60,10 @@ Types:
 - <code><a href="./src/resources/shared.ts">PublicFiscalYearReference</a></code>
 - <code><a href="./src/resources/shared.ts">PublicFormSubmissionFilter</a></code>
 - <code><a href="./src/resources/shared.ts">PublicFormSubmissionOnPageFilter</a></code>
-- <code><a href="./src/resources/shared.ts">PublicIndexedTimePoint</a></code>
-- <code><a href="./src/resources/shared.ts">PublicIndexOffset</a></code>
 - <code><a href="./src/resources/shared.ts">PublicInListFilter</a></code>
 - <code><a href="./src/resources/shared.ts">PublicInListFilterMetadata</a></code>
+- <code><a href="./src/resources/shared.ts">PublicIndexOffset</a></code>
+- <code><a href="./src/resources/shared.ts">PublicIndexedTimePoint</a></code>
 - <code><a href="./src/resources/shared.ts">PublicIntegrationEventFilter</a></code>
 - <code><a href="./src/resources/shared.ts">PublicMonthReference</a></code>
 - <code><a href="./src/resources/shared.ts">PublicMultiStringPropertyOperation</a></code>
@@ -70,8 +71,8 @@ Types:
 - <code><a href="./src/resources/shared.ts">PublicNotAnyFilterBranch</a></code>
 - <code><a href="./src/resources/shared.ts">PublicNowReference</a></code>
 - <code><a href="./src/resources/shared.ts">PublicNumAssociationsFilter</a></code>
-- <code><a href="./src/resources/shared.ts">PublicNumberPropertyOperation</a></code>
 - <code><a href="./src/resources/shared.ts">PublicNumOccurrencesRefineBy</a></code>
+- <code><a href="./src/resources/shared.ts">PublicNumberPropertyOperation</a></code>
 - <code><a href="./src/resources/shared.ts">PublicObjectID</a></code>
 - <code><a href="./src/resources/shared.ts">PublicOrFilterBranch</a></code>
 - <code><a href="./src/resources/shared.ts">PublicPageViewAnalyticsFilter</a></code>
@@ -244,8 +245,8 @@ Types:
 
 Methods:
 
-- <code title="get /automation/v4/sequences/">client.automation.sequences.<a href="./src/resources/automation/sequences/sequences.ts">list</a>() -> CollectionResponseWithTotalPublicSequenceLiteResponseForwardPaging</code>
-- <code title="get /automation/v4/sequences/{sequenceId}">client.automation.sequences.<a href="./src/resources/automation/sequences/sequences.ts">get</a>(sequenceID) -> PublicSequenceResponse</code>
+- <code title="get /automation/v4/sequences/">client.automation.sequences.<a href="./src/resources/automation/sequences/sequences.ts">list</a>({ ...params }) -> PublicSequenceLiteResponsesPage</code>
+- <code title="get /automation/v4/sequences/{sequenceId}">client.automation.sequences.<a href="./src/resources/automation/sequences/sequences.ts">get</a>(sequenceID, { ...params }) -> PublicSequenceResponse</code>
 
 ### Enrollments
 
@@ -315,8 +316,8 @@ Types:
 - <code><a href="./src/resources/automation/workflows.ts">APIStaticValue</a></code>
 - <code><a href="./src/resources/automation/workflows.ts">APITimeDelay</a></code>
 - <code><a href="./src/resources/automation/workflows.ts">APITimeOfDay</a></code>
-- <code><a href="./src/resources/automation/workflows.ts">APITimestampValue</a></code>
 - <code><a href="./src/resources/automation/workflows.ts">APITimeWindow</a></code>
+- <code><a href="./src/resources/automation/workflows.ts">APITimestampValue</a></code>
 - <code><a href="./src/resources/automation/workflows.ts">APIUnEnrollmentSetting</a></code>
 - <code><a href="./src/resources/automation/workflows.ts">APIWebhookAction</a></code>
 - <code><a href="./src/resources/automation/workflows.ts">APIWeeklyEnrollmentSchedule</a></code>
@@ -541,7 +542,6 @@ Types:
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">Column</a></code>
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">ColumnRequest</a></code>
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">ForeignID</a></code>
-- <code><a href="./src/resources/cms/hubdb/hubdb.ts">HubdbStandardError</a></code>
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">HubDBTableCloneRequest</a></code>
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">HubDBTableRowBatchCloneRequest</a></code>
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">HubDBTableRowV3</a></code>
@@ -614,7 +614,6 @@ Types:
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">AttentionSpanCalculatedValues</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">AttentionSpanEvent</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">AttentionSpanEventRequest</a></code>
-- <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">BatchReadInputPropertyName</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">BatchResponsePropertyWithErrors</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">BeginsWith</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">BooleanPropertyVariable</a></code>
@@ -656,10 +655,10 @@ Types:
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">IfNumber</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">IfString</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">InboundDBObjectType</a></code>
-- <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">IntegratorObjectCreationRequest</a></code>
-- <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">IntegratorObjectCreationResponse</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">IntegratorOEmbedDomainModel</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">IntegratorOEmbedDomainRequest</a></code>
+- <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">IntegratorObjectCreationRequest</a></code>
+- <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">IntegratorObjectCreationResponse</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">IsEngagementType</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">IsPipelineStageClosed</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">IsPresent</a></code>
@@ -685,12 +684,12 @@ Types:
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">NumberPropertyVariable</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">NumberTargetPropertyVariable</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">NumberToString</a></code>
+- <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">OEmbedDomainsCollectionResponse</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">ObjectDefinitionResponse</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">ObjectSchema</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">ObjectTypeDefinition</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">ObjectTypeDefinitionPatch</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">ObjectTypeIDProto</a></code>
-- <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">OEmbedDomainsCollectionResponse</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">Option1</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">OptionDecorations</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">OptionDecoratorsExtensionData</a></code>
@@ -752,11 +751,11 @@ Methods:
 
 - <code title="post /media-bridge/v1/{appId}/settings/object-definitions">client.cms.mediaBridge.integratorSettings.<a href="./src/resources/cms/media-bridge/integrator-settings.ts">createObjectDefinition</a>(appID, { ...params }) -> BulkIntegratorObjectCreationResponse</code>
 - <code title="post /media-bridge/v1/{appId}/settings/oembed-domains">client.cms.mediaBridge.integratorSettings.<a href="./src/resources/cms/media-bridge/integrator-settings.ts">createOembedDomain</a>(appID, { ...params }) -> IntegratorOEmbedDomainModel</code>
-- <code title="delete /media-bridge/v1/{appId}/settings/oembed-domains">client.cms.mediaBridge.integratorSettings.<a href="./src/resources/cms/media-bridge/integrator-settings.ts">deleteOembedDomain</a>(appID) -> void</code>
+- <code title="delete /media-bridge/v1/{appId}/settings/oembed-domains">client.cms.mediaBridge.integratorSettings.<a href="./src/resources/cms/media-bridge/integrator-settings.ts">deleteOembedDomain</a>(appID, { ...params }) -> void</code>
 - <code title="get /media-bridge/v1/{appId}/settings/event-visibility">client.cms.mediaBridge.integratorSettings.<a href="./src/resources/cms/media-bridge/integrator-settings.ts">getEventVisibilitySettings</a>(appID) -> EventVisibilityResponse</code>
 - <code title="get /media-bridge/v1/{appId}/settings/object-definitions/{mediaType}">client.cms.mediaBridge.integratorSettings.<a href="./src/resources/cms/media-bridge/integrator-settings.ts">getObjectDefinitionsByMediaType</a>(mediaType, { ...params }) -> ObjectDefinitionResponse</code>
 - <code title="get /media-bridge/v1/{appId}/settings/oembed-domains/{oEmbedDomainId}">client.cms.mediaBridge.integratorSettings.<a href="./src/resources/cms/media-bridge/integrator-settings.ts">getOembedDomain</a>(oEmbedDomainID, { ...params }) -> IntegratorOEmbedDomainModel</code>
-- <code title="get /media-bridge/v1/{appId}/settings/oembed-domains">client.cms.mediaBridge.integratorSettings.<a href="./src/resources/cms/media-bridge/integrator-settings.ts">listOembedDomains</a>(appID) -> OEmbedDomainsCollectionResponse</code>
+- <code title="get /media-bridge/v1/{appId}/settings/oembed-domains">client.cms.mediaBridge.integratorSettings.<a href="./src/resources/cms/media-bridge/integrator-settings.ts">listOembedDomains</a>(appID, { ...params }) -> OEmbedDomainsCollectionResponse</code>
 - <code title="post /media-bridge/v1/{appId}/settings/register">client.cms.mediaBridge.integratorSettings.<a href="./src/resources/cms/media-bridge/integrator-settings.ts">registerAppName</a>(appID, { ...params }) -> MediaBridgeProviderRegistrationResponse</code>
 - <code title="put /media-bridge/v1/{appId}/settings">client.cms.mediaBridge.integratorSettings.<a href="./src/resources/cms/media-bridge/integrator-settings.ts">updateAppName</a>(appID, { ...params }) -> MediaBridgeProviderRegistrationResponse</code>
 - <code title="patch /media-bridge/v1/{appId}/settings/event-visibility">client.cms.mediaBridge.integratorSettings.<a href="./src/resources/cms/media-bridge/integrator-settings.ts">updateEventVisibilitySettings</a>(appID, { ...params }) -> EventVisibilityChange</code>
@@ -770,8 +769,8 @@ Methods:
 - <code title="patch /media-bridge/v1/{appId}/properties/{objectType}/{propertyName}">client.cms.mediaBridge.properties.<a href="./src/resources/cms/media-bridge/properties.ts">update</a>(propertyName, { ...params }) -> Property</code>
 - <code title="get /media-bridge/v1/{appId}/properties/{objectType}">client.cms.mediaBridge.properties.<a href="./src/resources/cms/media-bridge/properties.ts">list</a>(objectType, { ...params }) -> CollectionResponsePropertyNoPaging</code>
 - <code title="delete /media-bridge/v1/{appId}/properties/{objectType}/{propertyName}">client.cms.mediaBridge.properties.<a href="./src/resources/cms/media-bridge/properties.ts">delete</a>(propertyName, { ...params }) -> void</code>
-- <code title="post /media-bridge/v1/{appId}/properties/{objectType}/batch/archive">client.cms.mediaBridge.properties.<a href="./src/resources/cms/media-bridge/properties.ts">archiveBatch</a>(objectType, { ...params }) -> void</code>
 - <code title="post /media-bridge/v1/{appId}/properties/{objectType}/batch/create">client.cms.mediaBridge.properties.<a href="./src/resources/cms/media-bridge/properties.ts">createBatch</a>(objectType, { ...params }) -> BatchResponseProperty</code>
+- <code title="post /media-bridge/v1/{appId}/properties/{objectType}/batch/archive">client.cms.mediaBridge.properties.<a href="./src/resources/cms/media-bridge/properties.ts">deleteBatch</a>(objectType, { ...params }) -> void</code>
 - <code title="get /media-bridge/v1/{appId}/properties/{objectType}/{propertyName}">client.cms.mediaBridge.properties.<a href="./src/resources/cms/media-bridge/properties.ts">get</a>(propertyName, { ...params }) -> Property</code>
 - <code title="post /media-bridge/v1/{appId}/properties/{objectType}/batch/read">client.cms.mediaBridge.properties.<a href="./src/resources/cms/media-bridge/properties.ts">getBatch</a>(objectType, { ...params }) -> BatchResponseProperty</code>
 
@@ -780,7 +779,7 @@ Methods:
 Methods:
 
 - <code title="patch /media-bridge/v1/{appId}/schemas/{objectType}">client.cms.mediaBridge.schemas.<a href="./src/resources/cms/media-bridge/schemas.ts">update</a>(objectType, { ...params }) -> ObjectsSchemasObjectTypeDefinition</code>
-- <code title="get /media-bridge/v1/{appId}/schemas">client.cms.mediaBridge.schemas.<a href="./src/resources/cms/media-bridge/schemas.ts">list</a>(appID) -> CollectionResponseObjectSchemaNoPaging</code>
+- <code title="get /media-bridge/v1/{appId}/schemas">client.cms.mediaBridge.schemas.<a href="./src/resources/cms/media-bridge/schemas.ts">list</a>(appID, { ...params }) -> CollectionResponseObjectSchemaNoPaging</code>
 - <code title="post /media-bridge/v1/{appId}/schemas/{objectType}/associations">client.cms.mediaBridge.schemas.<a href="./src/resources/cms/media-bridge/schemas.ts">createAssociation</a>(objectType, { ...params }) -> AssociationDefinition</code>
 - <code title="delete /media-bridge/v1/{appId}/schemas/{objectType}/associations/{associationId}">client.cms.mediaBridge.schemas.<a href="./src/resources/cms/media-bridge/schemas.ts">deleteAssociation</a>(associationID, { ...params }) -> void</code>
 - <code title="get /media-bridge/v1/{appId}/schemas/{objectType}">client.cms.mediaBridge.schemas.<a href="./src/resources/cms/media-bridge/schemas.ts">get</a>(objectType, { ...params }) -> ObjectSchema</code>
@@ -952,7 +951,6 @@ Types:
 - <code><a href="./src/resources/conversations/conversations.ts">ContactPhone</a></code>
 - <code><a href="./src/resources/conversations/conversations.ts">ContactProfile</a></code>
 - <code><a href="./src/resources/conversations/conversations.ts">ContactURL</a></code>
-- <code><a href="./src/resources/conversations/conversations.ts">ConversationsPublicChannelAccount</a></code>
 - <code><a href="./src/resources/conversations/conversations.ts">ConversationsPublicConversationsMessage</a></code>
 - <code><a href="./src/resources/conversations/conversations.ts">EmailActor</a></code>
 - <code><a href="./src/resources/conversations/conversations.ts">IntegratorActor</a></code>
@@ -960,6 +958,7 @@ Types:
 - <code><a href="./src/resources/conversations/conversations.ts">PublicActor</a></code>
 - <code><a href="./src/resources/conversations/conversations.ts">PublicAssignmentMessage</a></code>
 - <code><a href="./src/resources/conversations/conversations.ts">PublicChannel</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">PublicChannelAccount</a></code>
 - <code><a href="./src/resources/conversations/conversations.ts">PublicClient</a></code>
 - <code><a href="./src/resources/conversations/conversations.ts">PublicComment</a></code>
 - <code><a href="./src/resources/conversations/conversations.ts">PublicCommentEgg</a></code>
@@ -1001,20 +1000,20 @@ Types:
 Methods:
 
 - <code title="post /conversations/v3/conversations/actors/batch/read">client.conversations.actors.<a href="./src/resources/conversations/actors.ts">batchRead</a>({ ...params }) -> BatchResponsePublicActor</code>
-- <code title="get /conversations/v3/conversations/actors/{actorId}">client.conversations.actors.<a href="./src/resources/conversations/actors.ts">get</a>(actorID) -> PublicActor</code>
+- <code title="get /conversations/v3/conversations/actors/{actorId}">client.conversations.actors.<a href="./src/resources/conversations/actors.ts">get</a>(actorID, { ...params }) -> PublicActor</code>
 
 ## ChannelAccounts
 
 Methods:
 
-- <code title="get /conversations/v3/conversations/channel-accounts">client.conversations.channelAccounts.<a href="./src/resources/conversations/channel-accounts.ts">list</a>() -> CollectionResponseWithTotalPublicChannelAccountForwardPaging</code>
-- <code title="get /conversations/v3/conversations/channel-accounts/{channelAccountId}">client.conversations.channelAccounts.<a href="./src/resources/conversations/channel-accounts.ts">get</a>(channelAccountID) -> ConversationsPublicChannelAccount</code>
+- <code title="get /conversations/v3/conversations/channel-accounts">client.conversations.channelAccounts.<a href="./src/resources/conversations/channel-accounts.ts">list</a>({ ...params }) -> PublicChannelAccountsPage</code>
+- <code title="get /conversations/v3/conversations/channel-accounts/{channelAccountId}">client.conversations.channelAccounts.<a href="./src/resources/conversations/channel-accounts.ts">get</a>(channelAccountID, { ...params }) -> PublicChannelAccount</code>
 
 ## Channels
 
 Methods:
 
-- <code title="get /conversations/v3/conversations/channels">client.conversations.channels.<a href="./src/resources/conversations/channels.ts">list</a>() -> CollectionResponseWithTotalPublicChannelForwardPaging</code>
+- <code title="get /conversations/v3/conversations/channels">client.conversations.channels.<a href="./src/resources/conversations/channels.ts">list</a>({ ...params }) -> PublicChannelsPage</code>
 - <code title="get /conversations/v3/conversations/channels/{channelId}">client.conversations.channels.<a href="./src/resources/conversations/channels.ts">get</a>(channelID) -> PublicChannel</code>
 
 ## CustomChannels
@@ -1025,14 +1024,11 @@ Types:
 - <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">ChannelIntegrationParticipant</a></code>
 - <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">CollectionResponseWithTotalPublicChannelIntegrationChannelForwardPaging</a></code>
 - <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">ContactAttachment</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">CustomChannelsPublicClient</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">CustomChannelsPublicFile</a></code>
 - <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">FileAttachment</a></code>
 - <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">LocationAttachment</a></code>
 - <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">MessageHeaderAttachment</a></code>
 - <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PreResolvedContact</a></code>
 - <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PreResolvedContacts</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicChannelAccount</a></code>
 - <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicChannelAccountEgg</a></code>
 - <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicChannelAccountStagingToken</a></code>
 - <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicChannelAccountStagingTokenUpdateRequest</a></code>
@@ -1050,7 +1046,7 @@ Methods:
 
 - <code title="post /conversations/v3/custom-channels/">client.conversations.customChannels.<a href="./src/resources/conversations/custom-channels/custom-channels.ts">create</a>({ ...params }) -> PublicChannelIntegrationChannel</code>
 - <code title="patch /conversations/v3/custom-channels/{channelId}">client.conversations.customChannels.<a href="./src/resources/conversations/custom-channels/custom-channels.ts">update</a>(channelID, { ...params }) -> PublicChannelIntegrationChannel</code>
-- <code title="get /conversations/v3/custom-channels/">client.conversations.customChannels.<a href="./src/resources/conversations/custom-channels/custom-channels.ts">list</a>() -> CollectionResponseWithTotalPublicChannelIntegrationChannelForwardPaging</code>
+- <code title="get /conversations/v3/custom-channels/">client.conversations.customChannels.<a href="./src/resources/conversations/custom-channels/custom-channels.ts">list</a>({ ...params }) -> PublicChannelIntegrationChannelsPage</code>
 - <code title="delete /conversations/v3/custom-channels/{channelId}">client.conversations.customChannels.<a href="./src/resources/conversations/custom-channels/custom-channels.ts">delete</a>(channelID) -> void</code>
 - <code title="get /conversations/v3/custom-channels/{channelId}">client.conversations.customChannels.<a href="./src/resources/conversations/custom-channels/custom-channels.ts">get</a>(channelID) -> PublicChannelIntegrationChannel</code>
 
@@ -1064,10 +1060,10 @@ Methods:
 
 Methods:
 
-- <code title="post /conversations/v3/custom-channels/{channelId}/channel-accounts">client.conversations.customChannels.channelAccounts.<a href="./src/resources/conversations/custom-channels/channel-accounts.ts">create</a>(channelID, { ...params }) -> ConversationsPublicChannelAccount</code>
-- <code title="patch /conversations/v3/custom-channels/{channelId}/channel-accounts/{channelAccountId}">client.conversations.customChannels.channelAccounts.<a href="./src/resources/conversations/custom-channels/channel-accounts.ts">update</a>(channelAccountID, { ...params }) -> ConversationsPublicChannelAccount</code>
-- <code title="get /conversations/v3/custom-channels/{channelId}/channel-accounts">client.conversations.customChannels.channelAccounts.<a href="./src/resources/conversations/custom-channels/channel-accounts.ts">list</a>(channelID) -> CollectionResponseWithTotalPublicChannelAccountForwardPaging</code>
-- <code title="get /conversations/v3/custom-channels/{channelId}/channel-accounts/{channelAccountId}">client.conversations.customChannels.channelAccounts.<a href="./src/resources/conversations/custom-channels/channel-accounts.ts">get</a>(channelAccountID, { ...params }) -> ConversationsPublicChannelAccount</code>
+- <code title="post /conversations/v3/custom-channels/{channelId}/channel-accounts">client.conversations.customChannels.channelAccounts.<a href="./src/resources/conversations/custom-channels/channel-accounts.ts">create</a>(channelID, { ...params }) -> PublicChannelAccount</code>
+- <code title="patch /conversations/v3/custom-channels/{channelId}/channel-accounts/{channelAccountId}">client.conversations.customChannels.channelAccounts.<a href="./src/resources/conversations/custom-channels/channel-accounts.ts">update</a>(channelAccountID, { ...params }) -> PublicChannelAccount</code>
+- <code title="get /conversations/v3/custom-channels/{channelId}/channel-accounts">client.conversations.customChannels.channelAccounts.<a href="./src/resources/conversations/custom-channels/channel-accounts.ts">list</a>(channelID, { ...params }) -> PublicChannelAccountsPage</code>
+- <code title="get /conversations/v3/custom-channels/{channelId}/channel-accounts/{channelAccountId}">client.conversations.customChannels.channelAccounts.<a href="./src/resources/conversations/custom-channels/channel-accounts.ts">get</a>(channelAccountID, { ...params }) -> PublicChannelAccount</code>
 
 ### Messages
 
@@ -1081,15 +1077,15 @@ Methods:
 
 Methods:
 
-- <code title="get /conversations/v3/conversations/inboxes">client.conversations.inboxes.<a href="./src/resources/conversations/inboxes.ts">list</a>() -> CollectionResponseWithTotalPublicInboxForwardPaging</code>
-- <code title="get /conversations/v3/conversations/inboxes/{inboxId}">client.conversations.inboxes.<a href="./src/resources/conversations/inboxes.ts">get</a>(inboxID) -> PublicInbox</code>
+- <code title="get /conversations/v3/conversations/inboxes">client.conversations.inboxes.<a href="./src/resources/conversations/inboxes.ts">list</a>({ ...params }) -> PublicInboxesPage</code>
+- <code title="get /conversations/v3/conversations/inboxes/{inboxId}">client.conversations.inboxes.<a href="./src/resources/conversations/inboxes.ts">get</a>(inboxID, { ...params }) -> PublicInbox</code>
 
 ## Messages
 
 Methods:
 
 - <code title="post /conversations/v3/conversations/threads/{threadId}/messages">client.conversations.messages.<a href="./src/resources/conversations/messages.ts">create</a>(threadID) -> PublicMessage</code>
-- <code title="get /conversations/v3/conversations/threads/{threadId}/messages">client.conversations.messages.<a href="./src/resources/conversations/messages.ts">list</a>(threadID) -> CollectionResponsePublicMessageForwardPaging</code>
+- <code title="get /conversations/v3/conversations/threads/{threadId}/messages">client.conversations.messages.<a href="./src/resources/conversations/messages.ts">list</a>(threadID, { ...params }) -> CollectionResponsePublicMessageForwardPagingResultsPage</code>
 - <code title="get /conversations/v3/conversations/threads/{threadId}/messages/{messageId}">client.conversations.messages.<a href="./src/resources/conversations/messages.ts">get</a>(messageID, { ...params }) -> PublicMessage</code>
 - <code title="get /conversations/v3/conversations/threads/{threadId}/messages/{messageId}/original-content">client.conversations.messages.<a href="./src/resources/conversations/messages.ts">getOriginalContent</a>(messageID, { ...params }) -> PublicMessageContent</code>
 
@@ -1098,9 +1094,9 @@ Methods:
 Methods:
 
 - <code title="patch /conversations/v3/conversations/threads/{threadId}">client.conversations.threads.<a href="./src/resources/conversations/threads.ts">update</a>(threadID, { ...params }) -> PublicThread</code>
-- <code title="get /conversations/v3/conversations/threads">client.conversations.threads.<a href="./src/resources/conversations/threads.ts">list</a>() -> CollectionResponsePublicThreadForwardPaging</code>
+- <code title="get /conversations/v3/conversations/threads">client.conversations.threads.<a href="./src/resources/conversations/threads.ts">list</a>({ ...params }) -> PublicThreadsPage</code>
 - <code title="delete /conversations/v3/conversations/threads/{threadId}">client.conversations.threads.<a href="./src/resources/conversations/threads.ts">delete</a>(threadID) -> void</code>
-- <code title="get /conversations/v3/conversations/threads/{threadId}">client.conversations.threads.<a href="./src/resources/conversations/threads.ts">get</a>(threadID) -> PublicThread</code>
+- <code title="get /conversations/v3/conversations/threads/{threadId}">client.conversations.threads.<a href="./src/resources/conversations/threads.ts">get</a>(threadID, { ...params }) -> PublicThread</code>
 
 ## VisitorIdentification
 
@@ -1166,6 +1162,7 @@ Types:
 - <code><a href="./src/resources/crm/associations/associations.ts">BatchInputPublicAssociation</a></code>
 - <code><a href="./src/resources/crm/associations/associations.ts">BatchResponsePublicAssociation</a></code>
 - <code><a href="./src/resources/crm/associations/associations.ts">BatchResponsePublicAssociationMulti</a></code>
+- <code><a href="./src/resources/crm/associations/associations.ts">BatchResponseVoid</a></code>
 - <code><a href="./src/resources/crm/associations/associations.ts">PublicAssociation</a></code>
 - <code><a href="./src/resources/crm/associations/associations.ts">PublicAssociationMulti</a></code>
 
@@ -1181,41 +1178,72 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/crm/associations/schema.ts">CollectionResponsePublicAssociationDefinitionNoPaging</a></code>
-- <code><a href="./src/resources/crm/associations/schema.ts">PublicAssociationDefinition</a></code>
+- <code><a href="./src/resources/crm/associations/schema/schema.ts">CollectionResponsePublicAssociationDefinitionNoPaging</a></code>
+- <code><a href="./src/resources/crm/associations/schema/schema.ts">PublicAssociationDefinition</a></code>
 
 Methods:
 
-- <code title="get /crm/v3/associations/{fromObjectType}/{toObjectType}/types">client.crm.associations.schema.<a href="./src/resources/crm/associations/schema.ts">list</a>(toObjectType, { ...params }) -> CollectionResponsePublicAssociationDefinitionNoPaging</code>
+- <code title="get /crm/v3/associations/{fromObjectType}/{toObjectType}/types">client.crm.associations.schema.<a href="./src/resources/crm/associations/schema/schema.ts">list</a>(toObjectType, { ...params }) -> CollectionResponsePublicAssociationDefinitionNoPaging</code>
+
+#### V4
+
+Types:
+
+- <code><a href="./src/resources/crm/associations/schema/v4/v4.ts">BatchInputPublicAssociationDefinitionConfigurationCreateRequest</a></code>
+- <code><a href="./src/resources/crm/associations/schema/v4/v4.ts">BatchInputPublicAssociationDefinitionConfigurationUpdateRequest</a></code>
+- <code><a href="./src/resources/crm/associations/schema/v4/v4.ts">BatchInputPublicAssociationSpec</a></code>
+- <code><a href="./src/resources/crm/associations/schema/v4/v4.ts">BatchResponsePublicAssociationDefinitionConfigurationUpdateResult</a></code>
+- <code><a href="./src/resources/crm/associations/schema/v4/v4.ts">BatchResponsePublicAssociationDefinitionUserConfiguration</a></code>
+- <code><a href="./src/resources/crm/associations/schema/v4/v4.ts">CollectionResponseAssociationSpecWithLabel</a></code>
+- <code><a href="./src/resources/crm/associations/schema/v4/v4.ts">CollectionResponsePublicAssociationDefinitionUserConfiguration</a></code>
+- <code><a href="./src/resources/crm/associations/schema/v4/v4.ts">PublicAssociationDefinitionConfigurationCreateRequest</a></code>
+- <code><a href="./src/resources/crm/associations/schema/v4/v4.ts">PublicAssociationDefinitionConfigurationUpdateRequest</a></code>
+- <code><a href="./src/resources/crm/associations/schema/v4/v4.ts">PublicAssociationDefinitionConfigurationUpdateResult</a></code>
+- <code><a href="./src/resources/crm/associations/schema/v4/v4.ts">PublicAssociationDefinitionCreateRequest</a></code>
+- <code><a href="./src/resources/crm/associations/schema/v4/v4.ts">PublicAssociationDefinitionUpdateRequest</a></code>
+- <code><a href="./src/resources/crm/associations/schema/v4/v4.ts">PublicAssociationDefinitionUserConfiguration</a></code>
+- <code><a href="./src/resources/crm/associations/schema/v4/v4.ts">PublicAssociationSpec</a></code>
+
+##### Configurations
+
+Methods:
+
+- <code title="get /crm/associations/v4/definitions/configurations/all">client.crm.associations.schema.v4.configurations.<a href="./src/resources/crm/associations/schema/v4/configurations.ts">list</a>() -> CollectionResponsePublicAssociationDefinitionUserConfiguration</code>
+- <code title="post /crm/associations/v4/definitions/configurations/{fromObjectType}/{toObjectType}/batch/create">client.crm.associations.schema.v4.configurations.<a href="./src/resources/crm/associations/schema/v4/configurations.ts">batchCreate</a>(toObjectType, { ...params }) -> BatchResponsePublicAssociationDefinitionUserConfiguration</code>
+- <code title="post /crm/associations/v4/definitions/configurations/{fromObjectType}/{toObjectType}/batch/purge">client.crm.associations.schema.v4.configurations.<a href="./src/resources/crm/associations/schema/v4/configurations.ts">batchDelete</a>(toObjectType, { ...params }) -> BatchResponseVoid</code>
+- <code title="post /crm/associations/v4/definitions/configurations/{fromObjectType}/{toObjectType}/batch/update">client.crm.associations.schema.v4.configurations.<a href="./src/resources/crm/associations/schema/v4/configurations.ts">batchUpdate</a>(toObjectType, { ...params }) -> BatchResponsePublicAssociationDefinitionConfigurationUpdateResult</code>
+- <code title="get /crm/associations/v4/definitions/configurations/{fromObjectType}/{toObjectType}">client.crm.associations.schema.v4.configurations.<a href="./src/resources/crm/associations/schema/v4/configurations.ts">getByObjectTypes</a>(toObjectType, { ...params }) -> CollectionResponsePublicAssociationDefinitionUserConfiguration</code>
+
+##### Definitions
+
+Methods:
+
+- <code title="post /crm/associations/v4/{fromObjectType}/{toObjectType}/labels">client.crm.associations.schema.v4.definitions.<a href="./src/resources/crm/associations/schema/v4/definitions.ts">createLabel</a>(toObjectType, { ...params }) -> CollectionResponseAssociationSpecWithLabel</code>
+- <code title="delete /crm/associations/v4/{fromObjectType}/{toObjectType}/labels/{associationTypeId}">client.crm.associations.schema.v4.definitions.<a href="./src/resources/crm/associations/schema/v4/definitions.ts">deleteLabel</a>(associationTypeID, { ...params }) -> void</code>
+- <code title="get /crm/associations/v4/{fromObjectType}/{toObjectType}/labels">client.crm.associations.schema.v4.definitions.<a href="./src/resources/crm/associations/schema/v4/definitions.ts">listLabels</a>(toObjectType, { ...params }) -> CollectionResponseAssociationSpecWithLabel</code>
+- <code title="put /crm/associations/v4/{fromObjectType}/{toObjectType}/labels">client.crm.associations.schema.v4.definitions.<a href="./src/resources/crm/associations/schema/v4/definitions.ts">updateLabel</a>(toObjectType, { ...params }) -> void</code>
 
 ### V4
 
 Types:
 
-- <code><a href="./src/resources/crm/associations/v4/v4.ts">AssociationSpec1</a></code>
-- <code><a href="./src/resources/crm/associations/v4/v4.ts">AssociationsV4PublicObjectSearchRequest</a></code>
-- <code><a href="./src/resources/crm/associations/v4/v4.ts">AssociationsV4SimplePublicObject</a></code>
-- <code><a href="./src/resources/crm/associations/v4/v4.ts">AssociationsV4SimplePublicObjectBatchInputForCreate</a></code>
-- <code><a href="./src/resources/crm/associations/v4/v4.ts">AssociationsV4SimplePublicObjectInputForCreate</a></code>
-- <code><a href="./src/resources/crm/associations/v4/v4.ts">AssociationsV4SimplePublicObjectWithAssociations</a></code>
-- <code><a href="./src/resources/crm/associations/v4/v4.ts">AssociationsV4SimplePublicUpsertObject</a></code>
 - <code><a href="./src/resources/crm/associations/v4/v4.ts">BatchInputPublicAssociationMultiArchive</a></code>
 - <code><a href="./src/resources/crm/associations/v4/v4.ts">BatchInputPublicAssociationMultiPost</a></code>
 - <code><a href="./src/resources/crm/associations/v4/v4.ts">BatchInputPublicDefaultAssociationMultiPost</a></code>
 - <code><a href="./src/resources/crm/associations/v4/v4.ts">BatchInputPublicFetchAssociationsBatchRequest</a></code>
 - <code><a href="./src/resources/crm/associations/v4/v4.ts">BatchResponseLabelsBetweenObjectPair</a></code>
 - <code><a href="./src/resources/crm/associations/v4/v4.ts">BatchResponsePublicAssociationMultiWithLabel</a></code>
-- <code><a href="./src/resources/crm/associations/v4/v4.ts">BatchResponseVoid</a></code>
 - <code><a href="./src/resources/crm/associations/v4/v4.ts">DateTime</a></code>
-- <code><a href="./src/resources/crm/associations/v4/v4.ts">NextPage1</a></code>
-- <code><a href="./src/resources/crm/associations/v4/v4.ts">PreviousPage1</a></code>
 - <code><a href="./src/resources/crm/associations/v4/v4.ts">PublicAssociationMultiArchive</a></code>
 - <code><a href="./src/resources/crm/associations/v4/v4.ts">PublicAssociationMultiPost</a></code>
 - <code><a href="./src/resources/crm/associations/v4/v4.ts">PublicAssociationMultiWithLabel</a></code>
 - <code><a href="./src/resources/crm/associations/v4/v4.ts">PublicDefaultAssociationMultiPost</a></code>
 - <code><a href="./src/resources/crm/associations/v4/v4.ts">PublicFetchAssociationsBatchRequest</a></code>
 - <code><a href="./src/resources/crm/associations/v4/v4.ts">ReportCreationResponse</a></code>
-- <code><a href="./src/resources/crm/associations/v4/v4.ts">StandardError1</a></code>
+
+Methods:
+
+- <code title="post /crm/v4/objects/{objectType}/merge">client.crm.associations.v4.<a href="./src/resources/crm/associations/v4/v4.ts">merge</a>(objectType, { ...params }) -> SimplePublicObject</code>
 
 #### Batch
 
@@ -1226,12 +1254,13 @@ Methods:
 - <code title="post /crm/v4/associations/{fromObjectType}/{toObjectType}/batch/associate/default">client.crm.associations.v4.batch.<a href="./src/resources/crm/associations/v4/batch.ts">createDefault</a>(toObjectType, { ...params }) -> BatchResponsePublicDefaultAssociation</code>
 - <code title="post /crm/v4/associations/{fromObjectType}/{toObjectType}/batch/labels/archive">client.crm.associations.v4.batch.<a href="./src/resources/crm/associations/v4/batch.ts">deleteLabels</a>(toObjectType, { ...params }) -> BatchResponseVoid</code>
 - <code title="post /crm/v4/associations/{fromObjectType}/{toObjectType}/batch/read">client.crm.associations.v4.batch.<a href="./src/resources/crm/associations/v4/batch.ts">get</a>(toObjectType, { ...params }) -> BatchResponsePublicAssociationMultiWithLabel</code>
+- <code title="post /crm/v4/objects/{objectType}/batch/upsert">client.crm.associations.v4.batch.<a href="./src/resources/crm/associations/v4/batch.ts">upsert</a>(objectType, { ...params }) -> BatchResponseSimplePublicUpsertObject</code>
 
 #### Report
 
 Methods:
 
-- <code title="post /crm/v4/associations/usage/high-usage-report/{userId}">client.crm.associations.v4.report.<a href="./src/resources/crm/associations/v4/report.ts">getHighUsageReport</a>(userID) -> ReportCreationResponse</code>
+- <code title="post /crm/v4/associations/usage/high-usage-report/{userId}">client.crm.associations.v4.report.<a href="./src/resources/crm/associations/v4/report.ts">requestHighUsageReport</a>(userID) -> ReportCreationResponse</code>
 
 ## Exports
 
@@ -1461,10 +1490,10 @@ Types:
 - <code><a href="./src/resources/crm/lists/lists.ts">ListFolderCreateResponse</a></code>
 - <code><a href="./src/resources/crm/lists/lists.ts">ListFolderFetchResponse</a></code>
 - <code><a href="./src/resources/crm/lists/lists.ts">ListMoveRequest</a></code>
-- <code><a href="./src/resources/crm/lists/lists.ts">ListsByIDResponse</a></code>
 - <code><a href="./src/resources/crm/lists/lists.ts">ListSearchRequest</a></code>
 - <code><a href="./src/resources/crm/lists/lists.ts">ListSearchResponse</a></code>
 - <code><a href="./src/resources/crm/lists/lists.ts">ListUpdateResponse</a></code>
+- <code><a href="./src/resources/crm/lists/lists.ts">ListsByIDResponse</a></code>
 - <code><a href="./src/resources/crm/lists/lists.ts">MembershipChangeRequest</a></code>
 - <code><a href="./src/resources/crm/lists/lists.ts">MembershipsUpdateResponse</a></code>
 - <code><a href="./src/resources/crm/lists/lists.ts">PublicBatchMigrationMapping</a></code>
@@ -1742,6 +1771,7 @@ Types:
 - <code><a href="./src/resources/crm/objects/deal-splits.ts">BatchResponseDealToDealSplits</a></code>
 - <code><a href="./src/resources/crm/objects/deal-splits.ts">BatchResponseDealToDealSplitsWithErrors</a></code>
 - <code><a href="./src/resources/crm/objects/deal-splits.ts">DealToDealSplits</a></code>
+- <code><a href="./src/resources/crm/objects/deal-splits.ts">ObjectsDealSplitsSimplePublicObject</a></code>
 - <code><a href="./src/resources/crm/objects/deal-splits.ts">PublicDealSplitInput</a></code>
 - <code><a href="./src/resources/crm/objects/deal-splits.ts">PublicDealSplitsBatchCreateRequest</a></code>
 - <code><a href="./src/resources/crm/objects/deal-splits.ts">PublicDealSplitsCreateRequest</a></code>
@@ -2155,9 +2185,9 @@ Types:
 
 - <code><a href="./src/resources/crm/objects/schemas.ts">ObjectSchema</a></code>
 - <code><a href="./src/resources/crm/objects/schemas.ts">ObjectSchemaEgg</a></code>
-- <code><a href="./src/resources/crm/objects/schemas.ts">ObjectsSchemasObjectTypeDefinition</a></code>
 - <code><a href="./src/resources/crm/objects/schemas.ts">ObjectTypeDefinitionPatch</a></code>
 - <code><a href="./src/resources/crm/objects/schemas.ts">ObjectTypePropertyCreate</a></code>
+- <code><a href="./src/resources/crm/objects/schemas.ts">ObjectsSchemasObjectTypeDefinition</a></code>
 
 Methods:
 
@@ -2308,7 +2338,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/crm/properties/properties.ts">BatchReadInputPropertyName</a></code>
 - <code><a href="./src/resources/crm/properties/properties.ts">CollectionResponseProperty</a></code>
 - <code><a href="./src/resources/crm/properties/properties.ts">CollectionResponsePropertyGroup</a></code>
 - <code><a href="./src/resources/crm/properties/properties.ts">CreatedResponseProperty</a></code>
@@ -2339,7 +2368,7 @@ Methods:
 
 - <code title="post /crm/v3/properties/{objectType}/groups">client.crm.properties.groups.<a href="./src/resources/crm/properties/groups.ts">create</a>(objectType, { ...params }) -> CreatedResponsePropertyGroup</code>
 - <code title="patch /crm/v3/properties/{objectType}/groups/{groupName}">client.crm.properties.groups.<a href="./src/resources/crm/properties/groups.ts">update</a>(groupName, { ...params }) -> PropertyGroup</code>
-- <code title="get /crm/v3/properties/{objectType}/groups">client.crm.properties.groups.<a href="./src/resources/crm/properties/groups.ts">list</a>(objectType) -> CollectionResponsePropertyGroup</code>
+- <code title="get /crm/v3/properties/{objectType}/groups">client.crm.properties.groups.<a href="./src/resources/crm/properties/groups.ts">list</a>(objectType, { ...params }) -> CollectionResponsePropertyGroup</code>
 - <code title="delete /crm/v3/properties/{objectType}/groups/{groupName}">client.crm.properties.groups.<a href="./src/resources/crm/properties/groups.ts">delete</a>(groupName, { ...params }) -> void</code>
 - <code title="get /crm/v3/properties/{objectType}/groups/{groupName}">client.crm.properties.groups.<a href="./src/resources/crm/properties/groups.ts">get</a>(groupName, { ...params }) -> PropertyGroup</code>
 
@@ -2467,13 +2496,13 @@ Types:
 - <code><a href="./src/resources/events/event-definitions.ts">ExternalBehavioralEventTypeDefinitionPatch</a></code>
 - <code><a href="./src/resources/events/event-definitions.ts">FiscalQuarter</a></code>
 - <code><a href="./src/resources/events/event-definitions.ts">FiscalYear</a></code>
-- <code><a href="./src/resources/events/event-definitions.ts">IndexedTimePoint</a></code>
 - <code><a href="./src/resources/events/event-definitions.ts">IndexOffset</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">IndexedTimePoint</a></code>
 - <code><a href="./src/resources/events/event-definitions.ts">MonthReference</a></code>
 - <code><a href="./src/resources/events/event-definitions.ts">MultiStringPropertyOperation</a></code>
 - <code><a href="./src/resources/events/event-definitions.ts">NowReference</a></code>
-- <code><a href="./src/resources/events/event-definitions.ts">NumberPropertyOperation</a></code>
 - <code><a href="./src/resources/events/event-definitions.ts">NumOccurrencesRefineBy</a></code>
+- <code><a href="./src/resources/events/event-definitions.ts">NumberPropertyOperation</a></code>
 - <code><a href="./src/resources/events/event-definitions.ts">PropertyFilter</a></code>
 - <code><a href="./src/resources/events/event-definitions.ts">PropertyReferencedTime</a></code>
 - <code><a href="./src/resources/events/event-definitions.ts">QuarterReference</a></code>
@@ -2669,7 +2698,6 @@ Types:
 - <code><a href="./src/resources/marketing/emails/emails.ts">CollectionResponseWithTotalVersionPublicEmail</a></code>
 - <code><a href="./src/resources/marketing/emails/emails.ts">EmailCloneRequestVNext</a></code>
 - <code><a href="./src/resources/marketing/emails/emails.ts">EmailCreateRequest</a></code>
-- <code><a href="./src/resources/marketing/emails/emails.ts">EmailsPaging</a></code>
 - <code><a href="./src/resources/marketing/emails/emails.ts">EmailStatisticInterval</a></code>
 - <code><a href="./src/resources/marketing/emails/emails.ts">EmailStatisticsData</a></code>
 - <code><a href="./src/resources/marketing/emails/emails.ts">EmailUpdateRequest</a></code>
@@ -2699,7 +2727,7 @@ Methods:
 - <code title="post /marketing/v3/emails/clone">client.marketing.emails.<a href="./src/resources/marketing/emails/emails.ts">clone</a>({ ...params }) -> PublicEmail</code>
 - <code title="post /marketing/v3/emails/ab-test/create-variation">client.marketing.emails.<a href="./src/resources/marketing/emails/emails.ts">createAbTestVariation</a>({ ...params }) -> PublicEmail</code>
 - <code title="get /marketing/v3/emails/{emailId}">client.marketing.emails.<a href="./src/resources/marketing/emails/emails.ts">get</a>(emailID, { ...params }) -> PublicEmail</code>
-- <code title="get /marketing/v3/emails/{emailId}/ab-test/get-variation">client.marketing.emails.<a href="./src/resources/marketing/emails/emails.ts">getAbTestVariation</a>(emailID) -> PublicEmail</code>
+- <code title="get /marketing/v3/emails/{emailId}/ab-test/get-variation">client.marketing.emails.<a href="./src/resources/marketing/emails/emails.ts">getAbTestVariation</a>(emailID, { ...params }) -> PublicEmail</code>
 - <code title="get /marketing/v3/emails/{emailId}/draft">client.marketing.emails.<a href="./src/resources/marketing/emails/emails.ts">getDraft</a>(emailID) -> PublicEmail</code>
 - <code title="get /marketing/v3/emails/{emailId}/revisions/{revisionId}">client.marketing.emails.<a href="./src/resources/marketing/emails/emails.ts">getRevision</a>(revisionID, { ...params }) -> VersionPublicEmail</code>
 - <code title="get /marketing/v3/emails/{emailId}/revisions">client.marketing.emails.<a href="./src/resources/marketing/emails/emails.ts">listRevisions</a>(emailID, { ...params }) -> VersionPublicEmailsPage</code>
@@ -3024,10 +3052,10 @@ Methods:
 
 Methods:
 
-- <code title="get /scheduler/v3/meetings/meeting-links">client.scheduler.meetings.meetingsLinks.<a href="./src/resources/scheduler/meetings/meetings-links.ts">list</a>() -> CollectionResponseWithTotalExternalLinkMetadataForwardPaging</code>
+- <code title="get /scheduler/v3/meetings/meeting-links">client.scheduler.meetings.meetingsLinks.<a href="./src/resources/scheduler/meetings/meetings-links.ts">list</a>({ ...params }) -> ExternalLinkMetadataPage</code>
 - <code title="post /scheduler/v3/meetings/meeting-links/book">client.scheduler.meetings.meetingsLinks.<a href="./src/resources/scheduler/meetings/meetings-links.ts">book</a>({ ...params }) -> ExternalMeetingBookingResponse</code>
-- <code title="get /scheduler/v3/meetings/meeting-links/book/availability-page/{slug}">client.scheduler.meetings.meetingsLinks.<a href="./src/resources/scheduler/meetings/meetings-links.ts">getAvailabilityBySlug</a>(slug) -> ExternalLinkAvailabilityAndBusyTimes</code>
-- <code title="get /scheduler/v3/meetings/meeting-links/book/{slug}">client.scheduler.meetings.meetingsLinks.<a href="./src/resources/scheduler/meetings/meetings-links.ts">getBookingInfoBySlug</a>(slug) -> ExternalBookingInfo</code>
+- <code title="get /scheduler/v3/meetings/meeting-links/book/availability-page/{slug}">client.scheduler.meetings.meetingsLinks.<a href="./src/resources/scheduler/meetings/meetings-links.ts">getAvailabilityBySlug</a>(slug, { ...params }) -> ExternalLinkAvailabilityAndBusyTimes</code>
+- <code title="get /scheduler/v3/meetings/meeting-links/book/{slug}">client.scheduler.meetings.meetingsLinks.<a href="./src/resources/scheduler/meetings/meetings-links.ts">getBookingInfoBySlug</a>(slug, { ...params }) -> ExternalBookingInfo</code>
 
 # Settings
 
@@ -3063,7 +3091,7 @@ Methods:
 - <code title="get /settings/v3/currencies/exchange-rates/{exchangeRateId}">client.settings.currencies.<a href="./src/resources/settings/currencies/currencies.ts">getExchangeRateByID</a>(exchangeRateID) -> ExchangeRate</code>
 - <code title="get /settings/v3/currencies/codes">client.settings.currencies.<a href="./src/resources/settings/currencies/currencies.ts">listCodes</a>() -> CollectionResponseCurrencyCodeInfoNoPaging</code>
 - <code title="get /settings/v3/currencies/exchange-rates/current">client.settings.currencies.<a href="./src/resources/settings/currencies/currencies.ts">listCurrentExchangeRates</a>() -> CollectionResponseExchangeRateNoPaging</code>
-- <code title="get /settings/v3/currencies/exchange-rates">client.settings.currencies.<a href="./src/resources/settings/currencies/currencies.ts">listExchangeRates</a>() -> CollectionResponseExchangeRateForwardPaging</code>
+- <code title="get /settings/v3/currencies/exchange-rates">client.settings.currencies.<a href="./src/resources/settings/currencies/currencies.ts">listExchangeRates</a>({ ...params }) -> ExchangeRatesPage</code>
 - <code title="put /settings/v3/currencies/company-currency">client.settings.currencies.<a href="./src/resources/settings/currencies/currencies.ts">updateCompanyCurrency</a>({ ...params }) -> CompanyCurrency</code>
 - <code title="patch /settings/v3/currencies/exchange-rates/{exchangeRateId}">client.settings.currencies.<a href="./src/resources/settings/currencies/currencies.ts">updateExchangeRate</a>(exchangeRateID, { ...params }) -> ExchangeRate</code>
 - <code title="post /settings/v3/currencies/exchange-rates/update-visibility">client.settings.currencies.<a href="./src/resources/settings/currencies/currencies.ts">updateVisibility</a>({ ...params }) -> void</code>
@@ -3085,7 +3113,7 @@ Types:
 
 Methods:
 
-- <code title="get /tax-rates/v1/tax-rates">client.settings.taxRates.<a href="./src/resources/settings/tax-rates.ts">list</a>() -> CollectionResponsePublicTaxRateGroupForwardPaging</code>
+- <code title="get /tax-rates/v1/tax-rates">client.settings.taxRates.<a href="./src/resources/settings/tax-rates.ts">list</a>({ ...params }) -> PublicTaxRateGroupsPage</code>
 - <code title="get /tax-rates/v1/tax-rates/{taxRateGroupId}">client.settings.taxRates.<a href="./src/resources/settings/tax-rates.ts">get</a>(taxRateGroupID) -> PublicTaxRateGroup</code>
 
 ## Users

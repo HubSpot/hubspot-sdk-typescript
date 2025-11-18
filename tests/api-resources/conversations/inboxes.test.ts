@@ -21,8 +21,19 @@ describe('resource inboxes', () => {
   });
 
   // Prism tests are disabled
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.conversations.inboxes.list(
+        { after: 'after', archived: true, defaultPageLength: 0, limit: 0, sort: ['string'] },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Hubspot.NotFoundError);
+  });
+
+  // Prism tests are disabled
   test.skip('get', async () => {
-    const responsePromise = client.conversations.inboxes.get('inboxId');
+    const responsePromise = client.conversations.inboxes.get(0);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -30,5 +41,13 @@ describe('resource inboxes', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('get: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.conversations.inboxes.get(0, { archived: true }, { path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Hubspot.NotFoundError);
   });
 });

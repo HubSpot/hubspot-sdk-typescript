@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../core/resource';
 import * as Shared from '../shared';
-import * as EmailsAPI from '../marketing/emails/emails';
 import * as EventsAPI from '../marketing/events/events';
 import { APIPromise } from '../../core/api-promise';
 import { Page, type PageParams, PagePromise } from '../../core/pagination';
@@ -113,10 +112,7 @@ export interface CollectionResponsePublicImportErrorForwardPaging {
 export interface CollectionResponsePublicImportResponse {
   results: Array<PublicImportResponse>;
 
-  /**
-   * Contains information pagination of results.
-   */
-  paging?: EmailsAPI.EmailsPaging;
+  paging?: Shared.Paging;
 }
 
 export interface ImportRowCore {

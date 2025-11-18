@@ -16,7 +16,7 @@ export class Groups extends APIResource {
    * ```ts
    * const propertyGroup =
    *   await client.cms.mediaBridge.groups.create('objectType', {
-   *     appId: 'appId',
+   *     appId: 0,
    *     label: 'label',
    *     name: 'name',
    *   });
@@ -41,7 +41,7 @@ export class Groups extends APIResource {
    * ```ts
    * const collectionResponsePropertyGroupNoPaging =
    *   await client.cms.mediaBridge.groups.list('objectType', {
-   *     appId: 'appId',
+   *     appId: 0,
    *   });
    * ```
    */
@@ -61,7 +61,7 @@ export class Groups extends APIResource {
    * ```ts
    * await client.cms.mediaBridge.groups.deleteByName(
    *   'groupName',
-   *   { appId: 'appId', objectType: 'objectType' },
+   *   { appId: 0, objectType: 'objectType' },
    * );
    * ```
    */
@@ -85,7 +85,7 @@ export class Groups extends APIResource {
    * const propertyGroup =
    *   await client.cms.mediaBridge.groups.getByName(
    *     'groupName',
-   *     { appId: 'appId', objectType: 'objectType' },
+   *     { appId: 0, objectType: 'objectType' },
    *   );
    * ```
    */
@@ -109,7 +109,7 @@ export class Groups extends APIResource {
    * const propertyGroup =
    *   await client.cms.mediaBridge.groups.updateByName(
    *     'groupName',
-   *     { appId: 'appId', objectType: 'objectType' },
+   *     { appId: 0, objectType: 'objectType' },
    *   );
    * ```
    */
@@ -128,9 +128,10 @@ export class Groups extends APIResource {
 
 export interface GroupCreateParams {
   /**
-   * Path param:
+   * Path param: The appId for the media bridge app. It is possible to have multiple
+   * apps in your developer account that use the media bridge.
    */
-  appId: string;
+  appId: number;
 
   /**
    * Body param:
@@ -149,29 +150,48 @@ export interface GroupCreateParams {
 }
 
 export interface GroupListParams {
-  appId: string;
+  /**
+   * The appId for the media bridge app. It is possible to have multiple apps in your
+   * developer account that use the media bridge.
+   */
+  appId: number;
 }
 
 export interface GroupDeleteByNameParams {
-  appId: string;
+  /**
+   * The appId for the media bridge app. It is possible to have multiple apps in your
+   * developer account that use the media bridge.
+   */
+  appId: number;
 
+  /**
+   * The object type for the property group
+   */
   objectType: string;
 }
 
 export interface GroupGetByNameParams {
-  appId: string;
+  /**
+   * The appId for the media bridge app. It is possible to have multiple apps in your
+   * developer account that use the media bridge.
+   */
+  appId: number;
 
+  /**
+   * The object type for the property group.
+   */
   objectType: string;
 }
 
 export interface GroupUpdateByNameParams {
   /**
-   * Path param:
+   * Path param: The appId for the media bridge app. It is possible to have multiple
+   * apps in your developer account that use the media bridge.
    */
-  appId: string;
+  appId: number;
 
   /**
-   * Path param:
+   * Path param: The object type for the property group.
    */
   objectType: string;
 

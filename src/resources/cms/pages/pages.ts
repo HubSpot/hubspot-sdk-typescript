@@ -71,7 +71,6 @@ import {
   SitePageUpdateParams,
   SitePages,
 } from './site-pages';
-import * as EmailsAPI from '../../marketing/emails/emails';
 import { Page as PaginationPage } from '../../../core/pagination';
 
 export class Pages extends APIResource {
@@ -310,10 +309,7 @@ export interface CollectionResponseWithTotalVersionContentFolder {
    */
   total: number;
 
-  /**
-   * Contains information pagination of results.
-   */
-  paging?: EmailsAPI.EmailsPaging;
+  paging?: Shared.Paging;
 }
 
 /**
@@ -330,10 +326,7 @@ export interface CollectionResponseWithTotalVersionPage {
    */
   total: number;
 
-  /**
-   * Contains information pagination of results.
-   */
-  paging?: EmailsAPI.EmailsPaging;
+  paging?: Shared.Paging;
 }
 
 /**

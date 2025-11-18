@@ -11,7 +11,7 @@ describe('resource groups', () => {
   // Prism tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.cms.mediaBridge.groups.create('objectType', {
-      appId: 'appId',
+      appId: 0,
       label: 'label',
       name: 'name',
     });
@@ -27,7 +27,7 @@ describe('resource groups', () => {
   // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.cms.mediaBridge.groups.create('objectType', {
-      appId: 'appId',
+      appId: 0,
       label: 'label',
       name: 'name',
       displayOrder: 0,
@@ -36,7 +36,7 @@ describe('resource groups', () => {
 
   // Prism tests are disabled
   test.skip('list: only required params', async () => {
-    const responsePromise = client.cms.mediaBridge.groups.list('objectType', { appId: 'appId' });
+    const responsePromise = client.cms.mediaBridge.groups.list('objectType', { appId: 0 });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -48,13 +48,13 @@ describe('resource groups', () => {
 
   // Prism tests are disabled
   test.skip('list: required and optional params', async () => {
-    const response = await client.cms.mediaBridge.groups.list('objectType', { appId: 'appId' });
+    const response = await client.cms.mediaBridge.groups.list('objectType', { appId: 0 });
   });
 
   // Prism tests are disabled
   test.skip('deleteByName: only required params', async () => {
     const responsePromise = client.cms.mediaBridge.groups.deleteByName('groupName', {
-      appId: 'appId',
+      appId: 0,
       objectType: 'objectType',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -69,7 +69,7 @@ describe('resource groups', () => {
   // Prism tests are disabled
   test.skip('deleteByName: required and optional params', async () => {
     const response = await client.cms.mediaBridge.groups.deleteByName('groupName', {
-      appId: 'appId',
+      appId: 0,
       objectType: 'objectType',
     });
   });
@@ -77,7 +77,7 @@ describe('resource groups', () => {
   // Prism tests are disabled
   test.skip('getByName: only required params', async () => {
     const responsePromise = client.cms.mediaBridge.groups.getByName('groupName', {
-      appId: 'appId',
+      appId: 0,
       objectType: 'objectType',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -92,7 +92,7 @@ describe('resource groups', () => {
   // Prism tests are disabled
   test.skip('getByName: required and optional params', async () => {
     const response = await client.cms.mediaBridge.groups.getByName('groupName', {
-      appId: 'appId',
+      appId: 0,
       objectType: 'objectType',
     });
   });
@@ -100,7 +100,7 @@ describe('resource groups', () => {
   // Prism tests are disabled
   test.skip('updateByName: only required params', async () => {
     const responsePromise = client.cms.mediaBridge.groups.updateByName('groupName', {
-      appId: 'appId',
+      appId: 0,
       objectType: 'objectType',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -115,7 +115,7 @@ describe('resource groups', () => {
   // Prism tests are disabled
   test.skip('updateByName: required and optional params', async () => {
     const response = await client.cms.mediaBridge.groups.updateByName('groupName', {
-      appId: 'appId',
+      appId: 0,
       objectType: 'objectType',
       displayOrder: 0,
       label: 'label',

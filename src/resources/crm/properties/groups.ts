@@ -64,9 +64,10 @@ export class Groups extends APIResource {
    */
   list(
     objectType: string,
+    query: GroupListParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<PropertiesAPI.CollectionResponsePropertyGroup> {
-    return this._client.get(path`/crm/v3/properties/${objectType}/groups`, options);
+    return this._client.get(path`/crm/v3/properties/${objectType}/groups`, { query, ...options });
   }
 
   /**
@@ -103,8 +104,11 @@ export class Groups extends APIResource {
     params: GroupGetParams,
     options?: RequestOptions,
   ): APIPromise<PropertiesAPI.PropertyGroup> {
-    const { objectType } = params;
-    return this._client.get(path`/crm/v3/properties/${objectType}/groups/${groupName}`, options);
+    const { objectType, ...query } = params;
+    return this._client.get(path`/crm/v3/properties/${objectType}/groups/${groupName}`, {
+      query,
+      ...options,
+    });
   }
 }
 
@@ -133,18 +137,31 @@ export interface GroupUpdateParams {
   label?: string;
 }
 
+export interface GroupListParams {
+  locale?: string;
+}
+
 export interface GroupDeleteParams {
   objectType: string;
 }
 
 export interface GroupGetParams {
+  /**
+   * Path param:
+   */
   objectType: string;
+
+  /**
+   * Query param:
+   */
+  locale?: string;
 }
 
 export declare namespace Groups {
   export {
     type GroupCreateParams as GroupCreateParams,
     type GroupUpdateParams as GroupUpdateParams,
+    type GroupListParams as GroupListParams,
     type GroupDeleteParams as GroupDeleteParams,
     type GroupGetParams as GroupGetParams,
   };

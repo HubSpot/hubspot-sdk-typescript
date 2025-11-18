@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../core/resource';
 import * as Shared from '../shared';
-import * as EmailsAPI from '../marketing/emails/emails';
 import { APIPromise } from '../../core/api-promise';
 import { Page, type PageParams, PagePromise } from '../../core/pagination';
 import { buildHeaders } from '../../internal/headers';
@@ -1009,18 +1008,18 @@ export interface APITimeOfDay {
   minute: number;
 }
 
+export interface APITimeWindow {
+  day: 'MONDAY' | 'TUESDAY' | 'WEDNESDAY' | 'THURSDAY' | 'FRIDAY' | 'SATURDAY' | 'SUNDAY';
+
+  endTime?: APITimeOfDay;
+
+  startTime?: APITimeOfDay;
+}
+
 export interface APITimestampValue {
   timestampType: 'EXECUTION_TIME';
 
   type: 'TIMESTAMP';
-}
-
-export interface APITimeWindow {
-  day: 'MONDAY' | 'TUESDAY' | 'WEDNESDAY' | 'THURSDAY' | 'FRIDAY' | 'SATURDAY' | 'SUNDAY';
-
-  endTime: APITimeOfDay;
-
-  startTime: APITimeOfDay;
 }
 
 export interface APIUnEnrollmentSetting {
@@ -1142,10 +1141,7 @@ export interface BatchResponseFlowIDWorkflowIDMappingResponseWithErrors {
 export interface CollectionResponseAPIFlowEmailCampaign {
   results: Array<APIFlowEmailCampaign>;
 
-  /**
-   * Contains information pagination of results.
-   */
-  paging?: EmailsAPI.EmailsPaging;
+  paging?: Shared.Paging;
 }
 
 export interface CollectionResponseAPIFlowListingForwardPaging {
@@ -1255,8 +1251,8 @@ export declare namespace Workflows {
     type APIStaticValue as APIStaticValue,
     type APITimeDelay as APITimeDelay,
     type APITimeOfDay as APITimeOfDay,
-    type APITimestampValue as APITimestampValue,
     type APITimeWindow as APITimeWindow,
+    type APITimestampValue as APITimestampValue,
     type APIUnEnrollmentSetting as APIUnEnrollmentSetting,
     type APIWebhookAction as APIWebhookAction,
     type APIWeeklyEnrollmentSchedule as APIWeeklyEnrollmentSchedule,

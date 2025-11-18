@@ -153,8 +153,15 @@ export class Emails extends APIResource {
    *   );
    * ```
    */
-  getAbTestVariation(emailID: string, options?: RequestOptions): APIPromise<PublicEmail> {
-    return this._client.get(path`/marketing/v3/emails/${emailID}/ab-test/get-variation`, options);
+  getAbTestVariation(
+    emailID: string,
+    query: EmailGetAbTestVariationParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<PublicEmail> {
+    return this._client.get(path`/marketing/v3/emails/${emailID}/ab-test/get-variation`, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -406,10 +413,7 @@ export interface CollectionResponseWithTotalVersionPublicEmail {
    */
   total: number;
 
-  /**
-   * Contains information pagination of results.
-   */
-  paging?: EmailsPaging;
+  paging?: Shared.Paging;
 }
 
 export interface EmailCloneRequestVNext {
@@ -1424,27 +1428,10 @@ export interface EmailCreateRequest {
   webversion?: PublicWebversionDetails;
 }
 
-/**
- * Contains information pagination of results.
- */
-export interface EmailsPaging {
-  /**
-   * Specifies the paging information needed to retrieve the next set of results in a
-   * paginated API response
-   */
-  next: Shared.NextPage;
-
-  /**
-   * specifies the paging information needed to retrieve the previous set of results
-   * in a paginated API response
-   */
-  prev?: Shared.PreviousPage;
-}
-
 export interface EmailStatisticInterval {
-  aggregations?: EmailStatisticsData;
+  aggregations: EmailStatisticsData;
 
-  interval?: Interval;
+  interval: Interval;
 }
 
 export interface EmailStatisticsData {
@@ -2485,82 +2472,12 @@ export interface PublicDividerStyleSettings {
  * A marketing email
  */
 export interface PublicEmail {
+  isAb: boolean;
+
   /**
    * The email ID.
    */
-  id: string;
-
-  /**
-   * Data structure representing the content of the email.
-   */
-  content: PublicEmailContent;
-
-  /**
-   * Data structure representing the from fields on the email.
-   */
-  from: PublicEmailFromDetails;
-
-  /**
-   * The name of the email, as displayed on the email dashboard.
-   */
-  name: string;
-
-  /**
-   * Determines whether the email will be sent immediately on publish.
-   */
-  sendOnPublish: boolean;
-
-  /**
-   * The email state.
-   */
-  state:
-    | 'AUTOMATED'
-    | 'AUTOMATED_DRAFT'
-    | 'AUTOMATED_SENDING'
-    | 'AUTOMATED_FOR_FORM'
-    | 'AUTOMATED_FOR_FORM_BUFFER'
-    | 'AUTOMATED_FOR_FORM_DRAFT'
-    | 'AUTOMATED_FOR_FORM_LEGACY'
-    | 'BLOG_EMAIL_DRAFT'
-    | 'BLOG_EMAIL_PUBLISHED'
-    | 'DRAFT'
-    | 'DRAFT_AB'
-    | 'DRAFT_AB_VARIANT'
-    | 'ERROR'
-    | 'LOSER_AB_VARIANT'
-    | 'PAGE_STUB'
-    | 'PRE_PROCESSING'
-    | 'PROCESSING'
-    | 'PUBLISHED'
-    | 'PUBLISHED_AB'
-    | 'PUBLISHED_AB_VARIANT'
-    | 'PUBLISHED_OR_SCHEDULED'
-    | 'RSS_TO_EMAIL_DRAFT'
-    | 'RSS_TO_EMAIL_PUBLISHED'
-    | 'SCHEDULED'
-    | 'SCHEDULED_AB'
-    | 'SCHEDULED_OR_PUBLISHED'
-    | 'AUTOMATED_AB'
-    | 'AUTOMATED_AB_VARIANT'
-    | 'AUTOMATED_DRAFT_AB'
-    | 'AUTOMATED_DRAFT_ABVARIANT'
-    | 'AUTOMATED_LOSER_ABVARIANT'
-    | 'AGENT_GENERATED';
-
-  /**
-   * The email subcategory.
-   */
-  subcategory: string;
-
-  /**
-   * The subject of the email.
-   */
-  subject: string;
-
-  /**
-   * Data structure representing the to fields of the email.
-   */
-  to: PublicEmailToDetails;
+  id?: string;
 
   /**
    * The active domain of the email.
@@ -2597,6 +2514,11 @@ export interface PublicEmail {
   clonedFrom?: string;
 
   /**
+   * Data structure representing the content of the email.
+   */
+  content?: PublicEmailContent;
+
+  /**
    * The date and time of the email's creation, in ISO8601 representation.
    */
   createdAt?: string;
@@ -2624,7 +2546,10 @@ export interface PublicEmail {
 
   folderIdV2?: number;
 
-  isAb?: boolean;
+  /**
+   * Data structure representing the from fields on the email.
+   */
+  from?: PublicEmailFromDetails;
 
   /**
    * Returns the published status of the email. This is read only.
@@ -3431,6 +3356,11 @@ export interface PublicEmail {
     | 'zu'
     | 'zu-za';
 
+  /**
+   * The name of the email, as displayed on the email dashboard.
+   */
+  name?: string;
+
   previewKey?: string;
 
   primaryEmailCampaignId?: string;
@@ -3466,7 +3396,59 @@ export interface PublicEmail {
    */
   rssData?: PublicRssEmailDetails;
 
+  /**
+   * Determines whether the email will be sent immediately on publish.
+   */
+  sendOnPublish?: boolean;
+
+  /**
+   * The email state.
+   */
+  state?:
+    | 'AUTOMATED'
+    | 'AUTOMATED_DRAFT'
+    | 'AUTOMATED_SENDING'
+    | 'AUTOMATED_FOR_FORM'
+    | 'AUTOMATED_FOR_FORM_BUFFER'
+    | 'AUTOMATED_FOR_FORM_DRAFT'
+    | 'AUTOMATED_FOR_FORM_LEGACY'
+    | 'BLOG_EMAIL_DRAFT'
+    | 'BLOG_EMAIL_PUBLISHED'
+    | 'DRAFT'
+    | 'DRAFT_AB'
+    | 'DRAFT_AB_VARIANT'
+    | 'ERROR'
+    | 'LOSER_AB_VARIANT'
+    | 'PAGE_STUB'
+    | 'PRE_PROCESSING'
+    | 'PROCESSING'
+    | 'PUBLISHED'
+    | 'PUBLISHED_AB'
+    | 'PUBLISHED_AB_VARIANT'
+    | 'PUBLISHED_OR_SCHEDULED'
+    | 'RSS_TO_EMAIL_DRAFT'
+    | 'RSS_TO_EMAIL_PUBLISHED'
+    | 'SCHEDULED'
+    | 'SCHEDULED_AB'
+    | 'SCHEDULED_OR_PUBLISHED'
+    | 'AUTOMATED_AB'
+    | 'AUTOMATED_AB_VARIANT'
+    | 'AUTOMATED_DRAFT_AB'
+    | 'AUTOMATED_DRAFT_ABVARIANT'
+    | 'AUTOMATED_LOSER_ABVARIANT'
+    | 'AGENT_GENERATED';
+
   stats?: EmailStatisticsData;
+
+  /**
+   * The email subcategory.
+   */
+  subcategory?: string;
+
+  /**
+   * The subject of the email.
+   */
+  subject?: string;
 
   /**
    * Data structure representing the subscription fields of the email.
@@ -3479,6 +3461,11 @@ export interface PublicEmail {
    * AB testing related data. This property is only returned for AB type emails.
    */
   testing?: PublicEmailTestingDetails;
+
+  /**
+   * Data structure representing the to fields of the email.
+   */
+  to?: PublicEmailToDetails;
 
   /**
    * The email type, this is derived from other properties on the email such as
@@ -6039,6 +6026,33 @@ export interface EmailGetParams {
   workflowNames?: boolean;
 }
 
+export interface EmailGetAbTestVariationParams {
+  /**
+   * Boolean variable to request archived email
+   */
+  archived?: boolean;
+
+  /**
+   * List of properties to be returned in the API response
+   */
+  includedProperties?: Array<string>;
+
+  /**
+   * Boolean variable to request stats to be returned in response
+   */
+  includeStats?: boolean;
+
+  /**
+   * Boolean variable to request name of the campaign in response
+   */
+  marketingCampaignNames?: boolean;
+
+  /**
+   * Boolean variable to request name of the associated workflows in response
+   */
+  workflowNames?: boolean;
+}
+
 export interface EmailGetRevisionParams {
   /**
    * The marketing email ID.
@@ -7066,7 +7080,6 @@ export declare namespace Emails {
     type CollectionResponseWithTotalVersionPublicEmail as CollectionResponseWithTotalVersionPublicEmail,
     type EmailCloneRequestVNext as EmailCloneRequestVNext,
     type EmailCreateRequest as EmailCreateRequest,
-    type EmailsPaging as EmailsPaging,
     type EmailStatisticInterval as EmailStatisticInterval,
     type EmailStatisticsData as EmailStatisticsData,
     type EmailUpdateRequest as EmailUpdateRequest,
@@ -7095,6 +7108,7 @@ export declare namespace Emails {
     type EmailCloneParams as EmailCloneParams,
     type EmailCreateAbTestVariationParams as EmailCreateAbTestVariationParams,
     type EmailGetParams as EmailGetParams,
+    type EmailGetAbTestVariationParams as EmailGetAbTestVariationParams,
     type EmailGetRevisionParams as EmailGetRevisionParams,
     type EmailListRevisionsParams as EmailListRevisionsParams,
     type EmailRestoreRevisionParams as EmailRestoreRevisionParams,

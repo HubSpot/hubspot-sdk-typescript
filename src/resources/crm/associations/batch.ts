@@ -10,6 +10,9 @@ import { path } from '../../../internal/utils/path';
 
 export class Batch extends APIResource {
   /**
+   * This endpoint allows you to create multiple associations between specified
+   * 'from' and 'to' object types in a single batch request.
+   *
    * @example
    * ```ts
    * const batchResponsePublicAssociation =
@@ -68,6 +71,9 @@ export class Batch extends APIResource {
   }
 
   /**
+   * This endpoint allows you to retrieve multiple associations between specified
+   * 'from' and 'to' object types in a single batch request.
+   *
    * @example
    * ```ts
    * const batchResponsePublicAssociationMulti =
@@ -92,7 +98,7 @@ export class Batch extends APIResource {
 
 export interface BatchCreateParams {
   /**
-   * Path param:
+   * Path param: The type of the source object in the association.
    */
   fromObjectType: string;
 
@@ -116,7 +122,7 @@ export interface BatchDeleteParams {
 
 export interface BatchGetParams {
   /**
-   * Path param:
+   * Path param: The type of the source object in the association.
    */
   fromObjectType: string;
 

@@ -11,6 +11,7 @@ describe('resource enrollments', () => {
   // Prism tests are disabled
   test.skip('enroll: only required params', async () => {
     const responsePromise = client.automation.sequences.enrollments.enroll({
+      userId: 'userId',
       contactId: 'contactId',
       senderEmail: 'senderEmail',
       sequenceId: 'sequenceId',
@@ -27,6 +28,7 @@ describe('resource enrollments', () => {
   // Prism tests are disabled
   test.skip('enroll: required and optional params', async () => {
     const response = await client.automation.sequences.enrollments.enroll({
+      userId: 'userId',
       contactId: 'contactId',
       senderEmail: 'senderEmail',
       sequenceId: 'sequenceId',

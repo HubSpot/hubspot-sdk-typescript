@@ -10,7 +10,24 @@ const client = new Hubspot({
 describe('resource tables', () => {
   // Prism tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.cms.hubdb.tables.create({ label: 'label', name: 'name' });
+    const responsePromise = client.cms.hubdb.tables.create({
+      allowChildTables: true,
+      allowPublicApiAccess: true,
+      columns: [
+        {
+          id: 0,
+          label: 'label',
+          name: 'name',
+          options: [{ hidden: false, label: 'Option A', value: 'A' }],
+          type: 'NULL',
+        },
+      ],
+      dynamicMetaTags: { foo: 0 },
+      enableChildTablePages: true,
+      label: 'label',
+      name: 'name',
+      useForPages: true,
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,8 +40,6 @@ describe('resource tables', () => {
   // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.cms.hubdb.tables.create({
-      label: 'label',
-      name: 'name',
       allowChildTables: true,
       allowPublicApiAccess: true,
       columns: [
@@ -50,6 +65,8 @@ describe('resource tables', () => {
       ],
       dynamicMetaTags: { foo: 0 },
       enableChildTablePages: true,
+      label: 'label',
+      name: 'name',
       useForPages: true,
     });
   });
@@ -349,8 +366,22 @@ describe('resource tables', () => {
   // Prism tests are disabled
   test.skip('updateDraft: only required params', async () => {
     const responsePromise = client.cms.hubdb.tables.updateDraft('tableIdOrName', {
+      allowChildTables: true,
+      allowPublicApiAccess: true,
+      columns: [
+        {
+          id: 0,
+          label: 'label',
+          name: 'name',
+          options: [{ hidden: false, label: 'Option A', value: 'A' }],
+          type: 'NULL',
+        },
+      ],
+      dynamicMetaTags: { foo: 0 },
+      enableChildTablePages: true,
       label: 'label',
       name: 'name',
+      useForPages: true,
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -364,11 +395,6 @@ describe('resource tables', () => {
   // Prism tests are disabled
   test.skip('updateDraft: required and optional params', async () => {
     const response = await client.cms.hubdb.tables.updateDraft('tableIdOrName', {
-      label: 'label',
-      name: 'name',
-      archived: true,
-      includeForeignIds: true,
-      isGetLocalizedSchema: true,
       allowChildTables: true,
       allowPublicApiAccess: true,
       columns: [
@@ -394,7 +420,12 @@ describe('resource tables', () => {
       ],
       dynamicMetaTags: { foo: 0 },
       enableChildTablePages: true,
+      label: 'label',
+      name: 'name',
       useForPages: true,
+      archived: true,
+      includeForeignIds: true,
+      isGetLocalizedSchema: true,
     });
   });
 });

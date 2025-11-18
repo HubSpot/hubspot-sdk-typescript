@@ -2,7 +2,9 @@
 
 import { APIResource } from '../../core/resource';
 import * as ConversationsAPI from './conversations';
+import { PublicChannelsPage } from './conversations';
 import { APIPromise } from '../../core/api-promise';
+import { Page, type PageParams, PagePromise } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
@@ -12,14 +14,21 @@ export class Channels extends APIResource {
    *
    * @example
    * ```ts
-   * const collectionResponseWithTotalPublicChannelForwardPaging =
-   *   await client.conversations.channels.list();
+   * // Automatically fetches more pages as needed.
+   * for await (const publicChannel of client.conversations.channels.list()) {
+   *   // ...
+   * }
    * ```
    */
   list(
+    query: ChannelListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<ConversationsAPI.CollectionResponseWithTotalPublicChannelForwardPaging> {
-    return this._client.get('/conversations/v3/conversations/channels', options);
+  ): PagePromise<PublicChannelsPage, ConversationsAPI.PublicChannel> {
+    return this._client.getAPIList(
+      '/conversations/v3/conversations/channels',
+      Page<ConversationsAPI.PublicChannel>,
+      { query, ...options },
+    );
   }
 
   /**
@@ -28,10 +37,28 @@ export class Channels extends APIResource {
    * @example
    * ```ts
    * const publicChannel =
-   *   await client.conversations.channels.get('channelId');
+   *   await client.conversations.channels.get(0);
    * ```
    */
-  get(channelID: string, options?: RequestOptions): APIPromise<ConversationsAPI.PublicChannel> {
+  get(channelID: number, options?: RequestOptions): APIPromise<ConversationsAPI.PublicChannel> {
     return this._client.get(path`/conversations/v3/conversations/channels/${channelID}`, options);
   }
 }
+
+export interface ChannelListParams extends PageParams {
+  /**
+   * The default number of results to display per page.
+   */
+  defaultPageLength?: number;
+
+  /**
+   * Specify the sort order for the channels.
+   */
+  sort?: Array<string>;
+}
+
+export declare namespace Channels {
+  export { type ChannelListParams as ChannelListParams };
+}
+
+export { type PublicChannelsPage };

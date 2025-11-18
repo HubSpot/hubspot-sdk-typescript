@@ -29,6 +29,17 @@ export class PostalMail extends APIResource {
    * ```ts
    * const createdResponseSimplePublicObject =
    *   await client.crm.objects.postalMail.create({
+   *     associations: [
+   *       {
+   *         to: { id: '37295' },
+   *         types: [
+   *           {
+   *             associationCategory: 'HUBSPOT_DEFINED',
+   *             associationTypeId: 0,
+   *           },
+   *         ],
+   *       },
+   *     ],
    *     properties: { foo: 'string' },
    *   });
    * ```
@@ -119,7 +130,19 @@ export class PostalMail extends APIResource {
    * @example
    * ```ts
    * const collectionResponseWithTotalSimplePublicObject =
-   *   await client.crm.objects.postalMail.search();
+   *   await client.crm.objects.postalMail.search({
+   *     after: 'after',
+   *     filterGroups: [
+   *       {
+   *         filters: [
+   *           { operator: 'EQ', propertyName: 'propertyName' },
+   *         ],
+   *       },
+   *     ],
+   *     limit: 0,
+   *     properties: ['string'],
+   *     sorts: ['string'],
+   *   });
    * ```
    */
   search(
@@ -131,12 +154,12 @@ export class PostalMail extends APIResource {
 }
 
 export interface PostalMailCreateParams {
+  associations: Array<CrmAPI.PublicAssociationsForObject>;
+
   /**
    * Key-value pairs for setting properties for the new object.
    */
   properties: { [key: string]: string };
-
-  associations?: Array<CrmAPI.PublicAssociationsForObject>;
 }
 
 export interface PostalMailUpdateParams {
@@ -177,32 +200,32 @@ export interface PostalMailSearchParams {
   /**
    * A paging cursor token for retrieving subsequent pages.
    */
-  after?: string;
+  after: string;
 
   /**
    * Up to 6 groups of filters defining additional query criteria.
    */
-  filterGroups?: Array<CrmAPI.FilterGroup>;
+  filterGroups: Array<CrmAPI.FilterGroup>;
 
   /**
    * The maximum results to return, up to 200 objects.
    */
-  limit?: number;
+  limit: number;
 
   /**
    * A list of property names to include in the response.
    */
-  properties?: Array<string>;
+  properties: Array<string>;
+
+  /**
+   * Specifies sorting order based on object properties.
+   */
+  sorts: Array<string>;
 
   /**
    * The search query string, up to 3000 characters.
    */
   query?: string;
-
-  /**
-   * Specifies sorting order based on object properties.
-   */
-  sorts?: Array<string>;
 }
 
 PostalMail.Batch = Batch;

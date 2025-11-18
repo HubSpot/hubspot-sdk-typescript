@@ -71,7 +71,8 @@ export interface BatchBatchGetParams {
   archived?: boolean;
 
   /**
-   * Body param:
+   * Body param: A unique property used to identify objects instead of the default
+   * ID.
    */
   idProperty?: string;
 }

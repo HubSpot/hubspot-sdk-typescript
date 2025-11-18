@@ -24,7 +24,6 @@ import {
   MembershipRemoveParams,
   Memberships,
 } from './memberships';
-import * as EmailsAPI from '../../marketing/emails/emails';
 import { APIPromise } from '../../../core/api-promise';
 import { Page } from '../../../core/pagination';
 import { buildHeaders } from '../../../internal/headers';
@@ -202,7 +201,10 @@ export class Lists extends APIResource {
    *
    * @example
    * ```ts
-   * const listSearchResponse = await client.crm.lists.search();
+   * const listSearchResponse = await client.crm.lists.search({
+   *   additionalProperties: ['hs_list_size_week_delta'],
+   *   offset: 0,
+   * });
    * ```
    */
   search(body: ListSearchParams, options?: RequestOptions): APIPromise<ListSearchResponse> {
@@ -270,10 +272,7 @@ export type JoinTimeAndRecordIDsPage = Page<JoinTimeAndRecordID>;
 export interface APICollectionResponseJoinTimeAndRecordID {
   results: Array<JoinTimeAndRecordID>;
 
-  /**
-   * Contains information pagination of results.
-   */
-  paging?: EmailsAPI.EmailsPaging;
+  paging?: Shared.Paging;
 
   total?: number;
 }
@@ -406,16 +405,6 @@ export interface ListMoveRequest {
 }
 
 /**
- * The response object containing the lists found for a multi-list fetch.
- */
-export interface ListsByIDResponse {
-  /**
-   * The object list definitions.
-   */
-  lists: Array<PublicObjectList>;
-}
-
-/**
  * The request object used for searching through lists.
  */
 export interface ListSearchRequest {
@@ -428,7 +417,14 @@ export interface ListSearchRequest {
    * `hs_list_size`, `hs_last_record_added_at`, `hs_last_record_removed_at`,
    * `hs_folder_name`, and `hs_list_reference_count`.
    */
-  additionalProperties?: Array<string>;
+  additionalProperties: Array<string>;
+
+  /**
+   * Value used to paginate through lists. The `offset` provided in the response can
+   * be used in the next request to fetch the next page of results. Defaults to `0`
+   * if no offset is provided.
+   */
+  offset: number;
 
   /**
    * The number of lists to include in the response. Defaults to `20` if no value is
@@ -445,13 +441,6 @@ export interface ListSearchRequest {
    * not be filtered by `listId`.
    */
   listIds?: Array<string>;
-
-  /**
-   * Value used to paginate through lists. The `offset` provided in the response can
-   * be used in the next request to fetch the next page of results. Defaults to `0`
-   * if no offset is provided.
-   */
-  offset?: number;
 
   /**
    * The `processingTypes` that will be used to filter results by `processingType`.
@@ -508,6 +497,16 @@ export interface ListUpdateResponse {
    * An object list definition.
    */
   updatedList?: PublicObjectList;
+}
+
+/**
+ * The response object containing the lists found for a multi-list fetch.
+ */
+export interface ListsByIDResponse {
+  /**
+   * The object list definitions.
+   */
+  lists: Array<PublicObjectList>;
 }
 
 /**
@@ -800,15 +799,15 @@ export interface PublicObjectListSearchResult {
  * Lists record is member of
  */
 export interface RecordListMembership {
-  firstAddedTimestamp: string;
-
-  lastAddedTimestamp: string;
-
   listId: string;
 
   listVersion: number;
 
+  firstAddedTimestamp?: string;
+
   isPublicList?: boolean;
+
+  lastAddedTimestamp?: string;
 }
 
 export interface ListCreateParams {
@@ -928,7 +927,14 @@ export interface ListSearchParams {
    * `hs_list_size`, `hs_last_record_added_at`, `hs_last_record_removed_at`,
    * `hs_folder_name`, and `hs_list_reference_count`.
    */
-  additionalProperties?: Array<string>;
+  additionalProperties: Array<string>;
+
+  /**
+   * Value used to paginate through lists. The `offset` provided in the response can
+   * be used in the next request to fetch the next page of results. Defaults to `0`
+   * if no offset is provided.
+   */
+  offset: number;
 
   /**
    * The number of lists to include in the response. Defaults to `20` if no value is
@@ -945,13 +951,6 @@ export interface ListSearchParams {
    * not be filtered by `listId`.
    */
   listIds?: Array<string>;
-
-  /**
-   * Value used to paginate through lists. The `offset` provided in the response can
-   * be used in the next request to fetch the next page of results. Defaults to `0`
-   * if no offset is provided.
-   */
-  offset?: number;
 
   /**
    * The `processingTypes` that will be used to filter results by `processingType`.
@@ -1027,10 +1026,10 @@ export declare namespace Lists {
     type ListFolderCreateResponse as ListFolderCreateResponse,
     type ListFolderFetchResponse as ListFolderFetchResponse,
     type ListMoveRequest as ListMoveRequest,
-    type ListsByIDResponse as ListsByIDResponse,
     type ListSearchRequest as ListSearchRequest,
     type ListSearchResponse as ListSearchResponse,
     type ListUpdateResponse as ListUpdateResponse,
+    type ListsByIDResponse as ListsByIDResponse,
     type MembershipChangeRequest as MembershipChangeRequest,
     type MembershipsUpdateResponse as MembershipsUpdateResponse,
     type PublicBatchMigrationMapping as PublicBatchMigrationMapping,

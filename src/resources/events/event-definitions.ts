@@ -1042,26 +1042,6 @@ export interface FiscalYear {
   second?: number;
 }
 
-export interface IndexedTimePoint {
-  indexReference:
-    | NowReference
-    | TodayReference
-    | WeekReference
-    | MonthReference
-    | QuarterReference
-    | FiscalQuarter
-    | YearReference
-    | FiscalYear;
-
-  timeType: 'INDEXED';
-
-  timezoneSource: 'CUSTOM' | 'USER' | 'PORTAL';
-
-  zoneId: string;
-
-  offset?: IndexOffset;
-}
-
 export interface IndexOffset {
   days?: number;
 
@@ -1080,6 +1060,26 @@ export interface IndexOffset {
   weeks?: number;
 
   years?: number;
+}
+
+export interface IndexedTimePoint {
+  indexReference:
+    | NowReference
+    | TodayReference
+    | WeekReference
+    | MonthReference
+    | QuarterReference
+    | FiscalQuarter
+    | YearReference
+    | FiscalYear;
+
+  timeType: 'INDEXED';
+
+  timezoneSource: 'CUSTOM' | 'USER' | 'PORTAL';
+
+  zoneId: string;
+
+  offset?: IndexOffset;
 }
 
 export interface MonthReference {
@@ -1135,6 +1135,14 @@ export interface NowReference {
   second?: number;
 }
 
+export interface NumOccurrencesRefineBy {
+  type: 'NumOccurrencesRefineBy';
+
+  maxOccurrences?: number;
+
+  minOccurrences?: number;
+}
+
 export interface NumberPropertyOperation {
   includeObjectsWithNoValueSet: boolean;
 
@@ -1157,14 +1165,6 @@ export interface NumberPropertyOperation {
   value: number;
 
   defaultValue?: string;
-}
-
-export interface NumOccurrencesRefineBy {
-  type: 'NumOccurrencesRefineBy';
-
-  maxOccurrences?: number;
-
-  minOccurrences?: number;
 }
 
 export interface PropertyFilter {
@@ -1605,13 +1605,13 @@ export declare namespace EventDefinitions {
     type ExternalBehavioralEventTypeDefinitionPatch as ExternalBehavioralEventTypeDefinitionPatch,
     type FiscalQuarter as FiscalQuarter,
     type FiscalYear as FiscalYear,
-    type IndexedTimePoint as IndexedTimePoint,
     type IndexOffset as IndexOffset,
+    type IndexedTimePoint as IndexedTimePoint,
     type MonthReference as MonthReference,
     type MultiStringPropertyOperation as MultiStringPropertyOperation,
     type NowReference as NowReference,
-    type NumberPropertyOperation as NumberPropertyOperation,
     type NumOccurrencesRefineBy as NumOccurrencesRefineBy,
+    type NumberPropertyOperation as NumberPropertyOperation,
     type PropertyFilter as PropertyFilter,
     type PropertyReferencedTime as PropertyReferencedTime,
     type QuarterReference as QuarterReference,

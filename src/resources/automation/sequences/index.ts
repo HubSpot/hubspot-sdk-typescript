@@ -17,4 +17,7 @@ export {
   type PublicSequenceStepResponse,
   type PublicTaskPatternResponse,
   type UnenrollmentSettingsResponse,
+  type SequenceListParams,
+  type SequenceGetParams,
+  type PublicSequenceLiteResponsesPage,
 } from './sequences';

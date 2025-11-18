@@ -24,6 +24,9 @@ export class PropertyValidations extends APIResource {
   }
 
   /**
+   * Update a specific validation rule for a property identified by its name and rule
+   * type.
+   *
    * @example
    * ```ts
    * await client.crm.propertyValidations.crmV3PropertyValidationsObjectTypeIDPropertyNameRuleTypeRuleType(
@@ -97,16 +100,33 @@ export class PropertyValidations extends APIResource {
 }
 
 export interface CollectionResponsePublicPropertyValidationRuleMapNoPaging {
+  /**
+   * Collection of properties with their validation rules. Each item maps a property
+   * name to its configured validation rules for the specified object type.
+   */
   results: Array<PublicPropertyValidationRuleMap>;
 }
 
 export interface CollectionResponsePublicPropertyValidationRuleNoPaging {
+  /**
+   * Collection of validation rules configured for the specified property. Each rule
+   * defines a constraint that property values must satisfy (e.g., format
+   * requirements, length limits, allowed values).
+   */
   results: Array<PublicPropertyValidationRule>;
 }
 
 export interface PublicPropertyValidationRule {
+  /**
+   * A list of arguments that define the specific conditions or parameters for the
+   * validation rule.
+   */
   ruleArguments: Array<string>;
 
+  /**
+   * The category of validation applied to the property, such as FORMAT,
+   * ALPHANUMERIC, or MAX_LENGTH.
+   */
   ruleType:
     | 'FORMAT'
     | 'ALPHANUMERIC'
@@ -138,33 +158,47 @@ export interface PublicPropertyValidationRule {
 }
 
 export interface PublicPropertyValidationRuleMap {
+  /**
+   * The name of the property for which validation rules are defined.
+   */
   propertyName: string;
 
+  /**
+   * A list of validation rules applicable to the property.
+   */
   propertyValidationRules: Array<PublicPropertyValidationRule>;
 }
 
 export interface PublicPropertyValidationRuleUpdate {
+  /**
+   * A list of arguments that define the constraints for the validation rule.
+   */
   ruleArguments: Array<string>;
 }
 
 export interface PropertyValidationCrmV3PropertyValidationsObjectTypeIDPropertyNameRuleTypeRuleTypeParams {
   /**
-   * Path param:
+   * Path param: The ID of the object type to which the property belongs.
    */
   objectTypeId: string;
 
   /**
-   * Path param:
+   * Path param: The name of the property for which the validation rule is being
+   * updated.
    */
   propertyName: string;
 
   /**
-   * Body param:
+   * Body param: A list of arguments that define the constraints for the validation
+   * rule.
    */
   ruleArguments: Array<string>;
 }
 
 export interface PropertyValidationGetParams {
+  /**
+   * The ID of the object type to which the property belongs.
+   */
   objectTypeId: string;
 }
 

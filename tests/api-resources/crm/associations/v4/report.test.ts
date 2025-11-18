@@ -9,8 +9,8 @@ const client = new Hubspot({
 
 describe('resource report', () => {
   // Prism tests are disabled
-  test.skip('getHighUsageReport', async () => {
-    const responsePromise = client.crm.associations.v4.report.getHighUsageReport(0);
+  test.skip('requestHighUsageReport', async () => {
+    const responsePromise = client.crm.associations.v4.report.requestHighUsageReport(0);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

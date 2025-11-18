@@ -66,6 +66,18 @@ describe('resource groups', () => {
   });
 
   // Prism tests are disabled
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.crm.properties.groups.list(
+        'objectType',
+        { locale: 'locale' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Hubspot.NotFoundError);
+  });
+
+  // Prism tests are disabled
   test.skip('delete: only required params', async () => {
     const responsePromise = client.crm.properties.groups.delete('groupName', { objectType: 'objectType' });
     const rawResponse = await responsePromise.asResponse();
@@ -96,6 +108,9 @@ describe('resource groups', () => {
 
   // Prism tests are disabled
   test.skip('get: required and optional params', async () => {
-    const response = await client.crm.properties.groups.get('groupName', { objectType: 'objectType' });
+    const response = await client.crm.properties.groups.get('groupName', {
+      objectType: 'objectType',
+      locale: 'locale',
+    });
   });
 });

@@ -11,7 +11,10 @@ export class Send extends APIResource {
    *
    * @example
    * ```ts
-   * await client.events.send.send({ eventName: 'eventName' });
+   * await client.events.send.send({
+   *   eventName: 'eventName',
+   *   properties: { foo: 'string' },
+   * });
    * ```
    */
   send(body: SendSendParams, options?: RequestOptions): APIPromise<void> {
@@ -28,7 +31,12 @@ export class Send extends APIResource {
    * @example
    * ```ts
    * await client.events.send.sendBatch({
-   *   inputs: [{ eventName: 'eventName' }],
+   *   inputs: [
+   *     {
+   *       eventName: 'eventName',
+   *       properties: { foo: 'string' },
+   *     },
+   *   ],
    * });
    * ```
    */
@@ -56,6 +64,13 @@ export interface BehavioralEventHTTPCompletionRequest {
   eventName: string;
 
   /**
+   * The event properties to update. Takes the format of key-value pairs (property
+   * internal name and property value). Learn more about
+   * [HubSpot's default event properties](https://developers.hubspot.com/docs/guides/api/analytics-and-events/custom-events/custom-event-definitions#hubspot-s-default-event-properties).
+   */
+  properties: { [key: string]: string };
+
+  /**
    * The visitor's email address. Used for associating the event data with a CRM
    * record.
    */
@@ -71,13 +86,6 @@ export interface BehavioralEventHTTPCompletionRequest {
    * used.
    */
   occurredAt?: string;
-
-  /**
-   * The event properties to update. Takes the format of key-value pairs (property
-   * internal name and property value). Learn more about
-   * [HubSpot's default event properties](https://developers.hubspot.com/docs/guides/api/analytics-and-events/custom-events/custom-event-definitions#hubspot-s-default-event-properties).
-   */
-  properties?: { [key: string]: string };
 
   /**
    * The visitor's usertoken. Used for associating the event data with a CRM record.
@@ -103,6 +111,13 @@ export interface SendSendParams {
   eventName: string;
 
   /**
+   * The event properties to update. Takes the format of key-value pairs (property
+   * internal name and property value). Learn more about
+   * [HubSpot's default event properties](https://developers.hubspot.com/docs/guides/api/analytics-and-events/custom-events/custom-event-definitions#hubspot-s-default-event-properties).
+   */
+  properties: { [key: string]: string };
+
+  /**
    * The visitor's email address. Used for associating the event data with a CRM
    * record.
    */
@@ -118,13 +133,6 @@ export interface SendSendParams {
    * used.
    */
   occurredAt?: string;
-
-  /**
-   * The event properties to update. Takes the format of key-value pairs (property
-   * internal name and property value). Learn more about
-   * [HubSpot's default event properties](https://developers.hubspot.com/docs/guides/api/analytics-and-events/custom-events/custom-event-definitions#hubspot-s-default-event-properties).
-   */
-  properties?: { [key: string]: string };
 
   /**
    * The visitor's usertoken. Used for associating the event data with a CRM record.

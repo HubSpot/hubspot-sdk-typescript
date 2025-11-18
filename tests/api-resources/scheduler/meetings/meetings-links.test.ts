@@ -21,6 +21,17 @@ describe('resource meetingsLinks', () => {
   });
 
   // Prism tests are disabled
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.scheduler.meetings.meetingsLinks.list(
+        { after: 'after', limit: 0, name: 'name', organizerUserId: 'organizerUserId', type: 'type' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Hubspot.NotFoundError);
+  });
+
+  // Prism tests are disabled
   test.skip('book: only required params', async () => {
     const responsePromise = client.scheduler.meetings.meetingsLinks.book({
       duration: 0,
@@ -60,8 +71,10 @@ describe('resource meetingsLinks', () => {
   });
 
   // Prism tests are disabled
-  test.skip('getAvailabilityBySlug', async () => {
-    const responsePromise = client.scheduler.meetings.meetingsLinks.getAvailabilityBySlug('slug');
+  test.skip('getAvailabilityBySlug: only required params', async () => {
+    const responsePromise = client.scheduler.meetings.meetingsLinks.getAvailabilityBySlug('slug', {
+      timezone: 'timezone',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -72,8 +85,18 @@ describe('resource meetingsLinks', () => {
   });
 
   // Prism tests are disabled
-  test.skip('getBookingInfoBySlug', async () => {
-    const responsePromise = client.scheduler.meetings.meetingsLinks.getBookingInfoBySlug('slug');
+  test.skip('getAvailabilityBySlug: required and optional params', async () => {
+    const response = await client.scheduler.meetings.meetingsLinks.getAvailabilityBySlug('slug', {
+      timezone: 'timezone',
+      monthOffset: 0,
+    });
+  });
+
+  // Prism tests are disabled
+  test.skip('getBookingInfoBySlug: only required params', async () => {
+    const responsePromise = client.scheduler.meetings.meetingsLinks.getBookingInfoBySlug('slug', {
+      timezone: 'timezone',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -81,5 +104,12 @@ describe('resource meetingsLinks', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('getBookingInfoBySlug: required and optional params', async () => {
+    const response = await client.scheduler.meetings.meetingsLinks.getBookingInfoBySlug('slug', {
+      timezone: 'timezone',
+    });
   });
 });

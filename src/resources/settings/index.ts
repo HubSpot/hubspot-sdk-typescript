@@ -23,15 +23,19 @@ export {
   type CurrencyBatchGetParams,
   type CurrencyBatchUpdateParams,
   type CurrencyCreateExchangeRateParams,
+  type CurrencyListExchangeRatesParams,
   type CurrencyUpdateCompanyCurrencyParams,
   type CurrencyUpdateExchangeRateParams,
   type CurrencyUpdateVisibilityParams,
+  type ExchangeRatesPage,
 } from './currencies/index';
 export { Settings } from './settings';
 export {
   TaxRates,
   type CollectionResponsePublicTaxRateGroupForwardPaging,
   type PublicTaxRateGroup,
+  type TaxRateListParams,
+  type PublicTaxRateGroupsPage,
 } from './tax-rates';
 export {
   Users,

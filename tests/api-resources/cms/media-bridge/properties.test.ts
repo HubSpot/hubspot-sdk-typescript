@@ -11,7 +11,7 @@ describe('resource properties', () => {
   // Prism tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.cms.mediaBridge.properties.create('objectType', {
-      appId: 'appId',
+      appId: 0,
       fieldType: 'booleancheckbox',
       groupName: 'groupName',
       label: 'label',
@@ -30,7 +30,7 @@ describe('resource properties', () => {
   // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.cms.mediaBridge.properties.create('objectType', {
-      appId: 'appId',
+      appId: 0,
       fieldType: 'booleancheckbox',
       groupName: 'groupName',
       label: 'label',
@@ -54,7 +54,7 @@ describe('resource properties', () => {
   // Prism tests are disabled
   test.skip('update: only required params', async () => {
     const responsePromise = client.cms.mediaBridge.properties.update('propertyName', {
-      appId: 'appId',
+      appId: 0,
       objectType: 'objectType',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -69,7 +69,7 @@ describe('resource properties', () => {
   // Prism tests are disabled
   test.skip('update: required and optional params', async () => {
     const response = await client.cms.mediaBridge.properties.update('propertyName', {
-      appId: 'appId',
+      appId: 0,
       objectType: 'objectType',
       calculationFormula: 'calculationFormula',
       description: 'description',
@@ -89,7 +89,7 @@ describe('resource properties', () => {
 
   // Prism tests are disabled
   test.skip('list: only required params', async () => {
-    const responsePromise = client.cms.mediaBridge.properties.list('objectType', { appId: 'appId' });
+    const responsePromise = client.cms.mediaBridge.properties.list('objectType', { appId: 0 });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -101,13 +101,17 @@ describe('resource properties', () => {
 
   // Prism tests are disabled
   test.skip('list: required and optional params', async () => {
-    const response = await client.cms.mediaBridge.properties.list('objectType', { appId: 'appId' });
+    const response = await client.cms.mediaBridge.properties.list('objectType', {
+      appId: 0,
+      archived: true,
+      properties: 'properties',
+    });
   });
 
   // Prism tests are disabled
   test.skip('delete: only required params', async () => {
     const responsePromise = client.cms.mediaBridge.properties.delete('propertyName', {
-      appId: 'appId',
+      appId: 0,
       objectType: 'objectType',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -122,38 +126,15 @@ describe('resource properties', () => {
   // Prism tests are disabled
   test.skip('delete: required and optional params', async () => {
     const response = await client.cms.mediaBridge.properties.delete('propertyName', {
-      appId: 'appId',
+      appId: 0,
       objectType: 'objectType',
-    });
-  });
-
-  // Prism tests are disabled
-  test.skip('archiveBatch: only required params', async () => {
-    const responsePromise = client.cms.mediaBridge.properties.archiveBatch('objectType', {
-      appId: 'appId',
-      inputs: [{ name: 'name' }],
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('archiveBatch: required and optional params', async () => {
-    const response = await client.cms.mediaBridge.properties.archiveBatch('objectType', {
-      appId: 'appId',
-      inputs: [{ name: 'name' }],
     });
   });
 
   // Prism tests are disabled
   test.skip('createBatch: only required params', async () => {
     const responsePromise = client.cms.mediaBridge.properties.createBatch('objectType', {
-      appId: 'appId',
+      appId: 0,
       inputs: [
         { fieldType: 'booleancheckbox', groupName: 'groupName', label: 'label', name: 'name', type: 'bool' },
       ],
@@ -170,7 +151,7 @@ describe('resource properties', () => {
   // Prism tests are disabled
   test.skip('createBatch: required and optional params', async () => {
     const response = await client.cms.mediaBridge.properties.createBatch('objectType', {
-      appId: 'appId',
+      appId: 0,
       inputs: [
         {
           fieldType: 'booleancheckbox',
@@ -196,9 +177,32 @@ describe('resource properties', () => {
   });
 
   // Prism tests are disabled
+  test.skip('deleteBatch: only required params', async () => {
+    const responsePromise = client.cms.mediaBridge.properties.deleteBatch('objectType', {
+      appId: 0,
+      inputs: [{ name: 'name' }],
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('deleteBatch: required and optional params', async () => {
+    const response = await client.cms.mediaBridge.properties.deleteBatch('objectType', {
+      appId: 0,
+      inputs: [{ name: 'name' }],
+    });
+  });
+
+  // Prism tests are disabled
   test.skip('get: only required params', async () => {
     const responsePromise = client.cms.mediaBridge.properties.get('propertyName', {
-      appId: 'appId',
+      appId: 0,
       objectType: 'objectType',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -213,16 +217,19 @@ describe('resource properties', () => {
   // Prism tests are disabled
   test.skip('get: required and optional params', async () => {
     const response = await client.cms.mediaBridge.properties.get('propertyName', {
-      appId: 'appId',
+      appId: 0,
       objectType: 'objectType',
+      archived: true,
+      properties: 'properties',
     });
   });
 
   // Prism tests are disabled
   test.skip('getBatch: only required params', async () => {
     const responsePromise = client.cms.mediaBridge.properties.getBatch('objectType', {
-      appId: 'appId',
+      appId: 0,
       archived: true,
+      dataSensitivity: 'non_sensitive',
       inputs: [{ name: 'name' }],
     });
     const rawResponse = await responsePromise.asResponse();
@@ -237,10 +244,10 @@ describe('resource properties', () => {
   // Prism tests are disabled
   test.skip('getBatch: required and optional params', async () => {
     const response = await client.cms.mediaBridge.properties.getBatch('objectType', {
-      appId: 'appId',
+      appId: 0,
       archived: true,
-      inputs: [{ name: 'name' }],
       dataSensitivity: 'non_sensitive',
+      inputs: [{ name: 'name' }],
     });
   });
 });

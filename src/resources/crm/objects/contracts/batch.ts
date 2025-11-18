@@ -14,7 +14,22 @@ export class Batch extends APIResource {
    * ```ts
    * const batchResponseSimplePublicObject =
    *   await client.crm.objects.contracts.batch.create({
-   *     inputs: [{ properties: { foo: 'string' } }],
+   *     inputs: [
+   *       {
+   *         associations: [
+   *           {
+   *             to: { id: '37295' },
+   *             types: [
+   *               {
+   *                 associationCategory: 'HUBSPOT_DEFINED',
+   *                 associationTypeId: 0,
+   *               },
+   *             ],
+   *           },
+   *         ],
+   *         properties: { foo: 'string' },
+   *       },
+   *     ],
    *   });
    * ```
    */
@@ -140,7 +155,8 @@ export interface BatchGetParams {
   archived?: boolean;
 
   /**
-   * Body param:
+   * Body param: A unique property used to identify objects instead of the default
+   * ID.
    */
   idProperty?: string;
 }

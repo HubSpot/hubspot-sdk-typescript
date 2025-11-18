@@ -149,6 +149,14 @@ export interface BatchInputString {
   inputs: Array<string>;
 }
 
+export interface BatchReadInputPropertyName {
+  archived: boolean;
+
+  dataSensitivity: 'non_sensitive' | 'sensitive' | 'highly_sensitive';
+
+  inputs: Array<PropertyName>;
+}
+
 export interface BatchResponseProperty {
   completedAt: string;
 
@@ -1115,24 +1123,20 @@ export interface PublicFormSubmissionOnPageFilter {
     | PublicRangedTimeOperation;
 }
 
-export interface PublicIndexedTimePoint {
-  indexReference:
-    | PublicNowReference
-    | PublicTodayReference
-    | PublicWeekReference
-    | PublicFiscalQuarterReference
-    | PublicFiscalYearReference
-    | PublicYearReference
-    | PublicQuarterReference
-    | PublicMonthReference;
+export interface PublicInListFilter {
+  filterType: 'IN_LIST';
 
-  timeType: 'INDEXED';
+  listId: string;
 
-  zoneId: string;
+  operator: string;
 
-  offset?: PublicIndexOffset;
+  metadata?: PublicInListFilterMetadata;
+}
 
-  timezoneSource?: string;
+export interface PublicInListFilterMetadata {
+  id: string;
+
+  inListType: string;
 }
 
 export interface PublicIndexOffset {
@@ -1155,20 +1159,24 @@ export interface PublicIndexOffset {
   years?: number;
 }
 
-export interface PublicInListFilter {
-  filterType: 'IN_LIST';
+export interface PublicIndexedTimePoint {
+  indexReference:
+    | PublicNowReference
+    | PublicTodayReference
+    | PublicWeekReference
+    | PublicFiscalQuarterReference
+    | PublicFiscalYearReference
+    | PublicYearReference
+    | PublicQuarterReference
+    | PublicMonthReference;
 
-  listId: string;
+  timeType: 'INDEXED';
 
-  operator: string;
+  zoneId: string;
 
-  metadata?: PublicInListFilterMetadata;
-}
+  offset?: PublicIndexOffset;
 
-export interface PublicInListFilterMetadata {
-  id: string;
-
-  inListType: string;
+  timezoneSource?: string;
 }
 
 export interface PublicIntegrationEventFilter {
@@ -1320,6 +1328,14 @@ export interface PublicNumAssociationsFilter {
   filterType: 'NUM_ASSOCIATIONS';
 }
 
+export interface PublicNumOccurrencesRefineBy {
+  type: 'NUM_OCCURRENCES';
+
+  maxOccurrences?: number;
+
+  minOccurrences?: number;
+}
+
 export interface PublicNumberPropertyOperation {
   includeObjectsWithNoValueSet: boolean;
 
@@ -1328,14 +1344,6 @@ export interface PublicNumberPropertyOperation {
   operator: string;
 
   value: number;
-}
-
-export interface PublicNumOccurrencesRefineBy {
-  type: 'NUM_OCCURRENCES';
-
-  maxOccurrences?: number;
-
-  minOccurrences?: number;
 }
 
 export interface PublicObjectID {

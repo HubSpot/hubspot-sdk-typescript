@@ -29,7 +29,12 @@ const client = new Hubspot({
   accessToken: 'pat-na1-xxxxxxxx-xxxx',
 });
 
-const result = await client.crm.objects.contacts.create({ properties: { email: 'mark.s@lumon.industries' } });
+const result = await client.crm.objects.contacts.create({
+  associations: [
+    { to: { id: '37295' }, types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }] },
+  ],
+  properties: { email: 'mark.s@lumon.industries' },
+});
 
 console.log(result.createdResourceId);
 ```
@@ -46,7 +51,12 @@ const client = new Hubspot({
   accessToken: 'pat-na1-xxxxxxxx-xxxx',
 });
 
-const params: Hubspot.Crm.Objects.ContactCreateParams = { properties: { email: 'mark.s@lumon.industries' } };
+const params: Hubspot.Crm.Objects.ContactCreateParams = {
+  associations: [
+    { to: { id: '37295' }, types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }] },
+  ],
+  properties: { email: 'mark.s@lumon.industries' },
+};
 const createdResponseSimplePublicObject: Hubspot.CreatedResponseSimplePublicObject =
   await client.crm.objects.contacts.create(params);
 ```
@@ -95,7 +105,12 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 const createdResponseSimplePublicObject = await client.crm.objects.contacts
-  .create({ properties: { email: 'mark.s@lumon.industries' } })
+  .create({
+    associations: [
+      { to: { id: '37295' }, types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }] },
+    ],
+    properties: { email: 'mark.s@lumon.industries' },
+  })
   .catch(async (err) => {
     if (err instanceof Hubspot.APIError) {
       console.log(err.status); // 400
@@ -136,7 +151,7 @@ const client = new Hubspot({
 });
 
 // Or, configure per-request:
-await client.crm.objects.contacts.create({ properties: { email: 'mark.s@lumon.industries' } }, {
+await client.crm.objects.contacts.create({ associations: [{ to: { id: '37295' }, types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }] }], properties: { email: 'mark.s@lumon.industries' } }, {
   maxRetries: 5,
 });
 ```
@@ -153,7 +168,7 @@ const client = new Hubspot({
 });
 
 // Override per-request:
-await client.crm.objects.contacts.create({ properties: { email: 'mark.s@lumon.industries' } }, {
+await client.crm.objects.contacts.create({ associations: [{ to: { id: '37295' }, types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }] }], properties: { email: 'mark.s@lumon.industries' } }, {
   timeout: 5 * 1000,
 });
 ```
@@ -208,13 +223,23 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 const client = new Hubspot();
 
 const response = await client.crm.objects.contacts
-  .create({ properties: { email: 'mark.s@lumon.industries' } })
+  .create({
+    associations: [
+      { to: { id: '37295' }, types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }] },
+    ],
+    properties: { email: 'mark.s@lumon.industries' },
+  })
   .asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
 const { data: createdResponseSimplePublicObject, response: raw } = await client.crm.objects.contacts
-  .create({ properties: { email: 'mark.s@lumon.industries' } })
+  .create({
+    associations: [
+      { to: { id: '37295' }, types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }] },
+    ],
+    properties: { email: 'mark.s@lumon.industries' },
+  })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
 console.log(createdResponseSimplePublicObject.createdResourceId);

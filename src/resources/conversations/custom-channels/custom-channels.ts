@@ -12,12 +12,14 @@ import * as ChannelAccountsAPI from './channel-accounts';
 import {
   ChannelAccountCreateParams,
   ChannelAccountGetParams,
+  ChannelAccountListParams,
   ChannelAccountUpdateParams,
   ChannelAccounts,
 } from './channel-accounts';
 import * as MessagesAPI from './messages';
 import { MessageCreateParams, MessageGetParams, MessageUpdateParams, Messages } from './messages';
 import { APIPromise } from '../../../core/api-promise';
+import { Page, type PageParams, PagePromise } from '../../../core/pagination';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -55,18 +57,18 @@ export class CustomChannels extends APIResource {
    * @example
    * ```ts
    * const publicChannelIntegrationChannel =
-   *   await client.conversations.customChannels.update(
-   *     'channelId',
-   *     {
-   *       capabilities: { foo: {} },
-   *       channelDescription: {},
-   *       channelLogoUrl: {},
-   *     },
-   *   );
+   *   await client.conversations.customChannels.update(0, {
+   *     capabilities: { foo: {} },
+   *     channelAccountConnectionRedirectUrl: {},
+   *     channelDescription: {},
+   *     channelLogoUrl: {},
+   *     name: {},
+   *     webhookUrl: {},
+   *   });
    * ```
    */
   update(
-    channelID: string,
+    channelID: number,
     body: CustomChannelUpdateParams,
     options?: RequestOptions,
   ): APIPromise<PublicChannelIntegrationChannel> {
@@ -78,14 +80,21 @@ export class CustomChannels extends APIResource {
    *
    * @example
    * ```ts
-   * const collectionResponseWithTotalPublicChannelIntegrationChannelForwardPaging =
-   *   await client.conversations.customChannels.list();
+   * // Automatically fetches more pages as needed.
+   * for await (const publicChannelIntegrationChannel of client.conversations.customChannels.list()) {
+   *   // ...
+   * }
    * ```
    */
   list(
+    query: CustomChannelListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CollectionResponseWithTotalPublicChannelIntegrationChannelForwardPaging> {
-    return this._client.get('/conversations/v3/custom-channels/', options);
+  ): PagePromise<PublicChannelIntegrationChannelsPage, PublicChannelIntegrationChannel> {
+    return this._client.getAPIList(
+      '/conversations/v3/custom-channels/',
+      Page<PublicChannelIntegrationChannel>,
+      { query, ...options },
+    );
   }
 
   /**
@@ -93,12 +102,10 @@ export class CustomChannels extends APIResource {
    *
    * @example
    * ```ts
-   * await client.conversations.customChannels.delete(
-   *   'channelId',
-   * );
+   * await client.conversations.customChannels.delete(0);
    * ```
    */
-  delete(channelID: string, options?: RequestOptions): APIPromise<void> {
+  delete(channelID: number, options?: RequestOptions): APIPromise<void> {
     return this._client.delete(path`/conversations/v3/custom-channels/${channelID}`, {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
@@ -112,15 +119,15 @@ export class CustomChannels extends APIResource {
    * @example
    * ```ts
    * const publicChannelIntegrationChannel =
-   *   await client.conversations.customChannels.get(
-   *     'channelId',
-   *   );
+   *   await client.conversations.customChannels.get(0);
    * ```
    */
-  get(channelID: string, options?: RequestOptions): APIPromise<PublicChannelIntegrationChannel> {
+  get(channelID: number, options?: RequestOptions): APIPromise<PublicChannelIntegrationChannel> {
     return this._client.get(path`/conversations/v3/custom-channels/${channelID}`, options);
   }
 }
+
+export type PublicChannelIntegrationChannelsPage = Page<PublicChannelIntegrationChannel>;
 
 export interface ChannelIntegrationMessageEgg {
   attachments: Array<
@@ -135,8 +142,6 @@ export interface ChannelIntegrationMessageEgg {
 
   channelAccountId: string;
 
-  integrationThreadId: string;
-
   messageDirection: 'INCOMING' | 'OUTGOING';
 
   recipients: Array<ChannelIntegrationParticipant>;
@@ -150,6 +155,8 @@ export interface ChannelIntegrationMessageEgg {
   inReplyToId?: string;
 
   integrationIdempotencyId?: string;
+
+  integrationThreadId?: string;
 
   preResolvedContacts?: PreResolvedContacts;
 
@@ -174,24 +181,6 @@ export interface ContactAttachment {
   contactProfile: ConversationsAPI.ContactProfile;
 
   type: 'CONTACT';
-}
-
-export interface CustomChannelsPublicClient {
-  clientType: 'HUBSPOT' | 'SYSTEM' | 'INTEGRATION' | 'UNKNOWN';
-
-  integrationAppId?: number;
-}
-
-export interface CustomChannelsPublicFile {
-  fileId: string;
-
-  fileUsageType: string;
-
-  type: 'FILE';
-
-  name?: string;
-
-  url?: string;
 }
 
 export interface FileAttachment {
@@ -232,28 +221,6 @@ export interface PreResolvedContact {
 
 export interface PreResolvedContacts {
   contacts: Array<PreResolvedContact>;
-}
-
-export interface PublicChannelAccount {
-  id: string;
-
-  active: boolean;
-
-  archived: boolean;
-
-  authorized: boolean;
-
-  channelId: string;
-
-  createdAt: string;
-
-  inboxId: string;
-
-  name: string;
-
-  archivedAt?: string;
-
-  deliveryIdentifier?: ConversationsAPI.PublicDeliveryIdentifier;
 }
 
 export interface PublicChannelAccountEgg {
@@ -329,15 +296,15 @@ export interface PublicChannelIntegrationChannelCreate {
 export interface PublicChannelIntegrationChannelPatch {
   capabilities: { [key: string]: unknown };
 
+  channelAccountConnectionRedirectUrl: unknown;
+
   channelDescription: unknown;
 
   channelLogoUrl: unknown;
 
-  channelAccountConnectionRedirectUrl?: unknown;
+  name: unknown;
 
-  name?: unknown;
-
-  webhookUrl?: unknown;
+  webhookUrl: unknown;
 }
 
 export interface PublicChannelIntegrationMessageUpdateRequest {
@@ -433,15 +400,27 @@ export interface CustomChannelCreateParams {
 export interface CustomChannelUpdateParams {
   capabilities: { [key: string]: unknown };
 
+  channelAccountConnectionRedirectUrl: unknown;
+
   channelDescription: unknown;
 
   channelLogoUrl: unknown;
 
-  channelAccountConnectionRedirectUrl?: unknown;
+  name: unknown;
 
-  name?: unknown;
+  webhookUrl: unknown;
+}
 
-  webhookUrl?: unknown;
+export interface CustomChannelListParams extends PageParams {
+  /**
+   * Specify the default number of results to return per page.
+   */
+  defaultPageLength?: number;
+
+  /**
+   * Specify the sorting order for the results.
+   */
+  sort?: Array<string>;
 }
 
 CustomChannels.ChannelAccountStagingTokens = ChannelAccountStagingTokens;
@@ -454,14 +433,11 @@ export declare namespace CustomChannels {
     type ChannelIntegrationParticipant as ChannelIntegrationParticipant,
     type CollectionResponseWithTotalPublicChannelIntegrationChannelForwardPaging as CollectionResponseWithTotalPublicChannelIntegrationChannelForwardPaging,
     type ContactAttachment as ContactAttachment,
-    type CustomChannelsPublicClient as CustomChannelsPublicClient,
-    type CustomChannelsPublicFile as CustomChannelsPublicFile,
     type FileAttachment as FileAttachment,
     type LocationAttachment as LocationAttachment,
     type MessageHeaderAttachment as MessageHeaderAttachment,
     type PreResolvedContact as PreResolvedContact,
     type PreResolvedContacts as PreResolvedContacts,
-    type PublicChannelAccount as PublicChannelAccount,
     type PublicChannelAccountEgg as PublicChannelAccountEgg,
     type PublicChannelAccountStagingToken as PublicChannelAccountStagingToken,
     type PublicChannelAccountStagingTokenUpdateRequest as PublicChannelAccountStagingTokenUpdateRequest,
@@ -474,8 +450,10 @@ export declare namespace CustomChannels {
     type QuickRepliesAttachment as QuickRepliesAttachment,
     type SocialMetadataIntegrationAttachment as SocialMetadataIntegrationAttachment,
     type UnsupportedContentAttachment as UnsupportedContentAttachment,
+    type PublicChannelIntegrationChannelsPage as PublicChannelIntegrationChannelsPage,
     type CustomChannelCreateParams as CustomChannelCreateParams,
     type CustomChannelUpdateParams as CustomChannelUpdateParams,
+    type CustomChannelListParams as CustomChannelListParams,
   };
 
   export {
@@ -487,6 +465,7 @@ export declare namespace CustomChannels {
     ChannelAccounts as ChannelAccounts,
     type ChannelAccountCreateParams as ChannelAccountCreateParams,
     type ChannelAccountUpdateParams as ChannelAccountUpdateParams,
+    type ChannelAccountListParams as ChannelAccountListParams,
     type ChannelAccountGetParams as ChannelAccountGetParams,
   };
 

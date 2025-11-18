@@ -8,6 +8,7 @@ export {
   ChannelAccounts,
   type ChannelAccountCreateParams,
   type ChannelAccountUpdateParams,
+  type ChannelAccountListParams,
   type ChannelAccountGetParams,
 } from './channel-accounts';
 export {
@@ -16,14 +17,11 @@ export {
   type ChannelIntegrationParticipant,
   type CollectionResponseWithTotalPublicChannelIntegrationChannelForwardPaging,
   type ContactAttachment,
-  type CustomChannelsPublicClient,
-  type CustomChannelsPublicFile,
   type FileAttachment,
   type LocationAttachment,
   type MessageHeaderAttachment,
   type PreResolvedContact,
   type PreResolvedContacts,
-  type PublicChannelAccount,
   type PublicChannelAccountEgg,
   type PublicChannelAccountStagingToken,
   type PublicChannelAccountStagingTokenUpdateRequest,
@@ -38,6 +36,8 @@ export {
   type UnsupportedContentAttachment,
   type CustomChannelCreateParams,
   type CustomChannelUpdateParams,
+  type CustomChannelListParams,
+  type PublicChannelIntegrationChannelsPage,
 } from './custom-channels';
 export {
   Messages,

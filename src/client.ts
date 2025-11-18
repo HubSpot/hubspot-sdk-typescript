@@ -808,6 +808,7 @@ export declare namespace Hubspot {
   export type BatchInputPropertyName = API.BatchInputPropertyName;
   export type BatchInputPublicObjectID = API.BatchInputPublicObjectID;
   export type BatchInputString = API.BatchInputString;
+  export type BatchReadInputPropertyName = API.BatchReadInputPropertyName;
   export type BatchResponseProperty = API.BatchResponseProperty;
   export type CollectionResponseObjectSchemaNoPaging = API.CollectionResponseObjectSchemaNoPaging;
   export type Error = API.Error;
@@ -855,10 +856,10 @@ export declare namespace Hubspot {
   export type PublicFiscalYearReference = API.PublicFiscalYearReference;
   export type PublicFormSubmissionFilter = API.PublicFormSubmissionFilter;
   export type PublicFormSubmissionOnPageFilter = API.PublicFormSubmissionOnPageFilter;
-  export type PublicIndexedTimePoint = API.PublicIndexedTimePoint;
-  export type PublicIndexOffset = API.PublicIndexOffset;
   export type PublicInListFilter = API.PublicInListFilter;
   export type PublicInListFilterMetadata = API.PublicInListFilterMetadata;
+  export type PublicIndexOffset = API.PublicIndexOffset;
+  export type PublicIndexedTimePoint = API.PublicIndexedTimePoint;
   export type PublicIntegrationEventFilter = API.PublicIntegrationEventFilter;
   export type PublicMonthReference = API.PublicMonthReference;
   export type PublicMultiStringPropertyOperation = API.PublicMultiStringPropertyOperation;
@@ -866,8 +867,8 @@ export declare namespace Hubspot {
   export type PublicNotAnyFilterBranch = API.PublicNotAnyFilterBranch;
   export type PublicNowReference = API.PublicNowReference;
   export type PublicNumAssociationsFilter = API.PublicNumAssociationsFilter;
-  export type PublicNumberPropertyOperation = API.PublicNumberPropertyOperation;
   export type PublicNumOccurrencesRefineBy = API.PublicNumOccurrencesRefineBy;
+  export type PublicNumberPropertyOperation = API.PublicNumberPropertyOperation;
   export type PublicObjectID = API.PublicObjectID;
   export type PublicOrFilterBranch = API.PublicOrFilterBranch;
   export type PublicPageViewAnalyticsFilter = API.PublicPageViewAnalyticsFilter;

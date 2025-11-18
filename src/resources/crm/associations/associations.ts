@@ -5,41 +5,30 @@ import * as Shared from '../../shared';
 import * as CrmAPI from '../crm';
 import * as BatchAPI from './batch';
 import { Batch, BatchCreateParams, BatchDeleteParams, BatchGetParams } from './batch';
-import * as SchemaAPI from './schema';
+import * as SchemaAPI from './schema/schema';
 import {
   CollectionResponsePublicAssociationDefinitionNoPaging,
   PublicAssociationDefinition,
   Schema,
   SchemaListParams,
-} from './schema';
-import * as EmailsAPI from '../../marketing/emails/emails';
+} from './schema/schema';
 import * as V4API from './v4/v4';
 import {
-  AssociationSpec1,
-  AssociationsV4PublicObjectSearchRequest,
-  AssociationsV4SimplePublicObject,
-  AssociationsV4SimplePublicObjectBatchInputForCreate,
-  AssociationsV4SimplePublicObjectInputForCreate,
-  AssociationsV4SimplePublicObjectWithAssociations,
-  AssociationsV4SimplePublicUpsertObject,
   BatchInputPublicAssociationMultiArchive,
   BatchInputPublicAssociationMultiPost,
   BatchInputPublicDefaultAssociationMultiPost,
   BatchInputPublicFetchAssociationsBatchRequest,
   BatchResponseLabelsBetweenObjectPair,
   BatchResponsePublicAssociationMultiWithLabel,
-  BatchResponseVoid,
   DateTime,
-  NextPage1,
-  PreviousPage1,
   PublicAssociationMultiArchive,
   PublicAssociationMultiPost,
   PublicAssociationMultiWithLabel,
   PublicDefaultAssociationMultiPost,
   PublicFetchAssociationsBatchRequest,
   ReportCreationResponse,
-  StandardError1,
   V4,
+  V4MergeParams,
 } from './v4/v4';
 
 export class Associations extends APIResource {
@@ -53,27 +42,83 @@ export interface BatchInputPublicAssociation {
 }
 
 export interface BatchResponsePublicAssociation {
+  /**
+   * The date and time when the batch operation was completed.
+   */
   completedAt: string;
 
   results: Array<PublicAssociation>;
 
+  /**
+   * The date and time when the batch operation started.
+   */
   startedAt: string;
 
+  /**
+   * The current status of the batch operation, with possible values: PENDING,
+   * PROCESSING, CANCELED, COMPLETE.
+   */
   status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
 
   errors?: Array<Shared.StandardError>;
 
+  /**
+   * A collection of URLs related to the batch operation.
+   */
   links?: { [key: string]: string };
 
+  /**
+   * The number of errors encountered during the batch operation.
+   */
   numErrors?: number;
 
+  /**
+   * The date and time when the batch operation was requested.
+   */
   requestedAt?: string;
 }
 
 export interface BatchResponsePublicAssociationMulti {
+  /**
+   * The date and time when the batch operation was completed.
+   */
   completedAt: string;
 
   results: Array<PublicAssociationMulti>;
+
+  /**
+   * The date and time when the batch operation started.
+   */
+  startedAt: string;
+
+  /**
+   * The current status of the batch operation, with possible values: PENDING,
+   * PROCESSING, CANCELED, COMPLETE.
+   */
+  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+
+  errors?: Array<Shared.StandardError>;
+
+  /**
+   * URLs linking to resources or documentation associated with the batch operation.
+   */
+  links?: { [key: string]: string };
+
+  /**
+   * The number of errors encountered during the batch operation.
+   */
+  numErrors?: number;
+
+  /**
+   * The date and time when the batch request was made.
+   */
+  requestedAt?: string;
+}
+
+export interface BatchResponseVoid {
+  completedAt: string;
+
+  results: Array<unknown>;
 
   startedAt: string;
 
@@ -93,6 +138,9 @@ export interface PublicAssociation {
 
   to: Shared.PublicObjectID;
 
+  /**
+   * The type of association between the 'from' and 'to' objects.
+   */
   type: string;
 }
 
@@ -105,10 +153,7 @@ export interface PublicAssociationMulti {
    */
   to: Array<CrmAPI.AssociatedID>;
 
-  /**
-   * Contains information pagination of results.
-   */
-  paging?: EmailsAPI.EmailsPaging;
+  paging?: Shared.Paging;
 }
 
 Associations.Batch = Batch;
@@ -120,6 +165,7 @@ export declare namespace Associations {
     type BatchInputPublicAssociation as BatchInputPublicAssociation,
     type BatchResponsePublicAssociation as BatchResponsePublicAssociation,
     type BatchResponsePublicAssociationMulti as BatchResponsePublicAssociationMulti,
+    type BatchResponseVoid as BatchResponseVoid,
     type PublicAssociation as PublicAssociation,
     type PublicAssociationMulti as PublicAssociationMulti,
   };
@@ -140,29 +186,19 @@ export declare namespace Associations {
 
   export {
     V4 as V4,
-    type AssociationSpec1 as AssociationSpec1,
-    type AssociationsV4PublicObjectSearchRequest as AssociationsV4PublicObjectSearchRequest,
-    type AssociationsV4SimplePublicObject as AssociationsV4SimplePublicObject,
-    type AssociationsV4SimplePublicObjectBatchInputForCreate as AssociationsV4SimplePublicObjectBatchInputForCreate,
-    type AssociationsV4SimplePublicObjectInputForCreate as AssociationsV4SimplePublicObjectInputForCreate,
-    type AssociationsV4SimplePublicObjectWithAssociations as AssociationsV4SimplePublicObjectWithAssociations,
-    type AssociationsV4SimplePublicUpsertObject as AssociationsV4SimplePublicUpsertObject,
     type BatchInputPublicAssociationMultiArchive as BatchInputPublicAssociationMultiArchive,
     type BatchInputPublicAssociationMultiPost as BatchInputPublicAssociationMultiPost,
     type BatchInputPublicDefaultAssociationMultiPost as BatchInputPublicDefaultAssociationMultiPost,
     type BatchInputPublicFetchAssociationsBatchRequest as BatchInputPublicFetchAssociationsBatchRequest,
     type BatchResponseLabelsBetweenObjectPair as BatchResponseLabelsBetweenObjectPair,
     type BatchResponsePublicAssociationMultiWithLabel as BatchResponsePublicAssociationMultiWithLabel,
-    type BatchResponseVoid as BatchResponseVoid,
     type DateTime as DateTime,
-    type NextPage1 as NextPage1,
-    type PreviousPage1 as PreviousPage1,
     type PublicAssociationMultiArchive as PublicAssociationMultiArchive,
     type PublicAssociationMultiPost as PublicAssociationMultiPost,
     type PublicAssociationMultiWithLabel as PublicAssociationMultiWithLabel,
     type PublicDefaultAssociationMultiPost as PublicDefaultAssociationMultiPost,
     type PublicFetchAssociationsBatchRequest as PublicFetchAssociationsBatchRequest,
     type ReportCreationResponse as ReportCreationResponse,
-    type StandardError1 as StandardError1,
+    type V4MergeParams as V4MergeParams,
   };
 }

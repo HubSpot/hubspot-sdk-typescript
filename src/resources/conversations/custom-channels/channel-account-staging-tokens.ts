@@ -19,7 +19,7 @@ export class ChannelAccountStagingTokens extends APIResource {
    *   await client.conversations.customChannels.channelAccountStagingTokens.update(
    *     'accountToken',
    *     {
-   *       channelId: 'channelId',
+   *       channelId: 0,
    *       accountName: 'accountName',
    *       deliveryIdentifier: { type: 'type', value: 'value' },
    *     },
@@ -41,9 +41,10 @@ export class ChannelAccountStagingTokens extends APIResource {
 
 export interface ChannelAccountStagingTokenUpdateParams {
   /**
-   * Path param:
+   * Path param: The ID of the channel associated with the staging token being
+   * updated.
    */
-  channelId: string;
+  channelId: number;
 
   /**
    * Body param:

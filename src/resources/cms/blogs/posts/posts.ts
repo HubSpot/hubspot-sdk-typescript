@@ -4,7 +4,6 @@ import { APIResource } from '../../../../core/resource';
 import * as Shared from '../../../shared';
 import * as CmsAPI from '../../cms';
 import * as PagesAPI from '../../pages/pages';
-import * as EmailsAPI from '../../../marketing/emails/emails';
 import * as BatchAPI from './batch';
 import { Batch, BatchCreateParams, BatchDeleteParams, BatchGetParams, BatchUpdateParams } from './batch';
 import { APIPromise } from '../../../../core/api-promise';
@@ -1818,10 +1817,7 @@ export interface CollectionResponseWithTotalVersionBlogPost {
    */
   total: number;
 
-  /**
-   * Contains information pagination of results.
-   */
-  paging?: EmailsAPI.EmailsPaging;
+  paging?: Shared.Paging;
 }
 
 export interface ContentLanguageVariation {

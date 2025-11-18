@@ -2,7 +2,9 @@
 
 import { APIResource } from '../../../core/resource';
 import * as ConversationsAPI from '../conversations';
+import { PublicChannelAccountsPage } from '../conversations';
 import { APIPromise } from '../../../core/api-promise';
+import { Page, type PageParams, PagePromise } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -13,18 +15,18 @@ export class ChannelAccounts extends APIResource {
    *
    * @example
    * ```ts
-   * const conversationsPublicChannelAccount =
+   * const publicChannelAccount =
    *   await client.conversations.customChannels.channelAccounts.create(
-   *     'channelId',
+   *     0,
    *     { authorized: true, inboxId: 'inboxId', name: 'name' },
    *   );
    * ```
    */
   create(
-    channelID: string,
+    channelID: number,
     body: ChannelAccountCreateParams,
     options?: RequestOptions,
-  ): APIPromise<ConversationsAPI.ConversationsPublicChannelAccount> {
+  ): APIPromise<ConversationsAPI.PublicChannelAccount> {
     return this._client.post(path`/conversations/v3/custom-channels/${channelID}/channel-accounts`, {
       body,
       ...options,
@@ -37,18 +39,18 @@ export class ChannelAccounts extends APIResource {
    *
    * @example
    * ```ts
-   * const conversationsPublicChannelAccount =
+   * const publicChannelAccount =
    *   await client.conversations.customChannels.channelAccounts.update(
-   *     'channelAccountId',
-   *     { channelId: 'channelId' },
+   *     0,
+   *     { channelId: 0 },
    *   );
    * ```
    */
   update(
-    channelAccountID: string,
+    channelAccountID: number,
     params: ChannelAccountUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<ConversationsAPI.ConversationsPublicChannelAccount> {
+  ): APIPromise<ConversationsAPI.PublicChannelAccount> {
     const { channelId, ...body } = params;
     return this._client.patch(
       path`/conversations/v3/custom-channels/${channelId}/channel-accounts/${channelAccountID}`,
@@ -61,17 +63,24 @@ export class ChannelAccounts extends APIResource {
    *
    * @example
    * ```ts
-   * const collectionResponseWithTotalPublicChannelAccountForwardPaging =
-   *   await client.conversations.customChannels.channelAccounts.list(
-   *     'channelId',
-   *   );
+   * // Automatically fetches more pages as needed.
+   * for await (const publicChannelAccount of client.conversations.customChannels.channelAccounts.list(
+   *   0,
+   * )) {
+   *   // ...
+   * }
    * ```
    */
   list(
-    channelID: string,
+    channelID: number,
+    query: ChannelAccountListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<ConversationsAPI.CollectionResponseWithTotalPublicChannelAccountForwardPaging> {
-    return this._client.get(path`/conversations/v3/custom-channels/${channelID}/channel-accounts`, options);
+  ): PagePromise<PublicChannelAccountsPage, ConversationsAPI.PublicChannelAccount> {
+    return this._client.getAPIList(
+      path`/conversations/v3/custom-channels/${channelID}/channel-accounts`,
+      Page<ConversationsAPI.PublicChannelAccount>,
+      { query, ...options },
+    );
   }
 
   /**
@@ -81,22 +90,22 @@ export class ChannelAccounts extends APIResource {
    *
    * @example
    * ```ts
-   * const conversationsPublicChannelAccount =
+   * const publicChannelAccount =
    *   await client.conversations.customChannels.channelAccounts.get(
-   *     'channelAccountId',
-   *     { channelId: 'channelId' },
+   *     0,
+   *     { channelId: 0 },
    *   );
    * ```
    */
   get(
-    channelAccountID: string,
+    channelAccountID: number,
     params: ChannelAccountGetParams,
     options?: RequestOptions,
-  ): APIPromise<ConversationsAPI.ConversationsPublicChannelAccount> {
-    const { channelId } = params;
+  ): APIPromise<ConversationsAPI.PublicChannelAccount> {
+    const { channelId, ...query } = params;
     return this._client.get(
       path`/conversations/v3/custom-channels/${channelId}/channel-accounts/${channelAccountID}`,
-      options,
+      { query, ...options },
     );
   }
 }
@@ -113,9 +122,9 @@ export interface ChannelAccountCreateParams {
 
 export interface ChannelAccountUpdateParams {
   /**
-   * Path param:
+   * Path param: The channel to update
    */
-  channelId: string;
+  channelId: number;
 
   /**
    * Body param:
@@ -128,14 +137,38 @@ export interface ChannelAccountUpdateParams {
   name?: string;
 }
 
+export interface ChannelAccountListParams extends PageParams {
+  archived?: boolean;
+
+  defaultPageLength?: number;
+
+  deliveryIdentifierType?: Array<string>;
+
+  deliveryIdentifierValue?: Array<string>;
+
+  sort?: Array<string>;
+}
+
 export interface ChannelAccountGetParams {
-  channelId: string;
+  /**
+   * Path param: The ID of the channel associated with the account being retrieved.
+   */
+  channelId: number;
+
+  /**
+   * Query param: Filter results to include only archived or non-archived channel
+   * accounts.
+   */
+  archived?: boolean;
 }
 
 export declare namespace ChannelAccounts {
   export {
     type ChannelAccountCreateParams as ChannelAccountCreateParams,
     type ChannelAccountUpdateParams as ChannelAccountUpdateParams,
+    type ChannelAccountListParams as ChannelAccountListParams,
     type ChannelAccountGetParams as ChannelAccountGetParams,
   };
 }
+
+export { type PublicChannelAccountsPage };

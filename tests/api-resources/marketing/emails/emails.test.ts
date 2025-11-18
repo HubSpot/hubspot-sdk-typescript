@@ -308,6 +308,24 @@ describe('resource emails', () => {
   });
 
   // Prism tests are disabled
+  test.skip('getAbTestVariation: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.marketing.emails.getAbTestVariation(
+        'emailId',
+        {
+          archived: true,
+          includedProperties: ['string'],
+          includeStats: true,
+          marketingCampaignNames: true,
+          workflowNames: true,
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Hubspot.NotFoundError);
+  });
+
+  // Prism tests are disabled
   test.skip('getDraft', async () => {
     const responsePromise = client.marketing.emails.getDraft('emailId');
     const rawResponse = await responsePromise.asResponse();

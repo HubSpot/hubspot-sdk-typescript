@@ -12,10 +12,11 @@ export class Enrollments extends APIResource {
    * details.
    */
   enroll(
-    body: EnrollmentEnrollParams,
+    params: EnrollmentEnrollParams,
     options?: RequestOptions,
   ): APIPromise<SequencesAPI.PublicSequenceEnrollmentLiteResponse> {
-    return this._client.post('/automation/v4/sequences/enrollments', { body, ...options });
+    const { userId, ...body } = params;
+    return this._client.post('/automation/v4/sequences/enrollments', { query: { userId }, body, ...options });
   }
 
   /**
@@ -30,12 +31,29 @@ export class Enrollments extends APIResource {
 }
 
 export interface EnrollmentEnrollParams {
+  /**
+   * Query param:
+   */
+  userId: string;
+
+  /**
+   * Body param:
+   */
   contactId: string;
 
+  /**
+   * Body param:
+   */
   senderEmail: string;
 
+  /**
+   * Body param:
+   */
   sequenceId: string;
 
+  /**
+   * Body param:
+   */
   senderAliasAddress?: string;
 }
 

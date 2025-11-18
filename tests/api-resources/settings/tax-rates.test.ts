@@ -21,6 +21,17 @@ describe('resource taxRates', () => {
   });
 
   // Prism tests are disabled
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.settings.taxRates.list(
+        { active: true, after: 'after', limit: 0 },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Hubspot.NotFoundError);
+  });
+
+  // Prism tests are disabled
   test.skip('get', async () => {
     const responsePromise = client.settings.taxRates.get('taxRateGroupId');
     const rawResponse = await responsePromise.asResponse();

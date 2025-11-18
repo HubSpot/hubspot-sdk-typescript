@@ -18,7 +18,7 @@ export class Schemas extends APIResource {
    * const objectsSchemasObjectTypeDefinition =
    *   await client.cms.mediaBridge.schemas.update(
    *     'objectType',
-   *     { appId: 'appId' },
+   *     { appId: 0 },
    *   );
    * ```
    */
@@ -37,11 +37,15 @@ export class Schemas extends APIResource {
    * @example
    * ```ts
    * const collectionResponseObjectSchemaNoPaging =
-   *   await client.cms.mediaBridge.schemas.list('appId');
+   *   await client.cms.mediaBridge.schemas.list(0);
    * ```
    */
-  list(appID: string, options?: RequestOptions): APIPromise<Shared.CollectionResponseObjectSchemaNoPaging> {
-    return this._client.get(path`/media-bridge/v1/${appID}/schemas`, options);
+  list(
+    appID: number,
+    query: SchemaListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Shared.CollectionResponseObjectSchemaNoPaging> {
+    return this._client.get(path`/media-bridge/v1/${appID}/schemas`, { query, ...options });
   }
 
   /**
@@ -53,7 +57,7 @@ export class Schemas extends APIResource {
    *   await client.cms.mediaBridge.schemas.createAssociation(
    *     'objectType',
    *     {
-   *       appId: 'appId',
+   *       appId: 0,
    *       fromObjectTypeId: 'fromObjectTypeId',
    *       toObjectTypeId: 'toObjectTypeId',
    *     },
@@ -79,7 +83,7 @@ export class Schemas extends APIResource {
    * ```ts
    * await client.cms.mediaBridge.schemas.deleteAssociation(
    *   'associationId',
-   *   { appId: 'appId', objectType: 'objectType' },
+   *   { appId: 0, objectType: 'objectType' },
    * );
    * ```
    */
@@ -102,7 +106,7 @@ export class Schemas extends APIResource {
    * ```ts
    * const objectSchema =
    *   await client.cms.mediaBridge.schemas.get('objectType', {
-   *     appId: 'appId',
+   *     appId: 0,
    *   });
    * ```
    */
@@ -118,9 +122,10 @@ export class Schemas extends APIResource {
 
 export interface SchemaUpdateParams {
   /**
-   * Path param:
+   * Path param: The appId for the media bridge app. It is possible to have multiple
+   * apps in your developer account that use the media bridge.
    */
-  appId: string;
+  appId: number;
 
   /**
    * Body param:
@@ -167,11 +172,19 @@ export interface SchemaUpdateParams {
   secondaryDisplayProperties?: Array<string>;
 }
 
+export interface SchemaListParams {
+  /**
+   * Whether to return only results that have been archived.
+   */
+  archived?: boolean;
+}
+
 export interface SchemaCreateAssociationParams {
   /**
-   * Path param:
+   * Path param: The appId for the media bridge app. It is possible to have multiple
+   * apps in your developer account that use the media bridge.
    */
-  appId: string;
+  appId: number;
 
   /**
    * Body param:
@@ -190,18 +203,30 @@ export interface SchemaCreateAssociationParams {
 }
 
 export interface SchemaDeleteAssociationParams {
-  appId: string;
+  /**
+   * The appId for the media bridge app. It is possible to have multiple apps in your
+   * developer account that use the media bridge.
+   */
+  appId: number;
 
+  /**
+   * The object type for the definition that you want to delete.
+   */
   objectType: string;
 }
 
 export interface SchemaGetParams {
-  appId: string;
+  /**
+   * The appId for the media bridge app. It is possible to have multiple apps in your
+   * developer account that use the media bridge.
+   */
+  appId: number;
 }
 
 export declare namespace Schemas {
   export {
     type SchemaUpdateParams as SchemaUpdateParams,
+    type SchemaListParams as SchemaListParams,
     type SchemaCreateAssociationParams as SchemaCreateAssociationParams,
     type SchemaDeleteAssociationParams as SchemaDeleteAssociationParams,
     type SchemaGetParams as SchemaGetParams,

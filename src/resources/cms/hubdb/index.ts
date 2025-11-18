@@ -13,7 +13,6 @@ export {
   type Column,
   type ColumnRequest,
   type ForeignID,
-  type HubdbStandardError,
   type HubDBTableCloneRequest,
   type HubDBTableRowBatchCloneRequest,
   type HubDBTableRowV3,

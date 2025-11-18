@@ -6,6 +6,7 @@ export {
   type BatchInputPublicAssociation,
   type BatchResponsePublicAssociation,
   type BatchResponsePublicAssociationMulti,
+  type BatchResponseVoid,
   type PublicAssociation,
   type PublicAssociationMulti,
 } from './associations/index';
@@ -83,10 +84,10 @@ export {
   type ListFolderCreateResponse,
   type ListFolderFetchResponse,
   type ListMoveRequest,
-  type ListsByIDResponse,
   type ListSearchRequest,
   type ListSearchResponse,
   type ListUpdateResponse,
+  type ListsByIDResponse,
   type MembershipChangeRequest,
   type MembershipsUpdateResponse,
   type PublicBatchMigrationMapping,
@@ -147,7 +148,6 @@ export {
 } from './pipelines/index';
 export {
   Properties,
-  type BatchReadInputPropertyName,
   type CollectionResponseProperty,
   type CollectionResponsePropertyGroup,
   type CreatedResponseProperty,
