@@ -224,6 +224,15 @@ export {
   type ProductSearchParams,
 } from './products/index';
 export {
+  Projects,
+  type ProjectCreateParams,
+  type ProjectUpdateParams,
+  type ProjectListParams,
+  type ProjectGetParams,
+  type ProjectMergeParams,
+  type ProjectSearchParams,
+} from './projects/index';
+export {
   Quotes,
   type QuoteCreateParams,
   type QuoteUpdateParams,

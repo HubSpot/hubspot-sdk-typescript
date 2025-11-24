@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as ConversationsAPI from '../conversations';
 import * as CustomChannelsAPI from './custom-channels';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
@@ -12,7 +13,7 @@ export class Messages extends APIResource {
    *
    * @example
    * ```ts
-   * const publicConversationsMessage =
+   * const conversationsPublicConversationsMessage =
    *   await client.conversations.customChannels.messages.create(
    *     0,
    *     {
@@ -45,7 +46,7 @@ export class Messages extends APIResource {
     channelID: number,
     body: MessageCreateParams,
     options?: RequestOptions,
-  ): APIPromise<CustomChannelsAPI.PublicConversationsMessage> {
+  ): APIPromise<ConversationsAPI.ConversationsPublicConversationsMessage> {
     return this._client.post(path`/conversations/v3/custom-channels/${channelID}/messages`, {
       body,
       ...options,
@@ -59,7 +60,7 @@ export class Messages extends APIResource {
    *
    * @example
    * ```ts
-   * const publicConversationsMessage =
+   * const conversationsPublicConversationsMessage =
    *   await client.conversations.customChannels.messages.update(
    *     'messageId',
    *     { channelId: 0, statusType: 'FAILED' },
@@ -70,7 +71,7 @@ export class Messages extends APIResource {
     messageID: string,
     params: MessageUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<CustomChannelsAPI.PublicConversationsMessage> {
+  ): APIPromise<ConversationsAPI.ConversationsPublicConversationsMessage> {
     const { channelId, ...body } = params;
     return this._client.patch(path`/conversations/v3/custom-channels/${channelId}/messages/${messageID}`, {
       body,
@@ -83,7 +84,7 @@ export class Messages extends APIResource {
    *
    * @example
    * ```ts
-   * const publicConversationsMessage =
+   * const conversationsPublicConversationsMessage =
    *   await client.conversations.customChannels.messages.get(
    *     'messageId',
    *     { channelId: 0 },
@@ -94,7 +95,7 @@ export class Messages extends APIResource {
     messageID: string,
     params: MessageGetParams,
     options?: RequestOptions,
-  ): APIPromise<CustomChannelsAPI.PublicConversationsMessage> {
+  ): APIPromise<ConversationsAPI.ConversationsPublicConversationsMessage> {
     const { channelId } = params;
     return this._client.get(
       path`/conversations/v3/custom-channels/${channelId}/messages/${messageID}`,

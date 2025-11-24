@@ -172,6 +172,13 @@ export {
   type PropertyValidationGetParams,
 } from './property-validations';
 export {
+  Subscriptions,
+  type PauseSubscriptionRequest,
+  type UnpauseRequest,
+  type SubscriptionPauseParams,
+  type SubscriptionUnpauseParams,
+} from './subscriptions';
+export {
   Timeline,
   type BatchInputTimelineEvent,
   type BatchResponseTimelineEventResponse,
