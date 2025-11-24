@@ -19,25 +19,25 @@ export class FeatureFlags extends APIResource {
 }
 
 export interface BatchPortalEntry {
-  flagState: 'OFF' | 'ON' | 'ABSENT';
+  flagState: 'ABSENT' | 'OFF' | 'ON';
 
   portalId: number;
 }
 
 export interface FlagPutRequest {
-  defaultState: 'OFF' | 'ON' | 'ABSENT';
+  defaultState: 'ABSENT' | 'OFF' | 'ON';
 
-  overrideState?: 'OFF' | 'ON' | 'ABSENT';
+  overrideState?: 'ABSENT' | 'OFF' | 'ON';
 }
 
 export interface FlagResponse {
   appId: number;
 
-  defaultState: 'OFF' | 'ON' | 'ABSENT';
+  defaultState: 'ABSENT' | 'OFF' | 'ON';
 
   flagName: string;
 
-  overrideState?: 'OFF' | 'ON' | 'ABSENT';
+  overrideState?: 'ABSENT' | 'OFF' | 'ON';
 }
 
 export interface PortalFlagStateBatchDeleteRequest {
@@ -53,7 +53,7 @@ export interface PortalFlagStateBatchResponse {
 }
 
 export interface PortalFlagStatePutRequest {
-  flagState: 'OFF' | 'ON' | 'ABSENT';
+  flagState: 'ABSENT' | 'OFF' | 'ON';
 }
 
 export interface PortalFlagStateResponse {
@@ -61,7 +61,7 @@ export interface PortalFlagStateResponse {
 
   flagName: string;
 
-  flagState: 'OFF' | 'ON' | 'ABSENT';
+  flagState: 'ABSENT' | 'OFF' | 'ON';
 
   portalId: number;
 }

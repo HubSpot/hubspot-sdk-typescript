@@ -356,7 +356,7 @@ export interface UserUpdateParams {
    * Query param: The name of a property with unique user values. Valid values are
    * `USER_ID`(default) or `EMAIL`
    */
-  idProperty?: 'USER_ID' | 'EMAIL';
+  idProperty?: 'EMAIL' | 'USER_ID';
 
   /**
    * Body param: The first name of the user.
@@ -391,7 +391,7 @@ export interface UserDeleteParams {
    * The name of a property with unique user values. Valid values are
    * `USER_ID`(default) or `EMAIL`
    */
-  idProperty?: 'USER_ID' | 'EMAIL';
+  idProperty?: 'EMAIL' | 'USER_ID';
 }
 
 export interface UserGetParams {
@@ -399,7 +399,7 @@ export interface UserGetParams {
    * The name of a property with unique user values. Valid values are
    * `USER_ID`(default) or `EMAIL`
    */
-  idProperty?: 'USER_ID' | 'EMAIL';
+  idProperty?: 'EMAIL' | 'USER_ID';
 }
 
 export declare namespace Users {

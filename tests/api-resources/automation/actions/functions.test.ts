@@ -30,7 +30,7 @@ describe('resource functions', () => {
     const responsePromise = client.automation.actions.functions.delete('functionId', {
       appId: 0,
       definitionId: 'definitionId',
-      functionType: 'PRE_ACTION_EXECUTION',
+      functionType: 'POST_ACTION_EXECUTION',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -46,7 +46,7 @@ describe('resource functions', () => {
     const response = await client.automation.actions.functions.delete('functionId', {
       appId: 0,
       definitionId: 'definitionId',
-      functionType: 'PRE_ACTION_EXECUTION',
+      functionType: 'POST_ACTION_EXECUTION',
     });
   });
 
@@ -55,7 +55,7 @@ describe('resource functions', () => {
     const responsePromise = client.automation.actions.functions.createOrReplace('functionId', {
       appId: 0,
       definitionId: 'definitionId',
-      functionType: 'PRE_ACTION_EXECUTION',
+      functionType: 'POST_ACTION_EXECUTION',
       body: 'body',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -72,7 +72,7 @@ describe('resource functions', () => {
     const response = await client.automation.actions.functions.createOrReplace('functionId', {
       appId: 0,
       definitionId: 'definitionId',
-      functionType: 'PRE_ACTION_EXECUTION',
+      functionType: 'POST_ACTION_EXECUTION',
       body: 'body',
     });
   });
@@ -80,7 +80,7 @@ describe('resource functions', () => {
   // Prism tests are disabled
   test.skip('createOrReplaceByFunctionType: only required params', async () => {
     const responsePromise = client.automation.actions.functions.createOrReplaceByFunctionType(
-      'PRE_ACTION_EXECUTION',
+      'POST_ACTION_EXECUTION',
       { appId: 0, definitionId: 'definitionId', body: 'body' },
     );
     const rawResponse = await responsePromise.asResponse();
@@ -95,17 +95,17 @@ describe('resource functions', () => {
   // Prism tests are disabled
   test.skip('createOrReplaceByFunctionType: required and optional params', async () => {
     const response = await client.automation.actions.functions.createOrReplaceByFunctionType(
-      'PRE_ACTION_EXECUTION',
+      'POST_ACTION_EXECUTION',
       { appId: 0, definitionId: 'definitionId', body: 'body' },
     );
   });
 
   // Prism tests are disabled
   test.skip('deleteByFunctionType: only required params', async () => {
-    const responsePromise = client.automation.actions.functions.deleteByFunctionType('PRE_ACTION_EXECUTION', {
-      appId: 0,
-      definitionId: 'definitionId',
-    });
+    const responsePromise = client.automation.actions.functions.deleteByFunctionType(
+      'POST_ACTION_EXECUTION',
+      { appId: 0, definitionId: 'definitionId' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -117,7 +117,7 @@ describe('resource functions', () => {
 
   // Prism tests are disabled
   test.skip('deleteByFunctionType: required and optional params', async () => {
-    const response = await client.automation.actions.functions.deleteByFunctionType('PRE_ACTION_EXECUTION', {
+    const response = await client.automation.actions.functions.deleteByFunctionType('POST_ACTION_EXECUTION', {
       appId: 0,
       definitionId: 'definitionId',
     });
@@ -128,7 +128,7 @@ describe('resource functions', () => {
     const responsePromise = client.automation.actions.functions.get('functionId', {
       appId: 0,
       definitionId: 'definitionId',
-      functionType: 'PRE_ACTION_EXECUTION',
+      functionType: 'POST_ACTION_EXECUTION',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -144,13 +144,13 @@ describe('resource functions', () => {
     const response = await client.automation.actions.functions.get('functionId', {
       appId: 0,
       definitionId: 'definitionId',
-      functionType: 'PRE_ACTION_EXECUTION',
+      functionType: 'POST_ACTION_EXECUTION',
     });
   });
 
   // Prism tests are disabled
   test.skip('getByFunctionType: only required params', async () => {
-    const responsePromise = client.automation.actions.functions.getByFunctionType('PRE_ACTION_EXECUTION', {
+    const responsePromise = client.automation.actions.functions.getByFunctionType('POST_ACTION_EXECUTION', {
       appId: 0,
       definitionId: 'definitionId',
     });
@@ -165,7 +165,7 @@ describe('resource functions', () => {
 
   // Prism tests are disabled
   test.skip('getByFunctionType: required and optional params', async () => {
-    const response = await client.automation.actions.functions.getByFunctionType('PRE_ACTION_EXECUTION', {
+    const response = await client.automation.actions.functions.getByFunctionType('POST_ACTION_EXECUTION', {
       appId: 0,
       definitionId: 'definitionId',
     });

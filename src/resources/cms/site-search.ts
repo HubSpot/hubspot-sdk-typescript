@@ -66,7 +66,7 @@ export interface ContentSearchResult {
    * The type of document. Can be `SITE_PAGE`, `LANDING_PAGE`, `BLOG_POST`,
    * `LISTING_PAGE`, or `KNOWLEDGE_ARTICLE`.
    */
-  type: 'LANDING_PAGE' | 'BLOG_POST' | 'SITE_PAGE' | 'KNOWLEDGE_ARTICLE' | 'LISTING_PAGE';
+  type: 'BLOG_POST' | 'KNOWLEDGE_ARTICLE' | 'LANDING_PAGE' | 'LISTING_PAGE' | 'SITE_PAGE';
 
   /**
    * The url of the document.
@@ -476,6 +476,7 @@ export interface ContentSearchResult {
     | 'haw'
     | 'haw-us'
     | 'he'
+    | 'he-il'
     | 'hi'
     | 'hi-in'
     | 'hr'
@@ -490,11 +491,11 @@ export interface ContentSearchResult {
     | 'ia'
     | 'ia-001'
     | 'id'
+    | 'id-id'
     | 'ig'
     | 'ig-ng'
     | 'ii'
     | 'ii-cn'
-    | 'id-id'
     | 'is'
     | 'is-is'
     | 'it'
@@ -502,13 +503,10 @@ export interface ContentSearchResult {
     | 'it-it'
     | 'it-sm'
     | 'it-va'
-    | 'he-il'
     | 'ja'
     | 'ja-jp'
     | 'jgo'
     | 'jgo-cm'
-    | 'yi'
-    | 'yi-001'
     | 'jmc'
     | 'jmc-tz'
     | 'jv'
@@ -552,10 +550,10 @@ export interface ContentSearchResult {
     | 'ksf-cm'
     | 'ksh'
     | 'ksh-de'
-    | 'kw'
-    | 'kw-gb'
     | 'ku'
     | 'ku-tr'
+    | 'kw'
+    | 'kw-gb'
     | 'ky'
     | 'ky-kg'
     | 'lag'
@@ -642,8 +640,8 @@ export interface ContentSearchResult {
     | 'nl'
     | 'nl-aw'
     | 'nl-be'
-    | 'nl-ch'
     | 'nl-bq'
+    | 'nl-ch'
     | 'nl-cw'
     | 'nl-lu'
     | 'nl-nl'
@@ -839,6 +837,8 @@ export interface ContentSearchResult {
     | 'xog-ug'
     | 'yav'
     | 'yav-cm'
+    | 'yi'
+    | 'yi-001'
     | 'yo'
     | 'yo-bj'
     | 'yo-ng'
@@ -849,12 +849,12 @@ export interface ContentSearchResult {
     | 'zgh-ma'
     | 'zh'
     | 'zh-cn'
+    | 'zh-hans'
+    | 'zh-hant'
     | 'zh-hk'
     | 'zh-mo'
     | 'zh-sg'
     | 'zh-tw'
-    | 'zh-hans'
-    | 'zh-hant'
     | 'zu'
     | 'zu-za';
 
@@ -907,7 +907,7 @@ export interface IndexedData {
    * The type of document. Can be `SITE_PAGE`, `LANDING_PAGE`, `BLOG_POST`,
    * `LISTING_PAGE`, or `KNOWLEDGE_ARTICLE`.
    */
-  type: 'LANDING_PAGE' | 'BLOG_POST' | 'SITE_PAGE' | 'KNOWLEDGE_ARTICLE' | 'LISTING_PAGE';
+  type: 'BLOG_POST' | 'KNOWLEDGE_ARTICLE' | 'LANDING_PAGE' | 'LISTING_PAGE' | 'SITE_PAGE';
 }
 
 export interface IndexedField {
@@ -939,7 +939,7 @@ export interface SiteSearchGetIndexedDataParams {
    * The type of document. Can be one of `SITE_PAGE`, `BLOG_POST`, or
    * `KNOWLEDGE_ARTICLE`.
    */
-  type?: 'LANDING_PAGE' | 'BLOG_POST' | 'SITE_PAGE' | 'KNOWLEDGE_ARTICLE' | 'LISTING_PAGE';
+  type?: 'BLOG_POST' | 'KNOWLEDGE_ARTICLE' | 'LANDING_PAGE' | 'LISTING_PAGE' | 'SITE_PAGE';
 }
 
 export interface SiteSearchSearchParams {
@@ -1360,6 +1360,7 @@ export interface SiteSearchSearchParams {
     | 'haw'
     | 'haw-us'
     | 'he'
+    | 'he-il'
     | 'hi'
     | 'hi-in'
     | 'hr'
@@ -1374,11 +1375,11 @@ export interface SiteSearchSearchParams {
     | 'ia'
     | 'ia-001'
     | 'id'
+    | 'id-id'
     | 'ig'
     | 'ig-ng'
     | 'ii'
     | 'ii-cn'
-    | 'id-id'
     | 'is'
     | 'is-is'
     | 'it'
@@ -1386,13 +1387,10 @@ export interface SiteSearchSearchParams {
     | 'it-it'
     | 'it-sm'
     | 'it-va'
-    | 'he-il'
     | 'ja'
     | 'ja-jp'
     | 'jgo'
     | 'jgo-cm'
-    | 'yi'
-    | 'yi-001'
     | 'jmc'
     | 'jmc-tz'
     | 'jv'
@@ -1436,10 +1434,10 @@ export interface SiteSearchSearchParams {
     | 'ksf-cm'
     | 'ksh'
     | 'ksh-de'
-    | 'kw'
-    | 'kw-gb'
     | 'ku'
     | 'ku-tr'
+    | 'kw'
+    | 'kw-gb'
     | 'ky'
     | 'ky-kg'
     | 'lag'
@@ -1526,8 +1524,8 @@ export interface SiteSearchSearchParams {
     | 'nl'
     | 'nl-aw'
     | 'nl-be'
-    | 'nl-ch'
     | 'nl-bq'
+    | 'nl-ch'
     | 'nl-cw'
     | 'nl-lu'
     | 'nl-nl'
@@ -1723,6 +1721,8 @@ export interface SiteSearchSearchParams {
     | 'xog-ug'
     | 'yav'
     | 'yav-cm'
+    | 'yi'
+    | 'yi-001'
     | 'yo'
     | 'yo-bj'
     | 'yo-ng'
@@ -1733,12 +1733,12 @@ export interface SiteSearchSearchParams {
     | 'zgh-ma'
     | 'zh'
     | 'zh-cn'
+    | 'zh-hans'
+    | 'zh-hant'
     | 'zh-hk'
     | 'zh-mo'
     | 'zh-sg'
     | 'zh-tw'
-    | 'zh-hans'
-    | 'zh-hant'
     | 'zu'
     | 'zu-za';
 
@@ -1748,7 +1748,7 @@ export interface SiteSearchSearchParams {
    * `LONG` will build a more detailed content snippet based on the html/content of
    * the page.
    */
-  length?: 'SHORT' | 'LONG';
+  length?: 'LONG' | 'SHORT';
 
   /**
    * Specifies the number of results to be returned in a single response. Defaults to

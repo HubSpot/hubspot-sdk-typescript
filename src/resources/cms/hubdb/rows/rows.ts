@@ -279,8 +279,14 @@ export interface RowCreateParams {
 }
 
 export interface RowListParams extends PageParams {
+  /**
+   * Specifies whether to include archived rows in the response.
+   */
   archived?: boolean;
 
+  /**
+   * The number of rows to skip before starting to return results.
+   */
   offset?: number;
 
   /**
@@ -303,7 +309,7 @@ export interface RowCloneDraftParams {
   tableIdOrName: string;
 
   /**
-   * Query param:
+   * Query param: The name for the cloned row.
    */
   name?: string;
 }
@@ -322,7 +328,7 @@ export interface RowGetParams {
   tableIdOrName: string;
 
   /**
-   * Query param:
+   * Query param: Specifies whether to return an archived row. Defaults to `false`.
    */
   archived?: boolean;
 }
@@ -334,14 +340,20 @@ export interface RowGetDraftParams {
   tableIdOrName: string;
 
   /**
-   * Query param:
+   * Query param: Set this to `true` to return an archived row. Defaults to `false`.
    */
   archived?: boolean;
 }
 
 export interface RowListDraftParams extends PageParams {
+  /**
+   * Specifies whether to return archived rows. Defaults to `false`.
+   */
   archived?: boolean;
 
+  /**
+   * The number of rows to skip before starting to return results.
+   */
   offset?: number;
 
   /**

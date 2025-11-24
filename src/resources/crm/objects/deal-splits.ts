@@ -55,7 +55,7 @@ export interface BatchResponseDealToDealSplits {
 
   startedAt: string;
 
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   links?: { [key: string]: string };
 
@@ -69,7 +69,7 @@ export interface BatchResponseDealToDealSplitsWithErrors {
 
   startedAt: string;
 
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   errors?: Array<Shared.StandardError>;
 

@@ -46,7 +46,7 @@ export interface ActionResponseWithResultsPublicStatus {
    * Indicates the current status of the operation, with possible values: PENDING,
    * PROCESSING, CANCELED, COMPLETE.
    */
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   /**
    * A list of errors that occurred during the operation.
@@ -89,7 +89,7 @@ export interface ActionResponseWithResultsPublicWideStatus {
    * The current status of the operation, which can be PENDING, PROCESSING, CANCELED,
    * or COMPLETE.
    */
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   /**
    * An array of error objects detailing any issues encountered during the operation.
@@ -133,7 +133,7 @@ export interface ActionResponseWithResultsSubscriptionDefinition {
    * The current status of the operation, which can be PENDING, PROCESSING, CANCELED,
    * or COMPLETE.
    */
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   /**
    * An array of errors that occurred during the operation.
@@ -181,7 +181,7 @@ export interface BatchResponsePublicBulkOptOutFromAllResponse {
    * The current status of the bulk opt-out operation, which can be PENDING,
    * PROCESSING, CANCELED, or COMPLETE.
    */
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   /**
    * An array of error objects detailing any issues encountered during the bulk
@@ -225,7 +225,7 @@ export interface BatchResponsePublicStatus {
    * The current status of the batch operation, which can be PENDING, PROCESSING,
    * CANCELED, or COMPLETE.
    */
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   /**
    * An array of error objects detailing any issues encountered.
@@ -269,7 +269,7 @@ export interface BatchResponsePublicStatusBulkResponse {
    * The current status of the batch process, with possible values: PENDING,
    * PROCESSING, CANCELED, COMPLETE.
    */
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   /**
    * A collection of related links associated with the batch response.
@@ -302,7 +302,7 @@ export interface BatchResponsePublicStatusBulkResponseWithErrors {
    * The current status of the operation, which can be PENDING, PROCESSING, CANCELED,
    * or COMPLETE.
    */
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   /**
    * An array of error objects detailing any issues encountered during the operation.
@@ -347,7 +347,7 @@ export interface BatchResponsePublicWideStatusBulkResponse {
    * The current status of the batch process, with possible values: PENDING,
    * PROCESSING, CANCELED, COMPLETE.
    */
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   /**
    * A collection of related links associated with the batch response.
@@ -380,7 +380,7 @@ export interface BatchResponsePublicWideStatusBulkResponseWithErrors {
    * The current status of the operation, which can be PENDING, PROCESSING, CANCELED,
    * or COMPLETE.
    */
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   /**
    * An array of error objects detailing any issues encountered during the operation.
@@ -432,7 +432,7 @@ export interface PartialPublicStatusRequest {
    * The current subscription status of the contact, which can be 'SUBSCRIBED',
    * 'UNSUBSCRIBED', or 'NOT_SPECIFIED'.
    */
-  statusState: 'SUBSCRIBED' | 'UNSUBSCRIBED' | 'NOT_SPECIFIED';
+  statusState: 'NOT_SPECIFIED' | 'SUBSCRIBED' | 'UNSUBSCRIBED';
 
   /**
    * The unique identifier of the subscription to be updated.
@@ -446,13 +446,13 @@ export interface PartialPublicStatusRequest {
    * 'PROCESS_AND_STORE', and 'LEGITIMATE_INTEREST_OTHER'.
    */
   legalBasis?:
-    | 'LEGITIMATE_INTEREST_PQL'
-    | 'LEGITIMATE_INTEREST_CLIENT'
-    | 'PERFORMANCE_OF_CONTRACT'
     | 'CONSENT_WITH_NOTICE'
+    | 'LEGITIMATE_INTEREST_CLIENT'
+    | 'LEGITIMATE_INTEREST_OTHER'
+    | 'LEGITIMATE_INTEREST_PQL'
     | 'NON_GDPR'
-    | 'PROCESS_AND_STORE'
-    | 'LEGITIMATE_INTEREST_OTHER';
+    | 'PERFORMANCE_OF_CONTRACT'
+    | 'PROCESS_AND_STORE';
 
   /**
    * An explanation for the legal basis used for communication.
@@ -487,7 +487,7 @@ export interface PublicStatus {
    * The current subscription status of the contact, which can be 'SUBSCRIBED',
    * 'UNSUBSCRIBED', or 'NOT_SPECIFIED'.
    */
-  status: 'SUBSCRIBED' | 'UNSUBSCRIBED' | 'NOT_SPECIFIED';
+  status: 'NOT_SPECIFIED' | 'SUBSCRIBED' | 'UNSUBSCRIBED';
 
   /**
    * The contact's email address.
@@ -516,13 +516,13 @@ export interface PublicStatus {
    * 'PROCESS_AND_STORE', and 'LEGITIMATE_INTEREST_OTHER'.
    */
   legalBasis?:
-    | 'LEGITIMATE_INTEREST_PQL'
-    | 'LEGITIMATE_INTEREST_CLIENT'
-    | 'PERFORMANCE_OF_CONTRACT'
     | 'CONSENT_WITH_NOTICE'
+    | 'LEGITIMATE_INTEREST_CLIENT'
+    | 'LEGITIMATE_INTEREST_OTHER'
+    | 'LEGITIMATE_INTEREST_PQL'
     | 'NON_GDPR'
-    | 'PROCESS_AND_STORE'
-    | 'LEGITIMATE_INTEREST_OTHER';
+    | 'PERFORMANCE_OF_CONTRACT'
+    | 'PROCESS_AND_STORE';
 
   /**
    * An explanation for the legal basis used for communication.
@@ -534,10 +534,10 @@ export interface PublicStatus {
    * 'RESUBSCRIBE_OCCURRED' or 'NO_STATUS_CHANGE'.
    */
   setStatusSuccessReason?:
-    | 'RESUBSCRIBE_OCCURRED'
     | 'NO_STATUS_CHANGE'
-    | 'UNSUBSCRIBE_FROM_ALL_OCCURRED'
-    | 'REQUESTED_CHANGE_OCCURRED';
+    | 'REQUESTED_CHANGE_OCCURRED'
+    | 'RESUBSCRIBE_OCCURRED'
+    | 'UNSUBSCRIBE_FROM_ALL_OCCURRED';
 
   /**
    * The name of the subscription.
@@ -566,7 +566,7 @@ export interface PublicStatusRequest {
   /**
    * The status of the contact's subscription.
    */
-  statusState: 'SUBSCRIBED' | 'UNSUBSCRIBED' | 'NOT_SPECIFIED';
+  statusState: 'NOT_SPECIFIED' | 'SUBSCRIBED' | 'UNSUBSCRIBED';
 
   /**
    * The contact's email address.
@@ -582,13 +582,13 @@ export interface PublicStatusRequest {
    * The legal basis for communication.
    */
   legalBasis?:
-    | 'LEGITIMATE_INTEREST_PQL'
-    | 'LEGITIMATE_INTEREST_CLIENT'
-    | 'PERFORMANCE_OF_CONTRACT'
     | 'CONSENT_WITH_NOTICE'
+    | 'LEGITIMATE_INTEREST_CLIENT'
+    | 'LEGITIMATE_INTEREST_OTHER'
+    | 'LEGITIMATE_INTEREST_PQL'
     | 'NON_GDPR'
-    | 'PROCESS_AND_STORE'
-    | 'LEGITIMATE_INTEREST_OTHER';
+    | 'PERFORMANCE_OF_CONTRACT'
+    | 'PROCESS_AND_STORE';
 
   /**
    * The explanation for the legal basis.
@@ -638,7 +638,7 @@ export interface PublicWideStatus {
    * The subscription status of the contact, which can be 'SUBSCRIBED',
    * 'UNSUBSCRIBED', or 'NOT_SPECIFIED'.
    */
-  status: 'SUBSCRIBED' | 'UNSUBSCRIBED' | 'NOT_SPECIFIED';
+  status: 'NOT_SPECIFIED' | 'SUBSCRIBED' | 'UNSUBSCRIBED';
 
   /**
    * The email address of the contact.
@@ -653,7 +653,7 @@ export interface PublicWideStatus {
   /**
    * The type of wide status, which can be 'PORTAL_WIDE' or 'BUSINESS_UNIT_WIDE'.
    */
-  wideStatusType: 'PORTAL_WIDE' | 'BUSINESS_UNIT_WIDE';
+  wideStatusType: 'BUSINESS_UNIT_WIDE' | 'PORTAL_WIDE';
 
   /**
    * The ID of the business unit associated with the status.

@@ -81,7 +81,7 @@ describe('resource users', () => {
   test.skip('delete: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.settings.users.delete('userId', { idProperty: 'USER_ID' }, { path: '/_stainless_unknown_path' }),
+      client.settings.users.delete('userId', { idProperty: 'EMAIL' }, { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Hubspot.NotFoundError);
   });
 
@@ -101,7 +101,7 @@ describe('resource users', () => {
   test.skip('get: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.settings.users.get('userId', { idProperty: 'USER_ID' }, { path: '/_stainless_unknown_path' }),
+      client.settings.users.get('userId', { idProperty: 'EMAIL' }, { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Hubspot.NotFoundError);
   });
 

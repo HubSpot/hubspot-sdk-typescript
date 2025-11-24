@@ -50,13 +50,13 @@ export interface CollectionResponseWithTotalPublicSequenceLiteResponseForwardPag
 export interface EmailSettingsResponse {
   criteria: 'ALL' | 'NONE';
 
-  sellingStrategy: 'LEAD_BASED' | 'ACCOUNT_BASED';
+  sellingStrategy: 'ACCOUNT_BASED' | 'LEAD_BASED';
 }
 
 export interface MeetingSettingsResponse {
   criteria: 'ALL' | 'NONE';
 
-  sellingStrategy: 'LEAD_BASED' | 'ACCOUNT_BASED';
+  sellingStrategy: 'ACCOUNT_BASED' | 'LEAD_BASED';
 }
 
 export interface PublicEmailPatternResponse {

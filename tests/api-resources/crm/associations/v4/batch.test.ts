@@ -146,32 +146,4 @@ describe('resource batch', () => {
       inputs: [{ id: 'id', after: 'after' }],
     });
   });
-
-  // Prism tests are disabled
-  test.skip('upsert: only required params', async () => {
-    const responsePromise = client.crm.associations.v4.batch.upsert('objectType', {
-      inputs: [{ id: 'id', properties: { foo: 'string' } }],
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('upsert: required and optional params', async () => {
-    const response = await client.crm.associations.v4.batch.upsert('objectType', {
-      inputs: [
-        {
-          id: 'id',
-          properties: { foo: 'string' },
-          idProperty: 'idProperty',
-          objectWriteTraceId: 'objectWriteTraceId',
-        },
-      ],
-    });
-  });
 });

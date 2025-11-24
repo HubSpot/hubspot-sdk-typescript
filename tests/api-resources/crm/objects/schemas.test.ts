@@ -46,7 +46,7 @@ describe('resource schemas', () => {
           groupName: 'my_object_information',
           hasUniqueValue: false,
           hidden: true,
-          numberDisplayHint: 'unformatted',
+          numberDisplayHint: 'currency',
           options: [
             {
               displayOrder: 1,
@@ -63,11 +63,11 @@ describe('resource schemas', () => {
               description: 'Choice number two',
             },
           ],
-          optionSortStrategy: 'DISPLAY_ORDER',
+          optionSortStrategy: 'ALPHABETICAL',
           referencedObjectType: 'referencedObjectType',
           searchableInGlobalSearch: true,
           showCurrencySymbol: true,
-          textDisplayHint: 'unformatted_single_line',
+          textDisplayHint: 'domain_name',
         },
       ],
       requiredProperties: ['my_object_property'],

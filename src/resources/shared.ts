@@ -23,7 +23,7 @@ export interface ActionResponse {
 
   startedAt: string;
 
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   links?: { [key: string]: string };
 
@@ -82,7 +82,7 @@ export interface AssociationSpec {
   /**
    * The category of the association, such as "HUBSPOT_DEFINED".
    */
-  associationCategory: 'HUBSPOT_DEFINED' | 'USER_DEFINED' | 'INTEGRATOR_DEFINED';
+  associationCategory: 'HUBSPOT_DEFINED' | 'INTEGRATOR_DEFINED' | 'USER_DEFINED';
 
   /**
    * The ID representing the specific type of association.
@@ -152,7 +152,7 @@ export interface BatchInputString {
 export interface BatchReadInputPropertyName {
   archived: boolean;
 
-  dataSensitivity: 'non_sensitive' | 'sensitive' | 'highly_sensitive';
+  dataSensitivity: 'highly_sensitive' | 'non_sensitive' | 'sensitive';
 
   inputs: Array<PropertyName>;
 }
@@ -164,7 +164,7 @@ export interface BatchResponseProperty {
 
   startedAt: string;
 
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   links?: { [key: string]: string };
 
@@ -429,7 +429,7 @@ export interface Property {
    * Indicates the sensitivity level of the property, such as "non_sensitive",
    * "sensitive", or "highly_sensitive".
    */
-  dataSensitivity?: 'non_sensitive' | 'sensitive' | 'highly_sensitive';
+  dataSensitivity?: 'highly_sensitive' | 'non_sensitive' | 'sensitive';
 
   /**
    * The order that this property should be displayed in the HubSpot UI relative to
@@ -523,7 +523,7 @@ export interface PropertyCreate {
 
   calculationFormula?: string;
 
-  dataSensitivity?: 'non_sensitive' | 'sensitive' | 'highly_sensitive';
+  dataSensitivity?: 'highly_sensitive' | 'non_sensitive' | 'sensitive';
 
   description?: string;
 
@@ -770,18 +770,18 @@ export interface PublicCalendarDatePropertyOperation {
   timeUnit: string;
 
   fiscalYearStart?:
-    | 'JANUARY'
-    | 'FEBRUARY'
-    | 'MARCH'
     | 'APRIL'
-    | 'MAY'
-    | 'JUNE'
-    | 'JULY'
     | 'AUGUST'
-    | 'SEPTEMBER'
-    | 'OCTOBER'
+    | 'DECEMBER'
+    | 'FEBRUARY'
+    | 'JANUARY'
+    | 'JULY'
+    | 'JUNE'
+    | 'MARCH'
+    | 'MAY'
     | 'NOVEMBER'
-    | 'DECEMBER';
+    | 'OCTOBER'
+    | 'SEPTEMBER';
 
   timeUnitCount?: number;
 
@@ -928,19 +928,19 @@ export interface PublicEmailEventFilter {
   level: string;
 
   operator:
+    | 'BOUNCED'
     | 'LINK_CLICKED'
     | 'MARKED_SPAM'
     | 'OPENED'
     | 'OPENED_BUT_LINK_NOT_CLICKED'
     | 'OPENED_BUT_NOT_REPLIED'
-    | 'REPLIED'
-    | 'UNSUBSCRIBED'
-    | 'BOUNCED'
     | 'RECEIVED'
     | 'RECEIVED_BUT_NOT_OPENED'
+    | 'REPLIED'
     | 'SENT'
     | 'SENT_BUT_LINK_NOT_CLICKED'
-    | 'SENT_BUT_NOT_RECEIVED';
+    | 'SENT_BUT_NOT_RECEIVED'
+    | 'UNSUBSCRIBED';
 
   clickUrl?: string;
 
@@ -1880,7 +1880,7 @@ export interface PublicWebinarFilter {
 }
 
 export interface PublicWeekReference {
-  dayOfWeek: 'MONDAY' | 'TUESDAY' | 'WEDNESDAY' | 'THURSDAY' | 'FRIDAY' | 'SATURDAY' | 'SUNDAY';
+  dayOfWeek: 'FRIDAY' | 'MONDAY' | 'SATURDAY' | 'SUNDAY' | 'THURSDAY' | 'TUESDAY' | 'WEDNESDAY';
 
   referenceType: 'WEEK';
 

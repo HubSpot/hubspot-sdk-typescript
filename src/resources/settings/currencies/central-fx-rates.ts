@@ -57,6 +57,10 @@ export class CentralFxRates extends APIResource {
 }
 
 export interface CentralFxRateCreateCurrencyParams {
+  /**
+   * The currency code being added to the HubSpot portal for use with central
+   * exchange rates.
+   */
   currencyCode:
     | 'AED'
     | 'AFN'

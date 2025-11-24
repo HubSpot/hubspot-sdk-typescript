@@ -47,7 +47,7 @@ export interface APIUsage {
   /**
    * Status of fetching the information, including if the data came from the cache.
    */
-  fetchStatus: 'SUCCESS' | 'TIMEOUT' | 'FAILURE' | 'CACHED' | 'NOTFOUND';
+  fetchStatus: 'CACHED' | 'FAILURE' | 'NOTFOUND' | 'SUCCESS' | 'TIMEOUT';
 
   /**
    * Name of the limit type.
@@ -72,7 +72,7 @@ export interface CollectionResponseAPIUsage {
 }
 
 export interface PortalInformationResponse {
-  accountType: 'STANDARD' | 'DEVELOPER_TEST' | 'SANDBOX' | 'APP_DEVELOPER';
+  accountType: 'APP_DEVELOPER' | 'DEVELOPER_TEST' | 'SANDBOX' | 'STANDARD';
 
   additionalCurrencies: Array<string>;
 

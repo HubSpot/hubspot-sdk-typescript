@@ -12,7 +12,7 @@ describe('resource sitePages', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.cms.pages.sitePages.create({
       id: 'id',
-      abStatus: 'master',
+      abStatus: 'automated_loser_variant',
       abTestId: 'abTestId',
       archivedAt: '2019-12-27T18:11:19.117Z',
       archivedInDashboard: true,
@@ -151,7 +151,7 @@ describe('resource sitePages', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.cms.pages.sitePages.create({
       id: 'id',
-      abStatus: 'master',
+      abStatus: 'automated_loser_variant',
       abTestId: 'abTestId',
       archivedAt: '2019-12-27T18:11:19.117Z',
       archivedInDashboard: true,
@@ -286,7 +286,7 @@ describe('resource sitePages', () => {
   test.skip('update: only required params', async () => {
     const responsePromise = client.cms.pages.sitePages.update('objectId', {
       id: 'id',
-      abStatus: 'master',
+      abStatus: 'automated_loser_variant',
       abTestId: 'abTestId',
       archivedAt: '2019-12-27T18:11:19.117Z',
       archivedInDashboard: true,
@@ -425,7 +425,7 @@ describe('resource sitePages', () => {
   test.skip('update: required and optional params', async () => {
     const response = await client.cms.pages.sitePages.update('objectId', {
       id: 'id',
-      abStatus: 'master',
+      abStatus: 'automated_loser_variant',
       abTestId: 'abTestId',
       archivedAt: '2019-12-27T18:11:19.117Z',
       archivedInDashboard: true,
@@ -684,7 +684,7 @@ describe('resource sitePages', () => {
       inputs: [
         {
           id: 'id',
-          abStatus: 'master',
+          abStatus: 'automated_loser_variant',
           abTestId: 'abTestId',
           archivedAt: '2019-12-27T18:11:19.117Z',
           archivedInDashboard: true,
@@ -827,7 +827,7 @@ describe('resource sitePages', () => {
       inputs: [
         {
           id: 'id',
-          abStatus: 'master',
+          abStatus: 'automated_loser_variant',
           abTestId: 'abTestId',
           archivedAt: '2019-12-27T18:11:19.117Z',
           archivedInDashboard: true,
@@ -1276,7 +1276,7 @@ describe('resource sitePages', () => {
   test.skip('updateDraft: only required params', async () => {
     const responsePromise = client.cms.pages.sitePages.updateDraft('objectId', {
       id: 'id',
-      abStatus: 'master',
+      abStatus: 'automated_loser_variant',
       abTestId: 'abTestId',
       archivedAt: '2019-12-27T18:11:19.117Z',
       archivedInDashboard: true,
@@ -1415,7 +1415,7 @@ describe('resource sitePages', () => {
   test.skip('updateDraft: required and optional params', async () => {
     const response = await client.cms.pages.sitePages.updateDraft('objectId', {
       id: 'id',
-      abStatus: 'master',
+      abStatus: 'automated_loser_variant',
       abTestId: 'abTestId',
       archivedAt: '2019-12-27T18:11:19.117Z',
       archivedInDashboard: true,

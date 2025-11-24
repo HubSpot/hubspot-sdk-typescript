@@ -16,7 +16,7 @@ export class Portals extends APIResource {
    *   await client.crm.featureFlags.portals.update(0, {
    *     appId: 0,
    *     flagName: 'flagName',
-   *     flagState: 'OFF',
+   *     flagState: 'ABSENT',
    *   });
    * ```
    */
@@ -93,7 +93,7 @@ export class Portals extends APIResource {
    *     'flagName',
    *     {
    *       appId: 0,
-   *       portalStates: [{ flagState: 'OFF', portalId: 0 }],
+   *       portalStates: [{ flagState: 'ABSENT', portalId: 0 }],
    *     },
    *   );
    * ```
@@ -147,7 +147,7 @@ export interface PortalUpdateParams {
   /**
    * Body param:
    */
-  flagState: 'OFF' | 'ON' | 'ABSENT';
+  flagState: 'ABSENT' | 'OFF' | 'ON';
 }
 
 export interface PortalDeleteParams {

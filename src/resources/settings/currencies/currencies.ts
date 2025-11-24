@@ -242,7 +242,7 @@ export interface BatchResponseExchangeRate {
 
   startedAt: string;
 
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   links?: { [key: string]: string };
 
@@ -256,7 +256,7 @@ export interface BatchResponseExchangeRateWithErrors {
 
   startedAt: string;
 
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   errors?: Array<Shared.StandardError>;
 
@@ -268,6 +268,9 @@ export interface BatchResponseExchangeRateWithErrors {
 }
 
 export interface CentralExchangeRatesInformation {
+  /**
+   * Indicates if central exchange rates is enabled for the portal or not.
+   */
   centralExchangeRatesEnabled: boolean;
 }
 
@@ -286,12 +289,21 @@ export interface CollectionResponseExchangeRateNoPaging {
 }
 
 export interface CompanyCurrency {
+  /**
+   * The currency code for the company currency
+   */
   id: string;
 
+  /**
+   * The date the company currency was created.
+   */
   createdAt: string;
 }
 
 export interface CompanyCurrencyUpdateRequest {
+  /**
+   * The three-letter code representing a specific currency (ex. USD).
+   */
   currencyCode:
     | 'AED'
     | 'AFN'
@@ -472,12 +484,22 @@ export interface CompanyCurrencyUpdateRequest {
 }
 
 export interface CurrencyCodeInfo {
+  /**
+   * The three-letter code representing a specific currency (ex. USD).
+   */
   currencyCode: string;
 
+  /**
+   * The full name of the currency (ex. US Dollar).
+   */
   currencyName: string;
 }
 
 export interface CurrencyCreateRequest {
+  /**
+   * The currency code being added to the HubSpot portal for use with central
+   * exchange rates.
+   */
   currencyCode:
     | 'AED'
     | 'AFN'
@@ -658,6 +680,10 @@ export interface CurrencyCreateRequest {
 }
 
 export interface CurrencyPairUpdate {
+  /**
+   * This represents the three-letter currency code (such as USD for US Dollar) of
+   * the currency you want to convert from.
+   */
   fromCurrencyCode:
     | 'AED'
     | 'AFN'
@@ -836,6 +862,10 @@ export interface CurrencyPairUpdate {
     | 'ZMW'
     | 'ZWL';
 
+  /**
+   * This represents the three-letter currency code (such as USD for US Dollar) of
+   * the currency you want to convert to.
+   */
   toCurrencyCode:
     | 'AED'
     | 'AFN'
@@ -1014,18 +1044,38 @@ export interface CurrencyPairUpdate {
     | 'ZMW'
     | 'ZWL';
 
+  /**
+   * This indicates if the currency pair is shown in the MultiCurrency settings page.
+   * Setting this to false will remove the currency pair from the settings page.
+   */
   visibleInUI: boolean;
 }
 
 export interface ExchangeRate {
+  /**
+   * A unique identifier for the exchange rate
+   */
   id: string;
 
+  /**
+   * The conversion rate between the to and from currency code of this exchange rate.
+   */
   conversionRate: number;
 
+  /**
+   * The date the exchange rate was created.
+   */
   createdAt: string;
 
+  /**
+   * The date the exchange rate is in effect.
+   */
   effectiveAt: string;
 
+  /**
+   * This represents the three-letter currency code (such as USD for US Dollar) of
+   * the currency you are converting from.
+   */
   fromCurrencyCode:
     | 'AED'
     | 'AFN'
@@ -1204,6 +1254,10 @@ export interface ExchangeRate {
     | 'ZMW'
     | 'ZWL';
 
+  /**
+   * This represents the three-letter currency code (such as USD for US Dollar) of
+   * the currency you are converting to.
+   */
   toCurrencyCode:
     | 'AED'
     | 'AFN'
@@ -1382,14 +1436,27 @@ export interface ExchangeRate {
     | 'ZMW'
     | 'ZWL';
 
+  /**
+   * The date the exchange rate was last updated.
+   */
   updatedAt: string;
 
+  /**
+   * This indicates if the exchange rate is shown in the MultiCurrency settings page.
+   */
   visibleInUI: boolean;
 }
 
 export interface ExchangeRateCreateRequest {
+  /**
+   * The conversion rate between the to and from currency code of this exchange rate.
+   */
   conversionRate: number;
 
+  /**
+   * This represents the three-letter currency code (such as USD for US Dollar) of
+   * the currency you want to convert from.
+   */
   fromCurrencyCode:
     | 'AED'
     | 'AFN'
@@ -1568,20 +1635,40 @@ export interface ExchangeRateCreateRequest {
     | 'ZMW'
     | 'ZWL';
 
+  /**
+   * The date the exchange rate is in effect.
+   */
   effectiveAt?: string;
 }
 
 export interface ExchangeRateMultiplier {
+  /**
+   * The updated conversion rate between the to and from currency code of this
+   * exchange rate.
+   */
   conversionRate: number;
 
+  /**
+   * The date the exchange rate is in effect.
+   */
   effectiveAt?: string;
 }
 
 export interface ExchangeRateUpdateRequest {
+  /**
+   * A unique identifier for the exchange rate being updated
+   */
   id: string;
 
+  /**
+   * The updated conversion rate between the to and from currency code of this
+   * exchange rate.
+   */
   conversionRate: number;
 
+  /**
+   * The date the exchange rate will be in effect.
+   */
   effectiveAt?: string;
 }
 
@@ -1598,8 +1685,15 @@ export interface CurrencyBatchUpdateParams {
 }
 
 export interface CurrencyCreateExchangeRateParams {
+  /**
+   * The conversion rate between the to and from currency code of this exchange rate.
+   */
   conversionRate: number;
 
+  /**
+   * This represents the three-letter currency code (such as USD for US Dollar) of
+   * the currency you want to convert from.
+   */
   fromCurrencyCode:
     | 'AED'
     | 'AFN'
@@ -1778,6 +1872,9 @@ export interface CurrencyCreateExchangeRateParams {
     | 'ZMW'
     | 'ZWL';
 
+  /**
+   * The date the exchange rate is in effect.
+   */
   effectiveAt?: string;
 }
 
@@ -2148,6 +2245,9 @@ export interface CurrencyListExchangeRatesParams extends PageParams {
 }
 
 export interface CurrencyUpdateCompanyCurrencyParams {
+  /**
+   * The three-letter code representing a specific currency (ex. USD).
+   */
   currencyCode:
     | 'AED'
     | 'AFN'
@@ -2328,12 +2428,23 @@ export interface CurrencyUpdateCompanyCurrencyParams {
 }
 
 export interface CurrencyUpdateExchangeRateParams {
+  /**
+   * The updated conversion rate between the to and from currency code of this
+   * exchange rate.
+   */
   conversionRate: number;
 
+  /**
+   * The date the exchange rate is in effect.
+   */
   effectiveAt?: string;
 }
 
 export interface CurrencyUpdateVisibilityParams {
+  /**
+   * This represents the three-letter currency code (such as USD for US Dollar) of
+   * the currency you want to convert from.
+   */
   fromCurrencyCode:
     | 'AED'
     | 'AFN'
@@ -2512,6 +2623,10 @@ export interface CurrencyUpdateVisibilityParams {
     | 'ZMW'
     | 'ZWL';
 
+  /**
+   * This represents the three-letter currency code (such as USD for US Dollar) of
+   * the currency you want to convert to.
+   */
   toCurrencyCode:
     | 'AED'
     | 'AFN'
@@ -2690,6 +2805,10 @@ export interface CurrencyUpdateVisibilityParams {
     | 'ZMW'
     | 'ZWL';
 
+  /**
+   * This indicates if the currency pair is shown in the MultiCurrency settings page.
+   * Setting this to false will remove the currency pair from the settings page.
+   */
   visibleInUI: boolean;
 }
 

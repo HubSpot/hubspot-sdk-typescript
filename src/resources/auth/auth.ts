@@ -7,6 +7,7 @@ import {
   OAuth,
   OAuthCreateAccessTokenParams,
   RefreshTokenInfoResponse,
+  SignedAccessToken,
   TokenResponseIf,
 } from './oauth';
 
@@ -21,6 +22,7 @@ export declare namespace Auth {
     OAuth as OAuth,
     type AccessTokenInfoResponse as AccessTokenInfoResponse,
     type RefreshTokenInfoResponse as RefreshTokenInfoResponse,
+    type SignedAccessToken as SignedAccessToken,
     type TokenResponseIf as TokenResponseIf,
     type OAuthCreateAccessTokenParams as OAuthCreateAccessTokenParams,
   };

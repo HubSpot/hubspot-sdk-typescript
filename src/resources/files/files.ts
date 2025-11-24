@@ -63,13 +63,13 @@ export interface File {
    * File access. Can be PUBLIC_INDEXABLE, PUBLIC_NOT_INDEXABLE, PRIVATE.
    */
   access:
-    | 'PUBLIC_INDEXABLE'
-    | 'PUBLIC_NOT_INDEXABLE'
     | 'HIDDEN_INDEXABLE'
     | 'HIDDEN_NOT_INDEXABLE'
     | 'HIDDEN_PRIVATE'
-    | 'PRIVATE'
     | 'HIDDEN_SENSITIVE'
+    | 'PRIVATE'
+    | 'PUBLIC_INDEXABLE'
+    | 'PUBLIC_NOT_INDEXABLE'
     | 'SENSITIVE';
 
   /**
@@ -179,7 +179,7 @@ export interface FileActionResponse {
   /**
    * Current status of the task.
    */
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   /**
    * ID of the requested task.
@@ -231,13 +231,13 @@ export interface FileUpdateInput {
    * a new file and return the found duplicate instead.
    */
   access?:
-    | 'PUBLIC_INDEXABLE'
-    | 'PUBLIC_NOT_INDEXABLE'
     | 'HIDDEN_INDEXABLE'
     | 'HIDDEN_NOT_INDEXABLE'
     | 'HIDDEN_PRIVATE'
-    | 'PRIVATE'
     | 'HIDDEN_SENSITIVE'
+    | 'PRIVATE'
+    | 'PUBLIC_INDEXABLE'
+    | 'PUBLIC_NOT_INDEXABLE'
     | 'SENSITIVE';
 
   clearExpires?: boolean;
@@ -323,7 +323,7 @@ export interface FolderActionResponse {
   /**
    * Current status of the task.
    */
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   /**
    * ID of the task.
@@ -439,13 +439,13 @@ export interface ImportFromURLInput {
    * _can't_ index the file.
    */
   access:
-    | 'PUBLIC_INDEXABLE'
-    | 'PUBLIC_NOT_INDEXABLE'
     | 'HIDDEN_INDEXABLE'
     | 'HIDDEN_NOT_INDEXABLE'
     | 'HIDDEN_PRIVATE'
-    | 'PRIVATE'
     | 'HIDDEN_SENSITIVE'
+    | 'PRIVATE'
+    | 'PUBLIC_INDEXABLE'
+    | 'PUBLIC_NOT_INDEXABLE'
     | 'SENSITIVE';
 
   /**

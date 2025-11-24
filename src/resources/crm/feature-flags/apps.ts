@@ -16,7 +16,7 @@ export class Apps extends APIResource {
    * const flagResponse =
    *   await client.crm.featureFlags.apps.update('flagName', {
    *     appId: 0,
-   *     defaultState: 'OFF',
+   *     defaultState: 'ABSENT',
    *   });
    * ```
    */
@@ -106,12 +106,12 @@ export interface AppUpdateParams {
   /**
    * Body param:
    */
-  defaultState: 'OFF' | 'ON' | 'ABSENT';
+  defaultState: 'ABSENT' | 'OFF' | 'ON';
 
   /**
    * Body param:
    */
-  overrideState?: 'OFF' | 'ON' | 'ABSENT';
+  overrideState?: 'ABSENT' | 'OFF' | 'ON';
 }
 
 export interface AppDeleteParams {

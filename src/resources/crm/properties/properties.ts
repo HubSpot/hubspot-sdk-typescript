@@ -303,7 +303,7 @@ export interface PropertyCreateParams {
 
   calculationFormula?: string;
 
-  dataSensitivity?: 'non_sensitive' | 'sensitive' | 'highly_sensitive';
+  dataSensitivity?: 'highly_sensitive' | 'non_sensitive' | 'sensitive';
 
   description?: string;
 
@@ -400,7 +400,7 @@ export interface PropertyListParams {
    */
   archived?: boolean;
 
-  dataSensitivity?: 'non_sensitive' | 'sensitive' | 'highly_sensitive';
+  dataSensitivity?: 'highly_sensitive' | 'non_sensitive' | 'sensitive';
 
   locale?: string;
 
@@ -425,7 +425,7 @@ export interface PropertyGetParams {
   /**
    * Query param:
    */
-  dataSensitivity?: 'non_sensitive' | 'sensitive' | 'highly_sensitive';
+  dataSensitivity?: 'highly_sensitive' | 'non_sensitive' | 'sensitive';
 
   /**
    * Query param:

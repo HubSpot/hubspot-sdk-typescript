@@ -50,7 +50,7 @@ describe('resource messages', () => {
   test.skip('update: only required params', async () => {
     const responsePromise = client.conversations.customChannels.messages.update('messageId', {
       channelId: 0,
-      statusType: 'SENT',
+      statusType: 'FAILED',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -65,7 +65,7 @@ describe('resource messages', () => {
   test.skip('update: required and optional params', async () => {
     const response = await client.conversations.customChannels.messages.update('messageId', {
       channelId: 0,
-      statusType: 'SENT',
+      statusType: 'FAILED',
       errorMessage: 'errorMessage',
     });
   });

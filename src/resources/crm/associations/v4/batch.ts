@@ -174,29 +174,6 @@ export class Batch extends APIResource {
       ...options,
     });
   }
-
-  /**
-   * Upsert a batch of CRM objects, creating new records or updating existing ones
-   * based on their internal IDs or unique property values.
-   *
-   * @example
-   * ```ts
-   * const batchResponseSimplePublicUpsertObject =
-   *   await client.crm.associations.v4.batch.upsert(
-   *     'objectType',
-   *     {
-   *       inputs: [{ id: 'id', properties: { foo: 'string' } }],
-   *     },
-   *   );
-   * ```
-   */
-  upsert(
-    objectType: string,
-    body: BatchUpsertParams,
-    options?: RequestOptions,
-  ): APIPromise<CrmAPI.BatchResponseSimplePublicUpsertObject> {
-    return this._client.post(path`/crm/v4/objects/${objectType}/batch/upsert`, { body, ...options });
-  }
 }
 
 export interface BatchCreateParams {
@@ -260,10 +237,6 @@ export interface BatchGetParams {
   inputs: Array<V4API.PublicFetchAssociationsBatchRequest>;
 }
 
-export interface BatchUpsertParams {
-  inputs: Array<CrmAPI.SimplePublicObjectBatchInputUpsert>;
-}
-
 export declare namespace Batch {
   export {
     type BatchCreateParams as BatchCreateParams,
@@ -271,6 +244,5 @@ export declare namespace Batch {
     type BatchCreateDefaultParams as BatchCreateDefaultParams,
     type BatchDeleteLabelsParams as BatchDeleteLabelsParams,
     type BatchGetParams as BatchGetParams,
-    type BatchUpsertParams as BatchUpsertParams,
   };
 }

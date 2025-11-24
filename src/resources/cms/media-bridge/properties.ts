@@ -195,7 +195,7 @@ export class Properties extends APIResource {
    *     {
    *       appId: 0,
    *       archived: true,
-   *       dataSensitivity: 'non_sensitive',
+   *       dataSensitivity: 'highly_sensitive',
    *       inputs: [{ name: 'name' }],
    *     },
    *   );
@@ -266,7 +266,7 @@ export interface PropertyCreateParams {
   /**
    * Body param:
    */
-  dataSensitivity?: 'non_sensitive' | 'sensitive' | 'highly_sensitive';
+  dataSensitivity?: 'highly_sensitive' | 'non_sensitive' | 'sensitive';
 
   /**
    * Body param:
@@ -484,7 +484,7 @@ export interface PropertyGetBatchParams {
   /**
    * Body param:
    */
-  dataSensitivity: 'non_sensitive' | 'sensitive' | 'highly_sensitive';
+  dataSensitivity: 'highly_sensitive' | 'non_sensitive' | 'sensitive';
 
   /**
    * Body param:

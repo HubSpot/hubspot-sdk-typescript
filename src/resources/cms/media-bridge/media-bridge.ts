@@ -489,7 +489,7 @@ export interface AttentionSpanEvent {
 
   mediaName: string;
 
-  mediaType: 'VIDEO' | 'AUDIO' | 'DOCUMENT' | 'OTHER' | 'IMAGE';
+  mediaType: 'AUDIO' | 'DOCUMENT' | 'IMAGE' | 'OTHER' | 'VIDEO';
 
   /**
    * The timestamp at which this event occurred, in milliseconds since the epoch.
@@ -557,7 +557,7 @@ export interface AttentionSpanEvent {
 }
 
 export interface AttentionSpanEventRequest {
-  mediaType: 'VIDEO' | 'AUDIO' | 'DOCUMENT' | 'OTHER' | 'IMAGE';
+  mediaType: 'AUDIO' | 'DOCUMENT' | 'IMAGE' | 'OTHER' | 'VIDEO';
 
   occurredTimestamp: number;
 
@@ -597,7 +597,7 @@ export interface BatchResponsePropertyWithErrors {
 
   startedAt: string;
 
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   errors?: Array<Shared.StandardError>;
 
@@ -1767,7 +1767,7 @@ export interface Euler {
 }
 
 export interface EventVisibilityChange {
-  eventType: 'ALL' | 'MEDIA_PLAYS' | 'MEDIA_PLAYS_PERCENT' | 'ATTENTION_SPAN';
+  eventType: 'ALL' | 'ATTENTION_SPAN' | 'MEDIA_PLAYS' | 'MEDIA_PLAYS_PERCENT';
 
   updatedAt: number;
 
@@ -3284,12 +3284,12 @@ export interface InboundDBObjectType {
   lastModifiedPropertyName: string;
 
   metaType:
-    | 'HUBSPOT'
-    | 'INTEGRATION'
-    | 'PORTAL_SPECIFIC'
     | 'CMS_HUBDB'
+    | 'HUBSPOT'
     | 'HUBSPOT_EVENT'
+    | 'INTEGRATION'
     | 'INTEGRATION_EVENT'
+    | 'PORTAL_SPECIFIC'
     | 'PORTAL_SPECIFIC_EVENT';
 
   metaTypeId: number;
@@ -4075,7 +4075,7 @@ export interface MediaPlayedEvent {
 
   mediaName: string;
 
-  mediaType: 'VIDEO' | 'AUDIO' | 'DOCUMENT' | 'OTHER' | 'IMAGE';
+  mediaType: 'AUDIO' | 'DOCUMENT' | 'IMAGE' | 'OTHER' | 'VIDEO';
 
   occurredTimestamp: number;
 
@@ -4101,7 +4101,7 @@ export interface MediaPlayedEvent {
 }
 
 export interface MediaPlayedEventRequest {
-  mediaType: 'VIDEO' | 'AUDIO' | 'DOCUMENT' | 'OTHER' | 'IMAGE';
+  mediaType: 'AUDIO' | 'DOCUMENT' | 'IMAGE' | 'OTHER' | 'VIDEO';
 
   occurredTimestamp: number;
 
@@ -4149,7 +4149,7 @@ export interface MediaPlayedPercentageEvent {
 
   mediaName: string;
 
-  mediaType: 'VIDEO' | 'AUDIO' | 'DOCUMENT' | 'OTHER' | 'IMAGE';
+  mediaType: 'AUDIO' | 'DOCUMENT' | 'IMAGE' | 'OTHER' | 'VIDEO';
 
   occurredTimestamp: number;
 
@@ -4187,7 +4187,7 @@ export interface MediaPlayedPercentageEvent {
 }
 
 export interface MediaPlayedPercentageEventRequest {
-  mediaType: 'VIDEO' | 'AUDIO' | 'DOCUMENT' | 'OTHER' | 'IMAGE';
+  mediaType: 'AUDIO' | 'DOCUMENT' | 'IMAGE' | 'OTHER' | 'VIDEO';
 
   occurredTimestamp: number;
 
@@ -5770,7 +5770,7 @@ export interface Property {
    * Indicates the sensitivity level of the property, such as "non_sensitive",
    * "sensitive", or "highly_sensitive".
    */
-  dataSensitivity: 'none' | 'standard' | 'high';
+  dataSensitivity: 'high' | 'none' | 'standard';
 
   dateDisplayHint: 'absolute' | 'absolute_with_relative' | 'time_since' | 'time_until';
 
@@ -5788,7 +5788,7 @@ export interface Property {
    * The mode in which the property is displayed. Can be: "current_value" or
    * "all_unique_versions".
    */
-  displayMode: 'current_value' | 'all_unique_versions';
+  displayMode: 'all_unique_versions' | 'current_value';
 
   /**
    * The position of the item relative to others in the list.
@@ -5893,7 +5893,7 @@ export interface Property {
    * be: "unformatted", "formatted", "currency", "percentage", "duration", or
    * "probability".
    */
-  numberDisplayHint: 'unformatted' | 'formatted' | 'currency' | 'percentage' | 'duration' | 'probability';
+  numberDisplayHint: 'currency' | 'duration' | 'formatted' | 'percentage' | 'probability' | 'unformatted';
 
   /**
    * A list of valid options for the property. This field is required for enumerated
@@ -5910,7 +5910,7 @@ export interface Property {
    * Specifies how to sort property options. Can be either "DISPLAY_ORDER" to defer
    * to the displayOrder field, or "ALPHABETICAL".
    */
-  optionSortStrategy: 'DISPLAY_ORDER' | 'ALPHABETICAL';
+  optionSortStrategy: 'ALPHABETICAL' | 'DISPLAY_ORDER';
 
   owningAppId: number;
 
@@ -5933,167 +5933,167 @@ export interface Property {
    * Deprecated. Use externalOptionsReferenceType instead.
    */
   referencedObjectType:
-    | 'CONTACT'
-    | 'COMPANY'
-    | 'DEAL'
-    | 'ENGAGEMENT'
-    | 'TICKET'
-    | 'OWNER'
-    | 'PRODUCT'
-    | 'LINE_ITEM'
-    | 'BET_DELIVERABLE_SERVICE'
-    | 'CONTENT'
-    | 'CONVERSATION'
-    | 'BET_ALERT'
-    | 'PORTAL'
-    | 'QUOTE'
-    | 'FORM_SUBMISSION_INBOUNDDB'
-    | 'QUOTA'
-    | 'UNSUBSCRIBE'
-    | 'COMMUNICATION'
-    | 'FEEDBACK_SUBMISSION'
-    | 'ATTRIBUTION'
-    | 'SALESFORCE_SYNC_ERROR'
-    | 'RESTORABLE_CRM_OBJECT'
-    | 'HUB'
-    | 'LANDING_PAGE'
-    | 'PRODUCT_OR_FOLDER'
-    | 'TASK'
-    | 'FORM'
-    | 'MARKETING_EMAIL'
+    | 'ABANDONED_CART'
+    | 'ACCEPTANCE_TEST'
+    | 'AD'
     | 'AD_ACCOUNT'
     | 'AD_CAMPAIGN'
     | 'AD_GROUP'
-    | 'AD'
-    | 'KEYWORD'
-    | 'CAMPAIGN'
-    | 'SOCIAL_CHANNEL'
-    | 'SOCIAL_POST'
-    | 'SITE_PAGE'
-    | 'BLOG_POST'
-    | 'IMPORT'
-    | 'EXPORT'
-    | 'CTA'
-    | 'TASK_TEMPLATE'
-    | 'AUTOMATION_PLATFORM_FLOW'
-    | 'OBJECT_LIST'
-    | 'NOTE'
-    | 'MEETING_EVENT'
-    | 'CALL'
-    | 'EMAIL'
-    | 'PUBLISHING_TASK'
-    | 'CONVERSATION_SESSION'
-    | 'CONTACT_CREATE_ATTRIBUTION'
-    | 'INVOICE'
-    | 'MARKETING_EVENT'
-    | 'CONVERSATION_INBOX'
-    | 'CHATFLOW'
-    | 'MEDIA_BRIDGE'
-    | 'SEQUENCE'
-    | 'SEQUENCE_STEP'
-    | 'FORECAST'
-    | 'SNIPPET'
-    | 'TEMPLATE'
-    | 'DEAL_CREATE_ATTRIBUTION'
-    | 'QUOTE_TEMPLATE'
-    | 'QUOTE_MODULE'
-    | 'QUOTE_MODULE_FIELD'
-    | 'QUOTE_FIELD'
-    | 'SEQUENCE_ENROLLMENT'
-    | 'SUBSCRIPTION'
-    | 'ACCEPTANCE_TEST'
-    | 'SOCIAL_BROADCAST'
-    | 'DEAL_SPLIT'
-    | 'DEAL_REGISTRATION'
-    | 'GOAL_TARGET'
-    | 'GOAL_TARGET_GROUP'
-    | 'PORTAL_OBJECT_SYNC_MESSAGE'
-    | 'FILE_MANAGER_FILE'
-    | 'FILE_MANAGER_FOLDER'
-    | 'SEQUENCE_STEP_ENROLLMENT'
+    | 'AI_FORECAST'
+    | 'ALL_PAGES'
     | 'APPROVAL'
     | 'APPROVAL_STEP'
+    | 'ATTRIBUTION'
+    | 'AUDIENCE'
+    | 'AUTOMATION_JOURNEY'
+    | 'AUTOMATION_PLATFORM_FLOW'
+    | 'AUTOMATION_PLATFORM_FLOW_ACTION'
+    | 'BET_ALERT'
+    | 'BET_DELIVERABLE_SERVICE'
+    | 'BLOG_LISTING_PAGE'
+    | 'BLOG_POST'
+    | 'CALL'
+    | 'CAMPAIGN'
+    | 'CAMPAIGN_BUDGET_ITEM'
+    | 'CAMPAIGN_SPEND_ITEM'
+    | 'CAMPAIGN_STEP'
+    | 'CAMPAIGN_TEMPLATE'
+    | 'CAMPAIGN_TEMPLATE_STEP'
+    | 'CART'
+    | 'CASE_STUDY'
+    | 'CHATFLOW'
+    | 'CLIP'
+    | 'CMS_URL'
+    | 'COMBO_EVENT_CONFIGURATION'
+    | 'COMMERCE_PAYMENT'
+    | 'COMMUNICATION'
+    | 'COMPANY'
+    | 'CONTACT'
+    | 'CONTACT_CREATE_ATTRIBUTION'
+    | 'CONTENT'
+    | 'CONTENT_AUDIT'
+    | 'CONTENT_AUDIT_PAGE'
+    | 'CONVERSATION'
+    | 'CONVERSATION_INBOX'
+    | 'CONVERSATION_SESSION'
+    | 'CRM_OBJECTS_DUMMY_TYPE'
+    | 'CRM_PIPELINES_DUMMY_TYPE'
+    | 'CTA'
     | 'CTA_VARIANT'
-    | 'SALES_DOCUMENT'
-    | 'DISCOUNT'
-    | 'FEE'
-    | 'TAX'
-    | 'MARKETING_CALENDAR'
-    | 'PERMISSIONS_TESTING'
-    | 'PRIVACY_SCANNER_COOKIE'
+    | 'DATA_PRIVACY_CONSENT'
     | 'DATA_SYNC_STATE'
-    | 'WEB_INTERACTIVE'
-    | 'PLAYBOOK'
+    | 'DEAL'
+    | 'DEAL_CREATE_ATTRIBUTION'
+    | 'DEAL_REGISTRATION'
+    | 'DEAL_SPLIT'
+    | 'DISCOUNT'
+    | 'DISCOUNT_CODE'
+    | 'DISCOUNT_TEMPLATE'
+    | 'EMAIL'
+    | 'ENGAGEMENT'
+    | 'EXPORT'
+    | 'EXTERNAL_WEB_URL'
+    | 'FEE'
+    | 'FEEDBACK_SUBMISSION'
+    | 'FEEDBACK_SURVEY'
+    | 'FILE_MANAGER_FILE'
+    | 'FILE_MANAGER_FOLDER'
     | 'FOLDER'
+    | 'FORECAST'
+    | 'FORM'
+    | 'FORM_SUBMISSION_INBOUNDDB'
+    | 'GOAL_TARGET'
+    | 'GOAL_TARGET_GROUP'
+    | 'GOAL_TEMPLATE'
+    | 'GSC_PROPERTY'
+    | 'HUB'
+    | 'IMPORT'
+    | 'INVOICE'
+    | 'KEYWORD'
+    | 'KNOWLEDGE_ARTICLE'
+    | 'LANDING_PAGE'
+    | 'LEAD'
+    | 'LINE_ITEM'
+    | 'MARKETING_CALENDAR'
+    | 'MARKETING_CAMPAIGN_UTM'
+    | 'MARKETING_EMAIL'
+    | 'MARKETING_EVENT'
+    | 'MARKETING_EVENT_ATTENDANCE'
+    | 'MARKETING_SMS'
+    | 'MEDIA_BRIDGE'
+    | 'MEETING_EVENT'
+    | 'MIC'
+    | 'NOTE'
+    | 'OBJECT_LIST'
+    | 'ORDER'
+    | 'OWNER'
+    | 'PARTNER_ACCOUNT'
+    | 'PARTNER_CLIENT'
+    | 'PARTNER_CLIENT_REVENUE'
+    | 'PARTNER_SERVICE'
+    | 'PAYMENT_LINK'
+    | 'PAYMENT_SCHEDULE'
+    | 'PAYMENT_SCHEDULE_INSTALLMENT'
+    | 'PERMISSIONS_TESTING'
+    | 'PLAYBOOK'
     | 'PLAYBOOK_QUESTION'
     | 'PLAYBOOK_SUBMISSION'
     | 'PLAYBOOK_SUBMISSION_ANSWER'
-    | 'COMMERCE_PAYMENT'
-    | 'GSC_PROPERTY'
-    | 'SOX_PROTECTED_DUMMY_TYPE'
-    | 'BLOG_LISTING_PAGE'
+    | 'PLAYLIST'
+    | 'PLAYLIST_FOLDER'
+    | 'PODCAST_EPISODE'
+    | 'PORTAL'
+    | 'PORTAL_OBJECT_SYNC_MESSAGE'
+    | 'POSTAL_MAIL'
+    | 'PRIVACY_SCANNER_COOKIE'
+    | 'PRODUCT'
+    | 'PRODUCT_OR_FOLDER'
+    | 'PROPERTY_INFO'
+    | 'PROSPECTING_AGENT_CONTACT_ASSIGNMENT'
+    | 'PUBLISHING_TASK'
     | 'QUARANTINED_SUBMISSION'
-    | 'PAYMENT_SCHEDULE'
-    | 'PAYMENT_SCHEDULE_INSTALLMENT'
-    | 'MARKETING_CAMPAIGN_UTM'
-    | 'DISCOUNT_TEMPLATE'
-    | 'DISCOUNT_CODE'
-    | 'FEEDBACK_SURVEY'
-    | 'CMS_URL'
+    | 'QUOTA'
+    | 'QUOTE'
+    | 'QUOTE_FIELD'
+    | 'QUOTE_MODULE'
+    | 'QUOTE_MODULE_FIELD'
+    | 'QUOTE_TEMPLATE'
+    | 'RESTORABLE_CRM_OBJECT'
+    | 'ROSTER'
+    | 'ROSTER_MEMBER'
+    | 'SALES_DOCUMENT'
     | 'SALES_TASK'
     | 'SALES_WORKLOAD'
-    | 'USER'
-    | 'POSTAL_MAIL'
-    | 'SCHEMAS_BACKEND_TEST'
-    | 'PAYMENT_LINK'
-    | 'SUBMISSION_TAG'
-    | 'CAMPAIGN_STEP'
+    | 'SALESFORCE_SYNC_ERROR'
     | 'SCHEDULING_PAGE'
+    | 'SCHEMAS_BACKEND_TEST'
+    | 'SCORE_CONFIGURATION'
+    | 'SEQUENCE'
+    | 'SEQUENCE_ENROLLMENT'
+    | 'SEQUENCE_STEP'
+    | 'SEQUENCE_STEP_ENROLLMENT'
+    | 'SERVICE'
+    | 'SITE_PAGE'
+    | 'SNIPPET'
+    | 'SOCIAL_BROADCAST'
+    | 'SOCIAL_CHANNEL'
+    | 'SOCIAL_POST'
+    | 'SOCIAL_PROFILE'
+    | 'SOX_PROTECTED_DUMMY_TYPE'
     | 'SOX_PROTECTED_TEST_TYPE'
-    | 'ORDER'
-    | 'MARKETING_SMS'
-    | 'PARTNER_ACCOUNT'
-    | 'CAMPAIGN_TEMPLATE'
-    | 'CAMPAIGN_TEMPLATE_STEP'
-    | 'PLAYLIST'
-    | 'CLIP'
-    | 'CAMPAIGN_BUDGET_ITEM'
-    | 'CAMPAIGN_SPEND_ITEM'
-    | 'MIC'
-    | 'CONTENT_AUDIT'
-    | 'CONTENT_AUDIT_PAGE'
-    | 'PLAYLIST_FOLDER'
-    | 'LEAD'
-    | 'ABANDONED_CART'
-    | 'EXTERNAL_WEB_URL'
+    | 'SUBMISSION_TAG'
+    | 'SUBSCRIPTION'
+    | 'TASK'
+    | 'TASK_TEMPLATE'
+    | 'TAX'
+    | 'TEMPLATE'
+    | 'TICKET'
+    | 'UNKNOWN'
+    | 'UNSUBSCRIBE'
+    | 'USER'
     | 'VIEW'
     | 'VIEW_BLOCK'
-    | 'ROSTER'
-    | 'CART'
-    | 'AUTOMATION_PLATFORM_FLOW_ACTION'
-    | 'SOCIAL_PROFILE'
-    | 'PARTNER_CLIENT'
-    | 'ROSTER_MEMBER'
-    | 'MARKETING_EVENT_ATTENDANCE'
-    | 'ALL_PAGES'
-    | 'AI_FORECAST'
-    | 'CRM_PIPELINES_DUMMY_TYPE'
-    | 'KNOWLEDGE_ARTICLE'
-    | 'PROPERTY_INFO'
-    | 'DATA_PRIVACY_CONSENT'
-    | 'GOAL_TEMPLATE'
-    | 'SCORE_CONFIGURATION'
-    | 'AUDIENCE'
-    | 'PARTNER_CLIENT_REVENUE'
-    | 'AUTOMATION_JOURNEY'
-    | 'COMBO_EVENT_CONFIGURATION'
-    | 'CRM_OBJECTS_DUMMY_TYPE'
-    | 'CASE_STUDY'
-    | 'SERVICE'
-    | 'PODCAST_EPISODE'
-    | 'PARTNER_SERVICE'
-    | 'PROSPECTING_AGENT_CONTACT_ASSIGNMENT'
-    | 'UNKNOWN';
+    | 'WEB_INTERACTIVE';
 
   /**
    * Whether the property is searchable globaly.
@@ -6119,29 +6119,29 @@ export interface Property {
    * "ip_address", "physical_address", or "postal_code".
    */
   textDisplayHint:
-    | 'unformatted_single_line'
-    | 'multi_line'
-    | 'email'
-    | 'phone_number'
     | 'domain_name'
+    | 'email'
     | 'ip_address'
+    | 'multi_line'
+    | 'phone_number'
     | 'physical_address'
-    | 'postal_code';
+    | 'postal_code'
+    | 'unformatted_single_line';
 
   /**
    * The data type of the property, such as string or number.
    */
   type:
-    | 'string'
-    | 'number'
     | 'bool'
+    | 'currency_number'
+    | 'date'
     | 'datetime'
     | 'enumeration'
-    | 'date'
-    | 'phone_number'
-    | 'currency_number'
     | 'json'
-    | 'object_coordinates';
+    | 'number'
+    | 'object_coordinates'
+    | 'phone_number'
+    | 'string';
 
   /**
    * The timestamp when the property was last updated, in ISO 8601 format.
@@ -6176,7 +6176,7 @@ export interface Property1 {
 
   createdUserId?: string;
 
-  dataSensitivity?: 'non_sensitive' | 'sensitive' | 'highly_sensitive';
+  dataSensitivity?: 'highly_sensitive' | 'non_sensitive' | 'sensitive';
 
   dateDisplayHint?: 'absolute' | 'absolute_with_relative' | 'time_since' | 'time_until';
 
@@ -6309,7 +6309,7 @@ export interface PropertyDefinition {
 }
 
 export interface PropertyDefinitionSource {
-  type: 'GLOBAL' | 'OBJECT_TYPE' | 'HAVEN_BRANCH' | 'PORTAL';
+  type: 'GLOBAL' | 'HAVEN_BRANCH' | 'OBJECT_TYPE' | 'PORTAL';
 
   name?: string;
 }

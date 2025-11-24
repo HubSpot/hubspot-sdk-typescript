@@ -562,7 +562,7 @@ export interface PublicListConversionInactivity {
 
   offset: number;
 
-  timeUnit: 'DAY' | 'WEEK' | 'MONTH';
+  timeUnit: 'DAY' | 'MONTH' | 'WEEK';
 }
 
 export interface PublicListConversionResponse {
@@ -913,7 +913,7 @@ export declare namespace ListScheduleConversionParams {
 
     offset: number;
 
-    timeUnit: 'DAY' | 'WEEK' | 'MONTH';
+    timeUnit: 'DAY' | 'MONTH' | 'WEEK';
   }
 }
 

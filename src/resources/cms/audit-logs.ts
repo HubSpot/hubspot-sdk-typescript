@@ -41,7 +41,7 @@ export interface PublicAuditLog {
    * The type of event that took place (CREATED, UPDATED, PUBLISHED, DELETED,
    * UNPUBLISHED).
    */
-  event: 'CREATED' | 'UPDATED' | 'PUBLISHED' | 'DELETED' | 'UNPUBLISHED' | 'RESTORE';
+  event: 'CREATED' | 'DELETED' | 'PUBLISHED' | 'RESTORE' | 'UNPUBLISHED' | 'UPDATED';
 
   /**
    * The name of the user who caused the event.
@@ -64,24 +64,24 @@ export interface PublicAuditLog {
   objectType:
     | 'BLOG'
     | 'BLOG_POST'
-    | 'LANDING_PAGE'
-    | 'WEBSITE_PAGE'
-    | 'TEMPLATE'
-    | 'MODULE'
-    | 'GLOBAL_MODULE'
-    | 'SERVERLESS_FUNCTION'
-    | 'DOMAIN'
-    | 'URL_MAPPING'
-    | 'EMAIL'
     | 'CONTENT_SETTINGS'
-    | 'HUBDB_TABLE'
-    | 'KNOWLEDGE_BASE_ARTICLE'
-    | 'KNOWLEDGE_BASE'
-    | 'THEME'
     | 'CSS'
-    | 'JS'
     | 'CTA'
-    | 'FILE';
+    | 'DOMAIN'
+    | 'EMAIL'
+    | 'FILE'
+    | 'GLOBAL_MODULE'
+    | 'HUBDB_TABLE'
+    | 'JS'
+    | 'KNOWLEDGE_BASE'
+    | 'KNOWLEDGE_BASE_ARTICLE'
+    | 'LANDING_PAGE'
+    | 'MODULE'
+    | 'SERVERLESS_FUNCTION'
+    | 'TEMPLATE'
+    | 'THEME'
+    | 'URL_MAPPING'
+    | 'WEBSITE_PAGE';
 
   /**
    * The timestamp at which the event occurred.
@@ -93,6 +93,11 @@ export interface PublicAuditLog {
    */
   userId: string;
 
+  /**
+   * Supplementary metadata associated with the audit log entry. It provides
+   * additional context about the audited event (ex: rows deleted/updated for a HubDB
+   * event, the specific fields that were changed for a Content Settings event).
+   */
   meta?: unknown;
 }
 

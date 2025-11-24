@@ -118,7 +118,7 @@ describe('resource files', () => {
     await expect(
       client.files.files.getSignedURL(
         '321669910225',
-        { expirationSeconds: 0, size: 'thumb', upscale: true },
+        { expirationSeconds: 0, size: 'icon', upscale: true },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Hubspot.NotFoundError);
@@ -126,7 +126,7 @@ describe('resource files', () => {
 
   // Prism tests are disabled
   test.skip('importFromURLAsync: only required params', async () => {
-    const responsePromise = client.files.files.importFromURLAsync({ access: 'PUBLIC_INDEXABLE', url: 'url' });
+    const responsePromise = client.files.files.importFromURLAsync({ access: 'HIDDEN_INDEXABLE', url: 'url' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -139,7 +139,7 @@ describe('resource files', () => {
   // Prism tests are disabled
   test.skip('importFromURLAsync: required and optional params', async () => {
     const response = await client.files.files.importFromURLAsync({
-      access: 'PUBLIC_INDEXABLE',
+      access: 'HIDDEN_INDEXABLE',
       url: 'url',
       duplicateValidationScope: 'ENTIRE_PORTAL',
       duplicateValidationStrategy: 'NONE',

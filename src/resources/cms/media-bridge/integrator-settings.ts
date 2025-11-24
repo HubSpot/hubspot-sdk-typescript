@@ -105,13 +105,13 @@ export class IntegratorSettings extends APIResource {
    * ```ts
    * const objectDefinitionResponse =
    *   await client.cms.mediaBridge.integratorSettings.getObjectDefinitionsByMediaType(
-   *     'VIDEO',
+   *     'AUDIO',
    *     { appId: 0 },
    *   );
    * ```
    */
   getObjectDefinitionsByMediaType(
-    mediaType: 'VIDEO' | 'AUDIO' | 'DOCUMENT' | 'OTHER' | 'IMAGE',
+    mediaType: 'AUDIO' | 'DOCUMENT' | 'IMAGE' | 'OTHER' | 'VIDEO',
     params: IntegratorSettingGetObjectDefinitionsByMediaTypeParams,
     options?: RequestOptions,
   ): APIPromise<MediaBridgeAPI.ObjectDefinitionResponse> {
@@ -318,7 +318,7 @@ export interface IntegratorSettingUpdateAppNameParams {
 }
 
 export interface IntegratorSettingUpdateEventVisibilitySettingsParams {
-  eventType: 'ALL' | 'MEDIA_PLAYS' | 'MEDIA_PLAYS_PERCENT' | 'ATTENTION_SPAN';
+  eventType: 'ALL' | 'ATTENTION_SPAN' | 'MEDIA_PLAYS' | 'MEDIA_PLAYS_PERCENT';
 
   updatedAt: number;
 

@@ -79,7 +79,7 @@ export interface StatisticGetHistogramParams {
   /**
    * The interval to aggregate statistics for.
    */
-  interval?: 'YEAR' | 'QUARTER' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR' | 'QUARTER_HOUR' | 'MINUTE' | 'SECOND';
+  interval?: 'DAY' | 'HOUR' | 'MINUTE' | 'MONTH' | 'QUARTER' | 'QUARTER_HOUR' | 'SECOND' | 'WEEK' | 'YEAR';
 
   /**
    * The start timestamp of the time span, in ISO8601 representation.

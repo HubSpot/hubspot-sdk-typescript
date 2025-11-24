@@ -52,7 +52,7 @@ describe('resource subscriptions', () => {
     const response = await client.marketing.subscriptions.subscribe({
       emailAddress: 'emailAddress',
       subscriptionId: 'subscriptionId',
-      legalBasis: 'LEGITIMATE_INTEREST_PQL',
+      legalBasis: 'CONSENT_WITH_NOTICE',
       legalBasisExplanation: 'legalBasisExplanation',
     });
   });
@@ -77,7 +77,7 @@ describe('resource subscriptions', () => {
     const response = await client.marketing.subscriptions.unsubscribe({
       emailAddress: 'emailAddress',
       subscriptionId: 'subscriptionId',
-      legalBasis: 'LEGITIMATE_INTEREST_PQL',
+      legalBasis: 'CONSENT_WITH_NOTICE',
       legalBasisExplanation: 'legalBasisExplanation',
     });
   });

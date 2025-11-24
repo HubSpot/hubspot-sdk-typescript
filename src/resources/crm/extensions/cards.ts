@@ -150,11 +150,11 @@ export interface CardActions {
 }
 
 export interface CardAuditResponse {
-  actionType: 'CREATE' | 'UPDATE' | 'DELETE';
+  actionType: 'CREATE' | 'DELETE' | 'UPDATE';
 
   applicationId: number;
 
-  authSource: 'INTERNAL' | 'APP' | 'EXTERNAL';
+  authSource: 'APP' | 'EXTERNAL' | 'INTERNAL';
 
   changedAt: number;
 
@@ -206,7 +206,7 @@ export interface CardDisplayProperty {
   /**
    * Type of data represented by this property.
    */
-  dataType: 'BOOLEAN' | 'CURRENCY' | 'DATE' | 'DATETIME' | 'EMAIL' | 'LINK' | 'NUMERIC' | 'STRING' | 'STATUS';
+  dataType: 'BOOLEAN' | 'CURRENCY' | 'DATE' | 'DATETIME' | 'EMAIL' | 'LINK' | 'NUMERIC' | 'STATUS' | 'STRING';
 
   /**
    * The label for this property as you'd like it displayed to users.
@@ -275,7 +275,7 @@ export interface CardObjectTypeBody {
   /**
    * A CRM object type where this card should be displayed.
    */
-  name: 'contacts' | 'deals' | 'companies' | 'tickets' | 'marketing_events';
+  name: 'companies' | 'contacts' | 'deals' | 'marketing_events' | 'tickets';
 
   /**
    * An array of properties that should be sent to this card's target URL when the
@@ -327,7 +327,7 @@ export interface DisplayOption {
   /**
    * The type of status.
    */
-  type: 'DEFAULT' | 'SUCCESS' | 'WARNING' | 'DANGER' | 'INFO';
+  type: 'DANGER' | 'DEFAULT' | 'INFO' | 'SUCCESS' | 'WARNING';
 }
 
 export interface IFrameActionBody {
@@ -400,8 +400,8 @@ export interface ObjectToken {
     | 'EMAIL'
     | 'LINK'
     | 'NUMERIC'
-    | 'STRING'
-    | 'STATUS';
+    | 'STATUS'
+    | 'STRING';
 
   label?: string;
 

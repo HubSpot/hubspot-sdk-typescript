@@ -126,12 +126,12 @@ export interface PublicSubscriptionStatus {
    * Where the status is determined from e.g. PORTAL_WIDE_STATUS if the contact opted
    * out from the portal.
    */
-  sourceOfStatus: 'PORTAL_WIDE_STATUS' | 'BRAND_WIDE_STATUS' | 'SUBSCRIPTION_STATUS';
+  sourceOfStatus: 'BRAND_WIDE_STATUS' | 'PORTAL_WIDE_STATUS' | 'SUBSCRIPTION_STATUS';
 
   /**
    * Whether the contact is subscribed.
    */
-  status: 'SUBSCRIBED' | 'NOT_SUBSCRIBED';
+  status: 'NOT_SUBSCRIBED' | 'SUBSCRIBED';
 
   /**
    * The ID of the brand that the subscription is associated with, if there is one.
@@ -142,13 +142,13 @@ export interface PublicSubscriptionStatus {
    * The legal reason for the current status of the subscription.
    */
   legalBasis?:
-    | 'LEGITIMATE_INTEREST_PQL'
-    | 'LEGITIMATE_INTEREST_CLIENT'
-    | 'PERFORMANCE_OF_CONTRACT'
     | 'CONSENT_WITH_NOTICE'
+    | 'LEGITIMATE_INTEREST_CLIENT'
+    | 'LEGITIMATE_INTEREST_OTHER'
+    | 'LEGITIMATE_INTEREST_PQL'
     | 'NON_GDPR'
-    | 'PROCESS_AND_STORE'
-    | 'LEGITIMATE_INTEREST_OTHER';
+    | 'PERFORMANCE_OF_CONTRACT'
+    | 'PROCESS_AND_STORE';
 
   /**
    * A more detailed explanation to go with the legal basis.
@@ -189,13 +189,13 @@ export interface PublicUpdateSubscriptionStatusRequest {
    * portals).
    */
   legalBasis?:
-    | 'LEGITIMATE_INTEREST_PQL'
-    | 'LEGITIMATE_INTEREST_CLIENT'
-    | 'PERFORMANCE_OF_CONTRACT'
     | 'CONSENT_WITH_NOTICE'
+    | 'LEGITIMATE_INTEREST_CLIENT'
+    | 'LEGITIMATE_INTEREST_OTHER'
+    | 'LEGITIMATE_INTEREST_PQL'
     | 'NON_GDPR'
-    | 'PROCESS_AND_STORE'
-    | 'LEGITIMATE_INTEREST_OTHER';
+    | 'PERFORMANCE_OF_CONTRACT'
+    | 'PROCESS_AND_STORE';
 
   /**
    * A more detailed explanation to go with the legal basis (required for GDPR
@@ -285,13 +285,13 @@ export interface SubscriptionSubscribeParams {
    * portals).
    */
   legalBasis?:
-    | 'LEGITIMATE_INTEREST_PQL'
-    | 'LEGITIMATE_INTEREST_CLIENT'
-    | 'PERFORMANCE_OF_CONTRACT'
     | 'CONSENT_WITH_NOTICE'
+    | 'LEGITIMATE_INTEREST_CLIENT'
+    | 'LEGITIMATE_INTEREST_OTHER'
+    | 'LEGITIMATE_INTEREST_PQL'
     | 'NON_GDPR'
-    | 'PROCESS_AND_STORE'
-    | 'LEGITIMATE_INTEREST_OTHER';
+    | 'PERFORMANCE_OF_CONTRACT'
+    | 'PROCESS_AND_STORE';
 
   /**
    * A more detailed explanation to go with the legal basis (required for GDPR
@@ -316,13 +316,13 @@ export interface SubscriptionUnsubscribeParams {
    * portals).
    */
   legalBasis?:
-    | 'LEGITIMATE_INTEREST_PQL'
-    | 'LEGITIMATE_INTEREST_CLIENT'
-    | 'PERFORMANCE_OF_CONTRACT'
     | 'CONSENT_WITH_NOTICE'
+    | 'LEGITIMATE_INTEREST_CLIENT'
+    | 'LEGITIMATE_INTEREST_OTHER'
+    | 'LEGITIMATE_INTEREST_PQL'
     | 'NON_GDPR'
-    | 'PROCESS_AND_STORE'
-    | 'LEGITIMATE_INTEREST_OTHER';
+    | 'PERFORMANCE_OF_CONTRACT'
+    | 'PROCESS_AND_STORE';
 
   /**
    * A more detailed explanation to go with the legal basis (required for GDPR

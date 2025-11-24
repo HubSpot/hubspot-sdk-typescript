@@ -26,12 +26,16 @@ describe('resource oauth', () => {
     await expect(
       client.auth.oauth.createAccessToken(
         {
+          query_client_secret: 'client_secret',
+          query_refresh_token: 'refresh_token',
           client_id: 'client_id',
-          client_secret: 'client_secret',
+          body_client_secret: 'client_secret',
           code: 'code',
+          code_verifier: 'code_verifier',
           grant_type: 'authorization_code',
           redirect_uri: 'redirect_uri',
-          refresh_token: 'refresh_token',
+          body_refresh_token: 'refresh_token',
+          scope: 'scope',
         },
         { path: '/_stainless_unknown_path' },
       ),

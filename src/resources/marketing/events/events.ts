@@ -49,7 +49,7 @@ export class Events extends APIResource {
    * const marketingEventDefaultResponse = await client.marketing.events.create({
    *   customProperties: [
    *     {
-   *       dataSensitivity: 'none',
+   *       dataSensitivity: 'high',
    *       isEncrypted: true,
    *       isLargeValue: true,
    *       name: 'name',
@@ -57,7 +57,7 @@ export class Events extends APIResource {
    *       requestId: 'requestId',
    *       selectedByUser: true,
    *       selectedByUserTimestamp: 0,
-   *       source: 'UNKNOWN',
+   *       source: 'ACADEMY',
    *       sourceId: 'sourceId',
    *       sourceLabel: 'sourceLabel',
    *       sourceMetadata: 'sourceMetadata',
@@ -91,7 +91,7 @@ export class Events extends APIResource {
    *   await client.marketing.events.update('objectId', {
    *     customProperties: [
    *       {
-   *         dataSensitivity: 'none',
+   *         dataSensitivity: 'high',
    *         isEncrypted: true,
    *         isLargeValue: true,
    *         name: 'name',
@@ -99,7 +99,7 @@ export class Events extends APIResource {
    *         requestId: 'requestId',
    *         selectedByUser: true,
    *         selectedByUserTimestamp: 0,
-   *         source: 'UNKNOWN',
+   *         source: 'ACADEMY',
    *         sourceId: 'sourceId',
    *         sourceLabel: 'sourceLabel',
    *         sourceMetadata: 'sourceMetadata',
@@ -435,7 +435,7 @@ export class Events extends APIResource {
    *     externalAccountId: 'externalAccountId',
    *     customProperties: [
    *       {
-   *         dataSensitivity: 'none',
+   *         dataSensitivity: 'high',
    *         isEncrypted: true,
    *         isLargeValue: true,
    *         name: 'name',
@@ -443,7 +443,7 @@ export class Events extends APIResource {
    *         requestId: 'requestId',
    *         selectedByUser: true,
    *         selectedByUserTimestamp: 0,
-   *         source: 'UNKNOWN',
+   *         source: 'ACADEMY',
    *         sourceId: 'sourceId',
    *         sourceLabel: 'sourceLabel',
    *         sourceMetadata: 'sourceMetadata',
@@ -513,7 +513,7 @@ export class Events extends APIResource {
    *   await client.marketing.events.upsertByExternalEventID('externalEventId', {
    *     customProperties: [
    *       {
-   *         dataSensitivity: 'none',
+   *         dataSensitivity: 'high',
    *         isEncrypted: true,
    *         isLargeValue: true,
    *         name: 'name',
@@ -521,7 +521,7 @@ export class Events extends APIResource {
    *         requestId: 'requestId',
    *         selectedByUser: true,
    *         selectedByUserTimestamp: 0,
-   *         source: 'UNKNOWN',
+   *         source: 'ACADEMY',
    *         sourceId: 'sourceId',
    *         sourceLabel: 'sourceLabel',
    *         sourceMetadata: 'sourceMetadata',
@@ -703,7 +703,7 @@ export interface BatchResponseMarketingEventPublicDefaultResponse {
 
   startedAt: string;
 
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   errors?: Array<Shared.StandardError>;
 
@@ -721,7 +721,7 @@ export interface BatchResponseMarketingEventPublicDefaultResponseV2 {
 
   startedAt: string;
 
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   links?: { [key: string]: string };
 
@@ -735,7 +735,7 @@ export interface BatchResponseMarketingEventPublicDefaultResponseV2WithErrors {
 
   startedAt: string;
 
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   errors?: Array<Shared.StandardError>;
 
@@ -753,7 +753,7 @@ export interface BatchResponseSubscriberEmailResponse {
 
   startedAt: string;
 
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   errors?: Array<Shared.StandardError>;
 
@@ -771,7 +771,7 @@ export interface BatchResponseSubscriberVidResponse {
 
   startedAt: string;
 
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   errors?: Array<Shared.StandardError>;
 
@@ -1400,7 +1400,7 @@ export interface ParticipationBreakdown {
 }
 
 export interface ParticipationProperties {
-  attendanceState: 'REGISTERED' | 'ATTENDED' | 'CANCELLED' | 'EMPTY' | 'NO_SHOW';
+  attendanceState: 'ATTENDED' | 'CANCELLED' | 'EMPTY' | 'NO_SHOW' | 'REGISTERED';
 
   occurredAt: number;
 
@@ -1419,7 +1419,7 @@ export interface PropertyValue {
    * The sensitivity level of the property, such as "non_sensitive", "sensitive", and
    * "highly_sensitive".
    */
-  dataSensitivity: 'none' | 'standard' | 'high';
+  dataSensitivity: 'high' | 'none' | 'standard';
 
   /**
    * Whether the property value is encrypted.
@@ -1454,105 +1454,105 @@ export interface PropertyValue {
    * The origin of the property value, such as "IMPORT" or "API".
    */
   source:
-    | 'UNKNOWN'
-    | 'IMPORT'
-    | 'API'
-    | 'FORM'
-    | 'ANALYTICS'
-    | 'MIGRATION'
-    | 'SALESFORCE'
-    | 'INTEGRATION'
-    | 'CONTACTS_WEB'
-    | 'WAL_INCREMENTAL'
-    | 'TASK'
-    | 'EMAIL'
-    | 'WORKFLOWS'
-    | 'CALCULATED'
-    | 'SOCIAL'
-    | 'BATCH_UPDATE'
-    | 'SIGNALS'
-    | 'BIDEN'
-    | 'DEFAULT'
-    | 'COMPANIES'
-    | 'DEALS'
-    | 'ASSISTS'
-    | 'PRESENTATIONS'
-    | 'TALLY'
-    | 'SIDEKICK'
-    | 'CRM_UI'
-    | 'MERGE_CONTACTS'
-    | 'PORTAL_USER_ASSOCIATOR'
-    | 'INTEGRATIONS_PLATFORM'
-    | 'BCC_TO_CRM'
-    | 'FORWARD_TO_CRM'
-    | 'ENGAGEMENTS'
-    | 'SALES'
-    | 'HEISENBERG'
-    | 'LEADIN'
-    | 'GMAIL_INTEGRATION'
     | 'ACADEMY'
-    | 'SALES_MESSAGES'
-    | 'AVATARS_SERVICE'
-    | 'MERGE_COMPANIES'
-    | 'SEQUENCES'
-    | 'COMPANY_FAMILIES'
-    | 'MOBILE_IOS'
-    | 'MOBILE_ANDROID'
-    | 'CONTACTS'
-    | 'ASSOCIATIONS'
-    | 'EXTENSION'
-    | 'SUCCESS'
-    | 'BOT'
-    | 'INTEGRATIONS_SYNC'
-    | 'AUTOMATION_PLATFORM'
-    | 'CONVERSATIONS'
-    | 'EMAIL_INTEGRATION'
-    | 'CONTENT_MEMBERSHIP'
-    | 'QUOTES'
-    | 'BET_ASSIGNMENT'
-    | 'QUOTAS'
-    | 'BET_CRM_CONNECTOR'
-    | 'MEETINGS'
-    | 'MERGE_OBJECTS'
-    | 'RECYCLING_BIN'
+    | 'ACCEPTANCE_TEST'
     | 'ADS'
     | 'AI_GROUP'
-    | 'COMMUNICATOR'
-    | 'SETTINGS'
-    | 'PROPERTY_SETTINGS'
-    | 'PIPELINE_SETTINGS'
-    | 'COMPANY_INSIGHTS'
-    | 'BEHAVIORAL_EVENTS'
-    | 'PAYMENTS'
-    | 'GOALS'
-    | 'PORTAL_OBJECT_SYNC'
+    | 'ANALYTICS'
+    | 'API'
     | 'APPROVALS'
-    | 'FILE_MANAGER'
-    | 'MARKETPLACE'
-    | 'INTERNAL_PROCESSING'
-    | 'FORECASTING'
-    | 'SLACK_INTEGRATION'
-    | 'CRM_UI_BULK_ACTION'
-    | 'WORKFLOW_CONTACT_DELETE_ACTION'
-    | 'ACCEPTANCE_TEST'
-    | 'PLAYBOOKS'
-    | 'CHATSPOT'
-    | 'FLYWHEEL_PRODUCT_DATA_SYNC'
-    | 'HELP_DESK'
-    | 'BILLING'
-    | 'DATA_ENRICHMENT'
+    | 'ASSISTS'
+    | 'ASSOCIATIONS'
     | 'AUTOMATION_JOURNEY'
-    | 'MICROAPPS'
-    | 'INTENT'
-    | 'PROSPECTING_AGENT'
+    | 'AUTOMATION_PLATFORM'
+    | 'AVATARS_SERVICE'
+    | 'BATCH_UPDATE'
+    | 'BCC_TO_CRM'
+    | 'BEHAVIORAL_EVENTS'
+    | 'BET_ASSIGNMENT'
+    | 'BET_CRM_CONNECTOR'
+    | 'BIDEN'
+    | 'BILLING'
+    | 'BOT'
+    | 'CALCULATED'
     | 'CENTRAL_EXCHANGE_RATES'
-    | 'HELP_DESK_AI'
-    | 'CONVERSATIONAL_ENRICHMENT'
-    | 'CRM_PROCESSES_PLATFORM'
+    | 'CHATSPOT'
     | 'CLONE_OBJECTS'
-    | 'MARKET_SOURCING'
+    | 'COMMUNICATOR'
+    | 'COMPANIES'
+    | 'COMPANY_FAMILIES'
+    | 'COMPANY_INSIGHTS'
+    | 'CONTACTS'
+    | 'CONTACTS_WEB'
+    | 'CONTENT_MEMBERSHIP'
+    | 'CONVERSATIONAL_ENRICHMENT'
+    | 'CONVERSATIONS'
+    | 'CRM_PROCESSES_PLATFORM'
+    | 'CRM_UI'
+    | 'CRM_UI_BULK_ACTION'
+    | 'DATA_ENRICHMENT'
     | 'DATASET'
-    | 'PROPERTY_RESTORE';
+    | 'DEALS'
+    | 'DEFAULT'
+    | 'EMAIL'
+    | 'EMAIL_INTEGRATION'
+    | 'ENGAGEMENTS'
+    | 'EXTENSION'
+    | 'FILE_MANAGER'
+    | 'FLYWHEEL_PRODUCT_DATA_SYNC'
+    | 'FORECASTING'
+    | 'FORM'
+    | 'FORWARD_TO_CRM'
+    | 'GMAIL_INTEGRATION'
+    | 'GOALS'
+    | 'HEISENBERG'
+    | 'HELP_DESK'
+    | 'HELP_DESK_AI'
+    | 'IMPORT'
+    | 'INTEGRATION'
+    | 'INTEGRATIONS_PLATFORM'
+    | 'INTEGRATIONS_SYNC'
+    | 'INTENT'
+    | 'INTERNAL_PROCESSING'
+    | 'LEADIN'
+    | 'MARKET_SOURCING'
+    | 'MARKETPLACE'
+    | 'MEETINGS'
+    | 'MERGE_COMPANIES'
+    | 'MERGE_CONTACTS'
+    | 'MERGE_OBJECTS'
+    | 'MICROAPPS'
+    | 'MIGRATION'
+    | 'MOBILE_ANDROID'
+    | 'MOBILE_IOS'
+    | 'PAYMENTS'
+    | 'PIPELINE_SETTINGS'
+    | 'PLAYBOOKS'
+    | 'PORTAL_OBJECT_SYNC'
+    | 'PORTAL_USER_ASSOCIATOR'
+    | 'PRESENTATIONS'
+    | 'PROPERTY_RESTORE'
+    | 'PROPERTY_SETTINGS'
+    | 'PROSPECTING_AGENT'
+    | 'QUOTAS'
+    | 'QUOTES'
+    | 'RECYCLING_BIN'
+    | 'SALES'
+    | 'SALES_MESSAGES'
+    | 'SALESFORCE'
+    | 'SEQUENCES'
+    | 'SETTINGS'
+    | 'SIDEKICK'
+    | 'SIGNALS'
+    | 'SLACK_INTEGRATION'
+    | 'SOCIAL'
+    | 'SUCCESS'
+    | 'TALLY'
+    | 'TASK'
+    | 'UNKNOWN'
+    | 'WAL_INCREMENTAL'
+    | 'WORKFLOW_CONTACT_DELETE_ACTION'
+    | 'WORKFLOWS';
 
   /**
    * The ID of the property source indicating where it was created.

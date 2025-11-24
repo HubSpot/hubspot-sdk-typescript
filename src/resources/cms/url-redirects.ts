@@ -316,6 +316,9 @@ export interface URLRedirectListParams extends PageParams {
    */
   createdBefore?: string;
 
+  /**
+   * A query parameter to specify the order in which the URL redirects are returned.
+   */
   sort?: Array<string>;
 
   /**
