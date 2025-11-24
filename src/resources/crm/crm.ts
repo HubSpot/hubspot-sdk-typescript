@@ -76,6 +76,14 @@ import {
   PublicPropertyValidationRuleMap,
   PublicPropertyValidationRuleUpdate,
 } from './property-validations';
+import * as SubscriptionsAPI from './subscriptions';
+import {
+  PauseSubscriptionRequest,
+  SubscriptionPauseParams,
+  SubscriptionUnpauseParams,
+  Subscriptions,
+  UnpauseRequest,
+} from './subscriptions';
 import * as AssociationsAPI from './associations/associations';
 import {
   Associations,
@@ -230,6 +238,7 @@ export class Crm extends APIResource {
   properties: PropertiesAPI.Properties = new PropertiesAPI.Properties(this._client);
   propertyValidations: PropertyValidationsAPI.PropertyValidations =
     new PropertyValidationsAPI.PropertyValidations(this._client);
+  subscriptions: SubscriptionsAPI.Subscriptions = new SubscriptionsAPI.Subscriptions(this._client);
   timeline: TimelineAPI.Timeline = new TimelineAPI.Timeline(this._client);
   users: UsersAPI.Users = new UsersAPI.Users(this._client);
 }
@@ -947,6 +956,7 @@ Crm.Owners = Owners;
 Crm.Pipelines = Pipelines;
 Crm.Properties = Properties;
 Crm.PropertyValidations = PropertyValidations;
+Crm.Subscriptions = Subscriptions;
 Crm.Timeline = Timeline;
 Crm.Users = Users;
 
@@ -1170,6 +1180,14 @@ export declare namespace Crm {
     type PublicPropertyValidationRuleUpdate as PublicPropertyValidationRuleUpdate,
     type PropertyValidationCrmV3PropertyValidationsObjectTypeIDPropertyNameRuleTypeRuleTypeParams as PropertyValidationCrmV3PropertyValidationsObjectTypeIDPropertyNameRuleTypeRuleTypeParams,
     type PropertyValidationGetParams as PropertyValidationGetParams,
+  };
+
+  export {
+    Subscriptions as Subscriptions,
+    type PauseSubscriptionRequest as PauseSubscriptionRequest,
+    type UnpauseRequest as UnpauseRequest,
+    type SubscriptionPauseParams as SubscriptionPauseParams,
+    type SubscriptionUnpauseParams as SubscriptionUnpauseParams,
   };
 
   export {

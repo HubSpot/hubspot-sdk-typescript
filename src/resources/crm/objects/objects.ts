@@ -275,6 +275,16 @@ import {
   ProductUpdateParams,
   Products,
 } from './products/products';
+import * as ProjectsAPI from './projects/projects';
+import {
+  ProjectCreateParams,
+  ProjectGetParams,
+  ProjectListParams,
+  ProjectMergeParams,
+  ProjectSearchParams,
+  ProjectUpdateParams,
+  Projects,
+} from './projects/projects';
 import * as QuotesAPI from './quotes/quotes';
 import {
   QuoteCreateParams,
@@ -354,6 +364,7 @@ export class Objects extends APIResource {
   partnerServices: PartnerServicesAPI.PartnerServices = new PartnerServicesAPI.PartnerServices(this._client);
   postalMail: PostalMailAPI.PostalMail = new PostalMailAPI.PostalMail(this._client);
   products: ProductsAPI.Products = new ProductsAPI.Products(this._client);
+  projects: ProjectsAPI.Projects = new ProjectsAPI.Projects(this._client);
   quotes: QuotesAPI.Quotes = new QuotesAPI.Quotes(this._client);
   schemas: SchemasAPI.Schemas = new SchemasAPI.Schemas(this._client);
   services: ServicesAPI.Services = new ServicesAPI.Services(this._client);
@@ -390,6 +401,7 @@ Objects.PartnerClients = PartnerClients;
 Objects.PartnerServices = PartnerServices;
 Objects.PostalMail = PostalMail;
 Objects.Products = Products;
+Objects.Projects = Projects;
 Objects.Quotes = Quotes;
 Objects.Schemas = Schemas;
 Objects.Services = Services;
@@ -655,6 +667,16 @@ export declare namespace Objects {
     type ProductListParams as ProductListParams,
     type ProductGetParams as ProductGetParams,
     type ProductSearchParams as ProductSearchParams,
+  };
+
+  export {
+    Projects as Projects,
+    type ProjectCreateParams as ProjectCreateParams,
+    type ProjectUpdateParams as ProjectUpdateParams,
+    type ProjectListParams as ProjectListParams,
+    type ProjectGetParams as ProjectGetParams,
+    type ProjectMergeParams as ProjectMergeParams,
+    type ProjectSearchParams as ProjectSearchParams,
   };
 
   export {

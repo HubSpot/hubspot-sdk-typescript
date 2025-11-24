@@ -934,28 +934,102 @@ Methods:
 
 # Conversations
 
+Types:
+
+- <code><a href="./src/resources/conversations/conversations.ts">AgentActor</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">BatchResponsePublicActor</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">BatchResponsePublicActorWithErrors</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">BotActor</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">CollectionResponsePublicMessageForwardPaging</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">CollectionResponsePublicThreadForwardPaging</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">CollectionResponseWithTotalPublicChannelAccountForwardPaging</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">CollectionResponseWithTotalPublicChannelForwardPaging</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">CollectionResponseWithTotalPublicInboxForwardPaging</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">ContactAddress</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">ContactEmail</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">ContactName</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">ContactOrg</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">ContactPhone</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">ContactProfile</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">ContactURL</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">ConversationsPublicConversationsMessage</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">EmailActor</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">IntegratorActor</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">LlmActor</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">PublicActor</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">PublicAssignmentMessage</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">PublicChannel</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">PublicChannelAccount</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">PublicClient</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">PublicComment</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">PublicCommentEgg</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">PublicContact</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">PublicConversationsMessageEgg</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">PublicDeliveryIdentifier</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">PublicFile</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">PublicFileEgg</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">PublicInbox</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">PublicLocation</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">PublicMessage</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">PublicMessageContent</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">PublicMessageEgg</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">PublicMessageFailureDetails</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">PublicMessageHeader</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">PublicMessageStatus</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">PublicQuickReplies</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">PublicQuickRepliesEgg</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">PublicRecipient</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">PublicRecipientEgg</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">PublicSender</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">PublicSocialMediaEgg</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">PublicSocialMetadataAttachment</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">PublicThread</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">PublicThreadAssociations</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">PublicThreadInboxChange</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">PublicThreadStatusChange</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">PublicThreadUpdateRequest</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">PublicUnsupportedContent</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">PublicWelcomeMessage</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">PublicWhatsAppTemplateMetadata</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">QuickReply</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">SocialMetadata</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">SystemActor</a></code>
+- <code><a href="./src/resources/conversations/conversations.ts">VisitorActor</a></code>
+
+## Actors
+
+Methods:
+
+- <code title="post /conversations/v3/conversations/actors/batch/read">client.conversations.actors.<a href="./src/resources/conversations/actors.ts">batchRead</a>({ ...params }) -> BatchResponsePublicActor</code>
+- <code title="get /conversations/v3/conversations/actors/{actorId}">client.conversations.actors.<a href="./src/resources/conversations/actors.ts">get</a>(actorID, { ...params }) -> PublicActor</code>
+
+## ChannelAccounts
+
+Methods:
+
+- <code title="get /conversations/v3/conversations/channel-accounts">client.conversations.channelAccounts.<a href="./src/resources/conversations/channel-accounts.ts">list</a>({ ...params }) -> PublicChannelAccountsPage</code>
+- <code title="get /conversations/v3/conversations/channel-accounts/{channelAccountId}">client.conversations.channelAccounts.<a href="./src/resources/conversations/channel-accounts.ts">get</a>(channelAccountID, { ...params }) -> PublicChannelAccount</code>
+
+## Channels
+
+Methods:
+
+- <code title="get /conversations/v3/conversations/channels">client.conversations.channels.<a href="./src/resources/conversations/channels.ts">list</a>({ ...params }) -> PublicChannelsPage</code>
+- <code title="get /conversations/v3/conversations/channels/{channelId}">client.conversations.channels.<a href="./src/resources/conversations/channels.ts">get</a>(channelID) -> PublicChannel</code>
+
 ## CustomChannels
 
 Types:
 
 - <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">ChannelIntegrationMessageEgg</a></code>
 - <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">ChannelIntegrationParticipant</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">CollectionResponseWithTotalPublicChannelAccountForwardPaging</a></code>
 - <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">CollectionResponseWithTotalPublicChannelIntegrationChannelForwardPaging</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">ContactAddress</a></code>
 - <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">ContactAttachment</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">ContactEmail</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">ContactName</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">ContactOrg</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">ContactPhone</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">ContactProfile</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">ContactURL</a></code>
 - <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">FileAttachment</a></code>
 - <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">LocationAttachment</a></code>
 - <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">MessageHeaderAttachment</a></code>
 - <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PreResolvedContact</a></code>
 - <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PreResolvedContacts</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicChannelAccount</a></code>
 - <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicChannelAccountEgg</a></code>
 - <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicChannelAccountStagingToken</a></code>
 - <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicChannelAccountStagingTokenUpdateRequest</a></code>
@@ -964,24 +1038,8 @@ Types:
 - <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicChannelIntegrationChannelCreate</a></code>
 - <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicChannelIntegrationChannelPatch</a></code>
 - <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicChannelIntegrationMessageUpdateRequest</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicClient</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicContact</a></code>
 - <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicConversationsMessage</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicDeliveryIdentifier</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicFile</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicLocation</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicMessageFailureDetails</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicMessageHeader</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicMessageStatus</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicQuickReplies</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicRecipient</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicSender</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicSocialMetadataAttachment</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicUnsupportedContent</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicWhatsAppTemplateMetadata</a></code>
 - <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">QuickRepliesAttachment</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">QuickReply</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">SocialMetadata</a></code>
 - <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">SocialMetadataIntegrationAttachment</a></code>
 - <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">UnsupportedContentAttachment</a></code>
 
@@ -1012,9 +1070,34 @@ Methods:
 
 Methods:
 
-- <code title="post /conversations/v3/custom-channels/{channelId}/messages">client.conversations.customChannels.messages.<a href="./src/resources/conversations/custom-channels/messages.ts">create</a>(channelID, { ...params }) -> PublicConversationsMessage</code>
-- <code title="patch /conversations/v3/custom-channels/{channelId}/messages/{messageId}">client.conversations.customChannels.messages.<a href="./src/resources/conversations/custom-channels/messages.ts">update</a>(messageID, { ...params }) -> PublicConversationsMessage</code>
-- <code title="get /conversations/v3/custom-channels/{channelId}/messages/{messageId}">client.conversations.customChannels.messages.<a href="./src/resources/conversations/custom-channels/messages.ts">get</a>(messageID, { ...params }) -> PublicConversationsMessage</code>
+- <code title="post /conversations/v3/custom-channels/{channelId}/messages">client.conversations.customChannels.messages.<a href="./src/resources/conversations/custom-channels/messages.ts">create</a>(channelID, { ...params }) -> ConversationsPublicConversationsMessage</code>
+- <code title="patch /conversations/v3/custom-channels/{channelId}/messages/{messageId}">client.conversations.customChannels.messages.<a href="./src/resources/conversations/custom-channels/messages.ts">update</a>(messageID, { ...params }) -> ConversationsPublicConversationsMessage</code>
+- <code title="get /conversations/v3/custom-channels/{channelId}/messages/{messageId}">client.conversations.customChannels.messages.<a href="./src/resources/conversations/custom-channels/messages.ts">get</a>(messageID, { ...params }) -> ConversationsPublicConversationsMessage</code>
+
+## Inboxes
+
+Methods:
+
+- <code title="get /conversations/v3/conversations/inboxes">client.conversations.inboxes.<a href="./src/resources/conversations/inboxes.ts">list</a>({ ...params }) -> PublicInboxesPage</code>
+- <code title="get /conversations/v3/conversations/inboxes/{inboxId}">client.conversations.inboxes.<a href="./src/resources/conversations/inboxes.ts">get</a>(inboxID, { ...params }) -> PublicInbox</code>
+
+## Messages
+
+Methods:
+
+- <code title="post /conversations/v3/conversations/threads/{threadId}/messages">client.conversations.messages.<a href="./src/resources/conversations/messages.ts">create</a>(threadID) -> PublicMessage</code>
+- <code title="get /conversations/v3/conversations/threads/{threadId}/messages">client.conversations.messages.<a href="./src/resources/conversations/messages.ts">list</a>(threadID, { ...params }) -> CollectionResponsePublicMessageForwardPagingResultsPage</code>
+- <code title="get /conversations/v3/conversations/threads/{threadId}/messages/{messageId}">client.conversations.messages.<a href="./src/resources/conversations/messages.ts">get</a>(messageID, { ...params }) -> PublicMessage</code>
+- <code title="get /conversations/v3/conversations/threads/{threadId}/messages/{messageId}/original-content">client.conversations.messages.<a href="./src/resources/conversations/messages.ts">getOriginalContent</a>(messageID, { ...params }) -> PublicMessageContent</code>
+
+## Threads
+
+Methods:
+
+- <code title="patch /conversations/v3/conversations/threads/{threadId}">client.conversations.threads.<a href="./src/resources/conversations/threads.ts">update</a>(threadID, { ...params }) -> PublicThread</code>
+- <code title="get /conversations/v3/conversations/threads">client.conversations.threads.<a href="./src/resources/conversations/threads.ts">list</a>({ ...params }) -> PublicThreadsPage</code>
+- <code title="delete /conversations/v3/conversations/threads/{threadId}">client.conversations.threads.<a href="./src/resources/conversations/threads.ts">delete</a>(threadID) -> void</code>
+- <code title="get /conversations/v3/conversations/threads/{threadId}">client.conversations.threads.<a href="./src/resources/conversations/threads.ts">get</a>(threadID, { ...params }) -> PublicThread</code>
 
 ## VisitorIdentification
 
@@ -2071,6 +2154,36 @@ Methods:
 - <code title="post /crm/v3/objects/products/batch/read">client.crm.objects.products.batch.<a href="./src/resources/crm/objects/products/batch.ts">get</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
 - <code title="post /crm/v3/objects/products/batch/upsert">client.crm.objects.products.batch.<a href="./src/resources/crm/objects/products/batch.ts">upsert</a>({ ...params }) -> BatchResponseSimplePublicUpsertObject</code>
 
+### Projects
+
+Methods:
+
+- <code title="post /crm/objects/v3/projects">client.crm.objects.projects.<a href="./src/resources/crm/objects/projects/projects.ts">create</a>({ ...params }) -> CreatedResponseSimplePublicObject</code>
+- <code title="patch /crm/objects/v3/projects/{projectId}">client.crm.objects.projects.<a href="./src/resources/crm/objects/projects/projects.ts">update</a>(projectID, { ...params }) -> SimplePublicObject</code>
+- <code title="get /crm/objects/v3/projects">client.crm.objects.projects.<a href="./src/resources/crm/objects/projects/projects.ts">list</a>({ ...params }) -> SimplePublicObjectWithAssociationsPage</code>
+- <code title="delete /crm/objects/v3/projects/{projectId}">client.crm.objects.projects.<a href="./src/resources/crm/objects/projects/projects.ts">delete</a>(projectID) -> void</code>
+- <code title="get /crm/objects/v3/projects/{projectId}">client.crm.objects.projects.<a href="./src/resources/crm/objects/projects/projects.ts">get</a>(projectID, { ...params }) -> SimplePublicObjectWithAssociations</code>
+- <code title="post /crm/objects/v3/projects/merge">client.crm.objects.projects.<a href="./src/resources/crm/objects/projects/projects.ts">merge</a>({ ...params }) -> SimplePublicObject</code>
+- <code title="post /crm/objects/v3/projects/search">client.crm.objects.projects.<a href="./src/resources/crm/objects/projects/projects.ts">search</a>({ ...params }) -> CollectionResponseWithTotalSimplePublicObject</code>
+
+#### Associations
+
+Methods:
+
+- <code title="put /crm/objects/v3/projects/{projectId}/associations/{toObjectType}/{toObjectId}/{associationType}">client.crm.objects.projects.associations.<a href="./src/resources/crm/objects/projects/associations.ts">update</a>(associationType, { ...params }) -> SimplePublicObjectWithAssociations</code>
+- <code title="get /crm/objects/v3/projects/{projectId}/associations/{toObjectType}">client.crm.objects.projects.associations.<a href="./src/resources/crm/objects/projects/associations.ts">list</a>(toObjectType, { ...params }) -> AssociatedIDsPage</code>
+- <code title="delete /crm/objects/v3/projects/{projectId}/associations/{toObjectType}/{toObjectId}/{associationType}">client.crm.objects.projects.associations.<a href="./src/resources/crm/objects/projects/associations.ts">delete</a>(associationType, { ...params }) -> void</code>
+
+#### Batch
+
+Methods:
+
+- <code title="post /crm/objects/v3/projects/batch/create">client.crm.objects.projects.batch.<a href="./src/resources/crm/objects/projects/batch.ts">create</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
+- <code title="post /crm/objects/v3/projects/batch/update">client.crm.objects.projects.batch.<a href="./src/resources/crm/objects/projects/batch.ts">update</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
+- <code title="post /crm/objects/v3/projects/batch/archive">client.crm.objects.projects.batch.<a href="./src/resources/crm/objects/projects/batch.ts">delete</a>({ ...params }) -> void</code>
+- <code title="post /crm/objects/v3/projects/batch/read">client.crm.objects.projects.batch.<a href="./src/resources/crm/objects/projects/batch.ts">get</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
+- <code title="post /crm/objects/v3/projects/batch/upsert">client.crm.objects.projects.batch.<a href="./src/resources/crm/objects/projects/batch.ts">upsert</a>({ ...params }) -> BatchResponseSimplePublicUpsertObject</code>
+
 ### Quotes
 
 Methods:
@@ -2300,6 +2413,19 @@ Methods:
 - <code title="get /crm/v3/property-validations/{objectTypeId}">client.crm.propertyValidations.<a href="./src/resources/crm/property-validations.ts">list</a>(objectTypeID) -> CollectionResponsePublicPropertyValidationRuleMapNoPaging</code>
 - <code title="put /crm/v3/property-validations/{objectTypeId}/{propertyName}/rule-type/{ruleType}">client.crm.propertyValidations.<a href="./src/resources/crm/property-validations.ts">crmV3PropertyValidationsObjectTypeIDPropertyNameRuleTypeRuleType</a>(ruleType, { ...params }) -> void</code>
 - <code title="get /crm/v3/property-validations/{objectTypeId}/{propertyName}">client.crm.propertyValidations.<a href="./src/resources/crm/property-validations.ts">get</a>(propertyName, { ...params }) -> CollectionResponsePublicPropertyValidationRuleNoPaging</code>
+
+## Subscriptions
+
+Types:
+
+- <code><a href="./src/resources/crm/subscriptions.ts">PauseSubscriptionRequest</a></code>
+- <code><a href="./src/resources/crm/subscriptions.ts">UnpauseRequest</a></code>
+
+Methods:
+
+- <code title="post /payments-subscriptions/v1/subscriptions/crm/{objectId}/cancel">client.crm.subscriptions.<a href="./src/resources/crm/subscriptions.ts">cancel</a>(objectID) -> Response</code>
+- <code title="post /payments-subscriptions/v1/subscriptions/crm/{objectId}/pause">client.crm.subscriptions.<a href="./src/resources/crm/subscriptions.ts">pause</a>(objectID, { ...params }) -> Response</code>
+- <code title="post /payments-subscriptions/v1/subscriptions/crm/{objectId}/unpause">client.crm.subscriptions.<a href="./src/resources/crm/subscriptions.ts">unpause</a>(objectID, { ...params }) -> Response</code>
 
 ## Timeline
 
