@@ -14,7 +14,7 @@ export class Events extends APIResource {
    * const attentionSpanEvent =
    *   await client.cms.mediaBridge.events.createAttentionSpanEvent(
    *     {
-   *       mediaType: 'VIDEO',
+   *       mediaType: 'AUDIO',
    *       occurredTimestamp: 0,
    *       rawDataMap: { foo: 0 },
    *       sessionId: 'sessionId',
@@ -37,7 +37,7 @@ export class Events extends APIResource {
    * const mediaPlayedEvent =
    *   await client.cms.mediaBridge.events.createMediaPlayedEvent(
    *     {
-   *       mediaType: 'VIDEO',
+   *       mediaType: 'AUDIO',
    *       occurredTimestamp: 0,
    *       sessionId: 'sessionId',
    *       state: 'STARTED',
@@ -61,7 +61,7 @@ export class Events extends APIResource {
    * const mediaPlayedPercentageEvent =
    *   await client.cms.mediaBridge.events.createMediaPlayedPercentEvent(
    *     {
-   *       mediaType: 'VIDEO',
+   *       mediaType: 'AUDIO',
    *       occurredTimestamp: 0,
    *       playedPercent: 0,
    *       sessionId: 'sessionId',
@@ -78,7 +78,7 @@ export class Events extends APIResource {
 }
 
 export interface EventCreateAttentionSpanEventParams {
-  mediaType: 'VIDEO' | 'AUDIO' | 'DOCUMENT' | 'OTHER' | 'IMAGE';
+  mediaType: 'AUDIO' | 'DOCUMENT' | 'IMAGE' | 'OTHER' | 'VIDEO';
 
   occurredTimestamp: number;
 
@@ -112,7 +112,7 @@ export interface EventCreateAttentionSpanEventParams {
 }
 
 export interface EventCreateMediaPlayedEventParams {
-  mediaType: 'VIDEO' | 'AUDIO' | 'DOCUMENT' | 'OTHER' | 'IMAGE';
+  mediaType: 'AUDIO' | 'DOCUMENT' | 'IMAGE' | 'OTHER' | 'VIDEO';
 
   occurredTimestamp: number;
 
@@ -144,7 +144,7 @@ export interface EventCreateMediaPlayedEventParams {
 }
 
 export interface EventCreateMediaPlayedPercentEventParams {
-  mediaType: 'VIDEO' | 'AUDIO' | 'DOCUMENT' | 'OTHER' | 'IMAGE';
+  mediaType: 'AUDIO' | 'DOCUMENT' | 'IMAGE' | 'OTHER' | 'VIDEO';
 
   occurredTimestamp: number;
 

@@ -26,7 +26,7 @@ describe('resource siteSearch', () => {
     await expect(
       client.cms.siteSearch.getIndexedData(
         'contentId',
-        { type: 'LANDING_PAGE' },
+        { type: 'BLOG_POST' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Hubspot.NotFoundError);
@@ -57,7 +57,7 @@ describe('resource siteSearch', () => {
           groupId: [0],
           hubdbQuery: 'hubdbQuery',
           language: 'af',
-          length: 'SHORT',
+          length: 'LONG',
           limit: 0,
           matchPrefix: true,
           offset: 0,

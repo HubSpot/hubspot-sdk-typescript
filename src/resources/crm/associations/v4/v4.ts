@@ -11,37 +11,13 @@ import {
   BatchDeleteLabelsParams,
   BatchDeleteParams,
   BatchGetParams,
-  BatchUpsertParams,
 } from './batch';
 import * as ReportAPI from './report';
 import { Report } from './report';
-import { APIPromise } from '../../../../core/api-promise';
-import { RequestOptions } from '../../../../internal/request-options';
-import { path } from '../../../../internal/utils/path';
 
 export class V4 extends APIResource {
   batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
   report: ReportAPI.Report = new ReportAPI.Report(this._client);
-
-  /**
-   * Merge two CRM objects of the specified type into one.
-   *
-   * @example
-   * ```ts
-   * const simplePublicObject =
-   *   await client.crm.associations.v4.merge('objectType', {
-   *     objectIdToMerge: 'objectIdToMerge',
-   *     primaryObjectId: 'primaryObjectId',
-   *   });
-   * ```
-   */
-  merge(
-    objectType: string,
-    body: V4MergeParams,
-    options?: RequestOptions,
-  ): APIPromise<CrmAPI.SimplePublicObject> {
-    return this._client.post(path`/crm/v4/objects/${objectType}/merge`, { body, ...options });
-  }
 }
 
 export interface BatchInputPublicAssociationMultiArchive {
@@ -77,7 +53,7 @@ export interface BatchResponseLabelsBetweenObjectPair {
    * The status of the batch processing request: "PENDING", "PROCESSING",
    * "CANCELLED", or "COMPLETE".
    */
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   errors?: Array<Shared.StandardError>;
 
@@ -114,7 +90,7 @@ export interface BatchResponsePublicAssociationMultiWithLabel {
    * The status of the batch processing request: "PENDING", "PROCESSING", "CANCELED",
    * or "COMPLETE".
    */
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   errors?: Array<Shared.StandardError>;
 
@@ -208,19 +184,6 @@ export interface ReportCreationResponse {
   userId: number;
 }
 
-export interface V4MergeParams {
-  /**
-   * The unique identifier of the CRM object that will be merged into the primary
-   * object.
-   */
-  objectIdToMerge: string;
-
-  /**
-   * The unique identifier of the CRM object that will remain after the merge.
-   */
-  primaryObjectId: string;
-}
-
 V4.Batch = Batch;
 V4.Report = Report;
 
@@ -239,7 +202,6 @@ export declare namespace V4 {
     type PublicDefaultAssociationMultiPost as PublicDefaultAssociationMultiPost,
     type PublicFetchAssociationsBatchRequest as PublicFetchAssociationsBatchRequest,
     type ReportCreationResponse as ReportCreationResponse,
-    type V4MergeParams as V4MergeParams,
   };
 
   export {
@@ -249,7 +211,6 @@ export declare namespace V4 {
     type BatchCreateDefaultParams as BatchCreateDefaultParams,
     type BatchDeleteLabelsParams as BatchDeleteLabelsParams,
     type BatchGetParams as BatchGetParams,
-    type BatchUpsertParams as BatchUpsertParams,
   };
 
   export { Report as Report };

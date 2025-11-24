@@ -64,7 +64,7 @@ export class Batch extends APIResource {
    * const batchResponseProperty =
    *   await client.crm.properties.batch.get('objectType', {
    *     archived: true,
-   *     dataSensitivity: 'non_sensitive',
+   *     dataSensitivity: 'highly_sensitive',
    *     inputs: [{ name: 'name' }],
    *   });
    * ```
@@ -100,7 +100,7 @@ export interface BatchGetParams {
   /**
    * Body param:
    */
-  dataSensitivity: 'non_sensitive' | 'sensitive' | 'highly_sensitive';
+  dataSensitivity: 'highly_sensitive' | 'non_sensitive' | 'sensitive';
 
   /**
    * Body param:

@@ -53,7 +53,7 @@ describe('resource statistics', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.marketing.emails.statistics.getHistogram(
-        { emailIds: [0], endTimestamp: 'endTimestamp', interval: 'YEAR', startTimestamp: 'startTimestamp' },
+        { emailIds: [0], endTimestamp: 'endTimestamp', interval: 'DAY', startTimestamp: 'startTimestamp' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Hubspot.NotFoundError);

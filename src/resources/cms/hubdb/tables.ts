@@ -29,7 +29,7 @@ export class Tables extends APIResource {
    *       options: [
    *         { hidden: false, label: 'Option A', value: 'A' },
    *       ],
-   *       type: 'NULL',
+   *       type: 'BOOLEAN',
    *     },
    *   ],
    *   dynamicMetaTags: { foo: 0 },
@@ -374,7 +374,7 @@ export class Tables extends APIResource {
    *               value: 'A',
    *             },
    *           ],
-   *           type: 'NULL',
+   *           type: 'BOOLEAN',
    *         },
    *       ],
    *       dynamicMetaTags: { foo: 0 },
@@ -450,6 +450,9 @@ export interface TableListParams extends PageParams {
    */
   archived?: boolean;
 
+  /**
+   * Specifies the content type for the response.
+   */
   contentType?: string;
 
   /**
@@ -467,6 +470,9 @@ export interface TableListParams extends PageParams {
    */
   createdBefore?: string;
 
+  /**
+   * Indicates whether to retrieve the localized schema for the tables.
+   */
   isGetLocalizedSchema?: boolean;
 
   /**
@@ -512,6 +518,9 @@ export interface TableCloneDraftParams {
 }
 
 export interface TableDeleteVersionParams {
+  /**
+   * The ID or name of the table whose version is to be deleted.
+   */
   tableIdOrName: string;
 }
 
@@ -540,6 +549,9 @@ export interface TableGetParams {
    */
   includeForeignIds?: boolean;
 
+  /**
+   * Indicates whether to retrieve the localized schema for the tables.
+   */
   isGetLocalizedSchema?: boolean;
 }
 
@@ -554,6 +566,9 @@ export interface TableGetDraftParams {
    */
   includeForeignIds?: boolean;
 
+  /**
+   * Indicates whether to retrieve the localized schema for the table.
+   */
   isGetLocalizedSchema?: boolean;
 }
 
@@ -569,6 +584,9 @@ export interface TableListDraftParams extends PageParams {
    */
   archived?: boolean;
 
+  /**
+   * Specifies the content type for the response.
+   */
   contentType?: string;
 
   /**
@@ -586,6 +604,9 @@ export interface TableListDraftParams extends PageParams {
    */
   createdBefore?: string;
 
+  /**
+   * Indicates whether to retrieve the localized schema.
+   */
   isGetLocalizedSchema?: boolean;
 
   /**
@@ -688,7 +709,7 @@ export interface TableUpdateDraftParams {
   includeForeignIds?: boolean;
 
   /**
-   * Query param:
+   * Query param: Indicates whether to retrieve the localized schema for the table.
    */
   isGetLocalizedSchema?: boolean;
 }

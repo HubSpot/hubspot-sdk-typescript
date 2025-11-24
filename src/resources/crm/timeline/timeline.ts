@@ -59,7 +59,7 @@ export interface BatchResponseTimelineEventResponse {
   /**
    * The status of the batch response. Should always be COMPLETED if processed.
    */
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   links?: { [key: string]: string };
 
@@ -76,7 +76,7 @@ export interface BatchResponseTimelineEventResponseWithErrors {
 
   startedAt: string;
 
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   errors?: Array<Shared.StandardError>;
 

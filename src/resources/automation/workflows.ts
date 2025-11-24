@@ -84,7 +84,7 @@ export interface APIAppendObjectPropertyValue {
 }
 
 export interface APIAssociationDataSource {
-  associationCategory: 'HUBSPOT_DEFINED' | 'USER_DEFINED' | 'INTEGRATOR_DEFINED';
+  associationCategory: 'HUBSPOT_DEFINED' | 'INTEGRATOR_DEFINED' | 'USER_DEFINED';
 
   associationTypeId: number;
 
@@ -98,7 +98,7 @@ export interface APIAssociationDataSource {
 }
 
 export interface APIAssociationTimestampDataSource {
-  associationCategory: 'HUBSPOT_DEFINED' | 'USER_DEFINED' | 'INTEGRATOR_DEFINED';
+  associationCategory: 'HUBSPOT_DEFINED' | 'INTEGRATOR_DEFINED' | 'USER_DEFINED';
 
   /**
    * The ID representing the type of association.
@@ -126,18 +126,18 @@ export interface APIBlockedDate {
   dayOfMonth: number;
 
   month:
-    | 'JANUARY'
-    | 'FEBRUARY'
-    | 'MARCH'
     | 'APRIL'
-    | 'MAY'
-    | 'JUNE'
-    | 'JULY'
     | 'AUGUST'
-    | 'SEPTEMBER'
-    | 'OCTOBER'
+    | 'DECEMBER'
+    | 'FEBRUARY'
+    | 'JANUARY'
+    | 'JULY'
+    | 'JUNE'
+    | 'MARCH'
+    | 'MAY'
     | 'NOVEMBER'
-    | 'DECEMBER';
+    | 'OCTOBER'
+    | 'SEPTEMBER';
 
   year?: number;
 }
@@ -629,7 +629,7 @@ export interface APIManualEnrollmentCriteria {
 }
 
 export interface APIMonthlyRelativeDaysEnrollmentSchedule {
-  monthlyRelativeDays: 'LAST_DAY_OF_MONTH' | 'FIRST_MONDAY_OF_MONTH';
+  monthlyRelativeDays: 'FIRST_MONDAY_OF_MONTH' | 'LAST_DAY_OF_MONTH';
 
   timeOfDay: APITimeOfDay;
 
@@ -932,18 +932,18 @@ export interface APIStaticDateAnchor {
   dayOfMonth: number;
 
   month:
-    | 'JANUARY'
-    | 'FEBRUARY'
-    | 'MARCH'
     | 'APRIL'
-    | 'MAY'
-    | 'JUNE'
-    | 'JULY'
     | 'AUGUST'
-    | 'SEPTEMBER'
-    | 'OCTOBER'
+    | 'DECEMBER'
+    | 'FEBRUARY'
+    | 'JANUARY'
+    | 'JULY'
+    | 'JUNE'
+    | 'MARCH'
+    | 'MAY'
     | 'NOVEMBER'
-    | 'DECEMBER';
+    | 'OCTOBER'
+    | 'SEPTEMBER';
 
   type: 'STATIC_DATE_ANCHOR';
 
@@ -980,22 +980,22 @@ export interface APITimeDelay {
   delta: number;
 
   timeUnit:
-    | 'NANOS'
-    | 'MICROS'
-    | 'MILLIS'
-    | 'SECONDS'
-    | 'MINUTES'
-    | 'HOURS'
-    | 'HALF_DAYS'
-    | 'DAYS'
-    | 'WEEKS'
-    | 'MONTHS'
-    | 'YEARS'
-    | 'DECADES'
     | 'CENTURIES'
-    | 'MILLENNIA'
+    | 'DAYS'
+    | 'DECADES'
     | 'ERAS'
-    | 'FOREVER';
+    | 'FOREVER'
+    | 'HALF_DAYS'
+    | 'HOURS'
+    | 'MICROS'
+    | 'MILLENNIA'
+    | 'MILLIS'
+    | 'MINUTES'
+    | 'MONTHS'
+    | 'NANOS'
+    | 'SECONDS'
+    | 'WEEKS'
+    | 'YEARS';
 
   timeOfDay?: APITimeOfDay;
 
@@ -1009,7 +1009,7 @@ export interface APITimeOfDay {
 }
 
 export interface APITimeWindow {
-  day: 'MONDAY' | 'TUESDAY' | 'WEDNESDAY' | 'THURSDAY' | 'FRIDAY' | 'SATURDAY' | 'SUNDAY';
+  day: 'FRIDAY' | 'MONDAY' | 'SATURDAY' | 'SUNDAY' | 'THURSDAY' | 'TUESDAY' | 'WEDNESDAY';
 
   endTime?: APITimeOfDay;
 
@@ -1056,18 +1056,18 @@ export interface APIYearlyEnrollmentSchedule {
   dayOfMonth: number;
 
   month:
-    | 'JANUARY'
-    | 'FEBRUARY'
-    | 'MARCH'
     | 'APRIL'
-    | 'MAY'
-    | 'JUNE'
-    | 'JULY'
     | 'AUGUST'
-    | 'SEPTEMBER'
-    | 'OCTOBER'
+    | 'DECEMBER'
+    | 'FEBRUARY'
+    | 'JANUARY'
+    | 'JULY'
+    | 'JUNE'
+    | 'MARCH'
+    | 'MAY'
     | 'NOVEMBER'
-    | 'DECEMBER';
+    | 'OCTOBER'
+    | 'SEPTEMBER';
 
   timeOfDay: APITimeOfDay;
 
@@ -1081,7 +1081,7 @@ export interface BatchResponseAPIFlow {
 
   startedAt: string;
 
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   links?: { [key: string]: string };
 
@@ -1095,7 +1095,7 @@ export interface BatchResponseAPIFlowWithErrors {
 
   startedAt: string;
 
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   errors?: Array<Shared.StandardError>;
 
@@ -1113,7 +1113,7 @@ export interface BatchResponseFlowIDWorkflowIDMappingResponse {
 
   startedAt: string;
 
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   links?: { [key: string]: string };
 
@@ -1127,7 +1127,7 @@ export interface BatchResponseFlowIDWorkflowIDMappingResponseWithErrors {
 
   startedAt: string;
 
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   errors?: Array<Shared.StandardError>;
 

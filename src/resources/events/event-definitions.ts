@@ -166,7 +166,7 @@ export class EventDefinitions extends APIResource {
 export type ExternalBehavioralEventTypeDefinitionsPage = Page<ExternalBehavioralEventTypeDefinition>;
 
 export interface AbsoluteComparativeTimestampRefineBy {
-  comparison: 'BEFORE' | 'AFTER';
+  comparison: 'AFTER' | 'BEFORE';
 
   timestamp: number;
 
@@ -194,7 +194,7 @@ export interface AllPropertyTypesOperation {
 
   operationType: string;
 
-  operator: 'IS_KNOWN' | 'IS_UNKNOWN' | 'IS_BLANK' | 'IS_NOT_BLANK';
+  operator: 'IS_BLANK' | 'IS_KNOWN' | 'IS_NOT_BLANK' | 'IS_UNKNOWN';
 
   operatorName: string;
 
@@ -230,13 +230,13 @@ export interface AssociationDefinition {
    * The cardinality from the source object's perspective, either "ONE_TO_ONE" or
    * "ONE_TO_MANY".
    */
-  cardinality: 'ONE_TO_ONE' | 'ONE_TO_MANY';
+  cardinality: 'ONE_TO_MANY' | 'ONE_TO_ONE';
 
   /**
    * The category of the association. Can be: "HUBSPOT_DEFINED", "USER_DEFINED", or
    * "INTEGRATOR_DEFINED"
    */
-  category: 'HUBSPOT_DEFINED' | 'USER_DEFINED' | 'INTEGRATOR_DEFINED';
+  category: 'HUBSPOT_DEFINED' | 'INTEGRATOR_DEFINED' | 'USER_DEFINED';
 
   /**
    * The ID of the source object type (e.g., 0-1 for contacts).
@@ -278,7 +278,7 @@ export interface AssociationDefinition {
    * The cardinality from the destination object's perspective, either "ONE_TO_ONE"
    * or "ONE_TO_MANY".
    */
-  inverseCardinality: 'ONE_TO_ONE' | 'ONE_TO_MANY';
+  inverseCardinality: 'ONE_TO_MANY' | 'ONE_TO_ONE';
 
   /**
    * Whether all potential reverse linked objects are included in the association.
@@ -334,166 +334,166 @@ export interface AssociationDefinition {
    * The name of the source object type (e.g,. "DEAL" or "QUOTE").
    */
   fromObjectType?:
-    | 'CONTACT'
-    | 'COMPANY'
-    | 'DEAL'
-    | 'ENGAGEMENT'
-    | 'TICKET'
-    | 'OWNER'
-    | 'PRODUCT'
-    | 'LINE_ITEM'
-    | 'BET_DELIVERABLE_SERVICE'
-    | 'CONTENT'
-    | 'CONVERSATION'
-    | 'BET_ALERT'
-    | 'PORTAL'
-    | 'QUOTE'
-    | 'FORM_SUBMISSION_INBOUNDDB'
-    | 'QUOTA'
-    | 'UNSUBSCRIBE'
-    | 'COMMUNICATION'
-    | 'FEEDBACK_SUBMISSION'
-    | 'ATTRIBUTION'
-    | 'SALESFORCE_SYNC_ERROR'
-    | 'RESTORABLE_CRM_OBJECT'
-    | 'HUB'
-    | 'LANDING_PAGE'
-    | 'PRODUCT_OR_FOLDER'
-    | 'TASK'
-    | 'FORM'
-    | 'MARKETING_EMAIL'
+    | 'ABANDONED_CART'
+    | 'ACCEPTANCE_TEST'
+    | 'AD'
     | 'AD_ACCOUNT'
     | 'AD_CAMPAIGN'
     | 'AD_GROUP'
-    | 'AD'
-    | 'KEYWORD'
-    | 'CAMPAIGN'
-    | 'SOCIAL_CHANNEL'
-    | 'SOCIAL_POST'
-    | 'SITE_PAGE'
-    | 'BLOG_POST'
-    | 'IMPORT'
-    | 'EXPORT'
-    | 'CTA'
-    | 'TASK_TEMPLATE'
-    | 'AUTOMATION_PLATFORM_FLOW'
-    | 'OBJECT_LIST'
-    | 'NOTE'
-    | 'MEETING_EVENT'
-    | 'CALL'
-    | 'EMAIL'
-    | 'PUBLISHING_TASK'
-    | 'CONVERSATION_SESSION'
-    | 'CONTACT_CREATE_ATTRIBUTION'
-    | 'INVOICE'
-    | 'MARKETING_EVENT'
-    | 'CONVERSATION_INBOX'
-    | 'CHATFLOW'
-    | 'MEDIA_BRIDGE'
-    | 'SEQUENCE'
-    | 'SEQUENCE_STEP'
-    | 'FORECAST'
-    | 'SNIPPET'
-    | 'TEMPLATE'
-    | 'DEAL_CREATE_ATTRIBUTION'
-    | 'QUOTE_TEMPLATE'
-    | 'QUOTE_MODULE'
-    | 'QUOTE_MODULE_FIELD'
-    | 'QUOTE_FIELD'
-    | 'SEQUENCE_ENROLLMENT'
-    | 'SUBSCRIPTION'
-    | 'ACCEPTANCE_TEST'
-    | 'SOCIAL_BROADCAST'
-    | 'DEAL_SPLIT'
-    | 'DEAL_REGISTRATION'
-    | 'GOAL_TARGET'
-    | 'GOAL_TARGET_GROUP'
-    | 'PORTAL_OBJECT_SYNC_MESSAGE'
-    | 'FILE_MANAGER_FILE'
-    | 'FILE_MANAGER_FOLDER'
-    | 'SEQUENCE_STEP_ENROLLMENT'
+    | 'AI_FORECAST'
+    | 'ALL_PAGES'
     | 'APPROVAL'
     | 'APPROVAL_STEP'
+    | 'ATTRIBUTION'
+    | 'AUDIENCE'
+    | 'AUTOMATION_JOURNEY'
+    | 'AUTOMATION_PLATFORM_FLOW'
+    | 'AUTOMATION_PLATFORM_FLOW_ACTION'
+    | 'BET_ALERT'
+    | 'BET_DELIVERABLE_SERVICE'
+    | 'BLOG_LISTING_PAGE'
+    | 'BLOG_POST'
+    | 'CALL'
+    | 'CAMPAIGN'
+    | 'CAMPAIGN_BUDGET_ITEM'
+    | 'CAMPAIGN_SPEND_ITEM'
+    | 'CAMPAIGN_STEP'
+    | 'CAMPAIGN_TEMPLATE'
+    | 'CAMPAIGN_TEMPLATE_STEP'
+    | 'CART'
+    | 'CASE_STUDY'
+    | 'CHATFLOW'
+    | 'CLIP'
+    | 'CMS_URL'
+    | 'COMBO_EVENT_CONFIGURATION'
+    | 'COMMERCE_PAYMENT'
+    | 'COMMUNICATION'
+    | 'COMPANY'
+    | 'CONTACT'
+    | 'CONTACT_CREATE_ATTRIBUTION'
+    | 'CONTENT'
+    | 'CONTENT_AUDIT'
+    | 'CONTENT_AUDIT_PAGE'
+    | 'CONVERSATION'
+    | 'CONVERSATION_INBOX'
+    | 'CONVERSATION_SESSION'
+    | 'CRM_OBJECTS_DUMMY_TYPE'
+    | 'CRM_PIPELINES_DUMMY_TYPE'
+    | 'CTA'
     | 'CTA_VARIANT'
-    | 'SALES_DOCUMENT'
-    | 'DISCOUNT'
-    | 'FEE'
-    | 'TAX'
-    | 'MARKETING_CALENDAR'
-    | 'PERMISSIONS_TESTING'
-    | 'PRIVACY_SCANNER_COOKIE'
+    | 'DATA_PRIVACY_CONSENT'
     | 'DATA_SYNC_STATE'
-    | 'WEB_INTERACTIVE'
-    | 'PLAYBOOK'
+    | 'DEAL'
+    | 'DEAL_CREATE_ATTRIBUTION'
+    | 'DEAL_REGISTRATION'
+    | 'DEAL_SPLIT'
+    | 'DISCOUNT'
+    | 'DISCOUNT_CODE'
+    | 'DISCOUNT_TEMPLATE'
+    | 'EMAIL'
+    | 'ENGAGEMENT'
+    | 'EXPORT'
+    | 'EXTERNAL_WEB_URL'
+    | 'FEE'
+    | 'FEEDBACK_SUBMISSION'
+    | 'FEEDBACK_SURVEY'
+    | 'FILE_MANAGER_FILE'
+    | 'FILE_MANAGER_FOLDER'
     | 'FOLDER'
+    | 'FORECAST'
+    | 'FORM'
+    | 'FORM_SUBMISSION_INBOUNDDB'
+    | 'GOAL_TARGET'
+    | 'GOAL_TARGET_GROUP'
+    | 'GOAL_TEMPLATE'
+    | 'GSC_PROPERTY'
+    | 'HUB'
+    | 'IMPORT'
+    | 'INVOICE'
+    | 'KEYWORD'
+    | 'KNOWLEDGE_ARTICLE'
+    | 'LANDING_PAGE'
+    | 'LEAD'
+    | 'LINE_ITEM'
+    | 'MARKETING_CALENDAR'
+    | 'MARKETING_CAMPAIGN_UTM'
+    | 'MARKETING_EMAIL'
+    | 'MARKETING_EVENT'
+    | 'MARKETING_EVENT_ATTENDANCE'
+    | 'MARKETING_SMS'
+    | 'MEDIA_BRIDGE'
+    | 'MEETING_EVENT'
+    | 'MIC'
+    | 'NOTE'
+    | 'OBJECT_LIST'
+    | 'ORDER'
+    | 'OWNER'
+    | 'PARTNER_ACCOUNT'
+    | 'PARTNER_CLIENT'
+    | 'PARTNER_CLIENT_REVENUE'
+    | 'PARTNER_SERVICE'
+    | 'PAYMENT_LINK'
+    | 'PAYMENT_SCHEDULE'
+    | 'PAYMENT_SCHEDULE_INSTALLMENT'
+    | 'PERMISSIONS_TESTING'
+    | 'PLAYBOOK'
     | 'PLAYBOOK_QUESTION'
     | 'PLAYBOOK_SUBMISSION'
     | 'PLAYBOOK_SUBMISSION_ANSWER'
-    | 'COMMERCE_PAYMENT'
-    | 'GSC_PROPERTY'
-    | 'SOX_PROTECTED_DUMMY_TYPE'
-    | 'BLOG_LISTING_PAGE'
+    | 'PLAYLIST'
+    | 'PLAYLIST_FOLDER'
+    | 'PODCAST_EPISODE'
+    | 'PORTAL'
+    | 'PORTAL_OBJECT_SYNC_MESSAGE'
+    | 'POSTAL_MAIL'
+    | 'PRIVACY_SCANNER_COOKIE'
+    | 'PRODUCT'
+    | 'PRODUCT_OR_FOLDER'
+    | 'PROPERTY_INFO'
+    | 'PUBLISHING_TASK'
     | 'QUARANTINED_SUBMISSION'
-    | 'PAYMENT_SCHEDULE'
-    | 'PAYMENT_SCHEDULE_INSTALLMENT'
-    | 'MARKETING_CAMPAIGN_UTM'
-    | 'DISCOUNT_TEMPLATE'
-    | 'DISCOUNT_CODE'
-    | 'FEEDBACK_SURVEY'
-    | 'CMS_URL'
+    | 'QUOTA'
+    | 'QUOTE'
+    | 'QUOTE_FIELD'
+    | 'QUOTE_MODULE'
+    | 'QUOTE_MODULE_FIELD'
+    | 'QUOTE_TEMPLATE'
+    | 'RESTORABLE_CRM_OBJECT'
+    | 'ROSTER'
+    | 'ROSTER_MEMBER'
+    | 'SALES_DOCUMENT'
     | 'SALES_TASK'
     | 'SALES_WORKLOAD'
-    | 'USER'
-    | 'POSTAL_MAIL'
-    | 'SCHEMAS_BACKEND_TEST'
-    | 'PAYMENT_LINK'
-    | 'SUBMISSION_TAG'
-    | 'CAMPAIGN_STEP'
+    | 'SALESFORCE_SYNC_ERROR'
     | 'SCHEDULING_PAGE'
+    | 'SCHEMAS_BACKEND_TEST'
+    | 'SCORE_CONFIGURATION'
+    | 'SEQUENCE'
+    | 'SEQUENCE_ENROLLMENT'
+    | 'SEQUENCE_STEP'
+    | 'SEQUENCE_STEP_ENROLLMENT'
+    | 'SERVICE'
+    | 'SITE_PAGE'
+    | 'SNIPPET'
+    | 'SOCIAL_BROADCAST'
+    | 'SOCIAL_CHANNEL'
+    | 'SOCIAL_POST'
+    | 'SOCIAL_PROFILE'
+    | 'SOX_PROTECTED_DUMMY_TYPE'
     | 'SOX_PROTECTED_TEST_TYPE'
-    | 'ORDER'
-    | 'MARKETING_SMS'
-    | 'PARTNER_ACCOUNT'
-    | 'CAMPAIGN_TEMPLATE'
-    | 'CAMPAIGN_TEMPLATE_STEP'
-    | 'PLAYLIST'
-    | 'CLIP'
-    | 'CAMPAIGN_BUDGET_ITEM'
-    | 'CAMPAIGN_SPEND_ITEM'
-    | 'MIC'
-    | 'CONTENT_AUDIT'
-    | 'CONTENT_AUDIT_PAGE'
-    | 'PLAYLIST_FOLDER'
-    | 'LEAD'
-    | 'ABANDONED_CART'
-    | 'EXTERNAL_WEB_URL'
+    | 'SUBMISSION_TAG'
+    | 'SUBSCRIPTION'
+    | 'TASK'
+    | 'TASK_TEMPLATE'
+    | 'TAX'
+    | 'TEMPLATE'
+    | 'TICKET'
+    | 'UNKNOWN'
+    | 'UNSUBSCRIBE'
+    | 'USER'
     | 'VIEW'
     | 'VIEW_BLOCK'
-    | 'ROSTER'
-    | 'CART'
-    | 'AUTOMATION_PLATFORM_FLOW_ACTION'
-    | 'SOCIAL_PROFILE'
-    | 'PARTNER_CLIENT'
-    | 'ROSTER_MEMBER'
-    | 'MARKETING_EVENT_ATTENDANCE'
-    | 'ALL_PAGES'
-    | 'AI_FORECAST'
-    | 'CRM_PIPELINES_DUMMY_TYPE'
-    | 'KNOWLEDGE_ARTICLE'
-    | 'PROPERTY_INFO'
-    | 'DATA_PRIVACY_CONSENT'
-    | 'GOAL_TEMPLATE'
-    | 'SCORE_CONFIGURATION'
-    | 'AUDIENCE'
-    | 'PARTNER_CLIENT_REVENUE'
-    | 'AUTOMATION_JOURNEY'
-    | 'COMBO_EVENT_CONFIGURATION'
-    | 'CRM_OBJECTS_DUMMY_TYPE'
-    | 'CASE_STUDY'
-    | 'SERVICE'
-    | 'PODCAST_EPISODE'
-    | 'PARTNER_SERVICE'
-    | 'UNKNOWN';
+    | 'WEB_INTERACTIVE';
 
   /**
    * The label used to describe the reverse relationship in an association.
@@ -509,166 +509,166 @@ export interface AssociationDefinition {
    * The name of the destination object type (e.g,. "DEAL" or "QUOTE").
    */
   toObjectType?:
-    | 'CONTACT'
-    | 'COMPANY'
-    | 'DEAL'
-    | 'ENGAGEMENT'
-    | 'TICKET'
-    | 'OWNER'
-    | 'PRODUCT'
-    | 'LINE_ITEM'
-    | 'BET_DELIVERABLE_SERVICE'
-    | 'CONTENT'
-    | 'CONVERSATION'
-    | 'BET_ALERT'
-    | 'PORTAL'
-    | 'QUOTE'
-    | 'FORM_SUBMISSION_INBOUNDDB'
-    | 'QUOTA'
-    | 'UNSUBSCRIBE'
-    | 'COMMUNICATION'
-    | 'FEEDBACK_SUBMISSION'
-    | 'ATTRIBUTION'
-    | 'SALESFORCE_SYNC_ERROR'
-    | 'RESTORABLE_CRM_OBJECT'
-    | 'HUB'
-    | 'LANDING_PAGE'
-    | 'PRODUCT_OR_FOLDER'
-    | 'TASK'
-    | 'FORM'
-    | 'MARKETING_EMAIL'
+    | 'ABANDONED_CART'
+    | 'ACCEPTANCE_TEST'
+    | 'AD'
     | 'AD_ACCOUNT'
     | 'AD_CAMPAIGN'
     | 'AD_GROUP'
-    | 'AD'
-    | 'KEYWORD'
-    | 'CAMPAIGN'
-    | 'SOCIAL_CHANNEL'
-    | 'SOCIAL_POST'
-    | 'SITE_PAGE'
-    | 'BLOG_POST'
-    | 'IMPORT'
-    | 'EXPORT'
-    | 'CTA'
-    | 'TASK_TEMPLATE'
-    | 'AUTOMATION_PLATFORM_FLOW'
-    | 'OBJECT_LIST'
-    | 'NOTE'
-    | 'MEETING_EVENT'
-    | 'CALL'
-    | 'EMAIL'
-    | 'PUBLISHING_TASK'
-    | 'CONVERSATION_SESSION'
-    | 'CONTACT_CREATE_ATTRIBUTION'
-    | 'INVOICE'
-    | 'MARKETING_EVENT'
-    | 'CONVERSATION_INBOX'
-    | 'CHATFLOW'
-    | 'MEDIA_BRIDGE'
-    | 'SEQUENCE'
-    | 'SEQUENCE_STEP'
-    | 'FORECAST'
-    | 'SNIPPET'
-    | 'TEMPLATE'
-    | 'DEAL_CREATE_ATTRIBUTION'
-    | 'QUOTE_TEMPLATE'
-    | 'QUOTE_MODULE'
-    | 'QUOTE_MODULE_FIELD'
-    | 'QUOTE_FIELD'
-    | 'SEQUENCE_ENROLLMENT'
-    | 'SUBSCRIPTION'
-    | 'ACCEPTANCE_TEST'
-    | 'SOCIAL_BROADCAST'
-    | 'DEAL_SPLIT'
-    | 'DEAL_REGISTRATION'
-    | 'GOAL_TARGET'
-    | 'GOAL_TARGET_GROUP'
-    | 'PORTAL_OBJECT_SYNC_MESSAGE'
-    | 'FILE_MANAGER_FILE'
-    | 'FILE_MANAGER_FOLDER'
-    | 'SEQUENCE_STEP_ENROLLMENT'
+    | 'AI_FORECAST'
+    | 'ALL_PAGES'
     | 'APPROVAL'
     | 'APPROVAL_STEP'
+    | 'ATTRIBUTION'
+    | 'AUDIENCE'
+    | 'AUTOMATION_JOURNEY'
+    | 'AUTOMATION_PLATFORM_FLOW'
+    | 'AUTOMATION_PLATFORM_FLOW_ACTION'
+    | 'BET_ALERT'
+    | 'BET_DELIVERABLE_SERVICE'
+    | 'BLOG_LISTING_PAGE'
+    | 'BLOG_POST'
+    | 'CALL'
+    | 'CAMPAIGN'
+    | 'CAMPAIGN_BUDGET_ITEM'
+    | 'CAMPAIGN_SPEND_ITEM'
+    | 'CAMPAIGN_STEP'
+    | 'CAMPAIGN_TEMPLATE'
+    | 'CAMPAIGN_TEMPLATE_STEP'
+    | 'CART'
+    | 'CASE_STUDY'
+    | 'CHATFLOW'
+    | 'CLIP'
+    | 'CMS_URL'
+    | 'COMBO_EVENT_CONFIGURATION'
+    | 'COMMERCE_PAYMENT'
+    | 'COMMUNICATION'
+    | 'COMPANY'
+    | 'CONTACT'
+    | 'CONTACT_CREATE_ATTRIBUTION'
+    | 'CONTENT'
+    | 'CONTENT_AUDIT'
+    | 'CONTENT_AUDIT_PAGE'
+    | 'CONVERSATION'
+    | 'CONVERSATION_INBOX'
+    | 'CONVERSATION_SESSION'
+    | 'CRM_OBJECTS_DUMMY_TYPE'
+    | 'CRM_PIPELINES_DUMMY_TYPE'
+    | 'CTA'
     | 'CTA_VARIANT'
-    | 'SALES_DOCUMENT'
-    | 'DISCOUNT'
-    | 'FEE'
-    | 'TAX'
-    | 'MARKETING_CALENDAR'
-    | 'PERMISSIONS_TESTING'
-    | 'PRIVACY_SCANNER_COOKIE'
+    | 'DATA_PRIVACY_CONSENT'
     | 'DATA_SYNC_STATE'
-    | 'WEB_INTERACTIVE'
-    | 'PLAYBOOK'
+    | 'DEAL'
+    | 'DEAL_CREATE_ATTRIBUTION'
+    | 'DEAL_REGISTRATION'
+    | 'DEAL_SPLIT'
+    | 'DISCOUNT'
+    | 'DISCOUNT_CODE'
+    | 'DISCOUNT_TEMPLATE'
+    | 'EMAIL'
+    | 'ENGAGEMENT'
+    | 'EXPORT'
+    | 'EXTERNAL_WEB_URL'
+    | 'FEE'
+    | 'FEEDBACK_SUBMISSION'
+    | 'FEEDBACK_SURVEY'
+    | 'FILE_MANAGER_FILE'
+    | 'FILE_MANAGER_FOLDER'
     | 'FOLDER'
+    | 'FORECAST'
+    | 'FORM'
+    | 'FORM_SUBMISSION_INBOUNDDB'
+    | 'GOAL_TARGET'
+    | 'GOAL_TARGET_GROUP'
+    | 'GOAL_TEMPLATE'
+    | 'GSC_PROPERTY'
+    | 'HUB'
+    | 'IMPORT'
+    | 'INVOICE'
+    | 'KEYWORD'
+    | 'KNOWLEDGE_ARTICLE'
+    | 'LANDING_PAGE'
+    | 'LEAD'
+    | 'LINE_ITEM'
+    | 'MARKETING_CALENDAR'
+    | 'MARKETING_CAMPAIGN_UTM'
+    | 'MARKETING_EMAIL'
+    | 'MARKETING_EVENT'
+    | 'MARKETING_EVENT_ATTENDANCE'
+    | 'MARKETING_SMS'
+    | 'MEDIA_BRIDGE'
+    | 'MEETING_EVENT'
+    | 'MIC'
+    | 'NOTE'
+    | 'OBJECT_LIST'
+    | 'ORDER'
+    | 'OWNER'
+    | 'PARTNER_ACCOUNT'
+    | 'PARTNER_CLIENT'
+    | 'PARTNER_CLIENT_REVENUE'
+    | 'PARTNER_SERVICE'
+    | 'PAYMENT_LINK'
+    | 'PAYMENT_SCHEDULE'
+    | 'PAYMENT_SCHEDULE_INSTALLMENT'
+    | 'PERMISSIONS_TESTING'
+    | 'PLAYBOOK'
     | 'PLAYBOOK_QUESTION'
     | 'PLAYBOOK_SUBMISSION'
     | 'PLAYBOOK_SUBMISSION_ANSWER'
-    | 'COMMERCE_PAYMENT'
-    | 'GSC_PROPERTY'
-    | 'SOX_PROTECTED_DUMMY_TYPE'
-    | 'BLOG_LISTING_PAGE'
+    | 'PLAYLIST'
+    | 'PLAYLIST_FOLDER'
+    | 'PODCAST_EPISODE'
+    | 'PORTAL'
+    | 'PORTAL_OBJECT_SYNC_MESSAGE'
+    | 'POSTAL_MAIL'
+    | 'PRIVACY_SCANNER_COOKIE'
+    | 'PRODUCT'
+    | 'PRODUCT_OR_FOLDER'
+    | 'PROPERTY_INFO'
+    | 'PUBLISHING_TASK'
     | 'QUARANTINED_SUBMISSION'
-    | 'PAYMENT_SCHEDULE'
-    | 'PAYMENT_SCHEDULE_INSTALLMENT'
-    | 'MARKETING_CAMPAIGN_UTM'
-    | 'DISCOUNT_TEMPLATE'
-    | 'DISCOUNT_CODE'
-    | 'FEEDBACK_SURVEY'
-    | 'CMS_URL'
+    | 'QUOTA'
+    | 'QUOTE'
+    | 'QUOTE_FIELD'
+    | 'QUOTE_MODULE'
+    | 'QUOTE_MODULE_FIELD'
+    | 'QUOTE_TEMPLATE'
+    | 'RESTORABLE_CRM_OBJECT'
+    | 'ROSTER'
+    | 'ROSTER_MEMBER'
+    | 'SALES_DOCUMENT'
     | 'SALES_TASK'
     | 'SALES_WORKLOAD'
-    | 'USER'
-    | 'POSTAL_MAIL'
-    | 'SCHEMAS_BACKEND_TEST'
-    | 'PAYMENT_LINK'
-    | 'SUBMISSION_TAG'
-    | 'CAMPAIGN_STEP'
+    | 'SALESFORCE_SYNC_ERROR'
     | 'SCHEDULING_PAGE'
+    | 'SCHEMAS_BACKEND_TEST'
+    | 'SCORE_CONFIGURATION'
+    | 'SEQUENCE'
+    | 'SEQUENCE_ENROLLMENT'
+    | 'SEQUENCE_STEP'
+    | 'SEQUENCE_STEP_ENROLLMENT'
+    | 'SERVICE'
+    | 'SITE_PAGE'
+    | 'SNIPPET'
+    | 'SOCIAL_BROADCAST'
+    | 'SOCIAL_CHANNEL'
+    | 'SOCIAL_POST'
+    | 'SOCIAL_PROFILE'
+    | 'SOX_PROTECTED_DUMMY_TYPE'
     | 'SOX_PROTECTED_TEST_TYPE'
-    | 'ORDER'
-    | 'MARKETING_SMS'
-    | 'PARTNER_ACCOUNT'
-    | 'CAMPAIGN_TEMPLATE'
-    | 'CAMPAIGN_TEMPLATE_STEP'
-    | 'PLAYLIST'
-    | 'CLIP'
-    | 'CAMPAIGN_BUDGET_ITEM'
-    | 'CAMPAIGN_SPEND_ITEM'
-    | 'MIC'
-    | 'CONTENT_AUDIT'
-    | 'CONTENT_AUDIT_PAGE'
-    | 'PLAYLIST_FOLDER'
-    | 'LEAD'
-    | 'ABANDONED_CART'
-    | 'EXTERNAL_WEB_URL'
+    | 'SUBMISSION_TAG'
+    | 'SUBSCRIPTION'
+    | 'TASK'
+    | 'TASK_TEMPLATE'
+    | 'TAX'
+    | 'TEMPLATE'
+    | 'TICKET'
+    | 'UNKNOWN'
+    | 'UNSUBSCRIBE'
+    | 'USER'
     | 'VIEW'
     | 'VIEW_BLOCK'
-    | 'ROSTER'
-    | 'CART'
-    | 'AUTOMATION_PLATFORM_FLOW_ACTION'
-    | 'SOCIAL_PROFILE'
-    | 'PARTNER_CLIENT'
-    | 'ROSTER_MEMBER'
-    | 'MARKETING_EVENT_ATTENDANCE'
-    | 'ALL_PAGES'
-    | 'AI_FORECAST'
-    | 'CRM_PIPELINES_DUMMY_TYPE'
-    | 'KNOWLEDGE_ARTICLE'
-    | 'PROPERTY_INFO'
-    | 'DATA_PRIVACY_CONSENT'
-    | 'GOAL_TEMPLATE'
-    | 'SCORE_CONFIGURATION'
-    | 'AUDIENCE'
-    | 'PARTNER_CLIENT_REVENUE'
-    | 'AUTOMATION_JOURNEY'
-    | 'COMBO_EVENT_CONFIGURATION'
-    | 'CRM_OBJECTS_DUMMY_TYPE'
-    | 'CASE_STUDY'
-    | 'SERVICE'
-    | 'PODCAST_EPISODE'
-    | 'PARTNER_SERVICE'
-    | 'UNKNOWN';
+    | 'WEB_INTERACTIVE';
 }
 
 export interface BehavioralEventTypeDefinitionLabels {
@@ -682,7 +682,7 @@ export interface BoolPropertyOperation {
 
   operationType: string;
 
-  operator: 'IS_EQUAL_TO' | 'IS_NOT_EQUAL_TO' | 'HAS_EVER_BEEN_EQUAL_TO' | 'HAS_NEVER_BEEN_EQUAL_TO';
+  operator: 'HAS_EVER_BEEN_EQUAL_TO' | 'HAS_NEVER_BEEN_EQUAL_TO' | 'IS_EQUAL_TO' | 'IS_NOT_EQUAL_TO';
 
   operatorName: string;
 
@@ -698,13 +698,13 @@ export interface CalendarDatePropertyOperation {
 
   operationType: string;
 
-  operator: 'IN_THIS_TIME_UNIT' | 'IN_THIS_TIME_UNIT_SO_FAR' | 'IN_NEXT_TIME_UNIT' | 'IN_LAST_TIME_UNIT';
+  operator: 'IN_LAST_TIME_UNIT' | 'IN_NEXT_TIME_UNIT' | 'IN_THIS_TIME_UNIT' | 'IN_THIS_TIME_UNIT_SO_FAR';
 
   operatorName: string;
 
   propertyType: 'calendar-date';
 
-  timeUnit: 'DAY' | 'WEEK' | 'MONTH' | 'QUARTER' | 'YEAR';
+  timeUnit: 'DAY' | 'MONTH' | 'QUARTER' | 'WEEK' | 'YEAR';
 
   timeUnitCount: number;
 
@@ -713,18 +713,18 @@ export interface CalendarDatePropertyOperation {
   defaultValue?: string;
 
   fiscalYearStart?:
-    | 'JANUARY'
-    | 'FEBRUARY'
-    | 'MARCH'
     | 'APRIL'
-    | 'MAY'
-    | 'JUNE'
-    | 'JULY'
     | 'AUGUST'
-    | 'SEPTEMBER'
-    | 'OCTOBER'
+    | 'DECEMBER'
+    | 'FEBRUARY'
+    | 'JANUARY'
+    | 'JULY'
+    | 'JUNE'
+    | 'MARCH'
+    | 'MAY'
     | 'NOVEMBER'
-    | 'DECEMBER';
+    | 'OCTOBER'
+    | 'SEPTEMBER';
 }
 
 export interface CollectionResponseWithTotalExternalBehavioralEventTypeDefinitionForwardPaging {
@@ -760,7 +760,7 @@ export interface ComparativeDatePropertyOperation {
 
   operationType: string;
 
-  operator: 'IS_BEFORE' | 'IS_AFTER';
+  operator: 'IS_AFTER' | 'IS_BEFORE';
 
   operatorName: string;
 
@@ -778,7 +778,7 @@ export interface ComparativePropertyUpdatedOperation {
 
   operationType: string;
 
-  operator: 'IS_BEFORE' | 'IS_AFTER';
+  operator: 'IS_AFTER' | 'IS_BEFORE';
 
   operatorName: string;
 
@@ -796,7 +796,7 @@ export interface DatePoint {
 
   timeType: 'DATE';
 
-  timezoneSource: 'CUSTOM' | 'USER' | 'PORTAL';
+  timezoneSource: 'CUSTOM' | 'PORTAL' | 'USER';
 
   year: number;
 
@@ -816,11 +816,11 @@ export interface DatePropertyOperation {
 
   includeObjectsWithNoValueSet: boolean;
 
-  month: 'JAN' | 'FEB' | 'MAR' | 'APR' | 'MAY' | 'JUN' | 'JUL' | 'AUG' | 'SEP' | 'OCT' | 'NOV' | 'DEC';
+  month: 'APR' | 'AUG' | 'DEC' | 'FEB' | 'JAN' | 'JUL' | 'JUN' | 'MAR' | 'MAY' | 'NOV' | 'OCT' | 'SEP';
 
   operationType: string;
 
-  operator: 'EQUAL' | 'BEFORE' | 'AFTER';
+  operator: 'AFTER' | 'BEFORE' | 'EQUAL';
 
   operatorName: string;
 
@@ -836,7 +836,7 @@ export interface DateTimePropertyOperation {
 
   operationType: string;
 
-  operator: 'IS_BEFORE' | 'IS_AFTER' | 'IS_EQUAL_TO' | 'IS_BEFORE_DATE' | 'IS_AFTER_DATE';
+  operator: 'IS_AFTER' | 'IS_AFTER_DATE' | 'IS_BEFORE' | 'IS_BEFORE_DATE' | 'IS_EQUAL_TO';
 
   operatorName: string;
 
@@ -855,18 +855,18 @@ export interface EnumerationPropertyOperation {
   operationType: string;
 
   operator:
-    | 'IS_ANY_OF'
-    | 'IS_NONE_OF'
-    | 'IS_EXACTLY'
-    | 'IS_NOT_EXACTLY'
     | 'CONTAINS_ALL'
     | 'DOES_NOT_CONTAIN_ALL'
     | 'HAS_EVER_BEEN_ANY_OF'
-    | 'HAS_NEVER_BEEN_ANY_OF'
     | 'HAS_EVER_BEEN_EXACTLY'
-    | 'HAS_NEVER_BEEN_EXACTLY'
     | 'HAS_EVER_CONTAINED_ALL'
-    | 'HAS_NEVER_CONTAINED_ALL';
+    | 'HAS_NEVER_BEEN_ANY_OF'
+    | 'HAS_NEVER_BEEN_EXACTLY'
+    | 'HAS_NEVER_CONTAINED_ALL'
+    | 'IS_ANY_OF'
+    | 'IS_EXACTLY'
+    | 'IS_NONE_OF'
+    | 'IS_NOT_EXACTLY';
 
   operatorName: string;
 
@@ -955,13 +955,13 @@ export interface ExternalBehavioralEventTypeDefinition {
   primaryObjectId?: string;
 
   trackingType?:
-    | 'VISITED_URL'
     | 'CLICKED_ELEMENT'
-    | 'CUSTOM_SCRIPT'
-    | 'MANUAL'
-    | 'IMPORT'
-    | 'PROPERTY_CHANGE'
     | 'COMBO_EVENT'
+    | 'CUSTOM_SCRIPT'
+    | 'IMPORT'
+    | 'MANUAL'
+    | 'PROPERTY_CHANGE'
+    | 'VISITED_URL'
     | 'WEBHOOK';
 }
 
@@ -1075,7 +1075,7 @@ export interface IndexedTimePoint {
 
   timeType: 'INDEXED';
 
-  timezoneSource: 'CUSTOM' | 'USER' | 'PORTAL';
+  timezoneSource: 'CUSTOM' | 'PORTAL' | 'USER';
 
   zoneId: string;
 
@@ -1103,7 +1103,7 @@ export interface MultiStringPropertyOperation {
 
   operationType: string;
 
-  operator: 'IS_EQUAL_TO' | 'IS_NOT_EQUAL_TO' | 'CONTAINS' | 'DOES_NOT_CONTAIN' | 'STARTS_WITH' | 'ENDS_WITH';
+  operator: 'CONTAINS' | 'DOES_NOT_CONTAIN' | 'ENDS_WITH' | 'IS_EQUAL_TO' | 'IS_NOT_EQUAL_TO' | 'STARTS_WITH';
 
   operatorName: string;
 
@@ -1149,14 +1149,14 @@ export interface NumberPropertyOperation {
   operationType: string;
 
   operator:
+    | 'HAS_EVER_BEEN_EQUAL_TO'
+    | 'HAS_NEVER_BEEN_EQUAL_TO'
     | 'IS_EQUAL_TO'
-    | 'IS_NOT_EQUAL_TO'
     | 'IS_GREATER_THAN'
     | 'IS_GREATER_THAN_OR_EQUAL_TO'
     | 'IS_LESS_THAN'
     | 'IS_LESS_THAN_OR_EQUAL_TO'
-    | 'HAS_EVER_BEEN_EQUAL_TO'
-    | 'HAS_NEVER_BEEN_EQUAL_TO';
+    | 'IS_NOT_EQUAL_TO';
 
   operatorName: string;
 
@@ -1198,15 +1198,15 @@ export interface PropertyReferencedTime {
   property: string;
 
   referenceType:
-    | 'VALUE'
-    | 'UPDATED_AT'
     | 'ANNIVERSARY'
-    | 'VALUE_WITH_ZONE_SAME_LOCAL_CONVERSION'
-    | 'ANNIVERSARY_WITH_ZONE_SAME_LOCAL_CONVERSION';
+    | 'ANNIVERSARY_WITH_ZONE_SAME_LOCAL_CONVERSION'
+    | 'UPDATED_AT'
+    | 'VALUE'
+    | 'VALUE_WITH_ZONE_SAME_LOCAL_CONVERSION';
 
   timeType: 'PROPERTY_REFERENCED';
 
-  timezoneSource: 'CUSTOM' | 'USER' | 'PORTAL';
+  timezoneSource: 'CUSTOM' | 'PORTAL' | 'USER';
 
   zoneId: string;
 }
@@ -1268,7 +1268,7 @@ export interface RangedNumberPropertyOperation {
 export interface RangedTimeOperation {
   includeObjectsWithNoValueSet: boolean;
 
-  lowerBoundEndpointBehavior: 'INCLUSIVE' | 'EXCLUSIVE';
+  lowerBoundEndpointBehavior: 'EXCLUSIVE' | 'INCLUSIVE';
 
   lowerBoundTimePoint: DatePoint | IndexedTimePoint | PropertyReferencedTime;
 
@@ -1279,17 +1279,17 @@ export interface RangedTimeOperation {
   operatorName: string;
 
   propertyParser:
-    | 'VALUE'
-    | 'UPDATED_AT'
     | 'ANNIVERSARY'
-    | 'VALUE_WITH_ZONE_SAME_LOCAL_CONVERSION'
-    | 'ANNIVERSARY_WITH_ZONE_SAME_LOCAL_CONVERSION';
+    | 'ANNIVERSARY_WITH_ZONE_SAME_LOCAL_CONVERSION'
+    | 'UPDATED_AT'
+    | 'VALUE'
+    | 'VALUE_WITH_ZONE_SAME_LOCAL_CONVERSION';
 
   propertyType: 'rangedtime';
 
   type: string;
 
-  upperBoundEndpointBehavior: 'INCLUSIVE' | 'EXCLUSIVE';
+  upperBoundEndpointBehavior: 'EXCLUSIVE' | 'INCLUSIVE';
 
   upperBoundTimePoint: DatePoint | IndexedTimePoint | PropertyReferencedTime;
 
@@ -1297,7 +1297,7 @@ export interface RangedTimeOperation {
 }
 
 export interface RelativeComparativeTimestampRefineBy {
-  comparison: 'BEFORE' | 'AFTER';
+  comparison: 'AFTER' | 'BEFORE';
 
   timeOffset: TimeOffset;
 
@@ -1323,8 +1323,8 @@ export interface RollingDateRangePropertyOperation {
 
   operator:
     | 'IS_LESS_THAN_X_DAYS_AGO'
-    | 'IS_MORE_THAN_X_DAYS_AGO'
     | 'IS_LESS_THAN_X_DAYS_FROM_NOW'
+    | 'IS_MORE_THAN_X_DAYS_AGO'
     | 'IS_MORE_THAN_X_DAYS_FROM_NOW';
 
   operatorName: string;
@@ -1343,7 +1343,7 @@ export interface RollingPropertyUpdatedOperation {
 
   operationType: string;
 
-  operator: 'UPDATED_IN_LAST_X_DAYS' | 'NOT_UPDATED_IN_LAST_X_DAYS';
+  operator: 'NOT_UPDATED_IN_LAST_X_DAYS' | 'UPDATED_IN_LAST_X_DAYS';
 
   operatorName: string;
 
@@ -1353,7 +1353,7 @@ export interface RollingPropertyUpdatedOperation {
 }
 
 export interface SetOccurrencesRefineBy {
-  setType: 'ALL' | 'ALL_INCLUDE_EMPTY' | 'ANY' | 'NONE' | 'NONE_EXCLUDE_EMPTY' | 'ANY_INCLUDE_EMPTY';
+  setType: 'ALL' | 'ALL_INCLUDE_EMPTY' | 'ANY' | 'ANY_INCLUDE_EMPTY' | 'NONE' | 'NONE_EXCLUDE_EMPTY';
 
   type: 'SetOccurrencesRefineBy';
 }
@@ -1364,16 +1364,16 @@ export interface StringPropertyOperation {
   operationType: string;
 
   operator:
-    | 'IS_EQUAL_TO'
-    | 'IS_NOT_EQUAL_TO'
     | 'CONTAINS'
     | 'DOES_NOT_CONTAIN'
-    | 'STARTS_WITH'
     | 'ENDS_WITH'
     | 'HAS_EVER_BEEN_EQUAL_TO'
-    | 'HAS_NEVER_BEEN_EQUAL_TO'
     | 'HAS_EVER_CONTAINED'
-    | 'HAS_NEVER_CONTAINED';
+    | 'HAS_NEVER_BEEN_EQUAL_TO'
+    | 'HAS_NEVER_CONTAINED'
+    | 'IS_EQUAL_TO'
+    | 'IS_NOT_EQUAL_TO'
+    | 'STARTS_WITH';
 
   operatorName: string;
 
@@ -1387,28 +1387,28 @@ export interface StringPropertyOperation {
 export interface TimeOffset {
   amount: number;
 
-  offsetDirection: 'PAST' | 'FUTURE';
+  offsetDirection: 'FUTURE' | 'PAST';
 
-  timeUnit: 'WEEKS' | 'DAYS' | 'HOURS' | 'MINUTES';
+  timeUnit: 'DAYS' | 'HOURS' | 'MINUTES' | 'WEEKS';
 }
 
 export interface TimePointOperation {
-  endpointBehavior: 'INCLUSIVE' | 'EXCLUSIVE';
+  endpointBehavior: 'EXCLUSIVE' | 'INCLUSIVE';
 
   includeObjectsWithNoValueSet: boolean;
 
   operationType: string;
 
-  operator: 'IS_BEFORE' | 'IS_AFTER';
+  operator: 'IS_AFTER' | 'IS_BEFORE';
 
   operatorName: string;
 
   propertyParser:
-    | 'VALUE'
-    | 'UPDATED_AT'
     | 'ANNIVERSARY'
-    | 'VALUE_WITH_ZONE_SAME_LOCAL_CONVERSION'
-    | 'ANNIVERSARY_WITH_ZONE_SAME_LOCAL_CONVERSION';
+    | 'ANNIVERSARY_WITH_ZONE_SAME_LOCAL_CONVERSION'
+    | 'UPDATED_AT'
+    | 'VALUE'
+    | 'VALUE_WITH_ZONE_SAME_LOCAL_CONVERSION';
 
   propertyType: 'timepoint';
 
@@ -1432,7 +1432,7 @@ export interface TodayReference {
 }
 
 export interface WeekReference {
-  dayOfWeek: 'MONDAY' | 'TUESDAY' | 'WEDNESDAY' | 'THURSDAY' | 'FRIDAY' | 'SATURDAY' | 'SUNDAY';
+  dayOfWeek: 'FRIDAY' | 'MONDAY' | 'SATURDAY' | 'SUNDAY' | 'THURSDAY' | 'TUESDAY' | 'WEDNESDAY';
 
   referenceType: 'WEEK';
 

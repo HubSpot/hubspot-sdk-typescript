@@ -208,27 +208,27 @@ export interface DependentField {
  */
 export interface DependentFieldFilter {
   operator:
-    | 'eq'
-    | 'neq'
+    | 'between'
     | 'contains'
     | 'doesnt_contain'
-    | 'str_starts_with'
-    | 'str_ends_with'
-    | 'lt'
-    | 'lte'
+    | 'eq'
     | 'gt'
     | 'gte'
-    | 'between'
+    | 'is_not_empty'
+    | 'lt'
+    | 'lte'
+    | 'neq'
     | 'not_between'
-    | 'within_time_reverse'
-    | 'within_time'
-    | 'set_any'
-    | 'set_not_any'
     | 'set_all'
-    | 'set_not_all'
+    | 'set_any'
     | 'set_eq'
     | 'set_neq'
-    | 'is_not_empty';
+    | 'set_not_all'
+    | 'set_not_any'
+    | 'str_ends_with'
+    | 'str_starts_with'
+    | 'within_time'
+    | 'within_time_reverse';
 
   rangeEnd: string;
 
@@ -433,7 +433,7 @@ export interface FieldGroup {
   /**
    * The type of rich text included. The default value is text.
    */
-  richTextType: 'text' | 'image';
+  richTextType: 'image' | 'text';
 
   /**
    * A block of rich text or an image. Those can be used to add extra information for
@@ -592,7 +592,7 @@ export interface FormDisplayOptions {
    * The theme used for styling the input fields. This will not apply if the form is
    * added to a HubSpot CMS page.
    */
-  theme: 'default_style' | 'canvas' | 'linear' | 'round' | 'sharp' | 'legacy';
+  theme: 'canvas' | 'default_style' | 'legacy' | 'linear' | 'round' | 'sharp';
 
   cssClass?: string;
 }
@@ -605,7 +605,7 @@ export interface FormPostSubmitAction {
    * The action to take after submit. The default action is displaying a thank you
    * message.
    */
-  type: 'thank_you' | 'redirect_url';
+  type: 'redirect_url' | 'thank_you';
 
   /**
    * The thank you text or the page to redirect to.
@@ -633,7 +633,7 @@ export interface FormStyle {
 
   legalConsentTextSize: string;
 
-  submitAlignment: 'left' | 'right' | 'center';
+  submitAlignment: 'center' | 'left' | 'right';
 
   submitColor: string;
 
@@ -881,7 +881,7 @@ export interface LegalConsentOptionsImplicitConsentToProcess {
 }
 
 export interface LegalConsentOptionsLegitimateInterest {
-  lawfulBasis: 'lead' | 'client' | 'other';
+  lawfulBasis: 'client' | 'lead' | 'other';
 
   privacyText: string;
 

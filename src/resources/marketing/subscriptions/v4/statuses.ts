@@ -17,7 +17,7 @@ export class Statuses extends APIResource {
    *     'subscriberIdString',
    *     {
    *       channel: 'EMAIL',
-   *       statusState: 'SUBSCRIBED',
+   *       statusState: 'NOT_SPECIFIED',
    *       subscriptionId: 0,
    *     },
    *   );
@@ -114,7 +114,7 @@ export class Statuses extends APIResource {
    *       inputs: [
    *         {
    *           channel: 'EMAIL',
-   *           statusState: 'SUBSCRIBED',
+   *           statusState: 'NOT_SPECIFIED',
    *           subscriberIdString: 'subscriberIdString',
    *           subscriptionId: 0,
    *         },
@@ -213,7 +213,7 @@ export interface StatusUpdateParams {
    * The current subscription status of the contact, which can be 'SUBSCRIBED',
    * 'UNSUBSCRIBED', or 'NOT_SPECIFIED'.
    */
-  statusState: 'SUBSCRIBED' | 'UNSUBSCRIBED' | 'NOT_SPECIFIED';
+  statusState: 'NOT_SPECIFIED' | 'SUBSCRIBED' | 'UNSUBSCRIBED';
 
   /**
    * The unique identifier of the subscription to be updated.
@@ -227,13 +227,13 @@ export interface StatusUpdateParams {
    * 'PROCESS_AND_STORE', and 'LEGITIMATE_INTEREST_OTHER'.
    */
   legalBasis?:
-    | 'LEGITIMATE_INTEREST_PQL'
-    | 'LEGITIMATE_INTEREST_CLIENT'
-    | 'PERFORMANCE_OF_CONTRACT'
     | 'CONSENT_WITH_NOTICE'
+    | 'LEGITIMATE_INTEREST_CLIENT'
+    | 'LEGITIMATE_INTEREST_OTHER'
+    | 'LEGITIMATE_INTEREST_PQL'
     | 'NON_GDPR'
-    | 'PROCESS_AND_STORE'
-    | 'LEGITIMATE_INTEREST_OTHER';
+    | 'PERFORMANCE_OF_CONTRACT'
+    | 'PROCESS_AND_STORE';
 
   /**
    * An explanation for the legal basis used for communication.

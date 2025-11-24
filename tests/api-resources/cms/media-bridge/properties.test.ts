@@ -37,7 +37,7 @@ describe('resource properties', () => {
       name: 'name',
       type: 'bool',
       calculationFormula: 'calculationFormula',
-      dataSensitivity: 'non_sensitive',
+      dataSensitivity: 'highly_sensitive',
       description: 'description',
       displayOrder: 0,
       externalOptions: true,
@@ -160,7 +160,7 @@ describe('resource properties', () => {
           name: 'name',
           type: 'bool',
           calculationFormula: 'calculationFormula',
-          dataSensitivity: 'non_sensitive',
+          dataSensitivity: 'highly_sensitive',
           description: 'description',
           displayOrder: 0,
           externalOptions: true,
@@ -229,7 +229,7 @@ describe('resource properties', () => {
     const responsePromise = client.cms.mediaBridge.properties.getBatch('objectType', {
       appId: 0,
       archived: true,
-      dataSensitivity: 'non_sensitive',
+      dataSensitivity: 'highly_sensitive',
       inputs: [{ name: 'name' }],
     });
     const rawResponse = await responsePromise.asResponse();
@@ -246,7 +246,7 @@ describe('resource properties', () => {
     const response = await client.cms.mediaBridge.properties.getBatch('objectType', {
       appId: 0,
       archived: true,
-      dataSensitivity: 'non_sensitive',
+      dataSensitivity: 'highly_sensitive',
       inputs: [{ name: 'name' }],
     });
   });

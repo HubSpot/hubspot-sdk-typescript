@@ -94,7 +94,7 @@ describe('resource partnerServices', () => {
   test.skip('search: only required params', async () => {
     const responsePromise = client.crm.objects.partnerServices.search({
       after: 'after',
-      filterGroups: [{ filters: [{ operator: 'EQ', propertyName: 'propertyName' }] }],
+      filterGroups: [{ filters: [{ operator: 'BETWEEN', propertyName: 'propertyName' }] }],
       limit: 0,
       properties: ['string'],
       sorts: ['string'],
@@ -116,7 +116,7 @@ describe('resource partnerServices', () => {
         {
           filters: [
             {
-              operator: 'EQ',
+              operator: 'BETWEEN',
               propertyName: 'propertyName',
               highValue: 'highValue',
               value: 'value',

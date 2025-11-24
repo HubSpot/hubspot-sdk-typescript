@@ -11,7 +11,7 @@ describe('resource events', () => {
   // Prism tests are disabled
   test.skip('createAttentionSpanEvent: only required params', async () => {
     const responsePromise = client.cms.mediaBridge.events.createAttentionSpanEvent({
-      mediaType: 'VIDEO',
+      mediaType: 'AUDIO',
       occurredTimestamp: 0,
       rawDataMap: { foo: 0 },
       sessionId: 'sessionId',
@@ -28,7 +28,7 @@ describe('resource events', () => {
   // Prism tests are disabled
   test.skip('createAttentionSpanEvent: required and optional params', async () => {
     const response = await client.cms.mediaBridge.events.createAttentionSpanEvent({
-      mediaType: 'VIDEO',
+      mediaType: 'AUDIO',
       occurredTimestamp: 0,
       rawDataMap: { foo: 0 },
       sessionId: 'sessionId',
@@ -50,7 +50,7 @@ describe('resource events', () => {
   // Prism tests are disabled
   test.skip('createMediaPlayedEvent: only required params', async () => {
     const responsePromise = client.cms.mediaBridge.events.createMediaPlayedEvent({
-      mediaType: 'VIDEO',
+      mediaType: 'AUDIO',
       occurredTimestamp: 0,
       sessionId: 'sessionId',
       state: 'STARTED',
@@ -67,7 +67,7 @@ describe('resource events', () => {
   // Prism tests are disabled
   test.skip('createMediaPlayedEvent: required and optional params', async () => {
     const response = await client.cms.mediaBridge.events.createMediaPlayedEvent({
-      mediaType: 'VIDEO',
+      mediaType: 'AUDIO',
       occurredTimestamp: 0,
       sessionId: 'sessionId',
       state: 'STARTED',
@@ -88,7 +88,7 @@ describe('resource events', () => {
   // Prism tests are disabled
   test.skip('createMediaPlayedPercentEvent: only required params', async () => {
     const responsePromise = client.cms.mediaBridge.events.createMediaPlayedPercentEvent({
-      mediaType: 'VIDEO',
+      mediaType: 'AUDIO',
       occurredTimestamp: 0,
       playedPercent: 0,
       sessionId: 'sessionId',
@@ -105,7 +105,7 @@ describe('resource events', () => {
   // Prism tests are disabled
   test.skip('createMediaPlayedPercentEvent: required and optional params', async () => {
     const response = await client.cms.mediaBridge.events.createMediaPlayedPercentEvent({
-      mediaType: 'VIDEO',
+      mediaType: 'AUDIO',
       occurredTimestamp: 0,
       playedPercent: 0,
       sessionId: 'sessionId',

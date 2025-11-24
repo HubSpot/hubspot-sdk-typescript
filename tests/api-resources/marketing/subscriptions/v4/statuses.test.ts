@@ -12,7 +12,7 @@ describe('resource statuses', () => {
   test.skip('update: only required params', async () => {
     const responsePromise = client.marketing.subscriptions.v4.statuses.update('subscriberIdString', {
       channel: 'EMAIL',
-      statusState: 'SUBSCRIBED',
+      statusState: 'NOT_SPECIFIED',
       subscriptionId: 0,
     });
     const rawResponse = await responsePromise.asResponse();
@@ -28,9 +28,9 @@ describe('resource statuses', () => {
   test.skip('update: required and optional params', async () => {
     const response = await client.marketing.subscriptions.v4.statuses.update('subscriberIdString', {
       channel: 'EMAIL',
-      statusState: 'SUBSCRIBED',
+      statusState: 'NOT_SPECIFIED',
       subscriptionId: 0,
-      legalBasis: 'LEGITIMATE_INTEREST_PQL',
+      legalBasis: 'CONSENT_WITH_NOTICE',
       legalBasisExplanation: 'legalBasisExplanation',
     });
   });
@@ -114,7 +114,7 @@ describe('resource statuses', () => {
       inputs: [
         {
           channel: 'EMAIL',
-          statusState: 'SUBSCRIBED',
+          statusState: 'NOT_SPECIFIED',
           subscriberIdString: 'subscriberIdString',
           subscriptionId: 0,
         },
@@ -135,10 +135,10 @@ describe('resource statuses', () => {
       inputs: [
         {
           channel: 'EMAIL',
-          statusState: 'SUBSCRIBED',
+          statusState: 'NOT_SPECIFIED',
           subscriberIdString: 'subscriberIdString',
           subscriptionId: 0,
-          legalBasis: 'LEGITIMATE_INTEREST_PQL',
+          legalBasis: 'CONSENT_WITH_NOTICE',
           legalBasisExplanation: 'legalBasisExplanation',
         },
       ],

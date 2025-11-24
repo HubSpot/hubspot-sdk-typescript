@@ -18,7 +18,7 @@ export class SitePages extends APIResource {
    * ```ts
    * await client.cms.pages.sitePages.create({
    *   id: 'id',
-   *   abStatus: 'master',
+   *   abStatus: 'automated_loser_variant',
    *   abTestId: 'abTestId',
    *   archivedAt: '2019-12-27T18:11:19.117Z',
    *   archivedInDashboard: true,
@@ -97,7 +97,7 @@ export class SitePages extends APIResource {
    * ```ts
    * const page = await client.cms.pages.sitePages.update('objectId', {
    *   id: 'id',
-   *   abStatus: 'master',
+   *   abStatus: 'automated_loser_variant',
    *   abTestId: 'abTestId',
    *   archivedAt: '2019-12-27T18:11:19.117Z',
    *   archivedInDashboard: true,
@@ -277,7 +277,7 @@ export class SitePages extends APIResource {
    *   inputs: [
    *     {
    *       id: 'id',
-   *       abStatus: 'master',
+   *       abStatus: 'automated_loser_variant',
    *       abTestId: 'abTestId',
    *       archivedAt: '2019-12-27T18:11:19.117Z',
    *       archivedInDashboard: true,
@@ -691,7 +691,7 @@ export class SitePages extends APIResource {
    * ```ts
    * const page = await client.cms.pages.sitePages.updateDraft('objectId', {
    *   id: 'id',
-   *   abStatus: 'master',
+   *   abStatus: 'automated_loser_variant',
    *   abTestId: 'abTestId',
    *   archivedAt: '2019-12-27T18:11:19.117Z',
    *   archivedInDashboard: true,
@@ -792,14 +792,14 @@ export interface SitePageCreateParams {
    * The status of the AB test associated with this page, if applicable
    */
   abStatus:
-    | 'master'
-    | 'variant'
+    | 'automated_loser_variant'
+    | 'automated_master'
+    | 'automated_variant'
     | 'loser_variant'
     | 'mab_master'
     | 'mab_variant'
-    | 'automated_master'
-    | 'automated_variant'
-    | 'automated_loser_variant';
+    | 'master'
+    | 'variant';
 
   /**
    * The ID of the AB test associated with this page, if applicable
@@ -844,7 +844,7 @@ export interface SitePageCreateParams {
    * An ENUM descibing the type of this object. Should be either LANDING_PAGE or
    * SITE_PAGE.
    */
-  contentTypeCategory: '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10' | '11' | '12';
+  contentTypeCategory: '0' | '1' | '10' | '11' | '12' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9';
 
   created: string;
 
@@ -860,12 +860,17 @@ export interface SitePageCreateParams {
    */
   currentState:
     | 'AUTOMATED'
+    | 'AUTOMATED_AB'
+    | 'AUTOMATED_AB_VARIANT'
     | 'AUTOMATED_DRAFT'
-    | 'AUTOMATED_SENDING'
+    | 'AUTOMATED_DRAFT_AB'
+    | 'AUTOMATED_DRAFT_ABVARIANT'
     | 'AUTOMATED_FOR_FORM'
     | 'AUTOMATED_FOR_FORM_BUFFER'
     | 'AUTOMATED_FOR_FORM_DRAFT'
     | 'AUTOMATED_FOR_FORM_LEGACY'
+    | 'AUTOMATED_LOSER_ABVARIANT'
+    | 'AUTOMATED_SENDING'
     | 'BLOG_EMAIL_DRAFT'
     | 'BLOG_EMAIL_PUBLISHED'
     | 'DRAFT'
@@ -884,12 +889,7 @@ export interface SitePageCreateParams {
     | 'RSS_TO_EMAIL_PUBLISHED'
     | 'SCHEDULED'
     | 'SCHEDULED_AB'
-    | 'SCHEDULED_OR_PUBLISHED'
-    | 'AUTOMATED_AB'
-    | 'AUTOMATED_AB_VARIANT'
-    | 'AUTOMATED_DRAFT_AB'
-    | 'AUTOMATED_DRAFT_ABVARIANT'
-    | 'AUTOMATED_LOSER_ABVARIANT';
+    | 'SCHEDULED_OR_PUBLISHED';
 
   /**
    * The domain this page will resolve to. If null, the page will default to the
@@ -1334,6 +1334,7 @@ export interface SitePageCreateParams {
     | 'haw'
     | 'haw-us'
     | 'he'
+    | 'he-il'
     | 'hi'
     | 'hi-in'
     | 'hr'
@@ -1348,11 +1349,11 @@ export interface SitePageCreateParams {
     | 'ia'
     | 'ia-001'
     | 'id'
+    | 'id-id'
     | 'ig'
     | 'ig-ng'
     | 'ii'
     | 'ii-cn'
-    | 'id-id'
     | 'is'
     | 'is-is'
     | 'it'
@@ -1360,13 +1361,10 @@ export interface SitePageCreateParams {
     | 'it-it'
     | 'it-sm'
     | 'it-va'
-    | 'he-il'
     | 'ja'
     | 'ja-jp'
     | 'jgo'
     | 'jgo-cm'
-    | 'yi'
-    | 'yi-001'
     | 'jmc'
     | 'jmc-tz'
     | 'jv'
@@ -1410,10 +1408,10 @@ export interface SitePageCreateParams {
     | 'ksf-cm'
     | 'ksh'
     | 'ksh-de'
-    | 'kw'
-    | 'kw-gb'
     | 'ku'
     | 'ku-tr'
+    | 'kw'
+    | 'kw-gb'
     | 'ky'
     | 'ky-kg'
     | 'lag'
@@ -1500,8 +1498,8 @@ export interface SitePageCreateParams {
     | 'nl'
     | 'nl-aw'
     | 'nl-be'
-    | 'nl-ch'
     | 'nl-bq'
+    | 'nl-ch'
     | 'nl-cw'
     | 'nl-lu'
     | 'nl-nl'
@@ -1697,6 +1695,8 @@ export interface SitePageCreateParams {
     | 'xog-ug'
     | 'yav'
     | 'yav-cm'
+    | 'yi'
+    | 'yi-001'
     | 'yo'
     | 'yo-bj'
     | 'yo-ng'
@@ -1707,12 +1707,12 @@ export interface SitePageCreateParams {
     | 'zgh-ma'
     | 'zh'
     | 'zh-cn'
+    | 'zh-hans'
+    | 'zh-hant'
     | 'zh-hk'
     | 'zh-mo'
     | 'zh-sg'
     | 'zh-tw'
-    | 'zh-hans'
-    | 'zh-hant'
     | 'zu'
     | 'zu-za';
 
@@ -1865,14 +1865,14 @@ export interface SitePageUpdateParams {
    * Body param: The status of the AB test associated with this page, if applicable
    */
   abStatus:
-    | 'master'
-    | 'variant'
+    | 'automated_loser_variant'
+    | 'automated_master'
+    | 'automated_variant'
     | 'loser_variant'
     | 'mab_master'
     | 'mab_variant'
-    | 'automated_master'
-    | 'automated_variant'
-    | 'automated_loser_variant';
+    | 'master'
+    | 'variant';
 
   /**
    * Body param: The ID of the AB test associated with this page, if applicable
@@ -1921,7 +1921,7 @@ export interface SitePageUpdateParams {
    * Body param: An ENUM descibing the type of this object. Should be either
    * LANDING_PAGE or SITE_PAGE.
    */
-  contentTypeCategory: '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10' | '11' | '12';
+  contentTypeCategory: '0' | '1' | '10' | '11' | '12' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9';
 
   /**
    * Body param:
@@ -1943,12 +1943,17 @@ export interface SitePageUpdateParams {
    */
   currentState:
     | 'AUTOMATED'
+    | 'AUTOMATED_AB'
+    | 'AUTOMATED_AB_VARIANT'
     | 'AUTOMATED_DRAFT'
-    | 'AUTOMATED_SENDING'
+    | 'AUTOMATED_DRAFT_AB'
+    | 'AUTOMATED_DRAFT_ABVARIANT'
     | 'AUTOMATED_FOR_FORM'
     | 'AUTOMATED_FOR_FORM_BUFFER'
     | 'AUTOMATED_FOR_FORM_DRAFT'
     | 'AUTOMATED_FOR_FORM_LEGACY'
+    | 'AUTOMATED_LOSER_ABVARIANT'
+    | 'AUTOMATED_SENDING'
     | 'BLOG_EMAIL_DRAFT'
     | 'BLOG_EMAIL_PUBLISHED'
     | 'DRAFT'
@@ -1967,12 +1972,7 @@ export interface SitePageUpdateParams {
     | 'RSS_TO_EMAIL_PUBLISHED'
     | 'SCHEDULED'
     | 'SCHEDULED_AB'
-    | 'SCHEDULED_OR_PUBLISHED'
-    | 'AUTOMATED_AB'
-    | 'AUTOMATED_AB_VARIANT'
-    | 'AUTOMATED_DRAFT_AB'
-    | 'AUTOMATED_DRAFT_ABVARIANT'
-    | 'AUTOMATED_LOSER_ABVARIANT';
+    | 'SCHEDULED_OR_PUBLISHED';
 
   /**
    * Body param: The domain this page will resolve to. If null, the page will default
@@ -2424,6 +2424,7 @@ export interface SitePageUpdateParams {
     | 'haw'
     | 'haw-us'
     | 'he'
+    | 'he-il'
     | 'hi'
     | 'hi-in'
     | 'hr'
@@ -2438,11 +2439,11 @@ export interface SitePageUpdateParams {
     | 'ia'
     | 'ia-001'
     | 'id'
+    | 'id-id'
     | 'ig'
     | 'ig-ng'
     | 'ii'
     | 'ii-cn'
-    | 'id-id'
     | 'is'
     | 'is-is'
     | 'it'
@@ -2450,13 +2451,10 @@ export interface SitePageUpdateParams {
     | 'it-it'
     | 'it-sm'
     | 'it-va'
-    | 'he-il'
     | 'ja'
     | 'ja-jp'
     | 'jgo'
     | 'jgo-cm'
-    | 'yi'
-    | 'yi-001'
     | 'jmc'
     | 'jmc-tz'
     | 'jv'
@@ -2500,10 +2498,10 @@ export interface SitePageUpdateParams {
     | 'ksf-cm'
     | 'ksh'
     | 'ksh-de'
-    | 'kw'
-    | 'kw-gb'
     | 'ku'
     | 'ku-tr'
+    | 'kw'
+    | 'kw-gb'
     | 'ky'
     | 'ky-kg'
     | 'lag'
@@ -2590,8 +2588,8 @@ export interface SitePageUpdateParams {
     | 'nl'
     | 'nl-aw'
     | 'nl-be'
-    | 'nl-ch'
     | 'nl-bq'
+    | 'nl-ch'
     | 'nl-cw'
     | 'nl-lu'
     | 'nl-nl'
@@ -2787,6 +2785,8 @@ export interface SitePageUpdateParams {
     | 'xog-ug'
     | 'yav'
     | 'yav-cm'
+    | 'yi'
+    | 'yi-001'
     | 'yo'
     | 'yo-bj'
     | 'yo-ng'
@@ -2797,12 +2797,12 @@ export interface SitePageUpdateParams {
     | 'zgh-ma'
     | 'zh'
     | 'zh-cn'
+    | 'zh-hans'
+    | 'zh-hant'
     | 'zh-hk'
     | 'zh-mo'
     | 'zh-sg'
     | 'zh-tw'
-    | 'zh-hans'
-    | 'zh-hant'
     | 'zu'
     | 'zu-za';
 
@@ -3217,14 +3217,14 @@ export interface SitePageUpdateDraftParams {
    * The status of the AB test associated with this page, if applicable
    */
   abStatus:
-    | 'master'
-    | 'variant'
+    | 'automated_loser_variant'
+    | 'automated_master'
+    | 'automated_variant'
     | 'loser_variant'
     | 'mab_master'
     | 'mab_variant'
-    | 'automated_master'
-    | 'automated_variant'
-    | 'automated_loser_variant';
+    | 'master'
+    | 'variant';
 
   /**
    * The ID of the AB test associated with this page, if applicable
@@ -3269,7 +3269,7 @@ export interface SitePageUpdateDraftParams {
    * An ENUM descibing the type of this object. Should be either LANDING_PAGE or
    * SITE_PAGE.
    */
-  contentTypeCategory: '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10' | '11' | '12';
+  contentTypeCategory: '0' | '1' | '10' | '11' | '12' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9';
 
   created: string;
 
@@ -3285,12 +3285,17 @@ export interface SitePageUpdateDraftParams {
    */
   currentState:
     | 'AUTOMATED'
+    | 'AUTOMATED_AB'
+    | 'AUTOMATED_AB_VARIANT'
     | 'AUTOMATED_DRAFT'
-    | 'AUTOMATED_SENDING'
+    | 'AUTOMATED_DRAFT_AB'
+    | 'AUTOMATED_DRAFT_ABVARIANT'
     | 'AUTOMATED_FOR_FORM'
     | 'AUTOMATED_FOR_FORM_BUFFER'
     | 'AUTOMATED_FOR_FORM_DRAFT'
     | 'AUTOMATED_FOR_FORM_LEGACY'
+    | 'AUTOMATED_LOSER_ABVARIANT'
+    | 'AUTOMATED_SENDING'
     | 'BLOG_EMAIL_DRAFT'
     | 'BLOG_EMAIL_PUBLISHED'
     | 'DRAFT'
@@ -3309,12 +3314,7 @@ export interface SitePageUpdateDraftParams {
     | 'RSS_TO_EMAIL_PUBLISHED'
     | 'SCHEDULED'
     | 'SCHEDULED_AB'
-    | 'SCHEDULED_OR_PUBLISHED'
-    | 'AUTOMATED_AB'
-    | 'AUTOMATED_AB_VARIANT'
-    | 'AUTOMATED_DRAFT_AB'
-    | 'AUTOMATED_DRAFT_ABVARIANT'
-    | 'AUTOMATED_LOSER_ABVARIANT';
+    | 'SCHEDULED_OR_PUBLISHED';
 
   /**
    * The domain this page will resolve to. If null, the page will default to the
@@ -3759,6 +3759,7 @@ export interface SitePageUpdateDraftParams {
     | 'haw'
     | 'haw-us'
     | 'he'
+    | 'he-il'
     | 'hi'
     | 'hi-in'
     | 'hr'
@@ -3773,11 +3774,11 @@ export interface SitePageUpdateDraftParams {
     | 'ia'
     | 'ia-001'
     | 'id'
+    | 'id-id'
     | 'ig'
     | 'ig-ng'
     | 'ii'
     | 'ii-cn'
-    | 'id-id'
     | 'is'
     | 'is-is'
     | 'it'
@@ -3785,13 +3786,10 @@ export interface SitePageUpdateDraftParams {
     | 'it-it'
     | 'it-sm'
     | 'it-va'
-    | 'he-il'
     | 'ja'
     | 'ja-jp'
     | 'jgo'
     | 'jgo-cm'
-    | 'yi'
-    | 'yi-001'
     | 'jmc'
     | 'jmc-tz'
     | 'jv'
@@ -3835,10 +3833,10 @@ export interface SitePageUpdateDraftParams {
     | 'ksf-cm'
     | 'ksh'
     | 'ksh-de'
-    | 'kw'
-    | 'kw-gb'
     | 'ku'
     | 'ku-tr'
+    | 'kw'
+    | 'kw-gb'
     | 'ky'
     | 'ky-kg'
     | 'lag'
@@ -3925,8 +3923,8 @@ export interface SitePageUpdateDraftParams {
     | 'nl'
     | 'nl-aw'
     | 'nl-be'
-    | 'nl-ch'
     | 'nl-bq'
+    | 'nl-ch'
     | 'nl-cw'
     | 'nl-lu'
     | 'nl-nl'
@@ -4122,6 +4120,8 @@ export interface SitePageUpdateDraftParams {
     | 'xog-ug'
     | 'yav'
     | 'yav-cm'
+    | 'yi'
+    | 'yi-001'
     | 'yo'
     | 'yo-bj'
     | 'yo-ng'
@@ -4132,12 +4132,12 @@ export interface SitePageUpdateDraftParams {
     | 'zgh-ma'
     | 'zh'
     | 'zh-cn'
+    | 'zh-hans'
+    | 'zh-hant'
     | 'zh-hk'
     | 'zh-mo'
     | 'zh-sg'
     | 'zh-tw'
-    | 'zh-hans'
-    | 'zh-hant'
     | 'zu'
     | 'zu-za';
 

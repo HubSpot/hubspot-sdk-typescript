@@ -51,10 +51,10 @@ export class Functions extends APIResource {
    */
   createOrReplaceByFunctionType(
     functionType:
-      | 'PRE_ACTION_EXECUTION'
-      | 'PRE_FETCH_OPTIONS'
+      | 'POST_ACTION_EXECUTION'
       | 'POST_FETCH_OPTIONS'
-      | 'POST_ACTION_EXECUTION',
+      | 'PRE_ACTION_EXECUTION'
+      | 'PRE_FETCH_OPTIONS',
     params: FunctionCreateOrReplaceByFunctionTypeParams,
     options?: RequestOptions,
   ): APIPromise<ActionsAPI.PublicActionFunctionIdentifier> {
@@ -71,10 +71,10 @@ export class Functions extends APIResource {
    */
   deleteByFunctionType(
     functionType:
-      | 'PRE_ACTION_EXECUTION'
-      | 'PRE_FETCH_OPTIONS'
+      | 'POST_ACTION_EXECUTION'
       | 'POST_FETCH_OPTIONS'
-      | 'POST_ACTION_EXECUTION',
+      | 'PRE_ACTION_EXECUTION'
+      | 'PRE_FETCH_OPTIONS',
     params: FunctionDeleteByFunctionTypeParams,
     options?: RequestOptions,
   ): APIPromise<void> {
@@ -105,10 +105,10 @@ export class Functions extends APIResource {
    */
   getByFunctionType(
     functionType:
-      | 'PRE_ACTION_EXECUTION'
-      | 'PRE_FETCH_OPTIONS'
+      | 'POST_ACTION_EXECUTION'
       | 'POST_FETCH_OPTIONS'
-      | 'POST_ACTION_EXECUTION',
+      | 'PRE_ACTION_EXECUTION'
+      | 'PRE_FETCH_OPTIONS',
     params: FunctionGetByFunctionTypeParams,
     options?: RequestOptions,
   ): APIPromise<ActionsAPI.PublicActionFunction> {
@@ -132,7 +132,7 @@ export interface FunctionDeleteParams {
 
   definitionId: string;
 
-  functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION';
+  functionType: 'POST_ACTION_EXECUTION' | 'POST_FETCH_OPTIONS' | 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS';
 }
 
 export interface FunctionCreateOrReplaceParams {
@@ -150,7 +150,7 @@ export interface FunctionCreateOrReplaceParams {
    * Path param: The type of function. Can be `PRE_ACTION_EXECUTION`,
    * `PRE_FETCH_OPTIONS`, `POST_FETCH_OPTIONS`, `POST_ACTION_EXECUTION`.
    */
-  functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION';
+  functionType: 'POST_ACTION_EXECUTION' | 'POST_FETCH_OPTIONS' | 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS';
 
   /**
    * Body param:
@@ -202,7 +202,7 @@ export interface FunctionGetParams {
    * The type of function. Can be `PRE_ACTION_EXECUTION`, `PRE_FETCH_OPTIONS`,
    * `POST_FETCH_OPTIONS`, `POST_ACTION_EXECUTION`.
    */
-  functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION';
+  functionType: 'POST_ACTION_EXECUTION' | 'POST_FETCH_OPTIONS' | 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS';
 }
 
 export interface FunctionGetByFunctionTypeParams {

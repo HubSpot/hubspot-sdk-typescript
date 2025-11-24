@@ -1,24 +1,26 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Actors, type ActorBatchReadParams, type ActorGetParams } from './actors';
-export {
-  ChannelAccounts,
-  type ChannelAccountListParams,
-  type ChannelAccountGetParams,
-} from './channel-accounts';
-export { Channels, type ChannelListParams } from './channels';
 export { Conversations } from './conversations';
 export {
   CustomChannels,
   type ChannelIntegrationMessageEgg,
   type ChannelIntegrationParticipant,
+  type CollectionResponseWithTotalPublicChannelAccountForwardPaging,
   type CollectionResponseWithTotalPublicChannelIntegrationChannelForwardPaging,
+  type ContactAddress,
   type ContactAttachment,
+  type ContactEmail,
+  type ContactName,
+  type ContactOrg,
+  type ContactPhone,
+  type ContactProfile,
+  type ContactURL,
   type FileAttachment,
   type LocationAttachment,
   type MessageHeaderAttachment,
   type PreResolvedContact,
   type PreResolvedContacts,
+  type PublicChannelAccount,
   type PublicChannelAccountEgg,
   type PublicChannelAccountStagingToken,
   type PublicChannelAccountStagingTokenUpdateRequest,
@@ -27,24 +29,32 @@ export {
   type PublicChannelIntegrationChannelCreate,
   type PublicChannelIntegrationChannelPatch,
   type PublicChannelIntegrationMessageUpdateRequest,
+  type PublicClient,
+  type PublicContact,
   type PublicConversationsMessage,
+  type PublicDeliveryIdentifier,
+  type PublicFile,
+  type PublicLocation,
+  type PublicMessageFailureDetails,
+  type PublicMessageHeader,
+  type PublicMessageStatus,
+  type PublicQuickReplies,
+  type PublicRecipient,
+  type PublicSender,
+  type PublicSocialMetadataAttachment,
+  type PublicUnsupportedContent,
+  type PublicWhatsAppTemplateMetadata,
   type QuickRepliesAttachment,
+  type QuickReply,
+  type SocialMetadata,
   type SocialMetadataIntegrationAttachment,
   type UnsupportedContentAttachment,
   type CustomChannelCreateParams,
   type CustomChannelUpdateParams,
   type CustomChannelListParams,
+  type PublicChannelAccountsPage,
   type PublicChannelIntegrationChannelsPage,
 } from './custom-channels/index';
-export { Inboxes, type InboxListParams, type InboxGetParams } from './inboxes';
-export {
-  Messages,
-  type MessageCreateParams,
-  type MessageListParams,
-  type MessageGetParams,
-  type MessageGetOriginalContentParams,
-} from './messages';
-export { Threads, type ThreadUpdateParams, type ThreadListParams, type ThreadGetParams } from './threads';
 export {
   VisitorIdentification,
   type IdentificationTokenGenerationRequest,

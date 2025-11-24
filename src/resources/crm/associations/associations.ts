@@ -28,7 +28,6 @@ import {
   PublicFetchAssociationsBatchRequest,
   ReportCreationResponse,
   V4,
-  V4MergeParams,
 } from './v4/v4';
 
 export class Associations extends APIResource {
@@ -58,7 +57,7 @@ export interface BatchResponsePublicAssociation {
    * The current status of the batch operation, with possible values: PENDING,
    * PROCESSING, CANCELED, COMPLETE.
    */
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   errors?: Array<Shared.StandardError>;
 
@@ -95,7 +94,7 @@ export interface BatchResponsePublicAssociationMulti {
    * The current status of the batch operation, with possible values: PENDING,
    * PROCESSING, CANCELED, COMPLETE.
    */
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   errors?: Array<Shared.StandardError>;
 
@@ -122,7 +121,7 @@ export interface BatchResponseVoid {
 
   startedAt: string;
 
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   errors?: Array<Shared.StandardError>;
 
@@ -199,6 +198,5 @@ export declare namespace Associations {
     type PublicDefaultAssociationMultiPost as PublicDefaultAssociationMultiPost,
     type PublicFetchAssociationsBatchRequest as PublicFetchAssociationsBatchRequest,
     type ReportCreationResponse as ReportCreationResponse,
-    type V4MergeParams as V4MergeParams,
   };
 }

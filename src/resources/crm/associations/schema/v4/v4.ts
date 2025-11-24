@@ -44,7 +44,7 @@ export interface BatchResponsePublicAssociationDefinitionConfigurationUpdateResu
 
   startedAt: string;
 
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   errors?: Array<Shared.StandardError>;
 
@@ -62,7 +62,7 @@ export interface BatchResponsePublicAssociationDefinitionUserConfiguration {
 
   startedAt: string;
 
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   errors?: Array<Shared.StandardError>;
 
@@ -86,7 +86,7 @@ export interface CollectionResponsePublicAssociationDefinitionUserConfiguration 
 }
 
 export interface PublicAssociationDefinitionConfigurationCreateRequest {
-  category: 'HUBSPOT_DEFINED' | 'USER_DEFINED' | 'INTEGRATOR_DEFINED';
+  category: 'HUBSPOT_DEFINED' | 'INTEGRATOR_DEFINED' | 'USER_DEFINED';
 
   maxToObjectIds: number;
 
@@ -94,7 +94,7 @@ export interface PublicAssociationDefinitionConfigurationCreateRequest {
 }
 
 export interface PublicAssociationDefinitionConfigurationUpdateRequest {
-  category: 'HUBSPOT_DEFINED' | 'USER_DEFINED' | 'INTEGRATOR_DEFINED';
+  category: 'HUBSPOT_DEFINED' | 'INTEGRATOR_DEFINED' | 'USER_DEFINED';
 
   maxToObjectIds: number;
 
@@ -102,7 +102,7 @@ export interface PublicAssociationDefinitionConfigurationUpdateRequest {
 }
 
 export interface PublicAssociationDefinitionConfigurationUpdateResult {
-  category: 'HUBSPOT_DEFINED' | 'USER_DEFINED' | 'INTEGRATOR_DEFINED';
+  category: 'HUBSPOT_DEFINED' | 'INTEGRATOR_DEFINED' | 'USER_DEFINED';
 
   typeId: number;
 
@@ -126,7 +126,7 @@ export interface PublicAssociationDefinitionUpdateRequest {
 }
 
 export interface PublicAssociationDefinitionUserConfiguration {
-  category: 'HUBSPOT_DEFINED' | 'USER_DEFINED' | 'INTEGRATOR_DEFINED';
+  category: 'HUBSPOT_DEFINED' | 'INTEGRATOR_DEFINED' | 'USER_DEFINED';
 
   typeId: number;
 

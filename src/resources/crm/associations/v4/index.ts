@@ -7,7 +7,6 @@ export {
   type BatchCreateDefaultParams,
   type BatchDeleteLabelsParams,
   type BatchGetParams,
-  type BatchUpsertParams,
 } from './batch';
 export { Report } from './report';
 export {
@@ -25,5 +24,4 @@ export {
   type PublicDefaultAssociationMultiPost,
   type PublicFetchAssociationsBatchRequest,
   type ReportCreationResponse,
-  type V4MergeParams,
 } from './v4';

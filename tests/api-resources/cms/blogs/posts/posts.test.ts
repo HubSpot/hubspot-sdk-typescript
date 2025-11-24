@@ -12,7 +12,7 @@ describe('resource posts', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.cms.blogs.posts.create({
       id: 'id',
-      abStatus: 'master',
+      abStatus: 'automated_loser_variant',
       abTestId: 'abTestId',
       archivedAt: 0,
       archivedInDashboard: true,
@@ -155,7 +155,7 @@ describe('resource posts', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.cms.blogs.posts.create({
       id: 'id',
-      abStatus: 'master',
+      abStatus: 'automated_loser_variant',
       abTestId: 'abTestId',
       archivedAt: 0,
       archivedInDashboard: true,
@@ -294,7 +294,7 @@ describe('resource posts', () => {
   test.skip('update: only required params', async () => {
     const responsePromise = client.cms.blogs.posts.update('objectId', {
       id: 'id',
-      abStatus: 'master',
+      abStatus: 'automated_loser_variant',
       abTestId: 'abTestId',
       archivedAt: 0,
       archivedInDashboard: true,
@@ -437,7 +437,7 @@ describe('resource posts', () => {
   test.skip('update: required and optional params', async () => {
     const response = await client.cms.blogs.posts.update('objectId', {
       id: 'id',
-      abStatus: 'master',
+      abStatus: 'automated_loser_variant',
       abTestId: 'abTestId',
       archivedAt: 0,
       archivedInDashboard: true,
@@ -888,7 +888,7 @@ describe('resource posts', () => {
   test.skip('updateDraft: only required params', async () => {
     const responsePromise = client.cms.blogs.posts.updateDraft('objectId', {
       id: 'id',
-      abStatus: 'master',
+      abStatus: 'automated_loser_variant',
       abTestId: 'abTestId',
       archivedAt: 0,
       archivedInDashboard: true,
@@ -1031,7 +1031,7 @@ describe('resource posts', () => {
   test.skip('updateDraft: required and optional params', async () => {
     const response = await client.cms.blogs.posts.updateDraft('objectId', {
       id: 'id',
-      abStatus: 'master',
+      abStatus: 'automated_loser_variant',
       abTestId: 'abTestId',
       archivedAt: 0,
       archivedInDashboard: true,

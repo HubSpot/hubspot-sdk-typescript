@@ -254,7 +254,7 @@ export interface AssociatedID {
 }
 
 export interface AssociationSpecWithLabel {
-  category: 'HUBSPOT_DEFINED' | 'USER_DEFINED' | 'INTEGRATOR_DEFINED';
+  category: 'HUBSPOT_DEFINED' | 'INTEGRATOR_DEFINED' | 'USER_DEFINED';
 
   typeId: number;
 
@@ -318,7 +318,7 @@ export interface BatchResponsePublicDefaultAssociation {
    * The status of the batch processing request: "PENDING", "PROCESSING",
    * "CANCELLED", or "COMPLETE".
    */
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   errors?: Array<Shared.StandardError>;
 
@@ -358,7 +358,7 @@ export interface BatchResponseSimplePublicObject {
    * The status of the batch processing request: "PENDING", "PROCESSING",
    * "CANCELLED", or "COMPLETE"
    */
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   errors?: Array<Shared.StandardError>;
 
@@ -399,7 +399,7 @@ export interface BatchResponseSimplePublicUpsertObject {
    * The status of the batch processing request. Can be: "PENDING", "PROCESSING",
    * "CANCELED", or "COMPLETE".
    */
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   errors?: Array<Shared.StandardError>;
 
@@ -489,19 +489,19 @@ export interface Filter {
    * The comparison operator used in the filter, such as "EQ" or "GT".
    */
   operator:
+    | 'BETWEEN'
+    | 'CONTAINS_TOKEN'
     | 'EQ'
-    | 'NEQ'
-    | 'LT'
-    | 'LTE'
     | 'GT'
     | 'GTE'
-    | 'BETWEEN'
-    | 'IN'
-    | 'NOT_IN'
     | 'HAS_PROPERTY'
+    | 'IN'
+    | 'LT'
+    | 'LTE'
+    | 'NEQ'
+    | 'NOT_CONTAINS_TOKEN'
     | 'NOT_HAS_PROPERTY'
-    | 'CONTAINS_TOKEN'
-    | 'NOT_CONTAINS_TOKEN';
+    | 'NOT_IN';
 
   /**
    * The name of the property to apply the filter to.

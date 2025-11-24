@@ -13,7 +13,7 @@ describe('resource portals', () => {
     const responsePromise = client.crm.featureFlags.portals.update(0, {
       appId: 0,
       flagName: 'flagName',
-      flagState: 'OFF',
+      flagState: 'ABSENT',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,7 +29,7 @@ describe('resource portals', () => {
     const response = await client.crm.featureFlags.portals.update(0, {
       appId: 0,
       flagName: 'flagName',
-      flagState: 'OFF',
+      flagState: 'ABSENT',
     });
   });
 
@@ -77,7 +77,7 @@ describe('resource portals', () => {
   test.skip('batchUpsert: only required params', async () => {
     const responsePromise = client.crm.featureFlags.portals.batchUpsert('flagName', {
       appId: 0,
-      portalStates: [{ flagState: 'OFF', portalId: 0 }],
+      portalStates: [{ flagState: 'ABSENT', portalId: 0 }],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -92,7 +92,7 @@ describe('resource portals', () => {
   test.skip('batchUpsert: required and optional params', async () => {
     const response = await client.crm.featureFlags.portals.batchUpsert('flagName', {
       appId: 0,
-      portalStates: [{ flagState: 'OFF', portalId: 0 }],
+      portalStates: [{ flagState: 'ABSENT', portalId: 0 }],
     });
   });
 

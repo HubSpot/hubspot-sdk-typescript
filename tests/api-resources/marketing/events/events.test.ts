@@ -13,7 +13,7 @@ describe('resource events', () => {
     const responsePromise = client.marketing.events.create({
       customProperties: [
         {
-          dataSensitivity: 'none',
+          dataSensitivity: 'high',
           isEncrypted: true,
           isLargeValue: true,
           name: 'name',
@@ -21,7 +21,7 @@ describe('resource events', () => {
           requestId: 'requestId',
           selectedByUser: true,
           selectedByUserTimestamp: 0,
-          source: 'UNKNOWN',
+          source: 'ACADEMY',
           sourceId: 'sourceId',
           sourceLabel: 'sourceLabel',
           sourceMetadata: 'sourceMetadata',
@@ -53,7 +53,7 @@ describe('resource events', () => {
     const response = await client.marketing.events.create({
       customProperties: [
         {
-          dataSensitivity: 'none',
+          dataSensitivity: 'high',
           isEncrypted: true,
           isLargeValue: true,
           name: 'name',
@@ -61,7 +61,7 @@ describe('resource events', () => {
           requestId: 'requestId',
           selectedByUser: true,
           selectedByUserTimestamp: 0,
-          source: 'UNKNOWN',
+          source: 'ACADEMY',
           sourceId: 'sourceId',
           sourceLabel: 'sourceLabel',
           sourceMetadata: 'sourceMetadata',
@@ -93,7 +93,7 @@ describe('resource events', () => {
     const responsePromise = client.marketing.events.update('objectId', {
       customProperties: [
         {
-          dataSensitivity: 'none',
+          dataSensitivity: 'high',
           isEncrypted: true,
           isLargeValue: true,
           name: 'name',
@@ -101,7 +101,7 @@ describe('resource events', () => {
           requestId: 'requestId',
           selectedByUser: true,
           selectedByUserTimestamp: 0,
-          source: 'UNKNOWN',
+          source: 'ACADEMY',
           sourceId: 'sourceId',
           sourceLabel: 'sourceLabel',
           sourceMetadata: 'sourceMetadata',
@@ -129,7 +129,7 @@ describe('resource events', () => {
     const response = await client.marketing.events.update('objectId', {
       customProperties: [
         {
-          dataSensitivity: 'none',
+          dataSensitivity: 'high',
           isEncrypted: true,
           isLargeValue: true,
           name: 'name',
@@ -137,7 +137,7 @@ describe('resource events', () => {
           requestId: 'requestId',
           selectedByUser: true,
           selectedByUserTimestamp: 0,
-          source: 'UNKNOWN',
+          source: 'ACADEMY',
           sourceId: 'sourceId',
           sourceLabel: 'sourceLabel',
           sourceMetadata: 'sourceMetadata',
@@ -352,7 +352,7 @@ describe('resource events', () => {
         {
           customProperties: [
             {
-              dataSensitivity: 'none',
+              dataSensitivity: 'high',
               isEncrypted: true,
               isLargeValue: true,
               name: 'name',
@@ -360,7 +360,7 @@ describe('resource events', () => {
               requestId: 'requestId',
               selectedByUser: true,
               selectedByUserTimestamp: 0,
-              source: 'UNKNOWN',
+              source: 'ACADEMY',
               sourceId: 'sourceId',
               sourceLabel: 'sourceLabel',
               sourceMetadata: 'sourceMetadata',
@@ -393,7 +393,7 @@ describe('resource events', () => {
         {
           customProperties: [
             {
-              dataSensitivity: 'none',
+              dataSensitivity: 'high',
               isEncrypted: true,
               isLargeValue: true,
               name: 'name',
@@ -401,7 +401,7 @@ describe('resource events', () => {
               requestId: 'requestId',
               selectedByUser: true,
               selectedByUserTimestamp: 0,
-              source: 'UNKNOWN',
+              source: 'ACADEMY',
               sourceId: 'sourceId',
               sourceLabel: 'sourceLabel',
               sourceMetadata: 'sourceMetadata',
@@ -434,7 +434,7 @@ describe('resource events', () => {
       externalAccountId: 'externalAccountId',
       customProperties: [
         {
-          dataSensitivity: 'none',
+          dataSensitivity: 'high',
           isEncrypted: true,
           isLargeValue: true,
           name: 'name',
@@ -442,7 +442,7 @@ describe('resource events', () => {
           requestId: 'requestId',
           selectedByUser: true,
           selectedByUserTimestamp: 0,
-          source: 'UNKNOWN',
+          source: 'ACADEMY',
           sourceId: 'sourceId',
           sourceLabel: 'sourceLabel',
           sourceMetadata: 'sourceMetadata',
@@ -471,7 +471,7 @@ describe('resource events', () => {
       externalAccountId: 'externalAccountId',
       customProperties: [
         {
-          dataSensitivity: 'none',
+          dataSensitivity: 'high',
           isEncrypted: true,
           isLargeValue: true,
           name: 'name',
@@ -479,7 +479,7 @@ describe('resource events', () => {
           requestId: 'requestId',
           selectedByUser: true,
           selectedByUserTimestamp: 0,
-          source: 'UNKNOWN',
+          source: 'ACADEMY',
           sourceId: 'sourceId',
           sourceLabel: 'sourceLabel',
           sourceMetadata: 'sourceMetadata',
@@ -511,7 +511,7 @@ describe('resource events', () => {
         {
           customProperties: [
             {
-              dataSensitivity: 'none',
+              dataSensitivity: 'high',
               isEncrypted: true,
               isLargeValue: true,
               name: 'name',
@@ -519,7 +519,7 @@ describe('resource events', () => {
               requestId: 'requestId',
               selectedByUser: true,
               selectedByUserTimestamp: 0,
-              source: 'UNKNOWN',
+              source: 'ACADEMY',
               sourceId: 'sourceId',
               sourceLabel: 'sourceLabel',
               sourceMetadata: 'sourceMetadata',
@@ -555,7 +555,7 @@ describe('resource events', () => {
         {
           customProperties: [
             {
-              dataSensitivity: 'none',
+              dataSensitivity: 'high',
               isEncrypted: true,
               isLargeValue: true,
               name: 'name',
@@ -563,7 +563,7 @@ describe('resource events', () => {
               requestId: 'requestId',
               selectedByUser: true,
               selectedByUserTimestamp: 0,
-              source: 'UNKNOWN',
+              source: 'ACADEMY',
               sourceId: 'sourceId',
               sourceLabel: 'sourceLabel',
               sourceMetadata: 'sourceMetadata',
@@ -597,7 +597,7 @@ describe('resource events', () => {
     const responsePromise = client.marketing.events.upsertByExternalEventID('externalEventId', {
       customProperties: [
         {
-          dataSensitivity: 'none',
+          dataSensitivity: 'high',
           isEncrypted: true,
           isLargeValue: true,
           name: 'name',
@@ -605,7 +605,7 @@ describe('resource events', () => {
           requestId: 'requestId',
           selectedByUser: true,
           selectedByUserTimestamp: 0,
-          source: 'UNKNOWN',
+          source: 'ACADEMY',
           sourceId: 'sourceId',
           sourceLabel: 'sourceLabel',
           sourceMetadata: 'sourceMetadata',
@@ -637,7 +637,7 @@ describe('resource events', () => {
     const response = await client.marketing.events.upsertByExternalEventID('externalEventId', {
       customProperties: [
         {
-          dataSensitivity: 'none',
+          dataSensitivity: 'high',
           isEncrypted: true,
           isLargeValue: true,
           name: 'name',
@@ -645,7 +645,7 @@ describe('resource events', () => {
           requestId: 'requestId',
           selectedByUser: true,
           selectedByUserTimestamp: 0,
-          source: 'UNKNOWN',
+          source: 'ACADEMY',
           sourceId: 'sourceId',
           sourceLabel: 'sourceLabel',
           sourceMetadata: 'sourceMetadata',

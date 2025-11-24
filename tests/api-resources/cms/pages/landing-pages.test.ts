@@ -12,7 +12,7 @@ describe('resource landingPages', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.cms.pages.landingPages.create({
       id: 'id',
-      abStatus: 'master',
+      abStatus: 'automated_loser_variant',
       abTestId: 'abTestId',
       archivedAt: '2019-12-27T18:11:19.117Z',
       archivedInDashboard: true,
@@ -151,7 +151,7 @@ describe('resource landingPages', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.cms.pages.landingPages.create({
       id: 'id',
-      abStatus: 'master',
+      abStatus: 'automated_loser_variant',
       abTestId: 'abTestId',
       archivedAt: '2019-12-27T18:11:19.117Z',
       archivedInDashboard: true,
@@ -286,7 +286,7 @@ describe('resource landingPages', () => {
   test.skip('update: only required params', async () => {
     const responsePromise = client.cms.pages.landingPages.update('objectId', {
       id: 'id',
-      abStatus: 'master',
+      abStatus: 'automated_loser_variant',
       abTestId: 'abTestId',
       archivedAt: '2019-12-27T18:11:19.117Z',
       archivedInDashboard: true,
@@ -425,7 +425,7 @@ describe('resource landingPages', () => {
   test.skip('update: required and optional params', async () => {
     const response = await client.cms.pages.landingPages.update('objectId', {
       id: 'id',
-      abStatus: 'master',
+      abStatus: 'automated_loser_variant',
       abTestId: 'abTestId',
       archivedAt: '2019-12-27T18:11:19.117Z',
       archivedInDashboard: true,
@@ -688,7 +688,7 @@ describe('resource landingPages', () => {
       inputs: [
         {
           id: 'id',
-          abStatus: 'master',
+          abStatus: 'automated_loser_variant',
           abTestId: 'abTestId',
           archivedAt: '2019-12-27T18:11:19.117Z',
           archivedInDashboard: true,
@@ -831,7 +831,7 @@ describe('resource landingPages', () => {
       inputs: [
         {
           id: 'id',
-          abStatus: 'master',
+          abStatus: 'automated_loser_variant',
           abTestId: 'abTestId',
           archivedAt: '2019-12-27T18:11:19.117Z',
           archivedInDashboard: true,
@@ -1542,7 +1542,7 @@ describe('resource landingPages', () => {
   test.skip('updateDraft: only required params', async () => {
     const responsePromise = client.cms.pages.landingPages.updateDraft('objectId', {
       id: 'id',
-      abStatus: 'master',
+      abStatus: 'automated_loser_variant',
       abTestId: 'abTestId',
       archivedAt: '2019-12-27T18:11:19.117Z',
       archivedInDashboard: true,
@@ -1681,7 +1681,7 @@ describe('resource landingPages', () => {
   test.skip('updateDraft: required and optional params', async () => {
     const response = await client.cms.pages.landingPages.updateDraft('objectId', {
       id: 'id',
-      abStatus: 'master',
+      abStatus: 'automated_loser_variant',
       abTestId: 'abTestId',
       archivedAt: '2019-12-27T18:11:19.117Z',
       archivedInDashboard: true,

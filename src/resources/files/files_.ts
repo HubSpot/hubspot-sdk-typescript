@@ -126,7 +126,7 @@ export class Files extends APIResource {
    * ```ts
    * const importFromURLTaskLocator =
    *   await client.files.files.importFromURLAsync({
-   *     access: 'PUBLIC_INDEXABLE',
+   *     access: 'HIDDEN_INDEXABLE',
    *     url: 'url',
    *   });
    * ```
@@ -205,13 +205,13 @@ export interface FileUpdateParams {
    * a new file and return the found duplicate instead.
    */
   access?:
-    | 'PUBLIC_INDEXABLE'
-    | 'PUBLIC_NOT_INDEXABLE'
     | 'HIDDEN_INDEXABLE'
     | 'HIDDEN_NOT_INDEXABLE'
     | 'HIDDEN_PRIVATE'
-    | 'PRIVATE'
     | 'HIDDEN_SENSITIVE'
+    | 'PRIVATE'
+    | 'PUBLIC_INDEXABLE'
+    | 'PUBLIC_NOT_INDEXABLE'
     | 'SENSITIVE';
 
   clearExpires?: boolean;
@@ -262,7 +262,7 @@ export interface FileGetSignedURLParams {
    * For image files. This will resize the image to the desired size before sharing.
    * Does not affect the original file, just the file served by this signed URL.
    */
-  size?: 'thumb' | 'icon' | 'medium' | 'preview';
+  size?: 'icon' | 'medium' | 'preview' | 'thumb';
 
   /**
    * If size is provided, this will upscale the image to fit the size dimensions.
@@ -279,13 +279,13 @@ export interface FileImportFromURLAsyncParams {
    * _can't_ index the file.
    */
   access:
-    | 'PUBLIC_INDEXABLE'
-    | 'PUBLIC_NOT_INDEXABLE'
     | 'HIDDEN_INDEXABLE'
     | 'HIDDEN_NOT_INDEXABLE'
     | 'HIDDEN_PRIVATE'
-    | 'PRIVATE'
     | 'HIDDEN_SENSITIVE'
+    | 'PRIVATE'
+    | 'PUBLIC_INDEXABLE'
+    | 'PUBLIC_NOT_INDEXABLE'
     | 'SENSITIVE';
 
   /**

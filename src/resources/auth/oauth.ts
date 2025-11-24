@@ -23,10 +23,12 @@ export class OAuth extends APIResource {
    * to 300 characters to account for any potential changes.
    */
   createAccessToken(
-    body: OAuthCreateAccessTokenParams | null | undefined = {},
+    params: OAuthCreateAccessTokenParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<TokenResponseIf> {
+    const { query_client_secret, query_refresh_token, ...body } = params ?? {};
     return this._client.post('/oauth/v1/token', {
+      query: { client_secret: query_client_secret, refresh_token: query_refresh_token },
       body,
       ...options,
       headers: buildHeaders([{ 'Content-Type': 'application/x-www-form-urlencoded' }, options?.headers]),
@@ -39,6 +41,8 @@ export class OAuth extends APIResource {
    *
    * This will not uninstall the application from HubSpot or inhibit data syncing
    * between an account and the app.
+   *
+   * @deprecated
    */
   deleteRefreshToken(token: string, options?: RequestOptions): APIPromise<void> {
     return this._client.delete(path`/oauth/v1/refresh-tokens/${token}`, {
@@ -54,6 +58,8 @@ export class OAuth extends APIResource {
    * Note: HubSpot access tokens will fluctuate in size as the information that's
    * encoded in them changes over time. It's recommended to allow for tokens to be up
    * to 300 characters to account for any potential changes.
+   *
+   * @deprecated
    */
   getAccessToken(token: string, options?: RequestOptions): APIPromise<AccessTokenInfoResponse> {
     return this._client.get(path`/oauth/v1/access-tokens/${token}`, options);
@@ -64,6 +70,8 @@ export class OAuth extends APIResource {
    * that the token was created for and the ID of the account it's associated with.
    * Learn more about
    * [refresh tokens](https://developers.hubspot.com/docs/guides/api/app-management/oauth-tokens#generate-initial-access-and-refresh-tokens).
+   *
+   * @deprecated
    */
   getRefreshToken(token: string, options?: RequestOptions): APIPromise<RefreshTokenInfoResponse> {
     return this._client.get(path`/oauth/v1/refresh-tokens/${token}`, options);
@@ -87,6 +95,10 @@ export interface AccessTokenInfoResponse {
 
   hub_domain?: string;
 
+  is_private_distribution?: boolean;
+
+  signed_access_token?: SignedAccessToken;
+
   user?: string;
 }
 
@@ -108,36 +120,111 @@ export interface RefreshTokenInfoResponse {
   user?: string;
 }
 
+export interface SignedAccessToken {
+  appId: number;
+
+  expiresAt: number;
+
+  hubId: number;
+
+  hublet: string;
+
+  installingUserId: number;
+
+  isPrivateDistribution: boolean;
+
+  isServiceAccount: boolean;
+
+  isUserLevel: boolean;
+
+  newSignature: string;
+
+  scopes: string;
+
+  scopeToScopeGroupPks: string;
+
+  signature: string;
+
+  trialScopes: string;
+
+  trialScopeToScopeGroupPks: string;
+
+  userId: number;
+}
+
 export interface TokenResponseIf {
-  access_token: string;
+  accessToken?: string;
 
-  expires_in: number;
+  expiresIn?: number;
 
-  refresh_token: string;
+  hubId?: number;
 
-  token_type: string;
+  idToken?: string;
 
-  id_token?: string;
+  scopes?: Array<string>;
+
+  tokenType?: string;
+
+  userId?: number;
 }
 
 export interface OAuthCreateAccessTokenParams {
+  /**
+   * Query param:
+   */
+  query_client_secret?: string;
+
+  /**
+   * Query param:
+   */
+  query_refresh_token?: string;
+
+  /**
+   * Body param:
+   */
   client_id?: string;
 
-  client_secret?: string;
+  /**
+   * Body param:
+   */
+  body_client_secret?: string;
 
+  /**
+   * Body param:
+   */
   code?: string;
 
-  grant_type?: 'authorization_code' | 'refresh_token';
+  /**
+   * Body param:
+   */
+  code_verifier?: string;
 
+  /**
+   * Body param:
+   */
+  grant_type?: 'authorization_code' | 'client_credentials' | 'refresh_token';
+
+  /**
+   * Body param:
+   */
   redirect_uri?: string;
 
-  refresh_token?: string;
+  /**
+   * Body param:
+   */
+  body_refresh_token?: string;
+
+  /**
+   * Body param:
+   */
+  scope?: string;
 }
 
 export declare namespace OAuth {
   export {
     type AccessTokenInfoResponse as AccessTokenInfoResponse,
     type RefreshTokenInfoResponse as RefreshTokenInfoResponse,
+    type SignedAccessToken as SignedAccessToken,
     type TokenResponseIf as TokenResponseIf,
     type OAuthCreateAccessTokenParams as OAuthCreateAccessTokenParams,
   };

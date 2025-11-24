@@ -22,7 +22,7 @@ export class Posts extends APIResource {
    * ```ts
    * const blogPost = await client.cms.blogs.posts.create({
    *   id: 'id',
-   *   abStatus: 'master',
+   *   abStatus: 'automated_loser_variant',
    *   abTestId: 'abTestId',
    *   archivedAt: 0,
    *   archivedInDashboard: true,
@@ -101,7 +101,7 @@ export class Posts extends APIResource {
    * ```ts
    * const blogPost = await client.cms.blogs.posts.update('objectId', {
    *   id: 'id',
-   *   abStatus: 'master',
+   *   abStatus: 'automated_loser_variant',
    *   abTestId: 'abTestId',
    *   archivedAt: 0,
    *   archivedInDashboard: true,
@@ -489,7 +489,7 @@ export class Posts extends APIResource {
    * ```ts
    * const blogPost = await client.cms.blogs.posts.updateDraft('objectId', {
    *   id: 'id',
-   *   abStatus: 'master',
+   *   abStatus: 'automated_loser_variant',
    *   abTestId: 'abTestId',
    *   archivedAt: 0,
    *   archivedInDashboard: true,
@@ -617,7 +617,7 @@ export interface BatchResponseBlogPost {
   /**
    * Status of batch operation.
    */
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   /**
    * Links associated with batch operation.
@@ -652,7 +652,7 @@ export interface BatchResponseBlogPostWithErrors {
   /**
    * Status of batch operation.
    */
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   /**
    * Errors in batch operation.
@@ -685,14 +685,14 @@ export interface BlogPost {
   id: string;
 
   abStatus:
-    | 'master'
-    | 'variant'
+    | 'automated_loser_variant'
+    | 'automated_master'
+    | 'automated_variant'
     | 'loser_variant'
     | 'mab_master'
     | 'mab_variant'
-    | 'automated_master'
-    | 'automated_variant'
-    | 'automated_loser_variant';
+    | 'master'
+    | 'variant';
 
   abTestId: string;
 
@@ -744,6 +744,12 @@ export interface BlogPost {
   contentTypeCategory:
     | '0'
     | '1'
+    | '10'
+    | '11'
+    | '12'
+    | '13'
+    | '14'
+    | '15'
     | '2'
     | '3'
     | '4'
@@ -751,13 +757,7 @@ export interface BlogPost {
     | '6'
     | '7'
     | '8'
-    | '9'
-    | '10'
-    | '11'
-    | '12'
-    | '13'
-    | '14'
-    | '15';
+    | '9';
 
   created: string;
 
@@ -774,12 +774,17 @@ export interface BlogPost {
    */
   currentState:
     | 'AUTOMATED'
+    | 'AUTOMATED_AB'
+    | 'AUTOMATED_AB_VARIANT'
     | 'AUTOMATED_DRAFT'
-    | 'AUTOMATED_SENDING'
+    | 'AUTOMATED_DRAFT_AB'
+    | 'AUTOMATED_DRAFT_ABVARIANT'
     | 'AUTOMATED_FOR_FORM'
     | 'AUTOMATED_FOR_FORM_BUFFER'
     | 'AUTOMATED_FOR_FORM_DRAFT'
     | 'AUTOMATED_FOR_FORM_LEGACY'
+    | 'AUTOMATED_LOSER_ABVARIANT'
+    | 'AUTOMATED_SENDING'
     | 'BLOG_EMAIL_DRAFT'
     | 'BLOG_EMAIL_PUBLISHED'
     | 'DRAFT'
@@ -798,12 +803,7 @@ export interface BlogPost {
     | 'RSS_TO_EMAIL_PUBLISHED'
     | 'SCHEDULED'
     | 'SCHEDULED_AB'
-    | 'SCHEDULED_OR_PUBLISHED'
-    | 'AUTOMATED_AB'
-    | 'AUTOMATED_AB_VARIANT'
-    | 'AUTOMATED_DRAFT_AB'
-    | 'AUTOMATED_DRAFT_ABVARIANT'
-    | 'AUTOMATED_LOSER_ABVARIANT';
+    | 'SCHEDULED_OR_PUBLISHED';
 
   /**
    * The domain that the post lives on. If null, the post will default to the domain
@@ -1035,11 +1035,11 @@ export interface BlogPost {
     | 'en-dm'
     | 'en-ee'
     | 'en-er'
-    | 'en-fr'
     | 'en-fi'
     | 'en-fj'
     | 'en-fk'
     | 'en-fm'
+    | 'en-fr'
     | 'en-gb'
     | 'en-gd'
     | 'en-gg'
@@ -1251,6 +1251,7 @@ export interface BlogPost {
     | 'haw'
     | 'haw-us'
     | 'he'
+    | 'he-il'
     | 'hi'
     | 'hi-in'
     | 'hr'
@@ -1265,11 +1266,11 @@ export interface BlogPost {
     | 'ia'
     | 'ia-001'
     | 'id'
+    | 'id-id'
     | 'ig'
     | 'ig-ng'
     | 'ii'
     | 'ii-cn'
-    | 'id-id'
     | 'is'
     | 'is-is'
     | 'it'
@@ -1277,13 +1278,10 @@ export interface BlogPost {
     | 'it-it'
     | 'it-sm'
     | 'it-va'
-    | 'he-il'
     | 'ja'
     | 'ja-jp'
     | 'jgo'
     | 'jgo-cm'
-    | 'yi'
-    | 'yi-001'
     | 'jmc'
     | 'jmc-tz'
     | 'jv'
@@ -1327,10 +1325,10 @@ export interface BlogPost {
     | 'ksf-cm'
     | 'ksh'
     | 'ksh-de'
-    | 'kw'
-    | 'kw-gb'
     | 'ku'
     | 'ku-tr'
+    | 'kw'
+    | 'kw-gb'
     | 'ky'
     | 'ky-kg'
     | 'lag'
@@ -1417,8 +1415,8 @@ export interface BlogPost {
     | 'nl'
     | 'nl-aw'
     | 'nl-be'
-    | 'nl-ch'
     | 'nl-bq'
+    | 'nl-ch'
     | 'nl-cw'
     | 'nl-lu'
     | 'nl-nl'
@@ -1614,6 +1612,8 @@ export interface BlogPost {
     | 'xog-ug'
     | 'yav'
     | 'yav-cm'
+    | 'yi'
+    | 'yi-001'
     | 'yo'
     | 'yo-bj'
     | 'yo-ng'
@@ -1624,12 +1624,12 @@ export interface BlogPost {
     | 'zgh-ma'
     | 'zh'
     | 'zh-cn'
+    | 'zh-hans'
+    | 'zh-hant'
     | 'zh-hk'
     | 'zh-mo'
     | 'zh-sg'
     | 'zh-tw'
-    | 'zh-hans'
-    | 'zh-hant'
     | 'zu'
     | 'zu-za';
 
@@ -1886,14 +1886,14 @@ export interface PostCreateParams {
   id: string;
 
   abStatus:
-    | 'master'
-    | 'variant'
+    | 'automated_loser_variant'
+    | 'automated_master'
+    | 'automated_variant'
     | 'loser_variant'
     | 'mab_master'
     | 'mab_variant'
-    | 'automated_master'
-    | 'automated_variant'
-    | 'automated_loser_variant';
+    | 'master'
+    | 'variant';
 
   abTestId: string;
 
@@ -1945,6 +1945,12 @@ export interface PostCreateParams {
   contentTypeCategory:
     | '0'
     | '1'
+    | '10'
+    | '11'
+    | '12'
+    | '13'
+    | '14'
+    | '15'
     | '2'
     | '3'
     | '4'
@@ -1952,13 +1958,7 @@ export interface PostCreateParams {
     | '6'
     | '7'
     | '8'
-    | '9'
-    | '10'
-    | '11'
-    | '12'
-    | '13'
-    | '14'
-    | '15';
+    | '9';
 
   created: string;
 
@@ -1975,12 +1975,17 @@ export interface PostCreateParams {
    */
   currentState:
     | 'AUTOMATED'
+    | 'AUTOMATED_AB'
+    | 'AUTOMATED_AB_VARIANT'
     | 'AUTOMATED_DRAFT'
-    | 'AUTOMATED_SENDING'
+    | 'AUTOMATED_DRAFT_AB'
+    | 'AUTOMATED_DRAFT_ABVARIANT'
     | 'AUTOMATED_FOR_FORM'
     | 'AUTOMATED_FOR_FORM_BUFFER'
     | 'AUTOMATED_FOR_FORM_DRAFT'
     | 'AUTOMATED_FOR_FORM_LEGACY'
+    | 'AUTOMATED_LOSER_ABVARIANT'
+    | 'AUTOMATED_SENDING'
     | 'BLOG_EMAIL_DRAFT'
     | 'BLOG_EMAIL_PUBLISHED'
     | 'DRAFT'
@@ -1999,12 +2004,7 @@ export interface PostCreateParams {
     | 'RSS_TO_EMAIL_PUBLISHED'
     | 'SCHEDULED'
     | 'SCHEDULED_AB'
-    | 'SCHEDULED_OR_PUBLISHED'
-    | 'AUTOMATED_AB'
-    | 'AUTOMATED_AB_VARIANT'
-    | 'AUTOMATED_DRAFT_AB'
-    | 'AUTOMATED_DRAFT_ABVARIANT'
-    | 'AUTOMATED_LOSER_ABVARIANT';
+    | 'SCHEDULED_OR_PUBLISHED';
 
   /**
    * The domain that the post lives on. If null, the post will default to the domain
@@ -2236,11 +2236,11 @@ export interface PostCreateParams {
     | 'en-dm'
     | 'en-ee'
     | 'en-er'
-    | 'en-fr'
     | 'en-fi'
     | 'en-fj'
     | 'en-fk'
     | 'en-fm'
+    | 'en-fr'
     | 'en-gb'
     | 'en-gd'
     | 'en-gg'
@@ -2452,6 +2452,7 @@ export interface PostCreateParams {
     | 'haw'
     | 'haw-us'
     | 'he'
+    | 'he-il'
     | 'hi'
     | 'hi-in'
     | 'hr'
@@ -2466,11 +2467,11 @@ export interface PostCreateParams {
     | 'ia'
     | 'ia-001'
     | 'id'
+    | 'id-id'
     | 'ig'
     | 'ig-ng'
     | 'ii'
     | 'ii-cn'
-    | 'id-id'
     | 'is'
     | 'is-is'
     | 'it'
@@ -2478,13 +2479,10 @@ export interface PostCreateParams {
     | 'it-it'
     | 'it-sm'
     | 'it-va'
-    | 'he-il'
     | 'ja'
     | 'ja-jp'
     | 'jgo'
     | 'jgo-cm'
-    | 'yi'
-    | 'yi-001'
     | 'jmc'
     | 'jmc-tz'
     | 'jv'
@@ -2528,10 +2526,10 @@ export interface PostCreateParams {
     | 'ksf-cm'
     | 'ksh'
     | 'ksh-de'
-    | 'kw'
-    | 'kw-gb'
     | 'ku'
     | 'ku-tr'
+    | 'kw'
+    | 'kw-gb'
     | 'ky'
     | 'ky-kg'
     | 'lag'
@@ -2618,8 +2616,8 @@ export interface PostCreateParams {
     | 'nl'
     | 'nl-aw'
     | 'nl-be'
-    | 'nl-ch'
     | 'nl-bq'
+    | 'nl-ch'
     | 'nl-cw'
     | 'nl-lu'
     | 'nl-nl'
@@ -2815,6 +2813,8 @@ export interface PostCreateParams {
     | 'xog-ug'
     | 'yav'
     | 'yav-cm'
+    | 'yi'
+    | 'yi-001'
     | 'yo'
     | 'yo-bj'
     | 'yo-ng'
@@ -2825,12 +2825,12 @@ export interface PostCreateParams {
     | 'zgh-ma'
     | 'zh'
     | 'zh-cn'
+    | 'zh-hans'
+    | 'zh-hant'
     | 'zh-hk'
     | 'zh-mo'
     | 'zh-sg'
     | 'zh-tw'
-    | 'zh-hans'
-    | 'zh-hant'
     | 'zu'
     | 'zu-za';
 
@@ -2973,14 +2973,14 @@ export interface PostUpdateParams {
    * Body param:
    */
   abStatus:
-    | 'master'
-    | 'variant'
+    | 'automated_loser_variant'
+    | 'automated_master'
+    | 'automated_variant'
     | 'loser_variant'
     | 'mab_master'
     | 'mab_variant'
-    | 'automated_master'
-    | 'automated_variant'
-    | 'automated_loser_variant';
+    | 'master'
+    | 'variant';
 
   /**
    * Body param:
@@ -3037,6 +3037,12 @@ export interface PostUpdateParams {
   contentTypeCategory:
     | '0'
     | '1'
+    | '10'
+    | '11'
+    | '12'
+    | '13'
+    | '14'
+    | '15'
     | '2'
     | '3'
     | '4'
@@ -3044,13 +3050,7 @@ export interface PostUpdateParams {
     | '6'
     | '7'
     | '8'
-    | '9'
-    | '10'
-    | '11'
-    | '12'
-    | '13'
-    | '14'
-    | '15';
+    | '9';
 
   /**
    * Body param:
@@ -3073,12 +3073,17 @@ export interface PostUpdateParams {
    */
   currentState:
     | 'AUTOMATED'
+    | 'AUTOMATED_AB'
+    | 'AUTOMATED_AB_VARIANT'
     | 'AUTOMATED_DRAFT'
-    | 'AUTOMATED_SENDING'
+    | 'AUTOMATED_DRAFT_AB'
+    | 'AUTOMATED_DRAFT_ABVARIANT'
     | 'AUTOMATED_FOR_FORM'
     | 'AUTOMATED_FOR_FORM_BUFFER'
     | 'AUTOMATED_FOR_FORM_DRAFT'
     | 'AUTOMATED_FOR_FORM_LEGACY'
+    | 'AUTOMATED_LOSER_ABVARIANT'
+    | 'AUTOMATED_SENDING'
     | 'BLOG_EMAIL_DRAFT'
     | 'BLOG_EMAIL_PUBLISHED'
     | 'DRAFT'
@@ -3097,12 +3102,7 @@ export interface PostUpdateParams {
     | 'RSS_TO_EMAIL_PUBLISHED'
     | 'SCHEDULED'
     | 'SCHEDULED_AB'
-    | 'SCHEDULED_OR_PUBLISHED'
-    | 'AUTOMATED_AB'
-    | 'AUTOMATED_AB_VARIANT'
-    | 'AUTOMATED_DRAFT_AB'
-    | 'AUTOMATED_DRAFT_ABVARIANT'
-    | 'AUTOMATED_LOSER_ABVARIANT';
+    | 'SCHEDULED_OR_PUBLISHED';
 
   /**
    * Body param: The domain that the post lives on. If null, the post will default to
@@ -3345,11 +3345,11 @@ export interface PostUpdateParams {
     | 'en-dm'
     | 'en-ee'
     | 'en-er'
-    | 'en-fr'
     | 'en-fi'
     | 'en-fj'
     | 'en-fk'
     | 'en-fm'
+    | 'en-fr'
     | 'en-gb'
     | 'en-gd'
     | 'en-gg'
@@ -3561,6 +3561,7 @@ export interface PostUpdateParams {
     | 'haw'
     | 'haw-us'
     | 'he'
+    | 'he-il'
     | 'hi'
     | 'hi-in'
     | 'hr'
@@ -3575,11 +3576,11 @@ export interface PostUpdateParams {
     | 'ia'
     | 'ia-001'
     | 'id'
+    | 'id-id'
     | 'ig'
     | 'ig-ng'
     | 'ii'
     | 'ii-cn'
-    | 'id-id'
     | 'is'
     | 'is-is'
     | 'it'
@@ -3587,13 +3588,10 @@ export interface PostUpdateParams {
     | 'it-it'
     | 'it-sm'
     | 'it-va'
-    | 'he-il'
     | 'ja'
     | 'ja-jp'
     | 'jgo'
     | 'jgo-cm'
-    | 'yi'
-    | 'yi-001'
     | 'jmc'
     | 'jmc-tz'
     | 'jv'
@@ -3637,10 +3635,10 @@ export interface PostUpdateParams {
     | 'ksf-cm'
     | 'ksh'
     | 'ksh-de'
-    | 'kw'
-    | 'kw-gb'
     | 'ku'
     | 'ku-tr'
+    | 'kw'
+    | 'kw-gb'
     | 'ky'
     | 'ky-kg'
     | 'lag'
@@ -3727,8 +3725,8 @@ export interface PostUpdateParams {
     | 'nl'
     | 'nl-aw'
     | 'nl-be'
-    | 'nl-ch'
     | 'nl-bq'
+    | 'nl-ch'
     | 'nl-cw'
     | 'nl-lu'
     | 'nl-nl'
@@ -3924,6 +3922,8 @@ export interface PostUpdateParams {
     | 'xog-ug'
     | 'yav'
     | 'yav-cm'
+    | 'yi'
+    | 'yi-001'
     | 'yo'
     | 'yo-bj'
     | 'yo-ng'
@@ -3934,12 +3934,12 @@ export interface PostUpdateParams {
     | 'zgh-ma'
     | 'zh'
     | 'zh-cn'
+    | 'zh-hans'
+    | 'zh-hant'
     | 'zh-hk'
     | 'zh-mo'
     | 'zh-sg'
     | 'zh-tw'
-    | 'zh-hans'
-    | 'zh-hant'
     | 'zu'
     | 'zu-za';
 
@@ -4276,14 +4276,14 @@ export interface PostUpdateDraftParams {
   id: string;
 
   abStatus:
-    | 'master'
-    | 'variant'
+    | 'automated_loser_variant'
+    | 'automated_master'
+    | 'automated_variant'
     | 'loser_variant'
     | 'mab_master'
     | 'mab_variant'
-    | 'automated_master'
-    | 'automated_variant'
-    | 'automated_loser_variant';
+    | 'master'
+    | 'variant';
 
   abTestId: string;
 
@@ -4335,6 +4335,12 @@ export interface PostUpdateDraftParams {
   contentTypeCategory:
     | '0'
     | '1'
+    | '10'
+    | '11'
+    | '12'
+    | '13'
+    | '14'
+    | '15'
     | '2'
     | '3'
     | '4'
@@ -4342,13 +4348,7 @@ export interface PostUpdateDraftParams {
     | '6'
     | '7'
     | '8'
-    | '9'
-    | '10'
-    | '11'
-    | '12'
-    | '13'
-    | '14'
-    | '15';
+    | '9';
 
   created: string;
 
@@ -4365,12 +4365,17 @@ export interface PostUpdateDraftParams {
    */
   currentState:
     | 'AUTOMATED'
+    | 'AUTOMATED_AB'
+    | 'AUTOMATED_AB_VARIANT'
     | 'AUTOMATED_DRAFT'
-    | 'AUTOMATED_SENDING'
+    | 'AUTOMATED_DRAFT_AB'
+    | 'AUTOMATED_DRAFT_ABVARIANT'
     | 'AUTOMATED_FOR_FORM'
     | 'AUTOMATED_FOR_FORM_BUFFER'
     | 'AUTOMATED_FOR_FORM_DRAFT'
     | 'AUTOMATED_FOR_FORM_LEGACY'
+    | 'AUTOMATED_LOSER_ABVARIANT'
+    | 'AUTOMATED_SENDING'
     | 'BLOG_EMAIL_DRAFT'
     | 'BLOG_EMAIL_PUBLISHED'
     | 'DRAFT'
@@ -4389,12 +4394,7 @@ export interface PostUpdateDraftParams {
     | 'RSS_TO_EMAIL_PUBLISHED'
     | 'SCHEDULED'
     | 'SCHEDULED_AB'
-    | 'SCHEDULED_OR_PUBLISHED'
-    | 'AUTOMATED_AB'
-    | 'AUTOMATED_AB_VARIANT'
-    | 'AUTOMATED_DRAFT_AB'
-    | 'AUTOMATED_DRAFT_ABVARIANT'
-    | 'AUTOMATED_LOSER_ABVARIANT';
+    | 'SCHEDULED_OR_PUBLISHED';
 
   /**
    * The domain that the post lives on. If null, the post will default to the domain
@@ -4626,11 +4626,11 @@ export interface PostUpdateDraftParams {
     | 'en-dm'
     | 'en-ee'
     | 'en-er'
-    | 'en-fr'
     | 'en-fi'
     | 'en-fj'
     | 'en-fk'
     | 'en-fm'
+    | 'en-fr'
     | 'en-gb'
     | 'en-gd'
     | 'en-gg'
@@ -4842,6 +4842,7 @@ export interface PostUpdateDraftParams {
     | 'haw'
     | 'haw-us'
     | 'he'
+    | 'he-il'
     | 'hi'
     | 'hi-in'
     | 'hr'
@@ -4856,11 +4857,11 @@ export interface PostUpdateDraftParams {
     | 'ia'
     | 'ia-001'
     | 'id'
+    | 'id-id'
     | 'ig'
     | 'ig-ng'
     | 'ii'
     | 'ii-cn'
-    | 'id-id'
     | 'is'
     | 'is-is'
     | 'it'
@@ -4868,13 +4869,10 @@ export interface PostUpdateDraftParams {
     | 'it-it'
     | 'it-sm'
     | 'it-va'
-    | 'he-il'
     | 'ja'
     | 'ja-jp'
     | 'jgo'
     | 'jgo-cm'
-    | 'yi'
-    | 'yi-001'
     | 'jmc'
     | 'jmc-tz'
     | 'jv'
@@ -4918,10 +4916,10 @@ export interface PostUpdateDraftParams {
     | 'ksf-cm'
     | 'ksh'
     | 'ksh-de'
-    | 'kw'
-    | 'kw-gb'
     | 'ku'
     | 'ku-tr'
+    | 'kw'
+    | 'kw-gb'
     | 'ky'
     | 'ky-kg'
     | 'lag'
@@ -5008,8 +5006,8 @@ export interface PostUpdateDraftParams {
     | 'nl'
     | 'nl-aw'
     | 'nl-be'
-    | 'nl-ch'
     | 'nl-bq'
+    | 'nl-ch'
     | 'nl-cw'
     | 'nl-lu'
     | 'nl-nl'
@@ -5205,6 +5203,8 @@ export interface PostUpdateDraftParams {
     | 'xog-ug'
     | 'yav'
     | 'yav-cm'
+    | 'yi'
+    | 'yi-001'
     | 'yo'
     | 'yo-bj'
     | 'yo-ng'
@@ -5215,12 +5215,12 @@ export interface PostUpdateDraftParams {
     | 'zgh-ma'
     | 'zh'
     | 'zh-cn'
+    | 'zh-hans'
+    | 'zh-hant'
     | 'zh-hk'
     | 'zh-mo'
     | 'zh-sg'
     | 'zh-tw'
-    | 'zh-hans'
-    | 'zh-hant'
     | 'zu'
     | 'zu-za';
 

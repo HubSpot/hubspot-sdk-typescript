@@ -90,7 +90,7 @@ describe('resource integratorSettings', () => {
   // Prism tests are disabled
   test.skip('getObjectDefinitionsByMediaType: only required params', async () => {
     const responsePromise = client.cms.mediaBridge.integratorSettings.getObjectDefinitionsByMediaType(
-      'VIDEO',
+      'AUDIO',
       { appId: 0 },
     );
     const rawResponse = await responsePromise.asResponse();
@@ -105,7 +105,7 @@ describe('resource integratorSettings', () => {
   // Prism tests are disabled
   test.skip('getObjectDefinitionsByMediaType: required and optional params', async () => {
     const response = await client.cms.mediaBridge.integratorSettings.getObjectDefinitionsByMediaType(
-      'VIDEO',
+      'AUDIO',
       { appId: 0, includeFullDefinition: true },
     );
   });

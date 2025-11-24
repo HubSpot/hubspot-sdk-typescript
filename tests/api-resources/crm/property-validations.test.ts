@@ -24,7 +24,7 @@ describe('resource propertyValidations', () => {
   test.skip('crmV3PropertyValidationsObjectTypeIDPropertyNameRuleTypeRuleType: only required params', async () => {
     const responsePromise =
       client.crm.propertyValidations.crmV3PropertyValidationsObjectTypeIDPropertyNameRuleTypeRuleType(
-        'FORMAT',
+        'AFTER_DATETIME_DURATION',
         { objectTypeId: 'objectTypeId', propertyName: 'propertyName', ruleArguments: ['string'] },
       );
     const rawResponse = await responsePromise.asResponse();
@@ -40,7 +40,7 @@ describe('resource propertyValidations', () => {
   test.skip('crmV3PropertyValidationsObjectTypeIDPropertyNameRuleTypeRuleType: required and optional params', async () => {
     const response =
       await client.crm.propertyValidations.crmV3PropertyValidationsObjectTypeIDPropertyNameRuleTypeRuleType(
-        'FORMAT',
+        'AFTER_DATETIME_DURATION',
         { objectTypeId: 'objectTypeId', propertyName: 'propertyName', ruleArguments: ['string'] },
       );
   });

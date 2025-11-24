@@ -30,7 +30,7 @@ export class PropertyValidations extends APIResource {
    * @example
    * ```ts
    * await client.crm.propertyValidations.crmV3PropertyValidationsObjectTypeIDPropertyNameRuleTypeRuleType(
-   *   'FORMAT',
+   *   'AFTER_DATETIME_DURATION',
    *   {
    *     objectTypeId: 'objectTypeId',
    *     propertyName: 'propertyName',
@@ -41,33 +41,33 @@ export class PropertyValidations extends APIResource {
    */
   crmV3PropertyValidationsObjectTypeIDPropertyNameRuleTypeRuleType(
     ruleType:
-      | 'FORMAT'
-      | 'ALPHANUMERIC'
-      | 'MAX_LENGTH'
-      | 'MIN_LENGTH'
-      | 'MIN_NUMBER'
-      | 'MAX_NUMBER'
-      | 'START_DATE'
-      | 'END_DATE'
-      | 'SPECIAL_CHARACTERS'
-      | 'WHITESPACE'
-      | 'DECIMAL'
-      | 'BEFORE_DURATION'
-      | 'AFTER_DURATION'
-      | 'DAYS_OF_WEEK'
-      | 'REGEX'
-      | 'START_DATETIME'
-      | 'END_DATETIME'
-      | 'BEFORE_DATETIME_DURATION'
       | 'AFTER_DATETIME_DURATION'
-      | 'PHONE_NUMBER_WITH_EXPLICIT_COUNTRY_CODE'
-      | 'URL'
-      | 'URL_ALLOWED_DOMAINS'
-      | 'URL_BLOCKED_DOMAINS'
+      | 'AFTER_DURATION'
+      | 'ALPHANUMERIC'
+      | 'BEFORE_DATETIME_DURATION'
+      | 'BEFORE_DURATION'
+      | 'DAYS_OF_WEEK'
+      | 'DECIMAL'
+      | 'DOMAIN'
       | 'EMAIL'
       | 'EMAIL_ALLOWED_DOMAINS'
       | 'EMAIL_BLOCKED_DOMAINS'
-      | 'DOMAIN',
+      | 'END_DATE'
+      | 'END_DATETIME'
+      | 'FORMAT'
+      | 'MAX_LENGTH'
+      | 'MAX_NUMBER'
+      | 'MIN_LENGTH'
+      | 'MIN_NUMBER'
+      | 'PHONE_NUMBER_WITH_EXPLICIT_COUNTRY_CODE'
+      | 'REGEX'
+      | 'SPECIAL_CHARACTERS'
+      | 'START_DATE'
+      | 'START_DATETIME'
+      | 'URL'
+      | 'URL_ALLOWED_DOMAINS'
+      | 'URL_BLOCKED_DOMAINS'
+      | 'WHITESPACE',
     params: PropertyValidationCrmV3PropertyValidationsObjectTypeIDPropertyNameRuleTypeRuleTypeParams,
     options?: RequestOptions,
   ): APIPromise<void> {
@@ -128,33 +128,33 @@ export interface PublicPropertyValidationRule {
    * ALPHANUMERIC, or MAX_LENGTH.
    */
   ruleType:
-    | 'FORMAT'
-    | 'ALPHANUMERIC'
-    | 'MAX_LENGTH'
-    | 'MIN_LENGTH'
-    | 'MIN_NUMBER'
-    | 'MAX_NUMBER'
-    | 'START_DATE'
-    | 'END_DATE'
-    | 'SPECIAL_CHARACTERS'
-    | 'WHITESPACE'
-    | 'DECIMAL'
-    | 'BEFORE_DURATION'
-    | 'AFTER_DURATION'
-    | 'DAYS_OF_WEEK'
-    | 'REGEX'
-    | 'START_DATETIME'
-    | 'END_DATETIME'
-    | 'BEFORE_DATETIME_DURATION'
     | 'AFTER_DATETIME_DURATION'
-    | 'PHONE_NUMBER_WITH_EXPLICIT_COUNTRY_CODE'
-    | 'URL'
-    | 'URL_ALLOWED_DOMAINS'
-    | 'URL_BLOCKED_DOMAINS'
+    | 'AFTER_DURATION'
+    | 'ALPHANUMERIC'
+    | 'BEFORE_DATETIME_DURATION'
+    | 'BEFORE_DURATION'
+    | 'DAYS_OF_WEEK'
+    | 'DECIMAL'
+    | 'DOMAIN'
     | 'EMAIL'
     | 'EMAIL_ALLOWED_DOMAINS'
     | 'EMAIL_BLOCKED_DOMAINS'
-    | 'DOMAIN';
+    | 'END_DATE'
+    | 'END_DATETIME'
+    | 'FORMAT'
+    | 'MAX_LENGTH'
+    | 'MAX_NUMBER'
+    | 'MIN_LENGTH'
+    | 'MIN_NUMBER'
+    | 'PHONE_NUMBER_WITH_EXPLICIT_COUNTRY_CODE'
+    | 'REGEX'
+    | 'SPECIAL_CHARACTERS'
+    | 'START_DATE'
+    | 'START_DATETIME'
+    | 'URL'
+    | 'URL_ALLOWED_DOMAINS'
+    | 'URL_BLOCKED_DOMAINS'
+    | 'WHITESPACE';
 }
 
 export interface PublicPropertyValidationRuleMap {

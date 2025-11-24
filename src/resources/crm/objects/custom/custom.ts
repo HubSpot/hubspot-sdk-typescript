@@ -179,7 +179,10 @@ export class Custom extends APIResource {
    *     filterGroups: [
    *       {
    *         filters: [
-   *           { operator: 'EQ', propertyName: 'propertyName' },
+   *           {
+   *             operator: 'BETWEEN',
+   *             propertyName: 'propertyName',
+   *           },
    *         ],
    *       },
    *     ],

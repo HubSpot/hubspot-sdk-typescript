@@ -349,7 +349,7 @@ export interface PipelineStage {
    * Defines the level of write access for the pipeline stage, with possible values
    * being CRM_PERMISSIONS_ENFORCEMENT, READ_ONLY, or INTERNAL_ONLY.
    */
-  writePermissions?: 'CRM_PERMISSIONS_ENFORCEMENT' | 'READ_ONLY' | 'INTERNAL_ONLY';
+  writePermissions?: 'CRM_PERMISSIONS_ENFORCEMENT' | 'INTERNAL_ONLY' | 'READ_ONLY';
 }
 
 /**

@@ -324,7 +324,7 @@ export interface ObjectTypePropertyCreate {
   /**
    * The data type of the property.
    */
-  type: 'string' | 'number' | 'date' | 'datetime' | 'enumeration' | 'bool';
+  type: 'bool' | 'date' | 'datetime' | 'enumeration' | 'number' | 'string';
 
   /**
    * A description of the property that will be shown as help text in HubSpot.
@@ -360,7 +360,7 @@ export interface ObjectTypePropertyCreate {
   /**
    * Controls how numeric properties are formatted in the HubSpot UI
    */
-  numberDisplayHint?: 'unformatted' | 'formatted' | 'currency' | 'percentage' | 'duration' | 'probability';
+  numberDisplayHint?: 'currency' | 'duration' | 'formatted' | 'percentage' | 'probability' | 'unformatted';
 
   /**
    * A list of available options for the property. This field is only required for
@@ -371,7 +371,7 @@ export interface ObjectTypePropertyCreate {
   /**
    * Controls how the property options will be sorted in the HubSpot UI.
    */
-  optionSortStrategy?: 'DISPLAY_ORDER' | 'ALPHABETICAL';
+  optionSortStrategy?: 'ALPHABETICAL' | 'DISPLAY_ORDER';
 
   /**
    * Defines the options this property will return, e.g. OWNER would return name of
@@ -394,14 +394,14 @@ export interface ObjectTypePropertyCreate {
    * Controls how text properties are formatted in the HubSpot UI
    */
   textDisplayHint?:
-    | 'unformatted_single_line'
-    | 'multi_line'
-    | 'email'
-    | 'phone_number'
     | 'domain_name'
+    | 'email'
     | 'ip_address'
+    | 'multi_line'
+    | 'phone_number'
     | 'physical_address'
-    | 'postal_code';
+    | 'postal_code'
+    | 'unformatted_single_line';
 }
 
 /**

@@ -12,7 +12,7 @@ describe('resource apps', () => {
   test.skip('update: only required params', async () => {
     const responsePromise = client.crm.featureFlags.apps.update('flagName', {
       appId: 0,
-      defaultState: 'OFF',
+      defaultState: 'ABSENT',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,8 +27,8 @@ describe('resource apps', () => {
   test.skip('update: required and optional params', async () => {
     const response = await client.crm.featureFlags.apps.update('flagName', {
       appId: 0,
-      defaultState: 'OFF',
-      overrideState: 'OFF',
+      defaultState: 'ABSENT',
+      overrideState: 'ABSENT',
     });
   });
 

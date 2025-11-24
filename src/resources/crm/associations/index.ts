@@ -31,5 +31,4 @@ export {
   type PublicDefaultAssociationMultiPost,
   type PublicFetchAssociationsBatchRequest,
   type ReportCreationResponse,
-  type V4MergeParams,
 } from './v4/index';

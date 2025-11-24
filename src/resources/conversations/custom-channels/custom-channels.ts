@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
-import * as ConversationsAPI from '../conversations';
 import * as ChannelAccountStagingTokensAPI from './channel-account-staging-tokens';
 import {
   ChannelAccountStagingTokenUpdateParams,
@@ -129,6 +128,8 @@ export class CustomChannels extends APIResource {
 
 export type PublicChannelIntegrationChannelsPage = Page<PublicChannelIntegrationChannel>;
 
+export type PublicChannelAccountsPage = Page<PublicChannelAccount>;
+
 export interface ChannelIntegrationMessageEgg {
   attachments: Array<
     | FileAttachment
@@ -164,9 +165,17 @@ export interface ChannelIntegrationMessageEgg {
 }
 
 export interface ChannelIntegrationParticipant {
-  deliveryIdentifier: ConversationsAPI.PublicDeliveryIdentifier;
+  deliveryIdentifier: PublicDeliveryIdentifier;
 
   name?: string;
+}
+
+export interface CollectionResponseWithTotalPublicChannelAccountForwardPaging {
+  results: Array<PublicChannelAccount>;
+
+  total: number;
+
+  paging?: Shared.ForwardPaging;
 }
 
 export interface CollectionResponseWithTotalPublicChannelIntegrationChannelForwardPaging {
@@ -177,10 +186,78 @@ export interface CollectionResponseWithTotalPublicChannelIntegrationChannelForwa
   paging?: Shared.ForwardPaging;
 }
 
+export interface ContactAddress {
+  city?: string;
+
+  country?: string;
+
+  countryCode?: string;
+
+  state?: string;
+
+  street?: string;
+
+  type?: 'HOME' | 'WORK';
+
+  zip?: string;
+}
+
 export interface ContactAttachment {
-  contactProfile: ConversationsAPI.ContactProfile;
+  contactProfile: ContactProfile;
 
   type: 'CONTACT';
+}
+
+export interface ContactEmail {
+  email: string;
+
+  type?: 'HOME' | 'WORK';
+}
+
+export interface ContactName {
+  firstName?: string;
+
+  lastName?: string;
+
+  middleName?: string;
+
+  prefix?: string;
+
+  suffix?: string;
+}
+
+export interface ContactOrg {
+  company?: string;
+
+  department?: string;
+
+  title?: string;
+}
+
+export interface ContactPhone {
+  phone: string;
+
+  type?: 'CELL' | 'HOME' | 'MAIN' | 'WORK';
+}
+
+export interface ContactProfile {
+  addresses: Array<ContactAddress>;
+
+  emails: Array<ContactEmail>;
+
+  phones: Array<ContactPhone>;
+
+  urls: Array<ContactURL>;
+
+  name?: ContactName;
+
+  org?: ContactOrg;
+}
+
+export interface ContactURL {
+  url: string;
+
+  type?: 'HOME' | 'WORK';
 }
 
 export interface FileAttachment {
@@ -223,6 +300,28 @@ export interface PreResolvedContacts {
   contacts: Array<PreResolvedContact>;
 }
 
+export interface PublicChannelAccount {
+  id: string;
+
+  active: boolean;
+
+  archived: boolean;
+
+  authorized: boolean;
+
+  channelId: string;
+
+  createdAt: string;
+
+  inboxId: string;
+
+  name: string;
+
+  archivedAt?: string;
+
+  deliveryIdentifier?: PublicDeliveryIdentifier;
+}
+
 export interface PublicChannelAccountEgg {
   authorized: boolean;
 
@@ -230,7 +329,7 @@ export interface PublicChannelAccountEgg {
 
   name: string;
 
-  deliveryIdentifier?: ConversationsAPI.PublicDeliveryIdentifier;
+  deliveryIdentifier?: PublicDeliveryIdentifier;
 }
 
 export interface PublicChannelAccountStagingToken {
@@ -246,13 +345,13 @@ export interface PublicChannelAccountStagingToken {
 
   accountName?: string;
 
-  deliveryIdentifier?: ConversationsAPI.PublicDeliveryIdentifier;
+  deliveryIdentifier?: PublicDeliveryIdentifier;
 }
 
 export interface PublicChannelAccountStagingTokenUpdateRequest {
   accountName: string;
 
-  deliveryIdentifier: ConversationsAPI.PublicDeliveryIdentifier;
+  deliveryIdentifier: PublicDeliveryIdentifier;
 }
 
 export interface PublicChannelAccountUpdateRequest {
@@ -311,9 +410,21 @@ export interface PublicChannelIntegrationMessageUpdateRequest {
   /**
    * Valid status are SENT, FAILED, and READ
    */
-  statusType: 'SENT' | 'FAILED' | 'READ';
+  statusType: 'FAILED' | 'READ' | 'SENT';
 
   errorMessage?: string;
+}
+
+export interface PublicClient {
+  clientType: 'HUBSPOT' | 'INTEGRATION' | 'SYSTEM' | 'UNKNOWN';
+
+  integrationAppId?: number;
+}
+
+export interface PublicContact {
+  contactProfile: ContactProfile;
+
+  type: 'CONTACT';
 }
 
 export interface PublicConversationsMessage {
@@ -322,21 +433,21 @@ export interface PublicConversationsMessage {
   archived: boolean;
 
   attachments: Array<
-    | ConversationsAPI.PublicFile
-    | ConversationsAPI.PublicLocation
-    | ConversationsAPI.PublicContact
-    | ConversationsAPI.PublicUnsupportedContent
-    | ConversationsAPI.PublicMessageHeader
-    | ConversationsAPI.PublicQuickReplies
-    | ConversationsAPI.PublicWhatsAppTemplateMetadata
-    | ConversationsAPI.PublicSocialMetadataAttachment
+    | PublicFile
+    | PublicLocation
+    | PublicContact
+    | PublicUnsupportedContent
+    | PublicMessageHeader
+    | PublicQuickReplies
+    | PublicWhatsAppTemplateMetadata
+    | PublicSocialMetadataAttachment
   >;
 
   channelAccountId: string;
 
   channelId: string;
 
-  client: ConversationsAPI.PublicClient;
+  client: PublicClient;
 
   conversationsThreadId: string;
 
@@ -346,13 +457,13 @@ export interface PublicConversationsMessage {
 
   direction: 'INCOMING' | 'OUTGOING';
 
-  recipients: Array<ConversationsAPI.PublicRecipient>;
+  recipients: Array<PublicRecipient>;
 
-  senders: Array<ConversationsAPI.PublicSender>;
+  senders: Array<PublicSender>;
 
   text: string;
 
-  truncationStatus: 'NOT_TRUNCATED' | 'TRUNCATED_TO_MOST_RECENT_REPLY' | 'TRUNCATED';
+  truncationStatus: 'NOT_TRUNCATED' | 'TRUNCATED' | 'TRUNCATED_TO_MOST_RECENT_REPLY';
 
   type: 'MESSAGE';
 
@@ -360,21 +471,147 @@ export interface PublicConversationsMessage {
 
   richText?: string;
 
-  status?: ConversationsAPI.PublicMessageStatus;
+  status?: PublicMessageStatus;
 
   subject?: string;
 
   updatedAt?: string;
 }
 
-export interface QuickRepliesAttachment {
-  quickReplies: Array<ConversationsAPI.QuickReply>;
+export interface PublicDeliveryIdentifier {
+  type: string;
+
+  value: string;
+}
+
+export interface PublicFile {
+  fileId: string;
+
+  fileUsageType: string;
+
+  type: 'FILE';
+
+  name?: string;
+
+  url?: string;
+}
+
+export interface PublicLocation {
+  latitude: number;
+
+  longitude: number;
+
+  type: 'LOCATION';
+
+  address?: string;
+
+  name?: string;
+
+  url?: string;
+}
+
+export interface PublicMessageFailureDetails {
+  errorMessageTokens: { [key: string]: string };
+
+  errorMessage?: string;
+}
+
+export interface PublicMessageHeader {
+  type: 'MESSAGE_HEADER';
+
+  fileId?: number;
+
+  text?: string;
+}
+
+export interface PublicMessageStatus {
+  statusType: 'FAILED' | 'READ' | 'RECEIVED' | 'SENT';
+
+  failureDetails?: PublicMessageFailureDetails;
+}
+
+export interface PublicQuickReplies {
+  allowMultiSelect: boolean;
+
+  allowUserInput: boolean;
+
+  quickReplies: Array<QuickReply>;
 
   type: 'QUICK_REPLIES';
 }
 
+export interface PublicRecipient {
+  deliveryIdentifier: PublicDeliveryIdentifier;
+
+  actorId?: string;
+
+  name?: string;
+
+  recipientField?: string;
+}
+
+export interface PublicSender {
+  actorId?: string;
+
+  deliveryIdentifier?: PublicDeliveryIdentifier;
+
+  name?: string;
+
+  senderField?: string;
+}
+
+export interface PublicSocialMetadataAttachment {
+  socialMetadata: SocialMetadata;
+
+  type: 'SOCIAL_MEDIA_METADATA';
+}
+
+export interface PublicUnsupportedContent {
+  type: 'UNSUPPORTED_CONTENT';
+}
+
+export interface PublicWhatsAppTemplateMetadata {
+  crmObjectIds: { [key: string]: number };
+
+  mappedTemplateId: string;
+
+  parameters: { [key: string]: string };
+
+  type: 'WHATSAPP_TEMPLATE_METADATA';
+}
+
+export interface QuickRepliesAttachment {
+  quickReplies: Array<QuickReply>;
+
+  type: 'QUICK_REPLIES';
+}
+
+export interface QuickReply {
+  value: string;
+
+  valueType: string;
+
+  label?: string;
+}
+
+export interface SocialMetadata {
+  mediaType: string;
+
+  id?: string;
+
+  description?: string;
+
+  mediaTitle?: string;
+
+  mediaUrl?: string;
+
+  mediaUrlString?: string;
+
+  thumbnailUrl?: string;
+}
+
 export interface SocialMetadataIntegrationAttachment {
-  socialMetadata: ConversationsAPI.SocialMetadata;
+  socialMetadata: SocialMetadata;
 
   type: 'SOCIAL_MEDIA_METADATA';
 }
@@ -431,13 +668,22 @@ export declare namespace CustomChannels {
   export {
     type ChannelIntegrationMessageEgg as ChannelIntegrationMessageEgg,
     type ChannelIntegrationParticipant as ChannelIntegrationParticipant,
+    type CollectionResponseWithTotalPublicChannelAccountForwardPaging as CollectionResponseWithTotalPublicChannelAccountForwardPaging,
     type CollectionResponseWithTotalPublicChannelIntegrationChannelForwardPaging as CollectionResponseWithTotalPublicChannelIntegrationChannelForwardPaging,
+    type ContactAddress as ContactAddress,
     type ContactAttachment as ContactAttachment,
+    type ContactEmail as ContactEmail,
+    type ContactName as ContactName,
+    type ContactOrg as ContactOrg,
+    type ContactPhone as ContactPhone,
+    type ContactProfile as ContactProfile,
+    type ContactURL as ContactURL,
     type FileAttachment as FileAttachment,
     type LocationAttachment as LocationAttachment,
     type MessageHeaderAttachment as MessageHeaderAttachment,
     type PreResolvedContact as PreResolvedContact,
     type PreResolvedContacts as PreResolvedContacts,
+    type PublicChannelAccount as PublicChannelAccount,
     type PublicChannelAccountEgg as PublicChannelAccountEgg,
     type PublicChannelAccountStagingToken as PublicChannelAccountStagingToken,
     type PublicChannelAccountStagingTokenUpdateRequest as PublicChannelAccountStagingTokenUpdateRequest,
@@ -446,8 +692,24 @@ export declare namespace CustomChannels {
     type PublicChannelIntegrationChannelCreate as PublicChannelIntegrationChannelCreate,
     type PublicChannelIntegrationChannelPatch as PublicChannelIntegrationChannelPatch,
     type PublicChannelIntegrationMessageUpdateRequest as PublicChannelIntegrationMessageUpdateRequest,
+    type PublicClient as PublicClient,
+    type PublicContact as PublicContact,
     type PublicConversationsMessage as PublicConversationsMessage,
+    type PublicDeliveryIdentifier as PublicDeliveryIdentifier,
+    type PublicFile as PublicFile,
+    type PublicLocation as PublicLocation,
+    type PublicMessageFailureDetails as PublicMessageFailureDetails,
+    type PublicMessageHeader as PublicMessageHeader,
+    type PublicMessageStatus as PublicMessageStatus,
+    type PublicQuickReplies as PublicQuickReplies,
+    type PublicRecipient as PublicRecipient,
+    type PublicSender as PublicSender,
+    type PublicSocialMetadataAttachment as PublicSocialMetadataAttachment,
+    type PublicUnsupportedContent as PublicUnsupportedContent,
+    type PublicWhatsAppTemplateMetadata as PublicWhatsAppTemplateMetadata,
     type QuickRepliesAttachment as QuickRepliesAttachment,
+    type QuickReply as QuickReply,
+    type SocialMetadata as SocialMetadata,
     type SocialMetadataIntegrationAttachment as SocialMetadataIntegrationAttachment,
     type UnsupportedContentAttachment as UnsupportedContentAttachment,
     type PublicChannelIntegrationChannelsPage as PublicChannelIntegrationChannelsPage,

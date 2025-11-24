@@ -65,7 +65,7 @@ export interface ActionResponseWithSingleResultUri {
    * The current status of the export, which can be PENDING, PROCESSING, COMPLETE or
    * CANCELED.
    */
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   errors?: Array<Shared.StandardError>;
 
@@ -163,20 +163,20 @@ export interface PublicExportResponse {
    * The current state of the export process.
    */
   exportState:
-    | 'ENQUEUED'
-    | 'PROCESSING'
-    | 'DONE'
-    | 'FAILED'
     | 'CANCELED'
     | 'CONFLICT'
-    | 'DELETED'
     | 'DEFERRED'
-    | 'PENDING_APPROVAL';
+    | 'DELETED'
+    | 'DONE'
+    | 'ENQUEUED'
+    | 'FAILED'
+    | 'PENDING_APPROVAL'
+    | 'PROCESSING';
 
   /**
    * The type of export, which can be either VIEW or LIST.
    */
-  exportType: 'VIEW' | 'LIST';
+  exportType: 'LIST' | 'VIEW';
 
   /**
    * The list of properties exported for the associated object.

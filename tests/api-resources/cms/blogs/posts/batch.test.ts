@@ -14,7 +14,7 @@ describe('resource batch', () => {
       inputs: [
         {
           id: 'id',
-          abStatus: 'master',
+          abStatus: 'automated_loser_variant',
           abTestId: 'abTestId',
           archivedAt: 0,
           archivedInDashboard: true,
@@ -161,7 +161,7 @@ describe('resource batch', () => {
       inputs: [
         {
           id: 'id',
-          abStatus: 'master',
+          abStatus: 'automated_loser_variant',
           abTestId: 'abTestId',
           archivedAt: 0,
           archivedInDashboard: true,

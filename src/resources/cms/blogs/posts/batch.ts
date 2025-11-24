@@ -16,7 +16,7 @@ export class Batch extends APIResource {
    *   inputs: [
    *     {
    *       id: 'id',
-   *       abStatus: 'master',
+   *       abStatus: 'automated_loser_variant',
    *       abTestId: 'abTestId',
    *       archivedAt: 0,
    *       archivedInDashboard: true,

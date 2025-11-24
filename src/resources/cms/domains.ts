@@ -137,6 +137,9 @@ export interface DomainListParams extends PageParams {
    */
   createdBefore?: string;
 
+  /**
+   * Specifies the order in which the domains are returned.
+   */
   sort?: Array<string>;
 
   /**

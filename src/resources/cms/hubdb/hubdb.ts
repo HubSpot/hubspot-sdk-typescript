@@ -55,16 +55,32 @@ export interface BatchInputHubDBTableRowV3Request {
 }
 
 export interface BatchResponseHubDBTableRowV3 {
+  /**
+   * The timestamp indicating when the batch processing was completed.
+   */
   completedAt: string;
 
   results: Array<HubDBTableRowV3>;
 
+  /**
+   * The timestamp indicating when the batch processing began.
+   */
   startedAt: string;
 
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+  /**
+   * The current status of the batch operation, with possible values: CANCELED,
+   * COMPLETE, PENDING, PROCESSING.
+   */
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
+  /**
+   * A collection of related links associated with the batch response.
+   */
   links?: { [key: string]: string };
 
+  /**
+   * The timestamp indicating when the batch request was made.
+   */
   requestedAt?: string;
 }
 
@@ -75,7 +91,7 @@ export interface BatchResponseHubDBTableRowV3WithErrors {
 
   startedAt: string;
 
-  status: 'PENDING' | 'PROCESSING' | 'CANCELED' | 'COMPLETE';
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   errors?: Array<Shared.StandardError>;
 
@@ -128,28 +144,28 @@ export interface Column {
    * Type of the column
    */
   type:
-    | 'NULL'
-    | 'TEXT'
-    | 'NUMBER'
-    | 'URL'
-    | 'IMAGE'
-    | 'SELECT'
-    | 'MULTISELECT'
     | 'BOOLEAN'
-    | 'LOCATION'
+    | 'CODE'
+    | 'COMPOSITE'
+    | 'CTA'
+    | 'CURRENCY'
     | 'DATE'
     | 'DATETIME'
-    | 'CURRENCY'
-    | 'RICHTEXT'
-    | 'FOREIGN_ID'
-    | 'VIDEO'
-    | 'CTA'
+    | 'EMBED'
     | 'FILE'
-    | 'JSON'
-    | 'COMPOSITE'
-    | 'CODE'
+    | 'FOREIGN_ID'
     | 'HUBSPOT_VIDEO'
-    | 'EMBED';
+    | 'IMAGE'
+    | 'JSON'
+    | 'LOCATION'
+    | 'MULTISELECT'
+    | 'NULL'
+    | 'NUMBER'
+    | 'RICHTEXT'
+    | 'SELECT'
+    | 'TEXT'
+    | 'URL'
+    | 'VIDEO';
 
   createdAt?: string;
 
@@ -229,28 +245,28 @@ export interface ColumnRequest {
    * Type of the column
    */
   type:
-    | 'NULL'
-    | 'TEXT'
-    | 'NUMBER'
-    | 'URL'
-    | 'IMAGE'
-    | 'SELECT'
-    | 'MULTISELECT'
     | 'BOOLEAN'
-    | 'LOCATION'
+    | 'CODE'
+    | 'COMPOSITE'
+    | 'CTA'
+    | 'CURRENCY'
     | 'DATE'
     | 'DATETIME'
-    | 'CURRENCY'
-    | 'RICHTEXT'
-    | 'FOREIGN_ID'
-    | 'VIDEO'
-    | 'CTA'
+    | 'EMBED'
     | 'FILE'
-    | 'JSON'
-    | 'COMPOSITE'
-    | 'CODE'
+    | 'FOREIGN_ID'
     | 'HUBSPOT_VIDEO'
-    | 'EMBED';
+    | 'IMAGE'
+    | 'JSON'
+    | 'LOCATION'
+    | 'MULTISELECT'
+    | 'NULL'
+    | 'NUMBER'
+    | 'RICHTEXT'
+    | 'SELECT'
+    | 'TEXT'
+    | 'URL'
+    | 'VIDEO';
 
   /**
    * The id of the column from another table to which the column refers/points to.
@@ -624,8 +640,14 @@ export interface SimpleUser {
 export interface StreamingCollectionResponseWithTotalHubDBTableRowV3 {
   results: Array<Shared.HubDBTableRowV3Wrapper>;
 
+  /**
+   * The total number of rows available in the collection.
+   */
   total: number;
 
+  /**
+   * Indicates the type of response, which is 'STREAMING' by default.
+   */
   type: 'STREAMING';
 
   paging?: Shared.Paging;
