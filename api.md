@@ -368,6 +368,8 @@ Types:
 - <code><a href="./src/resources/cms/cms.ts">DetachFromLangGroupRequestVNext</a></code>
 - <code><a href="./src/resources/cms/cms.ts">Gradient</a></code>
 - <code><a href="./src/resources/cms/cms.ts">LayoutSection</a></code>
+- <code><a href="./src/resources/cms/cms.ts">Margin</a></code>
+- <code><a href="./src/resources/cms/cms.ts">Padding</a></code>
 - <code><a href="./src/resources/cms/cms.ts">PublicAccessRule</a></code>
 - <code><a href="./src/resources/cms/cms.ts">RgbaColor</a></code>
 - <code><a href="./src/resources/cms/cms.ts">RowMetaData</a></code>
@@ -429,8 +431,6 @@ Types:
 - <code><a href="./src/resources/cms/blogs/posts/posts.ts">CollectionResponseWithTotalBlogPostForwardPaging</a></code>
 - <code><a href="./src/resources/cms/blogs/posts/posts.ts">CollectionResponseWithTotalVersionBlogPost</a></code>
 - <code><a href="./src/resources/cms/blogs/posts/posts.ts">ContentLanguageVariation</a></code>
-- <code><a href="./src/resources/cms/blogs/posts/posts.ts">Margin</a></code>
-- <code><a href="./src/resources/cms/blogs/posts/posts.ts">Padding</a></code>
 - <code><a href="./src/resources/cms/blogs/posts/posts.ts">VersionBlogPost</a></code>
 
 Methods:

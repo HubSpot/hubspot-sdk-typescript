@@ -228,7 +228,6 @@ import {
   VersionContentFolder,
   VersionPage,
 } from './pages/pages';
-import * as PostsAPI from './blogs/posts/posts';
 
 export class Cms extends APIResource {
   auditLogs: AuditLogsAPI.AuditLogs = new AuditLogsAPI.AuditLogs(this._client);
@@ -294,9 +293,9 @@ export interface BatchInputJsonNode {
 export interface BreakpointStyles {
   hidden: boolean;
 
-  margin: PostsAPI.Margin;
+  margin: Margin;
 
-  padding: PostsAPI.Padding;
+  padding: Padding;
 }
 
 export interface ColorStop {
@@ -384,6 +383,10 @@ export interface LayoutSection {
 
   x: number;
 }
+
+export type Margin = unknown;
+
+export type Padding = unknown;
 
 export type PublicAccessRule = unknown;
 
@@ -493,6 +496,8 @@ export declare namespace Cms {
     type DetachFromLangGroupRequestVNext as DetachFromLangGroupRequestVNext,
     type Gradient as Gradient,
     type LayoutSection as LayoutSection,
+    type Margin as Margin,
+    type Padding as Padding,
     type PublicAccessRule as PublicAccessRule,
     type RgbaColor as RgbaColor,
     type RowMetaData as RowMetaData,
