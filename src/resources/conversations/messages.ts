@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../core/resource';
 import * as ConversationsAPI from './conversations';
-import { CollectionResponsePublicMessageForwardPagingResultsPage } from './conversations';
+import { PublicMessagesPage } from './conversations';
 import { APIPromise } from '../../core/api-promise';
 import { Page, type PageParams, PagePromise } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
@@ -31,7 +31,7 @@ export class Messages extends APIResource {
    * @example
    * ```ts
    * // Automatically fetches more pages as needed.
-   * for await (const message of client.conversations.messages.list(
+   * for await (const publicMessage of client.conversations.messages.list(
    *   0,
    * )) {
    *   // ...
@@ -42,25 +42,10 @@ export class Messages extends APIResource {
     threadID: number,
     query: MessageListParams | null | undefined = {},
     options?: RequestOptions,
-  ): PagePromise<
-    CollectionResponsePublicMessageForwardPagingResultsPage,
-    | ConversationsAPI.ConversationsPublicConversationsMessage
-    | ConversationsAPI.PublicComment
-    | ConversationsAPI.PublicWelcomeMessage
-    | ConversationsAPI.PublicAssignmentMessage
-    | ConversationsAPI.PublicThreadStatusChange
-    | ConversationsAPI.PublicThreadInboxChange
-  > {
+  ): PagePromise<PublicMessagesPage, ConversationsAPI.PublicMessage> {
     return this._client.getAPIList(
       path`/conversations/v3/conversations/threads/${threadID}/messages`,
-      Page<
-        | ConversationsAPI.ConversationsPublicConversationsMessage
-        | ConversationsAPI.PublicComment
-        | ConversationsAPI.PublicWelcomeMessage
-        | ConversationsAPI.PublicAssignmentMessage
-        | ConversationsAPI.PublicThreadStatusChange
-        | ConversationsAPI.PublicThreadInboxChange
-      >,
+      Page<ConversationsAPI.PublicMessage>,
       { query, ...options },
     );
   }
@@ -160,4 +145,4 @@ export declare namespace Messages {
   };
 }
 
-export { type CollectionResponsePublicMessageForwardPagingResultsPage };
+export { type PublicMessagesPage };
