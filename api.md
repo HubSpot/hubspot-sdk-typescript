@@ -1086,7 +1086,7 @@ Methods:
 Methods:
 
 - <code title="post /conversations/v3/conversations/threads/{threadId}/messages">client.conversations.messages.<a href="./src/resources/conversations/messages.ts">create</a>(threadID) -> PublicMessage</code>
-- <code title="get /conversations/v3/conversations/threads/{threadId}/messages">client.conversations.messages.<a href="./src/resources/conversations/messages.ts">list</a>(threadID, { ...params }) -> CollectionResponsePublicMessageForwardPagingResultsPage</code>
+- <code title="get /conversations/v3/conversations/threads/{threadId}/messages">client.conversations.messages.<a href="./src/resources/conversations/messages.ts">list</a>(threadID, { ...params }) -> PublicMessagesPage</code>
 - <code title="get /conversations/v3/conversations/threads/{threadId}/messages/{messageId}">client.conversations.messages.<a href="./src/resources/conversations/messages.ts">get</a>(messageID, { ...params }) -> PublicMessage</code>
 - <code title="get /conversations/v3/conversations/threads/{threadId}/messages/{messageId}/original-content">client.conversations.messages.<a href="./src/resources/conversations/messages.ts">getOriginalContent</a>(messageID, { ...params }) -> PublicMessageContent</code>
 

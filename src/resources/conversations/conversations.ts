@@ -76,6 +76,8 @@ export type PublicChannelsPage = Page<PublicChannel>;
 
 export type PublicInboxesPage = Page<PublicInbox>;
 
+export type PublicMessagesPage = Page<PublicMessage>;
+
 export type PublicThreadsPage = Page<PublicThread>;
 
 export interface AgentActor {
@@ -133,14 +135,7 @@ export interface BotActor {
 }
 
 export interface CollectionResponsePublicMessageForwardPaging {
-  results: Array<
-    | ConversationsPublicConversationsMessage
-    | PublicComment
-    | PublicWelcomeMessage
-    | PublicAssignmentMessage
-    | PublicThreadStatusChange
-    | PublicThreadInboxChange
-  >;
+  results: Array<PublicMessage>;
 
   paging?: Shared.ForwardPaging;
 }
