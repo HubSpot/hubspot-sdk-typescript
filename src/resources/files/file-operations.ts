@@ -86,15 +86,15 @@ export class FileOperations extends APIResource {
    * @example
    * ```ts
    * const fileStat =
-   *   await client.files.fileOperations.getByPath('path');
+   *   await client.files.fileOperations.getByPath('file_path');
    * ```
    */
   getByPath(
-    path_: string,
+    filePath: string,
     query: FileOperationGetByPathParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<FilesAPI.FileStat> {
-    return this._client.get(path`/files/v3/files/stat/${path_}`, { query, ...options });
+    return this._client.get(path`/files/v3/files/stat/${filePath}`, { query, ...options });
   }
 
   /**
