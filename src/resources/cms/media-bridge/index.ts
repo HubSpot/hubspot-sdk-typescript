@@ -58,6 +58,7 @@ export {
   type Euler,
   type EventVisibilityChange,
   type EventVisibilityResponse,
+  type Expression,
   type ExtensionData,
   type ExternalOptionsMetaData,
   type ExtractMostRecentEmailReplyHTML,
