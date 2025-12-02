@@ -361,6 +361,7 @@ Types:
 - <code><a href="./src/resources/cms/cms.ts">AttachToLangPrimaryRequestVNext</a></code>
 - <code><a href="./src/resources/cms/cms.ts">BackgroundImage</a></code>
 - <code><a href="./src/resources/cms/cms.ts">BatchInputJsonNode</a></code>
+- <code><a href="./src/resources/cms/cms.ts">BreakpointStyles</a></code>
 - <code><a href="./src/resources/cms/cms.ts">ColorStop</a></code>
 - <code><a href="./src/resources/cms/cms.ts">ContentCloneRequestVNext</a></code>
 - <code><a href="./src/resources/cms/cms.ts">ContentScheduleRequestVNext</a></code>
@@ -425,7 +426,6 @@ Types:
 - <code><a href="./src/resources/cms/blogs/posts/posts.ts">BatchResponseBlogPostWithErrors</a></code>
 - <code><a href="./src/resources/cms/blogs/posts/posts.ts">BlogPost</a></code>
 - <code><a href="./src/resources/cms/blogs/posts/posts.ts">BlogPostLanguageCloneRequestVNext</a></code>
-- <code><a href="./src/resources/cms/blogs/posts/posts.ts">BreakpointStyles</a></code>
 - <code><a href="./src/resources/cms/blogs/posts/posts.ts">CollectionResponseWithTotalBlogPostForwardPaging</a></code>
 - <code><a href="./src/resources/cms/blogs/posts/posts.ts">CollectionResponseWithTotalVersionBlogPost</a></code>
 - <code><a href="./src/resources/cms/blogs/posts/posts.ts">ContentLanguageVariation</a></code>

@@ -291,6 +291,14 @@ export interface BatchInputJsonNode {
   inputs: Array<unknown>;
 }
 
+export interface BreakpointStyles {
+  hidden: boolean;
+
+  margin: PostsAPI.Margin;
+
+  padding: PostsAPI.Padding;
+}
+
 export interface ColorStop {
   /**
    * A color defined by RGB values.
@@ -444,7 +452,7 @@ export interface Styles {
 
   verticalAlignment: string;
 
-  breakpointStyles?: { [key: string]: PostsAPI.BreakpointStyles };
+  breakpointStyles?: { [key: string]: BreakpointStyles };
 }
 
 /**
@@ -478,6 +486,7 @@ export declare namespace Cms {
     type AttachToLangPrimaryRequestVNext as AttachToLangPrimaryRequestVNext,
     type BackgroundImage as BackgroundImage,
     type BatchInputJsonNode as BatchInputJsonNode,
+    type BreakpointStyles as BreakpointStyles,
     type ColorStop as ColorStop,
     type ContentCloneRequestVNext as ContentCloneRequestVNext,
     type ContentScheduleRequestVNext as ContentScheduleRequestVNext,

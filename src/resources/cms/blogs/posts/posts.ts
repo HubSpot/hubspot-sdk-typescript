@@ -1777,14 +1777,6 @@ export interface BlogPostLanguageCloneRequestVNext {
   language?: string;
 }
 
-export interface BreakpointStyles {
-  hidden: boolean;
-
-  margin: Margin;
-
-  padding: Padding;
-}
-
 /**
  * Response object for collections of blog posts with pagination information.
  */
@@ -5374,7 +5366,6 @@ export declare namespace Posts {
     type BatchResponseBlogPostWithErrors as BatchResponseBlogPostWithErrors,
     type BlogPost as BlogPost,
     type BlogPostLanguageCloneRequestVNext as BlogPostLanguageCloneRequestVNext,
-    type BreakpointStyles as BreakpointStyles,
     type CollectionResponseWithTotalBlogPostForwardPaging as CollectionResponseWithTotalBlogPostForwardPaging,
     type CollectionResponseWithTotalVersionBlogPost as CollectionResponseWithTotalVersionBlogPost,
     type ContentLanguageVariation as ContentLanguageVariation,
