@@ -163,6 +163,7 @@ export {
 } from './properties';
 export {
   Schemas,
+  type SchemaListResponse,
   type SchemaUpdateParams,
   type SchemaListParams,
   type SchemaCreateAssociationParams,

@@ -26,6 +26,7 @@ import {
   SchemaDeleteAssociationParams,
   SchemaDeleteParams,
   SchemaListParams,
+  SchemaListResponse,
   SchemaUpdateParams,
   Schemas,
 } from './schemas';
@@ -695,6 +696,7 @@ export declare namespace Objects {
     type ObjectTypeDefinitionPatch as ObjectTypeDefinitionPatch,
     type ObjectTypePropertyCreate as ObjectTypePropertyCreate,
     type ObjectsSchemasObjectTypeDefinition as ObjectsSchemasObjectTypeDefinition,
+    type SchemaListResponse as SchemaListResponse,
     type SchemaCreateParams as SchemaCreateParams,
     type SchemaUpdateParams as SchemaUpdateParams,
     type SchemaListParams as SchemaListParams,
