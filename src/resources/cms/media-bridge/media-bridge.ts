@@ -69,7 +69,7 @@ export class MediaBridge extends APIResource {
 export interface AbsoluteValue {
   operator: 'ABSOLUTE_VALUE';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -81,7 +81,7 @@ export interface AddNumbers {
 
   operator: 'ADD_NUMBERS';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -91,9 +91,9 @@ export interface AddNumbers {
 export interface AddTime {
   operator: 'ADD_TIME';
 
-  stringToCheck: unknown;
+  stringToCheck: Expression;
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -105,7 +105,7 @@ export interface And {
 
   operator: 'AND';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -257,9 +257,9 @@ export interface BatchResponsePropertyWithErrors {
 export interface BeginsWith {
   operator: 'BEGINS_WITH';
 
-  stringToCheck: unknown;
+  stringToCheck: Expression;
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -269,7 +269,7 @@ export interface BeginsWith {
 export interface BooleanPropertyVariable {
   operator: 'BOOLEAN_PROPERTY_VARIABLE';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -279,7 +279,7 @@ export interface BooleanPropertyVariable {
 export interface BooleanTargetPropertyVariable {
   operator: 'BOOLEAN_TARGET_PROPERTY_VARIABLE';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -305,7 +305,7 @@ export interface CollectionResponsePropertyNoPaging {
 export interface ConcatStrings {
   operator: 'CONCAT_STRINGS';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -315,7 +315,7 @@ export interface ConcatStrings {
 export interface ConstantBoolean {
   operator: 'CONSTANT_BOOLEAN';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -325,7 +325,7 @@ export interface ConstantBoolean {
 export interface ConstantNumber {
   operator: 'CONSTANT_NUMBER';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -335,7 +335,7 @@ export interface ConstantNumber {
 export interface ConstantString {
   operator: 'CONSTANT_STRING';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -345,9 +345,9 @@ export interface ConstantString {
 export interface Contains {
   operator: 'CONTAINS';
 
-  stringToCheck: unknown;
+  stringToCheck: Expression;
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -357,7 +357,7 @@ export interface Contains {
 export interface Date {
   operator: 'DATE';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -367,7 +367,7 @@ export interface Date {
 export interface DatedExchangeRate {
   operator: 'DATED_EXCHANGE_RATE';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -395,7 +395,7 @@ export interface DivideNumbers {
 
   operator: 'DIVIDE_NUMBERS';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -413,7 +413,7 @@ export interface Endpoints {
 export interface Euler {
   operator: 'EULER';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -438,6 +438,78 @@ export interface EventVisibilityResponse {
   visibilitySettings: Array<EventVisibilityChange>;
 }
 
+export type Expression =
+  | ConstantBoolean
+  | ConstantNumber
+  | ConstantString
+  | BooleanPropertyVariable
+  | StringPropertyVariable
+  | NumberPropertyVariable
+  | TimestampOfPropertyVariable
+  | BooleanTargetPropertyVariable
+  | StringTargetPropertyVariable
+  | NumberTargetPropertyVariable
+  | TimestampOfTargetPropertyVariable
+  | AddNumbers
+  | SubtractNumbers
+  | MultiplyNumbers
+  | DivideNumbers
+  | RoundDownNumbers
+  | RoundUpNumbers
+  | RoundNearestNumbers
+  | UpperCase
+  | LowerCase
+  | ConcatStrings
+  | Contains
+  | BeginsWith
+  | NumberToString
+  | ParseNumber
+  | FetchExchangeRate
+  | FetchCurrencyDecimalPlaces
+  | FetchSingleCurrencyPortalCurrency
+  | DatedExchangeRate
+  | PipelineProbability
+  | MaxNumbers
+  | MinNumbers
+  | LessThan
+  | LessThanOrEqual
+  | MoreThan
+  | MoreThanOrEqual
+  | NumberEquals
+  | StringEquals
+  | IsPipelineStageClosed
+  | Not
+  | Date
+  | Month
+  | Year
+  | Now
+  | TimeBetween
+  | PeriodToMonths
+  | PeriodToWeeks
+  | And
+  | Or
+  | Xor
+  | IfString
+  | IfNumber
+  | IfBoolean
+  | IsPresent
+  | HasEmailReply
+  | HasPlainTextEmailReply
+  | ExtractMostRecentEmailReplyHTML
+  | ExtractMostRecentEmailReplyText
+  | ExtractMostRecentPlainTextEmailReply
+  | SetContainsString
+  | IsEngagementType
+  | FormatFullName
+  | AbsoluteValue
+  | SquareRoot
+  | Power
+  | Substring
+  | Euler
+  | StringLength
+  | AddTime
+  | SubtractTime;
+
 export interface ExtensionData {
   extensionStatusMap: { [key: string]: string };
 
@@ -461,7 +533,7 @@ export interface ExternalOptionsMetaData {
 export interface ExtractMostRecentEmailReplyHTML {
   operator: 'EXTRACT_MOST_RECENT_EMAIL_REPLY_HTML';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -471,7 +543,7 @@ export interface ExtractMostRecentEmailReplyHTML {
 export interface ExtractMostRecentEmailReplyText {
   operator: 'EXTRACT_MOST_RECENT_EMAIL_REPLY_TEXT';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -481,7 +553,7 @@ export interface ExtractMostRecentEmailReplyText {
 export interface ExtractMostRecentPlainTextEmailReply {
   operator: 'EXTRACT_MOST_RECENT_PLAIN_TEXT_EMAIL_REPLY';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -491,7 +563,7 @@ export interface ExtractMostRecentPlainTextEmailReply {
 export interface FetchCurrencyDecimalPlaces {
   operator: 'FETCH_CURRENCY_DECIMAL_PLACES';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -501,7 +573,7 @@ export interface FetchCurrencyDecimalPlaces {
 export interface FetchExchangeRate {
   operator: 'FETCH_EXCHANGE_RATE';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -511,7 +583,7 @@ export interface FetchExchangeRate {
 export interface FetchSingleCurrencyPortalCurrency {
   operator: 'FETCH_SINGLE_CURRENCY_PORTAL_CURRENCY';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -531,7 +603,7 @@ export interface FilteringMetaData {
 export interface FormatFullName {
   operator: 'FORMAT_FULL_NAME';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -573,7 +645,7 @@ export interface GroupView {
 export interface HasEmailReply {
   operator: 'HAS_EMAIL_REPLY';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -583,7 +655,7 @@ export interface HasEmailReply {
 export interface HasPlainTextEmailReply {
   operator: 'HAS_PLAIN_TEXT_EMAIL_REPLY';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -593,13 +665,13 @@ export interface HasPlainTextEmailReply {
 export interface IfBoolean {
   enclosedInParentheses: boolean;
 
-  ifExpression: unknown;
+  ifExpression: Expression;
 
   operator: 'IF_BOOLEAN';
 
-  elseExpression?: unknown;
+  elseExpression?: Expression;
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -609,13 +681,13 @@ export interface IfBoolean {
 export interface IfNumber {
   enclosedInParentheses: boolean;
 
-  ifExpression: unknown;
+  ifExpression: Expression;
 
   operator: 'IF_NUMBER';
 
-  elseExpression?: unknown;
+  elseExpression?: Expression;
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -625,13 +697,13 @@ export interface IfNumber {
 export interface IfString {
   enclosedInParentheses: boolean;
 
-  ifExpression: unknown;
+  ifExpression: Expression;
 
   operator: 'IF_STRING';
 
-  elseExpression?: unknown;
+  elseExpression?: Expression;
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -762,7 +834,7 @@ export interface IntegratorObjectCreationResponse {
 export interface IsEngagementType {
   operator: 'IS_ENGAGEMENT_TYPE';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -772,7 +844,7 @@ export interface IsEngagementType {
 export interface IsPipelineStageClosed {
   operator: 'IS_PIPELINE_STAGE_CLOSED';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -780,11 +852,11 @@ export interface IsPipelineStageClosed {
 }
 
 export interface IsPresent {
-  expressionToEvaluate: unknown;
+  expressionToEvaluate: Expression;
 
   operator: 'IS_PRESENT';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -794,7 +866,7 @@ export interface IsPresent {
 export interface LessThan {
   operator: 'LESS_THAN';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -804,7 +876,7 @@ export interface LessThan {
 export interface LessThanOrEqual {
   operator: 'LESS_THAN_OR_EQUAL';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -814,7 +886,7 @@ export interface LessThanOrEqual {
 export interface LowerCase {
   operator: 'LOWER_CASE';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -824,7 +896,7 @@ export interface LowerCase {
 export interface MaxNumbers {
   operator: 'MAX_NUMBERS';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -1034,7 +1106,7 @@ export interface MediaPlayedPercentageEventRequest {
 export interface MinNumbers {
   operator: 'MIN_NUMBERS';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -1044,7 +1116,7 @@ export interface MinNumbers {
 export interface Month {
   operator: 'MONTH';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -1054,7 +1126,7 @@ export interface Month {
 export interface MoreThan {
   operator: 'MORE_THAN';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -1064,7 +1136,7 @@ export interface MoreThan {
 export interface MoreThanOrEqual {
   operator: 'MORE_THAN_OR_EQUAL';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -1076,7 +1148,7 @@ export interface MultiplyNumbers {
 
   operator: 'MULTIPLY_NUMBERS';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -1086,7 +1158,7 @@ export interface MultiplyNumbers {
 export interface Not {
   operator: 'NOT';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -1096,7 +1168,7 @@ export interface Not {
 export interface Now {
   operator: 'NOW';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -1106,7 +1178,7 @@ export interface Now {
 export interface NumberEquals {
   operator: 'NUMBER_EQUALS';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -1116,7 +1188,7 @@ export interface NumberEquals {
 export interface NumberPropertyVariable {
   operator: 'NUMBER_PROPERTY_VARIABLE';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -1126,7 +1198,7 @@ export interface NumberPropertyVariable {
 export interface NumberTargetPropertyVariable {
   operator: 'NUMBER_TARGET_PROPERTY_VARIABLE';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -1136,7 +1208,7 @@ export interface NumberTargetPropertyVariable {
 export interface NumberToString {
   operator: 'NUMBER_TO_STRING';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -1284,7 +1356,7 @@ export interface Or {
 
   operator: 'OR';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -1294,7 +1366,7 @@ export interface Or {
 export interface ParseNumber {
   operator: 'PARSE_NUMBER';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -1304,7 +1376,7 @@ export interface ParseNumber {
 export interface PeriodToMonths {
   operator: 'PERIOD_TO_MONTHS';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -1314,7 +1386,7 @@ export interface PeriodToMonths {
 export interface PeriodToWeeks {
   operator: 'PERIOD_TO_WEEKS';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -1324,7 +1396,7 @@ export interface PeriodToWeeks {
 export interface PipelineProbability {
   operator: 'PIPELINE_PROBABILITY';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -1334,7 +1406,7 @@ export interface PipelineProbability {
 export interface Power {
   operator: 'POWER';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -1821,77 +1893,7 @@ export interface PropertyDefinition {
    */
   property: Shared.Property;
 
-  calculationExpression?:
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | AddTime
-    | SubtractTime;
+  calculationExpression?: Expression;
 
   calculationFormula?: string;
 
@@ -1945,77 +1947,7 @@ export interface RollupExpression {
 
   sourcePropertyName: string;
 
-  conditionalExpression?:
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | AddTime
-    | SubtractTime;
+  conditionalExpression?: Expression;
 
   conditionalFormula?: string;
 
@@ -2027,7 +1959,7 @@ export interface RollupExpression {
 export interface RoundDownNumbers {
   operator: 'ROUND_DOWN';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -2037,7 +1969,7 @@ export interface RoundDownNumbers {
 export interface RoundNearestNumbers {
   operator: 'ROUND_NEAREST';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -2047,7 +1979,7 @@ export interface RoundNearestNumbers {
 export interface RoundUpNumbers {
   operator: 'ROUND_UP';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -2065,9 +1997,9 @@ export interface ScopeMapping {
 export interface SetContainsString {
   operator: 'SET_CONTAINS_STRING';
 
-  stringToCheck: unknown;
+  stringToCheck: Expression;
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -2081,7 +2013,7 @@ export interface SoftRequiredPropertiesExtensionData {
 export interface SquareRoot {
   operator: 'SQUARE_ROOT';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -2091,7 +2023,7 @@ export interface SquareRoot {
 export interface StringEquals {
   operator: 'STRING_EQUALS';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -2101,7 +2033,7 @@ export interface StringEquals {
 export interface StringLength {
   operator: 'STRING_LENGTH';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -2111,7 +2043,7 @@ export interface StringLength {
 export interface StringPropertyVariable {
   operator: 'STRING_PROPERTY_VARIABLE';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -2121,7 +2053,7 @@ export interface StringPropertyVariable {
 export interface StringTargetPropertyVariable {
   operator: 'STRING_TARGET_PROPERTY_VARIABLE';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -2131,9 +2063,9 @@ export interface StringTargetPropertyVariable {
 export interface Substring {
   operator: 'SUBSTRING';
 
-  stringToCheck: unknown;
+  stringToCheck: Expression;
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -2145,7 +2077,7 @@ export interface SubtractNumbers {
 
   operator: 'SUBTRACT_NUMBERS';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -2155,9 +2087,9 @@ export interface SubtractNumbers {
 export interface SubtractTime {
   operator: 'SUBTRACT_TIME';
 
-  stringToCheck: unknown;
+  stringToCheck: Expression;
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -2167,7 +2099,7 @@ export interface SubtractTime {
 export interface TimeBetween {
   operator: 'TIME_BETWEEN';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -2177,7 +2109,7 @@ export interface TimeBetween {
 export interface TimestampOfPropertyVariable {
   operator: 'TIMESTAMP_OF_PROPERTY_VARIABLE';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -2187,7 +2119,7 @@ export interface TimestampOfPropertyVariable {
 export interface TimestampOfTargetPropertyVariable {
   operator: 'TIMESTAMP_OF_TARGET_PROPERTY_VARIABLE';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -2197,7 +2129,7 @@ export interface TimestampOfTargetPropertyVariable {
 export interface UpperCase {
   operator: 'UPPER_CASE';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -2209,7 +2141,7 @@ export interface Xor {
 
   operator: 'XOR';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -2219,7 +2151,7 @@ export interface Xor {
 export interface Year {
   operator: 'YEAR';
 
-  inputs?: Array<unknown>;
+  inputs?: Array<Expression>;
 
   propertyName?: string;
 
@@ -2263,6 +2195,7 @@ export declare namespace MediaBridge {
     type Euler as Euler,
     type EventVisibilityChange as EventVisibilityChange,
     type EventVisibilityResponse as EventVisibilityResponse,
+    type Expression as Expression,
     type ExtensionData as ExtensionData,
     type ExternalOptionsMetaData as ExternalOptionsMetaData,
     type ExtractMostRecentEmailReplyHTML as ExtractMostRecentEmailReplyHTML,

@@ -637,6 +637,7 @@ Types:
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">Euler</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">EventVisibilityChange</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">EventVisibilityResponse</a></code>
+- <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">Expression</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">ExtensionData</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">ExternalOptionsMetaData</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">ExtractMostRecentEmailReplyHTML</a></code>
