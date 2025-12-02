@@ -434,7 +434,7 @@ describe('instantiate client', () => {
 
   test('multiple auth schemes validation', () => {
     expect(() => {
-      new HubSpot({
+      new Hubspot({
         accessToken: 'token',
         developerAPIKey: 'key',
       });
