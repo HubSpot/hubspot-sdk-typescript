@@ -35,8 +35,6 @@ export {
   type CollectionResponseWithTotalBlogPostForwardPaging,
   type CollectionResponseWithTotalVersionBlogPost,
   type ContentLanguageVariation,
-  type Margin,
-  type Padding,
   type VersionBlogPost,
   type PostCreateParams,
   type PostUpdateParams,

@@ -1844,10 +1844,6 @@ export interface ContentLanguageVariation {
   tagIds?: Array<number>;
 }
 
-export type Margin = unknown;
-
-export type Padding = unknown;
-
 /**
  * Model definition of a version of a blog post.
  */
@@ -5369,8 +5365,6 @@ export declare namespace Posts {
     type CollectionResponseWithTotalBlogPostForwardPaging as CollectionResponseWithTotalBlogPostForwardPaging,
     type CollectionResponseWithTotalVersionBlogPost as CollectionResponseWithTotalVersionBlogPost,
     type ContentLanguageVariation as ContentLanguageVariation,
-    type Margin as Margin,
-    type Padding as Padding,
     type VersionBlogPost as VersionBlogPost,
     type BlogPostsPage as BlogPostsPage,
     type VersionBlogPostsPage as VersionBlogPostsPage,
