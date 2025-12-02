@@ -4,6 +4,7 @@ Types:
 
 - <code><a href="./src/resources/shared.ts">AbTestCreateRequestVNext</a></code>
 - <code><a href="./src/resources/shared.ts">ActionResponse</a></code>
+- <code><a href="./src/resources/shared.ts">APIError</a></code>
 - <code><a href="./src/resources/shared.ts">AssociationDefinition</a></code>
 - <code><a href="./src/resources/shared.ts">AssociationDefinitionEgg</a></code>
 - <code><a href="./src/resources/shared.ts">AssociationSpec</a></code>
@@ -14,7 +15,6 @@ Types:
 - <code><a href="./src/resources/shared.ts">BatchInputString</a></code>
 - <code><a href="./src/resources/shared.ts">BatchReadInputPropertyName</a></code>
 - <code><a href="./src/resources/shared.ts">BatchResponseProperty</a></code>
-- <code><a href="./src/resources/shared.ts">Error</a></code>
 - <code><a href="./src/resources/shared.ts">ErrorDetail</a></code>
 - <code><a href="./src/resources/shared.ts">ForwardPaging</a></code>
 - <code><a href="./src/resources/shared.ts">HubDBTableRowV3Wrapper</a></code>
@@ -2608,21 +2608,21 @@ Types:
 - <code><a href="./src/resources/files/files.ts">ImportFromURLTaskLocator</a></code>
 - <code><a href="./src/resources/files/files.ts">SignedURL</a></code>
 
-## Files
+## FileOperations
 
 Methods:
 
-- <code title="patch /files/v3/files/{fileId}">client.files.files.<a href="./src/resources/files/files_.ts">update</a>(fileID, { ...params }) -> File</code>
-- <code title="delete /files/v3/files/{fileId}">client.files.files.<a href="./src/resources/files/files_.ts">delete</a>(fileID) -> void</code>
-- <code title="delete /files/v3/files/{fileId}/gdpr-delete">client.files.files.<a href="./src/resources/files/files_.ts">gdprDelete</a>(fileID) -> void</code>
-- <code title="get /files/v3/files/{fileId}">client.files.files.<a href="./src/resources/files/files_.ts">get</a>(fileID, { ...params }) -> File</code>
-- <code title="get /files/v3/files/stat/{path}">client.files.files.<a href="./src/resources/files/files_.ts">getByPath</a>(path\_, { ...params }) -> FileStat</code>
-- <code title="get /files/v3/files/import-from-url/async/tasks/{taskId}/status">client.files.files.<a href="./src/resources/files/files_.ts">getImportTaskStatus</a>(taskID) -> FileActionResponse</code>
-- <code title="get /files/v3/files/{fileId}/signed-url">client.files.files.<a href="./src/resources/files/files_.ts">getSignedURL</a>(fileID, { ...params }) -> SignedURL</code>
-- <code title="post /files/v3/files/import-from-url/async">client.files.files.<a href="./src/resources/files/files_.ts">importFromURLAsync</a>({ ...params }) -> ImportFromURLTaskLocator</code>
-- <code title="put /files/v3/files/{fileId}">client.files.files.<a href="./src/resources/files/files_.ts">replace</a>(fileID, { ...params }) -> File</code>
-- <code title="get /files/v3/files/search">client.files.files.<a href="./src/resources/files/files_.ts">search</a>({ ...params }) -> FilesPage</code>
-- <code title="post /files/v3/files">client.files.files.<a href="./src/resources/files/files_.ts">upload</a>({ ...params }) -> File</code>
+- <code title="patch /files/v3/files/{fileId}">client.files.fileOperations.<a href="./src/resources/files/file-operations.ts">update</a>(fileID, { ...params }) -> File</code>
+- <code title="delete /files/v3/files/{fileId}">client.files.fileOperations.<a href="./src/resources/files/file-operations.ts">delete</a>(fileID) -> void</code>
+- <code title="delete /files/v3/files/{fileId}/gdpr-delete">client.files.fileOperations.<a href="./src/resources/files/file-operations.ts">gdprDelete</a>(fileID) -> void</code>
+- <code title="get /files/v3/files/{fileId}">client.files.fileOperations.<a href="./src/resources/files/file-operations.ts">get</a>(fileID, { ...params }) -> File</code>
+- <code title="get /files/v3/files/stat/{path}">client.files.fileOperations.<a href="./src/resources/files/file-operations.ts">getByPath</a>(path\_, { ...params }) -> FileStat</code>
+- <code title="get /files/v3/files/import-from-url/async/tasks/{taskId}/status">client.files.fileOperations.<a href="./src/resources/files/file-operations.ts">getImportTaskStatus</a>(taskID) -> FileActionResponse</code>
+- <code title="get /files/v3/files/{fileId}/signed-url">client.files.fileOperations.<a href="./src/resources/files/file-operations.ts">getSignedURL</a>(fileID, { ...params }) -> SignedURL</code>
+- <code title="post /files/v3/files/import-from-url/async">client.files.fileOperations.<a href="./src/resources/files/file-operations.ts">importFromURLAsync</a>({ ...params }) -> ImportFromURLTaskLocator</code>
+- <code title="put /files/v3/files/{fileId}">client.files.fileOperations.<a href="./src/resources/files/file-operations.ts">replace</a>(fileID, { ...params }) -> File</code>
+- <code title="get /files/v3/files/search">client.files.fileOperations.<a href="./src/resources/files/file-operations.ts">search</a>({ ...params }) -> FilesPage</code>
+- <code title="post /files/v3/files">client.files.fileOperations.<a href="./src/resources/files/file-operations.ts">upload</a>({ ...params }) -> File</code>
 
 ## Folders
 

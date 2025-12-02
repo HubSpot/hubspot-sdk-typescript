@@ -1,5 +1,16 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+export {
+  FileOperations,
+  type FileOperationUpdateParams,
+  type FileOperationGetParams,
+  type FileOperationGetByPathParams,
+  type FileOperationGetSignedURLParams,
+  type FileOperationImportFromURLAsyncParams,
+  type FileOperationReplaceParams,
+  type FileOperationSearchParams,
+  type FileOperationUploadParams,
+} from './file-operations';
 export { Files } from './files';
 export {
   Folders,
@@ -10,13 +21,3 @@ export {
   type FolderUpdateAsyncByIDParams,
   type FolderUpdateByIDParams,
 } from './folders';
-export {
-  type FileUpdateParams,
-  type FileGetParams,
-  type FileGetByPathParams,
-  type FileGetSignedURLParams,
-  type FileImportFromURLAsyncParams,
-  type FileReplaceParams,
-  type FileSearchParams,
-  type FileUploadParams,
-} from './files_';

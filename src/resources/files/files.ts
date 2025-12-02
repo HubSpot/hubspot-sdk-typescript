@@ -2,18 +2,18 @@
 
 import { APIResource } from '../../core/resource';
 import * as Shared from '../shared';
-import * as FilesFilesAPI from './files_';
+import * as FileOperationsAPI from './file-operations';
 import {
-  FileGetByPathParams,
-  FileGetParams,
-  FileGetSignedURLParams,
-  FileImportFromURLAsyncParams,
-  FileReplaceParams,
-  FileSearchParams,
-  FileUpdateParams,
-  FileUploadParams,
-  Files as FilesAPIFiles,
-} from './files_';
+  FileOperationGetByPathParams,
+  FileOperationGetParams,
+  FileOperationGetSignedURLParams,
+  FileOperationImportFromURLAsyncParams,
+  FileOperationReplaceParams,
+  FileOperationSearchParams,
+  FileOperationUpdateParams,
+  FileOperationUploadParams,
+  FileOperations,
+} from './file-operations';
 import * as FoldersAPI from './folders';
 import {
   FolderCreateParams,
@@ -27,7 +27,7 @@ import {
 import { Page } from '../../core/pagination';
 
 export class Files extends APIResource {
-  files: FilesFilesAPI.Files = new FilesFilesAPI.Files(this._client);
+  fileOperations: FileOperationsAPI.FileOperations = new FileOperationsAPI.FileOperations(this._client);
   folders: FoldersAPI.Folders = new FoldersAPI.Folders(this._client);
 }
 
@@ -567,7 +567,7 @@ export interface SignedURL {
   width?: number;
 }
 
-Files.Files = FilesAPIFiles;
+Files.FileOperations = FileOperations;
 Files.Folders = Folders;
 
 export declare namespace Files {
@@ -590,15 +590,15 @@ export declare namespace Files {
   };
 
   export {
-    FilesAPIFiles as Files,
-    type FileUpdateParams as FileUpdateParams,
-    type FileGetParams as FileGetParams,
-    type FileGetByPathParams as FileGetByPathParams,
-    type FileGetSignedURLParams as FileGetSignedURLParams,
-    type FileImportFromURLAsyncParams as FileImportFromURLAsyncParams,
-    type FileReplaceParams as FileReplaceParams,
-    type FileSearchParams as FileSearchParams,
-    type FileUploadParams as FileUploadParams,
+    FileOperations as FileOperations,
+    type FileOperationUpdateParams as FileOperationUpdateParams,
+    type FileOperationGetParams as FileOperationGetParams,
+    type FileOperationGetByPathParams as FileOperationGetByPathParams,
+    type FileOperationGetSignedURLParams as FileOperationGetSignedURLParams,
+    type FileOperationImportFromURLAsyncParams as FileOperationImportFromURLAsyncParams,
+    type FileOperationReplaceParams as FileOperationReplaceParams,
+    type FileOperationSearchParams as FileOperationSearchParams,
+    type FileOperationUploadParams as FileOperationUploadParams,
   };
 
   export {

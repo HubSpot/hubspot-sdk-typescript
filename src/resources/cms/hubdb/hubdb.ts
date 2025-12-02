@@ -553,7 +553,7 @@ export interface ImportResult {
   /**
    * List of errors during import
    */
-  errors: Array<Shared.Error>;
+  errors: Array<Shared.APIError>;
 
   /**
    * Specifies whether row limit exceeded during import
@@ -657,7 +657,7 @@ export type UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3 =
   | RandomAccessCollectionResponseWithTotalHubDBTableRowV3
   | StreamingCollectionResponseWithTotalHubDBTableRowV3;
 
-export type Variant = unknown;
+export interface Variant {}
 
 Hubdb.Rows = Rows;
 Hubdb.Tables = Tables;

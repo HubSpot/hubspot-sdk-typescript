@@ -822,6 +822,7 @@ export declare namespace Hubspot {
 
   export type AbTestCreateRequestVNext = API.AbTestCreateRequestVNext;
   export type ActionResponse = API.ActionResponse;
+  export type APIError = API.APIError;
   export type AssociationDefinition = API.AssociationDefinition;
   export type AssociationDefinitionEgg = API.AssociationDefinitionEgg;
   export type AssociationSpec = API.AssociationSpec;
@@ -832,7 +833,6 @@ export declare namespace Hubspot {
   export type BatchInputString = API.BatchInputString;
   export type BatchReadInputPropertyName = API.BatchReadInputPropertyName;
   export type BatchResponseProperty = API.BatchResponseProperty;
-  export type Error = API.Error;
   export type ErrorDetail = API.ErrorDetail;
   export type ForwardPaging = API.ForwardPaging;
   export type HubDBTableRowV3Wrapper = API.HubDBTableRowV3Wrapper;
