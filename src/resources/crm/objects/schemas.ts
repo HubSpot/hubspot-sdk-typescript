@@ -51,14 +51,13 @@ export class Schemas extends APIResource {
   /**
    * @example
    * ```ts
-   * const collectionResponseObjectSchemaNoPaging =
-   *   await client.crm.objects.schemas.list();
+   * const schemas = await client.crm.objects.schemas.list();
    * ```
    */
   list(
     query: SchemaListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<Shared.CollectionResponseObjectSchemaNoPaging> {
+  ): APIPromise<SchemaListResponse> {
     return this._client.get('/crm-object-schemas/v3/schemas', { query, ...options });
   }
 
@@ -468,6 +467,10 @@ export interface ObjectsSchemasObjectTypeDefinition {
   updatedAt?: string;
 }
 
+export interface SchemaListResponse {
+  results: Array<ObjectSchema>;
+}
+
 export interface SchemaCreateParams {
   /**
    * Associations defined for this object type.
@@ -583,6 +586,7 @@ export declare namespace Schemas {
     type ObjectTypeDefinitionPatch as ObjectTypeDefinitionPatch,
     type ObjectTypePropertyCreate as ObjectTypePropertyCreate,
     type ObjectsSchemasObjectTypeDefinition as ObjectsSchemasObjectTypeDefinition,
+    type SchemaListResponse as SchemaListResponse,
     type SchemaCreateParams as SchemaCreateParams,
     type SchemaUpdateParams as SchemaUpdateParams,
     type SchemaListParams as SchemaListParams,

@@ -832,7 +832,6 @@ export declare namespace Hubspot {
   export type BatchInputString = API.BatchInputString;
   export type BatchReadInputPropertyName = API.BatchReadInputPropertyName;
   export type BatchResponseProperty = API.BatchResponseProperty;
-  export type CollectionResponseObjectSchemaNoPaging = API.CollectionResponseObjectSchemaNoPaging;
   export type Error = API.Error;
   export type ErrorDetail = API.ErrorDetail;
   export type ForwardPaging = API.ForwardPaging;

@@ -1,6 +1,5 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as SchemasAPI from './crm/objects/schemas';
 import { Page } from '../core/pagination';
 
 /**
@@ -169,10 +168,6 @@ export interface BatchResponseProperty {
   links?: { [key: string]: string };
 
   requestedAt?: string;
-}
-
-export interface CollectionResponseObjectSchemaNoPaging {
-  results: Array<SchemasAPI.ObjectSchema>;
 }
 
 export interface Error {

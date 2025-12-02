@@ -247,6 +247,7 @@ export {
   type ObjectTypeDefinitionPatch,
   type ObjectTypePropertyCreate,
   type ObjectsSchemasObjectTypeDefinition,
+  type SchemaListResponse,
   type SchemaCreateParams,
   type SchemaUpdateParams,
   type SchemaListParams,

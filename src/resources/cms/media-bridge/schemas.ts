@@ -36,15 +36,16 @@ export class Schemas extends APIResource {
    *
    * @example
    * ```ts
-   * const collectionResponseObjectSchemaNoPaging =
-   *   await client.cms.mediaBridge.schemas.list(0);
+   * const schemas = await client.cms.mediaBridge.schemas.list(
+   *   0,
+   * );
    * ```
    */
   list(
     appID: number,
     query: SchemaListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<Shared.CollectionResponseObjectSchemaNoPaging> {
+  ): APIPromise<SchemaListResponse> {
     return this._client.get(path`/media-bridge/v1/${appID}/schemas`, { query, ...options });
   }
 
@@ -118,6 +119,10 @@ export class Schemas extends APIResource {
     const { appId } = params;
     return this._client.get(path`/media-bridge/v1/${appId}/schemas/${objectType}`, options);
   }
+}
+
+export interface SchemaListResponse {
+  results: Array<ObjectsSchemasAPI.ObjectSchema>;
 }
 
 export interface SchemaUpdateParams {
@@ -225,6 +230,7 @@ export interface SchemaGetParams {
 
 export declare namespace Schemas {
   export {
+    type SchemaListResponse as SchemaListResponse,
     type SchemaUpdateParams as SchemaUpdateParams,
     type SchemaListParams as SchemaListParams,
     type SchemaCreateAssociationParams as SchemaCreateAssociationParams,

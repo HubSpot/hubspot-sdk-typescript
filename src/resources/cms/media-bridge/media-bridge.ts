@@ -51,6 +51,7 @@ import {
   SchemaDeleteAssociationParams,
   SchemaGetParams,
   SchemaListParams,
+  SchemaListResponse,
   SchemaUpdateParams,
   Schemas,
 } from './schemas';
@@ -2332,6 +2333,7 @@ export declare namespace MediaBridge {
 
   export {
     Schemas as Schemas,
+    type SchemaListResponse as SchemaListResponse,
     type SchemaUpdateParams as SchemaUpdateParams,
     type SchemaListParams as SchemaListParams,
     type SchemaCreateAssociationParams as SchemaCreateAssociationParams,
