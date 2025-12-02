@@ -911,14 +911,14 @@ Types:
 
 Methods:
 
-- <code title="post /cms/v3/source-code/{environment}/content/{path}">client.cms.sourceCode.<a href="./src/resources/cms/source-code.ts">create</a>(path\_, { ...params }) -> AssetFileMetadata</code>
-- <code title="delete /cms/v3/source-code/{environment}/content/{path}">client.cms.sourceCode.<a href="./src/resources/cms/source-code.ts">delete</a>(path\_, { ...params }) -> void</code>
+- <code title="post /cms/v3/source-code/{environment}/content/{path}">client.cms.sourceCode.<a href="./src/resources/cms/source-code.ts">create</a>(filePath, { ...params }) -> AssetFileMetadata</code>
+- <code title="delete /cms/v3/source-code/{environment}/content/{path}">client.cms.sourceCode.<a href="./src/resources/cms/source-code.ts">delete</a>(filePath, { ...params }) -> void</code>
 - <code title="post /cms/v3/source-code/extract/async">client.cms.sourceCode.<a href="./src/resources/cms/source-code.ts">extractAsync</a>({ ...params }) -> TaskLocator</code>
-- <code title="get /cms/v3/source-code/{environment}/content/{path}">client.cms.sourceCode.<a href="./src/resources/cms/source-code.ts">get</a>(path\_, { ...params }) -> Response</code>
+- <code title="get /cms/v3/source-code/{environment}/content/{path}">client.cms.sourceCode.<a href="./src/resources/cms/source-code.ts">get</a>(filePath, { ...params }) -> Response</code>
 - <code title="get /cms/v3/source-code/extract/async/tasks/{taskId}/status">client.cms.sourceCode.<a href="./src/resources/cms/source-code.ts">getExtractionStatus</a>(taskID) -> ActionResponse</code>
-- <code title="get /cms/v3/source-code/{environment}/metadata/{path}">client.cms.sourceCode.<a href="./src/resources/cms/source-code.ts">getMetadata</a>(path\_, { ...params }) -> AssetFileMetadata</code>
-- <code title="put /cms/v3/source-code/{environment}/content/{path}">client.cms.sourceCode.<a href="./src/resources/cms/source-code.ts">upsert</a>(path\_, { ...params }) -> AssetFileMetadata</code>
-- <code title="post /cms/v3/source-code/{environment}/validate/{path}">client.cms.sourceCode.<a href="./src/resources/cms/source-code.ts">validate</a>(path\_, { ...params }) -> Response</code>
+- <code title="get /cms/v3/source-code/{environment}/metadata/{path}">client.cms.sourceCode.<a href="./src/resources/cms/source-code.ts">getMetadata</a>(filePath, { ...params }) -> AssetFileMetadata</code>
+- <code title="put /cms/v3/source-code/{environment}/content/{path}">client.cms.sourceCode.<a href="./src/resources/cms/source-code.ts">upsert</a>(filePath, { ...params }) -> AssetFileMetadata</code>
+- <code title="post /cms/v3/source-code/{environment}/validate/{path}">client.cms.sourceCode.<a href="./src/resources/cms/source-code.ts">validate</a>(filePath, { ...params }) -> Response</code>
 
 ## URLRedirects
 
@@ -2616,7 +2616,7 @@ Methods:
 - <code title="delete /files/v3/files/{fileId}">client.files.fileOperations.<a href="./src/resources/files/file-operations.ts">delete</a>(fileID) -> void</code>
 - <code title="delete /files/v3/files/{fileId}/gdpr-delete">client.files.fileOperations.<a href="./src/resources/files/file-operations.ts">gdprDelete</a>(fileID) -> void</code>
 - <code title="get /files/v3/files/{fileId}">client.files.fileOperations.<a href="./src/resources/files/file-operations.ts">get</a>(fileID, { ...params }) -> File</code>
-- <code title="get /files/v3/files/stat/{path}">client.files.fileOperations.<a href="./src/resources/files/file-operations.ts">getByPath</a>(path\_, { ...params }) -> FileStat</code>
+- <code title="get /files/v3/files/stat/{path}">client.files.fileOperations.<a href="./src/resources/files/file-operations.ts">getByPath</a>(filePath, { ...params }) -> FileStat</code>
 - <code title="get /files/v3/files/import-from-url/async/tasks/{taskId}/status">client.files.fileOperations.<a href="./src/resources/files/file-operations.ts">getImportTaskStatus</a>(taskID) -> FileActionResponse</code>
 - <code title="get /files/v3/files/{fileId}/signed-url">client.files.fileOperations.<a href="./src/resources/files/file-operations.ts">getSignedURL</a>(fileID, { ...params }) -> SignedURL</code>
 - <code title="post /files/v3/files/import-from-url/async">client.files.fileOperations.<a href="./src/resources/files/file-operations.ts">importFromURLAsync</a>({ ...params }) -> ImportFromURLTaskLocator</code>

@@ -70,7 +70,7 @@ describe('resource fileOperations', () => {
 
   // Prism tests are disabled
   test.skip('getByPath', async () => {
-    const responsePromise = client.files.fileOperations.getByPath('path');
+    const responsePromise = client.files.fileOperations.getByPath('file_path');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -85,7 +85,7 @@ describe('resource fileOperations', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.files.fileOperations.getByPath(
-        'path',
+        'file_path',
         { properties: ['string'] },
         { path: '/_stainless_unknown_path' },
       ),

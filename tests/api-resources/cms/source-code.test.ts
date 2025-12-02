@@ -10,7 +10,7 @@ const client = new Hubspot({
 describe('resource sourceCode', () => {
   // Prism tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.cms.sourceCode.create('path', { environment: 'environment' });
+    const responsePromise = client.cms.sourceCode.create('file_path', { environment: 'environment' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,7 +22,7 @@ describe('resource sourceCode', () => {
 
   // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
-    const response = await client.cms.sourceCode.create('path', {
+    const response = await client.cms.sourceCode.create('file_path', {
       environment: 'environment',
       file: await toFile(Buffer.from('# my file contents'), 'README.md'),
     });
@@ -30,7 +30,7 @@ describe('resource sourceCode', () => {
 
   // Prism tests are disabled
   test.skip('delete: only required params', async () => {
-    const responsePromise = client.cms.sourceCode.delete('path', { environment: 'environment' });
+    const responsePromise = client.cms.sourceCode.delete('file_path', { environment: 'environment' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -42,7 +42,7 @@ describe('resource sourceCode', () => {
 
   // Prism tests are disabled
   test.skip('delete: required and optional params', async () => {
-    const response = await client.cms.sourceCode.delete('path', { environment: 'environment' });
+    const response = await client.cms.sourceCode.delete('file_path', { environment: 'environment' });
   });
 
   // Prism tests are disabled
@@ -63,7 +63,7 @@ describe('resource sourceCode', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.cms.sourceCode.get('path', { environment: 'environment' });
+    const response = await client.cms.sourceCode.get('file_path', { environment: 'environment' });
   });
 
   // Prism tests are disabled
@@ -80,7 +80,7 @@ describe('resource sourceCode', () => {
 
   // Prism tests are disabled
   test.skip('getMetadata: only required params', async () => {
-    const responsePromise = client.cms.sourceCode.getMetadata('path', { environment: 'environment' });
+    const responsePromise = client.cms.sourceCode.getMetadata('file_path', { environment: 'environment' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -92,7 +92,7 @@ describe('resource sourceCode', () => {
 
   // Prism tests are disabled
   test.skip('getMetadata: required and optional params', async () => {
-    const response = await client.cms.sourceCode.getMetadata('path', {
+    const response = await client.cms.sourceCode.getMetadata('file_path', {
       environment: 'environment',
       properties: 'properties',
     });
@@ -100,7 +100,7 @@ describe('resource sourceCode', () => {
 
   // Prism tests are disabled
   test.skip('upsert: only required params', async () => {
-    const responsePromise = client.cms.sourceCode.upsert('path', { environment: 'environment' });
+    const responsePromise = client.cms.sourceCode.upsert('file_path', { environment: 'environment' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -112,14 +112,14 @@ describe('resource sourceCode', () => {
 
   // Prism tests are disabled
   test.skip('upsert: required and optional params', async () => {
-    const response = await client.cms.sourceCode.upsert('path', {
+    const response = await client.cms.sourceCode.upsert('file_path', {
       environment: 'environment',
       file: await toFile(Buffer.from('# my file contents'), 'README.md'),
     });
   });
 
   test('validate: required and optional params', async () => {
-    const response = await client.cms.sourceCode.validate('path', {
+    const response = await client.cms.sourceCode.validate('file_path', {
       environment: 'environment',
       file: await toFile(Buffer.from('# my file contents'), 'README.md'),
     });

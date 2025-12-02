@@ -18,13 +18,13 @@ export class SourceCode extends APIResource {
    * @deprecated
    */
   create(
-    path_: string,
+    filePath: string,
     params: SourceCodeCreateParams,
     options?: RequestOptions,
   ): APIPromise<AssetFileMetadata> {
     const { environment, ...body } = params;
     return this._client.post(
-      path`/cms/v3/source-code/${environment}/content/${path_}`,
+      path`/cms/v3/source-code/${environment}/content/${filePath}`,
       multipartFormRequestOptions({ body, ...options }, this._client),
     );
   }
@@ -34,14 +34,14 @@ export class SourceCode extends APIResource {
    *
    * @example
    * ```ts
-   * await client.cms.sourceCode.delete('path', {
+   * await client.cms.sourceCode.delete('file_path', {
    *   environment: 'environment',
    * });
    * ```
    */
-  delete(path_: string, params: SourceCodeDeleteParams, options?: RequestOptions): APIPromise<void> {
+  delete(filePath: string, params: SourceCodeDeleteParams, options?: RequestOptions): APIPromise<void> {
     const { environment } = params;
-    return this._client.delete(path`/cms/v3/source-code/${environment}/content/${path_}`, {
+    return this._client.delete(path`/cms/v3/source-code/${environment}/content/${filePath}`, {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
@@ -69,17 +69,18 @@ export class SourceCode extends APIResource {
    *
    * @example
    * ```ts
-   * const sourceCode = await client.cms.sourceCode.get('path', {
-   *   environment: 'environment',
-   * });
+   * const sourceCode = await client.cms.sourceCode.get(
+   *   'file_path',
+   *   { environment: 'environment' },
+   * );
    *
    * const content = await sourceCode.blob();
    * console.log(content);
    * ```
    */
-  get(path_: string, params: SourceCodeGetParams, options?: RequestOptions): APIPromise<Response> {
+  get(filePath: string, params: SourceCodeGetParams, options?: RequestOptions): APIPromise<Response> {
     const { environment } = params;
-    return this._client.get(path`/cms/v3/source-code/${environment}/content/${path_}`, {
+    return this._client.get(path`/cms/v3/source-code/${environment}/content/${filePath}`, {
       ...options,
       headers: buildHeaders([{ Accept: 'application/octet-stream' }, options?.headers]),
       __binaryResponse: true,
@@ -107,18 +108,18 @@ export class SourceCode extends APIResource {
    * @example
    * ```ts
    * const assetFileMetadata =
-   *   await client.cms.sourceCode.getMetadata('path', {
+   *   await client.cms.sourceCode.getMetadata('file_path', {
    *     environment: 'environment',
    *   });
    * ```
    */
   getMetadata(
-    path_: string,
+    filePath: string,
     params: SourceCodeGetMetadataParams,
     options?: RequestOptions,
   ): APIPromise<AssetFileMetadata> {
     const { environment, ...query } = params;
-    return this._client.get(path`/cms/v3/source-code/${environment}/metadata/${path_}`, {
+    return this._client.get(path`/cms/v3/source-code/${environment}/metadata/${filePath}`, {
       query,
       ...options,
     });
@@ -131,19 +132,19 @@ export class SourceCode extends APIResource {
    * @example
    * ```ts
    * const assetFileMetadata =
-   *   await client.cms.sourceCode.upsert('path', {
+   *   await client.cms.sourceCode.upsert('file_path', {
    *     environment: 'environment',
    *   });
    * ```
    */
   upsert(
-    path_: string,
+    filePath: string,
     params: SourceCodeUpsertParams,
     options?: RequestOptions,
   ): APIPromise<AssetFileMetadata> {
     const { environment, ...body } = params;
     return this._client.put(
-      path`/cms/v3/source-code/${environment}/content/${path_}`,
+      path`/cms/v3/source-code/${environment}/content/${filePath}`,
       multipartFormRequestOptions({ body, ...options }, this._client),
     );
   }
@@ -155,7 +156,7 @@ export class SourceCode extends APIResource {
    * @example
    * ```ts
    * const response = await client.cms.sourceCode.validate(
-   *   'path',
+   *   'file_path',
    *   { environment: 'environment' },
    * );
    *
@@ -163,10 +164,14 @@ export class SourceCode extends APIResource {
    * console.log(content);
    * ```
    */
-  validate(path_: string, params: SourceCodeValidateParams, options?: RequestOptions): APIPromise<Response> {
+  validate(
+    filePath: string,
+    params: SourceCodeValidateParams,
+    options?: RequestOptions,
+  ): APIPromise<Response> {
     const { environment, ...body } = params;
     return this._client.post(
-      path`/cms/v3/source-code/${environment}/validate/${path_}`,
+      path`/cms/v3/source-code/${environment}/validate/${filePath}`,
       multipartFormRequestOptions(
         {
           body,
