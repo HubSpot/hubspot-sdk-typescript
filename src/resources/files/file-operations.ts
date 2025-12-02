@@ -11,18 +11,22 @@ import { RequestOptions } from '../../internal/request-options';
 import { multipartFormRequestOptions } from '../../internal/uploads';
 import { path } from '../../internal/utils/path';
 
-export class Files extends APIResource {
+export class FileOperations extends APIResource {
   /**
    * Update properties of file by ID.
    *
    * @example
    * ```ts
-   * const file = await client.files.files.update(
+   * const file = await client.files.fileOperations.update(
    *   '321669910225',
    * );
    * ```
    */
-  update(fileID: string, body: FileUpdateParams, options?: RequestOptions): APIPromise<FilesAPI.File> {
+  update(
+    fileID: string,
+    body: FileOperationUpdateParams,
+    options?: RequestOptions,
+  ): APIPromise<FilesAPI.File> {
     return this._client.patch(path`/files/v3/files/${fileID}`, { body, ...options });
   }
 
@@ -31,7 +35,7 @@ export class Files extends APIResource {
    *
    * @example
    * ```ts
-   * await client.files.files.delete('321669910225');
+   * await client.files.fileOperations.delete('321669910225');
    * ```
    */
   delete(fileID: string, options?: RequestOptions): APIPromise<void> {
@@ -46,7 +50,9 @@ export class Files extends APIResource {
    *
    * @example
    * ```ts
-   * await client.files.files.gdprDelete('321669910225');
+   * await client.files.fileOperations.gdprDelete(
+   *   '321669910225',
+   * );
    * ```
    */
   gdprDelete(fileID: string, options?: RequestOptions): APIPromise<void> {
@@ -61,12 +67,14 @@ export class Files extends APIResource {
    *
    * @example
    * ```ts
-   * const file = await client.files.files.get('321669910225');
+   * const file = await client.files.fileOperations.get(
+   *   '321669910225',
+   * );
    * ```
    */
   get(
     fileID: string,
-    query: FileGetParams | null | undefined = {},
+    query: FileOperationGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<FilesAPI.File> {
     return this._client.get(path`/files/v3/files/${fileID}`, { query, ...options });
@@ -77,12 +85,13 @@ export class Files extends APIResource {
    *
    * @example
    * ```ts
-   * const fileStat = await client.files.files.getByPath('path');
+   * const fileStat =
+   *   await client.files.fileOperations.getByPath('path');
    * ```
    */
   getByPath(
     path_: string,
-    query: FileGetByPathParams | null | undefined = {},
+    query: FileOperationGetByPathParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<FilesAPI.FileStat> {
     return this._client.get(path`/files/v3/files/stat/${path_}`, { query, ...options });
@@ -94,7 +103,9 @@ export class Files extends APIResource {
    * @example
    * ```ts
    * const fileActionResponse =
-   *   await client.files.files.getImportTaskStatus('taskId');
+   *   await client.files.fileOperations.getImportTaskStatus(
+   *     'taskId',
+   *   );
    * ```
    */
   getImportTaskStatus(taskID: string, options?: RequestOptions): APIPromise<FilesAPI.FileActionResponse> {
@@ -106,14 +117,15 @@ export class Files extends APIResource {
    *
    * @example
    * ```ts
-   * const signedURL = await client.files.files.getSignedURL(
-   *   '321669910225',
-   * );
+   * const signedURL =
+   *   await client.files.fileOperations.getSignedURL(
+   *     '321669910225',
+   *   );
    * ```
    */
   getSignedURL(
     fileID: string,
-    query: FileGetSignedURLParams | null | undefined = {},
+    query: FileOperationGetSignedURLParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<FilesAPI.SignedURL> {
     return this._client.get(path`/files/v3/files/${fileID}/signed-url`, { query, ...options });
@@ -125,14 +137,14 @@ export class Files extends APIResource {
    * @example
    * ```ts
    * const importFromURLTaskLocator =
-   *   await client.files.files.importFromURLAsync({
+   *   await client.files.fileOperations.importFromURLAsync({
    *     access: 'HIDDEN_INDEXABLE',
    *     url: 'url',
    *   });
    * ```
    */
   importFromURLAsync(
-    body: FileImportFromURLAsyncParams,
+    body: FileOperationImportFromURLAsyncParams,
     options?: RequestOptions,
   ): APIPromise<FilesAPI.ImportFromURLTaskLocator> {
     return this._client.post('/files/v3/files/import-from-url/async', { body, ...options });
@@ -144,14 +156,14 @@ export class Files extends APIResource {
    *
    * @example
    * ```ts
-   * const file = await client.files.files.replace(
+   * const file = await client.files.fileOperations.replace(
    *   '321669910225',
    * );
    * ```
    */
   replace(
     fileID: string,
-    body: FileReplaceParams | null | undefined = {},
+    body: FileOperationReplaceParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<FilesAPI.File> {
     return this._client.put(
@@ -167,13 +179,13 @@ export class Files extends APIResource {
    * @example
    * ```ts
    * // Automatically fetches more pages as needed.
-   * for await (const file of client.files.files.search()) {
+   * for await (const file of client.files.fileOperations.search()) {
    *   // ...
    * }
    * ```
    */
   search(
-    query: FileSearchParams | null | undefined = {},
+    query: FileOperationSearchParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<FilesPage, FilesAPI.File> {
     return this._client.getAPIList('/files/v3/files/search', Page<FilesAPI.File>, { query, ...options });
@@ -184,11 +196,11 @@ export class Files extends APIResource {
    *
    * @example
    * ```ts
-   * const file = await client.files.files.upload();
+   * const file = await client.files.fileOperations.upload();
    * ```
    */
   upload(
-    body: FileUploadParams | null | undefined = {},
+    body: FileOperationUploadParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<FilesAPI.File> {
     return this._client.post(
@@ -198,7 +210,7 @@ export class Files extends APIResource {
   }
 }
 
-export interface FileUpdateParams {
+export interface FileOperationUpdateParams {
   /**
    * NONE: Do not run any duplicate validation. REJECT: Reject the upload if a
    * duplicate is found. RETURN_EXISTING: If a duplicate file is found, do not upload
@@ -241,18 +253,18 @@ export interface FileUpdateParams {
   parentFolderPath?: string;
 }
 
-export interface FileGetParams {
+export interface FileOperationGetParams {
   properties?: Array<string>;
 }
 
-export interface FileGetByPathParams {
+export interface FileOperationGetByPathParams {
   /**
    * Properties to return in the response.
    */
   properties?: Array<string>;
 }
 
-export interface FileGetSignedURLParams {
+export interface FileOperationGetSignedURLParams {
   /**
    * How long in seconds the link will provide access to the file.
    */
@@ -270,7 +282,7 @@ export interface FileGetSignedURLParams {
   upscale?: boolean;
 }
 
-export interface FileImportFromURLAsyncParams {
+export interface FileOperationImportFromURLAsyncParams {
   /**
    * PUBLIC_INDEXABLE: File is publicly accessible by anyone who has the URL. Search
    * engines can index the file. PUBLIC_NOT_INDEXABLE: File is publicly accessible by
@@ -345,7 +357,7 @@ export interface FileImportFromURLAsyncParams {
   ttl?: string;
 }
 
-export interface FileReplaceParams {
+export interface FileOperationReplaceParams {
   /**
    * Character set of given file data.
    */
@@ -364,7 +376,7 @@ export interface FileReplaceParams {
   options?: string;
 }
 
-export interface FileSearchParams extends PageParams {
+export interface FileOperationSearchParams extends PageParams {
   /**
    * Search files by access. If `true`, will show only public files. If `false`, will
    * show only private files.
@@ -541,7 +553,7 @@ export interface FileSearchParams extends PageParams {
   widthLte?: number;
 }
 
-export interface FileUploadParams {
+export interface FileOperationUploadParams {
   /**
    * Character set of the uploaded file.
    */
@@ -576,16 +588,16 @@ export interface FileUploadParams {
   options?: string;
 }
 
-export declare namespace Files {
+export declare namespace FileOperations {
   export {
-    type FileUpdateParams as FileUpdateParams,
-    type FileGetParams as FileGetParams,
-    type FileGetByPathParams as FileGetByPathParams,
-    type FileGetSignedURLParams as FileGetSignedURLParams,
-    type FileImportFromURLAsyncParams as FileImportFromURLAsyncParams,
-    type FileReplaceParams as FileReplaceParams,
-    type FileSearchParams as FileSearchParams,
-    type FileUploadParams as FileUploadParams,
+    type FileOperationUpdateParams as FileOperationUpdateParams,
+    type FileOperationGetParams as FileOperationGetParams,
+    type FileOperationGetByPathParams as FileOperationGetByPathParams,
+    type FileOperationGetSignedURLParams as FileOperationGetSignedURLParams,
+    type FileOperationImportFromURLAsyncParams as FileOperationImportFromURLAsyncParams,
+    type FileOperationReplaceParams as FileOperationReplaceParams,
+    type FileOperationSearchParams as FileOperationSearchParams,
+    type FileOperationUploadParams as FileOperationUploadParams,
   };
 }
 

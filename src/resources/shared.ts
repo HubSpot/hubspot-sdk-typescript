@@ -29,6 +29,46 @@ export interface ActionResponse {
   requestedAt?: string;
 }
 
+export interface APIError {
+  /**
+   * The error category.
+   */
+  category: string;
+
+  /**
+   * A unique identifier for the request. Include this value with any error reports
+   * or support tickets.
+   */
+  correlationId: string;
+
+  /**
+   * A human readable message describing the error along with remediation steps where
+   * appropriate.
+   */
+  message: string;
+
+  /**
+   * Context about the error condition.
+   */
+  context?: { [key: string]: Array<string> };
+
+  /**
+   * further information about the error
+   */
+  errors?: Array<ErrorDetail>;
+
+  /**
+   * A map of link names to associated URIs containing documentation about the error
+   * or recommended remediation steps.
+   */
+  links?: { [key: string]: string };
+
+  /**
+   * A specific category that contains more specific detail about the error.
+   */
+  subCategory?: string;
+}
+
 /**
  * The definition of an association
  */
@@ -168,46 +208,6 @@ export interface BatchResponseProperty {
   links?: { [key: string]: string };
 
   requestedAt?: string;
-}
-
-export interface Error {
-  /**
-   * The error category.
-   */
-  category: string;
-
-  /**
-   * A unique identifier for the request. Include this value with any error reports
-   * or support tickets.
-   */
-  correlationId: string;
-
-  /**
-   * A human readable message describing the error along with remediation steps where
-   * appropriate.
-   */
-  message: string;
-
-  /**
-   * Context about the error condition.
-   */
-  context?: { [key: string]: Array<string> };
-
-  /**
-   * further information about the error
-   */
-  errors?: Array<ErrorDetail>;
-
-  /**
-   * A map of link names to associated URIs containing documentation about the error
-   * or recommended remediation steps.
-   */
-  links?: { [key: string]: string };
-
-  /**
-   * A specific category that contains more specific detail about the error.
-   */
-  subCategory?: string;
 }
 
 export interface ErrorDetail {
