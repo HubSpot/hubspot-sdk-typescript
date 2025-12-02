@@ -32,7 +32,6 @@ export {
   type BatchResponseBlogPostWithErrors,
   type BlogPost,
   type BlogPostLanguageCloneRequestVNext,
-  type BreakpointStyles,
   type CollectionResponseWithTotalBlogPostForwardPaging,
   type CollectionResponseWithTotalVersionBlogPost,
   type ContentLanguageVariation,
