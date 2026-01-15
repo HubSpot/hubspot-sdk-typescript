@@ -32,27 +32,27 @@ export class Enrollments extends APIResource {
 
 export interface EnrollmentEnrollParams {
   /**
-   * Query param:
+   * Query param
    */
   userId: string;
 
   /**
-   * Body param:
+   * Body param
    */
   contactId: string;
 
   /**
-   * Body param:
+   * Body param
    */
   senderEmail: string;
 
   /**
-   * Body param:
+   * Body param
    */
   sequenceId: string;
 
   /**
-   * Body param:
+   * Body param
    */
   senderAliasAddress?: string;
 }

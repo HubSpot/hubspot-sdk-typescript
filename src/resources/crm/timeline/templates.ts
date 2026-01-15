@@ -40,7 +40,11 @@ export class Templates extends APIResource {
    *         name: 'petName',
    *         type: 'string',
    *       },
-   *       { label: 'Pet Age', name: 'petAge', type: 'number' },
+   *       {
+   *         label: 'Pet Age',
+   *         name: 'petAge',
+   *         type: 'number',
+   *       },
    *       {
    *         label: 'Pet Color',
    *         name: 'petColor',

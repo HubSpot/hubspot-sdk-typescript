@@ -62,7 +62,11 @@ describe('resource participations', () => {
     await expect(
       client.marketing.events.participations.listBreakdownByContact(
         'contactIdentifier',
-        { after: 'after', limit: 0, state: 'state' },
+        {
+          after: 'after',
+          limit: 0,
+          state: 'state',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Hubspot.NotFoundError);
@@ -115,7 +119,12 @@ describe('resource participations', () => {
     await expect(
       client.marketing.events.participations.listBreakdownByID(
         0,
-        { after: 'after', contactIdentifier: 'contactIdentifier', limit: 0, state: 'state' },
+        {
+          after: 'after',
+          contactIdentifier: 'contactIdentifier',
+          limit: 0,
+          state: 'state',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Hubspot.NotFoundError);

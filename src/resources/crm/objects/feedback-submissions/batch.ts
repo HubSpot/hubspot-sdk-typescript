@@ -32,7 +32,7 @@ export class Batch extends APIResource {
 
 export interface BatchGetParams {
   /**
-   * Body param:
+   * Body param
    */
   inputs: Array<CrmAPI.SimplePublicObjectID>;
 

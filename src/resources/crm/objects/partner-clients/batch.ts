@@ -35,7 +35,12 @@ export class Batch extends APIResource {
    * const batchResponseSimplePublicObject =
    *   await client.crm.objects.partnerClients.batch.batchUpdate(
    *     {
-   *       inputs: [{ id: 'id', properties: { foo: 'string' } }],
+   *       inputs: [
+   *         {
+   *           id: 'id',
+   *           properties: { foo: 'string' },
+   *         },
+   *       ],
    *     },
    *   );
    * ```
@@ -50,7 +55,7 @@ export class Batch extends APIResource {
 
 export interface BatchBatchGetParams {
   /**
-   * Body param:
+   * Body param
    */
   inputs: Array<CrmAPI.SimplePublicObjectID>;
 
@@ -66,7 +71,7 @@ export interface BatchBatchGetParams {
   propertiesWithHistory: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   archived?: boolean;
 

@@ -12,7 +12,13 @@ describe('resource batch', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.crm.associations.batch.create('toObjectType', {
       fromObjectType: 'fromObjectType',
-      inputs: [{ from: { id: '53628' }, to: { id: '12726' }, type: 'contact_to_company' }],
+      inputs: [
+        {
+          from: { id: '53628' },
+          to: { id: '12726' },
+          type: 'contact_to_company',
+        },
+      ],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,7 +33,13 @@ describe('resource batch', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.crm.associations.batch.create('toObjectType', {
       fromObjectType: 'fromObjectType',
-      inputs: [{ from: { id: '53628' }, to: { id: '12726' }, type: 'contact_to_company' }],
+      inputs: [
+        {
+          from: { id: '53628' },
+          to: { id: '12726' },
+          type: 'contact_to_company',
+        },
+      ],
     });
   });
 
@@ -35,7 +47,13 @@ describe('resource batch', () => {
   test.skip('delete: only required params', async () => {
     const responsePromise = client.crm.associations.batch.delete('toObjectType', {
       fromObjectType: 'fromObjectType',
-      inputs: [{ from: { id: '53628' }, to: { id: '12726' }, type: 'contact_to_company' }],
+      inputs: [
+        {
+          from: { id: '53628' },
+          to: { id: '12726' },
+          type: 'contact_to_company',
+        },
+      ],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -50,7 +68,13 @@ describe('resource batch', () => {
   test.skip('delete: required and optional params', async () => {
     const response = await client.crm.associations.batch.delete('toObjectType', {
       fromObjectType: 'fromObjectType',
-      inputs: [{ from: { id: '53628' }, to: { id: '12726' }, type: 'contact_to_company' }],
+      inputs: [
+        {
+          from: { id: '53628' },
+          to: { id: '12726' },
+          type: 'contact_to_company',
+        },
+      ],
     });
   });
 

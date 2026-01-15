@@ -14,8 +14,16 @@ describe('resource pipelines', () => {
       displayOrder: 0,
       label: 'My replaced pipeline',
       stages: [
-        { displayOrder: 0, label: 'In Progress', metadata: { ticketState: 'OPEN' } },
-        { displayOrder: 1, label: 'Done', metadata: { ticketState: 'CLOSED' } },
+        {
+          displayOrder: 0,
+          label: 'In Progress',
+          metadata: { ticketState: 'OPEN' },
+        },
+        {
+          displayOrder: 1,
+          label: 'Done',
+          metadata: { ticketState: 'CLOSED' },
+        },
       ],
     });
     const rawResponse = await responsePromise.asResponse();
@@ -33,8 +41,16 @@ describe('resource pipelines', () => {
       displayOrder: 0,
       label: 'My replaced pipeline',
       stages: [
-        { displayOrder: 0, label: 'In Progress', metadata: { ticketState: 'OPEN' } },
-        { displayOrder: 1, label: 'Done', metadata: { ticketState: 'CLOSED' } },
+        {
+          displayOrder: 0,
+          label: 'In Progress',
+          metadata: { ticketState: 'OPEN' },
+        },
+        {
+          displayOrder: 1,
+          label: 'Done',
+          metadata: { ticketState: 'CLOSED' },
+        },
       ],
     });
   });
@@ -137,8 +153,16 @@ describe('resource pipelines', () => {
       displayOrder: 0,
       label: 'My replaced pipeline',
       stages: [
-        { displayOrder: 0, label: 'In Progress', metadata: { ticketState: 'OPEN' } },
-        { displayOrder: 1, label: 'Done', metadata: { ticketState: 'CLOSED' } },
+        {
+          displayOrder: 0,
+          label: 'In Progress',
+          metadata: { ticketState: 'OPEN' },
+        },
+        {
+          displayOrder: 1,
+          label: 'Done',
+          metadata: { ticketState: 'CLOSED' },
+        },
       ],
     });
     const rawResponse = await responsePromise.asResponse();
@@ -157,8 +181,16 @@ describe('resource pipelines', () => {
       displayOrder: 0,
       label: 'My replaced pipeline',
       stages: [
-        { displayOrder: 0, label: 'In Progress', metadata: { ticketState: 'OPEN' } },
-        { displayOrder: 1, label: 'Done', metadata: { ticketState: 'CLOSED' } },
+        {
+          displayOrder: 0,
+          label: 'In Progress',
+          metadata: { ticketState: 'OPEN' },
+        },
+        {
+          displayOrder: 1,
+          label: 'Done',
+          metadata: { ticketState: 'CLOSED' },
+        },
       ],
       validateDealStageUsagesBeforeDelete: true,
       validateReferencesBeforeDelete: true,

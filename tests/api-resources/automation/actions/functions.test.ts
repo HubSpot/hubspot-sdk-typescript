@@ -81,7 +81,11 @@ describe('resource functions', () => {
   test.skip('createOrReplaceByFunctionType: only required params', async () => {
     const responsePromise = client.automation.actions.functions.createOrReplaceByFunctionType(
       'POST_ACTION_EXECUTION',
-      { appId: 0, definitionId: 'definitionId', body: 'body' },
+      {
+        appId: 0,
+        definitionId: 'definitionId',
+        body: 'body',
+      },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -96,7 +100,11 @@ describe('resource functions', () => {
   test.skip('createOrReplaceByFunctionType: required and optional params', async () => {
     const response = await client.automation.actions.functions.createOrReplaceByFunctionType(
       'POST_ACTION_EXECUTION',
-      { appId: 0, definitionId: 'definitionId', body: 'body' },
+      {
+        appId: 0,
+        definitionId: 'definitionId',
+        body: 'body',
+      },
     );
   });
 

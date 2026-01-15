@@ -18,7 +18,13 @@ describe('resource tables', () => {
           id: 0,
           label: 'label',
           name: 'name',
-          options: [{ hidden: false, label: 'Option A', value: 'A' }],
+          options: [
+            {
+              hidden: false,
+              label: 'Option A',
+              value: 'A',
+            },
+          ],
           type: 'BOOLEAN',
         },
       ],
@@ -201,7 +207,11 @@ describe('resource tables', () => {
     await expect(
       client.cms.hubdb.tables.get(
         'tableIdOrName',
-        { archived: true, includeForeignIds: true, isGetLocalizedSchema: true },
+        {
+          archived: true,
+          includeForeignIds: true,
+          isGetLocalizedSchema: true,
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Hubspot.NotFoundError);
@@ -225,7 +235,11 @@ describe('resource tables', () => {
     await expect(
       client.cms.hubdb.tables.getDraft(
         'tableIdOrName',
-        { archived: true, includeForeignIds: true, isGetLocalizedSchema: true },
+        {
+          archived: true,
+          includeForeignIds: true,
+          isGetLocalizedSchema: true,
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Hubspot.NotFoundError);
@@ -373,7 +387,13 @@ describe('resource tables', () => {
           id: 0,
           label: 'label',
           name: 'name',
-          options: [{ hidden: false, label: 'Option A', value: 'A' }],
+          options: [
+            {
+              hidden: false,
+              label: 'Option A',
+              value: 'A',
+            },
+          ],
           type: 'BOOLEAN',
         },
       ],

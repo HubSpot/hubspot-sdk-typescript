@@ -55,7 +55,11 @@ describe('resource activity', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.account.activity.listLoginActivities(
-        { after: 'after', limit: 0, userId: 0 },
+        {
+          after: 'after',
+          limit: 0,
+          userId: 0,
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Hubspot.NotFoundError);
@@ -78,7 +82,13 @@ describe('resource activity', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.account.activity.listSecurityActivities(
-        { after: 'after', fromTimestamp: 0, limit: 0, toTimestamp: 0, userId: 0 },
+        {
+          after: 'after',
+          fromTimestamp: 0,
+          limit: 0,
+          toTimestamp: 0,
+          userId: 0,
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Hubspot.NotFoundError);

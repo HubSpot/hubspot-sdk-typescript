@@ -118,7 +118,7 @@ export interface PartnerClientUpdateParams {
   properties: { [key: string]: string };
 
   /**
-   * Query param:
+   * Query param
    */
   idProperty?: string;
 }

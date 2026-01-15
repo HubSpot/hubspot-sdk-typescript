@@ -105,49 +105,49 @@ export interface DefinitionUpdateParams {
   appId: number;
 
   /**
-   * Body param:
+   * Body param
    */
   actionUrl?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   executionRules?: Array<ActionsAPI.PublicExecutionTranslationRule>;
 
   /**
-   * Body param:
+   * Body param
    */
   inputFieldDependencies?: Array<
     ActionsAPI.PublicSingleFieldDependency | ActionsAPI.PublicConditionalSingleFieldDependency
   >;
 
   /**
-   * Body param:
+   * Body param
    */
   inputFields?: Array<ActionsAPI.InputFieldDefinition>;
 
   /**
-   * Body param:
+   * Body param
    */
   labels?: { [key: string]: ActionsAPI.PublicActionLabels };
 
   /**
-   * Body param:
+   * Body param
    */
   objectRequestOptions?: ActionsAPI.PublicObjectRequestOptions;
 
   /**
-   * Body param:
+   * Body param
    */
   objectTypes?: Array<string>;
 
   /**
-   * Body param:
+   * Body param
    */
   outputFields?: Array<ActionsAPI.OutputFieldDefinition>;
 
   /**
-   * Body param:
+   * Body param
    */
   published?: boolean;
 }

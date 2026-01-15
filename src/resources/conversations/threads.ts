@@ -82,17 +82,17 @@ export class Threads extends APIResource {
 
 export interface ThreadUpdateParams {
   /**
-   * Query param:
+   * Query param
    */
   query_archived?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   body_archived?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   status?: 'CLOSED' | 'OPEN';
 }

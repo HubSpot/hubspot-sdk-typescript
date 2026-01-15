@@ -31,7 +31,10 @@ const client = new Hubspot({
 
 const result = await client.crm.objects.contacts.create({
   associations: [
-    { to: { id: '37295' }, types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }] },
+    {
+      to: { id: '37295' },
+      types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
+    },
   ],
   properties: { email: 'mark.s@lumon.industries' },
 });
@@ -53,7 +56,10 @@ const client = new Hubspot({
 
 const params: Hubspot.Crm.Objects.ContactCreateParams = {
   associations: [
-    { to: { id: '37295' }, types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }] },
+    {
+      to: { id: '37295' },
+      types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
+    },
   ],
   properties: { email: 'mark.s@lumon.industries' },
 };
@@ -79,13 +85,19 @@ import Hubspot, { toFile } from 'hubspot-sdk';
 const client = new Hubspot();
 
 // If you have access to Node `fs` we recommend using `fs.createReadStream()`:
-await client.cms.hubdb.tables.importDraft('tableIdOrName', { file: fs.createReadStream('/path/to/file') });
+await client.cms.hubdb.tables.importDraft('tableIdOrName', {
+  file: fs.createReadStream('/path/to/file'),
+});
 
 // Or if you have the web `File` API you can pass a `File` instance:
-await client.cms.hubdb.tables.importDraft('tableIdOrName', { file: new File(['my bytes'], 'file') });
+await client.cms.hubdb.tables.importDraft('tableIdOrName', {
+  file: new File(['my bytes'], 'file'),
+});
 
 // You can also pass a `fetch` `Response`:
-await client.cms.hubdb.tables.importDraft('tableIdOrName', { file: await fetch('https://somesite/file') });
+await client.cms.hubdb.tables.importDraft('tableIdOrName', {
+  file: await fetch('https://somesite/file'),
+});
 
 // Finally, if none of the above are convenient, you can use our `toFile` helper:
 await client.cms.hubdb.tables.importDraft('tableIdOrName', {
@@ -107,7 +119,10 @@ a subclass of `APIError` will be thrown:
 const createdResponseSimplePublicObject = await client.crm.objects.contacts
   .create({
     associations: [
-      { to: { id: '37295' }, types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }] },
+      {
+        to: { id: '37295' },
+        types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
+      },
     ],
     properties: { email: 'mark.s@lumon.industries' },
   })
@@ -151,7 +166,13 @@ const client = new Hubspot({
 });
 
 // Or, configure per-request:
-await client.crm.objects.contacts.create({ associations: [{ to: { id: '37295' }, types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }] }], properties: { email: 'mark.s@lumon.industries' } }, {
+await client.crm.objects.contacts.create({
+  associations: [{
+  to: { id: '37295' },
+  types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
+}],
+  properties: { email: 'mark.s@lumon.industries' },
+}, {
   maxRetries: 5,
 });
 ```
@@ -168,7 +189,13 @@ const client = new Hubspot({
 });
 
 // Override per-request:
-await client.crm.objects.contacts.create({ associations: [{ to: { id: '37295' }, types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }] }], properties: { email: 'mark.s@lumon.industries' } }, {
+await client.crm.objects.contacts.create({
+  associations: [{
+  to: { id: '37295' },
+  types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
+}],
+  properties: { email: 'mark.s@lumon.industries' },
+}, {
   timeout: 5 * 1000,
 });
 ```
@@ -186,7 +213,9 @@ You can use the `for await … of` syntax to iterate through items across all pa
 async function fetchAllSimplePublicObjectWithAssociations(params) {
   const allSimplePublicObjectWithAssociations = [];
   // Automatically fetches more pages as needed.
-  for await (const simplePublicObjectWithAssociations of client.crm.objects.contacts.list({ limit: 100 })) {
+  for await (const simplePublicObjectWithAssociations of client.crm.objects.contacts.list({
+    limit: 100,
+  })) {
     allSimplePublicObjectWithAssociations.push(simplePublicObjectWithAssociations);
   }
   return allSimplePublicObjectWithAssociations;
@@ -225,7 +254,10 @@ const client = new Hubspot();
 const response = await client.crm.objects.contacts
   .create({
     associations: [
-      { to: { id: '37295' }, types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }] },
+      {
+        to: { id: '37295' },
+        types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
+      },
     ],
     properties: { email: 'mark.s@lumon.industries' },
   })
@@ -236,7 +268,10 @@ console.log(response.statusText); // access the underlying Response object
 const { data: createdResponseSimplePublicObject, response: raw } = await client.crm.objects.contacts
   .create({
     associations: [
-      { to: { id: '37295' }, types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }] },
+      {
+        to: { id: '37295' },
+        types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
+      },
     ],
     properties: { email: 'mark.s@lumon.industries' },
   })

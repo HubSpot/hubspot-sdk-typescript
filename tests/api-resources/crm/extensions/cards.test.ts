@@ -18,7 +18,13 @@ describe('resource cards', () => {
             dataType: 'STRING',
             label: 'Pets Name',
             name: 'pet_name',
-            options: [{ label: 'label', name: 'name', type: 'DANGER' }],
+            options: [
+              {
+                label: 'label',
+                name: 'name',
+                type: 'DANGER',
+              },
+            ],
           },
         ],
       },
@@ -47,7 +53,13 @@ describe('resource cards', () => {
             dataType: 'STRING',
             label: 'Pets Name',
             name: 'pet_name',
-            options: [{ label: 'label', name: 'name', type: 'DANGER' }],
+            options: [
+              {
+                label: 'label',
+                name: 'name',
+                type: 'DANGER',
+              },
+            ],
           },
         ],
       },
@@ -84,7 +96,13 @@ describe('resource cards', () => {
             dataType: 'STRING',
             label: 'Pets Name',
             name: 'pet_name',
-            options: [{ label: 'label', name: 'name', type: 'DANGER' }],
+            options: [
+              {
+                label: 'label',
+                name: 'name',
+                type: 'DANGER',
+              },
+            ],
           },
         ],
       },

@@ -97,12 +97,12 @@ export interface AssociationUpdateParams {
 
 export interface AssociationListParams extends PageParams {
   /**
-   * Path param:
+   * Path param
    */
   projectId: string;
 
   /**
-   * Query param:
+   * Query param
    */
   includeFA?: boolean;
 }

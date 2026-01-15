@@ -45,7 +45,13 @@ describe('resource properties', () => {
       hasUniqueValue: true,
       hidden: true,
       options: [
-        { displayOrder: 0, hidden: true, label: 'label', value: 'value', description: 'description' },
+        {
+          displayOrder: 0,
+          hidden: true,
+          label: 'label',
+          value: 'value',
+          description: 'description',
+        },
       ],
       referencedObjectType: 'referencedObjectType',
     });
@@ -81,7 +87,13 @@ describe('resource properties', () => {
       hidden: true,
       label: 'label',
       options: [
-        { displayOrder: 0, hidden: true, label: 'label', value: 'value', description: 'description' },
+        {
+          displayOrder: 0,
+          hidden: true,
+          label: 'label',
+          value: 'value',
+          description: 'description',
+        },
       ],
       type: 'bool',
     });
@@ -136,7 +148,13 @@ describe('resource properties', () => {
     const responsePromise = client.cms.mediaBridge.properties.createBatch('objectType', {
       appId: 0,
       inputs: [
-        { fieldType: 'booleancheckbox', groupName: 'groupName', label: 'label', name: 'name', type: 'bool' },
+        {
+          fieldType: 'booleancheckbox',
+          groupName: 'groupName',
+          label: 'label',
+          name: 'name',
+          type: 'bool',
+        },
       ],
     });
     const rawResponse = await responsePromise.asResponse();
@@ -168,7 +186,13 @@ describe('resource properties', () => {
           hasUniqueValue: true,
           hidden: true,
           options: [
-            { displayOrder: 0, hidden: true, label: 'label', value: 'value', description: 'description' },
+            {
+              displayOrder: 0,
+              hidden: true,
+              label: 'label',
+              value: 'value',
+              description: 'description',
+            },
           ],
           referencedObjectType: 'referencedObjectType',
         },

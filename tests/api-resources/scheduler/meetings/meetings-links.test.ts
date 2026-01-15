@@ -25,7 +25,13 @@ describe('resource meetingsLinks', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.scheduler.meetings.meetingsLinks.list(
-        { after: 'after', limit: 0, name: 'name', organizerUserId: 'organizerUserId', type: 'type' },
+        {
+          after: 'after',
+          limit: 0,
+          name: 'name',
+          organizerUserId: 'organizerUserId',
+          type: 'type',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Hubspot.NotFoundError);

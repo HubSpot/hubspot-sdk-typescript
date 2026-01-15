@@ -19,7 +19,13 @@ describe('resource definitions', () => {
           typeDefinition: {
             externalOptions: true,
             name: 'name',
-            options: [{ hidden: false, label: 'Option A', value: 'A' }],
+            options: [
+              {
+                hidden: false,
+                label: 'Option A',
+                value: 'A',
+              },
+            ],
             type: 'bool',
           },
         },
@@ -41,7 +47,13 @@ describe('resource definitions', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.automation.actions.definitions.create(0, {
       actionUrl: 'actionUrl',
-      functions: [{ functionSource: 'functionSource', functionType: 'POST_ACTION_EXECUTION', id: 'id' }],
+      functions: [
+        {
+          functionSource: 'functionSource',
+          functionType: 'POST_ACTION_EXECUTION',
+          id: 'id',
+        },
+      ],
       inputFields: [
         {
           isRequired: true,
@@ -86,7 +98,12 @@ describe('resource definitions', () => {
       objectTypes: ['string'],
       published: true,
       archivedAt: 0,
-      executionRules: [{ conditions: { foo: {} }, labelName: 'labelName' }],
+      executionRules: [
+        {
+          conditions: { foo: {} },
+          labelName: 'labelName',
+        },
+      ],
       inputFieldDependencies: [
         {
           controllingFieldName: 'controllingFieldName',
@@ -140,7 +157,12 @@ describe('resource definitions', () => {
     const response = await client.automation.actions.definitions.update('definitionId', {
       appId: 0,
       actionUrl: 'actionUrl',
-      executionRules: [{ conditions: { foo: {} }, labelName: 'labelName' }],
+      executionRules: [
+        {
+          conditions: { foo: {} },
+          labelName: 'labelName',
+        },
+      ],
       inputFieldDependencies: [
         {
           controllingFieldName: 'controllingFieldName',
@@ -238,7 +260,11 @@ describe('resource definitions', () => {
     await expect(
       client.automation.actions.definitions.list(
         0,
-        { after: 'after', archived: true, limit: 0 },
+        {
+          after: 'after',
+          archived: true,
+          limit: 0,
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Hubspot.NotFoundError);

@@ -133,17 +133,17 @@ export interface SchemaUpdateParams {
   appId: number;
 
   /**
-   * Body param:
+   * Body param
    */
   clearDescription?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   description?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   labels?: Shared.ObjectTypeDefinitionLabels;
 
@@ -160,7 +160,7 @@ export interface SchemaUpdateParams {
   requiredProperties?: Array<string>;
 
   /**
-   * Body param:
+   * Body param
    */
   restorable?: boolean;
 
@@ -192,17 +192,17 @@ export interface SchemaCreateAssociationParams {
   appId: number;
 
   /**
-   * Body param:
+   * Body param
    */
   fromObjectTypeId: string;
 
   /**
-   * Body param:
+   * Body param
    */
   toObjectTypeId: string;
 
   /**
-   * Body param:
+   * Body param
    */
   name?: string;
 }

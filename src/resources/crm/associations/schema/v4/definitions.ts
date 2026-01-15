@@ -106,22 +106,22 @@ export class Definitions extends APIResource {
 
 export interface DefinitionCreateLabelParams {
   /**
-   * Path param:
+   * Path param
    */
   fromObjectType: string;
 
   /**
-   * Body param:
+   * Body param
    */
   label: string;
 
   /**
-   * Body param:
+   * Body param
    */
   name: string;
 
   /**
-   * Body param:
+   * Body param
    */
   inverseLabel?: string;
 }
@@ -138,22 +138,22 @@ export interface DefinitionListLabelsParams {
 
 export interface DefinitionUpdateLabelParams {
   /**
-   * Path param:
+   * Path param
    */
   fromObjectType: string;
 
   /**
-   * Body param:
+   * Body param
    */
   associationTypeId: number;
 
   /**
-   * Body param:
+   * Body param
    */
   label: string;
 
   /**
-   * Body param:
+   * Body param
    */
   inverseLabel?: string;
 }

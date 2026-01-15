@@ -12,7 +12,16 @@ describe('resource attendance', () => {
   test.skip('createByEventIDAndContactID: only required params', async () => {
     const responsePromise = client.marketing.events.attendance.createByEventIDAndContactID(
       'subscriberState',
-      { objectId: 'objectId', inputs: [{ interactionDateTime: 0, properties: { foo: 'string' }, vid: 0 }] },
+      {
+        objectId: 'objectId',
+        inputs: [
+          {
+            interactionDateTime: 0,
+            properties: { foo: 'string' },
+            vid: 0,
+          },
+        ],
+      },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,7 +36,13 @@ describe('resource attendance', () => {
   test.skip('createByEventIDAndContactID: required and optional params', async () => {
     const response = await client.marketing.events.attendance.createByEventIDAndContactID('subscriberState', {
       objectId: 'objectId',
-      inputs: [{ interactionDateTime: 0, properties: { foo: 'string' }, vid: 0 }],
+      inputs: [
+        {
+          interactionDateTime: 0,
+          properties: { foo: 'string' },
+          vid: 0,
+        },
+      ],
     });
   });
 
@@ -74,7 +89,13 @@ describe('resource attendance', () => {
       'subscriberState',
       {
         externalEventId: 'externalEventId',
-        inputs: [{ interactionDateTime: 0, properties: { foo: 'string' }, vid: 0 }],
+        inputs: [
+          {
+            interactionDateTime: 0,
+            properties: { foo: 'string' },
+            vid: 0,
+          },
+        ],
       },
     );
     const rawResponse = await responsePromise.asResponse();
@@ -92,7 +113,13 @@ describe('resource attendance', () => {
       'subscriberState',
       {
         externalEventId: 'externalEventId',
-        inputs: [{ interactionDateTime: 0, properties: { foo: 'string' }, vid: 0 }],
+        inputs: [
+          {
+            interactionDateTime: 0,
+            properties: { foo: 'string' },
+            vid: 0,
+          },
+        ],
         externalAccountId: 'externalAccountId',
       },
     );

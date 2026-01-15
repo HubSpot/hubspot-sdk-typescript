@@ -212,7 +212,7 @@ export interface CustomCreateParams {
 
 export interface CustomUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   objectType: string;
 
@@ -261,7 +261,7 @@ export interface CustomDeleteParams {
 
 export interface CustomGetParams {
   /**
-   * Path param:
+   * Path param
    */
   objectType: string;
 

@@ -53,7 +53,12 @@ describe('resource batch', () => {
   // Prism tests are disabled
   test.skip('update: only required params', async () => {
     const responsePromise = client.crm.objects.courses.batch.update({
-      inputs: [{ id: 'id', properties: { foo: 'string' } }],
+      inputs: [
+        {
+          id: 'id',
+          properties: { foo: 'string' },
+        },
+      ],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -125,7 +130,12 @@ describe('resource batch', () => {
   // Prism tests are disabled
   test.skip('upsert: only required params', async () => {
     const responsePromise = client.crm.objects.courses.batch.upsert({
-      inputs: [{ id: 'id', properties: { foo: 'string' } }],
+      inputs: [
+        {
+          id: 'id',
+          properties: { foo: 'string' },
+        },
+      ],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);

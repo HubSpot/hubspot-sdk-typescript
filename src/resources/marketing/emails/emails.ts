@@ -4868,7 +4868,7 @@ export interface EmailUpdateParams {
   body_archived?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   businessUnitId?: number;
 
@@ -4883,7 +4883,7 @@ export interface EmailUpdateParams {
   content?: PublicEmailContent;
 
   /**
-   * Body param:
+   * Body param
    */
   folderIdV2?: number;
 
@@ -4893,12 +4893,12 @@ export interface EmailUpdateParams {
   from?: PublicEmailFromDetails;
 
   /**
-   * Body param:
+   * Body param
    */
   jitterSendTime?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   language?:
     | 'af'
@@ -5856,7 +5856,7 @@ export interface EmailUpdateParams {
   to?: PublicEmailToDetails;
 
   /**
-   * Body param:
+   * Body param
    */
   webversion?: PublicWebversionDetails;
 }

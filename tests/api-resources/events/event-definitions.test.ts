@@ -34,7 +34,13 @@ describe('resource eventDefinitions', () => {
           description: 'description',
           name: 'name',
           options: [
-            { displayOrder: 0, hidden: true, label: 'label', value: 'value', description: 'description' },
+            {
+              displayOrder: 0,
+              hidden: true,
+              label: 'label',
+              value: 'value',
+              description: 'description',
+            },
           ],
         },
       ],
@@ -120,7 +126,13 @@ describe('resource eventDefinitions', () => {
       description: 'description',
       name: 'name',
       options: [
-        { displayOrder: 0, hidden: true, label: 'label', value: 'value', description: 'description' },
+        {
+          displayOrder: 0,
+          hidden: true,
+          label: 'label',
+          value: 'value',
+          description: 'description',
+        },
       ],
     });
   });
@@ -179,7 +191,13 @@ describe('resource eventDefinitions', () => {
       description: 'description',
       label: 'label',
       options: [
-        { displayOrder: 0, hidden: true, label: 'label', value: 'value', description: 'description' },
+        {
+          displayOrder: 0,
+          hidden: true,
+          label: 'label',
+          value: 'value',
+          description: 'description',
+        },
       ],
     });
   });

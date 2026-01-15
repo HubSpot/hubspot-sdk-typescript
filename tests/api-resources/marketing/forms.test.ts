@@ -49,7 +49,12 @@ describe('resource forms', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.marketing.forms.list(
-        { after: 'after', archived: true, formTypes: ['hubspot'], limit: 0 },
+        {
+          after: 'after',
+          archived: true,
+          formTypes: ['hubspot'],
+          limit: 0,
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Hubspot.NotFoundError);

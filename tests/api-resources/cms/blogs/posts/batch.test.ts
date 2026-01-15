@@ -57,10 +57,24 @@ describe('resource batch', () => {
                 {
                   cssClass: 'cssClass',
                   styles: {
-                    backgroundColor: { a: 0, b: 0, g: 0, r: 0 },
+                    backgroundColor: {
+                      a: 0,
+                      b: 0,
+                      g: 0,
+                      r: 0,
+                    },
                     backgroundGradient: {
                       angle: { units: 'units', value: 0 },
-                      colors: [{ color: { a: 0, b: 0, g: 0, r: 0 } }],
+                      colors: [
+                        {
+                          color: {
+                            a: 0,
+                            b: 0,
+                            g: 0,
+                            r: 0,
+                          },
+                        },
+                      ],
                       sideOrCorner: { horizontalSide: 'horizontalSide', verticalSide: 'verticalSide' },
                     },
                     backgroundImage: {
@@ -77,10 +91,24 @@ describe('resource batch', () => {
               ],
               rows: [{}],
               styles: {
-                backgroundColor: { a: 0, b: 0, g: 0, r: 0 },
+                backgroundColor: {
+                  a: 0,
+                  b: 0,
+                  g: 0,
+                  r: 0,
+                },
                 backgroundGradient: {
                   angle: { units: 'units', value: 0 },
-                  colors: [{ color: { a: 0, b: 0, g: 0, r: 0 } }],
+                  colors: [
+                    {
+                      color: {
+                        a: 0,
+                        b: 0,
+                        g: 0,
+                        r: 0,
+                      },
+                    },
+                  ],
                   sideOrCorner: { horizontalSide: 'horizontalSide', verticalSide: 'verticalSide' },
                 },
                 backgroundImage: {
@@ -204,10 +232,24 @@ describe('resource batch', () => {
                 {
                   cssClass: 'cssClass',
                   styles: {
-                    backgroundColor: { a: 0, b: 0, g: 0, r: 0 },
+                    backgroundColor: {
+                      a: 0,
+                      b: 0,
+                      g: 0,
+                      r: 0,
+                    },
                     backgroundGradient: {
                       angle: { units: 'units', value: 0 },
-                      colors: [{ color: { a: 0, b: 0, g: 0, r: 0 } }],
+                      colors: [
+                        {
+                          color: {
+                            a: 0,
+                            b: 0,
+                            g: 0,
+                            r: 0,
+                          },
+                        },
+                      ],
                       sideOrCorner: { horizontalSide: 'horizontalSide', verticalSide: 'verticalSide' },
                     },
                     backgroundImage: {
@@ -219,16 +261,36 @@ describe('resource batch', () => {
                     forceFullWidthSection: true,
                     maxWidthSectionCentering: 0,
                     verticalAlignment: 'verticalAlignment',
-                    breakpointStyles: { foo: { hidden: true, margin: {}, padding: {} } },
+                    breakpointStyles: {
+                      foo: {
+                        hidden: true,
+                        margin: {},
+                        padding: {},
+                      },
+                    },
                   },
                 },
               ],
               rows: [{}],
               styles: {
-                backgroundColor: { a: 0, b: 0, g: 0, r: 0 },
+                backgroundColor: {
+                  a: 0,
+                  b: 0,
+                  g: 0,
+                  r: 0,
+                },
                 backgroundGradient: {
                   angle: { units: 'units', value: 0 },
-                  colors: [{ color: { a: 0, b: 0, g: 0, r: 0 } }],
+                  colors: [
+                    {
+                      color: {
+                        a: 0,
+                        b: 0,
+                        g: 0,
+                        r: 0,
+                      },
+                    },
+                  ],
                   sideOrCorner: { horizontalSide: 'horizontalSide', verticalSide: 'verticalSide' },
                 },
                 backgroundImage: {
@@ -240,7 +302,13 @@ describe('resource batch', () => {
                 forceFullWidthSection: true,
                 maxWidthSectionCentering: 0,
                 verticalAlignment: 'verticalAlignment',
-                breakpointStyles: { foo: { hidden: true, margin: {}, padding: {} } },
+                breakpointStyles: {
+                  foo: {
+                    hidden: true,
+                    margin: {},
+                    padding: {},
+                  },
+                },
               },
               type: 'type',
               w: 0,

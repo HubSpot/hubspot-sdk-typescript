@@ -37,7 +37,12 @@ export class Batch extends APIResource {
    * ```ts
    * const batchResponsePublicCampaign =
    *   await client.marketing.campaigns.batch.update({
-   *     inputs: [{ id: 'id', properties: { foo: 'string' } }],
+   *     inputs: [
+   *       {
+   *         id: 'id',
+   *         properties: { foo: 'string' },
+   *       },
+   *     ],
    *   });
    * ```
    */
@@ -112,7 +117,7 @@ export interface BatchDeleteParams {
 
 export interface BatchGetParams {
   /**
-   * Body param:
+   * Body param
    */
   inputs: Array<CampaignsAPI.PublicCampaignReadInput>;
 

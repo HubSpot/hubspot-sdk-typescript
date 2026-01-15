@@ -16,7 +16,11 @@ export class Spend extends APIResource {
    * const publicSpendItem =
    *   await client.marketing.campaigns.spend.create(
    *     'campaignGuid',
-   *     { amount: 0, name: 'name', order: 0 },
+   *     {
+   *       amount: 0,
+   *       name: 'name',
+   *       order: 0,
+   *     },
    *   );
    * ```
    */
@@ -110,22 +114,22 @@ export interface SpendUpdateParams {
   campaignGuid: string;
 
   /**
-   * Body param:
+   * Body param
    */
   amount: number;
 
   /**
-   * Body param:
+   * Body param
    */
   name: string;
 
   /**
-   * Body param:
+   * Body param
    */
   order: number;
 
   /**
-   * Body param:
+   * Body param
    */
   description?: string;
 }

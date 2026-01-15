@@ -12,7 +12,10 @@ describe('resource contracts', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.crm.objects.contracts.create({
       associations: [
-        { to: { id: '37295' }, types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }] },
+        {
+          to: { id: '37295' },
+          types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
+        },
       ],
       properties: { foo: 'string' },
     });
@@ -29,7 +32,10 @@ describe('resource contracts', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.crm.objects.contracts.create({
       associations: [
-        { to: { id: '37295' }, types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }] },
+        {
+          to: { id: '37295' },
+          types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
+        },
       ],
       properties: { foo: 'string' },
     });

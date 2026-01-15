@@ -27,7 +27,11 @@ export class Tables extends APIResource {
    *       label: 'label',
    *       name: 'name',
    *       options: [
-   *         { hidden: false, label: 'Option A', value: 'A' },
+   *         {
+   *           hidden: false,
+   *           label: 'Option A',
+   *           value: 'A',
+   *         },
    *       ],
    *       type: 'BOOLEAN',
    *     },

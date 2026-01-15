@@ -13,7 +13,10 @@ describe('resource calendar', () => {
     const responsePromise = client.scheduler.meetings.calendar.create({
       organizerUserId: 'organizerUserId',
       associations: [
-        { to: { id: '37295' }, types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }] },
+        {
+          to: { id: '37295' },
+          types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
+        },
       ],
       emailReminderSchedule: {
         reminders: [{ numberOfTimeUnits: 0, timeUnit: 'timeUnit' }],
@@ -43,7 +46,10 @@ describe('resource calendar', () => {
     const response = await client.scheduler.meetings.calendar.create({
       organizerUserId: 'organizerUserId',
       associations: [
-        { to: { id: '37295' }, types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }] },
+        {
+          to: { id: '37295' },
+          types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
+        },
       ],
       emailReminderSchedule: {
         reminders: [{ numberOfTimeUnits: 0, timeUnit: 'timeUnit' }],

@@ -87,7 +87,11 @@ describe('instantiate client', () => {
         error: jest.fn(),
       };
 
-      const client = new Hubspot({ logger: logger, logLevel: 'debug', accessToken: 'pat-na1-xxxxxxxx-xxxx' });
+      const client = new Hubspot({
+        logger: logger,
+        logLevel: 'debug',
+        accessToken: 'pat-na1-xxxxxxxx-xxxx',
+      });
 
       await forceAPIResponseForClient(client);
       expect(debugMock).toHaveBeenCalled();
@@ -107,7 +111,11 @@ describe('instantiate client', () => {
         error: jest.fn(),
       };
 
-      const client = new Hubspot({ logger: logger, logLevel: 'info', accessToken: 'pat-na1-xxxxxxxx-xxxx' });
+      const client = new Hubspot({
+        logger: logger,
+        logLevel: 'info',
+        accessToken: 'pat-na1-xxxxxxxx-xxxx',
+      });
 
       await forceAPIResponseForClient(client);
       expect(debugMock).not.toHaveBeenCalled();
@@ -157,7 +165,11 @@ describe('instantiate client', () => {
       };
 
       process.env['HUBSPOT_LOG'] = 'debug';
-      const client = new Hubspot({ logger: logger, logLevel: 'off', accessToken: 'pat-na1-xxxxxxxx-xxxx' });
+      const client = new Hubspot({
+        logger: logger,
+        logLevel: 'off',
+        accessToken: 'pat-na1-xxxxxxxx-xxxx',
+      });
 
       await forceAPIResponseForClient(client);
       expect(debugMock).not.toHaveBeenCalled();
@@ -173,7 +185,11 @@ describe('instantiate client', () => {
       };
 
       process.env['HUBSPOT_LOG'] = 'not a log level';
-      const client = new Hubspot({ logger: logger, logLevel: 'debug', accessToken: 'pat-na1-xxxxxxxx-xxxx' });
+      const client = new Hubspot({
+        logger: logger,
+        logLevel: 'debug',
+        accessToken: 'pat-na1-xxxxxxxx-xxxx',
+      });
       expect(client.logLevel).toBe('debug');
       expect(warnMock).not.toHaveBeenCalled();
     });
@@ -538,7 +554,11 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new Hubspot({ accessToken: 'pat-na1-xxxxxxxx-xxxx', timeout: 10, fetch: testFetch });
+    const client = new Hubspot({
+      accessToken: 'pat-na1-xxxxxxxx-xxxx',
+      timeout: 10,
+      fetch: testFetch,
+    });
 
     expect(await client.request({ path: '/foo', method: 'get' })).toEqual({ a: 1 });
     expect(count).toEqual(2);
@@ -568,7 +588,11 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new Hubspot({ accessToken: 'pat-na1-xxxxxxxx-xxxx', fetch: testFetch, maxRetries: 4 });
+    const client = new Hubspot({
+      accessToken: 'pat-na1-xxxxxxxx-xxxx',
+      fetch: testFetch,
+      maxRetries: 4,
+    });
 
     expect(await client.request({ path: '/foo', method: 'get' })).toEqual({ a: 1 });
 
@@ -592,7 +616,11 @@ describe('retries', () => {
       capturedRequest = init;
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
-    const client = new Hubspot({ accessToken: 'pat-na1-xxxxxxxx-xxxx', fetch: testFetch, maxRetries: 4 });
+    const client = new Hubspot({
+      accessToken: 'pat-na1-xxxxxxxx-xxxx',
+      fetch: testFetch,
+      maxRetries: 4,
+    });
 
     expect(
       await client.request({
@@ -654,7 +682,11 @@ describe('retries', () => {
       capturedRequest = init;
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
-    const client = new Hubspot({ accessToken: 'pat-na1-xxxxxxxx-xxxx', fetch: testFetch, maxRetries: 4 });
+    const client = new Hubspot({
+      accessToken: 'pat-na1-xxxxxxxx-xxxx',
+      fetch: testFetch,
+      maxRetries: 4,
+    });
 
     expect(
       await client.request({

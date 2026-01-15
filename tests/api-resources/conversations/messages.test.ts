@@ -38,7 +38,13 @@ describe('resource messages', () => {
     await expect(
       client.conversations.messages.list(
         0,
-        { after: 'after', archived: true, limit: 0, property: 'property', sort: ['string'] },
+        {
+          after: 'after',
+          archived: true,
+          limit: 0,
+          property: 'property',
+          sort: ['string'],
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Hubspot.NotFoundError);

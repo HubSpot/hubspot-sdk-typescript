@@ -32,7 +32,13 @@ describe('resource batch', () => {
   // Prism tests are disabled
   test.skip('createBatch: only required params', async () => {
     const responsePromise = client.cms.hubdb.rows.batch.createBatch('tableIdOrName', {
-      inputs: [{ childTableId: 0, displayIndex: 0, values: { foo: {} } }],
+      inputs: [
+        {
+          childTableId: 0,
+          displayIndex: 0,
+          values: { foo: {} },
+        },
+      ],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -46,7 +52,15 @@ describe('resource batch', () => {
   // Prism tests are disabled
   test.skip('createBatch: required and optional params', async () => {
     const response = await client.cms.hubdb.rows.batch.createBatch('tableIdOrName', {
-      inputs: [{ childTableId: 0, displayIndex: 0, values: { foo: {} }, name: 'name', path: 'path' }],
+      inputs: [
+        {
+          childTableId: 0,
+          displayIndex: 0,
+          values: { foo: {} },
+          name: 'name',
+          path: 'path',
+        },
+      ],
     });
   });
 
@@ -106,7 +120,13 @@ describe('resource batch', () => {
   // Prism tests are disabled
   test.skip('replaceBatch: only required params', async () => {
     const responsePromise = client.cms.hubdb.rows.batch.replaceBatch('tableIdOrName', {
-      inputs: [{ childTableId: 0, displayIndex: 0, values: { foo: {} } }],
+      inputs: [
+        {
+          childTableId: 0,
+          displayIndex: 0,
+          values: { foo: {} },
+        },
+      ],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -121,7 +141,14 @@ describe('resource batch', () => {
   test.skip('replaceBatch: required and optional params', async () => {
     const response = await client.cms.hubdb.rows.batch.replaceBatch('tableIdOrName', {
       inputs: [
-        { childTableId: 0, displayIndex: 0, values: { foo: {} }, id: 'id', name: 'name', path: 'path' },
+        {
+          childTableId: 0,
+          displayIndex: 0,
+          values: { foo: {} },
+          id: 'id',
+          name: 'name',
+          path: 'path',
+        },
       ],
     });
   });
@@ -129,7 +156,13 @@ describe('resource batch', () => {
   // Prism tests are disabled
   test.skip('updateBatch: only required params', async () => {
     const responsePromise = client.cms.hubdb.rows.batch.updateBatch('tableIdOrName', {
-      inputs: [{ childTableId: 0, displayIndex: 0, values: { foo: {} } }],
+      inputs: [
+        {
+          childTableId: 0,
+          displayIndex: 0,
+          values: { foo: {} },
+        },
+      ],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -144,7 +177,14 @@ describe('resource batch', () => {
   test.skip('updateBatch: required and optional params', async () => {
     const response = await client.cms.hubdb.rows.batch.updateBatch('tableIdOrName', {
       inputs: [
-        { childTableId: 0, displayIndex: 0, values: { foo: {} }, id: 'id', name: 'name', path: 'path' },
+        {
+          childTableId: 0,
+          displayIndex: 0,
+          values: { foo: {} },
+          id: 'id',
+          name: 'name',
+          path: 'path',
+        },
       ],
     });
   });

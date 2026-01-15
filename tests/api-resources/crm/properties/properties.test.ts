@@ -43,7 +43,13 @@ describe('resource properties', () => {
       hasUniqueValue: true,
       hidden: true,
       options: [
-        { displayOrder: 0, hidden: true, label: 'label', value: 'value', description: 'description' },
+        {
+          displayOrder: 0,
+          hidden: true,
+          label: 'label',
+          value: 'value',
+          description: 'description',
+        },
       ],
       referencedObjectType: 'referencedObjectType',
     });
@@ -74,8 +80,20 @@ describe('resource properties', () => {
       hidden: false,
       label: 'My Contact Property',
       options: [
-        { displayOrder: 1, hidden: false, label: 'Option A', value: 'A', description: 'Choice number one' },
-        { displayOrder: 2, hidden: false, label: 'Option B', value: 'B', description: 'Choice number two' },
+        {
+          displayOrder: 1,
+          hidden: false,
+          label: 'Option A',
+          value: 'A',
+          description: 'Choice number one',
+        },
+        {
+          displayOrder: 2,
+          hidden: false,
+          label: 'Option B',
+          value: 'B',
+          description: 'Choice number two',
+        },
       ],
       type: 'enumeration',
     });
@@ -99,7 +117,12 @@ describe('resource properties', () => {
     await expect(
       client.crm.properties.list(
         'objectType',
-        { archived: true, dataSensitivity: 'highly_sensitive', locale: 'locale', properties: 'properties' },
+        {
+          archived: true,
+          dataSensitivity: 'highly_sensitive',
+          locale: 'locale',
+          properties: 'properties',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Hubspot.NotFoundError);

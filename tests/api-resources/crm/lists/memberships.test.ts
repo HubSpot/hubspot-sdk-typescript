@@ -26,7 +26,11 @@ describe('resource memberships', () => {
     await expect(
       client.crm.lists.memberships.list(
         'listId',
-        { after: 'after', before: 'before', limit: 0 },
+        {
+          after: 'after',
+          before: 'before',
+          limit: 0,
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Hubspot.NotFoundError);
@@ -128,7 +132,11 @@ describe('resource memberships', () => {
     await expect(
       client.crm.lists.memberships.getPageOrderedByAddedToListDate(
         'listId',
-        { after: 'after', before: 'before', limit: 0 },
+        {
+          after: 'after',
+          before: 'before',
+          limit: 0,
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Hubspot.NotFoundError);

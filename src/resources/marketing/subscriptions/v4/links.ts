@@ -28,27 +28,27 @@ export class Links extends APIResource {
 
 export interface LinkCreateParams {
   /**
-   * Query param:
+   * Query param
    */
   channel: 'EMAIL';
 
   /**
-   * Body param:
+   * Body param
    */
   subscriberIdString: string;
 
   /**
-   * Query param:
+   * Query param
    */
   businessUnitId?: number;
 
   /**
-   * Body param:
+   * Body param
    */
   language?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   subscriptionId?: number;
 }

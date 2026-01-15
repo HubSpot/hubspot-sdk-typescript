@@ -48,7 +48,12 @@ export class Batch extends APIResource {
    * ```ts
    * const batchResponseSimplePublicObject =
    *   await client.crm.objects.emails.batch.update({
-   *     inputs: [{ id: 'id', properties: { foo: 'string' } }],
+   *     inputs: [
+   *       {
+   *         id: 'id',
+   *         properties: { foo: 'string' },
+   *       },
+   *     ],
    *   });
    * ```
    */
@@ -105,7 +110,12 @@ export class Batch extends APIResource {
    * ```ts
    * const batchResponseSimplePublicUpsertObject =
    *   await client.crm.objects.emails.batch.upsert({
-   *     inputs: [{ id: 'id', properties: { foo: 'string' } }],
+   *     inputs: [
+   *       {
+   *         id: 'id',
+   *         properties: { foo: 'string' },
+   *       },
+   *     ],
    *   });
    * ```
    */
@@ -131,7 +141,7 @@ export interface BatchDeleteParams {
 
 export interface BatchGetParams {
   /**
-   * Body param:
+   * Body param
    */
   inputs: Array<CrmAPI.SimplePublicObjectID>;
 

@@ -44,7 +44,14 @@ describe('resource emails', () => {
           buttonStyleSettings: {
             backgroundColor: {},
             cornerRadius: 0,
-            fontStyle: { bold: true, color: 'color', font: 'font', italic: true, size: 0, underline: true },
+            fontStyle: {
+              bold: true,
+              color: 'color',
+              font: 'font',
+              italic: true,
+              size: 0,
+              underline: true,
+            },
           },
           colorPickerFavorite1: 'colorPickerFavorite1',
           colorPickerFavorite2: 'colorPickerFavorite2',
@@ -52,7 +59,11 @@ describe('resource emails', () => {
           colorPickerFavorite4: 'colorPickerFavorite4',
           colorPickerFavorite5: 'colorPickerFavorite5',
           colorPickerFavorite6: 'colorPickerFavorite6',
-          dividerStyleSettings: { color: {}, height: 0, lineType: 'lineType' },
+          dividerStyleSettings: {
+            color: {},
+            height: 0,
+            lineType: 'lineType',
+          },
           emailBodyPadding: 'emailBodyPadding',
           emailBodyWidth: 'emailBodyWidth',
           headingOneFont: {
@@ -71,7 +82,14 @@ describe('resource emails', () => {
             size: 0,
             underline: true,
           },
-          linksFont: { bold: true, color: 'color', font: 'font', italic: true, size: 0, underline: true },
+          linksFont: {
+            bold: true,
+            color: 'color',
+            font: 'font',
+            italic: true,
+            size: 0,
+            underline: true,
+          },
           primaryAccentColor: 'primaryAccentColor',
           primaryFont: 'primaryFont',
           primaryFontColor: 'primaryFontColor',
@@ -86,11 +104,20 @@ describe('resource emails', () => {
         templatePath: 'templatePath',
         themeSettingsValues: { foo: {} },
         widgetContainers: { foo: {} },
-        widgets: { 'module-0-1-1': {}, 'module-1-1-1': {}, module_160676180617911: {}, preview_text: {} },
+        widgets: {
+          'module-0-1-1': {},
+          'module-1-1-1': {},
+          module_160676180617911: {},
+          preview_text: {},
+        },
       },
       feedbackSurveyId: 'feedbackSurveyId',
       folderIdV2: 0,
-      from: { customReplyTo: 'customReplyTo', fromName: 'Bruce Wayne', replyTo: 'test@hubspot.com' },
+      from: {
+        customReplyTo: 'customReplyTo',
+        fromName: 'Bruce Wayne',
+        replyTo: 'test@hubspot.com',
+      },
       jitterSendTime: true,
       language: 'af',
       publishDate: '2023-11-30T18:44:20.387Z',
@@ -375,7 +402,11 @@ describe('resource emails', () => {
     await expect(
       client.marketing.emails.listRevisions(
         'emailId',
-        { after: 'after', before: 'before', limit: 0 },
+        {
+          after: 'after',
+          before: 'before',
+          limit: 0,
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Hubspot.NotFoundError);

@@ -16,7 +16,11 @@ export class Budget extends APIResource {
    * const publicBudgetItem =
    *   await client.marketing.campaigns.budget.create(
    *     'campaignGuid',
-   *     { amount: 0, name: 'name', order: 0 },
+   *     {
+   *       amount: 0,
+   *       name: 'name',
+   *       order: 0,
+   *     },
    *   );
    * ```
    */
@@ -129,22 +133,22 @@ export interface BudgetUpdateParams {
   campaignGuid: string;
 
   /**
-   * Body param:
+   * Body param
    */
   amount: number;
 
   /**
-   * Body param:
+   * Body param
    */
   name: string;
 
   /**
-   * Body param:
+   * Body param
    */
   order: number;
 
   /**
-   * Body param:
+   * Body param
    */
   description?: string;
 }

@@ -21,27 +21,27 @@ export class Calendar extends APIResource {
 
 export interface CalendarCreateParams {
   /**
-   * Query param:
+   * Query param
    */
   organizerUserId: string;
 
   /**
-   * Body param:
+   * Body param
    */
   associations: Array<MeetingsAPI.ExternalAssociationCreateRequest>;
 
   /**
-   * Body param:
+   * Body param
    */
   emailReminderSchedule: MeetingsAPI.ExternalEmailReminderSchedule;
 
   /**
-   * Body param:
+   * Body param
    */
   properties: MeetingsAPI.ExternalCalendarMeetingEventCreateProperties;
 
   /**
-   * Body param:
+   * Body param
    */
   timezone: string;
 }

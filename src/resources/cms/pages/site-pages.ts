@@ -1913,7 +1913,7 @@ export interface SitePageUpdateParams {
   categoryId: number;
 
   /**
-   * Body param:
+   * Body param
    */
   contentGroupId: string;
 
@@ -1924,7 +1924,7 @@ export interface SitePageUpdateParams {
   contentTypeCategory: '0' | '1' | '10' | '11' | '12' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9';
 
   /**
-   * Body param:
+   * Body param
    */
   created: string;
 
@@ -1934,7 +1934,7 @@ export interface SitePageUpdateParams {
   createdById: string;
 
   /**
-   * Body param:
+   * Body param
    */
   currentlyPublished: boolean;
 
@@ -1981,12 +1981,12 @@ export interface SitePageUpdateParams {
   domain: string;
 
   /**
-   * Body param:
+   * Body param
    */
   dynamicPageDataSourceId: string;
 
   /**
-   * Body param:
+   * Body param
    */
   dynamicPageDataSourceType: number;
 
@@ -2807,7 +2807,7 @@ export interface SitePageUpdateParams {
     | 'zu-za';
 
   /**
-   * Body param:
+   * Body param
    */
   layoutSections: { [key: string]: CmsAPI.LayoutSection };
 
@@ -2913,7 +2913,7 @@ export interface SitePageUpdateParams {
   templatePath: string;
 
   /**
-   * Body param:
+   * Body param
    */
   themeSettingsValues: { [key: string]: unknown };
 
@@ -2923,12 +2923,12 @@ export interface SitePageUpdateParams {
   translatedFromId: string;
 
   /**
-   * Body param:
+   * Body param
    */
   translations: { [key: string]: PagesAPI.PagesContentLanguageVariation };
 
   /**
-   * Body param:
+   * Body param
    */
   updated: string;
 

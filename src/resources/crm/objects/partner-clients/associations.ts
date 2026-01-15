@@ -103,12 +103,12 @@ export interface AssociationUpdateParams {
 
 export interface AssociationListParams extends PageParams {
   /**
-   * Path param:
+   * Path param
    */
   partnerClientId: string;
 
   /**
-   * Query param:
+   * Query param
    */
   includeFA?: boolean;
 }

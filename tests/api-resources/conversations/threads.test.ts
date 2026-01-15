@@ -84,7 +84,11 @@ describe('resource threads', () => {
     await expect(
       client.conversations.threads.get(
         0,
-        { archived: true, association: ['TICKET'], property: 'property' },
+        {
+          archived: true,
+          association: ['TICKET'],
+          property: 'property',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Hubspot.NotFoundError);
