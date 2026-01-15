@@ -48,7 +48,12 @@ describe('resource smtpTokens', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.marketing.transactional.smtpTokens.list(
-        { after: 'after', campaignName: 'campaignName', emailCampaignId: 'emailCampaignId', limit: 0 },
+        {
+          after: 'after',
+          campaignName: 'campaignName',
+          emailCampaignId: 'emailCampaignId',
+          limit: 0,
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Hubspot.NotFoundError);

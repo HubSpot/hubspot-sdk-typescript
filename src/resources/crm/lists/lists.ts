@@ -975,7 +975,7 @@ export interface ListSearchParams {
 
 export interface ListUpdateFiltersParams {
   /**
-   * Body param:
+   * Body param
    */
   filterBranch:
     | Shared.PublicOrFilterBranch

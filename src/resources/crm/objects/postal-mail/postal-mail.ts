@@ -172,7 +172,7 @@ export interface PostalMailUpdateParams {
   properties: { [key: string]: string };
 
   /**
-   * Query param:
+   * Query param
    */
   idProperty?: string;
 }

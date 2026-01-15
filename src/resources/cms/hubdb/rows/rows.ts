@@ -33,7 +33,11 @@ export class Rows extends APIResource {
    * ```ts
    * const hubDBTableRowV3 = await client.cms.hubdb.rows.create(
    *   'tableIdOrName',
-   *   { childTableId: 0, displayIndex: 0, values: { foo: {} } },
+   *   {
+   *     childTableId: 0,
+   *     displayIndex: 0,
+   *     values: { foo: {} },
+   *   },
    * );
    * ```
    */
@@ -381,7 +385,7 @@ export interface RowReplaceDraftParams {
   childTableId: number;
 
   /**
-   * Body param:
+   * Body param
    */
   displayIndex: number;
 
@@ -415,7 +419,7 @@ export interface RowUpdateDraftParams {
   childTableId: number;
 
   /**
-   * Body param:
+   * Body param
    */
   displayIndex: number;
 

@@ -1988,7 +1988,7 @@ export interface TagUpdateParams {
   id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   created: string;
 
@@ -2767,7 +2767,7 @@ export interface TagUpdateParams {
   translatedFromId: number;
 
   /**
-   * Body param:
+   * Body param
    */
   updated: string;
 

@@ -25,7 +25,12 @@ describe('resource channels', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.conversations.channels.list(
-        { after: 'after', defaultPageLength: 0, limit: 0, sort: ['string'] },
+        {
+          after: 'after',
+          defaultPageLength: 0,
+          limit: 0,
+          sort: ['string'],
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Hubspot.NotFoundError);

@@ -2210,7 +2210,7 @@ export interface LandingPageUpdateParams {
   categoryId: number;
 
   /**
-   * Body param:
+   * Body param
    */
   contentGroupId: string;
 
@@ -2221,7 +2221,7 @@ export interface LandingPageUpdateParams {
   contentTypeCategory: '0' | '1' | '10' | '11' | '12' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9';
 
   /**
-   * Body param:
+   * Body param
    */
   created: string;
 
@@ -2231,7 +2231,7 @@ export interface LandingPageUpdateParams {
   createdById: string;
 
   /**
-   * Body param:
+   * Body param
    */
   currentlyPublished: boolean;
 
@@ -2278,12 +2278,12 @@ export interface LandingPageUpdateParams {
   domain: string;
 
   /**
-   * Body param:
+   * Body param
    */
   dynamicPageDataSourceId: string;
 
   /**
-   * Body param:
+   * Body param
    */
   dynamicPageDataSourceType: number;
 
@@ -3104,7 +3104,7 @@ export interface LandingPageUpdateParams {
     | 'zu-za';
 
   /**
-   * Body param:
+   * Body param
    */
   layoutSections: { [key: string]: CmsAPI.LayoutSection };
 
@@ -3210,7 +3210,7 @@ export interface LandingPageUpdateParams {
   templatePath: string;
 
   /**
-   * Body param:
+   * Body param
    */
   themeSettingsValues: { [key: string]: unknown };
 
@@ -3220,12 +3220,12 @@ export interface LandingPageUpdateParams {
   translatedFromId: string;
 
   /**
-   * Body param:
+   * Body param
    */
   translations: { [key: string]: PagesAPI.PagesContentLanguageVariation };
 
   /**
-   * Body param:
+   * Body param
    */
   updated: string;
 
@@ -4727,7 +4727,7 @@ export interface LandingPageUpdateFolderParams {
   category: number;
 
   /**
-   * Body param:
+   * Body param
    */
   created: string;
 
@@ -4747,7 +4747,7 @@ export interface LandingPageUpdateFolderParams {
   parentFolderId: number;
 
   /**
-   * Body param:
+   * Body param
    */
   updated: string;
 

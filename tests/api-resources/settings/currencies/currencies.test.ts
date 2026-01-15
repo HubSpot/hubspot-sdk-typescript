@@ -25,7 +25,13 @@ describe('resource currencies', () => {
   // Prism tests are disabled
   test.skip('batchCreate: required and optional params', async () => {
     const response = await client.settings.currencies.batchCreate({
-      inputs: [{ conversionRate: 0, fromCurrencyCode: 'AED', effectiveAt: '2019-12-27T18:11:19.117Z' }],
+      inputs: [
+        {
+          conversionRate: 0,
+          fromCurrencyCode: 'AED',
+          effectiveAt: '2019-12-27T18:11:19.117Z',
+        },
+      ],
     });
   });
 
@@ -63,7 +69,13 @@ describe('resource currencies', () => {
   // Prism tests are disabled
   test.skip('batchUpdate: required and optional params', async () => {
     const response = await client.settings.currencies.batchUpdate({
-      inputs: [{ id: 'id', conversionRate: 0, effectiveAt: '2019-12-27T18:11:19.117Z' }],
+      inputs: [
+        {
+          id: 'id',
+          conversionRate: 0,
+          effectiveAt: '2019-12-27T18:11:19.117Z',
+        },
+      ],
     });
   });
 
@@ -156,7 +168,12 @@ describe('resource currencies', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.settings.currencies.listExchangeRates(
-        { after: 'after', fromCurrencyCode: 'AED', limit: 0, toCurrencyCode: 'AED' },
+        {
+          after: 'after',
+          fromCurrencyCode: 'AED',
+          limit: 0,
+          toCurrencyCode: 'AED',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Hubspot.NotFoundError);

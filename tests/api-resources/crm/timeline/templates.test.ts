@@ -14,9 +14,21 @@ describe('resource templates', () => {
       name: 'PetSpot Registration',
       objectType: 'contacts',
       tokens: [
-        { label: 'Pet Name', name: 'petName', type: 'string' },
-        { label: 'Pet Age', name: 'petAge', type: 'number' },
-        { label: 'Pet Color', name: 'petColor', type: 'enumeration' },
+        {
+          label: 'Pet Name',
+          name: 'petName',
+          type: 'string',
+        },
+        {
+          label: 'Pet Age',
+          name: 'petAge',
+          type: 'number',
+        },
+        {
+          label: 'Pet Color',
+          name: 'petColor',
+          type: 'enumeration',
+        },
       ],
     });
     const rawResponse = await responsePromise.asResponse();
@@ -86,9 +98,21 @@ describe('resource templates', () => {
       id: '1001298',
       name: 'PetSpot Registration',
       tokens: [
-        { label: 'Pet Name', name: 'petName', type: 'string' },
-        { label: 'Pet Age', name: 'petAge', type: 'number' },
-        { label: 'Pet Color', name: 'petColor', type: 'enumeration' },
+        {
+          label: 'Pet Name',
+          name: 'petName',
+          type: 'string',
+        },
+        {
+          label: 'Pet Age',
+          name: 'petAge',
+          type: 'number',
+        },
+        {
+          label: 'Pet Color',
+          name: 'petColor',
+          type: 'enumeration',
+        },
       ],
     });
     const rawResponse = await responsePromise.asResponse();

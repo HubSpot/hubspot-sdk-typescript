@@ -134,17 +134,17 @@ export interface GroupCreateParams {
   appId: number;
 
   /**
-   * Body param:
+   * Body param
    */
   label: string;
 
   /**
-   * Body param:
+   * Body param
    */
   name: string;
 
   /**
-   * Body param:
+   * Body param
    */
   displayOrder?: number;
 }
@@ -196,12 +196,12 @@ export interface GroupUpdateByNameParams {
   objectType: string;
 
   /**
-   * Body param:
+   * Body param
    */
   displayOrder?: number;
 
   /**
-   * Body param:
+   * Body param
    */
   label?: string;
 }

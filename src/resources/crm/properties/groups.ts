@@ -122,17 +122,17 @@ export interface GroupCreateParams {
 
 export interface GroupUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   objectType: string;
 
   /**
-   * Body param:
+   * Body param
    */
   displayOrder?: number;
 
   /**
-   * Body param:
+   * Body param
    */
   label?: string;
 }
@@ -147,12 +147,12 @@ export interface GroupDeleteParams {
 
 export interface GroupGetParams {
   /**
-   * Path param:
+   * Path param
    */
   objectType: string;
 
   /**
-   * Query param:
+   * Query param
    */
   locale?: string;
 }

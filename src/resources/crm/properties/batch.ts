@@ -93,22 +93,22 @@ export interface BatchDeleteParams {
 
 export interface BatchGetParams {
   /**
-   * Body param:
+   * Body param
    */
   archived: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   dataSensitivity: 'highly_sensitive' | 'non_sensitive' | 'sensitive';
 
   /**
-   * Body param:
+   * Body param
    */
   inputs: Array<Shared.PropertyName>;
 
   /**
-   * Query param:
+   * Query param
    */
   locale?: string;
 }

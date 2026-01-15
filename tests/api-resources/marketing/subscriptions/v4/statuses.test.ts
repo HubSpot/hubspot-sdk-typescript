@@ -186,7 +186,11 @@ describe('resource statuses', () => {
   test.skip('getUnsubscribeAllStatus: required and optional params', async () => {
     const response = await client.marketing.subscriptions.v4.statuses.getUnsubscribeAllStatus(
       'subscriberIdString',
-      { channel: 'EMAIL', businessUnitId: 0, verbose: true },
+      {
+        channel: 'EMAIL',
+        businessUnitId: 0,
+        verbose: true,
+      },
     );
   });
 

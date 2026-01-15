@@ -104,12 +104,12 @@ export interface AppUpdateParams {
   appId: number;
 
   /**
-   * Body param:
+   * Body param
    */
   defaultState: 'ABSENT' | 'OFF' | 'ON';
 
   /**
-   * Body param:
+   * Body param
    */
   overrideState?: 'ABSENT' | 'OFF' | 'ON';
 }

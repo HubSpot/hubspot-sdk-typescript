@@ -15,7 +15,12 @@ describe('resource schemas', () => {
       labels: {},
       name: 'my_object',
       properties: [
-        { fieldType: 'select', label: 'My object property', name: 'my_object_property', type: 'enumeration' },
+        {
+          fieldType: 'select',
+          label: 'My object property',
+          name: 'my_object_property',
+          type: 'enumeration',
+        },
       ],
       requiredProperties: ['my_object_property'],
     });

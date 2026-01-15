@@ -32,7 +32,12 @@ describe('resource callbacks', () => {
   // Prism tests are disabled
   test.skip('completeBatch: only required params', async () => {
     const responsePromise = client.automation.actions.callbacks.completeBatch({
-      inputs: [{ callbackId: 'callbackId', outputFields: { foo: 'string' } }],
+      inputs: [
+        {
+          callbackId: 'callbackId',
+          outputFields: { foo: 'string' },
+        },
+      ],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -46,7 +51,12 @@ describe('resource callbacks', () => {
   // Prism tests are disabled
   test.skip('completeBatch: required and optional params', async () => {
     const response = await client.automation.actions.callbacks.completeBatch({
-      inputs: [{ callbackId: 'callbackId', outputFields: { foo: 'string' } }],
+      inputs: [
+        {
+          callbackId: 'callbackId',
+          outputFields: { foo: 'string' },
+        },
+      ],
     });
   });
 });

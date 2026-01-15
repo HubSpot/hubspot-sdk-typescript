@@ -12,7 +12,13 @@ describe('resource batch', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.crm.properties.batch.create('objectType', {
       inputs: [
-        { fieldType: 'booleancheckbox', groupName: 'groupName', label: 'label', name: 'name', type: 'bool' },
+        {
+          fieldType: 'booleancheckbox',
+          groupName: 'groupName',
+          label: 'label',
+          name: 'name',
+          type: 'bool',
+        },
       ],
     });
     const rawResponse = await responsePromise.asResponse();
@@ -43,7 +49,13 @@ describe('resource batch', () => {
           hasUniqueValue: true,
           hidden: true,
           options: [
-            { displayOrder: 0, hidden: true, label: 'label', value: 'value', description: 'description' },
+            {
+              displayOrder: 0,
+              hidden: true,
+              label: 'label',
+              value: 'value',
+              description: 'description',
+            },
           ],
           referencedObjectType: 'referencedObjectType',
         },

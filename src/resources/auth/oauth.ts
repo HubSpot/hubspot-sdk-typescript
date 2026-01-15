@@ -170,52 +170,52 @@ export interface TokenResponseIf {
 
 export interface OAuthCreateAccessTokenParams {
   /**
-   * Query param:
+   * Query param
    */
   query_client_secret?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   query_refresh_token?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   client_id?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body_client_secret?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   code?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   code_verifier?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   grant_type?: 'authorization_code' | 'client_credentials' | 'refresh_token';
 
   /**
-   * Body param:
+   * Body param
    */
   redirect_uri?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body_refresh_token?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   scope?: string;
 }

@@ -154,7 +154,11 @@ describe('resource settings', () => {
     await expect(
       client.cms.blogs.settings.listRevisions(
         'blogId',
-        { after: 'after', before: 'before', limit: 0 },
+        {
+          after: 'after',
+          before: 'before',
+          limit: 0,
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Hubspot.NotFoundError);

@@ -55,10 +55,24 @@ describe('resource posts', () => {
             {
               cssClass: 'cssClass',
               styles: {
-                backgroundColor: { a: 0, b: 0, g: 0, r: 0 },
+                backgroundColor: {
+                  a: 0,
+                  b: 0,
+                  g: 0,
+                  r: 0,
+                },
                 backgroundGradient: {
                   angle: { units: 'units', value: 0 },
-                  colors: [{ color: { a: 0, b: 0, g: 0, r: 0 } }],
+                  colors: [
+                    {
+                      color: {
+                        a: 0,
+                        b: 0,
+                        g: 0,
+                        r: 0,
+                      },
+                    },
+                  ],
                   sideOrCorner: { horizontalSide: 'horizontalSide', verticalSide: 'verticalSide' },
                 },
                 backgroundImage: {
@@ -75,10 +89,24 @@ describe('resource posts', () => {
           ],
           rows: [{}],
           styles: {
-            backgroundColor: { a: 0, b: 0, g: 0, r: 0 },
+            backgroundColor: {
+              a: 0,
+              b: 0,
+              g: 0,
+              r: 0,
+            },
             backgroundGradient: {
               angle: { units: 'units', value: 0 },
-              colors: [{ color: { a: 0, b: 0, g: 0, r: 0 } }],
+              colors: [
+                {
+                  color: {
+                    a: 0,
+                    b: 0,
+                    g: 0,
+                    r: 0,
+                  },
+                },
+              ],
               sideOrCorner: { horizontalSide: 'horizontalSide', verticalSide: 'verticalSide' },
             },
             backgroundImage: {
@@ -198,10 +226,24 @@ describe('resource posts', () => {
             {
               cssClass: 'cssClass',
               styles: {
-                backgroundColor: { a: 0, b: 0, g: 0, r: 0 },
+                backgroundColor: {
+                  a: 0,
+                  b: 0,
+                  g: 0,
+                  r: 0,
+                },
                 backgroundGradient: {
                   angle: { units: 'units', value: 0 },
-                  colors: [{ color: { a: 0, b: 0, g: 0, r: 0 } }],
+                  colors: [
+                    {
+                      color: {
+                        a: 0,
+                        b: 0,
+                        g: 0,
+                        r: 0,
+                      },
+                    },
+                  ],
                   sideOrCorner: { horizontalSide: 'horizontalSide', verticalSide: 'verticalSide' },
                 },
                 backgroundImage: {
@@ -213,16 +255,36 @@ describe('resource posts', () => {
                 forceFullWidthSection: true,
                 maxWidthSectionCentering: 0,
                 verticalAlignment: 'verticalAlignment',
-                breakpointStyles: { foo: { hidden: true, margin: {}, padding: {} } },
+                breakpointStyles: {
+                  foo: {
+                    hidden: true,
+                    margin: {},
+                    padding: {},
+                  },
+                },
               },
             },
           ],
           rows: [{}],
           styles: {
-            backgroundColor: { a: 0, b: 0, g: 0, r: 0 },
+            backgroundColor: {
+              a: 0,
+              b: 0,
+              g: 0,
+              r: 0,
+            },
             backgroundGradient: {
               angle: { units: 'units', value: 0 },
-              colors: [{ color: { a: 0, b: 0, g: 0, r: 0 } }],
+              colors: [
+                {
+                  color: {
+                    a: 0,
+                    b: 0,
+                    g: 0,
+                    r: 0,
+                  },
+                },
+              ],
               sideOrCorner: { horizontalSide: 'horizontalSide', verticalSide: 'verticalSide' },
             },
             backgroundImage: {
@@ -234,7 +296,13 @@ describe('resource posts', () => {
             forceFullWidthSection: true,
             maxWidthSectionCentering: 0,
             verticalAlignment: 'verticalAlignment',
-            breakpointStyles: { foo: { hidden: true, margin: {}, padding: {} } },
+            breakpointStyles: {
+              foo: {
+                hidden: true,
+                margin: {},
+                padding: {},
+              },
+            },
           },
           type: 'type',
           w: 0,
@@ -337,10 +405,24 @@ describe('resource posts', () => {
             {
               cssClass: 'cssClass',
               styles: {
-                backgroundColor: { a: 0, b: 0, g: 0, r: 0 },
+                backgroundColor: {
+                  a: 0,
+                  b: 0,
+                  g: 0,
+                  r: 0,
+                },
                 backgroundGradient: {
                   angle: { units: 'units', value: 0 },
-                  colors: [{ color: { a: 0, b: 0, g: 0, r: 0 } }],
+                  colors: [
+                    {
+                      color: {
+                        a: 0,
+                        b: 0,
+                        g: 0,
+                        r: 0,
+                      },
+                    },
+                  ],
                   sideOrCorner: { horizontalSide: 'horizontalSide', verticalSide: 'verticalSide' },
                 },
                 backgroundImage: {
@@ -357,10 +439,24 @@ describe('resource posts', () => {
           ],
           rows: [{}],
           styles: {
-            backgroundColor: { a: 0, b: 0, g: 0, r: 0 },
+            backgroundColor: {
+              a: 0,
+              b: 0,
+              g: 0,
+              r: 0,
+            },
             backgroundGradient: {
               angle: { units: 'units', value: 0 },
-              colors: [{ color: { a: 0, b: 0, g: 0, r: 0 } }],
+              colors: [
+                {
+                  color: {
+                    a: 0,
+                    b: 0,
+                    g: 0,
+                    r: 0,
+                  },
+                },
+              ],
               sideOrCorner: { horizontalSide: 'horizontalSide', verticalSide: 'verticalSide' },
             },
             backgroundImage: {
@@ -480,10 +576,24 @@ describe('resource posts', () => {
             {
               cssClass: 'cssClass',
               styles: {
-                backgroundColor: { a: 0, b: 0, g: 0, r: 0 },
+                backgroundColor: {
+                  a: 0,
+                  b: 0,
+                  g: 0,
+                  r: 0,
+                },
                 backgroundGradient: {
                   angle: { units: 'units', value: 0 },
-                  colors: [{ color: { a: 0, b: 0, g: 0, r: 0 } }],
+                  colors: [
+                    {
+                      color: {
+                        a: 0,
+                        b: 0,
+                        g: 0,
+                        r: 0,
+                      },
+                    },
+                  ],
                   sideOrCorner: { horizontalSide: 'horizontalSide', verticalSide: 'verticalSide' },
                 },
                 backgroundImage: {
@@ -495,16 +605,36 @@ describe('resource posts', () => {
                 forceFullWidthSection: true,
                 maxWidthSectionCentering: 0,
                 verticalAlignment: 'verticalAlignment',
-                breakpointStyles: { foo: { hidden: true, margin: {}, padding: {} } },
+                breakpointStyles: {
+                  foo: {
+                    hidden: true,
+                    margin: {},
+                    padding: {},
+                  },
+                },
               },
             },
           ],
           rows: [{}],
           styles: {
-            backgroundColor: { a: 0, b: 0, g: 0, r: 0 },
+            backgroundColor: {
+              a: 0,
+              b: 0,
+              g: 0,
+              r: 0,
+            },
             backgroundGradient: {
               angle: { units: 'units', value: 0 },
-              colors: [{ color: { a: 0, b: 0, g: 0, r: 0 } }],
+              colors: [
+                {
+                  color: {
+                    a: 0,
+                    b: 0,
+                    g: 0,
+                    r: 0,
+                  },
+                },
+              ],
               sideOrCorner: { horizontalSide: 'horizontalSide', verticalSide: 'verticalSide' },
             },
             backgroundImage: {
@@ -516,7 +646,13 @@ describe('resource posts', () => {
             forceFullWidthSection: true,
             maxWidthSectionCentering: 0,
             verticalAlignment: 'verticalAlignment',
-            breakpointStyles: { foo: { hidden: true, margin: {}, padding: {} } },
+            breakpointStyles: {
+              foo: {
+                hidden: true,
+                margin: {},
+                padding: {},
+              },
+            },
           },
           type: 'type',
           w: 0,
@@ -776,7 +912,11 @@ describe('resource posts', () => {
     await expect(
       client.cms.blogs.posts.getPreviousVersions(
         'objectId',
-        { after: 'after', before: 'before', limit: 0 },
+        {
+          after: 'after',
+          before: 'before',
+          limit: 0,
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Hubspot.NotFoundError);
@@ -931,10 +1071,24 @@ describe('resource posts', () => {
             {
               cssClass: 'cssClass',
               styles: {
-                backgroundColor: { a: 0, b: 0, g: 0, r: 0 },
+                backgroundColor: {
+                  a: 0,
+                  b: 0,
+                  g: 0,
+                  r: 0,
+                },
                 backgroundGradient: {
                   angle: { units: 'units', value: 0 },
-                  colors: [{ color: { a: 0, b: 0, g: 0, r: 0 } }],
+                  colors: [
+                    {
+                      color: {
+                        a: 0,
+                        b: 0,
+                        g: 0,
+                        r: 0,
+                      },
+                    },
+                  ],
                   sideOrCorner: { horizontalSide: 'horizontalSide', verticalSide: 'verticalSide' },
                 },
                 backgroundImage: {
@@ -951,10 +1105,24 @@ describe('resource posts', () => {
           ],
           rows: [{}],
           styles: {
-            backgroundColor: { a: 0, b: 0, g: 0, r: 0 },
+            backgroundColor: {
+              a: 0,
+              b: 0,
+              g: 0,
+              r: 0,
+            },
             backgroundGradient: {
               angle: { units: 'units', value: 0 },
-              colors: [{ color: { a: 0, b: 0, g: 0, r: 0 } }],
+              colors: [
+                {
+                  color: {
+                    a: 0,
+                    b: 0,
+                    g: 0,
+                    r: 0,
+                  },
+                },
+              ],
               sideOrCorner: { horizontalSide: 'horizontalSide', verticalSide: 'verticalSide' },
             },
             backgroundImage: {
@@ -1074,10 +1242,24 @@ describe('resource posts', () => {
             {
               cssClass: 'cssClass',
               styles: {
-                backgroundColor: { a: 0, b: 0, g: 0, r: 0 },
+                backgroundColor: {
+                  a: 0,
+                  b: 0,
+                  g: 0,
+                  r: 0,
+                },
                 backgroundGradient: {
                   angle: { units: 'units', value: 0 },
-                  colors: [{ color: { a: 0, b: 0, g: 0, r: 0 } }],
+                  colors: [
+                    {
+                      color: {
+                        a: 0,
+                        b: 0,
+                        g: 0,
+                        r: 0,
+                      },
+                    },
+                  ],
                   sideOrCorner: { horizontalSide: 'horizontalSide', verticalSide: 'verticalSide' },
                 },
                 backgroundImage: {
@@ -1089,16 +1271,36 @@ describe('resource posts', () => {
                 forceFullWidthSection: true,
                 maxWidthSectionCentering: 0,
                 verticalAlignment: 'verticalAlignment',
-                breakpointStyles: { foo: { hidden: true, margin: {}, padding: {} } },
+                breakpointStyles: {
+                  foo: {
+                    hidden: true,
+                    margin: {},
+                    padding: {},
+                  },
+                },
               },
             },
           ],
           rows: [{}],
           styles: {
-            backgroundColor: { a: 0, b: 0, g: 0, r: 0 },
+            backgroundColor: {
+              a: 0,
+              b: 0,
+              g: 0,
+              r: 0,
+            },
             backgroundGradient: {
               angle: { units: 'units', value: 0 },
-              colors: [{ color: { a: 0, b: 0, g: 0, r: 0 } }],
+              colors: [
+                {
+                  color: {
+                    a: 0,
+                    b: 0,
+                    g: 0,
+                    r: 0,
+                  },
+                },
+              ],
               sideOrCorner: { horizontalSide: 'horizontalSide', verticalSide: 'verticalSide' },
             },
             backgroundImage: {
@@ -1110,7 +1312,13 @@ describe('resource posts', () => {
             forceFullWidthSection: true,
             maxWidthSectionCentering: 0,
             verticalAlignment: 'verticalAlignment',
-            breakpointStyles: { foo: { hidden: true, margin: {}, padding: {} } },
+            breakpointStyles: {
+              foo: {
+                hidden: true,
+                margin: {},
+                padding: {},
+              },
+            },
           },
           type: 'type',
           w: 0,

@@ -12,7 +12,11 @@ describe('resource events', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.crm.timeline.events.create({
       eventTemplateId: '1001298',
-      tokens: { petAge: 'string', petColor: 'black', petName: 'Art3mis' },
+      tokens: {
+        petAge: 'string',
+        petColor: 'black',
+        petName: 'Art3mis',
+      },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,7 +31,11 @@ describe('resource events', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.crm.timeline.events.create({
       eventTemplateId: '1001298',
-      tokens: { petAge: 'string', petColor: 'black', petName: 'Art3mis' },
+      tokens: {
+        petAge: 'string',
+        petColor: 'black',
+        petName: 'Art3mis',
+      },
       id: 'id',
       domain: 'domain',
       email: 'art3mis-pup@petspot.com',
@@ -54,8 +62,22 @@ describe('resource events', () => {
   test.skip('batchCreate: only required params', async () => {
     const responsePromise = client.crm.timeline.events.batchCreate({
       inputs: [
-        { eventTemplateId: '1001298', tokens: { petAge: 'string', petColor: 'black', petName: 'Art3mis' } },
-        { eventTemplateId: '1001298', tokens: { petAge: 'string', petColor: 'yellow', petName: 'Pocket' } },
+        {
+          eventTemplateId: '1001298',
+          tokens: {
+            petAge: 'string',
+            petColor: 'black',
+            petName: 'Art3mis',
+          },
+        },
+        {
+          eventTemplateId: '1001298',
+          tokens: {
+            petAge: 'string',
+            petColor: 'yellow',
+            petName: 'Pocket',
+          },
+        },
       ],
     });
     const rawResponse = await responsePromise.asResponse();
@@ -73,7 +95,11 @@ describe('resource events', () => {
       inputs: [
         {
           eventTemplateId: '1001298',
-          tokens: { petAge: 'string', petColor: 'black', petName: 'Art3mis' },
+          tokens: {
+            petAge: 'string',
+            petColor: 'black',
+            petName: 'Art3mis',
+          },
           id: 'id',
           domain: 'domain',
           email: 'art3mis-pup@petspot.com',
@@ -96,7 +122,11 @@ describe('resource events', () => {
         },
         {
           eventTemplateId: '1001298',
-          tokens: { petAge: 'string', petColor: 'yellow', petName: 'Pocket' },
+          tokens: {
+            petAge: 'string',
+            petColor: 'yellow',
+            petName: 'Pocket',
+          },
           id: 'id',
           domain: 'domain',
           email: 'pocket-tiger@petspot.com',

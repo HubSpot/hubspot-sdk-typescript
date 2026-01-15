@@ -25,7 +25,11 @@ describe('resource propertyValidations', () => {
     const responsePromise =
       client.crm.propertyValidations.crmV3PropertyValidationsObjectTypeIDPropertyNameRuleTypeRuleType(
         'AFTER_DATETIME_DURATION',
-        { objectTypeId: 'objectTypeId', propertyName: 'propertyName', ruleArguments: ['string'] },
+        {
+          objectTypeId: 'objectTypeId',
+          propertyName: 'propertyName',
+          ruleArguments: ['string'],
+        },
       );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -41,7 +45,11 @@ describe('resource propertyValidations', () => {
     const response =
       await client.crm.propertyValidations.crmV3PropertyValidationsObjectTypeIDPropertyNameRuleTypeRuleType(
         'AFTER_DATETIME_DURATION',
-        { objectTypeId: 'objectTypeId', propertyName: 'propertyName', ruleArguments: ['string'] },
+        {
+          objectTypeId: 'objectTypeId',
+          propertyName: 'propertyName',
+          ruleArguments: ['string'],
+        },
       );
   });
 

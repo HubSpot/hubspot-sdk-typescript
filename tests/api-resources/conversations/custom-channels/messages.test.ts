@@ -31,11 +31,27 @@ describe('resource messages', () => {
   // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.conversations.customChannels.messages.create(0, {
-      attachments: [{ fileId: 'fileId', type: 'FILE', fileUsageType: 'fileUsageType' }],
+      attachments: [
+        {
+          fileId: 'fileId',
+          type: 'FILE',
+          fileUsageType: 'fileUsageType',
+        },
+      ],
       channelAccountId: 'channelAccountId',
       messageDirection: 'INCOMING',
-      recipients: [{ deliveryIdentifier: { type: 'type', value: 'value' }, name: 'name' }],
-      senders: [{ deliveryIdentifier: { type: 'type', value: 'value' }, name: 'name' }],
+      recipients: [
+        {
+          deliveryIdentifier: { type: 'type', value: 'value' },
+          name: 'name',
+        },
+      ],
+      senders: [
+        {
+          deliveryIdentifier: { type: 'type', value: 'value' },
+          name: 'name',
+        },
+      ],
       text: 'text',
       timestamp: '2019-12-27T18:11:19.117Z',
       inReplyToId: 'inReplyToId',

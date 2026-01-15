@@ -19,23 +19,23 @@ fi
 
 echo "==> Starting mock server with URL ${URL}"
 
-# Run prism mock on the given spec
+# Run steady mock on the given spec
 if [ "$1" == "--daemon" ]; then
-  npm exec --package=@stainless-api/prism-cli@5.15.0 -- prism mock "$URL" &> .prism.log &
+  npm exec --package=@stdy/cli@0.13.1 -- steady --host 127.0.0.1 -p 4010 "$URL" &> .stdy.log &
 
   # Wait for server to come online
   echo -n "Waiting for server"
-  while ! grep -q "✖  fatal\|Prism is listening" ".prism.log" ; do
+  while ! grep -q "ERROR\|Steady server listening on" ".stdy.log" ; do
     echo -n "."
     sleep 0.1
   done
 
-  if grep -q "✖  fatal" ".prism.log"; then
-    cat .prism.log
+  if grep -q "ERROR" ".stdy.log"; then
+    cat .stdy.log
     exit 1
   fi
 
   echo
 else
-  npm exec --package=@stainless-api/prism-cli@5.15.0 -- prism mock "$URL"
+  npm exec --package=@stdy/cli@0.13.1 -- steady --host 127.0.0.1 -p 4010 "$URL"
 fi

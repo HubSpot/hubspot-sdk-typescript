@@ -63,7 +63,13 @@ describe('resource campaigns', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.marketing.campaigns.list(
-        { after: 'after', limit: 0, name: 'name', properties: ['string'], sort: 'sort' },
+        {
+          after: 'after',
+          limit: 0,
+          name: 'name',
+          properties: ['string'],
+          sort: 'sort',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Hubspot.NotFoundError);
@@ -99,7 +105,11 @@ describe('resource campaigns', () => {
     await expect(
       client.marketing.campaigns.get(
         'campaignGuid',
-        { endDate: 'endDate', properties: ['string'], startDate: 'startDate' },
+        {
+          endDate: 'endDate',
+          properties: ['string'],
+          startDate: 'startDate',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Hubspot.NotFoundError);

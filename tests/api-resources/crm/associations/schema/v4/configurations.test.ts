@@ -24,7 +24,13 @@ describe('resource configurations', () => {
   test.skip('batchCreate: only required params', async () => {
     const responsePromise = client.crm.associations.schema.v4.configurations.batchCreate('toObjectType', {
       fromObjectType: 'fromObjectType',
-      inputs: [{ category: 'HUBSPOT_DEFINED', maxToObjectIds: 0, typeId: 0 }],
+      inputs: [
+        {
+          category: 'HUBSPOT_DEFINED',
+          maxToObjectIds: 0,
+          typeId: 0,
+        },
+      ],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -39,7 +45,13 @@ describe('resource configurations', () => {
   test.skip('batchCreate: required and optional params', async () => {
     const response = await client.crm.associations.schema.v4.configurations.batchCreate('toObjectType', {
       fromObjectType: 'fromObjectType',
-      inputs: [{ category: 'HUBSPOT_DEFINED', maxToObjectIds: 0, typeId: 0 }],
+      inputs: [
+        {
+          category: 'HUBSPOT_DEFINED',
+          maxToObjectIds: 0,
+          typeId: 0,
+        },
+      ],
     });
   });
 
@@ -70,7 +82,13 @@ describe('resource configurations', () => {
   test.skip('batchUpdate: only required params', async () => {
     const responsePromise = client.crm.associations.schema.v4.configurations.batchUpdate('toObjectType', {
       fromObjectType: 'fromObjectType',
-      inputs: [{ category: 'HUBSPOT_DEFINED', maxToObjectIds: 0, typeId: 0 }],
+      inputs: [
+        {
+          category: 'HUBSPOT_DEFINED',
+          maxToObjectIds: 0,
+          typeId: 0,
+        },
+      ],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -85,7 +103,13 @@ describe('resource configurations', () => {
   test.skip('batchUpdate: required and optional params', async () => {
     const response = await client.crm.associations.schema.v4.configurations.batchUpdate('toObjectType', {
       fromObjectType: 'fromObjectType',
-      inputs: [{ category: 'HUBSPOT_DEFINED', maxToObjectIds: 0, typeId: 0 }],
+      inputs: [
+        {
+          category: 'HUBSPOT_DEFINED',
+          maxToObjectIds: 0,
+          typeId: 0,
+        },
+      ],
     });
   });
 

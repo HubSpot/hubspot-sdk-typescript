@@ -25,7 +25,12 @@ describe('resource owners', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.crm.owners.list(
-        { after: 'after', archived: true, email: 'email', limit: 0 },
+        {
+          after: 'after',
+          archived: true,
+          email: 'email',
+          limit: 0,
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Hubspot.NotFoundError);

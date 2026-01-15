@@ -32,7 +32,11 @@ describe('resource integratorSettings', () => {
   // Prism tests are disabled
   test.skip('createOembedDomain: only required params', async () => {
     const responsePromise = client.cms.mediaBridge.integratorSettings.createOembedDomain(0, {
-      endpoints: { discovery: true, schemes: ['string'], url: 'url' },
+      endpoints: {
+        discovery: true,
+        schemes: ['string'],
+        url: 'url',
+      },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -46,7 +50,11 @@ describe('resource integratorSettings', () => {
   // Prism tests are disabled
   test.skip('createOembedDomain: required and optional params', async () => {
     const response = await client.cms.mediaBridge.integratorSettings.createOembedDomain(0, {
-      endpoints: { discovery: true, schemes: ['string'], url: 'url' },
+      endpoints: {
+        discovery: true,
+        schemes: ['string'],
+        url: 'url',
+      },
       portalId: 0,
     });
   });
@@ -225,7 +233,11 @@ describe('resource integratorSettings', () => {
   test.skip('updateOembedDomain: only required params', async () => {
     const responsePromise = client.cms.mediaBridge.integratorSettings.updateOembedDomain('oEmbedDomainId', {
       appId: 0,
-      endpoints: { discovery: true, schemes: ['string'], url: 'url' },
+      endpoints: {
+        discovery: true,
+        schemes: ['string'],
+        url: 'url',
+      },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -240,7 +252,11 @@ describe('resource integratorSettings', () => {
   test.skip('updateOembedDomain: required and optional params', async () => {
     const response = await client.cms.mediaBridge.integratorSettings.updateOembedDomain('oEmbedDomainId', {
       appId: 0,
-      endpoints: { discovery: true, schemes: ['string'], url: 'url' },
+      endpoints: {
+        discovery: true,
+        schemes: ['string'],
+        url: 'url',
+      },
       portalId: 0,
     });
   });

@@ -2958,7 +2958,7 @@ export interface PostUpdateParams {
   id: string;
 
   /**
-   * Body param:
+   * Body param
    */
   abStatus:
     | 'automated_loser_variant'
@@ -2971,7 +2971,7 @@ export interface PostUpdateParams {
     | 'variant';
 
   /**
-   * Body param:
+   * Body param
    */
   abTestId: string;
 
@@ -3041,7 +3041,7 @@ export interface PostUpdateParams {
     | '9';
 
   /**
-   * Body param:
+   * Body param
    */
   created: string;
 
@@ -3051,7 +3051,7 @@ export interface PostUpdateParams {
   createdById: string;
 
   /**
-   * Body param:
+   * Body param
    */
   currentlyPublished: boolean;
 
@@ -3099,12 +3099,12 @@ export interface PostUpdateParams {
   domain: string;
 
   /**
-   * Body param:
+   * Body param
    */
   dynamicPageDataSourceId: string;
 
   /**
-   * Body param:
+   * Body param
    */
   dynamicPageDataSourceType: number;
 
@@ -3142,7 +3142,7 @@ export interface PostUpdateParams {
   featuredImageAltText: string;
 
   /**
-   * Body param:
+   * Body param
    */
   folderId: string;
 
@@ -3932,7 +3932,7 @@ export interface PostUpdateParams {
     | 'zu-za';
 
   /**
-   * Body param:
+   * Body param
    */
   layoutSections: { [key: string]: CmsAPI.LayoutSection };
 
@@ -3943,7 +3943,7 @@ export interface PostUpdateParams {
   linkRelCanonicalUrl: string;
 
   /**
-   * Body param:
+   * Body param
    */
   mabExperimentId: string;
 
@@ -3958,22 +3958,22 @@ export interface PostUpdateParams {
   name: string;
 
   /**
-   * Body param:
+   * Body param
    */
   pageExpiryDate: number;
 
   /**
-   * Body param:
+   * Body param
    */
   pageExpiryEnabled: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   pageExpiryRedirectId: number;
 
   /**
-   * Body param:
+   * Body param
    */
   pageExpiryRedirectUrl: string;
 
@@ -4042,7 +4042,7 @@ export interface PostUpdateParams {
   tagIds: Array<number>;
 
   /**
-   * Body param:
+   * Body param
    */
   themeSettingsValues: { [key: string]: unknown };
 
@@ -4052,12 +4052,12 @@ export interface PostUpdateParams {
   translatedFromId: string;
 
   /**
-   * Body param:
+   * Body param
    */
   translations: { [key: string]: PagesAPI.PagesContentLanguageVariation };
 
   /**
-   * Body param:
+   * Body param
    */
   updated: string;
 

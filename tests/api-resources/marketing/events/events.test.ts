@@ -258,7 +258,13 @@ describe('resource events', () => {
 
   test('deleteBatchByExternalEventID: required and optional params', async () => {
     const response = await client.marketing.events.deleteBatchByExternalEventID({
-      inputs: [{ appId: 0, externalAccountId: 'externalAccountId', externalEventId: 'externalEventId' }],
+      inputs: [
+        {
+          appId: 0,
+          externalAccountId: 'externalAccountId',
+          externalEventId: 'externalEventId',
+        },
+      ],
     });
   });
 
@@ -691,7 +697,13 @@ describe('resource events', () => {
     const response = await client.marketing.events.upsertSubscriberStateByID('subscriberState', {
       externalEventId: 'externalEventId',
       externalAccountId: 'externalAccountId',
-      inputs: [{ interactionDateTime: 0, properties: { foo: 'string' }, vid: 0 }],
+      inputs: [
+        {
+          interactionDateTime: 0,
+          properties: { foo: 'string' },
+          vid: 0,
+        },
+      ],
     });
   });
 });

@@ -192,7 +192,7 @@ export interface ObjectCreateParams {
 
 export interface ObjectUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   objectType: string;
 
@@ -241,7 +241,7 @@ export interface ObjectDeleteParams {
 
 export interface ObjectGetParams {
   /**
-   * Path param:
+   * Path param
    */
   objectType: string;
 

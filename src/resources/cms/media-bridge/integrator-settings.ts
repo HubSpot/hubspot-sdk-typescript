@@ -337,12 +337,12 @@ export interface IntegratorSettingUpdateOembedDomainParams {
   appId: number;
 
   /**
-   * Body param:
+   * Body param
    */
   endpoints: MediaBridgeAPI.Endpoints;
 
   /**
-   * Body param:
+   * Body param
    */
   portalId?: number;
 }

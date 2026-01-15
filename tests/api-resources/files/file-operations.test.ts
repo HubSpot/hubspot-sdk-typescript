@@ -122,7 +122,11 @@ describe('resource fileOperations', () => {
     await expect(
       client.files.fileOperations.getSignedURL(
         '321669910225',
-        { expirationSeconds: 0, size: 'icon', upscale: true },
+        {
+          expirationSeconds: 0,
+          size: 'icon',
+          upscale: true,
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Hubspot.NotFoundError);

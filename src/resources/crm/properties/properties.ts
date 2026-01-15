@@ -324,7 +324,7 @@ export interface PropertyCreateParams {
 
 export interface PropertyUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   objectType: string;
 
@@ -413,7 +413,7 @@ export interface PropertyDeleteParams {
 
 export interface PropertyGetParams {
   /**
-   * Path param:
+   * Path param
    */
   objectType: string;
 
@@ -423,17 +423,17 @@ export interface PropertyGetParams {
   archived?: boolean;
 
   /**
-   * Query param:
+   * Query param
    */
   dataSensitivity?: 'highly_sensitive' | 'non_sensitive' | 'sensitive';
 
   /**
-   * Query param:
+   * Query param
    */
   locale?: string;
 
   /**
-   * Query param:
+   * Query param
    */
   properties?: string;
 }

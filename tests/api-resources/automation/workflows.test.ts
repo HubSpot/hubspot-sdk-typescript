@@ -135,7 +135,12 @@ describe('resource workflows', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.automation.workflows.listEmailCampaigns(
-        { after: 'after', before: 'before', flowId: ['string'], limit: 0 },
+        {
+          after: 'after',
+          before: 'before',
+          flowId: ['string'],
+          limit: 0,
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Hubspot.NotFoundError);

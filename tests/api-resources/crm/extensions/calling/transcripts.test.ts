@@ -13,7 +13,12 @@ describe('resource transcripts', () => {
     const responsePromise = client.crm.extensions.calling.transcripts.create({
       engagementId: 0,
       transcriptCreateUtterances: [
-        { endTimeMillis: 0, speaker: { id: 'id', name: 'name' }, startTimeMillis: 0, text: 'text' },
+        {
+          endTimeMillis: 0,
+          speaker: { id: 'id', name: 'name' },
+          startTimeMillis: 0,
+          text: 'text',
+        },
       ],
     });
     const rawResponse = await responsePromise.asResponse();
@@ -32,7 +37,11 @@ describe('resource transcripts', () => {
       transcriptCreateUtterances: [
         {
           endTimeMillis: 0,
-          speaker: { id: 'id', name: 'name', email: 'email' },
+          speaker: {
+            id: 'id',
+            name: 'name',
+            email: 'email',
+          },
           startTimeMillis: 0,
           text: 'text',
           languageCode: 'languageCode',

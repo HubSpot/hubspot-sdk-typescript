@@ -103,7 +103,7 @@ export interface BatchCreateParams {
   fromObjectType: string;
 
   /**
-   * Body param:
+   * Body param
    */
   inputs: Array<AssociationsAPI.PublicAssociation>;
 }
@@ -115,7 +115,7 @@ export interface BatchDeleteParams {
   fromObjectType: string;
 
   /**
-   * Body param:
+   * Body param
    */
   inputs: Array<AssociationsAPI.PublicAssociation>;
 }
@@ -127,7 +127,7 @@ export interface BatchGetParams {
   fromObjectType: string;
 
   /**
-   * Body param:
+   * Body param
    */
   inputs: Array<Shared.PublicObjectID>;
 }

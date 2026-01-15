@@ -18,7 +18,11 @@ export class ChannelAccounts extends APIResource {
    * const publicChannelAccount =
    *   await client.conversations.customChannels.channelAccounts.create(
    *     0,
-   *     { authorized: true, inboxId: 'inboxId', name: 'name' },
+   *     {
+   *       authorized: true,
+   *       inboxId: 'inboxId',
+   *       name: 'name',
+   *     },
    *   );
    * ```
    */
@@ -127,12 +131,12 @@ export interface ChannelAccountUpdateParams {
   channelId: number;
 
   /**
-   * Body param:
+   * Body param
    */
   authorized?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   name?: string;
 }

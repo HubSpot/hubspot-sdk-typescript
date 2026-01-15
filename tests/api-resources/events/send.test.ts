@@ -39,7 +39,12 @@ describe('resource send', () => {
   // Prism tests are disabled
   test.skip('sendBatch: only required params', async () => {
     const responsePromise = client.events.send.sendBatch({
-      inputs: [{ eventName: 'eventName', properties: { foo: 'string' } }],
+      inputs: [
+        {
+          eventName: 'eventName',
+          properties: { foo: 'string' },
+        },
+      ],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);

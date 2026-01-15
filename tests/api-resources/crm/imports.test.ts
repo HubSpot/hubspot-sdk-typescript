@@ -51,7 +51,11 @@ describe('resource imports', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.crm.imports.list(
-        { after: 'after', before: 'before', limit: 0 },
+        {
+          after: 'after',
+          before: 'before',
+          limit: 0,
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Hubspot.NotFoundError);
@@ -99,7 +103,12 @@ describe('resource imports', () => {
     await expect(
       client.crm.imports.listErrors(
         0,
-        { after: 'after', includeErrorMessage: true, includeRowData: true, limit: 0 },
+        {
+          after: 'after',
+          includeErrorMessage: true,
+          includeRowData: true,
+          limit: 0,
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Hubspot.NotFoundError);

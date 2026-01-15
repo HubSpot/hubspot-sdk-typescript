@@ -47,7 +47,12 @@ describe('resource batch', () => {
   test.skip('delete: only required params', async () => {
     const responsePromise = client.crm.associations.v4.batch.delete('toObjectType', {
       fromObjectType: 'fromObjectType',
-      inputs: [{ from: { id: '37295' }, to: [{ id: '37295' }] }],
+      inputs: [
+        {
+          from: { id: '37295' },
+          to: [{ id: '37295' }],
+        },
+      ],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -62,7 +67,12 @@ describe('resource batch', () => {
   test.skip('delete: required and optional params', async () => {
     const response = await client.crm.associations.v4.batch.delete('toObjectType', {
       fromObjectType: 'fromObjectType',
-      inputs: [{ from: { id: '37295' }, to: [{ id: '37295' }] }],
+      inputs: [
+        {
+          from: { id: '37295' },
+          to: [{ id: '37295' }],
+        },
+      ],
     });
   });
 
@@ -70,7 +80,12 @@ describe('resource batch', () => {
   test.skip('createDefault: only required params', async () => {
     const responsePromise = client.crm.associations.v4.batch.createDefault('toObjectType', {
       fromObjectType: 'fromObjectType',
-      inputs: [{ from: { id: '37295' }, to: { id: '37295' } }],
+      inputs: [
+        {
+          from: { id: '37295' },
+          to: { id: '37295' },
+        },
+      ],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -85,7 +100,12 @@ describe('resource batch', () => {
   test.skip('createDefault: required and optional params', async () => {
     const response = await client.crm.associations.v4.batch.createDefault('toObjectType', {
       fromObjectType: 'fromObjectType',
-      inputs: [{ from: { id: '37295' }, to: { id: '37295' } }],
+      inputs: [
+        {
+          from: { id: '37295' },
+          to: { id: '37295' },
+        },
+      ],
     });
   });
 

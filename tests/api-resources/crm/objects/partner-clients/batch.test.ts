@@ -38,7 +38,12 @@ describe('resource batch', () => {
   // Prism tests are disabled
   test.skip('batchUpdate: only required params', async () => {
     const responsePromise = client.crm.objects.partnerClients.batch.batchUpdate({
-      inputs: [{ id: 'id', properties: { foo: 'string' } }],
+      inputs: [
+        {
+          id: 'id',
+          properties: { foo: 'string' },
+        },
+      ],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);

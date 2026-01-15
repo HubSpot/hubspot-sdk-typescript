@@ -145,7 +145,7 @@ export interface PortalUpdateParams {
   flagName: string;
 
   /**
-   * Body param:
+   * Body param
    */
   flagState: 'ABSENT' | 'OFF' | 'ON';
 }
@@ -169,7 +169,7 @@ export interface PortalBatchDeleteParams {
   appId: number;
 
   /**
-   * Body param:
+   * Body param
    */
   portalIds: Array<number>;
 }
@@ -181,7 +181,7 @@ export interface PortalBatchUpsertParams {
   appId: number;
 
   /**
-   * Body param:
+   * Body param
    */
   portalStates: Array<FeatureFlagsAPI.BatchPortalEntry>;
 }

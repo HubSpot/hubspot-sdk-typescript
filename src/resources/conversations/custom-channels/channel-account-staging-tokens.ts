@@ -47,12 +47,12 @@ export interface ChannelAccountStagingTokenUpdateParams {
   channelId: number;
 
   /**
-   * Body param:
+   * Body param
    */
   accountName: string;
 
   /**
-   * Body param:
+   * Body param
    */
   deliveryIdentifier: ConversationsAPI.PublicDeliveryIdentifier;
 }

@@ -114,24 +114,24 @@ export interface MessageListParams extends PageParams {
 
 export interface MessageGetParams {
   /**
-   * Path param:
+   * Path param
    */
   threadId: number;
 
   /**
-   * Query param:
+   * Query param
    */
   property?: string;
 }
 
 export interface MessageGetOriginalContentParams {
   /**
-   * Path param:
+   * Path param
    */
   threadId: number;
 
   /**
-   * Query param:
+   * Query param
    */
   property?: string;
 }

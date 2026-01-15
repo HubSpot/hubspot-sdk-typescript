@@ -153,7 +153,7 @@ export interface FunctionCreateOrReplaceParams {
   functionType: 'POST_ACTION_EXECUTION' | 'POST_FETCH_OPTIONS' | 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS';
 
   /**
-   * Body param:
+   * Body param
    */
   body: string;
 }
@@ -170,7 +170,7 @@ export interface FunctionCreateOrReplaceByFunctionTypeParams {
   definitionId: string;
 
   /**
-   * Body param:
+   * Body param
    */
   body: string;
 }

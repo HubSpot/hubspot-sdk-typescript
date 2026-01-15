@@ -58,7 +58,10 @@ export class Batch extends APIResource {
    *     {
    *       fromObjectType: 'fromObjectType',
    *       inputs: [
-   *         { from: { id: '37295' }, to: [{ id: '37295' }] },
+   *         {
+   *           from: { id: '37295' },
+   *           to: [{ id: '37295' }],
+   *         },
    *       ],
    *     },
    *   );
@@ -87,7 +90,10 @@ export class Batch extends APIResource {
    *     {
    *       fromObjectType: 'fromObjectType',
    *       inputs: [
-   *         { from: { id: '37295' }, to: { id: '37295' } },
+   *         {
+   *           from: { id: '37295' },
+   *           to: { id: '37295' },
+   *         },
    *       ],
    *     },
    *   );
@@ -183,7 +189,7 @@ export interface BatchCreateParams {
   fromObjectType: string;
 
   /**
-   * Body param:
+   * Body param
    */
   inputs: Array<V4API.PublicAssociationMultiPost>;
 }
@@ -196,7 +202,7 @@ export interface BatchDeleteParams {
   fromObjectType: string;
 
   /**
-   * Body param:
+   * Body param
    */
   inputs: Array<V4API.PublicAssociationMultiArchive>;
 }
@@ -208,7 +214,7 @@ export interface BatchCreateDefaultParams {
   fromObjectType: string;
 
   /**
-   * Body param:
+   * Body param
    */
   inputs: Array<V4API.PublicDefaultAssociationMultiPost>;
 }
@@ -220,7 +226,7 @@ export interface BatchDeleteLabelsParams {
   fromObjectType: string;
 
   /**
-   * Body param:
+   * Body param
    */
   inputs: Array<V4API.PublicAssociationMultiPost>;
 }
@@ -232,7 +238,7 @@ export interface BatchGetParams {
   fromObjectType: string;
 
   /**
-   * Body param:
+   * Body param
    */
   inputs: Array<V4API.PublicFetchAssociationsBatchRequest>;
 }

@@ -222,7 +222,7 @@ export interface PropertyCreateParams {
   appId: number;
 
   /**
-   * Body param:
+   * Body param
    */
   fieldType:
     | 'booleancheckbox'
@@ -239,72 +239,72 @@ export interface PropertyCreateParams {
     | 'textarea';
 
   /**
-   * Body param:
+   * Body param
    */
   groupName: string;
 
   /**
-   * Body param:
+   * Body param
    */
   label: string;
 
   /**
-   * Body param:
+   * Body param
    */
   name: string;
 
   /**
-   * Body param:
+   * Body param
    */
   type: 'bool' | 'date' | 'datetime' | 'enumeration' | 'number' | 'phone_number' | 'string';
 
   /**
-   * Body param:
+   * Body param
    */
   calculationFormula?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   dataSensitivity?: 'highly_sensitive' | 'non_sensitive' | 'sensitive';
 
   /**
-   * Body param:
+   * Body param
    */
   description?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   displayOrder?: number;
 
   /**
-   * Body param:
+   * Body param
    */
   externalOptions?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   formField?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   hasUniqueValue?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   hidden?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   options?: Array<Shared.OptionInput>;
 
   /**
-   * Body param:
+   * Body param
    */
   referencedObjectType?: string;
 }
@@ -322,22 +322,22 @@ export interface PropertyUpdateParams {
   objectType: string;
 
   /**
-   * Body param:
+   * Body param
    */
   calculationFormula?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   description?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   displayOrder?: number;
 
   /**
-   * Body param:
+   * Body param
    */
   fieldType?:
     | 'booleancheckbox'
@@ -354,37 +354,37 @@ export interface PropertyUpdateParams {
     | 'textarea';
 
   /**
-   * Body param:
+   * Body param
    */
   formField?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   groupName?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   hasUniqueValue?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   hidden?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   label?: string;
 
   /**
-   * Body param:
+   * Body param
    */
   options?: Array<Shared.OptionInput>;
 
   /**
-   * Body param:
+   * Body param
    */
   type?: 'bool' | 'date' | 'datetime' | 'enumeration' | 'number' | 'phone_number' | 'string';
 }
@@ -428,7 +428,7 @@ export interface PropertyCreateBatchParams {
   appId: number;
 
   /**
-   * Body param:
+   * Body param
    */
   inputs: Array<Shared.PropertyCreate>;
 }
@@ -441,7 +441,7 @@ export interface PropertyDeleteBatchParams {
   appId: number;
 
   /**
-   * Body param:
+   * Body param
    */
   inputs: Array<Shared.PropertyName>;
 }
@@ -477,17 +477,17 @@ export interface PropertyGetBatchParams {
   appId: number;
 
   /**
-   * Body param:
+   * Body param
    */
   archived: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   dataSensitivity: 'highly_sensitive' | 'non_sensitive' | 'sensitive';
 
   /**
-   * Body param:
+   * Body param
    */
   inputs: Array<Shared.PropertyName>;
 }

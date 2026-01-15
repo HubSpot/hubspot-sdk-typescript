@@ -150,7 +150,7 @@ export interface MessageUpdateParams {
   statusType: 'FAILED' | 'READ' | 'SENT';
 
   /**
-   * Body param:
+   * Body param
    */
   errorMessage?: string;
 }

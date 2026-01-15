@@ -236,7 +236,7 @@ export interface SourceCodeCreateParams {
   environment: string;
 
   /**
-   * Body param:
+   * Body param
    */
   file?: Uploadable;
 }
@@ -266,7 +266,7 @@ export interface SourceCodeGetMetadataParams {
   environment: string;
 
   /**
-   * Query param:
+   * Query param
    */
   properties?: string;
 }
@@ -278,19 +278,19 @@ export interface SourceCodeUpsertParams {
   environment: string;
 
   /**
-   * Body param:
+   * Body param
    */
   file?: Uploadable;
 }
 
 export interface SourceCodeValidateParams {
   /**
-   * Path param:
+   * Path param
    */
   environment: string;
 
   /**
-   * Body param:
+   * Body param
    */
   file?: Uploadable;
 }

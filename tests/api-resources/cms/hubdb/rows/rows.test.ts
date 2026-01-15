@@ -53,7 +53,14 @@ describe('resource rows', () => {
     await expect(
       client.cms.hubdb.rows.list(
         'tableIdOrName',
-        { after: 'after', archived: true, limit: 0, offset: 0, properties: ['string'], sort: ['string'] },
+        {
+          after: 'after',
+          archived: true,
+          limit: 0,
+          offset: 0,
+          properties: ['string'],
+          sort: ['string'],
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Hubspot.NotFoundError);
@@ -162,7 +169,14 @@ describe('resource rows', () => {
     await expect(
       client.cms.hubdb.rows.listDraft(
         'tableIdOrName',
-        { after: 'after', archived: true, limit: 0, offset: 0, properties: ['string'], sort: ['string'] },
+        {
+          after: 'after',
+          archived: true,
+          limit: 0,
+          offset: 0,
+          properties: ['string'],
+          sort: ['string'],
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Hubspot.NotFoundError);

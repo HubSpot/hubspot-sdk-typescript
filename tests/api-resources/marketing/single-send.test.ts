@@ -10,7 +10,10 @@ const client = new Hubspot({
 describe('resource singleSend', () => {
   // Prism tests are disabled
   test.skip('send: only required params', async () => {
-    const responsePromise = client.marketing.singleSend.send({ emailId: 0, message: { to: 'to' } });
+    const responsePromise = client.marketing.singleSend.send({
+      emailId: 0,
+      message: { to: 'to' },
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

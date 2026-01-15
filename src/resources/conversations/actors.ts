@@ -52,7 +52,7 @@ export interface ActorBatchReadParams {
   inputs: Array<string>;
 
   /**
-   * Query param:
+   * Query param
    */
   property?: string;
 }

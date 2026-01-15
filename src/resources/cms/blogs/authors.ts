@@ -2150,7 +2150,7 @@ export interface AuthorUpdateParams {
   bio: string;
 
   /**
-   * Body param:
+   * Body param
    */
   created: string;
 
@@ -2175,7 +2175,7 @@ export interface AuthorUpdateParams {
   facebook: string;
 
   /**
-   * Body param:
+   * Body param
    */
   fullName: string;
 
@@ -2944,12 +2944,12 @@ export interface AuthorUpdateParams {
   linkedin: string;
 
   /**
-   * Body param:
+   * Body param
    */
   name: string;
 
   /**
-   * Body param:
+   * Body param
    */
   slug: string;
 
@@ -2965,7 +2965,7 @@ export interface AuthorUpdateParams {
   twitter: string;
 
   /**
-   * Body param:
+   * Body param
    */
   updated: string;
 

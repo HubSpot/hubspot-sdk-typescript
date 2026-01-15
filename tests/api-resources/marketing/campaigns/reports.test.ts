@@ -50,7 +50,11 @@ describe('resource reports', () => {
     await expect(
       client.marketing.campaigns.reports.getRevenueAttribution(
         'campaignGuid',
-        { attributionModel: 'attributionModel', endDate: 'endDate', startDate: 'startDate' },
+        {
+          attributionModel: 'attributionModel',
+          endDate: 'endDate',
+          startDate: 'startDate',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Hubspot.NotFoundError);

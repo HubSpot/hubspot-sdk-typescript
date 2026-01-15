@@ -133,36 +133,36 @@ export class Configurations extends APIResource {
 
 export interface ConfigurationBatchCreateParams {
   /**
-   * Path param:
+   * Path param
    */
   fromObjectType: string;
 
   /**
-   * Body param:
+   * Body param
    */
   inputs: Array<V4API.PublicAssociationDefinitionConfigurationCreateRequest>;
 }
 
 export interface ConfigurationBatchDeleteParams {
   /**
-   * Path param:
+   * Path param
    */
   fromObjectType: string;
 
   /**
-   * Body param:
+   * Body param
    */
   inputs: Array<V4API.PublicAssociationSpec>;
 }
 
 export interface ConfigurationBatchUpdateParams {
   /**
-   * Path param:
+   * Path param
    */
   fromObjectType: string;
 
   /**
-   * Body param:
+   * Body param
    */
   inputs: Array<V4API.PublicAssociationDefinitionConfigurationUpdateRequest>;
 }

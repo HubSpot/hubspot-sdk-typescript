@@ -1754,12 +1754,12 @@ export interface EventCompleteByExternalEventIDParams {
   externalAccountId: string;
 
   /**
-   * Body param:
+   * Body param
    */
   endDateTime: string;
 
   /**
-   * Body param:
+   * Body param
    */
   startDateTime: string;
 }
@@ -1831,7 +1831,7 @@ export interface EventUpdateByExternalEventIDParams {
   eventCancelled?: boolean;
 
   /**
-   * Body param:
+   * Body param
    */
   eventCompleted?: boolean;
 
