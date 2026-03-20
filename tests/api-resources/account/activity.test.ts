@@ -8,7 +8,7 @@ const client = new Hubspot({
 });
 
 describe('resource activity', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('listAuditLogs', async () => {
     const responsePromise = client.account.activity.listAuditLogs();
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource activity', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('listAuditLogs: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -28,6 +28,7 @@ describe('resource activity', () => {
         {
           actingUserId: [0],
           after: 'after',
+          fillFinalTimestamp: true,
           limit: 0,
           occurredAfter: '2019-12-27T18:11:19.117Z',
           occurredBefore: '2019-12-27T18:11:19.117Z',
@@ -38,7 +39,7 @@ describe('resource activity', () => {
     ).rejects.toThrow(Hubspot.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('listLoginActivities', async () => {
     const responsePromise = client.account.activity.listLoginActivities();
     const rawResponse = await responsePromise.asResponse();
@@ -50,7 +51,7 @@ describe('resource activity', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('listLoginActivities: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -65,7 +66,7 @@ describe('resource activity', () => {
     ).rejects.toThrow(Hubspot.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('listSecurityActivities', async () => {
     const responsePromise = client.account.activity.listSecurityActivities();
     const rawResponse = await responsePromise.asResponse();
@@ -77,7 +78,7 @@ describe('resource activity', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('listSecurityActivities: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(

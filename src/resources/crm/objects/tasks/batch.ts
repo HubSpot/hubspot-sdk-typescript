@@ -1,80 +1,45 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
-import * as CrmAPI from '../../crm';
+import * as ObjectsAPI from '../objects';
 import { APIPromise } from '../../../../core/api-promise';
 import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
+import { path } from '../../../../internal/utils/path';
 
 export class Batch extends APIResource {
   /**
-   * Create a batch of tasks
-   *
-   * @example
-   * ```ts
-   * const batchResponseSimplePublicObject =
-   *   await client.crm.objects.tasks.batch.create({
-   *     inputs: [
-   *       {
-   *         associations: [
-   *           {
-   *             to: { id: '37295' },
-   *             types: [
-   *               {
-   *                 associationCategory: 'HUBSPOT_DEFINED',
-   *                 associationTypeId: 0,
-   *               },
-   *             ],
-   *           },
-   *         ],
-   *         properties: { foo: 'string' },
-   *       },
-   *     ],
-   *   });
-   * ```
+   * Create multiple tasks in a single request by providing a batch of task
+   * properties and associations. This endpoint allows for efficient task creation by
+   * processing multiple tasks together.
    */
   create(
+    objectType: string,
     body: BatchCreateParams,
     options?: RequestOptions,
-  ): APIPromise<CrmAPI.BatchResponseSimplePublicObject> {
-    return this._client.post('/crm/v3/objects/tasks/batch/create', { body, ...options });
+  ): APIPromise<ObjectsAPI.BatchResponseSimplePublicObject> {
+    return this._client.post(path`/crm/objects/2026-03/${objectType}/batch/create`, { body, ...options });
   }
 
   /**
-   * Update a batch of tasks by internal ID, or unique property values
-   *
-   * @example
-   * ```ts
-   * const batchResponseSimplePublicObject =
-   *   await client.crm.objects.tasks.batch.update({
-   *     inputs: [
-   *       {
-   *         id: 'id',
-   *         properties: { foo: 'string' },
-   *       },
-   *     ],
-   *   });
-   * ```
+   * Update multiple tasks in a single request using their internal IDs or unique
+   * property values. This operation allows you to modify the properties of each task
+   * in the batch, ensuring efficient management of task data.
    */
   update(
+    objectType: string,
     body: BatchUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<CrmAPI.BatchResponseSimplePublicObject> {
-    return this._client.post('/crm/v3/objects/tasks/batch/update', { body, ...options });
+  ): APIPromise<ObjectsAPI.BatchResponseSimplePublicObject> {
+    return this._client.post(path`/crm/objects/2026-03/${objectType}/batch/update`, { body, ...options });
   }
 
   /**
-   * Archive a batch of tasks by ID
-   *
-   * @example
-   * ```ts
-   * await client.crm.objects.tasks.batch.delete({
-   *   inputs: [{ id: 'id' }],
-   * });
-   * ```
+   * Archive a batch of tasks by their IDs, moving them to the recycling bin. This
+   * operation requires a list of task IDs to be provided in the request body.
    */
-  delete(body: BatchDeleteParams, options?: RequestOptions): APIPromise<void> {
-    return this._client.post('/crm/v3/objects/tasks/batch/archive', {
+  delete(objectType: string, body: BatchDeleteParams, options?: RequestOptions): APIPromise<void> {
+    return this._client.post(path`/crm/objects/2026-03/${objectType}/batch/archive`, {
       body,
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
@@ -84,65 +49,51 @@ export class Batch extends APIResource {
   /**
    * Retrieve records by record ID or include the `idProperty` parameter to retrieve
    * records by a custom unique value property.
-   *
-   * @example
-   * ```ts
-   * const batchResponseSimplePublicObject =
-   *   await client.crm.objects.tasks.batch.get({
-   *     inputs: [{ id: 'id' }],
-   *     properties: ['string'],
-   *     propertiesWithHistory: ['string'],
-   *   });
-   * ```
    */
-  get(params: BatchGetParams, options?: RequestOptions): APIPromise<CrmAPI.BatchResponseSimplePublicObject> {
+  get(
+    objectType: string,
+    params: BatchGetParams,
+    options?: RequestOptions,
+  ): APIPromise<ObjectsAPI.BatchResponseSimplePublicObject> {
     const { archived, ...body } = params;
-    return this._client.post('/crm/v3/objects/tasks/batch/read', { query: { archived }, body, ...options });
+    return this._client.post(path`/crm/objects/2026-03/${objectType}/batch/read`, {
+      query: { archived },
+      body,
+      ...options,
+    });
   }
 
   /**
    * Create or update records identified by a unique property value as specified by
    * the `idProperty` query param. `idProperty` query param refers to a property
    * whose values are unique for the object.
-   *
-   * @example
-   * ```ts
-   * const batchResponseSimplePublicUpsertObject =
-   *   await client.crm.objects.tasks.batch.upsert({
-   *     inputs: [
-   *       {
-   *         id: 'id',
-   *         properties: { foo: 'string' },
-   *       },
-   *     ],
-   *   });
-   * ```
    */
   upsert(
+    objectType: string,
     body: BatchUpsertParams,
     options?: RequestOptions,
-  ): APIPromise<CrmAPI.BatchResponseSimplePublicUpsertObject> {
-    return this._client.post('/crm/v3/objects/tasks/batch/upsert', { body, ...options });
+  ): APIPromise<ObjectsAPI.BatchResponseSimplePublicUpsertObject> {
+    return this._client.post(path`/crm/objects/2026-03/${objectType}/batch/upsert`, { body, ...options });
   }
 }
 
 export interface BatchCreateParams {
-  inputs: Array<CrmAPI.SimplePublicObjectBatchInputForCreate>;
+  inputs: Array<ObjectsAPI.SimplePublicObjectBatchInputForCreate>;
 }
 
 export interface BatchUpdateParams {
-  inputs: Array<CrmAPI.SimplePublicObjectBatchInput>;
+  inputs: Array<ObjectsAPI.SimplePublicObjectBatchInput>;
 }
 
 export interface BatchDeleteParams {
-  inputs: Array<CrmAPI.SimplePublicObjectID>;
+  inputs: Array<ObjectsAPI.SimplePublicObjectID>;
 }
 
 export interface BatchGetParams {
   /**
    * Body param
    */
-  inputs: Array<CrmAPI.SimplePublicObjectID>;
+  inputs: Array<ObjectsAPI.SimplePublicObjectID>;
 
   /**
    * Body param: Key-value pairs for setting properties for the new object.
@@ -161,14 +112,14 @@ export interface BatchGetParams {
   archived?: boolean;
 
   /**
-   * Body param: A unique property used to identify objects instead of the default
-   * ID.
+   * Body param: When using a custom unique value property to retrieve records, the
+   * name of the property. Do not include this parameter if retrieving by record ID.
    */
   idProperty?: string;
 }
 
 export interface BatchUpsertParams {
-  inputs: Array<CrmAPI.SimplePublicObjectBatchInputUpsert>;
+  inputs: Array<ObjectsAPI.SimplePublicObjectBatchInputUpsert>;
 }
 
 export declare namespace Batch {

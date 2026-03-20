@@ -29,17 +29,10 @@ const client = new Hubspot({
   accessToken: 'pat-na1-xxxxxxxx-xxxx',
 });
 
-const result = await client.crm.objects.contacts.create({
-  associations: [
-    {
-      to: { id: '37295' },
-      types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
-    },
-  ],
-  properties: { email: 'mark.s@lumon.industries' },
-});
+const page = await client.account.activity.listAuditLogs();
+const publicAPIUserActionEvent = page.results[0];
 
-console.log(result.createdResourceId);
+console.log(publicAPIUserActionEvent.id);
 ```
 
 ### Request & Response types
@@ -54,59 +47,11 @@ const client = new Hubspot({
   accessToken: 'pat-na1-xxxxxxxx-xxxx',
 });
 
-const params: Hubspot.Crm.Objects.ContactCreateParams = {
-  associations: [
-    {
-      to: { id: '37295' },
-      types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
-    },
-  ],
-  properties: { email: 'mark.s@lumon.industries' },
-};
-const createdResponseSimplePublicObject: Hubspot.CreatedResponseSimplePublicObject =
-  await client.crm.objects.contacts.create(params);
+const [publicAPIUserActionEvent]: [Hubspot.Account.PublicAPIUserActionEvent] =
+  await client.account.activity.listAuditLogs();
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
-
-## File uploads
-
-Request parameters that correspond to file uploads can be passed in many different forms:
-
-- `File` (or an object with the same structure)
-- a `fetch` `Response` (or an object with the same structure)
-- an `fs.ReadStream`
-- the return value of our `toFile` helper
-
-```ts
-import fs from 'fs';
-import Hubspot, { toFile } from 'hubspot-sdk';
-
-const client = new Hubspot();
-
-// If you have access to Node `fs` we recommend using `fs.createReadStream()`:
-await client.cms.hubdb.tables.importDraft('tableIdOrName', {
-  file: fs.createReadStream('/path/to/file'),
-});
-
-// Or if you have the web `File` API you can pass a `File` instance:
-await client.cms.hubdb.tables.importDraft('tableIdOrName', {
-  file: new File(['my bytes'], 'file'),
-});
-
-// You can also pass a `fetch` `Response`:
-await client.cms.hubdb.tables.importDraft('tableIdOrName', {
-  file: await fetch('https://somesite/file'),
-});
-
-// Finally, if none of the above are convenient, you can use our `toFile` helper:
-await client.cms.hubdb.tables.importDraft('tableIdOrName', {
-  file: await toFile(Buffer.from('my bytes'), 'file'),
-});
-await client.cms.hubdb.tables.importDraft('tableIdOrName', {
-  file: await toFile(new Uint8Array([0, 1, 2]), 'file'),
-});
-```
 
 ## Handling errors
 
@@ -116,25 +61,15 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const createdResponseSimplePublicObject = await client.crm.objects.contacts
-  .create({
-    associations: [
-      {
-        to: { id: '37295' },
-        types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
-      },
-    ],
-    properties: { email: 'mark.s@lumon.industries' },
-  })
-  .catch(async (err) => {
-    if (err instanceof Hubspot.APIError) {
-      console.log(err.status); // 400
-      console.log(err.name); // BadRequestError
-      console.log(err.headers); // {server: 'nginx', ...}
-    } else {
-      throw err;
-    }
-  });
+const page = await client.account.activity.listAuditLogs().catch(async (err) => {
+  if (err instanceof Hubspot.APIError) {
+    console.log(err.status); // 400
+    console.log(err.name); // BadRequestError
+    console.log(err.headers); // {server: 'nginx', ...}
+  } else {
+    throw err;
+  }
+});
 ```
 
 Error codes are as follows:
@@ -166,13 +101,7 @@ const client = new Hubspot({
 });
 
 // Or, configure per-request:
-await client.crm.objects.contacts.create({
-  associations: [{
-  to: { id: '37295' },
-  types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
-}],
-  properties: { email: 'mark.s@lumon.industries' },
-}, {
+await client.account.activity.listAuditLogs({
   maxRetries: 5,
 });
 ```
@@ -189,13 +118,7 @@ const client = new Hubspot({
 });
 
 // Override per-request:
-await client.crm.objects.contacts.create({
-  associations: [{
-  to: { id: '37295' },
-  types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
-}],
-  properties: { email: 'mark.s@lumon.industries' },
-}, {
+await client.account.activity.listAuditLogs({
   timeout: 5 * 1000,
 });
 ```
@@ -210,24 +133,22 @@ List methods in the Hubspot API are paginated.
 You can use the `for await … of` syntax to iterate through items across all pages:
 
 ```ts
-async function fetchAllSimplePublicObjectWithAssociations(params) {
-  const allSimplePublicObjectWithAssociations = [];
+async function fetchAllPublicAPIUserActionEvents(params) {
+  const allPublicAPIUserActionEvents = [];
   // Automatically fetches more pages as needed.
-  for await (const simplePublicObjectWithAssociations of client.crm.objects.contacts.list({
-    limit: 100,
-  })) {
-    allSimplePublicObjectWithAssociations.push(simplePublicObjectWithAssociations);
+  for await (const publicAPIUserActionEvent of client.account.activity.listAuditLogs()) {
+    allPublicAPIUserActionEvents.push(publicAPIUserActionEvent);
   }
-  return allSimplePublicObjectWithAssociations;
+  return allPublicAPIUserActionEvents;
 }
 ```
 
 Alternatively, you can request a single page at a time:
 
 ```ts
-let page = await client.crm.objects.contacts.list({ limit: 100 });
-for (const simplePublicObjectWithAssociations of page.results) {
-  console.log(simplePublicObjectWithAssociations);
+let page = await client.account.activity.listAuditLogs();
+for (const publicAPIUserActionEvent of page.results) {
+  console.log(publicAPIUserActionEvent);
 }
 
 // Convenience methods are provided for manually paginating:
@@ -251,33 +172,15 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new Hubspot();
 
-const response = await client.crm.objects.contacts
-  .create({
-    associations: [
-      {
-        to: { id: '37295' },
-        types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
-      },
-    ],
-    properties: { email: 'mark.s@lumon.industries' },
-  })
-  .asResponse();
+const response = await client.account.activity.listAuditLogs().asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: createdResponseSimplePublicObject, response: raw } = await client.crm.objects.contacts
-  .create({
-    associations: [
-      {
-        to: { id: '37295' },
-        types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
-      },
-    ],
-    properties: { email: 'mark.s@lumon.industries' },
-  })
-  .withResponse();
+const { data: page, response: raw } = await client.account.activity.listAuditLogs().withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(createdResponseSimplePublicObject.createdResourceId);
+for await (const publicAPIUserActionEvent of page) {
+  console.log(publicAPIUserActionEvent.id);
+}
 ```
 
 ### Logging
@@ -357,7 +260,7 @@ parameter. This library doesn't validate at runtime that the request matches the
 send will be sent as-is.
 
 ```ts
-client.crm.objects.contacts.create({
+client.account.activity.listAuditLogs({
   // ...
   // @ts-expect-error baz is not yet public
   baz: 'undocumented option',

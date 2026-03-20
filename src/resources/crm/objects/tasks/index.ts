@@ -8,11 +8,4 @@ export {
   type BatchGetParams,
   type BatchUpsertParams,
 } from './batch';
-export {
-  Tasks,
-  type TaskCreateParams,
-  type TaskUpdateParams,
-  type TaskListParams,
-  type TaskGetParams,
-  type TaskSearchParams,
-} from './tasks';
+export { Tasks, type TaskDeleteParams } from './tasks';

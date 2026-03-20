@@ -7,10 +7,10 @@ const client = new Hubspot({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource batch', () => {
+describe('resource custom', () => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.crm.objects.tasks.batch.create('objectType', {
+    const responsePromise = client.crm.objects.custom.create('objectType', {
       inputs: [
         {
           associations: [
@@ -34,7 +34,7 @@ describe('resource batch', () => {
 
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
-    const response = await client.crm.objects.tasks.batch.create('objectType', {
+    const response = await client.crm.objects.custom.create('objectType', {
       inputs: [
         {
           associations: [
@@ -52,7 +52,7 @@ describe('resource batch', () => {
 
   // Mock server tests are disabled
   test.skip('update: only required params', async () => {
-    const responsePromise = client.crm.objects.tasks.batch.update('objectType', {
+    const responsePromise = client.crm.objects.custom.update('objectType', {
       inputs: [
         {
           id: 'id',
@@ -71,7 +71,7 @@ describe('resource batch', () => {
 
   // Mock server tests are disabled
   test.skip('update: required and optional params', async () => {
-    const response = await client.crm.objects.tasks.batch.update('objectType', {
+    const response = await client.crm.objects.custom.update('objectType', {
       inputs: [
         {
           id: 'id',
@@ -84,10 +84,39 @@ describe('resource batch', () => {
   });
 
   // Mock server tests are disabled
+  test.skip('list', async () => {
+    const responsePromise = client.crm.objects.custom.list('objectType');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.crm.objects.custom.list(
+        'objectType',
+        {
+          after: 'after',
+          archived: true,
+          associations: ['string'],
+          limit: 0,
+          properties: ['string'],
+          propertiesWithHistory: ['string'],
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Hubspot.NotFoundError);
+  });
+
+  // Mock server tests are disabled
   test.skip('delete: only required params', async () => {
-    const responsePromise = client.crm.objects.tasks.batch.delete('objectType', {
-      inputs: [{ id: '430001' }],
-    });
+    const responsePromise = client.crm.objects.custom.delete('objectType', { inputs: [{ id: '430001' }] });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -99,14 +128,12 @@ describe('resource batch', () => {
 
   // Mock server tests are disabled
   test.skip('delete: required and optional params', async () => {
-    const response = await client.crm.objects.tasks.batch.delete('objectType', {
-      inputs: [{ id: '430001' }],
-    });
+    const response = await client.crm.objects.custom.delete('objectType', { inputs: [{ id: '430001' }] });
   });
 
   // Mock server tests are disabled
   test.skip('get: only required params', async () => {
-    const responsePromise = client.crm.objects.tasks.batch.get('objectType', {
+    const responsePromise = client.crm.objects.custom.get('objectType', {
       inputs: [{ id: '430001' }],
       properties: ['string'],
       propertiesWithHistory: ['string'],
@@ -122,7 +149,7 @@ describe('resource batch', () => {
 
   // Mock server tests are disabled
   test.skip('get: required and optional params', async () => {
-    const response = await client.crm.objects.tasks.batch.get('objectType', {
+    const response = await client.crm.objects.custom.get('objectType', {
       inputs: [{ id: '430001' }],
       properties: ['string'],
       propertiesWithHistory: ['string'],
@@ -132,8 +159,73 @@ describe('resource batch', () => {
   });
 
   // Mock server tests are disabled
+  test.skip('merge: only required params', async () => {
+    const responsePromise = client.crm.objects.custom.merge('objectType', {
+      objectIdToMerge: 'objectIdToMerge',
+      primaryObjectId: 'primaryObjectId',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('merge: required and optional params', async () => {
+    const response = await client.crm.objects.custom.merge('objectType', {
+      objectIdToMerge: 'objectIdToMerge',
+      primaryObjectId: 'primaryObjectId',
+    });
+  });
+
+  // Mock server tests are disabled
+  test.skip('search: only required params', async () => {
+    const responsePromise = client.crm.objects.custom.search('objectType', {
+      after: 'after',
+      filterGroups: [{ filters: [{ operator: 'BETWEEN', propertyName: 'propertyName' }] }],
+      limit: 0,
+      properties: ['string'],
+      sorts: ['string'],
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('search: required and optional params', async () => {
+    const response = await client.crm.objects.custom.search('objectType', {
+      after: 'after',
+      filterGroups: [
+        {
+          filters: [
+            {
+              operator: 'BETWEEN',
+              propertyName: 'propertyName',
+              highValue: 'highValue',
+              value: 'value',
+              values: ['string'],
+            },
+          ],
+        },
+      ],
+      limit: 0,
+      properties: ['string'],
+      sorts: ['string'],
+      query: 'query',
+    });
+  });
+
+  // Mock server tests are disabled
   test.skip('upsert: only required params', async () => {
-    const responsePromise = client.crm.objects.tasks.batch.upsert('objectType', {
+    const responsePromise = client.crm.objects.custom.upsert('objectType', {
       inputs: [
         {
           id: 'id',
@@ -152,7 +244,7 @@ describe('resource batch', () => {
 
   // Mock server tests are disabled
   test.skip('upsert: required and optional params', async () => {
-    const response = await client.crm.objects.tasks.batch.upsert('objectType', {
+    const response = await client.crm.objects.custom.upsert('objectType', {
       inputs: [
         {
           id: 'id',
