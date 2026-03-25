@@ -20,7 +20,16 @@ import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
 import { Account } from './resources/account/account';
+import { Automation } from './resources/automation/automation';
+import { Cms } from './resources/cms/cms';
 import { Crm } from './resources/crm/crm';
+import { DataStudio } from './resources/data-studio/data-studio';
+import { Events } from './resources/events/events';
+import { Files } from './resources/files/files';
+import { Marketing } from './resources/marketing/marketing';
+import { Meta } from './resources/meta/meta';
+import { Scheduler } from './resources/scheduler/scheduler';
+import { Settings } from './resources/settings/settings';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
@@ -748,11 +757,29 @@ export class Hubspot {
   static toFile = Uploads.toFile;
 
   account: API.Account = new API.Account(this);
+  automation: API.Automation = new API.Automation(this);
+  cms: API.Cms = new API.Cms(this);
   crm: API.Crm = new API.Crm(this);
+  dataStudio: API.DataStudio = new API.DataStudio(this);
+  events: API.Events = new API.Events(this);
+  files: API.Files = new API.Files(this);
+  marketing: API.Marketing = new API.Marketing(this);
+  meta: API.Meta = new API.Meta(this);
+  scheduler: API.Scheduler = new API.Scheduler(this);
+  settings: API.Settings = new API.Settings(this);
 }
 
 Hubspot.Account = Account;
+Hubspot.Automation = Automation;
+Hubspot.Cms = Cms;
 Hubspot.Crm = Crm;
+Hubspot.DataStudio = DataStudio;
+Hubspot.Events = Events;
+Hubspot.Files = Files;
+Hubspot.Marketing = Marketing;
+Hubspot.Meta = Meta;
+Hubspot.Scheduler = Scheduler;
+Hubspot.Settings = Settings;
 
 export declare namespace Hubspot {
   export type RequestOptions = Opts.RequestOptions;
@@ -762,10 +789,33 @@ export declare namespace Hubspot {
 
   export { Account as Account };
 
+  export { Automation as Automation };
+
+  export { Cms as Cms };
+
   export { Crm as Crm };
 
+  export { DataStudio as DataStudio };
+
+  export { Events as Events };
+
+  export { Files as Files };
+
+  export { Marketing as Marketing };
+
+  export { Meta as Meta };
+
+  export { Scheduler as Scheduler };
+
+  export { Settings as Settings };
+
+  export type AssociationSpec = API.AssociationSpec;
   export type Error = API.Error;
   export type ErrorDetail = API.ErrorDetail;
   export type ForwardPaging = API.ForwardPaging;
   export type NextPage = API.NextPage;
+  export type Paging = API.Paging;
+  export type PreviousPage = API.PreviousPage;
+  export type PublicObjectID = API.PublicObjectID;
+  export type StandardError = API.StandardError;
 }

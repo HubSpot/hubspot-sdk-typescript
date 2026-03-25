@@ -11,8 +11,8 @@ import { path } from '../../../internal/utils/path';
 
 export class Contacts extends APIResource {
   /**
-   * Create a task with the given properties and return a copy of the object,
-   * including the ID. Documentation and examples for creating standard tasks is
+   * Create a CRM object with the given properties and return a copy of the object,
+   * including the ID. Documentation and examples for creating standard objects is
    * provided.
    */
   create(
@@ -24,8 +24,8 @@ export class Contacts extends APIResource {
   }
 
   /**
-   * Perform a partial update of an Object identified by `{taskId}`or optionally a
-   * unique property value as specified by the `idProperty` query param. `{taskId}`
+   * Perform a partial update of an Object identified by `{objectId}`or optionally a
+   * unique property value as specified by the `idProperty` query param. `{objectId}`
    * refers to the internal object ID by default, and the `idProperty` query param
    * refers to a property whose values are unique for the object. Provided property
    * values will be overwritten. Read-only and non-existent properties will result in
@@ -45,7 +45,8 @@ export class Contacts extends APIResource {
   }
 
   /**
-   * Read a page of tasks. Control what is returned via the `properties` query param.
+   * Read a page of objects. Control what is returned via the `properties` query
+   * param.
    */
   list(
     objectType: string,
@@ -60,7 +61,7 @@ export class Contacts extends APIResource {
   }
 
   /**
-   * Move an Object identified by `{taskId}` to the recycling bin.
+   * Move an Object identified by `{objectId}` to the recycling bin.
    */
   delete(objectID: string, params: ContactDeleteParams, options?: RequestOptions): APIPromise<void> {
     const { objectType } = params;
@@ -70,6 +71,13 @@ export class Contacts extends APIResource {
     });
   }
 
+  /**
+   * Permanently delete a contact and all associated content to follow GDPR. Use
+   * optional property `idProperty` set to `email` to identify contact by email
+   * address. If email address is not found, the email address will be added to a
+   * blocklist and prevent it from being used in the future. Learn more about
+   * [permanently deleting contacts](https://knowledge.hubspot.com/privacy-and-consent/how-do-i-perform-a-gdpr-delete-in-hubspot).
+   */
   gdprDelete(objectType: string, body: ContactGdprDeleteParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post(path`/crm/objects/2026-03/${objectType}/gdpr-delete`, {
       body,
@@ -79,7 +87,7 @@ export class Contacts extends APIResource {
   }
 
   /**
-   * Read an Object identified by `{taskId}`. `{taskId}` refers to the internal
+   * Read an Object identified by `{objectId}`. `{objectId}` refers to the internal
    * object ID by default, or optionally any unique property value as specified by
    * the `idProperty` query param. Control what is returned via the `properties`
    * query param.
@@ -93,6 +101,10 @@ export class Contacts extends APIResource {
     return this._client.get(path`/crm/objects/2026-03/${objectType}/${objectID}`, { query, ...options });
   }
 
+  /**
+   * Merge two CRM objects of the same type by specifying one as the primary object
+   * and the other as the object to be merged into it.
+   */
   merge(
     objectType: string,
     body: ContactMergeParams,
@@ -102,9 +114,9 @@ export class Contacts extends APIResource {
   }
 
   /**
-   * Execute a search for tasks based on the provided criteria, including filters,
-   * properties, and sorting options. This allows for retrieving tasks that match
-   * specific conditions or property values.
+   * Execute a search query to find CRM objects of a given type, using specified
+   * filters and properties. The search can be customized with filters, sorting, and
+   * pagination options.
    */
   search(
     objectType: string,
@@ -113,6 +125,23 @@ export class Contacts extends APIResource {
   ): APIPromise<ObjectsAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post(path`/crm/objects/2026-03/${objectType}/search`, { body, ...options });
   }
+}
+
+/**
+ * An input that contains the information required to process a public GDPR data
+ * deletion request.
+ */
+export interface PublicGdprDeleteInput {
+  /**
+   * The ID of the contact to permanently delete.
+   */
+  objectId: string;
+
+  /**
+   * The name of a property whose values are unique for this object. An alternative
+   * to identifying a contact by ID.
+   */
+  idProperty?: string;
 }
 
 export interface ContactCreateParams {
@@ -126,7 +155,7 @@ export interface ContactCreateParams {
 
 export interface ContactUpdateParams {
   /**
-   * Path param: Object type.
+   * Path param
    */
   objectType: string;
 
@@ -136,7 +165,7 @@ export interface ContactUpdateParams {
   properties: { [key: string]: string };
 
   /**
-   * Query param: The name of a property whose values are unique for this object
+   * Query param: The name of a property whose values are unique for this object type
    */
   idProperty?: string;
 }
@@ -164,15 +193,12 @@ export interface ContactListParams extends PageParams {
    * A comma separated list of the properties to be returned along with their history
    * of previous values. If any of the specified properties are not present on the
    * requested object(s), they will be ignored. Usage of this parameter will reduce
-   * the maximum number of tasks that can be read by a single request.
+   * the maximum number of objects that can be read by a single request.
    */
   propertiesWithHistory?: Array<string>;
 }
 
 export interface ContactDeleteParams {
-  /**
-   * Object type.
-   */
   objectType: string;
 }
 
@@ -191,7 +217,7 @@ export interface ContactGdprDeleteParams {
 
 export interface ContactGetParams {
   /**
-   * Path param: Object type.
+   * Path param
    */
   objectType: string;
 
@@ -207,7 +233,7 @@ export interface ContactGetParams {
   associations?: Array<string>;
 
   /**
-   * Query param: The name of a property whose values are unique for this object
+   * Query param: The name of a property whose values are unique for this object type
    */
   idProperty?: string;
 
@@ -274,6 +300,7 @@ export interface ContactSearchParams {
 
 export declare namespace Contacts {
   export {
+    type PublicGdprDeleteInput as PublicGdprDeleteInput,
     type ContactCreateParams as ContactCreateParams,
     type ContactUpdateParams as ContactUpdateParams,
     type ContactListParams as ContactListParams,

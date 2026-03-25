@@ -13,9 +13,11 @@ import {
   ContactSearchParams,
   ContactUpdateParams,
   Contacts,
+  PublicGdprDeleteInput,
 } from './contacts';
 import * as CustomAPI from './custom';
 import {
+  BatchResponsePublicDefaultAssociation,
   Custom,
   CustomCreateParams,
   CustomDeleteParams,
@@ -25,15 +27,14 @@ import {
   CustomSearchParams,
   CustomUpdateParams,
   CustomUpsertParams,
+  LabelsBetweenObjectPair,
+  PublicDefaultAssociation,
 } from './custom';
-import * as TasksAPI from './tasks/tasks';
-import { TaskDeleteParams, Tasks } from './tasks/tasks';
 import { Page } from '../../../core/pagination';
 
 export class Objects extends APIResource {
   contacts: ContactsAPI.Contacts = new ContactsAPI.Contacts(this._client);
   custom: CustomAPI.Custom = new CustomAPI.Custom(this._client);
-  tasks: TasksAPI.Tasks = new TasksAPI.Tasks(this._client);
 }
 
 export type SimplePublicObjectWithAssociationsPage = Page<SimplePublicObjectWithAssociations>;
@@ -48,49 +49,9 @@ export interface AssociatedID {
   id: string;
 
   /**
-   * The type of association.
+   * The type of associations.
    */
   type: string;
-}
-
-/**
- * Defines the type, direction, and details of the relationship between two CRM
- * objects.
- */
-export interface AssociationSpec {
-  /**
-   * The category of the association, such as "HUBSPOT_DEFINED".
-   */
-  associationCategory: 'HUBSPOT_DEFINED' | 'INTEGRATOR_DEFINED' | 'USER_DEFINED' | 'WORK';
-
-  /**
-   * The ID representing the specific type of association.
-   */
-  associationTypeId: number;
-}
-
-/**
- * Defines the type, direction, and details of the relationship between two CRM
- * objects.
- */
-export interface AssociationSpecWithLabel {
-  /**
-   * Association category. Can be HUBSPOT_DEFINED, USER_DEFINED, INTEGRATOR_DEFINED
-   * or WORK
-   */
-  category: 'HUBSPOT_DEFINED' | 'INTEGRATOR_DEFINED' | 'USER_DEFINED' | 'WORK';
-
-  /**
-   * An integer value used to uniquely identify a specific association type within
-   * its Association Category.
-   */
-  typeId: number;
-
-  /**
-   * An optional descriptor that provides additional context about the relationship
-   * between associated records, such as "Mentor" and "Mentee".
-   */
-  label?: string;
 }
 
 export interface BatchInputSimplePublicObjectBatchInput {
@@ -135,46 +96,6 @@ export interface BatchReadInputSimplePublicObjectID {
 }
 
 /**
- * The response returned after performing a batch operation on associations.
- */
-export interface BatchResponsePublicDefaultAssociation {
-  /**
-   * The timestamp when the batch process was completed, in ISO 8601 format.
-   */
-  completedAt: string;
-
-  results: Array<PublicDefaultAssociation>;
-
-  /**
-   * The timestamp when the batch process began execution, in ISO 8601 format.
-   */
-  startedAt: string;
-
-  /**
-   * The status of the batch processing request. Can be: "PENDING", "PROCESSING",
-   * "CANCELED", or "COMPLETE".
-   */
-  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
-
-  errors?: Array<StandardError>;
-
-  /**
-   * An object containing relevant links related to the batch request.
-   */
-  links?: { [key: string]: string };
-
-  /**
-   * The total number of errors that occurred during the operation.
-   */
-  numErrors?: number;
-
-  /**
-   * The timestamp when the batch process was initiated, in ISO 8601 format.
-   */
-  requestedAt?: string;
-}
-
-/**
  * A public object batch response object
  */
 export interface BatchResponseSimplePublicObject {
@@ -195,7 +116,7 @@ export interface BatchResponseSimplePublicObject {
    */
   status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
-  errors?: Array<StandardError>;
+  errors?: Array<Shared.StandardError>;
 
   /**
    * An object containing relevant links related to the batch request.
@@ -236,7 +157,7 @@ export interface BatchResponseSimplePublicUpsertObject {
    */
   status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
-  errors?: Array<StandardError>;
+  errors?: Array<Shared.StandardError>;
 
   /**
    * An object containing relevant links related to the batch request.
@@ -257,13 +178,7 @@ export interface BatchResponseSimplePublicUpsertObject {
 export interface CollectionResponseAssociatedID {
   results: Array<AssociatedID>;
 
-  paging?: Paging;
-}
-
-export interface CollectionResponseMultiAssociatedObjectWithLabelForwardPaging {
-  results: Array<MultiAssociatedObjectWithLabel>;
-
-  paging?: Shared.ForwardPaging;
+  paging?: Shared.Paging;
 }
 
 export interface CollectionResponseSimplePublicObjectWithAssociationsForwardPaging {
@@ -284,7 +199,7 @@ export interface CollectionResponseWithTotalSimplePublicObject {
    */
   total: number;
 
-  paging?: Paging;
+  paging?: Shared.Paging;
 }
 
 /**
@@ -336,118 +251,13 @@ export interface FilterGroup {
   filters: Array<Filter>;
 }
 
-/**
- * The relationship descriptors applicable between two object types.
- */
-export interface LabelsBetweenObjectPair {
-  /**
-   * Source unique ID of the object.
-   */
-  fromObjectId: string;
-
-  /**
-   * Source object type.
-   */
-  fromObjectTypeId: string;
-
-  labels: Array<string>;
-
-  /**
-   * Target unique ID of the object.
-   */
-  toObjectId: string;
-
-  /**
-   * Target object type.
-   */
-  toObjectTypeId: string;
-}
-
-/**
- * Represents an object that is associated with multiple other objects, with
- * optional context.
- */
-export interface MultiAssociatedObjectWithLabel {
-  associationTypes: Array<AssociationSpecWithLabel>;
-
-  /**
-   * Target unique ID of the object.
-   */
-  toObjectId: string;
-}
-
-export interface Paging {
-  /**
-   * Specifies the paging information needed to retrieve the next set of results in a
-   * paginated API response
-   */
-  next?: Shared.NextPage;
-
-  /**
-   * specifies the paging information needed to retrieve the previous set of results
-   * in a paginated API response
-   */
-  prev?: PreviousPage;
-}
-
-/**
- * specifies the paging information needed to retrieve the previous set of results
- * in a paginated API response
- */
-export interface PreviousPage {
-  /**
-   * A paging cursor token for retrieving previous pages.
-   */
-  before: string;
-
-  /**
-   * A URL that can be used to retrieve the previous pages' results.
-   */
-  link?: string;
-}
-
 export interface PublicAssociationsForObject {
   /**
    * Contains the Id of a Public Object
    */
-  to: PublicObjectID;
+  to: Shared.PublicObjectID;
 
-  types: Array<AssociationSpec>;
-}
-
-export interface PublicDefaultAssociation {
-  /**
-   * Defines the type, direction, and details of the relationship between two CRM
-   * objects.
-   */
-  associationSpec: AssociationSpec;
-
-  /**
-   * Contains the Id of a Public Object
-   */
-  from: PublicObjectID;
-
-  /**
-   * Contains the Id of a Public Object
-   */
-  to: PublicObjectID;
-}
-
-/**
- * An input that contains the information required to process a public GDPR data
- * deletion request.
- */
-export interface PublicGdprDeleteInput {
-  /**
-   * The ID of the contact to permanently delete.
-   */
-  objectId: string;
-
-  /**
-   * The name of a property whose values are unique for this object. An alternative
-   * to identifying a contact by ID.
-   */
-  idProperty?: string;
+  types: Array<Shared.AssociationSpec>;
 }
 
 /**
@@ -465,16 +275,6 @@ export interface PublicMergeInput {
    * value after the merge.
    */
   primaryObjectId: string;
-}
-
-/**
- * Contains the Id of a Public Object
- */
-export interface PublicObjectID {
-  /**
-   * The unique ID of the object.
-   */
-  id: string;
 }
 
 /**
@@ -785,51 +585,6 @@ export interface SimplePublicUpsertObject {
 }
 
 /**
- * Ye olde error
- */
-export interface StandardError {
-  /**
-   * The main category of the error.
-   */
-  category: string;
-
-  /**
-   * Additional context-specific information related to the error.
-   */
-  context: { [key: string]: Array<string> };
-
-  /**
-   * The detailed error objects.
-   */
-  errors: Array<Shared.ErrorDetail>;
-
-  /**
-   * URLs linking to documentation or resources associated with the error.
-   */
-  links: { [key: string]: string };
-
-  /**
-   * A human-readable string describing the error and possible remediation steps.
-   */
-  message: string;
-
-  /**
-   * The HTTP status code associated with the error.
-   */
-  status: string;
-
-  /**
-   * A unique ID for the error instance.
-   */
-  id?: string;
-
-  /**
-   * A more specific error category within each main category.
-   */
-  subCategory?: unknown;
-}
-
-/**
  * Property model that includes timestamp.
  */
 export interface ValueWithTimestamp {
@@ -866,36 +621,24 @@ export interface ValueWithTimestamp {
 
 Objects.Contacts = Contacts;
 Objects.Custom = Custom;
-Objects.Tasks = Tasks;
 
 export declare namespace Objects {
   export {
     type AssociatedID as AssociatedID,
-    type AssociationSpec as AssociationSpec,
-    type AssociationSpecWithLabel as AssociationSpecWithLabel,
     type BatchInputSimplePublicObjectBatchInput as BatchInputSimplePublicObjectBatchInput,
     type BatchInputSimplePublicObjectBatchInputForCreate as BatchInputSimplePublicObjectBatchInputForCreate,
     type BatchInputSimplePublicObjectBatchInputUpsert as BatchInputSimplePublicObjectBatchInputUpsert,
     type BatchInputSimplePublicObjectID as BatchInputSimplePublicObjectID,
     type BatchReadInputSimplePublicObjectID as BatchReadInputSimplePublicObjectID,
-    type BatchResponsePublicDefaultAssociation as BatchResponsePublicDefaultAssociation,
     type BatchResponseSimplePublicObject as BatchResponseSimplePublicObject,
     type BatchResponseSimplePublicUpsertObject as BatchResponseSimplePublicUpsertObject,
     type CollectionResponseAssociatedID as CollectionResponseAssociatedID,
-    type CollectionResponseMultiAssociatedObjectWithLabelForwardPaging as CollectionResponseMultiAssociatedObjectWithLabelForwardPaging,
     type CollectionResponseSimplePublicObjectWithAssociationsForwardPaging as CollectionResponseSimplePublicObjectWithAssociationsForwardPaging,
     type CollectionResponseWithTotalSimplePublicObject as CollectionResponseWithTotalSimplePublicObject,
     type Filter as Filter,
     type FilterGroup as FilterGroup,
-    type LabelsBetweenObjectPair as LabelsBetweenObjectPair,
-    type MultiAssociatedObjectWithLabel as MultiAssociatedObjectWithLabel,
-    type Paging as Paging,
-    type PreviousPage as PreviousPage,
     type PublicAssociationsForObject as PublicAssociationsForObject,
-    type PublicDefaultAssociation as PublicDefaultAssociation,
-    type PublicGdprDeleteInput as PublicGdprDeleteInput,
     type PublicMergeInput as PublicMergeInput,
-    type PublicObjectID as PublicObjectID,
     type PublicObjectSearchRequest as PublicObjectSearchRequest,
     type SimplePublicObject as SimplePublicObject,
     type SimplePublicObjectBatchInput as SimplePublicObjectBatchInput,
@@ -906,12 +649,12 @@ export declare namespace Objects {
     type SimplePublicObjectInputForCreate as SimplePublicObjectInputForCreate,
     type SimplePublicObjectWithAssociations as SimplePublicObjectWithAssociations,
     type SimplePublicUpsertObject as SimplePublicUpsertObject,
-    type StandardError as StandardError,
     type ValueWithTimestamp as ValueWithTimestamp,
   };
 
   export {
     Contacts as Contacts,
+    type PublicGdprDeleteInput as PublicGdprDeleteInput,
     type ContactCreateParams as ContactCreateParams,
     type ContactUpdateParams as ContactUpdateParams,
     type ContactListParams as ContactListParams,
@@ -924,6 +667,9 @@ export declare namespace Objects {
 
   export {
     Custom as Custom,
+    type BatchResponsePublicDefaultAssociation as BatchResponsePublicDefaultAssociation,
+    type LabelsBetweenObjectPair as LabelsBetweenObjectPair,
+    type PublicDefaultAssociation as PublicDefaultAssociation,
     type CustomCreateParams as CustomCreateParams,
     type CustomUpdateParams as CustomUpdateParams,
     type CustomListParams as CustomListParams,
@@ -933,6 +679,4 @@ export declare namespace Objects {
     type CustomSearchParams as CustomSearchParams,
     type CustomUpsertParams as CustomUpsertParams,
   };
-
-  export { Tasks as Tasks, type TaskDeleteParams as TaskDeleteParams };
 }
