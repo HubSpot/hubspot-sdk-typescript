@@ -29,9 +29,17 @@ const client = new Hubspot({
   accessToken: 'pat-na1-xxxxxxxx-xxxx',
 });
 
-const portalInformationResponse = await client.account.get();
+const result = await client.crm.objects.contacts.create({
+  associations: [
+    {
+      to: { id: 'id' },
+      types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
+    },
+  ],
+  properties: { email: 'mark.s@lumon.industries' },
+});
 
-console.log(portalInformationResponse.accountType);
+console.log(result.id);
 ```
 
 ### Request & Response types
@@ -46,7 +54,18 @@ const client = new Hubspot({
   accessToken: 'pat-na1-xxxxxxxx-xxxx',
 });
 
-const portalInformationResponse: Hubspot.PortalInformationResponse = await client.account.get();
+const params: Hubspot.Crm.Objects.ContactCreateParams = {
+  associations: [
+    {
+      to: { id: 'id' },
+      types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
+    },
+  ],
+  properties: { email: 'mark.s@lumon.industries' },
+};
+const simplePublicObject: Hubspot.SimplePublicObject = await client.crm.objects.contacts.create(
+  params,
+);
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -103,15 +122,25 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const portalInformationResponse = await client.account.get().catch(async (err) => {
-  if (err instanceof Hubspot.APIError) {
-    console.log(err.status); // 400
-    console.log(err.name); // BadRequestError
-    console.log(err.headers); // {server: 'nginx', ...}
-  } else {
-    throw err;
-  }
-});
+const simplePublicObject = await client.crm.objects.contacts
+  .create({
+    associations: [
+      {
+        to: { id: 'id' },
+        types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
+      },
+    ],
+    properties: { email: 'mark.s@lumon.industries' },
+  })
+  .catch(async (err) => {
+    if (err instanceof Hubspot.APIError) {
+      console.log(err.status); // 400
+      console.log(err.name); // BadRequestError
+      console.log(err.headers); // {server: 'nginx', ...}
+    } else {
+      throw err;
+    }
+  });
 ```
 
 Error codes are as follows:
@@ -143,7 +172,13 @@ const client = new Hubspot({
 });
 
 // Or, configure per-request:
-await client.account.get({
+await client.crm.objects.contacts.create({
+  associations: [{
+  to: { id: 'id' },
+  types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
+}],
+  properties: { email: 'mark.s@lumon.industries' },
+}, {
   maxRetries: 5,
 });
 ```
@@ -160,7 +195,13 @@ const client = new Hubspot({
 });
 
 // Override per-request:
-await client.account.get({
+await client.crm.objects.contacts.create({
+  associations: [{
+  to: { id: 'id' },
+  types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
+}],
+  properties: { email: 'mark.s@lumon.industries' },
+}, {
   timeout: 5 * 1000,
 });
 ```
@@ -175,22 +216,24 @@ List methods in the Hubspot API are paginated.
 You can use the `for await … of` syntax to iterate through items across all pages:
 
 ```ts
-async function fetchAllPublicAPIUserActionEvents(params) {
-  const allPublicAPIUserActionEvents = [];
+async function fetchAllSimplePublicObjectWithAssociations(params) {
+  const allSimplePublicObjectWithAssociations = [];
   // Automatically fetches more pages as needed.
-  for await (const publicAPIUserActionEvent of client.account.activity.listAuditLogs()) {
-    allPublicAPIUserActionEvents.push(publicAPIUserActionEvent);
+  for await (const simplePublicObjectWithAssociations of client.crm.objects.contacts.list({
+    limit: 100,
+  })) {
+    allSimplePublicObjectWithAssociations.push(simplePublicObjectWithAssociations);
   }
-  return allPublicAPIUserActionEvents;
+  return allSimplePublicObjectWithAssociations;
 }
 ```
 
 Alternatively, you can request a single page at a time:
 
 ```ts
-let page = await client.account.activity.listAuditLogs();
-for (const publicAPIUserActionEvent of page.results) {
-  console.log(publicAPIUserActionEvent);
+let page = await client.crm.objects.contacts.list({ limit: 100 });
+for (const simplePublicObjectWithAssociations of page.results) {
+  console.log(simplePublicObjectWithAssociations);
 }
 
 // Convenience methods are provided for manually paginating:
@@ -214,15 +257,33 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new Hubspot();
 
-const response = await client.account.get().asResponse();
+const response = await client.crm.objects.contacts
+  .create({
+    associations: [
+      {
+        to: { id: 'id' },
+        types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
+      },
+    ],
+    properties: { email: 'mark.s@lumon.industries' },
+  })
+  .asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: portalInformationResponse, response: raw } = await client.account
-  .get()
+const { data: simplePublicObject, response: raw } = await client.crm.objects.contacts
+  .create({
+    associations: [
+      {
+        to: { id: 'id' },
+        types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
+      },
+    ],
+    properties: { email: 'mark.s@lumon.industries' },
+  })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(portalInformationResponse.accountType);
+console.log(simplePublicObject.id);
 ```
 
 ### Logging
@@ -302,7 +363,7 @@ parameter. This library doesn't validate at runtime that the request matches the
 send will be sent as-is.
 
 ```ts
-client.account.get({
+client.crm.objects.contacts.create({
   // ...
   // @ts-expect-error baz is not yet public
   baz: 'undocumented option',
