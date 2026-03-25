@@ -36,7 +36,7 @@ const result = await client.crm.objects.contacts.create({
       types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
     },
   ],
-  properties: { email: 'mark.s@lumon.industries' },
+  properties: { associations: 'string', email: 'mark.s@lumon.industries' },
 });
 
 console.log(result.id);
