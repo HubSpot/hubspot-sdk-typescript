@@ -5,7 +5,6 @@ export {
   Currencies,
   type BatchInputExchangeRateCreateRequest,
   type BatchInputExchangeRateUpdateRequest,
-  type BatchInputPublicObjectID,
   type BatchResponseExchangeRate,
   type CentralExchangeRatesInformation,
   type CollectionResponseCurrencyCodeInfoNoPaging,

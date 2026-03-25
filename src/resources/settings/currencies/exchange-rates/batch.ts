@@ -41,6 +41,9 @@ export interface BatchUpdateParams {
 }
 
 export interface BatchGetParams {
+  /**
+   * An array of deal split inputs
+   */
   inputs: Array<Shared.PublicObjectID>;
 }
 

@@ -248,20 +248,6 @@ export interface BatchInputBlogPost {
   inputs: Array<BlogPost>;
 }
 
-export interface BatchInputJsonNode {
-  /**
-   * JSON nodes to input.
-   */
-  inputs: Array<unknown>;
-}
-
-export interface BatchInputString {
-  /**
-   * Strings to input.
-   */
-  inputs: Array<string>;
-}
-
 export interface BatchResponseBlogPost {
   /**
    * Time of batch operation completion.
@@ -1591,7 +1577,7 @@ export interface BlogPostVersion {
 
   updatedAt: string;
 
-  user: BlogsAPI.VersionUser;
+  user: Shared.VersionUser;
 }
 
 export interface BreakpointStyles {
@@ -1933,7 +1919,7 @@ export interface VersionBlogPost {
    */
   updatedAt: string;
 
-  user: BlogsAPI.VersionUser;
+  user: Shared.VersionUser;
 }
 
 export interface PostCreateParams {
@@ -8360,8 +8346,6 @@ export declare namespace Posts {
     type Angle as Angle,
     type BackgroundImage as BackgroundImage,
     type BatchInputBlogPost as BatchInputBlogPost,
-    type BatchInputJsonNode as BatchInputJsonNode,
-    type BatchInputString as BatchInputString,
     type BatchResponseBlogPost as BatchResponseBlogPost,
     type BatchResponseBlogPostWithErrors as BatchResponseBlogPostWithErrors,
     type BlogPost as BlogPost,

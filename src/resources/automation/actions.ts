@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../core/resource';
 import * as Shared from '../shared';
-import * as SendAPI from '../events/send';
 import { APIPromise } from '../../core/api-promise';
 import { Page, type PageParams, PagePromise } from '../../core/pagination';
 import { buildHeaders } from '../../internal/headers';
@@ -335,7 +334,7 @@ export interface FieldTypeDefinition {
 
   name: string;
 
-  options: Array<SendAPI.Option>;
+  options: Array<Shared.Option>;
 
   schema:
     | IntegerFieldSchema
@@ -572,43 +571,6 @@ export interface ObjectFieldSchema {
   properties: unknown;
 
   type: 'OBJECT';
-}
-
-/**
- * A HubSpot property option
- */
-export interface Option {
-  /**
-   * A description of the option.
-   */
-  description: string;
-
-  /**
-   * The position of the item relative to others in the list.
-   */
-  displayOrder: number;
-
-  doubleData: number;
-
-  /**
-   * Whether the option is displayed in HubSpot's UI.
-   */
-  hidden: boolean;
-
-  /**
-   * A user-friendly label that identifies the option.
-   */
-  label: string;
-
-  /**
-   * Whether the option is read-only.
-   */
-  readOnly: boolean;
-
-  /**
-   * The actual value of the option.
-   */
-  value: string;
 }
 
 export interface OutputFieldDefinition {
@@ -1058,7 +1020,6 @@ export declare namespace Actions {
     type IntegerFieldSchema as IntegerFieldSchema,
     type LongFieldSchema as LongFieldSchema,
     type ObjectFieldSchema as ObjectFieldSchema,
-    type Option as Option,
     type OutputFieldDefinition as OutputFieldDefinition,
     type PublicActionDefinition as PublicActionDefinition,
     type PublicActionDefinitionEgg as PublicActionDefinitionEgg,

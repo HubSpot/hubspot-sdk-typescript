@@ -21,7 +21,6 @@ export {
   type IntegerFieldSchema,
   type LongFieldSchema,
   type ObjectFieldSchema,
-  type Option,
   type OutputFieldDefinition,
   type PublicActionDefinition,
   type PublicActionDefinitionEgg,
@@ -59,3 +58,21 @@ export {
   type PublicActionRevisionsPage,
 } from './actions';
 export { Automation } from './automation';
+export {
+  Sequences,
+  type CollectionResponseWithTotalPublicSequenceLiteResponse,
+  type PublicEmailPatternResponse,
+  type PublicSequenceEnrollmentLiteResponse,
+  type PublicSequenceEnrollmentRequest,
+  type PublicSequenceEnrollmentResponse,
+  type PublicSequenceLiteResponse,
+  type PublicSequenceResponse,
+  type PublicSequenceSettingsResponse,
+  type PublicSequenceStepDependencyResponse,
+  type PublicSequenceStepResponse,
+  type PublicTaskPatternResponse,
+  type SequenceListParams,
+  type SequenceCreateEnrollmentParams,
+  type SequenceGetParams,
+  type PublicSequenceLiteResponsesPage,
+} from './sequences';

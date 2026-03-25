@@ -1,0 +1,240 @@
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+import { APIResource } from '../../../../core/resource';
+import * as CrmAPI from '../../crm';
+import * as ObjectsAPI from '../objects';
+import { SimplePublicObjectWithAssociationsPage } from '../objects';
+import * as BatchAPI from './batch';
+import {
+  Batch,
+  BatchCreateParams,
+  BatchDeleteParams,
+  BatchGetParams,
+  BatchUpdateParams,
+  BatchUpsertParams,
+} from './batch';
+import { APIPromise } from '../../../../core/api-promise';
+import { Page, type PageParams, PagePromise } from '../../../../core/pagination';
+import { buildHeaders } from '../../../../internal/headers';
+import { RequestOptions } from '../../../../internal/request-options';
+import { path } from '../../../../internal/utils/path';
+
+export class Carts extends APIResource {
+  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
+
+  /**
+   * Create a single cart. Include a `properties` object to define
+   * [property values](https://developers.hubspot.com/docs/guides/api/crm/properties)
+   * for the {objectName}, along with an `associations` array to define
+   * [associations](https://developers.hubspot.com/docs/guides/api/crm/associations/associations-v4)
+   * with other records.
+   */
+  create(body: CartCreateParams, options?: RequestOptions): APIPromise<CrmAPI.SimplePublicObject> {
+    return this._client.post('/crm/objects/2026-03/carts', { body, ...options });
+  }
+
+  /**
+   * Update a cart by ID (`objectId`) or unique property value (`idProperty`).
+   * Provided property values will be overwritten. Read-only and non-existent
+   * properties will result in an error. Properties values can be cleared by passing
+   * an empty string.
+   */
+  update(
+    cartID: string,
+    params: CartUpdateParams,
+    options?: RequestOptions,
+  ): APIPromise<CrmAPI.SimplePublicObject> {
+    const { idProperty, ...body } = params;
+    return this._client.patch(path`/crm/objects/2026-03/carts/${cartID}`, {
+      query: { idProperty },
+      body,
+      ...options,
+    });
+  }
+
+  /**
+   * Retrieve all carts. Control what is returned via the `properties` query param.
+   */
+  list(
+    query: CartListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<SimplePublicObjectWithAssociationsPage, ObjectsAPI.SimplePublicObjectWithAssociations> {
+    return this._client.getAPIList(
+      '/crm/objects/2026-03/carts',
+      Page<ObjectsAPI.SimplePublicObjectWithAssociations>,
+      { query, ...options },
+    );
+  }
+
+  /**
+   * Archive a cart by ID. Deleted carts can be restored within 90 days of deletion.
+   * Learn more about
+   * [restoring records](https://knowledge.hubspot.com/records/restore-deleted-records).
+   */
+  delete(cartID: string, options?: RequestOptions): APIPromise<void> {
+    return this._client.delete(path`/crm/objects/2026-03/carts/${cartID}`, {
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
+
+  /**
+   * Retrieve a cart by its ID (`objectId`) or by a unique property (`idProperty`).
+   * Includes options for specifying what gets returned, such as the `properties`
+   * query parameter.
+   */
+  get(
+    cartID: string,
+    query: CartGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ObjectsAPI.SimplePublicObjectWithAssociations> {
+    return this._client.get(path`/crm/objects/2026-03/carts/${cartID}`, { query, ...options });
+  }
+
+  /**
+   * Search for carts based on the specified search criteria, such as filters and
+   * properties, and retrieve the matching results.
+   */
+  search(
+    body: CartSearchParams,
+    options?: RequestOptions,
+  ): APIPromise<ObjectsAPI.CollectionResponseWithTotalSimplePublicObject> {
+    return this._client.post('/crm/objects/2026-03/carts/search', { body, ...options });
+  }
+}
+
+export interface CartCreateParams {
+  associations: Array<ObjectsAPI.PublicAssociationsForObject>;
+
+  /**
+   * Key-value pairs for setting properties for the new object.
+   */
+  properties: { [key: string]: string };
+}
+
+export interface CartUpdateParams {
+  /**
+   * Body param: Key value pairs representing the properties of the object.
+   */
+  properties: { [key: string]: string };
+
+  /**
+   * Query param: The name of a property whose values are unique for this object type
+   */
+  idProperty?: string;
+}
+
+export interface CartListParams extends PageParams {
+  /**
+   * Whether to return only results that have been archived.
+   */
+  archived?: boolean;
+
+  /**
+   * A comma separated list of object types to retrieve associated IDs for. If any of
+   * the specified associations do not exist, they will be ignored.
+   */
+  associations?: Array<string>;
+
+  /**
+   * A comma separated list of the properties to be returned in the response. If any
+   * of the specified properties are not present on the requested object(s), they
+   * will be ignored.
+   */
+  properties?: Array<string>;
+
+  /**
+   * A comma separated list of the properties to be returned along with their history
+   * of previous values. If any of the specified properties are not present on the
+   * requested object(s), they will be ignored. Usage of this parameter will reduce
+   * the maximum number of objects that can be read by a single request.
+   */
+  propertiesWithHistory?: Array<string>;
+}
+
+export interface CartGetParams {
+  /**
+   * Whether to return only results that have been archived.
+   */
+  archived?: boolean;
+
+  /**
+   * A comma separated list of object types to retrieve associated IDs for. If any of
+   * the specified associations do not exist, they will be ignored.
+   */
+  associations?: Array<string>;
+
+  /**
+   * The name of a property whose values are unique for this object type
+   */
+  idProperty?: string;
+
+  /**
+   * A comma separated list of the properties to be returned in the response. If any
+   * of the specified properties are not present on the requested object(s), they
+   * will be ignored.
+   */
+  properties?: Array<string>;
+
+  /**
+   * A comma separated list of the properties to be returned along with their history
+   * of previous values. If any of the specified properties are not present on the
+   * requested object(s), they will be ignored.
+   */
+  propertiesWithHistory?: Array<string>;
+}
+
+export interface CartSearchParams {
+  /**
+   * A paging cursor token for retrieving subsequent pages.
+   */
+  after: string;
+
+  /**
+   * Up to 6 groups of filters defining additional query criteria.
+   */
+  filterGroups: Array<CrmAPI.FilterGroup>;
+
+  /**
+   * The maximum results to return, up to 200 objects.
+   */
+  limit: number;
+
+  /**
+   * A list of property names to include in the response.
+   */
+  properties: Array<string>;
+
+  /**
+   * Specifies sorting order based on object properties.
+   */
+  sorts: Array<string>;
+
+  /**
+   * The search query string, up to 3000 characters.
+   */
+  query?: string;
+}
+
+Carts.Batch = Batch;
+
+export declare namespace Carts {
+  export {
+    type CartCreateParams as CartCreateParams,
+    type CartUpdateParams as CartUpdateParams,
+    type CartListParams as CartListParams,
+    type CartGetParams as CartGetParams,
+    type CartSearchParams as CartSearchParams,
+  };
+
+  export {
+    Batch as Batch,
+    type BatchCreateParams as BatchCreateParams,
+    type BatchUpdateParams as BatchUpdateParams,
+    type BatchDeleteParams as BatchDeleteParams,
+    type BatchGetParams as BatchGetParams,
+    type BatchUpsertParams as BatchUpsertParams,
+  };
+}
+
+export { type SimplePublicObjectWithAssociationsPage };

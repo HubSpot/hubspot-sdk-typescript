@@ -1,13 +1,55 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as TagsAPI from './tags';
+import {
+  BatchInputTag,
+  BatchResponseTag,
+  BatchResponseTagWithErrors,
+  CollectionResponseWithTotalTagForwardPaging,
+  Tag,
+  TagAttachToLangGroupParams,
+  TagCloneRequestVNext,
+  TagCreateBatchParams,
+  TagCreateLangVariationParams,
+  TagCreateParams,
+  TagDeleteBatchParams,
+  TagDeleteParams,
+  TagDetachFromLangGroupParams,
+  TagGetBatchParams,
+  TagGetParams,
+  TagListParams,
+  TagSetLangPrimaryParams,
+  TagUpdateBatchParams,
+  TagUpdateLangsParams,
+  TagUpdateParams,
+  Tags,
+} from './tags';
+import * as AuthorsAPI from './authors/authors';
+import {
+  AuthorAttachToLangGroupParams,
+  AuthorCreateLanguageVariationParams,
+  AuthorCreateParams,
+  AuthorDeleteParams,
+  AuthorDetachFromLangGroupParams,
+  AuthorGetParams,
+  AuthorListParams,
+  AuthorSetNewLangPrimaryParams,
+  AuthorUpdateLanguagesParams,
+  AuthorUpdateParams,
+  Authors,
+  BatchInputBlogAuthor,
+  BatchResponseBlogAuthor,
+  BatchResponseBlogAuthorWithErrors,
+  BlogAuthor,
+  BlogAuthorCloneRequestVNext,
+  CollectionResponseWithTotalBlogAuthorForwardPaging,
+} from './authors/authors';
 import * as PostsAPI from './posts/posts';
 import {
   Angle,
   BackgroundImage,
   BatchInputBlogPost,
-  BatchInputJsonNode,
-  BatchInputString,
   BatchResponseBlogPost,
   BatchResponseBlogPostWithErrors,
   BlogPost,
@@ -66,8 +108,10 @@ import {
 } from './settings/settings';
 
 export class Blogs extends APIResource {
+  authors: AuthorsAPI.Authors = new AuthorsAPI.Authors(this._client);
   posts: PostsAPI.Posts = new PostsAPI.Posts(this._client);
   settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
+  tags: TagsAPI.Tags = new TagsAPI.Tags(this._client);
 }
 
 export interface AttachToLangPrimaryRequestVNext {
@@ -1778,6 +1822,13 @@ export interface AttachToLangPrimaryRequestVNext {
     | 'zu-za';
 }
 
+export interface BatchInputJsonNode {
+  /**
+   * JSON nodes to input.
+   */
+  inputs: Array<unknown>;
+}
+
 export interface DetachFromLangGroupRequestVNext {
   /**
    * ID of the object to remove from a multi-language group.
@@ -2651,34 +2702,39 @@ export interface UpdateLanguagesRequestVNext {
   primaryId: string;
 }
 
-export interface VersionUser {
-  /**
-   * The unique ID of the User.
-   */
-  id: string;
-
-  /**
-   * The email address of the user.
-   */
-  email: string;
-
-  /**
-   * The first and last name of the User.
-   */
-  fullName: string;
-}
-
+Blogs.Authors = Authors;
 Blogs.Posts = Posts;
 Blogs.Settings = Settings;
+Blogs.Tags = Tags;
 
 export declare namespace Blogs {
   export {
     type AttachToLangPrimaryRequestVNext as AttachToLangPrimaryRequestVNext,
+    type BatchInputJsonNode as BatchInputJsonNode,
     type DetachFromLangGroupRequestVNext as DetachFromLangGroupRequestVNext,
     type PublicAccessRule as PublicAccessRule,
     type SetNewLanguagePrimaryRequestVNext as SetNewLanguagePrimaryRequestVNext,
     type UpdateLanguagesRequestVNext as UpdateLanguagesRequestVNext,
-    type VersionUser as VersionUser,
+  };
+
+  export {
+    Authors as Authors,
+    type BatchInputBlogAuthor as BatchInputBlogAuthor,
+    type BatchResponseBlogAuthor as BatchResponseBlogAuthor,
+    type BatchResponseBlogAuthorWithErrors as BatchResponseBlogAuthorWithErrors,
+    type BlogAuthor as BlogAuthor,
+    type BlogAuthorCloneRequestVNext as BlogAuthorCloneRequestVNext,
+    type CollectionResponseWithTotalBlogAuthorForwardPaging as CollectionResponseWithTotalBlogAuthorForwardPaging,
+    type AuthorCreateParams as AuthorCreateParams,
+    type AuthorUpdateParams as AuthorUpdateParams,
+    type AuthorListParams as AuthorListParams,
+    type AuthorDeleteParams as AuthorDeleteParams,
+    type AuthorAttachToLangGroupParams as AuthorAttachToLangGroupParams,
+    type AuthorCreateLanguageVariationParams as AuthorCreateLanguageVariationParams,
+    type AuthorDetachFromLangGroupParams as AuthorDetachFromLangGroupParams,
+    type AuthorGetParams as AuthorGetParams,
+    type AuthorSetNewLangPrimaryParams as AuthorSetNewLangPrimaryParams,
+    type AuthorUpdateLanguagesParams as AuthorUpdateLanguagesParams,
   };
 
   export {
@@ -2686,8 +2742,6 @@ export declare namespace Blogs {
     type Angle as Angle,
     type BackgroundImage as BackgroundImage,
     type BatchInputBlogPost as BatchInputBlogPost,
-    type BatchInputJsonNode as BatchInputJsonNode,
-    type BatchInputString as BatchInputString,
     type BatchResponseBlogPost as BatchResponseBlogPost,
     type BatchResponseBlogPostWithErrors as BatchResponseBlogPostWithErrors,
     type BlogPost as BlogPost,
@@ -2742,5 +2796,29 @@ export declare namespace Blogs {
     type SettingListParams as SettingListParams,
     type SettingGetRevisionParams as SettingGetRevisionParams,
     type SettingListRevisionsParams as SettingListRevisionsParams,
+  };
+
+  export {
+    Tags as Tags,
+    type BatchInputTag as BatchInputTag,
+    type BatchResponseTag as BatchResponseTag,
+    type BatchResponseTagWithErrors as BatchResponseTagWithErrors,
+    type CollectionResponseWithTotalTagForwardPaging as CollectionResponseWithTotalTagForwardPaging,
+    type Tag as Tag,
+    type TagCloneRequestVNext as TagCloneRequestVNext,
+    type TagCreateParams as TagCreateParams,
+    type TagUpdateParams as TagUpdateParams,
+    type TagListParams as TagListParams,
+    type TagDeleteParams as TagDeleteParams,
+    type TagAttachToLangGroupParams as TagAttachToLangGroupParams,
+    type TagCreateBatchParams as TagCreateBatchParams,
+    type TagCreateLangVariationParams as TagCreateLangVariationParams,
+    type TagDeleteBatchParams as TagDeleteBatchParams,
+    type TagDetachFromLangGroupParams as TagDetachFromLangGroupParams,
+    type TagGetParams as TagGetParams,
+    type TagGetBatchParams as TagGetBatchParams,
+    type TagSetLangPrimaryParams as TagSetLangPrimaryParams,
+    type TagUpdateBatchParams as TagUpdateBatchParams,
+    type TagUpdateLangsParams as TagUpdateLangsParams,
   };
 }

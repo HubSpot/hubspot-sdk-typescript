@@ -36,7 +36,6 @@ import {
   IntegerFieldSchema,
   LongFieldSchema,
   ObjectFieldSchema,
-  Option,
   OutputFieldDefinition,
   PublicActionDefinition,
   PublicActionDefinitionEgg,
@@ -60,12 +59,33 @@ import {
   TestRequestContext,
   WorkflowsRequestContext,
 } from './actions';
+import * as SequencesAPI from './sequences';
+import {
+  CollectionResponseWithTotalPublicSequenceLiteResponse,
+  PublicEmailPatternResponse,
+  PublicSequenceEnrollmentLiteResponse,
+  PublicSequenceEnrollmentRequest,
+  PublicSequenceEnrollmentResponse,
+  PublicSequenceLiteResponse,
+  PublicSequenceLiteResponsesPage,
+  PublicSequenceResponse,
+  PublicSequenceSettingsResponse,
+  PublicSequenceStepDependencyResponse,
+  PublicSequenceStepResponse,
+  PublicTaskPatternResponse,
+  SequenceCreateEnrollmentParams,
+  SequenceGetParams,
+  SequenceListParams,
+  Sequences,
+} from './sequences';
 
 export class Automation extends APIResource {
   actions: ActionsAPI.Actions = new ActionsAPI.Actions(this._client);
+  sequences: SequencesAPI.Sequences = new SequencesAPI.Sequences(this._client);
 }
 
 Automation.Actions = Actions;
+Automation.Sequences = Sequences;
 
 export declare namespace Automation {
   export {
@@ -89,7 +109,6 @@ export declare namespace Automation {
     type IntegerFieldSchema as IntegerFieldSchema,
     type LongFieldSchema as LongFieldSchema,
     type ObjectFieldSchema as ObjectFieldSchema,
-    type Option as Option,
     type OutputFieldDefinition as OutputFieldDefinition,
     type PublicActionDefinition as PublicActionDefinition,
     type PublicActionDefinitionEgg as PublicActionDefinitionEgg,
@@ -125,5 +144,24 @@ export declare namespace Automation {
     type ActionGetParams as ActionGetParams,
     type ActionGetByFunctionTypeParams as ActionGetByFunctionTypeParams,
     type ActionGetRequiresObjectParams as ActionGetRequiresObjectParams,
+  };
+
+  export {
+    Sequences as Sequences,
+    type CollectionResponseWithTotalPublicSequenceLiteResponse as CollectionResponseWithTotalPublicSequenceLiteResponse,
+    type PublicEmailPatternResponse as PublicEmailPatternResponse,
+    type PublicSequenceEnrollmentLiteResponse as PublicSequenceEnrollmentLiteResponse,
+    type PublicSequenceEnrollmentRequest as PublicSequenceEnrollmentRequest,
+    type PublicSequenceEnrollmentResponse as PublicSequenceEnrollmentResponse,
+    type PublicSequenceLiteResponse as PublicSequenceLiteResponse,
+    type PublicSequenceResponse as PublicSequenceResponse,
+    type PublicSequenceSettingsResponse as PublicSequenceSettingsResponse,
+    type PublicSequenceStepDependencyResponse as PublicSequenceStepDependencyResponse,
+    type PublicSequenceStepResponse as PublicSequenceStepResponse,
+    type PublicTaskPatternResponse as PublicTaskPatternResponse,
+    type PublicSequenceLiteResponsesPage as PublicSequenceLiteResponsesPage,
+    type SequenceListParams as SequenceListParams,
+    type SequenceCreateEnrollmentParams as SequenceCreateEnrollmentParams,
+    type SequenceGetParams as SequenceGetParams,
   };
 }

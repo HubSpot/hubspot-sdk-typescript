@@ -6,7 +6,6 @@ Types:
 
 - <code><a href="./src/resources/settings/currencies/currencies.ts">BatchInputExchangeRateCreateRequest</a></code>
 - <code><a href="./src/resources/settings/currencies/currencies.ts">BatchInputExchangeRateUpdateRequest</a></code>
-- <code><a href="./src/resources/settings/currencies/currencies.ts">BatchInputPublicObjectID</a></code>
 - <code><a href="./src/resources/settings/currencies/currencies.ts">BatchResponseExchangeRate</a></code>
 - <code><a href="./src/resources/settings/currencies/currencies.ts">CentralExchangeRatesInformation</a></code>
 - <code><a href="./src/resources/settings/currencies/currencies.ts">CollectionResponseCurrencyCodeInfoNoPaging</a></code>
@@ -54,3 +53,15 @@ Methods:
 - <code title="post /settings/currencies/2026-03/exchange-rates/batch/create">client.settings.currencies.exchangeRates.batch.<a href="./src/resources/settings/currencies/exchange-rates/batch.ts">create</a>({ ...params }) -> BatchResponseExchangeRate</code>
 - <code title="post /settings/currencies/2026-03/exchange-rates/batch/update">client.settings.currencies.exchangeRates.batch.<a href="./src/resources/settings/currencies/exchange-rates/batch.ts">update</a>({ ...params }) -> BatchResponseExchangeRate</code>
 - <code title="post /settings/currencies/2026-03/exchange-rates/batch/read">client.settings.currencies.exchangeRates.batch.<a href="./src/resources/settings/currencies/exchange-rates/batch.ts">get</a>({ ...params }) -> BatchResponseExchangeRate</code>
+
+## TaxRates
+
+Types:
+
+- <code><a href="./src/resources/settings/tax-rates.ts">CollectionResponsePublicTaxRateGroupForwardPaging</a></code>
+- <code><a href="./src/resources/settings/tax-rates.ts">PublicTaxRateGroup</a></code>
+
+Methods:
+
+- <code title="get /tax-rates/2026-03/tax-rates">client.settings.taxRates.<a href="./src/resources/settings/tax-rates.ts">list</a>({ ...params }) -> PublicTaxRateGroupsPage</code>
+- <code title="get /tax-rates/2026-03/tax-rates/{taxRateGroupId}">client.settings.taxRates.<a href="./src/resources/settings/tax-rates.ts">get</a>(taxRateGroupID) -> PublicTaxRateGroup</code>

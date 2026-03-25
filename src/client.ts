@@ -20,8 +20,13 @@ import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
 import { Account } from './resources/account/account';
+import { AppWebhooks } from './resources/app-webhooks/app-webhooks';
+import { Auth } from './resources/auth/auth';
 import { Automation } from './resources/automation/automation';
+import { BusinessUnits } from './resources/business-units/business-units';
 import { Cms } from './resources/cms/cms';
+import { CommunicationPreferences } from './resources/communication-preferences/communication-preferences';
+import { Conversations } from './resources/conversations/conversations';
 import { Crm } from './resources/crm/crm';
 import { DataStudio } from './resources/data-studio/data-studio';
 import { Events } from './resources/events/events';
@@ -779,8 +784,13 @@ export class Hubspot {
   static toFile = Uploads.toFile;
 
   account: API.Account = new API.Account(this);
+  appWebhooks: API.AppWebhooks = new API.AppWebhooks(this);
+  auth: API.Auth = new API.Auth(this);
   automation: API.Automation = new API.Automation(this);
+  businessUnits: API.BusinessUnits = new API.BusinessUnits(this);
   cms: API.Cms = new API.Cms(this);
+  communicationPreferences: API.CommunicationPreferences = new API.CommunicationPreferences(this);
+  conversations: API.Conversations = new API.Conversations(this);
   crm: API.Crm = new API.Crm(this);
   dataStudio: API.DataStudio = new API.DataStudio(this);
   events: API.Events = new API.Events(this);
@@ -792,8 +802,13 @@ export class Hubspot {
 }
 
 Hubspot.Account = Account;
+Hubspot.AppWebhooks = AppWebhooks;
+Hubspot.Auth = Auth;
 Hubspot.Automation = Automation;
+Hubspot.BusinessUnits = BusinessUnits;
 Hubspot.Cms = Cms;
+Hubspot.CommunicationPreferences = CommunicationPreferences;
+Hubspot.Conversations = Conversations;
 Hubspot.Crm = Crm;
 Hubspot.DataStudio = DataStudio;
 Hubspot.Events = Events;
@@ -811,9 +826,19 @@ export declare namespace Hubspot {
 
   export { Account as Account };
 
+  export { AppWebhooks as AppWebhooks };
+
+  export { Auth as Auth };
+
   export { Automation as Automation };
 
+  export { BusinessUnits as BusinessUnits };
+
   export { Cms as Cms };
+
+  export { CommunicationPreferences as CommunicationPreferences };
+
+  export { Conversations as Conversations };
 
   export { Crm as Crm };
 
@@ -831,13 +856,42 @@ export declare namespace Hubspot {
 
   export { Settings as Settings };
 
+  export type ActionResponse = API.ActionResponse;
+  export type AssociationDefinition = API.AssociationDefinition;
+  export type AssociationDefinitionEgg = API.AssociationDefinitionEgg;
   export type AssociationSpec = API.AssociationSpec;
+  export type AutomationActionsOption = API.AutomationActionsOption;
+  export type BatchInputPropertyCreate = API.BatchInputPropertyCreate;
+  export type BatchInputPropertyName = API.BatchInputPropertyName;
+  export type BatchInputPublicObjectID = API.BatchInputPublicObjectID;
+  export type BatchInputString = API.BatchInputString;
+  export type BatchReadInputPropertyName = API.BatchReadInputPropertyName;
+  export type BatchResponseProperty = API.BatchResponseProperty;
+  export type CollectionResponseObjectSchemaNoPaging = API.CollectionResponseObjectSchemaNoPaging;
+  export type CollectionResponsePropertyGroupNoPaging = API.CollectionResponsePropertyGroupNoPaging;
+  export type CollectionResponsePropertyNoPaging = API.CollectionResponsePropertyNoPaging;
   export type Error = API.Error;
   export type ErrorDetail = API.ErrorDetail;
   export type ForwardPaging = API.ForwardPaging;
   export type NextPage = API.NextPage;
+  export type ObjectSchema = API.ObjectSchema;
+  export type ObjectTypeDefinition = API.ObjectTypeDefinition;
+  export type ObjectTypeDefinitionLabels = API.ObjectTypeDefinitionLabels;
+  export type ObjectTypeDefinitionPatch = API.ObjectTypeDefinitionPatch;
+  export type Option = API.Option;
+  export type OptionInput = API.OptionInput;
   export type Paging = API.Paging;
   export type PreviousPage = API.PreviousPage;
+  export type Property = API.Property;
+  export type PropertyCreate = API.PropertyCreate;
+  export type PropertyGroup = API.PropertyGroup;
+  export type PropertyGroupCreate = API.PropertyGroupCreate;
+  export type PropertyGroupUpdate = API.PropertyGroupUpdate;
+  export type PropertyModificationMetadata = API.PropertyModificationMetadata;
+  export type PropertyName = API.PropertyName;
+  export type PropertyValue = API.PropertyValue;
   export type PublicObjectID = API.PublicObjectID;
   export type StandardError = API.StandardError;
+  export type TaskLocator = API.TaskLocator;
+  export type VersionUser = API.VersionUser;
 }
