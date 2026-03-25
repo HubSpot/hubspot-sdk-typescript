@@ -36,7 +36,7 @@ const result = await client.crm.objects.contacts.create({
       types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
     },
   ],
-  properties: { associations: 'string', email: 'mark.s@lumon.industries' },
+  properties: { email: 'mark.s@lumon.industries' },
 });
 
 console.log(result.id);
@@ -61,7 +61,7 @@ const params: Hubspot.Crm.Objects.ContactCreateParams = {
       types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
     },
   ],
-  properties: { associations: 'string', email: 'mark.s@lumon.industries' },
+  properties: { email: 'mark.s@lumon.industries' },
 };
 const simplePublicObject: Hubspot.SimplePublicObject = await client.crm.objects.contacts.create(
   params,
@@ -130,7 +130,7 @@ const simplePublicObject = await client.crm.objects.contacts
         types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
       },
     ],
-    properties: { associations: 'string', email: 'mark.s@lumon.industries' },
+    properties: { email: 'mark.s@lumon.industries' },
   })
   .catch(async (err) => {
     if (err instanceof Hubspot.APIError) {
@@ -177,7 +177,7 @@ await client.crm.objects.contacts.create({
   to: { id: 'id' },
   types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
 }],
-  properties: { associations: 'string', email: 'mark.s@lumon.industries' },
+  properties: { email: 'mark.s@lumon.industries' },
 }, {
   maxRetries: 5,
 });
@@ -200,7 +200,7 @@ await client.crm.objects.contacts.create({
   to: { id: 'id' },
   types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
 }],
-  properties: { associations: 'string', email: 'mark.s@lumon.industries' },
+  properties: { email: 'mark.s@lumon.industries' },
 }, {
   timeout: 5 * 1000,
 });
@@ -265,7 +265,7 @@ const response = await client.crm.objects.contacts
         types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
       },
     ],
-    properties: { associations: 'string', email: 'mark.s@lumon.industries' },
+    properties: { email: 'mark.s@lumon.industries' },
   })
   .asResponse();
 console.log(response.headers.get('X-My-Header'));
@@ -279,7 +279,7 @@ const { data: simplePublicObject, response: raw } = await client.crm.objects.con
         types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
       },
     ],
-    properties: { associations: 'string', email: 'mark.s@lumon.industries' },
+    properties: { email: 'mark.s@lumon.industries' },
   })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
