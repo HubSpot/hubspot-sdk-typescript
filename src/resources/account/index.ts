@@ -4,13 +4,10 @@ export { Account } from './account';
 export {
   Activity,
   type ActingUser,
-  type APIUsage,
-  type CollectionResponseAPIUsageNoPaging,
   type CollectionResponseHydratedCriticalActionForwardPaging,
   type CollectionResponsePublicAPIUserActionEventForwardPaging,
   type CollectionResponsePublicLoginAuditForwardPaging,
   type HydratedCriticalAction,
-  type PortalInformationResponse,
   type PublicAPIUserActionEvent,
   type PublicLoginAudit,
   type ActivityListAuditLogsParams,

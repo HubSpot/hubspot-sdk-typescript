@@ -29,10 +29,9 @@ const client = new Hubspot({
   accessToken: 'pat-na1-xxxxxxxx-xxxx',
 });
 
-const page = await client.account.activity.listAuditLogs();
-const publicAPIUserActionEvent = page.results[0];
+const portalInformationResponse = await client.account.get();
 
-console.log(publicAPIUserActionEvent.id);
+console.log(portalInformationResponse.accountType);
 ```
 
 ### Request & Response types
@@ -47,8 +46,7 @@ const client = new Hubspot({
   accessToken: 'pat-na1-xxxxxxxx-xxxx',
 });
 
-const [publicAPIUserActionEvent]: [Hubspot.Account.PublicAPIUserActionEvent] =
-  await client.account.activity.listAuditLogs();
+const portalInformationResponse: Hubspot.PortalInformationResponse = await client.account.get();
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -61,7 +59,7 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const page = await client.account.activity.listAuditLogs().catch(async (err) => {
+const portalInformationResponse = await client.account.get().catch(async (err) => {
   if (err instanceof Hubspot.APIError) {
     console.log(err.status); // 400
     console.log(err.name); // BadRequestError
@@ -101,7 +99,7 @@ const client = new Hubspot({
 });
 
 // Or, configure per-request:
-await client.account.activity.listAuditLogs({
+await client.account.get({
   maxRetries: 5,
 });
 ```
@@ -118,7 +116,7 @@ const client = new Hubspot({
 });
 
 // Override per-request:
-await client.account.activity.listAuditLogs({
+await client.account.get({
   timeout: 5 * 1000,
 });
 ```
@@ -172,15 +170,15 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new Hubspot();
 
-const response = await client.account.activity.listAuditLogs().asResponse();
+const response = await client.account.get().asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: page, response: raw } = await client.account.activity.listAuditLogs().withResponse();
+const { data: portalInformationResponse, response: raw } = await client.account
+  .get()
+  .withResponse();
 console.log(raw.headers.get('X-My-Header'));
-for await (const publicAPIUserActionEvent of page) {
-  console.log(publicAPIUserActionEvent.id);
-}
+console.log(portalInformationResponse.accountType);
 ```
 
 ### Logging
@@ -260,7 +258,7 @@ parameter. This library doesn't validate at runtime that the request matches the
 send will be sent as-is.
 
 ```ts
-client.account.activity.listAuditLogs({
+client.account.get({
   // ...
   // @ts-expect-error baz is not yet public
   baz: 'undocumented option',

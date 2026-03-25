@@ -2,6 +2,7 @@
 
 export {
   Contacts,
+  type PublicGdprDeleteInput,
   type ContactCreateParams,
   type ContactUpdateParams,
   type ContactListParams,
@@ -13,6 +14,9 @@ export {
 } from './contacts';
 export {
   Custom,
+  type BatchResponsePublicDefaultAssociation,
+  type LabelsBetweenObjectPair,
+  type PublicDefaultAssociation,
   type CustomCreateParams,
   type CustomUpdateParams,
   type CustomListParams,
@@ -25,31 +29,20 @@ export {
 export {
   Objects,
   type AssociatedID,
-  type AssociationSpec,
-  type AssociationSpecWithLabel,
   type BatchInputSimplePublicObjectBatchInput,
   type BatchInputSimplePublicObjectBatchInputForCreate,
   type BatchInputSimplePublicObjectBatchInputUpsert,
   type BatchInputSimplePublicObjectID,
   type BatchReadInputSimplePublicObjectID,
-  type BatchResponsePublicDefaultAssociation,
   type BatchResponseSimplePublicObject,
   type BatchResponseSimplePublicUpsertObject,
   type CollectionResponseAssociatedID,
-  type CollectionResponseMultiAssociatedObjectWithLabelForwardPaging,
   type CollectionResponseSimplePublicObjectWithAssociationsForwardPaging,
   type CollectionResponseWithTotalSimplePublicObject,
   type Filter,
   type FilterGroup,
-  type LabelsBetweenObjectPair,
-  type MultiAssociatedObjectWithLabel,
-  type Paging,
-  type PreviousPage,
   type PublicAssociationsForObject,
-  type PublicDefaultAssociation,
-  type PublicGdprDeleteInput,
   type PublicMergeInput,
-  type PublicObjectID,
   type PublicObjectSearchRequest,
   type SimplePublicObject,
   type SimplePublicObjectBatchInput,
@@ -60,8 +53,6 @@ export {
   type SimplePublicObjectInputForCreate,
   type SimplePublicObjectWithAssociations,
   type SimplePublicUpsertObject,
-  type StandardError,
   type ValueWithTimestamp,
   type SimplePublicObjectWithAssociationsPage,
 } from './objects';
-export { Tasks, type TaskDeleteParams } from './tasks/index';

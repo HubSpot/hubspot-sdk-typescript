@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as Shared from '../../shared';
 import * as ObjectsAPI from './objects';
 import { SimplePublicObjectWithAssociationsPage } from './objects';
 import { APIPromise } from '../../../core/api-promise';
@@ -11,9 +12,8 @@ import { path } from '../../../internal/utils/path';
 
 export class Custom extends APIResource {
   /**
-   * Create multiple tasks in a single request by providing a batch of task
-   * properties and associations. This endpoint allows for efficient task creation by
-   * processing multiple tasks together.
+   * Create multiple CRM objects in a single request by specifying the object type
+   * and providing the necessary properties and associations for each object.
    */
   create(
     objectType: string,
@@ -24,9 +24,8 @@ export class Custom extends APIResource {
   }
 
   /**
-   * Update multiple tasks in a single request using their internal IDs or unique
-   * property values. This operation allows you to modify the properties of each task
-   * in the batch, ensuring efficient management of task data.
+   * Update a batch of CRM objects by their internal IDs or unique property values,
+   * allowing for efficient modifications of multiple records in a single request.
    */
   update(
     objectType: string,
@@ -37,7 +36,8 @@ export class Custom extends APIResource {
   }
 
   /**
-   * Read a page of tasks. Control what is returned via the `properties` query param.
+   * Read a page of objects. Control what is returned via the `properties` query
+   * param.
    */
   list(
     objectType: string,
@@ -52,8 +52,8 @@ export class Custom extends APIResource {
   }
 
   /**
-   * Archive a batch of tasks by their IDs, moving them to the recycling bin. This
-   * operation requires a list of task IDs to be provided in the request body.
+   * Archive a batch of objects by their unique IDs. This operation moves the
+   * specified objects to the recycling bin, effectively marking them as archived.
    */
   delete(objectType: string, body: CustomDeleteParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post(path`/crm/objects/2026-03/${objectType}/batch/archive`, {
@@ -80,6 +80,10 @@ export class Custom extends APIResource {
     });
   }
 
+  /**
+   * Merge two CRM objects of the same type by specifying one as the primary object
+   * and the other as the object to be merged into it.
+   */
   merge(
     objectType: string,
     body: CustomMergeParams,
@@ -89,9 +93,9 @@ export class Custom extends APIResource {
   }
 
   /**
-   * Execute a search for tasks based on the provided criteria, including filters,
-   * properties, and sorting options. This allows for retrieving tasks that match
-   * specific conditions or property values.
+   * Execute a search query to find CRM objects of a given type, using specified
+   * filters and properties. The search can be customized with filters, sorting, and
+   * pagination options.
    */
   search(
     objectType: string,
@@ -113,6 +117,91 @@ export class Custom extends APIResource {
   ): APIPromise<ObjectsAPI.BatchResponseSimplePublicUpsertObject> {
     return this._client.post(path`/crm/objects/2026-03/${objectType}/batch/upsert`, { body, ...options });
   }
+}
+
+/**
+ * The response returned after performing a batch operation on associations.
+ */
+export interface BatchResponsePublicDefaultAssociation {
+  /**
+   * The timestamp when the batch process was completed, in ISO 8601 format.
+   */
+  completedAt: string;
+
+  results: Array<PublicDefaultAssociation>;
+
+  /**
+   * The timestamp when the batch process began execution, in ISO 8601 format.
+   */
+  startedAt: string;
+
+  /**
+   * The status of the batch processing request. Can be: "PENDING", "PROCESSING",
+   * "CANCELED", or "COMPLETE".
+   */
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
+
+  errors?: Array<Shared.StandardError>;
+
+  /**
+   * An object containing relevant links related to the batch request.
+   */
+  links?: { [key: string]: string };
+
+  /**
+   * The total number of errors that occurred during the operation.
+   */
+  numErrors?: number;
+
+  /**
+   * The timestamp when the batch process was initiated, in ISO 8601 format.
+   */
+  requestedAt?: string;
+}
+
+/**
+ * The relationship descriptors applicable between two object types.
+ */
+export interface LabelsBetweenObjectPair {
+  /**
+   * Source unique ID of the object.
+   */
+  fromObjectId: string;
+
+  /**
+   * Source object type.
+   */
+  fromObjectTypeId: string;
+
+  labels: Array<string>;
+
+  /**
+   * Target unique ID of the object.
+   */
+  toObjectId: string;
+
+  /**
+   * Target object type.
+   */
+  toObjectTypeId: string;
+}
+
+export interface PublicDefaultAssociation {
+  /**
+   * Defines the type, direction, and details of the relationship between two CRM
+   * objects.
+   */
+  associationSpec: Shared.AssociationSpec;
+
+  /**
+   * Contains the Id of a Public Object
+   */
+  from: Shared.PublicObjectID;
+
+  /**
+   * Contains the Id of a Public Object
+   */
+  to: Shared.PublicObjectID;
 }
 
 export interface CustomCreateParams {
@@ -146,7 +235,7 @@ export interface CustomListParams extends PageParams {
    * A comma separated list of the properties to be returned along with their history
    * of previous values. If any of the specified properties are not present on the
    * requested object(s), they will be ignored. Usage of this parameter will reduce
-   * the maximum number of tasks that can be read by a single request.
+   * the maximum number of objects that can be read by a single request.
    */
   propertiesWithHistory?: Array<string>;
 }
@@ -236,6 +325,9 @@ export interface CustomUpsertParams {
 
 export declare namespace Custom {
   export {
+    type BatchResponsePublicDefaultAssociation as BatchResponsePublicDefaultAssociation,
+    type LabelsBetweenObjectPair as LabelsBetweenObjectPair,
+    type PublicDefaultAssociation as PublicDefaultAssociation,
     type CustomCreateParams as CustomCreateParams,
     type CustomUpdateParams as CustomUpdateParams,
     type CustomListParams as CustomListParams,

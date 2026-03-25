@@ -70,42 +70,6 @@ export interface ActingUser {
   userEmail?: string;
 }
 
-export interface APIUsage {
-  /**
-   * Indicates when the cache was last updated.
-   */
-  collectedAt: string;
-
-  /**
-   * How many API calls an account has made for the current day.
-   */
-  currentUsage: number;
-
-  /**
-   * Status of fetching the information, including if the data came from the cache.
-   */
-  fetchStatus: 'CACHED' | 'FAILURE' | 'NOTFOUND' | 'SUCCESS' | 'TIMEOUT';
-
-  /**
-   * Name of the limit type.
-   */
-  name: string;
-
-  /**
-   * Limits by which a single integration can consume the HubSpot public APIs.
-   */
-  usageLimit: number;
-
-  /**
-   * Time that the limit will reset.
-   */
-  resetsAt?: string;
-}
-
-export interface CollectionResponseAPIUsageNoPaging {
-  results: Array<APIUsage>;
-}
-
 export interface CollectionResponseHydratedCriticalActionForwardPaging {
   results: Array<HydratedCriticalAction>;
 
@@ -320,26 +284,6 @@ export interface HydratedCriticalAction {
   regionCode?: string;
 }
 
-export interface PortalInformationResponse {
-  accountType: 'APP_DEVELOPER' | 'DEVELOPER_TEST' | 'SANDBOX' | 'STANDARD';
-
-  additionalCurrencies: Array<string>;
-
-  companyCurrency: string;
-
-  dataHostingLocation: string;
-
-  portalId: number;
-
-  timeZone: string;
-
-  uiDomain: string;
-
-  utcOffset: string;
-
-  utcOffsetMilliseconds: number;
-}
-
 export interface PublicAPIUserActionEvent {
   /**
    * The unique ID of the activity.
@@ -453,13 +397,10 @@ export interface ActivityListSecurityActivitiesParams extends PageParams {
 export declare namespace Activity {
   export {
     type ActingUser as ActingUser,
-    type APIUsage as APIUsage,
-    type CollectionResponseAPIUsageNoPaging as CollectionResponseAPIUsageNoPaging,
     type CollectionResponseHydratedCriticalActionForwardPaging as CollectionResponseHydratedCriticalActionForwardPaging,
     type CollectionResponsePublicAPIUserActionEventForwardPaging as CollectionResponsePublicAPIUserActionEventForwardPaging,
     type CollectionResponsePublicLoginAuditForwardPaging as CollectionResponsePublicLoginAuditForwardPaging,
     type HydratedCriticalAction as HydratedCriticalAction,
-    type PortalInformationResponse as PortalInformationResponse,
     type PublicAPIUserActionEvent as PublicAPIUserActionEvent,
     type PublicLoginAudit as PublicLoginAudit,
     type PublicAPIUserActionEventsPage as PublicAPIUserActionEventsPage,
