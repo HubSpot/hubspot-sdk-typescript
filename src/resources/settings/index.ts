@@ -4,7 +4,6 @@ export {
   Currencies,
   type BatchInputExchangeRateCreateRequest,
   type BatchInputExchangeRateUpdateRequest,
-  type BatchInputPublicObjectID,
   type BatchResponseExchangeRate,
   type CentralExchangeRatesInformation,
   type CollectionResponseCurrencyCodeInfoNoPaging,
@@ -23,3 +22,10 @@ export {
   type ExchangeRatesPage,
 } from './currencies/index';
 export { Settings } from './settings';
+export {
+  TaxRates,
+  type CollectionResponsePublicTaxRateGroupForwardPaging,
+  type PublicTaxRateGroup,
+  type TaxRateListParams,
+  type PublicTaxRateGroupsPage,
+} from './tax-rates';

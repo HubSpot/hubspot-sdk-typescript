@@ -1,5 +1,80 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import * as EventsAPI from './events/events';
+import * as MediaBridgeAPI from './cms/media-bridge/media-bridge';
+
+export interface ActionResponse {
+  /**
+   * The timestamp indicating when the action was completed.
+   */
+  completedAt: string;
+
+  /**
+   * The timestamp indicating when the action was started.
+   */
+  startedAt: string;
+
+  /**
+   * The current status of the action, with possible values: CANCELED, COMPLETE,
+   * PENDING, PROCESSING.
+   */
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
+
+  /**
+   * A collection of related links associated with the action.
+   */
+  links?: { [key: string]: string };
+
+  /**
+   * The timestamp indicating when the action was requested.
+   */
+  requestedAt?: string;
+}
+
+/**
+ * The definition of an association
+ */
+export interface AssociationDefinition {
+  /**
+   * The unique ID of the associated object (e.g., a contact ID).
+   */
+  id: string;
+
+  /**
+   * The ID of the source object type (e.g., 0-1 for contacts).
+   */
+  fromObjectTypeId: string;
+
+  /**
+   * The ID of the destination object type (e.g., 0-3 for deals).
+   */
+  toObjectTypeId: string;
+
+  /**
+   * The timestamp when the association was created, in ISO 8601 format.
+   */
+  createdAt?: string;
+
+  /**
+   * For labeled association types, the internal name of the association.
+   */
+  name?: string;
+
+  /**
+   * The timestamp when the last update was made to an association, in ISO 8601
+   * format.
+   */
+  updatedAt?: string;
+}
+
+export interface AssociationDefinitionEgg {
+  fromObjectTypeId: string;
+
+  toObjectTypeId: string;
+
+  name?: string;
+}
+
 /**
  * Defines the type, direction, and details of the relationship between two CRM
  * objects.
@@ -14,6 +89,103 @@ export interface AssociationSpec {
    * The ID representing the specific type of association.
    */
   associationTypeId: number;
+}
+
+/**
+ * A HubSpot property option
+ */
+export interface AutomationActionsOption {
+  /**
+   * A description of the option.
+   */
+  description: string;
+
+  /**
+   * The position of the item relative to others in the list.
+   */
+  displayOrder: number;
+
+  doubleData: number;
+
+  /**
+   * Whether the option is displayed in HubSpot's UI.
+   */
+  hidden: boolean;
+
+  /**
+   * A user-friendly label that identifies the option.
+   */
+  label: string;
+
+  /**
+   * Whether the option is read-only.
+   */
+  readOnly: boolean;
+
+  /**
+   * The actual value of the option.
+   */
+  value: string;
+}
+
+export interface BatchInputPropertyCreate {
+  inputs: Array<PropertyCreate>;
+}
+
+export interface BatchInputPropertyName {
+  inputs: Array<PropertyName>;
+}
+
+export interface BatchInputPublicObjectID {
+  /**
+   * An array of deal split inputs
+   */
+  inputs: Array<PublicObjectID>;
+}
+
+export interface BatchInputString {
+  /**
+   * Strings to input.
+   */
+  inputs: Array<string>;
+}
+
+export interface BatchReadInputPropertyName {
+  archived: boolean;
+
+  dataSensitivity: 'highly_sensitive' | 'non_sensitive' | 'sensitive';
+
+  inputs: Array<PropertyName>;
+}
+
+export interface BatchResponseProperty {
+  completedAt: string;
+
+  results: Array<MediaBridgeAPI.Property1>;
+
+  startedAt: string;
+
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
+
+  errors?: Array<StandardError>;
+
+  links?: { [key: string]: string };
+
+  numErrors?: number;
+
+  requestedAt?: string;
+}
+
+export interface CollectionResponseObjectSchemaNoPaging {
+  results: Array<ObjectSchema>;
+}
+
+export interface CollectionResponsePropertyGroupNoPaging {
+  results: Array<PropertyGroup>;
+}
+
+export interface CollectionResponsePropertyNoPaging {
+  results: Array<MediaBridgeAPI.Property1>;
 }
 
 export interface Error {
@@ -108,6 +280,146 @@ export interface NextPage {
   link?: string;
 }
 
+export interface ObjectSchema {
+  id: string;
+
+  allowsSensitiveProperties: boolean;
+
+  archived: boolean;
+
+  associations: Array<EventsAPI.AssociationDefinition>;
+
+  fullyQualifiedName: string;
+
+  labels: ObjectTypeDefinitionLabels;
+
+  name: string;
+
+  objectTypeId: string;
+
+  properties: Array<MediaBridgeAPI.Property1>;
+
+  requiredProperties: Array<string>;
+
+  searchableProperties: Array<string>;
+
+  secondaryDisplayProperties: Array<string>;
+
+  createdAt?: string;
+
+  createdByUserId?: number;
+
+  description?: string;
+
+  primaryDisplayProperty?: string;
+
+  updatedAt?: string;
+
+  updatedByUserId?: number;
+}
+
+export interface ObjectTypeDefinition {
+  id: string;
+
+  allowsSensitiveProperties: boolean;
+
+  archived: boolean;
+
+  fullyQualifiedName: string;
+
+  labels: ObjectTypeDefinitionLabels;
+
+  name: string;
+
+  objectTypeId: string;
+
+  requiredProperties: Array<string>;
+
+  searchableProperties: Array<string>;
+
+  secondaryDisplayProperties: Array<string>;
+
+  createdAt?: string;
+
+  description?: string;
+
+  portalId?: number;
+
+  primaryDisplayProperty?: string;
+
+  updatedAt?: string;
+}
+
+export interface ObjectTypeDefinitionLabels {
+  plural?: string;
+
+  singular?: string;
+}
+
+export interface ObjectTypeDefinitionPatch {
+  clearDescription: boolean;
+
+  allowsSensitiveProperties?: boolean;
+
+  description?: string;
+
+  labels?: ObjectTypeDefinitionLabels;
+
+  primaryDisplayProperty?: string;
+
+  requiredProperties?: Array<string>;
+
+  restorable?: boolean;
+
+  searchableProperties?: Array<string>;
+
+  secondaryDisplayProperties?: Array<string>;
+}
+
+/**
+ * A HubSpot property option
+ */
+export interface Option {
+  /**
+   * Hidden options will not be displayed in HubSpot.
+   */
+  hidden: boolean;
+
+  /**
+   * A human-readable option label that will be shown in HubSpot.
+   */
+  label: string;
+
+  /**
+   * The internal value of the option, which must be used when setting the property
+   * value through the API.
+   */
+  value: string;
+
+  /**
+   * A description of the option.
+   */
+  description?: string;
+
+  /**
+   * Options are displayed in order starting with the lowest positive integer value.
+   * Values of -1 will cause the option to be displayed after any positive values.
+   */
+  displayOrder?: number;
+}
+
+export interface OptionInput {
+  displayOrder: number;
+
+  hidden: boolean;
+
+  label: string;
+
+  value: string;
+
+  description?: string;
+}
+
 export interface Paging {
   /**
    * Specifies the paging information needed to retrieve the next set of results in a
@@ -128,14 +440,458 @@ export interface Paging {
  */
 export interface PreviousPage {
   /**
-   * A paging cursor token for retrieving previous pages.
+   * A string token used to identify the position before the current page in the
+   * pagination sequence.
    */
   before: string;
 
   /**
-   * A URL that can be used to retrieve the previous pages' results.
+   * A URL string that provides a direct link to the previous page of results.
    */
   link?: string;
+}
+
+/**
+ * A HubSpot property
+ */
+export interface Property {
+  /**
+   * A description of the property that will be shown as help text in HubSpot.
+   */
+  description: string;
+
+  /**
+   * Controls how the property appears in HubSpot.
+   */
+  fieldType: string;
+
+  /**
+   * The name of the property group the property belongs to.
+   */
+  groupName: string;
+
+  /**
+   * A human-readable property label that will be shown in HubSpot.
+   */
+  label: string;
+
+  /**
+   * The internal property name, which must be used when referencing the property via
+   * the API.
+   */
+  name: string;
+
+  /**
+   * A list of valid options for the property. This field is required for enumerated
+   * properties, but will be empty for other property types.
+   */
+  options: Array<Option>;
+
+  /**
+   * The property data type.
+   */
+  type: string;
+
+  /**
+   * Whether or not the property is archived.
+   */
+  archived?: boolean;
+
+  /**
+   * When the property was archived.
+   */
+  archivedAt?: string;
+
+  /**
+   * For default properties, true indicates that the property is calculated by a
+   * HubSpot process. It has no effect for custom properties.
+   */
+  calculated?: boolean;
+
+  /**
+   * The formula used for calculated properties.
+   */
+  calculationFormula?: string;
+
+  /**
+   * When the property was created
+   */
+  createdAt?: string;
+
+  /**
+   * The internal ID of the user who created the property in HubSpot. This field may
+   * not exist if the property was created outside of HubSpot.
+   */
+  createdUserId?: string;
+
+  /**
+   * Indicates the sensitivity level of the property, such as "non_sensitive",
+   * "sensitive", or "highly_sensitive".
+   */
+  dataSensitivity?: 'highly_sensitive' | 'non_sensitive' | 'sensitive';
+
+  dateDisplayHint?: 'absolute' | 'absolute_with_relative' | 'time_since' | 'time_until';
+
+  /**
+   * The order that this property should be displayed in the HubSpot UI relative to
+   * other properties for this object type. Properties are displayed in order
+   * starting with the lowest positive integer value. A value of -1 will cause the
+   * property to be displayed **after** any positive values.
+   */
+  displayOrder?: number;
+
+  /**
+   * For default properties, true indicates that the options are stored externally to
+   * the property settings.
+   */
+  externalOptions?: boolean;
+
+  /**
+   * Whether or not the property can be used in a HubSpot form.
+   */
+  formField?: boolean;
+
+  /**
+   * Whether or not the property's value must be unique. Once set, this can't be
+   * changed.
+   */
+  hasUniqueValue?: boolean;
+
+  /**
+   * Whether or not the property will be hidden from the HubSpot UI. It's recommended
+   * that this be set to false for custom properties.
+   */
+  hidden?: boolean;
+
+  /**
+   * This will be true for default object properties built into HubSpot.
+   */
+  hubspotDefined?: boolean;
+
+  modificationMetadata?: PropertyModificationMetadata;
+
+  /**
+   * If this property is related to other object(s), they'll be listed here.
+   */
+  referencedObjectType?: string;
+
+  /**
+   * When sensitiveData is true, lists the type of sensitive data contained in the
+   * property (e.g., "HIPAA").
+   */
+  sensitiveDataCategories?: Array<string>;
+
+  /**
+   * Whether the property will display the currency symbol set in the account
+   * settings.
+   */
+  showCurrencySymbol?: boolean;
+
+  /**
+   * The timestamp when the property was last updated, in ISO 8601 format.
+   */
+  updatedAt?: string;
+
+  /**
+   * The internal user ID of the user who updated the property in HubSpot. This field
+   * may not exist if the property was updated outside of HubSpot.
+   */
+  updatedUserId?: string;
+}
+
+export interface PropertyCreate {
+  fieldType:
+    | 'booleancheckbox'
+    | 'calculation_equation'
+    | 'checkbox'
+    | 'date'
+    | 'file'
+    | 'html'
+    | 'number'
+    | 'phonenumber'
+    | 'radio'
+    | 'select'
+    | 'text'
+    | 'textarea';
+
+  groupName: string;
+
+  label: string;
+
+  name: string;
+
+  type: 'bool' | 'date' | 'datetime' | 'enumeration' | 'number' | 'phone_number' | 'string';
+
+  calculationFormula?: string;
+
+  dataSensitivity?: 'highly_sensitive' | 'non_sensitive' | 'sensitive';
+
+  description?: string;
+
+  displayOrder?: number;
+
+  externalOptions?: boolean;
+
+  formField?: boolean;
+
+  hasUniqueValue?: boolean;
+
+  hidden?: boolean;
+
+  options?: Array<OptionInput>;
+
+  referencedObjectType?: string;
+}
+
+export interface PropertyGroup {
+  archived: boolean;
+
+  label: string;
+
+  name: string;
+
+  displayOrder?: number;
+}
+
+export interface PropertyGroupCreate {
+  label: string;
+
+  name: string;
+
+  displayOrder?: number;
+}
+
+export interface PropertyGroupUpdate {
+  displayOrder?: number;
+
+  label?: string;
+}
+
+export interface PropertyModificationMetadata {
+  archivable: boolean;
+
+  readOnlyDefinition: boolean;
+
+  readOnlyValue: boolean;
+
+  readOnlyOptions?: boolean;
+}
+
+export interface PropertyName {
+  name: string;
+}
+
+/**
+ * Represents a single custom property of a marketing event, storing its name,
+ * value, metadata (like source, timestamp, and sensitivity), and related audit
+ * information for tracking changes.
+ */
+export interface PropertyValue {
+  /**
+   * The sensitivity level of the property, such as "non_sensitive", "sensitive", and
+   * "highly_sensitive".
+   */
+  dataSensitivity: 'high' | 'none' | 'standard';
+
+  /**
+   * Whether the property value is encrypted.
+   */
+  isEncrypted: boolean;
+
+  /**
+   * Indicates if the value exceeds normal size limits.
+   */
+  isLargeValue: boolean;
+
+  /**
+   * The unique property name.
+   */
+  name: string;
+
+  /**
+   * When the value was persisted to database, in epoch milliseconds.
+   */
+  persistenceTimestamp: number;
+
+  /**
+   * A unique ID associated with this request.
+   */
+  requestId: string;
+
+  /**
+   * Whether the value was selected by a user.
+   */
+  selectedByUser: boolean;
+
+  /**
+   * The timestamp when the value was selected by a user, if applicable.
+   */
+  selectedByUserTimestamp: number;
+
+  /**
+   * The origin of the property value, such as "IMPORT" or "API".
+   */
+  source:
+    | 'ACADEMY'
+    | 'ACCEPTANCE_TEST'
+    | 'ACTIVITY_AUTO_ASSOCIATE'
+    | 'ACTIVITY_LOG_REVERT'
+    | 'ADS'
+    | 'AI_GROUP'
+    | 'ANALYTICS'
+    | 'API'
+    | 'APPROVALS'
+    | 'ASSISTS'
+    | 'ASSOCIATIONS'
+    | 'AUTO_ASSOCIATE_BY_DOMAIN'
+    | 'AUTOMATION_JOURNEY'
+    | 'AUTOMATION_PLATFORM'
+    | 'AVATARS_SERVICE'
+    | 'BATCH_UPDATE'
+    | 'BCC_TO_CRM'
+    | 'BEHAVIORAL_EVENTS'
+    | 'BET_ASSIGNMENT'
+    | 'BET_CRM_CONNECTOR'
+    | 'BIDEN'
+    | 'BILLING'
+    | 'BOT'
+    | 'CALCULATED'
+    | 'CENTRAL_EXCHANGE_RATES'
+    | 'CHATSPOT'
+    | 'CLONE_OBJECTS'
+    | 'COMMUNICATOR'
+    | 'COMPANIES'
+    | 'COMPANY_FAMILIES'
+    | 'COMPANY_INSIGHTS'
+    | 'CONTACTS'
+    | 'CONTACTS_WEB'
+    | 'CONTENT_MEMBERSHIP'
+    | 'CONVERSATIONAL_ENRICHMENT'
+    | 'CONVERSATIONS'
+    | 'CRM_PROCESSES_PLATFORM'
+    | 'CRM_UI'
+    | 'CRM_UI_BULK_ACTION'
+    | 'CUSTOMER_AGENT'
+    | 'DATA_ENRICHMENT'
+    | 'DATA_QUALITY'
+    | 'DATASET'
+    | 'DEALS'
+    | 'DEFAULT'
+    | 'DELETE_OBJECTS'
+    | 'EMAIL'
+    | 'EMAIL_INBOX_IMPORT'
+    | 'EMAIL_INTEGRATION'
+    | 'ENGAGEMENTS'
+    | 'EXTENSION'
+    | 'FILE_MANAGER'
+    | 'FLYWHEEL_PRODUCT_DATA_SYNC'
+    | 'FORECASTING'
+    | 'FORM'
+    | 'FORWARD_TO_CRM'
+    | 'GMAIL_INTEGRATION'
+    | 'GOALS'
+    | 'HEISENBERG'
+    | 'HELP_DESK'
+    | 'HELP_DESK_AI'
+    | 'IMPORT'
+    | 'INTEGRATION'
+    | 'INTEGRATIONS_PLATFORM'
+    | 'INTEGRATIONS_SYNC'
+    | 'INTENT'
+    | 'INTERNAL_PROCESSING'
+    | 'LEADIN'
+    | 'LEGAL_BASIS_REMEDIATION'
+    | 'MARKET_SOURCING'
+    | 'MARKETPLACE'
+    | 'MEETINGS'
+    | 'MERGE_COMPANIES'
+    | 'MERGE_CONTACTS'
+    | 'MERGE_OBJECTS'
+    | 'MERGE_REVERT_OBJECTS'
+    | 'MICROAPPS'
+    | 'MIGRATION'
+    | 'MOBILE_ANDROID'
+    | 'MOBILE_IOS'
+    | 'PAYMENTS'
+    | 'PIPELINE_SETTINGS'
+    | 'PLAYBOOKS'
+    | 'PORTAL_OBJECT_SYNC'
+    | 'PORTAL_USER_ASSOCIATOR'
+    | 'PRESENTATIONS'
+    | 'PRIMARY_AUTOMATION'
+    | 'PROPERTY_DEFAULT_VALUE'
+    | 'PROPERTY_RESTORE'
+    | 'PROPERTY_SETTINGS'
+    | 'PROSPECTING_AGENT'
+    | 'QUOTAS'
+    | 'QUOTES'
+    | 'RECYCLING_BIN'
+    | 'RESTORE_OBJECTS'
+    | 'SALES'
+    | 'SALES_MESSAGES'
+    | 'SALESFORCE'
+    | 'SEQUENCES'
+    | 'SETTINGS'
+    | 'SIDEKICK'
+    | 'SIGNALS'
+    | 'SLACK_INTEGRATION'
+    | 'SMART_DATA_CAPTURE'
+    | 'SOCIAL'
+    | 'SUCCESS'
+    | 'TALLY'
+    | 'TASK'
+    | 'UNKNOWN'
+    | 'WAL_INCREMENTAL'
+    | 'WORK_UI'
+    | 'WORKFLOW_CONTACT_DELETE_ACTION'
+    | 'WORKFLOWS';
+
+  /**
+   * The ID of the property source indicating where it was created.
+   */
+  sourceId: string;
+
+  /**
+   * A human-readable label.
+   */
+  sourceLabel: string;
+
+  /**
+   * Metadata providing additional context about the source.
+   */
+  sourceMetadata: string;
+
+  sourceUpstreamDeployable: string;
+
+  /**
+   * The unique identifier associated with the source.
+   */
+  sourceVid: Array<number>;
+
+  /**
+   * When the value was set, as a 64-bit integer.
+   */
+  timestamp: number;
+
+  /**
+   * The unit of measurement or context for the value.
+   */
+  unit: string;
+
+  /**
+   * The ID of the user who updated the property.
+   */
+  updatedByUserId: number;
+
+  /**
+   * Flag indicating whether to use the timestamp field as the persistence timestamp.
+   */
+  useTimestampAsPersistenceTimestamp: boolean;
+
+  /**
+   * The property value.
+   */
+  value: string;
 }
 
 /**
@@ -143,7 +899,7 @@ export interface PreviousPage {
  */
 export interface PublicObjectID {
   /**
-   * The unique ID of the object.
+   * ID of the object
    */
   id: string;
 }
@@ -153,42 +909,71 @@ export interface PublicObjectID {
  */
 export interface StandardError {
   /**
-   * Error category.
+   * The main category of the error.
    */
   category: string;
 
   /**
-   * Error context.
+   * Additional context-specific information related to the error.
    */
   context: { [key: string]: Array<string> };
 
   /**
-   * List of error details.
+   * The detailed error objects.
    */
   errors: Array<ErrorDetail>;
 
   /**
-   * Error links.
+   * URLs linking to documentation or resources associated with the error.
    */
   links: { [key: string]: string };
 
   /**
-   * Error message.
+   * A human-readable string describing the error and possible remediation steps.
    */
   message: string;
 
   /**
-   * Error status.
+   * The HTTP status code associated with the error.
    */
   status: string;
 
   /**
-   * Error ID.
+   * A unique ID for the error instance.
    */
   id?: string;
 
   /**
-   * Error subcategory.
+   * A more specific error category within each main category.
    */
   subCategory?: unknown;
+}
+
+export interface TaskLocator {
+  /**
+   * The unique identifier for the task.
+   */
+  id: string;
+
+  /**
+   * A collection of link names mapped to their corresponding URIs.
+   */
+  links?: { [key: string]: string };
+}
+
+export interface VersionUser {
+  /**
+   * The unique ID of the User.
+   */
+  id: string;
+
+  /**
+   * The email address of the user.
+   */
+  email: string;
+
+  /**
+   * The first and last name of the User.
+   */
+  fullName: string;
 }

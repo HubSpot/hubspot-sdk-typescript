@@ -12,8 +12,6 @@ export {
   type Angle,
   type BackgroundImage,
   type BatchInputBlogPost,
-  type BatchInputJsonNode,
-  type BatchInputString,
   type BatchResponseBlogPost,
   type BatchResponseBlogPostWithErrors,
   type BlogPost,

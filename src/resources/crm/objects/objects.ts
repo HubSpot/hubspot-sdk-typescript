@@ -2,22 +2,9 @@
 
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
-import * as ContactsAPI from './contacts';
-import {
-  ContactCreateParams,
-  ContactDeleteParams,
-  ContactGdprDeleteParams,
-  ContactGetParams,
-  ContactListParams,
-  ContactMergeParams,
-  ContactSearchParams,
-  ContactUpdateParams,
-  Contacts,
-  PublicGdprDeleteInput,
-} from './contacts';
+import * as CrmAPI from '../crm';
 import * as CustomAPI from './custom';
 import {
-  BatchResponsePublicDefaultAssociation,
   Custom,
   CustomCreateParams,
   CustomDeleteParams,
@@ -27,14 +14,353 @@ import {
   CustomSearchParams,
   CustomUpdateParams,
   CustomUpsertParams,
-  LabelsBetweenObjectPair,
-  PublicDefaultAssociation,
 } from './custom';
+import * as InvoicesAPI from './invoices';
+import {
+  InvoiceCreateParams,
+  InvoiceDeleteParams,
+  InvoiceGetParams,
+  InvoiceListParams,
+  InvoiceSearchParams,
+  InvoiceUpdateParams,
+  InvoiceUpsertParams,
+  Invoices,
+} from './invoices';
+import * as ListingsAPI from './listings';
+import {
+  ListingCreateParams,
+  ListingDeleteParams,
+  ListingGetParams,
+  ListingListParams,
+  ListingSearchParams,
+  ListingUpdateParams,
+  ListingUpsertParams,
+  Listings,
+} from './listings';
+import * as OrdersAPI from './orders';
+import {
+  OrderCreateParams,
+  OrderDeleteParams,
+  OrderGetParams,
+  OrderListParams,
+  OrderSearchParams,
+  OrderUpdateParams,
+  OrderUpsertParams,
+  Orders,
+} from './orders';
+import * as PartnerServicesAPI from './partner-services';
+import {
+  CollectionResponseMultiAssociatedObjectWithLabelForwardPaging,
+  PartnerServiceGetParams,
+  PartnerServiceListParams,
+  PartnerServiceSearchParams,
+  PartnerServiceUpdateParams,
+  PartnerServices,
+} from './partner-services';
+import * as PostalMailAPI from './postal-mail';
+import {
+  PostalMail,
+  PostalMailCreateParams,
+  PostalMailDeleteParams,
+  PostalMailGetParams,
+  PostalMailListParams,
+  PostalMailSearchParams,
+  PostalMailUpdateParams,
+  PostalMailUpsertParams,
+} from './postal-mail';
+import * as ProductsAPI from './products';
+import {
+  ProductCreateParams,
+  ProductDeleteParams,
+  ProductGetParams,
+  ProductListParams,
+  ProductSearchParams,
+  ProductUpdateParams,
+  ProductUpsertParams,
+  Products,
+} from './products';
+import * as ServicesAPI from './services';
+import {
+  ServiceCreateParams,
+  ServiceDeleteParams,
+  ServiceGetParams,
+  ServiceListParams,
+  ServiceSearchParams,
+  ServiceUpdateParams,
+  ServiceUpsertParams,
+  Services,
+} from './services';
+import * as TaxesAPI from './taxes';
+import {
+  TaxCreateParams,
+  TaxDeleteParams,
+  TaxGetParams,
+  TaxListParams,
+  TaxSearchParams,
+  TaxUpdateParams,
+  TaxUpsertParams,
+  Taxes,
+} from './taxes';
+import * as UsersAPI from './users';
+import {
+  UserCreateParams,
+  UserDeleteParams,
+  UserGetParams,
+  UserListParams,
+  UserSearchParams,
+  UserUpdateParams,
+  UserUpsertParams,
+  Users,
+} from './users';
+import * as CallsAPI from './calls/calls';
+import {
+  CallCreateParams,
+  CallGetParams,
+  CallListParams,
+  CallSearchParams,
+  CallUpdateParams,
+  Calls,
+} from './calls/calls';
+import * as CartsAPI from './carts/carts';
+import {
+  CartCreateParams,
+  CartGetParams,
+  CartListParams,
+  CartSearchParams,
+  CartUpdateParams,
+  Carts,
+} from './carts/carts';
+import * as CommercePaymentsAPI from './commerce-payments/commerce-payments';
+import {
+  CommercePaymentCreateParams,
+  CommercePaymentGetParams,
+  CommercePaymentListParams,
+  CommercePaymentSearchParams,
+  CommercePaymentUpdateParams,
+  CommercePayments,
+} from './commerce-payments/commerce-payments';
+import * as CommunicationsAPI from './communications/communications';
+import {
+  CommunicationCreateParams,
+  CommunicationGetParams,
+  CommunicationListParams,
+  CommunicationSearchParams,
+  CommunicationUpdateParams,
+  Communications,
+} from './communications/communications';
+import * as CompaniesAPI from './companies/companies';
+import {
+  Companies,
+  CompanyCreateParams,
+  CompanyGetParams,
+  CompanyListParams,
+  CompanyMergeParams,
+  CompanySearchParams,
+  CompanyUpdateParams,
+} from './companies/companies';
+import * as ContactsAPI from './contacts/contacts';
+import {
+  ContactCreateParams,
+  ContactGdprDeleteParams,
+  ContactGetParams,
+  ContactListParams,
+  ContactMergeParams,
+  ContactSearchParams,
+  ContactUpdateParams,
+  Contacts,
+  PublicGdprDeleteInput,
+} from './contacts/contacts';
+import * as ContractsAPI from './contracts/contracts';
+import {
+  ContractCreateParams,
+  ContractGetParams,
+  ContractListParams,
+  ContractSearchParams,
+  ContractUpdateParams,
+  Contracts,
+} from './contracts/contracts';
+import * as CoursesAPI from './courses/courses';
+import {
+  CourseCreateParams,
+  CourseGetParams,
+  CourseListParams,
+  CourseSearchParams,
+  CourseUpdateParams,
+  Courses,
+} from './courses/courses';
+import * as DealsAPI from './deals/deals';
+import {
+  DealCreateParams,
+  DealGetParams,
+  DealListParams,
+  DealMergeParams,
+  DealSearchParams,
+  DealUpdateParams,
+  Deals,
+} from './deals/deals';
+import * as DiscountsAPI from './discounts/discounts';
+import {
+  DiscountCreateParams,
+  DiscountGetParams,
+  DiscountListParams,
+  DiscountSearchParams,
+  DiscountUpdateParams,
+  Discounts,
+} from './discounts/discounts';
+import * as EmailsAPI from './emails/emails';
+import {
+  EmailCreateParams,
+  EmailGetParams,
+  EmailListParams,
+  EmailSearchParams,
+  EmailUpdateParams,
+  Emails,
+} from './emails/emails';
+import * as FeedbackSubmissionsAPI from './feedback-submissions/feedback-submissions';
+import {
+  FeedbackSubmissionGetParams,
+  FeedbackSubmissionListParams,
+  FeedbackSubmissionSearchParams,
+  FeedbackSubmissions,
+} from './feedback-submissions/feedback-submissions';
+import * as FeesAPI from './fees/fees';
+import {
+  FeeCreateParams,
+  FeeGetParams,
+  FeeListParams,
+  FeeSearchParams,
+  FeeUpdateParams,
+  Fees,
+} from './fees/fees';
+import * as GoalTargetsAPI from './goal-targets/goal-targets';
+import {
+  GoalTargetCreateParams,
+  GoalTargetGetParams,
+  GoalTargetListParams,
+  GoalTargetSearchParams,
+  GoalTargetUpdateParams,
+  GoalTargets,
+} from './goal-targets/goal-targets';
+import * as LeadsAPI from './leads/leads';
+import {
+  LeadCreateParams,
+  LeadGetParams,
+  LeadListParams,
+  LeadSearchParams,
+  LeadUpdateParams,
+  Leads,
+} from './leads/leads';
+import * as LineItemsAPI from './line-items/line-items';
+import {
+  LineItemCreateParams,
+  LineItemGetParams,
+  LineItemListParams,
+  LineItemSearchParams,
+  LineItemUpdateParams,
+  LineItems,
+} from './line-items/line-items';
+import * as MeetingsAPI from './meetings/meetings';
+import {
+  MeetingCreateParams,
+  MeetingGetParams,
+  MeetingListParams,
+  MeetingSearchParams,
+  MeetingUpdateParams,
+  Meetings,
+} from './meetings/meetings';
+import * as NotesAPI from './notes/notes';
+import {
+  NoteCreateParams,
+  NoteGetParams,
+  NoteListParams,
+  NoteSearchParams,
+  NoteUpdateParams,
+  Notes,
+} from './notes/notes';
+import * as PartnerClientsAPI from './partner-clients/partner-clients';
+import {
+  PartnerClientGetParams,
+  PartnerClientListParams,
+  PartnerClientSearchParams,
+  PartnerClientUpdateParams,
+  PartnerClients,
+} from './partner-clients/partner-clients';
+import * as QuotesAPI from './quotes/quotes';
+import {
+  QuoteCreateParams,
+  QuoteGetParams,
+  QuoteListParams,
+  QuoteSearchParams,
+  QuoteUpdateParams,
+  Quotes,
+} from './quotes/quotes';
+import * as SubscriptionsAPI from './subscriptions/subscriptions';
+import {
+  SubscriptionCreateParams,
+  SubscriptionGetParams,
+  SubscriptionListParams,
+  SubscriptionSearchParams,
+  SubscriptionUpdateParams,
+  Subscriptions,
+} from './subscriptions/subscriptions';
+import * as TasksAPI from './tasks/tasks';
+import {
+  TaskCreateParams,
+  TaskGetParams,
+  TaskListParams,
+  TaskSearchParams,
+  TaskUpdateParams,
+  Tasks,
+} from './tasks/tasks';
+import * as TicketsAPI from './tickets/tickets';
+import {
+  TicketCreateParams,
+  TicketGetParams,
+  TicketListParams,
+  TicketMergeParams,
+  TicketSearchParams,
+  TicketUpdateParams,
+  Tickets,
+} from './tickets/tickets';
 import { Page } from '../../../core/pagination';
 
 export class Objects extends APIResource {
+  calls: CallsAPI.Calls = new CallsAPI.Calls(this._client);
+  carts: CartsAPI.Carts = new CartsAPI.Carts(this._client);
+  commercePayments: CommercePaymentsAPI.CommercePayments = new CommercePaymentsAPI.CommercePayments(
+    this._client,
+  );
+  communications: CommunicationsAPI.Communications = new CommunicationsAPI.Communications(this._client);
+  companies: CompaniesAPI.Companies = new CompaniesAPI.Companies(this._client);
   contacts: ContactsAPI.Contacts = new ContactsAPI.Contacts(this._client);
+  contracts: ContractsAPI.Contracts = new ContractsAPI.Contracts(this._client);
+  courses: CoursesAPI.Courses = new CoursesAPI.Courses(this._client);
   custom: CustomAPI.Custom = new CustomAPI.Custom(this._client);
+  deals: DealsAPI.Deals = new DealsAPI.Deals(this._client);
+  discounts: DiscountsAPI.Discounts = new DiscountsAPI.Discounts(this._client);
+  emails: EmailsAPI.Emails = new EmailsAPI.Emails(this._client);
+  feedbackSubmissions: FeedbackSubmissionsAPI.FeedbackSubmissions =
+    new FeedbackSubmissionsAPI.FeedbackSubmissions(this._client);
+  fees: FeesAPI.Fees = new FeesAPI.Fees(this._client);
+  goalTargets: GoalTargetsAPI.GoalTargets = new GoalTargetsAPI.GoalTargets(this._client);
+  invoices: InvoicesAPI.Invoices = new InvoicesAPI.Invoices(this._client);
+  leads: LeadsAPI.Leads = new LeadsAPI.Leads(this._client);
+  lineItems: LineItemsAPI.LineItems = new LineItemsAPI.LineItems(this._client);
+  listings: ListingsAPI.Listings = new ListingsAPI.Listings(this._client);
+  meetings: MeetingsAPI.Meetings = new MeetingsAPI.Meetings(this._client);
+  notes: NotesAPI.Notes = new NotesAPI.Notes(this._client);
+  orders: OrdersAPI.Orders = new OrdersAPI.Orders(this._client);
+  partnerClients: PartnerClientsAPI.PartnerClients = new PartnerClientsAPI.PartnerClients(this._client);
+  partnerServices: PartnerServicesAPI.PartnerServices = new PartnerServicesAPI.PartnerServices(this._client);
+  postalMail: PostalMailAPI.PostalMail = new PostalMailAPI.PostalMail(this._client);
+  products: ProductsAPI.Products = new ProductsAPI.Products(this._client);
+  quotes: QuotesAPI.Quotes = new QuotesAPI.Quotes(this._client);
+  services: ServicesAPI.Services = new ServicesAPI.Services(this._client);
+  subscriptions: SubscriptionsAPI.Subscriptions = new SubscriptionsAPI.Subscriptions(this._client);
+  tasks: TasksAPI.Tasks = new TasksAPI.Tasks(this._client);
+  taxes: TaxesAPI.Taxes = new TaxesAPI.Taxes(this._client);
+  tickets: TicketsAPI.Tickets = new TicketsAPI.Tickets(this._client);
+  users: UsersAPI.Users = new UsersAPI.Users(this._client);
 }
 
 export type SimplePublicObjectWithAssociationsPage = Page<SimplePublicObjectWithAssociations>;
@@ -104,7 +430,7 @@ export interface BatchResponseSimplePublicObject {
    */
   completedAt: string;
 
-  results: Array<SimplePublicObject>;
+  results: Array<CrmAPI.SimplePublicObject>;
 
   /**
    * The timestamp when the batch processing began, in ISO 8601 format.
@@ -112,7 +438,8 @@ export interface BatchResponseSimplePublicObject {
   startedAt: string;
 
   /**
-   * The status of the batch processing request. The expected value is "COMPLETE".
+   * The status of the batch processing request: "PENDING", "PROCESSING",
+   * "CANCELLED", or "COMPLETE"
    */
   status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
@@ -192,63 +519,14 @@ export interface CollectionResponseSimplePublicObjectWithAssociationsForwardPagi
  * total count of objects available.
  */
 export interface CollectionResponseWithTotalSimplePublicObject {
-  results: Array<SimplePublicObject>;
+  results: Array<CrmAPI.SimplePublicObject>;
 
   /**
-   * The number of available results
+   * The total number of objects included into response.
    */
   total: number;
 
   paging?: Shared.Paging;
-}
-
-/**
- * Defines a single condition for searching CRM objects, specifying the property to
- * filter on, the operator to use (such as equals, greater than, or contains), and
- * the value(s) to compare against.
- */
-export interface Filter {
-  /**
-   * null
-   */
-  operator:
-    | 'BETWEEN'
-    | 'CONTAINS_TOKEN'
-    | 'EQ'
-    | 'GT'
-    | 'GTE'
-    | 'HAS_PROPERTY'
-    | 'IN'
-    | 'LT'
-    | 'LTE'
-    | 'NEQ'
-    | 'NOT_CONTAINS_TOKEN'
-    | 'NOT_HAS_PROPERTY'
-    | 'NOT_IN';
-
-  /**
-   * The name of the property to apply the filter to.
-   */
-  propertyName: string;
-
-  /**
-   * The upper boundary value when using ranged-based filters.
-   */
-  highValue?: string;
-
-  /**
-   * The value to match against the property.
-   */
-  value?: string;
-
-  /**
-   * The values to match against the property.
-   */
-  values?: Array<string>;
-}
-
-export interface FilterGroup {
-  filters: Array<Filter>;
 }
 
 export interface PublicAssociationsForObject {
@@ -265,14 +543,12 @@ export interface PublicAssociationsForObject {
  */
 export interface PublicMergeInput {
   /**
-   * The object ID of the record that the merge will not set as the current value
-   * after the merge.
+   * The ID of the company to merge into the primary.
    */
   objectIdToMerge: string;
 
   /**
-   * The object ID of the record that the merge will generally set as the current
-   * value after the merge.
+   * The ID of the primary company, which the other will merge into.
    */
   primaryObjectId: string;
 }
@@ -289,7 +565,7 @@ export interface PublicObjectSearchRequest {
   /**
    * Up to 6 groups of filters defining additional query criteria.
    */
-  filterGroups: Array<FilterGroup>;
+  filterGroups: Array<CrmAPI.FilterGroup>;
 
   /**
    * The maximum results to return, up to 200 objects.
@@ -313,64 +589,13 @@ export interface PublicObjectSearchRequest {
 }
 
 /**
- * A simple public object.
- */
-export interface SimplePublicObject {
-  /**
-   * The unique ID of the object.
-   */
-  id: string;
-
-  /**
-   * Whether the object is archived.
-   */
-  archived: boolean;
-
-  /**
-   * The timestamp when the object was created, in ISO 8601 format.
-   */
-  createdAt: string;
-
-  /**
-   * Key-value pairs representing the properties of the object.
-   */
-  properties: { [key: string]: string | null };
-
-  /**
-   * The timestamp when the object was last updated, in ISO 8601 format.
-   */
-  updatedAt: string;
-
-  /**
-   * The timestamp when the object was archived, in ISO 8601 format.
-   */
-  archivedAt?: string;
-
-  /**
-   * An identifier used for tracing the write request for the object.
-   */
-  objectWriteTraceId?: string;
-
-  /**
-   * Key-value pairs representing the properties of the object along with their
-   * history.
-   */
-  propertiesWithHistory?: { [key: string]: Array<ValueWithTimestamp> };
-
-  /**
-   * The URL associated with the object.
-   */
-  url?: string;
-}
-
-/**
  * Contains an array of CRM object records to be processed in a batch operation,
  * each defined by their ID and properties.
  */
 export interface SimplePublicObjectBatchInput {
   /**
-   * The ID of the contact to update. This can be the object ID, or the unique
-   * property value of the `idProperty` property.
+   * The id to be updated. This can be the object id, or the unique property value of
+   * the idProperty property
    */
   id: string;
 
@@ -380,7 +605,7 @@ export interface SimplePublicObjectBatchInput {
   properties: { [key: string]: string };
 
   /**
-   * The name of a unique property, when identifying records by property.
+   * The name of a property whose values are unique for this object
    */
   idProperty?: string;
 
@@ -519,7 +744,7 @@ export interface SimplePublicObjectWithAssociations {
    * Key-value pairs representing the properties of the object along with their
    * history.
    */
-  propertiesWithHistory?: { [key: string]: Array<ValueWithTimestamp> };
+  propertiesWithHistory?: { [key: string]: Array<CrmAPI.ValueWithTimestamp> };
 
   /**
    * The URL on the API that provide direct navigation to the corresponding UI pages
@@ -568,7 +793,7 @@ export interface SimplePublicUpsertObject {
   archivedAt?: string;
 
   /**
-   * An identifier for tracing the creation request.
+   * An identifier used for tracing the write request for the object.
    */
   objectWriteTraceId?: string;
 
@@ -576,7 +801,7 @@ export interface SimplePublicUpsertObject {
    * Key-value pairs representing the properties of the object along with their
    * history.
    */
-  propertiesWithHistory?: { [key: string]: Array<ValueWithTimestamp> };
+  propertiesWithHistory?: { [key: string]: Array<CrmAPI.ValueWithTimestamp> };
 
   /**
    * The URL associated with the object.
@@ -584,43 +809,39 @@ export interface SimplePublicUpsertObject {
   url?: string;
 }
 
-/**
- * Property model that includes timestamp.
- */
-export interface ValueWithTimestamp {
-  /**
-   * The property type.
-   */
-  sourceType: string;
-
-  /**
-   * The timestamp when the property was updated, in ISO 8601 format.
-   */
-  timestamp: string;
-
-  /**
-   * The property value.
-   */
-  value: string;
-
-  /**
-   * The unique ID of the property.
-   */
-  sourceId?: string;
-
-  /**
-   * A human-readable label.
-   */
-  sourceLabel?: string;
-
-  /**
-   * The ID of the user who last updated the property.
-   */
-  updatedByUserId?: number;
-}
-
+Objects.Calls = Calls;
+Objects.Carts = Carts;
+Objects.CommercePayments = CommercePayments;
+Objects.Communications = Communications;
+Objects.Companies = Companies;
 Objects.Contacts = Contacts;
+Objects.Contracts = Contracts;
+Objects.Courses = Courses;
 Objects.Custom = Custom;
+Objects.Deals = Deals;
+Objects.Discounts = Discounts;
+Objects.Emails = Emails;
+Objects.FeedbackSubmissions = FeedbackSubmissions;
+Objects.Fees = Fees;
+Objects.GoalTargets = GoalTargets;
+Objects.Invoices = Invoices;
+Objects.Leads = Leads;
+Objects.LineItems = LineItems;
+Objects.Listings = Listings;
+Objects.Meetings = Meetings;
+Objects.Notes = Notes;
+Objects.Orders = Orders;
+Objects.PartnerClients = PartnerClients;
+Objects.PartnerServices = PartnerServices;
+Objects.PostalMail = PostalMail;
+Objects.Products = Products;
+Objects.Quotes = Quotes;
+Objects.Services = Services;
+Objects.Subscriptions = Subscriptions;
+Objects.Tasks = Tasks;
+Objects.Taxes = Taxes;
+Objects.Tickets = Tickets;
+Objects.Users = Users;
 
 export declare namespace Objects {
   export {
@@ -635,12 +856,9 @@ export declare namespace Objects {
     type CollectionResponseAssociatedID as CollectionResponseAssociatedID,
     type CollectionResponseSimplePublicObjectWithAssociationsForwardPaging as CollectionResponseSimplePublicObjectWithAssociationsForwardPaging,
     type CollectionResponseWithTotalSimplePublicObject as CollectionResponseWithTotalSimplePublicObject,
-    type Filter as Filter,
-    type FilterGroup as FilterGroup,
     type PublicAssociationsForObject as PublicAssociationsForObject,
     type PublicMergeInput as PublicMergeInput,
     type PublicObjectSearchRequest as PublicObjectSearchRequest,
-    type SimplePublicObject as SimplePublicObject,
     type SimplePublicObjectBatchInput as SimplePublicObjectBatchInput,
     type SimplePublicObjectBatchInputForCreate as SimplePublicObjectBatchInputForCreate,
     type SimplePublicObjectBatchInputUpsert as SimplePublicObjectBatchInputUpsert,
@@ -649,7 +867,52 @@ export declare namespace Objects {
     type SimplePublicObjectInputForCreate as SimplePublicObjectInputForCreate,
     type SimplePublicObjectWithAssociations as SimplePublicObjectWithAssociations,
     type SimplePublicUpsertObject as SimplePublicUpsertObject,
-    type ValueWithTimestamp as ValueWithTimestamp,
+  };
+
+  export {
+    Calls as Calls,
+    type CallCreateParams as CallCreateParams,
+    type CallUpdateParams as CallUpdateParams,
+    type CallListParams as CallListParams,
+    type CallGetParams as CallGetParams,
+    type CallSearchParams as CallSearchParams,
+  };
+
+  export {
+    Carts as Carts,
+    type CartCreateParams as CartCreateParams,
+    type CartUpdateParams as CartUpdateParams,
+    type CartListParams as CartListParams,
+    type CartGetParams as CartGetParams,
+    type CartSearchParams as CartSearchParams,
+  };
+
+  export {
+    CommercePayments as CommercePayments,
+    type CommercePaymentCreateParams as CommercePaymentCreateParams,
+    type CommercePaymentUpdateParams as CommercePaymentUpdateParams,
+    type CommercePaymentListParams as CommercePaymentListParams,
+    type CommercePaymentGetParams as CommercePaymentGetParams,
+    type CommercePaymentSearchParams as CommercePaymentSearchParams,
+  };
+
+  export {
+    Communications as Communications,
+    type CommunicationCreateParams as CommunicationCreateParams,
+    type CommunicationUpdateParams as CommunicationUpdateParams,
+    type CommunicationListParams as CommunicationListParams,
+    type CommunicationGetParams as CommunicationGetParams,
+    type CommunicationSearchParams as CommunicationSearchParams,
+  };
+
+  export {
+    Companies as Companies,
+    type CompanyCreateParams as CompanyCreateParams,
+    type CompanyUpdateParams as CompanyUpdateParams,
+    type CompanyListParams as CompanyListParams,
+    type CompanyGetParams as CompanyGetParams,
+    type CompanyMergeParams as CompanyMergeParams,
+    type CompanySearchParams as CompanySearchParams,
   };
 
   export {
@@ -658,7 +921,6 @@ export declare namespace Objects {
     type ContactCreateParams as ContactCreateParams,
     type ContactUpdateParams as ContactUpdateParams,
     type ContactListParams as ContactListParams,
-    type ContactDeleteParams as ContactDeleteParams,
     type ContactGdprDeleteParams as ContactGdprDeleteParams,
     type ContactGetParams as ContactGetParams,
     type ContactMergeParams as ContactMergeParams,
@@ -666,10 +928,25 @@ export declare namespace Objects {
   };
 
   export {
+    Contracts as Contracts,
+    type ContractCreateParams as ContractCreateParams,
+    type ContractUpdateParams as ContractUpdateParams,
+    type ContractListParams as ContractListParams,
+    type ContractGetParams as ContractGetParams,
+    type ContractSearchParams as ContractSearchParams,
+  };
+
+  export {
+    Courses as Courses,
+    type CourseCreateParams as CourseCreateParams,
+    type CourseUpdateParams as CourseUpdateParams,
+    type CourseListParams as CourseListParams,
+    type CourseGetParams as CourseGetParams,
+    type CourseSearchParams as CourseSearchParams,
+  };
+
+  export {
     Custom as Custom,
-    type BatchResponsePublicDefaultAssociation as BatchResponsePublicDefaultAssociation,
-    type LabelsBetweenObjectPair as LabelsBetweenObjectPair,
-    type PublicDefaultAssociation as PublicDefaultAssociation,
     type CustomCreateParams as CustomCreateParams,
     type CustomUpdateParams as CustomUpdateParams,
     type CustomListParams as CustomListParams,
@@ -678,5 +955,236 @@ export declare namespace Objects {
     type CustomMergeParams as CustomMergeParams,
     type CustomSearchParams as CustomSearchParams,
     type CustomUpsertParams as CustomUpsertParams,
+  };
+
+  export {
+    Deals as Deals,
+    type DealCreateParams as DealCreateParams,
+    type DealUpdateParams as DealUpdateParams,
+    type DealListParams as DealListParams,
+    type DealGetParams as DealGetParams,
+    type DealMergeParams as DealMergeParams,
+    type DealSearchParams as DealSearchParams,
+  };
+
+  export {
+    Discounts as Discounts,
+    type DiscountCreateParams as DiscountCreateParams,
+    type DiscountUpdateParams as DiscountUpdateParams,
+    type DiscountListParams as DiscountListParams,
+    type DiscountGetParams as DiscountGetParams,
+    type DiscountSearchParams as DiscountSearchParams,
+  };
+
+  export {
+    Emails as Emails,
+    type EmailCreateParams as EmailCreateParams,
+    type EmailUpdateParams as EmailUpdateParams,
+    type EmailListParams as EmailListParams,
+    type EmailGetParams as EmailGetParams,
+    type EmailSearchParams as EmailSearchParams,
+  };
+
+  export {
+    FeedbackSubmissions as FeedbackSubmissions,
+    type FeedbackSubmissionListParams as FeedbackSubmissionListParams,
+    type FeedbackSubmissionGetParams as FeedbackSubmissionGetParams,
+    type FeedbackSubmissionSearchParams as FeedbackSubmissionSearchParams,
+  };
+
+  export {
+    Fees as Fees,
+    type FeeCreateParams as FeeCreateParams,
+    type FeeUpdateParams as FeeUpdateParams,
+    type FeeListParams as FeeListParams,
+    type FeeGetParams as FeeGetParams,
+    type FeeSearchParams as FeeSearchParams,
+  };
+
+  export {
+    GoalTargets as GoalTargets,
+    type GoalTargetCreateParams as GoalTargetCreateParams,
+    type GoalTargetUpdateParams as GoalTargetUpdateParams,
+    type GoalTargetListParams as GoalTargetListParams,
+    type GoalTargetGetParams as GoalTargetGetParams,
+    type GoalTargetSearchParams as GoalTargetSearchParams,
+  };
+
+  export {
+    Invoices as Invoices,
+    type InvoiceCreateParams as InvoiceCreateParams,
+    type InvoiceUpdateParams as InvoiceUpdateParams,
+    type InvoiceListParams as InvoiceListParams,
+    type InvoiceDeleteParams as InvoiceDeleteParams,
+    type InvoiceGetParams as InvoiceGetParams,
+    type InvoiceSearchParams as InvoiceSearchParams,
+    type InvoiceUpsertParams as InvoiceUpsertParams,
+  };
+
+  export {
+    Leads as Leads,
+    type LeadCreateParams as LeadCreateParams,
+    type LeadUpdateParams as LeadUpdateParams,
+    type LeadListParams as LeadListParams,
+    type LeadGetParams as LeadGetParams,
+    type LeadSearchParams as LeadSearchParams,
+  };
+
+  export {
+    LineItems as LineItems,
+    type LineItemCreateParams as LineItemCreateParams,
+    type LineItemUpdateParams as LineItemUpdateParams,
+    type LineItemListParams as LineItemListParams,
+    type LineItemGetParams as LineItemGetParams,
+    type LineItemSearchParams as LineItemSearchParams,
+  };
+
+  export {
+    Listings as Listings,
+    type ListingCreateParams as ListingCreateParams,
+    type ListingUpdateParams as ListingUpdateParams,
+    type ListingListParams as ListingListParams,
+    type ListingDeleteParams as ListingDeleteParams,
+    type ListingGetParams as ListingGetParams,
+    type ListingSearchParams as ListingSearchParams,
+    type ListingUpsertParams as ListingUpsertParams,
+  };
+
+  export {
+    Meetings as Meetings,
+    type MeetingCreateParams as MeetingCreateParams,
+    type MeetingUpdateParams as MeetingUpdateParams,
+    type MeetingListParams as MeetingListParams,
+    type MeetingGetParams as MeetingGetParams,
+    type MeetingSearchParams as MeetingSearchParams,
+  };
+
+  export {
+    Notes as Notes,
+    type NoteCreateParams as NoteCreateParams,
+    type NoteUpdateParams as NoteUpdateParams,
+    type NoteListParams as NoteListParams,
+    type NoteGetParams as NoteGetParams,
+    type NoteSearchParams as NoteSearchParams,
+  };
+
+  export {
+    Orders as Orders,
+    type OrderCreateParams as OrderCreateParams,
+    type OrderUpdateParams as OrderUpdateParams,
+    type OrderListParams as OrderListParams,
+    type OrderDeleteParams as OrderDeleteParams,
+    type OrderGetParams as OrderGetParams,
+    type OrderSearchParams as OrderSearchParams,
+    type OrderUpsertParams as OrderUpsertParams,
+  };
+
+  export {
+    PartnerClients as PartnerClients,
+    type PartnerClientUpdateParams as PartnerClientUpdateParams,
+    type PartnerClientListParams as PartnerClientListParams,
+    type PartnerClientGetParams as PartnerClientGetParams,
+    type PartnerClientSearchParams as PartnerClientSearchParams,
+  };
+
+  export {
+    PartnerServices as PartnerServices,
+    type CollectionResponseMultiAssociatedObjectWithLabelForwardPaging as CollectionResponseMultiAssociatedObjectWithLabelForwardPaging,
+    type PartnerServiceUpdateParams as PartnerServiceUpdateParams,
+    type PartnerServiceListParams as PartnerServiceListParams,
+    type PartnerServiceGetParams as PartnerServiceGetParams,
+    type PartnerServiceSearchParams as PartnerServiceSearchParams,
+  };
+
+  export {
+    PostalMail as PostalMail,
+    type PostalMailCreateParams as PostalMailCreateParams,
+    type PostalMailUpdateParams as PostalMailUpdateParams,
+    type PostalMailListParams as PostalMailListParams,
+    type PostalMailDeleteParams as PostalMailDeleteParams,
+    type PostalMailGetParams as PostalMailGetParams,
+    type PostalMailSearchParams as PostalMailSearchParams,
+    type PostalMailUpsertParams as PostalMailUpsertParams,
+  };
+
+  export {
+    Products as Products,
+    type ProductCreateParams as ProductCreateParams,
+    type ProductUpdateParams as ProductUpdateParams,
+    type ProductListParams as ProductListParams,
+    type ProductDeleteParams as ProductDeleteParams,
+    type ProductGetParams as ProductGetParams,
+    type ProductSearchParams as ProductSearchParams,
+    type ProductUpsertParams as ProductUpsertParams,
+  };
+
+  export {
+    Quotes as Quotes,
+    type QuoteCreateParams as QuoteCreateParams,
+    type QuoteUpdateParams as QuoteUpdateParams,
+    type QuoteListParams as QuoteListParams,
+    type QuoteGetParams as QuoteGetParams,
+    type QuoteSearchParams as QuoteSearchParams,
+  };
+
+  export {
+    Services as Services,
+    type ServiceCreateParams as ServiceCreateParams,
+    type ServiceUpdateParams as ServiceUpdateParams,
+    type ServiceListParams as ServiceListParams,
+    type ServiceDeleteParams as ServiceDeleteParams,
+    type ServiceGetParams as ServiceGetParams,
+    type ServiceSearchParams as ServiceSearchParams,
+    type ServiceUpsertParams as ServiceUpsertParams,
+  };
+
+  export {
+    Subscriptions as Subscriptions,
+    type SubscriptionCreateParams as SubscriptionCreateParams,
+    type SubscriptionUpdateParams as SubscriptionUpdateParams,
+    type SubscriptionListParams as SubscriptionListParams,
+    type SubscriptionGetParams as SubscriptionGetParams,
+    type SubscriptionSearchParams as SubscriptionSearchParams,
+  };
+
+  export {
+    Tasks as Tasks,
+    type TaskCreateParams as TaskCreateParams,
+    type TaskUpdateParams as TaskUpdateParams,
+    type TaskListParams as TaskListParams,
+    type TaskGetParams as TaskGetParams,
+    type TaskSearchParams as TaskSearchParams,
+  };
+
+  export {
+    Taxes as Taxes,
+    type TaxCreateParams as TaxCreateParams,
+    type TaxUpdateParams as TaxUpdateParams,
+    type TaxListParams as TaxListParams,
+    type TaxDeleteParams as TaxDeleteParams,
+    type TaxGetParams as TaxGetParams,
+    type TaxSearchParams as TaxSearchParams,
+    type TaxUpsertParams as TaxUpsertParams,
+  };
+
+  export {
+    Tickets as Tickets,
+    type TicketCreateParams as TicketCreateParams,
+    type TicketUpdateParams as TicketUpdateParams,
+    type TicketListParams as TicketListParams,
+    type TicketGetParams as TicketGetParams,
+    type TicketMergeParams as TicketMergeParams,
+    type TicketSearchParams as TicketSearchParams,
+  };
+
+  export {
+    Users as Users,
+    type UserCreateParams as UserCreateParams,
+    type UserUpdateParams as UserUpdateParams,
+    type UserListParams as UserListParams,
+    type UserDeleteParams as UserDeleteParams,
+    type UserGetParams as UserGetParams,
+    type UserSearchParams as UserSearchParams,
+    type UserUpsertParams as UserUpsertParams,
   };
 }

@@ -46,10 +46,6 @@ export interface BatchInputExchangeRateUpdateRequest {
   inputs: Array<ExchangeRateUpdateRequest>;
 }
 
-export interface BatchInputPublicObjectID {
-  inputs: Array<Shared.PublicObjectID>;
-}
-
 export interface BatchResponseExchangeRate {
   /**
    * The datetime the response was completed
@@ -1678,7 +1674,6 @@ export declare namespace Currencies {
   export {
     type BatchInputExchangeRateCreateRequest as BatchInputExchangeRateCreateRequest,
     type BatchInputExchangeRateUpdateRequest as BatchInputExchangeRateUpdateRequest,
-    type BatchInputPublicObjectID as BatchInputPublicObjectID,
     type BatchResponseExchangeRate as BatchResponseExchangeRate,
     type CentralExchangeRatesInformation as CentralExchangeRatesInformation,
     type CollectionResponseCurrencyCodeInfoNoPaging as CollectionResponseCurrencyCodeInfoNoPaging,

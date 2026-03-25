@@ -188,7 +188,7 @@ describe('resource send', () => {
       properties: { foo: 'string' },
       email: 'email',
       objectId: 'objectId',
-      occurredAt: '2026-01-20T21:14:16.512Z',
+      occurredAt: '2019-12-27T18:11:19.117Z',
       utk: 'utk',
       uuid: 'uuid',
     });
@@ -222,7 +222,7 @@ describe('resource send', () => {
           properties: { foo: 'string' },
           email: 'email',
           objectId: 'objectId',
-          occurredAt: '2026-01-20T21:14:16.512Z',
+          occurredAt: '2019-12-27T18:11:19.117Z',
           utk: 'utk',
           uuid: 'uuid',
         },

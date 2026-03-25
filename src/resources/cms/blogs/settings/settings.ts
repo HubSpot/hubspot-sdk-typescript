@@ -966,7 +966,7 @@ export interface BlogVersion {
 
   updatedAt: string;
 
-  user: BlogsAPI.VersionUser;
+  user: Shared.VersionUser;
 }
 
 export interface CollectionResponseWithTotalBlog {
@@ -995,7 +995,7 @@ export interface VersionBlog {
    */
   updatedAt: string;
 
-  user: BlogsAPI.VersionUser;
+  user: Shared.VersionUser;
 }
 
 export interface SettingListParams extends PageParams {

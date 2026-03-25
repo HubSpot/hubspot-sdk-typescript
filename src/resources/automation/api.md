@@ -23,7 +23,6 @@ Types:
 - <code><a href="./src/resources/automation/actions.ts">IntegerFieldSchema</a></code>
 - <code><a href="./src/resources/automation/actions.ts">LongFieldSchema</a></code>
 - <code><a href="./src/resources/automation/actions.ts">ObjectFieldSchema</a></code>
-- <code><a href="./src/resources/automation/actions.ts">Option</a></code>
 - <code><a href="./src/resources/automation/actions.ts">OutputFieldDefinition</a></code>
 - <code><a href="./src/resources/automation/actions.ts">PublicActionDefinition</a></code>
 - <code><a href="./src/resources/automation/actions.ts">PublicActionDefinitionEgg</a></code>
@@ -61,3 +60,26 @@ Methods:
 - <code title="get /automation/actions/2026-03/{appId}/{definitionId}/revisions/{revisionId}">client.automation.actions.<a href="./src/resources/automation/actions.ts">get</a>(revisionID, { ...params }) -> PublicActionRevision</code>
 - <code title="get /automation/actions/2026-03/{appId}/{definitionId}/functions/{functionType}">client.automation.actions.<a href="./src/resources/automation/actions.ts">getByFunctionType</a>(functionType, { ...params }) -> PublicActionFunction</code>
 - <code title="get /automation/actions/2026-03/{appId}/{definitionId}/requires-object">client.automation.actions.<a href="./src/resources/automation/actions.ts">getRequiresObject</a>(definitionID, { ...params }) -> PublicActionDefinitionRequiresObjectResponse</code>
+
+## Sequences
+
+Types:
+
+- <code><a href="./src/resources/automation/sequences.ts">CollectionResponseWithTotalPublicSequenceLiteResponse</a></code>
+- <code><a href="./src/resources/automation/sequences.ts">PublicEmailPatternResponse</a></code>
+- <code><a href="./src/resources/automation/sequences.ts">PublicSequenceEnrollmentLiteResponse</a></code>
+- <code><a href="./src/resources/automation/sequences.ts">PublicSequenceEnrollmentRequest</a></code>
+- <code><a href="./src/resources/automation/sequences.ts">PublicSequenceEnrollmentResponse</a></code>
+- <code><a href="./src/resources/automation/sequences.ts">PublicSequenceLiteResponse</a></code>
+- <code><a href="./src/resources/automation/sequences.ts">PublicSequenceResponse</a></code>
+- <code><a href="./src/resources/automation/sequences.ts">PublicSequenceSettingsResponse</a></code>
+- <code><a href="./src/resources/automation/sequences.ts">PublicSequenceStepDependencyResponse</a></code>
+- <code><a href="./src/resources/automation/sequences.ts">PublicSequenceStepResponse</a></code>
+- <code><a href="./src/resources/automation/sequences.ts">PublicTaskPatternResponse</a></code>
+
+Methods:
+
+- <code title="get /automation/sequences/2026-03">client.automation.sequences.<a href="./src/resources/automation/sequences.ts">list</a>({ ...params }) -> PublicSequenceLiteResponsesPage</code>
+- <code title="post /automation/sequences/2026-03/enrollments">client.automation.sequences.<a href="./src/resources/automation/sequences.ts">createEnrollment</a>({ ...params }) -> PublicSequenceEnrollmentLiteResponse</code>
+- <code title="get /automation/sequences/2026-03/{sequenceId}">client.automation.sequences.<a href="./src/resources/automation/sequences.ts">get</a>(sequenceID, { ...params }) -> PublicSequenceResponse</code>
+- <code title="get /automation/sequences/2026-03/enrollments/contact/{contactId}">client.automation.sequences.<a href="./src/resources/automation/sequences.ts">getEnrollmentByContactID</a>(contactID) -> PublicSequenceEnrollmentResponse</code>
