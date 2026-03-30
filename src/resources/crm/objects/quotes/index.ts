@@ -1,13 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  Basic,
-  type BasicCreateParams,
-  type BasicUpdateParams,
-  type BasicDeleteParams,
-  type BasicGetParams,
-  type BasicUpsertParams,
-} from './basic';
+  Batch,
+  type BatchCreateParams,
+  type BatchUpdateParams,
+  type BatchDeleteParams,
+  type BatchGetParams,
+  type BatchUpsertParams,
+} from './batch';
 export {
   Quotes,
   type QuoteCreateParams,

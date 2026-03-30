@@ -1,22 +1,28 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as ActionsAPI from './actions';
+import * as SequencesAPI from './sequences';
 import {
-  ActionCompleteBatchParams,
-  ActionCompleteParams,
-  ActionCreateOrReplaceByFunctionTypeParams,
-  ActionCreateOrReplaceParams,
-  ActionCreateParams,
-  ActionCreateRequiresObjectParams,
-  ActionDeleteByFunctionTypeParams,
-  ActionDeleteParams,
+  CollectionResponseWithTotalPublicSequenceLiteResponse,
+  PublicEmailPatternResponse,
+  PublicSequenceEnrollmentLiteResponse,
+  PublicSequenceEnrollmentRequest,
+  PublicSequenceEnrollmentResponse,
+  PublicSequenceLiteResponse,
+  PublicSequenceLiteResponsesPage,
+  PublicSequenceResponse,
+  PublicSequenceSettingsResponse,
+  PublicSequenceStepDependencyResponse,
+  PublicSequenceStepResponse,
+  PublicTaskPatternResponse,
+  SequenceCreateEnrollmentParams,
+  SequenceGetParams,
+  SequenceListParams,
+  Sequences,
+} from './sequences';
+import * as ActionsAPI from './actions/actions';
+import {
   ActionExecutionIndexIdentifier,
-  ActionGetByFunctionTypeParams,
-  ActionGetParams,
-  ActionGetRequiresObjectParams,
-  ActionListParams,
-  ActionUpdateParams,
   Actions,
   AgentRequestContext,
   ArrayFieldSchema,
@@ -46,7 +52,6 @@ import {
   PublicActionFunctionIdentifier,
   PublicActionLabels,
   PublicActionRevision,
-  PublicActionRevisionsPage,
   PublicConditionalSingleFieldDependency,
   PublicExecutionTranslationRule,
   PublicFieldTypeDefinition,
@@ -58,26 +63,7 @@ import {
   StringFieldSchema,
   TestRequestContext,
   WorkflowsRequestContext,
-} from './actions';
-import * as SequencesAPI from './sequences';
-import {
-  CollectionResponseWithTotalPublicSequenceLiteResponse,
-  PublicEmailPatternResponse,
-  PublicSequenceEnrollmentLiteResponse,
-  PublicSequenceEnrollmentRequest,
-  PublicSequenceEnrollmentResponse,
-  PublicSequenceLiteResponse,
-  PublicSequenceLiteResponsesPage,
-  PublicSequenceResponse,
-  PublicSequenceSettingsResponse,
-  PublicSequenceStepDependencyResponse,
-  PublicSequenceStepResponse,
-  PublicTaskPatternResponse,
-  SequenceCreateEnrollmentParams,
-  SequenceGetParams,
-  SequenceListParams,
-  Sequences,
-} from './sequences';
+} from './actions/actions';
 
 export class Automation extends APIResource {
   actions: ActionsAPI.Actions = new ActionsAPI.Actions(this._client);
@@ -130,20 +116,6 @@ export declare namespace Automation {
     type StringFieldSchema as StringFieldSchema,
     type TestRequestContext as TestRequestContext,
     type WorkflowsRequestContext as WorkflowsRequestContext,
-    type PublicActionRevisionsPage as PublicActionRevisionsPage,
-    type ActionCreateParams as ActionCreateParams,
-    type ActionUpdateParams as ActionUpdateParams,
-    type ActionListParams as ActionListParams,
-    type ActionDeleteParams as ActionDeleteParams,
-    type ActionCompleteParams as ActionCompleteParams,
-    type ActionCompleteBatchParams as ActionCompleteBatchParams,
-    type ActionCreateOrReplaceParams as ActionCreateOrReplaceParams,
-    type ActionCreateOrReplaceByFunctionTypeParams as ActionCreateOrReplaceByFunctionTypeParams,
-    type ActionCreateRequiresObjectParams as ActionCreateRequiresObjectParams,
-    type ActionDeleteByFunctionTypeParams as ActionDeleteByFunctionTypeParams,
-    type ActionGetParams as ActionGetParams,
-    type ActionGetByFunctionTypeParams as ActionGetByFunctionTypeParams,
-    type ActionGetRequiresObjectParams as ActionGetRequiresObjectParams,
   };
 
   export {

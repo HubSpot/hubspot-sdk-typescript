@@ -7,10 +7,10 @@ const client = new Hubspot({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource actions', () => {
+describe('resource definitions', () => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.automation.actions.create(0, {
+    const responsePromise = client.automation.actions.definitions.create(0, {
       actionUrl: 'actionUrl',
       functions: [{ functionSource: 'functionSource', functionType: 'POST_ACTION_EXECUTION' }],
       inputFields: [
@@ -38,7 +38,7 @@ describe('resource actions', () => {
 
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
-    const response = await client.automation.actions.create(0, {
+    const response = await client.automation.actions.definitions.create(0, {
       actionUrl: 'actionUrl',
       functions: [
         {
@@ -139,7 +139,7 @@ describe('resource actions', () => {
 
   // Mock server tests are disabled
   test.skip('update: only required params', async () => {
-    const responsePromise = client.automation.actions.update('definitionId', { appId: 0 });
+    const responsePromise = client.automation.actions.definitions.update('definitionId', { appId: 0 });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -151,7 +151,7 @@ describe('resource actions', () => {
 
   // Mock server tests are disabled
   test.skip('update: required and optional params', async () => {
-    const response = await client.automation.actions.update('definitionId', {
+    const response = await client.automation.actions.definitions.update('definitionId', {
       appId: 0,
       actionUrl: 'actionUrl',
       executionRules: [
@@ -244,8 +244,8 @@ describe('resource actions', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('list: only required params', async () => {
-    const responsePromise = client.automation.actions.list('definitionId', { appId: 0 });
+  test.skip('list', async () => {
+    const responsePromise = client.automation.actions.definitions.list(0);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -256,21 +256,24 @@ describe('resource actions', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('list: required and optional params', async () => {
-    const response = await client.automation.actions.list('definitionId', {
-      appId: 0,
-      after: 'after',
-      limit: 0,
-    });
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.automation.actions.definitions.list(
+        0,
+        {
+          after: 'after',
+          archived: true,
+          limit: 0,
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Hubspot.NotFoundError);
   });
 
   // Mock server tests are disabled
   test.skip('delete: only required params', async () => {
-    const responsePromise = client.automation.actions.delete('functionId', {
-      appId: 0,
-      definitionId: 'definitionId',
-      functionType: 'POST_ACTION_EXECUTION',
-    });
+    const responsePromise = client.automation.actions.definitions.delete('definitionId', { appId: 0 });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -282,138 +285,12 @@ describe('resource actions', () => {
 
   // Mock server tests are disabled
   test.skip('delete: required and optional params', async () => {
-    const response = await client.automation.actions.delete('functionId', {
-      appId: 0,
-      definitionId: 'definitionId',
-      functionType: 'POST_ACTION_EXECUTION',
-    });
-  });
-
-  // Mock server tests are disabled
-  test.skip('complete: only required params', async () => {
-    const responsePromise = client.automation.actions.complete('callbackId', {
-      outputFields: { foo: 'string' },
-      typedOutputs: {},
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('complete: required and optional params', async () => {
-    const response = await client.automation.actions.complete('callbackId', {
-      outputFields: { foo: 'string' },
-      typedOutputs: {},
-      failureReasonType: 'failureReasonType',
-      requestContext: {
-        source: 'WORKFLOWS',
-        workflowId: 0,
-        actionExecutionIndexIdentifier: { actionExecutionIndex: 0, enrollmentId: 0 },
-        actionId: 0,
-      },
-    });
-  });
-
-  // Mock server tests are disabled
-  test.skip('completeBatch: only required params', async () => {
-    const responsePromise = client.automation.actions.completeBatch({
-      inputs: [
-        {
-          callbackId: 'callbackId',
-          outputFields: { foo: 'string' },
-          typedOutputs: {},
-        },
-      ],
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('completeBatch: required and optional params', async () => {
-    const response = await client.automation.actions.completeBatch({
-      inputs: [
-        {
-          callbackId: 'callbackId',
-          outputFields: { foo: 'string' },
-          typedOutputs: {},
-          failureReasonType: 'failureReasonType',
-          requestContext: {
-            source: 'WORKFLOWS',
-            workflowId: 0,
-            actionExecutionIndexIdentifier: { actionExecutionIndex: 0, enrollmentId: 0 },
-            actionId: 0,
-          },
-        },
-      ],
-    });
-  });
-
-  // Mock server tests are disabled
-  test.skip('createOrReplace: only required params', async () => {
-    const responsePromise = client.automation.actions.createOrReplace('functionId', {
-      appId: 0,
-      definitionId: 'definitionId',
-      functionType: 'POST_ACTION_EXECUTION',
-      body: 'body',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('createOrReplace: required and optional params', async () => {
-    const response = await client.automation.actions.createOrReplace('functionId', {
-      appId: 0,
-      definitionId: 'definitionId',
-      functionType: 'POST_ACTION_EXECUTION',
-      body: 'body',
-    });
-  });
-
-  // Mock server tests are disabled
-  test.skip('createOrReplaceByFunctionType: only required params', async () => {
-    const responsePromise = client.automation.actions.createOrReplaceByFunctionType('POST_ACTION_EXECUTION', {
-      appId: 0,
-      definitionId: 'definitionId',
-      body: 'body',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('createOrReplaceByFunctionType: required and optional params', async () => {
-    const response = await client.automation.actions.createOrReplaceByFunctionType('POST_ACTION_EXECUTION', {
-      appId: 0,
-      definitionId: 'definitionId',
-      body: 'body',
-    });
+    const response = await client.automation.actions.definitions.delete('definitionId', { appId: 0 });
   });
 
   // Mock server tests are disabled
   test.skip('createRequiresObject: only required params', async () => {
-    const responsePromise = client.automation.actions.createRequiresObject('definitionId', {
+    const responsePromise = client.automation.actions.definitions.createRequiresObject('definitionId', {
       appId: 0,
       requiresObject: true,
     });
@@ -428,41 +305,15 @@ describe('resource actions', () => {
 
   // Mock server tests are disabled
   test.skip('createRequiresObject: required and optional params', async () => {
-    const response = await client.automation.actions.createRequiresObject('definitionId', {
+    const response = await client.automation.actions.definitions.createRequiresObject('definitionId', {
       appId: 0,
       requiresObject: true,
     });
   });
 
   // Mock server tests are disabled
-  test.skip('deleteByFunctionType: only required params', async () => {
-    const responsePromise = client.automation.actions.deleteByFunctionType('POST_ACTION_EXECUTION', {
-      appId: 0,
-      definitionId: 'definitionId',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('deleteByFunctionType: required and optional params', async () => {
-    const response = await client.automation.actions.deleteByFunctionType('POST_ACTION_EXECUTION', {
-      appId: 0,
-      definitionId: 'definitionId',
-    });
-  });
-
-  // Mock server tests are disabled
   test.skip('get: only required params', async () => {
-    const responsePromise = client.automation.actions.get('revisionId', {
-      appId: 0,
-      definitionId: 'definitionId',
-    });
+    const responsePromise = client.automation.actions.definitions.get('definitionId', { appId: 0 });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -474,38 +325,17 @@ describe('resource actions', () => {
 
   // Mock server tests are disabled
   test.skip('get: required and optional params', async () => {
-    const response = await client.automation.actions.get('revisionId', {
+    const response = await client.automation.actions.definitions.get('definitionId', {
       appId: 0,
-      definitionId: 'definitionId',
-    });
-  });
-
-  // Mock server tests are disabled
-  test.skip('getByFunctionType: only required params', async () => {
-    const responsePromise = client.automation.actions.getByFunctionType('POST_ACTION_EXECUTION', {
-      appId: 0,
-      definitionId: 'definitionId',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('getByFunctionType: required and optional params', async () => {
-    const response = await client.automation.actions.getByFunctionType('POST_ACTION_EXECUTION', {
-      appId: 0,
-      definitionId: 'definitionId',
+      archived: true,
     });
   });
 
   // Mock server tests are disabled
   test.skip('getRequiresObject: only required params', async () => {
-    const responsePromise = client.automation.actions.getRequiresObject('definitionId', { appId: 0 });
+    const responsePromise = client.automation.actions.definitions.getRequiresObject('definitionId', {
+      appId: 0,
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -517,6 +347,8 @@ describe('resource actions', () => {
 
   // Mock server tests are disabled
   test.skip('getRequiresObject: required and optional params', async () => {
-    const response = await client.automation.actions.getRequiresObject('definitionId', { appId: 0 });
+    const response = await client.automation.actions.definitions.getRequiresObject('definitionId', {
+      appId: 0,
+    });
   });
 });

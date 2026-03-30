@@ -3,103 +3,6 @@
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
 import * as CrmAPI from '../crm';
-import * as CustomAPI from './custom';
-import {
-  Custom,
-  CustomCreateParams,
-  CustomDeleteParams,
-  CustomGetParams,
-  CustomListParams,
-  CustomMergeParams,
-  CustomSearchParams,
-  CustomUpdateParams,
-  CustomUpsertParams,
-} from './custom';
-import * as InvoicesAPI from './invoices';
-import {
-  InvoiceCreateParams,
-  InvoiceDeleteParams,
-  InvoiceGetParams,
-  InvoiceListParams,
-  InvoiceSearchParams,
-  InvoiceUpdateParams,
-  InvoiceUpsertParams,
-  Invoices,
-} from './invoices';
-import * as OrdersAPI from './orders';
-import {
-  OrderCreateParams,
-  OrderDeleteParams,
-  OrderGetParams,
-  OrderListParams,
-  OrderSearchParams,
-  OrderUpdateParams,
-  OrderUpsertParams,
-  Orders,
-} from './orders';
-import * as PartnerServicesAPI from './partner-services';
-import {
-  PartnerServiceGetParams,
-  PartnerServiceListParams,
-  PartnerServiceSearchParams,
-  PartnerServiceUpdateParams,
-  PartnerServices,
-} from './partner-services';
-import * as PostalMailAPI from './postal-mail';
-import {
-  PostalMail,
-  PostalMailCreateParams,
-  PostalMailDeleteParams,
-  PostalMailGetParams,
-  PostalMailListParams,
-  PostalMailSearchParams,
-  PostalMailUpdateParams,
-  PostalMailUpsertParams,
-} from './postal-mail';
-import * as ProductsAPI from './products';
-import {
-  ProductCreateParams,
-  ProductDeleteParams,
-  ProductGetParams,
-  ProductListParams,
-  ProductSearchParams,
-  ProductUpdateParams,
-  ProductUpsertParams,
-  Products,
-} from './products';
-import * as ServicesAPI from './services';
-import {
-  ServiceCreateParams,
-  ServiceDeleteParams,
-  ServiceGetParams,
-  ServiceListParams,
-  ServiceSearchParams,
-  ServiceUpdateParams,
-  ServiceUpsertParams,
-  Services,
-} from './services';
-import * as TaxesAPI from './taxes';
-import {
-  TaxCreateParams,
-  TaxDeleteParams,
-  TaxGetParams,
-  TaxListParams,
-  TaxSearchParams,
-  TaxUpdateParams,
-  TaxUpsertParams,
-  Taxes,
-} from './taxes';
-import * as UsersAPI from './users';
-import {
-  UserCreateParams,
-  UserDeleteParams,
-  UserGetParams,
-  UserListParams,
-  UserSearchParams,
-  UserUpdateParams,
-  UserUpsertParams,
-  Users,
-} from './users';
 import * as CallsAPI from './calls/calls';
 import {
   CallCreateParams,
@@ -176,6 +79,17 @@ import {
   CourseUpdateParams,
   Courses,
 } from './courses/courses';
+import * as CustomAPI from './custom/custom';
+import {
+  Custom,
+  CustomCreateParams,
+  CustomDeleteParams,
+  CustomGetParams,
+  CustomListParams,
+  CustomMergeParams,
+  CustomSearchParams,
+  CustomUpdateParams,
+} from './custom/custom';
 import * as DealsAPI from './deals/deals';
 import {
   DealCreateParams,
@@ -229,6 +143,15 @@ import {
   GoalTargetUpdateParams,
   GoalTargets,
 } from './goal-targets/goal-targets';
+import * as InvoicesAPI from './invoices/invoices';
+import {
+  InvoiceCreateParams,
+  InvoiceGetParams,
+  InvoiceListParams,
+  InvoiceSearchParams,
+  InvoiceUpdateParams,
+  Invoices,
+} from './invoices/invoices';
 import * as LeadsAPI from './leads/leads';
 import {
   LeadCreateParams,
@@ -284,6 +207,15 @@ import {
   ObjectUpdateParams,
   Objects as ObjectsAPIObjects,
 } from './objects_/objects_';
+import * as OrdersAPI from './orders/orders';
+import {
+  OrderCreateParams,
+  OrderGetParams,
+  OrderListParams,
+  OrderSearchParams,
+  OrderUpdateParams,
+  Orders,
+} from './orders/orders';
 import * as PartnerClientsAPI from './partner-clients/partner-clients';
 import {
   PartnerClientGetParams,
@@ -292,6 +224,32 @@ import {
   PartnerClientUpdateParams,
   PartnerClients,
 } from './partner-clients/partner-clients';
+import * as PartnerServicesAPI from './partner-services/partner-services';
+import {
+  PartnerServiceGetParams,
+  PartnerServiceListParams,
+  PartnerServiceSearchParams,
+  PartnerServiceUpdateParams,
+  PartnerServices,
+} from './partner-services/partner-services';
+import * as PostalMailAPI from './postal-mail/postal-mail';
+import {
+  PostalMail,
+  PostalMailCreateParams,
+  PostalMailGetParams,
+  PostalMailListParams,
+  PostalMailSearchParams,
+  PostalMailUpdateParams,
+} from './postal-mail/postal-mail';
+import * as ProductsAPI from './products/products';
+import {
+  ProductCreateParams,
+  ProductGetParams,
+  ProductListParams,
+  ProductSearchParams,
+  ProductUpdateParams,
+  Products,
+} from './products/products';
 import * as ProjectsAPI from './projects/projects';
 import {
   ProjectCreateParams,
@@ -311,6 +269,15 @@ import {
   QuoteUpdateParams,
   Quotes,
 } from './quotes/quotes';
+import * as ServicesAPI from './services/services';
+import {
+  ServiceCreateParams,
+  ServiceGetParams,
+  ServiceListParams,
+  ServiceSearchParams,
+  ServiceUpdateParams,
+  Services,
+} from './services/services';
 import * as SubscriptionsAPI from './subscriptions/subscriptions';
 import {
   SubscriptionCreateParams,
@@ -329,6 +296,15 @@ import {
   TaskUpdateParams,
   Tasks,
 } from './tasks/tasks';
+import * as TaxesAPI from './taxes/taxes';
+import {
+  TaxCreateParams,
+  TaxGetParams,
+  TaxListParams,
+  TaxSearchParams,
+  TaxUpdateParams,
+  Taxes,
+} from './taxes/taxes';
 import * as TicketsAPI from './tickets/tickets';
 import {
   TicketCreateParams,
@@ -339,6 +315,15 @@ import {
   TicketUpdateParams,
   Tickets,
 } from './tickets/tickets';
+import * as UsersAPI from './users/users';
+import {
+  UserCreateParams,
+  UserGetParams,
+  UserListParams,
+  UserSearchParams,
+  UserUpdateParams,
+  Users,
+} from './users/users';
 import { Page } from '../../../core/pagination';
 
 export class Objects extends APIResource {
@@ -923,7 +908,6 @@ export declare namespace Objects {
     type CustomGetParams as CustomGetParams,
     type CustomMergeParams as CustomMergeParams,
     type CustomSearchParams as CustomSearchParams,
-    type CustomUpsertParams as CustomUpsertParams,
   };
 
   export {
@@ -984,10 +968,8 @@ export declare namespace Objects {
     type InvoiceCreateParams as InvoiceCreateParams,
     type InvoiceUpdateParams as InvoiceUpdateParams,
     type InvoiceListParams as InvoiceListParams,
-    type InvoiceDeleteParams as InvoiceDeleteParams,
     type InvoiceGetParams as InvoiceGetParams,
     type InvoiceSearchParams as InvoiceSearchParams,
-    type InvoiceUpsertParams as InvoiceUpsertParams,
   };
 
   export {
@@ -1050,10 +1032,8 @@ export declare namespace Objects {
     type OrderCreateParams as OrderCreateParams,
     type OrderUpdateParams as OrderUpdateParams,
     type OrderListParams as OrderListParams,
-    type OrderDeleteParams as OrderDeleteParams,
     type OrderGetParams as OrderGetParams,
     type OrderSearchParams as OrderSearchParams,
-    type OrderUpsertParams as OrderUpsertParams,
   };
 
   export {
@@ -1077,10 +1057,8 @@ export declare namespace Objects {
     type PostalMailCreateParams as PostalMailCreateParams,
     type PostalMailUpdateParams as PostalMailUpdateParams,
     type PostalMailListParams as PostalMailListParams,
-    type PostalMailDeleteParams as PostalMailDeleteParams,
     type PostalMailGetParams as PostalMailGetParams,
     type PostalMailSearchParams as PostalMailSearchParams,
-    type PostalMailUpsertParams as PostalMailUpsertParams,
   };
 
   export {
@@ -1088,10 +1066,8 @@ export declare namespace Objects {
     type ProductCreateParams as ProductCreateParams,
     type ProductUpdateParams as ProductUpdateParams,
     type ProductListParams as ProductListParams,
-    type ProductDeleteParams as ProductDeleteParams,
     type ProductGetParams as ProductGetParams,
     type ProductSearchParams as ProductSearchParams,
-    type ProductUpsertParams as ProductUpsertParams,
   };
 
   export {
@@ -1118,10 +1094,8 @@ export declare namespace Objects {
     type ServiceCreateParams as ServiceCreateParams,
     type ServiceUpdateParams as ServiceUpdateParams,
     type ServiceListParams as ServiceListParams,
-    type ServiceDeleteParams as ServiceDeleteParams,
     type ServiceGetParams as ServiceGetParams,
     type ServiceSearchParams as ServiceSearchParams,
-    type ServiceUpsertParams as ServiceUpsertParams,
   };
 
   export {
@@ -1147,10 +1121,8 @@ export declare namespace Objects {
     type TaxCreateParams as TaxCreateParams,
     type TaxUpdateParams as TaxUpdateParams,
     type TaxListParams as TaxListParams,
-    type TaxDeleteParams as TaxDeleteParams,
     type TaxGetParams as TaxGetParams,
     type TaxSearchParams as TaxSearchParams,
-    type TaxUpsertParams as TaxUpsertParams,
   };
 
   export {
@@ -1168,9 +1140,7 @@ export declare namespace Objects {
     type UserCreateParams as UserCreateParams,
     type UserUpdateParams as UserUpdateParams,
     type UserListParams as UserListParams,
-    type UserDeleteParams as UserDeleteParams,
     type UserGetParams as UserGetParams,
     type UserSearchParams as UserSearchParams,
-    type UserUpsertParams as UserUpsertParams,
   };
 }

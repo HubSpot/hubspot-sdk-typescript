@@ -77,8 +77,7 @@ export {
   type CustomGetParams,
   type CustomMergeParams,
   type CustomSearchParams,
-  type CustomUpsertParams,
-} from './custom';
+} from './custom/index';
 export {
   Deals,
   type DealCreateParams,
@@ -131,11 +130,9 @@ export {
   type InvoiceCreateParams,
   type InvoiceUpdateParams,
   type InvoiceListParams,
-  type InvoiceDeleteParams,
   type InvoiceGetParams,
   type InvoiceSearchParams,
-  type InvoiceUpsertParams,
-} from './invoices';
+} from './invoices/index';
 export {
   Leads,
   type LeadCreateParams,
@@ -205,11 +202,9 @@ export {
   type OrderCreateParams,
   type OrderUpdateParams,
   type OrderListParams,
-  type OrderDeleteParams,
   type OrderGetParams,
   type OrderSearchParams,
-  type OrderUpsertParams,
-} from './orders';
+} from './orders/index';
 export {
   PartnerClients,
   type PartnerClientUpdateParams,
@@ -223,27 +218,23 @@ export {
   type PartnerServiceListParams,
   type PartnerServiceGetParams,
   type PartnerServiceSearchParams,
-} from './partner-services';
+} from './partner-services/index';
 export {
   PostalMail,
   type PostalMailCreateParams,
   type PostalMailUpdateParams,
   type PostalMailListParams,
-  type PostalMailDeleteParams,
   type PostalMailGetParams,
   type PostalMailSearchParams,
-  type PostalMailUpsertParams,
-} from './postal-mail';
+} from './postal-mail/index';
 export {
   Products,
   type ProductCreateParams,
   type ProductUpdateParams,
   type ProductListParams,
-  type ProductDeleteParams,
   type ProductGetParams,
   type ProductSearchParams,
-  type ProductUpsertParams,
-} from './products';
+} from './products/index';
 export {
   Projects,
   type ProjectCreateParams,
@@ -266,11 +257,9 @@ export {
   type ServiceCreateParams,
   type ServiceUpdateParams,
   type ServiceListParams,
-  type ServiceDeleteParams,
   type ServiceGetParams,
   type ServiceSearchParams,
-  type ServiceUpsertParams,
-} from './services';
+} from './services/index';
 export {
   Subscriptions,
   type SubscriptionCreateParams,
@@ -292,11 +281,9 @@ export {
   type TaxCreateParams,
   type TaxUpdateParams,
   type TaxListParams,
-  type TaxDeleteParams,
   type TaxGetParams,
   type TaxSearchParams,
-  type TaxUpsertParams,
-} from './taxes';
+} from './taxes/index';
 export {
   Tickets,
   type TicketCreateParams,
@@ -311,11 +298,9 @@ export {
   type UserCreateParams,
   type UserUpdateParams,
   type UserListParams,
-  type UserDeleteParams,
   type UserGetParams,
   type UserSearchParams,
-  type UserUpsertParams,
-} from './users';
+} from './users/index';
 export {
   type ObjectCreateParams,
   type ObjectUpdateParams,

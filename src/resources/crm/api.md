@@ -696,14 +696,23 @@ Methods:
 
 Methods:
 
-- <code title="post /crm/objects/2026-03/{objectType}/batch/create">client.crm.objects.custom.<a href="./src/resources/crm/objects/custom.ts">create</a>(objectType, { ...params }) -> BatchResponseSimplePublicObject</code>
-- <code title="post /crm/objects/2026-03/{objectType}/batch/update">client.crm.objects.custom.<a href="./src/resources/crm/objects/custom.ts">update</a>(objectType, { ...params }) -> BatchResponseSimplePublicObject</code>
-- <code title="get /crm/objects/2026-03/{objectType}">client.crm.objects.custom.<a href="./src/resources/crm/objects/custom.ts">list</a>(objectType, { ...params }) -> SimplePublicObjectWithAssociationsPage</code>
-- <code title="post /crm/objects/2026-03/{objectType}/batch/archive">client.crm.objects.custom.<a href="./src/resources/crm/objects/custom.ts">delete</a>(objectType, { ...params }) -> void</code>
-- <code title="post /crm/objects/2026-03/{objectType}/batch/read">client.crm.objects.custom.<a href="./src/resources/crm/objects/custom.ts">get</a>(objectType, { ...params }) -> BatchResponseSimplePublicObject</code>
-- <code title="post /crm/objects/2026-03/{objectType}/merge">client.crm.objects.custom.<a href="./src/resources/crm/objects/custom.ts">merge</a>(objectType, { ...params }) -> SimplePublicObject</code>
-- <code title="post /crm/objects/2026-03/{objectType}/search">client.crm.objects.custom.<a href="./src/resources/crm/objects/custom.ts">search</a>(objectType, { ...params }) -> CollectionResponseWithTotalSimplePublicObject</code>
-- <code title="post /crm/objects/2026-03/{objectType}/batch/upsert">client.crm.objects.custom.<a href="./src/resources/crm/objects/custom.ts">upsert</a>(objectType, { ...params }) -> BatchResponseSimplePublicUpsertObject</code>
+- <code title="post /crm/objects/2026-03/{objectType}">client.crm.objects.custom.<a href="./src/resources/crm/objects/custom/custom.ts">create</a>(objectType, { ...params }) -> SimplePublicObject</code>
+- <code title="patch /crm/objects/2026-03/{objectType}/{objectId}">client.crm.objects.custom.<a href="./src/resources/crm/objects/custom/custom.ts">update</a>(objectID, { ...params }) -> SimplePublicObject</code>
+- <code title="get /crm/objects/2026-03/{objectType}">client.crm.objects.custom.<a href="./src/resources/crm/objects/custom/custom.ts">list</a>(objectType, { ...params }) -> SimplePublicObjectWithAssociationsPage</code>
+- <code title="delete /crm/objects/2026-03/{objectType}/{objectId}">client.crm.objects.custom.<a href="./src/resources/crm/objects/custom/custom.ts">delete</a>(objectID, { ...params }) -> void</code>
+- <code title="get /crm/objects/2026-03/{objectType}/{objectId}">client.crm.objects.custom.<a href="./src/resources/crm/objects/custom/custom.ts">get</a>(objectID, { ...params }) -> SimplePublicObjectWithAssociations</code>
+- <code title="post /crm/objects/2026-03/{objectType}/merge">client.crm.objects.custom.<a href="./src/resources/crm/objects/custom/custom.ts">merge</a>(objectType, { ...params }) -> SimplePublicObject</code>
+- <code title="post /crm/objects/2026-03/{objectType}/search">client.crm.objects.custom.<a href="./src/resources/crm/objects/custom/custom.ts">search</a>(objectType, { ...params }) -> CollectionResponseWithTotalSimplePublicObject</code>
+
+#### Batch
+
+Methods:
+
+- <code title="post /crm/objects/2026-03/{objectType}/batch/create">client.crm.objects.custom.batch.<a href="./src/resources/crm/objects/custom/batch.ts">create</a>(objectType, { ...params }) -> BatchResponseSimplePublicObject</code>
+- <code title="post /crm/objects/2026-03/{objectType}/batch/update">client.crm.objects.custom.batch.<a href="./src/resources/crm/objects/custom/batch.ts">update</a>(objectType, { ...params }) -> BatchResponseSimplePublicObject</code>
+- <code title="post /crm/objects/2026-03/{objectType}/batch/archive">client.crm.objects.custom.batch.<a href="./src/resources/crm/objects/custom/batch.ts">delete</a>(objectType, { ...params }) -> void</code>
+- <code title="post /crm/objects/2026-03/{objectType}/batch/read">client.crm.objects.custom.batch.<a href="./src/resources/crm/objects/custom/batch.ts">get</a>(objectType, { ...params }) -> BatchResponseSimplePublicObject</code>
+- <code title="post /crm/objects/2026-03/{objectType}/batch/upsert">client.crm.objects.custom.batch.<a href="./src/resources/crm/objects/custom/batch.ts">upsert</a>(objectType, { ...params }) -> BatchResponseSimplePublicUpsertObject</code>
 
 ### Deals
 
@@ -828,13 +837,22 @@ Methods:
 
 Methods:
 
-- <code title="post /crm/objects/2026-03/invoices/batch/create">client.crm.objects.invoices.<a href="./src/resources/crm/objects/invoices.ts">create</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
-- <code title="post /crm/objects/2026-03/invoices/batch/update">client.crm.objects.invoices.<a href="./src/resources/crm/objects/invoices.ts">update</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
-- <code title="get /crm/objects/2026-03/invoices">client.crm.objects.invoices.<a href="./src/resources/crm/objects/invoices.ts">list</a>({ ...params }) -> SimplePublicObjectWithAssociationsPage</code>
-- <code title="post /crm/objects/2026-03/invoices/batch/archive">client.crm.objects.invoices.<a href="./src/resources/crm/objects/invoices.ts">delete</a>({ ...params }) -> void</code>
-- <code title="post /crm/objects/2026-03/invoices/batch/read">client.crm.objects.invoices.<a href="./src/resources/crm/objects/invoices.ts">get</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
-- <code title="post /crm/objects/2026-03/invoices/search">client.crm.objects.invoices.<a href="./src/resources/crm/objects/invoices.ts">search</a>({ ...params }) -> CollectionResponseWithTotalSimplePublicObject</code>
-- <code title="post /crm/objects/2026-03/invoices/batch/upsert">client.crm.objects.invoices.<a href="./src/resources/crm/objects/invoices.ts">upsert</a>({ ...params }) -> BatchResponseSimplePublicUpsertObject</code>
+- <code title="post /crm/objects/2026-03/invoices">client.crm.objects.invoices.<a href="./src/resources/crm/objects/invoices/invoices.ts">create</a>({ ...params }) -> SimplePublicObject</code>
+- <code title="patch /crm/objects/2026-03/invoices/{invoiceId}">client.crm.objects.invoices.<a href="./src/resources/crm/objects/invoices/invoices.ts">update</a>(invoiceID, { ...params }) -> SimplePublicObject</code>
+- <code title="get /crm/objects/2026-03/invoices">client.crm.objects.invoices.<a href="./src/resources/crm/objects/invoices/invoices.ts">list</a>({ ...params }) -> SimplePublicObjectWithAssociationsPage</code>
+- <code title="delete /crm/objects/2026-03/invoices/{invoiceId}">client.crm.objects.invoices.<a href="./src/resources/crm/objects/invoices/invoices.ts">delete</a>(invoiceID) -> void</code>
+- <code title="get /crm/objects/2026-03/invoices/{invoiceId}">client.crm.objects.invoices.<a href="./src/resources/crm/objects/invoices/invoices.ts">get</a>(invoiceID, { ...params }) -> SimplePublicObjectWithAssociations</code>
+- <code title="post /crm/objects/2026-03/invoices/search">client.crm.objects.invoices.<a href="./src/resources/crm/objects/invoices/invoices.ts">search</a>({ ...params }) -> CollectionResponseWithTotalSimplePublicObject</code>
+
+#### Batch
+
+Methods:
+
+- <code title="post /crm/objects/2026-03/invoices/batch/create">client.crm.objects.invoices.batch.<a href="./src/resources/crm/objects/invoices/batch.ts">create</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
+- <code title="post /crm/objects/2026-03/invoices/batch/update">client.crm.objects.invoices.batch.<a href="./src/resources/crm/objects/invoices/batch.ts">update</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
+- <code title="post /crm/objects/2026-03/invoices/batch/archive">client.crm.objects.invoices.batch.<a href="./src/resources/crm/objects/invoices/batch.ts">delete</a>({ ...params }) -> void</code>
+- <code title="post /crm/objects/2026-03/invoices/batch/read">client.crm.objects.invoices.batch.<a href="./src/resources/crm/objects/invoices/batch.ts">get</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
+- <code title="post /crm/objects/2026-03/invoices/batch/upsert">client.crm.objects.invoices.batch.<a href="./src/resources/crm/objects/invoices/batch.ts">upsert</a>({ ...params }) -> BatchResponseSimplePublicUpsertObject</code>
 
 ### Leads
 
@@ -965,13 +983,22 @@ Methods:
 
 Methods:
 
-- <code title="post /crm/objects/2026-03/orders/batch/create">client.crm.objects.orders.<a href="./src/resources/crm/objects/orders.ts">create</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
-- <code title="post /crm/objects/2026-03/orders/batch/update">client.crm.objects.orders.<a href="./src/resources/crm/objects/orders.ts">update</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
-- <code title="get /crm/objects/2026-03/orders">client.crm.objects.orders.<a href="./src/resources/crm/objects/orders.ts">list</a>({ ...params }) -> SimplePublicObjectWithAssociationsPage</code>
-- <code title="post /crm/objects/2026-03/orders/batch/archive">client.crm.objects.orders.<a href="./src/resources/crm/objects/orders.ts">delete</a>({ ...params }) -> void</code>
-- <code title="post /crm/objects/2026-03/orders/batch/read">client.crm.objects.orders.<a href="./src/resources/crm/objects/orders.ts">get</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
-- <code title="post /crm/objects/2026-03/orders/search">client.crm.objects.orders.<a href="./src/resources/crm/objects/orders.ts">search</a>({ ...params }) -> CollectionResponseWithTotalSimplePublicObject</code>
-- <code title="post /crm/objects/2026-03/orders/batch/upsert">client.crm.objects.orders.<a href="./src/resources/crm/objects/orders.ts">upsert</a>({ ...params }) -> BatchResponseSimplePublicUpsertObject</code>
+- <code title="post /crm/objects/2026-03/orders">client.crm.objects.orders.<a href="./src/resources/crm/objects/orders/orders.ts">create</a>({ ...params }) -> SimplePublicObject</code>
+- <code title="patch /crm/objects/2026-03/orders/{orderId}">client.crm.objects.orders.<a href="./src/resources/crm/objects/orders/orders.ts">update</a>(orderID, { ...params }) -> SimplePublicObject</code>
+- <code title="get /crm/objects/2026-03/orders">client.crm.objects.orders.<a href="./src/resources/crm/objects/orders/orders.ts">list</a>({ ...params }) -> SimplePublicObjectWithAssociationsPage</code>
+- <code title="delete /crm/objects/2026-03/orders/{orderId}">client.crm.objects.orders.<a href="./src/resources/crm/objects/orders/orders.ts">delete</a>(orderID) -> void</code>
+- <code title="get /crm/objects/2026-03/orders/{orderId}">client.crm.objects.orders.<a href="./src/resources/crm/objects/orders/orders.ts">get</a>(orderID, { ...params }) -> SimplePublicObjectWithAssociations</code>
+- <code title="post /crm/objects/2026-03/orders/search">client.crm.objects.orders.<a href="./src/resources/crm/objects/orders/orders.ts">search</a>({ ...params }) -> CollectionResponseWithTotalSimplePublicObject</code>
+
+#### Batch
+
+Methods:
+
+- <code title="post /crm/objects/2026-03/orders/batch/create">client.crm.objects.orders.batch.<a href="./src/resources/crm/objects/orders/batch.ts">create</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
+- <code title="post /crm/objects/2026-03/orders/batch/update">client.crm.objects.orders.batch.<a href="./src/resources/crm/objects/orders/batch.ts">update</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
+- <code title="post /crm/objects/2026-03/orders/batch/archive">client.crm.objects.orders.batch.<a href="./src/resources/crm/objects/orders/batch.ts">delete</a>({ ...params }) -> void</code>
+- <code title="post /crm/objects/2026-03/orders/batch/read">client.crm.objects.orders.batch.<a href="./src/resources/crm/objects/orders/batch.ts">get</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
+- <code title="post /crm/objects/2026-03/orders/batch/upsert">client.crm.objects.orders.batch.<a href="./src/resources/crm/objects/orders/batch.ts">upsert</a>({ ...params }) -> BatchResponseSimplePublicUpsertObject</code>
 
 ### PartnerClients
 
@@ -992,34 +1019,59 @@ Methods:
 
 Methods:
 
-- <code title="post /crm/objects/2026-03/partner_services/batch/update">client.crm.objects.partnerServices.<a href="./src/resources/crm/objects/partner-services.ts">update</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
-- <code title="get /crm/objects/2026-03/partner_services/{partnerServiceId}/associations/{toObjectType}">client.crm.objects.partnerServices.<a href="./src/resources/crm/objects/partner-services.ts">list</a>(toObjectType, { ...params }) -> MultiAssociatedObjectWithLabelsPage</code>
-- <code title="post /crm/objects/2026-03/partner_services/batch/read">client.crm.objects.partnerServices.<a href="./src/resources/crm/objects/partner-services.ts">get</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
-- <code title="post /crm/objects/2026-03/partner_services/search">client.crm.objects.partnerServices.<a href="./src/resources/crm/objects/partner-services.ts">search</a>({ ...params }) -> CollectionResponseWithTotalSimplePublicObject</code>
+- <code title="patch /crm/objects/2026-03/partner_services/{partnerServiceId}">client.crm.objects.partnerServices.<a href="./src/resources/crm/objects/partner-services/partner-services.ts">update</a>(partnerServiceID, { ...params }) -> SimplePublicObject</code>
+- <code title="get /crm/objects/2026-03/partner_services/{partnerServiceId}/associations/{toObjectType}">client.crm.objects.partnerServices.<a href="./src/resources/crm/objects/partner-services/partner-services.ts">list</a>(toObjectType, { ...params }) -> MultiAssociatedObjectWithLabelsPage</code>
+- <code title="get /crm/objects/2026-03/partner_services/{partnerServiceId}">client.crm.objects.partnerServices.<a href="./src/resources/crm/objects/partner-services/partner-services.ts">get</a>(partnerServiceID, { ...params }) -> SimplePublicObjectWithAssociations</code>
+- <code title="post /crm/objects/2026-03/partner_services/search">client.crm.objects.partnerServices.<a href="./src/resources/crm/objects/partner-services/partner-services.ts">search</a>({ ...params }) -> CollectionResponseWithTotalSimplePublicObject</code>
+
+#### Batch
+
+Methods:
+
+- <code title="post /crm/objects/2026-03/partner_services/batch/update">client.crm.objects.partnerServices.batch.<a href="./src/resources/crm/objects/partner-services/batch.ts">update</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
+- <code title="post /crm/objects/2026-03/partner_services/batch/read">client.crm.objects.partnerServices.batch.<a href="./src/resources/crm/objects/partner-services/batch.ts">get</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
 
 ### PostalMail
 
 Methods:
 
-- <code title="post /crm/objects/2026-03/postal_mail/batch/create">client.crm.objects.postalMail.<a href="./src/resources/crm/objects/postal-mail.ts">create</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
-- <code title="post /crm/objects/2026-03/postal_mail/batch/update">client.crm.objects.postalMail.<a href="./src/resources/crm/objects/postal-mail.ts">update</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
-- <code title="get /crm/objects/2026-03/postal_mail">client.crm.objects.postalMail.<a href="./src/resources/crm/objects/postal-mail.ts">list</a>({ ...params }) -> SimplePublicObjectWithAssociationsPage</code>
-- <code title="post /crm/objects/2026-03/postal_mail/batch/archive">client.crm.objects.postalMail.<a href="./src/resources/crm/objects/postal-mail.ts">delete</a>({ ...params }) -> void</code>
-- <code title="post /crm/objects/2026-03/postal_mail/batch/read">client.crm.objects.postalMail.<a href="./src/resources/crm/objects/postal-mail.ts">get</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
-- <code title="post /crm/objects/2026-03/postal_mail/search">client.crm.objects.postalMail.<a href="./src/resources/crm/objects/postal-mail.ts">search</a>({ ...params }) -> CollectionResponseWithTotalSimplePublicObject</code>
-- <code title="post /crm/objects/2026-03/postal_mail/batch/upsert">client.crm.objects.postalMail.<a href="./src/resources/crm/objects/postal-mail.ts">upsert</a>({ ...params }) -> BatchResponseSimplePublicUpsertObject</code>
+- <code title="post /crm/objects/2026-03/postal_mail">client.crm.objects.postalMail.<a href="./src/resources/crm/objects/postal-mail/postal-mail.ts">create</a>({ ...params }) -> SimplePublicObject</code>
+- <code title="patch /crm/objects/2026-03/postal_mail/{postalMailId}">client.crm.objects.postalMail.<a href="./src/resources/crm/objects/postal-mail/postal-mail.ts">update</a>(postalMailID, { ...params }) -> SimplePublicObject</code>
+- <code title="get /crm/objects/2026-03/postal_mail">client.crm.objects.postalMail.<a href="./src/resources/crm/objects/postal-mail/postal-mail.ts">list</a>({ ...params }) -> SimplePublicObjectWithAssociationsPage</code>
+- <code title="delete /crm/objects/2026-03/postal_mail/{postalMailId}">client.crm.objects.postalMail.<a href="./src/resources/crm/objects/postal-mail/postal-mail.ts">delete</a>(postalMailID) -> void</code>
+- <code title="get /crm/objects/2026-03/postal_mail/{postalMailId}">client.crm.objects.postalMail.<a href="./src/resources/crm/objects/postal-mail/postal-mail.ts">get</a>(postalMailID, { ...params }) -> SimplePublicObjectWithAssociations</code>
+- <code title="post /crm/objects/2026-03/postal_mail/search">client.crm.objects.postalMail.<a href="./src/resources/crm/objects/postal-mail/postal-mail.ts">search</a>({ ...params }) -> CollectionResponseWithTotalSimplePublicObject</code>
+
+#### Batch
+
+Methods:
+
+- <code title="post /crm/objects/2026-03/postal_mail/batch/create">client.crm.objects.postalMail.batch.<a href="./src/resources/crm/objects/postal-mail/batch.ts">create</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
+- <code title="post /crm/objects/2026-03/postal_mail/batch/update">client.crm.objects.postalMail.batch.<a href="./src/resources/crm/objects/postal-mail/batch.ts">update</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
+- <code title="post /crm/objects/2026-03/postal_mail/batch/archive">client.crm.objects.postalMail.batch.<a href="./src/resources/crm/objects/postal-mail/batch.ts">delete</a>({ ...params }) -> void</code>
+- <code title="post /crm/objects/2026-03/postal_mail/batch/read">client.crm.objects.postalMail.batch.<a href="./src/resources/crm/objects/postal-mail/batch.ts">get</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
+- <code title="post /crm/objects/2026-03/postal_mail/batch/upsert">client.crm.objects.postalMail.batch.<a href="./src/resources/crm/objects/postal-mail/batch.ts">upsert</a>({ ...params }) -> BatchResponseSimplePublicUpsertObject</code>
 
 ### Products
 
 Methods:
 
-- <code title="post /crm/objects/2026-03/products/batch/create">client.crm.objects.products.<a href="./src/resources/crm/objects/products.ts">create</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
-- <code title="post /crm/objects/2026-03/products/batch/update">client.crm.objects.products.<a href="./src/resources/crm/objects/products.ts">update</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
-- <code title="get /crm/objects/2026-03/products">client.crm.objects.products.<a href="./src/resources/crm/objects/products.ts">list</a>({ ...params }) -> SimplePublicObjectWithAssociationsPage</code>
-- <code title="post /crm/objects/2026-03/products/batch/archive">client.crm.objects.products.<a href="./src/resources/crm/objects/products.ts">delete</a>({ ...params }) -> void</code>
-- <code title="post /crm/objects/2026-03/products/batch/read">client.crm.objects.products.<a href="./src/resources/crm/objects/products.ts">get</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
-- <code title="post /crm/objects/2026-03/products/search">client.crm.objects.products.<a href="./src/resources/crm/objects/products.ts">search</a>({ ...params }) -> CollectionResponseWithTotalSimplePublicObject</code>
-- <code title="post /crm/objects/2026-03/products/batch/upsert">client.crm.objects.products.<a href="./src/resources/crm/objects/products.ts">upsert</a>({ ...params }) -> BatchResponseSimplePublicUpsertObject</code>
+- <code title="post /crm/objects/2026-03/products">client.crm.objects.products.<a href="./src/resources/crm/objects/products/products.ts">create</a>({ ...params }) -> SimplePublicObject</code>
+- <code title="patch /crm/objects/2026-03/products/{productId}">client.crm.objects.products.<a href="./src/resources/crm/objects/products/products.ts">update</a>(productID, { ...params }) -> SimplePublicObject</code>
+- <code title="get /crm/objects/2026-03/products">client.crm.objects.products.<a href="./src/resources/crm/objects/products/products.ts">list</a>({ ...params }) -> SimplePublicObjectWithAssociationsPage</code>
+- <code title="delete /crm/objects/2026-03/products/{productId}">client.crm.objects.products.<a href="./src/resources/crm/objects/products/products.ts">delete</a>(productID) -> void</code>
+- <code title="get /crm/objects/2026-03/products/{productId}">client.crm.objects.products.<a href="./src/resources/crm/objects/products/products.ts">get</a>(productID, { ...params }) -> SimplePublicObjectWithAssociations</code>
+- <code title="post /crm/objects/2026-03/products/search">client.crm.objects.products.<a href="./src/resources/crm/objects/products/products.ts">search</a>({ ...params }) -> CollectionResponseWithTotalSimplePublicObject</code>
+
+#### Batch
+
+Methods:
+
+- <code title="post /crm/objects/2026-03/products/batch/create">client.crm.objects.products.batch.<a href="./src/resources/crm/objects/products/batch.ts">create</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
+- <code title="post /crm/objects/2026-03/products/batch/update">client.crm.objects.products.batch.<a href="./src/resources/crm/objects/products/batch.ts">update</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
+- <code title="post /crm/objects/2026-03/products/batch/archive">client.crm.objects.products.batch.<a href="./src/resources/crm/objects/products/batch.ts">delete</a>({ ...params }) -> void</code>
+- <code title="post /crm/objects/2026-03/products/batch/read">client.crm.objects.products.batch.<a href="./src/resources/crm/objects/products/batch.ts">get</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
+- <code title="post /crm/objects/2026-03/products/batch/upsert">client.crm.objects.products.batch.<a href="./src/resources/crm/objects/products/batch.ts">upsert</a>({ ...params }) -> BatchResponseSimplePublicUpsertObject</code>
 
 ### Projects
 
@@ -1054,27 +1106,36 @@ Methods:
 - <code title="get /crm/objects/2026-03/quotes/{quoteId}">client.crm.objects.quotes.<a href="./src/resources/crm/objects/quotes/quotes.ts">get</a>(quoteID, { ...params }) -> SimplePublicObjectWithAssociations</code>
 - <code title="post /crm/objects/2026-03/quotes/search">client.crm.objects.quotes.<a href="./src/resources/crm/objects/quotes/quotes.ts">search</a>({ ...params }) -> CollectionResponseWithTotalSimplePublicObject</code>
 
-#### Basic
+#### Batch
 
 Methods:
 
-- <code title="post /crm/objects/2026-03/quotes/batch/create">client.crm.objects.quotes.basic.<a href="./src/resources/crm/objects/quotes/basic.ts">create</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
-- <code title="post /crm/objects/2026-03/quotes/batch/update">client.crm.objects.quotes.basic.<a href="./src/resources/crm/objects/quotes/basic.ts">update</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
-- <code title="post /crm/objects/2026-03/quotes/batch/archive">client.crm.objects.quotes.basic.<a href="./src/resources/crm/objects/quotes/basic.ts">delete</a>({ ...params }) -> void</code>
-- <code title="post /crm/objects/2026-03/quotes/batch/read">client.crm.objects.quotes.basic.<a href="./src/resources/crm/objects/quotes/basic.ts">get</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
-- <code title="post /crm/objects/2026-03/quotes/batch/upsert">client.crm.objects.quotes.basic.<a href="./src/resources/crm/objects/quotes/basic.ts">upsert</a>({ ...params }) -> BatchResponseSimplePublicUpsertObject</code>
+- <code title="post /crm/objects/2026-03/quotes/batch/create">client.crm.objects.quotes.batch.<a href="./src/resources/crm/objects/quotes/batch.ts">create</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
+- <code title="post /crm/objects/2026-03/quotes/batch/update">client.crm.objects.quotes.batch.<a href="./src/resources/crm/objects/quotes/batch.ts">update</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
+- <code title="post /crm/objects/2026-03/quotes/batch/archive">client.crm.objects.quotes.batch.<a href="./src/resources/crm/objects/quotes/batch.ts">delete</a>({ ...params }) -> void</code>
+- <code title="post /crm/objects/2026-03/quotes/batch/read">client.crm.objects.quotes.batch.<a href="./src/resources/crm/objects/quotes/batch.ts">get</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
+- <code title="post /crm/objects/2026-03/quotes/batch/upsert">client.crm.objects.quotes.batch.<a href="./src/resources/crm/objects/quotes/batch.ts">upsert</a>({ ...params }) -> BatchResponseSimplePublicUpsertObject</code>
 
 ### Services
 
 Methods:
 
-- <code title="post /crm/objects/2026-03/0-162/batch/create">client.crm.objects.services.<a href="./src/resources/crm/objects/services.ts">create</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
-- <code title="post /crm/objects/2026-03/0-162/batch/update">client.crm.objects.services.<a href="./src/resources/crm/objects/services.ts">update</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
-- <code title="get /crm/objects/2026-03/0-162">client.crm.objects.services.<a href="./src/resources/crm/objects/services.ts">list</a>({ ...params }) -> SimplePublicObjectWithAssociationsPage</code>
-- <code title="post /crm/objects/2026-03/0-162/batch/archive">client.crm.objects.services.<a href="./src/resources/crm/objects/services.ts">delete</a>({ ...params }) -> void</code>
-- <code title="post /crm/objects/2026-03/0-162/batch/read">client.crm.objects.services.<a href="./src/resources/crm/objects/services.ts">get</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
-- <code title="post /crm/objects/2026-03/0-162/search">client.crm.objects.services.<a href="./src/resources/crm/objects/services.ts">search</a>({ ...params }) -> CollectionResponseWithTotalSimplePublicObject</code>
-- <code title="post /crm/objects/2026-03/0-162/batch/upsert">client.crm.objects.services.<a href="./src/resources/crm/objects/services.ts">upsert</a>({ ...params }) -> BatchResponseSimplePublicUpsertObject</code>
+- <code title="post /crm/objects/2026-03/0-162">client.crm.objects.services.<a href="./src/resources/crm/objects/services/services.ts">create</a>({ ...params }) -> SimplePublicObject</code>
+- <code title="patch /crm/objects/2026-03/0-162/{serviceId}">client.crm.objects.services.<a href="./src/resources/crm/objects/services/services.ts">update</a>(serviceID, { ...params }) -> SimplePublicObject</code>
+- <code title="get /crm/objects/2026-03/0-162">client.crm.objects.services.<a href="./src/resources/crm/objects/services/services.ts">list</a>({ ...params }) -> SimplePublicObjectWithAssociationsPage</code>
+- <code title="delete /crm/objects/2026-03/0-162/{serviceId}">client.crm.objects.services.<a href="./src/resources/crm/objects/services/services.ts">delete</a>(serviceID) -> void</code>
+- <code title="get /crm/objects/2026-03/0-162/{serviceId}">client.crm.objects.services.<a href="./src/resources/crm/objects/services/services.ts">get</a>(serviceID, { ...params }) -> SimplePublicObjectWithAssociations</code>
+- <code title="post /crm/objects/2026-03/0-162/search">client.crm.objects.services.<a href="./src/resources/crm/objects/services/services.ts">search</a>({ ...params }) -> CollectionResponseWithTotalSimplePublicObject</code>
+
+#### Batch
+
+Methods:
+
+- <code title="post /crm/objects/2026-03/0-162/batch/create">client.crm.objects.services.batch.<a href="./src/resources/crm/objects/services/batch.ts">create</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
+- <code title="post /crm/objects/2026-03/0-162/batch/update">client.crm.objects.services.batch.<a href="./src/resources/crm/objects/services/batch.ts">update</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
+- <code title="post /crm/objects/2026-03/0-162/batch/archive">client.crm.objects.services.batch.<a href="./src/resources/crm/objects/services/batch.ts">delete</a>({ ...params }) -> void</code>
+- <code title="post /crm/objects/2026-03/0-162/batch/read">client.crm.objects.services.batch.<a href="./src/resources/crm/objects/services/batch.ts">get</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
+- <code title="post /crm/objects/2026-03/0-162/batch/upsert">client.crm.objects.services.batch.<a href="./src/resources/crm/objects/services/batch.ts">upsert</a>({ ...params }) -> BatchResponseSimplePublicUpsertObject</code>
 
 ### Subscriptions
 
@@ -1122,13 +1183,22 @@ Methods:
 
 Methods:
 
-- <code title="post /crm/objects/2026-03/taxes/batch/create">client.crm.objects.taxes.<a href="./src/resources/crm/objects/taxes.ts">create</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
-- <code title="post /crm/objects/2026-03/taxes/batch/update">client.crm.objects.taxes.<a href="./src/resources/crm/objects/taxes.ts">update</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
-- <code title="get /crm/objects/2026-03/taxes">client.crm.objects.taxes.<a href="./src/resources/crm/objects/taxes.ts">list</a>({ ...params }) -> SimplePublicObjectWithAssociationsPage</code>
-- <code title="post /crm/objects/2026-03/taxes/batch/archive">client.crm.objects.taxes.<a href="./src/resources/crm/objects/taxes.ts">delete</a>({ ...params }) -> void</code>
-- <code title="post /crm/objects/2026-03/taxes/batch/read">client.crm.objects.taxes.<a href="./src/resources/crm/objects/taxes.ts">get</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
-- <code title="post /crm/objects/2026-03/taxes/search">client.crm.objects.taxes.<a href="./src/resources/crm/objects/taxes.ts">search</a>({ ...params }) -> CollectionResponseWithTotalSimplePublicObject</code>
-- <code title="post /crm/objects/2026-03/taxes/batch/upsert">client.crm.objects.taxes.<a href="./src/resources/crm/objects/taxes.ts">upsert</a>({ ...params }) -> BatchResponseSimplePublicUpsertObject</code>
+- <code title="post /crm/objects/2026-03/taxes">client.crm.objects.taxes.<a href="./src/resources/crm/objects/taxes/taxes.ts">create</a>({ ...params }) -> SimplePublicObject</code>
+- <code title="patch /crm/objects/2026-03/taxes/{taxId}">client.crm.objects.taxes.<a href="./src/resources/crm/objects/taxes/taxes.ts">update</a>(taxID, { ...params }) -> SimplePublicObject</code>
+- <code title="get /crm/objects/2026-03/taxes">client.crm.objects.taxes.<a href="./src/resources/crm/objects/taxes/taxes.ts">list</a>({ ...params }) -> SimplePublicObjectWithAssociationsPage</code>
+- <code title="delete /crm/objects/2026-03/taxes/{taxId}">client.crm.objects.taxes.<a href="./src/resources/crm/objects/taxes/taxes.ts">delete</a>(taxID) -> void</code>
+- <code title="get /crm/objects/2026-03/taxes/{taxId}">client.crm.objects.taxes.<a href="./src/resources/crm/objects/taxes/taxes.ts">get</a>(taxID, { ...params }) -> SimplePublicObjectWithAssociations</code>
+- <code title="post /crm/objects/2026-03/taxes/search">client.crm.objects.taxes.<a href="./src/resources/crm/objects/taxes/taxes.ts">search</a>({ ...params }) -> CollectionResponseWithTotalSimplePublicObject</code>
+
+#### Batch
+
+Methods:
+
+- <code title="post /crm/objects/2026-03/taxes/batch/create">client.crm.objects.taxes.batch.<a href="./src/resources/crm/objects/taxes/batch.ts">create</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
+- <code title="post /crm/objects/2026-03/taxes/batch/update">client.crm.objects.taxes.batch.<a href="./src/resources/crm/objects/taxes/batch.ts">update</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
+- <code title="post /crm/objects/2026-03/taxes/batch/archive">client.crm.objects.taxes.batch.<a href="./src/resources/crm/objects/taxes/batch.ts">delete</a>({ ...params }) -> void</code>
+- <code title="post /crm/objects/2026-03/taxes/batch/read">client.crm.objects.taxes.batch.<a href="./src/resources/crm/objects/taxes/batch.ts">get</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
+- <code title="post /crm/objects/2026-03/taxes/batch/upsert">client.crm.objects.taxes.batch.<a href="./src/resources/crm/objects/taxes/batch.ts">upsert</a>({ ...params }) -> BatchResponseSimplePublicUpsertObject</code>
 
 ### Tickets
 
@@ -1156,13 +1226,22 @@ Methods:
 
 Methods:
 
-- <code title="post /crm/objects/2026-03/users/batch/create">client.crm.objects.users.<a href="./src/resources/crm/objects/users.ts">create</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
-- <code title="post /crm/objects/2026-03/users/batch/update">client.crm.objects.users.<a href="./src/resources/crm/objects/users.ts">update</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
-- <code title="get /crm/objects/2026-03/users">client.crm.objects.users.<a href="./src/resources/crm/objects/users.ts">list</a>({ ...params }) -> SimplePublicObjectWithAssociationsPage</code>
-- <code title="post /crm/objects/2026-03/users/batch/archive">client.crm.objects.users.<a href="./src/resources/crm/objects/users.ts">delete</a>({ ...params }) -> void</code>
-- <code title="post /crm/objects/2026-03/users/batch/read">client.crm.objects.users.<a href="./src/resources/crm/objects/users.ts">get</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
-- <code title="post /crm/objects/2026-03/users/search">client.crm.objects.users.<a href="./src/resources/crm/objects/users.ts">search</a>({ ...params }) -> CollectionResponseWithTotalSimplePublicObject</code>
-- <code title="post /crm/objects/2026-03/users/batch/upsert">client.crm.objects.users.<a href="./src/resources/crm/objects/users.ts">upsert</a>({ ...params }) -> BatchResponseSimplePublicUpsertObject</code>
+- <code title="post /crm/objects/2026-03/users">client.crm.objects.users.<a href="./src/resources/crm/objects/users/users.ts">create</a>({ ...params }) -> SimplePublicObject</code>
+- <code title="patch /crm/objects/2026-03/users/{userId}">client.crm.objects.users.<a href="./src/resources/crm/objects/users/users.ts">update</a>(userID, { ...params }) -> SimplePublicObject</code>
+- <code title="get /crm/objects/2026-03/users">client.crm.objects.users.<a href="./src/resources/crm/objects/users/users.ts">list</a>({ ...params }) -> SimplePublicObjectWithAssociationsPage</code>
+- <code title="delete /crm/objects/2026-03/users/{userId}">client.crm.objects.users.<a href="./src/resources/crm/objects/users/users.ts">delete</a>(userID) -> void</code>
+- <code title="get /crm/objects/2026-03/users/{userId}">client.crm.objects.users.<a href="./src/resources/crm/objects/users/users.ts">get</a>(userID, { ...params }) -> SimplePublicObjectWithAssociations</code>
+- <code title="post /crm/objects/2026-03/users/search">client.crm.objects.users.<a href="./src/resources/crm/objects/users/users.ts">search</a>({ ...params }) -> CollectionResponseWithTotalSimplePublicObject</code>
+
+#### Batch
+
+Methods:
+
+- <code title="post /crm/objects/2026-03/users/batch/create">client.crm.objects.users.batch.<a href="./src/resources/crm/objects/users/batch.ts">create</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
+- <code title="post /crm/objects/2026-03/users/batch/update">client.crm.objects.users.batch.<a href="./src/resources/crm/objects/users/batch.ts">update</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
+- <code title="post /crm/objects/2026-03/users/batch/archive">client.crm.objects.users.batch.<a href="./src/resources/crm/objects/users/batch.ts">delete</a>({ ...params }) -> void</code>
+- <code title="post /crm/objects/2026-03/users/batch/read">client.crm.objects.users.batch.<a href="./src/resources/crm/objects/users/batch.ts">get</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
+- <code title="post /crm/objects/2026-03/users/batch/upsert">client.crm.objects.users.batch.<a href="./src/resources/crm/objects/users/batch.ts">upsert</a>({ ...params }) -> BatchResponseSimplePublicUpsertObject</code>
 
 ## Owners
 
