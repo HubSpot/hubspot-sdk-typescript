@@ -78,7 +78,7 @@ export class Services extends APIResource {
   search(
     body: ServiceSearchParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CollectionResponseWithTotalSimplePublicObject> {
+  ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/objects/2026-03/0-162/search', { body, ...options });
   }
 

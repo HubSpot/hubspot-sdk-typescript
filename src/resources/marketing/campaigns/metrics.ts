@@ -10,10 +10,8 @@ import { path } from '../../../internal/utils/path';
 
 export class Metrics extends APIResource {
   /**
-   * Fetch the metrics for a specific marketing campaign using its unique identifier.
-   * This endpoint allows you to retrieve various performance metrics of the
-   * campaign, which can be useful for analyzing the effectiveness of your marketing
-   * efforts over a specified time period.
+   * This endpoint retrieves key attribution metrics for a specified campaign, such
+   * as sessions, new contacts, and influenced contacts.
    */
   getAttributionMetrics(
     campaignGuid: string,
@@ -27,10 +25,7 @@ export class Metrics extends APIResource {
   }
 
   /**
-   * Fetch revenue attribution report data for a specific campaign. This endpoint
-   * allows you to retrieve detailed revenue attribution information, which can be
-   * filtered by attribution model and date range. It is useful for analyzing the
-   * financial impact of marketing campaigns.
+   * Fetch revenue attribution report data for a specified campaign
    */
   getRevenueAttribution(
     campaignGuid: string,
@@ -44,10 +39,7 @@ export class Metrics extends APIResource {
   }
 
   /**
-   * Fetch the list of contact IDs for the specified campaign and contact type. This
-   * endpoint allows you to retrieve contact identifiers associated with a particular
-   * campaign, filtered by the type of contact. It is useful for analyzing or
-   * processing contacts involved in specific marketing campaigns.
+   * Fetch the list of contact IDs for the specified campaign and contact type
    */
   listContactIDsByType(
     contactType: string,
@@ -64,47 +56,38 @@ export class Metrics extends APIResource {
 }
 
 export interface MetricGetAttributionMetricsParams {
-  /**
-   * The end date for fetching metrics, in YYYY-MM-DD format.
-   */
   endDate?: string;
 
-  /**
-   * The start date for fetching metrics, in YYYY-MM-DD format.
-   */
   startDate?: string;
 }
 
 export interface MetricGetRevenueAttributionParams {
-  /**
-   * The model used to attribute revenue to the campaign.
-   */
   attributionModel?: string;
 
   /**
-   * End date to fetch attribution data, YYYY-MM-DD.
+   * End date to fetch attribution data, YYYY-MM-DD
    */
   endDate?: string;
 
   /**
-   * Start date to fetch attribution data, YYYY-MM-DD.
+   * Start date to fetch attribution data, YYYY-MM-DD
    */
   startDate?: string;
 }
 
 export interface MetricListContactIDsByTypeParams extends PageParams {
   /**
-   * Path param: The unique identifier of the campaign.
+   * Path param: The unique identifier of the campaign
    */
   campaignGuid: string;
 
   /**
-   * Query param: The end date for filtering contacts, formatted as a string.
+   * Query param
    */
   endDate?: string;
 
   /**
-   * Query param: The start date for filtering contacts, formatted as a string.
+   * Query param
    */
   startDate?: string;
 }

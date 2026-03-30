@@ -60,7 +60,7 @@ export type HydratedCriticalActionsPage = Page<HydratedCriticalAction>;
 
 export interface ActingUser {
   /**
-   * The ID of the user who performed the action.
+   * The user's unique ID.
    */
   userId: number;
 
@@ -90,7 +90,7 @@ export interface CollectionResponsePublicLoginAuditForwardPaging {
 
 export interface HydratedCriticalAction {
   /**
-   * The unique ID of the activity.
+   * The activity's unique ID.
    */
   id: string;
 
@@ -254,7 +254,7 @@ export interface HydratedCriticalAction {
   actingUser?: string;
 
   /**
-   * The approximate country code.
+   * The approximate country code
    */
   countryCode?: string;
 
@@ -279,14 +279,14 @@ export interface HydratedCriticalAction {
   objectId?: string;
 
   /**
-   * The approximate region code.
+   * The approximate region code
    */
   regionCode?: string;
 }
 
 export interface PublicAPIUserActionEvent {
   /**
-   * The unique ID of the activity.
+   * The login activity's unique ID.
    */
   id: string;
 
@@ -335,7 +335,7 @@ export interface PublicLoginAudit {
   loginSucceeded: boolean;
 
   /**
-   * The approximate country code of the login.
+   * The approximate country code of the login
    */
   countryCode?: string;
 
@@ -355,7 +355,7 @@ export interface PublicLoginAudit {
   location?: string;
 
   /**
-   * The approximate region code of the login.
+   * The approximate region code of the login
    */
   regionCode?: string;
 
@@ -383,14 +383,26 @@ export interface ActivityListAuditLogsParams extends PageParams {
 }
 
 export interface ActivityListLoginActivitiesParams extends PageParams {
+  /**
+   * Identifier of user to retrieve activities for
+   */
   userId?: number;
 }
 
 export interface ActivityListSecurityActivitiesParams extends PageParams {
+  /**
+   * Limit to activities created after this epoch timestamp.
+   */
   fromTimestamp?: number;
 
+  /**
+   * Limit to activities created before this epoch timestamp.
+   */
   toTimestamp?: number;
 
+  /**
+   * Identifier of user to retrieve activities for
+   */
   userId?: number;
 }
 

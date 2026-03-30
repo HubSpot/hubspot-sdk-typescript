@@ -11,6 +11,8 @@ export {
 } from './groups';
 export {
   Properties,
+  type BatchResponseProperty,
+  type CollectionResponsePropertyNoPaging,
   type PropertyUpdate,
   type PropertyCreateParams,
   type PropertyUpdateParams,

@@ -8,6 +8,9 @@ import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
 export class ListAssociations extends APIResource {
+  /**
+   * Gets lists associated with a marketing event by marketing event id
+   */
   list(
     marketingEventID: string,
     options?: RequestOptions,
@@ -18,6 +21,10 @@ export class ListAssociations extends APIResource {
     );
   }
 
+  /**
+   * Disassociates a list from a marketing event by marketing event id and ILS list
+   * id
+   */
   delete(listID: string, params: ListAssociationDeleteParams, options?: RequestOptions): APIPromise<void> {
     const { marketingEventId } = params;
     return this._client.delete(
@@ -26,6 +33,9 @@ export class ListAssociations extends APIResource {
     );
   }
 
+  /**
+   * Associates a list with a marketing event by marketing event id and ILS list id
+   */
   associate(
     listID: string,
     params: ListAssociationAssociateParams,
@@ -38,6 +48,10 @@ export class ListAssociations extends APIResource {
     );
   }
 
+  /**
+   * Associates a list with a marketing event by external account id, external event
+   * id, and ILS list id
+   */
   associateByExternalAccount(
     listID: string,
     params: ListAssociationAssociateByExternalAccountParams,
@@ -50,6 +64,10 @@ export class ListAssociations extends APIResource {
     );
   }
 
+  /**
+   * Disassociates a list from a marketing event by external account id, external
+   * event id, and ILS list id
+   */
   deleteByExternalAccount(
     listID: string,
     params: ListAssociationDeleteByExternalAccountParams,
@@ -62,6 +80,10 @@ export class ListAssociations extends APIResource {
     );
   }
 
+  /**
+   * Gets lists associated with a marketing event by external account id and external
+   * event id
+   */
   listByExternalAccount(
     externalEventID: string,
     params: ListAssociationListByExternalAccountParams,

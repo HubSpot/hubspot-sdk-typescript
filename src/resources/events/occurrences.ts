@@ -23,9 +23,11 @@ export class Occurrences extends APIResource {
   }
 
   /**
-   * Retrieve a list of visible external event type names for the specified event
-   * occurrences in March 2026. This endpoint is useful for identifying the types of
-   * events that are available for analysis or reporting within your HubSpot account.
+   * Retrieve a list of event type names. You may use these event types to query the
+   * API for event occurrences of a desired type.
+   *
+   * Note: the `get_types` method is only supported in the Python SDK version
+   * `12.0.0-beta.1` or later.
    */
   listEventTypes(options?: RequestOptions): APIPromise<VisibleExternalEventTypeNames> {
     return this._client.get('/events/event-occurrences/2026-03/event-types', options);
@@ -37,7 +39,7 @@ export type ExternalUnifiedEventsPage = Page<ExternalUnifiedEvent>;
 export interface CollectionResponseExternalUnifiedEvent {
   /**
    * An array of ExternalUnifiedEvent objects, each representing an individual event
-   * occurrence.
+   * with its associated details.
    */
   results: Array<ExternalUnifiedEvent>;
 
@@ -87,68 +89,35 @@ export interface VisibleExternalEventTypeNames {
 }
 
 export interface OccurrenceListParams extends PageParams {
-  /**
-   * An array of event IDs to filter by.
-   */
   id?: Array<string>;
 
-  /**
-   * A cursor token to retrieve results before a specific point.
-   */
   before?: string;
 
-  /**
-   * The type of event to filter by.
-   */
   eventType?: string;
 
-  /**
-   * The unique identifier of the object associated with the events.
-   */
   objectId?: number;
 
   objectProperty?: OccurrenceListParams.ObjectProperty;
 
-  /**
-   * The type of object associated with the events.
-   */
   objectType?: string;
 
-  /**
-   * Filter events that occurred after this date-time.
-   */
   occurredAfter?: string;
 
-  /**
-   * Filter events that occurred before this date-time.
-   */
   occurredBefore?: string;
 
-  /**
-   * An array of property names to include in the response.
-   */
   properties?: Array<string>;
 
   property?: OccurrenceListParams.Property;
 
-  /**
-   * An array of fields to sort the results by.
-   */
   sort?: Array<string>;
 }
 
 export namespace OccurrenceListParams {
   export interface ObjectProperty {
-    /**
-     * Filter events by specific object properties.
-     */
     '{propname}'?: unknown;
   }
 
   export interface Property {
-    /**
-     * Filter events by specific event properties.
-     */
     '{propname}'?: unknown;
   }
 }

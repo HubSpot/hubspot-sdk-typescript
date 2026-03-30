@@ -7,6 +7,9 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
 export class Batch extends APIResource {
+  /**
+   * Read a batch of deal split objects by their associated deal object internal ID
+   */
   read(
     body: BatchReadParams,
     options?: RequestOptions,
@@ -14,6 +17,11 @@ export class Batch extends APIResource {
     return this._client.post('/deal-splits/2026-03/batch/read', { body, ...options });
   }
 
+  /**
+   * Create or replace deal splits for deals with the provided IDs. Deal split
+   * percentages for each deal must sum up to 1.0 (100%) and may have up to 8 decimal
+   * places
+   */
   upsert(
     body: BatchUpsertParams,
     options?: RequestOptions,

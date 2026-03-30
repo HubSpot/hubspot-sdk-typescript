@@ -9,6 +9,10 @@ import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
 export class Participations extends APIResource {
+  /**
+   * Read Marketing event's participations counters by externalAccountId and
+   * externalEventId pair.
+   */
   getByExternalAccountAndEventID(
     externalEventID: string,
     params: ParticipationGetByExternalAccountAndEventIDParams,
@@ -21,6 +25,10 @@ export class Participations extends APIResource {
     );
   }
 
+  /**
+   * Read Marketing event's participations counters by internal identifier
+   * marketingEventId.
+   */
   getByID(marketingEventID: number, options?: RequestOptions): APIPromise<EventsAPI.AttendanceCounters> {
     return this._client.get(
       path`/marketing/marketing-events/2026-03/participations/${marketingEventID}`,
@@ -28,6 +36,9 @@ export class Participations extends APIResource {
     );
   }
 
+  /**
+   * Read Contact's participations by identifier - email or internal id.
+   */
   listBreakdownByContact(
     contactIdentifier: string,
     query: ParticipationListBreakdownByContactParams | null | undefined = {},
@@ -40,6 +51,10 @@ export class Participations extends APIResource {
     );
   }
 
+  /**
+   * Read Marketing event's participations breakdown with optional filters by
+   * externalAccountId and externalEventId pair.
+   */
   listBreakdownByExternalAccountAndEventID(
     externalEventID: string,
     params: ParticipationListBreakdownByExternalAccountAndEventIDParams,
@@ -53,6 +68,10 @@ export class Participations extends APIResource {
     );
   }
 
+  /**
+   * Read Marketing event's participations breakdown with optional filters by
+   * internal identifier marketingEventId.
+   */
   listBreakdownByID(
     marketingEventID: number,
     query: ParticipationListBreakdownByIDParams | null | undefined = {},

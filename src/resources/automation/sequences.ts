@@ -25,11 +25,8 @@ export class Sequences extends APIResource {
   }
 
   /**
-   * Enroll a contact into a sequence using the specified sequence ID and sender
-   * email. This endpoint requires the user ID to be provided as a query parameter
-   * and a valid JSON body with the necessary enrollment details. It is used to
-   * automate the process of enrolling contacts into predefined sequences for
-   * streamlined communication.
+   * Enroll a contact into a sequence using the specified user ID and sequence
+   * details.
    */
   createEnrollment(
     params: SequenceCreateEnrollmentParams,
@@ -44,10 +41,7 @@ export class Sequences extends APIResource {
   }
 
   /**
-   * Retrieve details of a specific sequence in your HubSpot account using the
-   * sequence ID. This endpoint requires the user ID to be specified and provides
-   * comprehensive information about the sequence, including its steps and
-   * dependencies.
+   * Retrieve details of a specific sequence by its ID.
    */
   get(
     sequenceID: string,
@@ -58,10 +52,7 @@ export class Sequences extends APIResource {
   }
 
   /**
-   * Retrieve the sequence enrollment details for a specific contact in your HubSpot
-   * account. This endpoint provides information about the sequence a contact is
-   * enrolled in, including enrollment timestamps and the sequence's name. It is
-   * useful for tracking the progress and status of a contact within a sequence.
+   * Get the enrollment status of a contact in sequences by their contact ID.
    */
   getEnrollmentByContactID(
     contactID: string,
@@ -465,22 +456,14 @@ export interface PublicTaskPatternResponse {
 }
 
 export interface SequenceListParams extends PageParams {
-  /**
-   * The unique identifier of the user whose sequences are to be retrieved. This
-   * parameter is required.
-   */
   userId: string;
 
-  /**
-   * The name of the sequence to filter results by.
-   */
   name?: string;
 }
 
 export interface SequenceCreateEnrollmentParams {
   /**
-   * Query param: The unique identifier of the user performing the enrollment. This
-   * parameter is required.
+   * Query param
    */
   userId: string;
 
@@ -509,10 +492,6 @@ export interface SequenceCreateEnrollmentParams {
 }
 
 export interface SequenceGetParams {
-  /**
-   * The unique identifier of the user requesting the sequence details. This
-   * parameter is required.
-   */
   userId: string;
 }
 

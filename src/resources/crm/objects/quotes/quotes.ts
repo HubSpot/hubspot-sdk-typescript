@@ -99,7 +99,7 @@ export class Quotes extends APIResource {
   search(
     body: QuoteSearchParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CollectionResponseWithTotalSimplePublicObject> {
+  ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/objects/2026-03/quotes/search', { body, ...options });
   }
 }

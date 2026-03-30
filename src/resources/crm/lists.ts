@@ -430,12 +430,8 @@ export interface ListSearchRequest {
   additionalProperties: Array<string>;
 
   /**
-   * The `listIds` that will be used to filter results by `listId`. If values are
-   * provided, then the response will only include results that have a `listId` in
-   * this array.
-   *
-   * If no value is provided, or if an empty list is provided, then the results will
-   * not be filtered by `listId`.
+   * ILS list ids to be included in search results. If not specified, all lists
+   * matching other criteria will be included
    */
   listIds: Array<string>;
 
@@ -447,14 +443,8 @@ export interface ListSearchRequest {
   offset: number;
 
   /**
-   * The `processingTypes` that will be used to filter results by `processingType`.
-   * If values are provided, then the response will only include results that have a
-   * `processingType` in this array.
-   *
-   * If no value is provided, or if an empty list is provided, then results will not
-   * be filtered by `processingType`.
-   *
-   * Valid `processingTypes` are: `MANUAL`, `SNAPSHOT`, or `DYNAMIC`.
+   * List processing types to be included in search results. If not specified, all
+   * lists with all processing types will be included.
    */
   processingTypes: Array<string>;
 
@@ -1687,7 +1677,9 @@ export interface PublicListConversionInactivity {
   conversionType: 'INACTIVITY';
 
   /**
-   * The number of time units for the inactivity period.
+   * Value used to paginate through lists. The `offset` provided in the response can
+   * be used in the next request to fetch the next page of results. Defaults to `0`
+   * if no offset is provided.
    */
   offset: number;
 
@@ -3387,12 +3379,8 @@ export interface ListSearchParams {
   additionalProperties: Array<string>;
 
   /**
-   * The `listIds` that will be used to filter results by `listId`. If values are
-   * provided, then the response will only include results that have a `listId` in
-   * this array.
-   *
-   * If no value is provided, or if an empty list is provided, then the results will
-   * not be filtered by `listId`.
+   * ILS list ids to be included in search results. If not specified, all lists
+   * matching other criteria will be included
    */
   listIds: Array<string>;
 
@@ -3404,14 +3392,8 @@ export interface ListSearchParams {
   offset: number;
 
   /**
-   * The `processingTypes` that will be used to filter results by `processingType`.
-   * If values are provided, then the response will only include results that have a
-   * `processingType` in this array.
-   *
-   * If no value is provided, or if an empty list is provided, then results will not
-   * be filtered by `processingType`.
-   *
-   * Valid `processingTypes` are: `MANUAL`, `SNAPSHOT`, or `DYNAMIC`.
+   * List processing types to be included in search results. If not specified, all
+   * lists with all processing types will be included.
    */
   processingTypes: Array<string>;
 
@@ -3495,7 +3477,9 @@ export declare namespace ListUpdateScheduleConversionParams {
     conversionType: 'INACTIVITY';
 
     /**
-     * The number of time units for the inactivity period.
+     * Value used to paginate through lists. The `offset` provided in the response can
+     * be used in the next request to fetch the next page of results. Defaults to `0`
+     * if no offset is provided.
      */
     offset: number;
 

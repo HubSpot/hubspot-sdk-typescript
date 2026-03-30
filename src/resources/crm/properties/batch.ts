@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
+import * as PropertiesAPI from './properties';
 import { APIPromise } from '../../../core/api-promise';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
@@ -16,14 +17,14 @@ export class Batch extends APIResource {
     objectType: string,
     body: BatchCreateParams,
     options?: RequestOptions,
-  ): APIPromise<Shared.BatchResponseProperty> {
+  ): APIPromise<PropertiesAPI.BatchResponseProperty> {
     return this._client.post(path`/crm/properties/2026-03/${objectType}/batch/create`, { body, ...options });
   }
 
   /**
-   * Delete multiple properties in a single request. This method will return a 204 No
-   * Content response on success regardless of the initial state of the property
-   * (e.g. active, already archived, non-existent).
+   * Archive a provided list of properties. This method will return a 204 No Content
+   * response on success regardless of the initial state of the property (e.g.
+   * active, already archived, non-existent).
    */
   delete(objectType: string, body: BatchDeleteParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post(path`/crm/properties/2026-03/${objectType}/batch/archive`, {
@@ -34,13 +35,13 @@ export class Batch extends APIResource {
   }
 
   /**
-   * Read a batch of properties.
+   * Read a provided list of properties.
    */
   get(
     objectType: string,
     params: BatchGetParams,
     options?: RequestOptions,
-  ): APIPromise<Shared.BatchResponseProperty> {
+  ): APIPromise<PropertiesAPI.BatchResponseProperty> {
     const { locale, ...body } = params;
     return this._client.post(path`/crm/properties/2026-03/${objectType}/batch/read`, {
       query: { locale },

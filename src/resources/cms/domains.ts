@@ -15,6 +15,9 @@ export class Domains extends APIResource {
     return this._client.getAPIList('/cms/domains/2026-03', Page<Domain>, { query, ...options });
   }
 
+  /**
+   * Returns a single domains with the id specified.
+   */
   get(domainID: string, options?: RequestOptions): APIPromise<Domain> {
     return this._client.get(path`/cms/domains/2026-03/${domainID}`, options);
   }
@@ -23,8 +26,14 @@ export class Domains extends APIResource {
 export type DomainsPage = Page<Domain>;
 
 export interface CollectionResponseWithTotalDomain {
+  /**
+   * The results of the query.
+   */
   results: Array<Domain>;
 
+  /**
+   * The number of available results.
+   */
   total: number;
 
   paging?: Shared.Paging;
@@ -67,27 +76,27 @@ export interface Domain {
   isSslOnly: boolean;
 
   /**
-   * Whether the domain is used for CMS blog posts. Deprecated
+   * Whether the domain is used for CMS blog posts.
    */
   isUsedForBlogPost: boolean;
 
   /**
-   * Whether the domain is used for CMS email web pages. Deprecated
+   * Whether the domain is used for CMS email web pages.
    */
   isUsedForEmail: boolean;
 
   /**
-   * Whether the domain is used for CMS knowledge pages. Deprecated
+   * Whether the domain is used for CMS knowledge pages.
    */
   isUsedForKnowledge: boolean;
 
   /**
-   * Whether the domain is used for CMS landing pages. Deprecated
+   * Whether the domain is used for CMS landing pages.
    */
   isUsedForLandingPage: boolean;
 
   /**
-   * Whether the domain is used for CMS site pages. Deprecated
+   * Whether the domain is used for CMS site pages.
    */
   isUsedForSitePage: boolean;
 

@@ -13,6 +13,9 @@ export class Emails extends APIResource {
     return this._client.post('/marketing/emails/2026-03', { body, ...options });
   }
 
+  /**
+   * Change properties of a marketing email.
+   */
   update(emailID: string, params: EmailUpdateParams, options?: RequestOptions): APIPromise<PublicEmail> {
     const { query_archived, ...body } = params;
     return this._client.patch(path`/marketing/emails/2026-03/${emailID}`, {
@@ -29,6 +32,9 @@ export class Emails extends APIResource {
     return this._client.getAPIList('/marketing/emails/2026-03', Page<PublicEmail>, { query, ...options });
   }
 
+  /**
+   * Delete a marketing email by its ID
+   */
   delete(
     emailID: string,
     params: EmailDeleteParams | null | undefined = {},
@@ -42,10 +48,19 @@ export class Emails extends APIResource {
     });
   }
 
+  /**
+   * This will create a duplicate email with the same properties as the original,
+   * with the exception of a unique ID.
+   */
   clone(body: EmailCloneParams, options?: RequestOptions): APIPromise<PublicEmail> {
     return this._client.post('/marketing/emails/2026-03/clone', { body, ...options });
   }
 
+  /**
+   * Create a variation of a marketing email for an A/B test. The new variation will
+   * be created as a draft. If an active variation already exists, a new one won't be
+   * created.
+   */
   createAbTestVariation(
     body: EmailCreateAbTestVariationParams,
     options?: RequestOptions,
@@ -53,6 +68,11 @@ export class Emails extends APIResource {
     return this._client.post('/marketing/emails/2026-03/ab-test/create-variation', { body, ...options });
   }
 
+  /**
+   * Use this endpoint to get aggregated statistics of emails sent in a specified
+   * time span. It also returns the list of emails that were sent during the time
+   * span.
+   */
   get(
     query: EmailGetParams | null | undefined = {},
     options?: RequestOptions,
@@ -60,6 +80,11 @@ export class Emails extends APIResource {
     return this._client.get('/marketing/emails/2026-03/statistics/list', { query, ...options });
   }
 
+  /**
+   * This endpoint lets you obtain the variation of an A/B marketing email. If the
+   * email is variation A (master) it will return variation B (variant) and vice
+   * versa.
+   */
   getAbTestVariation(
     emailID: string,
     query: EmailGetAbTestVariationParams | null | undefined = {},
@@ -71,10 +96,18 @@ export class Emails extends APIResource {
     });
   }
 
+  /**
+   * Get the draft version of an email (if it exists). If no draft version exists,
+   * the published email is returned.
+   */
   getDraft(emailID: string, options?: RequestOptions): APIPromise<PublicEmail> {
     return this._client.get(path`/marketing/emails/2026-03/${emailID}/draft`, options);
   }
 
+  /**
+   * Get aggregated statistics in intervals for a specified time span. Each interval
+   * contains aggregated statistics of the emails that were sent in that time.
+   */
   getHistogram(
     query: EmailGetHistogramParams | null | undefined = {},
     options?: RequestOptions,
@@ -82,6 +115,9 @@ export class Emails extends APIResource {
     return this._client.get('/marketing/emails/2026-03/statistics/histogram', { query, ...options });
   }
 
+  /**
+   * Get a specific revision of a marketing email.
+   */
   getRevision(
     revisionID: string,
     params: EmailGetRevisionParams,
@@ -91,6 +127,11 @@ export class Emails extends APIResource {
     return this._client.get(path`/marketing/emails/2026-03/${emailId}/revisions/${revisionID}`, options);
   }
 
+  /**
+   * Get a list of all versions of a marketing email, with each entry including the
+   * full state of that particular version. To view the most recent version, sort by
+   * the updatedAt parameter.
+   */
   listRevisions(
     emailID: string,
     query: EmailListRevisionsParams | null | undefined = {},
@@ -103,6 +144,11 @@ export class Emails extends APIResource {
     );
   }
 
+  /**
+   * If you have a Marketing Hub Enterprise account or the transactional email
+   * add-on, you can use this endpoint to publish an automated email or send/schedule
+   * a regular email.
+   */
   publish(emailID: string, options?: RequestOptions): APIPromise<void> {
     return this._client.post(path`/marketing/emails/2026-03/${emailID}/publish`, {
       ...options,
@@ -110,6 +156,9 @@ export class Emails extends APIResource {
     });
   }
 
+  /**
+   * Resets the draft back to a copy of the live object.
+   */
   resetDraft(emailID: string, options?: RequestOptions): APIPromise<void> {
     return this._client.post(path`/marketing/emails/2026-03/${emailID}/draft/reset`, {
       ...options,
@@ -117,6 +166,10 @@ export class Emails extends APIResource {
     });
   }
 
+  /**
+   * Restores a previous revision of a marketing email. The current revision becomes
+   * old, and the restored revision is given a new version number.
+   */
   restoreRevision(
     revisionID: string,
     params: EmailRestoreRevisionParams,
@@ -129,6 +182,10 @@ export class Emails extends APIResource {
     });
   }
 
+  /**
+   * Restores a previous revision of a marketing email to DRAFT state. If there is
+   * currently something in the draft for that object, it is overwritten.
+   */
   restoreRevisionToDraft(
     revisionID: number,
     params: EmailRestoreRevisionToDraftParams,
@@ -141,6 +198,12 @@ export class Emails extends APIResource {
     );
   }
 
+  /**
+   * If you have a Marketing Hub Enterprise account or the transactional email
+   * add-on, you can use this endpoint to unpublish an automated email or cancel a
+   * regular email. If the email is already in the process of being sent, canceling
+   * might not be possible.
+   */
   unpublish(emailID: string, options?: RequestOptions): APIPromise<void> {
     return this._client.post(path`/marketing/emails/2026-03/${emailID}/unpublish`, {
       ...options,
@@ -148,6 +211,12 @@ export class Emails extends APIResource {
     });
   }
 
+  /**
+   * Create or update the draft version of a marketing email. If no draft exists, the
+   * system creates a draft from the current “live” email then applies the request
+   * body to that draft. The draft version only lives on the buffer—the email is not
+   * cloned.
+   */
   updateDraft(
     emailID: string,
     body: EmailUpdateDraftParams,
@@ -160,18 +229,6 @@ export class Emails extends APIResource {
 export type PublicEmailsPage = Page<PublicEmail>;
 
 export type VersionPublicEmailsPage = Page<VersionPublicEmail>;
-
-export interface AbTestCreateRequestVNext {
-  /**
-   * ID of the email to test.
-   */
-  contentId: string;
-
-  /**
-   * Name of the variation to be created.
-   */
-  variationName: string;
-}
 
 export interface AggregateEmailStatistics {
   aggregate: EmailStatisticsData;
@@ -213,7 +270,7 @@ export interface CollectionResponseWithTotalPublicEmailVersion {
 
 export interface EmailCloneRequestVNext {
   /**
-   * The unique identifier of the email to be cloned.
+   * The email ID.
    */
   id: string;
 
@@ -2387,7 +2444,7 @@ export interface PublicEmail {
   businessUnitId?: string;
 
   /**
-   * The campaign GUID on the email.
+   * The ID of the campaign this email is associated to.
    */
   campaign?: string;
 
@@ -3437,7 +3494,7 @@ export interface PublicEmail {
   updatedAt?: string;
 
   /**
-   * The ID of the user who last updated the email.
+   * The id of the user who last updated the email.
    */
   updatedById?: string;
 
@@ -3736,6 +3793,9 @@ export interface VersionPublicEmail {
 
   object: PublicEmail;
 
+  /**
+   * The date and time of the last update to the email, in ISO8601 representation.
+   */
   updatedAt: string;
 
   user: Shared.VersionUser;
@@ -5928,7 +5988,7 @@ export interface EmailDeleteParams {
 
 export interface EmailCloneParams {
   /**
-   * The unique identifier of the email to be cloned.
+   * The email ID.
    */
   id: string;
 
@@ -5945,12 +6005,12 @@ export interface EmailCloneParams {
 
 export interface EmailCreateAbTestVariationParams {
   /**
-   * ID of the email to test.
+   * ID of the object to test.
    */
   contentId: string;
 
   /**
-   * Name of the variation to be created.
+   * Name of A/B test variation.
    */
   variationName: string;
 }
@@ -7046,7 +7106,6 @@ export interface EmailUpdateDraftParams {
 
 export declare namespace Emails {
   export {
-    type AbTestCreateRequestVNext as AbTestCreateRequestVNext,
     type AggregateEmailStatistics as AggregateEmailStatistics,
     type CollectionResponseWithTotalEmailStatisticInterval as CollectionResponseWithTotalEmailStatisticInterval,
     type CollectionResponseWithTotalPublicEmail as CollectionResponseWithTotalPublicEmail,

@@ -7,11 +7,6 @@ import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 
 export class Batch extends APIResource {
-  /**
-   * Create multiple discounts in a single request by providing the necessary
-   * properties and associations for each discount. This operation returns a list of
-   * the created discounts, including their unique identifiers.
-   */
   create(
     body: BatchCreateParams,
     options?: RequestOptions,
@@ -20,7 +15,7 @@ export class Batch extends APIResource {
   }
 
   /**
-   * Update discounts
+   * Update a batch of discounts by internal ID, or unique property values
    */
   update(
     body: BatchUpdateParams,
@@ -29,9 +24,6 @@ export class Batch extends APIResource {
     return this._client.post('/crm/objects/2026-03/discounts/batch/update', { body, ...options });
   }
 
-  /**
-   * Batch delete discounts
-   */
   delete(body: BatchDeleteParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/crm/objects/2026-03/discounts/batch/archive', {
       body,
@@ -41,7 +33,8 @@ export class Batch extends APIResource {
   }
 
   /**
-   * Batch retrieve discounts.
+   * Retrieve records by record ID or include the `idProperty` parameter to retrieve
+   * records by a custom unique value property.
    */
   get(
     params: BatchGetParams,
@@ -55,10 +48,6 @@ export class Batch extends APIResource {
     });
   }
 
-  /**
-   * Create and update a batch of discounts by a unique property. Discounts that
-   * don't exist will be created, while existing discounts will be updated.
-   */
   upsert(
     body: BatchUpsertParams,
     options?: RequestOptions,

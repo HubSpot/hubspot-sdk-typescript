@@ -14,6 +14,9 @@ import { path } from '../../../../internal/utils/path';
 export class ExchangeRates extends APIResource {
   batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
 
+  /**
+   * Create a new exchange rate with specified conversion rate and currency codes.
+   */
   createExchangeRate(
     body: ExchangeRateCreateExchangeRateParams,
     options?: RequestOptions,
@@ -21,6 +24,9 @@ export class ExchangeRates extends APIResource {
     return this._client.post('/settings/currencies/2026-03/exchange-rates', { body, ...options });
   }
 
+  /**
+   * Retrieve the details for a specific exchange rate specified by its ID.
+   */
   getExchangeRateByID(
     exchangeRateID: string,
     options?: RequestOptions,
@@ -28,12 +34,18 @@ export class ExchangeRates extends APIResource {
     return this._client.get(path`/settings/currencies/2026-03/exchange-rates/${exchangeRateID}`, options);
   }
 
+  /**
+   * Retrieve all current exchange rates for all currency pairs.
+   */
   listCurrentExchangeRates(
     options?: RequestOptions,
   ): APIPromise<CurrenciesAPI.CollectionResponseExchangeRateNoPaging> {
     return this._client.get('/settings/currencies/2026-03/exchange-rates/current', options);
   }
 
+  /**
+   * Get a list of exchange rates
+   */
   listExchangeRates(
     query: ExchangeRateListExchangeRatesParams | null | undefined = {},
     options?: RequestOptions,
@@ -45,6 +57,9 @@ export class ExchangeRates extends APIResource {
     );
   }
 
+  /**
+   * Update an existing conversion rate, specified by its ID.
+   */
   updateExchangeRate(
     exchangeRateID: string,
     body: ExchangeRateUpdateExchangeRateParams,
@@ -56,6 +71,10 @@ export class ExchangeRates extends APIResource {
     });
   }
 
+  /**
+   * Change the visibility setting for a currency pair. This will hide or display a
+   * currency pair for users in the HubSpot app.
+   */
   updateVisibility(body: ExchangeRateUpdateVisibilityParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/settings/currencies/2026-03/exchange-rates/update-visibility', {
       body,

@@ -11,19 +11,32 @@ describe('resource urlMappings', () => {
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.cms.urlMappings.create({
-      id: 'id',
-      created: '2019-12-27T18:11:19.117Z',
+      id: 0,
+      cdnPurgeEmbargoTime: 0,
+      contentGroupId: 0,
+      cosObjectType: 'ACCESS_GROUP_MEMBERSHIP',
+      created: 0,
+      createdById: 0,
+      deletedAt: 0,
       destination: 'destination',
+      internallyCreated: true,
+      isActive: true,
       isMatchFullUrl: true,
       isMatchQueryString: true,
       isOnlyAfterNotFound: true,
       isPattern: true,
       isProtocolAgnostic: true,
+      isRegex: true,
       isTrailingSlashOptional: true,
+      label: 'label',
+      name: 'name',
+      note: 'note',
+      portalId: 0,
       precedence: 0,
       redirectStyle: 0,
       routePrefix: 'routePrefix',
-      updated: '2019-12-27T18:11:19.117Z',
+      updated: 0,
+      updatedById: 0,
     });
   });
 

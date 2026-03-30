@@ -23,21 +23,20 @@ export class Carts extends APIResource {
   batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
 
   /**
-   * Create a single cart. Include a `properties` object to define
-   * [property values](https://developers.hubspot.com/docs/guides/api/crm/properties)
-   * for the {objectName}, along with an `associations` array to define
-   * [associations](https://developers.hubspot.com/docs/guides/api/crm/associations/associations-v4)
-   * with other records.
+   * Create a cart with the given properties and return a copy of the object,
+   * including the ID. Documentation and examples for creating standard carts is
+   * provided.
    */
   create(body: CartCreateParams, options?: RequestOptions): APIPromise<CrmAPI.SimplePublicObject> {
     return this._client.post('/crm/objects/2026-03/carts', { body, ...options });
   }
 
   /**
-   * Update a cart by ID (`objectId`) or unique property value (`idProperty`).
-   * Provided property values will be overwritten. Read-only and non-existent
-   * properties will result in an error. Properties values can be cleared by passing
-   * an empty string.
+   * Perform a partial update of a cart, specified by its ID. Alternatively, you can
+   * specify a cart by a unique property value using the `idProperty` query
+   * parameter. Provided property values will be overwritten. Read-only and
+   * non-existent properties will result in an error. Properties values can be
+   * cleared by passing an empty string.
    */
   update(
     cartID: string,
@@ -53,7 +52,8 @@ export class Carts extends APIResource {
   }
 
   /**
-   * Retrieve all carts. Control what is returned via the `properties` query param.
+   * Retrieve all carts. You can control what is returned via the `properties` query
+   * parameter.
    */
   list(
     query: CartListParams | null | undefined = {},
@@ -67,9 +67,7 @@ export class Carts extends APIResource {
   }
 
   /**
-   * Archive a cart by ID. Deleted carts can be restored within 90 days of deletion.
-   * Learn more about
-   * [restoring records](https://knowledge.hubspot.com/records/restore-deleted-records).
+   * Delete a cart by its ID, moving it to the recycling bin.
    */
   delete(cartID: string, options?: RequestOptions): APIPromise<void> {
     return this._client.delete(path`/crm/objects/2026-03/carts/${cartID}`, {
@@ -79,8 +77,7 @@ export class Carts extends APIResource {
   }
 
   /**
-   * Retrieve a cart by its ID (`objectId`) or by a unique property (`idProperty`).
-   * Includes options for specifying what gets returned, such as the `properties`
+   * Retrieve a cart by its ID. You can control what is returned via the `properties`
    * query parameter.
    */
   get(
@@ -98,7 +95,7 @@ export class Carts extends APIResource {
   search(
     body: CartSearchParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CollectionResponseWithTotalSimplePublicObject> {
+  ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/objects/2026-03/carts/search', { body, ...options });
   }
 }

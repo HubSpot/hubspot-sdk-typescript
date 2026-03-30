@@ -9,8 +9,7 @@ import { path } from '../../../internal/utils/path';
 
 export class Labels extends APIResource {
   /**
-   * Create multiple association definitions between two specified CRM object types
-   * in a single request.
+   * Batch configure association limits between two object types.
    */
   batchCreate(
     toObjectType: string,
@@ -93,7 +92,7 @@ export class Labels extends APIResource {
 
 export interface LabelBatchCreateParams {
   /**
-   * Path param: The type of the source object in the association.
+   * Path param
    */
   fromObjectType: string;
 
@@ -105,7 +104,7 @@ export interface LabelBatchCreateParams {
 
 export interface LabelCreateLabelParams {
   /**
-   * Path param: The type of the source object in the association.
+   * Path param
    */
   fromObjectType: string;
 
@@ -128,27 +127,18 @@ export interface LabelCreateLabelParams {
 }
 
 export interface LabelDeleteLabelParams {
-  /**
-   * The type of the source object in the association.
-   */
   fromObjectType: string;
 
-  /**
-   * The type of the target object in the association.
-   */
   toObjectType: string;
 }
 
 export interface LabelListLabelsParams {
-  /**
-   * The type of the source object in the association.
-   */
   fromObjectType: string;
 }
 
 export interface LabelUpdateLabelParams {
   /**
-   * Path param: The type of the source object in the association.
+   * Path param
    */
   fromObjectType: string;
 

@@ -7,6 +7,9 @@ import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 
 export class Batch extends APIResource {
+  /**
+   * Create the Blog Author objects detailed in the request body.
+   */
   create(body: BatchCreateParams, options?: RequestOptions): APIPromise<Response> {
     return this._client.post('/cms/blogs/2026-03/authors/batch/create', {
       body,
@@ -16,6 +19,9 @@ export class Batch extends APIResource {
     });
   }
 
+  /**
+   * Update the Blog Author objects identified in the request body.
+   */
   update(params: BatchUpdateParams, options?: RequestOptions): APIPromise<Response> {
     const { archived, ...body } = params;
     return this._client.post('/cms/blogs/2026-03/authors/batch/update', {
@@ -27,6 +33,9 @@ export class Batch extends APIResource {
     });
   }
 
+  /**
+   * Delete the Blog Author objects identified in the request body.
+   */
   delete(body: BatchDeleteParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/cms/blogs/2026-03/authors/batch/archive', {
       body,
@@ -35,6 +44,9 @@ export class Batch extends APIResource {
     });
   }
 
+  /**
+   * Retrieve the Blog Author objects identified in the request body.
+   */
   get(params: BatchGetParams, options?: RequestOptions): APIPromise<Response> {
     const { archived, ...body } = params;
     return this._client.post('/cms/blogs/2026-03/authors/batch/read', {

@@ -7,6 +7,9 @@ import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 
 export class MultiLanguage extends APIResource {
+  /**
+   * Attach a blog to a multi-language group.
+   */
   attachToLangGroup(
     body: MultiLanguageAttachToLangGroupParams,
     options?: RequestOptions,
@@ -19,6 +22,9 @@ export class MultiLanguage extends APIResource {
     });
   }
 
+  /**
+   * Create a new language variation from an existing blog.
+   */
   createLanguageVariation(
     body: MultiLanguageCreateLanguageVariationParams,
     options?: RequestOptions,
@@ -29,6 +35,9 @@ export class MultiLanguage extends APIResource {
     });
   }
 
+  /**
+   * Detaches a blog from a multi-language group.
+   */
   detachFromLangGroup(
     body: MultiLanguageDetachFromLangGroupParams,
     options?: RequestOptions,
@@ -41,6 +50,9 @@ export class MultiLanguage extends APIResource {
     });
   }
 
+  /**
+   * Set a blog as the primary language of a multi-language group.
+   */
   setNewLangPrimary(body: MultiLanguageSetNewLangPrimaryParams, options?: RequestOptions): APIPromise<void> {
     return this._client.put('/cms/blog-settings/2026-03/settings/multi-language/set-new-lang-primary', {
       body,
@@ -49,6 +61,9 @@ export class MultiLanguage extends APIResource {
     });
   }
 
+  /**
+   * Explicitly set new languages for each blog in a multi-language group.
+   */
   updateLanguages(body: MultiLanguageUpdateLanguagesParams, options?: RequestOptions): APIPromise<Response> {
     return this._client.post('/cms/blog-settings/2026-03/settings/multi-language/update-languages', {
       body,
@@ -1768,12 +1783,24 @@ export interface MultiLanguageAttachToLangGroupParams {
 }
 
 export interface MultiLanguageCreateLanguageVariationParams {
+  /**
+   * ID of blog to clone.
+   */
   id: string;
 
+  /**
+   * Target language of new variant.
+   */
   language?: string;
 
+  /**
+   * Language of primary blog to clone.
+   */
   primaryLanguage?: string;
 
+  /**
+   * Path to this blog.
+   */
   slug?: string;
 }
 

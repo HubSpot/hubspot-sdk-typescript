@@ -40,31 +40,15 @@ export class IPRanges extends APIResource {
 export type IPRangeListSimpleResponse = string;
 
 export interface IPRangeListParams {
-  /**
-   * An array of traffic directions to filter the IP ranges. Valid values are
-   * `INGRESS` and `EGRESS`.
-   */
   direction?: Array<'INGRESS' | 'EGRESS'>;
 
-  /**
-   * An array of service types to filter the IP ranges. Valid values include `EMAIL`,
-   * `API`, `DNS`, `WEB_SCRAPING`, and `TEST_SERVICE`.
-   */
-  service?: Array<'EMAIL' | 'API' | 'DNS' | 'WEB_SCRAPING'>;
+  service?: Array<'EMAIL' | 'API' | 'DNS' | 'WEB_SCRAPING' | 'TEST_SERVICE'>;
 }
 
 export interface IPRangeListSimpleParams {
-  /**
-   * An array of directions to filter the IP ranges by. Valid values are `INGRESS`
-   * and `EGRESS`.
-   */
   direction?: Array<'INGRESS' | 'EGRESS'>;
 
-  /**
-   * An array specifying the service types to filter by. Valid values include
-   * `EMAIL`, `API`, `DNS`, `WEB_SCRAPING`, and `TEST_SERVICE`.
-   */
-  service?: Array<'EMAIL' | 'API' | 'DNS' | 'WEB_SCRAPING'>;
+  service?: Array<'EMAIL' | 'API' | 'DNS' | 'WEB_SCRAPING' | 'TEST_SERVICE'>;
 }
 
 export declare namespace IPRanges {

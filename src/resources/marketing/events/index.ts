@@ -55,6 +55,7 @@ export {
   type SubscriberVidResponse,
   type EventCreateParams,
   type EventUpdateParams,
+  type EventListParams,
   type EventDeleteBatchParams,
   type EventDeleteBatchByExternalEventIDParams,
   type EventDeleteByExternalEventIDParams,
@@ -64,9 +65,8 @@ export {
   type EventUpdateByExternalEventIDParams,
   type EventUpsertBatchParams,
   type EventUpsertByExternalEventIDParams,
-  type EventUpsertSubscriberStateByEmailParams,
-  type EventUpsertSubscriberStateByIDParams,
   type ParticipationBreakdownsPage,
+  type MarketingEventPublicReadResponseV2sPage,
 } from './events';
 export {
   ListAssociations,
@@ -84,6 +84,11 @@ export {
   type ParticipationListBreakdownByIDParams,
 } from './participations';
 export { Settings, type SettingCreateOrUpdateParams } from './settings';
+export {
+  SubscriberState,
+  type SubscriberStateRecordByEmailParams,
+  type SubscriberStateRecordByIDParams,
+} from './subscriber-state';
 export {
   type EventCancelByExternalEventIDParams,
   type EventCompleteByExternalEventIDParams,

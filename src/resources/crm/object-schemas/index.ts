@@ -3,6 +3,8 @@
 export { Batch, type BatchGetParams } from './batch';
 export {
   ObjectSchemas,
+  type CollectionResponseObjectSchemaNoPaging,
+  type ObjectSchema,
   type ObjectSchemaBatchReadRequest,
   type ObjectSchemaEgg,
   type ObjectTypePropertyCreate,

@@ -16,7 +16,9 @@ export {
   type PublicDefaultAssociationMultiPost,
   type PublicFetchAssociationsBatchRequest,
   type ReportCreationResponse,
-  type AssociationDeleteAssociationsParams,
+  type AssociationListParams,
+  type AssociationDeleteParams,
+  type AssociationSearchParams,
   type AssociationUpdateAssociationLabelsParams,
 } from './associations/index';
 export {
@@ -57,6 +59,22 @@ export {
 } from './exports';
 export { Extensions } from './extensions/index';
 export {
+  FeatureFlags,
+  type BatchPortalEntry,
+  type FlagPutRequest,
+  type FlagResponse,
+  type FlagsForAppResponse,
+  type PortalFlagStateBatchDeleteRequest,
+  type PortalFlagStateBatchPutRequest,
+  type PortalFlagStateBatchResponse,
+  type PortalFlagStatePutRequest,
+  type PortalFlagStateResponse,
+  type FeatureFlagUpdateParams,
+  type FeatureFlagDeleteParams,
+  type FeatureFlagGetParams,
+  type FeatureFlagListPortalsParams,
+} from './feature-flags/index';
+export {
   Imports,
   type CollectionResponsePublicImportErrorForwardPaging,
   type CollectionResponsePublicImportResponseForwardPaging,
@@ -84,8 +102,8 @@ export {
   type CustomObjectRecordLimitResponse,
   type CustomPropertyLimitResponse,
   type LimitAndUsageForObjectType,
-  type LimitsObjectTypeDefinition,
   type NearLimitRecordSample,
+  type ObjectTypeDefinition,
   type ObjectTypeNearOrAtAssociationLimit,
   type PipelineLimitResponse,
   type RecordLimitResponse,
@@ -226,6 +244,8 @@ export {
 export { ObjectLibrary } from './object-library/index';
 export {
   ObjectSchemas,
+  type CollectionResponseObjectSchemaNoPaging,
+  type ObjectSchema,
   type ObjectSchemaBatchReadRequest,
   type ObjectSchemaEgg,
   type ObjectTypePropertyCreate,
@@ -249,10 +269,8 @@ export {
   type BatchResponseSimplePublicUpsertObject,
   type CollectionResponseAssociatedID,
   type CollectionResponseSimplePublicObjectWithAssociationsForwardPaging,
-  type CollectionResponseWithTotalSimplePublicObject,
   type PublicAssociationsForObject,
   type PublicMergeInput,
-  type PublicObjectSearchRequest,
   type SimplePublicObjectBatchInput,
   type SimplePublicObjectBatchInputForCreate,
   type SimplePublicObjectBatchInputUpsert,
@@ -296,6 +314,8 @@ export {
 } from './pipelines';
 export {
   Properties,
+  type BatchResponseProperty,
+  type CollectionResponsePropertyNoPaging,
   type PropertyUpdate,
   type PropertyCreateParams,
   type PropertyUpdateParams,
@@ -314,3 +334,15 @@ export {
   type PropertiesValidationGetByObjectTypeIDPropertyNameAndRuleTypeParams,
   type PropertiesValidationUpdateByObjectTypeIDPropertyNameAndRuleTypeParams,
 } from './properties-validations';
+export {
+  Timeline,
+  type AppEventOccurrence,
+  type AppEventResolutionResponse,
+  type BatchInputAppEventOccurrence,
+  type BatchResponseAppEventOccurrence,
+  type DeveloperQualifiedSymbol,
+  type ExternalAppEventResolutionRequest,
+  type TimelineEventIFrame,
+  type TimelineCreateEventParams,
+  type TimelineCreateProjectTypeParams,
+} from './timeline/index';

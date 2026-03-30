@@ -65,3 +65,26 @@ Methods:
 
 - <code title="get /tax-rates/2026-03/tax-rates">client.settings.taxRates.<a href="./src/resources/settings/tax-rates.ts">list</a>({ ...params }) -> PublicTaxRateGroupsPage</code>
 - <code title="get /tax-rates/2026-03/tax-rates/{taxRateGroupId}">client.settings.taxRates.<a href="./src/resources/settings/tax-rates.ts">get</a>(taxRateGroupID) -> PublicTaxRateGroup</code>
+
+## Users
+
+Types:
+
+- <code><a href="./src/resources/settings/users.ts">CollectionResponsePublicPermissionSetNoPaging</a></code>
+- <code><a href="./src/resources/settings/users.ts">CollectionResponsePublicTeamNoPaging</a></code>
+- <code><a href="./src/resources/settings/users.ts">CollectionResponsePublicUserForwardPaging</a></code>
+- <code><a href="./src/resources/settings/users.ts">PublicPermissionSet</a></code>
+- <code><a href="./src/resources/settings/users.ts">PublicTeam</a></code>
+- <code><a href="./src/resources/settings/users.ts">PublicUser</a></code>
+- <code><a href="./src/resources/settings/users.ts">PublicUserUpdate</a></code>
+- <code><a href="./src/resources/settings/users.ts">UserProvisionRequest</a></code>
+
+Methods:
+
+- <code title="post /settings/users/2026-03">client.settings.users.<a href="./src/resources/settings/users.ts">create</a>({ ...params }) -> PublicUser</code>
+- <code title="put /settings/users/2026-03/{userId}">client.settings.users.<a href="./src/resources/settings/users.ts">update</a>(userID, { ...params }) -> PublicUser</code>
+- <code title="get /settings/users/2026-03">client.settings.users.<a href="./src/resources/settings/users.ts">list</a>({ ...params }) -> PublicUsersPage</code>
+- <code title="delete /settings/users/2026-03/{userId}">client.settings.users.<a href="./src/resources/settings/users.ts">delete</a>(userID, { ...params }) -> void</code>
+- <code title="get /settings/users/2026-03/{userId}">client.settings.users.<a href="./src/resources/settings/users.ts">get</a>(userID, { ...params }) -> PublicUser</code>
+- <code title="get /settings/users/2026-03/roles">client.settings.users.<a href="./src/resources/settings/users.ts">listRoles</a>() -> CollectionResponsePublicPermissionSetNoPaging</code>
+- <code title="get /settings/users/2026-03/teams">client.settings.users.<a href="./src/resources/settings/users.ts">listTeams</a>() -> CollectionResponsePublicTeamNoPaging</code>

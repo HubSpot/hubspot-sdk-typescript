@@ -86,7 +86,7 @@ export class Invoices extends APIResource {
   search(
     body: InvoiceSearchParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CollectionResponseWithTotalSimplePublicObject> {
+  ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/objects/2026-03/invoices/search', { body, ...options });
   }
 

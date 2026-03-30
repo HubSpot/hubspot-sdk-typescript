@@ -3,9 +3,27 @@
 import { APIResource } from '../../core/resource';
 import * as Shared from '../shared';
 import * as FilesFilesAPI from './files_';
-import { FileImportFromURLAsyncParams, FileSearchParams, Files as FilesAPIFiles } from './files_';
+import {
+  FileCreateParams,
+  FileGetByPathParams,
+  FileGetParams,
+  FileGetSignedURLParams,
+  FileImportFromURLAsyncParams,
+  FileReplaceParams,
+  FileSearchParams,
+  FileUpdateParams,
+  FileUploadParams,
+  Files as FilesAPIFiles,
+} from './files_';
 import * as FoldersAPI from './folders';
-import { FolderSearchParams, FolderUpdateAsyncByIDParams, FolderUpdateByIDParams, Folders } from './folders';
+import {
+  FolderGetByIDParams,
+  FolderGetByPathParams,
+  FolderSearchParams,
+  FolderUpdateAsyncByIDParams,
+  FolderUpdateByIDParams,
+  Folders,
+} from './folders';
 import { Page } from '../../core/pagination';
 
 export class Files extends APIResource {
@@ -185,6 +203,55 @@ export interface FileActionResponse {
   result?: File;
 }
 
+export interface FileStat {
+  file?: File;
+
+  folder?: Folder;
+}
+
+export interface FileUpdateInput {
+  clearExpires: boolean;
+
+  /**
+   * NONE: Do not run any duplicate validation. REJECT: Reject the upload if a
+   * duplicate is found. RETURN_EXISTING: If a duplicate file is found, do not upload
+   * a new file and return the found duplicate instead.
+   */
+  access?:
+    | 'HIDDEN_INDEXABLE'
+    | 'HIDDEN_NOT_INDEXABLE'
+    | 'HIDDEN_PRIVATE'
+    | 'HIDDEN_SENSITIVE'
+    | 'PRIVATE'
+    | 'PUBLIC_INDEXABLE'
+    | 'PUBLIC_NOT_INDEXABLE'
+    | 'SENSITIVE';
+
+  expiresAt?: string;
+
+  /**
+   * Mark whether the file should be used in new content or not.
+   */
+  isUsableInContent?: boolean;
+
+  /**
+   * New name for the file.
+   */
+  name?: string;
+
+  /**
+   * FolderId where the file should be moved to. folderId and folderPath parameters
+   * cannot be set at the same time.
+   */
+  parentFolderId?: string;
+
+  /**
+   * Folder path where the file should be moved to. folderId and folderPath
+   * parameters cannot be set at the same time.
+   */
+  parentFolderPath?: string;
+}
+
 export interface Folder {
   /**
    * ID of the folder.
@@ -271,6 +338,27 @@ export interface FolderActionResponse {
   result?: Folder;
 }
 
+export interface FolderInput {
+  /**
+   * Desired name for the folder.
+   */
+  name: string;
+
+  /**
+   * FolderId of the parent of the created folder. If not specified, the folder will
+   * be created at the root level. parentFolderId and parentFolderPath cannot be set
+   * at the same time.
+   */
+  parentFolderId?: string;
+
+  /**
+   * Path of the parent of the created folder. If not specified the folder will be
+   * created at the root level. parentFolderPath and parentFolderId cannot be set at
+   * the same time.
+   */
+  parentPath?: string;
+}
+
 export interface FolderUpdateInput {
   /**
    * New name. If specified the folder's name and fullPath will change. All children
@@ -293,14 +381,15 @@ export interface FolderUpdateInputWithID {
   id: string;
 
   /**
-   * The new name for the folder, which will also update the fullPath and all
-   * children of the folder.
+   * New name. If specified the folder's name and fullPath will change. All children
+   * of the folder will be updated accordingly.
    */
   name?: string;
 
   /**
-   * The ID of the new parent folder, which will move the folder and its children
-   * into the specified folder.
+   * New parent folderId. If changed, the folder and all it's children will be moved
+   * into the specified folder. parentFolderId and parentFolderPath cannot be
+   * specified at the same time.
    */
   parentFolderId?: number;
 }
@@ -406,6 +495,49 @@ export interface ImportFromURLTaskLocator {
   links?: { [key: string]: string };
 }
 
+export interface SignedURL {
+  /**
+   * Timestamp of when the URL will no longer grant access to the file.
+   */
+  expiresAt: string;
+
+  /**
+   * Signed URL with access to the specified file. Anyone with this URL will be able
+   * to access the file until it expires.
+   */
+  url: string;
+
+  /**
+   * Extension of the requested file.
+   */
+  extension?: string;
+
+  /**
+   * For image and video files. The height of the file.
+   */
+  height?: number;
+
+  /**
+   * Name of the requested file.
+   */
+  name?: string;
+
+  /**
+   * Size in bytes of the requested file.
+   */
+  size?: number;
+
+  /**
+   * Type of the file. Can be IMG, DOCUMENT, AUDIO, MOVIE, or OTHER.
+   */
+  type?: string;
+
+  /**
+   * For image and video files. The width of the file.
+   */
+  width?: number;
+}
+
 Files.Files = FilesAPIFiles;
 Files.Folders = Folders;
 
@@ -415,23 +547,36 @@ export declare namespace Files {
     type CollectionResponseFolder as CollectionResponseFolder,
     type File as File,
     type FileActionResponse as FileActionResponse,
+    type FileStat as FileStat,
+    type FileUpdateInput as FileUpdateInput,
     type Folder as Folder,
     type FolderActionResponse as FolderActionResponse,
+    type FolderInput as FolderInput,
     type FolderUpdateInput as FolderUpdateInput,
     type FolderUpdateInputWithID as FolderUpdateInputWithID,
     type FolderUpdateTaskLocator as FolderUpdateTaskLocator,
     type ImportFromURLInput as ImportFromURLInput,
     type ImportFromURLTaskLocator as ImportFromURLTaskLocator,
+    type SignedURL as SignedURL,
   };
 
   export {
     FilesAPIFiles as Files,
+    type FileCreateParams as FileCreateParams,
+    type FileUpdateParams as FileUpdateParams,
+    type FileGetParams as FileGetParams,
+    type FileGetByPathParams as FileGetByPathParams,
+    type FileGetSignedURLParams as FileGetSignedURLParams,
     type FileImportFromURLAsyncParams as FileImportFromURLAsyncParams,
+    type FileReplaceParams as FileReplaceParams,
     type FileSearchParams as FileSearchParams,
+    type FileUploadParams as FileUploadParams,
   };
 
   export {
     Folders as Folders,
+    type FolderGetByIDParams as FolderGetByIDParams,
+    type FolderGetByPathParams as FolderGetByPathParams,
     type FolderSearchParams as FolderSearchParams,
     type FolderUpdateAsyncByIDParams as FolderUpdateAsyncByIDParams,
     type FolderUpdateByIDParams as FolderUpdateByIDParams,

@@ -1,12 +1,14 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as Shared from '../shared';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
 export class Limits extends APIResource {
+  /**
+   * Returns limits and usage for custom association labels
+   */
   getAssociationLabelLimits(
     query: LimitGetAssociationLabelLimitsParams | null | undefined = {},
     options?: RequestOptions,
@@ -14,6 +16,9 @@ export class Limits extends APIResource {
     return this._client.get('/crm/limits/2026-03/associations/labels', { query, ...options });
   }
 
+  /**
+   * Returns records approaching or at association limits between two objects
+   */
   getAssociationRecordsLimitsByObjectType(
     toObjectTypeID: string,
     params: LimitGetAssociationRecordsLimitsByObjectTypeParams,
@@ -26,12 +31,19 @@ export class Limits extends APIResource {
     );
   }
 
+  /**
+   * Returns objects with records approaching or at association limits
+   */
   getAssociationRecordsLimitsFromObjects(
     options?: RequestOptions,
   ): APIPromise<CollectionResponseObjectTypeNearOrAtAssociationLimitNoPaging> {
     return this._client.get('/crm/limits/2026-03/associations/records/from', options);
   }
 
+  /**
+   * Returns objects for which the from object has records approaching or at
+   * association limits
+   */
   getAssociationRecordsLimitsToObjects(
     fromObjectTypeID: string,
     options?: RequestOptions,
@@ -39,22 +51,37 @@ export class Limits extends APIResource {
     return this._client.get(path`/crm/limits/2026-03/associations/records/${fromObjectTypeID}/to`, options);
   }
 
+  /**
+   * Returns overall limit and per object usage for calculated properties
+   */
   getCalculatedPropertyLimits(options?: RequestOptions): APIPromise<CalculatedPropertyLimitResponse> {
     return this._client.get('/crm/limits/2026-03/calculated-properties', options);
   }
 
+  /**
+   * Returns limits and usage for custom object schemas
+   */
   getCustomObjectTypeLimits(options?: RequestOptions): APIPromise<CustomObjectLimitResponse> {
     return this._client.get('/crm/limits/2026-03/custom-object-types', options);
   }
 
+  /**
+   * Returns limits and usage per object for custom properties
+   */
   getCustomPropertyLimits(options?: RequestOptions): APIPromise<CustomPropertyLimitResponse> {
     return this._client.get('/crm/limits/2026-03/custom-properties', options);
   }
 
+  /**
+   * Returns limits and usage per object for pipelines
+   */
   getPipelineLimits(options?: RequestOptions): APIPromise<PipelineLimitResponse> {
     return this._client.get('/crm/limits/2026-03/pipelines', options);
   }
 
+  /**
+   * Returns limits and usage per object for records
+   */
   getRecordLimits(options?: RequestOptions): APIPromise<RecordLimitResponse> {
     return this._client.get('/crm/limits/2026-03/records', options);
   }
@@ -66,7 +93,7 @@ export interface AssociationLabelLimitResponse {
    */
   allLabels: Array<string>;
 
-  fromObjectType: Shared.ObjectTypeDefinition;
+  fromObjectType: ObjectTypeDefinition;
 
   /**
    * The maximum number of association labels allowed.
@@ -78,7 +105,7 @@ export interface AssociationLabelLimitResponse {
    */
   percentage: number;
 
-  toObjectType: Shared.ObjectTypeDefinition;
+  toObjectType: ObjectTypeDefinition;
 
   /**
    * The current number of association labels used.
@@ -234,23 +261,6 @@ export interface LimitAndUsageForObjectType {
   usage: number;
 }
 
-export interface LimitsObjectTypeDefinition {
-  /**
-   * The unique identifier for the object type.
-   */
-  objectTypeId: string;
-
-  /**
-   * The plural form label for the object type.
-   */
-  pluralLabel: string;
-
-  /**
-   * The singular form label for the object type.
-   */
-  singularLabel: string;
-}
-
 export interface NearLimitRecordSample {
   /**
    * The primary identifier of the record.
@@ -271,6 +281,23 @@ export interface NearLimitRecordSample {
    * The number of records currently in use.
    */
   usage: number;
+}
+
+export interface ObjectTypeDefinition {
+  /**
+   * The unique identifier for the object type.
+   */
+  objectTypeId: string;
+
+  /**
+   * The plural form label for the object type.
+   */
+  pluralLabel: string;
+
+  /**
+   * The singular form label for the object type.
+   */
+  singularLabel: string;
 }
 
 export interface ObjectTypeNearOrAtAssociationLimit {
@@ -356,8 +383,8 @@ export declare namespace Limits {
     type CustomObjectRecordLimitResponse as CustomObjectRecordLimitResponse,
     type CustomPropertyLimitResponse as CustomPropertyLimitResponse,
     type LimitAndUsageForObjectType as LimitAndUsageForObjectType,
-    type LimitsObjectTypeDefinition as LimitsObjectTypeDefinition,
     type NearLimitRecordSample as NearLimitRecordSample,
+    type ObjectTypeDefinition as ObjectTypeDefinition,
     type ObjectTypeNearOrAtAssociationLimit as ObjectTypeNearOrAtAssociationLimit,
     type PipelineLimitResponse as PipelineLimitResponse,
     type RecordLimitResponse as RecordLimitResponse,

@@ -20,7 +20,6 @@ import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
 import { Account } from './resources/account/account';
-import { AppWebhooks } from './resources/app-webhooks/app-webhooks';
 import { Auth } from './resources/auth/auth';
 import { Automation } from './resources/automation/automation';
 import { BusinessUnits } from './resources/business-units/business-units';
@@ -28,13 +27,13 @@ import { Cms } from './resources/cms/cms';
 import { CommunicationPreferences } from './resources/communication-preferences/communication-preferences';
 import { Conversations } from './resources/conversations/conversations';
 import { Crm } from './resources/crm/crm';
-import { DataStudio } from './resources/data-studio/data-studio';
 import { Events } from './resources/events/events';
 import { Files } from './resources/files/files';
 import { Marketing } from './resources/marketing/marketing';
 import { Meta } from './resources/meta/meta';
 import { Scheduler } from './resources/scheduler/scheduler';
 import { Settings } from './resources/settings/settings';
+import { Webhooks } from './resources/webhooks/webhooks';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
@@ -762,7 +761,6 @@ export class Hubspot {
   static toFile = Uploads.toFile;
 
   account: API.Account = new API.Account(this);
-  appWebhooks: API.AppWebhooks = new API.AppWebhooks(this);
   auth: API.Auth = new API.Auth(this);
   automation: API.Automation = new API.Automation(this);
   businessUnits: API.BusinessUnits = new API.BusinessUnits(this);
@@ -770,17 +768,16 @@ export class Hubspot {
   communicationPreferences: API.CommunicationPreferences = new API.CommunicationPreferences(this);
   conversations: API.Conversations = new API.Conversations(this);
   crm: API.Crm = new API.Crm(this);
-  dataStudio: API.DataStudio = new API.DataStudio(this);
   events: API.Events = new API.Events(this);
   files: API.Files = new API.Files(this);
   marketing: API.Marketing = new API.Marketing(this);
   meta: API.Meta = new API.Meta(this);
   scheduler: API.Scheduler = new API.Scheduler(this);
   settings: API.Settings = new API.Settings(this);
+  webhooks: API.Webhooks = new API.Webhooks(this);
 }
 
 Hubspot.Account = Account;
-Hubspot.AppWebhooks = AppWebhooks;
 Hubspot.Auth = Auth;
 Hubspot.Automation = Automation;
 Hubspot.BusinessUnits = BusinessUnits;
@@ -788,13 +785,13 @@ Hubspot.Cms = Cms;
 Hubspot.CommunicationPreferences = CommunicationPreferences;
 Hubspot.Conversations = Conversations;
 Hubspot.Crm = Crm;
-Hubspot.DataStudio = DataStudio;
 Hubspot.Events = Events;
 Hubspot.Files = Files;
 Hubspot.Marketing = Marketing;
 Hubspot.Meta = Meta;
 Hubspot.Scheduler = Scheduler;
 Hubspot.Settings = Settings;
+Hubspot.Webhooks = Webhooks;
 
 export declare namespace Hubspot {
   export type RequestOptions = Opts.RequestOptions;
@@ -803,8 +800,6 @@ export declare namespace Hubspot {
   export { type PageParams as PageParams, type PageResponse as PageResponse };
 
   export { Account as Account };
-
-  export { AppWebhooks as AppWebhooks };
 
   export { Auth as Auth };
 
@@ -820,8 +815,6 @@ export declare namespace Hubspot {
 
   export { Crm as Crm };
 
-  export { DataStudio as DataStudio };
-
   export { Events as Events };
 
   export { Files as Files };
@@ -834,6 +827,9 @@ export declare namespace Hubspot {
 
   export { Settings as Settings };
 
+  export { Webhooks as Webhooks };
+
+  export type AbTestCreateRequestVNext = API.AbTestCreateRequestVNext;
   export type ActionResponse = API.ActionResponse;
   export type AssociationDefinition = API.AssociationDefinition;
   export type AssociationDefinitionEgg = API.AssociationDefinitionEgg;
@@ -844,15 +840,11 @@ export declare namespace Hubspot {
   export type BatchInputPublicObjectID = API.BatchInputPublicObjectID;
   export type BatchInputString = API.BatchInputString;
   export type BatchReadInputPropertyName = API.BatchReadInputPropertyName;
-  export type BatchResponseProperty = API.BatchResponseProperty;
-  export type CollectionResponseObjectSchemaNoPaging = API.CollectionResponseObjectSchemaNoPaging;
   export type CollectionResponsePropertyGroupNoPaging = API.CollectionResponsePropertyGroupNoPaging;
-  export type CollectionResponsePropertyNoPaging = API.CollectionResponsePropertyNoPaging;
   export type Error = API.Error;
   export type ErrorDetail = API.ErrorDetail;
   export type ForwardPaging = API.ForwardPaging;
   export type NextPage = API.NextPage;
-  export type ObjectSchema = API.ObjectSchema;
   export type ObjectTypeDefinition = API.ObjectTypeDefinition;
   export type ObjectTypeDefinitionLabels = API.ObjectTypeDefinitionLabels;
   export type ObjectTypeDefinitionPatch = API.ObjectTypeDefinitionPatch;

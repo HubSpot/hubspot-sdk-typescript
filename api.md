@@ -2,6 +2,7 @@
 
 Types:
 
+- <code><a href="./src/resources/shared.ts">AbTestCreateRequestVNext</a></code>
 - <code><a href="./src/resources/shared.ts">ActionResponse</a></code>
 - <code><a href="./src/resources/shared.ts">AssociationDefinition</a></code>
 - <code><a href="./src/resources/shared.ts">AssociationDefinitionEgg</a></code>
@@ -12,15 +13,11 @@ Types:
 - <code><a href="./src/resources/shared.ts">BatchInputPublicObjectID</a></code>
 - <code><a href="./src/resources/shared.ts">BatchInputString</a></code>
 - <code><a href="./src/resources/shared.ts">BatchReadInputPropertyName</a></code>
-- <code><a href="./src/resources/shared.ts">BatchResponseProperty</a></code>
-- <code><a href="./src/resources/shared.ts">CollectionResponseObjectSchemaNoPaging</a></code>
 - <code><a href="./src/resources/shared.ts">CollectionResponsePropertyGroupNoPaging</a></code>
-- <code><a href="./src/resources/shared.ts">CollectionResponsePropertyNoPaging</a></code>
 - <code><a href="./src/resources/shared.ts">Error</a></code>
 - <code><a href="./src/resources/shared.ts">ErrorDetail</a></code>
 - <code><a href="./src/resources/shared.ts">ForwardPaging</a></code>
 - <code><a href="./src/resources/shared.ts">NextPage</a></code>
-- <code><a href="./src/resources/shared.ts">ObjectSchema</a></code>
 - <code><a href="./src/resources/shared.ts">ObjectTypeDefinition</a></code>
 - <code><a href="./src/resources/shared.ts">ObjectTypeDefinitionLabels</a></code>
 - <code><a href="./src/resources/shared.ts">ObjectTypeDefinitionPatch</a></code>
@@ -43,8 +40,6 @@ Types:
 
 # [Account](src/resources/account/api.md)
 
-# [AppWebhooks](src/resources/app-webhooks/api.md)
-
 # [Auth](src/resources/auth/api.md)
 
 # [Automation](src/resources/automation/api.md)
@@ -59,8 +54,6 @@ Types:
 
 # [Crm](src/resources/crm/api.md)
 
-# [DataStudio](src/resources/data-studio/api.md)
-
 # [Events](src/resources/events/api.md)
 
 # [Files](src/resources/files/api.md)
@@ -72,3 +65,5 @@ Types:
 # [Scheduler](src/resources/scheduler/api.md)
 
 # [Settings](src/resources/settings/api.md)
+
+# [Webhooks](src/resources/webhooks/api.md)

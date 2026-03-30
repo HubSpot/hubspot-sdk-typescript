@@ -2,49 +2,15 @@
 
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
-import * as EventsAPI from '../../events/events';
 import * as BatchAPI from './batch';
 import { Batch, BatchCreateParams, BatchDeleteParams, BatchGetParams } from './batch';
 import { APIPromise } from '../../../core/api-promise';
-import { Page, type PageParams, PagePromise } from '../../../core/pagination';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
 export class MediaBridge extends APIResource {
   batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
-
-  create(body: MediaBridgeCreateParams, options?: RequestOptions): APIPromise<MediaBridgeObject> {
-    return this._client.post('/media-bridge/2026-03/objects', { body, ...options });
-  }
-
-  update(
-    objectID: number,
-    body: MediaBridgeUpdateParams,
-    options?: RequestOptions,
-  ): APIPromise<MediaBridgeObject> {
-    return this._client.patch(path`/media-bridge/2026-03/objects/${objectID}`, { body, ...options });
-  }
-
-  list(
-    mediaType: 'AUDIO' | 'DOCUMENT' | 'IMAGE' | 'OTHER' | 'VIDEO',
-    query: MediaBridgeListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): PagePromise<MediaBridgeObjectsPage, MediaBridgeObject> {
-    return this._client.getAPIList(
-      path`/media-bridge/2026-03/objects/${mediaType}`,
-      Page<MediaBridgeObject>,
-      { query, ...options },
-    );
-  }
-
-  delete(objectID: number, params: MediaBridgeDeleteParams, options?: RequestOptions): APIPromise<void> {
-    const { mediaType } = params;
-    return this._client.delete(path`/media-bridge/2026-03/objects/${mediaType}/${objectID}`, {
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
-  }
 
   /**
    * Create a new association definition for the specified object type.
@@ -53,7 +19,7 @@ export class MediaBridge extends APIResource {
     objectType: string,
     params: MediaBridgeCreateAssociationParams,
     options?: RequestOptions,
-  ): APIPromise<EventsAPI.AssociationDefinition> {
+  ): APIPromise<Shared.AssociationDefinition> {
     const { appId, ...body } = params;
     return this._client.post(path`/media-bridge/2026-03/${appId}/schemas/${objectType}/associations`, {
       body,
@@ -67,13 +33,8 @@ export class MediaBridge extends APIResource {
   createAttentionSpanEvent(
     body: MediaBridgeCreateAttentionSpanEventParams,
     options?: RequestOptions,
-  ): APIPromise<Response> {
-    return this._client.post('/media-bridge/2026-03/events/attention-span', {
-      body,
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-      __binaryResponse: true,
-    });
+  ): APIPromise<AttentionSpanEvent> {
+    return this._client.post('/media-bridge/2026-03/events/attention-span', { body, ...options });
   }
 
   /**
@@ -82,13 +43,8 @@ export class MediaBridge extends APIResource {
   createMediaPlayedEvent(
     body: MediaBridgeCreateMediaPlayedEventParams,
     options?: RequestOptions,
-  ): APIPromise<Response> {
-    return this._client.post('/media-bridge/2026-03/events/media-played', {
-      body,
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-      __binaryResponse: true,
-    });
+  ): APIPromise<MediaPlayedEvent> {
+    return this._client.post('/media-bridge/2026-03/events/media-played', { body, ...options });
   }
 
   /**
@@ -98,20 +54,15 @@ export class MediaBridge extends APIResource {
   createMediaPlayedPercentEvent(
     body: MediaBridgeCreateMediaPlayedPercentEventParams,
     options?: RequestOptions,
-  ): APIPromise<Response> {
-    return this._client.post('/media-bridge/2026-03/events/media-played-percent', {
-      body,
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-      __binaryResponse: true,
-    });
+  ): APIPromise<MediaPlayedPercentageEvent> {
+    return this._client.post('/media-bridge/2026-03/events/media-played-percent', { body, ...options });
   }
 
   /**
    * Create a new media object type
    */
   createObjectType(
-    appID: string,
+    appID: number,
     body: MediaBridgeCreateObjectTypeParams,
     options?: RequestOptions,
   ): APIPromise<BulkIntegratorObjectCreationResponse> {
@@ -125,7 +76,7 @@ export class MediaBridge extends APIResource {
    * Set up a new oEmbed domain for your media bridge app.
    */
   createOembedDomain(
-    appID: string,
+    appID: number,
     body: MediaBridgeCreateOembedDomainParams,
     options?: RequestOptions,
   ): APIPromise<IntegratorOEmbedDomainModel> {
@@ -142,7 +93,7 @@ export class MediaBridge extends APIResource {
     objectType: string,
     params: MediaBridgeCreatePropertyParams,
     options?: RequestOptions,
-  ): APIPromise<Shared.Property> {
+  ): APIPromise<Property> {
     const { appId, ...body } = params;
     return this._client.post(path`/media-bridge/2026-03/${appId}/properties/${objectType}`, {
       body,
@@ -166,9 +117,9 @@ export class MediaBridge extends APIResource {
   }
 
   createVideoAssociationDefinition(
-    appID: string,
+    appID: number,
     options?: RequestOptions,
-  ): APIPromise<EventsAPI.AssociationDefinition> {
+  ): APIPromise<Shared.AssociationDefinition> {
     return this._client.post(
       path`/media-bridge/2026-03/${appID}/settings/video-association-definition`,
       options,
@@ -194,7 +145,7 @@ export class MediaBridge extends APIResource {
    * Delete an existing oEmbed domain.
    */
   deleteOembedDomain(
-    appID: string,
+    appID: number,
     params: MediaBridgeDeleteOembedDomainParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<void> {
@@ -236,19 +187,10 @@ export class MediaBridge extends APIResource {
     );
   }
 
-  get(
-    objectID: number,
-    params: MediaBridgeGetParams,
-    options?: RequestOptions,
-  ): APIPromise<MediaBridgeObject> {
-    const { mediaType } = params;
-    return this._client.get(path`/media-bridge/2026-03/objects/${mediaType}/${objectID}`, options);
-  }
-
   /**
    * Get the visibility settings for media bridge events for your apps.
    */
-  getEventVisibilitySettings(appID: string, options?: RequestOptions): APIPromise<EventVisibilityResponse> {
+  getEventVisibilitySettings(appID: number, options?: RequestOptions): APIPromise<EventVisibilityResponse> {
     return this._client.get(path`/media-bridge/2026-03/${appID}/settings/event-visibility`, options);
   }
 
@@ -274,7 +216,7 @@ export class MediaBridge extends APIResource {
     propertyName: string,
     params: MediaBridgeGetPropertyParams,
     options?: RequestOptions,
-  ): APIPromise<Shared.Property> {
+  ): APIPromise<Property> {
     const { appId, objectType, ...query } = params;
     return this._client.get(path`/media-bridge/2026-03/${appId}/properties/${objectType}/${propertyName}`, {
       query,
@@ -304,7 +246,7 @@ export class MediaBridge extends APIResource {
     objectType: string,
     params: MediaBridgeGetSchemaParams,
     options?: RequestOptions,
-  ): APIPromise<Shared.ObjectSchema> {
+  ): APIPromise<ObjectSchema> {
     const { appId } = params;
     return this._client.get(path`/media-bridge/2026-03/${appId}/schemas/${objectType}`, options);
   }
@@ -328,7 +270,7 @@ export class MediaBridge extends APIResource {
    * Get the details for existing oEmbed domains for your app
    */
   listOembedDomains(
-    appID: string,
+    appID: number,
     query: MediaBridgeListOembedDomainsParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<OEmbedDomainsCollectionResponse> {
@@ -345,7 +287,7 @@ export class MediaBridge extends APIResource {
     objectType: string,
     params: MediaBridgeListPropertiesParams,
     options?: RequestOptions,
-  ): APIPromise<Shared.CollectionResponsePropertyNoPaging> {
+  ): APIPromise<CollectionResponsePropertyNoPaging> {
     const { appId, ...query } = params;
     return this._client.get(path`/media-bridge/2026-03/${appId}/properties/${objectType}`, {
       query,
@@ -369,10 +311,10 @@ export class MediaBridge extends APIResource {
    * Get the schemas for all object types.
    */
   listSchemas(
-    appID: string,
+    appID: number,
     query: MediaBridgeListSchemasParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<Shared.CollectionResponseObjectSchemaNoPaging> {
+  ): APIPromise<CollectionResponseObjectSchemaNoPaging> {
     return this._client.get(path`/media-bridge/2026-03/${appID}/schemas`, { query, ...options });
   }
 
@@ -383,7 +325,7 @@ export class MediaBridge extends APIResource {
    * @deprecated
    */
   registerAppName(
-    appID: string,
+    appID: number,
     body: MediaBridgeRegisterAppNameParams,
     options?: RequestOptions,
   ): APIPromise<MediaBridgeProviderRegistrationResponse> {
@@ -394,7 +336,7 @@ export class MediaBridge extends APIResource {
    * Set the visibility settings for media bridge events created by your app.
    */
   updateEventVisibilitySettings(
-    appID: string,
+    appID: number,
     body: MediaBridgeUpdateEventVisibilitySettingsParams,
     options?: RequestOptions,
   ): APIPromise<EventVisibilityChange> {
@@ -426,7 +368,7 @@ export class MediaBridge extends APIResource {
     propertyName: string,
     params: MediaBridgeUpdatePropertyParams,
     options?: RequestOptions,
-  ): APIPromise<Shared.Property> {
+  ): APIPromise<Property> {
     const { appId, objectType, ...body } = params;
     return this._client.patch(path`/media-bridge/2026-03/${appId}/properties/${objectType}/${propertyName}`, {
       body,
@@ -469,15 +411,13 @@ export class MediaBridge extends APIResource {
    * items.
    */
   updateSettings(
-    appID: string,
+    appID: number,
     body: MediaBridgeUpdateSettingsParams,
     options?: RequestOptions,
   ): APIPromise<MediaBridgeProviderRegistrationResponse> {
     return this._client.put(path`/media-bridge/2026-03/${appID}/settings`, { body, ...options });
   }
 }
-
-export type MediaBridgeObjectsPage = Page<MediaBridgeObject>;
 
 export interface AbsoluteValue {
   operator: 'ABSOLUTE_VALUE';
@@ -900,6 +840,92 @@ export interface AttentionSpanCalculatedValues {
   totalSecondsPlayed: number;
 }
 
+export interface AttentionSpanEvent {
+  /**
+   * The ID of the contact in HubSpot’s system that consumed the media. This can be
+   * fetched using HubSpot's Get contact by usertoken (utk) API. The API also
+   * supports supplying a usertoken, and will handle converting this into a contact
+   * ID automatically.
+   */
+  contactId: number;
+
+  mediaBridgeId: number;
+
+  mediaBridgeObjectCoordinates: string;
+
+  mediaBridgeObjectTypeId: string;
+
+  mediaName: string;
+
+  mediaType: 'AUDIO' | 'DOCUMENT' | 'IMAGE' | 'OTHER' | 'VIDEO';
+
+  /**
+   * The timestamp at which this event occurred, in milliseconds since the epoch.
+   */
+  occurredTimestamp: number;
+
+  percentRange: string;
+
+  /**
+   * The ID of the HubSpot account.
+   */
+  portalId: number;
+
+  providerId: number;
+
+  sessionId: string;
+
+  /**
+   * The percent of the media that the user consumed. Providers may calculate this
+   * differently depending on how they consider repeated views of the same portion of
+   * media. For this reason, the API will not attempt to validate totalPercentWatched
+   * against the attention span information for the event. If it is missing, HubSpot
+   * will calculate this from the attention span map as follows: (number of spans
+   * with a value of 1 or more)/(Total number of spans).
+   */
+  totalPercentPlayed: number;
+
+  externalPlayContext?: 'EMAIL' | 'EXTERNAL_PAGE';
+
+  mediaUrl?: string;
+
+  /**
+   * The ID of the page, if hosted on HubSpot. Required for HubSpot pages.
+   */
+  pageId?: number;
+
+  /**
+   * The name of the page. Required if the page is not hosted on HubSpot.
+   */
+  pageName?: string;
+
+  pageObjectCoordinates?: string;
+
+  /**
+   * The URL of the page that an event happened on. Required if the page is not
+   * hosted on HubSpot.
+   */
+  pageUrl?: string;
+
+  /**
+   * This is the raw data which provides the most granular data about spans of the
+   * media, and how many times each span was consumed by the user. For example, for a
+   * 10 second video where each second is a span, if a visitor watches the first 5
+   * seconds of the video, then restarts the video and watches the first 2 seconds
+   * again, the resulting `rawDataString` would be
+   * `“0=2;1=2;2=1;3=1;4=1;5=0;6=0;7=0;8=0;9=0;”`.
+   */
+  rawData?: string;
+
+  /**
+   * The seconds that a user spent consuming the media. The media bridge calculates
+   * this as `totalPercentPlayed`\*`mediaDuration`. If a provider would like this to
+   * be calculated differently, they can provide the pre-calculated value when they
+   * create the event.
+   */
+  totalSecondsPlayed?: number;
+}
+
 export interface AttentionSpanEventRequest {
   mediaType: 'AUDIO' | 'DOCUMENT' | 'IMAGE' | 'OTHER' | 'VIDEO';
 
@@ -934,6 +960,24 @@ export interface AttentionSpanEventRequest {
   pageUrl?: string;
 
   rawDataString?: string;
+}
+
+export interface BatchResponseProperty {
+  completedAt: string;
+
+  results: Array<Property1>;
+
+  startedAt: string;
+
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
+
+  errors?: Array<Shared.StandardError>;
+
+  links?: { [key: string]: string };
+
+  numErrors?: number;
+
+  requestedAt?: string;
 }
 
 export interface BeginsWith {
@@ -1119,10 +1163,12 @@ export interface CaseChangeTestExtensionData {
   mood: 'ANGRY' | 'HAPPY' | 'SAD' | 'SARCASTIC';
 }
 
-export interface CollectionResponseMediaBridgeObjectForwardPaging {
-  results: Array<MediaBridgeObject>;
+export interface CollectionResponseObjectSchemaNoPaging {
+  results: Array<ObjectSchema>;
+}
 
-  paging?: Shared.ForwardPaging;
+export interface CollectionResponsePropertyNoPaging {
+  results: Array<Property1>;
 }
 
 export interface ConcatStrings {
@@ -1390,117 +1436,6 @@ export interface Contains {
   propertyName?: string;
 
   value?: boolean;
-}
-
-export interface CreateAudioObjectRequest {
-  mediaType: 'AUDIO';
-
-  title: string;
-
-  detailsPageLink?: string;
-
-  duration?: number;
-
-  externalId?: string;
-
-  fileUrl?: string;
-
-  oembedUrl?: string;
-
-  posterUrl?: string;
-
-  thumbnailUrl?: string;
-}
-
-export interface CreateDocumentObjectRequest {
-  mediaType: 'DOCUMENT';
-
-  title: string;
-
-  detailsPageLink?: string;
-
-  duration?: number;
-
-  externalId?: string;
-
-  fileUrl?: string;
-
-  oembedUrl?: string;
-
-  posterUrl?: string;
-
-  thumbnailUrl?: string;
-}
-
-export interface CreateImageObjectRequest {
-  mediaType: 'IMAGE';
-
-  title: string;
-
-  detailsPageLink?: string;
-
-  duration?: number;
-
-  externalId?: string;
-
-  fileUrl?: string;
-
-  oembedUrl?: string;
-
-  posterUrl?: string;
-
-  thumbnailUrl?: string;
-}
-
-export type CreateMBObjectRequest =
-  | CreateVideoObjectRequest
-  | CreateOtherObjectRequest
-  | CreateAudioObjectRequest
-  | CreateImageObjectRequest
-  | CreateDocumentObjectRequest;
-
-export interface CreateOtherObjectRequest {
-  mediaType: 'OTHER';
-
-  title: string;
-
-  detailsPageLink?: string;
-
-  duration?: number;
-
-  externalId?: string;
-
-  fileUrl?: string;
-
-  oembedUrl?: string;
-
-  posterUrl?: string;
-
-  thumbnailUrl?: string;
-}
-
-export interface CreateVideoObjectRequest {
-  mediaType: 'VIDEO';
-
-  title: string;
-
-  bearerToken?: string;
-
-  detailsPageLink?: string;
-
-  duration?: number;
-
-  externalId?: string;
-
-  fileUrl?: string;
-
-  oembedUrl?: string;
-
-  posterUrl?: string;
-
-  thumbnailUrl?: string;
-
-  transcriptUrl?: string;
 }
 
 export interface Date {
@@ -4063,34 +3998,6 @@ export interface MaxNumbers {
   value?: number;
 }
 
-export interface MediaBridgeObject {
-  id: string;
-
-  createdAt: string;
-
-  mediaType: 'AUDIO' | 'DOCUMENT' | 'IMAGE' | 'OTHER' | 'VIDEO';
-
-  title: string;
-
-  updatedAt: string;
-
-  detailsPageLink?: string;
-
-  duration?: number;
-
-  externalId?: string;
-
-  fileUrl?: string;
-
-  oembedUrl?: string;
-
-  posterUrl?: string;
-
-  thumbnailUrl?: string;
-
-  video?: VideoObject;
-}
-
 export interface MediaBridgePropertyUpdate {
   calculationFormula?: string;
 
@@ -4143,6 +4050,44 @@ export interface MediaBridgeProviderRegistrationResponse {
   name: string;
 }
 
+export interface MediaPlayedEvent {
+  contactId: number;
+
+  mediaBridgeId: number;
+
+  mediaBridgeObjectCoordinates: string;
+
+  mediaBridgeObjectTypeId: string;
+
+  mediaName: string;
+
+  mediaType: 'AUDIO' | 'DOCUMENT' | 'IMAGE' | 'OTHER' | 'VIDEO';
+
+  occurredTimestamp: number;
+
+  portalId: number;
+
+  providerId: number;
+
+  sessionId: string;
+
+  state: 'STARTED' | 'VIEWED';
+
+  externalPlayContext?: 'EMAIL' | 'EXTERNAL_PAGE';
+
+  iframeUrl?: string;
+
+  mediaUrl?: string;
+
+  pageId?: number;
+
+  pageName?: string;
+
+  pageObjectCoordinates?: string;
+
+  pageUrl?: string;
+}
+
 export interface MediaPlayedEventRequest {
   mediaType: 'AUDIO' | 'DOCUMENT' | 'IMAGE' | 'OTHER' | 'VIDEO';
 
@@ -4174,6 +4119,62 @@ export interface MediaPlayedEventRequest {
 
   pageName?: string;
 
+  pageUrl?: string;
+}
+
+export interface MediaPlayedPercentageEvent {
+  /**
+   * The ID of the contact in HubSpot’s system that consumed the media. This can be
+   * fetched using HubSpot's Get contact by usertoken (utk) API. The API also
+   * supports supplying a usertoken, and will handle converting this into a contact
+   * ID automatically.
+   */
+  contactId: number;
+
+  mediaBridgeId: number;
+
+  mediaBridgeObjectCoordinates: string;
+
+  mediaBridgeObjectTypeId: string;
+
+  mediaName: string;
+
+  mediaType: 'AUDIO' | 'DOCUMENT' | 'IMAGE' | 'OTHER' | 'VIDEO';
+
+  occurredTimestamp: number;
+
+  playedPercent: number;
+
+  /**
+   * The ID of the HubSpot account.
+   */
+  portalId: number;
+
+  providerId: number;
+
+  sessionId: string;
+
+  externalPlayContext?: 'EMAIL' | 'EXTERNAL_PAGE';
+
+  mediaUrl?: string;
+
+  /**
+   * The content ID of the page that an event happened on, for HubSpot pages.
+   * Required if the page is a HubSpot page.
+   */
+  pageId?: number;
+
+  /**
+   * The name or title of the page that an event happened on. Required for
+   * non-HubSpot pages.
+   */
+  pageName?: string;
+
+  pageObjectCoordinates?: string;
+
+  /**
+   * The URL of the page that an event happened on. Required for non-HubSpot pages.
+   */
   pageUrl?: string;
 }
 
@@ -4925,6 +4926,44 @@ export interface ObjectDefinitionResponse {
   schema?: InboundDBObjectType;
 }
 
+export interface ObjectSchema {
+  id: string;
+
+  allowsSensitiveProperties: boolean;
+
+  archived: boolean;
+
+  associations: Array<Shared.AssociationDefinition>;
+
+  fullyQualifiedName: string;
+
+  labels: Shared.ObjectTypeDefinitionLabels;
+
+  name: string;
+
+  objectTypeId: string;
+
+  properties: Array<Property1>;
+
+  requiredProperties: Array<string>;
+
+  searchableProperties: Array<string>;
+
+  secondaryDisplayProperties: Array<string>;
+
+  createdAt?: string;
+
+  createdByUserId?: number;
+
+  description?: string;
+
+  primaryDisplayProperty?: string;
+
+  updatedAt?: string;
+
+  updatedByUserId?: number;
+}
+
 export interface ObjectTypeIDProto {
   innerId: number;
 
@@ -5643,7 +5682,7 @@ export interface Property {
    * A list of valid options for the property. This field is required for enumerated
    * properties.
    */
-  options: Array<Shared.Option>;
+  options: Array<Shared.AutomationActionsOption>;
 
   /**
    * Whether options can be modified after creation.
@@ -5955,7 +5994,7 @@ export interface PropertyDefinition {
   /**
    * A HubSpot property
    */
-  property: Shared.Property;
+  property: Property;
 
   calculationExpression?:
     | ConstantBoolean
@@ -7451,117 +7490,6 @@ export interface TimestampOfTargetPropertyVariable {
   value?: string;
 }
 
-export interface UpdateAudioObjectRequest {
-  mediaType: 'AUDIO';
-
-  detailsPageLink?: string;
-
-  duration?: number;
-
-  externalId?: string;
-
-  fileUrl?: string;
-
-  oembedUrl?: string;
-
-  posterUrl?: string;
-
-  thumbnailUrl?: string;
-
-  title?: string;
-}
-
-export interface UpdateDocumentObjectRequest {
-  mediaType: 'DOCUMENT';
-
-  detailsPageLink?: string;
-
-  duration?: number;
-
-  externalId?: string;
-
-  fileUrl?: string;
-
-  oembedUrl?: string;
-
-  posterUrl?: string;
-
-  thumbnailUrl?: string;
-
-  title?: string;
-}
-
-export interface UpdateImageObjectRequest {
-  mediaType: 'IMAGE';
-
-  detailsPageLink?: string;
-
-  duration?: number;
-
-  externalId?: string;
-
-  fileUrl?: string;
-
-  oembedUrl?: string;
-
-  posterUrl?: string;
-
-  thumbnailUrl?: string;
-
-  title?: string;
-}
-
-export type UpdateMBObjectRequest =
-  | UpdateVideoObjectRequest
-  | UpdateOtherObjectRequest
-  | UpdateAudioObjectRequest
-  | UpdateImageObjectRequest
-  | UpdateDocumentObjectRequest;
-
-export interface UpdateOtherObjectRequest {
-  mediaType: 'OTHER';
-
-  detailsPageLink?: string;
-
-  duration?: number;
-
-  externalId?: string;
-
-  fileUrl?: string;
-
-  oembedUrl?: string;
-
-  posterUrl?: string;
-
-  thumbnailUrl?: string;
-
-  title?: string;
-}
-
-export interface UpdateVideoObjectRequest {
-  mediaType: 'VIDEO';
-
-  bearerToken?: string;
-
-  detailsPageLink?: string;
-
-  duration?: number;
-
-  externalId?: string;
-
-  fileUrl?: string;
-
-  oembedUrl?: string;
-
-  posterUrl?: string;
-
-  thumbnailUrl?: string;
-
-  title?: string;
-
-  transcriptUrl?: string;
-}
-
 export interface UpperCase {
   operator: 'UPPER_CASE';
 
@@ -7644,14 +7572,6 @@ export interface UpperCase {
   propertyName?: string;
 
   value?: string;
-}
-
-export interface VideoObject {
-  id: number;
-
-  deeplinkUrl: string;
-
-  fileId: number;
 }
 
 export interface Xor {
@@ -7824,55 +7744,11 @@ export interface Year {
   value?: number;
 }
 
-export type MediaBridgeCreateParams =
-  | MediaBridgeCreateParams.CreateVideoObjectRequest
-  | MediaBridgeCreateParams.CreateOtherObjectRequest
-  | MediaBridgeCreateParams.CreateAudioObjectRequest
-  | MediaBridgeCreateParams.CreateImageObjectRequest
-  | MediaBridgeCreateParams.CreateDocumentObjectRequest;
-
-export declare namespace MediaBridgeCreateParams {
-  export interface CreateVideoObjectRequest {}
-
-  export interface CreateOtherObjectRequest {}
-
-  export interface CreateAudioObjectRequest {}
-
-  export interface CreateImageObjectRequest {}
-
-  export interface CreateDocumentObjectRequest {}
-}
-
-export type MediaBridgeUpdateParams =
-  | MediaBridgeUpdateParams.UpdateVideoObjectRequest
-  | MediaBridgeUpdateParams.UpdateOtherObjectRequest
-  | MediaBridgeUpdateParams.UpdateAudioObjectRequest
-  | MediaBridgeUpdateParams.UpdateImageObjectRequest
-  | MediaBridgeUpdateParams.UpdateDocumentObjectRequest;
-
-export declare namespace MediaBridgeUpdateParams {
-  export interface UpdateVideoObjectRequest {}
-
-  export interface UpdateOtherObjectRequest {}
-
-  export interface UpdateAudioObjectRequest {}
-
-  export interface UpdateImageObjectRequest {}
-
-  export interface UpdateDocumentObjectRequest {}
-}
-
-export interface MediaBridgeListParams extends PageParams {}
-
-export interface MediaBridgeDeleteParams {
-  mediaType: 'AUDIO' | 'DOCUMENT' | 'IMAGE' | 'OTHER' | 'VIDEO';
-}
-
 export interface MediaBridgeCreateAssociationParams {
   /**
    * Path param
    */
-  appId: string;
+  appId: number;
 
   /**
    * Body param
@@ -8006,7 +7882,7 @@ export interface MediaBridgeCreatePropertyParams {
   /**
    * Path param
    */
-  appId: string;
+  appId: number;
 
   /**
    * Body param
@@ -8100,7 +7976,7 @@ export interface MediaBridgeCreatePropertyGroupParams {
   /**
    * Path param
    */
-  appId: string;
+  appId: number;
 
   /**
    * Body param
@@ -8119,7 +7995,7 @@ export interface MediaBridgeCreatePropertyGroupParams {
 }
 
 export interface MediaBridgeDeleteAssociationParams {
-  appId: string;
+  appId: number;
 
   objectType: string;
 }
@@ -8131,30 +8007,26 @@ export interface MediaBridgeDeleteOembedDomainParams {
 }
 
 export interface MediaBridgeDeletePropertyParams {
-  appId: string;
+  appId: number;
 
   objectType: string;
 }
 
 export interface MediaBridgeDeletePropertyGroupParams {
-  appId: string;
+  appId: number;
 
   objectType: string;
 }
 
-export interface MediaBridgeGetParams {
-  mediaType: 'AUDIO' | 'DOCUMENT' | 'IMAGE' | 'OTHER' | 'VIDEO';
-}
-
 export interface MediaBridgeGetOembedDomainParams {
-  appId: string;
+  appId: number;
 }
 
 export interface MediaBridgeGetPropertyParams {
   /**
    * Path param
    */
-  appId: string;
+  appId: number;
 
   /**
    * Path param
@@ -8173,20 +8045,20 @@ export interface MediaBridgeGetPropertyParams {
 }
 
 export interface MediaBridgeGetPropertyGroupParams {
-  appId: string;
+  appId: number;
 
   objectType: string;
 }
 
 export interface MediaBridgeGetSchemaParams {
-  appId: string;
+  appId: number;
 }
 
 export interface MediaBridgeListObjectTypesByMediaTypeParams {
   /**
    * Path param
    */
-  appId: string;
+  appId: number;
 
   /**
    * Query param
@@ -8202,7 +8074,7 @@ export interface MediaBridgeListPropertiesParams {
   /**
    * Path param
    */
-  appId: string;
+  appId: number;
 
   /**
    * Query param: Whether to return only results that have been archived.
@@ -8216,7 +8088,7 @@ export interface MediaBridgeListPropertiesParams {
 }
 
 export interface MediaBridgeListPropertyGroupsParams {
-  appId: string;
+  appId: number;
 }
 
 export interface MediaBridgeListSchemasParams {
@@ -8252,7 +8124,7 @@ export interface MediaBridgeUpdateOembedDomainParams {
   /**
    * Path param
    */
-  appId: string;
+  appId: number;
 
   /**
    * Body param
@@ -8269,7 +8141,7 @@ export interface MediaBridgeUpdatePropertyParams {
   /**
    * Path param
    */
-  appId: string;
+  appId: number;
 
   /**
    * Path param
@@ -8348,7 +8220,7 @@ export interface MediaBridgeUpdatePropertyGroupParams {
   /**
    * Path param
    */
-  appId: string;
+  appId: number;
 
   /**
    * Path param
@@ -8370,7 +8242,7 @@ export interface MediaBridgeUpdateSchemaParams {
   /**
    * Path param
    */
-  appId: string;
+  appId: number;
 
   /**
    * Body param
@@ -8437,24 +8309,21 @@ export declare namespace MediaBridge {
     type AddTime as AddTime,
     type And as And,
     type AttentionSpanCalculatedValues as AttentionSpanCalculatedValues,
+    type AttentionSpanEvent as AttentionSpanEvent,
     type AttentionSpanEventRequest as AttentionSpanEventRequest,
+    type BatchResponseProperty as BatchResponseProperty,
     type BeginsWith as BeginsWith,
     type BooleanPropertyVariable as BooleanPropertyVariable,
     type BooleanTargetPropertyVariable as BooleanTargetPropertyVariable,
     type BulkIntegratorObjectCreationResponse as BulkIntegratorObjectCreationResponse,
     type CaseChangeTestExtensionData as CaseChangeTestExtensionData,
-    type CollectionResponseMediaBridgeObjectForwardPaging as CollectionResponseMediaBridgeObjectForwardPaging,
+    type CollectionResponseObjectSchemaNoPaging as CollectionResponseObjectSchemaNoPaging,
+    type CollectionResponsePropertyNoPaging as CollectionResponsePropertyNoPaging,
     type ConcatStrings as ConcatStrings,
     type ConstantBoolean as ConstantBoolean,
     type ConstantNumber as ConstantNumber,
     type ConstantString as ConstantString,
     type Contains as Contains,
-    type CreateAudioObjectRequest as CreateAudioObjectRequest,
-    type CreateDocumentObjectRequest as CreateDocumentObjectRequest,
-    type CreateImageObjectRequest as CreateImageObjectRequest,
-    type CreateMBObjectRequest as CreateMBObjectRequest,
-    type CreateOtherObjectRequest as CreateOtherObjectRequest,
-    type CreateVideoObjectRequest as CreateVideoObjectRequest,
     type Date as Date,
     type DatedExchangeRate as DatedExchangeRate,
     type DefaultRequirements as DefaultRequirements,
@@ -8496,11 +8365,12 @@ export declare namespace MediaBridge {
     type LessThanOrEqual as LessThanOrEqual,
     type LowerCase as LowerCase,
     type MaxNumbers as MaxNumbers,
-    type MediaBridgeObject as MediaBridgeObject,
     type MediaBridgePropertyUpdate as MediaBridgePropertyUpdate,
     type MediaBridgeProviderPartial as MediaBridgeProviderPartial,
     type MediaBridgeProviderRegistrationResponse as MediaBridgeProviderRegistrationResponse,
+    type MediaPlayedEvent as MediaPlayedEvent,
     type MediaPlayedEventRequest as MediaPlayedEventRequest,
+    type MediaPlayedPercentageEvent as MediaPlayedPercentageEvent,
     type MediaPlayedPercentageEventRequest as MediaPlayedPercentageEventRequest,
     type MinNumbers as MinNumbers,
     type Month as Month,
@@ -8515,6 +8385,7 @@ export declare namespace MediaBridge {
     type NumberToString as NumberToString,
     type OEmbedDomainsCollectionResponse as OEmbedDomainsCollectionResponse,
     type ObjectDefinitionResponse as ObjectDefinitionResponse,
+    type ObjectSchema as ObjectSchema,
     type ObjectTypeIDProto as ObjectTypeIDProto,
     type Option1 as Option1,
     type OptionDecorations as OptionDecorations,
@@ -8549,21 +8420,9 @@ export declare namespace MediaBridge {
     type TimeBetweenSkipWeekends as TimeBetweenSkipWeekends,
     type TimestampOfPropertyVariable as TimestampOfPropertyVariable,
     type TimestampOfTargetPropertyVariable as TimestampOfTargetPropertyVariable,
-    type UpdateAudioObjectRequest as UpdateAudioObjectRequest,
-    type UpdateDocumentObjectRequest as UpdateDocumentObjectRequest,
-    type UpdateImageObjectRequest as UpdateImageObjectRequest,
-    type UpdateMBObjectRequest as UpdateMBObjectRequest,
-    type UpdateOtherObjectRequest as UpdateOtherObjectRequest,
-    type UpdateVideoObjectRequest as UpdateVideoObjectRequest,
     type UpperCase as UpperCase,
-    type VideoObject as VideoObject,
     type Xor as Xor,
     type Year as Year,
-    type MediaBridgeObjectsPage as MediaBridgeObjectsPage,
-    type MediaBridgeCreateParams as MediaBridgeCreateParams,
-    type MediaBridgeUpdateParams as MediaBridgeUpdateParams,
-    type MediaBridgeListParams as MediaBridgeListParams,
-    type MediaBridgeDeleteParams as MediaBridgeDeleteParams,
     type MediaBridgeCreateAssociationParams as MediaBridgeCreateAssociationParams,
     type MediaBridgeCreateAttentionSpanEventParams as MediaBridgeCreateAttentionSpanEventParams,
     type MediaBridgeCreateMediaPlayedEventParams as MediaBridgeCreateMediaPlayedEventParams,
@@ -8576,7 +8435,6 @@ export declare namespace MediaBridge {
     type MediaBridgeDeleteOembedDomainParams as MediaBridgeDeleteOembedDomainParams,
     type MediaBridgeDeletePropertyParams as MediaBridgeDeletePropertyParams,
     type MediaBridgeDeletePropertyGroupParams as MediaBridgeDeletePropertyGroupParams,
-    type MediaBridgeGetParams as MediaBridgeGetParams,
     type MediaBridgeGetOembedDomainParams as MediaBridgeGetOembedDomainParams,
     type MediaBridgeGetPropertyParams as MediaBridgeGetPropertyParams,
     type MediaBridgeGetPropertyGroupParams as MediaBridgeGetPropertyGroupParams,

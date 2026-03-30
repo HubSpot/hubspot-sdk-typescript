@@ -9,6 +9,78 @@ const client = new Hubspot({
 
 describe('resource folders', () => {
   // Mock server tests are disabled
+  test.skip('deleteByID', async () => {
+    const responsePromise = client.files.folders.deleteByID('321669910225');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('deleteByPath', async () => {
+    const responsePromise = client.files.folders.deleteByPath('folderPath');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('getByID', async () => {
+    const responsePromise = client.files.folders.getByID('321669910225');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('getByID: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.files.folders.getByID(
+        '321669910225',
+        { properties: ['string'] },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Hubspot.NotFoundError);
+  });
+
+  // Mock server tests are disabled
+  test.skip('getByPath', async () => {
+    const responsePromise = client.files.folders.getByPath('folderPath');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('getByPath: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.files.folders.getByPath(
+        'folderPath',
+        { properties: ['string'] },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Hubspot.NotFoundError);
+  });
+
+  // Mock server tests are disabled
   test.skip('getUpdateAsyncStatus', async () => {
     const responsePromise = client.files.folders.getUpdateAsyncStatus('taskId');
     const rawResponse = await responsePromise.asResponse();

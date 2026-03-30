@@ -9,6 +9,10 @@ import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
 export class ChannelAccounts extends APIResource {
+  /**
+   * Create a new account for a channel. Multiple accounts can communicate over a
+   * single channel using different delivery identifiers.
+   */
   create(
     channelID: number,
     body: ChannelAccountCreateParams,
@@ -20,6 +24,10 @@ export class ChannelAccounts extends APIResource {
     });
   }
 
+  /**
+   * This API is used to update the name of the channel account and it's isAuthorized
+   * status. Setting to isAuthorized flag to False disables the channel account.
+   */
   update(
     channelAccountID: number,
     params: ChannelAccountUpdateParams,
@@ -32,6 +40,9 @@ export class ChannelAccounts extends APIResource {
     );
   }
 
+  /**
+   * Retrieve a list of accounts for a custom channel.
+   */
   list(
     channelID: number,
     query: ChannelAccountListParams | null | undefined = {},
@@ -44,6 +55,11 @@ export class ChannelAccounts extends APIResource {
     );
   }
 
+  /**
+   * Update a channel account staging token's account name and delivery identifier.
+   * This information will be applied to the channel account created from this
+   * staging token. This is used for public apps.
+   */
   updateStagingToken(
     accountToken: string,
     params: ChannelAccountUpdateStagingTokenParams,

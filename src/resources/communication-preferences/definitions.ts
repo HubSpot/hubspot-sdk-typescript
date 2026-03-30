@@ -18,16 +18,8 @@ export class Definitions extends APIResource {
 }
 
 export interface DefinitionListParams {
-  /**
-   * The unique identifier of the business unit for which to retrieve the
-   * subscription definitions.
-   */
   businessUnitId?: number;
 
-  /**
-   * A boolean indicating whether to include translations of the subscription
-   * definitions. Defaults to false if not specified.
-   */
   includeTranslations?: boolean;
 }
 

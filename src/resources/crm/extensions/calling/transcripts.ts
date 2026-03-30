@@ -96,12 +96,26 @@ export interface TranscriptCreateParams {
 }
 
 export interface TranscriptCreateInboundCallParams {
+  /**
+   * Indicates whether an engagement should be created for the call.
+   */
   createEngagement: boolean;
 
+  /**
+   * Contains additional properties related to the engagement.
+   */
   engagementProperties: { [key: string]: string };
 
+  /**
+   * The unique identifier for the call from an external system.
+   */
   externalCallId: string;
 
+  /**
+   * The final status of the call, with accepted values including: BUSY,
+   * CALLING_CRM_USER, CANCELED, COMPLETED, CONNECTING, FAILED, HOLD, IN_PROGRESS,
+   * MISSED, NO_ANSWER, QUEUED, RINGING, UNKNOWN.
+   */
   finalCallStatus:
     | 'BUSY'
     | 'CALLING_CRM_USER'
@@ -123,10 +137,19 @@ export interface TranscriptCreateInboundCallParams {
 
   toNumber: CallingAPI.FormattedPhoneNumber;
 
+  /**
+   * The timestamp indicating when the call started, formatted as a date-time string.
+   */
   callStartedTimestamp?: string;
 
+  /**
+   * The duration of the call in seconds.
+   */
   durationSeconds?: number;
 
+  /**
+   * The ID of the user associated with the call.
+   */
   userId?: number;
 }
 

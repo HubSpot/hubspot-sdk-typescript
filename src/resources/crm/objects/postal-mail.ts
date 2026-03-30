@@ -74,7 +74,7 @@ export class PostalMail extends APIResource {
   search(
     body: PostalMailSearchParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CollectionResponseWithTotalSimplePublicObject> {
+  ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/objects/2026-03/postal_mail/search', { body, ...options });
   }
 

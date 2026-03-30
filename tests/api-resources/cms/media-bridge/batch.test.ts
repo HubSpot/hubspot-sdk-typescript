@@ -11,7 +11,7 @@ describe('resource batch', () => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.cms.mediaBridge.batch.create('objectType', {
-      appId: 'appId',
+      appId: 0,
       inputs: [
         {
           fieldType: 'booleancheckbox',
@@ -34,7 +34,7 @@ describe('resource batch', () => {
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.cms.mediaBridge.batch.create('objectType', {
-      appId: 'appId',
+      appId: 0,
       inputs: [
         {
           fieldType: 'booleancheckbox',
@@ -68,7 +68,7 @@ describe('resource batch', () => {
   // Mock server tests are disabled
   test.skip('delete: only required params', async () => {
     const responsePromise = client.cms.mediaBridge.batch.delete('objectType', {
-      appId: 'appId',
+      appId: 0,
       inputs: [{ name: 'name' }],
     });
     const rawResponse = await responsePromise.asResponse();
@@ -83,7 +83,7 @@ describe('resource batch', () => {
   // Mock server tests are disabled
   test.skip('delete: required and optional params', async () => {
     const response = await client.cms.mediaBridge.batch.delete('objectType', {
-      appId: 'appId',
+      appId: 0,
       inputs: [{ name: 'name' }],
     });
   });
@@ -91,7 +91,7 @@ describe('resource batch', () => {
   // Mock server tests are disabled
   test.skip('get: only required params', async () => {
     const responsePromise = client.cms.mediaBridge.batch.get('objectType', {
-      appId: 'appId',
+      appId: 0,
       archived: true,
       dataSensitivity: 'highly_sensitive',
       inputs: [{ name: 'name' }],
@@ -108,7 +108,7 @@ describe('resource batch', () => {
   // Mock server tests are disabled
   test.skip('get: required and optional params', async () => {
     const response = await client.cms.mediaBridge.batch.get('objectType', {
-      appId: 'appId',
+      appId: 0,
       archived: true,
       dataSensitivity: 'highly_sensitive',
       inputs: [{ name: 'name' }],

@@ -7,6 +7,9 @@ import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
 export class Messages extends APIResource {
+  /**
+   * Publish a message over your custom channel
+   */
   create(
     channelID: number,
     body: MessageCreateParams,
@@ -18,6 +21,11 @@ export class Messages extends APIResource {
     });
   }
 
+  /**
+   * Update a message's status to indicate if it was successfully sent, failed to
+   * send, or was read. For failed messages, this can also include the error message
+   * for the failure.
+   */
   update(
     messageID: string,
     params: MessageUpdateParams,
@@ -30,6 +38,9 @@ export class Messages extends APIResource {
     );
   }
 
+  /**
+   * Get the details for a specific message sent over a custom channel
+   */
   get(
     messageID: string,
     params: MessageGetParams,

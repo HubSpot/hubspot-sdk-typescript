@@ -23,7 +23,9 @@ export class Discounts extends APIResource {
   batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
 
   /**
-   * Create a discount
+   * Create a discount with the given properties and return a copy of the object,
+   * including the ID. Documentation and examples for creating standard discounts is
+   * provided.
    */
   create(body: DiscountCreateParams, options?: RequestOptions): APIPromise<CrmAPI.SimplePublicObject> {
     return this._client.post('/crm/objects/2026-03/discounts', { body, ...options });
@@ -52,8 +54,7 @@ export class Discounts extends APIResource {
   }
 
   /**
-   * Retrieve all discounts, using query parameters to specify the information that
-   * gets returned.
+   * List
    */
   list(
     query: DiscountListParams | null | undefined = {},
@@ -67,7 +68,7 @@ export class Discounts extends APIResource {
   }
 
   /**
-   * Delete a discount.
+   * Archive
    */
   delete(discountID: string, options?: RequestOptions): APIPromise<void> {
     return this._client.delete(path`/crm/objects/2026-03/discounts/${discountID}`, {
@@ -77,9 +78,10 @@ export class Discounts extends APIResource {
   }
 
   /**
-   * Retrieve a discount by its ID (`objectId`) or by a unique property
-   * (`idProperty`). You can specify what is returned using the `properties` query
-   * parameter.
+   * Read an Object identified by `{discountId}`. `{discountId}` refers to the
+   * internal object ID by default, or optionally any unique property value as
+   * specified by the `idProperty` query param. Control what is returned via the
+   * `properties` query param.
    */
   get(
     discountID: string,
@@ -89,13 +91,10 @@ export class Discounts extends APIResource {
     return this._client.get(path`/crm/objects/2026-03/discounts/${discountID}`, { query, ...options });
   }
 
-  /**
-   * Search for a discount
-   */
   search(
     body: DiscountSearchParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CollectionResponseWithTotalSimplePublicObject> {
+  ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/objects/2026-03/discounts/search', { body, ...options });
   }
 }

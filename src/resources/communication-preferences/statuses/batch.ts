@@ -7,10 +7,7 @@ import { RequestOptions } from '../../../internal/request-options';
 
 export class Batch extends APIResource {
   /**
-   * Retrieve the unsubscribe-all status for a batch of subscribers in a specified
-   * channel. This endpoint is useful for checking the current unsubscribe-all status
-   * of multiple subscribers at once, helping to manage and audit communication
-   * preferences efficiently.
+   * Checks whether a set of contacts have opted out of all communications.
    */
   getUnsubscribeAllStatuses(
     params: BatchGetUnsubscribeAllStatusesParams,
@@ -25,10 +22,7 @@ export class Batch extends APIResource {
   }
 
   /**
-   * Retrieve the subscription statuses for multiple subscribers in a batch
-   * operation. This endpoint allows you to check the communication preferences of
-   * several subscribers at once, which is useful for managing large lists of
-   * contacts efficiently.
+   * Batch retrieve subscription statuses for a set of contacts.
    */
   read(
     params: BatchReadParams,
@@ -70,8 +64,7 @@ export class Batch extends APIResource {
 
 export interface BatchGetUnsubscribeAllStatusesParams {
   /**
-   * Query param: The communication channel to check the unsubscribe-all status for.
-   * Currently, only 'EMAIL' is supported. This parameter is required.
+   * Query param
    */
   channel: 'EMAIL';
 
@@ -81,16 +74,14 @@ export interface BatchGetUnsubscribeAllStatusesParams {
   inputs: Array<string>;
 
   /**
-   * Query param: The ID of the business unit for which the statuses are being
-   * retrieved. This is an optional parameter.
+   * Query param
    */
   businessUnitId?: number;
 }
 
 export interface BatchReadParams {
   /**
-   * Query param: The communication channel to filter by. This parameter is required
-   * and currently only supports 'EMAIL'.
+   * Query param
    */
   channel: 'EMAIL';
 
@@ -100,16 +91,14 @@ export interface BatchReadParams {
   inputs: Array<string>;
 
   /**
-   * Query param: An optional identifier for the business unit. This is an integer
-   * value.
+   * Query param
    */
   businessUnitId?: number;
 }
 
 export interface BatchUnsubscribeAllParams {
   /**
-   * Query param: A required string specifying the communication channel. Currently,
-   * only 'EMAIL' is supported.
+   * Query param
    */
   channel: 'EMAIL';
 
@@ -119,14 +108,12 @@ export interface BatchUnsubscribeAllParams {
   inputs: Array<string>;
 
   /**
-   * Query param: The ID of the business unit to which the operation applies. It is
-   * an optional parameter.
+   * Query param
    */
   businessUnitId?: number;
 
   /**
-   * Query param: A boolean indicating whether to include detailed information in the
-   * response. Defaults to false.
+   * Query param
    */
   verbose?: boolean;
 }

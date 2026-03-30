@@ -38,6 +38,9 @@ export class OAuth extends APIResource {
     });
   }
 
+  /**
+   * Deletes/Revokes provided Refresh Token
+   */
   revokeToken(
     body: OAuthRevokeTokenParams | null | undefined = {},
     options?: RequestOptions,

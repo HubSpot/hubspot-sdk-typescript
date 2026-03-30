@@ -106,7 +106,7 @@ export class Tickets extends APIResource {
   search(
     body: TicketSearchParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CollectionResponseWithTotalSimplePublicObject> {
+  ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/objects/2026-03/tickets/search', { body, ...options });
   }
 }

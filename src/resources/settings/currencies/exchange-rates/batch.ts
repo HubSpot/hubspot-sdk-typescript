@@ -7,6 +7,9 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 
 export class Batch extends APIResource {
+  /**
+   * Create multiple exchange rates in a single request.
+   */
   create(
     body: BatchCreateParams,
     options?: RequestOptions,
@@ -17,6 +20,9 @@ export class Batch extends APIResource {
     });
   }
 
+  /**
+   * Update the conversion rates for multiple exchange rates in a batch operation.
+   */
   update(
     body: BatchUpdateParams,
     options?: RequestOptions,
@@ -27,6 +33,10 @@ export class Batch extends APIResource {
     });
   }
 
+  /**
+   * Retrieve the details of multiple exchange rates in a single request, specified
+   * by their IDs.
+   */
   get(body: BatchGetParams, options?: RequestOptions): APIPromise<CurrenciesAPI.BatchResponseExchangeRate> {
     return this._client.post('/settings/currencies/2026-03/exchange-rates/batch/read', { body, ...options });
   }

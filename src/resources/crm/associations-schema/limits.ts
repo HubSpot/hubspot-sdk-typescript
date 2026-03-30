@@ -9,8 +9,8 @@ import { path } from '../../../internal/utils/path';
 
 export class Limits extends APIResource {
   /**
-   * Fetch all limits for CRM associations, which include details about cardinality
-   * limits (i.e., one-to-many vs one-to-one).
+   * Retrieve all configured association limits between objects, which include
+   * details about how different CRM object types are associated with each other.
    */
   list(
     options?: RequestOptions,
@@ -19,8 +19,8 @@ export class Limits extends APIResource {
   }
 
   /**
-   * Batch delete limits defined for associations between two specified CRM object
-   * types.
+   * Batch delete limits that have been defined for association types between two
+   * object types.
    */
   batchDelete(
     toObjectType: string,
@@ -35,9 +35,8 @@ export class Limits extends APIResource {
   }
 
   /**
-   * Update multiple association configurations between two specified CRM object
-   * types in a single batch operation. This defines details about cardinality limits
-   * (i.e., one-to-many vs one-to-one).
+   * Batch update association limits that have been configured between two object
+   * types.
    */
   batchUpdate(
     toObjectType: string,
@@ -52,8 +51,9 @@ export class Limits extends APIResource {
   }
 
   /**
-   * Retrieve the cardinality limits for associations between two specified CRM
-   * object types (i.e., one-to-many vs one-to-one).
+   * Retrieve the configuration details for associations between two specified CRM
+   * object types. Use this endpoint to understand limits that have been set for
+   * specific association types.
    */
   getByObjectTypes(
     toObjectType: string,
@@ -70,7 +70,7 @@ export class Limits extends APIResource {
 
 export interface LimitBatchDeleteParams {
   /**
-   * Path param: The type of the source object in the association.
+   * Path param
    */
   fromObjectType: string;
 
@@ -82,7 +82,7 @@ export interface LimitBatchDeleteParams {
 
 export interface LimitBatchUpdateParams {
   /**
-   * Path param: The type of the source object in the association.
+   * Path param
    */
   fromObjectType: string;
 
@@ -93,9 +93,6 @@ export interface LimitBatchUpdateParams {
 }
 
 export interface LimitGetByObjectTypesParams {
-  /**
-   * The type of the source object in the association.
-   */
   fromObjectType: string;
 }
 

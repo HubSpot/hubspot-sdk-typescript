@@ -91,7 +91,7 @@ export class Leads extends APIResource {
   search(
     body: LeadSearchParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CollectionResponseWithTotalSimplePublicObject> {
+  ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/objects/2026-03/leads/search', { body, ...options });
   }
 }

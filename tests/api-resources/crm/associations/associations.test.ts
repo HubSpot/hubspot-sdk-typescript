@@ -9,8 +9,33 @@ const client = new Hubspot({
 
 describe('resource associations', () => {
   // Mock server tests are disabled
-  test.skip('deleteAssociations: only required params', async () => {
-    const responsePromise = client.crm.associations.deleteAssociations('toObjectId', {
+  test.skip('list: only required params', async () => {
+    const responsePromise = client.crm.associations.list('toObjectType', {
+      objectType: 'objectType',
+      objectId: 'objectId',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('list: required and optional params', async () => {
+    const response = await client.crm.associations.list('toObjectType', {
+      objectType: 'objectType',
+      objectId: 'objectId',
+      after: 'after',
+      limit: 0,
+    });
+  });
+
+  // Mock server tests are disabled
+  test.skip('delete: only required params', async () => {
+    const responsePromise = client.crm.associations.delete('toObjectId', {
       objectType: 'objectType',
       objectId: 'objectId',
       toObjectType: 'toObjectType',
@@ -25,8 +50,8 @@ describe('resource associations', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('deleteAssociations: required and optional params', async () => {
-    const response = await client.crm.associations.deleteAssociations('toObjectId', {
+  test.skip('delete: required and optional params', async () => {
+    const response = await client.crm.associations.delete('toObjectId', {
       objectType: 'objectType',
       objectId: 'objectId',
       toObjectType: 'toObjectType',
@@ -43,6 +68,48 @@ describe('resource associations', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('search: only required params', async () => {
+    const responsePromise = client.crm.associations.search('objectType', {
+      after: 'after',
+      filterGroups: [{ filters: [{ operator: 'BETWEEN', propertyName: 'propertyName' }] }],
+      limit: 0,
+      properties: ['string'],
+      sorts: ['string'],
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('search: required and optional params', async () => {
+    const response = await client.crm.associations.search('objectType', {
+      after: 'after',
+      filterGroups: [
+        {
+          filters: [
+            {
+              operator: 'BETWEEN',
+              propertyName: 'propertyName',
+              highValue: 'highValue',
+              value: 'value',
+              values: ['string'],
+            },
+          ],
+        },
+      ],
+      limit: 0,
+      properties: ['string'],
+      sorts: ['string'],
+      query: 'query',
+    });
   });
 
   // Mock server tests are disabled

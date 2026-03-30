@@ -8,11 +8,8 @@ import { RequestOptions } from '../../../../internal/request-options';
 
 export class Batch extends APIResource {
   /**
-   * Create a batch of payments The `inputs` array can contain a `properties` object
-   * to define property values for the record, along with an `associations` array to
-   * define
-   * [associations](https://developers.hubspot.com/docs/guides/api/crm/associations/associations-v4)
-   * with other CRM records.
+   * Create multiple commerce payment records in a single request, returning the
+   * details of each created payment, including their unique IDs.
    */
   create(
     body: BatchCreateParams,
@@ -22,10 +19,10 @@ export class Batch extends APIResource {
   }
 
   /**
-   * Update a batch of payments by ID (`objectId`) or unique property value
-   * (`idProperty`). Provided property values will be overwritten. Read-only and
-   * non-existent properties will result in an error. Properties values can be
-   * cleared by passing an empty string.
+   * Update multiple commerce payment records using their internal IDs or unique
+   * property values. This operation allows you to modify existing payment records in
+   * bulk by providing a list of records with their respective IDs and updated
+   * property values.
    */
   update(
     body: BatchUpdateParams,
@@ -35,7 +32,8 @@ export class Batch extends APIResource {
   }
 
   /**
-   * Delete a batch of payments by ID.
+   * Archive a batch of commerce payments by their IDs. This operation moves the
+   * specified payments to the archive, making them inactive in the system.
    */
   delete(body: BatchDeleteParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/crm/objects/2026-03/commerce_payments/batch/archive', {
@@ -46,8 +44,8 @@ export class Batch extends APIResource {
   }
 
   /**
-   * Retrieve a batch of payments by ID (`objectId`) or unique property value
-   * (`idProperty`).
+   * Retrieve records by record ID or include the `idProperty` parameter to retrieve
+   * records by a custom unique value property.
    */
   get(
     params: BatchGetParams,
@@ -62,8 +60,9 @@ export class Batch extends APIResource {
   }
 
   /**
-   * Create and update a batch of payments by a unique property. Payments that don't
-   * exist will be created, while existing payments will be updated.
+   * Create or update records identified by a unique property value as specified by
+   * the `idProperty` query param. `idProperty` query param refers to a property
+   * whose values are unique for the object.
    */
   upsert(
     body: BatchUpsertParams,

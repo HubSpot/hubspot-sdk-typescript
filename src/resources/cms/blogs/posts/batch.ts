@@ -7,6 +7,9 @@ import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 
 export class Batch extends APIResource {
+  /**
+   * Create a batch of blog posts, specifying their content in the request body.
+   */
   create(body: BatchCreateParams, options?: RequestOptions): APIPromise<Response> {
     return this._client.post('/cms/blogs/2026-03/posts/batch/create', {
       body,
@@ -16,6 +19,9 @@ export class Batch extends APIResource {
     });
   }
 
+  /**
+   * Update a batch of blog posts.
+   */
   update(params: BatchUpdateParams, options?: RequestOptions): APIPromise<Response> {
     const { archived, ...body } = params;
     return this._client.post('/cms/blogs/2026-03/posts/batch/update', {
@@ -27,6 +33,11 @@ export class Batch extends APIResource {
     });
   }
 
+  /**
+   * Delete a blog post by ID. Note: This is not the same as the in-app `archive`
+   * function. To perform a dashboard `archive` send an normal update with the
+   * `archivedInDashboard` field set to `true`.
+   */
   delete(body: BatchDeleteParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/cms/blogs/2026-03/posts/batch/archive', {
       body,
@@ -35,6 +46,9 @@ export class Batch extends APIResource {
     });
   }
 
+  /**
+   * Retrieve a batch of blog posts by ID. identified in the request body.
+   */
   get(params: BatchGetParams, options?: RequestOptions): APIPromise<Response> {
     const { archived, ...body } = params;
     return this._client.post('/cms/blogs/2026-03/posts/batch/read', {

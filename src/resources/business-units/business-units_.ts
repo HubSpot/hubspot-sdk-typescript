@@ -7,6 +7,9 @@ import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
 export class BusinessUnits extends APIResource {
+  /**
+   * Retrieve the brands that a specific user can access.
+   */
   getByUserID(
     userID: string,
     query: BusinessUnitGetByUserIDParams | null | undefined = {},

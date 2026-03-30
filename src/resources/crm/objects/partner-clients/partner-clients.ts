@@ -63,13 +63,15 @@ export class PartnerClients extends APIResource {
   }
 
   /**
-   * Search for partner clients by filtering on properties, searching through
-   * associations, and sorting results.
+   * Execute a search for partner clients based on defined filters, properties, and
+   * sorting options. This endpoint allows you to retrieve partner client data that
+   * matches the search criteria, facilitating integration and data synchronization
+   * with third-party systems.
    */
   search(
     body: PartnerClientSearchParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CollectionResponseWithTotalSimplePublicObject> {
+  ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/objects/2026-03/partner_clients/search', { body, ...options });
   }
 }

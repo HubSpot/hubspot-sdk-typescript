@@ -56,12 +56,12 @@ export class Properties extends APIResource {
     objectType: string,
     query: PropertyListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<Shared.CollectionResponsePropertyNoPaging> {
+  ): APIPromise<CollectionResponsePropertyNoPaging> {
     return this._client.get(path`/crm/properties/2026-03/${objectType}`, { query, ...options });
   }
 
   /**
-   * Delete an existing property.
+   * Move a property identified by {propertyName} to the recycling bin.
    */
   delete(propertyName: string, params: PropertyDeleteParams, options?: RequestOptions): APIPromise<void> {
     const { objectType } = params;
@@ -87,6 +87,48 @@ export class Properties extends APIResource {
   }
 }
 
+export interface BatchResponseProperty {
+  /**
+   * The timestamp indicating when the batch operation was completed.
+   */
+  completedAt: string;
+
+  results: Array<Shared.Property>;
+
+  /**
+   * The timestamp indicating when the batch operation began processing.
+   */
+  startedAt: string;
+
+  /**
+   * The current status of the batch operation, with possible values being CANCELED,
+   * COMPLETE, PENDING, or PROCESSING.
+   */
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
+
+  errors?: Array<Shared.StandardError>;
+
+  /**
+   * A collection of URLs linking to documentation or resources related to the batch
+   * operation.
+   */
+  links?: { [key: string]: string };
+
+  /**
+   * The total number of errors encountered during the batch operation.
+   */
+  numErrors?: number;
+
+  /**
+   * The timestamp indicating when the batch operation was requested.
+   */
+  requestedAt?: string;
+}
+
+export interface CollectionResponsePropertyNoPaging {
+  results: Array<Shared.Property>;
+}
+
 export interface PropertyUpdate {
   /**
    * Represents a formula that is used to compute a calculated property.
@@ -99,9 +141,9 @@ export interface PropertyUpdate {
   description?: string;
 
   /**
-   * Property groups are displayed in order starting with the lowest positive integer
-   * value. Values of -1 will cause the property group to be displayed after any
-   * positive values.
+   * Properties are displayed in order starting with the lowest positive integer
+   * value. Values of -1 will cause the Property to be displayed after any positive
+   * values.
    */
   displayOrder?: number;
 
@@ -138,13 +180,12 @@ export interface PropertyUpdate {
   hidden?: boolean;
 
   /**
-   * A human-readable label that will be shown in HubSpot.
+   * A human-readable property label that will be shown in HubSpot.
    */
   label?: string;
 
   /**
-   * A list of valid options for the property. This field is required for enumerated
-   * properties.
+   * A list of valid options for the property.
    */
   options?: Array<Shared.OptionInput>;
 
@@ -216,9 +257,9 @@ export interface PropertyUpdateParams {
   description?: string;
 
   /**
-   * Body param: Property groups are displayed in order starting with the lowest
-   * positive integer value. Values of -1 will cause the property group to be
-   * displayed after any positive values.
+   * Body param: Properties are displayed in order starting with the lowest positive
+   * integer value. Values of -1 will cause the Property to be displayed after any
+   * positive values.
    */
   displayOrder?: number;
 
@@ -255,13 +296,12 @@ export interface PropertyUpdateParams {
   hidden?: boolean;
 
   /**
-   * Body param: A human-readable label that will be shown in HubSpot.
+   * Body param: A human-readable property label that will be shown in HubSpot.
    */
   label?: string;
 
   /**
-   * Body param: A list of valid options for the property. This field is required for
-   * enumerated properties.
+   * Body param: A list of valid options for the property.
    */
   options?: Array<Shared.OptionInput>;
 
@@ -320,6 +360,8 @@ Properties.Groups = Groups;
 
 export declare namespace Properties {
   export {
+    type BatchResponseProperty as BatchResponseProperty,
+    type CollectionResponsePropertyNoPaging as CollectionResponsePropertyNoPaging,
     type PropertyUpdate as PropertyUpdate,
     type PropertyCreateParams as PropertyCreateParams,
     type PropertyUpdateParams as PropertyUpdateParams,

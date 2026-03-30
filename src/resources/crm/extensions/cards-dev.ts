@@ -7,6 +7,10 @@ import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
 export class CardsDev extends APIResource {
+  /**
+   * Defines a new card that will become active on an account when this app is
+   * installed.
+   */
   create(
     appID: number,
     body: CardsDevCreateParams,
@@ -15,6 +19,9 @@ export class CardsDev extends APIResource {
     return this._client.post(path`/crm/extensions/cards-dev/2026-03/${appID}`, { body, ...options });
   }
 
+  /**
+   * Update a card definition with new details.
+   */
   update(
     cardID: string,
     params: CardsDevUpdateParams,
@@ -27,6 +34,11 @@ export class CardsDev extends APIResource {
     });
   }
 
+  /**
+   * Permanently deletes a card definition with the given ID. Once deleted, data
+   * fetch requests for this card will no longer be sent to your service. This can't
+   * be undone.
+   */
   delete(cardID: string, params: CardsDevDeleteParams, options?: RequestOptions): APIPromise<void> {
     const { appId } = params;
     return this._client.delete(path`/crm/extensions/cards-dev/2026-03/${appId}/${cardID}`, {
@@ -35,10 +47,16 @@ export class CardsDev extends APIResource {
     });
   }
 
+  /**
+   * Returns a list of cards for a given app.
+   */
   get(appID: number, options?: RequestOptions): APIPromise<PublicCardListResponse> {
     return this._client.get(path`/crm/extensions/cards-dev/2026-03/${appID}`, options);
   }
 
+  /**
+   * Returns the definition for a card with the given ID.
+   */
   getByID(
     cardID: string,
     params: CardsDevGetByIDParams,
@@ -48,6 +66,11 @@ export class CardsDev extends APIResource {
     return this._client.get(path`/crm/extensions/cards-dev/2026-03/${appId}/${cardID}`, options);
   }
 
+  /**
+   * Returns an example card detail response. This is the payload with displayed
+   * details for a card that will be shown to a user. An app should send this in
+   * response to the data fetch request.
+   */
   getSampleResponse(options?: RequestOptions): APIPromise<IntegratorCardPayloadResponse> {
     return this._client.get('/crm/extensions/cards-dev/2026-03/sample-response', options);
   }
@@ -95,7 +118,7 @@ export interface ActionHookActionBody {
   propertyNamesIncluded: Array<string>;
 
   /**
-   * Specifies the type of action, which is 'ACTION_HOOK' for action hooks.
+   * The type of status.
    */
   type: 'ACTION_HOOK';
 
@@ -107,8 +130,7 @@ export interface ActionHookActionBody {
   confirmation?: ActionConfirmationBody;
 
   /**
-   * The label for the button that triggers the action as it will be displayed to
-   * users.
+   * The label for this property as you'd like it displayed to users.
    */
   label?: string;
 }
@@ -260,6 +282,10 @@ export interface CardMigrateViewsRequest {
 }
 
 export interface CardMigrateViewsResponse {
+  /**
+   * A human readable message describing the error along with remediation steps where
+   * appropriate
+   */
   message: string;
 }
 
@@ -319,7 +345,7 @@ export interface IFrameActionBody {
   propertyNamesIncluded: Array<string>;
 
   /**
-   * Specifies the type of action, which is 'IFRAME' for iframe actions.
+   * The type of status.
    */
   type: 'IFRAME';
 
@@ -334,8 +360,7 @@ export interface IFrameActionBody {
   width: number;
 
   /**
-   * The label for the button that opens the iframen as it will be displayed to
-   * users.
+   * The label for this property as you'd like it displayed to users.
    */
   label?: string;
 }
@@ -352,19 +377,20 @@ export interface IntegratorCardPayloadResponse {
   sections: Array<IntegratorObjectResult>;
 
   /**
-   * The total number of cards that are sent in this response.
+   * The total number of card properties that will be sent in this response.
    */
   totalCount: number;
 
   /**
-   * URL to a page the integrator has built that displays all details for the object
-   * cards. This URL will be displayed to users on the title of the card.
+   * URL to a page the integrator has built that displays all details for this card.
+   * This URL will be displayed to users under a `See more [x]` link if there are
+   * more than five items in your response, where `[x]` is the value of `itemLabel`.
    */
   allItemsLinkUrl?: string;
 
   /**
-   * The label to be used for the `allItemsLinkUrl` link (e.g. 'See more tickets')
-   * and the title of the card.
+   * The label to be used for the `allItemsLinkUrl` link (e.g. 'See more tickets').
+   * If not provided, this falls back to the card's title.
    */
   cardLabel?: string;
 
@@ -384,7 +410,7 @@ export interface IntegratorObjectResult {
   actions: Array<ActionHookActionBody | IFrameActionBody>;
 
   /**
-   * The title of the object card, displayed to users.
+   * The top-level title for this card. Displayed to users in the CRM UI.
    */
   title: string;
 
@@ -406,8 +432,7 @@ export interface ObjectToken {
   value: string;
 
   /**
-   * The type of the property. Can be one of CURRENCY, DATE, DATETIME, EMAIL, LINK,
-   * NUMERIC, STATUS
+   * Type of data represented by this property.
    */
   dataType?:
     | 'BOOLEAN'
@@ -421,12 +446,12 @@ export interface ObjectToken {
     | 'STRING';
 
   /**
-   * The label of the property as it will be displayed to users
+   * The label for this property as you'd like it displayed to users.
    */
   label?: string;
 
   /**
-   * The name of the property
+   * An internal identifier for this property. This value must be unique TODO.
    */
   name?: string;
 }
@@ -434,15 +459,15 @@ export interface ObjectToken {
 export interface PublicCardFetchBody {
   /**
    * An array of CRM object types where this card should be displayed. HubSpot will
-   * call your data fetch URL whenever a user visits a record page of the types
-   * defined here.
+   * call your target URL whenever a user visits a record page of the types defined
+   * here.
    */
   objectTypes: Array<CardObjectTypeBody>;
 
   /**
-   * URL to a service endpoint that will respond with card details. HubSpot will call
-   * this endpoint each time a user visits a CRM record page where this card should
-   * be displayed.
+   * URL to a service endpoint that will respond with details for this card. HubSpot
+   * will call this endpoint each time a user visits a CRM record page where this
+   * card should be displayed.
    */
   targetUrl: string;
 }
@@ -473,7 +498,7 @@ export interface PublicCardResponse {
   fetch: PublicCardFetchBody;
 
   /**
-   * The top-level title for this card, displayed to users in the CRM UI.
+   * The top-level title for this card. Displayed to users in the CRM UI.
    */
   title: string;
 

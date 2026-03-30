@@ -9,9 +9,16 @@ import { path } from '../../../internal/utils/path';
 
 export class Assets extends APIResource {
   /**
-   * Associate an asset with a specific campaign in your HubSpot account. This
-   * operation allows you to link an asset of a specified type and ID to a campaign,
-   * facilitating better organization and tracking of campaign resources.
+   * Associate a specified asset with a campaign. Using the API, you can create
+   * associations for the following asset types: ads, blog posts, calls, case
+   * studies, CTAs, CTAs (legacy), external website pages, feedback surveys, forms,
+   * files, knowledge base articles, landing pages, marketing email, marketing
+   * events, meetings, playbooks, podcast episodes, sales documents, sales emails,
+   * sequences, SMS, social posts, static lists, videos, website pages, and
+   * workflows.
+   *
+   * For other asset types, it is recommended to manage your associations directly in
+   * the campaign tool in HubSpot.
    */
   update(assetID: string, params: AssetUpdateParams, options?: RequestOptions): APIPromise<void> {
     const { campaignGuid, assetType } = params;
@@ -22,9 +29,10 @@ export class Assets extends APIResource {
   }
 
   /**
-   * List all assets of a specified campaign by asset type. This endpoint allows you
-   * to retrieve assets associated with a campaign, filtered by the type of asset. It
-   * supports pagination and date filtering to manage and refine the results.
+   * This endpoint lists all assets of the campaign by asset type. The assetType
+   * parameter is required, and each request can only fetch assets of a single type.
+   * Asset metrics can also be fetched along with the assets; they are available only
+   * if start and end dates are provided.
    */
   list(
     assetType: string,
@@ -39,9 +47,16 @@ export class Assets extends APIResource {
   }
 
   /**
-   * Disassociate an asset from a specific campaign. This operation removes the
-   * association between the specified asset and campaign, effectively detaching the
-   * asset from the campaign's context.
+   * Disassociate a specified asset from a campaign. Using the API, you can remove
+   * associations for the following asset types: ads, blog posts, calls, case
+   * studies, CTAs, CTAs (legacy), external website pages, feedback surveys, forms,
+   * files, knowledge base articles, landing pages, marketing email, marketing
+   * events, meetings, playbooks, podcast episodes, sales documents, sales emails,
+   * sequences, SMS, social posts, static lists, videos, website pages, and
+   * workflows.
+   *
+   * For other asset types, it is recommended to manage your associations directly in
+   * the campaign tool in HubSpot.
    */
   delete(assetID: string, params: AssetDeleteParams, options?: RequestOptions): APIPromise<void> {
     const { campaignGuid, assetType } = params;
@@ -53,20 +68,14 @@ export class Assets extends APIResource {
 }
 
 export interface AssetUpdateParams {
-  /**
-   * The unique identifier of the campaign to which the asset will be associated.
-   */
   campaignGuid: string;
 
-  /**
-   * The type of asset to be associated with the campaign.
-   */
   assetType: string;
 }
 
 export interface AssetListParams {
   /**
-   * Path param: The unique identifier of the campaign.
+   * Path param
    */
   campaignGuid: string;
 
@@ -78,7 +87,7 @@ export interface AssetListParams {
   after?: string;
 
   /**
-   * Query param: The end date for filtering assets, in YYYY-MM-DD format.
+   * Query param
    */
   endDate?: string;
 
@@ -88,21 +97,14 @@ export interface AssetListParams {
   limit?: string;
 
   /**
-   * Query param: The start date for filtering assets, in YYYY-MM-DD format.
+   * Query param
    */
   startDate?: string;
 }
 
 export interface AssetDeleteParams {
-  /**
-   * The unique identifier of the campaign from which the asset will be
-   * disassociated.
-   */
   campaignGuid: string;
 
-  /**
-   * The type of asset to be disassociated from the campaign.
-   */
   assetType: string;
 }
 

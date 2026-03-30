@@ -95,7 +95,7 @@ export class Subscriptions extends APIResource {
   search(
     body: SubscriptionSearchParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CollectionResponseWithTotalSimplePublicObject> {
+  ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/objects/2026-03/subscriptions/search', { body, ...options });
   }
 }
