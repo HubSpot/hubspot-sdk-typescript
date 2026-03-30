@@ -4,15 +4,15 @@ import { APIResource } from '../../../../core/resource';
 import * as CrmAPI from '../../crm';
 import * as ObjectsAPI from '../objects';
 import { SimplePublicObjectWithAssociationsPage } from '../objects';
-import * as BasicAPI from './basic';
+import * as BatchAPI from './batch';
 import {
-  Basic,
-  BasicCreateParams,
-  BasicDeleteParams,
-  BasicGetParams,
-  BasicUpdateParams,
-  BasicUpsertParams,
-} from './basic';
+  Batch,
+  BatchCreateParams,
+  BatchDeleteParams,
+  BatchGetParams,
+  BatchUpdateParams,
+  BatchUpsertParams,
+} from './batch';
 import { APIPromise } from '../../../../core/api-promise';
 import { Page, type PageParams, PagePromise } from '../../../../core/pagination';
 import { buildHeaders } from '../../../../internal/headers';
@@ -20,7 +20,7 @@ import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
 export class Quotes extends APIResource {
-  basic: BasicAPI.Basic = new BasicAPI.Basic(this._client);
+  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
 
   /**
    * Create a quote with the given properties and return a copy of the object,
@@ -217,7 +217,7 @@ export interface QuoteSearchParams {
   query?: string;
 }
 
-Quotes.Basic = Basic;
+Quotes.Batch = Batch;
 
 export declare namespace Quotes {
   export {
@@ -229,12 +229,12 @@ export declare namespace Quotes {
   };
 
   export {
-    Basic as Basic,
-    type BasicCreateParams as BasicCreateParams,
-    type BasicUpdateParams as BasicUpdateParams,
-    type BasicDeleteParams as BasicDeleteParams,
-    type BasicGetParams as BasicGetParams,
-    type BasicUpsertParams as BasicUpsertParams,
+    Batch as Batch,
+    type BatchCreateParams as BatchCreateParams,
+    type BatchUpdateParams as BatchUpdateParams,
+    type BatchDeleteParams as BatchDeleteParams,
+    type BatchGetParams as BatchGetParams,
+    type BatchUpsertParams as BatchUpsertParams,
   };
 }
 

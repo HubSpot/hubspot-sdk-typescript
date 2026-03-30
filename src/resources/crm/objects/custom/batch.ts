@@ -5,37 +5,36 @@ import * as ObjectsAPI from '../objects';
 import { APIPromise } from '../../../../core/api-promise';
 import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
+import { path } from '../../../../internal/utils/path';
 
-export class Basic extends APIResource {
+export class Batch extends APIResource {
   /**
-   * Create multiple quotes in a single request by providing a batch of quote
-   * objects, each with its own properties and optional associations.
+   * Create a batch of objects
    */
   create(
-    body: BasicCreateParams,
+    objectType: string,
+    body: BatchCreateParams,
     options?: RequestOptions,
   ): APIPromise<ObjectsAPI.BatchResponseSimplePublicObject> {
-    return this._client.post('/crm/objects/2026-03/quotes/batch/create', { body, ...options });
+    return this._client.post(path`/crm/objects/2026-03/${objectType}/batch/create`, { body, ...options });
   }
 
   /**
-   * Update multiple quotes using their internal IDs or unique property values. This
-   * endpoint allows batch processing of quote updates, ensuring efficient management
-   * of multiple records in a single request.
+   * Update a batch of objects by internal ID, or unique property values
    */
   update(
-    body: BasicUpdateParams,
+    objectType: string,
+    body: BatchUpdateParams,
     options?: RequestOptions,
   ): APIPromise<ObjectsAPI.BatchResponseSimplePublicObject> {
-    return this._client.post('/crm/objects/2026-03/quotes/batch/update', { body, ...options });
+    return this._client.post(path`/crm/objects/2026-03/${objectType}/batch/update`, { body, ...options });
   }
 
   /**
-   * Archive multiple quotes by their IDs in a single request, effectively moving
-   * them to the recycling bin.
+   * Archive a batch of objects by ID
    */
-  delete(body: BasicDeleteParams, options?: RequestOptions): APIPromise<void> {
-    return this._client.post('/crm/objects/2026-03/quotes/batch/archive', {
+  delete(objectType: string, body: BatchDeleteParams, options?: RequestOptions): APIPromise<void> {
+    return this._client.post(path`/crm/objects/2026-03/${objectType}/batch/archive`, {
       body,
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
@@ -47,11 +46,12 @@ export class Basic extends APIResource {
    * records by a custom unique value property.
    */
   get(
-    params: BasicGetParams,
+    objectType: string,
+    params: BatchGetParams,
     options?: RequestOptions,
   ): APIPromise<ObjectsAPI.BatchResponseSimplePublicObject> {
     const { archived, ...body } = params;
-    return this._client.post('/crm/objects/2026-03/quotes/batch/read', {
+    return this._client.post(path`/crm/objects/2026-03/${objectType}/batch/read`, {
       query: { archived },
       body,
       ...options,
@@ -64,26 +64,27 @@ export class Basic extends APIResource {
    * whose values are unique for the object.
    */
   upsert(
-    body: BasicUpsertParams,
+    objectType: string,
+    body: BatchUpsertParams,
     options?: RequestOptions,
   ): APIPromise<ObjectsAPI.BatchResponseSimplePublicUpsertObject> {
-    return this._client.post('/crm/objects/2026-03/quotes/batch/upsert', { body, ...options });
+    return this._client.post(path`/crm/objects/2026-03/${objectType}/batch/upsert`, { body, ...options });
   }
 }
 
-export interface BasicCreateParams {
+export interface BatchCreateParams {
   inputs: Array<ObjectsAPI.SimplePublicObjectBatchInputForCreate>;
 }
 
-export interface BasicUpdateParams {
+export interface BatchUpdateParams {
   inputs: Array<ObjectsAPI.SimplePublicObjectBatchInput>;
 }
 
-export interface BasicDeleteParams {
+export interface BatchDeleteParams {
   inputs: Array<ObjectsAPI.SimplePublicObjectID>;
 }
 
-export interface BasicGetParams {
+export interface BatchGetParams {
   /**
    * Body param
    */
@@ -112,16 +113,16 @@ export interface BasicGetParams {
   idProperty?: string;
 }
 
-export interface BasicUpsertParams {
+export interface BatchUpsertParams {
   inputs: Array<ObjectsAPI.SimplePublicObjectBatchInputUpsert>;
 }
 
-export declare namespace Basic {
+export declare namespace Batch {
   export {
-    type BasicCreateParams as BasicCreateParams,
-    type BasicUpdateParams as BasicUpdateParams,
-    type BasicDeleteParams as BasicDeleteParams,
-    type BasicGetParams as BasicGetParams,
-    type BasicUpsertParams as BasicUpsertParams,
+    type BatchCreateParams as BatchCreateParams,
+    type BatchUpdateParams as BatchUpdateParams,
+    type BatchDeleteParams as BatchDeleteParams,
+    type BatchGetParams as BatchGetParams,
+    type BatchUpsertParams as BatchUpsertParams,
   };
 }

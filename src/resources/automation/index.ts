@@ -42,21 +42,9 @@ export {
   type StringFieldSchema,
   type TestRequestContext,
   type WorkflowsRequestContext,
-  type ActionCreateParams,
-  type ActionUpdateParams,
-  type ActionListParams,
-  type ActionDeleteParams,
-  type ActionCompleteParams,
-  type ActionCompleteBatchParams,
-  type ActionCreateOrReplaceParams,
-  type ActionCreateOrReplaceByFunctionTypeParams,
-  type ActionCreateRequiresObjectParams,
-  type ActionDeleteByFunctionTypeParams,
-  type ActionGetParams,
-  type ActionGetByFunctionTypeParams,
-  type ActionGetRequiresObjectParams,
+  type PublicActionDefinitionsPage,
   type PublicActionRevisionsPage,
-} from './actions';
+} from './actions/index';
 export { Automation } from './automation';
 export {
   Sequences,
