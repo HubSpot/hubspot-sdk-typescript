@@ -20,10 +20,7 @@ export class URLRedirects extends APIResource {
   }
 
   /**
-   * Update the details of an existing URL redirect in your HubSpot account. This
-   * operation allows you to modify properties such as the destination URL, route
-   * prefix, and other redirect settings. Use this endpoint to ensure your URL
-   * redirects are up-to-date and functioning as intended.
+   * Updates the settings for an existing URL redirect.
    */
   update(
     urlRedirectID: string,
@@ -47,9 +44,7 @@ export class URLRedirects extends APIResource {
   }
 
   /**
-   * Delete a specific URL redirect in your HubSpot account using its unique
-   * identifier. This operation is useful for removing outdated or incorrect URL
-   * redirects, ensuring that your URL mappings remain current and accurate.
+   * Delete one existing redirect, so it is no longer mapped.
    */
   delete(urlRedirectID: string, options?: RequestOptions): APIPromise<void> {
     return this._client.delete(path`/cms/url-redirects/2026-03/${urlRedirectID}`, {
@@ -59,10 +54,7 @@ export class URLRedirects extends APIResource {
   }
 
   /**
-   * Retrieve detailed information about a specific URL redirect in your HubSpot
-   * account using its unique identifier. This endpoint is useful for obtaining the
-   * configuration and properties of a URL redirect, such as its destination, route
-   * prefix, and other settings.
+   * Returns the details for a single existing URL redirect by ID.
    */
   get(urlRedirectID: string, options?: RequestOptions): APIPromise<URLMapping> {
     return this._client.get(path`/cms/url-redirects/2026-03/${urlRedirectID}`, options);
@@ -162,13 +154,14 @@ export interface URLMapping {
 export interface URLMappingCreateRequestBody {
   /**
    * The destination URL, where the target URL should be redirected if it matches the
-   * routePrefix.
+   * `routePrefix`.
    */
   destination: string;
 
   /**
    * The type of redirect to create. Options include: 301 (permanent), 302
-   * (temporary), or 305 (proxy).
+   * (temporary), or 305 (proxy). Find more details
+   * [here](https://knowledge.hubspot.com/cos-general/how-to-redirect-a-hubspot-page).
    */
   redirectStyle: number;
 
@@ -178,13 +171,13 @@ export interface URLMappingCreateRequestBody {
   routePrefix: string;
 
   /**
-   * Whether the routePrefix should match on the entire URL, including the domain.
+   * Whether the `routePrefix` should match on the entire URL, including the domain.
    */
   isMatchFullUrl?: boolean;
 
   /**
-   * Whether the routePrefix should match on the entire URL path, including the query
-   * string.
+   * Whether the `routePrefix` should match on the entire URL path, including the
+   * query string.
    */
   isMatchQueryString?: boolean;
 
@@ -196,12 +189,12 @@ export interface URLMappingCreateRequestBody {
   isOnlyAfterNotFound?: boolean;
 
   /**
-   * Whether the routePrefix should match based on pattern.
+   * Whether the `routePrefix` should match based on pattern.
    */
   isPattern?: boolean;
 
   /**
-   * Whether the routePrefix should match both HTTP and HTTPS protocols.
+   * Whether the `routePrefix` should match both HTTP and HTTPS protocols.
    */
   isProtocolAgnostic?: boolean;
 
@@ -212,7 +205,7 @@ export interface URLMappingCreateRequestBody {
 
   /**
    * Used to prioritize URL redirection. If a given URL matches more than one
-   * redirect, the one with the lower precedence will be used.
+   * redirect, the one with the **lower** precedence will be used.
    */
   precedence?: number;
 }
@@ -220,13 +213,14 @@ export interface URLMappingCreateRequestBody {
 export interface URLRedirectCreateParams {
   /**
    * The destination URL, where the target URL should be redirected if it matches the
-   * routePrefix.
+   * `routePrefix`.
    */
   destination: string;
 
   /**
    * The type of redirect to create. Options include: 301 (permanent), 302
-   * (temporary), or 305 (proxy).
+   * (temporary), or 305 (proxy). Find more details
+   * [here](https://knowledge.hubspot.com/cos-general/how-to-redirect-a-hubspot-page).
    */
   redirectStyle: number;
 
@@ -236,13 +230,13 @@ export interface URLRedirectCreateParams {
   routePrefix: string;
 
   /**
-   * Whether the routePrefix should match on the entire URL, including the domain.
+   * Whether the `routePrefix` should match on the entire URL, including the domain.
    */
   isMatchFullUrl?: boolean;
 
   /**
-   * Whether the routePrefix should match on the entire URL path, including the query
-   * string.
+   * Whether the `routePrefix` should match on the entire URL path, including the
+   * query string.
    */
   isMatchQueryString?: boolean;
 
@@ -254,12 +248,12 @@ export interface URLRedirectCreateParams {
   isOnlyAfterNotFound?: boolean;
 
   /**
-   * Whether the routePrefix should match based on pattern.
+   * Whether the `routePrefix` should match based on pattern.
    */
   isPattern?: boolean;
 
   /**
-   * Whether the routePrefix should match both HTTP and HTTPS protocols.
+   * Whether the `routePrefix` should match both HTTP and HTTPS protocols.
    */
   isProtocolAgnostic?: boolean;
 
@@ -270,7 +264,7 @@ export interface URLRedirectCreateParams {
 
   /**
    * Used to prioritize URL redirection. If a given URL matches more than one
-   * redirect, the one with the lower precedence will be used.
+   * redirect, the one with the **lower** precedence will be used.
    */
   precedence?: number;
 }
@@ -355,39 +349,18 @@ export interface URLRedirectListParams extends PageParams {
    */
   archived?: boolean;
 
-  /**
-   * Filter redirects created after a specific timestamp. Format must be date-time.
-   */
   createdAfter?: string;
 
-  /**
-   * Filter redirects by their exact creation timestamp. Format must be date-time.
-   */
   createdAt?: string;
 
-  /**
-   * Filter redirects created before a specific timestamp. Format must be date-time.
-   */
   createdBefore?: string;
 
-  /**
-   * Specify the order in which to sort the results. Accepts an array of strings.
-   */
   sort?: Array<string>;
 
-  /**
-   * Filter redirects updated after a specific timestamp. Format must be date-time.
-   */
   updatedAfter?: string;
 
-  /**
-   * Filter redirects by their exact update timestamp. Format must be date-time.
-   */
   updatedAt?: string;
 
-  /**
-   * Filter redirects updated before a specific timestamp. Format must be date-time.
-   */
   updatedBefore?: string;
 }
 

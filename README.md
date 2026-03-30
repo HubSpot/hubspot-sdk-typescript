@@ -86,30 +86,25 @@ import Hubspot, { toFile } from 'hubspot-sdk';
 const client = new Hubspot();
 
 // If you have access to Node `fs` we recommend using `fs.createReadStream()`:
-await client.cms.sourceCode.create('path', {
-  environment: 'environment',
+await client.cms.hubdb.tables.importDraft('tableIdOrName', {
   file: fs.createReadStream('/path/to/file'),
 });
 
 // Or if you have the web `File` API you can pass a `File` instance:
-await client.cms.sourceCode.create('path', {
-  environment: 'environment',
+await client.cms.hubdb.tables.importDraft('tableIdOrName', {
   file: new File(['my bytes'], 'file'),
 });
 
 // You can also pass a `fetch` `Response`:
-await client.cms.sourceCode.create('path', {
-  environment: 'environment',
+await client.cms.hubdb.tables.importDraft('tableIdOrName', {
   file: await fetch('https://somesite/file'),
 });
 
 // Finally, if none of the above are convenient, you can use our `toFile` helper:
-await client.cms.sourceCode.create('path', {
-  environment: 'environment',
+await client.cms.hubdb.tables.importDraft('tableIdOrName', {
   file: await toFile(Buffer.from('my bytes'), 'file'),
 });
-await client.cms.sourceCode.create('path', {
-  environment: 'environment',
+await client.cms.hubdb.tables.importDraft('tableIdOrName', {
   file: await toFile(new Uint8Array([0, 1, 2]), 'file'),
 });
 ```

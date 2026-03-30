@@ -47,8 +47,8 @@ import {
   LimitGetAssociationLabelLimitsParams,
   LimitGetAssociationRecordsLimitsByObjectTypeParams,
   Limits,
-  LimitsObjectTypeDefinition,
   NearLimitRecordSample,
+  ObjectTypeDefinition,
   ObjectTypeNearOrAtAssociationLimit,
   PipelineLimitResponse,
   RecordLimitResponse,
@@ -250,7 +250,9 @@ import {
 } from './associations-schema/associations-schema';
 import * as AssociationsAPI from './associations/associations';
 import {
-  AssociationDeleteAssociationsParams,
+  AssociationDeleteParams,
+  AssociationListParams,
+  AssociationSearchParams,
   AssociationUpdateAssociationLabelsParams,
   Associations,
   BatchInputPublicAssociationMultiArchive,
@@ -278,10 +280,29 @@ import {
 } from './deal-splits/deal-splits';
 import * as ExtensionsAPI from './extensions/extensions';
 import { Extensions } from './extensions/extensions';
+import * as FeatureFlagsAPI from './feature-flags/feature-flags';
+import {
+  BatchPortalEntry,
+  FeatureFlagDeleteParams,
+  FeatureFlagGetParams,
+  FeatureFlagListPortalsParams,
+  FeatureFlagUpdateParams,
+  FeatureFlags,
+  FlagPutRequest,
+  FlagResponse,
+  FlagsForAppResponse,
+  PortalFlagStateBatchDeleteRequest,
+  PortalFlagStateBatchPutRequest,
+  PortalFlagStateBatchResponse,
+  PortalFlagStatePutRequest,
+  PortalFlagStateResponse,
+} from './feature-flags/feature-flags';
 import * as ObjectLibraryAPI from './object-library/object-library';
 import { ObjectLibrary } from './object-library/object-library';
 import * as ObjectSchemasAPI from './object-schemas/object-schemas';
 import {
+  CollectionResponseObjectSchemaNoPaging,
+  ObjectSchema,
   ObjectSchemaBatchReadRequest,
   ObjectSchemaCreateAssociationParams,
   ObjectSchemaCreateParams,
@@ -306,11 +327,9 @@ import {
   BatchResponseSimplePublicUpsertObject,
   CollectionResponseAssociatedID,
   CollectionResponseSimplePublicObjectWithAssociationsForwardPaging,
-  CollectionResponseWithTotalSimplePublicObject,
   Objects,
   PublicAssociationsForObject,
   PublicMergeInput,
-  PublicObjectSearchRequest,
   SimplePublicObjectBatchInput,
   SimplePublicObjectBatchInputForCreate,
   SimplePublicObjectBatchInputUpsert,
@@ -322,6 +341,8 @@ import {
 } from './objects/objects';
 import * as PropertiesAPI from './properties/properties';
 import {
+  BatchResponseProperty,
+  CollectionResponsePropertyNoPaging,
   Properties,
   PropertyCreateParams,
   PropertyDeleteParams,
@@ -330,6 +351,19 @@ import {
   PropertyUpdate,
   PropertyUpdateParams,
 } from './properties/properties';
+import * as TimelineAPI from './timeline/timeline';
+import {
+  AppEventOccurrence,
+  AppEventResolutionResponse,
+  BatchInputAppEventOccurrence,
+  BatchResponseAppEventOccurrence,
+  DeveloperQualifiedSymbol,
+  ExternalAppEventResolutionRequest,
+  Timeline,
+  TimelineCreateEventParams,
+  TimelineCreateProjectTypeParams,
+  TimelineEventIFrame,
+} from './timeline/timeline';
 import { Page } from '../../core/pagination';
 
 export class Crm extends APIResource {
@@ -341,6 +375,7 @@ export class Crm extends APIResource {
   dealSplits: DealSplitsAPI.DealSplits = new DealSplitsAPI.DealSplits(this._client);
   exports: ExportsAPI.Exports = new ExportsAPI.Exports(this._client);
   extensions: ExtensionsAPI.Extensions = new ExtensionsAPI.Extensions(this._client);
+  featureFlags: FeatureFlagsAPI.FeatureFlags = new FeatureFlagsAPI.FeatureFlags(this._client);
   imports: ImportsAPI.Imports = new ImportsAPI.Imports(this._client);
   limits: LimitsAPI.Limits = new LimitsAPI.Limits(this._client);
   lists: ListsAPI.Lists = new ListsAPI.Lists(this._client);
@@ -352,6 +387,7 @@ export class Crm extends APIResource {
   properties: PropertiesAPI.Properties = new PropertiesAPI.Properties(this._client);
   propertiesValidations: PropertiesValidationsAPI.PropertiesValidations =
     new PropertiesValidationsAPI.PropertiesValidations(this._client);
+  timeline: TimelineAPI.Timeline = new TimelineAPI.Timeline(this._client);
 }
 
 export type MultiAssociatedObjectWithLabelsPage = Page<MultiAssociatedObjectWithLabel>;
@@ -453,6 +489,27 @@ export interface BatchResponseVoid {
    * The timestamp when the batch request was initially made, in ISO 8601 format.
    */
   requestedAt?: string;
+}
+
+export interface CollectionResponseMultiAssociatedObjectWithLabelForwardPaging {
+  results: Array<MultiAssociatedObjectWithLabel>;
+
+  paging?: Shared.ForwardPaging;
+}
+
+/**
+ * Represents a list of simple objects returned from an API request, along with the
+ * total count of objects available.
+ */
+export interface CollectionResponseWithTotalSimplePublicObject {
+  results: Array<SimplePublicObject>;
+
+  /**
+   * The total number of objects in the collection.
+   */
+  total: number;
+
+  paging?: Shared.Paging;
 }
 
 /**
@@ -566,6 +623,41 @@ export interface PublicDefaultAssociation {
 }
 
 /**
+ * Describes a search request
+ */
+export interface PublicObjectSearchRequest {
+  /**
+   * A paging cursor token for retrieving subsequent pages.
+   */
+  after: string;
+
+  /**
+   * Up to 6 groups of filters defining additional query criteria.
+   */
+  filterGroups: Array<FilterGroup>;
+
+  /**
+   * The maximum results to return, up to 200 objects.
+   */
+  limit: number;
+
+  /**
+   * A list of property names to include in the response.
+   */
+  properties: Array<string>;
+
+  /**
+   * Specifies sorting order based on object properties.
+   */
+  sorts: Array<string>;
+
+  /**
+   * The search query string, up to 3000 characters.
+   */
+  query?: string;
+}
+
+/**
  * A simple public object.
  */
 export interface SimplePublicObject {
@@ -600,7 +692,7 @@ export interface SimplePublicObject {
   archivedAt?: string;
 
   /**
-   * An identifier used for tracing the write request for the object.
+   * A unique identifier for tracing the creation request.
    */
   objectWriteTraceId?: string;
 
@@ -657,6 +749,7 @@ Crm.AssociationsSchema = AssociationsSchema;
 Crm.DealSplits = DealSplits;
 Crm.Exports = Exports;
 Crm.Extensions = Extensions;
+Crm.FeatureFlags = FeatureFlags;
 Crm.Imports = Imports;
 Crm.Limits = Limits;
 Crm.Lists = Lists;
@@ -667,17 +760,21 @@ Crm.Owners = Owners;
 Crm.Pipelines = Pipelines;
 Crm.Properties = Properties;
 Crm.PropertiesValidations = PropertiesValidations;
+Crm.Timeline = Timeline;
 
 export declare namespace Crm {
   export {
     type AssociationSpecWithLabel as AssociationSpecWithLabel,
     type BatchResponsePublicDefaultAssociation as BatchResponsePublicDefaultAssociation,
     type BatchResponseVoid as BatchResponseVoid,
+    type CollectionResponseMultiAssociatedObjectWithLabelForwardPaging as CollectionResponseMultiAssociatedObjectWithLabelForwardPaging,
+    type CollectionResponseWithTotalSimplePublicObject as CollectionResponseWithTotalSimplePublicObject,
     type Filter as Filter,
     type FilterGroup as FilterGroup,
     type LabelsBetweenObjectPair as LabelsBetweenObjectPair,
     type MultiAssociatedObjectWithLabel as MultiAssociatedObjectWithLabel,
     type PublicDefaultAssociation as PublicDefaultAssociation,
+    type PublicObjectSearchRequest as PublicObjectSearchRequest,
     type SimplePublicObject as SimplePublicObject,
     type ValueWithTimestamp as ValueWithTimestamp,
   };
@@ -699,7 +796,9 @@ export declare namespace Crm {
     type PublicDefaultAssociationMultiPost as PublicDefaultAssociationMultiPost,
     type PublicFetchAssociationsBatchRequest as PublicFetchAssociationsBatchRequest,
     type ReportCreationResponse as ReportCreationResponse,
-    type AssociationDeleteAssociationsParams as AssociationDeleteAssociationsParams,
+    type AssociationListParams as AssociationListParams,
+    type AssociationDeleteParams as AssociationDeleteParams,
+    type AssociationSearchParams as AssociationSearchParams,
     type AssociationUpdateAssociationLabelsParams as AssociationUpdateAssociationLabelsParams,
   };
 
@@ -744,6 +843,23 @@ export declare namespace Crm {
   export { Extensions as Extensions };
 
   export {
+    FeatureFlags as FeatureFlags,
+    type BatchPortalEntry as BatchPortalEntry,
+    type FlagPutRequest as FlagPutRequest,
+    type FlagResponse as FlagResponse,
+    type FlagsForAppResponse as FlagsForAppResponse,
+    type PortalFlagStateBatchDeleteRequest as PortalFlagStateBatchDeleteRequest,
+    type PortalFlagStateBatchPutRequest as PortalFlagStateBatchPutRequest,
+    type PortalFlagStateBatchResponse as PortalFlagStateBatchResponse,
+    type PortalFlagStatePutRequest as PortalFlagStatePutRequest,
+    type PortalFlagStateResponse as PortalFlagStateResponse,
+    type FeatureFlagUpdateParams as FeatureFlagUpdateParams,
+    type FeatureFlagDeleteParams as FeatureFlagDeleteParams,
+    type FeatureFlagGetParams as FeatureFlagGetParams,
+    type FeatureFlagListPortalsParams as FeatureFlagListPortalsParams,
+  };
+
+  export {
     Imports as Imports,
     type CollectionResponsePublicImportErrorForwardPaging as CollectionResponsePublicImportErrorForwardPaging,
     type CollectionResponsePublicImportResponseForwardPaging as CollectionResponsePublicImportResponseForwardPaging,
@@ -772,8 +888,8 @@ export declare namespace Crm {
     type CustomObjectRecordLimitResponse as CustomObjectRecordLimitResponse,
     type CustomPropertyLimitResponse as CustomPropertyLimitResponse,
     type LimitAndUsageForObjectType as LimitAndUsageForObjectType,
-    type LimitsObjectTypeDefinition as LimitsObjectTypeDefinition,
     type NearLimitRecordSample as NearLimitRecordSample,
+    type ObjectTypeDefinition as ObjectTypeDefinition,
     type ObjectTypeNearOrAtAssociationLimit as ObjectTypeNearOrAtAssociationLimit,
     type PipelineLimitResponse as PipelineLimitResponse,
     type RecordLimitResponse as RecordLimitResponse,
@@ -917,6 +1033,8 @@ export declare namespace Crm {
 
   export {
     ObjectSchemas as ObjectSchemas,
+    type CollectionResponseObjectSchemaNoPaging as CollectionResponseObjectSchemaNoPaging,
+    type ObjectSchema as ObjectSchema,
     type ObjectSchemaBatchReadRequest as ObjectSchemaBatchReadRequest,
     type ObjectSchemaEgg as ObjectSchemaEgg,
     type ObjectTypePropertyCreate as ObjectTypePropertyCreate,
@@ -941,10 +1059,8 @@ export declare namespace Crm {
     type BatchResponseSimplePublicUpsertObject as BatchResponseSimplePublicUpsertObject,
     type CollectionResponseAssociatedID as CollectionResponseAssociatedID,
     type CollectionResponseSimplePublicObjectWithAssociationsForwardPaging as CollectionResponseSimplePublicObjectWithAssociationsForwardPaging,
-    type CollectionResponseWithTotalSimplePublicObject as CollectionResponseWithTotalSimplePublicObject,
     type PublicAssociationsForObject as PublicAssociationsForObject,
     type PublicMergeInput as PublicMergeInput,
-    type PublicObjectSearchRequest as PublicObjectSearchRequest,
     type SimplePublicObjectBatchInput as SimplePublicObjectBatchInput,
     type SimplePublicObjectBatchInputForCreate as SimplePublicObjectBatchInputForCreate,
     type SimplePublicObjectBatchInputUpsert as SimplePublicObjectBatchInputUpsert,
@@ -990,6 +1106,8 @@ export declare namespace Crm {
 
   export {
     Properties as Properties,
+    type BatchResponseProperty as BatchResponseProperty,
+    type CollectionResponsePropertyNoPaging as CollectionResponsePropertyNoPaging,
     type PropertyUpdate as PropertyUpdate,
     type PropertyCreateParams as PropertyCreateParams,
     type PropertyUpdateParams as PropertyUpdateParams,
@@ -1008,5 +1126,18 @@ export declare namespace Crm {
     type PropertiesValidationGetByObjectTypeIDAndPropertyNameParams as PropertiesValidationGetByObjectTypeIDAndPropertyNameParams,
     type PropertiesValidationGetByObjectTypeIDPropertyNameAndRuleTypeParams as PropertiesValidationGetByObjectTypeIDPropertyNameAndRuleTypeParams,
     type PropertiesValidationUpdateByObjectTypeIDPropertyNameAndRuleTypeParams as PropertiesValidationUpdateByObjectTypeIDPropertyNameAndRuleTypeParams,
+  };
+
+  export {
+    Timeline as Timeline,
+    type AppEventOccurrence as AppEventOccurrence,
+    type AppEventResolutionResponse as AppEventResolutionResponse,
+    type BatchInputAppEventOccurrence as BatchInputAppEventOccurrence,
+    type BatchResponseAppEventOccurrence as BatchResponseAppEventOccurrence,
+    type DeveloperQualifiedSymbol as DeveloperQualifiedSymbol,
+    type ExternalAppEventResolutionRequest as ExternalAppEventResolutionRequest,
+    type TimelineEventIFrame as TimelineEventIFrame,
+    type TimelineCreateEventParams as TimelineCreateEventParams,
+    type TimelineCreateProjectTypeParams as TimelineCreateProjectTypeParams,
   };
 }

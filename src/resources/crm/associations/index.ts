@@ -15,7 +15,9 @@ export {
   type PublicDefaultAssociationMultiPost,
   type PublicFetchAssociationsBatchRequest,
   type ReportCreationResponse,
-  type AssociationDeleteAssociationsParams,
+  type AssociationListParams,
+  type AssociationDeleteParams,
+  type AssociationSearchParams,
   type AssociationUpdateAssociationLabelsParams,
 } from './associations';
 export {

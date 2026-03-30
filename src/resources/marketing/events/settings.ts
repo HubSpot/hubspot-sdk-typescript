@@ -7,6 +7,9 @@ import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
 export class Settings extends APIResource {
+  /**
+   * Create or update the current settings for the application.
+   */
   createOrUpdate(
     appID: number,
     body: SettingCreateOrUpdateParams,
@@ -18,6 +21,9 @@ export class Settings extends APIResource {
     });
   }
 
+  /**
+   * Retrieve the current settings for the application.
+   */
   get(appID: number, options?: RequestOptions): APIPromise<EventsAPI.EventDetailSettings> {
     return this._client.get(path`/marketing/marketing-events/2026-03/${appID}/settings`, options);
   }

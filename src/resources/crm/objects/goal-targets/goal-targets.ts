@@ -25,8 +25,11 @@ export class GoalTargets extends APIResource {
   }
 
   /**
-   * Update a goal target by ID (`objectId`) or unique property value (`idProperty`).
-   * Provided property values will be overwritten. Read-only and non-existent
+   * Perform a partial update of an Object identified by `{goalTargetId}`or
+   * optionally a unique property value as specified by the `idProperty` query param.
+   * `{goalTargetId}` refers to the internal object ID by default, and the
+   * `idProperty` query param refers to a property whose values are unique for the
+   * object. Provided property values will be overwritten. Read-only and non-existent
    * properties will result in an error. Properties values can be cleared by passing
    * an empty string.
    */
@@ -44,7 +47,7 @@ export class GoalTargets extends APIResource {
   }
 
   /**
-   * Retrieve all goal targets. Control what is returned via the `properties` query
+   * Read a page of goal targets. Control what is returned via the `properties` query
    * param.
    */
   list(
@@ -59,7 +62,7 @@ export class GoalTargets extends APIResource {
   }
 
   /**
-   * Delete a goal target by ID.
+   * Delete a goal target by `{goalTargetId}` to the recycling bin.
    */
   delete(goalTargetID: string, options?: RequestOptions): APIPromise<void> {
     return this._client.delete(path`/crm/objects/2026-03/goal_targets/${goalTargetID}`, {
@@ -69,10 +72,8 @@ export class GoalTargets extends APIResource {
   }
 
   /**
-   * Read an Object identified by `{goalTargetId}`. `{goalTargetId}` refers to the
-   * internal object ID by default, or optionally any unique property value as
-   * specified by the `idProperty` query param. Control what is returned via the
-   * `properties` query param.
+   * Retrieve a goal target by its ID. You can specify what is returned using the
+   * `properties` query parameter.
    */
   get(
     goalTargetID: string,
@@ -88,7 +89,7 @@ export class GoalTargets extends APIResource {
   search(
     body: GoalTargetSearchParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CollectionResponseWithTotalSimplePublicObject> {
+  ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/objects/2026-03/goal_targets/search', { body, ...options });
   }
 }

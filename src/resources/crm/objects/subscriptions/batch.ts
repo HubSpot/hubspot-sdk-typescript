@@ -19,8 +19,8 @@ export class Batch extends APIResource {
   }
 
   /**
-   * Batch update multiple subscription objects in a single batch operation, allowing
-   * for efficient modifications of CRM subscription records.
+   * Update multiple subscription objects in a single batch operation, allowing for
+   * efficient modifications of CRM subscription records.
    */
   update(
     body: BatchUpdateParams,
@@ -42,7 +42,7 @@ export class Batch extends APIResource {
   }
 
   /**
-   * Retrieve a batch of commerce subscriptions by their IDs, including specified
+   * Retrieve a batch of CRM subscription objects by their IDs, including specified
    * properties and their histories.
    */
   get(

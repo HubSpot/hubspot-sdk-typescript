@@ -20,6 +20,7 @@ export {
   type SettingsResponse,
   type CallingCreateParams,
   type CallingUpdateParams,
+  type CallingCreateInboundCallParams,
   type CallingMarkReadyParams,
 } from './calling/index';
 export {

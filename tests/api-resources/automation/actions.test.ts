@@ -108,11 +108,13 @@ describe('resource actions', () => {
             name: 'name',
             options: [
               {
-                hidden: true,
-                label: 'label',
-                value: 'value',
                 description: 'description',
                 displayOrder: 0,
+                doubleData: 0,
+                hidden: true,
+                label: 'label',
+                readOnly: true,
+                value: 'value',
               },
             ],
             schema: {
@@ -211,11 +213,13 @@ describe('resource actions', () => {
             name: 'name',
             options: [
               {
-                hidden: true,
-                label: 'label',
-                value: 'value',
                 description: 'description',
                 displayOrder: 0,
+                doubleData: 0,
+                hidden: true,
+                label: 'label',
+                readOnly: true,
+                value: 'value',
               },
             ],
             schema: {

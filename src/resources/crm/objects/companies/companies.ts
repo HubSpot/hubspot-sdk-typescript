@@ -108,7 +108,7 @@ export class Companies extends APIResource {
   search(
     body: CompanySearchParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CollectionResponseWithTotalSimplePublicObject> {
+  ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/objects/2026-03/companies/search', { body, ...options });
   }
 }

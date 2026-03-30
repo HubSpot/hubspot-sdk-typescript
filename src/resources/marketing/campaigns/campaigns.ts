@@ -24,7 +24,7 @@ import {
 import * as SpendAPI from './spend';
 import { Spend, SpendCreateParams, SpendDeleteParams, SpendGetParams, SpendUpdateParams } from './spend';
 import { APIPromise } from '../../../core/api-promise';
-import { Page } from '../../../core/pagination';
+import { Page, type PageParams, PagePromise } from '../../../core/pagination';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -37,10 +37,19 @@ export class Campaigns extends APIResource {
   spend: SpendAPI.Spend = new SpendAPI.Spend(this._client);
 
   /**
-   * Perform a partial update of a campaign identified by the specified ID. Provided
-   * property values will be overwritten. Read-only and non-existent properties will
-   * be ignored. Properties values can be cleared by passing an empty string. Note:
-   * The 'hs_goal' property is deprecated and will be ignored if provided.
+   * Create a campaign with the specified properties and receive a copy of the
+   * campaign object, including its ID. Note that the 'hs_goal' property is
+   * deprecated and will be ignored if provided.
+   */
+  create(body: CampaignCreateParams, options?: RequestOptions): APIPromise<PublicCampaign> {
+    return this._client.post('/marketing/campaigns/2026-03', { body, ...options });
+  }
+
+  /**
+   * Perform a partial update of a campaign identified by the specified campaignGuid.
+   * Provided property values will be overwritten. Read-only and non-existent
+   * properties will cause 400 error. If an empty string is passed for any property
+   * in the Batch Update, it will reset that property's value.
    */
   update(
     campaignGuid: string,
@@ -51,8 +60,24 @@ export class Campaigns extends APIResource {
   }
 
   /**
-   * Delete a specified campaign from the system. This operation removes the campaign
-   * identified by the provided campaignGuid from your HubSpot account.
+   * Retrieve a paginated list of campaigns from your HubSpot account. This endpoint
+   * allows you to specify sorting, pagination, and filtering options to tailor the
+   * results to your needs.
+   */
+  list(
+    query: CampaignListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<PublicCampaignsPage, PublicCampaign> {
+    return this._client.getAPIList('/marketing/campaigns/2026-03', Page<PublicCampaign>, {
+      query,
+      ...options,
+    });
+  }
+
+  /**
+   * Delete a specified campaign from the system. This call will return a 204 No
+   * Content response regardless of whether the campaignGuid provided corresponds to
+   * an existing campaign or not.
    */
   delete(campaignGuid: string, options?: RequestOptions): APIPromise<void> {
     return this._client.delete(path`/marketing/campaigns/2026-03/${campaignGuid}`, {
@@ -62,10 +87,11 @@ export class Campaigns extends APIResource {
   }
 
   /**
-   * Read a campaign identified by a specified internal ID. This endpoint allows you
-   * to retrieve detailed information about a specific marketing campaign using its
-   * unique identifier. It supports filtering the response by specific properties and
-   * date ranges.
+   * Get a campaign identified by a specific campaignGuid with the given properties.
+   * Along with the campaign information, it also returns information about assets.
+   * Depending on the query parameters used, this can also be used to return
+   * information about the corresponding assets' metrics. Metrics are available only
+   * if startDate and endDate are provided.
    */
   get(
     campaignGuid: string,
@@ -75,6 +101,8 @@ export class Campaigns extends APIResource {
     return this._client.get(path`/marketing/campaigns/2026-03/${campaignGuid}`, { query, ...options });
   }
 }
+
+export type PublicCampaignsPage = Page<PublicCampaign>;
 
 export type ContactReferencesPage = Page<ContactReference>;
 
@@ -112,7 +140,8 @@ export interface BatchInputPublicCampaignReadInput {
 
 export interface BatchResponsePublicCampaign {
   /**
-   * The date and time when the batch operation was completed, in ISO 8601 format.
+   * The date and time when the batch operation was completed, formatted as a
+   * date-time string.
    */
   completedAt: string;
 
@@ -123,13 +152,14 @@ export interface BatchResponsePublicCampaign {
   results: Array<PublicCampaign>;
 
   /**
-   * The date and time when the batch operation started, in ISO 8601 format.
+   * The date and time when the batch operation started, formatted as a date-time
+   * string.
    */
   startedAt: string;
 
   /**
-   * The current status of the batch operation. Valid values include 'PENDING',
-   * 'PROCESSING', 'CANCELED', and 'COMPLETE'.
+   * The current status of the batch operation, with possible values: CANCELED,
+   * COMPLETE, PENDING, PROCESSING.
    */
   status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
@@ -140,7 +170,7 @@ export interface BatchResponsePublicCampaign {
   errors?: Array<Shared.StandardError>;
 
   /**
-   * A map of link names to associated URIs related to the batch operation.
+   * A map of related links associated with the batch operation.
    */
   links?: { [key: string]: string };
 
@@ -150,14 +180,15 @@ export interface BatchResponsePublicCampaign {
   numErrors?: number;
 
   /**
-   * The date and time when the batch operation was requested, in ISO 8601 format.
+   * The date and time when the batch operation was requested, formatted as a
+   * date-time string.
    */
   requestedAt?: string;
 }
 
 export interface BatchResponsePublicCampaignWithAssets {
   /**
-   * The date and time when the batch operation was completed, in ISO 8601 format.
+   * The timestamp when the batch request processing was completed.
    */
   completedAt: string;
 
@@ -168,13 +199,13 @@ export interface BatchResponsePublicCampaignWithAssets {
   results: Array<PublicCampaignWithAssets>;
 
   /**
-   * The date and time when the batch operation started, in ISO 8601 format.
+   * The timestamp when the processing of the batch request began.
    */
   startedAt: string;
 
   /**
-   * The current status of the batch operation. Valid values include 'PENDING',
-   * 'PROCESSING', 'CANCELED', and 'COMPLETE'.
+   * The current processing status of the batch operation, with possible values:
+   * CANCELED, COMPLETE, PENDING, PROCESSING.
    */
   status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
@@ -185,8 +216,7 @@ export interface BatchResponsePublicCampaignWithAssets {
   errors?: Array<Shared.StandardError>;
 
   /**
-   * A map of link names to associated URIs that provide additional information about
-   * the batch operation.
+   * A collection of URLs linking to related resources or documentation.
    */
   links?: { [key: string]: string };
 
@@ -196,7 +226,7 @@ export interface BatchResponsePublicCampaignWithAssets {
   numErrors?: number;
 
   /**
-   * The date and time when the batch operation was requested, in ISO 8601 format.
+   * The timestamp when the batch request was initially made.
    */
   requestedAt?: string;
 }
@@ -341,8 +371,8 @@ export interface PublicBudgetTotals {
   budgetItems: Array<PublicBudgetItem>;
 
   /**
-   * The currency code used for budget and spending amounts. Valid values include
-   * standard currency codes such as 'USD', 'EUR', 'JPY', etc.
+   * The currency code used for the budget and spend amounts, following ISO 4217
+   * standards.
    */
   currencyCode:
     | 'AED'
@@ -529,17 +559,18 @@ export interface PublicBudgetTotals {
   spendItems: Array<PublicSpendItem>;
 
   /**
-   * The total budget amount for the campaign, represented as a number.
+   * The total budget allocated for the campaign.
    */
   budgetTotal?: number;
 
   /**
-   * The remaining budget for the campaign after spending, represented as a number.
+   * The remaining budget available for the campaign after accounting for all spend
+   * items.
    */
   remainingBudget?: number;
 
   /**
-   * The total amount spent for the campaign, represented as a number.
+   * The total amount spent across all spend items in the campaign.
    */
   spendTotal?: number;
 }
@@ -602,13 +633,13 @@ export interface PublicCampaignAsset {
 
 export interface PublicCampaignBatchUpdateItem {
   /**
-   * The unique identifier for the campaign to be updated. It is a string.
+   * The unique identifier for the campaign to be updated.
    */
   id: string;
 
   /**
-   * A map of property names to their new values for the campaign. Each property name
-   * is a string, and its value is also a string.
+   * A set of key-value pairs representing the properties to be updated for the
+   * campaign.
    */
   properties: { [key: string]: string };
 }
@@ -631,7 +662,7 @@ export interface PublicCampaignInput {
 
 export interface PublicCampaignReadInput {
   /**
-   * The unique identifier for the campaign, represented as a string.
+   * The unique identifier for a campaign.
    */
   id: string;
 }
@@ -643,8 +674,8 @@ export interface PublicCampaignWithAssets {
   id: string;
 
   /**
-   * A map of asset types to their corresponding collection of campaign assets,
-   * represented by CollectionResponsePublicCampaignAsset objects.
+   * Contains the assets associated with the campaign, each represented as a
+   * collection of campaign assets.
    */
   assets: { [key: string]: CollectionResponsePublicCampaignAsset };
 
@@ -655,55 +686,56 @@ export interface PublicCampaignWithAssets {
   businessUnits: Array<PublicBusinessUnit>;
 
   /**
-   * The date and time when the campaign was created, in ISO 8601 format.
+   * The date and time when the campaign was created, formatted as a date-time
+   * string.
    */
   createdAt: string;
 
   /**
-   * A map of custom property names to their values for the campaign.
+   * A map of key-value pairs representing the properties of the campaign.
    */
   properties: { [key: string]: string };
 
   /**
-   * The date and time when the campaign was last updated, in ISO 8601 format.
+   * The date and time when the campaign was last updated, formatted as a date-time
+   * string.
    */
   updatedAt: string;
 }
 
 export interface PublicSpendItem {
   /**
-   * The unique identifier for the spend item, represented as a string.
+   * Unique identifier for the spend item.
    */
   id: string;
 
   /**
-   * The monetary amount of the spend item, represented as a number.
+   * The monetary value associated with the spend item.
    */
   amount: number;
 
   /**
-   * A Unix timestamp in milliseconds indicating when the spend item was created.
+   * The timestamp indicating when the spend item was created.
    */
   createdAt: number;
 
   /**
-   * The name of the spend item, represented as a string.
+   * The name assigned to the spend item.
    */
   name: string;
 
   /**
-   * An integer that specifies the order of the spend item.
+   * The sequence order of the spend item, where 0 is the oldest.
    */
   order: number;
 
   /**
-   * A Unix timestamp in milliseconds indicating when the spend item was last
-   * updated.
+   * The timestamp indicating when the spend item was last updated.
    */
   updatedAt: number;
 
   /**
-   * A brief description of the spend item, represented as a string.
+   * A detailed explanation or notes about the spend item.
    */
   description?: string;
 }
@@ -934,6 +966,15 @@ export interface RevenueAttributionAggregate {
   revenueAmount?: number;
 }
 
+export interface CampaignCreateParams {
+  /**
+   * A collection of key-value pairs representing the properties of the campaign.
+   * Each key is a property name, and the corresponding value is the property's
+   * value.
+   */
+  properties: { [key: string]: string };
+}
+
 export interface CampaignUpdateParams {
   /**
    * A collection of key-value pairs representing the properties of the campaign.
@@ -943,20 +984,19 @@ export interface CampaignUpdateParams {
   properties: { [key: string]: string };
 }
 
-export interface CampaignGetParams {
-  /**
-   * The end date for filtering campaign data, in YYYY-MM-DD format.
-   */
-  endDate?: string;
+export interface CampaignListParams extends PageParams {
+  name?: string;
 
-  /**
-   * A comma-separated list of property names to include in the response.
-   */
   properties?: Array<string>;
 
-  /**
-   * The start date for filtering campaign data, in YYYY-MM-DD format.
-   */
+  sort?: string;
+}
+
+export interface CampaignGetParams {
+  endDate?: string;
+
+  properties?: Array<string>;
+
   startDate?: string;
 }
 
@@ -994,7 +1034,10 @@ export declare namespace Campaigns {
     type PublicSpendItem as PublicSpendItem,
     type PublicSpendItemInput as PublicSpendItemInput,
     type RevenueAttributionAggregate as RevenueAttributionAggregate,
+    type PublicCampaignsPage as PublicCampaignsPage,
+    type CampaignCreateParams as CampaignCreateParams,
     type CampaignUpdateParams as CampaignUpdateParams,
+    type CampaignListParams as CampaignListParams,
     type CampaignGetParams as CampaignGetParams,
   };
 

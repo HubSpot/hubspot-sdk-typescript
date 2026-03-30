@@ -1,7 +1,16 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as EventsAPI from './events/events';
-import * as MediaBridgeAPI from './cms/media-bridge/media-bridge';
+export interface AbTestCreateRequestVNext {
+  /**
+   * ID of the object to test.
+   */
+  contentId: string;
+
+  /**
+   * Name of A/B test variation.
+   */
+  variationName: string;
+}
 
 export interface ActionResponse {
   /**
@@ -21,7 +30,8 @@ export interface ActionResponse {
   status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   /**
-   * A collection of related links associated with the action.
+   * A map of link names to associated URIs containing documentation about the error
+   * or recommended remediation steps
    */
   links?: { [key: string]: string };
 
@@ -105,6 +115,9 @@ export interface AutomationActionsOption {
    */
   displayOrder: number;
 
+  /**
+   * A numerical value associated with the option.
+   */
   doubleData: number;
 
   /**
@@ -158,39 +171,13 @@ export interface BatchReadInputPropertyName {
   inputs: Array<PropertyName>;
 }
 
-export interface BatchResponseProperty {
-  completedAt: string;
-
-  results: Array<MediaBridgeAPI.Property1>;
-
-  startedAt: string;
-
-  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
-
-  errors?: Array<StandardError>;
-
-  links?: { [key: string]: string };
-
-  numErrors?: number;
-
-  requestedAt?: string;
-}
-
-export interface CollectionResponseObjectSchemaNoPaging {
-  results: Array<ObjectSchema>;
-}
-
 export interface CollectionResponsePropertyGroupNoPaging {
   results: Array<PropertyGroup>;
 }
 
-export interface CollectionResponsePropertyNoPaging {
-  results: Array<MediaBridgeAPI.Property1>;
-}
-
 export interface Error {
   /**
-   * The error category.
+   * The error category
    */
   category: string;
 
@@ -223,7 +210,7 @@ export interface Error {
   links?: { [key: string]: string };
 
   /**
-   * A specific category that contains more specific detail about the error.
+   * A specific category that contains more specific detail about the error
    */
   subCategory?: string;
 }
@@ -251,7 +238,7 @@ export interface ErrorDetail {
   in?: string;
 
   /**
-   * A specific category that contains more specific detail about the error.
+   * A specific category that contains more specific detail about the error
    */
   subCategory?: string;
 }
@@ -278,44 +265,6 @@ export interface NextPage {
    * A URL that can be used to retrieve the next page results.
    */
   link?: string;
-}
-
-export interface ObjectSchema {
-  id: string;
-
-  allowsSensitiveProperties: boolean;
-
-  archived: boolean;
-
-  associations: Array<EventsAPI.AssociationDefinition>;
-
-  fullyQualifiedName: string;
-
-  labels: ObjectTypeDefinitionLabels;
-
-  name: string;
-
-  objectTypeId: string;
-
-  properties: Array<MediaBridgeAPI.Property1>;
-
-  requiredProperties: Array<string>;
-
-  searchableProperties: Array<string>;
-
-  secondaryDisplayProperties: Array<string>;
-
-  createdAt?: string;
-
-  createdByUserId?: number;
-
-  description?: string;
-
-  primaryDisplayProperty?: string;
-
-  updatedAt?: string;
-
-  updatedByUserId?: number;
 }
 
 export interface ObjectTypeDefinition {
@@ -530,6 +479,10 @@ export interface Property {
    */
   dataSensitivity?: 'highly_sensitive' | 'non_sensitive' | 'sensitive';
 
+  /**
+   * Controls how date properties are displayed in the HubSpot UI, with options such
+   * as 'absolute', 'absolute_with_relative', 'time_since', and 'time_until'.
+   */
   dateDisplayHint?: 'absolute' | 'absolute_with_relative' | 'time_since' | 'time_until';
 
   /**
@@ -558,8 +511,7 @@ export interface Property {
   hasUniqueValue?: boolean;
 
   /**
-   * Whether or not the property will be hidden from the HubSpot UI. It's recommended
-   * that this be set to false for custom properties.
+   * Hidden options won't be shown in HubSpot.
    */
   hidden?: boolean;
 
@@ -588,7 +540,7 @@ export interface Property {
   showCurrencySymbol?: boolean;
 
   /**
-   * The timestamp when the property was last updated, in ISO 8601 format.
+   * When the object type was last updated.
    */
   updatedAt?: string;
 
@@ -909,42 +861,42 @@ export interface PublicObjectID {
  */
 export interface StandardError {
   /**
-   * The main category of the error.
+   * Error category.
    */
   category: string;
 
   /**
-   * Additional context-specific information related to the error.
+   * Error context.
    */
   context: { [key: string]: Array<string> };
 
   /**
-   * The detailed error objects.
+   * List of error details.
    */
   errors: Array<ErrorDetail>;
 
   /**
-   * URLs linking to documentation or resources associated with the error.
+   * Error links.
    */
   links: { [key: string]: string };
 
   /**
-   * A human-readable string describing the error and possible remediation steps.
+   * Error message.
    */
   message: string;
 
   /**
-   * The HTTP status code associated with the error.
+   * Error status.
    */
   status: string;
 
   /**
-   * A unique ID for the error instance.
+   * Error ID.
    */
   id?: string;
 
   /**
-   * A more specific error category within each main category.
+   * Error subcategory.
    */
   subCategory?: unknown;
 }
@@ -956,7 +908,8 @@ export interface TaskLocator {
   id: string;
 
   /**
-   * A collection of link names mapped to their corresponding URIs.
+   * A map of link names to associated URIs containing documentation about the error
+   * or recommended remediation steps
    */
   links?: { [key: string]: string };
 }

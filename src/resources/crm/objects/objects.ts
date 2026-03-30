@@ -26,17 +26,6 @@ import {
   InvoiceUpsertParams,
   Invoices,
 } from './invoices';
-import * as ListingsAPI from './listings';
-import {
-  ListingCreateParams,
-  ListingDeleteParams,
-  ListingGetParams,
-  ListingListParams,
-  ListingSearchParams,
-  ListingUpdateParams,
-  ListingUpsertParams,
-  Listings,
-} from './listings';
 import * as OrdersAPI from './orders';
 import {
   OrderCreateParams,
@@ -50,7 +39,6 @@ import {
 } from './orders';
 import * as PartnerServicesAPI from './partner-services';
 import {
-  CollectionResponseMultiAssociatedObjectWithLabelForwardPaging,
   PartnerServiceGetParams,
   PartnerServiceListParams,
   PartnerServiceSearchParams,
@@ -259,6 +247,15 @@ import {
   LineItemUpdateParams,
   LineItems,
 } from './line-items/line-items';
+import * as ListingsAPI from './listings/listings';
+import {
+  ListingCreateParams,
+  ListingGetParams,
+  ListingListParams,
+  ListingSearchParams,
+  ListingUpdateParams,
+  Listings,
+} from './listings/listings';
 import * as MeetingsAPI from './meetings/meetings';
 import {
   MeetingCreateParams,
@@ -277,6 +274,16 @@ import {
   NoteUpdateParams,
   Notes,
 } from './notes/notes';
+import * as ObjectsObjectsAPI from './objects_/objects_';
+import {
+  ObjectCreateParams,
+  ObjectDeleteParams,
+  ObjectGetParams,
+  ObjectListParams,
+  ObjectSearchParams,
+  ObjectUpdateParams,
+  Objects as ObjectsAPIObjects,
+} from './objects_/objects_';
 import * as PartnerClientsAPI from './partner-clients/partner-clients';
 import {
   PartnerClientGetParams,
@@ -285,6 +292,16 @@ import {
   PartnerClientUpdateParams,
   PartnerClients,
 } from './partner-clients/partner-clients';
+import * as ProjectsAPI from './projects/projects';
+import {
+  ProjectCreateParams,
+  ProjectGetParams,
+  ProjectListParams,
+  ProjectMergeParams,
+  ProjectSearchParams,
+  ProjectUpdateParams,
+  Projects,
+} from './projects/projects';
 import * as QuotesAPI from './quotes/quotes';
 import {
   QuoteCreateParams,
@@ -349,11 +366,13 @@ export class Objects extends APIResource {
   listings: ListingsAPI.Listings = new ListingsAPI.Listings(this._client);
   meetings: MeetingsAPI.Meetings = new MeetingsAPI.Meetings(this._client);
   notes: NotesAPI.Notes = new NotesAPI.Notes(this._client);
+  objects: ObjectsObjectsAPI.Objects = new ObjectsObjectsAPI.Objects(this._client);
   orders: OrdersAPI.Orders = new OrdersAPI.Orders(this._client);
   partnerClients: PartnerClientsAPI.PartnerClients = new PartnerClientsAPI.PartnerClients(this._client);
   partnerServices: PartnerServicesAPI.PartnerServices = new PartnerServicesAPI.PartnerServices(this._client);
   postalMail: PostalMailAPI.PostalMail = new PostalMailAPI.PostalMail(this._client);
   products: ProductsAPI.Products = new ProductsAPI.Products(this._client);
+  projects: ProjectsAPI.Projects = new ProjectsAPI.Projects(this._client);
   quotes: QuotesAPI.Quotes = new QuotesAPI.Quotes(this._client);
   services: ServicesAPI.Services = new ServicesAPI.Services(this._client);
   subscriptions: SubscriptionsAPI.Subscriptions = new SubscriptionsAPI.Subscriptions(this._client);
@@ -514,21 +533,6 @@ export interface CollectionResponseSimplePublicObjectWithAssociationsForwardPagi
   paging?: Shared.ForwardPaging;
 }
 
-/**
- * Represents a list of simple objects returned from an API request, along with the
- * total count of objects available.
- */
-export interface CollectionResponseWithTotalSimplePublicObject {
-  results: Array<CrmAPI.SimplePublicObject>;
-
-  /**
-   * The total number of objects included into response.
-   */
-  total: number;
-
-  paging?: Shared.Paging;
-}
-
 export interface PublicAssociationsForObject {
   /**
    * Contains the Id of a Public Object
@@ -551,41 +555,6 @@ export interface PublicMergeInput {
    * The ID of the primary company, which the other will merge into.
    */
   primaryObjectId: string;
-}
-
-/**
- * Describes a search request
- */
-export interface PublicObjectSearchRequest {
-  /**
-   * A paging cursor token for retrieving subsequent pages.
-   */
-  after: string;
-
-  /**
-   * Up to 6 groups of filters defining additional query criteria.
-   */
-  filterGroups: Array<CrmAPI.FilterGroup>;
-
-  /**
-   * The maximum results to return, up to 200 objects.
-   */
-  limit: number;
-
-  /**
-   * A list of property names to include in the response.
-   */
-  properties: Array<string>;
-
-  /**
-   * Specifies sorting order based on object properties.
-   */
-  sorts: Array<string>;
-
-  /**
-   * The search query string, up to 3000 characters.
-   */
-  query?: string;
 }
 
 /**
@@ -830,11 +799,13 @@ Objects.LineItems = LineItems;
 Objects.Listings = Listings;
 Objects.Meetings = Meetings;
 Objects.Notes = Notes;
+Objects.Objects = ObjectsAPIObjects;
 Objects.Orders = Orders;
 Objects.PartnerClients = PartnerClients;
 Objects.PartnerServices = PartnerServices;
 Objects.PostalMail = PostalMail;
 Objects.Products = Products;
+Objects.Projects = Projects;
 Objects.Quotes = Quotes;
 Objects.Services = Services;
 Objects.Subscriptions = Subscriptions;
@@ -855,10 +826,8 @@ export declare namespace Objects {
     type BatchResponseSimplePublicUpsertObject as BatchResponseSimplePublicUpsertObject,
     type CollectionResponseAssociatedID as CollectionResponseAssociatedID,
     type CollectionResponseSimplePublicObjectWithAssociationsForwardPaging as CollectionResponseSimplePublicObjectWithAssociationsForwardPaging,
-    type CollectionResponseWithTotalSimplePublicObject as CollectionResponseWithTotalSimplePublicObject,
     type PublicAssociationsForObject as PublicAssociationsForObject,
     type PublicMergeInput as PublicMergeInput,
-    type PublicObjectSearchRequest as PublicObjectSearchRequest,
     type SimplePublicObjectBatchInput as SimplePublicObjectBatchInput,
     type SimplePublicObjectBatchInputForCreate as SimplePublicObjectBatchInputForCreate,
     type SimplePublicObjectBatchInputUpsert as SimplePublicObjectBatchInputUpsert,
@@ -1044,10 +1013,8 @@ export declare namespace Objects {
     type ListingCreateParams as ListingCreateParams,
     type ListingUpdateParams as ListingUpdateParams,
     type ListingListParams as ListingListParams,
-    type ListingDeleteParams as ListingDeleteParams,
     type ListingGetParams as ListingGetParams,
     type ListingSearchParams as ListingSearchParams,
-    type ListingUpsertParams as ListingUpsertParams,
   };
 
   export {
@@ -1066,6 +1033,16 @@ export declare namespace Objects {
     type NoteListParams as NoteListParams,
     type NoteGetParams as NoteGetParams,
     type NoteSearchParams as NoteSearchParams,
+  };
+
+  export {
+    ObjectsAPIObjects as Objects,
+    type ObjectCreateParams as ObjectCreateParams,
+    type ObjectUpdateParams as ObjectUpdateParams,
+    type ObjectListParams as ObjectListParams,
+    type ObjectDeleteParams as ObjectDeleteParams,
+    type ObjectGetParams as ObjectGetParams,
+    type ObjectSearchParams as ObjectSearchParams,
   };
 
   export {
@@ -1089,7 +1066,6 @@ export declare namespace Objects {
 
   export {
     PartnerServices as PartnerServices,
-    type CollectionResponseMultiAssociatedObjectWithLabelForwardPaging as CollectionResponseMultiAssociatedObjectWithLabelForwardPaging,
     type PartnerServiceUpdateParams as PartnerServiceUpdateParams,
     type PartnerServiceListParams as PartnerServiceListParams,
     type PartnerServiceGetParams as PartnerServiceGetParams,
@@ -1116,6 +1092,16 @@ export declare namespace Objects {
     type ProductGetParams as ProductGetParams,
     type ProductSearchParams as ProductSearchParams,
     type ProductUpsertParams as ProductUpsertParams,
+  };
+
+  export {
+    Projects as Projects,
+    type ProjectCreateParams as ProjectCreateParams,
+    type ProjectUpdateParams as ProjectUpdateParams,
+    type ProjectListParams as ProjectListParams,
+    type ProjectGetParams as ProjectGetParams,
+    type ProjectMergeParams as ProjectMergeParams,
+    type ProjectSearchParams as ProjectSearchParams,
   };
 
   export {

@@ -53,7 +53,8 @@ export class Emails extends APIResource {
   }
 
   /**
-   * Retrieve all emails. Control what is returned via the `properties` query param.
+   * Read a page of emails. Control what is returned via the `properties` query
+   * param.
    */
   list(
     query: EmailListParams | null | undefined = {},
@@ -77,7 +78,7 @@ export class Emails extends APIResource {
   }
 
   /**
-   * Retrieve an email identified by `{emailId}`. `{emailId}` refers to the internal
+   * Read an Object identified by `{emailId}`. `{emailId}` refers to the internal
    * object ID by default, or optionally any unique property value as specified by
    * the `idProperty` query param. Control what is returned via the `properties`
    * query param.
@@ -97,7 +98,7 @@ export class Emails extends APIResource {
   search(
     body: EmailSearchParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CollectionResponseWithTotalSimplePublicObject> {
+  ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/objects/2026-03/emails/search', { body, ...options });
   }
 }

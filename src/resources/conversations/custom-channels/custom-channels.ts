@@ -29,6 +29,10 @@ export class CustomChannels extends APIResource {
     return this._client.post('/conversations/custom-channels/2026-03', { body, ...options });
   }
 
+  /**
+   * Update the capabilities for an existing. You can also use it to update the
+   * channel's webhookUri and its channelAccountConnectionRedirectUrl.
+   */
   update(
     channelID: number,
     body: CustomChannelUpdateParams,
@@ -51,6 +55,9 @@ export class CustomChannels extends APIResource {
     );
   }
 
+  /**
+   * Archive an existing registered custom channel
+   */
   delete(channelID: number, options?: RequestOptions): APIPromise<void> {
     return this._client.delete(path`/conversations/custom-channels/2026-03/${channelID}`, {
       ...options,
@@ -58,6 +65,11 @@ export class CustomChannels extends APIResource {
     });
   }
 
+  /**
+   * Retrieve the details for a specific channel account. This contains all the
+   * metadata about your channel account, including its channel, associated inbox id,
+   * and delivery identifier information.
+   */
   get(
     channelAccountID: number,
     params: CustomChannelGetParams,
@@ -115,6 +127,8 @@ export interface ChannelIntegrationParticipant {
   deliveryIdentifier: PublicDeliveryIdentifier;
 
   name?: string;
+
+  senderActorId?: string;
 }
 
 export interface CollectionResponseWithTotalPublicChannelAccount {

@@ -35,8 +35,14 @@ import {
 } from './participations';
 import * as SettingsAPI from './settings';
 import { SettingCreateOrUpdateParams, Settings } from './settings';
+import * as SubscriberStateAPI from './subscriber-state';
+import {
+  SubscriberState,
+  SubscriberStateRecordByEmailParams,
+  SubscriberStateRecordByIDParams,
+} from './subscriber-state';
 import { APIPromise } from '../../../core/api-promise';
-import { Page } from '../../../core/pagination';
+import { Page, type PageParams, PagePromise } from '../../../core/pagination';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -49,11 +55,19 @@ export class Events extends APIResource {
   );
   participations: ParticipationsAPI.Participations = new ParticipationsAPI.Participations(this._client);
   settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
+  subscriberState: SubscriberStateAPI.SubscriberState = new SubscriberStateAPI.SubscriberState(this._client);
 
+  /**
+   * Creates a new marketing event in HubSpot
+   */
   create(body: EventCreateParams, options?: RequestOptions): APIPromise<MarketingEventDefaultResponse> {
     return this._client.post('/marketing/marketing-events/2026-03/events', { body, ...options });
   }
 
+  /**
+   * Updates the details of an existing Marketing Event identified by its objectId,
+   * if it exists.
+   */
   update(
     objectID: string,
     body: EventUpdateParams,
@@ -62,6 +76,20 @@ export class Events extends APIResource {
     return this._client.patch(path`/marketing/marketing-events/2026-03/${objectID}`, { body, ...options });
   }
 
+  list(
+    query: EventListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<MarketingEventPublicReadResponseV2sPage, MarketingEventPublicReadResponseV2> {
+    return this._client.getAPIList(
+      '/marketing/marketing-events/2026-03',
+      Page<MarketingEventPublicReadResponseV2>,
+      { query, ...options },
+    );
+  }
+
+  /**
+   * Deletes the existing Marketing Event with the specified objectId, if it exists.
+   */
   delete(objectID: string, options?: RequestOptions): APIPromise<void> {
     return this._client.delete(path`/marketing/marketing-events/2026-03/${objectID}`, {
       ...options,
@@ -69,6 +97,14 @@ export class Events extends APIResource {
     });
   }
 
+  /**
+   * Deletes multiple Marketing Events from the portal based on their objectId, if
+   * they exist.
+   *
+   * Responses: 204: Returned if all specified Marketing Events were successfully
+   * deleted. 207: Returned if some objectIds did not correspond to any existing
+   * Marketing Events.
+   */
   deleteBatch(body: EventDeleteBatchParams, options?: RequestOptions): APIPromise<Response> {
     return this._client.post('/marketing/marketing-events/2026-03/batch/archive', {
       body,
@@ -78,6 +114,13 @@ export class Events extends APIResource {
     });
   }
 
+  /**
+   * Deletes multiple Marketing Events based on externalAccountId, externalEventId,
+   * and appId.
+   *
+   * Only Marketing Events created by the same apps will be deleted; events from
+   * other apps cannot be removed by this endpoint.
+   */
   deleteBatchByExternalEventID(
     body: EventDeleteBatchByExternalEventIDParams,
     options?: RequestOptions,
@@ -90,6 +133,12 @@ export class Events extends APIResource {
     });
   }
 
+  /**
+   * Deletes the existing Marketing Event with the specified externalAccountId,
+   * externalEventId, if it exists.
+   *
+   * Only Marketing Events created by the same app can be deleted.
+   */
   deleteByExternalEventID(
     externalEventID: string,
     params: EventDeleteByExternalEventIDParams,
@@ -103,10 +152,21 @@ export class Events extends APIResource {
     });
   }
 
+  /**
+   * Returns the details of a Marketing Event with the specified objectId, if it
+   * exists.
+   */
   get(objectID: string, options?: RequestOptions): APIPromise<MarketingEventPublicReadResponseV2> {
     return this._client.get(path`/marketing/marketing-events/2026-03/${objectID}`, options);
   }
 
+  /**
+   * Returns the details of a Marketing Event with the specified externalAccountId,
+   * externalEventId, if it exists.
+   *
+   * Only Marketing Events created by the same app making the request can be
+   * retrieved.
+   */
   getByExternalEventID(
     externalEventID: string,
     query: EventGetByExternalEventIDParams,
@@ -118,6 +178,12 @@ export class Events extends APIResource {
     });
   }
 
+  /**
+   * Retrieves Marketing Events where the externalEventId matches the value provided
+   * in the request, limited to events created by the app making the request.
+   *
+   * Marketing Events created by other apps will not be included in the results.
+   */
   searchByExternalEventID(
     query: EventSearchByExternalEventIDParams,
     options?: RequestOptions,
@@ -125,6 +191,19 @@ export class Events extends APIResource {
     return this._client.get('/marketing/marketing-events/2026-03/events/search', { query, ...options });
   }
 
+  /**
+   * This endpoint searches the portal for all Marketing Events whose externalEventId
+   * matches the value provided in the request.
+   *
+   * It retrieves the objectId and additional event details for each matching
+   * Marketing Event.
+   *
+   * Since multiple Marketing Events can have the same externalEventId, the endpoint
+   * returns all matching results.
+   *
+   * Note: Marketing Events become searchable by externalEventId a few minutes after
+   * creation.
+   */
   searchIdentifiersByExternalEventID(
     externalEventID: string,
     options?: RequestOptions,
@@ -135,6 +214,10 @@ export class Events extends APIResource {
     );
   }
 
+  /**
+   * Updates multiple Marketing Events on the portal based on their objectId, if they
+   * exist.
+   */
   updateBatch(
     body: EventUpdateBatchParams,
     options?: RequestOptions,
@@ -142,6 +225,12 @@ export class Events extends APIResource {
     return this._client.post('/marketing/marketing-events/2026-03/batch/update', { body, ...options });
   }
 
+  /**
+   * Updates the details of an existing Marketing Event identified by its
+   * externalAccountId, externalEventId if it exists.
+   *
+   * Only Marketing Events created by the same app can be updated.
+   */
   updateByExternalEventID(
     externalEventID: string,
     params: EventUpdateByExternalEventIDParams,
@@ -155,6 +244,12 @@ export class Events extends APIResource {
     });
   }
 
+  /**
+   * Upserts multiple Marketing Events. If a Marketing Event with the specified ID
+   * already exists, it will be updated; otherwise, a new event will be created.
+   *
+   * Only Marketing Events originally created by the same app can be updated.
+   */
   upsertBatch(
     body: EventUpsertBatchParams,
     options?: RequestOptions,
@@ -162,6 +257,10 @@ export class Events extends APIResource {
     return this._client.post('/marketing/marketing-events/2026-03/events/upsert', { body, ...options });
   }
 
+  /**
+   * Upserts a marketing event If there is an existing marketing event with the
+   * specified ID, it will be updated; otherwise a new event will be created.
+   */
   upsertByExternalEventID(
     externalEventID: string,
     body: EventUpsertByExternalEventIDParams,
@@ -172,43 +271,9 @@ export class Events extends APIResource {
       ...options,
     });
   }
-
-  upsertSubscriberStateByEmail(
-    subscriberState: string,
-    params: EventUpsertSubscriberStateByEmailParams,
-    options?: RequestOptions,
-  ): APIPromise<Response> {
-    const { externalEventId, externalAccountId, ...body } = params;
-    return this._client.post(
-      path`/marketing/marketing-events/2026-03/events/${externalEventId}/${subscriberState}/email-upsert`,
-      {
-        query: { externalAccountId },
-        body,
-        ...options,
-        headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-        __binaryResponse: true,
-      },
-    );
-  }
-
-  upsertSubscriberStateByID(
-    subscriberState: string,
-    params: EventUpsertSubscriberStateByIDParams,
-    options?: RequestOptions,
-  ): APIPromise<Response> {
-    const { externalEventId, externalAccountId, ...body } = params;
-    return this._client.post(
-      path`/marketing/marketing-events/2026-03/events/${externalEventId}/${subscriberState}/upsert`,
-      {
-        query: { externalAccountId },
-        body,
-        ...options,
-        headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-        __binaryResponse: true,
-      },
-    );
-  }
 }
+
+export type MarketingEventPublicReadResponseV2sPage = Page<MarketingEventPublicReadResponseV2>;
 
 export type ParticipationBreakdownsPage = Page<ParticipationBreakdown>;
 
@@ -1543,6 +1608,8 @@ export interface EventUpdateParams {
   startDateTime?: string;
 }
 
+export interface EventListParams extends PageParams {}
+
 export interface EventDeleteBatchParams {
   inputs: Array<MarketingEventPublicObjectIDDeleteRequest>;
 }
@@ -1711,45 +1778,12 @@ export interface EventUpsertByExternalEventIDParams {
   startDateTime?: string;
 }
 
-export interface EventUpsertSubscriberStateByEmailParams {
-  /**
-   * Path param
-   */
-  externalEventId: string;
-
-  /**
-   * Query param
-   */
-  externalAccountId: string;
-
-  /**
-   * Body param: List of marketing event details to create or update
-   */
-  inputs: Array<MarketingEventEmailSubscriber>;
-}
-
-export interface EventUpsertSubscriberStateByIDParams {
-  /**
-   * Path param
-   */
-  externalEventId: string;
-
-  /**
-   * Query param
-   */
-  externalAccountId: string;
-
-  /**
-   * Body param: List of HubSpot contacts to subscribe to the marketing event
-   */
-  inputs: Array<MarketingEventSubscriber>;
-}
-
 Events.Attendance = Attendance;
 Events.Events = EventsAPIEvents;
 Events.ListAssociations = ListAssociations;
 Events.Participations = Participations;
 Events.Settings = Settings;
+Events.SubscriberState = SubscriberState;
 
 export declare namespace Events {
   export {
@@ -1797,8 +1831,10 @@ export declare namespace Events {
     type SearchPublicResponseWrapper as SearchPublicResponseWrapper,
     type SubscriberEmailResponse as SubscriberEmailResponse,
     type SubscriberVidResponse as SubscriberVidResponse,
+    type MarketingEventPublicReadResponseV2sPage as MarketingEventPublicReadResponseV2sPage,
     type EventCreateParams as EventCreateParams,
     type EventUpdateParams as EventUpdateParams,
+    type EventListParams as EventListParams,
     type EventDeleteBatchParams as EventDeleteBatchParams,
     type EventDeleteBatchByExternalEventIDParams as EventDeleteBatchByExternalEventIDParams,
     type EventDeleteByExternalEventIDParams as EventDeleteByExternalEventIDParams,
@@ -1808,8 +1844,6 @@ export declare namespace Events {
     type EventUpdateByExternalEventIDParams as EventUpdateByExternalEventIDParams,
     type EventUpsertBatchParams as EventUpsertBatchParams,
     type EventUpsertByExternalEventIDParams as EventUpsertByExternalEventIDParams,
-    type EventUpsertSubscriberStateByEmailParams as EventUpsertSubscriberStateByEmailParams,
-    type EventUpsertSubscriberStateByIDParams as EventUpsertSubscriberStateByIDParams,
   };
 
   export {
@@ -1844,4 +1878,10 @@ export declare namespace Events {
   };
 
   export { Settings as Settings, type SettingCreateOrUpdateParams as SettingCreateOrUpdateParams };
+
+  export {
+    SubscriberState as SubscriberState,
+    type SubscriberStateRecordByEmailParams as SubscriberStateRecordByEmailParams,
+    type SubscriberStateRecordByIDParams as SubscriberStateRecordByIDParams,
+  };
 }

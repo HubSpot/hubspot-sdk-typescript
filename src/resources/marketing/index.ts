@@ -28,13 +28,15 @@ export {
   type PublicSpendItem,
   type PublicSpendItemInput,
   type RevenueAttributionAggregate,
+  type CampaignCreateParams,
   type CampaignUpdateParams,
+  type CampaignListParams,
   type CampaignGetParams,
   type ContactReferencesPage,
+  type PublicCampaignsPage,
 } from './campaigns/index';
 export {
   Emails,
-  type AbTestCreateRequestVNext,
   type AggregateEmailStatistics,
   type CollectionResponseWithTotalEmailStatisticInterval,
   type CollectionResponseWithTotalPublicEmail,
@@ -126,6 +128,7 @@ export {
   type SubscriberVidResponse,
   type EventCreateParams,
   type EventUpdateParams,
+  type EventListParams,
   type EventDeleteBatchParams,
   type EventDeleteBatchByExternalEventIDParams,
   type EventDeleteByExternalEventIDParams,
@@ -135,16 +138,15 @@ export {
   type EventUpdateByExternalEventIDParams,
   type EventUpsertBatchParams,
   type EventUpsertByExternalEventIDParams,
-  type EventUpsertSubscriberStateByEmailParams,
-  type EventUpsertSubscriberStateByIDParams,
   type ParticipationBreakdownsPage,
+  type MarketingEventPublicReadResponseV2sPage,
 } from './events/index';
 export { Marketing } from './marketing';
+export { SingleSend, type SingleSendCreateParams } from './single-send';
 export {
   Transactional,
-  type EmailSendStatusView,
-  type EventIDView,
-  type PublicSingleSendEmail,
-  type PublicSingleSendRequestEgg,
-  type TransactionalSendParams,
-} from './transactional';
+  type CollectionResponseSmtpAPITokenViewForwardPaging,
+  type SmtpAPITokenRequestEgg,
+  type SmtpAPITokenView,
+  type SmtpAPITokenViewsPage,
+} from './transactional/index';

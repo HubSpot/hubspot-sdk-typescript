@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
+import * as MediaBridgeAPI from './media-bridge';
 import { APIPromise } from '../../../core/api-promise';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
@@ -15,7 +16,7 @@ export class Batch extends APIResource {
     objectType: string,
     params: BatchCreateParams,
     options?: RequestOptions,
-  ): APIPromise<Shared.BatchResponseProperty> {
+  ): APIPromise<MediaBridgeAPI.BatchResponseProperty> {
     const { appId, ...body } = params;
     return this._client.post(path`/media-bridge/2026-03/${appId}/properties/${objectType}/batch/create`, {
       body,
@@ -42,7 +43,7 @@ export class Batch extends APIResource {
     objectType: string,
     params: BatchGetParams,
     options?: RequestOptions,
-  ): APIPromise<Shared.BatchResponseProperty> {
+  ): APIPromise<MediaBridgeAPI.BatchResponseProperty> {
     const { appId, ...body } = params;
     return this._client.post(path`/media-bridge/2026-03/${appId}/properties/${objectType}/batch/read`, {
       body,
@@ -55,7 +56,7 @@ export interface BatchCreateParams {
   /**
    * Path param
    */
-  appId: string;
+  appId: number;
 
   /**
    * Body param
@@ -67,7 +68,7 @@ export interface BatchDeleteParams {
   /**
    * Path param
    */
-  appId: string;
+  appId: number;
 
   /**
    * Body param
@@ -79,7 +80,7 @@ export interface BatchGetParams {
   /**
    * Path param
    */
-  appId: string;
+  appId: number;
 
   /**
    * Body param

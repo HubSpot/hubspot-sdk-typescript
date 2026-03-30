@@ -35,18 +35,6 @@ describe('resource communicationPreferences', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('getStatusByEmail', async () => {
-    const responsePromise = client.communicationPreferences.getStatusByEmail('emailAddress');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
   test.skip('getStatuses: only required params', async () => {
     const responsePromise = client.communicationPreferences.getStatuses('subscriberIdString', {
       channel: 'EMAIL',
@@ -88,56 +76,6 @@ describe('resource communicationPreferences', () => {
       channel: 'EMAIL',
       businessUnitId: 0,
       verbose: true,
-    });
-  });
-
-  // Mock server tests are disabled
-  test.skip('subscribe: only required params', async () => {
-    const responsePromise = client.communicationPreferences.subscribe({
-      emailAddress: 'emailAddress',
-      subscriptionId: 'subscriptionId',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('subscribe: required and optional params', async () => {
-    const response = await client.communicationPreferences.subscribe({
-      emailAddress: 'emailAddress',
-      subscriptionId: 'subscriptionId',
-      legalBasis: 'CONSENT_WITH_NOTICE',
-      legalBasisExplanation: 'legalBasisExplanation',
-    });
-  });
-
-  // Mock server tests are disabled
-  test.skip('unsubscribe: only required params', async () => {
-    const responsePromise = client.communicationPreferences.unsubscribe({
-      emailAddress: 'emailAddress',
-      subscriptionId: 'subscriptionId',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('unsubscribe: required and optional params', async () => {
-    const response = await client.communicationPreferences.unsubscribe({
-      emailAddress: 'emailAddress',
-      subscriptionId: 'subscriptionId',
-      legalBasis: 'CONSENT_WITH_NOTICE',
-      legalBasisExplanation: 'legalBasisExplanation',
     });
   });
 

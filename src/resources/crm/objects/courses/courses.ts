@@ -53,7 +53,8 @@ export class Courses extends APIResource {
   }
 
   /**
-   * Retrieve all courses.
+   * Read a page of courses. Control what is returned via the `properties` query
+   * param.
    */
   list(
     query: CourseListParams | null | undefined = {},
@@ -67,7 +68,7 @@ export class Courses extends APIResource {
   }
 
   /**
-   * Delete a course by ID.
+   * Move an Object identified by `{courseId}` to the recycling bin.
    */
   delete(courseID: string, options?: RequestOptions): APIPromise<void> {
     return this._client.delete(path`/crm/objects/2026-03/0-410/${courseID}`, {
@@ -96,7 +97,7 @@ export class Courses extends APIResource {
   search(
     body: CourseSearchParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CollectionResponseWithTotalSimplePublicObject> {
+  ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/objects/2026-03/0-410/search', { body, ...options });
   }
 }

@@ -7,6 +7,9 @@ import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
 export class Events extends APIResource {
+  /**
+   * Mark a marketing event as cancelled.
+   */
   cancelByExternalEventID(
     externalEventID: string,
     params: EventCancelByExternalEventIDParams,
@@ -19,6 +22,9 @@ export class Events extends APIResource {
     });
   }
 
+  /**
+   * Mark a marketing event as completed
+   */
   completeByExternalEventID(
     externalEventID: string,
     params: EventCompleteByExternalEventIDParams,

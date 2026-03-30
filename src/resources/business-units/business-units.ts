@@ -6,7 +6,6 @@ import {
   BusinessUnitGetByUserIDParams,
   BusinessUnits as BusinessUnitsAPIBusinessUnits,
 } from './business-units_';
-import * as CampaignsAPI from '../marketing/campaigns/campaigns';
 
 export class BusinessUnits extends APIResource {
   businessUnits: BusinessUnitsBusinessUnitsAPI.BusinessUnits =
@@ -17,7 +16,7 @@ export interface CollectionResponsePublicBusinessUnitNoPaging {
   /**
    * The collection of Business Units
    */
-  results: Array<CampaignsAPI.PublicBusinessUnit>;
+  results: Array<PublicBusinessUnit>;
 }
 
 export interface PublicBusinessUnit {

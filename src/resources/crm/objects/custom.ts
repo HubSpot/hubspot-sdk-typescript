@@ -12,8 +12,7 @@ import { path } from '../../../internal/utils/path';
 
 export class Custom extends APIResource {
   /**
-   * Create multiple CRM objects in a single request by specifying the object type
-   * and providing the necessary properties and associations for each object.
+   * Create a batch of objects
    */
   create(
     objectType: string,
@@ -24,8 +23,7 @@ export class Custom extends APIResource {
   }
 
   /**
-   * Update a batch of CRM objects by their internal IDs or unique property values,
-   * allowing for efficient modifications of multiple records in a single request.
+   * Update a batch of objects by internal ID, or unique property values
    */
   update(
     objectType: string,
@@ -52,8 +50,7 @@ export class Custom extends APIResource {
   }
 
   /**
-   * Archive a batch of objects by their unique IDs. This operation moves the
-   * specified objects to the recycling bin, effectively marking them as archived.
+   * Archive a batch of objects by ID
    */
   delete(objectType: string, body: CustomDeleteParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post(path`/crm/objects/2026-03/${objectType}/batch/archive`, {
@@ -92,16 +89,11 @@ export class Custom extends APIResource {
     return this._client.post(path`/crm/objects/2026-03/${objectType}/merge`, { body, ...options });
   }
 
-  /**
-   * Execute a search query to find CRM objects of a given type, using specified
-   * filters and properties. The search can be customized with filters, sorting, and
-   * pagination options.
-   */
   search(
     objectType: string,
     body: CustomSearchParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CollectionResponseWithTotalSimplePublicObject> {
+  ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post(path`/crm/objects/2026-03/${objectType}/search`, { body, ...options });
   }
 

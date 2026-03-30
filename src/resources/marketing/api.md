@@ -1,5 +1,12 @@
 # Marketing
 
+Types:
+
+- <code><a href="./src/resources/marketing/marketing.ts">EmailSendStatusView</a></code>
+- <code><a href="./src/resources/marketing/marketing.ts">EventIDView</a></code>
+- <code><a href="./src/resources/marketing/marketing.ts">PublicSingleSendEmail</a></code>
+- <code><a href="./src/resources/marketing/marketing.ts">PublicSingleSendRequestEgg</a></code>
+
 ## Campaigns
 
 Types:
@@ -33,7 +40,9 @@ Types:
 
 Methods:
 
+- <code title="post /marketing/campaigns/2026-03">client.marketing.campaigns.<a href="./src/resources/marketing/campaigns/campaigns.ts">create</a>({ ...params }) -> PublicCampaign</code>
 - <code title="patch /marketing/campaigns/2026-03/{campaignGuid}">client.marketing.campaigns.<a href="./src/resources/marketing/campaigns/campaigns.ts">update</a>(campaignGuid, { ...params }) -> PublicCampaign</code>
+- <code title="get /marketing/campaigns/2026-03">client.marketing.campaigns.<a href="./src/resources/marketing/campaigns/campaigns.ts">list</a>({ ...params }) -> PublicCampaignsPage</code>
 - <code title="delete /marketing/campaigns/2026-03/{campaignGuid}">client.marketing.campaigns.<a href="./src/resources/marketing/campaigns/campaigns.ts">delete</a>(campaignGuid) -> void</code>
 - <code title="get /marketing/campaigns/2026-03/{campaignGuid}">client.marketing.campaigns.<a href="./src/resources/marketing/campaigns/campaigns.ts">get</a>(campaignGuid, { ...params }) -> PublicCampaignWithAssets</code>
 
@@ -85,7 +94,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/marketing/emails.ts">AbTestCreateRequestVNext</a></code>
 - <code><a href="./src/resources/marketing/emails.ts">AggregateEmailStatistics</a></code>
 - <code><a href="./src/resources/marketing/emails.ts">CollectionResponseWithTotalEmailStatisticInterval</a></code>
 - <code><a href="./src/resources/marketing/emails.ts">CollectionResponseWithTotalPublicEmail</a></code>
@@ -187,6 +195,7 @@ Methods:
 
 - <code title="post /marketing/marketing-events/2026-03/events">client.marketing.events.<a href="./src/resources/marketing/events/events.ts">create</a>({ ...params }) -> MarketingEventDefaultResponse</code>
 - <code title="patch /marketing/marketing-events/2026-03/{objectId}">client.marketing.events.<a href="./src/resources/marketing/events/events.ts">update</a>(objectID, { ...params }) -> MarketingEventPublicDefaultResponseV2</code>
+- <code title="get /marketing/marketing-events/2026-03">client.marketing.events.<a href="./src/resources/marketing/events/events.ts">list</a>({ ...params }) -> MarketingEventPublicReadResponseV2sPage</code>
 - <code title="delete /marketing/marketing-events/2026-03/{objectId}">client.marketing.events.<a href="./src/resources/marketing/events/events.ts">delete</a>(objectID) -> void</code>
 - <code title="post /marketing/marketing-events/2026-03/batch/archive">client.marketing.events.<a href="./src/resources/marketing/events/events.ts">deleteBatch</a>({ ...params }) -> Response</code>
 - <code title="post /marketing/marketing-events/2026-03/events/delete">client.marketing.events.<a href="./src/resources/marketing/events/events.ts">deleteBatchByExternalEventID</a>({ ...params }) -> Response</code>
@@ -199,8 +208,6 @@ Methods:
 - <code title="patch /marketing/marketing-events/2026-03/events/{externalEventId}">client.marketing.events.<a href="./src/resources/marketing/events/events.ts">updateByExternalEventID</a>(externalEventID, { ...params }) -> MarketingEventPublicDefaultResponse</code>
 - <code title="post /marketing/marketing-events/2026-03/events/upsert">client.marketing.events.<a href="./src/resources/marketing/events/events.ts">upsertBatch</a>({ ...params }) -> BatchResponseMarketingEventPublicDefaultResponse</code>
 - <code title="put /marketing/marketing-events/2026-03/events/{externalEventId}">client.marketing.events.<a href="./src/resources/marketing/events/events.ts">upsertByExternalEventID</a>(externalEventID, { ...params }) -> MarketingEventPublicDefaultResponse</code>
-- <code title="post /marketing/marketing-events/2026-03/events/{externalEventId}/{subscriberState}/email-upsert">client.marketing.events.<a href="./src/resources/marketing/events/events.ts">upsertSubscriberStateByEmail</a>(subscriberState, { ...params }) -> Response</code>
-- <code title="post /marketing/marketing-events/2026-03/events/{externalEventId}/{subscriberState}/upsert">client.marketing.events.<a href="./src/resources/marketing/events/events.ts">upsertSubscriberStateByID</a>(subscriberState, { ...params }) -> Response</code>
 
 ### Attendance
 
@@ -246,15 +253,39 @@ Methods:
 - <code title="post /marketing/marketing-events/2026-03/{appId}/settings">client.marketing.events.settings.<a href="./src/resources/marketing/events/settings.ts">createOrUpdate</a>(appID, { ...params }) -> EventDetailSettings</code>
 - <code title="get /marketing/marketing-events/2026-03/{appId}/settings">client.marketing.events.settings.<a href="./src/resources/marketing/events/settings.ts">get</a>(appID) -> EventDetailSettings</code>
 
+### SubscriberState
+
+Methods:
+
+- <code title="post /marketing/marketing-events/2026-03/events/{externalEventId}/{subscriberState}/email-upsert">client.marketing.events.subscriberState.<a href="./src/resources/marketing/events/subscriber-state.ts">recordByEmail</a>(subscriberState, { ...params }) -> Response</code>
+- <code title="post /marketing/marketing-events/2026-03/events/{externalEventId}/{subscriberState}/upsert">client.marketing.events.subscriberState.<a href="./src/resources/marketing/events/subscriber-state.ts">recordByID</a>(subscriberState, { ...params }) -> Response</code>
+
+## SingleSend
+
+Methods:
+
+- <code title="post /marketing/email-campaigns/2026-03/single-send">client.marketing.singleSend.<a href="./src/resources/marketing/single-send.ts">create</a>({ ...params }) -> EmailSendStatusView</code>
+
 ## Transactional
 
 Types:
 
-- <code><a href="./src/resources/marketing/transactional.ts">EmailSendStatusView</a></code>
-- <code><a href="./src/resources/marketing/transactional.ts">EventIDView</a></code>
-- <code><a href="./src/resources/marketing/transactional.ts">PublicSingleSendEmail</a></code>
-- <code><a href="./src/resources/marketing/transactional.ts">PublicSingleSendRequestEgg</a></code>
+- <code><a href="./src/resources/marketing/transactional/transactional.ts">CollectionResponseSmtpAPITokenViewForwardPaging</a></code>
+- <code><a href="./src/resources/marketing/transactional/transactional.ts">SmtpAPITokenRequestEgg</a></code>
+- <code><a href="./src/resources/marketing/transactional/transactional.ts">SmtpAPITokenView</a></code>
+
+### SingleEmail
 
 Methods:
 
-- <code title="post /marketing/transactional/2026-03/single-email/send">client.marketing.transactional.<a href="./src/resources/marketing/transactional.ts">send</a>({ ...params }) -> EmailSendStatusView</code>
+- <code title="post /marketing/transactional/2026-03/single-email/send">client.marketing.transactional.singleEmail.<a href="./src/resources/marketing/transactional/single-email.ts">send</a>({ ...params }) -> EmailSendStatusView</code>
+
+### SmtpTokens
+
+Methods:
+
+- <code title="post /marketing/transactional/2026-03/smtp-tokens">client.marketing.transactional.smtpTokens.<a href="./src/resources/marketing/transactional/smtp-tokens.ts">create</a>({ ...params }) -> SmtpAPITokenView</code>
+- <code title="get /marketing/transactional/2026-03/smtp-tokens">client.marketing.transactional.smtpTokens.<a href="./src/resources/marketing/transactional/smtp-tokens.ts">list</a>({ ...params }) -> SmtpAPITokenViewsPage</code>
+- <code title="delete /marketing/transactional/2026-03/smtp-tokens/{tokenId}">client.marketing.transactional.smtpTokens.<a href="./src/resources/marketing/transactional/smtp-tokens.ts">delete</a>(tokenID) -> void</code>
+- <code title="get /marketing/transactional/2026-03/smtp-tokens/{tokenId}">client.marketing.transactional.smtpTokens.<a href="./src/resources/marketing/transactional/smtp-tokens.ts">get</a>(tokenID) -> SmtpAPITokenView</code>
+- <code title="post /marketing/transactional/2026-03/smtp-tokens/{tokenId}/password-reset">client.marketing.transactional.smtpTokens.<a href="./src/resources/marketing/transactional/smtp-tokens.ts">resetPassword</a>(tokenID) -> SmtpAPITokenView</code>

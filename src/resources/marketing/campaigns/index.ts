@@ -43,9 +43,12 @@ export {
   type PublicSpendItem,
   type PublicSpendItemInput,
   type RevenueAttributionAggregate,
+  type CampaignCreateParams,
   type CampaignUpdateParams,
+  type CampaignListParams,
   type CampaignGetParams,
   type ContactReferencesPage,
+  type PublicCampaignsPage,
 } from './campaigns';
 export {
   Metrics,

@@ -79,7 +79,7 @@ export class Orders extends APIResource {
   search(
     body: OrderSearchParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CollectionResponseWithTotalSimplePublicObject> {
+  ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/objects/2026-03/orders/search', { body, ...options });
   }
 

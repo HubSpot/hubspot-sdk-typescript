@@ -37,6 +37,7 @@ import { ExternalSettings, VideoConferencing, VideoConferencingUpdateParams } fr
 import * as CallingAPI from './calling/calling';
 import {
   Calling,
+  CallingCreateInboundCallParams,
   CallingCreateParams,
   CallingMarkReadyParams,
   CallingUpdateParams,
@@ -91,6 +92,7 @@ export declare namespace Extensions {
     type SettingsResponse as SettingsResponse,
     type CallingCreateParams as CallingCreateParams,
     type CallingUpdateParams as CallingUpdateParams,
+    type CallingCreateInboundCallParams as CallingCreateInboundCallParams,
     type CallingMarkReadyParams as CallingMarkReadyParams,
   };
 

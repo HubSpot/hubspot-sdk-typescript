@@ -16,6 +16,11 @@ export {
   type AuthorCreateLanguageVariationParams,
   type AuthorDetachFromLangGroupParams,
   type AuthorGetParams,
+  type AuthorListByQueryParams,
+  type AuthorListPostsParams,
+  type AuthorListPostsByQueryParams,
+  type AuthorListTagsParams,
+  type AuthorListTagsByQueryParams,
   type AuthorSetNewLangPrimaryParams,
   type AuthorUpdateLanguagesParams,
 } from './authors';

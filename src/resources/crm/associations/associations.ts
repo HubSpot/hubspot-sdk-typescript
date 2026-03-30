@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
 import * as CrmAPI from '../crm';
+import { MultiAssociatedObjectWithLabelsPage } from '../crm';
 import * as BatchAPI from './batch';
 import {
   Batch,
@@ -13,6 +14,7 @@ import {
   BatchGetParams,
 } from './batch';
 import { APIPromise } from '../../../core/api-promise';
+import { Page, type PageParams, PagePromise } from '../../../core/pagination';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -20,11 +22,24 @@ import { path } from '../../../internal/utils/path';
 export class Associations extends APIResource {
   batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
 
-  deleteAssociations(
-    toObjectID: string,
-    params: AssociationDeleteAssociationsParams,
+  /**
+   * Retrieve all associations between a specific record and an object type. Limit
+   * 500 per call.
+   */
+  list(
+    toObjectType: string,
+    params: AssociationListParams,
     options?: RequestOptions,
-  ): APIPromise<void> {
+  ): PagePromise<MultiAssociatedObjectWithLabelsPage, CrmAPI.MultiAssociatedObjectWithLabel> {
+    const { objectType, objectId, ...query } = params;
+    return this._client.getAPIList(
+      path`/crm/objects/2026-03/${objectType}/${objectId}/associations/${toObjectType}`,
+      Page<CrmAPI.MultiAssociatedObjectWithLabel>,
+      { query, ...options },
+    );
+  }
+
+  delete(toObjectID: string, params: AssociationDeleteParams, options?: RequestOptions): APIPromise<void> {
     const { objectType, objectId, toObjectType } = params;
     return this._client.delete(
       path`/crm/objects/2026-03/${objectType}/${objectId}/associations/${toObjectType}/${toObjectID}`,
@@ -38,6 +53,14 @@ export class Associations extends APIResource {
    */
   requestHighUsageReport(userID: number, options?: RequestOptions): APIPromise<ReportCreationResponse> {
     return this._client.post(path`/crm/associations/2026-03/usage/high-usage-report/${userID}`, options);
+  }
+
+  search(
+    objectType: string,
+    body: AssociationSearchParams,
+    options?: RequestOptions,
+  ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
+    return this._client.post(path`/crm/objects/2026-03/${objectType}/search`, { body, ...options });
   }
 
   updateAssociationLabels(
@@ -235,12 +258,56 @@ export interface ReportCreationResponse {
   userId: number;
 }
 
-export interface AssociationDeleteAssociationsParams {
+export interface AssociationListParams extends PageParams {
+  /**
+   * Path param
+   */
+  objectType: string;
+
+  /**
+   * Path param
+   */
+  objectId: string;
+}
+
+export interface AssociationDeleteParams {
   objectType: string;
 
   objectId: string;
 
   toObjectType: string;
+}
+
+export interface AssociationSearchParams {
+  /**
+   * A paging cursor token for retrieving subsequent pages.
+   */
+  after: string;
+
+  /**
+   * Up to 6 groups of filters defining additional query criteria.
+   */
+  filterGroups: Array<CrmAPI.FilterGroup>;
+
+  /**
+   * The maximum results to return, up to 200 objects.
+   */
+  limit: number;
+
+  /**
+   * A list of property names to include in the response.
+   */
+  properties: Array<string>;
+
+  /**
+   * Specifies sorting order based on object properties.
+   */
+  sorts: Array<string>;
+
+  /**
+   * The search query string, up to 3000 characters.
+   */
+  query?: string;
 }
 
 export interface AssociationUpdateAssociationLabelsParams {
@@ -282,7 +349,9 @@ export declare namespace Associations {
     type PublicDefaultAssociationMultiPost as PublicDefaultAssociationMultiPost,
     type PublicFetchAssociationsBatchRequest as PublicFetchAssociationsBatchRequest,
     type ReportCreationResponse as ReportCreationResponse,
-    type AssociationDeleteAssociationsParams as AssociationDeleteAssociationsParams,
+    type AssociationListParams as AssociationListParams,
+    type AssociationDeleteParams as AssociationDeleteParams,
+    type AssociationSearchParams as AssociationSearchParams,
     type AssociationUpdateAssociationLabelsParams as AssociationUpdateAssociationLabelsParams,
   };
 
@@ -295,3 +364,5 @@ export declare namespace Associations {
     type BatchGetParams as BatchGetParams,
   };
 }
+
+export { type MultiAssociatedObjectWithLabelsPage };

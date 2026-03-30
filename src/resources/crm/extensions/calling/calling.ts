@@ -21,6 +21,9 @@ import { path } from '../../../../internal/utils/path';
 export class Calling extends APIResource {
   transcripts: TranscriptsAPI.Transcripts = new TranscriptsAPI.Transcripts(this._client);
 
+  /**
+   * Create new recording settings for a specific app using the provided app ID.
+   */
   create(
     appID: number,
     body: CallingCreateParams,
@@ -32,6 +35,9 @@ export class Calling extends APIResource {
     });
   }
 
+  /**
+   * Update the recording settings for a specific app using the provided app ID.
+   */
   update(
     appID: number,
     body: CallingUpdateParams,
@@ -43,6 +49,9 @@ export class Calling extends APIResource {
     });
   }
 
+  /**
+   * Delete the channel connection settings associated with the specified app.
+   */
   delete(appID: number, options?: RequestOptions): APIPromise<void> {
     return this._client.delete(path`/crm/extensions/calling/2026-03/${appID}/settings/channel-connection`, {
       ...options,
@@ -50,10 +59,25 @@ export class Calling extends APIResource {
     });
   }
 
+  createInboundCall(
+    body: CallingCreateInboundCallParams,
+    options?: RequestOptions,
+  ): APIPromise<CompletedThirdPartyCallResponse> {
+    return this._client.post('/crm/extensions/calling/2026-03/inbound-call', { body, ...options });
+  }
+
+  /**
+   * Retrieve the current recording settings for a specific app using the provided
+   * app ID.
+   */
   get(appID: number, options?: RequestOptions): APIPromise<RecordingSettingsResponse> {
     return this._client.get(path`/crm/extensions/calling/2026-03/${appID}/settings/recording`, options);
   }
 
+  /**
+   * This endpoint is used to mark a call recording as ready. It requires the
+   * engagementId to identify the specific recording.
+   */
   markReady(body: CallingMarkReadyParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/crm/extensions/calling/2026-03/recordings/ready', {
       body,
@@ -110,20 +134,40 @@ export interface ChannelConnectionSettingsResponse {
 }
 
 export interface CompanyCallerID {
+  /**
+   * Specifies the type of caller ID, which is set to 'COMPANY' by default.
+   */
   callerIdType: 'COMPANY';
 
   objectCoordinates: ObjectCoordinates;
 
+  /**
+   * The name associated with the company caller ID.
+   */
   name?: string;
 }
 
 export interface CompletedThirdPartyCallRequest {
+  /**
+   * Indicates whether an engagement should be created for the call.
+   */
   createEngagement: boolean;
 
+  /**
+   * Contains additional properties related to the engagement.
+   */
   engagementProperties: { [key: string]: string };
 
+  /**
+   * The unique identifier for the call from an external system.
+   */
   externalCallId: string;
 
+  /**
+   * The final status of the call, with accepted values including: BUSY,
+   * CALLING_CRM_USER, CANCELED, COMPLETED, CONNECTING, FAILED, HOLD, IN_PROGRESS,
+   * MISSED, NO_ANSWER, QUEUED, RINGING, UNKNOWN.
+   */
   finalCallStatus:
     | 'BUSY'
     | 'CALLING_CRM_USER'
@@ -145,10 +189,19 @@ export interface CompletedThirdPartyCallRequest {
 
   toNumber: FormattedPhoneNumber;
 
+  /**
+   * The timestamp indicating when the call started, formatted as a date-time string.
+   */
   callStartedTimestamp?: string;
 
+  /**
+   * The duration of the call in seconds.
+   */
   durationSeconds?: number;
 
+  /**
+   * The ID of the user associated with the call.
+   */
   userId?: number;
 }
 
@@ -157,20 +210,39 @@ export interface CompletedThirdPartyCallResponse {
 }
 
 export interface ContactCallerID {
+  /**
+   * Specifies the type of caller ID, with the default value being CONTACT.
+   */
   callerIdType: 'CONTACT';
 
   objectCoordinates: ObjectCoordinates;
 
+  /**
+   * The email address of the contact.
+   */
   email?: string;
 
+  /**
+   * The first name of the contact.
+   */
   firstName?: string;
 
+  /**
+   * The last name of the contact.
+   */
   lastName?: string;
 }
 
 export interface FormattedPhoneNumber {
+  /**
+   * The phone number formatted in E.164 standard.
+   */
   e164Number: string;
 
+  /**
+   * The type of phone number, with accepted values including FIXED_LINE, MOBILE,
+   * VOIP, and others.
+   */
   phoneNumberType:
     | 'FIXED_LINE'
     | 'FIXED_LINE_OR_MOBILE'
@@ -185,6 +257,9 @@ export interface FormattedPhoneNumber {
     | 'VOICEMAIL'
     | 'VOIP';
 
+  /**
+   * The extension number associated with the phone number.
+   */
   extension?: string;
 }
 
@@ -196,10 +271,19 @@ export interface MarkRecordingAsReadyRequest {
 }
 
 export interface ObjectCoordinates {
+  /**
+   * The unique identifier for the object.
+   */
   objectId: number;
 
+  /**
+   * The type identifier for the object.
+   */
   objectTypeId: string;
 
+  /**
+   * The unique identifier for the portal.
+   */
   portalId: number;
 }
 
@@ -389,6 +473,64 @@ export interface CallingUpdateParams {
   urlToRetrieveAuthedRecording?: string;
 }
 
+export interface CallingCreateInboundCallParams {
+  /**
+   * Indicates whether an engagement should be created for the call.
+   */
+  createEngagement: boolean;
+
+  /**
+   * Contains additional properties related to the engagement.
+   */
+  engagementProperties: { [key: string]: string };
+
+  /**
+   * The unique identifier for the call from an external system.
+   */
+  externalCallId: string;
+
+  /**
+   * The final status of the call, with accepted values including: BUSY,
+   * CALLING_CRM_USER, CANCELED, COMPLETED, CONNECTING, FAILED, HOLD, IN_PROGRESS,
+   * MISSED, NO_ANSWER, QUEUED, RINGING, UNKNOWN.
+   */
+  finalCallStatus:
+    | 'BUSY'
+    | 'CALLING_CRM_USER'
+    | 'CANCELED'
+    | 'COMPLETED'
+    | 'CONNECTING'
+    | 'FAILED'
+    | 'HOLD'
+    | 'IN_PROGRESS'
+    | 'MISSED'
+    | 'NO_ANSWER'
+    | 'QUEUED'
+    | 'RINGING'
+    | 'UNKNOWN';
+
+  fromNumber: FormattedPhoneNumber;
+
+  potentialRecipientUserIds: Array<number>;
+
+  toNumber: FormattedPhoneNumber;
+
+  /**
+   * The timestamp indicating when the call started, formatted as a date-time string.
+   */
+  callStartedTimestamp?: string;
+
+  /**
+   * The duration of the call in seconds.
+   */
+  durationSeconds?: number;
+
+  /**
+   * The ID of the user associated with the call.
+   */
+  userId?: number;
+}
+
 export interface CallingMarkReadyParams {
   /**
    * The unique identifier for the engagement associated with the call recording.
@@ -418,6 +560,7 @@ export declare namespace Calling {
     type SettingsResponse as SettingsResponse,
     type CallingCreateParams as CallingCreateParams,
     type CallingUpdateParams as CallingUpdateParams,
+    type CallingCreateInboundCallParams as CallingCreateInboundCallParams,
     type CallingMarkReadyParams as CallingMarkReadyParams,
   };
 

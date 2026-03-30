@@ -7,6 +7,9 @@ import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
 export class PropertiesValidations extends APIResource {
+  /**
+   * Read all properties with validation rules for a given object.
+   */
   getByObjectTypeID(
     objectTypeID: string,
     options?: RequestOptions,
@@ -14,6 +17,9 @@ export class PropertiesValidations extends APIResource {
     return this._client.get(path`/crm/property-validations/2026-03/${objectTypeID}`, options);
   }
 
+  /**
+   * Read a property's validation rules identified by {propertyName}.
+   */
   getByObjectTypeIDAndPropertyName(
     propertyName: string,
     params: PropertiesValidationGetByObjectTypeIDAndPropertyNameParams,
@@ -23,6 +29,10 @@ export class PropertiesValidations extends APIResource {
     return this._client.get(path`/crm/property-validations/2026-03/${objectTypeId}/${propertyName}`, options);
   }
 
+  /**
+   * Retrieve a specific validation rule for a property identified by its name and
+   * rule type.
+   */
   getByObjectTypeIDPropertyNameAndRuleType(
     ruleType:
       | 'AFTER_DATETIME_DURATION'
@@ -62,6 +72,10 @@ export class PropertiesValidations extends APIResource {
     );
   }
 
+  /**
+   * Update a specific validation rule for a property identified by its name and rule
+   * type.
+   */
   updateByObjectTypeIDPropertyNameAndRuleType(
     ruleType:
       | 'AFTER_DATETIME_DURATION'

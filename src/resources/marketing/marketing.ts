@@ -3,7 +3,6 @@
 import { APIResource } from '../../core/resource';
 import * as EmailsAPI from './emails';
 import {
-  AbTestCreateRequestVNext,
   AggregateEmailStatistics,
   CollectionResponseWithTotalEmailStatisticInterval,
   CollectionResponseWithTotalPublicEmail,
@@ -48,15 +47,8 @@ import {
   VersionPublicEmail,
   VersionPublicEmailsPage,
 } from './emails';
-import * as TransactionalAPI from './transactional';
-import {
-  EmailSendStatusView,
-  EventIDView,
-  PublicSingleSendEmail,
-  PublicSingleSendRequestEgg,
-  Transactional,
-  TransactionalSendParams,
-} from './transactional';
+import * as SingleSendAPI from './single-send';
+import { SingleSend, SingleSendCreateParams } from './single-send';
 import * as CampaignsAPI from './campaigns/campaigns';
 import {
   BatchInputPublicCampaignBatchUpdateItem,
@@ -65,7 +57,9 @@ import {
   BatchInputPublicCampaignReadInput,
   BatchResponsePublicCampaign,
   BatchResponsePublicCampaignWithAssets,
+  CampaignCreateParams,
   CampaignGetParams,
+  CampaignListParams,
   CampaignUpdateParams,
   Campaigns,
   CollectionResponseContactReferenceForwardPaging,
@@ -85,6 +79,7 @@ import {
   PublicCampaignInput,
   PublicCampaignReadInput,
   PublicCampaignWithAssets,
+  PublicCampaignsPage,
   PublicSpendItem,
   PublicSpendItemInput,
   RevenueAttributionAggregate,
@@ -117,14 +112,13 @@ import {
   EventDetailSettings,
   EventDetailSettingsURL,
   EventGetByExternalEventIDParams,
+  EventListParams,
   EventSearchByExternalEventIDParams,
   EventUpdateBatchParams,
   EventUpdateByExternalEventIDParams,
   EventUpdateParams,
   EventUpsertBatchParams,
   EventUpsertByExternalEventIDParams,
-  EventUpsertSubscriberStateByEmailParams,
-  EventUpsertSubscriberStateByIDParams,
   Events,
   MarketingEventAssociation,
   MarketingEventCompleteRequestParams,
@@ -138,6 +132,7 @@ import {
   MarketingEventPublicObjectIDDeleteRequest,
   MarketingEventPublicReadResponse,
   MarketingEventPublicReadResponseV2,
+  MarketingEventPublicReadResponseV2sPage,
   MarketingEventPublicUpdateRequestFullV2,
   MarketingEventPublicUpdateRequestV2,
   MarketingEventSubscriber,
@@ -150,20 +145,198 @@ import {
   SubscriberEmailResponse,
   SubscriberVidResponse,
 } from './events/events';
+import * as TransactionalAPI from './transactional/transactional';
+import {
+  CollectionResponseSmtpAPITokenViewForwardPaging,
+  SmtpAPITokenRequestEgg,
+  SmtpAPITokenView,
+  Transactional,
+} from './transactional/transactional';
 
 export class Marketing extends APIResource {
   campaigns: CampaignsAPI.Campaigns = new CampaignsAPI.Campaigns(this._client);
   emails: EmailsAPI.Emails = new EmailsAPI.Emails(this._client);
   events: EventsAPI.Events = new EventsAPI.Events(this._client);
+  singleSend: SingleSendAPI.SingleSend = new SingleSendAPI.SingleSend(this._client);
   transactional: TransactionalAPI.Transactional = new TransactionalAPI.Transactional(this._client);
+}
+
+export interface EmailSendStatusView {
+  /**
+   * Status of the send request.
+   */
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
+
+  /**
+   * Identifier used to query the status of the send.
+   */
+  statusId: string;
+
+  /**
+   * Time when the send was completed.
+   */
+  completedAt?: string;
+
+  eventId?: EventIDView;
+
+  /**
+   * A human readable message describing the error along with remediation steps where
+   * appropriate
+   */
+  message?: string;
+
+  /**
+   * Time when the send was requested.
+   */
+  requestedAt?: string;
+
+  /**
+   * Result of the send.
+   */
+  sendResult?:
+    | 'ADDRESS_LIST_BOMBED'
+    | 'ADDRESS_ONLY_ACCEPTED_ON_PROD'
+    | 'ADDRESS_OPTED_OUT'
+    | 'ATTACHMENT_DOWNLOAD_QUEUE_FULL'
+    | 'BLOCKED_ADDRESS'
+    | 'BLOCKED_DOMAIN'
+    | 'BRAND_RECIPIENT_FATIGUE_SUPPRESSED'
+    | 'CAMPAIGN_CANCELLED'
+    | 'CANCELLED_ABUSE'
+    | 'CORRUPT_INPUT'
+    | 'EMAIL_DISABLED'
+    | 'EMAIL_UNCONFIRMED'
+    | 'GDPR_DOI_ENABLED'
+    | 'GRAYMAIL_SUPPRESSED'
+    | 'HUBL_LIMIT_EXCEEDED'
+    | 'IDEMPOTENT_FAIL'
+    | 'IDEMPOTENT_IGNORE'
+    | 'INVALID_APP_ID_ATTRIBUTION'
+    | 'INVALID_FROM_ADDRESS'
+    | 'INVALID_TO_ADDRESS'
+    | 'LOW_CONTACT_QUALITY_SCORE'
+    | 'MISSING_CONTENT'
+    | 'MISSING_REQUIRED_PARAMETER'
+    | 'MISSING_TEMPLATE_PROPERTIES'
+    | 'MTA_IGNORE'
+    | 'NON_MARKETABLE_CONTACT'
+    | 'PORTAL_AUTHENTICATION_FAILURE'
+    | 'PORTAL_EXPIRED'
+    | 'PORTAL_MISSING_MARKETING_SCOPE'
+    | 'PORTAL_NOT_AUTHORIZED_FOR_APPLICATION'
+    | 'PORTAL_OVER_LIMIT'
+    | 'PORTAL_SUSPENDED'
+    | 'PREVIOUS_SPAM'
+    | 'PREVIOUSLY_BOUNCED'
+    | 'PREVIOUSLY_UNSUBSCRIBED_BRAND'
+    | 'PREVIOUSLY_UNSUBSCRIBED_BUSINESS_UNIT'
+    | 'PREVIOUSLY_UNSUBSCRIBED_MESSAGE'
+    | 'PREVIOUSLY_UNSUBSCRIBED_PORTAL'
+    | 'QUARANTINED_ADDRESS'
+    | 'QUEUED'
+    | 'RECIPIENT_FATIGUE_SUPPRESSED'
+    | 'SENT'
+    | 'TEMPLATE_RENDER_EXCEPTION'
+    | 'THROTTLED'
+    | 'TOO_MANY_RECIPIENTS'
+    | 'UBB_GOVERNANCE_MISSING'
+    | 'UNCONFIGURED_SENDING_DOMAIN'
+    | 'UNDELIVERABLE'
+    | 'VALIDATION_FAILED';
+
+  /**
+   * Time when the send began processing.
+   */
+  startedAt?: string;
+}
+
+export interface EventIDView {
+  /**
+   * Identifier of event.
+   */
+  id: string;
+
+  /**
+   * Time of event creation.
+   */
+  created: string;
+}
+
+export interface PublicSingleSendEmail {
+  /**
+   * List of email addresses to send as Bcc.
+   */
+  bcc: Array<string>;
+
+  /**
+   * List of email addresses to send as Cc.
+   */
+  cc: Array<string>;
+
+  /**
+   * List of Reply-To header values for the email.
+   */
+  replyTo: Array<string>;
+
+  /**
+   * The From header for the email.
+   */
+  from?: string;
+
+  /**
+   * ID for a particular send. No more than one email will be sent per sendId.
+   */
+  sendId?: string;
+
+  /**
+   * The recipient of the email.
+   */
+  to?: string;
+}
+
+export interface PublicSingleSendRequestEgg {
+  /**
+   * The contactProperties field is a map of contact property values. Each contact
+   * property value contains a name and value property. Each property will get set on
+   * the contact record and will be visible in the template under {{ contact.NAME }}.
+   * Use these properties when you want to set a contact property while you’re
+   * sending the email. For example, when sending a receipt you may want to set a
+   * last_paid_date property, as the sending of the receipt will have information
+   * about the last payment.
+   */
+  contactProperties: { [key: string]: string };
+
+  /**
+   * The customProperties field is a map of property values. Each property value
+   * contains a name and value property. Each property will be visible in the
+   * template under {{ custom.NAME }}. Note: Custom properties do not currently
+   * support arrays. To provide a listing in an email, one workaround is to build an
+   * HTML list (either with tables or ul) and specify it as a custom property.
+   */
+  customProperties: { [key: string]: unknown };
+
+  /**
+   * The content ID for the email, which can be found in email tool UI.
+   */
+  emailId: number;
+
+  message: PublicSingleSendEmail;
 }
 
 Marketing.Campaigns = Campaigns;
 Marketing.Emails = Emails;
 Marketing.Events = Events;
+Marketing.SingleSend = SingleSend;
 Marketing.Transactional = Transactional;
 
 export declare namespace Marketing {
+  export {
+    type EmailSendStatusView as EmailSendStatusView,
+    type EventIDView as EventIDView,
+    type PublicSingleSendEmail as PublicSingleSendEmail,
+    type PublicSingleSendRequestEgg as PublicSingleSendRequestEgg,
+  };
+
   export {
     Campaigns as Campaigns,
     type BatchInputPublicCampaignBatchUpdateItem as BatchInputPublicCampaignBatchUpdateItem,
@@ -192,13 +365,15 @@ export declare namespace Marketing {
     type PublicSpendItem as PublicSpendItem,
     type PublicSpendItemInput as PublicSpendItemInput,
     type RevenueAttributionAggregate as RevenueAttributionAggregate,
+    type PublicCampaignsPage as PublicCampaignsPage,
+    type CampaignCreateParams as CampaignCreateParams,
     type CampaignUpdateParams as CampaignUpdateParams,
+    type CampaignListParams as CampaignListParams,
     type CampaignGetParams as CampaignGetParams,
   };
 
   export {
     Emails as Emails,
-    type AbTestCreateRequestVNext as AbTestCreateRequestVNext,
     type AggregateEmailStatistics as AggregateEmailStatistics,
     type CollectionResponseWithTotalEmailStatisticInterval as CollectionResponseWithTotalEmailStatisticInterval,
     type CollectionResponseWithTotalPublicEmail as CollectionResponseWithTotalPublicEmail,
@@ -289,8 +464,10 @@ export declare namespace Marketing {
     type SearchPublicResponseWrapper as SearchPublicResponseWrapper,
     type SubscriberEmailResponse as SubscriberEmailResponse,
     type SubscriberVidResponse as SubscriberVidResponse,
+    type MarketingEventPublicReadResponseV2sPage as MarketingEventPublicReadResponseV2sPage,
     type EventCreateParams as EventCreateParams,
     type EventUpdateParams as EventUpdateParams,
+    type EventListParams as EventListParams,
     type EventDeleteBatchParams as EventDeleteBatchParams,
     type EventDeleteBatchByExternalEventIDParams as EventDeleteBatchByExternalEventIDParams,
     type EventDeleteByExternalEventIDParams as EventDeleteByExternalEventIDParams,
@@ -300,16 +477,14 @@ export declare namespace Marketing {
     type EventUpdateByExternalEventIDParams as EventUpdateByExternalEventIDParams,
     type EventUpsertBatchParams as EventUpsertBatchParams,
     type EventUpsertByExternalEventIDParams as EventUpsertByExternalEventIDParams,
-    type EventUpsertSubscriberStateByEmailParams as EventUpsertSubscriberStateByEmailParams,
-    type EventUpsertSubscriberStateByIDParams as EventUpsertSubscriberStateByIDParams,
   };
+
+  export { SingleSend as SingleSend, type SingleSendCreateParams as SingleSendCreateParams };
 
   export {
     Transactional as Transactional,
-    type EmailSendStatusView as EmailSendStatusView,
-    type EventIDView as EventIDView,
-    type PublicSingleSendEmail as PublicSingleSendEmail,
-    type PublicSingleSendRequestEgg as PublicSingleSendRequestEgg,
-    type TransactionalSendParams as TransactionalSendParams,
+    type CollectionResponseSmtpAPITokenViewForwardPaging as CollectionResponseSmtpAPITokenViewForwardPaging,
+    type SmtpAPITokenRequestEgg as SmtpAPITokenRequestEgg,
+    type SmtpAPITokenView as SmtpAPITokenView,
   };
 }

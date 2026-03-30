@@ -101,7 +101,7 @@ export class LineItems extends APIResource {
   search(
     body: LineItemSearchParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CollectionResponseWithTotalSimplePublicObject> {
+  ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/objects/2026-03/line_items/search', { body, ...options });
   }
 }

@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as Shared from '../../../shared';
-import * as BlogsAPI from '../blogs';
+import * as CmsAPI from '../../cms';
 import * as MultiLanguageAPI from './multi-language';
 import {
   MultiLanguage,
@@ -20,6 +20,10 @@ import { path } from '../../../../internal/utils/path';
 export class Settings extends APIResource {
   multiLanguage: MultiLanguageAPI.MultiLanguage = new MultiLanguageAPI.MultiLanguage(this._client);
 
+  /**
+   * Get the list of blogs. Results can be limited and filtered by creation or
+   * updated date.
+   */
   list(
     query: SettingListParams | null | undefined = {},
     options?: RequestOptions,
@@ -27,10 +31,16 @@ export class Settings extends APIResource {
     return this._client.getAPIList('/cms/blog-settings/2026-03/settings', Page<Blog>, { query, ...options });
   }
 
+  /**
+   * Retrieve a specific blog by its ID.
+   */
   get(blogID: string, options?: RequestOptions): APIPromise<Blog> {
     return this._client.get(path`/cms/blog-settings/2026-03/settings/${blogID}`, options);
   }
 
+  /**
+   * Get a specific blog revision.
+   */
   getRevision(
     revisionID: string,
     params: SettingGetRevisionParams,
@@ -43,6 +53,10 @@ export class Settings extends APIResource {
     );
   }
 
+  /**
+   * Get the list of blog revisions. Results can be limited and filtered by creation
+   * or updated date.
+   */
   listRevisions(
     blogID: string,
     query: SettingListRevisionsParams | null | undefined = {},
@@ -61,6 +75,9 @@ export type BlogsPage = Page<Blog>;
 export type VersionBlogsPage = Page<VersionBlog>;
 
 export interface Blog {
+  /**
+   * The unique ID of the Blog.
+   */
   id: string;
 
   /**
@@ -68,6 +85,9 @@ export interface Blog {
    */
   absoluteUrl: string;
 
+  /**
+   * Boolean determining whether or not this blog allows public comments.
+   */
   allowComments: boolean;
 
   /**
@@ -76,14 +96,24 @@ export interface Blog {
   created: string;
 
   /**
-   * The timestamp (ISO8601 format) when this blog was deleted.
+   * The timestamp (ISO8601 format) when this Blog was deleted.
    */
   deletedAt: string;
 
+  /**
+   * The Description of this Blog.
+   */
   description: string;
 
+  /**
+   * The html title of this Blog.
+   */
   htmlTitle: string;
 
+  /**
+   * The explicitly defined language of the Blog. If null, the Blog will default to
+   * the language of the Domain.
+   */
   language:
     | 'aa'
     | 'ab'
@@ -931,16 +961,35 @@ export interface Blog {
 
   listingPageId: string;
 
+  /**
+   * The internal name of the blog.
+   */
   name: string;
 
-  publicAccessRules: Array<BlogsAPI.PublicAccessRule>;
+  /**
+   * Rules for require member registration to access private content.
+   */
+  publicAccessRules: Array<CmsAPI.PublicAccessRule>;
 
+  /**
+   * Boolean to determine whether or not to respect publicAccessRules.
+   */
   publicAccessRulesEnabled: boolean;
 
+  /**
+   * The public title of this Blog.
+   */
   publicTitle: string;
 
+  /**
+   * The path of the this blog. This field is appended to the domain to construct the
+   * url of this blog.
+   */
   slug: string;
 
+  /**
+   * ID of the primary Blog this object was translated from.
+   */
   translatedFromId: string;
 
   /**
@@ -950,12 +999,24 @@ export interface Blog {
 }
 
 export interface BlogLanguageCloneRequestVNext {
+  /**
+   * ID of blog to clone.
+   */
   id: string;
 
+  /**
+   * Target language of new variant.
+   */
   language?: string;
 
+  /**
+   * Language of primary blog to clone.
+   */
   primaryLanguage?: string;
 
+  /**
+   * Path to this blog.
+   */
   slug?: string;
 }
 
@@ -986,6 +1047,9 @@ export interface CollectionResponseWithTotalBlogVersion {
 }
 
 export interface VersionBlog {
+  /**
+   * The id of the version.
+   */
   id: string;
 
   object: Blog;

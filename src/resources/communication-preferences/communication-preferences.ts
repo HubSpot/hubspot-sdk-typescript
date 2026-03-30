@@ -33,19 +33,6 @@ export class CommunicationPreferences extends APIResource {
   }
 
   /**
-   * Retrieve the subscription statuses for a specific email address. This endpoint
-   * allows you to check the current subscription status for email communications,
-   * which can be useful for managing communication preferences and ensuring
-   * compliance with user preferences.
-   */
-  getStatusByEmail(
-    emailAddress: string,
-    options?: RequestOptions,
-  ): APIPromise<PublicSubscriptionStatusesResponse> {
-    return this._client.get(path`/communication-preferences/2026-03/status/email/${emailAddress}`, options);
-  }
-
-  /**
    * Retrieve a contact's current email subscription preferences.
    */
   getStatuses(
@@ -76,36 +63,7 @@ export class CommunicationPreferences extends APIResource {
   }
 
   /**
-   * Subscribe a user to a specific communication preference using their email
-   * address and subscription ID. This endpoint allows you to manage subscription
-   * statuses by updating them to 'subscribed' for a given email address. It is
-   * useful for ensuring that users receive communications they have opted into.
-   */
-  subscribe(
-    body: CommunicationPreferenceSubscribeParams,
-    options?: RequestOptions,
-  ): APIPromise<PublicSubscriptionStatus> {
-    return this._client.post('/communication-preferences/2026-03/subscribe', { body, ...options });
-  }
-
-  /**
-   * Unsubscribe a user from communication preferences. This endpoint allows you to
-   * update the subscription status of a user to 'unsubscribed' for specified
-   * communication channels. It is useful for managing user preferences and ensuring
-   * compliance with user opt-out requests.
-   */
-  unsubscribe(
-    body: CommunicationPreferenceUnsubscribeParams,
-    options?: RequestOptions,
-  ): APIPromise<PublicSubscriptionStatus> {
-    return this._client.post('/communication-preferences/2026-03/unsubscribe', { body, ...options });
-  }
-
-  /**
-   * Unsubscribe a subscriber from all communication channels. This endpoint allows
-   * you to remove a subscriber from all communication preferences, effectively
-   * opting them out from receiving any further communications. This can be useful
-   * for ensuring compliance with user requests or legal requirements.
+   * Unsubscribe a contact from all email subscriptions.
    */
   unsubscribeAll(
     subscriberIDString: string,
@@ -669,80 +627,6 @@ export interface PublicStatusRequest {
   legalBasisExplanation?: string;
 }
 
-export interface PublicSubscriptionStatus {
-  /**
-   * The unique identifier for the subscription status.
-   */
-  id: string;
-
-  /**
-   * A description of the subscription status.
-   */
-  description: string;
-
-  /**
-   * The name of the subscription status.
-   */
-  name: string;
-
-  /**
-   * Indicates the origin of the subscription status, with possible values being
-   * 'PORTAL_WIDE_STATUS', 'BRAND_WIDE_STATUS', or 'SUBSCRIPTION_STATUS'.
-   */
-  sourceOfStatus: 'BRAND_WIDE_STATUS' | 'PORTAL_WIDE_STATUS' | 'SUBSCRIPTION_STATUS';
-
-  /**
-   * The current status of the subscription, which can be 'SUBSCRIBED' or
-   * 'NOT_SUBSCRIBED'.
-   */
-  status: 'NOT_SUBSCRIBED' | 'SUBSCRIBED';
-
-  /**
-   * The unique identifier for the brand associated with the subscription status,
-   * represented as an integer.
-   */
-  brandId?: number;
-
-  /**
-   * The legal basis for processing the subscription, which can include values such
-   * as 'LEGITIMATE_INTEREST_PQL', 'LEGITIMATE_INTEREST_CLIENT',
-   * 'PERFORMANCE_OF_CONTRACT', 'CONSENT_WITH_NOTICE', 'NON_GDPR',
-   * 'PROCESS_AND_STORE', or 'LEGITIMATE_INTEREST_OTHER'.
-   */
-  legalBasis?:
-    | 'CONSENT_WITH_NOTICE'
-    | 'LEGITIMATE_INTEREST_CLIENT'
-    | 'LEGITIMATE_INTEREST_OTHER'
-    | 'LEGITIMATE_INTEREST_PQL'
-    | 'NON_GDPR'
-    | 'PERFORMANCE_OF_CONTRACT'
-    | 'PROCESS_AND_STORE';
-
-  /**
-   * An explanation of the legal basis for the subscription status.
-   */
-  legalBasisExplanation?: string;
-
-  /**
-   * The name of the preference group associated with the subscription status.
-   */
-  preferenceGroupName?: string;
-}
-
-export interface PublicSubscriptionStatusesResponse {
-  /**
-   * The email address of the recipient for whom the subscription statuses are being
-   * retrieved. It is a string.
-   */
-  recipient: string;
-
-  /**
-   * An array of PublicSubscriptionStatus objects, each detailing the subscription
-   * status of the recipient for a particular subscription.
-   */
-  subscriptionStatuses: Array<PublicSubscriptionStatus>;
-}
-
 export interface PublicSubscriptionTranslation {
   /**
    * The timestamp indicating when the subscription translation was created.
@@ -773,42 +657,6 @@ export interface PublicSubscriptionTranslation {
    * The timestamp indicating when the subscription translation was last updated.
    */
   updatedAt: number;
-}
-
-export interface PublicUpdateSubscriptionStatusRequest {
-  /**
-   * The email address of the user whose subscription status is being updated. It is
-   * a required field and must be a string.
-   */
-  emailAddress: string;
-
-  /**
-   * The unique identifier of the subscription for which the status is being updated.
-   * It is a required field and must be a string.
-   */
-  subscriptionId: string;
-
-  /**
-   * The legal basis for processing the subscription status change. It is an optional
-   * field and must be a string with valid values including
-   * 'LEGITIMATE_INTEREST_PQL', 'LEGITIMATE_INTEREST_CLIENT',
-   * 'PERFORMANCE_OF_CONTRACT', 'CONSENT_WITH_NOTICE', 'NON_GDPR',
-   * 'PROCESS_AND_STORE', and 'LEGITIMATE_INTEREST_OTHER'.
-   */
-  legalBasis?:
-    | 'CONSENT_WITH_NOTICE'
-    | 'LEGITIMATE_INTEREST_CLIENT'
-    | 'LEGITIMATE_INTEREST_OTHER'
-    | 'LEGITIMATE_INTEREST_PQL'
-    | 'NON_GDPR'
-    | 'PERFORMANCE_OF_CONTRACT'
-    | 'PROCESS_AND_STORE';
-
-  /**
-   * An optional field providing an explanation for the legal basis used. It must be
-   * a string.
-   */
-  legalBasisExplanation?: string;
 }
 
 export interface PublicWideStatus {
@@ -920,8 +768,7 @@ export interface SubscriptionDefinition {
 
 export interface CommunicationPreferenceGenerateLinksParams {
   /**
-   * Query param: The communication channel for which the links are generated. Must
-   * be 'EMAIL'.
+   * Query param
    */
   channel: 'EMAIL';
 
@@ -932,8 +779,7 @@ export interface CommunicationPreferenceGenerateLinksParams {
   subscriberIdString: string;
 
   /**
-   * Query param: The ID of the business unit associated with the request. Defaults
-   * to 0.
+   * Query param
    */
   businessUnitId?: number;
 
@@ -951,126 +797,24 @@ export interface CommunicationPreferenceGenerateLinksParams {
 }
 
 export interface CommunicationPreferenceGetStatusesParams {
-  /**
-   * A required string indicating the communication channel to retrieve the status
-   * for. Valid value is 'EMAIL'.
-   */
   channel: 'EMAIL';
 
-  /**
-   * An optional integer representing the business unit ID to filter the subscription
-   * status.
-   */
   businessUnitId?: number;
 }
 
 export interface CommunicationPreferenceGetUnsubscribeAllStatusParams {
-  /**
-   * The communication channel to unsubscribe from. Must be 'EMAIL'.
-   */
   channel: 'EMAIL';
 
-  /**
-   * The ID of the business unit associated with the communication preferences.
-   */
   businessUnitId?: number;
 
-  /**
-   * A boolean indicating whether to include detailed information in the response.
-   * Defaults to false.
-   */
   verbose?: boolean;
 }
 
-export interface CommunicationPreferenceSubscribeParams {
-  /**
-   * The email address of the user whose subscription status is being updated. It is
-   * a required field and must be a string.
-   */
-  emailAddress: string;
-
-  /**
-   * The unique identifier of the subscription for which the status is being updated.
-   * It is a required field and must be a string.
-   */
-  subscriptionId: string;
-
-  /**
-   * The legal basis for processing the subscription status change. It is an optional
-   * field and must be a string with valid values including
-   * 'LEGITIMATE_INTEREST_PQL', 'LEGITIMATE_INTEREST_CLIENT',
-   * 'PERFORMANCE_OF_CONTRACT', 'CONSENT_WITH_NOTICE', 'NON_GDPR',
-   * 'PROCESS_AND_STORE', and 'LEGITIMATE_INTEREST_OTHER'.
-   */
-  legalBasis?:
-    | 'CONSENT_WITH_NOTICE'
-    | 'LEGITIMATE_INTEREST_CLIENT'
-    | 'LEGITIMATE_INTEREST_OTHER'
-    | 'LEGITIMATE_INTEREST_PQL'
-    | 'NON_GDPR'
-    | 'PERFORMANCE_OF_CONTRACT'
-    | 'PROCESS_AND_STORE';
-
-  /**
-   * An optional field providing an explanation for the legal basis used. It must be
-   * a string.
-   */
-  legalBasisExplanation?: string;
-}
-
-export interface CommunicationPreferenceUnsubscribeParams {
-  /**
-   * The email address of the user whose subscription status is being updated. It is
-   * a required field and must be a string.
-   */
-  emailAddress: string;
-
-  /**
-   * The unique identifier of the subscription for which the status is being updated.
-   * It is a required field and must be a string.
-   */
-  subscriptionId: string;
-
-  /**
-   * The legal basis for processing the subscription status change. It is an optional
-   * field and must be a string with valid values including
-   * 'LEGITIMATE_INTEREST_PQL', 'LEGITIMATE_INTEREST_CLIENT',
-   * 'PERFORMANCE_OF_CONTRACT', 'CONSENT_WITH_NOTICE', 'NON_GDPR',
-   * 'PROCESS_AND_STORE', and 'LEGITIMATE_INTEREST_OTHER'.
-   */
-  legalBasis?:
-    | 'CONSENT_WITH_NOTICE'
-    | 'LEGITIMATE_INTEREST_CLIENT'
-    | 'LEGITIMATE_INTEREST_OTHER'
-    | 'LEGITIMATE_INTEREST_PQL'
-    | 'NON_GDPR'
-    | 'PERFORMANCE_OF_CONTRACT'
-    | 'PROCESS_AND_STORE';
-
-  /**
-   * An optional field providing an explanation for the legal basis used. It must be
-   * a string.
-   */
-  legalBasisExplanation?: string;
-}
-
 export interface CommunicationPreferenceUnsubscribeAllParams {
-  /**
-   * The communication channel from which to unsubscribe the subscriber. Must be
-   * 'EMAIL'.
-   */
   channel: 'EMAIL';
 
-  /**
-   * The ID of the business unit associated with the subscriber. This is an optional
-   * parameter.
-   */
   businessUnitId?: number;
 
-  /**
-   * A boolean flag indicating whether to include detailed information in the
-   * response. Defaults to false.
-   */
   verbose?: boolean;
 }
 
@@ -1132,18 +876,13 @@ export declare namespace CommunicationPreferences {
     type PublicStatus as PublicStatus,
     type PublicStatusBulkResponse as PublicStatusBulkResponse,
     type PublicStatusRequest as PublicStatusRequest,
-    type PublicSubscriptionStatus as PublicSubscriptionStatus,
-    type PublicSubscriptionStatusesResponse as PublicSubscriptionStatusesResponse,
     type PublicSubscriptionTranslation as PublicSubscriptionTranslation,
-    type PublicUpdateSubscriptionStatusRequest as PublicUpdateSubscriptionStatusRequest,
     type PublicWideStatus as PublicWideStatus,
     type PublicWideStatusBulkResponse as PublicWideStatusBulkResponse,
     type SubscriptionDefinition as SubscriptionDefinition,
     type CommunicationPreferenceGenerateLinksParams as CommunicationPreferenceGenerateLinksParams,
     type CommunicationPreferenceGetStatusesParams as CommunicationPreferenceGetStatusesParams,
     type CommunicationPreferenceGetUnsubscribeAllStatusParams as CommunicationPreferenceGetUnsubscribeAllStatusParams,
-    type CommunicationPreferenceSubscribeParams as CommunicationPreferenceSubscribeParams,
-    type CommunicationPreferenceUnsubscribeParams as CommunicationPreferenceUnsubscribeParams,
     type CommunicationPreferenceUnsubscribeAllParams as CommunicationPreferenceUnsubscribeAllParams,
     type CommunicationPreferenceUpdateStatusParams as CommunicationPreferenceUpdateStatusParams,
   };

@@ -1,5 +1,30 @@
 # Cms
 
+Types:
+
+- <code><a href="./src/resources/cms/cms.ts">Angle</a></code>
+- <code><a href="./src/resources/cms/cms.ts">AttachToLangPrimaryRequestVNext</a></code>
+- <code><a href="./src/resources/cms/cms.ts">BackgroundImage</a></code>
+- <code><a href="./src/resources/cms/cms.ts">BatchInputJsonNode</a></code>
+- <code><a href="./src/resources/cms/cms.ts">BreakpointStyles</a></code>
+- <code><a href="./src/resources/cms/cms.ts">ColorStop</a></code>
+- <code><a href="./src/resources/cms/cms.ts">ContentCloneRequestVNext</a></code>
+- <code><a href="./src/resources/cms/cms.ts">ContentLanguageVariation</a></code>
+- <code><a href="./src/resources/cms/cms.ts">ContentScheduleRequestVNext</a></code>
+- <code><a href="./src/resources/cms/cms.ts">DetachFromLangGroupRequestVNext</a></code>
+- <code><a href="./src/resources/cms/cms.ts">Gradient</a></code>
+- <code><a href="./src/resources/cms/cms.ts">LayoutSection</a></code>
+- <code><a href="./src/resources/cms/cms.ts">Margin</a></code>
+- <code><a href="./src/resources/cms/cms.ts">Padding</a></code>
+- <code><a href="./src/resources/cms/cms.ts">PublicAccessRule</a></code>
+- <code><a href="./src/resources/cms/cms.ts">RgbaColor</a></code>
+- <code><a href="./src/resources/cms/cms.ts">RowMetaData</a></code>
+- <code><a href="./src/resources/cms/cms.ts">SetNewLanguagePrimaryRequestVNext</a></code>
+- <code><a href="./src/resources/cms/cms.ts">SideOrCorner</a></code>
+- <code><a href="./src/resources/cms/cms.ts">Size</a></code>
+- <code><a href="./src/resources/cms/cms.ts">Styles</a></code>
+- <code><a href="./src/resources/cms/cms.ts">UpdateLanguagesRequestVNext</a></code>
+
 ## AuditLogs
 
 Types:
@@ -18,12 +43,9 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/cms/blogs/blogs.ts">AttachToLangPrimaryRequestVNext</a></code>
-- <code><a href="./src/resources/cms/blogs/blogs.ts">BatchInputJsonNode</a></code>
-- <code><a href="./src/resources/cms/blogs/blogs.ts">DetachFromLangGroupRequestVNext</a></code>
-- <code><a href="./src/resources/cms/blogs/blogs.ts">PublicAccessRule</a></code>
-- <code><a href="./src/resources/cms/blogs/blogs.ts">SetNewLanguagePrimaryRequestVNext</a></code>
-- <code><a href="./src/resources/cms/blogs/blogs.ts">UpdateLanguagesRequestVNext</a></code>
+- <code><a href="./src/resources/cms/blogs/blogs.ts">CursorPagedResultBlogAuthorLong</a></code>
+- <code><a href="./src/resources/cms/blogs/blogs.ts">CursorPagedResultBlogPostLong</a></code>
+- <code><a href="./src/resources/cms/blogs/blogs.ts">CursorPagedResultTagLong</a></code>
 
 ### Authors
 
@@ -40,12 +62,17 @@ Methods:
 
 - <code title="post /cms/blogs/2026-03/authors">client.cms.blogs.authors.<a href="./src/resources/cms/blogs/authors/authors.ts">create</a>({ ...params }) -> Response</code>
 - <code title="patch /cms/blogs/2026-03/authors/{objectId}">client.cms.blogs.authors.<a href="./src/resources/cms/blogs/authors/authors.ts">update</a>(objectID, { ...params }) -> Response</code>
-- <code title="get /cms/blogs/2026-03/authors">client.cms.blogs.authors.<a href="./src/resources/cms/blogs/authors/authors.ts">list</a>({ ...params }) -> Response</code>
+- <code title="get /cms/blogs/2026-03/authors/cursor">client.cms.blogs.authors.<a href="./src/resources/cms/blogs/authors/authors.ts">list</a>({ ...params }) -> Response</code>
 - <code title="delete /cms/blogs/2026-03/authors/{objectId}">client.cms.blogs.authors.<a href="./src/resources/cms/blogs/authors/authors.ts">delete</a>(objectID, { ...params }) -> void</code>
 - <code title="post /cms/blogs/2026-03/authors/multi-language/attach-to-lang-group">client.cms.blogs.authors.<a href="./src/resources/cms/blogs/authors/authors.ts">attachToLangGroup</a>({ ...params }) -> Response</code>
 - <code title="post /cms/blogs/2026-03/authors/multi-language/create-language-variation">client.cms.blogs.authors.<a href="./src/resources/cms/blogs/authors/authors.ts">createLanguageVariation</a>({ ...params }) -> Response</code>
 - <code title="post /cms/blogs/2026-03/authors/multi-language/detach-from-lang-group">client.cms.blogs.authors.<a href="./src/resources/cms/blogs/authors/authors.ts">detachFromLangGroup</a>({ ...params }) -> Response</code>
 - <code title="get /cms/blogs/2026-03/authors/{objectId}">client.cms.blogs.authors.<a href="./src/resources/cms/blogs/authors/authors.ts">get</a>(objectID, { ...params }) -> Response</code>
+- <code title="get /cms/blogs/2026-03/authors/cursor/query">client.cms.blogs.authors.<a href="./src/resources/cms/blogs/authors/authors.ts">listByQuery</a>({ ...params }) -> Response</code>
+- <code title="get /cms/blogs/2026-03/posts/cursor">client.cms.blogs.authors.<a href="./src/resources/cms/blogs/authors/authors.ts">listPosts</a>({ ...params }) -> Response</code>
+- <code title="get /cms/blogs/2026-03/posts/cursor/query">client.cms.blogs.authors.<a href="./src/resources/cms/blogs/authors/authors.ts">listPostsByQuery</a>({ ...params }) -> Response</code>
+- <code title="get /cms/blogs/2026-03/tags/cursor">client.cms.blogs.authors.<a href="./src/resources/cms/blogs/authors/authors.ts">listTags</a>({ ...params }) -> Response</code>
+- <code title="get /cms/blogs/2026-03/tags/cursor/query">client.cms.blogs.authors.<a href="./src/resources/cms/blogs/authors/authors.ts">listTagsByQuery</a>({ ...params }) -> Response</code>
 - <code title="put /cms/blogs/2026-03/authors/multi-language/set-new-lang-primary">client.cms.blogs.authors.<a href="./src/resources/cms/blogs/authors/authors.ts">setNewLangPrimary</a>({ ...params }) -> void</code>
 - <code title="post /cms/blogs/2026-03/authors/multi-language/update-languages">client.cms.blogs.authors.<a href="./src/resources/cms/blogs/authors/authors.ts">updateLanguages</a>({ ...params }) -> Response</code>
 
@@ -62,54 +89,34 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/cms/blogs/posts/posts.ts">Angle</a></code>
-- <code><a href="./src/resources/cms/blogs/posts/posts.ts">BackgroundImage</a></code>
 - <code><a href="./src/resources/cms/blogs/posts/posts.ts">BatchInputBlogPost</a></code>
 - <code><a href="./src/resources/cms/blogs/posts/posts.ts">BatchResponseBlogPost</a></code>
 - <code><a href="./src/resources/cms/blogs/posts/posts.ts">BatchResponseBlogPostWithErrors</a></code>
 - <code><a href="./src/resources/cms/blogs/posts/posts.ts">BlogPost</a></code>
 - <code><a href="./src/resources/cms/blogs/posts/posts.ts">BlogPostLanguageCloneRequestVNext</a></code>
 - <code><a href="./src/resources/cms/blogs/posts/posts.ts">BlogPostVersion</a></code>
-- <code><a href="./src/resources/cms/blogs/posts/posts.ts">BreakpointStyles</a></code>
 - <code><a href="./src/resources/cms/blogs/posts/posts.ts">CollectionResponseWithTotalBlogPostForwardPaging</a></code>
 - <code><a href="./src/resources/cms/blogs/posts/posts.ts">CollectionResponseWithTotalBlogPostVersion</a></code>
-- <code><a href="./src/resources/cms/blogs/posts/posts.ts">ColorStop</a></code>
-- <code><a href="./src/resources/cms/blogs/posts/posts.ts">ContentCloneRequestVNext</a></code>
-- <code><a href="./src/resources/cms/blogs/posts/posts.ts">ContentLanguageVariation</a></code>
-- <code><a href="./src/resources/cms/blogs/posts/posts.ts">ContentScheduleRequestVNext</a></code>
-- <code><a href="./src/resources/cms/blogs/posts/posts.ts">Gradient</a></code>
-- <code><a href="./src/resources/cms/blogs/posts/posts.ts">LayoutSection</a></code>
-- <code><a href="./src/resources/cms/blogs/posts/posts.ts">Margin</a></code>
-- <code><a href="./src/resources/cms/blogs/posts/posts.ts">Padding</a></code>
-- <code><a href="./src/resources/cms/blogs/posts/posts.ts">RgbaColor</a></code>
-- <code><a href="./src/resources/cms/blogs/posts/posts.ts">RowMetaData</a></code>
-- <code><a href="./src/resources/cms/blogs/posts/posts.ts">SideOrCorner</a></code>
-- <code><a href="./src/resources/cms/blogs/posts/posts.ts">Size</a></code>
-- <code><a href="./src/resources/cms/blogs/posts/posts.ts">Styles</a></code>
 - <code><a href="./src/resources/cms/blogs/posts/posts.ts">VersionBlogPost</a></code>
 
 Methods:
 
 - <code title="post /cms/blogs/2026-03/posts">client.cms.blogs.posts.<a href="./src/resources/cms/blogs/posts/posts.ts">create</a>({ ...params }) -> Response</code>
 - <code title="patch /cms/blogs/2026-03/posts/{objectId}">client.cms.blogs.posts.<a href="./src/resources/cms/blogs/posts/posts.ts">update</a>(objectID, { ...params }) -> Response</code>
-- <code title="get /cms/blogs/2026-03/posts">client.cms.blogs.posts.<a href="./src/resources/cms/blogs/posts/posts.ts">list</a>({ ...params }) -> Response</code>
+- <code title="get /cms/blogs/2026-03/posts/cursor">client.cms.blogs.posts.<a href="./src/resources/cms/blogs/posts/posts.ts">list</a>({ ...params }) -> Response</code>
 - <code title="delete /cms/blogs/2026-03/posts/{objectId}">client.cms.blogs.posts.<a href="./src/resources/cms/blogs/posts/posts.ts">delete</a>(objectID, { ...params }) -> void</code>
-- <code title="post /cms/blogs/2026-03/posts/multi-language/attach-to-lang-group">client.cms.blogs.posts.<a href="./src/resources/cms/blogs/posts/posts.ts">attachToLangGroup</a>({ ...params }) -> Response</code>
 - <code title="post /cms/blogs/2026-03/posts/clone">client.cms.blogs.posts.<a href="./src/resources/cms/blogs/posts/posts.ts">clone</a>({ ...params }) -> Response</code>
-- <code title="post /cms/blogs/2026-03/posts/multi-language/create-language-variation">client.cms.blogs.posts.<a href="./src/resources/cms/blogs/posts/posts.ts">createLangVariation</a>({ ...params }) -> Response</code>
-- <code title="post /cms/blogs/2026-03/posts/multi-language/detach-from-lang-group">client.cms.blogs.posts.<a href="./src/resources/cms/blogs/posts/posts.ts">detachFromLangGroup</a>({ ...params }) -> Response</code>
 - <code title="get /cms/blogs/2026-03/posts/{objectId}">client.cms.blogs.posts.<a href="./src/resources/cms/blogs/posts/posts.ts">get</a>(objectID, { ...params }) -> Response</code>
 - <code title="get /cms/blogs/2026-03/posts/{objectId}/draft">client.cms.blogs.posts.<a href="./src/resources/cms/blogs/posts/posts.ts">getDraftByID</a>(objectID) -> Response</code>
-- <code title="get /cms/blogs/2026-03/posts/{objectId}/revisions/{revisionId}">client.cms.blogs.posts.<a href="./src/resources/cms/blogs/posts/posts.ts">getPreviousVersion</a>(revisionID, { ...params }) -> Response</code>
-- <code title="get /cms/blogs/2026-03/posts/{objectId}/revisions">client.cms.blogs.posts.<a href="./src/resources/cms/blogs/posts/posts.ts">getPreviousVersions</a>(objectID, { ...params }) -> Response</code>
+- <code title="get /cms/blogs/2026-03/authors/cursor">client.cms.blogs.posts.<a href="./src/resources/cms/blogs/posts/posts.ts">listAuthors</a>({ ...params }) -> Response</code>
+- <code title="get /cms/blogs/2026-03/tags/cursor">client.cms.blogs.posts.<a href="./src/resources/cms/blogs/posts/posts.ts">listTags</a>({ ...params }) -> Response</code>
 - <code title="post /cms/blogs/2026-03/posts/{objectId}/draft/push-live">client.cms.blogs.posts.<a href="./src/resources/cms/blogs/posts/posts.ts">pushLive</a>(objectID) -> void</code>
+- <code title="get /cms/blogs/2026-03/posts/cursor/query">client.cms.blogs.posts.<a href="./src/resources/cms/blogs/posts/posts.ts">query</a>({ ...params }) -> Response</code>
+- <code title="get /cms/blogs/2026-03/authors/cursor/query">client.cms.blogs.posts.<a href="./src/resources/cms/blogs/posts/posts.ts">queryAuthors</a>({ ...params }) -> Response</code>
+- <code title="get /cms/blogs/2026-03/tags/cursor/query">client.cms.blogs.posts.<a href="./src/resources/cms/blogs/posts/posts.ts">queryTags</a>({ ...params }) -> Response</code>
 - <code title="post /cms/blogs/2026-03/posts/{objectId}/draft/reset">client.cms.blogs.posts.<a href="./src/resources/cms/blogs/posts/posts.ts">resetDraft</a>(objectID) -> void</code>
-- <code title="post /cms/blogs/2026-03/posts/{objectId}/revisions/{revisionId}/restore">client.cms.blogs.posts.<a href="./src/resources/cms/blogs/posts/posts.ts">restorePreviousVersion</a>(revisionID, { ...params }) -> Response</code>
-- <code title="post /cms/blogs/2026-03/posts/{objectId}/revisions/{revisionId}/restore-to-draft">client.cms.blogs.posts.<a href="./src/resources/cms/blogs/posts/posts.ts">restorePreviousVersionToDraft</a>(revisionID, { ...params }) -> Response</code>
 - <code title="post /cms/blogs/2026-03/posts/schedule">client.cms.blogs.posts.<a href="./src/resources/cms/blogs/posts/posts.ts">schedule</a>({ ...params }) -> void</code>
-- <code title="put /cms/blogs/2026-03/posts/multi-language/set-new-lang-primary">client.cms.blogs.posts.<a href="./src/resources/cms/blogs/posts/posts.ts">setLangPrimary</a>({ ...params }) -> void</code>
 - <code title="patch /cms/blogs/2026-03/posts/{objectId}/draft">client.cms.blogs.posts.<a href="./src/resources/cms/blogs/posts/posts.ts">updateDraft</a>(objectID, { ...params }) -> Response</code>
-- <code title="post /cms/blogs/2026-03/posts/multi-language/update-languages">client.cms.blogs.posts.<a href="./src/resources/cms/blogs/posts/posts.ts">updateLangs</a>({ ...params }) -> Response</code>
 
 #### Batch
 
@@ -119,6 +126,25 @@ Methods:
 - <code title="post /cms/blogs/2026-03/posts/batch/update">client.cms.blogs.posts.batch.<a href="./src/resources/cms/blogs/posts/batch.ts">update</a>({ ...params }) -> Response</code>
 - <code title="post /cms/blogs/2026-03/posts/batch/archive">client.cms.blogs.posts.batch.<a href="./src/resources/cms/blogs/posts/batch.ts">delete</a>({ ...params }) -> void</code>
 - <code title="post /cms/blogs/2026-03/posts/batch/read">client.cms.blogs.posts.batch.<a href="./src/resources/cms/blogs/posts/batch.ts">get</a>({ ...params }) -> Response</code>
+
+#### MultiLanguage
+
+Methods:
+
+- <code title="post /cms/blogs/2026-03/posts/multi-language/attach-to-lang-group">client.cms.blogs.posts.multiLanguage.<a href="./src/resources/cms/blogs/posts/multi-language.ts">attachToLangGroup</a>({ ...params }) -> Response</code>
+- <code title="post /cms/blogs/2026-03/posts/multi-language/create-language-variation">client.cms.blogs.posts.multiLanguage.<a href="./src/resources/cms/blogs/posts/multi-language.ts">createLangVariation</a>({ ...params }) -> Response</code>
+- <code title="post /cms/blogs/2026-03/posts/multi-language/detach-from-lang-group">client.cms.blogs.posts.multiLanguage.<a href="./src/resources/cms/blogs/posts/multi-language.ts">detachFromLangGroup</a>({ ...params }) -> Response</code>
+- <code title="put /cms/blogs/2026-03/posts/multi-language/set-new-lang-primary">client.cms.blogs.posts.multiLanguage.<a href="./src/resources/cms/blogs/posts/multi-language.ts">setLangPrimary</a>({ ...params }) -> void</code>
+- <code title="post /cms/blogs/2026-03/posts/multi-language/update-languages">client.cms.blogs.posts.multiLanguage.<a href="./src/resources/cms/blogs/posts/multi-language.ts">updateLangs</a>({ ...params }) -> Response</code>
+
+#### Revisions
+
+Methods:
+
+- <code title="get /cms/blogs/2026-03/posts/{objectId}/revisions/{revisionId}">client.cms.blogs.posts.revisions.<a href="./src/resources/cms/blogs/posts/revisions.ts">getPreviousVersion</a>(revisionID, { ...params }) -> Response</code>
+- <code title="get /cms/blogs/2026-03/posts/{objectId}/revisions">client.cms.blogs.posts.revisions.<a href="./src/resources/cms/blogs/posts/revisions.ts">getPreviousVersions</a>(objectID, { ...params }) -> Response</code>
+- <code title="post /cms/blogs/2026-03/posts/{objectId}/revisions/{revisionId}/restore">client.cms.blogs.posts.revisions.<a href="./src/resources/cms/blogs/posts/revisions.ts">restorePreviousVersion</a>(revisionID, { ...params }) -> Response</code>
+- <code title="post /cms/blogs/2026-03/posts/{objectId}/revisions/{revisionId}/restore-to-draft">client.cms.blogs.posts.revisions.<a href="./src/resources/cms/blogs/posts/revisions.ts">restorePreviousVersionToDraft</a>(revisionID, { ...params }) -> Response</code>
 
 ### Settings
 
@@ -152,29 +178,40 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/cms/blogs/tags.ts">BatchInputTag</a></code>
-- <code><a href="./src/resources/cms/blogs/tags.ts">BatchResponseTag</a></code>
-- <code><a href="./src/resources/cms/blogs/tags.ts">BatchResponseTagWithErrors</a></code>
-- <code><a href="./src/resources/cms/blogs/tags.ts">CollectionResponseWithTotalTagForwardPaging</a></code>
-- <code><a href="./src/resources/cms/blogs/tags.ts">Tag</a></code>
-- <code><a href="./src/resources/cms/blogs/tags.ts">TagCloneRequestVNext</a></code>
+- <code><a href="./src/resources/cms/blogs/tags/tags.ts">BatchInputTag</a></code>
+- <code><a href="./src/resources/cms/blogs/tags/tags.ts">BatchResponseTag</a></code>
+- <code><a href="./src/resources/cms/blogs/tags/tags.ts">BatchResponseTagWithErrors</a></code>
+- <code><a href="./src/resources/cms/blogs/tags/tags.ts">CollectionResponseWithTotalTagForwardPaging</a></code>
+- <code><a href="./src/resources/cms/blogs/tags/tags.ts">Tag</a></code>
+- <code><a href="./src/resources/cms/blogs/tags/tags.ts">TagCloneRequestVNext</a></code>
 
 Methods:
 
-- <code title="post /cms/blogs/2026-03/tags">client.cms.blogs.tags.<a href="./src/resources/cms/blogs/tags.ts">create</a>({ ...params }) -> Response</code>
-- <code title="patch /cms/blogs/2026-03/tags/{objectId}">client.cms.blogs.tags.<a href="./src/resources/cms/blogs/tags.ts">update</a>(objectID, { ...params }) -> Response</code>
-- <code title="get /cms/blogs/2026-03/tags">client.cms.blogs.tags.<a href="./src/resources/cms/blogs/tags.ts">list</a>({ ...params }) -> Response</code>
-- <code title="delete /cms/blogs/2026-03/tags/{objectId}">client.cms.blogs.tags.<a href="./src/resources/cms/blogs/tags.ts">delete</a>(objectID, { ...params }) -> void</code>
-- <code title="post /cms/blogs/2026-03/tags/multi-language/attach-to-lang-group">client.cms.blogs.tags.<a href="./src/resources/cms/blogs/tags.ts">attachToLangGroup</a>({ ...params }) -> Response</code>
-- <code title="post /cms/blogs/2026-03/tags/batch/create">client.cms.blogs.tags.<a href="./src/resources/cms/blogs/tags.ts">createBatch</a>({ ...params }) -> Response</code>
-- <code title="post /cms/blogs/2026-03/tags/multi-language/create-language-variation">client.cms.blogs.tags.<a href="./src/resources/cms/blogs/tags.ts">createLangVariation</a>({ ...params }) -> Response</code>
-- <code title="post /cms/blogs/2026-03/tags/batch/archive">client.cms.blogs.tags.<a href="./src/resources/cms/blogs/tags.ts">deleteBatch</a>({ ...params }) -> void</code>
-- <code title="post /cms/blogs/2026-03/tags/multi-language/detach-from-lang-group">client.cms.blogs.tags.<a href="./src/resources/cms/blogs/tags.ts">detachFromLangGroup</a>({ ...params }) -> Response</code>
-- <code title="get /cms/blogs/2026-03/tags/{objectId}">client.cms.blogs.tags.<a href="./src/resources/cms/blogs/tags.ts">get</a>(objectID, { ...params }) -> Response</code>
-- <code title="post /cms/blogs/2026-03/tags/batch/read">client.cms.blogs.tags.<a href="./src/resources/cms/blogs/tags.ts">getBatch</a>({ ...params }) -> Response</code>
-- <code title="put /cms/blogs/2026-03/tags/multi-language/set-new-lang-primary">client.cms.blogs.tags.<a href="./src/resources/cms/blogs/tags.ts">setLangPrimary</a>({ ...params }) -> void</code>
-- <code title="post /cms/blogs/2026-03/tags/batch/update">client.cms.blogs.tags.<a href="./src/resources/cms/blogs/tags.ts">updateBatch</a>({ ...params }) -> Response</code>
-- <code title="post /cms/blogs/2026-03/tags/multi-language/update-languages">client.cms.blogs.tags.<a href="./src/resources/cms/blogs/tags.ts">updateLangs</a>({ ...params }) -> Response</code>
+- <code title="post /cms/blogs/2026-03/tags">client.cms.blogs.tags.<a href="./src/resources/cms/blogs/tags/tags.ts">create</a>({ ...params }) -> Response</code>
+- <code title="patch /cms/blogs/2026-03/tags/{objectId}">client.cms.blogs.tags.<a href="./src/resources/cms/blogs/tags/tags.ts">update</a>(objectID, { ...params }) -> Response</code>
+- <code title="get /cms/blogs/2026-03/tags">client.cms.blogs.tags.<a href="./src/resources/cms/blogs/tags/tags.ts">list</a>({ ...params }) -> Response</code>
+- <code title="delete /cms/blogs/2026-03/tags/{objectId}">client.cms.blogs.tags.<a href="./src/resources/cms/blogs/tags/tags.ts">delete</a>(objectID, { ...params }) -> void</code>
+- <code title="post /cms/blogs/2026-03/tags/multi-language/attach-to-lang-group">client.cms.blogs.tags.<a href="./src/resources/cms/blogs/tags/tags.ts">attachToLangGroup</a>({ ...params }) -> Response</code>
+- <code title="post /cms/blogs/2026-03/tags/multi-language/create-language-variation">client.cms.blogs.tags.<a href="./src/resources/cms/blogs/tags/tags.ts">createLangVariation</a>({ ...params }) -> Response</code>
+- <code title="post /cms/blogs/2026-03/tags/multi-language/detach-from-lang-group">client.cms.blogs.tags.<a href="./src/resources/cms/blogs/tags/tags.ts">detachFromLangGroup</a>({ ...params }) -> Response</code>
+- <code title="get /cms/blogs/2026-03/tags/{objectId}">client.cms.blogs.tags.<a href="./src/resources/cms/blogs/tags/tags.ts">get</a>(objectID, { ...params }) -> Response</code>
+- <code title="get /cms/blogs/2026-03/authors/cursor">client.cms.blogs.tags.<a href="./src/resources/cms/blogs/tags/tags.ts">listAuthorsCursor</a>({ ...params }) -> Response</code>
+- <code title="get /cms/blogs/2026-03/authors/cursor/query">client.cms.blogs.tags.<a href="./src/resources/cms/blogs/tags/tags.ts">listAuthorsCursorByQuery</a>({ ...params }) -> Response</code>
+- <code title="get /cms/blogs/2026-03/tags/cursor">client.cms.blogs.tags.<a href="./src/resources/cms/blogs/tags/tags.ts">listCursor</a>({ ...params }) -> Response</code>
+- <code title="get /cms/blogs/2026-03/tags/cursor/query">client.cms.blogs.tags.<a href="./src/resources/cms/blogs/tags/tags.ts">listCursorByQuery</a>({ ...params }) -> Response</code>
+- <code title="get /cms/blogs/2026-03/posts/cursor">client.cms.blogs.tags.<a href="./src/resources/cms/blogs/tags/tags.ts">listPostsCursor</a>({ ...params }) -> Response</code>
+- <code title="get /cms/blogs/2026-03/posts/cursor/query">client.cms.blogs.tags.<a href="./src/resources/cms/blogs/tags/tags.ts">listPostsCursorByQuery</a>({ ...params }) -> Response</code>
+- <code title="put /cms/blogs/2026-03/tags/multi-language/set-new-lang-primary">client.cms.blogs.tags.<a href="./src/resources/cms/blogs/tags/tags.ts">setLangPrimary</a>({ ...params }) -> void</code>
+- <code title="post /cms/blogs/2026-03/tags/multi-language/update-languages">client.cms.blogs.tags.<a href="./src/resources/cms/blogs/tags/tags.ts">updateLangs</a>({ ...params }) -> Response</code>
+
+#### Batch
+
+Methods:
+
+- <code title="post /cms/blogs/2026-03/tags/batch/archive">client.cms.blogs.tags.batch.<a href="./src/resources/cms/blogs/tags/batch.ts">delete</a>({ ...params }) -> void</code>
+- <code title="post /cms/blogs/2026-03/tags/batch/create">client.cms.blogs.tags.batch.<a href="./src/resources/cms/blogs/tags/batch.ts">createBatch</a>({ ...params }) -> Response</code>
+- <code title="post /cms/blogs/2026-03/tags/batch/read">client.cms.blogs.tags.batch.<a href="./src/resources/cms/blogs/tags/batch.ts">getBatch</a>({ ...params }) -> Response</code>
+- <code title="post /cms/blogs/2026-03/tags/batch/update">client.cms.blogs.tags.batch.<a href="./src/resources/cms/blogs/tags/batch.ts">updateBatch</a>({ ...params }) -> Response</code>
 
 ## Domains
 
@@ -188,6 +225,76 @@ Methods:
 - <code title="get /cms/domains/2026-03">client.cms.domains.<a href="./src/resources/cms/domains.ts">list</a>({ ...params }) -> DomainsPage</code>
 - <code title="get /cms/domains/2026-03/{domainId}">client.cms.domains.<a href="./src/resources/cms/domains.ts">get</a>(domainID) -> Domain</code>
 
+## Hubdb
+
+Types:
+
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">BatchInputHubDBTableRowBatchCloneRequest</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">BatchInputHubDBTableRowV3BatchUpdateRequest</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">BatchInputHubDBTableRowV3Request</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">BatchResponseHubDBTableRowV3</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">BoundedNextPage</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">BoundedPaging</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">CollectionResponseWithTotalHubDBTableV3</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">Column</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">ColumnRequest</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">ForeignID</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">HubDBTableCloneRequest</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">HubDBTableRowBatchCloneRequest</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">HubDBTableRowV3</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">HubDBTableRowV3BatchUpdateRequest</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">HubDBTableRowV3Request</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">HubDBTableRowV3Wrapper</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">HubDBTableV3</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">HubDBTableV3Request</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">ImportResult</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">Option</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">RandomAccessCollectionResponseWithTotalHubDBTableRowV3</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">SimpleUser</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">StreamingCollectionResponseWithTotalHubDBTableRowV3</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">Variant</a></code>
+
+### Rows
+
+Methods:
+
+- <code title="post /cms/hubdb/2026-03/tables/{tableIdOrName}/rows">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows.ts">create</a>(tableIDOrName, { ...params }) -> HubDBTableRowV3</code>
+- <code title="get /cms/hubdb/2026-03/tables/{tableIdOrName}/rows">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows.ts">list</a>(tableIDOrName, { ...params }) -> HubDBTableRowV3WrappersPage</code>
+- <code title="post /cms/hubdb/2026-03/tables/{tableIdOrName}/rows/draft/batch/clone">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows.ts">cloneBatch</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
+- <code title="post /cms/hubdb/2026-03/tables/{tableIdOrName}/rows/{rowId}/draft/clone">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows.ts">cloneDraft</a>(rowID, { ...params }) -> HubDBTableRowV3</code>
+- <code title="post /cms/hubdb/2026-03/tables/{tableIdOrName}/rows/draft/batch/create">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows.ts">createBatch</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
+- <code title="delete /cms/hubdb/2026-03/tables/{tableIdOrName}/rows/{rowId}/draft">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows.ts">deleteDraft</a>(rowID, { ...params }) -> void</code>
+- <code title="get /cms/hubdb/2026-03/tables/{tableIdOrName}/rows/{rowId}">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows.ts">get</a>(rowID, { ...params }) -> HubDBTableRowV3</code>
+- <code title="post /cms/hubdb/2026-03/tables/{tableIdOrName}/rows/batch/read">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows.ts">getBatch</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
+- <code title="get /cms/hubdb/2026-03/tables/{tableIdOrName}/rows/{rowId}/draft">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows.ts">getDraft</a>(rowID, { ...params }) -> HubDBTableRowV3</code>
+- <code title="post /cms/hubdb/2026-03/tables/{tableIdOrName}/rows/draft/batch/read">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows.ts">getDraftBatch</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
+- <code title="post /cms/hubdb/2026-03/tables/{tableIdOrName}/rows/draft/batch/purge">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows.ts">purgeBatch</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
+- <code title="post /cms/hubdb/2026-03/tables/{tableIdOrName}/rows/draft/batch/replace">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows.ts">replaceBatch</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
+- <code title="put /cms/hubdb/2026-03/tables/{tableIdOrName}/rows/{rowId}/draft">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows.ts">replaceDraft</a>(rowID, { ...params }) -> HubDBTableRowV3</code>
+- <code title="post /cms/hubdb/2026-03/tables/{tableIdOrName}/rows/draft/batch/update">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows.ts">updateBatch</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
+- <code title="patch /cms/hubdb/2026-03/tables/{tableIdOrName}/rows/{rowId}/draft">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows.ts">updateDraft</a>(rowID, { ...params }) -> HubDBTableRowV3</code>
+
+### Tables
+
+Methods:
+
+- <code title="post /cms/hubdb/2026-03/tables">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">create</a>({ ...params }) -> HubDBTableV3</code>
+- <code title="get /cms/hubdb/2026-03/tables">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">list</a>({ ...params }) -> HubDBTableV3sPage</code>
+- <code title="delete /cms/hubdb/2026-03/tables/{tableIdOrName}">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">delete</a>(tableIDOrName) -> void</code>
+- <code title="post /cms/hubdb/2026-03/tables/{tableIdOrName}/draft/clone">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">cloneDraft</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
+- <code title="delete /cms/hubdb/2026-03/tables/{tableIdOrName}/versions/{versionId}">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">deleteVersion</a>(versionID, { ...params }) -> void</code>
+- <code title="get /cms/hubdb/2026-03/tables/{tableIdOrName}/export">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">export</a>(tableIDOrName, { ...params }) -> Response</code>
+- <code title="get /cms/hubdb/2026-03/tables/{tableIdOrName}/draft/export">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">exportDraft</a>(tableIDOrName, { ...params }) -> Response</code>
+- <code title="get /cms/hubdb/2026-03/tables/{tableIdOrName}">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">get</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
+- <code title="get /cms/hubdb/2026-03/tables/{tableIdOrName}/draft">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">getDraft</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
+- <code title="post /cms/hubdb/2026-03/tables/{tableIdOrName}/draft/import">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">importDraft</a>(tableIDOrName, { ...params }) -> ImportResult</code>
+- <code title="get /cms/hubdb/2026-03/tables/draft">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">listDraft</a>({ ...params }) -> HubDBTableV3sPage</code>
+- <code title="post /cms/hubdb/2026-03/tables/{tableIdOrName}/draft/publish">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">publishDraft</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
+- <code title="post /cms/hubdb/2026-03/tables/{tableIdOrName}/draft/reset">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">resetDraft</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
+- <code title="post /cms/hubdb/2026-03/tables/{tableIdOrName}/unpublish">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">unpublish</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
+- <code title="patch /cms/hubdb/2026-03/tables/{tableIdOrName}/draft">client.cms.hubdb.tables.<a href="./src/resources/cms/hubdb/tables.ts">updateDraft</a>(tableIDOrName, { ...params }) -> HubDBTableV3</code>
+
 ## MediaBridge
 
 Types:
@@ -197,24 +304,21 @@ Types:
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">AddTime</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">And</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">AttentionSpanCalculatedValues</a></code>
+- <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">AttentionSpanEvent</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">AttentionSpanEventRequest</a></code>
+- <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">BatchResponseProperty</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">BeginsWith</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">BooleanPropertyVariable</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">BooleanTargetPropertyVariable</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">BulkIntegratorObjectCreationResponse</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">CaseChangeTestExtensionData</a></code>
-- <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">CollectionResponseMediaBridgeObjectForwardPaging</a></code>
+- <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">CollectionResponseObjectSchemaNoPaging</a></code>
+- <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">CollectionResponsePropertyNoPaging</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">ConcatStrings</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">ConstantBoolean</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">ConstantNumber</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">ConstantString</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">Contains</a></code>
-- <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">CreateAudioObjectRequest</a></code>
-- <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">CreateDocumentObjectRequest</a></code>
-- <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">CreateImageObjectRequest</a></code>
-- <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">CreateMBObjectRequest</a></code>
-- <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">CreateOtherObjectRequest</a></code>
-- <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">CreateVideoObjectRequest</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">Date</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">DatedExchangeRate</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">DefaultRequirements</a></code>
@@ -256,11 +360,12 @@ Types:
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">LessThanOrEqual</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">LowerCase</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">MaxNumbers</a></code>
-- <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">MediaBridgeObject</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">MediaBridgePropertyUpdate</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">MediaBridgeProviderPartial</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">MediaBridgeProviderRegistrationResponse</a></code>
+- <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">MediaPlayedEvent</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">MediaPlayedEventRequest</a></code>
+- <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">MediaPlayedPercentageEvent</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">MediaPlayedPercentageEventRequest</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">MinNumbers</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">Month</a></code>
@@ -275,6 +380,7 @@ Types:
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">NumberToString</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">OEmbedDomainsCollectionResponse</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">ObjectDefinitionResponse</a></code>
+- <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">ObjectSchema</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">ObjectTypeIDProto</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">Option1</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">OptionDecorations</a></code>
@@ -309,27 +415,16 @@ Types:
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">TimeBetweenSkipWeekends</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">TimestampOfPropertyVariable</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">TimestampOfTargetPropertyVariable</a></code>
-- <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">UpdateAudioObjectRequest</a></code>
-- <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">UpdateDocumentObjectRequest</a></code>
-- <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">UpdateImageObjectRequest</a></code>
-- <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">UpdateMBObjectRequest</a></code>
-- <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">UpdateOtherObjectRequest</a></code>
-- <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">UpdateVideoObjectRequest</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">UpperCase</a></code>
-- <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">VideoObject</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">Xor</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">Year</a></code>
 
 Methods:
 
-- <code title="post /media-bridge/2026-03/objects">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">create</a>() -> MediaBridgeObject</code>
-- <code title="patch /media-bridge/2026-03/objects/{objectId}">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">update</a>(objectID) -> MediaBridgeObject</code>
-- <code title="get /media-bridge/2026-03/objects/{mediaType}">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">list</a>(mediaType, { ...params }) -> MediaBridgeObjectsPage</code>
-- <code title="delete /media-bridge/2026-03/objects/{mediaType}/{objectId}">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">delete</a>(objectID, { ...params }) -> void</code>
 - <code title="post /media-bridge/2026-03/{appId}/schemas/{objectType}/associations">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">createAssociation</a>(objectType, { ...params }) -> AssociationDefinition</code>
-- <code title="post /media-bridge/2026-03/events/attention-span">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">createAttentionSpanEvent</a>({ ...params }) -> Response</code>
-- <code title="post /media-bridge/2026-03/events/media-played">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">createMediaPlayedEvent</a>({ ...params }) -> Response</code>
-- <code title="post /media-bridge/2026-03/events/media-played-percent">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">createMediaPlayedPercentEvent</a>({ ...params }) -> Response</code>
+- <code title="post /media-bridge/2026-03/events/attention-span">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">createAttentionSpanEvent</a>({ ...params }) -> AttentionSpanEvent</code>
+- <code title="post /media-bridge/2026-03/events/media-played">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">createMediaPlayedEvent</a>({ ...params }) -> MediaPlayedEvent</code>
+- <code title="post /media-bridge/2026-03/events/media-played-percent">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">createMediaPlayedPercentEvent</a>({ ...params }) -> MediaPlayedPercentageEvent</code>
 - <code title="post /media-bridge/2026-03/{appId}/settings/object-definitions">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">createObjectType</a>(appID, { ...params }) -> BulkIntegratorObjectCreationResponse</code>
 - <code title="post /media-bridge/2026-03/{appId}/settings/oembed-domains">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">createOembedDomain</a>(appID, { ...params }) -> IntegratorOEmbedDomainModel</code>
 - <code title="post /media-bridge/2026-03/{appId}/properties/{objectType}">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">createProperty</a>(objectType, { ...params }) -> Property</code>
@@ -339,7 +434,6 @@ Methods:
 - <code title="delete /media-bridge/2026-03/{appId}/settings/oembed-domains">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">deleteOembedDomain</a>(appID, { ...params }) -> void</code>
 - <code title="delete /media-bridge/2026-03/{appId}/properties/{objectType}/{propertyName}">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">deleteProperty</a>(propertyName, { ...params }) -> void</code>
 - <code title="delete /media-bridge/2026-03/{appId}/properties/{objectType}/groups/{groupName}">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">deletePropertyGroup</a>(groupName, { ...params }) -> void</code>
-- <code title="get /media-bridge/2026-03/objects/{mediaType}/{objectId}">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">get</a>(objectID, { ...params }) -> MediaBridgeObject</code>
 - <code title="get /media-bridge/2026-03/{appId}/settings/event-visibility">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">getEventVisibilitySettings</a>(appID) -> EventVisibilityResponse</code>
 - <code title="get /media-bridge/2026-03/{appId}/settings/oembed-domains/{oEmbedDomainId}">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">getOembedDomain</a>(oEmbedDomainID, { ...params }) -> IntegratorOEmbedDomainModel</code>
 - <code title="get /media-bridge/2026-03/{appId}/properties/{objectType}/{propertyName}">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">getProperty</a>(propertyName, { ...params }) -> Property</code>
@@ -365,6 +459,124 @@ Methods:
 - <code title="post /media-bridge/2026-03/{appId}/properties/{objectType}/batch/create">client.cms.mediaBridge.batch.<a href="./src/resources/cms/media-bridge/batch.ts">create</a>(objectType, { ...params }) -> BatchResponseProperty</code>
 - <code title="post /media-bridge/2026-03/{appId}/properties/{objectType}/batch/archive">client.cms.mediaBridge.batch.<a href="./src/resources/cms/media-bridge/batch.ts">delete</a>(objectType, { ...params }) -> void</code>
 - <code title="post /media-bridge/2026-03/{appId}/properties/{objectType}/batch/read">client.cms.mediaBridge.batch.<a href="./src/resources/cms/media-bridge/batch.ts">get</a>(objectType, { ...params }) -> BatchResponseProperty</code>
+
+## Pages
+
+Types:
+
+- <code><a href="./src/resources/cms/pages/pages.ts">AbTestEndRequestVNext</a></code>
+- <code><a href="./src/resources/cms/pages/pages.ts">AbTestRerunRequestVNext</a></code>
+- <code><a href="./src/resources/cms/pages/pages.ts">BatchInputContentFolder</a></code>
+- <code><a href="./src/resources/cms/pages/pages.ts">BatchInputPage</a></code>
+- <code><a href="./src/resources/cms/pages/pages.ts">BatchResponseContentFolder</a></code>
+- <code><a href="./src/resources/cms/pages/pages.ts">BatchResponseContentFolderWithErrors</a></code>
+- <code><a href="./src/resources/cms/pages/pages.ts">BatchResponsePage</a></code>
+- <code><a href="./src/resources/cms/pages/pages.ts">BatchResponsePageWithErrors</a></code>
+- <code><a href="./src/resources/cms/pages/pages.ts">CollectionResponseWithTotalContentFolderForwardPaging</a></code>
+- <code><a href="./src/resources/cms/pages/pages.ts">CollectionResponseWithTotalContentFolderVersion</a></code>
+- <code><a href="./src/resources/cms/pages/pages.ts">CollectionResponseWithTotalPageForwardPaging</a></code>
+- <code><a href="./src/resources/cms/pages/pages.ts">CollectionResponseWithTotalPageVersion</a></code>
+- <code><a href="./src/resources/cms/pages/pages.ts">ContentFolder</a></code>
+- <code><a href="./src/resources/cms/pages/pages.ts">ContentFolderVersion</a></code>
+- <code><a href="./src/resources/cms/pages/pages.ts">ContentLanguageCloneRequestVNext</a></code>
+- <code><a href="./src/resources/cms/pages/pages.ts">CursorPagedResultContentFolderLong</a></code>
+- <code><a href="./src/resources/cms/pages/pages.ts">CursorPagedResultPageLong</a></code>
+- <code><a href="./src/resources/cms/pages/pages.ts">Page</a></code>
+- <code><a href="./src/resources/cms/pages/pages.ts">PageVersion</a></code>
+
+Methods:
+
+- <code title="get /cms/pages/2026-03/site-pages/{objectId}/revisions/{revisionId}">client.cms.pages.<a href="./src/resources/cms/pages/pages.ts">getRevision</a>(revisionID, { ...params }) -> PageVersion</code>
+- <code title="get /cms/pages/2026-03/landing-pages/folders/cursor">client.cms.pages.<a href="./src/resources/cms/pages/pages.ts">listLandingPageFolders</a>({ ...params }) -> unknown</code>
+- <code title="get /cms/pages/2026-03/landing-pages/cursor">client.cms.pages.<a href="./src/resources/cms/pages/pages.ts">listLandingPages</a>({ ...params }) -> unknown</code>
+- <code title="get /cms/pages/2026-03/site-pages/{objectId}/revisions">client.cms.pages.<a href="./src/resources/cms/pages/pages.ts">listRevisions</a>(objectID, { ...params }) -> PageVersionsPage</code>
+- <code title="get /cms/pages/2026-03/site-pages/cursor">client.cms.pages.<a href="./src/resources/cms/pages/pages.ts">listSitePages</a>({ ...params }) -> unknown</code>
+- <code title="get /cms/pages/2026-03/landing-pages/folders/cursor/query">client.cms.pages.<a href="./src/resources/cms/pages/pages.ts">queryLandingPageFolders</a>({ ...params }) -> unknown</code>
+- <code title="get /cms/pages/2026-03/landing-pages/cursor/query">client.cms.pages.<a href="./src/resources/cms/pages/pages.ts">queryLandingPages</a>({ ...params }) -> unknown</code>
+- <code title="get /cms/pages/2026-03/site-pages/cursor/query">client.cms.pages.<a href="./src/resources/cms/pages/pages.ts">querySitePages</a>({ ...params }) -> unknown</code>
+- <code title="post /cms/pages/2026-03/site-pages/{objectId}/draft/reset">client.cms.pages.<a href="./src/resources/cms/pages/pages.ts">resetDraft</a>(objectID) -> void</code>
+- <code title="post /cms/pages/2026-03/site-pages/{objectId}/revisions/{revisionId}/restore">client.cms.pages.<a href="./src/resources/cms/pages/pages.ts">restoreRevision</a>(revisionID, { ...params }) -> Page</code>
+- <code title="post /cms/pages/2026-03/site-pages/{objectId}/revisions/{revisionId}/restore-to-draft">client.cms.pages.<a href="./src/resources/cms/pages/pages.ts">restoreRevisionToDraft</a>(revisionID, { ...params }) -> Page</code>
+
+### ABTests
+
+Methods:
+
+- <code title="post /cms/pages/2026-03/site-pages/ab-test/create-variation">client.cms.pages.aBTests.<a href="./src/resources/cms/pages/a-b-tests.ts">createAbTestVariation</a>({ ...params }) -> Page</code>
+- <code title="post /cms/pages/2026-03/site-pages/ab-test/end">client.cms.pages.aBTests.<a href="./src/resources/cms/pages/a-b-tests.ts">endAbTest</a>({ ...params }) -> void</code>
+- <code title="post /cms/pages/2026-03/site-pages/ab-test/rerun">client.cms.pages.aBTests.<a href="./src/resources/cms/pages/a-b-tests.ts">rerunAbTest</a>({ ...params }) -> void</code>
+
+### Batch
+
+Methods:
+
+- <code title="post /cms/pages/2026-03/landing-pages/folders/batch/create">client.cms.pages.batch.<a href="./src/resources/cms/pages/batch.ts">createFolders</a>({ ...params }) -> BatchResponseContentFolder</code>
+- <code title="post /cms/pages/2026-03/landing-pages/batch/create">client.cms.pages.batch.<a href="./src/resources/cms/pages/batch.ts">createLandingPages</a>({ ...params }) -> BatchResponsePage</code>
+- <code title="post /cms/pages/2026-03/site-pages/batch/create">client.cms.pages.batch.<a href="./src/resources/cms/pages/batch.ts">createSitePages</a>({ ...params }) -> BatchResponsePage</code>
+- <code title="post /cms/pages/2026-03/landing-pages/folders/batch/archive">client.cms.pages.batch.<a href="./src/resources/cms/pages/batch.ts">deleteFolders</a>({ ...params }) -> void</code>
+- <code title="post /cms/pages/2026-03/landing-pages/batch/archive">client.cms.pages.batch.<a href="./src/resources/cms/pages/batch.ts">deleteLandingPages</a>({ ...params }) -> void</code>
+- <code title="post /cms/pages/2026-03/site-pages/batch/archive">client.cms.pages.batch.<a href="./src/resources/cms/pages/batch.ts">deleteSitePages</a>({ ...params }) -> void</code>
+- <code title="post /cms/pages/2026-03/landing-pages/batch/read">client.cms.pages.batch.<a href="./src/resources/cms/pages/batch.ts">getLandingPages</a>({ ...params }) -> BatchResponsePage</code>
+- <code title="post /cms/pages/2026-03/site-pages/batch/read">client.cms.pages.batch.<a href="./src/resources/cms/pages/batch.ts">getSitePages</a>({ ...params }) -> BatchResponsePage</code>
+- <code title="post /cms/pages/2026-03/landing-pages/folders/batch/update">client.cms.pages.batch.<a href="./src/resources/cms/pages/batch.ts">updateFolders</a>({ ...params }) -> BatchResponseContentFolder</code>
+- <code title="post /cms/pages/2026-03/landing-pages/batch/update">client.cms.pages.batch.<a href="./src/resources/cms/pages/batch.ts">updateLandingPages</a>({ ...params }) -> BatchResponsePage</code>
+- <code title="post /cms/pages/2026-03/site-pages/batch/update">client.cms.pages.batch.<a href="./src/resources/cms/pages/batch.ts">updateSitePages</a>({ ...params }) -> BatchResponsePage</code>
+
+### Folders
+
+Methods:
+
+- <code title="post /cms/pages/2026-03/landing-pages/folders">client.cms.pages.folders.<a href="./src/resources/cms/pages/folders.ts">createFolder</a>({ ...params }) -> ContentFolder</code>
+- <code title="delete /cms/pages/2026-03/landing-pages/folders/{objectId}">client.cms.pages.folders.<a href="./src/resources/cms/pages/folders.ts">deleteFolder</a>(objectID, { ...params }) -> void</code>
+- <code title="get /cms/pages/2026-03/landing-pages/folders/{objectId}">client.cms.pages.folders.<a href="./src/resources/cms/pages/folders.ts">getFolder</a>(objectID, { ...params }) -> ContentFolder</code>
+- <code title="get /cms/pages/2026-03/landing-pages/folders/{objectId}/revisions/{revisionId}">client.cms.pages.folders.<a href="./src/resources/cms/pages/folders.ts">getFolderRevision</a>(revisionID, { ...params }) -> ContentFolderVersion</code>
+- <code title="post /cms/pages/2026-03/landing-pages/folders/batch/read">client.cms.pages.folders.<a href="./src/resources/cms/pages/folders.ts">getFoldersBatch</a>({ ...params }) -> BatchResponseContentFolder</code>
+- <code title="get /cms/pages/2026-03/landing-pages/folders/{objectId}/revisions">client.cms.pages.folders.<a href="./src/resources/cms/pages/folders.ts">listFolderRevisions</a>(objectID, { ...params }) -> ContentFolderVersionsPage</code>
+- <code title="get /cms/pages/2026-03/landing-pages/folders">client.cms.pages.folders.<a href="./src/resources/cms/pages/folders.ts">listFolders</a>({ ...params }) -> ContentFoldersPage</code>
+- <code title="post /cms/pages/2026-03/landing-pages/folders/{objectId}/revisions/{revisionId}/restore">client.cms.pages.folders.<a href="./src/resources/cms/pages/folders.ts">restoreFolderRevision</a>(revisionID, { ...params }) -> ContentFolder</code>
+- <code title="patch /cms/pages/2026-03/landing-pages/folders/{objectId}">client.cms.pages.folders.<a href="./src/resources/cms/pages/folders.ts">updateFolder</a>(objectID, { ...params }) -> ContentFolder</code>
+
+### LandingPages
+
+Methods:
+
+- <code title="post /cms/pages/2026-03/landing-pages">client.cms.pages.landingPages.<a href="./src/resources/cms/pages/landing-pages.ts">create</a>({ ...params }) -> Page</code>
+- <code title="patch /cms/pages/2026-03/landing-pages/{objectId}">client.cms.pages.landingPages.<a href="./src/resources/cms/pages/landing-pages.ts">update</a>(objectID, { ...params }) -> Page</code>
+- <code title="get /cms/pages/2026-03/landing-pages">client.cms.pages.landingPages.<a href="./src/resources/cms/pages/landing-pages.ts">list</a>({ ...params }) -> PagesPage</code>
+- <code title="delete /cms/pages/2026-03/landing-pages/{objectId}">client.cms.pages.landingPages.<a href="./src/resources/cms/pages/landing-pages.ts">delete</a>(objectID, { ...params }) -> void</code>
+- <code title="post /cms/pages/2026-03/landing-pages/clone">client.cms.pages.landingPages.<a href="./src/resources/cms/pages/landing-pages.ts">clone</a>({ ...params }) -> Page</code>
+- <code title="get /cms/pages/2026-03/landing-pages/{objectId}">client.cms.pages.landingPages.<a href="./src/resources/cms/pages/landing-pages.ts">get</a>(objectID, { ...params }) -> Page</code>
+- <code title="get /cms/pages/2026-03/landing-pages/{objectId}/draft">client.cms.pages.landingPages.<a href="./src/resources/cms/pages/landing-pages.ts">getDraft</a>(objectID) -> Page</code>
+- <code title="post /cms/pages/2026-03/landing-pages/{objectId}/draft/push-live">client.cms.pages.landingPages.<a href="./src/resources/cms/pages/landing-pages.ts">publishDraft</a>(objectID) -> void</code>
+- <code title="post /cms/pages/2026-03/landing-pages/{objectId}/draft/reset">client.cms.pages.landingPages.<a href="./src/resources/cms/pages/landing-pages.ts">resetDraft</a>(objectID) -> void</code>
+- <code title="post /cms/pages/2026-03/landing-pages/schedule">client.cms.pages.landingPages.<a href="./src/resources/cms/pages/landing-pages.ts">schedule</a>({ ...params }) -> void</code>
+- <code title="patch /cms/pages/2026-03/landing-pages/{objectId}/draft">client.cms.pages.landingPages.<a href="./src/resources/cms/pages/landing-pages.ts">updateDraft</a>(objectID, { ...params }) -> Page</code>
+
+### MultiLanguage
+
+Methods:
+
+- <code title="post /cms/pages/2026-03/site-pages/multi-language/attach-to-lang-group">client.cms.pages.multiLanguage.<a href="./src/resources/cms/pages/multi-language.ts">attachToLangGroup</a>({ ...params }) -> Response</code>
+- <code title="post /cms/pages/2026-03/site-pages/multi-language/create-language-variation">client.cms.pages.multiLanguage.<a href="./src/resources/cms/pages/multi-language.ts">createLanguageVariation</a>({ ...params }) -> Page</code>
+- <code title="post /cms/pages/2026-03/site-pages/multi-language/detach-from-lang-group">client.cms.pages.multiLanguage.<a href="./src/resources/cms/pages/multi-language.ts">detachFromLangGroup</a>({ ...params }) -> Response</code>
+- <code title="put /cms/pages/2026-03/site-pages/multi-language/set-new-lang-primary">client.cms.pages.multiLanguage.<a href="./src/resources/cms/pages/multi-language.ts">setNewLangPrimary</a>({ ...params }) -> void</code>
+- <code title="post /cms/pages/2026-03/site-pages/multi-language/update-languages">client.cms.pages.multiLanguage.<a href="./src/resources/cms/pages/multi-language.ts">updateLanguages</a>({ ...params }) -> Response</code>
+
+### WebsitePages
+
+Methods:
+
+- <code title="post /cms/pages/2026-03/site-pages">client.cms.pages.websitePages.<a href="./src/resources/cms/pages/website-pages.ts">create</a>({ ...params }) -> Page</code>
+- <code title="patch /cms/pages/2026-03/site-pages/{objectId}">client.cms.pages.websitePages.<a href="./src/resources/cms/pages/website-pages.ts">update</a>(objectID, { ...params }) -> Page</code>
+- <code title="get /cms/pages/2026-03/site-pages">client.cms.pages.websitePages.<a href="./src/resources/cms/pages/website-pages.ts">list</a>({ ...params }) -> PagesPage</code>
+- <code title="delete /cms/pages/2026-03/site-pages/{objectId}">client.cms.pages.websitePages.<a href="./src/resources/cms/pages/website-pages.ts">delete</a>(objectID, { ...params }) -> void</code>
+- <code title="post /cms/pages/2026-03/site-pages/clone">client.cms.pages.websitePages.<a href="./src/resources/cms/pages/website-pages.ts">clone</a>({ ...params }) -> Page</code>
+- <code title="get /cms/pages/2026-03/site-pages/{objectId}">client.cms.pages.websitePages.<a href="./src/resources/cms/pages/website-pages.ts">get</a>(objectID, { ...params }) -> Page</code>
+- <code title="get /cms/pages/2026-03/site-pages/{objectId}/draft">client.cms.pages.websitePages.<a href="./src/resources/cms/pages/website-pages.ts">getDraft</a>(objectID) -> Page</code>
+- <code title="post /cms/pages/2026-03/site-pages/{objectId}/draft/push-live">client.cms.pages.websitePages.<a href="./src/resources/cms/pages/website-pages.ts">publishDraft</a>(objectID) -> void</code>
+- <code title="post /cms/pages/2026-03/site-pages/schedule">client.cms.pages.websitePages.<a href="./src/resources/cms/pages/website-pages.ts">schedule</a>({ ...params }) -> void</code>
+- <code title="put /cms/pages/2026-03/landing-pages/multi-language/set-new-lang-primary">client.cms.pages.websitePages.<a href="./src/resources/cms/pages/website-pages.ts">setNewLangPrimary</a>({ ...params }) -> void</code>
+- <code title="patch /cms/pages/2026-03/site-pages/{objectId}/draft">client.cms.pages.websitePages.<a href="./src/resources/cms/pages/website-pages.ts">updateDraft</a>(objectID, { ...params }) -> Page</code>
 
 ## SiteSearch
 

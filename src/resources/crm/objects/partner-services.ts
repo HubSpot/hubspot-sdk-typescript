@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
-import * as Shared from '../../shared';
 import * as CrmAPI from '../crm';
 import { MultiAssociatedObjectWithLabelsPage } from '../crm';
 import * as ObjectsAPI from './objects';
@@ -64,15 +63,9 @@ export class PartnerServices extends APIResource {
   search(
     body: PartnerServiceSearchParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CollectionResponseWithTotalSimplePublicObject> {
+  ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/objects/2026-03/partner_services/search', { body, ...options });
   }
-}
-
-export interface CollectionResponseMultiAssociatedObjectWithLabelForwardPaging {
-  results: Array<CrmAPI.MultiAssociatedObjectWithLabel>;
-
-  paging?: Shared.ForwardPaging;
 }
 
 export interface PartnerServiceUpdateParams {
@@ -149,7 +142,6 @@ export interface PartnerServiceSearchParams {
 
 export declare namespace PartnerServices {
   export {
-    type CollectionResponseMultiAssociatedObjectWithLabelForwardPaging as CollectionResponseMultiAssociatedObjectWithLabelForwardPaging,
     type PartnerServiceUpdateParams as PartnerServiceUpdateParams,
     type PartnerServiceListParams as PartnerServiceListParams,
     type PartnerServiceGetParams as PartnerServiceGetParams,

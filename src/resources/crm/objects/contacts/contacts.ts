@@ -23,11 +23,7 @@ export class Contacts extends APIResource {
   batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
 
   /**
-   * Create a single contact. Include a `properties` object to define
-   * [property values](https://developers.hubspot.com/docs/guides/api/crm/properties)
-   * for the contact, along with an `associations` array to define
-   * [associations](https://developers.hubspot.com/docs/guides/api/crm/associations/associations-v4)
-   * with other CRM records.
+   * Create a contact
    */
   create(body: ContactCreateParams, options?: RequestOptions): APIPromise<CrmAPI.SimplePublicObject> {
     return this._client.post('/crm/objects/2026-03/contacts', { body, ...options });
@@ -55,10 +51,6 @@ export class Contacts extends APIResource {
     });
   }
 
-  /**
-   * Retrieve all contacts, using query parameters to specify the information that
-   * gets returned.
-   */
   list(
     query: ContactListParams | null | undefined = {},
     options?: RequestOptions,
@@ -84,13 +76,6 @@ export class Contacts extends APIResource {
     });
   }
 
-  /**
-   * Permanently delete a contact and all associated content to follow GDPR. Use
-   * optional property `idProperty` set to `email` to identify contact by email
-   * address. If email address is not found, the email address will be added to a
-   * blocklist and prevent it from being used in the future. Learn more about
-   * [permanently deleting contacts](https://knowledge.hubspot.com/privacy-and-consent/how-do-i-perform-a-gdpr-delete-in-hubspot).
-   */
   gdprDelete(body: ContactGdprDeleteParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/crm/objects/2026-03/contacts/gdpr-delete', {
       body,
@@ -99,11 +84,6 @@ export class Contacts extends APIResource {
     });
   }
 
-  /**
-   * Retrieve a contact by its ID (`contactId`) or by a unique property
-   * (`idProperty`). You can specify what is returned using the `properties` query
-   * parameter.
-   */
   get(
     contactID: string,
     query: ContactGetParams | null | undefined = {},
@@ -113,8 +93,7 @@ export class Contacts extends APIResource {
   }
 
   /**
-   * Merge two contact records. Learn more about
-   * [merging records](https://knowledge.hubspot.com/records/merge-records).
+   * Merge two contacts
    */
   merge(body: ContactMergeParams, options?: RequestOptions): APIPromise<CrmAPI.SimplePublicObject> {
     return this._client.post('/crm/objects/2026-03/contacts/merge', { body, ...options });
@@ -128,7 +107,7 @@ export class Contacts extends APIResource {
   search(
     body: ContactSearchParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CollectionResponseWithTotalSimplePublicObject> {
+  ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/objects/2026-03/contacts/search', { body, ...options });
   }
 }

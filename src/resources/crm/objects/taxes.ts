@@ -83,7 +83,7 @@ export class Taxes extends APIResource {
   search(
     body: TaxSearchParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CollectionResponseWithTotalSimplePublicObject> {
+  ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/objects/2026-03/taxes/search', { body, ...options });
   }
 

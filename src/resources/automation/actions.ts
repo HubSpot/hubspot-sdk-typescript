@@ -9,6 +9,9 @@ import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
 export class Actions extends APIResource {
+  /**
+   * Create a new custom workflow action.
+   */
   create(
     appID: number,
     body: ActionCreateParams,
@@ -17,6 +20,9 @@ export class Actions extends APIResource {
     return this._client.post(path`/automation/actions/2026-03/${appID}`, { body, ...options });
   }
 
+  /**
+   * Update an existing action definition by ID.
+   */
   update(
     definitionID: string,
     params: ActionUpdateParams,
@@ -29,6 +35,9 @@ export class Actions extends APIResource {
     });
   }
 
+  /**
+   * Retrieve the versions of a definition by ID.
+   */
   list(
     definitionID: string,
     params: ActionListParams,
@@ -42,6 +51,9 @@ export class Actions extends APIResource {
     );
   }
 
+  /**
+   * Archive a function for a specific definition.
+   */
   delete(functionID: string, params: ActionDeleteParams, options?: RequestOptions): APIPromise<void> {
     const { appId, definitionId, functionType } = params;
     return this._client.delete(
@@ -50,6 +62,9 @@ export class Actions extends APIResource {
     );
   }
 
+  /**
+   * Complete a specific blocked action execution by ID.
+   */
   complete(callbackID: string, body: ActionCompleteParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post(path`/automation/actions/callbacks/2026-03/${callbackID}/complete`, {
       body,
@@ -58,6 +73,9 @@ export class Actions extends APIResource {
     });
   }
 
+  /**
+   * Complete a batch of blocked action executions.
+   */
   completeBatch(body: ActionCompleteBatchParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/automation/actions/callbacks/2026-03/complete', {
       body,
@@ -66,6 +84,9 @@ export class Actions extends APIResource {
     });
   }
 
+  /**
+   * Update a function for a given definition by ID.
+   */
   createOrReplace(
     functionID: string,
     params: ActionCreateOrReplaceParams,
@@ -78,6 +99,9 @@ export class Actions extends APIResource {
     );
   }
 
+  /**
+   * Add a function for a given definition.
+   */
   createOrReplaceByFunctionType(
     functionType:
       | 'POST_ACTION_EXECUTION'
@@ -94,6 +118,9 @@ export class Actions extends APIResource {
     );
   }
 
+  /**
+   * Set whether a custom action definition requires an object.
+   */
   createRequiresObject(
     definitionID: string,
     params: ActionCreateRequiresObjectParams,
@@ -107,6 +134,9 @@ export class Actions extends APIResource {
     });
   }
 
+  /**
+   * Delete a function within a given definition.
+   */
   deleteByFunctionType(
     functionType:
       | 'POST_ACTION_EXECUTION'
@@ -123,6 +153,9 @@ export class Actions extends APIResource {
     );
   }
 
+  /**
+   * Retrieve a specific revision of a definition by revision ID.
+   */
   get(
     revisionID: string,
     params: ActionGetParams,
@@ -135,6 +168,9 @@ export class Actions extends APIResource {
     );
   }
 
+  /**
+   * Retrieve functions of a specific type for a given definition.
+   */
   getByFunctionType(
     functionType:
       | 'POST_ACTION_EXECUTION'
@@ -151,6 +187,9 @@ export class Actions extends APIResource {
     );
   }
 
+  /**
+   * Retrieve whether a custom action definition requires an object.
+   */
   getRequiresObject(
     definitionID: string,
     params: ActionGetRequiresObjectParams,
@@ -167,22 +206,41 @@ export class Actions extends APIResource {
 export type PublicActionRevisionsPage = Page<PublicActionRevision>;
 
 export interface ActionExecutionIndexIdentifier {
+  /**
+   * The index number representing the execution order of the action.
+   */
   actionExecutionIndex: number;
 
+  /**
+   * The ID associated with the enrollment process.
+   */
   enrollmentId: number;
 }
 
 export interface AgentRequestContext {
+  /**
+   * The unique identifier for the agent making the request.
+   */
   agentId: number;
 
   chirpAiContextObject: ChirpAIContextObject;
 
+  /**
+   * Indicates the source of the request, with the default value being 'AGENTS'.
+   */
   source: 'AGENTS';
 
+  /**
+   * The unique identifier for the trajectory associated with the agent request.
+   */
   trajectoryId?: string;
 }
 
 export interface ArrayFieldSchema {
+  /**
+   * Defines the type of elements contained within the array, which can be an
+   * integer, long, double, string, boolean, another array, or an object.
+   */
   items:
     | IntegerFieldSchema
     | LongFieldSchema
@@ -192,6 +250,9 @@ export interface ArrayFieldSchema {
     | ArrayFieldSchema
     | ObjectFieldSchema;
 
+  /**
+   * Specifies that the field is of type 'ARRAY'.
+   */
   type: 'ARRAY';
 }
 
@@ -200,18 +261,38 @@ export interface BatchInputCallbackCompletionBatchRequest {
 }
 
 export interface BooleanFieldSchema {
+  /**
+   * Specifies the field type as BOOLEAN, indicating that the field can hold a true
+   * or false value.
+   */
   type: 'BOOLEAN';
 }
 
 export interface CallbackCompletionBatchRequest {
+  /**
+   * The unique identifier for the callback.
+   */
   callbackId: string;
 
+  /**
+   * Holds the output fields for the callback completion.
+   */
   outputFields: { [key: string]: string };
 
+  /**
+   * Contains the typed outputs for the callback completion.
+   */
   typedOutputs: unknown;
 
+  /**
+   * Specifies the type of failure reason for the callback completion.
+   */
   failureReasonType?: string;
 
+  /**
+   * Defines the context of the request, which can be one of several predefined
+   * types.
+   */
   requestContext?:
     | WorkflowsRequestContext
     | AgentRequestContext
@@ -221,12 +302,26 @@ export interface CallbackCompletionBatchRequest {
 }
 
 export interface CallbackCompletionRequest {
+  /**
+   * Contains the output fields associated with the callback, with each field
+   * represented as a key-value pair.
+   */
   outputFields: { [key: string]: string };
 
+  /**
+   * Holds the typed outputs related to the callback, structured as an object.
+   */
   typedOutputs: unknown;
 
+  /**
+   * Indicates the reason for the failure of a callback completion.
+   */
   failureReasonType?: string;
 
+  /**
+   * Specifies the context in which the request is made, which can be one of several
+   * predefined contexts.
+   */
   requestContext?:
     | WorkflowsRequestContext
     | AgentRequestContext
@@ -236,12 +331,24 @@ export interface CallbackCompletionRequest {
 }
 
 export interface ChirpAIContextObject {
+  /**
+   * The group to which the application belongs.
+   */
   applicationGroup: string;
 
+  /**
+   * The identifier for the application associated with the context.
+   */
   applicationId: string;
 
+  /**
+   * Additional metadata related to the context, represented as key-value pairs.
+   */
   metadata: { [key: string]: string };
 
+  /**
+   * Holds OpenTelemetry context information as key-value pairs.
+   */
   otelContextHolder: { [key: string]: string };
 
   unstructuredSources: Array<
@@ -270,10 +377,19 @@ export interface ChirpAIContextObject {
 
   complianceIds?: ComplianceIDs;
 
+  /**
+   * The identifier for the feature associated with the context.
+   */
   featureId?: string;
 
+  /**
+   * The identifier for the inference associated with the context.
+   */
   inferenceId?: string;
 
+  /**
+   * The identifier for the trajectory, formatted as a UUID.
+   */
   trajectoryId?: string;
 }
 
@@ -300,42 +416,84 @@ export interface ComplianceIDs {
 
   userIds: Array<number>;
 
+  /**
+   * The reason why no contact ID is available.
+   */
   noContactIdReason?: string;
 
+  /**
+   * The reason why no portal ID is available.
+   */
   noPortalIdReason?: string;
 
+  /**
+   * The reason why no user ID is available.
+   */
   noUserIdReason?: string;
 }
 
 export interface ContactID {
+  /**
+   * The ID of the portal associated with the contact.
+   */
   portalId: number;
 
+  /**
+   * The email address of the contact.
+   */
   email?: string;
 
+  /**
+   * The unique identifier for the contact.
+   */
   vid?: number;
 }
 
 export interface CopilotRequestContext {
+  /**
+   * Indicates the source of the request, with the default value being 'COPILOT'.
+   */
   source: 'COPILOT';
 
+  /**
+   * The unique identifier for the trajectory.
+   */
   trajectoryId?: string;
 }
 
 export interface DoubleFieldSchema {
+  /**
+   * Indicates the field type as DOUBLE.
+   */
   type: 'DOUBLE';
 
+  /**
+   * The maximum allowable value for the double field.
+   */
   maximum?: number;
 
+  /**
+   * The minimum allowable value for the double field.
+   */
   minimum?: number;
 }
 
 export interface FieldTypeDefinition {
+  /**
+   * Indicates whether the field's options are sourced externally.
+   */
   externalOptions: boolean;
 
+  /**
+   * The unique identifier for the field.
+   */
   name: string;
 
-  options: Array<Shared.Option>;
+  options: Array<Shared.AutomationActionsOption>;
 
+  /**
+   * Defines the structure and constraints of the field.
+   */
   schema:
     | IntegerFieldSchema
     | LongFieldSchema
@@ -345,6 +503,10 @@ export interface FieldTypeDefinition {
     | ArrayFieldSchema
     | ObjectFieldSchema;
 
+  /**
+   * Specifies the data type of the field, with accepted values like bool, date,
+   * datetime, enumeration, json, number, object_coordinates, phone_number, string.
+   */
   type:
     | 'bool'
     | 'currency_number'
@@ -357,12 +519,26 @@ export interface FieldTypeDefinition {
     | 'phone_number'
     | 'string';
 
+  /**
+   * Specifies whether the field uses the Chirp feature.
+   */
   useChirp: boolean;
 
+  /**
+   * A detailed explanation of the field's purpose and usage.
+   */
   description?: string;
 
+  /**
+   * Specifies the type of external reference for options.
+   */
   externalOptionsReferenceType?: string;
 
+  /**
+   * Describes the field's type in the UI, with accepted values like booleancheckbox,
+   * calculation_equation, checkbox, date, file, html, number, phonenumber, radio,
+   * select, text, textarea, unknown.
+   */
   fieldType?:
     | 'booleancheckbox'
     | 'calculation_equation'
@@ -381,12 +557,25 @@ export interface FieldTypeDefinition {
     | 'textarea'
     | 'unknown';
 
+  /**
+   * Additional information or guidance about the field.
+   */
   helpText?: string;
 
+  /**
+   * The user-friendly label for the field.
+   */
   label?: string;
 
+  /**
+   * A URL that provides options for the field.
+   */
   optionsUrl?: string;
 
+  /**
+   * Indicates the type of object that the field references, with accepted values
+   * like OWNER.
+   */
   referencedObjectType?:
     | 'ABANDONED_CART'
     | 'ACCEPTANCE_TEST'
@@ -552,24 +741,48 @@ export interface FieldTypeDefinition {
 }
 
 export interface IntegerFieldSchema {
+  /**
+   * The type of the field, which is set to INTEGER.
+   */
   type: 'INTEGER';
 
+  /**
+   * The maximum value allowed for the integer field.
+   */
   maximum?: number;
 
+  /**
+   * The minimum value allowed for the integer field.
+   */
   minimum?: number;
 }
 
 export interface LongFieldSchema {
+  /**
+   * The type of the field, which is LONG by default.
+   */
   type: 'LONG';
 
+  /**
+   * The maximum value allowed for the long field.
+   */
   maximum?: number;
 
+  /**
+   * The minimum value allowed for the long field.
+   */
   minimum?: number;
 }
 
 export interface ObjectFieldSchema {
+  /**
+   * Contains the properties of the object.
+   */
   properties: unknown;
 
+  /**
+   * Specifies the type of the field, which is 'OBJECT' by default.
+   */
   type: 'OBJECT';
 }
 
@@ -606,18 +819,31 @@ export interface PublicActionDefinition {
 }
 
 export interface PublicActionDefinitionEgg {
+  /**
+   * The URL endpoint where the action is executed.
+   */
   actionUrl: string;
 
   functions: Array<PublicActionFunction>;
 
   inputFields: Array<PublicInputFieldDefinition>;
 
+  /**
+   * Holds various labels associated with the action, including names and
+   * descriptions.
+   */
   labels: { [key: string]: PublicActionLabels };
 
   objectTypes: Array<string>;
 
+  /**
+   * Indicates whether the action is published and available for use.
+   */
   published: boolean;
 
+  /**
+   * The timestamp indicating when the action was archived.
+   */
   archivedAt?: number;
 
   executionRules?: Array<PublicExecutionTranslationRule>;
@@ -630,6 +856,9 @@ export interface PublicActionDefinitionEgg {
 }
 
 export interface PublicActionDefinitionPatch {
+  /**
+   * The URL endpoint where the action is executed.
+   */
   actionUrl?: string;
 
   executionRules?: Array<PublicExecutionTranslationRule>;
@@ -638,6 +867,9 @@ export interface PublicActionDefinitionPatch {
 
   inputFields?: Array<PublicInputFieldDefinition>;
 
+  /**
+   * Contains labels for the action, including names and descriptions.
+   */
   labels?: { [key: string]: PublicActionLabels };
 
   objectRequestOptions?: PublicObjectRequestOptions;
@@ -646,82 +878,166 @@ export interface PublicActionDefinitionPatch {
 
   outputFields?: Array<OutputFieldDefinition>;
 
+  /**
+   * Indicates whether the action is published and available for use.
+   */
   published?: boolean;
 }
 
 export interface PublicActionDefinitionRequiresObjectRequest {
+  /**
+   * Indicates whether a custom action definition requires an associated object.
+   */
   requiresObject: boolean;
 }
 
 export interface PublicActionDefinitionRequiresObjectResponse {
+  /**
+   * Indicates whether a custom action definition requires an object.
+   */
   requiresObject: boolean;
 }
 
 export interface PublicActionFunction {
+  /**
+   * The source code or script that defines the function's behavior.
+   */
   functionSource: string;
 
+  /**
+   * The type of function, with accepted values: POST_ACTION_EXECUTION,
+   * POST_FETCH_OPTIONS, PRE_ACTION_EXECUTION, PRE_FETCH_OPTIONS.
+   */
   functionType: 'POST_ACTION_EXECUTION' | 'POST_FETCH_OPTIONS' | 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS';
 
+  /**
+   * The unique identifier for the action function.
+   */
   id?: string;
 }
 
 export interface PublicActionFunctionIdentifier {
+  /**
+   * The type of function, with accepted values: POST_ACTION_EXECUTION,
+   * POST_FETCH_OPTIONS, PRE_ACTION_EXECUTION, PRE_FETCH_OPTIONS.
+   */
   functionType: 'POST_ACTION_EXECUTION' | 'POST_FETCH_OPTIONS' | 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS';
 
+  /**
+   * The unique identifier for the function.
+   */
   id?: string;
 }
 
 export interface PublicActionLabels {
+  /**
+   * The name of the action.
+   */
   actionName: string;
 
+  /**
+   * Content displayed on the action card.
+   */
   actionCardContent?: string;
 
+  /**
+   * A description of what the action does.
+   */
   actionDescription?: string;
 
+  /**
+   * The display name of the application associated with the action.
+   */
   appDisplayName?: string;
 
+  /**
+   * Rules that govern the execution of the action.
+   */
   executionRules?: { [key: string]: string };
 
+  /**
+   * Descriptions for each input field.
+   */
   inputFieldDescriptions?: { [key: string]: string };
 
+  /**
+   * Labels for the input fields.
+   */
   inputFieldLabels?: { [key: string]: string };
 
+  /**
+   * Labels for the options available in input fields.
+   */
   inputFieldOptionLabels?: { [key: string]: { [key: string]: string } };
 
+  /**
+   * Labels for the output fields.
+   */
   outputFieldLabels?: { [key: string]: string };
 }
 
 export interface PublicActionRevision {
+  /**
+   * The unique identifier for the action revision.
+   */
   id: string;
 
+  /**
+   * The date and time when the action revision was created.
+   */
   createdAt: string;
 
   definition: PublicActionDefinition;
 
+  /**
+   * The unique identifier for the specific revision of the action.
+   */
   revisionId: string;
 }
 
 export interface PublicConditionalSingleFieldDependency {
+  /**
+   * The name of the field that determines the dependency.
+   */
   controllingFieldName: string;
 
+  /**
+   * The value of the controlling field that triggers the dependency.
+   */
   controllingFieldValue: string;
 
+  /**
+   * The type of dependency, with the default value being CONDITIONAL_SINGLE_FIELD.
+   */
   dependencyType: 'CONDITIONAL_SINGLE_FIELD';
 
   dependentFieldNames: Array<string>;
 }
 
 export interface PublicExecutionTranslationRule {
+  /**
+   * Defines the conditions that must be met for the execution rule to apply.
+   */
   conditions: { [key: string]: unknown };
 
+  /**
+   * Specifies the name of the label associated with the execution rule.
+   */
   labelName: string;
 }
 
 export interface PublicFieldTypeDefinition {
+  /**
+   * The internal name used to identify the field.
+   */
   name: string;
 
   options: Array<PublicOption>;
 
+  /**
+   * The data type of the field, with accepted values including bool, date, datetime,
+   * enumeration, json, number, object_coordinates, phone_number, and string.
+   */
   type:
     | 'bool'
     | 'date'
@@ -733,8 +1049,16 @@ export interface PublicFieldTypeDefinition {
     | 'phone_number'
     | 'string';
 
+  /**
+   * A detailed explanation of the field's purpose.
+   */
   description?: string;
 
+  /**
+   * The type of field, with accepted values including booleancheckbox,
+   * calculation_equation, checkbox, date, file, html, number, phonenumber, radio,
+   * select, text, and textarea.
+   */
   fieldType?:
     | 'booleancheckbox'
     | 'calculation_equation'
@@ -749,16 +1073,32 @@ export interface PublicFieldTypeDefinition {
     | 'text'
     | 'textarea';
 
+  /**
+   * Additional information or guidance about the field.
+   */
   helpText?: string;
 
+  /**
+   * A user-friendly name for the field.
+   */
   label?: string;
 
+  /**
+   * A URL that provides options for the field.
+   */
   optionsUrl?: string;
 
+  /**
+   * The type of object that the field references, with accepted values including
+   * OWNER.
+   */
   referencedObjectType?: 'OWNER';
 }
 
 export interface PublicInputFieldDefinition {
+  /**
+   * Indicates whether the input field is mandatory.
+   */
   isRequired: boolean;
 
   typeDefinition: PublicFieldTypeDefinition;
@@ -771,18 +1111,36 @@ export interface PublicObjectRequestOptions {
 }
 
 export interface PublicOption {
+  /**
+   * A user-friendly label that identifies the option.
+   */
   label: string;
 
+  /**
+   * The actual value of the option.
+   */
   value: string;
 
+  /**
+   * A description of the option.
+   */
   description?: string;
 
+  /**
+   * The position of the option relative to others in the list.
+   */
   displayOrder?: number;
 }
 
 export interface PublicSingleFieldDependency {
+  /**
+   * The name of the field that controls the dependency.
+   */
   controllingFieldName: string;
 
+  /**
+   * The type of dependency, with the default value being 'SINGLE_FIELD'.
+   */
   dependencyType: 'SINGLE_FIELD';
 
   dependentFieldNames: Array<string>;
@@ -791,44 +1149,83 @@ export interface PublicSingleFieldDependency {
 export interface StandaloneRequestContext {
   chirpAiContextObject: ChirpAIContextObject;
 
+  /**
+   * Indicates the source of the request, with the default value being 'STANDALONE'.
+   */
   source: 'STANDALONE';
 
+  /**
+   * A unique identifier for tracking the trajectory of the request.
+   */
   trajectoryId?: string;
 }
 
 export interface StringFieldSchema {
+  /**
+   * Indicates that the type is a string, with the default value being STRING.
+   */
   type: 'STRING';
 
+  /**
+   * Specifies the format of the string, with accepted values: DATE, DATE_TIME,
+   * OBJECT_COORDINATE, TIME, URI.
+   */
   format?: 'DATE' | 'DATE_TIME' | 'OBJECT_COORDINATE' | 'TIME' | 'URI';
 }
 
 export interface TestRequestContext {
+  /**
+   * Indicates the source of the test request, with the only accepted value being
+   * 'TEST'.
+   */
   source: 'TEST';
 }
 
 export interface WorkflowsRequestContext {
+  /**
+   * Indicates the source of the request, with the default value being WORKFLOWS.
+   */
   source: 'WORKFLOWS';
 
+  /**
+   * The ID of the workflow associated with the request context.
+   */
   workflowId: number;
 
   actionExecutionIndexIdentifier?: ActionExecutionIndexIdentifier;
 
+  /**
+   * The ID of the action within the workflow context.
+   */
   actionId?: number;
 }
 
 export interface ActionCreateParams {
+  /**
+   * The URL endpoint where the action is executed.
+   */
   actionUrl: string;
 
   functions: Array<PublicActionFunction>;
 
   inputFields: Array<PublicInputFieldDefinition>;
 
+  /**
+   * Holds various labels associated with the action, including names and
+   * descriptions.
+   */
   labels: { [key: string]: PublicActionLabels };
 
   objectTypes: Array<string>;
 
+  /**
+   * Indicates whether the action is published and available for use.
+   */
   published: boolean;
 
+  /**
+   * The timestamp indicating when the action was archived.
+   */
   archivedAt?: number;
 
   executionRules?: Array<PublicExecutionTranslationRule>;
@@ -847,7 +1244,7 @@ export interface ActionUpdateParams {
   appId: number;
 
   /**
-   * Body param
+   * Body param: The URL endpoint where the action is executed.
    */
   actionUrl?: string;
 
@@ -867,7 +1264,7 @@ export interface ActionUpdateParams {
   inputFields?: Array<PublicInputFieldDefinition>;
 
   /**
-   * Body param
+   * Body param: Contains labels for the action, including names and descriptions.
    */
   labels?: { [key: string]: PublicActionLabels };
 
@@ -887,7 +1284,7 @@ export interface ActionUpdateParams {
   outputFields?: Array<OutputFieldDefinition>;
 
   /**
-   * Body param
+   * Body param: Indicates whether the action is published and available for use.
    */
   published?: boolean;
 }
@@ -908,12 +1305,26 @@ export interface ActionDeleteParams {
 }
 
 export interface ActionCompleteParams {
+  /**
+   * Contains the output fields associated with the callback, with each field
+   * represented as a key-value pair.
+   */
   outputFields: { [key: string]: string };
 
+  /**
+   * Holds the typed outputs related to the callback, structured as an object.
+   */
   typedOutputs: unknown;
 
+  /**
+   * Indicates the reason for the failure of a callback completion.
+   */
   failureReasonType?: string;
 
+  /**
+   * Specifies the context in which the request is made, which can be one of several
+   * predefined contexts.
+   */
   requestContext?:
     | WorkflowsRequestContext
     | AgentRequestContext
@@ -972,7 +1383,8 @@ export interface ActionCreateRequiresObjectParams {
   appId: number;
 
   /**
-   * Body param
+   * Body param: Indicates whether a custom action definition requires an associated
+   * object.
    */
   requiresObject: boolean;
 }

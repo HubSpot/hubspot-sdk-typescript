@@ -6,6 +6,10 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
 export class CentralFxRates extends APIResource {
+  /**
+   * Create a new currency with central exchange rates in the portal. Unsupported
+   * currencies cannot be added here.
+   */
   createCurrency(
     body: CentralFxRateCreateCurrencyParams,
     options?: RequestOptions,
@@ -16,10 +20,18 @@ export class CentralFxRates extends APIResource {
     });
   }
 
+  /**
+   * Retrieve details on whether the central exchange rates feature is enabled for
+   * the portal.
+   */
   getInformation(options?: RequestOptions): APIPromise<CurrenciesAPI.CentralExchangeRatesInformation> {
     return this._client.get('/settings/currencies/2026-03/central-fx-rates/information', options);
   }
 
+  /**
+   * Retrieve a list of currency codes that are not supported by the central exchange
+   * rates. Unsupported currencies will need to be manually updated.
+   */
   getUnsupportedCurrencies(
     options?: RequestOptions,
   ): APIPromise<CurrenciesAPI.CollectionResponseCurrencyCodeInfoNoPaging> {

@@ -445,28 +445,8 @@ describe('resource posts', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('attachToLangGroup: required and optional params', async () => {
-    const response = await client.cms.blogs.posts.attachToLangGroup({
-      id: 'id',
-      language: 'aa',
-      primaryId: 'primaryId',
-      primaryLanguage: 'aa',
-    });
-  });
-
-  // Mock server tests are disabled
   test.skip('clone: required and optional params', async () => {
     const response = await client.cms.blogs.posts.clone({ id: 'id', cloneName: 'cloneName' });
-  });
-
-  // Mock server tests are disabled
-  test.skip('createLangVariation: required and optional params', async () => {
-    const response = await client.cms.blogs.posts.createLangVariation({ id: 'id', language: 'language' });
-  });
-
-  // Mock server tests are disabled
-  test.skip('detachFromLangGroup: required and optional params', async () => {
-    const response = await client.cms.blogs.posts.detachFromLangGroup({ id: 'id' });
   });
 
   // Mock server tests are disabled
@@ -482,20 +462,45 @@ describe('resource posts', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('getPreviousVersion: required and optional params', async () => {
-    const response = await client.cms.blogs.posts.getPreviousVersion('revisionId', { objectId: 'objectId' });
+  test.skip('listAuthors: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.cms.blogs.posts.listAuthors(
+        {
+          after: 'after',
+          archived: true,
+          createdAfter: '2019-12-27T18:11:19.117Z',
+          createdAt: '2019-12-27T18:11:19.117Z',
+          createdBefore: '2019-12-27T18:11:19.117Z',
+          limit: 0,
+          property: 'property',
+          sort: ['string'],
+          updatedAfter: '2019-12-27T18:11:19.117Z',
+          updatedAt: '2019-12-27T18:11:19.117Z',
+          updatedBefore: '2019-12-27T18:11:19.117Z',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Hubspot.NotFoundError);
   });
 
   // Mock server tests are disabled
-  test.skip('getPreviousVersions: request options and params are passed correctly', async () => {
+  test.skip('listTags: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.cms.blogs.posts.getPreviousVersions(
-        'objectId',
+      client.cms.blogs.posts.listTags(
         {
           after: 'after',
-          before: 'before',
+          archived: true,
+          createdAfter: '2019-12-27T18:11:19.117Z',
+          createdAt: '2019-12-27T18:11:19.117Z',
+          createdBefore: '2019-12-27T18:11:19.117Z',
           limit: 0,
+          property: 'property',
+          sort: ['string'],
+          updatedAfter: '2019-12-27T18:11:19.117Z',
+          updatedAt: '2019-12-27T18:11:19.117Z',
+          updatedBefore: '2019-12-27T18:11:19.117Z',
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -515,6 +520,75 @@ describe('resource posts', () => {
   });
 
   // Mock server tests are disabled
+  test.skip('query: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.cms.blogs.posts.query(
+        {
+          after: 'after',
+          archived: true,
+          createdAfter: '2019-12-27T18:11:19.117Z',
+          createdAt: '2019-12-27T18:11:19.117Z',
+          createdBefore: '2019-12-27T18:11:19.117Z',
+          limit: 0,
+          property: 'property',
+          sort: ['string'],
+          updatedAfter: '2019-12-27T18:11:19.117Z',
+          updatedAt: '2019-12-27T18:11:19.117Z',
+          updatedBefore: '2019-12-27T18:11:19.117Z',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Hubspot.NotFoundError);
+  });
+
+  // Mock server tests are disabled
+  test.skip('queryAuthors: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.cms.blogs.posts.queryAuthors(
+        {
+          after: 'after',
+          archived: true,
+          createdAfter: '2019-12-27T18:11:19.117Z',
+          createdAt: '2019-12-27T18:11:19.117Z',
+          createdBefore: '2019-12-27T18:11:19.117Z',
+          limit: 0,
+          property: 'property',
+          sort: ['string'],
+          updatedAfter: '2019-12-27T18:11:19.117Z',
+          updatedAt: '2019-12-27T18:11:19.117Z',
+          updatedBefore: '2019-12-27T18:11:19.117Z',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Hubspot.NotFoundError);
+  });
+
+  // Mock server tests are disabled
+  test.skip('queryTags: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.cms.blogs.posts.queryTags(
+        {
+          after: 'after',
+          archived: true,
+          createdAfter: '2019-12-27T18:11:19.117Z',
+          createdAt: '2019-12-27T18:11:19.117Z',
+          createdBefore: '2019-12-27T18:11:19.117Z',
+          limit: 0,
+          property: 'property',
+          sort: ['string'],
+          updatedAfter: '2019-12-27T18:11:19.117Z',
+          updatedAt: '2019-12-27T18:11:19.117Z',
+          updatedBefore: '2019-12-27T18:11:19.117Z',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Hubspot.NotFoundError);
+  });
+
+  // Mock server tests are disabled
   test.skip('resetDraft', async () => {
     const responsePromise = client.cms.blogs.posts.resetDraft('objectId');
     const rawResponse = await responsePromise.asResponse();
@@ -524,18 +598,6 @@ describe('resource posts', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('restorePreviousVersion: required and optional params', async () => {
-    const response = await client.cms.blogs.posts.restorePreviousVersion('revisionId', {
-      objectId: 'objectId',
-    });
-  });
-
-  // Mock server tests are disabled
-  test.skip('restorePreviousVersionToDraft: required and optional params', async () => {
-    const response = await client.cms.blogs.posts.restorePreviousVersionToDraft(0, { objectId: 'objectId' });
   });
 
   // Mock server tests are disabled
@@ -559,23 +621,6 @@ describe('resource posts', () => {
       id: 'id',
       publishDate: '2019-12-27T18:11:19.117Z',
     });
-  });
-
-  // Mock server tests are disabled
-  test.skip('setLangPrimary: only required params', async () => {
-    const responsePromise = client.cms.blogs.posts.setLangPrimary({ id: 'id' });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('setLangPrimary: required and optional params', async () => {
-    const response = await client.cms.blogs.posts.setLangPrimary({ id: 'id' });
   });
 
   // Mock server tests are disabled
@@ -771,14 +816,6 @@ describe('resource posts', () => {
       useFeaturedImage: true,
       widgetContainers: { foo: {} },
       widgets: { foo: {} },
-    });
-  });
-
-  // Mock server tests are disabled
-  test.skip('updateLangs: required and optional params', async () => {
-    const response = await client.cms.blogs.posts.updateLangs({
-      languages: { foo: 'aa' },
-      primaryId: 'primaryId',
     });
   });
 });

@@ -44,12 +44,14 @@ describe('resource messages', () => {
         {
           deliveryIdentifier: { type: 'CHANNEL_SPECIFIC_OPAQUE_ID', value: 'value' },
           name: 'name',
+          senderActorId: 'senderActorId',
         },
       ],
       senders: [
         {
           deliveryIdentifier: { type: 'CHANNEL_SPECIFIC_OPAQUE_ID', value: 'value' },
           name: 'name',
+          senderActorId: 'senderActorId',
         },
       ],
       text: 'text',

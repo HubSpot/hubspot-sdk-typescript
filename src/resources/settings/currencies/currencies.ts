@@ -20,14 +20,24 @@ export class Currencies extends APIResource {
   centralFxRates: CentralFxRatesAPI.CentralFxRates = new CentralFxRatesAPI.CentralFxRates(this._client);
   exchangeRates: ExchangeRatesAPI.ExchangeRates = new ExchangeRatesAPI.ExchangeRates(this._client);
 
+  /**
+   * Get the details for the company currency. The company currency is used in deal
+   * totals, reports, and the default currency for new deals.
+   */
   getCompanyCurrency(options?: RequestOptions): APIPromise<CompanyCurrency> {
     return this._client.get('/settings/currencies/2026-03/company-currency', options);
   }
 
+  /**
+   * Retrieve a list of all available currency codes and their names.
+   */
   listCodes(options?: RequestOptions): APIPromise<CollectionResponseCurrencyCodeInfoNoPaging> {
     return this._client.get('/settings/currencies/2026-03/codes', options);
   }
 
+  /**
+   * Set or update the primary company currency.
+   */
   updateCompanyCurrency(
     body: CurrencyUpdateCompanyCurrencyParams,
     options?: RequestOptions,

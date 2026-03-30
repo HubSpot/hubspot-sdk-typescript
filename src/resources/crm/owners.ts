@@ -15,6 +15,9 @@ export class Owners extends APIResource {
     return this._client.getAPIList('/crm/owners/2026-03', Page<PublicOwner>, { query, ...options });
   }
 
+  /**
+   * Retrieve details of a specific owner using either their 'id' or 'userId'.
+   */
   get(
     ownerID: number,
     query: OwnerGetParams | null | undefined = {},

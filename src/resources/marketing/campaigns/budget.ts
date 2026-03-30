@@ -9,9 +9,7 @@ import { path } from '../../../internal/utils/path';
 
 export class Budget extends APIResource {
   /**
-   * Add a new budget item to the specified campaign. This operation allows you to
-   * allocate a budget for a campaign by specifying the necessary details in the
-   * request body.
+   * Add a new budget item to the campaign
    */
   create(
     campaignGuid: string,
@@ -22,10 +20,7 @@ export class Budget extends APIResource {
   }
 
   /**
-   * Update a specific budget item by its ID within a marketing campaign. This
-   * operation allows you to modify the details of a budget item, such as its amount,
-   * name, or order, ensuring that your campaign's financial records are accurate and
-   * up-to-date.
+   * Update a specific budget item by ID
    */
   update(
     budgetID: number,
@@ -40,9 +35,7 @@ export class Budget extends APIResource {
   }
 
   /**
-   * Delete a specific budget item from a campaign using its unique ID. This
-   * operation removes the budget item from the campaign's budget list, ensuring it
-   * is no longer considered in budget calculations.
+   * Delete a specific budget item by ID
    */
   delete(budgetID: number, params: BudgetDeleteParams, options?: RequestOptions): APIPromise<void> {
     const { campaignGuid } = params;
@@ -53,9 +46,7 @@ export class Budget extends APIResource {
   }
 
   /**
-   * Retrieve a specific budget item by its ID for a given campaign. This endpoint is
-   * useful for accessing detailed information about a particular budget item
-   * associated with a marketing campaign.
+   * Get a specific budget item by ID
    */
   get(
     budgetID: number,
@@ -67,10 +58,11 @@ export class Budget extends APIResource {
   }
 
   /**
-   * Retrieve budget and spending items along with their totals for a specific
-   * campaign. This endpoint provides insights into the financial allocations and
-   * expenditures associated with the campaign, helping users to manage and analyze
-   * campaign budgets effectively.
+   * Retrieve detailed information about the budget and spend items for a specified
+   * campaign, including the total budget, total spend, and remaining budget. Budget
+   * and Spend items may be returned in any order, but the order field specifies
+   * their sequence based on the creation date. The item with order 0 is the oldest,
+   * and items with higher order values are newer
    */
   getTotals(campaignGuid: string, options?: RequestOptions): APIPromise<CampaignsAPI.PublicBudgetTotals> {
     return this._client.get(path`/marketing/campaigns/2026-03/${campaignGuid}/budget/totals`, options);
@@ -101,8 +93,7 @@ export interface BudgetCreateParams {
 
 export interface BudgetUpdateParams {
   /**
-   * Path param: The unique identifier of the campaign to which the budget item
-   * belongs.
+   * Path param
    */
   campaignGuid: string;
 
@@ -128,17 +119,10 @@ export interface BudgetUpdateParams {
 }
 
 export interface BudgetDeleteParams {
-  /**
-   * The unique identifier of the campaign from which the budget item will be
-   * deleted.
-   */
   campaignGuid: string;
 }
 
 export interface BudgetGetParams {
-  /**
-   * The unique identifier of the campaign.
-   */
   campaignGuid: string;
 }
 

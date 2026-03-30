@@ -6,6 +6,11 @@ import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
 export class SiteSearch extends APIResource {
+  /**
+   * Return all indexed data for an asset (e.g., page, blog post, HubDB table),
+   * specified by ID. This is useful when debugging why a particular asset is not
+   * returned from a custom search.
+   */
   getIndexedData(
     contentID: string,
     query: SiteSearchGetIndexedDataParams | null | undefined = {},
@@ -14,6 +19,12 @@ export class SiteSearch extends APIResource {
     return this._client.get(path`/cms/site-search/2026-03/indexed-data/${contentID}`, { query, ...options });
   }
 
+  /**
+   * Returns any website content matching the given search criteria for a given
+   * HubSpot account. Searches can be filtered by content type, domain, or URL path.
+   * Includes options for weighing results by recency and popularity, along with
+   * language support.
+   */
   search(
     query: SiteSearchSearchParams | null | undefined = {},
     options?: RequestOptions,
@@ -61,7 +72,7 @@ export interface ContentSearchResult {
   authorFullName?: string;
 
   /**
-   * For knowledge articles, the category of the article.
+   * The error category
    */
   category?: string;
 

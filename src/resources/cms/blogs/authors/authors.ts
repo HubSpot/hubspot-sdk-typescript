@@ -12,6 +12,9 @@ import { path } from '../../../../internal/utils/path';
 export class Authors extends APIResource {
   batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
 
+  /**
+   * Create a new Blog Author.
+   */
   create(body: AuthorCreateParams, options?: RequestOptions): APIPromise<Response> {
     return this._client.post('/cms/blogs/2026-03/authors', {
       body,
@@ -21,6 +24,11 @@ export class Authors extends APIResource {
     });
   }
 
+  /**
+   * Sparse updates a single Blog Author object identified by the id in the path. All
+   * the column values need not be specified. Only the that need to be modified can
+   * be specified.
+   */
   update(objectID: string, params: AuthorUpdateParams, options?: RequestOptions): APIPromise<Response> {
     const { archived, ...body } = params;
     return this._client.patch(path`/cms/blogs/2026-03/authors/${objectID}`, {
@@ -33,7 +41,7 @@ export class Authors extends APIResource {
   }
 
   list(query: AuthorListParams | null | undefined = {}, options?: RequestOptions): APIPromise<Response> {
-    return this._client.get('/cms/blogs/2026-03/authors', {
+    return this._client.get('/cms/blogs/2026-03/authors/cursor', {
       query,
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
@@ -41,6 +49,9 @@ export class Authors extends APIResource {
     });
   }
 
+  /**
+   * Delete the Blog Author object identified by the id in the path.
+   */
   delete(
     objectID: string,
     params: AuthorDeleteParams | null | undefined = {},
@@ -54,6 +65,9 @@ export class Authors extends APIResource {
     });
   }
 
+  /**
+   * Attach a Blog Author to a multi-language group.
+   */
   attachToLangGroup(body: AuthorAttachToLangGroupParams, options?: RequestOptions): APIPromise<Response> {
     return this._client.post('/cms/blogs/2026-03/authors/multi-language/attach-to-lang-group', {
       body,
@@ -63,6 +77,9 @@ export class Authors extends APIResource {
     });
   }
 
+  /**
+   * Create a new language variation from an existing Blog Author.
+   */
   createLanguageVariation(
     body: AuthorCreateLanguageVariationParams,
     options?: RequestOptions,
@@ -75,6 +92,9 @@ export class Authors extends APIResource {
     });
   }
 
+  /**
+   * Detach a Blog Author from a multi-language group.
+   */
   detachFromLangGroup(body: AuthorDetachFromLangGroupParams, options?: RequestOptions): APIPromise<Response> {
     return this._client.post('/cms/blogs/2026-03/authors/multi-language/detach-from-lang-group', {
       body,
@@ -84,6 +104,9 @@ export class Authors extends APIResource {
     });
   }
 
+  /**
+   * Retrieve the Blog Author object identified by the id in the path.
+   */
   get(
     objectID: string,
     query: AuthorGetParams | null | undefined = {},
@@ -97,6 +120,69 @@ export class Authors extends APIResource {
     });
   }
 
+  listByQuery(
+    query: AuthorListByQueryParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Response> {
+    return this._client.get('/cms/blogs/2026-03/authors/cursor/query', {
+      query,
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+      __binaryResponse: true,
+    });
+  }
+
+  listPosts(
+    query: AuthorListPostsParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Response> {
+    return this._client.get('/cms/blogs/2026-03/posts/cursor', {
+      query,
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+      __binaryResponse: true,
+    });
+  }
+
+  listPostsByQuery(
+    query: AuthorListPostsByQueryParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Response> {
+    return this._client.get('/cms/blogs/2026-03/posts/cursor/query', {
+      query,
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+      __binaryResponse: true,
+    });
+  }
+
+  listTags(
+    query: AuthorListTagsParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Response> {
+    return this._client.get('/cms/blogs/2026-03/tags/cursor', {
+      query,
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+      __binaryResponse: true,
+    });
+  }
+
+  listTagsByQuery(
+    query: AuthorListTagsByQueryParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Response> {
+    return this._client.get('/cms/blogs/2026-03/tags/cursor/query', {
+      query,
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+      __binaryResponse: true,
+    });
+  }
+
+  /**
+   * Set a Blog Author as the primary language of a multi-language group.
+   */
   setNewLangPrimary(body: AuthorSetNewLangPrimaryParams, options?: RequestOptions): APIPromise<void> {
     return this._client.put('/cms/blogs/2026-03/authors/multi-language/set-new-lang-primary', {
       body,
@@ -105,6 +191,9 @@ export class Authors extends APIResource {
     });
   }
 
+  /**
+   * Explicitly set new languages for each Blog Author in a multi-language group.
+   */
   updateLanguages(body: AuthorUpdateLanguagesParams, options?: RequestOptions): APIPromise<Response> {
     return this._client.post('/cms/blogs/2026-03/authors/multi-language/update-languages', {
       body,
@@ -4824,6 +4913,181 @@ export interface AuthorGetParams {
   property?: string;
 }
 
+export interface AuthorListByQueryParams {
+  /**
+   * The paging cursor token of the last successfully read resource will be returned
+   * as the `paging.next.after` JSON property of a paged response containing more
+   * results.
+   */
+  after?: string;
+
+  /**
+   * Whether to return only results that have been archived.
+   */
+  archived?: boolean;
+
+  createdAfter?: string;
+
+  createdAt?: string;
+
+  createdBefore?: string;
+
+  /**
+   * The maximum number of results to display per page.
+   */
+  limit?: number;
+
+  property?: string;
+
+  sort?: Array<string>;
+
+  updatedAfter?: string;
+
+  updatedAt?: string;
+
+  updatedBefore?: string;
+}
+
+export interface AuthorListPostsParams {
+  /**
+   * The paging cursor token of the last successfully read resource will be returned
+   * as the `paging.next.after` JSON property of a paged response containing more
+   * results.
+   */
+  after?: string;
+
+  /**
+   * Whether to return only results that have been archived.
+   */
+  archived?: boolean;
+
+  createdAfter?: string;
+
+  createdAt?: string;
+
+  createdBefore?: string;
+
+  /**
+   * The maximum number of results to display per page.
+   */
+  limit?: number;
+
+  property?: string;
+
+  sort?: Array<string>;
+
+  updatedAfter?: string;
+
+  updatedAt?: string;
+
+  updatedBefore?: string;
+}
+
+export interface AuthorListPostsByQueryParams {
+  /**
+   * The paging cursor token of the last successfully read resource will be returned
+   * as the `paging.next.after` JSON property of a paged response containing more
+   * results.
+   */
+  after?: string;
+
+  /**
+   * Whether to return only results that have been archived.
+   */
+  archived?: boolean;
+
+  createdAfter?: string;
+
+  createdAt?: string;
+
+  createdBefore?: string;
+
+  /**
+   * The maximum number of results to display per page.
+   */
+  limit?: number;
+
+  property?: string;
+
+  sort?: Array<string>;
+
+  updatedAfter?: string;
+
+  updatedAt?: string;
+
+  updatedBefore?: string;
+}
+
+export interface AuthorListTagsParams {
+  /**
+   * The paging cursor token of the last successfully read resource will be returned
+   * as the `paging.next.after` JSON property of a paged response containing more
+   * results.
+   */
+  after?: string;
+
+  /**
+   * Whether to return only results that have been archived.
+   */
+  archived?: boolean;
+
+  createdAfter?: string;
+
+  createdAt?: string;
+
+  createdBefore?: string;
+
+  /**
+   * The maximum number of results to display per page.
+   */
+  limit?: number;
+
+  property?: string;
+
+  sort?: Array<string>;
+
+  updatedAfter?: string;
+
+  updatedAt?: string;
+
+  updatedBefore?: string;
+}
+
+export interface AuthorListTagsByQueryParams {
+  /**
+   * The paging cursor token of the last successfully read resource will be returned
+   * as the `paging.next.after` JSON property of a paged response containing more
+   * results.
+   */
+  after?: string;
+
+  /**
+   * Whether to return only results that have been archived.
+   */
+  archived?: boolean;
+
+  createdAfter?: string;
+
+  createdAt?: string;
+
+  createdBefore?: string;
+
+  /**
+   * The maximum number of results to display per page.
+   */
+  limit?: number;
+
+  property?: string;
+
+  sort?: Array<string>;
+
+  updatedAfter?: string;
+
+  updatedAt?: string;
+
+  updatedBefore?: string;
+}
+
 export interface AuthorSetNewLangPrimaryParams {
   /**
    * ID of object to set as primary in multi-language group.
@@ -5706,6 +5970,11 @@ export declare namespace Authors {
     type AuthorCreateLanguageVariationParams as AuthorCreateLanguageVariationParams,
     type AuthorDetachFromLangGroupParams as AuthorDetachFromLangGroupParams,
     type AuthorGetParams as AuthorGetParams,
+    type AuthorListByQueryParams as AuthorListByQueryParams,
+    type AuthorListPostsParams as AuthorListPostsParams,
+    type AuthorListPostsByQueryParams as AuthorListPostsByQueryParams,
+    type AuthorListTagsParams as AuthorListTagsParams,
+    type AuthorListTagsByQueryParams as AuthorListTagsByQueryParams,
     type AuthorSetNewLangPrimaryParams as AuthorSetNewLangPrimaryParams,
     type AuthorUpdateLanguagesParams as AuthorUpdateLanguagesParams,
   };

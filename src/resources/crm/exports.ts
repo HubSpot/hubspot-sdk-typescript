@@ -8,14 +8,25 @@ import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
 export class Exports extends APIResource {
+  /**
+   * Begins exporting CRM data for the portal as specified in the request body
+   */
   createAsync(body: ExportCreateAsyncParams, options?: RequestOptions): APIPromise<Shared.TaskLocator> {
     return this._client.post('/crm/exports/2026-03/export/async', { body, ...options });
   }
 
+  /**
+   * Retrieve detailed information about a specific CRM export, including its current
+   * state and properties.
+   */
   get(exportID: number, options?: RequestOptions): APIPromise<PublicExportResponse> {
     return this._client.get(path`/crm/exports/2026-03/export/${exportID}`, options);
   }
 
+  /**
+   * Returns the status of the export with taskId, including the URL of the resulting
+   * file if the export status is COMPLETE
+   */
   getStatus(taskID: number, options?: RequestOptions): APIPromise<ActionResponseWithSingleResultUri> {
     return this._client.get(path`/crm/exports/2026-03/export/async/tasks/${taskID}/status`, options);
   }

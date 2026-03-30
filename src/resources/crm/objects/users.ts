@@ -85,7 +85,7 @@ export class Users extends APIResource {
   search(
     body: UserSearchParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CollectionResponseWithTotalSimplePublicObject> {
+  ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/objects/2026-03/users/search', { body, ...options });
   }
 

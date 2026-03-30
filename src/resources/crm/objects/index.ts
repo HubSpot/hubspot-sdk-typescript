@@ -157,11 +157,9 @@ export {
   type ListingCreateParams,
   type ListingUpdateParams,
   type ListingListParams,
-  type ListingDeleteParams,
   type ListingGetParams,
   type ListingSearchParams,
-  type ListingUpsertParams,
-} from './listings';
+} from './listings/index';
 export {
   Meetings,
   type MeetingCreateParams,
@@ -190,10 +188,8 @@ export {
   type BatchResponseSimplePublicUpsertObject,
   type CollectionResponseAssociatedID,
   type CollectionResponseSimplePublicObjectWithAssociationsForwardPaging,
-  type CollectionResponseWithTotalSimplePublicObject,
   type PublicAssociationsForObject,
   type PublicMergeInput,
-  type PublicObjectSearchRequest,
   type SimplePublicObjectBatchInput,
   type SimplePublicObjectBatchInputForCreate,
   type SimplePublicObjectBatchInputUpsert,
@@ -223,7 +219,6 @@ export {
 } from './partner-clients/index';
 export {
   PartnerServices,
-  type CollectionResponseMultiAssociatedObjectWithLabelForwardPaging,
   type PartnerServiceUpdateParams,
   type PartnerServiceListParams,
   type PartnerServiceGetParams,
@@ -249,6 +244,15 @@ export {
   type ProductSearchParams,
   type ProductUpsertParams,
 } from './products';
+export {
+  Projects,
+  type ProjectCreateParams,
+  type ProjectUpdateParams,
+  type ProjectListParams,
+  type ProjectGetParams,
+  type ProjectMergeParams,
+  type ProjectSearchParams,
+} from './projects/index';
 export {
   Quotes,
   type QuoteCreateParams,
@@ -312,3 +316,11 @@ export {
   type UserSearchParams,
   type UserUpsertParams,
 } from './users';
+export {
+  type ObjectCreateParams,
+  type ObjectUpdateParams,
+  type ObjectListParams,
+  type ObjectDeleteParams,
+  type ObjectGetParams,
+  type ObjectSearchParams,
+} from './objects_/index';

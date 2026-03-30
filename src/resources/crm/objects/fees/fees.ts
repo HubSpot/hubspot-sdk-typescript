@@ -98,7 +98,7 @@ export class Fees extends APIResource {
   search(
     body: FeeSearchParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CollectionResponseWithTotalSimplePublicObject> {
+  ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/objects/2026-03/fees/search', { body, ...options });
   }
 }

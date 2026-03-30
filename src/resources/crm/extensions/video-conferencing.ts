@@ -7,6 +7,9 @@ import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
 export class VideoConferencing extends APIResource {
+  /**
+   * Create or update video conference extension settings for your app
+   */
   update(
     appID: number,
     body: VideoConferencingUpdateParams,
@@ -18,6 +21,9 @@ export class VideoConferencing extends APIResource {
     });
   }
 
+  /**
+   * Delete video conference extension settings for your app
+   */
   delete(appID: number, options?: RequestOptions): APIPromise<void> {
     return this._client.delete(path`/crm/extensions/videoconferencing/2026-03/settings/${appID}`, {
       ...options,
@@ -25,6 +31,9 @@ export class VideoConferencing extends APIResource {
     });
   }
 
+  /**
+   * Fetch video conference extension settings for your app
+   */
   get(appID: number, options?: RequestOptions): APIPromise<ExternalSettings> {
     return this._client.get(path`/crm/extensions/videoconferencing/2026-03/settings/${appID}`, options);
   }

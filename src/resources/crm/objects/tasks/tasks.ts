@@ -32,7 +32,7 @@ export class Tasks extends APIResource {
   }
 
   /**
-   * Perform a partial update of a task identified by `{taskId}`or optionally a
+   * Perform a partial update of an Object identified by `{taskId}`or optionally a
    * unique property value as specified by the `idProperty` query param. `{taskId}`
    * refers to the internal object ID by default, and the `idProperty` query param
    * refers to a property whose values are unique for the object. Provided property
@@ -98,7 +98,7 @@ export class Tasks extends APIResource {
   search(
     body: TaskSearchParams,
     options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.CollectionResponseWithTotalSimplePublicObject> {
+  ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/objects/2026-03/tasks/search', { body, ...options });
   }
 }

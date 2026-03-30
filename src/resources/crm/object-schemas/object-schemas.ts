@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
-import * as EventsAPI from '../../events/events';
 import * as BatchAPI from './batch';
 import { Batch, BatchGetParams } from './batch';
 import { APIPromise } from '../../../core/api-promise';
@@ -13,10 +12,17 @@ import { path } from '../../../internal/utils/path';
 export class ObjectSchemas extends APIResource {
   batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
 
-  create(body: ObjectSchemaCreateParams, options?: RequestOptions): APIPromise<Shared.ObjectSchema> {
+  /**
+   * Create a new custom object schema by defining its properties and associations.
+   */
+  create(body: ObjectSchemaCreateParams, options?: RequestOptions): APIPromise<ObjectSchema> {
     return this._client.post('/crm-object-schemas/2026-03/schemas', { body, ...options });
   }
 
+  /**
+   * Update attributes of a custom object schema, such as properties and labels,
+   * using the object type ID or fully qualified name.
+   */
   update(
     objectType: string,
     body: ObjectSchemaUpdateParams,
@@ -25,13 +31,21 @@ export class ObjectSchemas extends APIResource {
     return this._client.patch(path`/crm-object-schemas/2026-03/schemas/${objectType}`, { body, ...options });
   }
 
+  /**
+   * Retrieve all custom object schemas, with options to include property
+   * definitions, association definitions, and audit metadata.
+   */
   list(
     query: ObjectSchemaListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<Shared.CollectionResponseObjectSchemaNoPaging> {
+  ): APIPromise<CollectionResponseObjectSchemaNoPaging> {
     return this._client.get('/crm-object-schemas/2026-03/schemas', { query, ...options });
   }
 
+  /**
+   * Remove a custom object schema from the account using its object type ID or fully
+   * qualified name.
+   */
   delete(
     objectType: string,
     params: ObjectSchemaDeleteParams | null | undefined = {},
@@ -45,17 +59,27 @@ export class ObjectSchemas extends APIResource {
     });
   }
 
+  /**
+   * Create a new association between the specified object type and another object
+   * type. This operation requires the definition of the association attributes, such
+   * as the primary and target object type IDs.
+   */
   createAssociation(
     objectType: string,
     body: ObjectSchemaCreateAssociationParams,
     options?: RequestOptions,
-  ): APIPromise<EventsAPI.AssociationDefinition> {
+  ): APIPromise<Shared.AssociationDefinition> {
     return this._client.post(path`/crm-object-schemas/2026-03/schemas/${objectType}/associations`, {
       body,
       ...options,
     });
   }
 
+  /**
+   * Remove an association between two object types identified by the association
+   * identifier and object type. This operation is irreversible and will permanently
+   * delete the specified association.
+   */
   deleteAssociation(
     associationIdentifier: string,
     params: ObjectSchemaDeleteAssociationParams,
@@ -68,26 +92,123 @@ export class ObjectSchemas extends APIResource {
     );
   }
 
+  /**
+   * Retrieve details of a custom object schema, including its properties and
+   * associations, using the object type ID or fully qualified name.
+   */
   get(
     objectType: string,
     query: ObjectSchemaGetParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<Shared.ObjectSchema> {
+  ): APIPromise<ObjectSchema> {
     return this._client.get(path`/crm-object-schemas/2026-03/schemas/${objectType}`, { query, ...options });
   }
 }
 
+export interface CollectionResponseObjectSchemaNoPaging {
+  results: Array<ObjectSchema>;
+}
+
+export interface ObjectSchema {
+  /**
+   * A unique ID for this schema's object type. Will be defined as
+   * {meta-type}-{unique ID}.
+   */
+  id: string;
+
+  allowsSensitiveProperties: boolean;
+
+  archived: boolean;
+
+  /**
+   * Associations defined for a given object type.
+   */
+  associations: Array<Shared.AssociationDefinition>;
+
+  /**
+   * An assigned unique ID for the object, including portal ID and object name.
+   */
+  fullyQualifiedName: string;
+
+  labels: Shared.ObjectTypeDefinitionLabels;
+
+  /**
+   * A unique name for the schema's object type.
+   */
+  name: string;
+
+  objectTypeId: string;
+
+  /**
+   * Properties defined for this object type.
+   */
+  properties: Array<Shared.Property>;
+
+  /**
+   * The names of properties that should be **required** when creating an object of
+   * this type.
+   */
+  requiredProperties: Array<string>;
+
+  /**
+   * Names of properties that will be indexed for this object type in by HubSpot's
+   * product search.
+   */
+  searchableProperties: Array<string>;
+
+  /**
+   * The names of secondary properties for this object. These will be displayed as
+   * secondary on the HubSpot record page for this object type.
+   */
+  secondaryDisplayProperties: Array<string>;
+
+  /**
+   * When the object schema was created.
+   */
+  createdAt?: string;
+
+  createdByUserId?: number;
+
+  description?: string;
+
+  /**
+   * The name of the primary property for this object. This will be displayed as
+   * primary on the HubSpot record page for this object type.
+   */
+  primaryDisplayProperty?: string;
+
+  /**
+   * When the object schema was last updated.
+   */
+  updatedAt?: string;
+
+  updatedByUserId?: number;
+}
+
 export interface ObjectSchemaBatchReadRequest {
+  /**
+   * Indicates whether to include association definitions in the response.
+   */
   includeAssociationDefinitions: boolean;
 
+  /**
+   * Indicates whether to include audit metadata in the response.
+   */
   includeAuditMetadata: boolean;
 
+  /**
+   * Indicates whether to include property definitions in the response.
+   */
   includePropertyDefinitions: boolean;
 
   inputs: Array<string>;
 }
 
 export interface ObjectSchemaEgg {
+  /**
+   * Determines if the object type can include properties that are marked as
+   * sensitive.
+   */
   allowsSensitiveProperties: boolean;
 
   /**
@@ -125,6 +246,9 @@ export interface ObjectSchemaEgg {
    */
   secondaryDisplayProperties: Array<string>;
 
+  /**
+   * A brief explanation of the object type.
+   */
   description?: string;
 
   /**
@@ -169,6 +293,9 @@ export interface ObjectTypePropertyCreate {
    */
   displayOrder?: number;
 
+  /**
+   * Specifies the reference type for external options associated with the property.
+   */
   externalOptionsReferenceType?: string;
 
   /**
@@ -187,6 +314,9 @@ export interface ObjectTypePropertyCreate {
    */
   hasUniqueValue?: boolean;
 
+  /**
+   * Hidden options won't be shown in HubSpot.
+   */
   hidden?: boolean;
 
   /**
@@ -237,6 +367,10 @@ export interface ObjectTypePropertyCreate {
 }
 
 export interface ObjectSchemaCreateParams {
+  /**
+   * Determines if the object type can include properties that are marked as
+   * sensitive.
+   */
   allowsSensitiveProperties: boolean;
 
   /**
@@ -274,6 +408,9 @@ export interface ObjectSchemaCreateParams {
    */
   secondaryDisplayProperties: Array<string>;
 
+  /**
+   * A brief explanation of the object type.
+   */
   description?: string;
 
   /**
@@ -332,6 +469,9 @@ export interface ObjectSchemaCreateAssociationParams {
 }
 
 export interface ObjectSchemaDeleteAssociationParams {
+  /**
+   * Fully qualified name or object type ID of your schema.
+   */
   objectType: string;
 }
 
@@ -347,6 +487,8 @@ ObjectSchemas.Batch = Batch;
 
 export declare namespace ObjectSchemas {
   export {
+    type CollectionResponseObjectSchemaNoPaging as CollectionResponseObjectSchemaNoPaging,
+    type ObjectSchema as ObjectSchema,
     type ObjectSchemaBatchReadRequest as ObjectSchemaBatchReadRequest,
     type ObjectSchemaEgg as ObjectSchemaEgg,
     type ObjectTypePropertyCreate as ObjectTypePropertyCreate,

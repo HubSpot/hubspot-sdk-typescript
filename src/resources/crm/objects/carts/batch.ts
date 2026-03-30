@@ -18,10 +18,7 @@ export class Batch extends APIResource {
   }
 
   /**
-   * Update a batch of carts by ID (`objectId`) or unique property value
-   * (`idProperty`). Provided property values will be overwritten. Read-only and
-   * non-existent properties will result in an error. Properties values can be
-   * cleared by passing an empty string.
+   * Update a batch of carts using their internal IDs or unique property values.
    */
   update(
     body: BatchUpdateParams,
@@ -31,9 +28,7 @@ export class Batch extends APIResource {
   }
 
   /**
-   * Delete a batch of carts by ID. Deleted carts can be restored within 90 days of
-   * deletion. Learn more about
-   * [restoring records](https://knowledge.hubspot.com/records/restore-deleted-records).
+   * Archive a batch of carts identified by their IDs.
    */
   delete(body: BatchDeleteParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/crm/objects/2026-03/carts/batch/archive', {
@@ -44,8 +39,8 @@ export class Batch extends APIResource {
   }
 
   /**
-   * Retrieve a batch of carts by ID (`objectId`) or unique property value
-   * (`idProperty`).
+   * Retrieve carts by ID, or include the `idProperty` parameter to retrieve carts by
+   * a custom unique value property.
    */
   get(
     params: BatchGetParams,
@@ -60,8 +55,8 @@ export class Batch extends APIResource {
   }
 
   /**
-   * Batch create and update a batch of carts by a unique property. Carts that don't
-   * exist will be created, while existing carts will be updated.
+   * Create or update records identified by a unique property value as specified by
+   * the `idProperty` query parameter.
    */
   upsert(
     body: BatchUpsertParams,

@@ -7,6 +7,19 @@ import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
 export class Attendance extends APIResource {
+  /**
+   * Records the participation of multiple HubSpot contacts in a Marketing Event
+   * using their HubSpot contact IDs.
+   *
+   * Additional Functionality:
+   *
+   * - Adds a timeline event to the contacts.
+   *
+   * Allowed Properties: For the state "attend":
+   *
+   * - joinedAt
+   * - leftAt
+   */
   createByEventIDAndContactID(
     subscriberState: string,
     params: AttendanceCreateByEventIDAndContactIDParams,
@@ -19,6 +32,23 @@ export class Attendance extends APIResource {
     );
   }
 
+  /**
+   * Records the participation of multiple HubSpot contacts in a Marketing Event
+   * using their email addresses.
+   *
+   * If a contact does not exist, it will be automatically created. The
+   * contactProperties field is used exclusively for creating new contacts and will
+   * not update properties of existing contacts.
+   *
+   * Additional Functionality:
+   *
+   * - Adds a timeline event to the contacts.
+   *
+   * Allowed Properties: For the state "attend":
+   *
+   * - joinedAt
+   * - leftAt
+   */
   createByEventIDAndEmail(
     subscriberState: string,
     params: AttendanceCreateByEventIDAndEmailParams,
@@ -31,6 +61,19 @@ export class Attendance extends APIResource {
     );
   }
 
+  /**
+   * Records the participation of multiple HubSpot contacts in a Marketing Event
+   * using their HubSpot contact IDs.
+   *
+   * Additional Functionality:
+   *
+   * - Adds a timeline event to the contacts.
+   *
+   * Allowed Properties: For the state "attend":
+   *
+   * - joinedAt
+   * - leftAt
+   */
   createByExternalEventIDAndContactID(
     subscriberState: string,
     params: AttendanceCreateByExternalEventIDAndContactIDParams,
@@ -43,6 +86,23 @@ export class Attendance extends APIResource {
     );
   }
 
+  /**
+   * Records the participation of multiple HubSpot contacts in a Marketing Event
+   * using their email addresses.
+   *
+   * If a contact does not exist, it will be automatically created. The
+   * contactProperties field is used exclusively for creating new contacts and will
+   * not update properties of existing contacts.
+   *
+   * Additional Functionality:
+   *
+   * - Adds a timeline event to the contacts.
+   *
+   * Allowed Properties: For the state "attend":
+   *
+   * - joinedAt
+   * - leftAt
+   */
   createByExternalEventIDAndEmail(
     subscriberState: string,
     params: AttendanceCreateByExternalEventIDAndEmailParams,

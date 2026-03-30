@@ -36,7 +36,7 @@ export interface IPRange {
    * The service associated with the IP range, such as EMAIL, API, DNS, or
    * WEB_SCRAPING.
    */
-  service: 'API' | 'DNS' | 'EMAIL' | 'WEB_SCRAPING';
+  service: 'API' | 'DNS' | 'EMAIL' | 'TEST_SERVICE' | 'WEB_SCRAPING';
 }
 
 Origins.IPRanges = IPRanges;

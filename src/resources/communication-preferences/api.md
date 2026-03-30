@@ -17,10 +17,7 @@ Types:
 - <code><a href="./src/resources/communication-preferences/communication-preferences.ts">PublicStatus</a></code>
 - <code><a href="./src/resources/communication-preferences/communication-preferences.ts">PublicStatusBulkResponse</a></code>
 - <code><a href="./src/resources/communication-preferences/communication-preferences.ts">PublicStatusRequest</a></code>
-- <code><a href="./src/resources/communication-preferences/communication-preferences.ts">PublicSubscriptionStatus</a></code>
-- <code><a href="./src/resources/communication-preferences/communication-preferences.ts">PublicSubscriptionStatusesResponse</a></code>
 - <code><a href="./src/resources/communication-preferences/communication-preferences.ts">PublicSubscriptionTranslation</a></code>
-- <code><a href="./src/resources/communication-preferences/communication-preferences.ts">PublicUpdateSubscriptionStatusRequest</a></code>
 - <code><a href="./src/resources/communication-preferences/communication-preferences.ts">PublicWideStatus</a></code>
 - <code><a href="./src/resources/communication-preferences/communication-preferences.ts">PublicWideStatusBulkResponse</a></code>
 - <code><a href="./src/resources/communication-preferences/communication-preferences.ts">SubscriptionDefinition</a></code>
@@ -28,11 +25,8 @@ Types:
 Methods:
 
 - <code title="post /communication-preferences/2026-03/links/generate">client.communicationPreferences.<a href="./src/resources/communication-preferences/communication-preferences.ts">generateLinks</a>({ ...params }) -> LinkGenerationResponse</code>
-- <code title="get /communication-preferences/2026-03/status/email/{emailAddress}">client.communicationPreferences.<a href="./src/resources/communication-preferences/communication-preferences.ts">getStatusByEmail</a>(emailAddress) -> PublicSubscriptionStatusesResponse</code>
 - <code title="get /communication-preferences/2026-03/statuses/{subscriberIdString}">client.communicationPreferences.<a href="./src/resources/communication-preferences/communication-preferences.ts">getStatuses</a>(subscriberIDString, { ...params }) -> ActionResponseWithResultsPublicStatus</code>
 - <code title="get /communication-preferences/2026-03/statuses/{subscriberIdString}/unsubscribe-all">client.communicationPreferences.<a href="./src/resources/communication-preferences/communication-preferences.ts">getUnsubscribeAllStatus</a>(subscriberIDString, { ...params }) -> ActionResponseWithResultsPublicWideStatus</code>
-- <code title="post /communication-preferences/2026-03/subscribe">client.communicationPreferences.<a href="./src/resources/communication-preferences/communication-preferences.ts">subscribe</a>({ ...params }) -> PublicSubscriptionStatus</code>
-- <code title="post /communication-preferences/2026-03/unsubscribe">client.communicationPreferences.<a href="./src/resources/communication-preferences/communication-preferences.ts">unsubscribe</a>({ ...params }) -> PublicSubscriptionStatus</code>
 - <code title="post /communication-preferences/2026-03/statuses/{subscriberIdString}/unsubscribe-all">client.communicationPreferences.<a href="./src/resources/communication-preferences/communication-preferences.ts">unsubscribeAll</a>(subscriberIDString, { ...params }) -> ActionResponseWithResultsPublicStatus</code>
 - <code title="post /communication-preferences/2026-03/statuses/{subscriberIdString}">client.communicationPreferences.<a href="./src/resources/communication-preferences/communication-preferences.ts">updateStatus</a>(subscriberIDString, { ...params }) -> ActionResponseWithResultsPublicStatus</code>
 
