@@ -26,18 +26,10 @@ The full API of this library can be found in [api.md](api.md).
 import Hubspot from 'hubspot-sdk';
 
 const client = new Hubspot({
-  accessToken: 'pat-na1-xxxxxxxx-xxxx',
+  accessToken: 'My Access Token',
 });
 
-const result = await client.crm.objects.contacts.create({
-  associations: [
-    {
-      to: { id: 'id' },
-      types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
-    },
-  ],
-  properties: { email: 'mark.s@lumon.industries' },
-});
+const result = await client.crm.objects.contacts.get('contactId');
 
 console.log(result.id);
 ```
@@ -51,7 +43,7 @@ This library includes TypeScript definitions for all request params and response
 import Hubspot from 'hubspot-sdk';
 
 const client = new Hubspot({
-  accessToken: 'pat-na1-xxxxxxxx-xxxx',
+  accessToken: 'My Access Token',
 });
 
 const params: Hubspot.Crm.Objects.ContactCreateParams = {
@@ -61,7 +53,7 @@ const params: Hubspot.Crm.Objects.ContactCreateParams = {
       types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
     },
   ],
-  properties: { email: 'mark.s@lumon.industries' },
+  properties: { foo: 'string' },
 };
 const simplePublicObject: Hubspot.SimplePublicObject = await client.crm.objects.contacts.create(
   params,
@@ -125,7 +117,7 @@ const simplePublicObject = await client.crm.objects.contacts
         types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
       },
     ],
-    properties: { email: 'mark.s@lumon.industries' },
+    properties: { foo: 'string' },
   })
   .catch(async (err) => {
     if (err instanceof Hubspot.APIError) {
@@ -172,7 +164,7 @@ await client.crm.objects.contacts.create({
   to: { id: 'id' },
   types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
 }],
-  properties: { email: 'mark.s@lumon.industries' },
+  properties: { foo: 'string' },
 }, {
   maxRetries: 5,
 });
@@ -195,7 +187,7 @@ await client.crm.objects.contacts.create({
   to: { id: 'id' },
   types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
 }],
-  properties: { email: 'mark.s@lumon.industries' },
+  properties: { foo: 'string' },
 }, {
   timeout: 5 * 1000,
 });
@@ -260,7 +252,7 @@ const response = await client.crm.objects.contacts
         types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
       },
     ],
-    properties: { email: 'mark.s@lumon.industries' },
+    properties: { foo: 'string' },
   })
   .asResponse();
 console.log(response.headers.get('X-My-Header'));
@@ -274,7 +266,7 @@ const { data: simplePublicObject, response: raw } = await client.crm.objects.con
         types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
       },
     ],
-    properties: { email: 'mark.s@lumon.industries' },
+    properties: { foo: 'string' },
   })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
@@ -358,7 +350,7 @@ parameter. This library doesn't validate at runtime that the request matches the
 send will be sent as-is.
 
 ```ts
-client.crm.objects.contacts.create({
+client.crm.objects.contacts.get({
   // ...
   // @ts-expect-error baz is not yet public
   baz: 'undocumented option',

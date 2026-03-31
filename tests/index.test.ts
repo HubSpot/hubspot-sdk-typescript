@@ -23,7 +23,7 @@ describe('instantiate client', () => {
     const client = new Hubspot({
       baseURL: 'http://localhost:5000/',
       defaultHeaders: { 'X-My-Default-Header': '2' },
-      accessToken: 'pat-na1-xxxxxxxx-xxxx',
+      accessToken: 'My Access Token',
     });
 
     test('they are used in the request', async () => {
@@ -90,7 +90,7 @@ describe('instantiate client', () => {
       const client = new Hubspot({
         logger: logger,
         logLevel: 'debug',
-        accessToken: 'pat-na1-xxxxxxxx-xxxx',
+        accessToken: 'My Access Token',
       });
 
       await forceAPIResponseForClient(client);
@@ -98,7 +98,7 @@ describe('instantiate client', () => {
     });
 
     test('default logLevel is warn', async () => {
-      const client = new Hubspot({ accessToken: 'pat-na1-xxxxxxxx-xxxx' });
+      const client = new Hubspot({ accessToken: 'My Access Token' });
       expect(client.logLevel).toBe('warn');
     });
 
@@ -114,7 +114,7 @@ describe('instantiate client', () => {
       const client = new Hubspot({
         logger: logger,
         logLevel: 'info',
-        accessToken: 'pat-na1-xxxxxxxx-xxxx',
+        accessToken: 'My Access Token',
       });
 
       await forceAPIResponseForClient(client);
@@ -131,7 +131,7 @@ describe('instantiate client', () => {
       };
 
       process.env['HUBSPOT_LOG'] = 'debug';
-      const client = new Hubspot({ logger: logger, accessToken: 'pat-na1-xxxxxxxx-xxxx' });
+      const client = new Hubspot({ logger: logger, accessToken: 'My Access Token' });
       expect(client.logLevel).toBe('debug');
 
       await forceAPIResponseForClient(client);
@@ -148,7 +148,7 @@ describe('instantiate client', () => {
       };
 
       process.env['HUBSPOT_LOG'] = 'not a log level';
-      const client = new Hubspot({ logger: logger, accessToken: 'pat-na1-xxxxxxxx-xxxx' });
+      const client = new Hubspot({ logger: logger, accessToken: 'My Access Token' });
       expect(client.logLevel).toBe('warn');
       expect(warnMock).toHaveBeenCalledWith(
         'process.env[\'HUBSPOT_LOG\'] was set to "not a log level", expected one of ["off","error","warn","info","debug"]',
@@ -168,7 +168,7 @@ describe('instantiate client', () => {
       const client = new Hubspot({
         logger: logger,
         logLevel: 'off',
-        accessToken: 'pat-na1-xxxxxxxx-xxxx',
+        accessToken: 'My Access Token',
       });
 
       await forceAPIResponseForClient(client);
@@ -188,7 +188,7 @@ describe('instantiate client', () => {
       const client = new Hubspot({
         logger: logger,
         logLevel: 'debug',
-        accessToken: 'pat-na1-xxxxxxxx-xxxx',
+        accessToken: 'My Access Token',
       });
       expect(client.logLevel).toBe('debug');
       expect(warnMock).not.toHaveBeenCalled();
@@ -200,7 +200,7 @@ describe('instantiate client', () => {
       const client = new Hubspot({
         baseURL: 'http://localhost:5000/',
         defaultQuery: { apiVersion: 'foo' },
-        accessToken: 'pat-na1-xxxxxxxx-xxxx',
+        accessToken: 'My Access Token',
       });
       expect(client.buildURL('/foo', null)).toEqual('http://localhost:5000/foo?apiVersion=foo');
     });
@@ -209,7 +209,7 @@ describe('instantiate client', () => {
       const client = new Hubspot({
         baseURL: 'http://localhost:5000/',
         defaultQuery: { apiVersion: 'foo', hello: 'world' },
-        accessToken: 'pat-na1-xxxxxxxx-xxxx',
+        accessToken: 'My Access Token',
       });
       expect(client.buildURL('/foo', null)).toEqual('http://localhost:5000/foo?apiVersion=foo&hello=world');
     });
@@ -218,7 +218,7 @@ describe('instantiate client', () => {
       const client = new Hubspot({
         baseURL: 'http://localhost:5000/',
         defaultQuery: { hello: 'world' },
-        accessToken: 'pat-na1-xxxxxxxx-xxxx',
+        accessToken: 'My Access Token',
       });
       expect(client.buildURL('/foo', { hello: undefined })).toEqual('http://localhost:5000/foo');
     });
@@ -227,7 +227,7 @@ describe('instantiate client', () => {
   test('custom fetch', async () => {
     const client = new Hubspot({
       baseURL: 'http://localhost:5000/',
-      accessToken: 'pat-na1-xxxxxxxx-xxxx',
+      accessToken: 'My Access Token',
       fetch: (url) => {
         return Promise.resolve(
           new Response(JSON.stringify({ url, custom: true }), {
@@ -245,7 +245,7 @@ describe('instantiate client', () => {
     // make sure the global fetch type is assignable to our Fetch type
     const client = new Hubspot({
       baseURL: 'http://localhost:5000/',
-      accessToken: 'pat-na1-xxxxxxxx-xxxx',
+      accessToken: 'My Access Token',
       fetch: defaultFetch,
     });
   });
@@ -253,7 +253,7 @@ describe('instantiate client', () => {
   test('custom signal', async () => {
     const client = new Hubspot({
       baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-      accessToken: 'pat-na1-xxxxxxxx-xxxx',
+      accessToken: 'My Access Token',
       fetch: (...args) => {
         return new Promise((resolve, reject) =>
           setTimeout(
@@ -285,7 +285,7 @@ describe('instantiate client', () => {
 
     const client = new Hubspot({
       baseURL: 'http://localhost:5000/',
-      accessToken: 'pat-na1-xxxxxxxx-xxxx',
+      accessToken: 'My Access Token',
       fetch: testFetch,
     });
 
@@ -297,7 +297,7 @@ describe('instantiate client', () => {
     test('trailing slash', () => {
       const client = new Hubspot({
         baseURL: 'http://localhost:5000/custom/path/',
-        accessToken: 'pat-na1-xxxxxxxx-xxxx',
+        accessToken: 'My Access Token',
       });
       expect(client.buildURL('/foo', null)).toEqual('http://localhost:5000/custom/path/foo');
     });
@@ -305,7 +305,7 @@ describe('instantiate client', () => {
     test('no trailing slash', () => {
       const client = new Hubspot({
         baseURL: 'http://localhost:5000/custom/path',
-        accessToken: 'pat-na1-xxxxxxxx-xxxx',
+        accessToken: 'My Access Token',
       });
       expect(client.buildURL('/foo', null)).toEqual('http://localhost:5000/custom/path/foo');
     });
@@ -315,40 +315,37 @@ describe('instantiate client', () => {
     });
 
     test('explicit option', () => {
-      const client = new Hubspot({ baseURL: 'https://example.com', accessToken: 'pat-na1-xxxxxxxx-xxxx' });
+      const client = new Hubspot({ baseURL: 'https://example.com', accessToken: 'My Access Token' });
       expect(client.baseURL).toEqual('https://example.com');
     });
 
     test('env variable', () => {
       process.env['HUBSPOT_BASE_URL'] = 'https://example.com/from_env';
-      const client = new Hubspot({ accessToken: 'pat-na1-xxxxxxxx-xxxx' });
+      const client = new Hubspot({ accessToken: 'My Access Token' });
       expect(client.baseURL).toEqual('https://example.com/from_env');
     });
 
     test('empty env variable', () => {
       process.env['HUBSPOT_BASE_URL'] = ''; // empty
-      const client = new Hubspot({ accessToken: 'pat-na1-xxxxxxxx-xxxx' });
+      const client = new Hubspot({ accessToken: 'My Access Token' });
       expect(client.baseURL).toEqual('https://api.hubapi.com');
     });
 
     test('blank env variable', () => {
       process.env['HUBSPOT_BASE_URL'] = '  '; // blank
-      const client = new Hubspot({ accessToken: 'pat-na1-xxxxxxxx-xxxx' });
+      const client = new Hubspot({ accessToken: 'My Access Token' });
       expect(client.baseURL).toEqual('https://api.hubapi.com');
     });
 
     test('in request options', () => {
-      const client = new Hubspot({ accessToken: 'pat-na1-xxxxxxxx-xxxx' });
+      const client = new Hubspot({ accessToken: 'My Access Token' });
       expect(client.buildURL('/foo', null, 'http://localhost:5000/option')).toEqual(
         'http://localhost:5000/option/foo',
       );
     });
 
     test('in request options overridden by client options', () => {
-      const client = new Hubspot({
-        accessToken: 'pat-na1-xxxxxxxx-xxxx',
-        baseURL: 'http://localhost:5000/client',
-      });
+      const client = new Hubspot({ accessToken: 'My Access Token', baseURL: 'http://localhost:5000/client' });
       expect(client.buildURL('/foo', null, 'http://localhost:5000/option')).toEqual(
         'http://localhost:5000/client/foo',
       );
@@ -356,7 +353,7 @@ describe('instantiate client', () => {
 
     test('in request options overridden by env variable', () => {
       process.env['HUBSPOT_BASE_URL'] = 'http://localhost:5000/env';
-      const client = new Hubspot({ accessToken: 'pat-na1-xxxxxxxx-xxxx' });
+      const client = new Hubspot({ accessToken: 'My Access Token' });
       expect(client.buildURL('/foo', null, 'http://localhost:5000/option')).toEqual(
         'http://localhost:5000/env/foo',
       );
@@ -364,11 +361,11 @@ describe('instantiate client', () => {
   });
 
   test('maxRetries option is correctly set', () => {
-    const client = new Hubspot({ maxRetries: 4, accessToken: 'pat-na1-xxxxxxxx-xxxx' });
+    const client = new Hubspot({ maxRetries: 4, accessToken: 'My Access Token' });
     expect(client.maxRetries).toEqual(4);
 
     // default
-    const client2 = new Hubspot({ accessToken: 'pat-na1-xxxxxxxx-xxxx' });
+    const client2 = new Hubspot({ accessToken: 'My Access Token' });
     expect(client2.maxRetries).toEqual(2);
   });
 
@@ -377,7 +374,7 @@ describe('instantiate client', () => {
       const client = new Hubspot({
         baseURL: 'http://localhost:5000/',
         maxRetries: 3,
-        accessToken: 'pat-na1-xxxxxxxx-xxxx',
+        accessToken: 'My Access Token',
       });
 
       const newClient = client.withOptions({
@@ -403,7 +400,7 @@ describe('instantiate client', () => {
         baseURL: 'http://localhost:5000/',
         defaultHeaders: { 'X-Test-Header': 'test-value' },
         defaultQuery: { 'test-param': 'test-value' },
-        accessToken: 'pat-na1-xxxxxxxx-xxxx',
+        accessToken: 'My Access Token',
       });
 
       const newClient = client.withOptions({
@@ -421,7 +418,7 @@ describe('instantiate client', () => {
       const client = new Hubspot({
         baseURL: 'http://localhost:5000/',
         timeout: 1000,
-        accessToken: 'pat-na1-xxxxxxxx-xxxx',
+        accessToken: 'My Access Token',
       });
 
       // Modify the client properties directly after creation
@@ -459,7 +456,7 @@ describe('instantiate client', () => {
 });
 
 describe('request building', () => {
-  const client = new Hubspot({ accessToken: 'pat-na1-xxxxxxxx-xxxx' });
+  const client = new Hubspot({ accessToken: 'My Access Token' });
 
   describe('custom headers', () => {
     test('handles undefined', async () => {
@@ -478,7 +475,7 @@ describe('request building', () => {
 });
 
 describe('default encoder', () => {
-  const client = new Hubspot({ accessToken: 'pat-na1-xxxxxxxx-xxxx' });
+  const client = new Hubspot({ accessToken: 'My Access Token' });
 
   class Serializable {
     toJSON() {
@@ -564,7 +561,7 @@ describe('retries', () => {
     };
 
     const client = new Hubspot({
-      accessToken: 'pat-na1-xxxxxxxx-xxxx',
+      accessToken: 'My Access Token',
       timeout: 10,
       fetch: testFetch,
     });
@@ -598,7 +595,7 @@ describe('retries', () => {
     };
 
     const client = new Hubspot({
-      accessToken: 'pat-na1-xxxxxxxx-xxxx',
+      accessToken: 'My Access Token',
       fetch: testFetch,
       maxRetries: 4,
     });
@@ -626,7 +623,7 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
     const client = new Hubspot({
-      accessToken: 'pat-na1-xxxxxxxx-xxxx',
+      accessToken: 'My Access Token',
       fetch: testFetch,
       maxRetries: 4,
     });
@@ -659,7 +656,7 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
     const client = new Hubspot({
-      accessToken: 'pat-na1-xxxxxxxx-xxxx',
+      accessToken: 'My Access Token',
       fetch: testFetch,
       maxRetries: 4,
       defaultHeaders: { 'X-Stainless-Retry-Count': null },
@@ -692,7 +689,7 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
     const client = new Hubspot({
-      accessToken: 'pat-na1-xxxxxxxx-xxxx',
+      accessToken: 'My Access Token',
       fetch: testFetch,
       maxRetries: 4,
     });
@@ -725,7 +722,7 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new Hubspot({ accessToken: 'pat-na1-xxxxxxxx-xxxx', fetch: testFetch });
+    const client = new Hubspot({ accessToken: 'My Access Token', fetch: testFetch });
 
     expect(await client.request({ path: '/foo', method: 'get' })).toEqual({ a: 1 });
     expect(count).toEqual(2);
@@ -755,7 +752,7 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new Hubspot({ accessToken: 'pat-na1-xxxxxxxx-xxxx', fetch: testFetch });
+    const client = new Hubspot({ accessToken: 'My Access Token', fetch: testFetch });
 
     expect(await client.request({ path: '/foo', method: 'get' })).toEqual({ a: 1 });
     expect(count).toEqual(2);
