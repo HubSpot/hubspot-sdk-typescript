@@ -22,40 +22,16 @@ export class Calling extends APIResource {
   transcripts: TranscriptsAPI.Transcripts = new TranscriptsAPI.Transcripts(this._client);
 
   /**
-   * Create new recording settings for a specific app using the provided app ID.
+   * Establish new channel connection settings for the specified app.
    */
-  create(
+  createChannelConnectionSettings(
     appID: number,
-    body: CallingCreateParams,
+    body: CallingCreateChannelConnectionSettingsParams,
     options?: RequestOptions,
-  ): APIPromise<RecordingSettingsResponse> {
-    return this._client.post(path`/crm/extensions/calling/2026-03/${appID}/settings/recording`, {
+  ): APIPromise<ChannelConnectionSettingsResponse> {
+    return this._client.post(path`/crm/extensions/calling/2026-03/${appID}/settings/channel-connection`, {
       body,
       ...options,
-    });
-  }
-
-  /**
-   * Update the recording settings for a specific app using the provided app ID.
-   */
-  update(
-    appID: number,
-    body: CallingUpdateParams,
-    options?: RequestOptions,
-  ): APIPromise<RecordingSettingsResponse> {
-    return this._client.patch(path`/crm/extensions/calling/2026-03/${appID}/settings/recording`, {
-      body,
-      ...options,
-    });
-  }
-
-  /**
-   * Delete the channel connection settings associated with the specified app.
-   */
-  delete(appID: number, options?: RequestOptions): APIPromise<void> {
-    return this._client.delete(path`/crm/extensions/calling/2026-03/${appID}/settings/channel-connection`, {
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
   }
 
@@ -67,23 +43,130 @@ export class Calling extends APIResource {
   }
 
   /**
-   * Retrieve the current recording settings for a specific app using the provided
-   * app ID.
-   */
-  get(appID: number, options?: RequestOptions): APIPromise<RecordingSettingsResponse> {
-    return this._client.get(path`/crm/extensions/calling/2026-03/${appID}/settings/recording`, options);
-  }
-
-  /**
    * This endpoint is used to mark a call recording as ready. It requires the
    * engagementId to identify the specific recording.
    */
-  markReady(body: CallingMarkReadyParams, options?: RequestOptions): APIPromise<void> {
+  createRecordingReady(body: CallingCreateRecordingReadyParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post('/crm/extensions/calling/2026-03/recordings/ready', {
       body,
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
+  }
+
+  /**
+   * Create new recording settings for a specific app using the provided app ID.
+   */
+  createRecordingSettings(
+    appID: number,
+    body: CallingCreateRecordingSettingsParams,
+    options?: RequestOptions,
+  ): APIPromise<RecordingSettingsResponse> {
+    return this._client.post(path`/crm/extensions/calling/2026-03/${appID}/settings/recording`, {
+      body,
+      ...options,
+    });
+  }
+
+  /**
+   * Create new settings for the calling extension associated with the specified
+   * appId.
+   */
+  createSettings(
+    appID: number,
+    body: CallingCreateSettingsParams,
+    options?: RequestOptions,
+  ): APIPromise<SettingsResponse> {
+    return this._client.post(path`/crm/extensions/calling/2026-03/${appID}/settings`, { body, ...options });
+  }
+
+  /**
+   * Delete the channel connection settings associated with the specified app.
+   */
+  deleteChannelConnectionSettings(appID: number, options?: RequestOptions): APIPromise<void> {
+    return this._client.delete(path`/crm/extensions/calling/2026-03/${appID}/settings/channel-connection`, {
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
+
+  /**
+   * Remove the calling extension settings associated with the specified appId. This
+   * action cannot be undone.
+   */
+  deleteSettings(appID: number, options?: RequestOptions): APIPromise<void> {
+    return this._client.delete(path`/crm/extensions/calling/2026-03/${appID}/settings`, {
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
+
+  /**
+   * Access the current channel connection settings for the specified app.
+   */
+  getChannelConnectionSettings(
+    appID: number,
+    options?: RequestOptions,
+  ): APIPromise<ChannelConnectionSettingsResponse> {
+    return this._client.get(
+      path`/crm/extensions/calling/2026-03/${appID}/settings/channel-connection`,
+      options,
+    );
+  }
+
+  /**
+   * Retrieve the current recording settings for a specific app using the provided
+   * app ID.
+   */
+  getRecordingSettings(appID: number, options?: RequestOptions): APIPromise<RecordingSettingsResponse> {
+    return this._client.get(path`/crm/extensions/calling/2026-03/${appID}/settings/recording`, options);
+  }
+
+  /**
+   * Retrieve the current settings of the calling extension for the specified appId.
+   */
+  getSettings(appID: number, options?: RequestOptions): APIPromise<SettingsResponse> {
+    return this._client.get(path`/crm/extensions/calling/2026-03/${appID}/settings`, options);
+  }
+
+  /**
+   * Modify the existing channel connection settings for the specified app.
+   */
+  updateChannelConnectionSettings(
+    appID: number,
+    body: CallingUpdateChannelConnectionSettingsParams,
+    options?: RequestOptions,
+  ): APIPromise<ChannelConnectionSettingsResponse> {
+    return this._client.patch(path`/crm/extensions/calling/2026-03/${appID}/settings/channel-connection`, {
+      body,
+      ...options,
+    });
+  }
+
+  /**
+   * Update the recording settings for a specific app using the provided app ID.
+   */
+  updateRecordingSettings(
+    appID: number,
+    body: CallingUpdateRecordingSettingsParams,
+    options?: RequestOptions,
+  ): APIPromise<RecordingSettingsResponse> {
+    return this._client.patch(path`/crm/extensions/calling/2026-03/${appID}/settings/recording`, {
+      body,
+      ...options,
+    });
+  }
+
+  /**
+   * Modify existing calling extension settings for the specified appId. Only the
+   * fields provided in the request will be updated.
+   */
+  updateSettings(
+    appID: number,
+    body: CallingUpdateSettingsParams,
+    options?: RequestOptions,
+  ): APIPromise<SettingsResponse> {
+    return this._client.patch(path`/crm/extensions/calling/2026-03/${appID}/settings`, { body, ...options });
   }
 }
 
@@ -459,18 +542,16 @@ export interface SettingsResponse {
   width: number;
 }
 
-export interface CallingCreateParams {
+export interface CallingCreateChannelConnectionSettingsParams {
   /**
-   * The URL used to access authenticated call recordings.
+   * Indicates whether the channel connection settings are ready.
    */
-  urlToRetrieveAuthedRecording: string;
-}
+  isReady: boolean;
 
-export interface CallingUpdateParams {
   /**
-   * The URL used to access authenticated call recordings.
+   * The URL associated with the channel connection settings.
    */
-  urlToRetrieveAuthedRecording?: string;
+  url: string;
 }
 
 export interface CallingCreateInboundCallParams {
@@ -531,11 +612,131 @@ export interface CallingCreateInboundCallParams {
   userId?: number;
 }
 
-export interface CallingMarkReadyParams {
+export interface CallingCreateRecordingReadyParams {
   /**
    * The unique identifier for the engagement associated with the call recording.
    */
   engagementId: number;
+}
+
+export interface CallingCreateRecordingSettingsParams {
+  /**
+   * The URL used to access authenticated call recordings.
+   */
+  urlToRetrieveAuthedRecording: string;
+}
+
+export interface CallingCreateSettingsParams {
+  /**
+   * Specifies the height of the calling extension interface.
+   */
+  height: number;
+
+  /**
+   * Indicates if the calling extension is ready for use.
+   */
+  isReady: boolean;
+
+  /**
+   * The name of the calling extension.
+   */
+  name: string;
+
+  /**
+   * Indicates if the calling extension supports custom objects.
+   */
+  supportsCustomObjects: boolean;
+
+  /**
+   * Indicates if the calling extension supports inbound calling.
+   */
+  supportsInboundCalling: boolean;
+
+  /**
+   * The URL associated with the calling extension.
+   */
+  url: string;
+
+  /**
+   * Indicates if the calling extension uses a separate calling window.
+   */
+  usesCallingWindow: boolean;
+
+  /**
+   * Indicates if the calling extension uses remote services.
+   */
+  usesRemote: boolean;
+
+  /**
+   * Specifies the width of the calling extension interface.
+   */
+  width: number;
+}
+
+export interface CallingUpdateChannelConnectionSettingsParams {
+  /**
+   * Indicates whether the channel connection settings are ready.
+   */
+  isReady?: boolean;
+
+  /**
+   * The URL for the channel connection settings.
+   */
+  url?: string;
+}
+
+export interface CallingUpdateRecordingSettingsParams {
+  /**
+   * The URL used to access authenticated call recordings.
+   */
+  urlToRetrieveAuthedRecording?: string;
+}
+
+export interface CallingUpdateSettingsParams {
+  /**
+   * The height setting for the calling extension interface.
+   */
+  height?: number;
+
+  /**
+   * Specifies whether the calling extension is ready for use.
+   */
+  isReady?: boolean;
+
+  /**
+   * The name of the calling extension.
+   */
+  name?: string;
+
+  /**
+   * Indicates if the calling extension supports custom objects.
+   */
+  supportsCustomObjects?: boolean;
+
+  /**
+   * Indicates if the calling extension supports inbound calling.
+   */
+  supportsInboundCalling?: boolean;
+
+  /**
+   * The URL associated with the calling extension settings.
+   */
+  url?: string;
+
+  /**
+   * Indicates if the calling extension uses a calling window.
+   */
+  usesCallingWindow?: boolean;
+
+  /**
+   * Indicates if the calling extension uses a remote connection.
+   */
+  usesRemote?: boolean;
+
+  /**
+   * The width setting for the calling extension interface.
+   */
+  width?: number;
 }
 
 Calling.Transcripts = Transcripts;
@@ -558,10 +759,14 @@ export declare namespace Calling {
     type SettingsPatchRequest as SettingsPatchRequest,
     type SettingsRequest as SettingsRequest,
     type SettingsResponse as SettingsResponse,
-    type CallingCreateParams as CallingCreateParams,
-    type CallingUpdateParams as CallingUpdateParams,
+    type CallingCreateChannelConnectionSettingsParams as CallingCreateChannelConnectionSettingsParams,
     type CallingCreateInboundCallParams as CallingCreateInboundCallParams,
-    type CallingMarkReadyParams as CallingMarkReadyParams,
+    type CallingCreateRecordingReadyParams as CallingCreateRecordingReadyParams,
+    type CallingCreateRecordingSettingsParams as CallingCreateRecordingSettingsParams,
+    type CallingCreateSettingsParams as CallingCreateSettingsParams,
+    type CallingUpdateChannelConnectionSettingsParams as CallingUpdateChannelConnectionSettingsParams,
+    type CallingUpdateRecordingSettingsParams as CallingUpdateRecordingSettingsParams,
+    type CallingUpdateSettingsParams as CallingUpdateSettingsParams,
   };
 
   export {

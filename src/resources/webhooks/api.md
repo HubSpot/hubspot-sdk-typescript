@@ -4,6 +4,7 @@
 
 Types:
 
+- <code><a href="./src/resources/webhooks/webhooks_/webhooks_.ts">ActionOverrideRequest</a></code>
 - <code><a href="./src/resources/webhooks/webhooks_/webhooks_.ts">AppLifecycleEventSubscriptionUpsertRequest</a></code>
 - <code><a href="./src/resources/webhooks/webhooks_/webhooks_.ts">AssociationSubscriptionUpsertRequest</a></code>
 - <code><a href="./src/resources/webhooks/webhooks_/webhooks_.ts">BatchInputSubscriptionBatchUpdateRequest</a></code>
@@ -33,29 +34,32 @@ Types:
 - <code><a href="./src/resources/webhooks/webhooks_/webhooks_.ts">SubscriptionResponse1</a></code>
 - <code><a href="./src/resources/webhooks/webhooks_/webhooks_.ts">SubscriptionUpsertRequest</a></code>
 - <code><a href="./src/resources/webhooks/webhooks_/webhooks_.ts">ThrottlingSettings</a></code>
-- <code><a href="./src/resources/webhooks/webhooks_/webhooks_.ts">WebhookGetFilterBySubscriptionResponse</a></code>
+- <code><a href="./src/resources/webhooks/webhooks_/webhooks_.ts">WebhookGetFiltersBySubscriptionResponse</a></code>
 
 Methods:
 
 - <code title="post /webhooks-journal/snapshots/2026-03/crm">client.webhooks.webhooks.<a href="./src/resources/webhooks/webhooks_/webhooks_.ts">createCrmSnapshot</a>({ ...params }) -> CrmObjectSnapshotBatchResponse</code>
 - <code title="post /webhooks-journal/subscriptions/2026-03/filters">client.webhooks.webhooks.<a href="./src/resources/webhooks/webhooks_/webhooks_.ts">createFilter</a>({ ...params }) -> FilterCreateResponse</code>
+- <code title="post /webhooks-journal/subscriptions/2026-03">client.webhooks.webhooks.<a href="./src/resources/webhooks/webhooks_/webhooks_.ts">createJournalSubscription</a>() -> SubscriptionResponse1</code>
 - <code title="post /webhooks/2026-03/{appId}/subscriptions">client.webhooks.webhooks.<a href="./src/resources/webhooks/webhooks_/webhooks_.ts">createSubscription</a>(appID, { ...params }) -> SubscriptionResponse</code>
 - <code title="delete /webhooks-journal/subscriptions/2026-03/filters/{filterId}">client.webhooks.webhooks.<a href="./src/resources/webhooks/webhooks_/webhooks_.ts">deleteFilter</a>(filterID) -> void</code>
-- <code title="delete /webhooks-journal/subscriptions/2026-03/portals/{portalId}">client.webhooks.webhooks.<a href="./src/resources/webhooks/webhooks_/webhooks_.ts">deletePortal</a>(portalID) -> void</code>
+- <code title="delete /webhooks-journal/subscriptions/2026-03/{subscriptionId}">client.webhooks.webhooks.<a href="./src/resources/webhooks/webhooks_/webhooks_.ts">deleteJournalSubscription</a>(subscriptionID) -> void</code>
+- <code title="delete /webhooks-journal/subscriptions/2026-03/portals/{portalId}">client.webhooks.webhooks.<a href="./src/resources/webhooks/webhooks_/webhooks_.ts">deletePortalSubscriptions</a>(portalID) -> void</code>
 - <code title="delete /webhooks/2026-03/{appId}/settings">client.webhooks.webhooks.<a href="./src/resources/webhooks/webhooks_/webhooks_.ts">deleteSettings</a>(appID) -> void</code>
 - <code title="delete /webhooks/2026-03/{appId}/subscriptions/{subscriptionId}">client.webhooks.webhooks.<a href="./src/resources/webhooks/webhooks_/webhooks_.ts">deleteSubscription</a>(subscriptionID, { ...params }) -> void</code>
-- <code title="get /webhooks-journal/journal/2026-03/earliest">client.webhooks.webhooks.<a href="./src/resources/webhooks/webhooks_/webhooks_.ts">getEarliestJournal</a>({ ...params }) -> Response</code>
-- <code title="get /webhooks-journal/journal-local/2026-03/earliest">client.webhooks.webhooks.<a href="./src/resources/webhooks/webhooks_/webhooks_.ts">getEarliestJournalLocal</a>({ ...params }) -> Response</code>
 - <code title="get /webhooks-journal/subscriptions/2026-03/filters/{filterId}">client.webhooks.webhooks.<a href="./src/resources/webhooks/webhooks_/webhooks_.ts">getFilter</a>(filterID) -> FilterResponse</code>
-- <code title="get /webhooks-journal/subscriptions/2026-03/filters/subscription/{subscriptionId}">client.webhooks.webhooks.<a href="./src/resources/webhooks/webhooks_/webhooks_.ts">getFilterBySubscription</a>(subscriptionID) -> WebhookGetFilterBySubscriptionResponse</code>
-- <code title="get /webhooks-journal/journal-local/2026-03/status/{statusId}">client.webhooks.webhooks.<a href="./src/resources/webhooks/webhooks_/webhooks_.ts">getJournalLocalStatus</a>(statusID) -> SnapshotStatusResponse</code>
+- <code title="get /webhooks-journal/subscriptions/2026-03/filters/subscription/{subscriptionId}">client.webhooks.webhooks.<a href="./src/resources/webhooks/webhooks_/webhooks_.ts">getFiltersBySubscription</a>(subscriptionID) -> WebhookGetFiltersBySubscriptionResponse</code>
+- <code title="get /webhooks-journal/journal/2026-03/earliest">client.webhooks.webhooks.<a href="./src/resources/webhooks/webhooks_/webhooks_.ts">getJournalEarliest</a>({ ...params }) -> Response</code>
+- <code title="get /webhooks-journal/journal/2026-03/latest">client.webhooks.webhooks.<a href="./src/resources/webhooks/webhooks_/webhooks_.ts">getJournalLatest</a>({ ...params }) -> Response</code>
+- <code title="get /webhooks-journal/journal/2026-03/offset/{offset}/next">client.webhooks.webhooks.<a href="./src/resources/webhooks/webhooks_/webhooks_.ts">getJournalNextByOffset</a>(offset, { ...params }) -> Response</code>
 - <code title="get /webhooks-journal/journal/2026-03/status/{statusId}">client.webhooks.webhooks.<a href="./src/resources/webhooks/webhooks_/webhooks_.ts">getJournalStatus</a>(statusID) -> SnapshotStatusResponse</code>
-- <code title="get /webhooks-journal/journal/2026-03/latest">client.webhooks.webhooks.<a href="./src/resources/webhooks/webhooks_/webhooks_.ts">getLatestJournal</a>({ ...params }) -> Response</code>
-- <code title="get /webhooks-journal/journal-local/2026-03/latest">client.webhooks.webhooks.<a href="./src/resources/webhooks/webhooks_/webhooks_.ts">getLatestJournalLocal</a>({ ...params }) -> Response</code>
-- <code title="get /webhooks-journal/journal/2026-03/offset/{offset}/next">client.webhooks.webhooks.<a href="./src/resources/webhooks/webhooks_/webhooks_.ts">getNextJournalByOffset</a>(offset, { ...params }) -> Response</code>
-- <code title="get /webhooks-journal/journal-local/2026-03/offset/{offset}/next">client.webhooks.webhooks.<a href="./src/resources/webhooks/webhooks_/webhooks_.ts">getNextJournalLocalByOffset</a>(offset, { ...params }) -> Response</code>
+- <code title="get /webhooks-journal/journal-local/2026-03/earliest">client.webhooks.webhooks.<a href="./src/resources/webhooks/webhooks_/webhooks_.ts">getLocalEarliest</a>({ ...params }) -> Response</code>
+- <code title="get /webhooks-journal/journal-local/2026-03/latest">client.webhooks.webhooks.<a href="./src/resources/webhooks/webhooks_/webhooks_.ts">getLocalLatest</a>({ ...params }) -> Response</code>
+- <code title="get /webhooks-journal/journal-local/2026-03/offset/{offset}/next">client.webhooks.webhooks.<a href="./src/resources/webhooks/webhooks_/webhooks_.ts">getLocalNextByOffset</a>(offset, { ...params }) -> Response</code>
+- <code title="get /webhooks-journal/journal-local/2026-03/status/{statusId}">client.webhooks.webhooks.<a href="./src/resources/webhooks/webhooks_/webhooks_.ts">getLocalStatus</a>(statusID) -> SnapshotStatusResponse</code>
 - <code title="get /webhooks/2026-03/{appId}/settings">client.webhooks.webhooks.<a href="./src/resources/webhooks/webhooks_/webhooks_.ts">getSettings</a>(appID) -> SettingsResponse</code>
 - <code title="get /webhooks/2026-03/{appId}/subscriptions/{subscriptionId}">client.webhooks.webhooks.<a href="./src/resources/webhooks/webhooks_/webhooks_.ts">getSubscription</a>(subscriptionID, { ...params }) -> SubscriptionResponse</code>
+- <code title="get /webhooks-journal/subscriptions/2026-03">client.webhooks.webhooks.<a href="./src/resources/webhooks/webhooks_/webhooks_.ts">listJournalSubscriptions</a>() -> CollectionResponseSubscriptionResponseNoPaging</code>
 - <code title="get /webhooks/2026-03/{appId}/subscriptions">client.webhooks.webhooks.<a href="./src/resources/webhooks/webhooks_/webhooks_.ts">listSubscriptions</a>(appID) -> SubscriptionListResponse</code>
 - <code title="put /webhooks/2026-03/{appId}/settings">client.webhooks.webhooks.<a href="./src/resources/webhooks/webhooks_/webhooks_.ts">updateSettings</a>(appID, { ...params }) -> SettingsResponse</code>
 - <code title="patch /webhooks/2026-03/{appId}/subscriptions/{subscriptionId}">client.webhooks.webhooks.<a href="./src/resources/webhooks/webhooks_/webhooks_.ts">updateSubscription</a>(subscriptionID, { ...params }) -> SubscriptionResponse</code>

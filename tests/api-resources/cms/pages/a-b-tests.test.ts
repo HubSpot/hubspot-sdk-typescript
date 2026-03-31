@@ -9,8 +9,8 @@ const client = new Hubspot({
 
 describe('resource aBTests', () => {
   // Mock server tests are disabled
-  test.skip('createAbTestVariation: only required params', async () => {
-    const responsePromise = client.cms.pages.aBTests.createAbTestVariation({
+  test.skip('createLandingPageVariation: only required params', async () => {
+    const responsePromise = client.cms.pages.aBTests.createLandingPageVariation({
       contentId: 'contentId',
       variationName: 'variationName',
     });
@@ -24,16 +24,39 @@ describe('resource aBTests', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('createAbTestVariation: required and optional params', async () => {
-    const response = await client.cms.pages.aBTests.createAbTestVariation({
+  test.skip('createLandingPageVariation: required and optional params', async () => {
+    const response = await client.cms.pages.aBTests.createLandingPageVariation({
       contentId: 'contentId',
       variationName: 'variationName',
     });
   });
 
   // Mock server tests are disabled
-  test.skip('endAbTest: only required params', async () => {
-    const responsePromise = client.cms.pages.aBTests.endAbTest({
+  test.skip('createSitePageVariation: only required params', async () => {
+    const responsePromise = client.cms.pages.aBTests.createSitePageVariation({
+      contentId: 'contentId',
+      variationName: 'variationName',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('createSitePageVariation: required and optional params', async () => {
+    const response = await client.cms.pages.aBTests.createSitePageVariation({
+      contentId: 'contentId',
+      variationName: 'variationName',
+    });
+  });
+
+  // Mock server tests are disabled
+  test.skip('endLandingPageTest: only required params', async () => {
+    const responsePromise = client.cms.pages.aBTests.endLandingPageTest({
       abTestId: 'abTestId',
       winnerId: 'winnerId',
     });
@@ -47,13 +70,39 @@ describe('resource aBTests', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('endAbTest: required and optional params', async () => {
-    const response = await client.cms.pages.aBTests.endAbTest({ abTestId: 'abTestId', winnerId: 'winnerId' });
+  test.skip('endLandingPageTest: required and optional params', async () => {
+    const response = await client.cms.pages.aBTests.endLandingPageTest({
+      abTestId: 'abTestId',
+      winnerId: 'winnerId',
+    });
   });
 
   // Mock server tests are disabled
-  test.skip('rerunAbTest: only required params', async () => {
-    const responsePromise = client.cms.pages.aBTests.rerunAbTest({
+  test.skip('endSitePageTest: only required params', async () => {
+    const responsePromise = client.cms.pages.aBTests.endSitePageTest({
+      abTestId: 'abTestId',
+      winnerId: 'winnerId',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('endSitePageTest: required and optional params', async () => {
+    const response = await client.cms.pages.aBTests.endSitePageTest({
+      abTestId: 'abTestId',
+      winnerId: 'winnerId',
+    });
+  });
+
+  // Mock server tests are disabled
+  test.skip('rerunLandingPageTest: only required params', async () => {
+    const responsePromise = client.cms.pages.aBTests.rerunLandingPageTest({
       abTestId: 'abTestId',
       variationId: 'variationId',
     });
@@ -67,8 +116,31 @@ describe('resource aBTests', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('rerunAbTest: required and optional params', async () => {
-    const response = await client.cms.pages.aBTests.rerunAbTest({
+  test.skip('rerunLandingPageTest: required and optional params', async () => {
+    const response = await client.cms.pages.aBTests.rerunLandingPageTest({
+      abTestId: 'abTestId',
+      variationId: 'variationId',
+    });
+  });
+
+  // Mock server tests are disabled
+  test.skip('rerunSitePageTest: only required params', async () => {
+    const responsePromise = client.cms.pages.aBTests.rerunSitePageTest({
+      abTestId: 'abTestId',
+      variationId: 'variationId',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('rerunSitePageTest: required and optional params', async () => {
+    const response = await client.cms.pages.aBTests.rerunSitePageTest({
       abTestId: 'abTestId',
       variationId: 'variationId',
     });

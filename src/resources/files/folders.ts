@@ -96,100 +96,42 @@ export class Folders extends APIResource {
 }
 
 export interface FolderGetByIDParams {
-  /**
-   * Properties to set on returned folder.
-   */
   properties?: Array<string>;
 }
 
 export interface FolderGetByPathParams {
-  /**
-   * Properties to set on returned folder.
-   */
   properties?: Array<string>;
 }
 
 export interface FolderSearchParams extends PageParams {
-  /**
-   * Search folders updated before this timestamp. Time must be epoch time in
-   * milliseconds.
-   */
   before?: string;
 
-  /**
-   * Search folders by exact time of creation. Time must be epoch time in
-   * milliseconds.
-   */
   createdAt?: string;
 
-  /**
-   * Search folders by greater than or equal to time of creation. Can be used with
-   * createdAtLte to create a range.
-   */
   createdAtGte?: string;
 
-  /**
-   * Search folders by less than or equal to time of creation. Can be used with
-   * createdAtGte to create a range.
-   */
   createdAtLte?: string;
 
-  /**
-   * Search folders by greater than or equal to ID. Can be used with idLte to create
-   * a range.
-   */
   idGte?: number;
 
-  /**
-   * Search folders by less than or equal to ID. Can be used with idGte to create a
-   * range.
-   */
   idLte?: number;
 
-  /**
-   * Search folders by multiple IDs. Comma-separated list of folder IDs.
-   */
   ids?: Array<number>;
 
-  /**
-   * Search for folders containing the specified name.
-   */
   name?: string;
 
   parentFolderIds?: Array<number>;
 
-  /**
-   * Search folders by path.
-   */
   path?: string;
 
-  /**
-   * Properties that should be included in the returned folders.
-   */
   properties?: Array<string>;
 
-  /**
-   * Sort results by given property. For example -name sorts by name field
-   * descending, name sorts by name field ascending.
-   */
   sort?: Array<string>;
 
-  /**
-   * Search folders by exact time of latest updated. Time must be epoch time in
-   * milliseconds.
-   */
   updatedAt?: string;
 
-  /**
-   * Search folders by greater than or equal to time of latest update. Can be used
-   * with updatedAtLte to create a range.
-   */
   updatedAtGte?: string;
 
-  /**
-   * Search folders by less than or equal to time of latest update. Can be used with
-   * updatedAtGte to create a range.
-   */
   updatedAtLte?: string;
 }
 

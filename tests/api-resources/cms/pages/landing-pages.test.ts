@@ -842,8 +842,8 @@ describe('resource landingPages', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('publishDraft', async () => {
-    const responsePromise = client.cms.pages.landingPages.publishDraft('objectId');
+  test.skip('pushDraftLive', async () => {
+    const responsePromise = client.cms.pages.landingPages.pushDraftLive('objectId');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

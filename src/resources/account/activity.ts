@@ -383,26 +383,14 @@ export interface ActivityListAuditLogsParams extends PageParams {
 }
 
 export interface ActivityListLoginActivitiesParams extends PageParams {
-  /**
-   * Identifier of user to retrieve activities for
-   */
   userId?: number;
 }
 
 export interface ActivityListSecurityActivitiesParams extends PageParams {
-  /**
-   * Limit to activities created after this epoch timestamp.
-   */
   fromTimestamp?: number;
 
-  /**
-   * Limit to activities created before this epoch timestamp.
-   */
   toTimestamp?: number;
 
-  /**
-   * Identifier of user to retrieve activities for
-   */
   userId?: number;
 }
 

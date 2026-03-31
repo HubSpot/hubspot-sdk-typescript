@@ -155,12 +155,19 @@ Types:
 
 Methods:
 
-- <code title="post /crm/extensions/calling/2026-03/{appId}/settings/recording">client.crm.extensions.calling.<a href="./src/resources/crm/extensions/calling/calling.ts">create</a>(appID, { ...params }) -> RecordingSettingsResponse</code>
-- <code title="patch /crm/extensions/calling/2026-03/{appId}/settings/recording">client.crm.extensions.calling.<a href="./src/resources/crm/extensions/calling/calling.ts">update</a>(appID, { ...params }) -> RecordingSettingsResponse</code>
-- <code title="delete /crm/extensions/calling/2026-03/{appId}/settings/channel-connection">client.crm.extensions.calling.<a href="./src/resources/crm/extensions/calling/calling.ts">delete</a>(appID) -> void</code>
+- <code title="post /crm/extensions/calling/2026-03/{appId}/settings/channel-connection">client.crm.extensions.calling.<a href="./src/resources/crm/extensions/calling/calling.ts">createChannelConnectionSettings</a>(appID, { ...params }) -> ChannelConnectionSettingsResponse</code>
 - <code title="post /crm/extensions/calling/2026-03/inbound-call">client.crm.extensions.calling.<a href="./src/resources/crm/extensions/calling/calling.ts">createInboundCall</a>({ ...params }) -> CompletedThirdPartyCallResponse</code>
-- <code title="get /crm/extensions/calling/2026-03/{appId}/settings/recording">client.crm.extensions.calling.<a href="./src/resources/crm/extensions/calling/calling.ts">get</a>(appID) -> RecordingSettingsResponse</code>
-- <code title="post /crm/extensions/calling/2026-03/recordings/ready">client.crm.extensions.calling.<a href="./src/resources/crm/extensions/calling/calling.ts">markReady</a>({ ...params }) -> void</code>
+- <code title="post /crm/extensions/calling/2026-03/recordings/ready">client.crm.extensions.calling.<a href="./src/resources/crm/extensions/calling/calling.ts">createRecordingReady</a>({ ...params }) -> void</code>
+- <code title="post /crm/extensions/calling/2026-03/{appId}/settings/recording">client.crm.extensions.calling.<a href="./src/resources/crm/extensions/calling/calling.ts">createRecordingSettings</a>(appID, { ...params }) -> RecordingSettingsResponse</code>
+- <code title="post /crm/extensions/calling/2026-03/{appId}/settings">client.crm.extensions.calling.<a href="./src/resources/crm/extensions/calling/calling.ts">createSettings</a>(appID, { ...params }) -> SettingsResponse</code>
+- <code title="delete /crm/extensions/calling/2026-03/{appId}/settings/channel-connection">client.crm.extensions.calling.<a href="./src/resources/crm/extensions/calling/calling.ts">deleteChannelConnectionSettings</a>(appID) -> void</code>
+- <code title="delete /crm/extensions/calling/2026-03/{appId}/settings">client.crm.extensions.calling.<a href="./src/resources/crm/extensions/calling/calling.ts">deleteSettings</a>(appID) -> void</code>
+- <code title="get /crm/extensions/calling/2026-03/{appId}/settings/channel-connection">client.crm.extensions.calling.<a href="./src/resources/crm/extensions/calling/calling.ts">getChannelConnectionSettings</a>(appID) -> ChannelConnectionSettingsResponse</code>
+- <code title="get /crm/extensions/calling/2026-03/{appId}/settings/recording">client.crm.extensions.calling.<a href="./src/resources/crm/extensions/calling/calling.ts">getRecordingSettings</a>(appID) -> RecordingSettingsResponse</code>
+- <code title="get /crm/extensions/calling/2026-03/{appId}/settings">client.crm.extensions.calling.<a href="./src/resources/crm/extensions/calling/calling.ts">getSettings</a>(appID) -> SettingsResponse</code>
+- <code title="patch /crm/extensions/calling/2026-03/{appId}/settings/channel-connection">client.crm.extensions.calling.<a href="./src/resources/crm/extensions/calling/calling.ts">updateChannelConnectionSettings</a>(appID, { ...params }) -> ChannelConnectionSettingsResponse</code>
+- <code title="patch /crm/extensions/calling/2026-03/{appId}/settings/recording">client.crm.extensions.calling.<a href="./src/resources/crm/extensions/calling/calling.ts">updateRecordingSettings</a>(appID, { ...params }) -> RecordingSettingsResponse</code>
+- <code title="patch /crm/extensions/calling/2026-03/{appId}/settings">client.crm.extensions.calling.<a href="./src/resources/crm/extensions/calling/calling.ts">updateSettings</a>(appID, { ...params }) -> SettingsResponse</code>
 
 #### Transcripts
 
@@ -331,6 +338,8 @@ Types:
 - <code><a href="./src/resources/crm/lists.ts">ListMoveRequest</a></code>
 - <code><a href="./src/resources/crm/lists.ts">ListSearchRequest</a></code>
 - <code><a href="./src/resources/crm/lists.ts">ListSearchResponse</a></code>
+- <code><a href="./src/resources/crm/lists.ts">ListSizeAndEditHistoryResponse</a></code>
+- <code><a href="./src/resources/crm/lists.ts">ListSizeDataPoint</a></code>
 - <code><a href="./src/resources/crm/lists.ts">ListUpdateResponse</a></code>
 - <code><a href="./src/resources/crm/lists.ts">ListsByIDResponse</a></code>
 - <code><a href="./src/resources/crm/lists.ts">MembershipChangeRequest</a></code>

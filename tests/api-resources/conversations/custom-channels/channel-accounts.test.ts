@@ -91,11 +91,7 @@ describe('resource channelAccounts', () => {
   test.skip('updateStagingToken: only required params', async () => {
     const responsePromise = client.conversations.customChannels.channelAccounts.updateStagingToken(
       'accountToken',
-      {
-        channelId: 0,
-        accountName: 'accountName',
-        deliveryIdentifier: { type: 'CHANNEL_SPECIFIC_OPAQUE_ID', value: 'value' },
-      },
+      { channelId: 0 },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);

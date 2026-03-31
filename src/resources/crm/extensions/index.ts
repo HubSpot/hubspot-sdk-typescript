@@ -18,10 +18,14 @@ export {
   type SettingsPatchRequest,
   type SettingsRequest,
   type SettingsResponse,
-  type CallingCreateParams,
-  type CallingUpdateParams,
+  type CallingCreateChannelConnectionSettingsParams,
   type CallingCreateInboundCallParams,
-  type CallingMarkReadyParams,
+  type CallingCreateRecordingReadyParams,
+  type CallingCreateRecordingSettingsParams,
+  type CallingCreateSettingsParams,
+  type CallingUpdateChannelConnectionSettingsParams,
+  type CallingUpdateRecordingSettingsParams,
+  type CallingUpdateSettingsParams,
 } from './calling/index';
 export {
   CardsDev,

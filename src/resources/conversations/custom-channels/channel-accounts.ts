@@ -126,12 +126,12 @@ export interface ChannelAccountUpdateStagingTokenParams {
   /**
    * Body param
    */
-  accountName: string;
+  accountName?: string;
 
   /**
    * Body param
    */
-  deliveryIdentifier: CustomChannelsAPI.PublicDeliveryIdentifier;
+  deliveryIdentifier?: CustomChannelsAPI.PublicDeliveryIdentifier;
 }
 
 export declare namespace ChannelAccounts {

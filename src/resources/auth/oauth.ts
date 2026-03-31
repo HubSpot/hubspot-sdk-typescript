@@ -57,9 +57,93 @@ export class OAuth extends APIResource {
   }
 }
 
-export interface TokenInfoResponseBaseIf {
+export interface PublicAccessTokenInfoResponse {
+  token: string;
+
   active: boolean;
+
+  app_id: number;
+
+  client_id: string;
+
+  expires_in: number;
+
+  hub_id: number;
+
+  is_private_distribution: boolean;
+
+  scopes: Array<string>;
+
+  signed_access_token: SignedAccessToken;
+
+  token_type: string;
+
+  token_use: 'access_token';
+
+  user_id: number;
+
+  hub_domain?: string;
+
+  user?: string;
 }
+
+export interface PublicRefreshTokenInfoResponse {
+  token: string;
+
+  active: boolean;
+
+  app_id: number;
+
+  client_id: string;
+
+  hub_id: number;
+
+  scopes: Array<string>;
+
+  token_type: string;
+
+  token_use: 'refresh_token';
+
+  user_id: number;
+
+  hub_domain?: string;
+
+  user?: string;
+}
+
+export interface SignedAccessToken {
+  appId: number;
+
+  expiresAt: number;
+
+  hubId: number;
+
+  hublet: string;
+
+  installingUserId: number;
+
+  isPrivateDistribution: boolean;
+
+  isServiceAccount: boolean;
+
+  isUserLevel: boolean;
+
+  newSignature: string;
+
+  scopes: string;
+
+  scopeToScopeGroupPks: string;
+
+  signature: string;
+
+  trialScopes: string;
+
+  trialScopeToScopeGroupPks: string;
+
+  userId: number;
+}
+
+export type TokenInfoResponseBaseIf = PublicAccessTokenInfoResponse | PublicRefreshTokenInfoResponse;
 
 export interface OAuthCreateTokenParams {
   client_id?: string;
@@ -101,6 +185,9 @@ export interface OAuthRevokeTokenParams {
 
 export declare namespace OAuth {
   export {
+    type PublicAccessTokenInfoResponse as PublicAccessTokenInfoResponse,
+    type PublicRefreshTokenInfoResponse as PublicRefreshTokenInfoResponse,
+    type SignedAccessToken as SignedAccessToken,
     type TokenInfoResponseBaseIf as TokenInfoResponseBaseIf,
     type OAuthCreateTokenParams as OAuthCreateTokenParams,
     type OAuthIntrospectTokenParams as OAuthIntrospectTokenParams,
