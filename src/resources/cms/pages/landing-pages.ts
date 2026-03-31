@@ -104,7 +104,7 @@ export class LandingPages extends APIResource {
    * Take any changes from the draft version of the Landing Page and apply them to
    * the live version.
    */
-  publishDraft(objectID: string, options?: RequestOptions): APIPromise<void> {
+  pushDraftLive(objectID: string, options?: RequestOptions): APIPromise<void> {
     return this._client.post(path`/cms/pages/2026-03/landing-pages/${objectID}/draft/push-live`, {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),

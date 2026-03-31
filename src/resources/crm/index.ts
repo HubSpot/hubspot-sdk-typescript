@@ -128,6 +128,8 @@ export {
   type ListMoveRequest,
   type ListSearchRequest,
   type ListSearchResponse,
+  type ListSizeAndEditHistoryResponse,
+  type ListSizeDataPoint,
   type ListUpdateResponse,
   type ListsByIDResponse,
   type MembershipChangeRequest,

@@ -375,6 +375,7 @@ export interface PreResolvedContact {
     | 'hs_email_last_open_date'
     | 'hs_email_last_reply_date'
     | 'hs_email_last_send_date'
+    | 'hs_email_live_sourcing_restricted'
     | 'hs_email_open'
     | 'hs_email_optimal_send_day_of_week'
     | 'hs_email_optimal_send_time_of_day'
@@ -688,9 +689,9 @@ export interface PublicChannelAccountStagingToken {
 }
 
 export interface PublicChannelAccountStagingTokenUpdateRequest {
-  accountName: string;
+  accountName?: string;
 
-  deliveryIdentifier: PublicDeliveryIdentifier;
+  deliveryIdentifier?: PublicDeliveryIdentifier;
 }
 
 export interface PublicChannelAccountUpdateRequest {

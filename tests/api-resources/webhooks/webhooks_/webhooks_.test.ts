@@ -85,6 +85,18 @@ describe('resource webhooks', () => {
   });
 
   // Mock server tests are disabled
+  test.skip('createJournalSubscription', async () => {
+    const responsePromise = client.webhooks.webhooks.createJournalSubscription({});
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
   test.skip('createSubscription: only required params', async () => {
     const responsePromise = client.webhooks.webhooks.createSubscription(0, {
       active: true,
@@ -123,8 +135,20 @@ describe('resource webhooks', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('deletePortal', async () => {
-    const responsePromise = client.webhooks.webhooks.deletePortal(0);
+  test.skip('deleteJournalSubscription', async () => {
+    const responsePromise = client.webhooks.webhooks.deleteJournalSubscription(0);
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('deletePortalSubscriptions', async () => {
+    const responsePromise = client.webhooks.webhooks.deletePortalSubscriptions(0);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -164,28 +188,6 @@ describe('resource webhooks', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('getEarliestJournal: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.webhooks.webhooks.getEarliestJournal(
-        { installPortalId: 0 },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Hubspot.NotFoundError);
-  });
-
-  // Mock server tests are disabled
-  test.skip('getEarliestJournalLocal: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.webhooks.webhooks.getEarliestJournalLocal(
-        { installPortalId: 0 },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Hubspot.NotFoundError);
-  });
-
-  // Mock server tests are disabled
   test.skip('getFilter', async () => {
     const responsePromise = client.webhooks.webhooks.getFilter(0);
     const rawResponse = await responsePromise.asResponse();
@@ -198,8 +200,8 @@ describe('resource webhooks', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('getFilterBySubscription', async () => {
-    const responsePromise = client.webhooks.webhooks.getFilterBySubscription(0);
+  test.skip('getFiltersBySubscription', async () => {
+    const responsePromise = client.webhooks.webhooks.getFiltersBySubscription(0);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -210,17 +212,34 @@ describe('resource webhooks', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('getJournalLocalStatus', async () => {
-    const responsePromise = client.webhooks.webhooks.getJournalLocalStatus(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
+  test.skip('getJournalEarliest: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.webhooks.webhooks.getJournalEarliest(
+        { installPortalId: 0 },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Hubspot.NotFoundError);
+  });
+
+  // Mock server tests are disabled
+  test.skip('getJournalLatest: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.webhooks.webhooks.getJournalLatest({ installPortalId: 0 }, { path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Hubspot.NotFoundError);
+  });
+
+  // Mock server tests are disabled
+  test.skip('getJournalNextByOffset: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.webhooks.webhooks.getJournalNextByOffset(
+        'offset',
+        { installPortalId: 0 },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Hubspot.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -236,29 +255,26 @@ describe('resource webhooks', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('getLatestJournal: request options and params are passed correctly', async () => {
+  test.skip('getLocalEarliest: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.webhooks.webhooks.getLatestJournal({ installPortalId: 0 }, { path: '/_stainless_unknown_path' }),
+      client.webhooks.webhooks.getLocalEarliest({ installPortalId: 0 }, { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Hubspot.NotFoundError);
   });
 
   // Mock server tests are disabled
-  test.skip('getLatestJournalLocal: request options and params are passed correctly', async () => {
+  test.skip('getLocalLatest: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.webhooks.webhooks.getLatestJournalLocal(
-        { installPortalId: 0 },
-        { path: '/_stainless_unknown_path' },
-      ),
+      client.webhooks.webhooks.getLocalLatest({ installPortalId: 0 }, { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Hubspot.NotFoundError);
   });
 
   // Mock server tests are disabled
-  test.skip('getNextJournalByOffset: request options and params are passed correctly', async () => {
+  test.skip('getLocalNextByOffset: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.webhooks.webhooks.getNextJournalByOffset(
+      client.webhooks.webhooks.getLocalNextByOffset(
         'offset',
         { installPortalId: 0 },
         { path: '/_stainless_unknown_path' },
@@ -267,15 +283,15 @@ describe('resource webhooks', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('getNextJournalLocalByOffset: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.webhooks.webhooks.getNextJournalLocalByOffset(
-        'offset',
-        { installPortalId: 0 },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Hubspot.NotFoundError);
+  test.skip('getLocalStatus', async () => {
+    const responsePromise = client.webhooks.webhooks.getLocalStatus('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
   });
 
   // Mock server tests are disabled
@@ -305,6 +321,18 @@ describe('resource webhooks', () => {
   // Mock server tests are disabled
   test.skip('getSubscription: required and optional params', async () => {
     const response = await client.webhooks.webhooks.getSubscription(0, { appId: 0 });
+  });
+
+  // Mock server tests are disabled
+  test.skip('listJournalSubscriptions', async () => {
+    const responsePromise = client.webhooks.webhooks.listJournalSubscriptions();
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
   });
 
   // Mock server tests are disabled

@@ -13,7 +13,7 @@ export class Folders extends APIResource {
   /**
    * Create a new folder for landing pages.
    */
-  createFolder(body: FolderCreateFolderParams, options?: RequestOptions): APIPromise<PagesAPI.ContentFolder> {
+  create(body: FolderCreateParams, options?: RequestOptions): APIPromise<PagesAPI.ContentFolder> {
     return this._client.post('/cms/pages/2026-03/landing-pages/folders', {
       body,
       ...options,
@@ -22,11 +22,44 @@ export class Folders extends APIResource {
   }
 
   /**
+   * Partially update a landing page folder, specified by the folder ID. You only
+   * need to specify the details values that you are modifying.
+   */
+  update(
+    objectID: string,
+    params: FolderUpdateParams,
+    options?: RequestOptions,
+  ): APIPromise<PagesAPI.ContentFolder> {
+    const { archived, ...body } = params;
+    return this._client.patch(path`/cms/pages/2026-03/landing-pages/folders/${objectID}`, {
+      query: { archived },
+      body,
+      ...options,
+      headers: buildHeaders([{ 'Content-Type': '*/*' }, options?.headers]),
+    });
+  }
+
+  /**
+   * Get the list of Landing Page Folders. Supports paging and filtering. This method
+   * would be useful for an integration that examined these models and used an
+   * external service to suggest edits.
+   */
+  list(
+    query: FolderListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<ContentFoldersPage, PagesAPI.ContentFolder> {
+    return this._client.getAPIList('/cms/pages/2026-03/landing-pages/folders', Page<PagesAPI.ContentFolder>, {
+      query,
+      ...options,
+    });
+  }
+
+  /**
    * Delete a landing page folder, specified by its ID.
    */
-  deleteFolder(
+  delete(
     objectID: string,
-    params: FolderDeleteFolderParams | null | undefined = {},
+    params: FolderDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<void> {
     const { archived } = params ?? {};
@@ -38,40 +71,10 @@ export class Folders extends APIResource {
   }
 
   /**
-   * Retrieve a landing page folder, specified by its ID.
-   */
-  getFolder(
-    objectID: string,
-    query: FolderGetFolderParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<PagesAPI.ContentFolder> {
-    return this._client.get(path`/cms/pages/2026-03/landing-pages/folders/${objectID}`, {
-      query,
-      ...options,
-    });
-  }
-
-  /**
-   * Retrieve a previous version of a folder, specified by the folder ID and revision
-   * ID.
-   */
-  getFolderRevision(
-    revisionID: string,
-    params: FolderGetFolderRevisionParams,
-    options?: RequestOptions,
-  ): APIPromise<PagesAPI.ContentFolderVersion> {
-    const { objectId } = params;
-    return this._client.get(
-      path`/cms/pages/2026-03/landing-pages/folders/${objectId}/revisions/${revisionID}`,
-      options,
-    );
-  }
-
-  /**
    * Retrieve a batch of landing page folders as identified in the request body.
    */
-  getFoldersBatch(
-    params: FolderGetFoldersBatchParams,
+  batchGet(
+    params: FolderBatchGetParams,
     options?: RequestOptions,
   ): APIPromise<PagesAPI.BatchResponseContentFolder> {
     const { archived, ...body } = params;
@@ -84,11 +87,41 @@ export class Folders extends APIResource {
   }
 
   /**
+   * Retrieve a landing page folder, specified by its ID.
+   */
+  get(
+    objectID: string,
+    query: FolderGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<PagesAPI.ContentFolder> {
+    return this._client.get(path`/cms/pages/2026-03/landing-pages/folders/${objectID}`, {
+      query,
+      ...options,
+    });
+  }
+
+  /**
+   * Retrieve a previous version of a folder, specified by the folder ID and revision
+   * ID.
+   */
+  getRevision(
+    revisionID: string,
+    params: FolderGetRevisionParams,
+    options?: RequestOptions,
+  ): APIPromise<PagesAPI.ContentFolderVersion> {
+    const { objectId } = params;
+    return this._client.get(
+      path`/cms/pages/2026-03/landing-pages/folders/${objectId}/revisions/${revisionID}`,
+      options,
+    );
+  }
+
+  /**
    * Retrieves all the previous versions of a landing page folder.
    */
-  listFolderRevisions(
+  listRevisions(
     objectID: string,
-    query: FolderListFolderRevisionsParams | null | undefined = {},
+    query: FolderListRevisionsParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<ContentFolderVersionsPage, PagesAPI.ContentFolderVersion> {
     return this._client.getAPIList(
@@ -99,26 +132,11 @@ export class Folders extends APIResource {
   }
 
   /**
-   * Get the list of Landing Page Folders. Supports paging and filtering. This method
-   * would be useful for an integration that examined these models and used an
-   * external service to suggest edits.
-   */
-  listFolders(
-    query: FolderListFoldersParams | null | undefined = {},
-    options?: RequestOptions,
-  ): PagePromise<ContentFoldersPage, PagesAPI.ContentFolder> {
-    return this._client.getAPIList('/cms/pages/2026-03/landing-pages/folders', Page<PagesAPI.ContentFolder>, {
-      query,
-      ...options,
-    });
-  }
-
-  /**
    * Takes a specified version of a landing page folder and restores it.
    */
-  restoreFolderRevision(
+  restoreRevision(
     revisionID: string,
-    params: FolderRestoreFolderRevisionParams,
+    params: FolderRestoreRevisionParams,
     options?: RequestOptions,
   ): APIPromise<PagesAPI.ContentFolder> {
     const { objectId } = params;
@@ -127,27 +145,9 @@ export class Folders extends APIResource {
       options,
     );
   }
-
-  /**
-   * Partially update a landing page folder, specified by the folder ID. You only
-   * need to specify the details values that you are modifying.
-   */
-  updateFolder(
-    objectID: string,
-    params: FolderUpdateFolderParams,
-    options?: RequestOptions,
-  ): APIPromise<PagesAPI.ContentFolder> {
-    const { archived, ...body } = params;
-    return this._client.patch(path`/cms/pages/2026-03/landing-pages/folders/${objectID}`, {
-      query: { archived },
-      body,
-      ...options,
-      headers: buildHeaders([{ 'Content-Type': '*/*' }, options?.headers]),
-    });
-  }
 }
 
-export interface FolderCreateFolderParams {
+export interface FolderCreateParams {
   /**
    * The unique ID of the content folder.
    */
@@ -184,70 +184,7 @@ export interface FolderCreateFolderParams {
   updated: string;
 }
 
-export interface FolderDeleteFolderParams {
-  /**
-   * Whether to return only results that have been archived.
-   */
-  archived?: boolean;
-}
-
-export interface FolderGetFolderParams {
-  /**
-   * Whether to return only results that have been archived.
-   */
-  archived?: boolean;
-
-  property?: string;
-}
-
-export interface FolderGetFolderRevisionParams {
-  objectId: string;
-}
-
-export interface FolderGetFoldersBatchParams {
-  /**
-   * Body param: Strings to input.
-   */
-  inputs: Array<string>;
-
-  /**
-   * Query param: Whether to return only results that have been archived.
-   */
-  archived?: boolean;
-}
-
-export interface FolderListFolderRevisionsParams extends PageParams {
-  before?: string;
-}
-
-export interface FolderListFoldersParams extends PageParams {
-  /**
-   * Whether to return only results that have been archived.
-   */
-  archived?: boolean;
-
-  createdAfter?: string;
-
-  createdAt?: string;
-
-  createdBefore?: string;
-
-  property?: string;
-
-  sort?: Array<string>;
-
-  updatedAfter?: string;
-
-  updatedAt?: string;
-
-  updatedBefore?: string;
-}
-
-export interface FolderRestoreFolderRevisionParams {
-  objectId: string;
-}
-
-export interface FolderUpdateFolderParams {
+export interface FolderUpdateParams {
   /**
    * Body param: The unique ID of the content folder.
    */
@@ -290,18 +227,81 @@ export interface FolderUpdateFolderParams {
   archived?: boolean;
 }
 
+export interface FolderListParams extends PageParams {
+  /**
+   * Whether to return only results that have been archived.
+   */
+  archived?: boolean;
+
+  createdAfter?: string;
+
+  createdAt?: string;
+
+  createdBefore?: string;
+
+  property?: string;
+
+  sort?: Array<string>;
+
+  updatedAfter?: string;
+
+  updatedAt?: string;
+
+  updatedBefore?: string;
+}
+
+export interface FolderDeleteParams {
+  /**
+   * Whether to return only results that have been archived.
+   */
+  archived?: boolean;
+}
+
+export interface FolderBatchGetParams {
+  /**
+   * Body param: Strings to input.
+   */
+  inputs: Array<string>;
+
+  /**
+   * Query param: Whether to return only results that have been archived.
+   */
+  archived?: boolean;
+}
+
+export interface FolderGetParams {
+  /**
+   * Whether to return only results that have been archived.
+   */
+  archived?: boolean;
+
+  property?: string;
+}
+
+export interface FolderGetRevisionParams {
+  objectId: string;
+}
+
+export interface FolderListRevisionsParams extends PageParams {
+  before?: string;
+}
+
+export interface FolderRestoreRevisionParams {
+  objectId: string;
+}
+
 export declare namespace Folders {
   export {
-    type FolderCreateFolderParams as FolderCreateFolderParams,
-    type FolderDeleteFolderParams as FolderDeleteFolderParams,
-    type FolderGetFolderParams as FolderGetFolderParams,
-    type FolderGetFolderRevisionParams as FolderGetFolderRevisionParams,
-    type FolderGetFoldersBatchParams as FolderGetFoldersBatchParams,
-    type FolderListFolderRevisionsParams as FolderListFolderRevisionsParams,
-    type FolderListFoldersParams as FolderListFoldersParams,
-    type FolderRestoreFolderRevisionParams as FolderRestoreFolderRevisionParams,
-    type FolderUpdateFolderParams as FolderUpdateFolderParams,
+    type FolderCreateParams as FolderCreateParams,
+    type FolderUpdateParams as FolderUpdateParams,
+    type FolderListParams as FolderListParams,
+    type FolderDeleteParams as FolderDeleteParams,
+    type FolderBatchGetParams as FolderBatchGetParams,
+    type FolderGetParams as FolderGetParams,
+    type FolderGetRevisionParams as FolderGetRevisionParams,
+    type FolderListRevisionsParams as FolderListRevisionsParams,
+    type FolderRestoreRevisionParams as FolderRestoreRevisionParams,
   };
 }
 
-export { type ContentFolderVersionsPage, type ContentFoldersPage };
+export { type ContentFoldersPage, type ContentFolderVersionsPage };

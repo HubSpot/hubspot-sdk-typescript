@@ -469,9 +469,6 @@ export interface ObjectSchemaCreateAssociationParams {
 }
 
 export interface ObjectSchemaDeleteAssociationParams {
-  /**
-   * Fully qualified name or object type ID of your schema.
-   */
   objectType: string;
 }
 

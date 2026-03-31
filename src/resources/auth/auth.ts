@@ -7,6 +7,9 @@ import {
   OAuthCreateTokenParams,
   OAuthIntrospectTokenParams,
   OAuthRevokeTokenParams,
+  PublicAccessTokenInfoResponse,
+  PublicRefreshTokenInfoResponse,
+  SignedAccessToken,
   TokenInfoResponseBaseIf,
 } from './oauth';
 
@@ -19,6 +22,9 @@ Auth.OAuth = OAuth;
 export declare namespace Auth {
   export {
     OAuth as OAuth,
+    type PublicAccessTokenInfoResponse as PublicAccessTokenInfoResponse,
+    type PublicRefreshTokenInfoResponse as PublicRefreshTokenInfoResponse,
+    type SignedAccessToken as SignedAccessToken,
     type TokenInfoResponseBaseIf as TokenInfoResponseBaseIf,
     type OAuthCreateTokenParams as OAuthCreateTokenParams,
     type OAuthIntrospectTokenParams as OAuthIntrospectTokenParams,

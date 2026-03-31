@@ -9,9 +9,10 @@ const client = new Hubspot({
 
 describe('resource calling', () => {
   // Mock server tests are disabled
-  test.skip('create: only required params', async () => {
-    const responsePromise = client.crm.extensions.calling.create(0, {
-      urlToRetrieveAuthedRecording: 'urlToRetrieveAuthedRecording',
+  test.skip('createChannelConnectionSettings: only required params', async () => {
+    const responsePromise = client.crm.extensions.calling.createChannelConnectionSettings(0, {
+      isReady: true,
+      url: 'url',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -23,34 +24,11 @@ describe('resource calling', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('create: required and optional params', async () => {
-    const response = await client.crm.extensions.calling.create(0, {
-      urlToRetrieveAuthedRecording: 'urlToRetrieveAuthedRecording',
+  test.skip('createChannelConnectionSettings: required and optional params', async () => {
+    const response = await client.crm.extensions.calling.createChannelConnectionSettings(0, {
+      isReady: true,
+      url: 'url',
     });
-  });
-
-  // Mock server tests are disabled
-  test.skip('update', async () => {
-    const responsePromise = client.crm.extensions.calling.update(0, {});
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('delete', async () => {
-    const responsePromise = client.crm.extensions.calling.delete(0);
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
   });
 
   // Mock server tests are disabled
@@ -98,8 +76,8 @@ describe('resource calling', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('get', async () => {
-    const responsePromise = client.crm.extensions.calling.get(0);
+  test.skip('createRecordingReady: only required params', async () => {
+    const responsePromise = client.crm.extensions.calling.createRecordingReady({ engagementId: 0 });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -110,8 +88,15 @@ describe('resource calling', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('markReady: only required params', async () => {
-    const responsePromise = client.crm.extensions.calling.markReady({ engagementId: 0 });
+  test.skip('createRecordingReady: required and optional params', async () => {
+    const response = await client.crm.extensions.calling.createRecordingReady({ engagementId: 0 });
+  });
+
+  // Mock server tests are disabled
+  test.skip('createRecordingSettings: only required params', async () => {
+    const responsePromise = client.crm.extensions.calling.createRecordingSettings(0, {
+      urlToRetrieveAuthedRecording: 'urlToRetrieveAuthedRecording',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -122,7 +107,142 @@ describe('resource calling', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('markReady: required and optional params', async () => {
-    const response = await client.crm.extensions.calling.markReady({ engagementId: 0 });
+  test.skip('createRecordingSettings: required and optional params', async () => {
+    const response = await client.crm.extensions.calling.createRecordingSettings(0, {
+      urlToRetrieveAuthedRecording: 'urlToRetrieveAuthedRecording',
+    });
+  });
+
+  // Mock server tests are disabled
+  test.skip('createSettings: only required params', async () => {
+    const responsePromise = client.crm.extensions.calling.createSettings(0, {
+      height: 0,
+      isReady: true,
+      name: 'name',
+      supportsCustomObjects: true,
+      supportsInboundCalling: true,
+      url: 'url',
+      usesCallingWindow: true,
+      usesRemote: true,
+      width: 0,
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('createSettings: required and optional params', async () => {
+    const response = await client.crm.extensions.calling.createSettings(0, {
+      height: 0,
+      isReady: true,
+      name: 'name',
+      supportsCustomObjects: true,
+      supportsInboundCalling: true,
+      url: 'url',
+      usesCallingWindow: true,
+      usesRemote: true,
+      width: 0,
+    });
+  });
+
+  // Mock server tests are disabled
+  test.skip('deleteChannelConnectionSettings', async () => {
+    const responsePromise = client.crm.extensions.calling.deleteChannelConnectionSettings(0);
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('deleteSettings', async () => {
+    const responsePromise = client.crm.extensions.calling.deleteSettings(0);
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('getChannelConnectionSettings', async () => {
+    const responsePromise = client.crm.extensions.calling.getChannelConnectionSettings(0);
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('getRecordingSettings', async () => {
+    const responsePromise = client.crm.extensions.calling.getRecordingSettings(0);
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('getSettings', async () => {
+    const responsePromise = client.crm.extensions.calling.getSettings(0);
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('updateChannelConnectionSettings', async () => {
+    const responsePromise = client.crm.extensions.calling.updateChannelConnectionSettings(0, {});
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('updateRecordingSettings', async () => {
+    const responsePromise = client.crm.extensions.calling.updateRecordingSettings(0, {});
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('updateSettings', async () => {
+    const responsePromise = client.crm.extensions.calling.updateSettings(0, {});
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
   });
 });

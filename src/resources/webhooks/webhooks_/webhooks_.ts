@@ -30,6 +30,13 @@ export class Webhooks extends APIResource {
     return this._client.post('/webhooks-journal/subscriptions/2026-03/filters', { body, ...options });
   }
 
+  createJournalSubscription(
+    body: WebhookCreateJournalSubscriptionParams,
+    options?: RequestOptions,
+  ): APIPromise<SubscriptionResponse1> {
+    return this._client.post('/webhooks-journal/subscriptions/2026-03', { body, ...options });
+  }
+
   /**
    * Create new event subscription for the specified app.
    */
@@ -48,7 +55,14 @@ export class Webhooks extends APIResource {
     });
   }
 
-  deletePortal(portalID: number, options?: RequestOptions): APIPromise<void> {
+  deleteJournalSubscription(subscriptionID: number, options?: RequestOptions): APIPromise<void> {
+    return this._client.delete(path`/webhooks-journal/subscriptions/2026-03/${subscriptionID}`, {
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
+
+  deletePortalSubscriptions(portalID: number, options?: RequestOptions): APIPromise<void> {
     return this._client.delete(path`/webhooks-journal/subscriptions/2026-03/portals/${portalID}`, {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
@@ -81,8 +95,22 @@ export class Webhooks extends APIResource {
     });
   }
 
-  getEarliestJournal(
-    query: WebhookGetEarliestJournalParams | null | undefined = {},
+  getFilter(filterID: number, options?: RequestOptions): APIPromise<FilterResponse> {
+    return this._client.get(path`/webhooks-journal/subscriptions/2026-03/filters/${filterID}`, options);
+  }
+
+  getFiltersBySubscription(
+    subscriptionID: number,
+    options?: RequestOptions,
+  ): APIPromise<WebhookGetFiltersBySubscriptionResponse> {
+    return this._client.get(
+      path`/webhooks-journal/subscriptions/2026-03/filters/subscription/${subscriptionID}`,
+      options,
+    );
+  }
+
+  getJournalEarliest(
+    query: WebhookGetJournalEarliestParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<Response> {
     return this._client.get('/webhooks-journal/journal/2026-03/earliest', {
@@ -93,42 +121,8 @@ export class Webhooks extends APIResource {
     });
   }
 
-  getEarliestJournalLocal(
-    query: WebhookGetEarliestJournalLocalParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<Response> {
-    return this._client.get('/webhooks-journal/journal-local/2026-03/earliest', {
-      query,
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-      __binaryResponse: true,
-    });
-  }
-
-  getFilter(filterID: number, options?: RequestOptions): APIPromise<FilterResponse> {
-    return this._client.get(path`/webhooks-journal/subscriptions/2026-03/filters/${filterID}`, options);
-  }
-
-  getFilterBySubscription(
-    subscriptionID: number,
-    options?: RequestOptions,
-  ): APIPromise<WebhookGetFilterBySubscriptionResponse> {
-    return this._client.get(
-      path`/webhooks-journal/subscriptions/2026-03/filters/subscription/${subscriptionID}`,
-      options,
-    );
-  }
-
-  getJournalLocalStatus(statusID: string, options?: RequestOptions): APIPromise<SnapshotStatusResponse> {
-    return this._client.get(path`/webhooks-journal/journal-local/2026-03/status/${statusID}`, options);
-  }
-
-  getJournalStatus(statusID: string, options?: RequestOptions): APIPromise<SnapshotStatusResponse> {
-    return this._client.get(path`/webhooks-journal/journal/2026-03/status/${statusID}`, options);
-  }
-
-  getLatestJournal(
-    query: WebhookGetLatestJournalParams | null | undefined = {},
+  getJournalLatest(
+    query: WebhookGetJournalLatestParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<Response> {
     return this._client.get('/webhooks-journal/journal/2026-03/latest', {
@@ -139,21 +133,9 @@ export class Webhooks extends APIResource {
     });
   }
 
-  getLatestJournalLocal(
-    query: WebhookGetLatestJournalLocalParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<Response> {
-    return this._client.get('/webhooks-journal/journal-local/2026-03/latest', {
-      query,
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-      __binaryResponse: true,
-    });
-  }
-
-  getNextJournalByOffset(
+  getJournalNextByOffset(
     offset: string,
-    query: WebhookGetNextJournalByOffsetParams | null | undefined = {},
+    query: WebhookGetJournalNextByOffsetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<Response> {
     return this._client.get(path`/webhooks-journal/journal/2026-03/offset/${offset}/next`, {
@@ -164,9 +146,37 @@ export class Webhooks extends APIResource {
     });
   }
 
-  getNextJournalLocalByOffset(
+  getJournalStatus(statusID: string, options?: RequestOptions): APIPromise<SnapshotStatusResponse> {
+    return this._client.get(path`/webhooks-journal/journal/2026-03/status/${statusID}`, options);
+  }
+
+  getLocalEarliest(
+    query: WebhookGetLocalEarliestParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Response> {
+    return this._client.get('/webhooks-journal/journal-local/2026-03/earliest', {
+      query,
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+      __binaryResponse: true,
+    });
+  }
+
+  getLocalLatest(
+    query: WebhookGetLocalLatestParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Response> {
+    return this._client.get('/webhooks-journal/journal-local/2026-03/latest', {
+      query,
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+      __binaryResponse: true,
+    });
+  }
+
+  getLocalNextByOffset(
     offset: string,
-    query: WebhookGetNextJournalLocalByOffsetParams | null | undefined = {},
+    query: WebhookGetLocalNextByOffsetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<Response> {
     return this._client.get(path`/webhooks-journal/journal-local/2026-03/offset/${offset}/next`, {
@@ -175,6 +185,10 @@ export class Webhooks extends APIResource {
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
       __binaryResponse: true,
     });
+  }
+
+  getLocalStatus(statusID: string, options?: RequestOptions): APIPromise<SnapshotStatusResponse> {
+    return this._client.get(path`/webhooks-journal/journal-local/2026-03/status/${statusID}`, options);
   }
 
   /**
@@ -195,6 +209,12 @@ export class Webhooks extends APIResource {
   ): APIPromise<SubscriptionResponse> {
     const { appId } = params;
     return this._client.get(path`/webhooks/2026-03/${appId}/subscriptions/${subscriptionID}`, options);
+  }
+
+  listJournalSubscriptions(
+    options?: RequestOptions,
+  ): APIPromise<CollectionResponseSubscriptionResponseNoPaging> {
+    return this._client.get('/webhooks-journal/subscriptions/2026-03', options);
   }
 
   /**
@@ -229,6 +249,16 @@ export class Webhooks extends APIResource {
       ...options,
     });
   }
+}
+
+export interface ActionOverrideRequest {
+  associatedObjectTypeIds?: Array<string>;
+
+  listIds?: Array<number>;
+
+  objectIds?: Array<number>;
+
+  properties?: Array<string>;
 }
 
 export interface AppLifecycleEventSubscriptionUpsertRequest {
@@ -782,6 +812,8 @@ export interface SubscriptionResponse1 {
    */
   updatedAt: string;
 
+  actionOverrides?: { [key: string]: ActionOverrideRequest };
+
   associatedObjectTypeIds?: Array<string>;
 
   createdBy?: number;
@@ -811,7 +843,7 @@ export interface ThrottlingSettings {
   maxConcurrentRequests: number;
 }
 
-export type WebhookGetFilterBySubscriptionResponse = Array<FilterResponse>;
+export type WebhookGetFiltersBySubscriptionResponse = Array<FilterResponse>;
 
 export interface WebhookCreateCrmSnapshotParams {
   snapshotRequests: Array<CrmObjectSnapshotRequest>;
@@ -826,6 +858,22 @@ export interface WebhookCreateFilterParams {
   filter: Filter;
 
   subscriptionId: number;
+}
+
+export type WebhookCreateJournalSubscriptionParams =
+  | WebhookCreateJournalSubscriptionParams.ObjectSubscriptionUpsertRequest
+  | WebhookCreateJournalSubscriptionParams.AssociationSubscriptionUpsertRequest
+  | WebhookCreateJournalSubscriptionParams.AppLifecycleEventSubscriptionUpsertRequest
+  | WebhookCreateJournalSubscriptionParams.ListMembershipSubscriptionUpsertRequest;
+
+export declare namespace WebhookCreateJournalSubscriptionParams {
+  export interface ObjectSubscriptionUpsertRequest {}
+
+  export interface AssociationSubscriptionUpsertRequest {}
+
+  export interface AppLifecycleEventSubscriptionUpsertRequest {}
+
+  export interface ListMembershipSubscriptionUpsertRequest {}
 }
 
 export interface WebhookCreateSubscriptionParams {
@@ -909,40 +957,34 @@ export interface WebhookCreateSubscriptionParams {
 }
 
 export interface WebhookDeleteSubscriptionParams {
-  /**
-   * The ID of the target app.
-   */
   appId: number;
 }
 
-export interface WebhookGetEarliestJournalParams {
+export interface WebhookGetJournalEarliestParams {
   installPortalId?: number;
 }
 
-export interface WebhookGetEarliestJournalLocalParams {
+export interface WebhookGetJournalLatestParams {
   installPortalId?: number;
 }
 
-export interface WebhookGetLatestJournalParams {
+export interface WebhookGetJournalNextByOffsetParams {
   installPortalId?: number;
 }
 
-export interface WebhookGetLatestJournalLocalParams {
+export interface WebhookGetLocalEarliestParams {
   installPortalId?: number;
 }
 
-export interface WebhookGetNextJournalByOffsetParams {
+export interface WebhookGetLocalLatestParams {
   installPortalId?: number;
 }
 
-export interface WebhookGetNextJournalLocalByOffsetParams {
+export interface WebhookGetLocalNextByOffsetParams {
   installPortalId?: number;
 }
 
 export interface WebhookGetSubscriptionParams {
-  /**
-   * The ID of the target app.
-   */
   appId: number;
 }
 
@@ -959,7 +1001,7 @@ export interface WebhookUpdateSettingsParams {
 
 export interface WebhookUpdateSubscriptionParams {
   /**
-   * Path param: The ID of the target app.
+   * Path param
    */
   appId: number;
 
@@ -975,6 +1017,7 @@ Webhooks.Batch = Batch;
 
 export declare namespace Webhooks {
   export {
+    type ActionOverrideRequest as ActionOverrideRequest,
     type AppLifecycleEventSubscriptionUpsertRequest as AppLifecycleEventSubscriptionUpsertRequest,
     type AssociationSubscriptionUpsertRequest as AssociationSubscriptionUpsertRequest,
     type BatchInputSubscriptionBatchUpdateRequest as BatchInputSubscriptionBatchUpdateRequest,
@@ -1004,17 +1047,18 @@ export declare namespace Webhooks {
     type SubscriptionResponse1 as SubscriptionResponse1,
     type SubscriptionUpsertRequest as SubscriptionUpsertRequest,
     type ThrottlingSettings as ThrottlingSettings,
-    type WebhookGetFilterBySubscriptionResponse as WebhookGetFilterBySubscriptionResponse,
+    type WebhookGetFiltersBySubscriptionResponse as WebhookGetFiltersBySubscriptionResponse,
     type WebhookCreateCrmSnapshotParams as WebhookCreateCrmSnapshotParams,
     type WebhookCreateFilterParams as WebhookCreateFilterParams,
+    type WebhookCreateJournalSubscriptionParams as WebhookCreateJournalSubscriptionParams,
     type WebhookCreateSubscriptionParams as WebhookCreateSubscriptionParams,
     type WebhookDeleteSubscriptionParams as WebhookDeleteSubscriptionParams,
-    type WebhookGetEarliestJournalParams as WebhookGetEarliestJournalParams,
-    type WebhookGetEarliestJournalLocalParams as WebhookGetEarliestJournalLocalParams,
-    type WebhookGetLatestJournalParams as WebhookGetLatestJournalParams,
-    type WebhookGetLatestJournalLocalParams as WebhookGetLatestJournalLocalParams,
-    type WebhookGetNextJournalByOffsetParams as WebhookGetNextJournalByOffsetParams,
-    type WebhookGetNextJournalLocalByOffsetParams as WebhookGetNextJournalLocalByOffsetParams,
+    type WebhookGetJournalEarliestParams as WebhookGetJournalEarliestParams,
+    type WebhookGetJournalLatestParams as WebhookGetJournalLatestParams,
+    type WebhookGetJournalNextByOffsetParams as WebhookGetJournalNextByOffsetParams,
+    type WebhookGetLocalEarliestParams as WebhookGetLocalEarliestParams,
+    type WebhookGetLocalLatestParams as WebhookGetLocalLatestParams,
+    type WebhookGetLocalNextByOffsetParams as WebhookGetLocalNextByOffsetParams,
     type WebhookGetSubscriptionParams as WebhookGetSubscriptionParams,
     type WebhookUpdateSettingsParams as WebhookUpdateSettingsParams,
     type WebhookUpdateSubscriptionParams as WebhookUpdateSubscriptionParams,

@@ -490,6 +490,18 @@ export interface ListSearchResponse {
   total: number;
 }
 
+export interface ListSizeAndEditHistoryResponse {
+  editHistory: Array<string>;
+
+  sizeHistory: Array<ListSizeDataPoint>;
+}
+
+export interface ListSizeDataPoint {
+  size: number;
+
+  timestamp: string;
+}
+
 export interface ListUpdateResponse {
   updatedList?: PublicObjectList;
 }
@@ -3507,6 +3519,8 @@ export declare namespace Lists {
     type ListMoveRequest as ListMoveRequest,
     type ListSearchRequest as ListSearchRequest,
     type ListSearchResponse as ListSearchResponse,
+    type ListSizeAndEditHistoryResponse as ListSizeAndEditHistoryResponse,
+    type ListSizeDataPoint as ListSizeDataPoint,
     type ListUpdateResponse as ListUpdateResponse,
     type ListsByIDResponse as ListsByIDResponse,
     type MembershipChangeRequest as MembershipChangeRequest,

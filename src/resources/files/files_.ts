@@ -209,20 +209,10 @@ export interface FileGetByPathParams {
 }
 
 export interface FileGetSignedURLParams {
-  /**
-   * How long in seconds the link will provide access to the file.
-   */
   expirationSeconds?: number;
 
-  /**
-   * For image files. This will resize the image to the desired size before sharing.
-   * Does not affect the original file, just the file served by this signed URL.
-   */
   size?: 'icon' | 'medium' | 'preview' | 'thumb';
 
-  /**
-   * If size is provided, this will upscale the image to fit the size dimensions.
-   */
   upscale?: boolean;
 }
 
@@ -310,186 +300,72 @@ export interface FileReplaceParams {
 }
 
 export interface FileSearchParams extends PageParams {
-  /**
-   * Search files by access. If 'true' will show only public files; if 'false' will
-   * show only private files
-   */
   allowsAnonymousAccess?: boolean;
 
-  /**
-   * Search files updated before this timestamp. Time must be epoch time in
-   * milliseconds.
-   */
   before?: string;
 
-  /**
-   * Search files by exact time of creation. Time must be epoch time in milliseconds.
-   */
   createdAt?: string;
 
-  /**
-   * Search files by greater than or equal to time of creation. Can be used with
-   * createdAtLte to create a range.
-   */
   createdAtGte?: string;
 
-  /**
-   * Search files by less than or equal to time of creation. Can be used with
-   * createdAtGte to create a range.
-   */
   createdAtLte?: string;
 
-  /**
-   * Search files by specified encoding.
-   */
   encoding?: string;
 
-  /**
-   * Search files by exact expires time. Time must be epoch time in milliseconds.
-   */
   expiresAt?: string;
 
-  /**
-   * Search files by greater than or equal to expires time. Can be used with
-   * expiresAtLte to create a range.
-   */
   expiresAtGte?: string;
 
-  /**
-   * Search files by less than or equal to expires time. Can be used with
-   * expiresAtGte to create a range.
-   */
   expiresAtLte?: string;
 
-  /**
-   * Search files by given extension.
-   */
   extension?: string;
 
-  /**
-   * Search files by specific md5 hash.
-   */
   fileMd5?: string;
 
-  /**
-   * Search files by height of image or video.
-   */
   height?: number;
 
-  /**
-   * Search files by greater than or equal to height of image or video. Can be used
-   * with heightLte to create a range.
-   */
   heightGte?: number;
 
-  /**
-   * Search files by less than or equal to height of image or video. Can be used with
-   * heightGte to create a range.
-   */
   heightLte?: number;
 
-  /**
-   * Search files by greater than or equal to ID. Can be used with idLte to create a
-   * range.
-   */
   idGte?: number;
 
-  /**
-   * Search files by less than or equal to ID. Can be used with idGte to create a
-   * range.
-   */
   idLte?: number;
 
   ids?: Array<number>;
 
-  /**
-   * If true shows files that have been marked to be used in new content. It false
-   * shows files that should not be used in new content.
-   */
   isUsableInContent?: boolean;
 
-  /**
-   * Search for files containing the given name.
-   */
   name?: string;
 
   parentFolderIds?: Array<number>;
 
-  /**
-   * Search files by path.
-   */
   path?: string;
 
-  /**
-   * Desired file properties in the return object.
-   */
   properties?: Array<string>;
 
-  /**
-   * Search files by exact file size in bytes.
-   */
   size?: number;
 
-  /**
-   * Search files by greater than or equal to file size. Can be used with sizeLte to
-   * create a range.
-   */
   sizeGte?: number;
 
-  /**
-   * Search files by less than or equal to file size. Can be used with sizeGte to
-   * create a range.
-   */
   sizeLte?: number;
 
-  /**
-   * Sort files by a given field.
-   */
   sort?: Array<string>;
 
-  /**
-   * Search files by file type.
-   */
   type?: string;
 
-  /**
-   * Search files by exact time of latest updated. Time must be epoch time in
-   * milliseconds.
-   */
   updatedAt?: string;
 
-  /**
-   * Search files by greater than or equal to time of latest update. Can be used with
-   * updatedAtLte to create a range.
-   */
   updatedAtGte?: string;
 
-  /**
-   * Search files by less than or equal to time of latest update. Can be used with
-   * updatedAtGte to create a range.
-   */
   updatedAtLte?: string;
 
-  /**
-   * Search for given URL
-   */
   url?: string;
 
-  /**
-   * Search files by width of image or video.
-   */
   width?: number;
 
-  /**
-   * Search files by greater than or equal to width of image or video. Can be used
-   * with widthLte to create a range.
-   */
   widthGte?: number;
 
-  /**
-   * Search files by less than or equal to width of image or video. Can be used with
-   * widthGte to create a range.
-   */
   widthLte?: number;
 }
 
