@@ -35,6 +35,7 @@ describe('resource properties', () => {
       name: 'name',
       type: 'bool',
       calculationFormula: 'calculationFormula',
+      currencyPropertyName: 'currencyPropertyName',
       dataSensitivity: 'highly_sensitive',
       description: 'description',
       displayOrder: 0,
@@ -52,6 +53,7 @@ describe('resource properties', () => {
         },
       ],
       referencedObjectType: 'referencedObjectType',
+      showCurrencySymbol: true,
     });
   });
 
@@ -72,6 +74,7 @@ describe('resource properties', () => {
     const response = await client.crm.properties.update('propertyName', {
       objectType: 'objectType',
       calculationFormula: 'calculationFormula',
+      currencyPropertyName: 'currencyPropertyName',
       description: 'description',
       displayOrder: 0,
       fieldType: 'booleancheckbox',
@@ -88,6 +91,7 @@ describe('resource properties', () => {
           description: 'description',
         },
       ],
+      showCurrencySymbol: true,
       type: 'bool',
     });
   });

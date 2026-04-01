@@ -81,6 +81,36 @@ export interface BatchResponseHubDBTableRowV3 {
    */
   status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
+  /**
+   * A collection of related links associated with the batch response.
+   */
+  links?: { [key: string]: string };
+
+  /**
+   * The timestamp indicating when the batch request was made.
+   */
+  requestedAt?: string;
+}
+
+export interface BatchResponseHubDBTableRowV3WithErrors {
+  /**
+   * The timestamp indicating when the batch processing was completed.
+   */
+  completedAt: string;
+
+  results: Array<HubDBTableRowV3>;
+
+  /**
+   * The timestamp indicating when the batch processing began.
+   */
+  startedAt: string;
+
+  /**
+   * The current status of the batch operation, with possible values: CANCELED,
+   * COMPLETE, PENDING, PROCESSING.
+   */
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
+
   errors?: Array<Shared.StandardError>;
 
   /**
@@ -88,6 +118,9 @@ export interface BatchResponseHubDBTableRowV3 {
    */
   links?: { [key: string]: string };
 
+  /**
+   * The number of errors encountered during the batch operation.
+   */
   numErrors?: number;
 
   /**
@@ -758,6 +791,7 @@ export declare namespace Hubdb {
     type BatchInputHubDBTableRowV3BatchUpdateRequest as BatchInputHubDBTableRowV3BatchUpdateRequest,
     type BatchInputHubDBTableRowV3Request as BatchInputHubDBTableRowV3Request,
     type BatchResponseHubDBTableRowV3 as BatchResponseHubDBTableRowV3,
+    type BatchResponseHubDBTableRowV3WithErrors as BatchResponseHubDBTableRowV3WithErrors,
     type BoundedNextPage as BoundedNextPage,
     type BoundedPaging as BoundedPaging,
     type CollectionResponseWithTotalHubDBTableV3 as CollectionResponseWithTotalHubDBTableV3,

@@ -92,13 +92,6 @@ export class Lists extends APIResource {
     });
   }
 
-  deleteScheduleConversion(listID: string, options?: RequestOptions): APIPromise<void> {
-    return this._client.delete(path`/crm/lists/2026-03/${listID}/schedule-conversion`, {
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
-  }
-
   get(
     listID: string,
     query: ListGetParams | null | undefined = {},
@@ -107,9 +100,9 @@ export class Lists extends APIResource {
     return this._client.get(path`/crm/lists/2026-03/${listID}`, { query, ...options });
   }
 
-  getByObjectTypeIDAndName(
+  getByObjectTypeAndName(
     listName: string,
-    params: ListGetByObjectTypeIDAndNameParams,
+    params: ListGetByObjectTypeAndNameParams,
     options?: RequestOptions,
   ): APIPromise<ListFetchResponse> {
     const { objectTypeId, ...query } = params;
@@ -124,6 +117,18 @@ export class Lists extends APIResource {
     options?: RequestOptions,
   ): APIPromise<PublicMigrationMapping> {
     return this._client.get('/crm/lists/2026-03/idmapping', { query, ...options });
+  }
+
+  getMembershipsJoinOrder(
+    listID: string,
+    query: ListGetMembershipsJoinOrderParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<JoinTimeAndRecordIDsPage, JoinTimeAndRecordID> {
+    return this._client.getAPIList(
+      path`/crm/lists/2026-03/${listID}/memberships/join-order`,
+      Page<JoinTimeAndRecordID>,
+      { query, ...options },
+    );
   }
 
   getRecordMemberships(
@@ -142,6 +147,21 @@ export class Lists extends APIResource {
     return this._client.get(path`/crm/lists/2026-03/${listID}/schedule-conversion`, options);
   }
 
+  getSizeAndEditsHistoryBetween(
+    listID: string,
+    query: ListGetSizeAndEditsHistoryBetweenParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ListSizeAndEditHistoryResponse> {
+    return this._client.get(path`/crm/lists/2026-03/${listID}/size-and-edits-history/between`, {
+      query,
+      ...options,
+    });
+  }
+
+  listBySearch(body: ListListBySearchParams, options?: RequestOptions): APIPromise<ListSearchResponse> {
+    return this._client.post('/crm/lists/2026-03/search', { body, ...options });
+  }
+
   listFolders(
     query: ListListFoldersParams | null | undefined = {},
     options?: RequestOptions,
@@ -156,18 +176,6 @@ export class Lists extends APIResource {
   ): PagePromise<JoinTimeAndRecordIDsPage, JoinTimeAndRecordID> {
     return this._client.getAPIList(
       path`/crm/lists/2026-03/${listID}/memberships`,
-      Page<JoinTimeAndRecordID>,
-      { query, ...options },
-    );
-  }
-
-  listMembershipsJoinOrder(
-    listID: string,
-    query: ListListMembershipsJoinOrderParams | null | undefined = {},
-    options?: RequestOptions,
-  ): PagePromise<JoinTimeAndRecordIDsPage, JoinTimeAndRecordID> {
-    return this._client.getAPIList(
-      path`/crm/lists/2026-03/${listID}/memberships/join-order`,
       Page<JoinTimeAndRecordID>,
       { query, ...options },
     );
@@ -221,8 +229,11 @@ export class Lists extends APIResource {
     });
   }
 
-  search(body: ListSearchParams, options?: RequestOptions): APIPromise<ListSearchResponse> {
-    return this._client.post('/crm/lists/2026-03/search', { body, ...options });
+  scheduleConversion(listID: string, options?: RequestOptions): APIPromise<void> {
+    return this._client.delete(path`/crm/lists/2026-03/${listID}/schedule-conversion`, {
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
   }
 
   updateListFilters(
@@ -285,6 +296,20 @@ export interface BatchInputRecordIDInput {
 }
 
 export interface BatchResponseRecordIDWithMemberships {
+  completedAt: string;
+
+  results: Array<RecordIDWithMemberships>;
+
+  startedAt: string;
+
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
+
+  links?: { [key: string]: string };
+
+  requestedAt?: string;
+}
+
+export interface BatchResponseRecordIDWithMembershipsWithErrors {
   completedAt: string;
 
   results: Array<RecordIDWithMemberships>;
@@ -3322,7 +3347,7 @@ export interface ListGetParams {
   includeFilters?: boolean;
 }
 
-export interface ListGetByObjectTypeIDAndNameParams {
+export interface ListGetByObjectTypeAndNameParams {
   /**
    * Path param
    */
@@ -3338,47 +3363,21 @@ export interface ListGetIDMappingParams {
   legacyListId?: string;
 }
 
+export interface ListGetMembershipsJoinOrderParams extends PageParams {
+  before?: string;
+}
+
 export interface ListGetRecordMembershipsParams {
   objectTypeId: string;
 }
 
-export interface ListListFoldersParams {
-  folderId?: string;
+export interface ListGetSizeAndEditsHistoryBetweenParams {
+  endDate?: string;
+
+  startDate?: string;
 }
 
-export interface ListListMembershipsParams extends PageParams {
-  before?: string;
-}
-
-export interface ListListMembershipsJoinOrderParams extends PageParams {
-  before?: string;
-}
-
-export interface ListMoveFolderParams {
-  folderId: string;
-}
-
-export interface ListMoveListParams {
-  /**
-   * The Id of the list to move.
-   */
-  listId: string;
-
-  /**
-   * The Id of folder to move the list to, the root folder is Id 0.
-   */
-  newFolderId: string;
-}
-
-export interface ListRemoveMembershipsParams {
-  body: Array<string>;
-}
-
-export interface ListRenameFolderParams {
-  newFolderName?: string;
-}
-
-export interface ListSearchParams {
+export interface ListListBySearchParams {
   /**
    * The property names of any additional list properties to include in the response.
    * Properties that do not exist or that are empty for a particular list are not
@@ -3427,6 +3426,38 @@ export interface ListSearchParams {
    * Sort field and order
    */
   sort?: string;
+}
+
+export interface ListListFoldersParams {
+  folderId?: string;
+}
+
+export interface ListListMembershipsParams extends PageParams {
+  before?: string;
+}
+
+export interface ListMoveFolderParams {
+  folderId: string;
+}
+
+export interface ListMoveListParams {
+  /**
+   * The Id of the list to move.
+   */
+  listId: string;
+
+  /**
+   * The Id of folder to move the list to, the root folder is Id 0.
+   */
+  newFolderId: string;
+}
+
+export interface ListRemoveMembershipsParams {
+  body: Array<string>;
+}
+
+export interface ListRenameFolderParams {
+  newFolderName?: string;
 }
 
 export interface ListUpdateListFiltersParams {
@@ -3508,6 +3539,7 @@ export declare namespace Lists {
     type APICollectionResponseRecordListMembership as APICollectionResponseRecordListMembership,
     type BatchInputRecordIDInput as BatchInputRecordIDInput,
     type BatchResponseRecordIDWithMemberships as BatchResponseRecordIDWithMemberships,
+    type BatchResponseRecordIDWithMembershipsWithErrors as BatchResponseRecordIDWithMembershipsWithErrors,
     type JoinTimeAndRecordID as JoinTimeAndRecordID,
     type ListCreateRequest as ListCreateRequest,
     type ListCreateResponse as ListCreateResponse,
@@ -3619,17 +3651,18 @@ export declare namespace Lists {
     type ListCreateFolderParams as ListCreateFolderParams,
     type ListCreateIDMappingParams as ListCreateIDMappingParams,
     type ListGetParams as ListGetParams,
-    type ListGetByObjectTypeIDAndNameParams as ListGetByObjectTypeIDAndNameParams,
+    type ListGetByObjectTypeAndNameParams as ListGetByObjectTypeAndNameParams,
     type ListGetIDMappingParams as ListGetIDMappingParams,
+    type ListGetMembershipsJoinOrderParams as ListGetMembershipsJoinOrderParams,
     type ListGetRecordMembershipsParams as ListGetRecordMembershipsParams,
+    type ListGetSizeAndEditsHistoryBetweenParams as ListGetSizeAndEditsHistoryBetweenParams,
+    type ListListBySearchParams as ListListBySearchParams,
     type ListListFoldersParams as ListListFoldersParams,
     type ListListMembershipsParams as ListListMembershipsParams,
-    type ListListMembershipsJoinOrderParams as ListListMembershipsJoinOrderParams,
     type ListMoveFolderParams as ListMoveFolderParams,
     type ListMoveListParams as ListMoveListParams,
     type ListRemoveMembershipsParams as ListRemoveMembershipsParams,
     type ListRenameFolderParams as ListRenameFolderParams,
-    type ListSearchParams as ListSearchParams,
     type ListUpdateListFiltersParams as ListUpdateListFiltersParams,
     type ListUpdateListNameParams as ListUpdateListNameParams,
     type ListUpdateScheduleConversionParams as ListUpdateScheduleConversionParams,

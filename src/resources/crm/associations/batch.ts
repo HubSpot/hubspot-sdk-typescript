@@ -4,6 +4,7 @@ import { APIResource } from '../../../core/resource';
 import * as CrmAPI from '../crm';
 import * as AssociationsAPI from './associations';
 import { APIPromise } from '../../../core/api-promise';
+import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -23,15 +24,11 @@ export class Batch extends APIResource {
   /**
    * Batch delete associations for objects
    */
-  delete(
-    toObjectType: string,
-    params: BatchDeleteParams,
-    options?: RequestOptions,
-  ): APIPromise<CrmAPI.BatchResponseVoid> {
+  delete(toObjectType: string, params: BatchDeleteParams, options?: RequestOptions): APIPromise<void> {
     const { fromObjectType, ...body } = params;
     return this._client.post(
       path`/crm/associations/2026-03/${fromObjectType}/${toObjectType}/batch/archive`,
-      { body, ...options },
+      { body, ...options, headers: buildHeaders([{ Accept: '*/*' }, options?.headers]) },
     );
   }
 
@@ -58,11 +55,11 @@ export class Batch extends APIResource {
     toObjectType: string,
     params: BatchDeleteLabelsParams,
     options?: RequestOptions,
-  ): APIPromise<CrmAPI.BatchResponseVoid> {
+  ): APIPromise<void> {
     const { fromObjectType, ...body } = params;
     return this._client.post(
       path`/crm/associations/2026-03/${fromObjectType}/${toObjectType}/batch/labels/archive`,
-      { body, ...options },
+      { body, ...options, headers: buildHeaders([{ Accept: '*/*' }, options?.headers]) },
     );
   }
 

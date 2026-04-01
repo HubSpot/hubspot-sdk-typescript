@@ -23,6 +23,8 @@ export {
   type BatchInputPublicCampaignReadInput,
   type BatchResponsePublicCampaign,
   type BatchResponsePublicCampaignWithAssets,
+  type BatchResponsePublicCampaignWithAssetsWithErrors,
+  type BatchResponsePublicCampaignWithErrors,
   type CollectionResponseContactReferenceForwardPaging,
   type CollectionResponsePublicCampaignAsset,
   type CollectionResponsePublicCampaignAssetForwardPaging,

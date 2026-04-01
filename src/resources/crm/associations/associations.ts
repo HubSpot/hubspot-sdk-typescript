@@ -111,21 +111,32 @@ export interface BatchResponseLabelsBetweenObjectPair {
    */
   status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
-  errors?: Array<Shared.StandardError>;
-
   /**
    * An object containing relevant links related to the batch request.
    */
   links?: { [key: string]: string };
 
   /**
-   * The number of errors encountered during the batch processing.
-   */
-  numErrors?: number;
-
-  /**
    * The timestamp when the batch request was initially made, in ISO 8601 format.
    */
+  requestedAt?: string;
+}
+
+export interface BatchResponseLabelsBetweenObjectPairWithErrors {
+  completedAt: string;
+
+  results: Array<CrmAPI.LabelsBetweenObjectPair>;
+
+  startedAt: string;
+
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
+
+  errors?: Array<Shared.StandardError>;
+
+  links?: { [key: string]: string };
+
+  numErrors?: number;
+
   requestedAt?: string;
 }
 
@@ -148,21 +159,32 @@ export interface BatchResponsePublicAssociationMultiWithLabel {
    */
   status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
-  errors?: Array<Shared.StandardError>;
-
   /**
    * An object containing relevant links related to the batch request.
    */
   links?: { [key: string]: string };
 
   /**
-   * The number of errors encountered during the batch processing.
-   */
-  numErrors?: number;
-
-  /**
    * The timestamp when the batch request was initially made, in ISO 8601 format.
    */
+  requestedAt?: string;
+}
+
+export interface BatchResponsePublicAssociationMultiWithLabelWithErrors {
+  completedAt: string;
+
+  results: Array<PublicAssociationMultiWithLabel>;
+
+  startedAt: string;
+
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
+
+  errors?: Array<Shared.StandardError>;
+
+  links?: { [key: string]: string };
+
+  numErrors?: number;
+
   requestedAt?: string;
 }
 
@@ -341,7 +363,9 @@ export declare namespace Associations {
     type BatchInputPublicDefaultAssociationMultiPost as BatchInputPublicDefaultAssociationMultiPost,
     type BatchInputPublicFetchAssociationsBatchRequest as BatchInputPublicFetchAssociationsBatchRequest,
     type BatchResponseLabelsBetweenObjectPair as BatchResponseLabelsBetweenObjectPair,
+    type BatchResponseLabelsBetweenObjectPairWithErrors as BatchResponseLabelsBetweenObjectPairWithErrors,
     type BatchResponsePublicAssociationMultiWithLabel as BatchResponsePublicAssociationMultiWithLabel,
+    type BatchResponsePublicAssociationMultiWithLabelWithErrors as BatchResponsePublicAssociationMultiWithLabelWithErrors,
     type DateTime as DateTime,
     type PublicAssociationMultiArchive as PublicAssociationMultiArchive,
     type PublicAssociationMultiPost as PublicAssociationMultiPost,

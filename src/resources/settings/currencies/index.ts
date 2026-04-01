@@ -6,6 +6,7 @@ export {
   type BatchInputExchangeRateCreateRequest,
   type BatchInputExchangeRateUpdateRequest,
   type BatchResponseExchangeRate,
+  type BatchResponseExchangeRateWithErrors,
   type CentralExchangeRatesInformation,
   type CollectionResponseCurrencyCodeInfoNoPaging,
   type CollectionResponseExchangeRateForwardPaging,

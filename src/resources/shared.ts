@@ -141,10 +141,6 @@ export interface AutomationActionsOption {
   value: string;
 }
 
-export interface BatchInputPropertyCreate {
-  inputs: Array<PropertyCreate>;
-}
-
 export interface BatchInputPropertyName {
   inputs: Array<PropertyName>;
 }
@@ -549,50 +545,6 @@ export interface Property {
    * may not exist if the property was updated outside of HubSpot.
    */
   updatedUserId?: string;
-}
-
-export interface PropertyCreate {
-  fieldType:
-    | 'booleancheckbox'
-    | 'calculation_equation'
-    | 'checkbox'
-    | 'date'
-    | 'file'
-    | 'html'
-    | 'number'
-    | 'phonenumber'
-    | 'radio'
-    | 'select'
-    | 'text'
-    | 'textarea';
-
-  groupName: string;
-
-  label: string;
-
-  name: string;
-
-  type: 'bool' | 'date' | 'datetime' | 'enumeration' | 'number' | 'phone_number' | 'string';
-
-  calculationFormula?: string;
-
-  dataSensitivity?: 'highly_sensitive' | 'non_sensitive' | 'sensitive';
-
-  description?: string;
-
-  displayOrder?: number;
-
-  externalOptions?: boolean;
-
-  formField?: boolean;
-
-  hasUniqueValue?: boolean;
-
-  hidden?: boolean;
-
-  options?: Array<OptionInput>;
-
-  referencedObjectType?: string;
 }
 
 export interface PropertyGroup {

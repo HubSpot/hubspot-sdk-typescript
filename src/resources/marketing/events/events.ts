@@ -395,17 +395,49 @@ export interface BatchResponseMarketingEventPublicDefaultResponseV2 {
    */
   status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
-  errors?: Array<Shared.StandardError>;
-
   /**
    * Result object of the request.
    */
   links?: { [key: string]: string };
 
+  /**
+   * Timestamp of when the request was sent.
+   */
+  requestedAt?: string;
+}
+
+export interface BatchResponseMarketingEventPublicDefaultResponseV2WithErrors {
+  /**
+   * Timestamp that represents when the request finished processing
+   */
+  completedAt: string;
+
+  results: Array<MarketingEventPublicDefaultResponseV2>;
+
+  /**
+   * Timestamp that represents when the request started processing
+   */
+  startedAt: string;
+
+  /**
+   * The status of the request processing
+   */
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
+
+  errors?: Array<Shared.StandardError>;
+
+  /**
+   * Result of the request
+   */
+  links?: { [key: string]: string };
+
+  /**
+   * The number of errors that occurred during the processing
+   */
   numErrors?: number;
 
   /**
-   * Timestamp of when the request was sent.
+   * Timestamp that represents when the request was made
    */
   requestedAt?: string;
 }
@@ -1797,6 +1829,7 @@ export declare namespace Events {
     type BatchInputMarketingEventSubscriber as BatchInputMarketingEventSubscriber,
     type BatchResponseMarketingEventPublicDefaultResponse as BatchResponseMarketingEventPublicDefaultResponse,
     type BatchResponseMarketingEventPublicDefaultResponseV2 as BatchResponseMarketingEventPublicDefaultResponseV2,
+    type BatchResponseMarketingEventPublicDefaultResponseV2WithErrors as BatchResponseMarketingEventPublicDefaultResponseV2WithErrors,
     type BatchResponseSubscriberEmailResponse as BatchResponseSubscriberEmailResponse,
     type BatchResponseSubscriberVidResponse as BatchResponseSubscriberVidResponse,
     type CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging as CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging,

@@ -9,7 +9,9 @@ Types:
 - <code><a href="./src/resources/webhooks/webhooks_/webhooks_.ts">AssociationSubscriptionUpsertRequest</a></code>
 - <code><a href="./src/resources/webhooks/webhooks_/webhooks_.ts">BatchInputSubscriptionBatchUpdateRequest</a></code>
 - <code><a href="./src/resources/webhooks/webhooks_/webhooks_.ts">BatchResponseJournalFetchResponse</a></code>
+- <code><a href="./src/resources/webhooks/webhooks_/webhooks_.ts">BatchResponseJournalFetchResponseWithErrors</a></code>
 - <code><a href="./src/resources/webhooks/webhooks_/webhooks_.ts">BatchResponseSubscriptionResponse</a></code>
+- <code><a href="./src/resources/webhooks/webhooks_/webhooks_.ts">BatchResponseSubscriptionResponseWithErrors</a></code>
 - <code><a href="./src/resources/webhooks/webhooks_/webhooks_.ts">CollectionResponseSubscriptionResponseNoPaging</a></code>
 - <code><a href="./src/resources/webhooks/webhooks_/webhooks_.ts">Condition</a></code>
 - <code><a href="./src/resources/webhooks/webhooks_/webhooks_.ts">CrmObjectSnapshotBatchRequest</a></code>

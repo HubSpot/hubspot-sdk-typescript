@@ -342,24 +342,56 @@ export interface BatchResponsePublicStatusBulkResponse {
   status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   /**
-   * An array of errors encountered during the batch operation, each represented by a
-   * StandardError object.
-   */
-  errors?: Array<Shared.StandardError>;
-
-  /**
    * A collection of related links associated with the batch response.
    */
   links?: { [key: string]: string };
 
   /**
-   * The number of errors encountered during the batch operation, represented as an
-   * integer.
+   * The date and time when the batch request was made.
+   */
+  requestedAt?: string;
+}
+
+export interface BatchResponsePublicStatusBulkResponseWithErrors {
+  /**
+   * The date and time when the operation was completed.
+   */
+  completedAt: string;
+
+  /**
+   * An array containing the results of the operation.
+   */
+  results: Array<PublicStatusBulkResponse>;
+
+  /**
+   * The date and time when the operation started.
+   */
+  startedAt: string;
+
+  /**
+   * The current status of the operation, which can be PENDING, PROCESSING, CANCELED,
+   * or COMPLETE.
+   */
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
+
+  /**
+   * An array of error objects detailing any issues encountered during the operation.
+   */
+  errors?: Array<Shared.StandardError>;
+
+  /**
+   * An object containing related links, where each key is a link name and each value
+   * is a URL.
+   */
+  links?: { [key: string]: string };
+
+  /**
+   * The number of errors encountered during the operation.
    */
   numErrors?: number;
 
   /**
-   * The date and time when the batch request was made.
+   * The date and time when the request was made.
    */
   requestedAt?: string;
 }
@@ -388,23 +420,56 @@ export interface BatchResponsePublicWideStatusBulkResponse {
   status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   /**
-   * An array of errors encountered during the batch operation, each item providing
-   * details about a specific error.
-   */
-  errors?: Array<Shared.StandardError>;
-
-  /**
    * A collection of related links associated with the batch response.
    */
   links?: { [key: string]: string };
 
   /**
-   * The number of errors that occurred during the batch operation.
+   * The date and time when the batch request was made.
+   */
+  requestedAt?: string;
+}
+
+export interface BatchResponsePublicWideStatusBulkResponseWithErrors {
+  /**
+   * The date and time when the operation was completed.
+   */
+  completedAt: string;
+
+  /**
+   * An array containing the results of the operation.
+   */
+  results: Array<PublicWideStatusBulkResponse>;
+
+  /**
+   * The date and time when the operation started.
+   */
+  startedAt: string;
+
+  /**
+   * The current status of the operation, which can be PENDING, PROCESSING, CANCELED,
+   * or COMPLETE.
+   */
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
+
+  /**
+   * An array of error objects detailing any issues encountered during the operation.
+   */
+  errors?: Array<Shared.StandardError>;
+
+  /**
+   * An object containing related links, where each key is a link name and each value
+   * is a URL.
+   */
+  links?: { [key: string]: string };
+
+  /**
+   * The number of errors encountered during the operation.
    */
   numErrors?: number;
 
   /**
-   * The date and time when the batch request was made.
+   * The date and time when the operation was requested.
    */
   requestedAt?: string;
 }
@@ -868,7 +933,9 @@ export declare namespace CommunicationPreferences {
     type BatchResponsePublicBulkOptOutFromAllResponse as BatchResponsePublicBulkOptOutFromAllResponse,
     type BatchResponsePublicStatus as BatchResponsePublicStatus,
     type BatchResponsePublicStatusBulkResponse as BatchResponsePublicStatusBulkResponse,
+    type BatchResponsePublicStatusBulkResponseWithErrors as BatchResponsePublicStatusBulkResponseWithErrors,
     type BatchResponsePublicWideStatusBulkResponse as BatchResponsePublicWideStatusBulkResponse,
+    type BatchResponsePublicWideStatusBulkResponseWithErrors as BatchResponsePublicWideStatusBulkResponseWithErrors,
     type LinkGenerationRequest as LinkGenerationRequest,
     type LinkGenerationResponse as LinkGenerationResponse,
     type PartialPublicStatusRequest as PartialPublicStatusRequest,

@@ -56,8 +56,6 @@ export interface BatchResponsePublicAssociationDefinitionConfigurationUpdateResu
    */
   status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
-  errors?: Array<Shared.StandardError>;
-
   /**
    * URLs linking to documentation or resources associated with the batch update
    * operation.
@@ -65,13 +63,26 @@ export interface BatchResponsePublicAssociationDefinitionConfigurationUpdateResu
   links?: { [key: string]: string };
 
   /**
-   * The total number of errors encountered during the batch update operation.
-   */
-  numErrors?: number;
-
-  /**
    * The date and time when the batch update operation was requested.
    */
+  requestedAt?: string;
+}
+
+export interface BatchResponsePublicAssociationDefinitionConfigurationUpdateResultWithErrors {
+  completedAt: string;
+
+  results: Array<PublicAssociationDefinitionConfigurationUpdateResult>;
+
+  startedAt: string;
+
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
+
+  errors?: Array<Shared.StandardError>;
+
+  links?: { [key: string]: string };
+
+  numErrors?: number;
+
   requestedAt?: string;
 }
 
@@ -94,8 +105,6 @@ export interface BatchResponsePublicAssociationDefinitionUserConfiguration {
    */
   status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
-  errors?: Array<Shared.StandardError>;
-
   /**
    * A collection of URLs linking to related documentation or resources associated
    * with the batch operation.
@@ -103,13 +112,26 @@ export interface BatchResponsePublicAssociationDefinitionUserConfiguration {
   links?: { [key: string]: string };
 
   /**
-   * The total number of errors encountered during the batch operation.
-   */
-  numErrors?: number;
-
-  /**
    * The date and time when the batch operation was requested.
    */
+  requestedAt?: string;
+}
+
+export interface BatchResponsePublicAssociationDefinitionUserConfigurationWithErrors {
+  completedAt: string;
+
+  results: Array<PublicAssociationDefinitionUserConfiguration>;
+
+  startedAt: string;
+
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
+
+  errors?: Array<Shared.StandardError>;
+
+  links?: { [key: string]: string };
+
+  numErrors?: number;
+
   requestedAt?: string;
 }
 
@@ -263,7 +285,9 @@ export declare namespace AssociationsSchema {
     type BatchInputPublicAssociationDefinitionConfigurationUpdateRequest as BatchInputPublicAssociationDefinitionConfigurationUpdateRequest,
     type BatchInputPublicAssociationSpec as BatchInputPublicAssociationSpec,
     type BatchResponsePublicAssociationDefinitionConfigurationUpdateResult as BatchResponsePublicAssociationDefinitionConfigurationUpdateResult,
+    type BatchResponsePublicAssociationDefinitionConfigurationUpdateResultWithErrors as BatchResponsePublicAssociationDefinitionConfigurationUpdateResultWithErrors,
     type BatchResponsePublicAssociationDefinitionUserConfiguration as BatchResponsePublicAssociationDefinitionUserConfiguration,
+    type BatchResponsePublicAssociationDefinitionUserConfigurationWithErrors as BatchResponsePublicAssociationDefinitionUserConfigurationWithErrors,
     type CollectionResponseAssociationSpecWithLabelNoPaging as CollectionResponseAssociationSpecWithLabelNoPaging,
     type CollectionResponsePublicAssociationDefinitionUserConfigurationNoPaging as CollectionResponsePublicAssociationDefinitionUserConfigurationNoPaging,
     type PublicAssociationDefinitionConfigurationCreateRequest as PublicAssociationDefinitionConfigurationCreateRequest,
