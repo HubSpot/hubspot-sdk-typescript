@@ -962,10 +962,28 @@ export interface AttentionSpanEventRequest {
   rawDataString?: string;
 }
 
+export interface BatchInputPropertyCreate {
+  inputs: Array<PropertyCreate>;
+}
+
 export interface BatchResponseProperty {
   completedAt: string;
 
-  results: Array<Property1>;
+  results: Array<Property>;
+
+  startedAt: string;
+
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
+
+  links?: { [key: string]: string };
+
+  requestedAt?: string;
+}
+
+export interface BatchResponsePropertyWithErrors {
+  completedAt: string;
+
+  results: Array<Property>;
 
   startedAt: string;
 
@@ -5988,6 +6006,50 @@ export interface Property1 {
   updatedUserId?: string;
 }
 
+export interface PropertyCreate {
+  fieldType:
+    | 'booleancheckbox'
+    | 'calculation_equation'
+    | 'checkbox'
+    | 'date'
+    | 'file'
+    | 'html'
+    | 'number'
+    | 'phonenumber'
+    | 'radio'
+    | 'select'
+    | 'text'
+    | 'textarea';
+
+  groupName: string;
+
+  label: string;
+
+  name: string;
+
+  type: 'bool' | 'date' | 'datetime' | 'enumeration' | 'number' | 'phone_number' | 'string';
+
+  calculationFormula?: string;
+
+  dataSensitivity?: 'highly_sensitive' | 'non_sensitive' | 'sensitive';
+
+  description?: string;
+
+  displayOrder?: number;
+
+  externalOptions?: boolean;
+
+  formField?: boolean;
+
+  hasUniqueValue?: boolean;
+
+  hidden?: boolean;
+
+  options?: Array<Shared.OptionInput>;
+
+  referencedObjectType?: string;
+}
+
 export interface PropertyDefinition {
   objectTypeId: string;
 
@@ -8311,7 +8373,9 @@ export declare namespace MediaBridge {
     type AttentionSpanCalculatedValues as AttentionSpanCalculatedValues,
     type AttentionSpanEvent as AttentionSpanEvent,
     type AttentionSpanEventRequest as AttentionSpanEventRequest,
+    type BatchInputPropertyCreate as BatchInputPropertyCreate,
     type BatchResponseProperty as BatchResponseProperty,
+    type BatchResponsePropertyWithErrors as BatchResponsePropertyWithErrors,
     type BeginsWith as BeginsWith,
     type BooleanPropertyVariable as BooleanPropertyVariable,
     type BooleanTargetPropertyVariable as BooleanTargetPropertyVariable,
@@ -8398,6 +8462,7 @@ export declare namespace MediaBridge {
     type Power as Power,
     type Property as Property,
     type Property1 as Property1,
+    type PropertyCreate as PropertyCreate,
     type PropertyDefinition as PropertyDefinition,
     type PropertyDefinitionSource as PropertyDefinitionSource,
     type RequiredPropertiesExtensionData as RequiredPropertiesExtensionData,

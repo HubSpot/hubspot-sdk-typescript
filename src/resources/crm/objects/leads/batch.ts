@@ -60,6 +60,18 @@ export class Batch extends APIResource {
       ...options,
     });
   }
+
+  /**
+   * Create or update records identified by a unique property value as specified by
+   * the `idProperty` query param. `idProperty` query param refers to a property
+   * whose values are unique for the object.
+   */
+  upsert(
+    body: BatchUpsertParams,
+    options?: RequestOptions,
+  ): APIPromise<ObjectsAPI.BatchResponseSimplePublicUpsertObject> {
+    return this._client.post('/crm/objects/2026-03/leads/batch/upsert', { body, ...options });
+  }
 }
 
 export interface BatchCreateParams {
@@ -103,11 +115,16 @@ export interface BatchGetParams {
   idProperty?: string;
 }
 
+export interface BatchUpsertParams {
+  inputs: Array<ObjectsAPI.SimplePublicObjectBatchInputUpsert>;
+}
+
 export declare namespace Batch {
   export {
     type BatchCreateParams as BatchCreateParams,
     type BatchUpdateParams as BatchUpdateParams,
     type BatchDeleteParams as BatchDeleteParams,
     type BatchGetParams as BatchGetParams,
+    type BatchUpsertParams as BatchUpsertParams,
   };
 }

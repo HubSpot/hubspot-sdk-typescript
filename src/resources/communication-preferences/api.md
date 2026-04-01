@@ -9,7 +9,9 @@ Types:
 - <code><a href="./src/resources/communication-preferences/communication-preferences.ts">BatchResponsePublicBulkOptOutFromAllResponse</a></code>
 - <code><a href="./src/resources/communication-preferences/communication-preferences.ts">BatchResponsePublicStatus</a></code>
 - <code><a href="./src/resources/communication-preferences/communication-preferences.ts">BatchResponsePublicStatusBulkResponse</a></code>
+- <code><a href="./src/resources/communication-preferences/communication-preferences.ts">BatchResponsePublicStatusBulkResponseWithErrors</a></code>
 - <code><a href="./src/resources/communication-preferences/communication-preferences.ts">BatchResponsePublicWideStatusBulkResponse</a></code>
+- <code><a href="./src/resources/communication-preferences/communication-preferences.ts">BatchResponsePublicWideStatusBulkResponseWithErrors</a></code>
 - <code><a href="./src/resources/communication-preferences/communication-preferences.ts">LinkGenerationRequest</a></code>
 - <code><a href="./src/resources/communication-preferences/communication-preferences.ts">LinkGenerationResponse</a></code>
 - <code><a href="./src/resources/communication-preferences/communication-preferences.ts">PartialPublicStatusRequest</a></code>

@@ -4,7 +4,6 @@ Types:
 
 - <code><a href="./src/resources/crm/crm.ts">AssociationSpecWithLabel</a></code>
 - <code><a href="./src/resources/crm/crm.ts">BatchResponsePublicDefaultAssociation</a></code>
-- <code><a href="./src/resources/crm/crm.ts">BatchResponseVoid</a></code>
 - <code><a href="./src/resources/crm/crm.ts">CollectionResponseMultiAssociatedObjectWithLabelForwardPaging</a></code>
 - <code><a href="./src/resources/crm/crm.ts">CollectionResponseWithTotalSimplePublicObject</a></code>
 - <code><a href="./src/resources/crm/crm.ts">Filter</a></code>
@@ -31,7 +30,9 @@ Types:
 - <code><a href="./src/resources/crm/associations/associations.ts">BatchInputPublicDefaultAssociationMultiPost</a></code>
 - <code><a href="./src/resources/crm/associations/associations.ts">BatchInputPublicFetchAssociationsBatchRequest</a></code>
 - <code><a href="./src/resources/crm/associations/associations.ts">BatchResponseLabelsBetweenObjectPair</a></code>
+- <code><a href="./src/resources/crm/associations/associations.ts">BatchResponseLabelsBetweenObjectPairWithErrors</a></code>
 - <code><a href="./src/resources/crm/associations/associations.ts">BatchResponsePublicAssociationMultiWithLabel</a></code>
+- <code><a href="./src/resources/crm/associations/associations.ts">BatchResponsePublicAssociationMultiWithLabelWithErrors</a></code>
 - <code><a href="./src/resources/crm/associations/associations.ts">DateTime</a></code>
 - <code><a href="./src/resources/crm/associations/associations.ts">PublicAssociationMultiArchive</a></code>
 - <code><a href="./src/resources/crm/associations/associations.ts">PublicAssociationMultiPost</a></code>
@@ -53,9 +54,9 @@ Methods:
 Methods:
 
 - <code title="put /crm/objects/2026-03/{fromObjectType}/{fromObjectId}/associations/default/{toObjectType}/{toObjectId}">client.crm.associations.batch.<a href="./src/resources/crm/associations/batch.ts">create</a>(toObjectID, { ...params }) -> BatchResponsePublicDefaultAssociation</code>
-- <code title="post /crm/associations/2026-03/{fromObjectType}/{toObjectType}/batch/archive">client.crm.associations.batch.<a href="./src/resources/crm/associations/batch.ts">delete</a>(toObjectType, { ...params }) -> BatchResponseVoid</code>
+- <code title="post /crm/associations/2026-03/{fromObjectType}/{toObjectType}/batch/archive">client.crm.associations.batch.<a href="./src/resources/crm/associations/batch.ts">delete</a>(toObjectType, { ...params }) -> void</code>
 - <code title="post /crm/associations/2026-03/{fromObjectType}/{toObjectType}/batch/associate/default">client.crm.associations.batch.<a href="./src/resources/crm/associations/batch.ts">createDefault</a>(toObjectType, { ...params }) -> BatchResponsePublicDefaultAssociation</code>
-- <code title="post /crm/associations/2026-03/{fromObjectType}/{toObjectType}/batch/labels/archive">client.crm.associations.batch.<a href="./src/resources/crm/associations/batch.ts">deleteLabels</a>(toObjectType, { ...params }) -> BatchResponseVoid</code>
+- <code title="post /crm/associations/2026-03/{fromObjectType}/{toObjectType}/batch/labels/archive">client.crm.associations.batch.<a href="./src/resources/crm/associations/batch.ts">deleteLabels</a>(toObjectType, { ...params }) -> void</code>
 - <code title="post /crm/associations/2026-03/{fromObjectType}/{toObjectType}/batch/read">client.crm.associations.batch.<a href="./src/resources/crm/associations/batch.ts">get</a>(toObjectType, { ...params }) -> BatchResponsePublicAssociationMultiWithLabel</code>
 
 ## AssociationsSchema
@@ -66,7 +67,9 @@ Types:
 - <code><a href="./src/resources/crm/associations-schema/associations-schema.ts">BatchInputPublicAssociationDefinitionConfigurationUpdateRequest</a></code>
 - <code><a href="./src/resources/crm/associations-schema/associations-schema.ts">BatchInputPublicAssociationSpec</a></code>
 - <code><a href="./src/resources/crm/associations-schema/associations-schema.ts">BatchResponsePublicAssociationDefinitionConfigurationUpdateResult</a></code>
+- <code><a href="./src/resources/crm/associations-schema/associations-schema.ts">BatchResponsePublicAssociationDefinitionConfigurationUpdateResultWithErrors</a></code>
 - <code><a href="./src/resources/crm/associations-schema/associations-schema.ts">BatchResponsePublicAssociationDefinitionUserConfiguration</a></code>
+- <code><a href="./src/resources/crm/associations-schema/associations-schema.ts">BatchResponsePublicAssociationDefinitionUserConfigurationWithErrors</a></code>
 - <code><a href="./src/resources/crm/associations-schema/associations-schema.ts">CollectionResponseAssociationSpecWithLabelNoPaging</a></code>
 - <code><a href="./src/resources/crm/associations-schema/associations-schema.ts">CollectionResponsePublicAssociationDefinitionUserConfigurationNoPaging</a></code>
 - <code><a href="./src/resources/crm/associations-schema/associations-schema.ts">PublicAssociationDefinitionConfigurationCreateRequest</a></code>
@@ -92,7 +95,7 @@ Methods:
 Methods:
 
 - <code title="get /crm/associations/2026-03/definitions/configurations/all">client.crm.associationsSchema.limits.<a href="./src/resources/crm/associations-schema/limits.ts">list</a>() -> CollectionResponsePublicAssociationDefinitionUserConfigurationNoPaging</code>
-- <code title="post /crm/associations/2026-03/definitions/configurations/{fromObjectType}/{toObjectType}/batch/purge">client.crm.associationsSchema.limits.<a href="./src/resources/crm/associations-schema/limits.ts">batchDelete</a>(toObjectType, { ...params }) -> BatchResponseVoid</code>
+- <code title="post /crm/associations/2026-03/definitions/configurations/{fromObjectType}/{toObjectType}/batch/purge">client.crm.associationsSchema.limits.<a href="./src/resources/crm/associations-schema/limits.ts">batchDelete</a>(toObjectType, { ...params }) -> void</code>
 - <code title="post /crm/associations/2026-03/definitions/configurations/{fromObjectType}/{toObjectType}/batch/update">client.crm.associationsSchema.limits.<a href="./src/resources/crm/associations-schema/limits.ts">batchUpdate</a>(toObjectType, { ...params }) -> BatchResponsePublicAssociationDefinitionConfigurationUpdateResult</code>
 - <code title="get /crm/associations/2026-03/definitions/configurations/{fromObjectType}/{toObjectType}">client.crm.associationsSchema.limits.<a href="./src/resources/crm/associations-schema/limits.ts">getByObjectTypes</a>(toObjectType, { ...params }) -> CollectionResponsePublicAssociationDefinitionUserConfigurationNoPaging</code>
 
@@ -101,6 +104,7 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/crm/deal-splits/deal-splits.ts">BatchResponseDealToDealSplits</a></code>
+- <code><a href="./src/resources/crm/deal-splits/deal-splits.ts">BatchResponseDealToDealSplitsWithErrors</a></code>
 - <code><a href="./src/resources/crm/deal-splits/deal-splits.ts">DealToDealSplits</a></code>
 - <code><a href="./src/resources/crm/deal-splits/deal-splits.ts">PublicDealSplitInput</a></code>
 - <code><a href="./src/resources/crm/deal-splits/deal-splits.ts">PublicDealSplitsBatchCreateRequest</a></code>
@@ -327,6 +331,7 @@ Types:
 - <code><a href="./src/resources/crm/lists.ts">APICollectionResponseRecordListMembership</a></code>
 - <code><a href="./src/resources/crm/lists.ts">BatchInputRecordIDInput</a></code>
 - <code><a href="./src/resources/crm/lists.ts">BatchResponseRecordIDWithMemberships</a></code>
+- <code><a href="./src/resources/crm/lists.ts">BatchResponseRecordIDWithMembershipsWithErrors</a></code>
 - <code><a href="./src/resources/crm/lists.ts">JoinTimeAndRecordID</a></code>
 - <code><a href="./src/resources/crm/lists.ts">ListCreateRequest</a></code>
 - <code><a href="./src/resources/crm/lists.ts">ListCreateResponse</a></code>
@@ -442,21 +447,22 @@ Methods:
 - <code title="post /crm/lists/2026-03/idmapping">client.crm.lists.<a href="./src/resources/crm/lists.ts">createIDMapping</a>([ ...body ]) -> PublicBatchMigrationMapping</code>
 - <code title="delete /crm/lists/2026-03/folders/{folderId}">client.crm.lists.<a href="./src/resources/crm/lists.ts">deleteFolder</a>(folderID) -> void</code>
 - <code title="delete /crm/lists/2026-03/{listId}/memberships">client.crm.lists.<a href="./src/resources/crm/lists.ts">deleteMemberships</a>(listID) -> void</code>
-- <code title="delete /crm/lists/2026-03/{listId}/schedule-conversion">client.crm.lists.<a href="./src/resources/crm/lists.ts">deleteScheduleConversion</a>(listID) -> void</code>
 - <code title="get /crm/lists/2026-03/{listId}">client.crm.lists.<a href="./src/resources/crm/lists.ts">get</a>(listID, { ...params }) -> ListFetchResponse</code>
-- <code title="get /crm/lists/2026-03/object-type-id/{objectTypeId}/name/{listName}">client.crm.lists.<a href="./src/resources/crm/lists.ts">getByObjectTypeIDAndName</a>(listName, { ...params }) -> ListFetchResponse</code>
+- <code title="get /crm/lists/2026-03/object-type-id/{objectTypeId}/name/{listName}">client.crm.lists.<a href="./src/resources/crm/lists.ts">getByObjectTypeAndName</a>(listName, { ...params }) -> ListFetchResponse</code>
 - <code title="get /crm/lists/2026-03/idmapping">client.crm.lists.<a href="./src/resources/crm/lists.ts">getIDMapping</a>({ ...params }) -> PublicMigrationMapping</code>
+- <code title="get /crm/lists/2026-03/{listId}/memberships/join-order">client.crm.lists.<a href="./src/resources/crm/lists.ts">getMembershipsJoinOrder</a>(listID, { ...params }) -> JoinTimeAndRecordIDsPage</code>
 - <code title="get /crm/lists/2026-03/records/{objectTypeId}/{recordId}/memberships">client.crm.lists.<a href="./src/resources/crm/lists.ts">getRecordMemberships</a>(recordID, { ...params }) -> APICollectionResponseRecordListMembership</code>
 - <code title="get /crm/lists/2026-03/{listId}/schedule-conversion">client.crm.lists.<a href="./src/resources/crm/lists.ts">getScheduleConversion</a>(listID) -> PublicListConversionResponse</code>
+- <code title="get /crm/lists/2026-03/{listId}/size-and-edits-history/between">client.crm.lists.<a href="./src/resources/crm/lists.ts">getSizeAndEditsHistoryBetween</a>(listID, { ...params }) -> ListSizeAndEditHistoryResponse</code>
+- <code title="post /crm/lists/2026-03/search">client.crm.lists.<a href="./src/resources/crm/lists.ts">listBySearch</a>({ ...params }) -> ListSearchResponse</code>
 - <code title="get /crm/lists/2026-03/folders">client.crm.lists.<a href="./src/resources/crm/lists.ts">listFolders</a>({ ...params }) -> ListFolderFetchResponse</code>
 - <code title="get /crm/lists/2026-03/{listId}/memberships">client.crm.lists.<a href="./src/resources/crm/lists.ts">listMemberships</a>(listID, { ...params }) -> JoinTimeAndRecordIDsPage</code>
-- <code title="get /crm/lists/2026-03/{listId}/memberships/join-order">client.crm.lists.<a href="./src/resources/crm/lists.ts">listMembershipsJoinOrder</a>(listID, { ...params }) -> JoinTimeAndRecordIDsPage</code>
 - <code title="put /crm/lists/2026-03/folders/{folderId}/move/{newParentFolderId}">client.crm.lists.<a href="./src/resources/crm/lists.ts">moveFolder</a>(newParentFolderID, { ...params }) -> ListFolderFetchResponse</code>
 - <code title="put /crm/lists/2026-03/folders/move-list">client.crm.lists.<a href="./src/resources/crm/lists.ts">moveList</a>({ ...params }) -> void</code>
 - <code title="put /crm/lists/2026-03/{listId}/memberships/remove">client.crm.lists.<a href="./src/resources/crm/lists.ts">removeMemberships</a>(listID, [ ...body ]) -> MembershipsUpdateResponse</code>
 - <code title="put /crm/lists/2026-03/folders/{folderId}/rename">client.crm.lists.<a href="./src/resources/crm/lists.ts">renameFolder</a>(folderID, { ...params }) -> ListFolderFetchResponse</code>
 - <code title="put /crm/lists/2026-03/{listId}/restore">client.crm.lists.<a href="./src/resources/crm/lists.ts">restore</a>(listID) -> void</code>
-- <code title="post /crm/lists/2026-03/search">client.crm.lists.<a href="./src/resources/crm/lists.ts">search</a>({ ...params }) -> ListSearchResponse</code>
+- <code title="delete /crm/lists/2026-03/{listId}/schedule-conversion">client.crm.lists.<a href="./src/resources/crm/lists.ts">scheduleConversion</a>(listID) -> void</code>
 - <code title="put /crm/lists/2026-03/{listId}/update-list-filters">client.crm.lists.<a href="./src/resources/crm/lists.ts">updateListFilters</a>(listID, { ...params }) -> ListUpdateResponse</code>
 - <code title="put /crm/lists/2026-03/{listId}/update-list-name">client.crm.lists.<a href="./src/resources/crm/lists.ts">updateListName</a>(listID, { ...params }) -> ListUpdateResponse</code>
 - <code title="put /crm/lists/2026-03/{listId}/schedule-conversion">client.crm.lists.<a href="./src/resources/crm/lists.ts">updateScheduleConversion</a>(listID, { ...params }) -> PublicListConversionResponse</code>
@@ -512,7 +518,9 @@ Types:
 - <code><a href="./src/resources/crm/objects/objects.ts">BatchInputSimplePublicObjectID</a></code>
 - <code><a href="./src/resources/crm/objects/objects.ts">BatchReadInputSimplePublicObjectID</a></code>
 - <code><a href="./src/resources/crm/objects/objects.ts">BatchResponseSimplePublicObject</a></code>
+- <code><a href="./src/resources/crm/objects/objects.ts">BatchResponseSimplePublicObjectWithErrors</a></code>
 - <code><a href="./src/resources/crm/objects/objects.ts">BatchResponseSimplePublicUpsertObject</a></code>
+- <code><a href="./src/resources/crm/objects/objects.ts">BatchResponseSimplePublicUpsertObjectWithErrors</a></code>
 - <code><a href="./src/resources/crm/objects/objects.ts">CollectionResponseAssociatedID</a></code>
 - <code><a href="./src/resources/crm/objects/objects.ts">CollectionResponseSimplePublicObjectWithAssociationsForwardPaging</a></code>
 - <code><a href="./src/resources/crm/objects/objects.ts">PublicAssociationsForObject</a></code>
@@ -841,6 +849,7 @@ Methods:
 - <code title="post /crm/objects/2026-03/goal_targets/batch/update">client.crm.objects.goalTargets.batch.<a href="./src/resources/crm/objects/goal-targets/batch.ts">update</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
 - <code title="post /crm/objects/2026-03/goal_targets/batch/archive">client.crm.objects.goalTargets.batch.<a href="./src/resources/crm/objects/goal-targets/batch.ts">delete</a>({ ...params }) -> void</code>
 - <code title="post /crm/objects/2026-03/goal_targets/batch/read">client.crm.objects.goalTargets.batch.<a href="./src/resources/crm/objects/goal-targets/batch.ts">get</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
+- <code title="post /crm/objects/2026-03/goal_targets/batch/upsert">client.crm.objects.goalTargets.batch.<a href="./src/resources/crm/objects/goal-targets/batch.ts">upsert</a>({ ...params }) -> BatchResponseSimplePublicUpsertObject</code>
 
 ### Invoices
 
@@ -882,6 +891,7 @@ Methods:
 - <code title="post /crm/objects/2026-03/leads/batch/update">client.crm.objects.leads.batch.<a href="./src/resources/crm/objects/leads/batch.ts">update</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
 - <code title="post /crm/objects/2026-03/leads/batch/archive">client.crm.objects.leads.batch.<a href="./src/resources/crm/objects/leads/batch.ts">delete</a>({ ...params }) -> void</code>
 - <code title="post /crm/objects/2026-03/leads/batch/read">client.crm.objects.leads.batch.<a href="./src/resources/crm/objects/leads/batch.ts">get</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
+- <code title="post /crm/objects/2026-03/leads/batch/upsert">client.crm.objects.leads.batch.<a href="./src/resources/crm/objects/leads/batch.ts">upsert</a>({ ...params }) -> BatchResponseSimplePublicUpsertObject</code>
 
 ### LineItems
 
@@ -1296,8 +1306,12 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/crm/properties/properties.ts">BatchInputPropertyCreate</a></code>
 - <code><a href="./src/resources/crm/properties/properties.ts">BatchResponseProperty</a></code>
+- <code><a href="./src/resources/crm/properties/properties.ts">BatchResponsePropertyWithErrors</a></code>
 - <code><a href="./src/resources/crm/properties/properties.ts">CollectionResponsePropertyNoPaging</a></code>
+- <code><a href="./src/resources/crm/properties/properties.ts">Property</a></code>
+- <code><a href="./src/resources/crm/properties/properties.ts">PropertyCreate</a></code>
 - <code><a href="./src/resources/crm/properties/properties.ts">PropertyUpdate</a></code>
 
 Methods:

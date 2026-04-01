@@ -19,6 +19,7 @@ export {
   type BatchInputMarketingEventSubscriber,
   type BatchResponseMarketingEventPublicDefaultResponse,
   type BatchResponseMarketingEventPublicDefaultResponseV2,
+  type BatchResponseMarketingEventPublicDefaultResponseV2WithErrors,
   type BatchResponseSubscriberEmailResponse,
   type BatchResponseSubscriberVidResponse,
   type CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging,

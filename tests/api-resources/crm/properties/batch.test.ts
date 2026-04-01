@@ -41,6 +41,7 @@ describe('resource batch', () => {
           name: 'name',
           type: 'bool',
           calculationFormula: 'calculationFormula',
+          currencyPropertyName: 'currencyPropertyName',
           dataSensitivity: 'highly_sensitive',
           description: 'description',
           displayOrder: 0,
@@ -58,6 +59,7 @@ describe('resource batch', () => {
             },
           ],
           referencedObjectType: 'referencedObjectType',
+          showCurrencySymbol: true,
         },
       ],
     });

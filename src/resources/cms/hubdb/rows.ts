@@ -167,14 +167,11 @@ export class Rows extends APIResource {
    * Permanently delete rows from the draft version of a table, given a set of row
    * IDs. Maximum of 100 row IDs per call.
    */
-  purgeBatch(
-    tableIDOrName: string,
-    body: RowPurgeBatchParams,
-    options?: RequestOptions,
-  ): APIPromise<HubdbAPI.BatchResponseHubDBTableRowV3> {
+  purgeBatch(tableIDOrName: string, body: RowPurgeBatchParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post(path`/cms/hubdb/2026-03/tables/${tableIDOrName}/rows/draft/batch/purge`, {
       body,
       ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
   }
 

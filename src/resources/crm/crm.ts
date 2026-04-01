@@ -60,6 +60,7 @@ import {
   APICollectionResponseRecordListMembership,
   BatchInputRecordIDInput,
   BatchResponseRecordIDWithMemberships,
+  BatchResponseRecordIDWithMembershipsWithErrors,
   JoinTimeAndRecordID,
   JoinTimeAndRecordIDsPage,
   ListAddAndRemoveMembershipsParams,
@@ -76,12 +77,14 @@ import {
   ListFolderCreateRequest,
   ListFolderCreateResponse,
   ListFolderFetchResponse,
-  ListGetByObjectTypeIDAndNameParams,
+  ListGetByObjectTypeAndNameParams,
   ListGetIDMappingParams,
+  ListGetMembershipsJoinOrderParams,
   ListGetParams,
   ListGetRecordMembershipsParams,
+  ListGetSizeAndEditsHistoryBetweenParams,
+  ListListBySearchParams,
   ListListFoldersParams,
-  ListListMembershipsJoinOrderParams,
   ListListMembershipsParams,
   ListListParams,
   ListMoveFolderParams,
@@ -89,7 +92,6 @@ import {
   ListMoveRequest,
   ListRemoveMembershipsParams,
   ListRenameFolderParams,
-  ListSearchParams,
   ListSearchRequest,
   ListSearchResponse,
   ListSizeAndEditHistoryResponse,
@@ -239,7 +241,9 @@ import {
   BatchInputPublicAssociationDefinitionConfigurationUpdateRequest,
   BatchInputPublicAssociationSpec,
   BatchResponsePublicAssociationDefinitionConfigurationUpdateResult,
+  BatchResponsePublicAssociationDefinitionConfigurationUpdateResultWithErrors,
   BatchResponsePublicAssociationDefinitionUserConfiguration,
+  BatchResponsePublicAssociationDefinitionUserConfigurationWithErrors,
   CollectionResponseAssociationSpecWithLabelNoPaging,
   CollectionResponsePublicAssociationDefinitionUserConfigurationNoPaging,
   PublicAssociationDefinitionConfigurationCreateRequest,
@@ -262,7 +266,9 @@ import {
   BatchInputPublicDefaultAssociationMultiPost,
   BatchInputPublicFetchAssociationsBatchRequest,
   BatchResponseLabelsBetweenObjectPair,
+  BatchResponseLabelsBetweenObjectPairWithErrors,
   BatchResponsePublicAssociationMultiWithLabel,
+  BatchResponsePublicAssociationMultiWithLabelWithErrors,
   DateTime,
   PublicAssociationMultiArchive,
   PublicAssociationMultiPost,
@@ -274,6 +280,7 @@ import {
 import * as DealSplitsAPI from './deal-splits/deal-splits';
 import {
   BatchResponseDealToDealSplits,
+  BatchResponseDealToDealSplitsWithErrors,
   DealSplits,
   DealToDealSplits,
   PublicDealSplitInput,
@@ -326,7 +333,9 @@ import {
   BatchInputSimplePublicObjectID,
   BatchReadInputSimplePublicObjectID,
   BatchResponseSimplePublicObject,
+  BatchResponseSimplePublicObjectWithErrors,
   BatchResponseSimplePublicUpsertObject,
+  BatchResponseSimplePublicUpsertObjectWithErrors,
   CollectionResponseAssociatedID,
   CollectionResponseSimplePublicObjectWithAssociationsForwardPaging,
   Objects,
@@ -343,9 +352,13 @@ import {
 } from './objects/objects';
 import * as PropertiesAPI from './properties/properties';
 import {
+  BatchInputPropertyCreate,
   BatchResponseProperty,
+  BatchResponsePropertyWithErrors,
   CollectionResponsePropertyNoPaging,
   Properties,
+  Property,
+  PropertyCreate,
   PropertyCreateParams,
   PropertyDeleteParams,
   PropertyGetParams,
@@ -452,43 +465,6 @@ export interface BatchResponsePublicDefaultAssociation {
 
   /**
    * The timestamp when the batch process was initiated, in ISO 8601 format.
-   */
-  requestedAt?: string;
-}
-
-export interface BatchResponseVoid {
-  /**
-   * Time operation completed
-   */
-  completedAt: string;
-
-  results: Array<unknown>;
-
-  /**
-   * The timestamp when the batch processing began, in ISO 8601 format.
-   */
-  startedAt: string;
-
-  /**
-   * The status of the batch processing request: "PENDING", "PROCESSING", "CANCELED",
-   * or "COMPLETE".
-   */
-  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
-
-  errors?: Array<Shared.StandardError>;
-
-  /**
-   * An object containing relevant links related to the batch request.
-   */
-  links?: { [key: string]: string };
-
-  /**
-   * The number of errors encountered during the batch processing.
-   */
-  numErrors?: number;
-
-  /**
-   * The timestamp when the batch request was initially made, in ISO 8601 format.
    */
   requestedAt?: string;
 }
@@ -768,7 +744,6 @@ export declare namespace Crm {
   export {
     type AssociationSpecWithLabel as AssociationSpecWithLabel,
     type BatchResponsePublicDefaultAssociation as BatchResponsePublicDefaultAssociation,
-    type BatchResponseVoid as BatchResponseVoid,
     type CollectionResponseMultiAssociatedObjectWithLabelForwardPaging as CollectionResponseMultiAssociatedObjectWithLabelForwardPaging,
     type CollectionResponseWithTotalSimplePublicObject as CollectionResponseWithTotalSimplePublicObject,
     type Filter as Filter,
@@ -790,7 +765,9 @@ export declare namespace Crm {
     type BatchInputPublicDefaultAssociationMultiPost as BatchInputPublicDefaultAssociationMultiPost,
     type BatchInputPublicFetchAssociationsBatchRequest as BatchInputPublicFetchAssociationsBatchRequest,
     type BatchResponseLabelsBetweenObjectPair as BatchResponseLabelsBetweenObjectPair,
+    type BatchResponseLabelsBetweenObjectPairWithErrors as BatchResponseLabelsBetweenObjectPairWithErrors,
     type BatchResponsePublicAssociationMultiWithLabel as BatchResponsePublicAssociationMultiWithLabel,
+    type BatchResponsePublicAssociationMultiWithLabelWithErrors as BatchResponsePublicAssociationMultiWithLabelWithErrors,
     type DateTime as DateTime,
     type PublicAssociationMultiArchive as PublicAssociationMultiArchive,
     type PublicAssociationMultiPost as PublicAssociationMultiPost,
@@ -810,7 +787,9 @@ export declare namespace Crm {
     type BatchInputPublicAssociationDefinitionConfigurationUpdateRequest as BatchInputPublicAssociationDefinitionConfigurationUpdateRequest,
     type BatchInputPublicAssociationSpec as BatchInputPublicAssociationSpec,
     type BatchResponsePublicAssociationDefinitionConfigurationUpdateResult as BatchResponsePublicAssociationDefinitionConfigurationUpdateResult,
+    type BatchResponsePublicAssociationDefinitionConfigurationUpdateResultWithErrors as BatchResponsePublicAssociationDefinitionConfigurationUpdateResultWithErrors,
     type BatchResponsePublicAssociationDefinitionUserConfiguration as BatchResponsePublicAssociationDefinitionUserConfiguration,
+    type BatchResponsePublicAssociationDefinitionUserConfigurationWithErrors as BatchResponsePublicAssociationDefinitionUserConfigurationWithErrors,
     type CollectionResponseAssociationSpecWithLabelNoPaging as CollectionResponseAssociationSpecWithLabelNoPaging,
     type CollectionResponsePublicAssociationDefinitionUserConfigurationNoPaging as CollectionResponsePublicAssociationDefinitionUserConfigurationNoPaging,
     type PublicAssociationDefinitionConfigurationCreateRequest as PublicAssociationDefinitionConfigurationCreateRequest,
@@ -825,6 +804,7 @@ export declare namespace Crm {
   export {
     DealSplits as DealSplits,
     type BatchResponseDealToDealSplits as BatchResponseDealToDealSplits,
+    type BatchResponseDealToDealSplitsWithErrors as BatchResponseDealToDealSplitsWithErrors,
     type DealToDealSplits as DealToDealSplits,
     type PublicDealSplitInput as PublicDealSplitInput,
     type PublicDealSplitsBatchCreateRequest as PublicDealSplitsBatchCreateRequest,
@@ -906,6 +886,7 @@ export declare namespace Crm {
     type APICollectionResponseRecordListMembership as APICollectionResponseRecordListMembership,
     type BatchInputRecordIDInput as BatchInputRecordIDInput,
     type BatchResponseRecordIDWithMemberships as BatchResponseRecordIDWithMemberships,
+    type BatchResponseRecordIDWithMembershipsWithErrors as BatchResponseRecordIDWithMembershipsWithErrors,
     type JoinTimeAndRecordID as JoinTimeAndRecordID,
     type ListCreateRequest as ListCreateRequest,
     type ListCreateResponse as ListCreateResponse,
@@ -1017,17 +998,18 @@ export declare namespace Crm {
     type ListCreateFolderParams as ListCreateFolderParams,
     type ListCreateIDMappingParams as ListCreateIDMappingParams,
     type ListGetParams as ListGetParams,
-    type ListGetByObjectTypeIDAndNameParams as ListGetByObjectTypeIDAndNameParams,
+    type ListGetByObjectTypeAndNameParams as ListGetByObjectTypeAndNameParams,
     type ListGetIDMappingParams as ListGetIDMappingParams,
+    type ListGetMembershipsJoinOrderParams as ListGetMembershipsJoinOrderParams,
     type ListGetRecordMembershipsParams as ListGetRecordMembershipsParams,
+    type ListGetSizeAndEditsHistoryBetweenParams as ListGetSizeAndEditsHistoryBetweenParams,
+    type ListListBySearchParams as ListListBySearchParams,
     type ListListFoldersParams as ListListFoldersParams,
     type ListListMembershipsParams as ListListMembershipsParams,
-    type ListListMembershipsJoinOrderParams as ListListMembershipsJoinOrderParams,
     type ListMoveFolderParams as ListMoveFolderParams,
     type ListMoveListParams as ListMoveListParams,
     type ListRemoveMembershipsParams as ListRemoveMembershipsParams,
     type ListRenameFolderParams as ListRenameFolderParams,
-    type ListSearchParams as ListSearchParams,
     type ListUpdateListFiltersParams as ListUpdateListFiltersParams,
     type ListUpdateListNameParams as ListUpdateListNameParams,
     type ListUpdateScheduleConversionParams as ListUpdateScheduleConversionParams,
@@ -1060,7 +1042,9 @@ export declare namespace Crm {
     type BatchInputSimplePublicObjectID as BatchInputSimplePublicObjectID,
     type BatchReadInputSimplePublicObjectID as BatchReadInputSimplePublicObjectID,
     type BatchResponseSimplePublicObject as BatchResponseSimplePublicObject,
+    type BatchResponseSimplePublicObjectWithErrors as BatchResponseSimplePublicObjectWithErrors,
     type BatchResponseSimplePublicUpsertObject as BatchResponseSimplePublicUpsertObject,
+    type BatchResponseSimplePublicUpsertObjectWithErrors as BatchResponseSimplePublicUpsertObjectWithErrors,
     type CollectionResponseAssociatedID as CollectionResponseAssociatedID,
     type CollectionResponseSimplePublicObjectWithAssociationsForwardPaging as CollectionResponseSimplePublicObjectWithAssociationsForwardPaging,
     type PublicAssociationsForObject as PublicAssociationsForObject,
@@ -1110,8 +1094,12 @@ export declare namespace Crm {
 
   export {
     Properties as Properties,
+    type BatchInputPropertyCreate as BatchInputPropertyCreate,
     type BatchResponseProperty as BatchResponseProperty,
+    type BatchResponsePropertyWithErrors as BatchResponsePropertyWithErrors,
     type CollectionResponsePropertyNoPaging as CollectionResponsePropertyNoPaging,
+    type Property as Property,
+    type PropertyCreate as PropertyCreate,
     type PropertyUpdate as PropertyUpdate,
     type PropertyCreateParams as PropertyCreateParams,
     type PropertyUpdateParams as PropertyUpdateParams,

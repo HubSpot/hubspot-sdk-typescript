@@ -7,6 +7,7 @@ Types:
 - <code><a href="./src/resources/settings/currencies/currencies.ts">BatchInputExchangeRateCreateRequest</a></code>
 - <code><a href="./src/resources/settings/currencies/currencies.ts">BatchInputExchangeRateUpdateRequest</a></code>
 - <code><a href="./src/resources/settings/currencies/currencies.ts">BatchResponseExchangeRate</a></code>
+- <code><a href="./src/resources/settings/currencies/currencies.ts">BatchResponseExchangeRateWithErrors</a></code>
 - <code><a href="./src/resources/settings/currencies/currencies.ts">CentralExchangeRatesInformation</a></code>
 - <code><a href="./src/resources/settings/currencies/currencies.ts">CollectionResponseCurrencyCodeInfoNoPaging</a></code>
 - <code><a href="./src/resources/settings/currencies/currencies.ts">CollectionResponseExchangeRateForwardPaging</a></code>

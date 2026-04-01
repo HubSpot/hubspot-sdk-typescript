@@ -5,7 +5,14 @@ import * as CrmAPI from '../../crm';
 import * as ObjectsAPI from '../objects';
 import { SimplePublicObjectWithAssociationsPage } from '../objects';
 import * as BatchAPI from './batch';
-import { Batch, BatchCreateParams, BatchDeleteParams, BatchGetParams, BatchUpdateParams } from './batch';
+import {
+  Batch,
+  BatchCreateParams,
+  BatchDeleteParams,
+  BatchGetParams,
+  BatchUpdateParams,
+  BatchUpsertParams,
+} from './batch';
 import { APIPromise } from '../../../../core/api-promise';
 import { Page, type PageParams, PagePromise } from '../../../../core/pagination';
 import { buildHeaders } from '../../../../internal/headers';
@@ -226,6 +233,7 @@ export declare namespace Leads {
     type BatchUpdateParams as BatchUpdateParams,
     type BatchDeleteParams as BatchDeleteParams,
     type BatchGetParams as BatchGetParams,
+    type BatchUpsertParams as BatchUpsertParams,
   };
 }
 

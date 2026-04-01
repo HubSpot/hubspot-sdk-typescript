@@ -11,8 +11,12 @@ export {
 } from './groups';
 export {
   Properties,
+  type BatchInputPropertyCreate,
   type BatchResponseProperty,
+  type BatchResponsePropertyWithErrors,
   type CollectionResponsePropertyNoPaging,
+  type Property,
+  type PropertyCreate,
   type PropertyUpdate,
   type PropertyCreateParams,
   type PropertyUpdateParams,

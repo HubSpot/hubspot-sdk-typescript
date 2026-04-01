@@ -74,6 +74,35 @@ export interface BatchResponseExchangeRate {
    */
   status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
+  /**
+   * The link to the next page with exchange rates.
+   */
+  links?: { [key: string]: string };
+
+  /**
+   * The datetime the of the request.
+   */
+  requestedAt?: string;
+}
+
+export interface BatchResponseExchangeRateWithErrors {
+  /**
+   * The datetime the response was completed
+   */
+  completedAt: string;
+
+  results: Array<ExchangeRate>;
+
+  /**
+   * The datetime the of the request.
+   */
+  startedAt: string;
+
+  /**
+   * The current status of the response (e.g. COMPLETED)
+   */
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
+
   errors?: Array<Shared.StandardError>;
 
   /**
@@ -81,6 +110,9 @@ export interface BatchResponseExchangeRate {
    */
   links?: { [key: string]: string };
 
+  /**
+   * The number of errors associated to the request.
+   */
   numErrors?: number;
 
   /**
@@ -1685,6 +1717,7 @@ export declare namespace Currencies {
     type BatchInputExchangeRateCreateRequest as BatchInputExchangeRateCreateRequest,
     type BatchInputExchangeRateUpdateRequest as BatchInputExchangeRateUpdateRequest,
     type BatchResponseExchangeRate as BatchResponseExchangeRate,
+    type BatchResponseExchangeRateWithErrors as BatchResponseExchangeRateWithErrors,
     type CentralExchangeRatesInformation as CentralExchangeRatesInformation,
     type CollectionResponseCurrencyCodeInfoNoPaging as CollectionResponseCurrencyCodeInfoNoPaging,
     type CollectionResponseExchangeRateForwardPaging as CollectionResponseExchangeRateForwardPaging,

@@ -447,6 +447,41 @@ export interface BatchResponseSimplePublicObject {
    */
   status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
+  /**
+   * An object containing relevant links related to the batch request.
+   */
+  links?: { [key: string]: string };
+
+  /**
+   * The timestamp when the batch request was initially made, in ISO 8601 format.
+   */
+  requestedAt?: string;
+}
+
+/**
+ * Represents the result of a batch operation on CRM objects, including the
+ * processing status, batch results, timestamps, and a list of any errors
+ * encountered during the operation.
+ */
+export interface BatchResponseSimplePublicObjectWithErrors {
+  /**
+   * The timestamp when the batch process was completed, in ISO 8601 format.
+   */
+  completedAt: string;
+
+  results: Array<CrmAPI.SimplePublicObject>;
+
+  /**
+   * The timestamp when the batch process began execution, in ISO 8601 format.
+   */
+  startedAt: string;
+
+  /**
+   * The status of the batch processing request - "PENDING", "PROCESSING",
+   * "CANCELLED", or "COMPLETE"
+   */
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
+
   errors?: Array<Shared.StandardError>;
 
   /**
@@ -455,12 +490,12 @@ export interface BatchResponseSimplePublicObject {
   links?: { [key: string]: string };
 
   /**
-   * The total number of errors that occurred during the batch operation.
+   * The number of errors encountered during the batch process.
    */
   numErrors?: number;
 
   /**
-   * The timestamp when the batch request was initially made, in ISO 8601 format.
+   * The timestamp when the batch process was initiated, in ISO 8601 format.
    */
   requestedAt?: string;
 }
@@ -488,6 +523,41 @@ export interface BatchResponseSimplePublicUpsertObject {
    */
   status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
+  /**
+   * An object containing relevant links related to the batch request.
+   */
+  links?: { [key: string]: string };
+
+  /**
+   * The timestamp when the batch process was initiated, in ISO 8601 format.
+   */
+  requestedAt?: string;
+}
+
+/**
+ * Represents the response from a batch upsert operation, including the status,
+ * timestamps, successfully processed objects, and any errors that occurred during
+ * processing.
+ */
+export interface BatchResponseSimplePublicUpsertObjectWithErrors {
+  /**
+   * The timestamp when the batch process was completed, in ISO 8601 format.
+   */
+  completedAt: string;
+
+  results: Array<SimplePublicUpsertObject>;
+
+  /**
+   * The timestamp when the batch process began execution, in ISO 8601 format.
+   */
+  startedAt: string;
+
+  /**
+   * The status of the batch processing request. Can be: "PENDING", "PROCESSING",
+   * "CANCELLED", or "COMPLETE".
+   */
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
+
   errors?: Array<Shared.StandardError>;
 
   /**
@@ -496,7 +566,7 @@ export interface BatchResponseSimplePublicUpsertObject {
   links?: { [key: string]: string };
 
   /**
-   * The total number of errors that occurred during the operation.
+   * The number of errors encountered during the batch process.
    */
   numErrors?: number;
 
@@ -808,7 +878,9 @@ export declare namespace Objects {
     type BatchInputSimplePublicObjectID as BatchInputSimplePublicObjectID,
     type BatchReadInputSimplePublicObjectID as BatchReadInputSimplePublicObjectID,
     type BatchResponseSimplePublicObject as BatchResponseSimplePublicObject,
+    type BatchResponseSimplePublicObjectWithErrors as BatchResponseSimplePublicObjectWithErrors,
     type BatchResponseSimplePublicUpsertObject as BatchResponseSimplePublicUpsertObject,
+    type BatchResponseSimplePublicUpsertObjectWithErrors as BatchResponseSimplePublicUpsertObjectWithErrors,
     type CollectionResponseAssociatedID as CollectionResponseAssociatedID,
     type CollectionResponseSimplePublicObjectWithAssociationsForwardPaging as CollectionResponseSimplePublicObjectWithAssociationsForwardPaging,
     type PublicAssociationsForObject as PublicAssociationsForObject,

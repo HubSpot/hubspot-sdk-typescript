@@ -164,20 +164,9 @@ export interface BatchResponsePublicCampaign {
   status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   /**
-   * An array of errors that occurred during the batch operation, each item detailing
-   * a specific error.
-   */
-  errors?: Array<Shared.StandardError>;
-
-  /**
    * A map of related links associated with the batch operation.
    */
   links?: { [key: string]: string };
-
-  /**
-   * The number of errors that occurred during the batch operation.
-   */
-  numErrors?: number;
 
   /**
    * The date and time when the batch operation was requested, formatted as a
@@ -210,23 +199,86 @@ export interface BatchResponsePublicCampaignWithAssets {
   status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   /**
-   * An array of errors encountered during the batch operation, each described by a
-   * StandardError object.
-   */
-  errors?: Array<Shared.StandardError>;
-
-  /**
    * A collection of URLs linking to related resources or documentation.
    */
   links?: { [key: string]: string };
 
   /**
-   * The number of errors encountered during the batch operation.
+   * The timestamp when the batch request was initially made.
+   */
+  requestedAt?: string;
+}
+
+export interface BatchResponsePublicCampaignWithAssetsWithErrors {
+  /**
+   * The date and time when the batch operation was completed.
+   */
+  completedAt: string;
+
+  results: Array<PublicCampaignWithAssets>;
+
+  /**
+   * The date and time when the batch operation started.
+   */
+  startedAt: string;
+
+  /**
+   * The current status of the batch operation, which can be CANCELED, COMPLETE,
+   * PENDING, or PROCESSING.
+   */
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
+
+  errors?: Array<Shared.StandardError>;
+
+  /**
+   * A collection of links related to the batch operation.
+   */
+  links?: { [key: string]: string };
+
+  /**
+   * The number of errors that occurred during the batch operation.
    */
   numErrors?: number;
 
   /**
-   * The timestamp when the batch request was initially made.
+   * The date and time when the batch operation was requested.
+   */
+  requestedAt?: string;
+}
+
+export interface BatchResponsePublicCampaignWithErrors {
+  /**
+   * The date and time when the batch operation was completed.
+   */
+  completedAt: string;
+
+  results: Array<PublicCampaign>;
+
+  /**
+   * The date and time when the batch operation began.
+   */
+  startedAt: string;
+
+  /**
+   * The current status of the batch operation. Accepted values are: CANCELED,
+   * COMPLETE, PENDING, PROCESSING.
+   */
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
+
+  errors?: Array<Shared.StandardError>;
+
+  /**
+   * URLs linking to resources or documentation related to the batch operation.
+   */
+  links?: { [key: string]: string };
+
+  /**
+   * The total number of errors encountered during the batch operation.
+   */
+  numErrors?: number;
+
+  /**
+   * The date and time when the batch request was made.
    */
   requestedAt?: string;
 }
@@ -1014,6 +1066,8 @@ export declare namespace Campaigns {
     type BatchInputPublicCampaignReadInput as BatchInputPublicCampaignReadInput,
     type BatchResponsePublicCampaign as BatchResponsePublicCampaign,
     type BatchResponsePublicCampaignWithAssets as BatchResponsePublicCampaignWithAssets,
+    type BatchResponsePublicCampaignWithAssetsWithErrors as BatchResponsePublicCampaignWithAssetsWithErrors,
+    type BatchResponsePublicCampaignWithErrors as BatchResponsePublicCampaignWithErrors,
     type CollectionResponseContactReferenceForwardPaging as CollectionResponseContactReferenceForwardPaging,
     type CollectionResponsePublicCampaignAsset as CollectionResponsePublicCampaignAsset,
     type CollectionResponsePublicCampaignAssetForwardPaging as CollectionResponsePublicCampaignAssetForwardPaging,

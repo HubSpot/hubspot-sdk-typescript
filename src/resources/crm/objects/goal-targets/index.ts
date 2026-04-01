@@ -6,6 +6,7 @@ export {
   type BatchUpdateParams,
   type BatchDeleteParams,
   type BatchGetParams,
+  type BatchUpsertParams,
 } from './batch';
 export {
   GoalTargets,

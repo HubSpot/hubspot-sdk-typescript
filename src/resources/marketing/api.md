@@ -17,6 +17,8 @@ Types:
 - <code><a href="./src/resources/marketing/campaigns/campaigns.ts">BatchInputPublicCampaignReadInput</a></code>
 - <code><a href="./src/resources/marketing/campaigns/campaigns.ts">BatchResponsePublicCampaign</a></code>
 - <code><a href="./src/resources/marketing/campaigns/campaigns.ts">BatchResponsePublicCampaignWithAssets</a></code>
+- <code><a href="./src/resources/marketing/campaigns/campaigns.ts">BatchResponsePublicCampaignWithAssetsWithErrors</a></code>
+- <code><a href="./src/resources/marketing/campaigns/campaigns.ts">BatchResponsePublicCampaignWithErrors</a></code>
 - <code><a href="./src/resources/marketing/campaigns/campaigns.ts">CollectionResponseContactReferenceForwardPaging</a></code>
 - <code><a href="./src/resources/marketing/campaigns/campaigns.ts">CollectionResponsePublicCampaignAsset</a></code>
 - <code><a href="./src/resources/marketing/campaigns/campaigns.ts">CollectionResponsePublicCampaignAssetForwardPaging</a></code>
@@ -156,6 +158,7 @@ Types:
 - <code><a href="./src/resources/marketing/events/events.ts">BatchInputMarketingEventSubscriber</a></code>
 - <code><a href="./src/resources/marketing/events/events.ts">BatchResponseMarketingEventPublicDefaultResponse</a></code>
 - <code><a href="./src/resources/marketing/events/events.ts">BatchResponseMarketingEventPublicDefaultResponseV2</a></code>
+- <code><a href="./src/resources/marketing/events/events.ts">BatchResponseMarketingEventPublicDefaultResponseV2WithErrors</a></code>
 - <code><a href="./src/resources/marketing/events/events.ts">BatchResponseSubscriberEmailResponse</a></code>
 - <code><a href="./src/resources/marketing/events/events.ts">BatchResponseSubscriberVidResponse</a></code>
 - <code><a href="./src/resources/marketing/events/events.ts">CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging</a></code>

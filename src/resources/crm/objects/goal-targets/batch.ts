@@ -54,6 +54,17 @@ export class Batch extends APIResource {
       ...options,
     });
   }
+
+  /**
+   * Create and update a batch of goal targets by a unique property. Goal targets
+   * that don't exist will be created, while existing goal targets will be updated.
+   */
+  upsert(
+    body: BatchUpsertParams,
+    options?: RequestOptions,
+  ): APIPromise<ObjectsAPI.BatchResponseSimplePublicUpsertObject> {
+    return this._client.post('/crm/objects/2026-03/goal_targets/batch/upsert', { body, ...options });
+  }
 }
 
 export interface BatchCreateParams {
@@ -97,11 +108,16 @@ export interface BatchGetParams {
   idProperty?: string;
 }
 
+export interface BatchUpsertParams {
+  inputs: Array<ObjectsAPI.SimplePublicObjectBatchInputUpsert>;
+}
+
 export declare namespace Batch {
   export {
     type BatchCreateParams as BatchCreateParams,
     type BatchUpdateParams as BatchUpdateParams,
     type BatchDeleteParams as BatchDeleteParams,
     type BatchGetParams as BatchGetParams,
+    type BatchUpsertParams as BatchUpsertParams,
   };
 }

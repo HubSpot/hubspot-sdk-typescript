@@ -389,18 +389,6 @@ describe('resource lists', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('deleteScheduleConversion', async () => {
-    const responsePromise = client.crm.lists.deleteScheduleConversion('listId');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
   test.skip('get', async () => {
     const responsePromise = client.crm.lists.get('listId');
     const rawResponse = await responsePromise.asResponse();
@@ -421,8 +409,8 @@ describe('resource lists', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('getByObjectTypeIDAndName: only required params', async () => {
-    const responsePromise = client.crm.lists.getByObjectTypeIDAndName('listName', {
+  test.skip('getByObjectTypeAndName: only required params', async () => {
+    const responsePromise = client.crm.lists.getByObjectTypeAndName('listName', {
       objectTypeId: 'objectTypeId',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -435,8 +423,8 @@ describe('resource lists', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('getByObjectTypeIDAndName: required and optional params', async () => {
-    const response = await client.crm.lists.getByObjectTypeIDAndName('listName', {
+  test.skip('getByObjectTypeAndName: required and optional params', async () => {
+    const response = await client.crm.lists.getByObjectTypeAndName('listName', {
       objectTypeId: 'objectTypeId',
       includeFilters: true,
     });
@@ -459,6 +447,34 @@ describe('resource lists', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.crm.lists.getIDMapping({ legacyListId: 'legacyListId' }, { path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Hubspot.NotFoundError);
+  });
+
+  // Mock server tests are disabled
+  test.skip('getMembershipsJoinOrder', async () => {
+    const responsePromise = client.crm.lists.getMembershipsJoinOrder('listId');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('getMembershipsJoinOrder: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.crm.lists.getMembershipsJoinOrder(
+        'listId',
+        {
+          after: 'after',
+          before: 'before',
+          limit: 0,
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
     ).rejects.toThrow(Hubspot.NotFoundError);
   });
 
@@ -493,6 +509,61 @@ describe('resource lists', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('getSizeAndEditsHistoryBetween', async () => {
+    const responsePromise = client.crm.lists.getSizeAndEditsHistoryBetween('listId');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('getSizeAndEditsHistoryBetween: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.crm.lists.getSizeAndEditsHistoryBetween(
+        'listId',
+        { endDate: 'endDate', startDate: 'startDate' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Hubspot.NotFoundError);
+  });
+
+  // Mock server tests are disabled
+  test.skip('listBySearch: only required params', async () => {
+    const responsePromise = client.crm.lists.listBySearch({
+      additionalProperties: ['string'],
+      listIds: ['string'],
+      offset: 0,
+      processingTypes: ['string'],
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('listBySearch: required and optional params', async () => {
+    const response = await client.crm.lists.listBySearch({
+      additionalProperties: ['string'],
+      listIds: ['string'],
+      offset: 0,
+      processingTypes: ['string'],
+      count: 0,
+      objectTypeId: 'objectTypeId',
+      query: 'query',
+      sort: 'sort',
+    });
   });
 
   // Mock server tests are disabled
@@ -532,34 +603,6 @@ describe('resource lists', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.crm.lists.listMemberships(
-        'listId',
-        {
-          after: 'after',
-          before: 'before',
-          limit: 0,
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Hubspot.NotFoundError);
-  });
-
-  // Mock server tests are disabled
-  test.skip('listMembershipsJoinOrder', async () => {
-    const responsePromise = client.crm.lists.listMembershipsJoinOrder('listId');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('listMembershipsJoinOrder: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.crm.lists.listMembershipsJoinOrder(
         'listId',
         {
           after: 'after',
@@ -659,13 +702,8 @@ describe('resource lists', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('search: only required params', async () => {
-    const responsePromise = client.crm.lists.search({
-      additionalProperties: ['string'],
-      listIds: ['string'],
-      offset: 0,
-      processingTypes: ['string'],
-    });
+  test.skip('scheduleConversion', async () => {
+    const responsePromise = client.crm.lists.scheduleConversion('listId');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -673,20 +711,6 @@ describe('resource lists', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('search: required and optional params', async () => {
-    const response = await client.crm.lists.search({
-      additionalProperties: ['string'],
-      listIds: ['string'],
-      offset: 0,
-      processingTypes: ['string'],
-      count: 0,
-      objectTypeId: 'objectTypeId',
-      query: 'query',
-      sort: 'sort',
-    });
   });
 
   // Mock server tests are disabled

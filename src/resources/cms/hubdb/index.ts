@@ -6,6 +6,7 @@ export {
   type BatchInputHubDBTableRowV3BatchUpdateRequest,
   type BatchInputHubDBTableRowV3Request,
   type BatchResponseHubDBTableRowV3,
+  type BatchResponseHubDBTableRowV3WithErrors,
   type BoundedNextPage,
   type BoundedPaging,
   type CollectionResponseWithTotalHubDBTableV3,

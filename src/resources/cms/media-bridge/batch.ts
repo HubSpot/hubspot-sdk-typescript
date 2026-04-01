@@ -61,7 +61,7 @@ export interface BatchCreateParams {
   /**
    * Body param
    */
-  inputs: Array<Shared.PropertyCreate>;
+  inputs: Array<MediaBridgeAPI.PropertyCreate>;
 }
 
 export interface BatchDeleteParams {

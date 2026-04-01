@@ -34,6 +34,47 @@ export interface BatchResponseDealToDealSplits {
    */
   status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
+  /**
+   * A map of link names to associated URIs for additional resources or
+   * documentation.
+   */
+  links?: { [key: string]: string };
+
+  /**
+   * The timestamp indicating when the batch operation was requested, in date-time
+   * format.
+   */
+  requestedAt?: string;
+}
+
+export interface BatchResponseDealToDealSplitsWithErrors {
+  /**
+   * The timestamp indicating when the batch operation was completed, in date-time
+   * format.
+   */
+  completedAt: string;
+
+  /**
+   * An array of deal-to-deal split objects representing the results of the batch
+   * operation.
+   */
+  results: Array<DealToDealSplits>;
+
+  /**
+   * The timestamp indicating when the batch operation started, in date-time format.
+   */
+  startedAt: string;
+
+  /**
+   * The current status of the batch operation, with possible values: CANCELED,
+   * COMPLETE, PENDING, PROCESSING.
+   */
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
+
+  /**
+   * An array of error objects detailing the errors that occurred during the batch
+   * operation.
+   */
   errors?: Array<Shared.StandardError>;
 
   /**
@@ -42,6 +83,9 @@ export interface BatchResponseDealToDealSplits {
    */
   links?: { [key: string]: string };
 
+  /**
+   * The total number of errors encountered during the batch operation.
+   */
   numErrors?: number;
 
   /**
@@ -103,6 +147,7 @@ DealSplits.Batch = Batch;
 export declare namespace DealSplits {
   export {
     type BatchResponseDealToDealSplits as BatchResponseDealToDealSplits,
+    type BatchResponseDealToDealSplitsWithErrors as BatchResponseDealToDealSplitsWithErrors,
     type DealToDealSplits as DealToDealSplits,
     type PublicDealSplitInput as PublicDealSplitInput,
     type PublicDealSplitsBatchCreateRequest as PublicDealSplitsBatchCreateRequest,

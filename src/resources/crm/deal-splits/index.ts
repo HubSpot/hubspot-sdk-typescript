@@ -4,6 +4,7 @@ export { Batch, type BatchReadParams, type BatchUpsertParams } from './batch';
 export {
   DealSplits,
   type BatchResponseDealToDealSplits,
+  type BatchResponseDealToDealSplitsWithErrors,
   type DealToDealSplits,
   type PublicDealSplitInput,
   type PublicDealSplitsBatchCreateRequest,

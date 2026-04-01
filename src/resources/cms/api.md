@@ -233,6 +233,7 @@ Types:
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">BatchInputHubDBTableRowV3BatchUpdateRequest</a></code>
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">BatchInputHubDBTableRowV3Request</a></code>
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">BatchResponseHubDBTableRowV3</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">BatchResponseHubDBTableRowV3WithErrors</a></code>
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">BoundedNextPage</a></code>
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">BoundedPaging</a></code>
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">CollectionResponseWithTotalHubDBTableV3</a></code>
@@ -269,7 +270,7 @@ Methods:
 - <code title="post /cms/hubdb/2026-03/tables/{tableIdOrName}/rows/batch/read">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows.ts">getBatch</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
 - <code title="get /cms/hubdb/2026-03/tables/{tableIdOrName}/rows/{rowId}/draft">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows.ts">getDraft</a>(rowID, { ...params }) -> HubDBTableRowV3</code>
 - <code title="post /cms/hubdb/2026-03/tables/{tableIdOrName}/rows/draft/batch/read">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows.ts">getDraftBatch</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
-- <code title="post /cms/hubdb/2026-03/tables/{tableIdOrName}/rows/draft/batch/purge">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows.ts">purgeBatch</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
+- <code title="post /cms/hubdb/2026-03/tables/{tableIdOrName}/rows/draft/batch/purge">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows.ts">purgeBatch</a>(tableIDOrName, { ...params }) -> void</code>
 - <code title="post /cms/hubdb/2026-03/tables/{tableIdOrName}/rows/draft/batch/replace">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows.ts">replaceBatch</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
 - <code title="put /cms/hubdb/2026-03/tables/{tableIdOrName}/rows/{rowId}/draft">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows.ts">replaceDraft</a>(rowID, { ...params }) -> HubDBTableRowV3</code>
 - <code title="post /cms/hubdb/2026-03/tables/{tableIdOrName}/rows/draft/batch/update">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows.ts">updateBatch</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
@@ -306,7 +307,9 @@ Types:
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">AttentionSpanCalculatedValues</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">AttentionSpanEvent</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">AttentionSpanEventRequest</a></code>
+- <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">BatchInputPropertyCreate</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">BatchResponseProperty</a></code>
+- <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">BatchResponsePropertyWithErrors</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">BeginsWith</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">BooleanPropertyVariable</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">BooleanTargetPropertyVariable</a></code>
@@ -393,6 +396,7 @@ Types:
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">Power</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">Property</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">Property1</a></code>
+- <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">PropertyCreate</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">PropertyDefinition</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">PropertyDefinitionSource</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">RequiredPropertiesExtensionData</a></code>

@@ -309,6 +309,20 @@ export interface BatchResponseJournalFetchResponse {
 
   status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
+  links?: { [key: string]: string };
+
+  requestedAt?: string;
+}
+
+export interface BatchResponseJournalFetchResponseWithErrors {
+  completedAt: string;
+
+  results: Array<JournalFetchResponse>;
+
+  startedAt: string;
+
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
+
   errors?: Array<Shared.StandardError>;
 
   links?: { [key: string]: string };
@@ -340,18 +354,35 @@ export interface BatchResponseSubscriptionResponse {
    */
   status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
-  errors?: Array<Shared.StandardError>;
-
   /**
    * A collection of related links associated with the batch operation.
    */
   links?: { [key: string]: string };
 
-  numErrors?: number;
-
   /**
    * The date and time when the batch operation was requested.
    */
+  requestedAt?: string;
+}
+
+export interface BatchResponseSubscriptionResponseWithErrors {
+  completedAt: string;
+
+  results: Array<SubscriptionResponse>;
+
+  startedAt: string;
+
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
+
+  errors?: Array<Shared.StandardError>;
+
+  links?: { [key: string]: string };
+
+  /**
+   * The number of errors that occurred during the batch operation.
+   */
+  numErrors?: number;
+
   requestedAt?: string;
 }
 
@@ -1022,7 +1053,9 @@ export declare namespace Webhooks {
     type AssociationSubscriptionUpsertRequest as AssociationSubscriptionUpsertRequest,
     type BatchInputSubscriptionBatchUpdateRequest as BatchInputSubscriptionBatchUpdateRequest,
     type BatchResponseJournalFetchResponse as BatchResponseJournalFetchResponse,
+    type BatchResponseJournalFetchResponseWithErrors as BatchResponseJournalFetchResponseWithErrors,
     type BatchResponseSubscriptionResponse as BatchResponseSubscriptionResponse,
+    type BatchResponseSubscriptionResponseWithErrors as BatchResponseSubscriptionResponseWithErrors,
     type CollectionResponseSubscriptionResponseNoPaging as CollectionResponseSubscriptionResponseNoPaging,
     type Condition as Condition,
     type CrmObjectSnapshotBatchRequest as CrmObjectSnapshotBatchRequest,
