@@ -2,10 +2,11 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as CrmAPI from '../../crm';
+import { MultiAssociatedObjectWithLabelsPage } from '../../crm';
 import * as ObjectsAPI from '../objects';
 import { SimplePublicObjectWithAssociationsPage } from '../objects';
 import * as BatchAPI from './batch';
-import { Batch, BatchUpdateParams } from './batch';
+import { Batch, BatchCreateDefaultAssociationParams, BatchGetParams, BatchUpdateParams } from './batch';
 import { APIPromise } from '../../../../core/api-promise';
 import { Page, type PageParams, PagePromise } from '../../../../core/pagination';
 import { RequestOptions } from '../../../../internal/request-options';
@@ -60,6 +61,23 @@ export class PartnerClients extends APIResource {
       query,
       ...options,
     });
+  }
+
+  /**
+   * Retrieve a list of associations for a specific partner client based on the
+   * specified object type.
+   */
+  listAssociations(
+    toObjectType: string,
+    params: PartnerClientListAssociationsParams,
+    options?: RequestOptions,
+  ): PagePromise<MultiAssociatedObjectWithLabelsPage, CrmAPI.MultiAssociatedObjectWithLabel> {
+    const { partnerClientId, ...query } = params;
+    return this._client.getAPIList(
+      path`/crm/objects/2026-03/partner_clients/${partnerClientId}/associations/${toObjectType}`,
+      Page<CrmAPI.MultiAssociatedObjectWithLabel>,
+      { query, ...options },
+    );
   }
 
   /**
@@ -148,6 +166,13 @@ export interface PartnerClientGetParams {
   propertiesWithHistory?: Array<string>;
 }
 
+export interface PartnerClientListAssociationsParams extends PageParams {
+  /**
+   * Path param
+   */
+  partnerClientId: string;
+}
+
 export interface PartnerClientSearchParams {
   /**
    * A paging cursor token for retrieving subsequent pages.
@@ -187,10 +212,16 @@ export declare namespace PartnerClients {
     type PartnerClientUpdateParams as PartnerClientUpdateParams,
     type PartnerClientListParams as PartnerClientListParams,
     type PartnerClientGetParams as PartnerClientGetParams,
+    type PartnerClientListAssociationsParams as PartnerClientListAssociationsParams,
     type PartnerClientSearchParams as PartnerClientSearchParams,
   };
 
-  export { Batch as Batch, type BatchUpdateParams as BatchUpdateParams };
+  export {
+    Batch as Batch,
+    type BatchUpdateParams as BatchUpdateParams,
+    type BatchCreateDefaultAssociationParams as BatchCreateDefaultAssociationParams,
+    type BatchGetParams as BatchGetParams,
+  };
 }
 
-export { type SimplePublicObjectWithAssociationsPage };
+export { type SimplePublicObjectWithAssociationsPage, type MultiAssociatedObjectWithLabelsPage };

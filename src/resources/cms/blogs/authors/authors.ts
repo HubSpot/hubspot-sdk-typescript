@@ -40,8 +40,13 @@ export class Authors extends APIResource {
     });
   }
 
+  /**
+   * Get the list of blog authors. Supports paging and filtering. This method would
+   * be useful for an integration that examined these models and used an external
+   * service to suggest edits.
+   */
   list(query: AuthorListParams | null | undefined = {}, options?: RequestOptions): APIPromise<Response> {
-    return this._client.get('/cms/blogs/2026-03/authors/cursor', {
+    return this._client.get('/cms/blogs/2026-03/authors', {
       query,
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
@@ -120,8 +125,20 @@ export class Authors extends APIResource {
     });
   }
 
-  listByQuery(
-    query: AuthorListByQueryParams | null | undefined = {},
+  getCursor(
+    query: AuthorGetCursorParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Response> {
+    return this._client.get('/cms/blogs/2026-03/authors/cursor', {
+      query,
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+      __binaryResponse: true,
+    });
+  }
+
+  getCursorByQuery(
+    query: AuthorGetCursorByQueryParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<Response> {
     return this._client.get('/cms/blogs/2026-03/authors/cursor/query', {
@@ -132,8 +149,8 @@ export class Authors extends APIResource {
     });
   }
 
-  listPosts(
-    query: AuthorListPostsParams | null | undefined = {},
+  getPostsCursor(
+    query: AuthorGetPostsCursorParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<Response> {
     return this._client.get('/cms/blogs/2026-03/posts/cursor', {
@@ -144,8 +161,8 @@ export class Authors extends APIResource {
     });
   }
 
-  listPostsByQuery(
-    query: AuthorListPostsByQueryParams | null | undefined = {},
+  getPostsCursorByQuery(
+    query: AuthorGetPostsCursorByQueryParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<Response> {
     return this._client.get('/cms/blogs/2026-03/posts/cursor/query', {
@@ -156,8 +173,8 @@ export class Authors extends APIResource {
     });
   }
 
-  listTags(
-    query: AuthorListTagsParams | null | undefined = {},
+  getTagsCursor(
+    query: AuthorGetTagsCursorParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<Response> {
     return this._client.get('/cms/blogs/2026-03/tags/cursor', {
@@ -168,8 +185,8 @@ export class Authors extends APIResource {
     });
   }
 
-  listTagsByQuery(
-    query: AuthorListTagsByQueryParams | null | undefined = {},
+  getTagsCursorByQuery(
+    query: AuthorGetTagsCursorByQueryParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<Response> {
     return this._client.get('/cms/blogs/2026-03/tags/cursor/query', {
@@ -4913,7 +4930,7 @@ export interface AuthorGetParams {
   property?: string;
 }
 
-export interface AuthorListByQueryParams {
+export interface AuthorGetCursorParams {
   /**
    * The paging cursor token of the last successfully read resource will be returned
    * as the `paging.next.after` JSON property of a paged response containing more
@@ -4948,7 +4965,7 @@ export interface AuthorListByQueryParams {
   updatedBefore?: string;
 }
 
-export interface AuthorListPostsParams {
+export interface AuthorGetCursorByQueryParams {
   /**
    * The paging cursor token of the last successfully read resource will be returned
    * as the `paging.next.after` JSON property of a paged response containing more
@@ -4983,7 +5000,7 @@ export interface AuthorListPostsParams {
   updatedBefore?: string;
 }
 
-export interface AuthorListPostsByQueryParams {
+export interface AuthorGetPostsCursorParams {
   /**
    * The paging cursor token of the last successfully read resource will be returned
    * as the `paging.next.after` JSON property of a paged response containing more
@@ -5018,7 +5035,7 @@ export interface AuthorListPostsByQueryParams {
   updatedBefore?: string;
 }
 
-export interface AuthorListTagsParams {
+export interface AuthorGetPostsCursorByQueryParams {
   /**
    * The paging cursor token of the last successfully read resource will be returned
    * as the `paging.next.after` JSON property of a paged response containing more
@@ -5053,7 +5070,42 @@ export interface AuthorListTagsParams {
   updatedBefore?: string;
 }
 
-export interface AuthorListTagsByQueryParams {
+export interface AuthorGetTagsCursorParams {
+  /**
+   * The paging cursor token of the last successfully read resource will be returned
+   * as the `paging.next.after` JSON property of a paged response containing more
+   * results.
+   */
+  after?: string;
+
+  /**
+   * Whether to return only results that have been archived.
+   */
+  archived?: boolean;
+
+  createdAfter?: string;
+
+  createdAt?: string;
+
+  createdBefore?: string;
+
+  /**
+   * The maximum number of results to display per page.
+   */
+  limit?: number;
+
+  property?: string;
+
+  sort?: Array<string>;
+
+  updatedAfter?: string;
+
+  updatedAt?: string;
+
+  updatedBefore?: string;
+}
+
+export interface AuthorGetTagsCursorByQueryParams {
   /**
    * The paging cursor token of the last successfully read resource will be returned
    * as the `paging.next.after` JSON property of a paged response containing more
@@ -5970,11 +6022,12 @@ export declare namespace Authors {
     type AuthorCreateLanguageVariationParams as AuthorCreateLanguageVariationParams,
     type AuthorDetachFromLangGroupParams as AuthorDetachFromLangGroupParams,
     type AuthorGetParams as AuthorGetParams,
-    type AuthorListByQueryParams as AuthorListByQueryParams,
-    type AuthorListPostsParams as AuthorListPostsParams,
-    type AuthorListPostsByQueryParams as AuthorListPostsByQueryParams,
-    type AuthorListTagsParams as AuthorListTagsParams,
-    type AuthorListTagsByQueryParams as AuthorListTagsByQueryParams,
+    type AuthorGetCursorParams as AuthorGetCursorParams,
+    type AuthorGetCursorByQueryParams as AuthorGetCursorByQueryParams,
+    type AuthorGetPostsCursorParams as AuthorGetPostsCursorParams,
+    type AuthorGetPostsCursorByQueryParams as AuthorGetPostsCursorByQueryParams,
+    type AuthorGetTagsCursorParams as AuthorGetTagsCursorParams,
+    type AuthorGetTagsCursorByQueryParams as AuthorGetTagsCursorByQueryParams,
     type AuthorSetNewLangPrimaryParams as AuthorSetNewLangPrimaryParams,
     type AuthorUpdateLanguagesParams as AuthorUpdateLanguagesParams,
   };

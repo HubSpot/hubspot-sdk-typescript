@@ -76,8 +76,11 @@ export {
   type PortalFlagStateResponse,
   type FeatureFlagUpdateParams,
   type FeatureFlagDeleteParams,
+  type FeatureFlagDeletePortalStateParams,
   type FeatureFlagGetParams,
+  type FeatureFlagGetPortalStateParams,
   type FeatureFlagListPortalsParams,
+  type FeatureFlagUpdatePortalStateParams,
 } from './feature-flags/index';
 export {
   Imports,
@@ -317,11 +320,17 @@ export {
   type PublicAuditInfo,
   type PipelineCreateParams,
   type PipelineUpdateParams,
-  type PipelineListParams,
   type PipelineDeleteParams,
+  type PipelineCreateStageParams,
+  type PipelineDeleteStageParams,
   type PipelineGetParams,
-  type PipelineGetAuditParams,
-  type PipelineReplaceParams,
+  type PipelineGetStageParams,
+  type PipelineListAuditParams,
+  type PipelineListStageAuditParams,
+  type PipelineListStagesParams,
+  type PipelineUpdateAllPropertiesParams,
+  type PipelineUpdateStageParams,
+  type PipelineUpdateStageAllPropertiesParams,
 } from './pipelines';
 export {
   Properties,

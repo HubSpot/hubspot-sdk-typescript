@@ -9,8 +9,8 @@ const client = new Hubspot({
 
 describe('resource batch', () => {
   // Mock server tests are disabled
-  test.skip('create: only required params', async () => {
-    const responsePromise = client.webhooks.webhooks.batch.create(0, { inputs: [{ id: 0, active: true }] });
+  test.skip('get: only required params', async () => {
+    const responsePromise = client.webhooks.webhooks.batch.get({ inputs: ['string'] });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,8 +21,8 @@ describe('resource batch', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('create: required and optional params', async () => {
-    const response = await client.webhooks.webhooks.batch.create(0, { inputs: [{ id: 0, active: true }] });
+  test.skip('get: required and optional params', async () => {
+    const response = await client.webhooks.webhooks.batch.get({ inputs: ['string'], installPortalId: 0 });
   });
 
   // Mock server tests are disabled
@@ -74,6 +74,94 @@ describe('resource batch', () => {
   });
 
   // Mock server tests are disabled
+  test.skip('getLocal: only required params', async () => {
+    const responsePromise = client.webhooks.webhooks.batch.getLocal({ inputs: ['string'] });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('getLocal: required and optional params', async () => {
+    const response = await client.webhooks.webhooks.batch.getLocal({
+      inputs: ['string'],
+      installPortalId: 0,
+    });
+  });
+
+  // Mock server tests are disabled
+  test.skip('getLocalEarliest', async () => {
+    const responsePromise = client.webhooks.webhooks.batch.getLocalEarliest(1);
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('getLocalEarliest: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.webhooks.webhooks.batch.getLocalEarliest(
+        1,
+        { installPortalId: 0 },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Hubspot.NotFoundError);
+  });
+
+  // Mock server tests are disabled
+  test.skip('getLocalLatest', async () => {
+    const responsePromise = client.webhooks.webhooks.batch.getLocalLatest(1);
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('getLocalLatest: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.webhooks.webhooks.batch.getLocalLatest(
+        1,
+        { installPortalId: 0 },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Hubspot.NotFoundError);
+  });
+
+  // Mock server tests are disabled
+  test.skip('getLocalNext: only required params', async () => {
+    const responsePromise = client.webhooks.webhooks.batch.getLocalNext(1, { offset: 'offset' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('getLocalNext: required and optional params', async () => {
+    const response = await client.webhooks.webhooks.batch.getLocalNext(1, {
+      offset: 'offset',
+      installPortalId: 0,
+    });
+  });
+
+  // Mock server tests are disabled
   test.skip('getNext: only required params', async () => {
     const responsePromise = client.webhooks.webhooks.batch.getNext(1, { offset: 'offset' });
     const rawResponse = await responsePromise.asResponse();
@@ -94,8 +182,10 @@ describe('resource batch', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('read: only required params', async () => {
-    const responsePromise = client.webhooks.webhooks.batch.read({ inputs: ['string'] });
+  test.skip('updateSubscriptions: only required params', async () => {
+    const responsePromise = client.webhooks.webhooks.batch.updateSubscriptions(0, {
+      inputs: [{ id: 0, active: true }],
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -106,7 +196,9 @@ describe('resource batch', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('read: required and optional params', async () => {
-    const response = await client.webhooks.webhooks.batch.read({ inputs: ['string'], installPortalId: 0 });
+  test.skip('updateSubscriptions: required and optional params', async () => {
+    const response = await client.webhooks.webhooks.batch.updateSubscriptions(0, {
+      inputs: [{ id: 0, active: true }],
+    });
   });
 });

@@ -10,11 +10,7 @@ const client = new Hubspot({
 describe('resource featureFlags', () => {
   // Mock server tests are disabled
   test.skip('update: only required params', async () => {
-    const responsePromise = client.crm.featureFlags.update(0, {
-      appId: 0,
-      flagName: 'flagName',
-      flagState: 'ABSENT',
-    });
+    const responsePromise = client.crm.featureFlags.update('flagName', { appId: 0, defaultState: 'ABSENT' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -26,16 +22,16 @@ describe('resource featureFlags', () => {
 
   // Mock server tests are disabled
   test.skip('update: required and optional params', async () => {
-    const response = await client.crm.featureFlags.update(0, {
+    const response = await client.crm.featureFlags.update('flagName', {
       appId: 0,
-      flagName: 'flagName',
-      flagState: 'ABSENT',
+      defaultState: 'ABSENT',
+      overrideState: 'ABSENT',
     });
   });
 
   // Mock server tests are disabled
   test.skip('delete: only required params', async () => {
-    const responsePromise = client.crm.featureFlags.delete(0, { appId: 0, flagName: 'flagName' });
+    const responsePromise = client.crm.featureFlags.delete('flagName', { appId: 0 });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -47,12 +43,29 @@ describe('resource featureFlags', () => {
 
   // Mock server tests are disabled
   test.skip('delete: required and optional params', async () => {
-    const response = await client.crm.featureFlags.delete(0, { appId: 0, flagName: 'flagName' });
+    const response = await client.crm.featureFlags.delete('flagName', { appId: 0 });
+  });
+
+  // Mock server tests are disabled
+  test.skip('deletePortalState: only required params', async () => {
+    const responsePromise = client.crm.featureFlags.deletePortalState(0, { appId: 0, flagName: 'flagName' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('deletePortalState: required and optional params', async () => {
+    const response = await client.crm.featureFlags.deletePortalState(0, { appId: 0, flagName: 'flagName' });
   });
 
   // Mock server tests are disabled
   test.skip('get: only required params', async () => {
-    const responsePromise = client.crm.featureFlags.get(0, { appId: 0, flagName: 'flagName' });
+    const responsePromise = client.crm.featureFlags.get('flagName', { appId: 0 });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -64,7 +77,24 @@ describe('resource featureFlags', () => {
 
   // Mock server tests are disabled
   test.skip('get: required and optional params', async () => {
-    const response = await client.crm.featureFlags.get(0, { appId: 0, flagName: 'flagName' });
+    const response = await client.crm.featureFlags.get('flagName', { appId: 0 });
+  });
+
+  // Mock server tests are disabled
+  test.skip('getPortalState: only required params', async () => {
+    const responsePromise = client.crm.featureFlags.getPortalState(0, { appId: 0, flagName: 'flagName' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('getPortalState: required and optional params', async () => {
+    const response = await client.crm.featureFlags.getPortalState(0, { appId: 0, flagName: 'flagName' });
   });
 
   // Mock server tests are disabled
@@ -97,6 +127,31 @@ describe('resource featureFlags', () => {
       appId: 0,
       limit: 0,
       startPortalId: 0,
+    });
+  });
+
+  // Mock server tests are disabled
+  test.skip('updatePortalState: only required params', async () => {
+    const responsePromise = client.crm.featureFlags.updatePortalState(0, {
+      appId: 0,
+      flagName: 'flagName',
+      flagState: 'ABSENT',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('updatePortalState: required and optional params', async () => {
+    const response = await client.crm.featureFlags.updatePortalState(0, {
+      appId: 0,
+      flagName: 'flagName',
+      flagState: 'ABSENT',
     });
   });
 });

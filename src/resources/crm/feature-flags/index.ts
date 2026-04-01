@@ -14,6 +14,9 @@ export {
   type PortalFlagStateResponse,
   type FeatureFlagUpdateParams,
   type FeatureFlagDeleteParams,
+  type FeatureFlagDeletePortalStateParams,
   type FeatureFlagGetParams,
+  type FeatureFlagGetPortalStateParams,
   type FeatureFlagListPortalsParams,
+  type FeatureFlagUpdatePortalStateParams,
 } from './feature-flags';

@@ -256,11 +256,14 @@ Types:
 
 Methods:
 
-- <code title="put /feature-flags/2026-03/{appId}/flags/{flagName}/portals/{portalId}">client.crm.featureFlags.<a href="./src/resources/crm/feature-flags/feature-flags.ts">update</a>(portalID, { ...params }) -> PortalFlagStateResponse</code>
-- <code title="delete /feature-flags/2026-03/{appId}/flags/{flagName}/portals/{portalId}">client.crm.featureFlags.<a href="./src/resources/crm/feature-flags/feature-flags.ts">delete</a>(portalID, { ...params }) -> PortalFlagStateResponse</code>
-- <code title="get /feature-flags/2026-03/{appId}/flags/{flagName}/portals/{portalId}">client.crm.featureFlags.<a href="./src/resources/crm/feature-flags/feature-flags.ts">get</a>(portalID, { ...params }) -> PortalFlagStateResponse</code>
+- <code title="put /feature-flags/2026-03/{appId}/flags/{flagName}">client.crm.featureFlags.<a href="./src/resources/crm/feature-flags/feature-flags.ts">update</a>(flagName, { ...params }) -> FlagResponse</code>
+- <code title="delete /feature-flags/2026-03/{appId}/flags/{flagName}">client.crm.featureFlags.<a href="./src/resources/crm/feature-flags/feature-flags.ts">delete</a>(flagName, { ...params }) -> FlagResponse</code>
+- <code title="delete /feature-flags/2026-03/{appId}/flags/{flagName}/portals/{portalId}">client.crm.featureFlags.<a href="./src/resources/crm/feature-flags/feature-flags.ts">deletePortalState</a>(portalID, { ...params }) -> PortalFlagStateResponse</code>
+- <code title="get /feature-flags/2026-03/{appId}/flags/{flagName}">client.crm.featureFlags.<a href="./src/resources/crm/feature-flags/feature-flags.ts">get</a>(flagName, { ...params }) -> FlagResponse</code>
+- <code title="get /feature-flags/2026-03/{appId}/flags/{flagName}/portals/{portalId}">client.crm.featureFlags.<a href="./src/resources/crm/feature-flags/feature-flags.ts">getPortalState</a>(portalID, { ...params }) -> PortalFlagStateResponse</code>
 - <code title="get /feature-flags/2026-03/{appId}/flags/all">client.crm.featureFlags.<a href="./src/resources/crm/feature-flags/feature-flags.ts">listAll</a>(appID) -> FlagsForAppResponse</code>
 - <code title="get /feature-flags/2026-03/{appId}/flags/{flagName}/portals">client.crm.featureFlags.<a href="./src/resources/crm/feature-flags/feature-flags.ts">listPortals</a>(flagName, { ...params }) -> PortalFlagStateBatchResponse</code>
+- <code title="put /feature-flags/2026-03/{appId}/flags/{flagName}/portals/{portalId}">client.crm.featureFlags.<a href="./src/resources/crm/feature-flags/feature-flags.ts">updatePortalState</a>(portalID, { ...params }) -> PortalFlagStateResponse</code>
 
 ### Batch
 
@@ -1026,6 +1029,7 @@ Methods:
 - <code title="patch /crm/objects/2026-03/partner_clients/{partnerClientId}">client.crm.objects.partnerClients.<a href="./src/resources/crm/objects/partner-clients/partner-clients.ts">update</a>(partnerClientID, { ...params }) -> SimplePublicObject</code>
 - <code title="get /crm/objects/2026-03/partner_clients">client.crm.objects.partnerClients.<a href="./src/resources/crm/objects/partner-clients/partner-clients.ts">list</a>({ ...params }) -> SimplePublicObjectWithAssociationsPage</code>
 - <code title="get /crm/objects/2026-03/partner_clients/{partnerClientId}">client.crm.objects.partnerClients.<a href="./src/resources/crm/objects/partner-clients/partner-clients.ts">get</a>(partnerClientID, { ...params }) -> SimplePublicObjectWithAssociations</code>
+- <code title="get /crm/objects/2026-03/partner_clients/{partnerClientId}/associations/{toObjectType}">client.crm.objects.partnerClients.<a href="./src/resources/crm/objects/partner-clients/partner-clients.ts">listAssociations</a>(toObjectType, { ...params }) -> MultiAssociatedObjectWithLabelsPage</code>
 - <code title="post /crm/objects/2026-03/partner_clients/search">client.crm.objects.partnerClients.<a href="./src/resources/crm/objects/partner-clients/partner-clients.ts">search</a>({ ...params }) -> CollectionResponseWithTotalSimplePublicObject</code>
 
 #### Batch
@@ -1033,6 +1037,8 @@ Methods:
 Methods:
 
 - <code title="post /crm/objects/2026-03/partner_clients/batch/update">client.crm.objects.partnerClients.batch.<a href="./src/resources/crm/objects/partner-clients/batch.ts">update</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
+- <code title="put /crm/objects/2026-03/{fromObjectType}/{fromObjectId}/associations/default/{toObjectType}/{toObjectId}">client.crm.objects.partnerClients.batch.<a href="./src/resources/crm/objects/partner-clients/batch.ts">createDefaultAssociation</a>(toObjectID, { ...params }) -> BatchResponsePublicDefaultAssociation</code>
+- <code title="post /crm/objects/2026-03/partner_clients/batch/read">client.crm.objects.partnerClients.batch.<a href="./src/resources/crm/objects/partner-clients/batch.ts">get</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
 
 ### PartnerServices
 
@@ -1294,13 +1300,20 @@ Types:
 
 Methods:
 
-- <code title="post /crm/pipelines/2026-03/{objectType}/{pipelineId}/stages">client.crm.pipelines.<a href="./src/resources/crm/pipelines.ts">create</a>(pipelineID, { ...params }) -> PipelineStage</code>
-- <code title="patch /crm/pipelines/2026-03/{objectType}/{pipelineId}/stages/{stageId}">client.crm.pipelines.<a href="./src/resources/crm/pipelines.ts">update</a>(stageID, { ...params }) -> PipelineStage</code>
-- <code title="get /crm/pipelines/2026-03/{objectType}/{pipelineId}/stages">client.crm.pipelines.<a href="./src/resources/crm/pipelines.ts">list</a>(pipelineID, { ...params }) -> CollectionResponsePipelineStageNoPaging</code>
-- <code title="delete /crm/pipelines/2026-03/{objectType}/{pipelineId}/stages/{stageId}">client.crm.pipelines.<a href="./src/resources/crm/pipelines.ts">delete</a>(stageID, { ...params }) -> void</code>
-- <code title="get /crm/pipelines/2026-03/{objectType}/{pipelineId}/stages/{stageId}">client.crm.pipelines.<a href="./src/resources/crm/pipelines.ts">get</a>(stageID, { ...params }) -> PipelineStage</code>
-- <code title="get /crm/pipelines/2026-03/{objectType}/{pipelineId}/stages/{stageId}/audit">client.crm.pipelines.<a href="./src/resources/crm/pipelines.ts">getAudit</a>(stageID, { ...params }) -> CollectionResponsePublicAuditInfoNoPaging</code>
-- <code title="put /crm/pipelines/2026-03/{objectType}/{pipelineId}/stages/{stageId}">client.crm.pipelines.<a href="./src/resources/crm/pipelines.ts">replace</a>(stageID, { ...params }) -> PipelineStage</code>
+- <code title="post /crm/pipelines/2026-03/{objectType}">client.crm.pipelines.<a href="./src/resources/crm/pipelines.ts">create</a>(objectType, { ...params }) -> Pipeline</code>
+- <code title="patch /crm/pipelines/2026-03/{objectType}/{pipelineId}">client.crm.pipelines.<a href="./src/resources/crm/pipelines.ts">update</a>(pipelineID, { ...params }) -> Pipeline</code>
+- <code title="get /crm/pipelines/2026-03/{objectType}">client.crm.pipelines.<a href="./src/resources/crm/pipelines.ts">list</a>(objectType) -> CollectionResponsePipelineNoPaging</code>
+- <code title="delete /crm/pipelines/2026-03/{objectType}/{pipelineId}">client.crm.pipelines.<a href="./src/resources/crm/pipelines.ts">delete</a>(pipelineID, { ...params }) -> void</code>
+- <code title="post /crm/pipelines/2026-03/{objectType}/{pipelineId}/stages">client.crm.pipelines.<a href="./src/resources/crm/pipelines.ts">createStage</a>(pipelineID, { ...params }) -> PipelineStage</code>
+- <code title="delete /crm/pipelines/2026-03/{objectType}/{pipelineId}/stages/{stageId}">client.crm.pipelines.<a href="./src/resources/crm/pipelines.ts">deleteStage</a>(stageID, { ...params }) -> void</code>
+- <code title="get /crm/pipelines/2026-03/{objectType}/{pipelineId}">client.crm.pipelines.<a href="./src/resources/crm/pipelines.ts">get</a>(pipelineID, { ...params }) -> Pipeline</code>
+- <code title="get /crm/pipelines/2026-03/{objectType}/{pipelineId}/stages/{stageId}">client.crm.pipelines.<a href="./src/resources/crm/pipelines.ts">getStage</a>(stageID, { ...params }) -> PipelineStage</code>
+- <code title="get /crm/pipelines/2026-03/{objectType}/{pipelineId}/audit">client.crm.pipelines.<a href="./src/resources/crm/pipelines.ts">listAudit</a>(pipelineID, { ...params }) -> CollectionResponsePublicAuditInfoNoPaging</code>
+- <code title="get /crm/pipelines/2026-03/{objectType}/{pipelineId}/stages/{stageId}/audit">client.crm.pipelines.<a href="./src/resources/crm/pipelines.ts">listStageAudit</a>(stageID, { ...params }) -> CollectionResponsePublicAuditInfoNoPaging</code>
+- <code title="get /crm/pipelines/2026-03/{objectType}/{pipelineId}/stages">client.crm.pipelines.<a href="./src/resources/crm/pipelines.ts">listStages</a>(pipelineID, { ...params }) -> CollectionResponsePipelineStageNoPaging</code>
+- <code title="put /crm/pipelines/2026-03/{objectType}/{pipelineId}">client.crm.pipelines.<a href="./src/resources/crm/pipelines.ts">updateAllProperties</a>(pipelineID, { ...params }) -> Pipeline</code>
+- <code title="patch /crm/pipelines/2026-03/{objectType}/{pipelineId}/stages/{stageId}">client.crm.pipelines.<a href="./src/resources/crm/pipelines.ts">updateStage</a>(stageID, { ...params }) -> PipelineStage</code>
+- <code title="put /crm/pipelines/2026-03/{objectType}/{pipelineId}/stages/{stageId}">client.crm.pipelines.<a href="./src/resources/crm/pipelines.ts">updateStageAllProperties</a>(stageID, { ...params }) -> PipelineStage</code>
 
 ## Properties
 
