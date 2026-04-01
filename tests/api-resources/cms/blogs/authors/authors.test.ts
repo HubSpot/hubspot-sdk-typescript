@@ -154,10 +154,10 @@ describe('resource authors', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('listByQuery: request options and params are passed correctly', async () => {
+  test.skip('getCursor: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.cms.blogs.authors.listByQuery(
+      client.cms.blogs.authors.getCursor(
         {
           after: 'after',
           archived: true,
@@ -177,10 +177,10 @@ describe('resource authors', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('listPosts: request options and params are passed correctly', async () => {
+  test.skip('getCursorByQuery: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.cms.blogs.authors.listPosts(
+      client.cms.blogs.authors.getCursorByQuery(
         {
           after: 'after',
           archived: true,
@@ -200,10 +200,10 @@ describe('resource authors', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('listPostsByQuery: request options and params are passed correctly', async () => {
+  test.skip('getPostsCursor: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.cms.blogs.authors.listPostsByQuery(
+      client.cms.blogs.authors.getPostsCursor(
         {
           after: 'after',
           archived: true,
@@ -223,10 +223,10 @@ describe('resource authors', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('listTags: request options and params are passed correctly', async () => {
+  test.skip('getPostsCursorByQuery: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.cms.blogs.authors.listTags(
+      client.cms.blogs.authors.getPostsCursorByQuery(
         {
           after: 'after',
           archived: true,
@@ -246,10 +246,33 @@ describe('resource authors', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('listTagsByQuery: request options and params are passed correctly', async () => {
+  test.skip('getTagsCursor: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.cms.blogs.authors.listTagsByQuery(
+      client.cms.blogs.authors.getTagsCursor(
+        {
+          after: 'after',
+          archived: true,
+          createdAfter: '2019-12-27T18:11:19.117Z',
+          createdAt: '2019-12-27T18:11:19.117Z',
+          createdBefore: '2019-12-27T18:11:19.117Z',
+          limit: 0,
+          property: 'property',
+          sort: ['string'],
+          updatedAfter: '2019-12-27T18:11:19.117Z',
+          updatedAt: '2019-12-27T18:11:19.117Z',
+          updatedBefore: '2019-12-27T18:11:19.117Z',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Hubspot.NotFoundError);
+  });
+
+  // Mock server tests are disabled
+  test.skip('getTagsCursorByQuery: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.cms.blogs.authors.getTagsCursorByQuery(
         {
           after: 'after',
           archived: true,

@@ -212,6 +212,7 @@ export {
   type PartnerClientUpdateParams,
   type PartnerClientListParams,
   type PartnerClientGetParams,
+  type PartnerClientListAssociationsParams,
   type PartnerClientSearchParams,
 } from './partner-clients/index';
 export {

@@ -44,47 +44,6 @@ describe('resource webhooks', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('createFilter: only required params', async () => {
-    const responsePromise = client.webhooks.webhooks.createFilter({
-      filter: {
-        conditions: [
-          {
-            filterType: 'CRM_OBJECT_PROPERTY',
-            operator: 'CONTAINS',
-            property: 'property',
-          },
-        ],
-      },
-      subscriptionId: 0,
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('createFilter: required and optional params', async () => {
-    const response = await client.webhooks.webhooks.createFilter({
-      filter: {
-        conditions: [
-          {
-            filterType: 'CRM_OBJECT_PROPERTY',
-            operator: 'CONTAINS',
-            property: 'property',
-            value: 'value',
-            values: ['string'],
-          },
-        ],
-      },
-      subscriptionId: 0,
-    });
-  });
-
-  // Mock server tests are disabled
   test.skip('createJournalSubscription', async () => {
     const responsePromise = client.webhooks.webhooks.createJournalSubscription({});
     const rawResponse = await responsePromise.asResponse();
@@ -123,8 +82,19 @@ describe('resource webhooks', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('deleteFilter', async () => {
-    const responsePromise = client.webhooks.webhooks.deleteFilter(0);
+  test.skip('createSubscriptionFilter: only required params', async () => {
+    const responsePromise = client.webhooks.webhooks.createSubscriptionFilter({
+      filter: {
+        conditions: [
+          {
+            filterType: 'CRM_OBJECT_PROPERTY',
+            operator: 'CONTAINS',
+            property: 'property',
+          },
+        ],
+      },
+      subscriptionId: 0,
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -132,6 +102,24 @@ describe('resource webhooks', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('createSubscriptionFilter: required and optional params', async () => {
+    const response = await client.webhooks.webhooks.createSubscriptionFilter({
+      filter: {
+        conditions: [
+          {
+            filterType: 'CRM_OBJECT_PROPERTY',
+            operator: 'CONTAINS',
+            property: 'property',
+            value: 'value',
+            values: ['string'],
+          },
+        ],
+      },
+      subscriptionId: 0,
+    });
   });
 
   // Mock server tests are disabled
@@ -188,20 +176,8 @@ describe('resource webhooks', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('getFilter', async () => {
-    const responsePromise = client.webhooks.webhooks.getFilter(0);
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('getFiltersBySubscription', async () => {
-    const responsePromise = client.webhooks.webhooks.getFiltersBySubscription(0);
+  test.skip('deleteSubscriptionFilter', async () => {
+    const responsePromise = client.webhooks.webhooks.deleteSubscriptionFilter(0);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -255,26 +231,32 @@ describe('resource webhooks', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('getLocalEarliest: request options and params are passed correctly', async () => {
+  test.skip('getLocalJournalEarliest: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.webhooks.webhooks.getLocalEarliest({ installPortalId: 0 }, { path: '/_stainless_unknown_path' }),
+      client.webhooks.webhooks.getLocalJournalEarliest(
+        { installPortalId: 0 },
+        { path: '/_stainless_unknown_path' },
+      ),
     ).rejects.toThrow(Hubspot.NotFoundError);
   });
 
   // Mock server tests are disabled
-  test.skip('getLocalLatest: request options and params are passed correctly', async () => {
+  test.skip('getLocalJournalLatest: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.webhooks.webhooks.getLocalLatest({ installPortalId: 0 }, { path: '/_stainless_unknown_path' }),
+      client.webhooks.webhooks.getLocalJournalLatest(
+        { installPortalId: 0 },
+        { path: '/_stainless_unknown_path' },
+      ),
     ).rejects.toThrow(Hubspot.NotFoundError);
   });
 
   // Mock server tests are disabled
-  test.skip('getLocalNextByOffset: request options and params are passed correctly', async () => {
+  test.skip('getLocalJournalNextByOffset: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.webhooks.webhooks.getLocalNextByOffset(
+      client.webhooks.webhooks.getLocalJournalNextByOffset(
         'offset',
         { installPortalId: 0 },
         { path: '/_stainless_unknown_path' },
@@ -283,8 +265,10 @@ describe('resource webhooks', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('getLocalStatus', async () => {
-    const responsePromise = client.webhooks.webhooks.getLocalStatus('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');
+  test.skip('getLocalJournalStatus', async () => {
+    const responsePromise = client.webhooks.webhooks.getLocalJournalStatus(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -321,6 +305,30 @@ describe('resource webhooks', () => {
   // Mock server tests are disabled
   test.skip('getSubscription: required and optional params', async () => {
     const response = await client.webhooks.webhooks.getSubscription(0, { appId: 0 });
+  });
+
+  // Mock server tests are disabled
+  test.skip('getSubscriptionFilter', async () => {
+    const responsePromise = client.webhooks.webhooks.getSubscriptionFilter(0);
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('getSubscriptionFilterForSubscription', async () => {
+    const responsePromise = client.webhooks.webhooks.getSubscriptionFilterForSubscription(0);
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
   });
 
   // Mock server tests are disabled

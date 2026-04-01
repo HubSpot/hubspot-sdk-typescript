@@ -91,6 +91,29 @@ describe('resource partnerClients', () => {
   });
 
   // Mock server tests are disabled
+  test.skip('listAssociations: only required params', async () => {
+    const responsePromise = client.crm.objects.partnerClients.listAssociations('toObjectType', {
+      partnerClientId: 'partnerClientId',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('listAssociations: required and optional params', async () => {
+    const response = await client.crm.objects.partnerClients.listAssociations('toObjectType', {
+      partnerClientId: 'partnerClientId',
+      after: 'after',
+      limit: 0,
+    });
+  });
+
+  // Mock server tests are disabled
   test.skip('search: only required params', async () => {
     const responsePromise = client.crm.objects.partnerClients.search({
       after: 'after',

@@ -219,6 +219,7 @@ import {
 import * as PartnerClientsAPI from './partner-clients/partner-clients';
 import {
   PartnerClientGetParams,
+  PartnerClientListAssociationsParams,
   PartnerClientListParams,
   PartnerClientSearchParams,
   PartnerClientUpdateParams,
@@ -1113,6 +1114,7 @@ export declare namespace Objects {
     type PartnerClientUpdateParams as PartnerClientUpdateParams,
     type PartnerClientListParams as PartnerClientListParams,
     type PartnerClientGetParams as PartnerClientGetParams,
+    type PartnerClientListAssociationsParams as PartnerClientListAssociationsParams,
     type PartnerClientSearchParams as PartnerClientSearchParams,
   };
 

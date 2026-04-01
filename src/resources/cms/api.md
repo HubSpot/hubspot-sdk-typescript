@@ -62,17 +62,18 @@ Methods:
 
 - <code title="post /cms/blogs/2026-03/authors">client.cms.blogs.authors.<a href="./src/resources/cms/blogs/authors/authors.ts">create</a>({ ...params }) -> Response</code>
 - <code title="patch /cms/blogs/2026-03/authors/{objectId}">client.cms.blogs.authors.<a href="./src/resources/cms/blogs/authors/authors.ts">update</a>(objectID, { ...params }) -> Response</code>
-- <code title="get /cms/blogs/2026-03/authors/cursor">client.cms.blogs.authors.<a href="./src/resources/cms/blogs/authors/authors.ts">list</a>({ ...params }) -> Response</code>
+- <code title="get /cms/blogs/2026-03/authors">client.cms.blogs.authors.<a href="./src/resources/cms/blogs/authors/authors.ts">list</a>({ ...params }) -> Response</code>
 - <code title="delete /cms/blogs/2026-03/authors/{objectId}">client.cms.blogs.authors.<a href="./src/resources/cms/blogs/authors/authors.ts">delete</a>(objectID, { ...params }) -> void</code>
 - <code title="post /cms/blogs/2026-03/authors/multi-language/attach-to-lang-group">client.cms.blogs.authors.<a href="./src/resources/cms/blogs/authors/authors.ts">attachToLangGroup</a>({ ...params }) -> Response</code>
 - <code title="post /cms/blogs/2026-03/authors/multi-language/create-language-variation">client.cms.blogs.authors.<a href="./src/resources/cms/blogs/authors/authors.ts">createLanguageVariation</a>({ ...params }) -> Response</code>
 - <code title="post /cms/blogs/2026-03/authors/multi-language/detach-from-lang-group">client.cms.blogs.authors.<a href="./src/resources/cms/blogs/authors/authors.ts">detachFromLangGroup</a>({ ...params }) -> Response</code>
 - <code title="get /cms/blogs/2026-03/authors/{objectId}">client.cms.blogs.authors.<a href="./src/resources/cms/blogs/authors/authors.ts">get</a>(objectID, { ...params }) -> Response</code>
-- <code title="get /cms/blogs/2026-03/authors/cursor/query">client.cms.blogs.authors.<a href="./src/resources/cms/blogs/authors/authors.ts">listByQuery</a>({ ...params }) -> Response</code>
-- <code title="get /cms/blogs/2026-03/posts/cursor">client.cms.blogs.authors.<a href="./src/resources/cms/blogs/authors/authors.ts">listPosts</a>({ ...params }) -> Response</code>
-- <code title="get /cms/blogs/2026-03/posts/cursor/query">client.cms.blogs.authors.<a href="./src/resources/cms/blogs/authors/authors.ts">listPostsByQuery</a>({ ...params }) -> Response</code>
-- <code title="get /cms/blogs/2026-03/tags/cursor">client.cms.blogs.authors.<a href="./src/resources/cms/blogs/authors/authors.ts">listTags</a>({ ...params }) -> Response</code>
-- <code title="get /cms/blogs/2026-03/tags/cursor/query">client.cms.blogs.authors.<a href="./src/resources/cms/blogs/authors/authors.ts">listTagsByQuery</a>({ ...params }) -> Response</code>
+- <code title="get /cms/blogs/2026-03/authors/cursor">client.cms.blogs.authors.<a href="./src/resources/cms/blogs/authors/authors.ts">getCursor</a>({ ...params }) -> Response</code>
+- <code title="get /cms/blogs/2026-03/authors/cursor/query">client.cms.blogs.authors.<a href="./src/resources/cms/blogs/authors/authors.ts">getCursorByQuery</a>({ ...params }) -> Response</code>
+- <code title="get /cms/blogs/2026-03/posts/cursor">client.cms.blogs.authors.<a href="./src/resources/cms/blogs/authors/authors.ts">getPostsCursor</a>({ ...params }) -> Response</code>
+- <code title="get /cms/blogs/2026-03/posts/cursor/query">client.cms.blogs.authors.<a href="./src/resources/cms/blogs/authors/authors.ts">getPostsCursorByQuery</a>({ ...params }) -> Response</code>
+- <code title="get /cms/blogs/2026-03/tags/cursor">client.cms.blogs.authors.<a href="./src/resources/cms/blogs/authors/authors.ts">getTagsCursor</a>({ ...params }) -> Response</code>
+- <code title="get /cms/blogs/2026-03/tags/cursor/query">client.cms.blogs.authors.<a href="./src/resources/cms/blogs/authors/authors.ts">getTagsCursorByQuery</a>({ ...params }) -> Response</code>
 - <code title="put /cms/blogs/2026-03/authors/multi-language/set-new-lang-primary">client.cms.blogs.authors.<a href="./src/resources/cms/blogs/authors/authors.ts">setNewLangPrimary</a>({ ...params }) -> void</code>
 - <code title="post /cms/blogs/2026-03/authors/multi-language/update-languages">client.cms.blogs.authors.<a href="./src/resources/cms/blogs/authors/authors.ts">updateLanguages</a>({ ...params }) -> Response</code>
 

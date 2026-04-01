@@ -11,27 +11,38 @@ export class FeatureFlags extends APIResource {
   batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
 
   /**
-   * Specify an account-level flag state for a specific HubSpot account.
+   * Set a feature flag for an app. For example, update the `hs-hide-crm-cards`
+   * flag's `defaultState` to `ON` to hide classic CRM cards from new installs.
    */
   update(
-    portalID: number,
+    flagName: string,
     params: FeatureFlagUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<PortalFlagStateResponse> {
-    const { appId, flagName, ...body } = params;
-    return this._client.put(path`/feature-flags/2026-03/${appId}/flags/${flagName}/portals/${portalID}`, {
-      body,
-      ...options,
-    });
+  ): APIPromise<FlagResponse> {
+    const { appId, ...body } = params;
+    return this._client.put(path`/feature-flags/2026-03/${appId}/flags/${flagName}`, { body, ...options });
+  }
+
+  /**
+   * Delete a feature flag in an app. For example, delete the `hs-release-app-cards`
+   * flag after all accounts have been migrated.
+   */
+  delete(
+    flagName: string,
+    params: FeatureFlagDeleteParams,
+    options?: RequestOptions,
+  ): APIPromise<FlagResponse> {
+    const { appId } = params;
+    return this._client.delete(path`/feature-flags/2026-03/${appId}/flags/${flagName}`, options);
   }
 
   /**
    * Delete an account-level flag state for a specific HubSpot account. No request
    * body is included.
    */
-  delete(
+  deletePortalState(
     portalID: number,
-    params: FeatureFlagDeleteParams,
+    params: FeatureFlagDeletePortalStateParams,
     options?: RequestOptions,
   ): APIPromise<PortalFlagStateResponse> {
     const { appId, flagName } = params;
@@ -42,11 +53,20 @@ export class FeatureFlags extends APIResource {
   }
 
   /**
+   * Retrieve the current status of the app's feature flags. No request body is
+   * included.
+   */
+  get(flagName: string, params: FeatureFlagGetParams, options?: RequestOptions): APIPromise<FlagResponse> {
+    const { appId } = params;
+    return this._client.get(path`/feature-flags/2026-03/${appId}/flags/${flagName}`, options);
+  }
+
+  /**
    * Retrieve the account-level flag state of a specific HubSpot account.
    */
-  get(
+  getPortalState(
     portalID: number,
-    params: FeatureFlagGetParams,
+    params: FeatureFlagGetPortalStateParams,
     options?: RequestOptions,
   ): APIPromise<PortalFlagStateResponse> {
     const { appId, flagName } = params;
@@ -72,6 +92,21 @@ export class FeatureFlags extends APIResource {
     const { appId, ...query } = params;
     return this._client.get(path`/feature-flags/2026-03/${appId}/flags/${flagName}/portals`, {
       query,
+      ...options,
+    });
+  }
+
+  /**
+   * Specify an account-level flag state for a specific HubSpot account.
+   */
+  updatePortalState(
+    portalID: number,
+    params: FeatureFlagUpdatePortalStateParams,
+    options?: RequestOptions,
+  ): APIPromise<PortalFlagStateResponse> {
+    const { appId, flagName, ...body } = params;
+    return this._client.put(path`/feature-flags/2026-03/${appId}/flags/${flagName}/portals/${portalID}`, {
+      body,
       ...options,
     });
   }
@@ -178,23 +213,33 @@ export interface FeatureFlagUpdateParams {
   appId: number;
 
   /**
-   * Path param
+   * Body param: The state that the flag should have if there are no overrides for a
+   * particular portal
    */
-  flagName: string;
+  defaultState: 'ABSENT' | 'OFF' | 'ON';
 
   /**
-   * Body param: The state that the given flag should be in for this portal
+   * Body param: A flag value that supercedes all other overrides, including
+   * portal-level values. Mostly used for things like emergency overrides
    */
-  flagState: 'ABSENT' | 'OFF' | 'ON';
+  overrideState?: 'ABSENT' | 'OFF' | 'ON';
 }
 
 export interface FeatureFlagDeleteParams {
+  appId: number;
+}
+
+export interface FeatureFlagDeletePortalStateParams {
   appId: number;
 
   flagName: string;
 }
 
 export interface FeatureFlagGetParams {
+  appId: number;
+}
+
+export interface FeatureFlagGetPortalStateParams {
   appId: number;
 
   flagName: string;
@@ -217,6 +262,23 @@ export interface FeatureFlagListPortalsParams {
   startPortalId?: number;
 }
 
+export interface FeatureFlagUpdatePortalStateParams {
+  /**
+   * Path param
+   */
+  appId: number;
+
+  /**
+   * Path param
+   */
+  flagName: string;
+
+  /**
+   * Body param: The state that the given flag should be in for this portal
+   */
+  flagState: 'ABSENT' | 'OFF' | 'ON';
+}
+
 FeatureFlags.Batch = Batch;
 
 export declare namespace FeatureFlags {
@@ -232,8 +294,11 @@ export declare namespace FeatureFlags {
     type PortalFlagStateResponse as PortalFlagStateResponse,
     type FeatureFlagUpdateParams as FeatureFlagUpdateParams,
     type FeatureFlagDeleteParams as FeatureFlagDeleteParams,
+    type FeatureFlagDeletePortalStateParams as FeatureFlagDeletePortalStateParams,
     type FeatureFlagGetParams as FeatureFlagGetParams,
+    type FeatureFlagGetPortalStateParams as FeatureFlagGetPortalStateParams,
     type FeatureFlagListPortalsParams as FeatureFlagListPortalsParams,
+    type FeatureFlagUpdatePortalStateParams as FeatureFlagUpdatePortalStateParams,
   };
 
   export {

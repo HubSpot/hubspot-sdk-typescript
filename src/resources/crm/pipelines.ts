@@ -8,11 +8,52 @@ import { path } from '../../internal/utils/path';
 
 export class Pipelines extends APIResource {
   /**
+   * Create a new pipeline with the provided property values. The entire pipeline
+   * object, including its unique ID, will be returned in the response.
+   */
+  create(objectType: string, body: PipelineCreateParams, options?: RequestOptions): APIPromise<Pipeline> {
+    return this._client.post(path`/crm/pipelines/2026-03/${objectType}`, { body, ...options });
+  }
+
+  /**
+   * Perform a partial update of the pipeline identified by `{pipelineId}`. The
+   * updated pipeline will be returned in the response.
+   */
+  update(pipelineID: string, params: PipelineUpdateParams, options?: RequestOptions): APIPromise<Pipeline> {
+    const { objectType, validateDealStageUsagesBeforeDelete, validateReferencesBeforeDelete, ...body } =
+      params;
+    return this._client.patch(path`/crm/pipelines/2026-03/${objectType}/${pipelineID}`, {
+      query: { validateDealStageUsagesBeforeDelete, validateReferencesBeforeDelete },
+      body,
+      ...options,
+    });
+  }
+
+  /**
+   * Return all pipelines for the object type specified by `{objectType}`.
+   */
+  list(objectType: string, options?: RequestOptions): APIPromise<CollectionResponsePipelineNoPaging> {
+    return this._client.get(path`/crm/pipelines/2026-03/${objectType}`, options);
+  }
+
+  /**
+   * Delete a pipeline
+   */
+  delete(pipelineID: string, params: PipelineDeleteParams, options?: RequestOptions): APIPromise<void> {
+    const { objectType, validateDealStageUsagesBeforeDelete, validateReferencesBeforeDelete } = params;
+    return this._client.delete(path`/crm/pipelines/2026-03/${objectType}/${pipelineID}`, {
+      query: { validateDealStageUsagesBeforeDelete, validateReferencesBeforeDelete },
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
+
+  /**
    * Create a pipeline stage
    */
-  create(
+  createStage(
     pipelineID: string,
-    params: PipelineCreateParams,
+    params: PipelineCreateStageParams,
     options?: RequestOptions,
   ): APIPromise<PipelineStage> {
     const { objectType, ...body } = params;
@@ -22,30 +63,14 @@ export class Pipelines extends APIResource {
     });
   }
 
-  update(stageID: string, params: PipelineUpdateParams, options?: RequestOptions): APIPromise<PipelineStage> {
-    const { objectType, pipelineId, ...body } = params;
-    return this._client.patch(path`/crm/pipelines/2026-03/${objectType}/${pipelineId}/stages/${stageID}`, {
-      body,
-      ...options,
-    });
-  }
-
-  /**
-   * Return all the stages associated with the pipeline identified by `{pipelineId}`.
-   */
-  list(
-    pipelineID: string,
-    params: PipelineListParams,
-    options?: RequestOptions,
-  ): APIPromise<CollectionResponsePipelineStageNoPaging> {
-    const { objectType } = params;
-    return this._client.get(path`/crm/pipelines/2026-03/${objectType}/${pipelineID}/stages`, options);
-  }
-
   /**
    * Delete a pipeline stage
    */
-  delete(stageID: string, params: PipelineDeleteParams, options?: RequestOptions): APIPromise<void> {
+  deleteStage(
+    stageID: string,
+    params: PipelineDeleteStageParams,
+    options?: RequestOptions,
+  ): APIPromise<void> {
     const { objectType, pipelineId } = params;
     return this._client.delete(path`/crm/pipelines/2026-03/${objectType}/${pipelineId}/stages/${stageID}`, {
       ...options,
@@ -54,9 +79,21 @@ export class Pipelines extends APIResource {
   }
 
   /**
+   * Return a single pipeline object identified by its unique `{pipelineId}`.
+   */
+  get(pipelineID: string, params: PipelineGetParams, options?: RequestOptions): APIPromise<Pipeline> {
+    const { objectType } = params;
+    return this._client.get(path`/crm/pipelines/2026-03/${objectType}/${pipelineID}`, options);
+  }
+
+  /**
    * Return a pipeline stage by ID
    */
-  get(stageID: string, params: PipelineGetParams, options?: RequestOptions): APIPromise<PipelineStage> {
+  getStage(
+    stageID: string,
+    params: PipelineGetStageParams,
+    options?: RequestOptions,
+  ): APIPromise<PipelineStage> {
     const { objectType, pipelineId } = params;
     return this._client.get(
       path`/crm/pipelines/2026-03/${objectType}/${pipelineId}/stages/${stageID}`,
@@ -66,11 +103,24 @@ export class Pipelines extends APIResource {
 
   /**
    * Return a reverse chronological list of all mutations that have occurred on the
+   * pipeline identified by `{pipelineId}`.
+   */
+  listAudit(
+    pipelineID: string,
+    params: PipelineListAuditParams,
+    options?: RequestOptions,
+  ): APIPromise<CollectionResponsePublicAuditInfoNoPaging> {
+    const { objectType } = params;
+    return this._client.get(path`/crm/pipelines/2026-03/${objectType}/${pipelineID}/audit`, options);
+  }
+
+  /**
+   * Return a reverse chronological list of all mutations that have occurred on the
    * pipeline stage identified by `{stageId}`.
    */
-  getAudit(
+  listStageAudit(
     stageID: string,
-    params: PipelineGetAuditParams,
+    params: PipelineListStageAuditParams,
     options?: RequestOptions,
   ): APIPromise<CollectionResponsePublicAuditInfoNoPaging> {
     const { objectType, pipelineId } = params;
@@ -81,12 +131,53 @@ export class Pipelines extends APIResource {
   }
 
   /**
+   * Return all the stages associated with the pipeline identified by `{pipelineId}`.
+   */
+  listStages(
+    pipelineID: string,
+    params: PipelineListStagesParams,
+    options?: RequestOptions,
+  ): APIPromise<CollectionResponsePipelineStageNoPaging> {
+    const { objectType } = params;
+    return this._client.get(path`/crm/pipelines/2026-03/${objectType}/${pipelineID}/stages`, options);
+  }
+
+  /**
+   * Replace a pipeline
+   */
+  updateAllProperties(
+    pipelineID: string,
+    params: PipelineUpdateAllPropertiesParams,
+    options?: RequestOptions,
+  ): APIPromise<Pipeline> {
+    const { objectType, validateDealStageUsagesBeforeDelete, validateReferencesBeforeDelete, ...body } =
+      params;
+    return this._client.put(path`/crm/pipelines/2026-03/${objectType}/${pipelineID}`, {
+      query: { validateDealStageUsagesBeforeDelete, validateReferencesBeforeDelete },
+      body,
+      ...options,
+    });
+  }
+
+  updateStage(
+    stageID: string,
+    params: PipelineUpdateStageParams,
+    options?: RequestOptions,
+  ): APIPromise<PipelineStage> {
+    const { objectType, pipelineId, ...body } = params;
+    return this._client.patch(path`/crm/pipelines/2026-03/${objectType}/${pipelineId}/stages/${stageID}`, {
+      body,
+      ...options,
+    });
+  }
+
+  /**
    * Replace all the properties of an existing pipeline stage with the values
    * provided. The updated stage will be returned in the response.
    */
-  replace(
+  updateStageAllProperties(
     stageID: string,
-    params: PipelineReplaceParams,
+    params: PipelineUpdateStageAllPropertiesParams,
     options?: RequestOptions,
   ): APIPromise<PipelineStage> {
     const { objectType, pipelineId, ...body } = params;
@@ -412,6 +503,78 @@ export interface PublicAuditInfo {
 
 export interface PipelineCreateParams {
   /**
+   * The order for displaying this pipeline. If two pipelines have a matching
+   * `displayOrder`, they will be sorted alphabetically by label.
+   */
+  displayOrder: number;
+
+  /**
+   * A unique label used to organize pipelines in HubSpot's UI
+   */
+  label: string;
+
+  /**
+   * Pipeline stage inputs used to create the new or replacement pipeline.
+   */
+  stages: Array<PipelineStageInput>;
+
+  pipelineId?: string;
+}
+
+export interface PipelineUpdateParams {
+  /**
+   * Path param
+   */
+  objectType: string;
+
+  /**
+   * Query param
+   */
+  validateDealStageUsagesBeforeDelete?: boolean;
+
+  /**
+   * Query param
+   */
+  validateReferencesBeforeDelete?: boolean;
+
+  /**
+   * Body param: Whether the pipeline is archived. This property should only be
+   * provided when restoring an archived pipeline. If it's provided in any other
+   * call, the request will fail and a `400 Bad Request` will be returned.
+   */
+  archived?: boolean;
+
+  /**
+   * Body param: The order for displaying this pipeline. If two pipelines have a
+   * matching `displayOrder`, they will be sorted alphabetically by label.
+   */
+  displayOrder?: number;
+
+  /**
+   * Body param: A unique label used to organize pipelines in HubSpot's UI
+   */
+  label?: string;
+}
+
+export interface PipelineDeleteParams {
+  /**
+   * Path param
+   */
+  objectType: string;
+
+  /**
+   * Query param
+   */
+  validateDealStageUsagesBeforeDelete?: boolean;
+
+  /**
+   * Query param
+   */
+  validateReferencesBeforeDelete?: boolean;
+}
+
+export interface PipelineCreateStageParams {
+  /**
    * Path param
    */
   objectType: string;
@@ -449,7 +612,72 @@ export interface PipelineCreateParams {
   stageId?: string;
 }
 
-export interface PipelineUpdateParams {
+export interface PipelineDeleteStageParams {
+  objectType: string;
+
+  pipelineId: string;
+}
+
+export interface PipelineGetParams {
+  objectType: string;
+}
+
+export interface PipelineGetStageParams {
+  objectType: string;
+
+  pipelineId: string;
+}
+
+export interface PipelineListAuditParams {
+  objectType: string;
+}
+
+export interface PipelineListStageAuditParams {
+  objectType: string;
+
+  pipelineId: string;
+}
+
+export interface PipelineListStagesParams {
+  objectType: string;
+}
+
+export interface PipelineUpdateAllPropertiesParams {
+  /**
+   * Path param
+   */
+  objectType: string;
+
+  /**
+   * Body param: The order for displaying this pipeline stage. If two pipeline stages
+   * have a matching `displayOrder`, they will be sorted alphabetically by label.
+   */
+  displayOrder: number;
+
+  /**
+   * Body param: A label used to organize pipeline stages in HubSpot's UI. Each
+   * pipeline stage's label must be unique within that pipeline.
+   */
+  label: string;
+
+  /**
+   * Body param: The stages associated with the pipeline. They can be retrieved and
+   * updated via the pipeline stages endpoints.
+   */
+  stages: Array<PipelineStageInput>;
+
+  /**
+   * Query param
+   */
+  validateDealStageUsagesBeforeDelete?: boolean;
+
+  /**
+   * Query param
+   */
+  validateReferencesBeforeDelete?: boolean;
+}
+
+export interface PipelineUpdateStageParams {
   /**
    * Path param
    */
@@ -493,29 +721,7 @@ export interface PipelineUpdateParams {
   label?: string;
 }
 
-export interface PipelineListParams {
-  objectType: string;
-}
-
-export interface PipelineDeleteParams {
-  objectType: string;
-
-  pipelineId: string;
-}
-
-export interface PipelineGetParams {
-  objectType: string;
-
-  pipelineId: string;
-}
-
-export interface PipelineGetAuditParams {
-  objectType: string;
-
-  pipelineId: string;
-}
-
-export interface PipelineReplaceParams {
+export interface PipelineUpdateStageAllPropertiesParams {
   /**
    * Path param
    */
@@ -570,10 +776,16 @@ export declare namespace Pipelines {
     type PublicAuditInfo as PublicAuditInfo,
     type PipelineCreateParams as PipelineCreateParams,
     type PipelineUpdateParams as PipelineUpdateParams,
-    type PipelineListParams as PipelineListParams,
     type PipelineDeleteParams as PipelineDeleteParams,
+    type PipelineCreateStageParams as PipelineCreateStageParams,
+    type PipelineDeleteStageParams as PipelineDeleteStageParams,
     type PipelineGetParams as PipelineGetParams,
-    type PipelineGetAuditParams as PipelineGetAuditParams,
-    type PipelineReplaceParams as PipelineReplaceParams,
+    type PipelineGetStageParams as PipelineGetStageParams,
+    type PipelineListAuditParams as PipelineListAuditParams,
+    type PipelineListStageAuditParams as PipelineListStageAuditParams,
+    type PipelineListStagesParams as PipelineListStagesParams,
+    type PipelineUpdateAllPropertiesParams as PipelineUpdateAllPropertiesParams,
+    type PipelineUpdateStageParams as PipelineUpdateStageParams,
+    type PipelineUpdateStageAllPropertiesParams as PipelineUpdateStageAllPropertiesParams,
   };
 }
