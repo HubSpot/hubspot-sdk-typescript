@@ -62,7 +62,7 @@ export class Definitions extends APIResource {
     eventName: string,
     body: DefinitionCreatePropertyParams,
     options?: RequestOptions,
-  ): APIPromise<Shared.Property> {
+  ): APIPromise<Property> {
     return this._client.post(path`/events/2026-03/event-definitions/${eventName}/property`, {
       body,
       ...options,
@@ -109,7 +109,7 @@ export class Definitions extends APIResource {
     propertyName: string,
     params: DefinitionUpdatePropertyParams,
     options?: RequestOptions,
-  ): APIPromise<Shared.Property> {
+  ): APIPromise<Property> {
     const { eventName, ...body } = params;
     return this._client.patch(path`/events/2026-03/event-definitions/${eventName}/property/${propertyName}`, {
       body,
@@ -978,7 +978,7 @@ export interface ExternalBehavioralEventTypeDefinition {
 
   objectTypeId: string;
 
-  properties: Array<Shared.Property>;
+  properties: Array<Property>;
 
   comboEventRules?: ComboEventRuleBranch;
 
@@ -1244,6 +1244,143 @@ export interface NumberPropertyOperation {
   defaultValue?: string;
 
   renderSpec?: string;
+}
+
+/**
+ * A HubSpot property
+ */
+export interface Property {
+  /**
+   * A summary of the property's purpose.
+   */
+  description: string;
+
+  /**
+   * Determines how the property will appear in HubSpot's UI or on a form. Learn more
+   * in the properties API guide.
+   */
+  fieldType: string;
+
+  /**
+   * The name of the group to which the property is assigned.
+   */
+  groupName: string;
+
+  /**
+   * The display label for the property.
+   */
+  label: string;
+
+  /**
+   * The internal name for the property.
+   */
+  name: string;
+
+  /**
+   * A list of valid options for the property. This field is required for enumerated
+   * properties.
+   */
+  options: Array<Shared.Option>;
+
+  /**
+   * The data type of the property, such as string or number.
+   */
+  type: string;
+
+  /**
+   * Whether the property is archived.
+   */
+  archived?: boolean;
+
+  /**
+   * The timestamp when the property was archived, in ISO 8601 format.
+   */
+  archivedAt?: string;
+
+  /**
+   * Whether the property is a calculated field.
+   */
+  calculated?: boolean;
+
+  /**
+   * The formula used for calculated properties.
+   */
+  calculationFormula?: string;
+
+  /**
+   * The timestamp when the property was created, in ISO 8601 format.
+   */
+  createdAt?: string;
+
+  /**
+   * The ID of the user who created the property.
+   */
+  createdUserId?: string;
+
+  /**
+   * Indicates the sensitivity level of the property, such as "non_sensitive",
+   * "sensitive", or "highly_sensitive".
+   */
+  dataSensitivity?: 'highly_sensitive' | 'non_sensitive' | 'sensitive';
+
+  dateDisplayHint?: 'absolute' | 'absolute_with_relative' | 'time_since' | 'time_until';
+
+  /**
+   * The position of the item relative to others in the list.
+   */
+  displayOrder?: number;
+
+  /**
+   * Applicable only for enumeration type properties. Should be set to true with a
+   * 'referencedObjectType' of 'OWNER'. Otherwise false.
+   */
+  externalOptions?: boolean;
+
+  /**
+   * Whether the property can appear on forms.
+   */
+  formField?: boolean;
+
+  /**
+   * Whether the property is a unique identifier property.
+   */
+  hasUniqueValue?: boolean;
+
+  /**
+   * Whether or not the property will be hidden from the HubSpot UI. It's recommended
+   * that this be set to false for custom properties.
+   */
+  hidden?: boolean;
+
+  /**
+   * A boolean value set to true for HubSpot default properties.
+   */
+  hubspotDefined?: boolean;
+
+  modificationMetadata?: Shared.PropertyModificationMetadata;
+
+  /**
+   * Deprecated. Use externalOptionsReferenceType instead.
+   */
+  referencedObjectType?: string;
+
+  /**
+   * When sensitiveData is true, lists the type of sensitive data contained in the
+   * property (e.g., "HIPAA").
+   */
+  sensitiveDataCategories?: Array<string>;
+
+  /**
+   * Whether to show the currency symbol in HubSpot's UI.
+   */
+  showCurrencySymbol?: boolean;
+
+  /**
+   * The timestamp when the property was last updated, in ISO 8601 format.
+   */
+  updatedAt?: string;
+
+  updatedUserId?: string;
 }
 
 export interface PropertyFilter {
@@ -1744,6 +1881,7 @@ export declare namespace Definitions {
     type NowReference as NowReference,
     type NumOccurrencesRefineBy as NumOccurrencesRefineBy,
     type NumberPropertyOperation as NumberPropertyOperation,
+    type Property as Property,
     type PropertyFilter as PropertyFilter,
     type PropertyFilterContext as PropertyFilterContext,
     type PropertyReferencedTime as PropertyReferencedTime,

@@ -24,7 +24,6 @@ Types:
 - <code><a href="./src/resources/shared.ts">OptionInput</a></code>
 - <code><a href="./src/resources/shared.ts">Paging</a></code>
 - <code><a href="./src/resources/shared.ts">PreviousPage</a></code>
-- <code><a href="./src/resources/shared.ts">Property</a></code>
 - <code><a href="./src/resources/shared.ts">PropertyGroup</a></code>
 - <code><a href="./src/resources/shared.ts">PropertyGroupCreate</a></code>
 - <code><a href="./src/resources/shared.ts">PropertyGroupUpdate</a></code>

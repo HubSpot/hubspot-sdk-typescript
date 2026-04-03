@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
+import * as CrmAPI from '../crm';
 import * as BatchAPI from './batch';
 import { Batch, BatchGetParams } from './batch';
 import { APIPromise } from '../../../core/api-promise';
@@ -142,7 +143,7 @@ export interface ObjectSchema {
   /**
    * Properties defined for this object type.
    */
-  properties: Array<Shared.Property>;
+  properties: Array<CrmAPI.Property>;
 
   /**
    * The names of properties that should be **required** when creating an object of

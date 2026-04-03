@@ -338,7 +338,6 @@ export {
   type BatchResponseProperty,
   type BatchResponsePropertyWithErrors,
   type CollectionResponsePropertyNoPaging,
-  type Property,
   type PropertyCreate,
   type PropertyUpdate,
   type PropertyCreateParams,
