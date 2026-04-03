@@ -82,8 +82,9 @@ export {
   type PublicEmailsPage,
   type VersionPublicEmailsPage,
 } from './emails';
+export { Marketing } from './marketing';
 export {
-  Events,
+  MarketingEvents,
   type AppInfo,
   type AttendanceCounters,
   type BatchInputMarketingEventCreateRequestParams,
@@ -129,22 +130,21 @@ export {
   type SearchPublicResponseWrapper,
   type SubscriberEmailResponse,
   type SubscriberVidResponse,
-  type EventCreateParams,
-  type EventUpdateParams,
-  type EventListParams,
-  type EventDeleteBatchParams,
-  type EventDeleteBatchByExternalEventIDParams,
-  type EventDeleteByExternalEventIDParams,
-  type EventGetByExternalEventIDParams,
-  type EventSearchByExternalEventIDParams,
-  type EventUpdateBatchParams,
-  type EventUpdateByExternalEventIDParams,
-  type EventUpsertBatchParams,
-  type EventUpsertByExternalEventIDParams,
+  type MarketingEventCreateParams,
+  type MarketingEventUpdateParams,
+  type MarketingEventListParams,
+  type MarketingEventDeleteBatchParams,
+  type MarketingEventDeleteBatchByExternalEventIDParams,
+  type MarketingEventDeleteByExternalEventIDParams,
+  type MarketingEventGetByExternalEventIDParams,
+  type MarketingEventSearchByExternalEventIDParams,
+  type MarketingEventUpdateBatchParams,
+  type MarketingEventUpdateByExternalEventIDParams,
+  type MarketingEventUpsertBatchParams,
+  type MarketingEventUpsertByExternalEventIDParams,
   type ParticipationBreakdownsPage,
   type MarketingEventPublicReadResponseV2sPage,
-} from './events/index';
-export { Marketing } from './marketing';
+} from './marketing-events/index';
 export { SingleSend, type SingleSendCreateParams } from './single-send';
 export {
   Transactional,

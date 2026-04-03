@@ -3,7 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as CmsAPI from '../cms';
 import * as PagesAPI from './pages';
-import { PagesPage } from './pages';
+import { CmsPagesPage } from './pages';
 import { APIPromise } from '../../../core/api-promise';
 import { Page, type PageParams, PagePromise } from '../../../core/pagination';
 import { buildHeaders } from '../../../internal/headers';
@@ -14,7 +14,7 @@ export class LandingPages extends APIResource {
   /**
    * Create a new landing page.
    */
-  create(body: LandingPageCreateParams, options?: RequestOptions): APIPromise<PagesAPI.Page> {
+  create(body: LandingPageCreateParams, options?: RequestOptions): APIPromise<PagesAPI.CmsPage> {
     return this._client.post('/cms/pages/2026-03/landing-pages', {
       body,
       ...options,
@@ -30,7 +30,7 @@ export class LandingPages extends APIResource {
     objectID: string,
     params: LandingPageUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<PagesAPI.Page> {
+  ): APIPromise<PagesAPI.CmsPage> {
     const { archived, ...body } = params;
     return this._client.patch(path`/cms/pages/2026-03/landing-pages/${objectID}`, {
       query: { archived },
@@ -48,8 +48,8 @@ export class LandingPages extends APIResource {
   list(
     query: LandingPageListParams | null | undefined = {},
     options?: RequestOptions,
-  ): PagePromise<PagesPage, PagesAPI.Page> {
-    return this._client.getAPIList('/cms/pages/2026-03/landing-pages', Page<PagesAPI.Page>, {
+  ): PagePromise<CmsPagesPage, PagesAPI.CmsPage> {
+    return this._client.getAPIList('/cms/pages/2026-03/landing-pages', Page<PagesAPI.CmsPage>, {
       query,
       ...options,
     });
@@ -74,7 +74,7 @@ export class LandingPages extends APIResource {
   /**
    * Create a copy of an existing landing page.
    */
-  clone(body: LandingPageCloneParams, options?: RequestOptions): APIPromise<PagesAPI.Page> {
+  clone(body: LandingPageCloneParams, options?: RequestOptions): APIPromise<PagesAPI.CmsPage> {
     return this._client.post('/cms/pages/2026-03/landing-pages/clone', {
       body,
       ...options,
@@ -89,14 +89,14 @@ export class LandingPages extends APIResource {
     objectID: string,
     query: LandingPageGetParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<PagesAPI.Page> {
+  ): APIPromise<PagesAPI.CmsPage> {
     return this._client.get(path`/cms/pages/2026-03/landing-pages/${objectID}`, { query, ...options });
   }
 
   /**
    * Retrieve the full draft version of a landing page, specified by page ID.
    */
-  getDraft(objectID: string, options?: RequestOptions): APIPromise<PagesAPI.Page> {
+  getDraft(objectID: string, options?: RequestOptions): APIPromise<PagesAPI.CmsPage> {
     return this._client.get(path`/cms/pages/2026-03/landing-pages/${objectID}/draft`, options);
   }
 
@@ -140,7 +140,7 @@ export class LandingPages extends APIResource {
     objectID: string,
     body: LandingPageUpdateDraftParams,
     options?: RequestOptions,
-  ): APIPromise<PagesAPI.Page> {
+  ): APIPromise<PagesAPI.CmsPage> {
     return this._client.patch(path`/cms/pages/2026-03/landing-pages/${objectID}/draft`, {
       body,
       ...options,
@@ -3879,4 +3879,4 @@ export declare namespace LandingPages {
   };
 }
 
-export { type PagesPage };
+export { type CmsPagesPage };

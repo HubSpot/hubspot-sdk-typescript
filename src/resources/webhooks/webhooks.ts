@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as WebhooksAPI from './webhooks_/webhooks_';
+import * as WebhookSubscriptionsAPI from './webhook-subscriptions/webhook-subscriptions';
 import {
   ActionOverrideRequest,
   AppLifecycleEventSubscriptionUpsertRequest,
@@ -35,33 +35,34 @@ import {
   SubscriptionResponse1,
   SubscriptionUpsertRequest,
   ThrottlingSettings,
-  WebhookCreateCrmSnapshotParams,
-  WebhookCreateJournalSubscriptionParams,
-  WebhookCreateSubscriptionFilterParams,
-  WebhookCreateSubscriptionParams,
-  WebhookDeleteSubscriptionParams,
-  WebhookGetJournalEarliestParams,
-  WebhookGetJournalLatestParams,
-  WebhookGetJournalNextByOffsetParams,
-  WebhookGetLocalJournalEarliestParams,
-  WebhookGetLocalJournalLatestParams,
-  WebhookGetLocalJournalNextByOffsetParams,
-  WebhookGetSubscriptionFilterForSubscriptionResponse,
-  WebhookGetSubscriptionParams,
-  WebhookUpdateSettingsParams,
-  WebhookUpdateSubscriptionParams,
-  Webhooks as WebhooksAPIWebhooks,
-} from './webhooks_/webhooks_';
+  WebhookSubscriptionCreateCrmSnapshotParams,
+  WebhookSubscriptionCreateJournalSubscriptionParams,
+  WebhookSubscriptionCreateSubscriptionFilterParams,
+  WebhookSubscriptionCreateSubscriptionParams,
+  WebhookSubscriptionDeleteSubscriptionParams,
+  WebhookSubscriptionGetJournalEarliestParams,
+  WebhookSubscriptionGetJournalLatestParams,
+  WebhookSubscriptionGetJournalNextByOffsetParams,
+  WebhookSubscriptionGetLocalJournalEarliestParams,
+  WebhookSubscriptionGetLocalJournalLatestParams,
+  WebhookSubscriptionGetLocalJournalNextByOffsetParams,
+  WebhookSubscriptionGetSubscriptionFilterForSubscriptionResponse,
+  WebhookSubscriptionGetSubscriptionParams,
+  WebhookSubscriptionUpdateSettingsParams,
+  WebhookSubscriptionUpdateSubscriptionParams,
+  WebhookSubscriptions,
+} from './webhook-subscriptions/webhook-subscriptions';
 
 export class Webhooks extends APIResource {
-  webhooks: WebhooksAPI.Webhooks = new WebhooksAPI.Webhooks(this._client);
+  webhookSubscriptions: WebhookSubscriptionsAPI.WebhookSubscriptions =
+    new WebhookSubscriptionsAPI.WebhookSubscriptions(this._client);
 }
 
-Webhooks.Webhooks = WebhooksAPIWebhooks;
+Webhooks.WebhookSubscriptions = WebhookSubscriptions;
 
 export declare namespace Webhooks {
   export {
-    WebhooksAPIWebhooks as Webhooks,
+    WebhookSubscriptions as WebhookSubscriptions,
     type ActionOverrideRequest as ActionOverrideRequest,
     type AppLifecycleEventSubscriptionUpsertRequest as AppLifecycleEventSubscriptionUpsertRequest,
     type AssociationSubscriptionUpsertRequest as AssociationSubscriptionUpsertRequest,
@@ -94,20 +95,20 @@ export declare namespace Webhooks {
     type SubscriptionResponse1 as SubscriptionResponse1,
     type SubscriptionUpsertRequest as SubscriptionUpsertRequest,
     type ThrottlingSettings as ThrottlingSettings,
-    type WebhookGetSubscriptionFilterForSubscriptionResponse as WebhookGetSubscriptionFilterForSubscriptionResponse,
-    type WebhookCreateCrmSnapshotParams as WebhookCreateCrmSnapshotParams,
-    type WebhookCreateJournalSubscriptionParams as WebhookCreateJournalSubscriptionParams,
-    type WebhookCreateSubscriptionParams as WebhookCreateSubscriptionParams,
-    type WebhookCreateSubscriptionFilterParams as WebhookCreateSubscriptionFilterParams,
-    type WebhookDeleteSubscriptionParams as WebhookDeleteSubscriptionParams,
-    type WebhookGetJournalEarliestParams as WebhookGetJournalEarliestParams,
-    type WebhookGetJournalLatestParams as WebhookGetJournalLatestParams,
-    type WebhookGetJournalNextByOffsetParams as WebhookGetJournalNextByOffsetParams,
-    type WebhookGetLocalJournalEarliestParams as WebhookGetLocalJournalEarliestParams,
-    type WebhookGetLocalJournalLatestParams as WebhookGetLocalJournalLatestParams,
-    type WebhookGetLocalJournalNextByOffsetParams as WebhookGetLocalJournalNextByOffsetParams,
-    type WebhookGetSubscriptionParams as WebhookGetSubscriptionParams,
-    type WebhookUpdateSettingsParams as WebhookUpdateSettingsParams,
-    type WebhookUpdateSubscriptionParams as WebhookUpdateSubscriptionParams,
+    type WebhookSubscriptionGetSubscriptionFilterForSubscriptionResponse as WebhookSubscriptionGetSubscriptionFilterForSubscriptionResponse,
+    type WebhookSubscriptionCreateCrmSnapshotParams as WebhookSubscriptionCreateCrmSnapshotParams,
+    type WebhookSubscriptionCreateJournalSubscriptionParams as WebhookSubscriptionCreateJournalSubscriptionParams,
+    type WebhookSubscriptionCreateSubscriptionParams as WebhookSubscriptionCreateSubscriptionParams,
+    type WebhookSubscriptionCreateSubscriptionFilterParams as WebhookSubscriptionCreateSubscriptionFilterParams,
+    type WebhookSubscriptionDeleteSubscriptionParams as WebhookSubscriptionDeleteSubscriptionParams,
+    type WebhookSubscriptionGetJournalEarliestParams as WebhookSubscriptionGetJournalEarliestParams,
+    type WebhookSubscriptionGetJournalLatestParams as WebhookSubscriptionGetJournalLatestParams,
+    type WebhookSubscriptionGetJournalNextByOffsetParams as WebhookSubscriptionGetJournalNextByOffsetParams,
+    type WebhookSubscriptionGetLocalJournalEarliestParams as WebhookSubscriptionGetLocalJournalEarliestParams,
+    type WebhookSubscriptionGetLocalJournalLatestParams as WebhookSubscriptionGetLocalJournalLatestParams,
+    type WebhookSubscriptionGetLocalJournalNextByOffsetParams as WebhookSubscriptionGetLocalJournalNextByOffsetParams,
+    type WebhookSubscriptionGetSubscriptionParams as WebhookSubscriptionGetSubscriptionParams,
+    type WebhookSubscriptionUpdateSettingsParams as WebhookSubscriptionUpdateSettingsParams,
+    type WebhookSubscriptionUpdateSubscriptionParams as WebhookSubscriptionUpdateSubscriptionParams,
   };
 }

@@ -118,6 +118,15 @@ export {
   type FeeSearchParams,
 } from './fees/index';
 export {
+  GenericObjects,
+  type GenericObjectCreateParams,
+  type GenericObjectUpdateParams,
+  type GenericObjectListParams,
+  type GenericObjectDeleteParams,
+  type GenericObjectGetParams,
+  type GenericObjectSearchParams,
+} from './generic-objects/index';
+export {
   GoalTargets,
   type GoalTargetCreateParams,
   type GoalTargetUpdateParams,
@@ -304,11 +313,3 @@ export {
   type UserGetParams,
   type UserSearchParams,
 } from './users/index';
-export {
-  type ObjectCreateParams,
-  type ObjectUpdateParams,
-  type ObjectListParams,
-  type ObjectDeleteParams,
-  type ObjectGetParams,
-  type ObjectSearchParams,
-} from './objects_/index';

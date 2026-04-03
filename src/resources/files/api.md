@@ -18,22 +18,22 @@ Types:
 - <code><a href="./src/resources/files/files.ts">ImportFromURLTaskLocator</a></code>
 - <code><a href="./src/resources/files/files.ts">SignedURL</a></code>
 
-## Files
+## FileAssets
 
 Methods:
 
-- <code title="post /files/2026-03/folders">client.files.files.<a href="./src/resources/files/files_.ts">create</a>({ ...params }) -> Folder</code>
-- <code title="patch /files/2026-03/files/{fileId}">client.files.files.<a href="./src/resources/files/files_.ts">update</a>(fileID, { ...params }) -> File</code>
-- <code title="delete /files/2026-03/files/{fileId}">client.files.files.<a href="./src/resources/files/files_.ts">delete</a>(fileID) -> void</code>
-- <code title="delete /files/2026-03/files/{fileId}/gdpr-delete">client.files.files.<a href="./src/resources/files/files_.ts">gdprDelete</a>(fileID) -> void</code>
-- <code title="get /files/2026-03/files/{fileId}">client.files.files.<a href="./src/resources/files/files_.ts">get</a>(fileID, { ...params }) -> File</code>
-- <code title="get /files/2026-03/files/stat/{path}">client.files.files.<a href="./src/resources/files/files_.ts">getByPath</a>(path\_, { ...params }) -> FileStat</code>
-- <code title="get /files/2026-03/files/import-from-url/async/tasks/{taskId}/status">client.files.files.<a href="./src/resources/files/files_.ts">getImportTaskStatus</a>(taskID) -> FileActionResponse</code>
-- <code title="get /files/2026-03/files/{fileId}/signed-url">client.files.files.<a href="./src/resources/files/files_.ts">getSignedURL</a>(fileID, { ...params }) -> SignedURL</code>
-- <code title="post /files/2026-03/files/import-from-url/async">client.files.files.<a href="./src/resources/files/files_.ts">importFromURLAsync</a>({ ...params }) -> ImportFromURLTaskLocator</code>
-- <code title="put /files/2026-03/files/{fileId}">client.files.files.<a href="./src/resources/files/files_.ts">replace</a>(fileID, { ...params }) -> File</code>
-- <code title="get /files/2026-03/files/search">client.files.files.<a href="./src/resources/files/files_.ts">search</a>({ ...params }) -> FilesPage</code>
-- <code title="post /files/2026-03/files">client.files.files.<a href="./src/resources/files/files_.ts">upload</a>({ ...params }) -> File</code>
+- <code title="post /files/2026-03/folders">client.files.fileAssets.<a href="./src/resources/files/file-assets.ts">create</a>({ ...params }) -> Folder</code>
+- <code title="patch /files/2026-03/files/{fileId}">client.files.fileAssets.<a href="./src/resources/files/file-assets.ts">update</a>(fileID, { ...params }) -> File</code>
+- <code title="delete /files/2026-03/files/{fileId}">client.files.fileAssets.<a href="./src/resources/files/file-assets.ts">delete</a>(fileID) -> void</code>
+- <code title="delete /files/2026-03/files/{fileId}/gdpr-delete">client.files.fileAssets.<a href="./src/resources/files/file-assets.ts">gdprDelete</a>(fileID) -> void</code>
+- <code title="get /files/2026-03/files/{fileId}">client.files.fileAssets.<a href="./src/resources/files/file-assets.ts">get</a>(fileID, { ...params }) -> File</code>
+- <code title="get /files/2026-03/files/stat/{path}">client.files.fileAssets.<a href="./src/resources/files/file-assets.ts">getByPath</a>(path\_, { ...params }) -> FileStat</code>
+- <code title="get /files/2026-03/files/import-from-url/async/tasks/{taskId}/status">client.files.fileAssets.<a href="./src/resources/files/file-assets.ts">getImportTaskStatus</a>(taskID) -> FileActionResponse</code>
+- <code title="get /files/2026-03/files/{fileId}/signed-url">client.files.fileAssets.<a href="./src/resources/files/file-assets.ts">getSignedURL</a>(fileID, { ...params }) -> SignedURL</code>
+- <code title="post /files/2026-03/files/import-from-url/async">client.files.fileAssets.<a href="./src/resources/files/file-assets.ts">importFromURLAsync</a>({ ...params }) -> ImportFromURLTaskLocator</code>
+- <code title="put /files/2026-03/files/{fileId}">client.files.fileAssets.<a href="./src/resources/files/file-assets.ts">replace</a>(fileID, { ...params }) -> File</code>
+- <code title="get /files/2026-03/files/search">client.files.fileAssets.<a href="./src/resources/files/file-assets.ts">search</a>({ ...params }) -> FilesPage</code>
+- <code title="post /files/2026-03/files">client.files.fileAssets.<a href="./src/resources/files/file-assets.ts">upload</a>({ ...params }) -> File</code>
 
 ## Folders
 

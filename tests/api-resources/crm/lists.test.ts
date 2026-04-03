@@ -538,7 +538,6 @@ describe('resource lists', () => {
   // Mock server tests are disabled
   test.skip('listBySearch: only required params', async () => {
     const responsePromise = client.crm.lists.listBySearch({
-      additionalProperties: ['string'],
       listIds: ['string'],
       offset: 0,
       processingTypes: ['string'],
@@ -555,10 +554,10 @@ describe('resource lists', () => {
   // Mock server tests are disabled
   test.skip('listBySearch: required and optional params', async () => {
     const response = await client.crm.lists.listBySearch({
-      additionalProperties: ['string'],
       listIds: ['string'],
       offset: 0,
       processingTypes: ['string'],
+      additional_filter_properties: ['string'],
       count: 0,
       objectTypeId: 'objectTypeId',
       query: 'query',

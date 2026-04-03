@@ -444,17 +444,6 @@ export interface ListMoveRequest {
 
 export interface ListSearchRequest {
   /**
-   * The property names of any additional list properties to include in the response.
-   * Properties that do not exist or that are empty for a particular list are not
-   * included in the response.
-   *
-   * By default, all requests will fetch the following properties for each list:
-   * `hs_list_size`, `hs_last_record_added_at`, `hs_last_record_removed_at`,
-   * `hs_folder_name`, and `hs_list_reference_count`.
-   */
-  additionalProperties: Array<string>;
-
-  /**
    * ILS list ids to be included in search results. If not specified, all lists
    * matching other criteria will be included
    */
@@ -472,6 +461,17 @@ export interface ListSearchRequest {
    * lists with all processing types will be included.
    */
   processingTypes: Array<string>;
+
+  /**
+   * The property names of any additional list properties to include in the response.
+   * Properties that do not exist or that are empty for a particular list are not
+   * included in the response.
+   *
+   * By default, all requests will fetch the following properties for each list:
+   * `hs_list_size`, `hs_last_record_added_at`, `hs_last_record_removed_at`,
+   * `hs_folder_name`, and `hs_list_reference_count`.
+   */
+  additional_filter_properties?: Array<string>;
 
   /**
    * The number of lists to include in the response. Defaults to `20` if no value is
@@ -2162,12 +2162,6 @@ export interface PublicObjectList {
 
 export interface PublicObjectListSearchResult {
   /**
-   * The name and value of any additional properties that exist for this list and
-   * that were included in the search request.
-   */
-  additionalProperties: { [key: string]: string };
-
-  /**
    * The **ILS ID** of the list.
    */
   listId: string;
@@ -2196,6 +2190,12 @@ export interface PublicObjectListSearchResult {
    * The processing type of the list.
    */
   processingType: string;
+
+  /**
+   * The name and value of any additional properties that exist for this list and
+   * that were included in the search request.
+   */
+  additional_filter_properties?: { [key: string]: string };
 
   /**
    * The time when the list was created.
@@ -3379,17 +3379,6 @@ export interface ListGetSizeAndEditsHistoryBetweenParams {
 
 export interface ListListBySearchParams {
   /**
-   * The property names of any additional list properties to include in the response.
-   * Properties that do not exist or that are empty for a particular list are not
-   * included in the response.
-   *
-   * By default, all requests will fetch the following properties for each list:
-   * `hs_list_size`, `hs_last_record_added_at`, `hs_last_record_removed_at`,
-   * `hs_folder_name`, and `hs_list_reference_count`.
-   */
-  additionalProperties: Array<string>;
-
-  /**
    * ILS list ids to be included in search results. If not specified, all lists
    * matching other criteria will be included
    */
@@ -3407,6 +3396,17 @@ export interface ListListBySearchParams {
    * lists with all processing types will be included.
    */
   processingTypes: Array<string>;
+
+  /**
+   * The property names of any additional list properties to include in the response.
+   * Properties that do not exist or that are empty for a particular list are not
+   * included in the response.
+   *
+   * By default, all requests will fetch the following properties for each list:
+   * `hs_list_size`, `hs_last_record_added_at`, `hs_last_record_removed_at`,
+   * `hs_folder_name`, and `hs_list_reference_count`.
+   */
+  additional_filter_properties?: Array<string>;
 
   /**
    * The number of lists to include in the response. Defaults to `20` if no value is

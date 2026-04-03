@@ -86,7 +86,7 @@ import {
   PublicSpendItemInput,
   RevenueAttributionAggregate,
 } from './campaigns/campaigns';
-import * as EventsAPI from './events/events';
+import * as MarketingEventsAPI from './marketing-events/marketing-events';
 import {
   AppInfo,
   AttendanceCounters,
@@ -108,28 +108,21 @@ import {
   CollectionResponseWithTotalPublicList,
   ContactAssociation,
   CrmPropertyWrapper,
-  EventCreateParams,
-  EventDeleteBatchByExternalEventIDParams,
-  EventDeleteBatchParams,
-  EventDeleteByExternalEventIDParams,
   EventDetailSettings,
   EventDetailSettingsURL,
-  EventGetByExternalEventIDParams,
-  EventListParams,
-  EventSearchByExternalEventIDParams,
-  EventUpdateBatchParams,
-  EventUpdateByExternalEventIDParams,
-  EventUpdateParams,
-  EventUpsertBatchParams,
-  EventUpsertByExternalEventIDParams,
-  Events,
   MarketingEventAssociation,
   MarketingEventCompleteRequestParams,
+  MarketingEventCreateParams,
   MarketingEventCreateRequestParams,
   MarketingEventDefaultResponse,
+  MarketingEventDeleteBatchByExternalEventIDParams,
+  MarketingEventDeleteBatchParams,
+  MarketingEventDeleteByExternalEventIDParams,
   MarketingEventEmailSubscriber,
   MarketingEventExternalUniqueIdentifier,
+  MarketingEventGetByExternalEventIDParams,
   MarketingEventIdentifiersResponse,
+  MarketingEventListParams,
   MarketingEventPublicDefaultResponse,
   MarketingEventPublicDefaultResponseV2,
   MarketingEventPublicObjectIDDeleteRequest,
@@ -138,8 +131,15 @@ import {
   MarketingEventPublicReadResponseV2sPage,
   MarketingEventPublicUpdateRequestFullV2,
   MarketingEventPublicUpdateRequestV2,
+  MarketingEventSearchByExternalEventIDParams,
   MarketingEventSubscriber,
+  MarketingEventUpdateBatchParams,
+  MarketingEventUpdateByExternalEventIDParams,
+  MarketingEventUpdateParams,
   MarketingEventUpdateRequestParams,
+  MarketingEventUpsertBatchParams,
+  MarketingEventUpsertByExternalEventIDParams,
+  MarketingEvents,
   ParticipationAssociations,
   ParticipationBreakdown,
   ParticipationProperties,
@@ -147,7 +147,7 @@ import {
   SearchPublicResponseWrapper,
   SubscriberEmailResponse,
   SubscriberVidResponse,
-} from './events/events';
+} from './marketing-events/marketing-events';
 import * as TransactionalAPI from './transactional/transactional';
 import {
   CollectionResponseSmtpAPITokenViewForwardPaging,
@@ -159,7 +159,7 @@ import {
 export class Marketing extends APIResource {
   campaigns: CampaignsAPI.Campaigns = new CampaignsAPI.Campaigns(this._client);
   emails: EmailsAPI.Emails = new EmailsAPI.Emails(this._client);
-  events: EventsAPI.Events = new EventsAPI.Events(this._client);
+  marketingEvents: MarketingEventsAPI.MarketingEvents = new MarketingEventsAPI.MarketingEvents(this._client);
   singleSend: SingleSendAPI.SingleSend = new SingleSendAPI.SingleSend(this._client);
   transactional: TransactionalAPI.Transactional = new TransactionalAPI.Transactional(this._client);
 }
@@ -328,7 +328,7 @@ export interface PublicSingleSendRequestEgg {
 
 Marketing.Campaigns = Campaigns;
 Marketing.Emails = Emails;
-Marketing.Events = Events;
+Marketing.MarketingEvents = MarketingEvents;
 Marketing.SingleSend = SingleSend;
 Marketing.Transactional = Transactional;
 
@@ -424,7 +424,7 @@ export declare namespace Marketing {
   };
 
   export {
-    Events as Events,
+    MarketingEvents as MarketingEvents,
     type AppInfo as AppInfo,
     type AttendanceCounters as AttendanceCounters,
     type BatchInputMarketingEventCreateRequestParams as BatchInputMarketingEventCreateRequestParams,
@@ -471,18 +471,18 @@ export declare namespace Marketing {
     type SubscriberEmailResponse as SubscriberEmailResponse,
     type SubscriberVidResponse as SubscriberVidResponse,
     type MarketingEventPublicReadResponseV2sPage as MarketingEventPublicReadResponseV2sPage,
-    type EventCreateParams as EventCreateParams,
-    type EventUpdateParams as EventUpdateParams,
-    type EventListParams as EventListParams,
-    type EventDeleteBatchParams as EventDeleteBatchParams,
-    type EventDeleteBatchByExternalEventIDParams as EventDeleteBatchByExternalEventIDParams,
-    type EventDeleteByExternalEventIDParams as EventDeleteByExternalEventIDParams,
-    type EventGetByExternalEventIDParams as EventGetByExternalEventIDParams,
-    type EventSearchByExternalEventIDParams as EventSearchByExternalEventIDParams,
-    type EventUpdateBatchParams as EventUpdateBatchParams,
-    type EventUpdateByExternalEventIDParams as EventUpdateByExternalEventIDParams,
-    type EventUpsertBatchParams as EventUpsertBatchParams,
-    type EventUpsertByExternalEventIDParams as EventUpsertByExternalEventIDParams,
+    type MarketingEventCreateParams as MarketingEventCreateParams,
+    type MarketingEventUpdateParams as MarketingEventUpdateParams,
+    type MarketingEventListParams as MarketingEventListParams,
+    type MarketingEventDeleteBatchParams as MarketingEventDeleteBatchParams,
+    type MarketingEventDeleteBatchByExternalEventIDParams as MarketingEventDeleteBatchByExternalEventIDParams,
+    type MarketingEventDeleteByExternalEventIDParams as MarketingEventDeleteByExternalEventIDParams,
+    type MarketingEventGetByExternalEventIDParams as MarketingEventGetByExternalEventIDParams,
+    type MarketingEventSearchByExternalEventIDParams as MarketingEventSearchByExternalEventIDParams,
+    type MarketingEventUpdateBatchParams as MarketingEventUpdateBatchParams,
+    type MarketingEventUpdateByExternalEventIDParams as MarketingEventUpdateByExternalEventIDParams,
+    type MarketingEventUpsertBatchParams as MarketingEventUpsertBatchParams,
+    type MarketingEventUpsertByExternalEventIDParams as MarketingEventUpsertByExternalEventIDParams,
   };
 
   export { SingleSend as SingleSend, type SingleSendCreateParams as SingleSendCreateParams };

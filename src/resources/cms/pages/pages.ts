@@ -76,7 +76,7 @@ import {
   WebsitePages,
 } from './website-pages';
 import { APIPromise } from '../../../core/api-promise';
-import { Page as PaginationPage, type PageParams, PagePromise } from '../../../core/pagination';
+import { Page, type PageParams, PagePromise } from '../../../core/pagination';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -169,7 +169,7 @@ export class Pages extends APIResource {
   ): PagePromise<PageVersionsPage, PageVersion> {
     return this._client.getAPIList(
       path`/cms/pages/2026-03/landing-pages/${objectID}/revisions`,
-      PaginationPage<PageVersion>,
+      Page<PageVersion>,
       { query, ...options },
     );
   }
@@ -184,7 +184,7 @@ export class Pages extends APIResource {
   ): PagePromise<PageVersionsPage, PageVersion> {
     return this._client.getAPIList(
       path`/cms/pages/2026-03/site-pages/${objectID}/revisions`,
-      PaginationPage<PageVersion>,
+      Page<PageVersion>,
       { query, ...options },
     );
   }
@@ -207,7 +207,7 @@ export class Pages extends APIResource {
     revisionID: string,
     params: PageRestoreLandingPageRevisionParams,
     options?: RequestOptions,
-  ): APIPromise<Page> {
+  ): APIPromise<CmsPage> {
     const { objectId } = params;
     return this._client.post(
       path`/cms/pages/2026-03/landing-pages/${objectId}/revisions/${revisionID}/restore`,
@@ -222,7 +222,7 @@ export class Pages extends APIResource {
     revisionID: number,
     params: PageRestoreLandingPageRevisionToDraftParams,
     options?: RequestOptions,
-  ): APIPromise<Page> {
+  ): APIPromise<CmsPage> {
     const { objectId } = params;
     return this._client.post(
       path`/cms/pages/2026-03/landing-pages/${objectId}/revisions/${revisionID}/restore-to-draft`,
@@ -238,7 +238,7 @@ export class Pages extends APIResource {
     revisionID: string,
     params: PageRestoreSitePageRevisionParams,
     options?: RequestOptions,
-  ): APIPromise<Page> {
+  ): APIPromise<CmsPage> {
     const { objectId } = params;
     return this._client.post(
       path`/cms/pages/2026-03/site-pages/${objectId}/revisions/${revisionID}/restore`,
@@ -254,7 +254,7 @@ export class Pages extends APIResource {
     revisionID: number,
     params: PageRestoreSitePageRevisionToDraftParams,
     options?: RequestOptions,
-  ): APIPromise<Page> {
+  ): APIPromise<CmsPage> {
     const { objectId } = params;
     return this._client.post(
       path`/cms/pages/2026-03/site-pages/${objectId}/revisions/${revisionID}/restore-to-draft`,
@@ -263,13 +263,13 @@ export class Pages extends APIResource {
   }
 }
 
-export type PageVersionsPage = PaginationPage<PageVersion>;
+export type PageVersionsPage = Page<PageVersion>;
 
-export type ContentFoldersPage = PaginationPage<ContentFolder>;
+export type ContentFoldersPage = Page<ContentFolder>;
 
-export type ContentFolderVersionsPage = PaginationPage<ContentFolderVersion>;
+export type ContentFolderVersionsPage = Page<ContentFolderVersion>;
 
-export type PagesPage = PaginationPage<Page>;
+export type CmsPagesPage = Page<CmsPage>;
 
 export interface AbTestEndRequestVNext {
   /**
@@ -306,7 +306,7 @@ export interface BatchInputPage {
   /**
    * Pages to input.
    */
-  inputs: Array<Page>;
+  inputs: Array<CmsPage>;
 }
 
 export interface BatchResponseContentFolder {
@@ -392,7 +392,7 @@ export interface BatchResponsePage {
   /**
    * Results of batch operation.
    */
-  results: Array<Page>;
+  results: Array<CmsPage>;
 
   /**
    * Time of batch operation start.
@@ -424,7 +424,7 @@ export interface BatchResponsePageWithErrors {
   /**
    * Results of batch operation.
    */
-  results: Array<Page>;
+  results: Array<CmsPage>;
 
   /**
    * Time of batch operation start.
@@ -457,119 +457,7 @@ export interface BatchResponsePageWithErrors {
   requestedAt?: string;
 }
 
-export interface CollectionResponseWithTotalContentFolderForwardPaging {
-  /**
-   * Collection of content folders.
-   */
-  results: Array<ContentFolder>;
-
-  /**
-   * Total number of content folders.
-   */
-  total: number;
-
-  paging?: Shared.ForwardPaging;
-}
-
-export interface CollectionResponseWithTotalContentFolderVersion {
-  results: Array<ContentFolderVersion>;
-
-  total: number;
-
-  paging?: Shared.Paging;
-}
-
-export interface CollectionResponseWithTotalPageForwardPaging {
-  /**
-   * Collection of pages.
-   */
-  results: Array<Page>;
-
-  /**
-   * Total number of pages.
-   */
-  total: number;
-
-  paging?: Shared.ForwardPaging;
-}
-
-export interface CollectionResponseWithTotalPageVersion {
-  results: Array<PageVersion>;
-
-  total: number;
-
-  paging?: Shared.Paging;
-}
-
-export interface ContentFolder {
-  /**
-   * The unique ID of the content folder.
-   */
-  id: string;
-
-  /**
-   * The type of object this folder applies to. Should always be LANDING_PAGE.
-   */
-  category: number;
-
-  /**
-   * The timestamp indicating when the content folder was created.
-   */
-  created: string;
-
-  /**
-   * The timestamp (ISO8601 format) when this content folder was deleted.
-   */
-  deletedAt: string;
-
-  /**
-   * The name of the folder which will show up in the app dashboard
-   */
-  name: string;
-
-  /**
-   * The ID of the content folder this folder is nested under
-   */
-  parentFolderId: number;
-
-  /**
-   * The timestamp indicating when the content folder was last updated.
-   */
-  updated: string;
-}
-
-export interface ContentFolderVersion {
-  id: string;
-
-  object: ContentFolder;
-
-  updatedAt: string;
-
-  user: Shared.VersionUser;
-}
-
-export interface ContentLanguageCloneRequestVNext {
-  /**
-   * ID of content to clone.
-   */
-  id: string;
-
-  /**
-   * Target language of new variant.
-   */
-  language?: string;
-
-  /**
-   * Language of primary content to clone.
-   */
-  primaryLanguage?: string;
-}
-
-export type CursorPagedResultContentFolderLong = unknown;
-
-export type CursorPagedResultPageLong = unknown;
-
-export interface Page {
+export interface CmsPage {
   /**
    * The unique ID of the page.
    */
@@ -1783,10 +1671,122 @@ export interface Page {
   widgets: { [key: string]: unknown };
 }
 
+export interface CollectionResponseWithTotalContentFolderForwardPaging {
+  /**
+   * Collection of content folders.
+   */
+  results: Array<ContentFolder>;
+
+  /**
+   * Total number of content folders.
+   */
+  total: number;
+
+  paging?: Shared.ForwardPaging;
+}
+
+export interface CollectionResponseWithTotalContentFolderVersion {
+  results: Array<ContentFolderVersion>;
+
+  total: number;
+
+  paging?: Shared.Paging;
+}
+
+export interface CollectionResponseWithTotalPageForwardPaging {
+  /**
+   * Collection of pages.
+   */
+  results: Array<CmsPage>;
+
+  /**
+   * Total number of pages.
+   */
+  total: number;
+
+  paging?: Shared.ForwardPaging;
+}
+
+export interface CollectionResponseWithTotalPageVersion {
+  results: Array<PageVersion>;
+
+  total: number;
+
+  paging?: Shared.Paging;
+}
+
+export interface ContentFolder {
+  /**
+   * The unique ID of the content folder.
+   */
+  id: string;
+
+  /**
+   * The type of object this folder applies to. Should always be LANDING_PAGE.
+   */
+  category: number;
+
+  /**
+   * The timestamp indicating when the content folder was created.
+   */
+  created: string;
+
+  /**
+   * The timestamp (ISO8601 format) when this content folder was deleted.
+   */
+  deletedAt: string;
+
+  /**
+   * The name of the folder which will show up in the app dashboard
+   */
+  name: string;
+
+  /**
+   * The ID of the content folder this folder is nested under
+   */
+  parentFolderId: number;
+
+  /**
+   * The timestamp indicating when the content folder was last updated.
+   */
+  updated: string;
+}
+
+export interface ContentFolderVersion {
+  id: string;
+
+  object: ContentFolder;
+
+  updatedAt: string;
+
+  user: Shared.VersionUser;
+}
+
+export interface ContentLanguageCloneRequestVNext {
+  /**
+   * ID of content to clone.
+   */
+  id: string;
+
+  /**
+   * Target language of new variant.
+   */
+  language?: string;
+
+  /**
+   * Language of primary content to clone.
+   */
+  primaryLanguage?: string;
+}
+
+export type CursorPagedResultContentFolderLong = unknown;
+
+export type CursorPagedResultPageLong = unknown;
+
 export interface PageVersion {
   id: string;
 
-  object: Page;
+  object: CmsPage;
 
   updatedAt: string;
 
@@ -2052,6 +2052,7 @@ export declare namespace Pages {
     type BatchResponseContentFolderWithErrors as BatchResponseContentFolderWithErrors,
     type BatchResponsePage as BatchResponsePage,
     type BatchResponsePageWithErrors as BatchResponsePageWithErrors,
+    type CmsPage as CmsPage,
     type CollectionResponseWithTotalContentFolderForwardPaging as CollectionResponseWithTotalContentFolderForwardPaging,
     type CollectionResponseWithTotalContentFolderVersion as CollectionResponseWithTotalContentFolderVersion,
     type CollectionResponseWithTotalPageForwardPaging as CollectionResponseWithTotalPageForwardPaging,
@@ -2061,7 +2062,6 @@ export declare namespace Pages {
     type ContentLanguageCloneRequestVNext as ContentLanguageCloneRequestVNext,
     type CursorPagedResultContentFolderLong as CursorPagedResultContentFolderLong,
     type CursorPagedResultPageLong as CursorPagedResultPageLong,
-    type Page as Page,
     type PageVersion as PageVersion,
     type PageVersionsPage as PageVersionsPage,
     type PageGetLandingPageFoldersParams as PageGetLandingPageFoldersParams,

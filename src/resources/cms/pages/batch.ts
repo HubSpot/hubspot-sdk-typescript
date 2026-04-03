@@ -179,14 +179,14 @@ export interface BatchCreateLandingPagesParams {
   /**
    * Pages to input.
    */
-  inputs: Array<PagesAPI.Page>;
+  inputs: Array<PagesAPI.CmsPage>;
 }
 
 export interface BatchCreateSitePagesParams {
   /**
    * Pages to input.
    */
-  inputs: Array<PagesAPI.Page>;
+  inputs: Array<PagesAPI.CmsPage>;
 }
 
 export interface BatchDeleteFoldersParams {

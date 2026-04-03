@@ -1,15 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as BusinessUnitsBusinessUnitsAPI from './business-units_';
-import {
-  BusinessUnitGetByUserIDParams,
-  BusinessUnits as BusinessUnitsAPIBusinessUnits,
-} from './business-units_';
+import * as BusinessUnitEntriesAPI from './business-unit-entries';
+import { BusinessUnitEntries, BusinessUnitEntryGetByUserIDParams } from './business-unit-entries';
 
 export class BusinessUnits extends APIResource {
-  businessUnits: BusinessUnitsBusinessUnitsAPI.BusinessUnits =
-    new BusinessUnitsBusinessUnitsAPI.BusinessUnits(this._client);
+  businessUnitEntries: BusinessUnitEntriesAPI.BusinessUnitEntries =
+    new BusinessUnitEntriesAPI.BusinessUnitEntries(this._client);
 }
 
 export interface CollectionResponsePublicBusinessUnitNoPaging {
@@ -50,7 +47,7 @@ export interface PublicBusinessUnitLogoMetadata {
   resizedUrl?: string;
 }
 
-BusinessUnits.BusinessUnits = BusinessUnitsAPIBusinessUnits;
+BusinessUnits.BusinessUnitEntries = BusinessUnitEntries;
 
 export declare namespace BusinessUnits {
   export {
@@ -60,7 +57,7 @@ export declare namespace BusinessUnits {
   };
 
   export {
-    BusinessUnitsAPIBusinessUnits as BusinessUnits,
-    type BusinessUnitGetByUserIDParams as BusinessUnitGetByUserIDParams,
+    BusinessUnitEntries as BusinessUnitEntries,
+    type BusinessUnitEntryGetByUserIDParams as BusinessUnitEntryGetByUserIDParams,
   };
 }
