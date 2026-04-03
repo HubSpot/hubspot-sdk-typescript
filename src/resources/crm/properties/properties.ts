@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
+import * as CrmAPI from '../crm';
 import * as BatchAPI from './batch';
 import { Batch, BatchCreateParams, BatchDeleteParams, BatchGetParams } from './batch';
 import * as GroupsAPI from './groups';
@@ -25,7 +26,11 @@ export class Properties extends APIResource {
   /**
    * Create and return a copy of a new property for the specified object type.
    */
-  create(objectType: string, body: PropertyCreateParams, options?: RequestOptions): APIPromise<Property> {
+  create(
+    objectType: string,
+    body: PropertyCreateParams,
+    options?: RequestOptions,
+  ): APIPromise<CrmAPI.Property> {
     return this._client.post(path`/crm/properties/2026-03/${objectType}`, { body, ...options });
   }
 
@@ -33,7 +38,11 @@ export class Properties extends APIResource {
    * Perform a partial update of a property identified by { propertyName }. Provided
    * fields will be overwritten.
    */
-  update(propertyName: string, params: PropertyUpdateParams, options?: RequestOptions): APIPromise<Property> {
+  update(
+    propertyName: string,
+    params: PropertyUpdateParams,
+    options?: RequestOptions,
+  ): APIPromise<CrmAPI.Property> {
     const { objectType, ...body } = params;
     return this._client.patch(path`/crm/properties/2026-03/${objectType}/${propertyName}`, {
       body,
@@ -66,7 +75,11 @@ export class Properties extends APIResource {
   /**
    * Read a property identified by {propertyName}.
    */
-  get(propertyName: string, params: PropertyGetParams, options?: RequestOptions): APIPromise<Property> {
+  get(
+    propertyName: string,
+    params: PropertyGetParams,
+    options?: RequestOptions,
+  ): APIPromise<CrmAPI.Property> {
     const { objectType, ...query } = params;
     return this._client.get(path`/crm/properties/2026-03/${objectType}/${propertyName}`, {
       query,
@@ -85,7 +98,7 @@ export interface BatchResponseProperty {
    */
   completedAt: string;
 
-  results: Array<Property>;
+  results: Array<CrmAPI.Property>;
 
   /**
    * The timestamp indicating when the batch operation began processing.
@@ -113,7 +126,7 @@ export interface BatchResponseProperty {
 export interface BatchResponsePropertyWithErrors {
   completedAt: string;
 
-  results: Array<Property>;
+  results: Array<CrmAPI.Property>;
 
   startedAt: string;
 
@@ -129,161 +142,7 @@ export interface BatchResponsePropertyWithErrors {
 }
 
 export interface CollectionResponsePropertyNoPaging {
-  results: Array<Property>;
-}
-
-/**
- * A HubSpot property
- */
-export interface Property {
-  /**
-   * A description of the property that will be shown as help text in HubSpot.
-   */
-  description: string;
-
-  /**
-   * Controls how the property appears in HubSpot.
-   */
-  fieldType: string;
-
-  /**
-   * The name of the property group the property belongs to.
-   */
-  groupName: string;
-
-  /**
-   * A human-readable property label that will be shown in HubSpot.
-   */
-  label: string;
-
-  /**
-   * The internal property name, which must be used when referencing the property via
-   * the API.
-   */
-  name: string;
-
-  /**
-   * A list of valid options for the property. This field is required for enumerated
-   * properties, but will be empty for other property types.
-   */
-  options: Array<Shared.Option>;
-
-  /**
-   * The property data type.
-   */
-  type: string;
-
-  /**
-   * Whether or not the property is archived.
-   */
-  archived?: boolean;
-
-  /**
-   * When the property was archived.
-   */
-  archivedAt?: string;
-
-  /**
-   * For default properties, true indicates that the property is calculated by a
-   * HubSpot process. It has no effect for custom properties.
-   */
-  calculated?: boolean;
-
-  /**
-   * Represents a formula that is used to compute a calculated property.
-   */
-  calculationFormula?: string;
-
-  /**
-   * The timestamp when the property was created, in ISO 8601 format.
-   */
-  createdAt?: string;
-
-  /**
-   * The internal user ID of the user who created the property in HubSpot. This field
-   * may not exist if the property was created outside of HubSpot.
-   */
-  createdUserId?: string;
-
-  /**
-   * The name of the related currency property.
-   */
-  currencyPropertyName?: string;
-
-  /**
-   * Indicates the sensitivity level of the property, such as "non_sensitive",
-   * "sensitive", or "highly_sensitive".
-   */
-  dataSensitivity?: 'highly_sensitive' | 'non_sensitive' | 'sensitive';
-
-  /**
-   * Indicates how date values should be displayed, with options such as 'absolute',
-   * 'absolute_with_relative', 'time_since', or 'time_until'.
-   */
-  dateDisplayHint?: 'absolute' | 'absolute_with_relative' | 'time_since' | 'time_until';
-
-  /**
-   * Properties are shown in order, starting with the lowest positive integer value.
-   */
-  displayOrder?: number;
-
-  /**
-   * For default properties, true indicates that the options are stored externally to
-   * the property settings.
-   */
-  externalOptions?: boolean;
-
-  /**
-   * Whether or not the property can be used in a HubSpot form.
-   */
-  formField?: boolean;
-
-  /**
-   * Whether or not the property's value must be unique. Once set, this can't be
-   * changed.
-   */
-  hasUniqueValue?: boolean;
-
-  /**
-   * Whether or not the property will be hidden from the HubSpot UI. It's recommended
-   * this be set to false for custom properties.
-   */
-  hidden?: boolean;
-
-  /**
-   * This will be true for default object properties built into HubSpot.
-   */
-  hubspotDefined?: boolean;
-
-  modificationMetadata?: Shared.PropertyModificationMetadata;
-
-  /**
-   * If this property is related to other object(s), they'll be listed here.
-   */
-  referencedObjectType?: string;
-
-  /**
-   * When sensitiveData is true, lists the type of sensitive data contained in the
-   * property (e.g., "HIPAA").
-   */
-  sensitiveDataCategories?: Array<string>;
-
-  /**
-   * Whether or not the property will display the currency symbol set in the account
-   * settings.
-   */
-  showCurrencySymbol?: boolean;
-
-  /**
-   * The timestamp when the property was last updated, in ISO 8601 format.
-   */
-  updatedAt?: string;
-
-  /**
-   * The internal user ID of the user who updated the property in HubSpot. This field
-   * may not exist if the property was updated outside of HubSpot.
-   */
-  updatedUserId?: string;
+  results: Array<CrmAPI.Property>;
 }
 
 export interface PropertyCreate {
@@ -693,7 +552,6 @@ export declare namespace Properties {
     type BatchResponseProperty as BatchResponseProperty,
     type BatchResponsePropertyWithErrors as BatchResponsePropertyWithErrors,
     type CollectionResponsePropertyNoPaging as CollectionResponsePropertyNoPaging,
-    type Property as Property,
     type PropertyCreate as PropertyCreate,
     type PropertyUpdate as PropertyUpdate,
     type PropertyCreateParams as PropertyCreateParams,

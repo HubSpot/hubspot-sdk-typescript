@@ -851,7 +851,6 @@ export declare namespace Hubspot {
   export type OptionInput = API.OptionInput;
   export type Paging = API.Paging;
   export type PreviousPage = API.PreviousPage;
-  export type Property = API.Property;
   export type PropertyGroup = API.PropertyGroup;
   export type PropertyGroupCreate = API.PropertyGroupCreate;
   export type PropertyGroupUpdate = API.PropertyGroupUpdate;

@@ -39,6 +39,7 @@ export {
   type NowReference,
   type NumOccurrencesRefineBy,
   type NumberPropertyOperation,
+  type Property,
   type PropertyFilter,
   type PropertyFilterContext,
   type PropertyReferencedTime,
