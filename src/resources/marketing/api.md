@@ -144,124 +144,124 @@ Methods:
 - <code title="post /marketing/emails/2026-03/{emailId}/unpublish">client.marketing.emails.<a href="./src/resources/marketing/emails.ts">unpublish</a>(emailID) -> void</code>
 - <code title="patch /marketing/emails/2026-03/{emailId}/draft">client.marketing.emails.<a href="./src/resources/marketing/emails.ts">updateDraft</a>(emailID, { ...params }) -> PublicEmail</code>
 
-## Events
+## MarketingEvents
 
 Types:
 
-- <code><a href="./src/resources/marketing/events/events.ts">AppInfo</a></code>
-- <code><a href="./src/resources/marketing/events/events.ts">AttendanceCounters</a></code>
-- <code><a href="./src/resources/marketing/events/events.ts">BatchInputMarketingEventCreateRequestParams</a></code>
-- <code><a href="./src/resources/marketing/events/events.ts">BatchInputMarketingEventEmailSubscriber</a></code>
-- <code><a href="./src/resources/marketing/events/events.ts">BatchInputMarketingEventExternalUniqueIdentifier</a></code>
-- <code><a href="./src/resources/marketing/events/events.ts">BatchInputMarketingEventPublicObjectIDDeleteRequest</a></code>
-- <code><a href="./src/resources/marketing/events/events.ts">BatchInputMarketingEventPublicUpdateRequestFullV2</a></code>
-- <code><a href="./src/resources/marketing/events/events.ts">BatchInputMarketingEventSubscriber</a></code>
-- <code><a href="./src/resources/marketing/events/events.ts">BatchResponseMarketingEventPublicDefaultResponse</a></code>
-- <code><a href="./src/resources/marketing/events/events.ts">BatchResponseMarketingEventPublicDefaultResponseV2</a></code>
-- <code><a href="./src/resources/marketing/events/events.ts">BatchResponseMarketingEventPublicDefaultResponseV2WithErrors</a></code>
-- <code><a href="./src/resources/marketing/events/events.ts">BatchResponseSubscriberEmailResponse</a></code>
-- <code><a href="./src/resources/marketing/events/events.ts">BatchResponseSubscriberVidResponse</a></code>
-- <code><a href="./src/resources/marketing/events/events.ts">CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging</a></code>
-- <code><a href="./src/resources/marketing/events/events.ts">CollectionResponseSearchPublicResponseWrapperNoPaging</a></code>
-- <code><a href="./src/resources/marketing/events/events.ts">CollectionResponseWithTotalMarketingEventIdentifiersResponse</a></code>
-- <code><a href="./src/resources/marketing/events/events.ts">CollectionResponseWithTotalParticipationBreakdown</a></code>
-- <code><a href="./src/resources/marketing/events/events.ts">CollectionResponseWithTotalPublicList</a></code>
-- <code><a href="./src/resources/marketing/events/events.ts">ContactAssociation</a></code>
-- <code><a href="./src/resources/marketing/events/events.ts">CrmPropertyWrapper</a></code>
-- <code><a href="./src/resources/marketing/events/events.ts">EventDetailSettings</a></code>
-- <code><a href="./src/resources/marketing/events/events.ts">EventDetailSettingsURL</a></code>
-- <code><a href="./src/resources/marketing/events/events.ts">MarketingEventAssociation</a></code>
-- <code><a href="./src/resources/marketing/events/events.ts">MarketingEventCompleteRequestParams</a></code>
-- <code><a href="./src/resources/marketing/events/events.ts">MarketingEventCreateRequestParams</a></code>
-- <code><a href="./src/resources/marketing/events/events.ts">MarketingEventDefaultResponse</a></code>
-- <code><a href="./src/resources/marketing/events/events.ts">MarketingEventEmailSubscriber</a></code>
-- <code><a href="./src/resources/marketing/events/events.ts">MarketingEventExternalUniqueIdentifier</a></code>
-- <code><a href="./src/resources/marketing/events/events.ts">MarketingEventIdentifiersResponse</a></code>
-- <code><a href="./src/resources/marketing/events/events.ts">MarketingEventPublicDefaultResponse</a></code>
-- <code><a href="./src/resources/marketing/events/events.ts">MarketingEventPublicDefaultResponseV2</a></code>
-- <code><a href="./src/resources/marketing/events/events.ts">MarketingEventPublicObjectIDDeleteRequest</a></code>
-- <code><a href="./src/resources/marketing/events/events.ts">MarketingEventPublicReadResponse</a></code>
-- <code><a href="./src/resources/marketing/events/events.ts">MarketingEventPublicReadResponseV2</a></code>
-- <code><a href="./src/resources/marketing/events/events.ts">MarketingEventPublicUpdateRequestFullV2</a></code>
-- <code><a href="./src/resources/marketing/events/events.ts">MarketingEventPublicUpdateRequestV2</a></code>
-- <code><a href="./src/resources/marketing/events/events.ts">MarketingEventSubscriber</a></code>
-- <code><a href="./src/resources/marketing/events/events.ts">MarketingEventUpdateRequestParams</a></code>
-- <code><a href="./src/resources/marketing/events/events.ts">ParticipationAssociations</a></code>
-- <code><a href="./src/resources/marketing/events/events.ts">ParticipationBreakdown</a></code>
-- <code><a href="./src/resources/marketing/events/events.ts">ParticipationProperties</a></code>
-- <code><a href="./src/resources/marketing/events/events.ts">PublicList</a></code>
-- <code><a href="./src/resources/marketing/events/events.ts">SearchPublicResponseWrapper</a></code>
-- <code><a href="./src/resources/marketing/events/events.ts">SubscriberEmailResponse</a></code>
-- <code><a href="./src/resources/marketing/events/events.ts">SubscriberVidResponse</a></code>
+- <code><a href="./src/resources/marketing/marketing-events/marketing-events.ts">AppInfo</a></code>
+- <code><a href="./src/resources/marketing/marketing-events/marketing-events.ts">AttendanceCounters</a></code>
+- <code><a href="./src/resources/marketing/marketing-events/marketing-events.ts">BatchInputMarketingEventCreateRequestParams</a></code>
+- <code><a href="./src/resources/marketing/marketing-events/marketing-events.ts">BatchInputMarketingEventEmailSubscriber</a></code>
+- <code><a href="./src/resources/marketing/marketing-events/marketing-events.ts">BatchInputMarketingEventExternalUniqueIdentifier</a></code>
+- <code><a href="./src/resources/marketing/marketing-events/marketing-events.ts">BatchInputMarketingEventPublicObjectIDDeleteRequest</a></code>
+- <code><a href="./src/resources/marketing/marketing-events/marketing-events.ts">BatchInputMarketingEventPublicUpdateRequestFullV2</a></code>
+- <code><a href="./src/resources/marketing/marketing-events/marketing-events.ts">BatchInputMarketingEventSubscriber</a></code>
+- <code><a href="./src/resources/marketing/marketing-events/marketing-events.ts">BatchResponseMarketingEventPublicDefaultResponse</a></code>
+- <code><a href="./src/resources/marketing/marketing-events/marketing-events.ts">BatchResponseMarketingEventPublicDefaultResponseV2</a></code>
+- <code><a href="./src/resources/marketing/marketing-events/marketing-events.ts">BatchResponseMarketingEventPublicDefaultResponseV2WithErrors</a></code>
+- <code><a href="./src/resources/marketing/marketing-events/marketing-events.ts">BatchResponseSubscriberEmailResponse</a></code>
+- <code><a href="./src/resources/marketing/marketing-events/marketing-events.ts">BatchResponseSubscriberVidResponse</a></code>
+- <code><a href="./src/resources/marketing/marketing-events/marketing-events.ts">CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging</a></code>
+- <code><a href="./src/resources/marketing/marketing-events/marketing-events.ts">CollectionResponseSearchPublicResponseWrapperNoPaging</a></code>
+- <code><a href="./src/resources/marketing/marketing-events/marketing-events.ts">CollectionResponseWithTotalMarketingEventIdentifiersResponse</a></code>
+- <code><a href="./src/resources/marketing/marketing-events/marketing-events.ts">CollectionResponseWithTotalParticipationBreakdown</a></code>
+- <code><a href="./src/resources/marketing/marketing-events/marketing-events.ts">CollectionResponseWithTotalPublicList</a></code>
+- <code><a href="./src/resources/marketing/marketing-events/marketing-events.ts">ContactAssociation</a></code>
+- <code><a href="./src/resources/marketing/marketing-events/marketing-events.ts">CrmPropertyWrapper</a></code>
+- <code><a href="./src/resources/marketing/marketing-events/marketing-events.ts">EventDetailSettings</a></code>
+- <code><a href="./src/resources/marketing/marketing-events/marketing-events.ts">EventDetailSettingsURL</a></code>
+- <code><a href="./src/resources/marketing/marketing-events/marketing-events.ts">MarketingEventAssociation</a></code>
+- <code><a href="./src/resources/marketing/marketing-events/marketing-events.ts">MarketingEventCompleteRequestParams</a></code>
+- <code><a href="./src/resources/marketing/marketing-events/marketing-events.ts">MarketingEventCreateRequestParams</a></code>
+- <code><a href="./src/resources/marketing/marketing-events/marketing-events.ts">MarketingEventDefaultResponse</a></code>
+- <code><a href="./src/resources/marketing/marketing-events/marketing-events.ts">MarketingEventEmailSubscriber</a></code>
+- <code><a href="./src/resources/marketing/marketing-events/marketing-events.ts">MarketingEventExternalUniqueIdentifier</a></code>
+- <code><a href="./src/resources/marketing/marketing-events/marketing-events.ts">MarketingEventIdentifiersResponse</a></code>
+- <code><a href="./src/resources/marketing/marketing-events/marketing-events.ts">MarketingEventPublicDefaultResponse</a></code>
+- <code><a href="./src/resources/marketing/marketing-events/marketing-events.ts">MarketingEventPublicDefaultResponseV2</a></code>
+- <code><a href="./src/resources/marketing/marketing-events/marketing-events.ts">MarketingEventPublicObjectIDDeleteRequest</a></code>
+- <code><a href="./src/resources/marketing/marketing-events/marketing-events.ts">MarketingEventPublicReadResponse</a></code>
+- <code><a href="./src/resources/marketing/marketing-events/marketing-events.ts">MarketingEventPublicReadResponseV2</a></code>
+- <code><a href="./src/resources/marketing/marketing-events/marketing-events.ts">MarketingEventPublicUpdateRequestFullV2</a></code>
+- <code><a href="./src/resources/marketing/marketing-events/marketing-events.ts">MarketingEventPublicUpdateRequestV2</a></code>
+- <code><a href="./src/resources/marketing/marketing-events/marketing-events.ts">MarketingEventSubscriber</a></code>
+- <code><a href="./src/resources/marketing/marketing-events/marketing-events.ts">MarketingEventUpdateRequestParams</a></code>
+- <code><a href="./src/resources/marketing/marketing-events/marketing-events.ts">ParticipationAssociations</a></code>
+- <code><a href="./src/resources/marketing/marketing-events/marketing-events.ts">ParticipationBreakdown</a></code>
+- <code><a href="./src/resources/marketing/marketing-events/marketing-events.ts">ParticipationProperties</a></code>
+- <code><a href="./src/resources/marketing/marketing-events/marketing-events.ts">PublicList</a></code>
+- <code><a href="./src/resources/marketing/marketing-events/marketing-events.ts">SearchPublicResponseWrapper</a></code>
+- <code><a href="./src/resources/marketing/marketing-events/marketing-events.ts">SubscriberEmailResponse</a></code>
+- <code><a href="./src/resources/marketing/marketing-events/marketing-events.ts">SubscriberVidResponse</a></code>
 
 Methods:
 
-- <code title="post /marketing/marketing-events/2026-03/events">client.marketing.events.<a href="./src/resources/marketing/events/events.ts">create</a>({ ...params }) -> MarketingEventDefaultResponse</code>
-- <code title="patch /marketing/marketing-events/2026-03/{objectId}">client.marketing.events.<a href="./src/resources/marketing/events/events.ts">update</a>(objectID, { ...params }) -> MarketingEventPublicDefaultResponseV2</code>
-- <code title="get /marketing/marketing-events/2026-03">client.marketing.events.<a href="./src/resources/marketing/events/events.ts">list</a>({ ...params }) -> MarketingEventPublicReadResponseV2sPage</code>
-- <code title="delete /marketing/marketing-events/2026-03/{objectId}">client.marketing.events.<a href="./src/resources/marketing/events/events.ts">delete</a>(objectID) -> void</code>
-- <code title="post /marketing/marketing-events/2026-03/batch/archive">client.marketing.events.<a href="./src/resources/marketing/events/events.ts">deleteBatch</a>({ ...params }) -> Response</code>
-- <code title="post /marketing/marketing-events/2026-03/events/delete">client.marketing.events.<a href="./src/resources/marketing/events/events.ts">deleteBatchByExternalEventID</a>({ ...params }) -> Response</code>
-- <code title="delete /marketing/marketing-events/2026-03/events/{externalEventId}">client.marketing.events.<a href="./src/resources/marketing/events/events.ts">deleteByExternalEventID</a>(externalEventID, { ...params }) -> void</code>
-- <code title="get /marketing/marketing-events/2026-03/{objectId}">client.marketing.events.<a href="./src/resources/marketing/events/events.ts">get</a>(objectID) -> MarketingEventPublicReadResponseV2</code>
-- <code title="get /marketing/marketing-events/2026-03/events/{externalEventId}">client.marketing.events.<a href="./src/resources/marketing/events/events.ts">getByExternalEventID</a>(externalEventID, { ...params }) -> MarketingEventPublicReadResponse</code>
-- <code title="get /marketing/marketing-events/2026-03/events/search">client.marketing.events.<a href="./src/resources/marketing/events/events.ts">searchByExternalEventID</a>({ ...params }) -> CollectionResponseSearchPublicResponseWrapperNoPaging</code>
-- <code title="get /marketing/marketing-events/2026-03/{externalEventId}/identifiers">client.marketing.events.<a href="./src/resources/marketing/events/events.ts">searchIdentifiersByExternalEventID</a>(externalEventID) -> CollectionResponseWithTotalMarketingEventIdentifiersResponse</code>
-- <code title="post /marketing/marketing-events/2026-03/batch/update">client.marketing.events.<a href="./src/resources/marketing/events/events.ts">updateBatch</a>({ ...params }) -> BatchResponseMarketingEventPublicDefaultResponseV2</code>
-- <code title="patch /marketing/marketing-events/2026-03/events/{externalEventId}">client.marketing.events.<a href="./src/resources/marketing/events/events.ts">updateByExternalEventID</a>(externalEventID, { ...params }) -> MarketingEventPublicDefaultResponse</code>
-- <code title="post /marketing/marketing-events/2026-03/events/upsert">client.marketing.events.<a href="./src/resources/marketing/events/events.ts">upsertBatch</a>({ ...params }) -> BatchResponseMarketingEventPublicDefaultResponse</code>
-- <code title="put /marketing/marketing-events/2026-03/events/{externalEventId}">client.marketing.events.<a href="./src/resources/marketing/events/events.ts">upsertByExternalEventID</a>(externalEventID, { ...params }) -> MarketingEventPublicDefaultResponse</code>
+- <code title="post /marketing/marketing-events/2026-03/events">client.marketing.marketingEvents.<a href="./src/resources/marketing/marketing-events/marketing-events.ts">create</a>({ ...params }) -> MarketingEventDefaultResponse</code>
+- <code title="patch /marketing/marketing-events/2026-03/{objectId}">client.marketing.marketingEvents.<a href="./src/resources/marketing/marketing-events/marketing-events.ts">update</a>(objectID, { ...params }) -> MarketingEventPublicDefaultResponseV2</code>
+- <code title="get /marketing/marketing-events/2026-03">client.marketing.marketingEvents.<a href="./src/resources/marketing/marketing-events/marketing-events.ts">list</a>({ ...params }) -> MarketingEventPublicReadResponseV2sPage</code>
+- <code title="delete /marketing/marketing-events/2026-03/{objectId}">client.marketing.marketingEvents.<a href="./src/resources/marketing/marketing-events/marketing-events.ts">delete</a>(objectID) -> void</code>
+- <code title="post /marketing/marketing-events/2026-03/batch/archive">client.marketing.marketingEvents.<a href="./src/resources/marketing/marketing-events/marketing-events.ts">deleteBatch</a>({ ...params }) -> Response</code>
+- <code title="post /marketing/marketing-events/2026-03/events/delete">client.marketing.marketingEvents.<a href="./src/resources/marketing/marketing-events/marketing-events.ts">deleteBatchByExternalEventID</a>({ ...params }) -> Response</code>
+- <code title="delete /marketing/marketing-events/2026-03/events/{externalEventId}">client.marketing.marketingEvents.<a href="./src/resources/marketing/marketing-events/marketing-events.ts">deleteByExternalEventID</a>(externalEventID, { ...params }) -> void</code>
+- <code title="get /marketing/marketing-events/2026-03/{objectId}">client.marketing.marketingEvents.<a href="./src/resources/marketing/marketing-events/marketing-events.ts">get</a>(objectID) -> MarketingEventPublicReadResponseV2</code>
+- <code title="get /marketing/marketing-events/2026-03/events/{externalEventId}">client.marketing.marketingEvents.<a href="./src/resources/marketing/marketing-events/marketing-events.ts">getByExternalEventID</a>(externalEventID, { ...params }) -> MarketingEventPublicReadResponse</code>
+- <code title="get /marketing/marketing-events/2026-03/events/search">client.marketing.marketingEvents.<a href="./src/resources/marketing/marketing-events/marketing-events.ts">searchByExternalEventID</a>({ ...params }) -> CollectionResponseSearchPublicResponseWrapperNoPaging</code>
+- <code title="get /marketing/marketing-events/2026-03/{externalEventId}/identifiers">client.marketing.marketingEvents.<a href="./src/resources/marketing/marketing-events/marketing-events.ts">searchIdentifiersByExternalEventID</a>(externalEventID) -> CollectionResponseWithTotalMarketingEventIdentifiersResponse</code>
+- <code title="post /marketing/marketing-events/2026-03/batch/update">client.marketing.marketingEvents.<a href="./src/resources/marketing/marketing-events/marketing-events.ts">updateBatch</a>({ ...params }) -> BatchResponseMarketingEventPublicDefaultResponseV2</code>
+- <code title="patch /marketing/marketing-events/2026-03/events/{externalEventId}">client.marketing.marketingEvents.<a href="./src/resources/marketing/marketing-events/marketing-events.ts">updateByExternalEventID</a>(externalEventID, { ...params }) -> MarketingEventPublicDefaultResponse</code>
+- <code title="post /marketing/marketing-events/2026-03/events/upsert">client.marketing.marketingEvents.<a href="./src/resources/marketing/marketing-events/marketing-events.ts">upsertBatch</a>({ ...params }) -> BatchResponseMarketingEventPublicDefaultResponse</code>
+- <code title="put /marketing/marketing-events/2026-03/events/{externalEventId}">client.marketing.marketingEvents.<a href="./src/resources/marketing/marketing-events/marketing-events.ts">upsertByExternalEventID</a>(externalEventID, { ...params }) -> MarketingEventPublicDefaultResponse</code>
 
 ### Attendance
 
 Methods:
 
-- <code title="post /marketing/marketing-events/2026-03/{objectId}/attendance/{subscriberState}/create">client.marketing.events.attendance.<a href="./src/resources/marketing/events/attendance.ts">createByEventIDAndContactID</a>(subscriberState, { ...params }) -> BatchResponseSubscriberVidResponse</code>
-- <code title="post /marketing/marketing-events/2026-03/{objectId}/attendance/{subscriberState}/email-create">client.marketing.events.attendance.<a href="./src/resources/marketing/events/attendance.ts">createByEventIDAndEmail</a>(subscriberState, { ...params }) -> BatchResponseSubscriberEmailResponse</code>
-- <code title="post /marketing/marketing-events/2026-03/attendance/{externalEventId}/{subscriberState}/create">client.marketing.events.attendance.<a href="./src/resources/marketing/events/attendance.ts">createByExternalEventIDAndContactID</a>(subscriberState, { ...params }) -> BatchResponseSubscriberVidResponse</code>
-- <code title="post /marketing/marketing-events/2026-03/attendance/{externalEventId}/{subscriberState}/email-create">client.marketing.events.attendance.<a href="./src/resources/marketing/events/attendance.ts">createByExternalEventIDAndEmail</a>(subscriberState, { ...params }) -> BatchResponseSubscriberEmailResponse</code>
+- <code title="post /marketing/marketing-events/2026-03/{objectId}/attendance/{subscriberState}/create">client.marketing.marketingEvents.attendance.<a href="./src/resources/marketing/marketing-events/attendance.ts">createByEventIDAndContactID</a>(subscriberState, { ...params }) -> BatchResponseSubscriberVidResponse</code>
+- <code title="post /marketing/marketing-events/2026-03/{objectId}/attendance/{subscriberState}/email-create">client.marketing.marketingEvents.attendance.<a href="./src/resources/marketing/marketing-events/attendance.ts">createByEventIDAndEmail</a>(subscriberState, { ...params }) -> BatchResponseSubscriberEmailResponse</code>
+- <code title="post /marketing/marketing-events/2026-03/attendance/{externalEventId}/{subscriberState}/create">client.marketing.marketingEvents.attendance.<a href="./src/resources/marketing/marketing-events/attendance.ts">createByExternalEventIDAndContactID</a>(subscriberState, { ...params }) -> BatchResponseSubscriberVidResponse</code>
+- <code title="post /marketing/marketing-events/2026-03/attendance/{externalEventId}/{subscriberState}/email-create">client.marketing.marketingEvents.attendance.<a href="./src/resources/marketing/marketing-events/attendance.ts">createByExternalEventIDAndEmail</a>(subscriberState, { ...params }) -> BatchResponseSubscriberEmailResponse</code>
 
 ### Events
 
 Methods:
 
-- <code title="post /marketing/marketing-events/2026-03/events/{externalEventId}/cancel">client.marketing.events.events.<a href="./src/resources/marketing/events/events_.ts">cancelByExternalEventID</a>(externalEventID, { ...params }) -> MarketingEventDefaultResponse</code>
-- <code title="post /marketing/marketing-events/2026-03/events/{externalEventId}/complete">client.marketing.events.events.<a href="./src/resources/marketing/events/events_.ts">completeByExternalEventID</a>(externalEventID, { ...params }) -> MarketingEventDefaultResponse</code>
+- <code title="post /marketing/marketing-events/2026-03/events/{externalEventId}/cancel">client.marketing.marketingEvents.events.<a href="./src/resources/marketing/marketing-events/events.ts">cancelByExternalEventID</a>(externalEventID, { ...params }) -> MarketingEventDefaultResponse</code>
+- <code title="post /marketing/marketing-events/2026-03/events/{externalEventId}/complete">client.marketing.marketingEvents.events.<a href="./src/resources/marketing/marketing-events/events.ts">completeByExternalEventID</a>(externalEventID, { ...params }) -> MarketingEventDefaultResponse</code>
 
 ### ListAssociations
 
 Methods:
 
-- <code title="get /marketing/marketing-events/2026-03/associations/{marketingEventId}/lists">client.marketing.events.listAssociations.<a href="./src/resources/marketing/events/list-associations.ts">list</a>(marketingEventID) -> CollectionResponseWithTotalPublicList</code>
-- <code title="delete /marketing/marketing-events/2026-03/associations/{marketingEventId}/lists/{listId}">client.marketing.events.listAssociations.<a href="./src/resources/marketing/events/list-associations.ts">delete</a>(listID, { ...params }) -> void</code>
-- <code title="put /marketing/marketing-events/2026-03/associations/{marketingEventId}/lists/{listId}">client.marketing.events.listAssociations.<a href="./src/resources/marketing/events/list-associations.ts">associate</a>(listID, { ...params }) -> void</code>
-- <code title="put /marketing/marketing-events/2026-03/associations/{externalAccountId}/{externalEventId}/lists/{listId}">client.marketing.events.listAssociations.<a href="./src/resources/marketing/events/list-associations.ts">associateByExternalAccount</a>(listID, { ...params }) -> void</code>
-- <code title="delete /marketing/marketing-events/2026-03/associations/{externalAccountId}/{externalEventId}/lists/{listId}">client.marketing.events.listAssociations.<a href="./src/resources/marketing/events/list-associations.ts">deleteByExternalAccount</a>(listID, { ...params }) -> void</code>
-- <code title="get /marketing/marketing-events/2026-03/associations/{externalAccountId}/{externalEventId}/lists">client.marketing.events.listAssociations.<a href="./src/resources/marketing/events/list-associations.ts">listByExternalAccount</a>(externalEventID, { ...params }) -> CollectionResponseWithTotalPublicList</code>
+- <code title="get /marketing/marketing-events/2026-03/associations/{marketingEventId}/lists">client.marketing.marketingEvents.listAssociations.<a href="./src/resources/marketing/marketing-events/list-associations.ts">list</a>(marketingEventID) -> CollectionResponseWithTotalPublicList</code>
+- <code title="delete /marketing/marketing-events/2026-03/associations/{marketingEventId}/lists/{listId}">client.marketing.marketingEvents.listAssociations.<a href="./src/resources/marketing/marketing-events/list-associations.ts">delete</a>(listID, { ...params }) -> void</code>
+- <code title="put /marketing/marketing-events/2026-03/associations/{marketingEventId}/lists/{listId}">client.marketing.marketingEvents.listAssociations.<a href="./src/resources/marketing/marketing-events/list-associations.ts">associate</a>(listID, { ...params }) -> void</code>
+- <code title="put /marketing/marketing-events/2026-03/associations/{externalAccountId}/{externalEventId}/lists/{listId}">client.marketing.marketingEvents.listAssociations.<a href="./src/resources/marketing/marketing-events/list-associations.ts">associateByExternalAccount</a>(listID, { ...params }) -> void</code>
+- <code title="delete /marketing/marketing-events/2026-03/associations/{externalAccountId}/{externalEventId}/lists/{listId}">client.marketing.marketingEvents.listAssociations.<a href="./src/resources/marketing/marketing-events/list-associations.ts">deleteByExternalAccount</a>(listID, { ...params }) -> void</code>
+- <code title="get /marketing/marketing-events/2026-03/associations/{externalAccountId}/{externalEventId}/lists">client.marketing.marketingEvents.listAssociations.<a href="./src/resources/marketing/marketing-events/list-associations.ts">listByExternalAccount</a>(externalEventID, { ...params }) -> CollectionResponseWithTotalPublicList</code>
 
 ### Participations
 
 Methods:
 
-- <code title="get /marketing/marketing-events/2026-03/participations/{externalAccountId}/{externalEventId}">client.marketing.events.participations.<a href="./src/resources/marketing/events/participations.ts">getByExternalAccountAndEventID</a>(externalEventID, { ...params }) -> AttendanceCounters</code>
-- <code title="get /marketing/marketing-events/2026-03/participations/{marketingEventId}">client.marketing.events.participations.<a href="./src/resources/marketing/events/participations.ts">getByID</a>(marketingEventID) -> AttendanceCounters</code>
-- <code title="get /marketing/marketing-events/2026-03/participations/contacts/{contactIdentifier}/breakdown">client.marketing.events.participations.<a href="./src/resources/marketing/events/participations.ts">listBreakdownByContact</a>(contactIdentifier, { ...params }) -> ParticipationBreakdownsPage</code>
-- <code title="get /marketing/marketing-events/2026-03/participations/{externalAccountId}/{externalEventId}/breakdown">client.marketing.events.participations.<a href="./src/resources/marketing/events/participations.ts">listBreakdownByExternalAccountAndEventID</a>(externalEventID, { ...params }) -> ParticipationBreakdownsPage</code>
-- <code title="get /marketing/marketing-events/2026-03/participations/{marketingEventId}/breakdown">client.marketing.events.participations.<a href="./src/resources/marketing/events/participations.ts">listBreakdownByID</a>(marketingEventID, { ...params }) -> ParticipationBreakdownsPage</code>
+- <code title="get /marketing/marketing-events/2026-03/participations/{externalAccountId}/{externalEventId}">client.marketing.marketingEvents.participations.<a href="./src/resources/marketing/marketing-events/participations.ts">getByExternalAccountAndEventID</a>(externalEventID, { ...params }) -> AttendanceCounters</code>
+- <code title="get /marketing/marketing-events/2026-03/participations/{marketingEventId}">client.marketing.marketingEvents.participations.<a href="./src/resources/marketing/marketing-events/participations.ts">getByID</a>(marketingEventID) -> AttendanceCounters</code>
+- <code title="get /marketing/marketing-events/2026-03/participations/contacts/{contactIdentifier}/breakdown">client.marketing.marketingEvents.participations.<a href="./src/resources/marketing/marketing-events/participations.ts">listBreakdownByContact</a>(contactIdentifier, { ...params }) -> ParticipationBreakdownsPage</code>
+- <code title="get /marketing/marketing-events/2026-03/participations/{externalAccountId}/{externalEventId}/breakdown">client.marketing.marketingEvents.participations.<a href="./src/resources/marketing/marketing-events/participations.ts">listBreakdownByExternalAccountAndEventID</a>(externalEventID, { ...params }) -> ParticipationBreakdownsPage</code>
+- <code title="get /marketing/marketing-events/2026-03/participations/{marketingEventId}/breakdown">client.marketing.marketingEvents.participations.<a href="./src/resources/marketing/marketing-events/participations.ts">listBreakdownByID</a>(marketingEventID, { ...params }) -> ParticipationBreakdownsPage</code>
 
 ### Settings
 
 Methods:
 
-- <code title="post /marketing/marketing-events/2026-03/{appId}/settings">client.marketing.events.settings.<a href="./src/resources/marketing/events/settings.ts">createOrUpdate</a>(appID, { ...params }) -> EventDetailSettings</code>
-- <code title="get /marketing/marketing-events/2026-03/{appId}/settings">client.marketing.events.settings.<a href="./src/resources/marketing/events/settings.ts">get</a>(appID) -> EventDetailSettings</code>
+- <code title="post /marketing/marketing-events/2026-03/{appId}/settings">client.marketing.marketingEvents.settings.<a href="./src/resources/marketing/marketing-events/settings.ts">createOrUpdate</a>(appID, { ...params }) -> EventDetailSettings</code>
+- <code title="get /marketing/marketing-events/2026-03/{appId}/settings">client.marketing.marketingEvents.settings.<a href="./src/resources/marketing/marketing-events/settings.ts">get</a>(appID) -> EventDetailSettings</code>
 
 ### SubscriberState
 
 Methods:
 
-- <code title="post /marketing/marketing-events/2026-03/events/{externalEventId}/{subscriberState}/email-upsert">client.marketing.events.subscriberState.<a href="./src/resources/marketing/events/subscriber-state.ts">recordByEmail</a>(subscriberState, { ...params }) -> Response</code>
-- <code title="post /marketing/marketing-events/2026-03/events/{externalEventId}/{subscriberState}/upsert">client.marketing.events.subscriberState.<a href="./src/resources/marketing/events/subscriber-state.ts">recordByID</a>(subscriberState, { ...params }) -> Response</code>
+- <code title="post /marketing/marketing-events/2026-03/events/{externalEventId}/{subscriberState}/email-upsert">client.marketing.marketingEvents.subscriberState.<a href="./src/resources/marketing/marketing-events/subscriber-state.ts">recordByEmail</a>(subscriberState, { ...params }) -> Response</code>
+- <code title="post /marketing/marketing-events/2026-03/events/{externalEventId}/{subscriberState}/upsert">client.marketing.marketingEvents.subscriberState.<a href="./src/resources/marketing/marketing-events/subscriber-state.ts">recordByID</a>(subscriberState, { ...params }) -> Response</code>
 
 ## SingleSend
 

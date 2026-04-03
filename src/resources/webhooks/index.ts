@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Webhooks } from './webhooks';
 export {
+  WebhookSubscriptions,
   type ActionOverrideRequest,
   type AppLifecycleEventSubscriptionUpsertRequest,
   type AssociationSubscriptionUpsertRequest,
@@ -34,19 +34,20 @@ export {
   type SubscriptionResponse1,
   type SubscriptionUpsertRequest,
   type ThrottlingSettings,
-  type WebhookGetSubscriptionFilterForSubscriptionResponse,
-  type WebhookCreateCrmSnapshotParams,
-  type WebhookCreateJournalSubscriptionParams,
-  type WebhookCreateSubscriptionParams,
-  type WebhookCreateSubscriptionFilterParams,
-  type WebhookDeleteSubscriptionParams,
-  type WebhookGetJournalEarliestParams,
-  type WebhookGetJournalLatestParams,
-  type WebhookGetJournalNextByOffsetParams,
-  type WebhookGetLocalJournalEarliestParams,
-  type WebhookGetLocalJournalLatestParams,
-  type WebhookGetLocalJournalNextByOffsetParams,
-  type WebhookGetSubscriptionParams,
-  type WebhookUpdateSettingsParams,
-  type WebhookUpdateSubscriptionParams,
-} from './webhooks_/index';
+  type WebhookSubscriptionGetSubscriptionFilterForSubscriptionResponse,
+  type WebhookSubscriptionCreateCrmSnapshotParams,
+  type WebhookSubscriptionCreateJournalSubscriptionParams,
+  type WebhookSubscriptionCreateSubscriptionParams,
+  type WebhookSubscriptionCreateSubscriptionFilterParams,
+  type WebhookSubscriptionDeleteSubscriptionParams,
+  type WebhookSubscriptionGetJournalEarliestParams,
+  type WebhookSubscriptionGetJournalLatestParams,
+  type WebhookSubscriptionGetJournalNextByOffsetParams,
+  type WebhookSubscriptionGetLocalJournalEarliestParams,
+  type WebhookSubscriptionGetLocalJournalLatestParams,
+  type WebhookSubscriptionGetLocalJournalNextByOffsetParams,
+  type WebhookSubscriptionGetSubscriptionParams,
+  type WebhookSubscriptionUpdateSettingsParams,
+  type WebhookSubscriptionUpdateSubscriptionParams,
+} from './webhook-subscriptions/index';
+export { Webhooks } from './webhooks';

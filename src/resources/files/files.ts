@@ -2,19 +2,19 @@
 
 import { APIResource } from '../../core/resource';
 import * as Shared from '../shared';
-import * as FilesFilesAPI from './files_';
+import * as FileAssetsAPI from './file-assets';
 import {
-  FileCreateParams,
-  FileGetByPathParams,
-  FileGetParams,
-  FileGetSignedURLParams,
-  FileImportFromURLAsyncParams,
-  FileReplaceParams,
-  FileSearchParams,
-  FileUpdateParams,
-  FileUploadParams,
-  Files as FilesAPIFiles,
-} from './files_';
+  FileAssetCreateParams,
+  FileAssetGetByPathParams,
+  FileAssetGetParams,
+  FileAssetGetSignedURLParams,
+  FileAssetImportFromURLAsyncParams,
+  FileAssetReplaceParams,
+  FileAssetSearchParams,
+  FileAssetUpdateParams,
+  FileAssetUploadParams,
+  FileAssets,
+} from './file-assets';
 import * as FoldersAPI from './folders';
 import {
   FolderGetByIDParams,
@@ -27,7 +27,7 @@ import {
 import { Page } from '../../core/pagination';
 
 export class Files extends APIResource {
-  files: FilesFilesAPI.Files = new FilesFilesAPI.Files(this._client);
+  fileAssets: FileAssetsAPI.FileAssets = new FileAssetsAPI.FileAssets(this._client);
   folders: FoldersAPI.Folders = new FoldersAPI.Folders(this._client);
 }
 
@@ -538,7 +538,7 @@ export interface SignedURL {
   width?: number;
 }
 
-Files.Files = FilesAPIFiles;
+Files.FileAssets = FileAssets;
 Files.Folders = Folders;
 
 export declare namespace Files {
@@ -561,16 +561,16 @@ export declare namespace Files {
   };
 
   export {
-    FilesAPIFiles as Files,
-    type FileCreateParams as FileCreateParams,
-    type FileUpdateParams as FileUpdateParams,
-    type FileGetParams as FileGetParams,
-    type FileGetByPathParams as FileGetByPathParams,
-    type FileGetSignedURLParams as FileGetSignedURLParams,
-    type FileImportFromURLAsyncParams as FileImportFromURLAsyncParams,
-    type FileReplaceParams as FileReplaceParams,
-    type FileSearchParams as FileSearchParams,
-    type FileUploadParams as FileUploadParams,
+    FileAssets as FileAssets,
+    type FileAssetCreateParams as FileAssetCreateParams,
+    type FileAssetUpdateParams as FileAssetUpdateParams,
+    type FileAssetGetParams as FileAssetGetParams,
+    type FileAssetGetByPathParams as FileAssetGetByPathParams,
+    type FileAssetGetSignedURLParams as FileAssetGetSignedURLParams,
+    type FileAssetImportFromURLAsyncParams as FileAssetImportFromURLAsyncParams,
+    type FileAssetReplaceParams as FileAssetReplaceParams,
+    type FileAssetSearchParams as FileAssetSearchParams,
+    type FileAssetUploadParams as FileAssetUploadParams,
   };
 
   export {

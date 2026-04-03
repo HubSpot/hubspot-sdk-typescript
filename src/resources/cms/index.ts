@@ -218,6 +218,7 @@ export {
   type BatchResponseContentFolderWithErrors,
   type BatchResponsePage,
   type BatchResponsePageWithErrors,
+  type CmsPage,
   type CollectionResponseWithTotalContentFolderForwardPaging,
   type CollectionResponseWithTotalContentFolderVersion,
   type CollectionResponseWithTotalPageForwardPaging,
@@ -227,7 +228,6 @@ export {
   type ContentLanguageCloneRequestVNext,
   type CursorPagedResultContentFolderLong,
   type CursorPagedResultPageLong,
-  type Page,
   type PageVersion,
   type PageGetLandingPageFoldersParams,
   type PageGetLandingPageFoldersByQueryParams,
@@ -245,7 +245,7 @@ export {
   type PageRestoreSitePageRevisionToDraftParams,
   type ContentFoldersPage,
   type ContentFolderVersionsPage,
-  type PagesPage,
+  type CmsPagesPage,
   type PageVersionsPage,
 } from './pages/index';
 export {

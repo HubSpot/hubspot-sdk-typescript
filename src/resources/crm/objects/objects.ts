@@ -134,6 +134,16 @@ import {
   FeeUpdateParams,
   Fees,
 } from './fees/fees';
+import * as GenericObjectsAPI from './generic-objects/generic-objects';
+import {
+  GenericObjectCreateParams,
+  GenericObjectDeleteParams,
+  GenericObjectGetParams,
+  GenericObjectListParams,
+  GenericObjectSearchParams,
+  GenericObjectUpdateParams,
+  GenericObjects,
+} from './generic-objects/generic-objects';
 import * as GoalTargetsAPI from './goal-targets/goal-targets';
 import {
   GoalTargetCreateParams,
@@ -197,16 +207,6 @@ import {
   NoteUpdateParams,
   Notes,
 } from './notes/notes';
-import * as ObjectsObjectsAPI from './objects_/objects_';
-import {
-  ObjectCreateParams,
-  ObjectDeleteParams,
-  ObjectGetParams,
-  ObjectListParams,
-  ObjectSearchParams,
-  ObjectUpdateParams,
-  Objects as ObjectsAPIObjects,
-} from './objects_/objects_';
 import * as OrdersAPI from './orders/orders';
 import {
   OrderCreateParams,
@@ -352,7 +352,7 @@ export class Objects extends APIResource {
   listings: ListingsAPI.Listings = new ListingsAPI.Listings(this._client);
   meetings: MeetingsAPI.Meetings = new MeetingsAPI.Meetings(this._client);
   notes: NotesAPI.Notes = new NotesAPI.Notes(this._client);
-  objects: ObjectsObjectsAPI.Objects = new ObjectsObjectsAPI.Objects(this._client);
+  genericObjects: GenericObjectsAPI.GenericObjects = new GenericObjectsAPI.GenericObjects(this._client);
   orders: OrdersAPI.Orders = new OrdersAPI.Orders(this._client);
   partnerClients: PartnerClientsAPI.PartnerClients = new PartnerClientsAPI.PartnerClients(this._client);
   partnerServices: PartnerServicesAPI.PartnerServices = new PartnerServicesAPI.PartnerServices(this._client);
@@ -855,7 +855,7 @@ Objects.LineItems = LineItems;
 Objects.Listings = Listings;
 Objects.Meetings = Meetings;
 Objects.Notes = Notes;
-Objects.Objects = ObjectsAPIObjects;
+Objects.GenericObjects = GenericObjects;
 Objects.Orders = Orders;
 Objects.PartnerClients = PartnerClients;
 Objects.PartnerServices = PartnerServices;
@@ -1091,13 +1091,13 @@ export declare namespace Objects {
   };
 
   export {
-    ObjectsAPIObjects as Objects,
-    type ObjectCreateParams as ObjectCreateParams,
-    type ObjectUpdateParams as ObjectUpdateParams,
-    type ObjectListParams as ObjectListParams,
-    type ObjectDeleteParams as ObjectDeleteParams,
-    type ObjectGetParams as ObjectGetParams,
-    type ObjectSearchParams as ObjectSearchParams,
+    GenericObjects as GenericObjects,
+    type GenericObjectCreateParams as GenericObjectCreateParams,
+    type GenericObjectUpdateParams as GenericObjectUpdateParams,
+    type GenericObjectListParams as GenericObjectListParams,
+    type GenericObjectDeleteParams as GenericObjectDeleteParams,
+    type GenericObjectGetParams as GenericObjectGetParams,
+    type GenericObjectSearchParams as GenericObjectSearchParams,
   };
 
   export {

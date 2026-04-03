@@ -28,7 +28,7 @@ export class MultiLanguage extends APIResource {
   createLanguageVariation(
     body: MultiLanguageCreateLanguageVariationParams,
     options?: RequestOptions,
-  ): APIPromise<PagesAPI.Page> {
+  ): APIPromise<PagesAPI.CmsPage> {
     return this._client.post('/cms/pages/2026-03/site-pages/multi-language/create-language-variation', {
       body,
       ...options,
