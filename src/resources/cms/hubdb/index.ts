@@ -28,7 +28,6 @@ export {
   type StreamingCollectionResponseWithTotalHubDBTableRowV3,
   type UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3,
   type Variant,
-  type HubDBTableRowV3WrappersPage,
   type HubDBTableV3sPage,
 } from './hubdb';
 export {

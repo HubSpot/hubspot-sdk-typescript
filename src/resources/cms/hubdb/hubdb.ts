@@ -46,8 +46,6 @@ export class Hubdb extends APIResource {
   tables: TablesAPI.Tables = new TablesAPI.Tables(this._client);
 }
 
-export type HubDBTableRowV3WrappersPage = Page<HubDBTableRowV3Wrapper>;
-
 export type HubDBTableV3sPage = Page<HubDBTableV3>;
 
 export interface BatchInputHubDBTableRowBatchCloneRequest {
