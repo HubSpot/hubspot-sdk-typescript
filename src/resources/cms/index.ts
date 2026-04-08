@@ -52,7 +52,6 @@ export {
   type StreamingCollectionResponseWithTotalHubDBTableRowV3,
   type UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3,
   type Variant,
-  type HubDBTableRowV3WrappersPage,
   type HubDBTableV3sPage,
 } from './hubdb/index';
 export {
@@ -218,7 +217,6 @@ export {
   type BatchResponseContentFolderWithErrors,
   type BatchResponsePage,
   type BatchResponsePageWithErrors,
-  type CmsPage,
   type CollectionResponseWithTotalContentFolderForwardPaging,
   type CollectionResponseWithTotalContentFolderVersion,
   type CollectionResponseWithTotalPageForwardPaging,
@@ -228,6 +226,7 @@ export {
   type ContentLanguageCloneRequestVNext,
   type CursorPagedResultContentFolderLong,
   type CursorPagedResultPageLong,
+  type PageData,
   type PageVersion,
   type PageGetLandingPageFoldersParams,
   type PageGetLandingPageFoldersByQueryParams,
@@ -245,7 +244,7 @@ export {
   type PageRestoreSitePageRevisionToDraftParams,
   type ContentFoldersPage,
   type ContentFolderVersionsPage,
-  type CmsPagesPage,
+  type PageDataPage,
   type PageVersionsPage,
 } from './pages/index';
 export {

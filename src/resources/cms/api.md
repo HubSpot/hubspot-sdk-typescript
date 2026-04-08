@@ -262,7 +262,7 @@ Types:
 Methods:
 
 - <code title="post /cms/hubdb/2026-03/tables/{tableIdOrName}/rows">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows.ts">create</a>(tableIDOrName, { ...params }) -> HubDBTableRowV3</code>
-- <code title="get /cms/hubdb/2026-03/tables/{tableIdOrName}/rows">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows.ts">list</a>(tableIDOrName, { ...params }) -> HubDBTableRowV3WrappersPage</code>
+- <code title="get /cms/hubdb/2026-03/tables/{tableIdOrName}/rows">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows.ts">list</a>(tableIDOrName, { ...params }) -> UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3</code>
 - <code title="post /cms/hubdb/2026-03/tables/{tableIdOrName}/rows/draft/batch/clone">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows.ts">cloneBatch</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
 - <code title="post /cms/hubdb/2026-03/tables/{tableIdOrName}/rows/{rowId}/draft/clone">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows.ts">cloneDraft</a>(rowID, { ...params }) -> HubDBTableRowV3</code>
 - <code title="post /cms/hubdb/2026-03/tables/{tableIdOrName}/rows/draft/batch/create">client.cms.hubdb.rows.<a href="./src/resources/cms/hubdb/rows.ts">createBatch</a>(tableIDOrName, { ...params }) -> BatchResponseHubDBTableRowV3</code>
@@ -477,7 +477,6 @@ Types:
 - <code><a href="./src/resources/cms/pages/pages.ts">BatchResponseContentFolderWithErrors</a></code>
 - <code><a href="./src/resources/cms/pages/pages.ts">BatchResponsePage</a></code>
 - <code><a href="./src/resources/cms/pages/pages.ts">BatchResponsePageWithErrors</a></code>
-- <code><a href="./src/resources/cms/pages/pages.ts">CmsPage</a></code>
 - <code><a href="./src/resources/cms/pages/pages.ts">CollectionResponseWithTotalContentFolderForwardPaging</a></code>
 - <code><a href="./src/resources/cms/pages/pages.ts">CollectionResponseWithTotalContentFolderVersion</a></code>
 - <code><a href="./src/resources/cms/pages/pages.ts">CollectionResponseWithTotalPageForwardPaging</a></code>
@@ -487,6 +486,7 @@ Types:
 - <code><a href="./src/resources/cms/pages/pages.ts">ContentLanguageCloneRequestVNext</a></code>
 - <code><a href="./src/resources/cms/pages/pages.ts">CursorPagedResultContentFolderLong</a></code>
 - <code><a href="./src/resources/cms/pages/pages.ts">CursorPagedResultPageLong</a></code>
+- <code><a href="./src/resources/cms/pages/pages.ts">PageData</a></code>
 - <code><a href="./src/resources/cms/pages/pages.ts">PageVersion</a></code>
 
 Methods:
@@ -502,17 +502,17 @@ Methods:
 - <code title="get /cms/pages/2026-03/landing-pages/{objectId}/revisions">client.cms.pages.<a href="./src/resources/cms/pages/pages.ts">listLandingPageRevisions</a>(objectID, { ...params }) -> PageVersionsPage</code>
 - <code title="get /cms/pages/2026-03/site-pages/{objectId}/revisions">client.cms.pages.<a href="./src/resources/cms/pages/pages.ts">listSitePageRevisions</a>(objectID, { ...params }) -> PageVersionsPage</code>
 - <code title="post /cms/pages/2026-03/site-pages/{objectId}/draft/reset">client.cms.pages.<a href="./src/resources/cms/pages/pages.ts">resetSitePageDraft</a>(objectID) -> void</code>
-- <code title="post /cms/pages/2026-03/landing-pages/{objectId}/revisions/{revisionId}/restore">client.cms.pages.<a href="./src/resources/cms/pages/pages.ts">restoreLandingPageRevision</a>(revisionID, { ...params }) -> CmsPage</code>
-- <code title="post /cms/pages/2026-03/landing-pages/{objectId}/revisions/{revisionId}/restore-to-draft">client.cms.pages.<a href="./src/resources/cms/pages/pages.ts">restoreLandingPageRevisionToDraft</a>(revisionID, { ...params }) -> CmsPage</code>
-- <code title="post /cms/pages/2026-03/site-pages/{objectId}/revisions/{revisionId}/restore">client.cms.pages.<a href="./src/resources/cms/pages/pages.ts">restoreSitePageRevision</a>(revisionID, { ...params }) -> CmsPage</code>
-- <code title="post /cms/pages/2026-03/site-pages/{objectId}/revisions/{revisionId}/restore-to-draft">client.cms.pages.<a href="./src/resources/cms/pages/pages.ts">restoreSitePageRevisionToDraft</a>(revisionID, { ...params }) -> CmsPage</code>
+- <code title="post /cms/pages/2026-03/landing-pages/{objectId}/revisions/{revisionId}/restore">client.cms.pages.<a href="./src/resources/cms/pages/pages.ts">restoreLandingPageRevision</a>(revisionID, { ...params }) -> PageData</code>
+- <code title="post /cms/pages/2026-03/landing-pages/{objectId}/revisions/{revisionId}/restore-to-draft">client.cms.pages.<a href="./src/resources/cms/pages/pages.ts">restoreLandingPageRevisionToDraft</a>(revisionID, { ...params }) -> PageData</code>
+- <code title="post /cms/pages/2026-03/site-pages/{objectId}/revisions/{revisionId}/restore">client.cms.pages.<a href="./src/resources/cms/pages/pages.ts">restoreSitePageRevision</a>(revisionID, { ...params }) -> PageData</code>
+- <code title="post /cms/pages/2026-03/site-pages/{objectId}/revisions/{revisionId}/restore-to-draft">client.cms.pages.<a href="./src/resources/cms/pages/pages.ts">restoreSitePageRevisionToDraft</a>(revisionID, { ...params }) -> PageData</code>
 
 ### ABTests
 
 Methods:
 
-- <code title="post /cms/pages/2026-03/landing-pages/ab-test/create-variation">client.cms.pages.aBTests.<a href="./src/resources/cms/pages/a-b-tests.ts">createLandingPageVariation</a>({ ...params }) -> CmsPage</code>
-- <code title="post /cms/pages/2026-03/site-pages/ab-test/create-variation">client.cms.pages.aBTests.<a href="./src/resources/cms/pages/a-b-tests.ts">createSitePageVariation</a>({ ...params }) -> CmsPage</code>
+- <code title="post /cms/pages/2026-03/landing-pages/ab-test/create-variation">client.cms.pages.aBTests.<a href="./src/resources/cms/pages/a-b-tests.ts">createLandingPageVariation</a>({ ...params }) -> PageData</code>
+- <code title="post /cms/pages/2026-03/site-pages/ab-test/create-variation">client.cms.pages.aBTests.<a href="./src/resources/cms/pages/a-b-tests.ts">createSitePageVariation</a>({ ...params }) -> PageData</code>
 - <code title="post /cms/pages/2026-03/landing-pages/ab-test/end">client.cms.pages.aBTests.<a href="./src/resources/cms/pages/a-b-tests.ts">endLandingPageTest</a>({ ...params }) -> void</code>
 - <code title="post /cms/pages/2026-03/site-pages/ab-test/end">client.cms.pages.aBTests.<a href="./src/resources/cms/pages/a-b-tests.ts">endSitePageTest</a>({ ...params }) -> void</code>
 - <code title="post /cms/pages/2026-03/landing-pages/ab-test/rerun">client.cms.pages.aBTests.<a href="./src/resources/cms/pages/a-b-tests.ts">rerunLandingPageTest</a>({ ...params }) -> void</code>
@@ -552,24 +552,24 @@ Methods:
 
 Methods:
 
-- <code title="post /cms/pages/2026-03/landing-pages">client.cms.pages.landingPages.<a href="./src/resources/cms/pages/landing-pages.ts">create</a>({ ...params }) -> CmsPage</code>
-- <code title="patch /cms/pages/2026-03/landing-pages/{objectId}">client.cms.pages.landingPages.<a href="./src/resources/cms/pages/landing-pages.ts">update</a>(objectID, { ...params }) -> CmsPage</code>
-- <code title="get /cms/pages/2026-03/landing-pages">client.cms.pages.landingPages.<a href="./src/resources/cms/pages/landing-pages.ts">list</a>({ ...params }) -> CmsPagesPage</code>
+- <code title="post /cms/pages/2026-03/landing-pages">client.cms.pages.landingPages.<a href="./src/resources/cms/pages/landing-pages.ts">create</a>({ ...params }) -> PageData</code>
+- <code title="patch /cms/pages/2026-03/landing-pages/{objectId}">client.cms.pages.landingPages.<a href="./src/resources/cms/pages/landing-pages.ts">update</a>(objectID, { ...params }) -> PageData</code>
+- <code title="get /cms/pages/2026-03/landing-pages">client.cms.pages.landingPages.<a href="./src/resources/cms/pages/landing-pages.ts">list</a>({ ...params }) -> PageDataPage</code>
 - <code title="delete /cms/pages/2026-03/landing-pages/{objectId}">client.cms.pages.landingPages.<a href="./src/resources/cms/pages/landing-pages.ts">delete</a>(objectID, { ...params }) -> void</code>
-- <code title="post /cms/pages/2026-03/landing-pages/clone">client.cms.pages.landingPages.<a href="./src/resources/cms/pages/landing-pages.ts">clone</a>({ ...params }) -> CmsPage</code>
-- <code title="get /cms/pages/2026-03/landing-pages/{objectId}">client.cms.pages.landingPages.<a href="./src/resources/cms/pages/landing-pages.ts">get</a>(objectID, { ...params }) -> CmsPage</code>
-- <code title="get /cms/pages/2026-03/landing-pages/{objectId}/draft">client.cms.pages.landingPages.<a href="./src/resources/cms/pages/landing-pages.ts">getDraft</a>(objectID) -> CmsPage</code>
+- <code title="post /cms/pages/2026-03/landing-pages/clone">client.cms.pages.landingPages.<a href="./src/resources/cms/pages/landing-pages.ts">clone</a>({ ...params }) -> PageData</code>
+- <code title="get /cms/pages/2026-03/landing-pages/{objectId}">client.cms.pages.landingPages.<a href="./src/resources/cms/pages/landing-pages.ts">get</a>(objectID, { ...params }) -> PageData</code>
+- <code title="get /cms/pages/2026-03/landing-pages/{objectId}/draft">client.cms.pages.landingPages.<a href="./src/resources/cms/pages/landing-pages.ts">getDraft</a>(objectID) -> PageData</code>
 - <code title="post /cms/pages/2026-03/landing-pages/{objectId}/draft/push-live">client.cms.pages.landingPages.<a href="./src/resources/cms/pages/landing-pages.ts">pushDraftLive</a>(objectID) -> void</code>
 - <code title="post /cms/pages/2026-03/landing-pages/{objectId}/draft/reset">client.cms.pages.landingPages.<a href="./src/resources/cms/pages/landing-pages.ts">resetDraft</a>(objectID) -> void</code>
 - <code title="post /cms/pages/2026-03/landing-pages/schedule">client.cms.pages.landingPages.<a href="./src/resources/cms/pages/landing-pages.ts">schedule</a>({ ...params }) -> void</code>
-- <code title="patch /cms/pages/2026-03/landing-pages/{objectId}/draft">client.cms.pages.landingPages.<a href="./src/resources/cms/pages/landing-pages.ts">updateDraft</a>(objectID, { ...params }) -> CmsPage</code>
+- <code title="patch /cms/pages/2026-03/landing-pages/{objectId}/draft">client.cms.pages.landingPages.<a href="./src/resources/cms/pages/landing-pages.ts">updateDraft</a>(objectID, { ...params }) -> PageData</code>
 
 ### MultiLanguage
 
 Methods:
 
 - <code title="post /cms/pages/2026-03/site-pages/multi-language/attach-to-lang-group">client.cms.pages.multiLanguage.<a href="./src/resources/cms/pages/multi-language.ts">attachToLangGroup</a>({ ...params }) -> Response</code>
-- <code title="post /cms/pages/2026-03/site-pages/multi-language/create-language-variation">client.cms.pages.multiLanguage.<a href="./src/resources/cms/pages/multi-language.ts">createLanguageVariation</a>({ ...params }) -> CmsPage</code>
+- <code title="post /cms/pages/2026-03/site-pages/multi-language/create-language-variation">client.cms.pages.multiLanguage.<a href="./src/resources/cms/pages/multi-language.ts">createLanguageVariation</a>({ ...params }) -> PageData</code>
 - <code title="post /cms/pages/2026-03/site-pages/multi-language/detach-from-lang-group">client.cms.pages.multiLanguage.<a href="./src/resources/cms/pages/multi-language.ts">detachFromLangGroup</a>({ ...params }) -> Response</code>
 - <code title="put /cms/pages/2026-03/site-pages/multi-language/set-new-lang-primary">client.cms.pages.multiLanguage.<a href="./src/resources/cms/pages/multi-language.ts">setNewLangPrimary</a>({ ...params }) -> void</code>
 - <code title="post /cms/pages/2026-03/site-pages/multi-language/update-languages">client.cms.pages.multiLanguage.<a href="./src/resources/cms/pages/multi-language.ts">updateLanguages</a>({ ...params }) -> Response</code>
@@ -578,17 +578,17 @@ Methods:
 
 Methods:
 
-- <code title="post /cms/pages/2026-03/site-pages">client.cms.pages.websitePages.<a href="./src/resources/cms/pages/website-pages.ts">create</a>({ ...params }) -> CmsPage</code>
-- <code title="patch /cms/pages/2026-03/site-pages/{objectId}">client.cms.pages.websitePages.<a href="./src/resources/cms/pages/website-pages.ts">update</a>(objectID, { ...params }) -> CmsPage</code>
-- <code title="get /cms/pages/2026-03/site-pages">client.cms.pages.websitePages.<a href="./src/resources/cms/pages/website-pages.ts">list</a>({ ...params }) -> CmsPagesPage</code>
+- <code title="post /cms/pages/2026-03/site-pages">client.cms.pages.websitePages.<a href="./src/resources/cms/pages/website-pages.ts">create</a>({ ...params }) -> PageData</code>
+- <code title="patch /cms/pages/2026-03/site-pages/{objectId}">client.cms.pages.websitePages.<a href="./src/resources/cms/pages/website-pages.ts">update</a>(objectID, { ...params }) -> PageData</code>
+- <code title="get /cms/pages/2026-03/site-pages">client.cms.pages.websitePages.<a href="./src/resources/cms/pages/website-pages.ts">list</a>({ ...params }) -> PageDataPage</code>
 - <code title="delete /cms/pages/2026-03/site-pages/{objectId}">client.cms.pages.websitePages.<a href="./src/resources/cms/pages/website-pages.ts">delete</a>(objectID, { ...params }) -> void</code>
-- <code title="post /cms/pages/2026-03/site-pages/clone">client.cms.pages.websitePages.<a href="./src/resources/cms/pages/website-pages.ts">clone</a>({ ...params }) -> CmsPage</code>
-- <code title="get /cms/pages/2026-03/site-pages/{objectId}">client.cms.pages.websitePages.<a href="./src/resources/cms/pages/website-pages.ts">get</a>(objectID, { ...params }) -> CmsPage</code>
-- <code title="get /cms/pages/2026-03/site-pages/{objectId}/draft">client.cms.pages.websitePages.<a href="./src/resources/cms/pages/website-pages.ts">getDraft</a>(objectID) -> CmsPage</code>
+- <code title="post /cms/pages/2026-03/site-pages/clone">client.cms.pages.websitePages.<a href="./src/resources/cms/pages/website-pages.ts">clone</a>({ ...params }) -> PageData</code>
+- <code title="get /cms/pages/2026-03/site-pages/{objectId}">client.cms.pages.websitePages.<a href="./src/resources/cms/pages/website-pages.ts">get</a>(objectID, { ...params }) -> PageData</code>
+- <code title="get /cms/pages/2026-03/site-pages/{objectId}/draft">client.cms.pages.websitePages.<a href="./src/resources/cms/pages/website-pages.ts">getDraft</a>(objectID) -> PageData</code>
 - <code title="post /cms/pages/2026-03/site-pages/{objectId}/draft/push-live">client.cms.pages.websitePages.<a href="./src/resources/cms/pages/website-pages.ts">publishDraft</a>(objectID) -> void</code>
 - <code title="post /cms/pages/2026-03/site-pages/schedule">client.cms.pages.websitePages.<a href="./src/resources/cms/pages/website-pages.ts">schedule</a>({ ...params }) -> void</code>
 - <code title="put /cms/pages/2026-03/landing-pages/multi-language/set-new-lang-primary">client.cms.pages.websitePages.<a href="./src/resources/cms/pages/website-pages.ts">setNewLangPrimary</a>({ ...params }) -> void</code>
-- <code title="patch /cms/pages/2026-03/site-pages/{objectId}/draft">client.cms.pages.websitePages.<a href="./src/resources/cms/pages/website-pages.ts">updateDraft</a>(objectID, { ...params }) -> CmsPage</code>
+- <code title="patch /cms/pages/2026-03/site-pages/{objectId}/draft">client.cms.pages.websitePages.<a href="./src/resources/cms/pages/website-pages.ts">updateDraft</a>(objectID, { ...params }) -> PageData</code>
 
 ## SiteSearch
 

@@ -15,4 +15,4 @@ export { Marketing } from './marketing/marketing';
 export { Meta } from './meta/meta';
 export { Scheduler } from './scheduler/scheduler';
 export { Settings } from './settings/settings';
-export { Webhooks } from './webhooks/webhooks';
+export { Webhooks } from './webhooks';

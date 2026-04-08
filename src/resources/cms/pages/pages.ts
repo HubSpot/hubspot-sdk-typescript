@@ -207,7 +207,7 @@ export class Pages extends APIResource {
     revisionID: string,
     params: PageRestoreLandingPageRevisionParams,
     options?: RequestOptions,
-  ): APIPromise<CmsPage> {
+  ): APIPromise<PageData> {
     const { objectId } = params;
     return this._client.post(
       path`/cms/pages/2026-03/landing-pages/${objectId}/revisions/${revisionID}/restore`,
@@ -222,7 +222,7 @@ export class Pages extends APIResource {
     revisionID: number,
     params: PageRestoreLandingPageRevisionToDraftParams,
     options?: RequestOptions,
-  ): APIPromise<CmsPage> {
+  ): APIPromise<PageData> {
     const { objectId } = params;
     return this._client.post(
       path`/cms/pages/2026-03/landing-pages/${objectId}/revisions/${revisionID}/restore-to-draft`,
@@ -238,7 +238,7 @@ export class Pages extends APIResource {
     revisionID: string,
     params: PageRestoreSitePageRevisionParams,
     options?: RequestOptions,
-  ): APIPromise<CmsPage> {
+  ): APIPromise<PageData> {
     const { objectId } = params;
     return this._client.post(
       path`/cms/pages/2026-03/site-pages/${objectId}/revisions/${revisionID}/restore`,
@@ -254,7 +254,7 @@ export class Pages extends APIResource {
     revisionID: number,
     params: PageRestoreSitePageRevisionToDraftParams,
     options?: RequestOptions,
-  ): APIPromise<CmsPage> {
+  ): APIPromise<PageData> {
     const { objectId } = params;
     return this._client.post(
       path`/cms/pages/2026-03/site-pages/${objectId}/revisions/${revisionID}/restore-to-draft`,
@@ -269,7 +269,7 @@ export type ContentFoldersPage = Page<ContentFolder>;
 
 export type ContentFolderVersionsPage = Page<ContentFolderVersion>;
 
-export type CmsPagesPage = Page<CmsPage>;
+export type PageDataPage = Page<PageData>;
 
 export interface AbTestEndRequestVNext {
   /**
@@ -306,7 +306,7 @@ export interface BatchInputPage {
   /**
    * Pages to input.
    */
-  inputs: Array<CmsPage>;
+  inputs: Array<PageData>;
 }
 
 export interface BatchResponseContentFolder {
@@ -392,7 +392,7 @@ export interface BatchResponsePage {
   /**
    * Results of batch operation.
    */
-  results: Array<CmsPage>;
+  results: Array<PageData>;
 
   /**
    * Time of batch operation start.
@@ -424,7 +424,7 @@ export interface BatchResponsePageWithErrors {
   /**
    * Results of batch operation.
    */
-  results: Array<CmsPage>;
+  results: Array<PageData>;
 
   /**
    * Time of batch operation start.
@@ -457,7 +457,119 @@ export interface BatchResponsePageWithErrors {
   requestedAt?: string;
 }
 
-export interface CmsPage {
+export interface CollectionResponseWithTotalContentFolderForwardPaging {
+  /**
+   * Collection of content folders.
+   */
+  results: Array<ContentFolder>;
+
+  /**
+   * Total number of content folders.
+   */
+  total: number;
+
+  paging?: Shared.ForwardPaging;
+}
+
+export interface CollectionResponseWithTotalContentFolderVersion {
+  results: Array<ContentFolderVersion>;
+
+  total: number;
+
+  paging?: Shared.Paging;
+}
+
+export interface CollectionResponseWithTotalPageForwardPaging {
+  /**
+   * Collection of pages.
+   */
+  results: Array<PageData>;
+
+  /**
+   * Total number of pages.
+   */
+  total: number;
+
+  paging?: Shared.ForwardPaging;
+}
+
+export interface CollectionResponseWithTotalPageVersion {
+  results: Array<PageVersion>;
+
+  total: number;
+
+  paging?: Shared.Paging;
+}
+
+export interface ContentFolder {
+  /**
+   * The unique ID of the content folder.
+   */
+  id: string;
+
+  /**
+   * The type of object this folder applies to. Should always be LANDING_PAGE.
+   */
+  category: number;
+
+  /**
+   * The timestamp indicating when the content folder was created.
+   */
+  created: string;
+
+  /**
+   * The timestamp (ISO8601 format) when this content folder was deleted.
+   */
+  deletedAt: string;
+
+  /**
+   * The name of the folder which will show up in the app dashboard
+   */
+  name: string;
+
+  /**
+   * The ID of the content folder this folder is nested under
+   */
+  parentFolderId: number;
+
+  /**
+   * The timestamp indicating when the content folder was last updated.
+   */
+  updated: string;
+}
+
+export interface ContentFolderVersion {
+  id: string;
+
+  object: ContentFolder;
+
+  updatedAt: string;
+
+  user: Shared.VersionUser;
+}
+
+export interface ContentLanguageCloneRequestVNext {
+  /**
+   * ID of content to clone.
+   */
+  id: string;
+
+  /**
+   * Target language of new variant.
+   */
+  language?: string;
+
+  /**
+   * Language of primary content to clone.
+   */
+  primaryLanguage?: string;
+}
+
+export type CursorPagedResultContentFolderLong = unknown;
+
+export type CursorPagedResultPageLong = unknown;
+
+export interface PageData {
   /**
    * The unique ID of the page.
    */
@@ -1671,122 +1783,10 @@ export interface CmsPage {
   widgets: { [key: string]: unknown };
 }
 
-export interface CollectionResponseWithTotalContentFolderForwardPaging {
-  /**
-   * Collection of content folders.
-   */
-  results: Array<ContentFolder>;
-
-  /**
-   * Total number of content folders.
-   */
-  total: number;
-
-  paging?: Shared.ForwardPaging;
-}
-
-export interface CollectionResponseWithTotalContentFolderVersion {
-  results: Array<ContentFolderVersion>;
-
-  total: number;
-
-  paging?: Shared.Paging;
-}
-
-export interface CollectionResponseWithTotalPageForwardPaging {
-  /**
-   * Collection of pages.
-   */
-  results: Array<CmsPage>;
-
-  /**
-   * Total number of pages.
-   */
-  total: number;
-
-  paging?: Shared.ForwardPaging;
-}
-
-export interface CollectionResponseWithTotalPageVersion {
-  results: Array<PageVersion>;
-
-  total: number;
-
-  paging?: Shared.Paging;
-}
-
-export interface ContentFolder {
-  /**
-   * The unique ID of the content folder.
-   */
-  id: string;
-
-  /**
-   * The type of object this folder applies to. Should always be LANDING_PAGE.
-   */
-  category: number;
-
-  /**
-   * The timestamp indicating when the content folder was created.
-   */
-  created: string;
-
-  /**
-   * The timestamp (ISO8601 format) when this content folder was deleted.
-   */
-  deletedAt: string;
-
-  /**
-   * The name of the folder which will show up in the app dashboard
-   */
-  name: string;
-
-  /**
-   * The ID of the content folder this folder is nested under
-   */
-  parentFolderId: number;
-
-  /**
-   * The timestamp indicating when the content folder was last updated.
-   */
-  updated: string;
-}
-
-export interface ContentFolderVersion {
-  id: string;
-
-  object: ContentFolder;
-
-  updatedAt: string;
-
-  user: Shared.VersionUser;
-}
-
-export interface ContentLanguageCloneRequestVNext {
-  /**
-   * ID of content to clone.
-   */
-  id: string;
-
-  /**
-   * Target language of new variant.
-   */
-  language?: string;
-
-  /**
-   * Language of primary content to clone.
-   */
-  primaryLanguage?: string;
-}
-
-export type CursorPagedResultContentFolderLong = unknown;
-
-export type CursorPagedResultPageLong = unknown;
-
 export interface PageVersion {
   id: string;
 
-  object: CmsPage;
+  object: PageData;
 
   updatedAt: string;
 
@@ -2052,7 +2052,6 @@ export declare namespace Pages {
     type BatchResponseContentFolderWithErrors as BatchResponseContentFolderWithErrors,
     type BatchResponsePage as BatchResponsePage,
     type BatchResponsePageWithErrors as BatchResponsePageWithErrors,
-    type CmsPage as CmsPage,
     type CollectionResponseWithTotalContentFolderForwardPaging as CollectionResponseWithTotalContentFolderForwardPaging,
     type CollectionResponseWithTotalContentFolderVersion as CollectionResponseWithTotalContentFolderVersion,
     type CollectionResponseWithTotalPageForwardPaging as CollectionResponseWithTotalPageForwardPaging,
@@ -2062,6 +2061,7 @@ export declare namespace Pages {
     type ContentLanguageCloneRequestVNext as ContentLanguageCloneRequestVNext,
     type CursorPagedResultContentFolderLong as CursorPagedResultContentFolderLong,
     type CursorPagedResultPageLong as CursorPagedResultPageLong,
+    type PageData as PageData,
     type PageVersion as PageVersion,
     type PageVersionsPage as PageVersionsPage,
     type PageGetLandingPageFoldersParams as PageGetLandingPageFoldersParams,

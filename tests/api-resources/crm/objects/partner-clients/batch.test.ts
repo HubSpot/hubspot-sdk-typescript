@@ -42,31 +42,6 @@ describe('resource batch', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('createDefaultAssociation: only required params', async () => {
-    const responsePromise = client.crm.objects.partnerClients.batch.createDefaultAssociation('toObjectId', {
-      fromObjectType: 'fromObjectType',
-      fromObjectId: 'fromObjectId',
-      toObjectType: 'toObjectType',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('createDefaultAssociation: required and optional params', async () => {
-    const response = await client.crm.objects.partnerClients.batch.createDefaultAssociation('toObjectId', {
-      fromObjectType: 'fromObjectType',
-      fromObjectId: 'fromObjectId',
-      toObjectType: 'toObjectType',
-    });
-  });
-
-  // Mock server tests are disabled
   test.skip('get: only required params', async () => {
     const responsePromise = client.crm.objects.partnerClients.batch.get({
       inputs: [{ id: '430001' }],

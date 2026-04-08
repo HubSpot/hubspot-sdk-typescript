@@ -345,6 +345,7 @@ export class Objects extends APIResource {
   feedbackSubmissions: FeedbackSubmissionsAPI.FeedbackSubmissions =
     new FeedbackSubmissionsAPI.FeedbackSubmissions(this._client);
   fees: FeesAPI.Fees = new FeesAPI.Fees(this._client);
+  genericObjects: GenericObjectsAPI.GenericObjects = new GenericObjectsAPI.GenericObjects(this._client);
   goalTargets: GoalTargetsAPI.GoalTargets = new GoalTargetsAPI.GoalTargets(this._client);
   invoices: InvoicesAPI.Invoices = new InvoicesAPI.Invoices(this._client);
   leads: LeadsAPI.Leads = new LeadsAPI.Leads(this._client);
@@ -352,7 +353,6 @@ export class Objects extends APIResource {
   listings: ListingsAPI.Listings = new ListingsAPI.Listings(this._client);
   meetings: MeetingsAPI.Meetings = new MeetingsAPI.Meetings(this._client);
   notes: NotesAPI.Notes = new NotesAPI.Notes(this._client);
-  genericObjects: GenericObjectsAPI.GenericObjects = new GenericObjectsAPI.GenericObjects(this._client);
   orders: OrdersAPI.Orders = new OrdersAPI.Orders(this._client);
   partnerClients: PartnerClientsAPI.PartnerClients = new PartnerClientsAPI.PartnerClients(this._client);
   partnerServices: PartnerServicesAPI.PartnerServices = new PartnerServicesAPI.PartnerServices(this._client);
@@ -848,6 +848,7 @@ Objects.Discounts = Discounts;
 Objects.Emails = Emails;
 Objects.FeedbackSubmissions = FeedbackSubmissions;
 Objects.Fees = Fees;
+Objects.GenericObjects = GenericObjects;
 Objects.GoalTargets = GoalTargets;
 Objects.Invoices = Invoices;
 Objects.Leads = Leads;
@@ -855,7 +856,6 @@ Objects.LineItems = LineItems;
 Objects.Listings = Listings;
 Objects.Meetings = Meetings;
 Objects.Notes = Notes;
-Objects.GenericObjects = GenericObjects;
 Objects.Orders = Orders;
 Objects.PartnerClients = PartnerClients;
 Objects.PartnerServices = PartnerServices;
@@ -1028,6 +1028,16 @@ export declare namespace Objects {
   };
 
   export {
+    GenericObjects as GenericObjects,
+    type GenericObjectCreateParams as GenericObjectCreateParams,
+    type GenericObjectUpdateParams as GenericObjectUpdateParams,
+    type GenericObjectListParams as GenericObjectListParams,
+    type GenericObjectDeleteParams as GenericObjectDeleteParams,
+    type GenericObjectGetParams as GenericObjectGetParams,
+    type GenericObjectSearchParams as GenericObjectSearchParams,
+  };
+
+  export {
     GoalTargets as GoalTargets,
     type GoalTargetCreateParams as GoalTargetCreateParams,
     type GoalTargetUpdateParams as GoalTargetUpdateParams,
@@ -1088,16 +1098,6 @@ export declare namespace Objects {
     type NoteListParams as NoteListParams,
     type NoteGetParams as NoteGetParams,
     type NoteSearchParams as NoteSearchParams,
-  };
-
-  export {
-    GenericObjects as GenericObjects,
-    type GenericObjectCreateParams as GenericObjectCreateParams,
-    type GenericObjectUpdateParams as GenericObjectUpdateParams,
-    type GenericObjectListParams as GenericObjectListParams,
-    type GenericObjectDeleteParams as GenericObjectDeleteParams,
-    type GenericObjectGetParams as GenericObjectGetParams,
-    type GenericObjectSearchParams as GenericObjectSearchParams,
   };
 
   export {

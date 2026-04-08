@@ -2,9 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import * as HubdbAPI from './hubdb';
-import { HubDBTableRowV3WrappersPage } from './hubdb';
 import { APIPromise } from '../../../core/api-promise';
-import { Page, type PageParams, PagePromise } from '../../../core/pagination';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -39,12 +37,8 @@ export class Rows extends APIResource {
     tableIDOrName: string,
     query: RowListParams | null | undefined = {},
     options?: RequestOptions,
-  ): PagePromise<HubDBTableRowV3WrappersPage, HubdbAPI.HubDBTableRowV3Wrapper> {
-    return this._client.getAPIList(
-      path`/cms/hubdb/2026-03/tables/${tableIDOrName}/rows`,
-      Page<HubdbAPI.HubDBTableRowV3Wrapper>,
-      { query, ...options },
-    );
+  ): APIPromise<HubdbAPI.UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3> {
+    return this._client.get(path`/cms/hubdb/2026-03/tables/${tableIDOrName}/rows`, { query, ...options });
   }
 
   /**
@@ -275,11 +269,23 @@ export interface RowCreateParams {
   path?: string;
 }
 
-export interface RowListParams extends PageParams {
+export interface RowListParams {
+  /**
+   * The paging cursor token of the last successfully read resource will be returned
+   * as the `paging.next.after` JSON property of a paged response containing more
+   * results.
+   */
+  after?: string;
+
   /**
    * Whether to return only results that have been archived.
    */
   archived?: boolean;
+
+  /**
+   * The maximum number of results to display per page.
+   */
+  limit?: number;
 
   offset?: number;
 
@@ -452,5 +458,3 @@ export declare namespace Rows {
     type RowUpdateDraftParams as RowUpdateDraftParams,
   };
 }
-
-export { type HubDBTableRowV3WrappersPage };

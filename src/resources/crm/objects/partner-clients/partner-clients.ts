@@ -6,7 +6,7 @@ import { MultiAssociatedObjectWithLabelsPage } from '../../crm';
 import * as ObjectsAPI from '../objects';
 import { SimplePublicObjectWithAssociationsPage } from '../objects';
 import * as BatchAPI from './batch';
-import { Batch, BatchCreateDefaultAssociationParams, BatchGetParams, BatchUpdateParams } from './batch';
+import { Batch, BatchGetParams, BatchUpdateParams } from './batch';
 import { APIPromise } from '../../../../core/api-promise';
 import { Page, type PageParams, PagePromise } from '../../../../core/pagination';
 import { RequestOptions } from '../../../../internal/request-options';
@@ -219,7 +219,6 @@ export declare namespace PartnerClients {
   export {
     Batch as Batch,
     type BatchUpdateParams as BatchUpdateParams,
-    type BatchCreateDefaultAssociationParams as BatchCreateDefaultAssociationParams,
     type BatchGetParams as BatchGetParams,
   };
 }

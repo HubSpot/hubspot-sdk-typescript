@@ -1,11 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
-import * as CrmAPI from '../../crm';
 import * as ObjectsAPI from '../objects';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
-import { path } from '../../../../internal/utils/path';
 
 export class Batch extends APIResource {
   /**
@@ -19,18 +17,6 @@ export class Batch extends APIResource {
     options?: RequestOptions,
   ): APIPromise<ObjectsAPI.BatchResponseSimplePublicObject> {
     return this._client.post('/crm/objects/2026-03/partner_clients/batch/update', { body, ...options });
-  }
-
-  createDefaultAssociation(
-    toObjectID: string,
-    params: BatchCreateDefaultAssociationParams,
-    options?: RequestOptions,
-  ): APIPromise<CrmAPI.BatchResponsePublicDefaultAssociation> {
-    const { fromObjectType, fromObjectId, toObjectType } = params;
-    return this._client.put(
-      path`/crm/objects/2026-03/${fromObjectType}/${fromObjectId}/associations/default/${toObjectType}/${toObjectID}`,
-      options,
-    );
   }
 
   /**
@@ -53,14 +39,6 @@ export class Batch extends APIResource {
 
 export interface BatchUpdateParams {
   inputs: Array<ObjectsAPI.SimplePublicObjectBatchInput>;
-}
-
-export interface BatchCreateDefaultAssociationParams {
-  fromObjectType: string;
-
-  fromObjectId: string;
-
-  toObjectType: string;
 }
 
 export interface BatchGetParams {
@@ -93,9 +71,5 @@ export interface BatchGetParams {
 }
 
 export declare namespace Batch {
-  export {
-    type BatchUpdateParams as BatchUpdateParams,
-    type BatchCreateDefaultAssociationParams as BatchCreateDefaultAssociationParams,
-    type BatchGetParams as BatchGetParams,
-  };
+  export { type BatchUpdateParams as BatchUpdateParams, type BatchGetParams as BatchGetParams };
 }
