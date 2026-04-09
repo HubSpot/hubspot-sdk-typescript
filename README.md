@@ -1,8 +1,8 @@
-# Hubspot TypeScript API Library
+# HubSpot TypeScript API Library
 
 [![NPM version](<https://img.shields.io/npm/v/hubspot-sdk.svg?label=npm%20(stable)>)](https://npmjs.org/package/hubspot-sdk) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/hubspot-sdk)
 
-This library provides convenient access to the Hubspot REST API from server-side TypeScript or JavaScript.
+This library provides convenient access to HubSpot's date-versioned REST API (`2026-03` release) from server-side TypeScript or JavaScript.
 
 The REST API documentation can be found on [developers.hubspot.com](https://developers.hubspot.com/docs/api-reference/overview). The full API of this library can be found in [api.md](api.md).
 
@@ -199,7 +199,7 @@ Note that requests which time out will be [retried twice by default](#retries).
 
 ## Auto-pagination
 
-List methods in the Hubspot API are paginated.
+List methods in the HubSpot API are paginated.
 You can use the `for await … of` syntax to iterate through items across all pages:
 
 ```ts
