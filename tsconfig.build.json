@@ -5,8 +5,8 @@
   "compilerOptions": {
     "rootDir": "./dist/src",
     "paths": {
-      "hubspot-sdk/*": ["./dist/src/*"],
-      "hubspot-sdk": ["./dist/src/index.ts"]
+      "@hubspot/sdk/*": ["./dist/src/*"],
+      "@hubspot/sdk": ["./dist/src/index.ts"]
     },
     "noEmit": false,
     "declaration": true,

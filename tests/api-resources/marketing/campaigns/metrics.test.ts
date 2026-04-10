@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { Campaigns } from 'hubspot-sdk/resources/marketing/campaigns/campaigns';
-import { BaseMetrics } from 'hubspot-sdk/resources/marketing/campaigns/metrics';
+import { Campaigns } from '@hubspot/sdk/resources/marketing/campaigns/campaigns';
+import { BaseMetrics } from '@hubspot/sdk/resources/marketing/campaigns/metrics';
 
-import HubSpot from 'hubspot-sdk';
-import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
+import HubSpot from '@hubspot/sdk';
+import { createClient, type PartialHubSpot } from '@hubspot/sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',

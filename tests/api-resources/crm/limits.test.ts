@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { Crm } from 'hubspot-sdk/resources/crm/crm';
-import { BaseLimits } from 'hubspot-sdk/resources/crm/limits';
+import { Crm } from '@hubspot/sdk/resources/crm/crm';
+import { BaseLimits } from '@hubspot/sdk/resources/crm/limits';
 
-import HubSpot from 'hubspot-sdk';
-import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
+import HubSpot from '@hubspot/sdk';
+import { createClient, type PartialHubSpot } from '@hubspot/sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',

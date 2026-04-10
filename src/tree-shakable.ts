@@ -13,13 +13,13 @@ type InferClientStructure<T extends readonly (typeof APIResource)[]> =
 /**
  * Creates a client with a subset of the available resources to reduce
  * bundle size.
- * Import the resource classes you need from `hubspot-sdk/resources/*`.
+ * Import the resource classes you need from `@hubspot/sdk/resources/*`.
  * Use the BaseResource variants if you do not need to use subresources.
  *
  * @example
  * ```ts
- * import { Account } from `hubspot-sdk/resources/account`;
- * import { createClient } from `hubspot-sdk/tree-shakable`;
+ * import { Account } from `@hubspot/sdk/resources/account`;
+ * import { createClient } from `@hubspot/sdk/tree-shakable`;
  *
  * const client = createClient({
  *   resources: [Account],

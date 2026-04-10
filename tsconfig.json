@@ -8,8 +8,8 @@
     "moduleResolution": "node",
     "esModuleInterop": true,
     "paths": {
-      "hubspot-sdk/*": ["./src/*"],
-      "hubspot-sdk": ["./src/index.ts"]
+      "@hubspot/sdk/*": ["./src/*"],
+      "@hubspot/sdk": ["./src/index.ts"]
     },
     "noEmit": true,
 

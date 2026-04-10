@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { BaseCentralFxRates } from 'hubspot-sdk/resources/settings/currencies/central-fx-rates';
-import { Currencies } from 'hubspot-sdk/resources/settings/currencies/currencies';
+import { BaseCentralFxRates } from '@hubspot/sdk/resources/settings/currencies/central-fx-rates';
+import { Currencies } from '@hubspot/sdk/resources/settings/currencies/currencies';
 
-import HubSpot from 'hubspot-sdk';
-import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
+import HubSpot from '@hubspot/sdk';
+import { createClient, type PartialHubSpot } from '@hubspot/sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',

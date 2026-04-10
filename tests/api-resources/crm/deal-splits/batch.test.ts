@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { BaseBatch } from 'hubspot-sdk/resources/crm/deal-splits/batch';
-import { DealSplits } from 'hubspot-sdk/resources/crm/deal-splits/deal-splits';
+import { BaseBatch } from '@hubspot/sdk/resources/crm/deal-splits/batch';
+import { DealSplits } from '@hubspot/sdk/resources/crm/deal-splits/deal-splits';
 
-import HubSpot from 'hubspot-sdk';
-import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
+import HubSpot from '@hubspot/sdk';
+import { createClient, type PartialHubSpot } from '@hubspot/sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',

@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { BaseChannelAccounts } from 'hubspot-sdk/resources/conversations/custom-channels/channel-accounts';
-import { CustomChannels } from 'hubspot-sdk/resources/conversations/custom-channels/custom-channels';
+import { BaseChannelAccounts } from '@hubspot/sdk/resources/conversations/custom-channels/channel-accounts';
+import { CustomChannels } from '@hubspot/sdk/resources/conversations/custom-channels/custom-channels';
 
-import HubSpot from 'hubspot-sdk';
-import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
+import HubSpot from '@hubspot/sdk';
+import { createClient, type PartialHubSpot } from '@hubspot/sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',

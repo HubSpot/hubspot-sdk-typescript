@@ -1,6 +1,6 @@
 # HubSpot TypeScript API Library
 
-[![NPM version](<https://img.shields.io/npm/v/hubspot-sdk.svg?label=npm%20(stable)>)](https://npmjs.org/package/hubspot-sdk) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/hubspot-sdk)
+[![NPM version](<https://img.shields.io/npm/v/@hubspot/sdk.svg?label=npm%20(stable)>)](https://npmjs.org/package/@hubspot/sdk) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/@hubspot/sdk)
 
 This library provides convenient access to the HubSpot REST API from server-side TypeScript or JavaScript.
 
@@ -11,11 +11,8 @@ It is generated with [Stainless](https://www.stainless.com/).
 ## Installation
 
 ```sh
-npm install git+ssh://git@github.com:HubSpot/hubspot-sdk-typescript.git
+npm install @hubspot/sdk
 ```
-
-> [!NOTE]
-> Once this package is [published to npm](https://www.stainless.com/docs/guides/publish), this will become: `npm install hubspot-sdk`
 
 ## Usage
 
@@ -23,7 +20,7 @@ The full API of this library can be found in [api.md](api.md).
 
 <!-- prettier-ignore -->
 ```js
-import HubSpot from 'hubspot-sdk';
+import HubSpot from '@hubspot/sdk';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',
@@ -40,7 +37,7 @@ This library includes TypeScript definitions for all request params and response
 
 <!-- prettier-ignore -->
 ```ts
-import HubSpot from 'hubspot-sdk';
+import HubSpot from '@hubspot/sdk';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',
@@ -73,7 +70,7 @@ Request parameters that correspond to file uploads can be passed in many differe
 
 ```ts
 import fs from 'fs';
-import HubSpot, { toFile } from 'hubspot-sdk';
+import HubSpot, { toFile } from '@hubspot/sdk';
 
 const client = new HubSpot();
 
@@ -237,9 +234,9 @@ while (page.hasNextPage()) {
 This library supports tree shaking to reduce bundle size. Instead of importing the full client, you can create a client only including the API resources you need:
 
 ```ts
-import { createClient } from 'hubspot-sdk/tree-shakable';
-import { Contacts } from 'hubspot-sdk/resources/crm/objects/contacts/contacts';
-import { BaseTables } from 'hubspot-sdk/resources/cms/hubdb/tables';
+import { createClient } from '@hubspot/sdk/tree-shakable';
+import { Contacts } from '@hubspot/sdk/resources/crm/objects/contacts/contacts';
+import { BaseTables } from '@hubspot/sdk/resources/cms/hubdb/tables';
 
 const client = createClient({
   // Specify the resources you'd like to use ...
@@ -292,9 +289,9 @@ The tree-shaken client is fully typed, so TypeScript will provide accurate autoc
 The `createClient` function automatically infers the correct type, but you can also use the `PartialHubSpot` type explicitly:
 
 ```ts
-import HubSpot from 'hubspot-sdk';
-import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
-import { BaseContacts } from 'hubspot-sdk/resources/crm/objects/contacts/contacts';
+import HubSpot from '@hubspot/sdk';
+import { createClient, type PartialHubSpot } from '@hubspot/sdk/tree-shakable';
+import { BaseContacts } from '@hubspot/sdk/resources/crm/objects/contacts/contacts';
 
 // Explicit variable type
 const client: PartialHubSpot<{ crm: { objects: { contacts: BaseContacts } } }> = createClient({
@@ -381,7 +378,7 @@ The log level can be configured in two ways:
 2. Using the `logLevel` client option (overrides the environment variable if set)
 
 ```ts
-import HubSpot from 'hubspot-sdk';
+import HubSpot from '@hubspot/sdk';
 
 const client = new HubSpot({
   logLevel: 'debug', // Show all log messages
@@ -409,7 +406,7 @@ When providing a custom logger, the `logLevel` option still controls which messa
 below the configured level will not be sent to your logger.
 
 ```ts
-import HubSpot from 'hubspot-sdk';
+import HubSpot from '@hubspot/sdk';
 import pino from 'pino';
 
 const logger = pino();
@@ -478,7 +475,7 @@ globalThis.fetch = fetch;
 Or pass it to the client:
 
 ```ts
-import HubSpot from 'hubspot-sdk';
+import HubSpot from '@hubspot/sdk';
 import fetch from 'my-fetch';
 
 const client = new HubSpot({ fetch });
@@ -489,7 +486,7 @@ const client = new HubSpot({ fetch });
 If you want to set custom `fetch` options without overriding the `fetch` function, you can provide a `fetchOptions` object when instantiating the client or making a request. (Request-specific options override client options.)
 
 ```ts
-import HubSpot from 'hubspot-sdk';
+import HubSpot from '@hubspot/sdk';
 
 const client = new HubSpot({
   fetchOptions: {
@@ -506,7 +503,7 @@ options to requests:
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/node.svg" align="top" width="18" height="21"> **Node** <sup>[[docs](https://github.com/nodejs/undici/blob/main/docs/docs/api/ProxyAgent.md#example---proxyagent-with-fetch)]</sup>
 
 ```ts
-import HubSpot from 'hubspot-sdk';
+import HubSpot from '@hubspot/sdk';
 import * as undici from 'undici';
 
 const proxyAgent = new undici.ProxyAgent('http://localhost:8888');
@@ -520,7 +517,7 @@ const client = new HubSpot({
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/bun.svg" align="top" width="18" height="21"> **Bun** <sup>[[docs](https://bun.sh/guides/http/proxy)]</sup>
 
 ```ts
-import HubSpot from 'hubspot-sdk';
+import HubSpot from '@hubspot/sdk';
 
 const client = new HubSpot({
   fetchOptions: {
@@ -532,7 +529,7 @@ const client = new HubSpot({
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/deno.svg" align="top" width="18" height="21"> **Deno** <sup>[[docs](https://docs.deno.com/api/deno/~/Deno.createHttpClient)]</sup>
 
 ```ts
-import HubSpot from 'npm:hubspot-sdk';
+import HubSpot from 'npm:@hubspot/sdk';
 
 const httpClient = Deno.createHttpClient({ proxy: { url: 'http://localhost:8888' } });
 const client = new HubSpot({

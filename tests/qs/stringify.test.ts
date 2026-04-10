@@ -1,7 +1,7 @@
 import iconv from 'iconv-lite';
-import { stringify } from 'hubspot-sdk/internal/qs';
-import { encode } from 'hubspot-sdk/internal/qs/utils';
-import { StringifyOptions } from 'hubspot-sdk/internal/qs/types';
+import { stringify } from '@hubspot/sdk/internal/qs';
+import { encode } from '@hubspot/sdk/internal/qs/utils';
+import { StringifyOptions } from '@hubspot/sdk/internal/qs/types';
 import { empty_test_cases } from './empty-keys-cases';
 import assert from 'assert';
 

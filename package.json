@@ -1,5 +1,5 @@
 {
-  "name": "hubspot-sdk",
+  "name": "@hubspot/sdk",
   "version": "0.0.1",
   "description": "The official TypeScript library for the HubSpot API",
   "author": "HubSpot <>",
