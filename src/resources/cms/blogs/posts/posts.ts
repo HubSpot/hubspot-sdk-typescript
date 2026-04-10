@@ -4,9 +4,17 @@ import { APIResource } from '../../../../core/resource';
 import * as Shared from '../../../shared';
 import * as CmsAPI from '../../cms';
 import * as BatchAPI from './batch';
-import { Batch, BatchCreateParams, BatchDeleteParams, BatchGetParams, BatchUpdateParams } from './batch';
+import {
+  BaseBatch,
+  Batch,
+  BatchCreateParams,
+  BatchDeleteParams,
+  BatchGetParams,
+  BatchUpdateParams,
+} from './batch';
 import * as MultiLanguageAPI from './multi-language';
 import {
+  BaseMultiLanguage,
   MultiLanguage,
   MultiLanguageAttachToLangGroupParams,
   MultiLanguageCreateLangVariationParams,
@@ -16,6 +24,7 @@ import {
 } from './multi-language';
 import * as RevisionsAPI from './revisions';
 import {
+  BaseRevisions,
   RevisionGetPreviousVersionParams,
   RevisionGetPreviousVersionsParams,
   RevisionRestorePreviousVersionParams,
@@ -27,10 +36,12 @@ import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Posts extends APIResource {
-  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
-  multiLanguage: MultiLanguageAPI.MultiLanguage = new MultiLanguageAPI.MultiLanguage(this._client);
-  revisions: RevisionsAPI.Revisions = new RevisionsAPI.Revisions(this._client);
+export class BasePosts extends APIResource {
+  static override readonly _key: readonly ['cms', 'blogs', 'posts'] = Object.freeze([
+    'cms',
+    'blogs',
+    'posts',
+  ] as const);
 
   /**
    * Create a new blog post, specifying its content in the request body.
@@ -225,6 +236,11 @@ export class Posts extends APIResource {
       __binaryResponse: true,
     });
   }
+}
+export class Posts extends BasePosts {
+  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
+  multiLanguage: MultiLanguageAPI.MultiLanguage = new MultiLanguageAPI.MultiLanguage(this._client);
+  revisions: RevisionsAPI.Revisions = new RevisionsAPI.Revisions(this._client);
 }
 
 export interface BatchInputBlogPost {
@@ -5569,8 +5585,11 @@ export interface PostUpdateDraftParams {
 }
 
 Posts.Batch = Batch;
+Posts.BaseBatch = BaseBatch;
 Posts.MultiLanguage = MultiLanguage;
+Posts.BaseMultiLanguage = BaseMultiLanguage;
 Posts.Revisions = Revisions;
+Posts.BaseRevisions = BaseRevisions;
 
 export declare namespace Posts {
   export {
@@ -5600,6 +5619,7 @@ export declare namespace Posts {
 
   export {
     Batch as Batch,
+    BaseBatch as BaseBatch,
     type BatchCreateParams as BatchCreateParams,
     type BatchUpdateParams as BatchUpdateParams,
     type BatchDeleteParams as BatchDeleteParams,
@@ -5608,6 +5628,7 @@ export declare namespace Posts {
 
   export {
     MultiLanguage as MultiLanguage,
+    BaseMultiLanguage as BaseMultiLanguage,
     type MultiLanguageAttachToLangGroupParams as MultiLanguageAttachToLangGroupParams,
     type MultiLanguageCreateLangVariationParams as MultiLanguageCreateLangVariationParams,
     type MultiLanguageDetachFromLangGroupParams as MultiLanguageDetachFromLangGroupParams,
@@ -5617,6 +5638,7 @@ export declare namespace Posts {
 
   export {
     Revisions as Revisions,
+    BaseRevisions as BaseRevisions,
     type RevisionGetPreviousVersionParams as RevisionGetPreviousVersionParams,
     type RevisionGetPreviousVersionsParams as RevisionGetPreviousVersionsParams,
     type RevisionRestorePreviousVersionParams as RevisionRestorePreviousVersionParams,

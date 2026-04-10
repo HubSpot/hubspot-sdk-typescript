@@ -1,13 +1,29 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Pages } from 'hubspot-sdk/resources/cms/pages/pages';
+import { BaseWebsitePages } from 'hubspot-sdk/resources/cms/pages/website-pages';
+
 import HubSpot from 'hubspot-sdk';
+import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource websitePages', () => {
+const partialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseWebsitePages],
+});
+
+const parentPartialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Pages],
+});
+
+const runTests = (client: PartialHubSpot<{ cms: { pages: { websitePages: BaseWebsitePages } } }>) => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.cms.pages.websitePages.create({
@@ -1252,4 +1268,7 @@ describe('resource websitePages', () => {
       widgets: { foo: {} },
     });
   });
-});
+};
+describe('resource websitePages', () => runTests(client));
+describe('resource websitePages (tree shakable, base)', () => runTests(partialClient));
+describe('resource websitePages (tree shakable, subresource)', () => runTests(parentPartialClient));

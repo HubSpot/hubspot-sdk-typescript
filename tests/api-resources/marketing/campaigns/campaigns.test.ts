@@ -1,13 +1,29 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Marketing } from 'hubspot-sdk/resources/marketing/marketing';
+import { BaseCampaigns } from 'hubspot-sdk/resources/marketing/campaigns/campaigns';
+
 import HubSpot from 'hubspot-sdk';
+import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource campaigns', () => {
+const partialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseCampaigns],
+});
+
+const parentPartialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Marketing],
+});
+
+const runTests = (client: PartialHubSpot<{ marketing: { campaigns: BaseCampaigns } }>) => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.marketing.campaigns.create({ properties: { foo: 'string' } });
@@ -114,4 +130,7 @@ describe('resource campaigns', () => {
       ),
     ).rejects.toThrow(HubSpot.NotFoundError);
   });
-});
+};
+describe('resource campaigns', () => runTests(client));
+describe('resource campaigns (tree shakable, base)', () => runTests(partialClient));
+describe('resource campaigns (tree shakable, subresource)', () => runTests(parentPartialClient));

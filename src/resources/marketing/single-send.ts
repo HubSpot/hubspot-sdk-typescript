@@ -5,7 +5,12 @@ import * as MarketingAPI from './marketing';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 
-export class SingleSend extends APIResource {
+export class BaseSingleSend extends APIResource {
+  static override readonly _key: readonly ['marketing', 'singleSend'] = Object.freeze([
+    'marketing',
+    'singleSend',
+  ] as const);
+
   /**
    * Send a template email to a specific recipient.
    */
@@ -16,6 +21,7 @@ export class SingleSend extends APIResource {
     return this._client.post('/marketing/email-campaigns/2026-03/single-send', { body, ...options });
   }
 }
+export class SingleSend extends BaseSingleSend {}
 
 export interface SingleSendCreateParams {
   /**

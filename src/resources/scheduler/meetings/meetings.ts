@@ -3,9 +3,10 @@
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
 import * as AdvancedAPI from './advanced';
-import { Advanced, AdvancedBookParams, AdvancedCreateParams } from './advanced';
+import { Advanced, AdvancedBookParams, AdvancedCreateParams, BaseAdvanced } from './advanced';
 import * as BasicAPI from './basic';
 import {
+  BaseBasic,
   Basic,
   BasicGetAvailabilityBySlugParams,
   BasicGetBookingInfoBySlugParams,
@@ -13,7 +14,13 @@ import {
 } from './basic';
 import { Page } from '../../../core/pagination';
 
-export class Meetings extends APIResource {
+export class BaseMeetings extends APIResource {
+  static override readonly _key: readonly ['scheduler', 'meetings'] = Object.freeze([
+    'scheduler',
+    'meetings',
+  ] as const);
+}
+export class Meetings extends BaseMeetings {
   advanced: AdvancedAPI.Advanced = new AdvancedAPI.Advanced(this._client);
   basic: BasicAPI.Basic = new BasicAPI.Basic(this._client);
 }
@@ -1145,7 +1152,9 @@ export interface ExternalValidatedFormField {
 }
 
 Meetings.Advanced = Advanced;
+Meetings.BaseAdvanced = BaseAdvanced;
 Meetings.Basic = Basic;
+Meetings.BaseBasic = BaseBasic;
 
 export declare namespace Meetings {
   export {
@@ -1186,12 +1195,14 @@ export declare namespace Meetings {
 
   export {
     Advanced as Advanced,
+    BaseAdvanced as BaseAdvanced,
     type AdvancedCreateParams as AdvancedCreateParams,
     type AdvancedBookParams as AdvancedBookParams,
   };
 
   export {
     Basic as Basic,
+    BaseBasic as BaseBasic,
     type BasicListParams as BasicListParams,
     type BasicGetAvailabilityBySlugParams as BasicGetAvailabilityBySlugParams,
     type BasicGetBookingInfoBySlugParams as BasicGetBookingInfoBySlugParams,

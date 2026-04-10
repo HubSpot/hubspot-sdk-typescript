@@ -6,7 +6,13 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class VideoConferencing extends APIResource {
+export class BaseVideoConferencing extends APIResource {
+  static override readonly _key: readonly ['crm', 'extensions', 'videoConferencing'] = Object.freeze([
+    'crm',
+    'extensions',
+    'videoConferencing',
+  ] as const);
+
   /**
    * Create or update video conference extension settings for your app
    */
@@ -38,6 +44,7 @@ export class VideoConferencing extends APIResource {
     return this._client.get(path`/crm/extensions/videoconferencing/2026-03/settings/${appID}`, options);
   }
 }
+export class VideoConferencing extends BaseVideoConferencing {}
 
 export interface ExternalSettings {
   createMeetingUrl: string;

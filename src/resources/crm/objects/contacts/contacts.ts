@@ -6,6 +6,7 @@ import * as ObjectsAPI from '../objects';
 import { SimplePublicObjectWithAssociationsPage } from '../objects';
 import * as BatchAPI from './batch';
 import {
+  BaseBatch,
   Batch,
   BatchCreateParams,
   BatchDeleteParams,
@@ -19,8 +20,12 @@ import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Contacts extends APIResource {
-  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
+export class BaseContacts extends APIResource {
+  static override readonly _key: readonly ['crm', 'objects', 'contacts'] = Object.freeze([
+    'crm',
+    'objects',
+    'contacts',
+  ] as const);
 
   /**
    * Create a contact
@@ -110,6 +115,9 @@ export class Contacts extends APIResource {
   ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/objects/2026-03/contacts/search', { body, ...options });
   }
+}
+export class Contacts extends BaseContacts {
+  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
 }
 
 /**
@@ -268,6 +276,7 @@ export interface ContactSearchParams {
 }
 
 Contacts.Batch = Batch;
+Contacts.BaseBatch = BaseBatch;
 
 export declare namespace Contacts {
   export {
@@ -283,6 +292,7 @@ export declare namespace Contacts {
 
   export {
     Batch as Batch,
+    BaseBatch as BaseBatch,
     type BatchCreateParams as BatchCreateParams,
     type BatchUpdateParams as BatchUpdateParams,
     type BatchDeleteParams as BatchDeleteParams,

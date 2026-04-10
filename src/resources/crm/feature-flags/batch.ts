@@ -6,7 +6,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Batch extends APIResource {
+export class BaseBatch extends APIResource {
+  static override readonly _key: readonly ['crm', 'featureFlags', 'batch'] = Object.freeze([
+    'crm',
+    'featureFlags',
+    'batch',
+  ] as const);
+
   /**
    * Delete an account-level flag state for multiple HubSpot accounts at once. Use
    * this endpoint to manage flag exposure for groups of HubSpot accounts.
@@ -39,6 +45,7 @@ export class Batch extends APIResource {
     });
   }
 }
+export class Batch extends BaseBatch {}
 
 export interface BatchDeleteParams {
   /**

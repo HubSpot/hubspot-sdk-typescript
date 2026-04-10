@@ -8,7 +8,13 @@ import { Page, type PageParams, PagePromise } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Metrics extends APIResource {
+export class BaseMetrics extends APIResource {
+  static override readonly _key: readonly ['marketing', 'campaigns', 'metrics'] = Object.freeze([
+    'marketing',
+    'campaigns',
+    'metrics',
+  ] as const);
+
   /**
    * This endpoint retrieves key attribution metrics for a specified campaign, such
    * as sessions, new contacts, and influenced contacts.
@@ -54,6 +60,7 @@ export class Metrics extends APIResource {
     );
   }
 }
+export class Metrics extends BaseMetrics {}
 
 export interface MetricGetAttributionMetricsParams {
   endDate?: string;

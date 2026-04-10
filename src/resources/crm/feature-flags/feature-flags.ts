@@ -2,13 +2,16 @@
 
 import { APIResource } from '../../../core/resource';
 import * as BatchAPI from './batch';
-import { Batch, BatchDeleteParams, BatchUpsertParams } from './batch';
+import { BaseBatch, Batch, BatchDeleteParams, BatchUpsertParams } from './batch';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class FeatureFlags extends APIResource {
-  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
+export class BaseFeatureFlags extends APIResource {
+  static override readonly _key: readonly ['crm', 'featureFlags'] = Object.freeze([
+    'crm',
+    'featureFlags',
+  ] as const);
 
   /**
    * Set a feature flag for an app. For example, update the `hs-hide-crm-cards`
@@ -110,6 +113,9 @@ export class FeatureFlags extends APIResource {
       ...options,
     });
   }
+}
+export class FeatureFlags extends BaseFeatureFlags {
+  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
 }
 
 export interface BatchPortalEntry {
@@ -280,6 +286,7 @@ export interface FeatureFlagUpdatePortalStateParams {
 }
 
 FeatureFlags.Batch = Batch;
+FeatureFlags.BaseBatch = BaseBatch;
 
 export declare namespace FeatureFlags {
   export {
@@ -303,6 +310,7 @@ export declare namespace FeatureFlags {
 
   export {
     Batch as Batch,
+    BaseBatch as BaseBatch,
     type BatchDeleteParams as BatchDeleteParams,
     type BatchUpsertParams as BatchUpsertParams,
   };

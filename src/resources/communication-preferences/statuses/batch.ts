@@ -5,7 +5,13 @@ import * as CommunicationPreferencesAPI from '../communication-preferences';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
-export class Batch extends APIResource {
+export class BaseBatch extends APIResource {
+  static override readonly _key: readonly ['communicationPreferences', 'statuses', 'batch'] = Object.freeze([
+    'communicationPreferences',
+    'statuses',
+    'batch',
+  ] as const);
+
   /**
    * Checks whether a set of contacts have opted out of all communications.
    */
@@ -61,6 +67,7 @@ export class Batch extends APIResource {
     return this._client.post('/communication-preferences/2026-03/statuses/batch/write', { body, ...options });
   }
 }
+export class Batch extends BaseBatch {}
 
 export interface BatchGetUnsubscribeAllStatusesParams {
   /**

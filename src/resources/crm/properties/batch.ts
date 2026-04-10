@@ -8,7 +8,13 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Batch extends APIResource {
+export class BaseBatch extends APIResource {
+  static override readonly _key: readonly ['crm', 'properties', 'batch'] = Object.freeze([
+    'crm',
+    'properties',
+    'batch',
+  ] as const);
+
   /**
    * Create a batch of properties using the same rules as when creating an individual
    * property.
@@ -50,6 +56,7 @@ export class Batch extends APIResource {
     });
   }
 }
+export class Batch extends BaseBatch {}
 
 export interface BatchCreateParams {
   inputs: Array<PropertiesAPI.PropertyCreate>;

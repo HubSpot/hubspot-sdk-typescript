@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Batch, type BatchUpdateParams, type BatchGetParams } from './batch';
+export { Batch, BaseBatch, type BatchUpdateParams, type BatchGetParams } from './batch';
 export {
   PartnerClients,
+  BasePartnerClients,
   type PartnerClientUpdateParams,
   type PartnerClientListParams,
   type PartnerClientGetParams,

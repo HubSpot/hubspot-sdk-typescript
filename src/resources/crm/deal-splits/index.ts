@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Batch, type BatchReadParams, type BatchUpsertParams } from './batch';
+export { Batch, BaseBatch, type BatchReadParams, type BatchUpsertParams } from './batch';
 export {
   DealSplits,
+  BaseDealSplits,
   type BatchResponseDealToDealSplits,
   type BatchResponseDealToDealSplitsWithErrors,
   type DealToDealSplits,

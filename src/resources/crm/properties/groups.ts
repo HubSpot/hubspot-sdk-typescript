@@ -7,7 +7,13 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Groups extends APIResource {
+export class BaseGroups extends APIResource {
+  static override readonly _key: readonly ['crm', 'properties', 'groups'] = Object.freeze([
+    'crm',
+    'properties',
+    'groups',
+  ] as const);
+
   /**
    * Create and return a copy of a new property group.
    */
@@ -69,6 +75,7 @@ export class Groups extends APIResource {
     });
   }
 }
+export class Groups extends BaseGroups {}
 
 export interface GroupCreateParams {
   label: string;

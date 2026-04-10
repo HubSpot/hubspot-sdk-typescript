@@ -6,7 +6,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Events extends APIResource {
+export class BaseEvents extends APIResource {
+  static override readonly _key: readonly ['marketing', 'marketingEvents', 'events'] = Object.freeze([
+    'marketing',
+    'marketingEvents',
+    'events',
+  ] as const);
+
   /**
    * Mark a marketing event as cancelled.
    */
@@ -38,6 +44,7 @@ export class Events extends APIResource {
     });
   }
 }
+export class Events extends BaseEvents {}
 
 export interface EventCancelByExternalEventIDParams {
   externalAccountId: string;

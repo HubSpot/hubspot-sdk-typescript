@@ -7,7 +7,12 @@ import { Page, type PageParams, PagePromise } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Sequences extends APIResource {
+export class BaseSequences extends APIResource {
+  static override readonly _key: readonly ['automation', 'sequences'] = Object.freeze([
+    'automation',
+    'sequences',
+  ] as const);
+
   /**
    * Retrieve a list of sequences available in your HubSpot account. This endpoint
    * allows you to filter sequences by user ID and name, and supports pagination for
@@ -61,6 +66,7 @@ export class Sequences extends APIResource {
     return this._client.get(path`/automation/sequences/2026-03/enrollments/contact/${contactID}`, options);
   }
 }
+export class Sequences extends BaseSequences {}
 
 export type PublicSequenceLiteResponsesPage = Page<PublicSequenceLiteResponse>;
 

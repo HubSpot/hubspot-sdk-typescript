@@ -2,6 +2,7 @@
 
 export {
   Hubdb,
+  BaseHubdb,
   type BatchInputHubDBTableRowBatchCloneRequest,
   type BatchInputHubDBTableRowV3BatchUpdateRequest,
   type BatchInputHubDBTableRowV3Request,
@@ -32,6 +33,7 @@ export {
 } from './hubdb';
 export {
   Rows,
+  BaseRows,
   type RowCreateParams,
   type RowListParams,
   type RowCloneBatchParams,
@@ -50,6 +52,7 @@ export {
 } from './rows';
 export {
   Tables,
+  BaseTables,
   type TableCreateParams,
   type TableListParams,
   type TableCloneDraftParams,

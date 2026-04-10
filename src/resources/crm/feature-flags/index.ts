@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Batch, type BatchDeleteParams, type BatchUpsertParams } from './batch';
+export { Batch, BaseBatch, type BatchDeleteParams, type BatchUpsertParams } from './batch';
 export {
   FeatureFlags,
+  BaseFeatureFlags,
   type BatchPortalEntry,
   type FlagPutRequest,
   type FlagResponse,

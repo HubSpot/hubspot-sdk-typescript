@@ -1,13 +1,29 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Cms } from 'hubspot-sdk/resources/cms/cms';
+import { BaseSiteSearch } from 'hubspot-sdk/resources/cms/site-search';
+
 import HubSpot from 'hubspot-sdk';
+import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource siteSearch', () => {
+const partialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseSiteSearch],
+});
+
+const parentPartialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Cms],
+});
+
+const runTests = (client: PartialHubSpot<{ cms: { siteSearch: BaseSiteSearch } }>) => {
   // Mock server tests are disabled
   test.skip('getIndexedData', async () => {
     const responsePromise = client.cms.siteSearch.getIndexedData('contentId');
@@ -74,4 +90,7 @@ describe('resource siteSearch', () => {
       ),
     ).rejects.toThrow(HubSpot.NotFoundError);
   });
-});
+};
+describe('resource siteSearch', () => runTests(client));
+describe('resource siteSearch (tree shakable, base)', () => runTests(partialClient));
+describe('resource siteSearch (tree shakable, subresource)', () => runTests(parentPartialClient));

@@ -2,6 +2,7 @@
 
 export {
   Authors,
+  BaseAuthors,
   type BatchInputBlogAuthor,
   type BatchResponseBlogAuthor,
   type BatchResponseBlogAuthorWithErrors,
@@ -27,6 +28,7 @@ export {
 } from './authors';
 export {
   Batch,
+  BaseBatch,
   type BatchCreateParams,
   type BatchUpdateParams,
   type BatchDeleteParams,

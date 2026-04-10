@@ -6,6 +6,7 @@ import * as ObjectsAPI from '../objects';
 import { SimplePublicObjectWithAssociationsPage } from '../objects';
 import * as BatchAPI from './batch';
 import {
+  BaseBatch,
   Batch,
   BatchCreateParams,
   BatchDeleteParams,
@@ -19,8 +20,12 @@ import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Invoices extends APIResource {
-  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
+export class BaseInvoices extends APIResource {
+  static override readonly _key: readonly ['crm', 'objects', 'invoices'] = Object.freeze([
+    'crm',
+    'objects',
+    'invoices',
+  ] as const);
 
   /**
    * Create a invoice with the given properties and return a copy of the object,
@@ -103,6 +108,9 @@ export class Invoices extends APIResource {
   ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/objects/2026-03/invoices/search', { body, ...options });
   }
+}
+export class Invoices extends BaseInvoices {
+  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
 }
 
 export interface InvoiceCreateParams {
@@ -219,6 +227,7 @@ export interface InvoiceSearchParams {
 }
 
 Invoices.Batch = Batch;
+Invoices.BaseBatch = BaseBatch;
 
 export declare namespace Invoices {
   export {
@@ -231,6 +240,7 @@ export declare namespace Invoices {
 
   export {
     Batch as Batch,
+    BaseBatch as BaseBatch,
     type BatchCreateParams as BatchCreateParams,
     type BatchUpdateParams as BatchUpdateParams,
     type BatchDeleteParams as BatchDeleteParams,

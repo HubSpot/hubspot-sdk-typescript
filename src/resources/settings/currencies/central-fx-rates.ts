@@ -5,7 +5,13 @@ import * as CurrenciesAPI from './currencies';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
-export class CentralFxRates extends APIResource {
+export class BaseCentralFxRates extends APIResource {
+  static override readonly _key: readonly ['settings', 'currencies', 'centralFxRates'] = Object.freeze([
+    'settings',
+    'currencies',
+    'centralFxRates',
+  ] as const);
+
   /**
    * Create a new currency with central exchange rates in the portal. Unsupported
    * currencies cannot be added here.
@@ -38,6 +44,7 @@ export class CentralFxRates extends APIResource {
     return this._client.get('/settings/currencies/2026-03/central-fx-rates/unsupported-currencies', options);
   }
 }
+export class CentralFxRates extends BaseCentralFxRates {}
 
 export interface CentralFxRateCreateCurrencyParams {
   /**

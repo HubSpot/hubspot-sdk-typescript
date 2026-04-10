@@ -6,7 +6,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 
-export class IPRanges extends APIResource {
+export class BaseIPRanges extends APIResource {
+  static override readonly _key: readonly ['meta', 'origins', 'ipRanges'] = Object.freeze([
+    'meta',
+    'origins',
+    'ipRanges',
+  ] as const);
+
   /**
    * Retrieve a collection of IP ranges associated with specific services and
    * directions, such as `EMAIL`, `API`, `DNS`, or `WEB_SCRAPING`. The response
@@ -36,6 +42,7 @@ export class IPRanges extends APIResource {
     });
   }
 }
+export class IPRanges extends BaseIPRanges {}
 
 export type IPRangeListSimpleResponse = string;
 

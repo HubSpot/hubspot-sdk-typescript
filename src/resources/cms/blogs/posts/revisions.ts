@@ -6,7 +6,14 @@ import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Revisions extends APIResource {
+export class BaseRevisions extends APIResource {
+  static override readonly _key: readonly ['cms', 'blogs', 'posts', 'revisions'] = Object.freeze([
+    'cms',
+    'blogs',
+    'posts',
+    'revisions',
+  ] as const);
+
   /**
    * Retrieve a previous version of a blog post.
    */
@@ -71,6 +78,7 @@ export class Revisions extends APIResource {
     );
   }
 }
+export class Revisions extends BaseRevisions {}
 
 export interface RevisionGetPreviousVersionParams {
   objectId: string;

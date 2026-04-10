@@ -1,13 +1,29 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Auth } from 'hubspot-sdk/resources/auth/auth';
+import { BaseOAuth } from 'hubspot-sdk/resources/auth/oauth';
+
 import HubSpot from 'hubspot-sdk';
+import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource oauth', () => {
+const partialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseOAuth],
+});
+
+const parentPartialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Auth],
+});
+
+const runTests = (client: PartialHubSpot<{ auth: { oauth: BaseOAuth } }>) => {
   // Mock server tests are disabled
   test.skip('createToken: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
@@ -71,4 +87,7 @@ describe('resource oauth', () => {
       ),
     ).rejects.toThrow(HubSpot.NotFoundError);
   });
-});
+};
+describe('resource oauth', () => runTests(client));
+describe('resource oauth (tree shakable, base)', () => runTests(partialClient));
+describe('resource oauth (tree shakable, subresource)', () => runTests(parentPartialClient));

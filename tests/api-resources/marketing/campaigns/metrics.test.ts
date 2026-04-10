@@ -1,13 +1,29 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Campaigns } from 'hubspot-sdk/resources/marketing/campaigns/campaigns';
+import { BaseMetrics } from 'hubspot-sdk/resources/marketing/campaigns/metrics';
+
 import HubSpot from 'hubspot-sdk';
+import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource metrics', () => {
+const partialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseMetrics],
+});
+
+const parentPartialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Campaigns],
+});
+
+const runTests = (client: PartialHubSpot<{ marketing: { campaigns: { metrics: BaseMetrics } } }>) => {
   // Mock server tests are disabled
   test.skip('getAttributionMetrics', async () => {
     const responsePromise = client.marketing.campaigns.metrics.getAttributionMetrics('campaignGuid');
@@ -84,4 +100,7 @@ describe('resource metrics', () => {
       startDate: 'startDate',
     });
   });
-});
+};
+describe('resource metrics', () => runTests(client));
+describe('resource metrics (tree shakable, base)', () => runTests(partialClient));
+describe('resource metrics (tree shakable, subresource)', () => runTests(parentPartialClient));

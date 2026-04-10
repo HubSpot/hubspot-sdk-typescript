@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as MeetingsAPI from './meetings/meetings';
 import {
+  BaseMeetings,
   CollectionResponseWithTotalExternalLinkMetadata,
   ExternalAssociationCreateRequest,
   ExternalBookingFormField,
@@ -39,15 +40,20 @@ import {
   Meetings,
 } from './meetings/meetings';
 
-export class Scheduler extends APIResource {
+export class BaseScheduler extends APIResource {
+  static override readonly _key: readonly ['scheduler'] = Object.freeze(['scheduler'] as const);
+}
+export class Scheduler extends BaseScheduler {
   meetings: MeetingsAPI.Meetings = new MeetingsAPI.Meetings(this._client);
 }
 
 Scheduler.Meetings = Meetings;
+Scheduler.BaseMeetings = BaseMeetings;
 
 export declare namespace Scheduler {
   export {
     Meetings as Meetings,
+    BaseMeetings as BaseMeetings,
     type CollectionResponseWithTotalExternalLinkMetadata as CollectionResponseWithTotalExternalLinkMetadata,
     type ExternalAssociationCreateRequest as ExternalAssociationCreateRequest,
     type ExternalBookingFormField as ExternalBookingFormField,

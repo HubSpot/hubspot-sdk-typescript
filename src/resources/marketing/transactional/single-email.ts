@@ -5,7 +5,13 @@ import * as MarketingAPI from '../marketing';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
-export class SingleEmail extends APIResource {
+export class BaseSingleEmail extends APIResource {
+  static override readonly _key: readonly ['marketing', 'transactional', 'singleEmail'] = Object.freeze([
+    'marketing',
+    'transactional',
+    'singleEmail',
+  ] as const);
+
   /**
    * Asynchronously send a transactional email. Returns the status of the email send
    * with a statusId that can be used to continuously query for the status using the
@@ -15,6 +21,7 @@ export class SingleEmail extends APIResource {
     return this._client.post('/marketing/transactional/2026-03/single-email/send', { body, ...options });
   }
 }
+export class SingleEmail extends BaseSingleEmail {}
 
 export interface SingleEmailSendParams {
   /**

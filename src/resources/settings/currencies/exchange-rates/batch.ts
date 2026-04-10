@@ -6,7 +6,10 @@ import * as CurrenciesAPI from '../currencies';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 
-export class Batch extends APIResource {
+export class BaseBatch extends APIResource {
+  static override readonly _key: readonly ['settings', 'currencies', 'exchangeRates', 'batch'] =
+    Object.freeze(['settings', 'currencies', 'exchangeRates', 'batch'] as const);
+
   /**
    * Create multiple exchange rates in a single request.
    */
@@ -41,6 +44,7 @@ export class Batch extends APIResource {
     return this._client.post('/settings/currencies/2026-03/exchange-rates/batch/read', { body, ...options });
   }
 }
+export class Batch extends BaseBatch {}
 
 export interface BatchCreateParams {
   inputs: Array<CurrenciesAPI.ExchangeRateCreateRequest>;

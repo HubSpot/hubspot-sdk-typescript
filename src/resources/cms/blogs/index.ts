@@ -2,6 +2,7 @@
 
 export {
   Authors,
+  BaseAuthors,
   type BatchInputBlogAuthor,
   type BatchResponseBlogAuthor,
   type BatchResponseBlogAuthorWithErrors,
@@ -27,12 +28,14 @@ export {
 } from './authors/index';
 export {
   Blogs,
+  BaseBlogs,
   type CursorPagedResultBlogAuthorLong,
   type CursorPagedResultBlogPostLong,
   type CursorPagedResultTagLong,
 } from './blogs';
 export {
   Posts,
+  BasePosts,
   type BatchInputBlogPost,
   type BatchResponseBlogPost,
   type BatchResponseBlogPostWithErrors,
@@ -58,6 +61,7 @@ export {
 } from './posts/index';
 export {
   Settings,
+  BaseSettings,
   type Blog,
   type BlogLanguageCloneRequestVNext,
   type BlogVersion,
@@ -72,6 +76,7 @@ export {
 } from './settings/index';
 export {
   Tags,
+  BaseTags,
   type BatchInputTag,
   type BatchResponseTag,
   type BatchResponseTagWithErrors,

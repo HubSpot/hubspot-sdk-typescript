@@ -6,7 +6,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 
-export class ABTests extends APIResource {
+export class BaseABTests extends APIResource {
+  static override readonly _key: readonly ['cms', 'pages', 'aBTests'] = Object.freeze([
+    'cms',
+    'pages',
+    'aBTests',
+  ] as const);
+
   /**
    * Create a new A/B test variation based on the information provided in the request
    * body.
@@ -81,6 +87,7 @@ export class ABTests extends APIResource {
     });
   }
 }
+export class ABTests extends BaseABTests {}
 
 export interface ABTestCreateLandingPageVariationParams {
   /**

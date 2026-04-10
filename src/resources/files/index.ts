@@ -2,6 +2,7 @@
 
 export {
   FileAssets,
+  BaseFileAssets,
   type FileAssetCreateParams,
   type FileAssetUpdateParams,
   type FileAssetGetParams,
@@ -12,9 +13,10 @@ export {
   type FileAssetSearchParams,
   type FileAssetUploadParams,
 } from './file-assets';
-export { Files } from './files';
+export { Files, BaseFiles } from './files';
 export {
   Folders,
+  BaseFolders,
   type FolderGetByIDParams,
   type FolderGetByPathParams,
   type FolderSearchParams,

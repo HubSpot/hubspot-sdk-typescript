@@ -4,6 +4,7 @@ import { APIResource } from '../../../../core/resource';
 import * as Shared from '../../../shared';
 import * as BatchAPI from './batch';
 import {
+  BaseBatch,
   Batch,
   BatchCreateBatchParams,
   BatchDeleteParams,
@@ -15,8 +16,12 @@ import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Tags extends APIResource {
-  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
+export class BaseTags extends APIResource {
+  static override readonly _key: readonly ['cms', 'blogs', 'tags'] = Object.freeze([
+    'cms',
+    'blogs',
+    'tags',
+  ] as const);
 
   /**
    * Create a new Blog Tag.
@@ -222,6 +227,9 @@ export class Tags extends APIResource {
       __binaryResponse: true,
     });
   }
+}
+export class Tags extends BaseTags {
+  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
 }
 
 export interface BatchInputTag {
@@ -5858,6 +5866,7 @@ export interface TagUpdateLangsParams {
 }
 
 Tags.Batch = Batch;
+Tags.BaseBatch = BaseBatch;
 
 export declare namespace Tags {
   export {
@@ -5887,6 +5896,7 @@ export declare namespace Tags {
 
   export {
     Batch as Batch,
+    BaseBatch as BaseBatch,
     type BatchDeleteParams as BatchDeleteParams,
     type BatchCreateBatchParams as BatchCreateBatchParams,
     type BatchGetBatchParams as BatchGetBatchParams,

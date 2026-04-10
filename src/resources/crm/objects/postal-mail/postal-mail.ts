@@ -6,6 +6,7 @@ import * as ObjectsAPI from '../objects';
 import { SimplePublicObjectWithAssociationsPage } from '../objects';
 import * as BatchAPI from './batch';
 import {
+  BaseBatch,
   Batch,
   BatchCreateParams,
   BatchDeleteParams,
@@ -19,8 +20,12 @@ import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class PostalMail extends APIResource {
-  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
+export class BasePostalMail extends APIResource {
+  static override readonly _key: readonly ['crm', 'objects', 'postalMail'] = Object.freeze([
+    'crm',
+    'objects',
+    'postalMail',
+  ] as const);
 
   /**
    * Create a postal mail object with the given properties and return a copy of the
@@ -81,6 +86,9 @@ export class PostalMail extends APIResource {
   ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/objects/2026-03/postal_mail/search', { body, ...options });
   }
+}
+export class PostalMail extends BasePostalMail {
+  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
 }
 
 export interface PostalMailCreateParams {
@@ -197,6 +205,7 @@ export interface PostalMailSearchParams {
 }
 
 PostalMail.Batch = Batch;
+PostalMail.BaseBatch = BaseBatch;
 
 export declare namespace PostalMail {
   export {
@@ -209,6 +218,7 @@ export declare namespace PostalMail {
 
   export {
     Batch as Batch,
+    BaseBatch as BaseBatch,
     type BatchCreateParams as BatchCreateParams,
     type BatchUpdateParams as BatchUpdateParams,
     type BatchDeleteParams as BatchDeleteParams,

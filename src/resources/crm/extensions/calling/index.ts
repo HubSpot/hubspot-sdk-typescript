@@ -2,6 +2,7 @@
 
 export {
   Calling,
+  BaseCalling,
   type ChannelConnectionSettingsPatchRequest,
   type ChannelConnectionSettingsRequest,
   type ChannelConnectionSettingsResponse,
@@ -29,6 +30,7 @@ export {
 } from './calling';
 export {
   Transcripts,
+  BaseTranscripts,
   type Speaker,
   type TranscriptCreateRequest,
   type TranscriptCreateResponse,

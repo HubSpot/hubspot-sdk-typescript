@@ -2,6 +2,7 @@
 
 export {
   Batch,
+  BaseBatch,
   type BatchCreateParams,
   type BatchUpdateParams,
   type BatchDeleteParams,
@@ -10,6 +11,7 @@ export {
 } from './batch';
 export {
   Tickets,
+  BaseTickets,
   type TicketCreateParams,
   type TicketUpdateParams,
   type TicketListParams,

@@ -1,13 +1,31 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseListAssociations } from 'hubspot-sdk/resources/marketing/marketing-events/list-associations';
+import { MarketingEvents } from 'hubspot-sdk/resources/marketing/marketing-events/marketing-events';
+
 import HubSpot from 'hubspot-sdk';
+import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource listAssociations', () => {
+const partialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseListAssociations],
+});
+
+const parentPartialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [MarketingEvents],
+});
+
+const runTests = (
+  client: PartialHubSpot<{ marketing: { marketingEvents: { listAssociations: BaseListAssociations } } }>,
+) => {
   // Mock server tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.marketing.marketingEvents.listAssociations.list('marketingEventId');
@@ -130,4 +148,7 @@ describe('resource listAssociations', () => {
       { externalAccountId: 'externalAccountId' },
     );
   });
-});
+};
+describe('resource listAssociations', () => runTests(client));
+describe('resource listAssociations (tree shakable, base)', () => runTests(partialClient));
+describe('resource listAssociations (tree shakable, subresource)', () => runTests(parentPartialClient));

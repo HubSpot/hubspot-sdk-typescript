@@ -6,7 +6,12 @@ import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class URLMappings extends APIResource {
+export class BaseURLMappings extends APIResource {
+  static override readonly _key: readonly ['cms', 'urlMappings'] = Object.freeze([
+    'cms',
+    'urlMappings',
+  ] as const);
+
   /**
    * Create a new URL mapping in your HubSpot account. This endpoint allows you to
    * define URL redirections and mappings, which can be useful for managing site
@@ -61,6 +66,7 @@ export class URLMappings extends APIResource {
     });
   }
 }
+export class URLMappings extends BaseURLMappings {}
 
 export interface URLMappingsURLMapping {
   /**

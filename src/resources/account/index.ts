@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Account } from './account';
+export { Account, BaseAccount } from './account';
 export {
   Activity,
+  BaseActivity,
   type ActingUser,
   type CollectionResponseHydratedCriticalActionForwardPaging,
   type CollectionResponsePublicAPIUserActionEventForwardPaging,

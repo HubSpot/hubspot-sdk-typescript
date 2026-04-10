@@ -1,13 +1,29 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Objects } from 'hubspot-sdk/resources/crm/objects/objects';
+import { BaseProjects } from 'hubspot-sdk/resources/crm/objects/projects/projects';
+
 import HubSpot from 'hubspot-sdk';
+import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource projects', () => {
+const partialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseProjects],
+});
+
+const parentPartialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Objects],
+});
+
+const runTests = (client: PartialHubSpot<{ crm: { objects: { projects: BaseProjects } } }>) => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.crm.objects.projects.create({
@@ -199,4 +215,7 @@ describe('resource projects', () => {
       query: 'query',
     });
   });
-});
+};
+describe('resource projects', () => runTests(client));
+describe('resource projects (tree shakable, base)', () => runTests(partialClient));
+describe('resource projects (tree shakable, subresource)', () => runTests(parentPartialClient));

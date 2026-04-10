@@ -6,6 +6,7 @@ import * as ObjectsAPI from '../objects';
 import { SimplePublicObjectWithAssociationsPage } from '../objects';
 import * as BatchAPI from './batch';
 import {
+  BaseBatch,
   Batch,
   BatchCreateParams,
   BatchDeleteParams,
@@ -19,8 +20,12 @@ import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Notes extends APIResource {
-  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
+export class BaseNotes extends APIResource {
+  static override readonly _key: readonly ['crm', 'objects', 'notes'] = Object.freeze([
+    'crm',
+    'objects',
+    'notes',
+  ] as const);
 
   /**
    * Create a note with the given properties and return a copy of the object,
@@ -101,6 +106,9 @@ export class Notes extends APIResource {
   ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/objects/2026-03/notes/search', { body, ...options });
   }
+}
+export class Notes extends BaseNotes {
+  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
 }
 
 export interface NoteCreateParams {
@@ -217,6 +225,7 @@ export interface NoteSearchParams {
 }
 
 Notes.Batch = Batch;
+Notes.BaseBatch = BaseBatch;
 
 export declare namespace Notes {
   export {
@@ -229,6 +238,7 @@ export declare namespace Notes {
 
   export {
     Batch as Batch,
+    BaseBatch as BaseBatch,
     type BatchCreateParams as BatchCreateParams,
     type BatchUpdateParams as BatchUpdateParams,
     type BatchDeleteParams as BatchDeleteParams,

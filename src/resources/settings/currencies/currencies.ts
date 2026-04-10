@@ -3,9 +3,10 @@
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
 import * as CentralFxRatesAPI from './central-fx-rates';
-import { CentralFxRateCreateCurrencyParams, CentralFxRates } from './central-fx-rates';
+import { BaseCentralFxRates, CentralFxRateCreateCurrencyParams, CentralFxRates } from './central-fx-rates';
 import * as ExchangeRatesAPI from './exchange-rates/exchange-rates';
 import {
+  BaseExchangeRates,
   ExchangeRateCreateExchangeRateParams,
   ExchangeRateListExchangeRatesParams,
   ExchangeRateUpdateExchangeRateParams,
@@ -16,9 +17,11 @@ import { APIPromise } from '../../../core/api-promise';
 import { Page } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 
-export class Currencies extends APIResource {
-  centralFxRates: CentralFxRatesAPI.CentralFxRates = new CentralFxRatesAPI.CentralFxRates(this._client);
-  exchangeRates: ExchangeRatesAPI.ExchangeRates = new ExchangeRatesAPI.ExchangeRates(this._client);
+export class BaseCurrencies extends APIResource {
+  static override readonly _key: readonly ['settings', 'currencies'] = Object.freeze([
+    'settings',
+    'currencies',
+  ] as const);
 
   /**
    * Get the details for the company currency. The company currency is used in deal
@@ -44,6 +47,10 @@ export class Currencies extends APIResource {
   ): APIPromise<CompanyCurrency> {
     return this._client.put('/settings/currencies/2026-03/company-currency', { body, ...options });
   }
+}
+export class Currencies extends BaseCurrencies {
+  centralFxRates: CentralFxRatesAPI.CentralFxRates = new CentralFxRatesAPI.CentralFxRates(this._client);
+  exchangeRates: ExchangeRatesAPI.ExchangeRates = new ExchangeRatesAPI.ExchangeRates(this._client);
 }
 
 export type ExchangeRatesPage = Page<ExchangeRate>;
@@ -1710,7 +1717,9 @@ export interface CurrencyUpdateCompanyCurrencyParams {
 }
 
 Currencies.CentralFxRates = CentralFxRates;
+Currencies.BaseCentralFxRates = BaseCentralFxRates;
 Currencies.ExchangeRates = ExchangeRates;
+Currencies.BaseExchangeRates = BaseExchangeRates;
 
 export declare namespace Currencies {
   export {
@@ -1736,11 +1745,13 @@ export declare namespace Currencies {
 
   export {
     CentralFxRates as CentralFxRates,
+    BaseCentralFxRates as BaseCentralFxRates,
     type CentralFxRateCreateCurrencyParams as CentralFxRateCreateCurrencyParams,
   };
 
   export {
     ExchangeRates as ExchangeRates,
+    BaseExchangeRates as BaseExchangeRates,
     type ExchangeRateCreateExchangeRateParams as ExchangeRateCreateExchangeRateParams,
     type ExchangeRateListExchangeRatesParams as ExchangeRateListExchangeRatesParams,
     type ExchangeRateUpdateExchangeRateParams as ExchangeRateUpdateExchangeRateParams,

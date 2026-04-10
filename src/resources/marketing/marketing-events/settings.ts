@@ -6,7 +6,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Settings extends APIResource {
+export class BaseSettings extends APIResource {
+  static override readonly _key: readonly ['marketing', 'marketingEvents', 'settings'] = Object.freeze([
+    'marketing',
+    'marketingEvents',
+    'settings',
+  ] as const);
+
   /**
    * Create or update the current settings for the application.
    */
@@ -28,6 +34,7 @@ export class Settings extends APIResource {
     return this._client.get(path`/marketing/marketing-events/2026-03/${appID}/settings`, options);
   }
 }
+export class Settings extends BaseSettings {}
 
 export interface SettingCreateOrUpdateParams {
   /**

@@ -6,6 +6,7 @@ import * as ObjectsAPI from '../objects';
 import { SimplePublicObjectWithAssociationsPage } from '../objects';
 import * as BatchAPI from './batch';
 import {
+  BaseBatch,
   Batch,
   BatchCreateParams,
   BatchDeleteParams,
@@ -19,8 +20,12 @@ import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Tickets extends APIResource {
-  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
+export class BaseTickets extends APIResource {
+  static override readonly _key: readonly ['crm', 'objects', 'tickets'] = Object.freeze([
+    'crm',
+    'objects',
+    'tickets',
+  ] as const);
 
   /**
    * Create a ticket with the given properties and return a copy of the object,
@@ -109,6 +114,9 @@ export class Tickets extends APIResource {
   ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/objects/2026-03/tickets/search', { body, ...options });
   }
+}
+export class Tickets extends BaseTickets {
+  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
 }
 
 export interface TicketCreateParams {
@@ -237,6 +245,7 @@ export interface TicketSearchParams {
 }
 
 Tickets.Batch = Batch;
+Tickets.BaseBatch = BaseBatch;
 
 export declare namespace Tickets {
   export {
@@ -250,6 +259,7 @@ export declare namespace Tickets {
 
   export {
     Batch as Batch,
+    BaseBatch as BaseBatch,
     type BatchCreateParams as BatchCreateParams,
     type BatchUpdateParams as BatchUpdateParams,
     type BatchDeleteParams as BatchDeleteParams,

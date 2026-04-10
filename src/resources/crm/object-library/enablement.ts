@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Enablement extends APIResource {
+export class BaseEnablement extends APIResource {
+  static override readonly _key: readonly ['crm', 'objectLibrary', 'enablement'] = Object.freeze([
+    'crm',
+    'objectLibrary',
+    'enablement',
+  ] as const);
+
   getAll(options?: RequestOptions): APIPromise<PortalObjectTypeEnablementPublicResponse> {
     return this._client.get('/crm/object-library/2026-03/enablement', options);
   }
@@ -17,6 +23,7 @@ export class Enablement extends APIResource {
     return this._client.get(path`/crm/object-library/2026-03/enablement/${objectTypeID}`, options);
   }
 }
+export class Enablement extends BaseEnablement {}
 
 export interface ObjectTypeEnablementPublicResponse {
   /**

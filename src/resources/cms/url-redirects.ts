@@ -8,7 +8,12 @@ import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class URLRedirects extends APIResource {
+export class BaseURLRedirects extends APIResource {
+  static override readonly _key: readonly ['cms', 'urlRedirects'] = Object.freeze([
+    'cms',
+    'urlRedirects',
+  ] as const);
+
   /**
    * Create a new URL redirect in your HubSpot account. This endpoint allows you to
    * define a new URL mapping that redirects traffic from a specified route to a
@@ -60,6 +65,7 @@ export class URLRedirects extends APIResource {
     return this._client.get(path`/cms/url-redirects/2026-03/${urlRedirectID}`, options);
   }
 }
+export class URLRedirects extends BaseURLRedirects {}
 
 export type URLMappingsPage = Page<URLMapping>;
 

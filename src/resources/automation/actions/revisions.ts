@@ -8,7 +8,13 @@ import { Page, type PageParams, PagePromise } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Revisions extends APIResource {
+export class BaseRevisions extends APIResource {
+  static override readonly _key: readonly ['automation', 'actions', 'revisions'] = Object.freeze([
+    'automation',
+    'actions',
+    'revisions',
+  ] as const);
+
   /**
    * Retrieve the versions of a definition by ID.
    */
@@ -40,6 +46,7 @@ export class Revisions extends APIResource {
     );
   }
 }
+export class Revisions extends BaseRevisions {}
 
 export interface RevisionListParams extends PageParams {
   /**

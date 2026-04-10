@@ -2,9 +2,16 @@
 
 import { APIResource } from '../../core/resource';
 import * as BusinessUnitEntriesAPI from './business-unit-entries';
-import { BusinessUnitEntries, BusinessUnitEntryGetByUserIDParams } from './business-unit-entries';
+import {
+  BaseBusinessUnitEntries,
+  BusinessUnitEntries,
+  BusinessUnitEntryGetByUserIDParams,
+} from './business-unit-entries';
 
-export class BusinessUnits extends APIResource {
+export class BaseBusinessUnits extends APIResource {
+  static override readonly _key: readonly ['businessUnits'] = Object.freeze(['businessUnits'] as const);
+}
+export class BusinessUnits extends BaseBusinessUnits {
   businessUnitEntries: BusinessUnitEntriesAPI.BusinessUnitEntries =
     new BusinessUnitEntriesAPI.BusinessUnitEntries(this._client);
 }
@@ -48,6 +55,7 @@ export interface PublicBusinessUnitLogoMetadata {
 }
 
 BusinessUnits.BusinessUnitEntries = BusinessUnitEntries;
+BusinessUnits.BaseBusinessUnitEntries = BaseBusinessUnitEntries;
 
 export declare namespace BusinessUnits {
   export {
@@ -58,6 +66,7 @@ export declare namespace BusinessUnits {
 
   export {
     BusinessUnitEntries as BusinessUnitEntries,
+    BaseBusinessUnitEntries as BaseBusinessUnitEntries,
     type BusinessUnitEntryGetByUserIDParams as BusinessUnitEntryGetByUserIDParams,
   };
 }

@@ -1,13 +1,29 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Account } from 'hubspot-sdk/resources/account/account';
+import { BaseActivity } from 'hubspot-sdk/resources/account/activity';
+
 import HubSpot from 'hubspot-sdk';
+import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource activity', () => {
+const partialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseActivity],
+});
+
+const parentPartialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Account],
+});
+
+const runTests = (client: PartialHubSpot<{ account: { activity: BaseActivity } }>) => {
   // Mock server tests are disabled
   test.skip('listAuditLogs', async () => {
     const responsePromise = client.account.activity.listAuditLogs();
@@ -94,4 +110,7 @@ describe('resource activity', () => {
       ),
     ).rejects.toThrow(HubSpot.NotFoundError);
   });
-});
+};
+describe('resource activity', () => runTests(client));
+describe('resource activity (tree shakable, base)', () => runTests(partialClient));
+describe('resource activity (tree shakable, subresource)', () => runTests(parentPartialClient));

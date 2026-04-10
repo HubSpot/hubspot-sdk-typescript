@@ -1,13 +1,29 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseEmails } from 'hubspot-sdk/resources/marketing/emails';
+import { Marketing } from 'hubspot-sdk/resources/marketing/marketing';
+
 import HubSpot from 'hubspot-sdk';
+import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource emails', () => {
+const partialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseEmails],
+});
+
+const parentPartialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Marketing],
+});
+
+const runTests = (client: PartialHubSpot<{ marketing: { emails: BaseEmails } }>) => {
   // Mock server tests are disabled
   test.skip('create', async () => {
     const responsePromise = client.marketing.emails.create({});
@@ -366,4 +382,7 @@ describe('resource emails', () => {
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
   });
-});
+};
+describe('resource emails', () => runTests(client));
+describe('resource emails (tree shakable, base)', () => runTests(partialClient));
+describe('resource emails (tree shakable, subresource)', () => runTests(parentPartialClient));

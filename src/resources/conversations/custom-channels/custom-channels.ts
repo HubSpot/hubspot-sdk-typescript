@@ -4,6 +4,7 @@ import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
 import * as ChannelAccountsAPI from './channel-accounts';
 import {
+  BaseChannelAccounts,
   ChannelAccountCreateParams,
   ChannelAccountListParams,
   ChannelAccountUpdateParams,
@@ -11,16 +12,24 @@ import {
   ChannelAccounts,
 } from './channel-accounts';
 import * as MessagesAPI from './messages';
-import { MessageCreateParams, MessageGetParams, MessageUpdateParams, Messages } from './messages';
+import {
+  BaseMessages,
+  MessageCreateParams,
+  MessageGetParams,
+  MessageUpdateParams,
+  Messages,
+} from './messages';
 import { APIPromise } from '../../../core/api-promise';
 import { Page, type PageParams, PagePromise } from '../../../core/pagination';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class CustomChannels extends APIResource {
-  channelAccounts: ChannelAccountsAPI.ChannelAccounts = new ChannelAccountsAPI.ChannelAccounts(this._client);
-  messages: MessagesAPI.Messages = new MessagesAPI.Messages(this._client);
+export class BaseCustomChannels extends APIResource {
+  static override readonly _key: readonly ['conversations', 'customChannels'] = Object.freeze([
+    'conversations',
+    'customChannels',
+  ] as const);
 
   create(
     body: CustomChannelCreateParams,
@@ -81,6 +90,10 @@ export class CustomChannels extends APIResource {
       { query, ...options },
     );
   }
+}
+export class CustomChannels extends BaseCustomChannels {
+  channelAccounts: ChannelAccountsAPI.ChannelAccounts = new ChannelAccountsAPI.ChannelAccounts(this._client);
+  messages: MessagesAPI.Messages = new MessagesAPI.Messages(this._client);
 }
 
 export type PublicChannelIntegrationChannelsPage = Page<PublicChannelIntegrationChannel>;
@@ -1022,7 +1035,9 @@ export interface CustomChannelGetParams {
 }
 
 CustomChannels.ChannelAccounts = ChannelAccounts;
+CustomChannels.BaseChannelAccounts = BaseChannelAccounts;
 CustomChannels.Messages = Messages;
+CustomChannels.BaseMessages = BaseMessages;
 
 export declare namespace CustomChannels {
   export {
@@ -1081,6 +1096,7 @@ export declare namespace CustomChannels {
 
   export {
     ChannelAccounts as ChannelAccounts,
+    BaseChannelAccounts as BaseChannelAccounts,
     type ChannelAccountCreateParams as ChannelAccountCreateParams,
     type ChannelAccountUpdateParams as ChannelAccountUpdateParams,
     type ChannelAccountListParams as ChannelAccountListParams,
@@ -1089,6 +1105,7 @@ export declare namespace CustomChannels {
 
   export {
     Messages as Messages,
+    BaseMessages as BaseMessages,
     type MessageCreateParams as MessageCreateParams,
     type MessageUpdateParams as MessageUpdateParams,
     type MessageGetParams as MessageGetParams,

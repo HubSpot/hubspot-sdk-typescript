@@ -9,7 +9,9 @@ import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Folders extends APIResource {
+export class BaseFolders extends APIResource {
+  static override readonly _key: readonly ['files', 'folders'] = Object.freeze(['files', 'folders'] as const);
+
   /**
    * Delete folder by ID.
    */
@@ -94,6 +96,7 @@ export class Folders extends APIResource {
     return this._client.patch(path`/files/2026-03/folders/${folderID}`, { body, ...options });
   }
 }
+export class Folders extends BaseFolders {}
 
 export interface FolderGetByIDParams {
   properties?: Array<string>;

@@ -1,13 +1,29 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Hubdb } from 'hubspot-sdk/resources/cms/hubdb/hubdb';
+import { BaseTables } from 'hubspot-sdk/resources/cms/hubdb/tables';
+
 import HubSpot, { toFile } from 'hubspot-sdk';
+import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource tables', () => {
+const partialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseTables],
+});
+
+const parentPartialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Hubdb],
+});
+
+const runTests = (client: PartialHubSpot<{ cms: { hubdb: { tables: BaseTables } } }>) => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.cms.hubdb.tables.create({
@@ -490,4 +506,7 @@ describe('resource tables', () => {
       isGetLocalizedSchema: true,
     });
   });
-});
+};
+describe('resource tables', () => runTests(client));
+describe('resource tables (tree shakable, base)', () => runTests(partialClient));
+describe('resource tables (tree shakable, subresource)', () => runTests(parentPartialClient));

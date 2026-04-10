@@ -3,13 +3,13 @@
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
 import * as BatchAPI from './batch';
-import { Batch, BatchCreateParams } from './batch';
+import { BaseBatch, Batch, BatchCreateParams } from './batch';
 import { APIPromise } from '../../../core/api-promise';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 
-export class Timeline extends APIResource {
-  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
+export class BaseTimeline extends APIResource {
+  static override readonly _key: readonly ['crm', 'timeline'] = Object.freeze(['crm', 'timeline'] as const);
 
   /**
    * Send a single instance of event data to a specified event type.
@@ -28,6 +28,9 @@ export class Timeline extends APIResource {
   ): APIPromise<AppEventResolutionResponse> {
     return this._client.post('/integrators/timeline/2026-03/types/projects', { body, ...options });
   }
+}
+export class Timeline extends BaseTimeline {
+  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
 }
 
 export interface AppEventOccurrence {
@@ -152,6 +155,7 @@ export interface TimelineCreateProjectTypeParams {
 }
 
 Timeline.Batch = Batch;
+Timeline.BaseBatch = BaseBatch;
 
 export declare namespace Timeline {
   export {
@@ -166,5 +170,5 @@ export declare namespace Timeline {
     type TimelineCreateProjectTypeParams as TimelineCreateProjectTypeParams,
   };
 
-  export { Batch as Batch, type BatchCreateParams as BatchCreateParams };
+  export { Batch as Batch, BaseBatch as BaseBatch, type BatchCreateParams as BatchCreateParams };
 }

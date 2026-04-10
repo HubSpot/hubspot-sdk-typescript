@@ -1,13 +1,29 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Crm } from 'hubspot-sdk/resources/crm/crm';
+import { BasePropertiesValidations } from 'hubspot-sdk/resources/crm/properties-validations';
+
 import HubSpot from 'hubspot-sdk';
+import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource propertiesValidations', () => {
+const partialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BasePropertiesValidations],
+});
+
+const parentPartialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Crm],
+});
+
+const runTests = (client: PartialHubSpot<{ crm: { propertiesValidations: BasePropertiesValidations } }>) => {
   // Mock server tests are disabled
   test.skip('getByObjectTypeID', async () => {
     const responsePromise = client.crm.propertiesValidations.getByObjectTypeID('objectTypeId');
@@ -96,4 +112,7 @@ describe('resource propertiesValidations', () => {
       },
     );
   });
-});
+};
+describe('resource propertiesValidations', () => runTests(client));
+describe('resource propertiesValidations (tree shakable, base)', () => runTests(partialClient));
+describe('resource propertiesValidations (tree shakable, subresource)', () => runTests(parentPartialClient));

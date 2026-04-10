@@ -6,7 +6,12 @@ import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class PropertiesValidations extends APIResource {
+export class BasePropertiesValidations extends APIResource {
+  static override readonly _key: readonly ['crm', 'propertiesValidations'] = Object.freeze([
+    'crm',
+    'propertiesValidations',
+  ] as const);
+
   /**
    * Read all properties with validation rules for a given object.
    */
@@ -115,6 +120,7 @@ export class PropertiesValidations extends APIResource {
     );
   }
 }
+export class PropertiesValidations extends BasePropertiesValidations {}
 
 export interface CollectionResponsePublicPropertyValidationRuleMapNoPaging {
   /**

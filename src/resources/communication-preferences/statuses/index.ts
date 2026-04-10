@@ -2,9 +2,10 @@
 
 export {
   Batch,
+  BaseBatch,
   type BatchGetUnsubscribeAllStatusesParams,
   type BatchReadParams,
   type BatchUnsubscribeAllParams,
   type BatchUpdateStatusesParams,
 } from './batch';
-export { Statuses } from './statuses';
+export { Statuses, BaseStatuses } from './statuses';

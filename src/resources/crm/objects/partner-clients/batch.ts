@@ -5,7 +5,14 @@ import * as ObjectsAPI from '../objects';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 
-export class Batch extends APIResource {
+export class BaseBatch extends APIResource {
+  static override readonly _key: readonly ['crm', 'objects', 'partnerClients', 'batch'] = Object.freeze([
+    'crm',
+    'objects',
+    'partnerClients',
+    'batch',
+  ] as const);
+
   /**
    * This endpoint allows you to update several partner client records at once by
    * providing a batch of CRM object records with their respective IDs and
@@ -36,6 +43,7 @@ export class Batch extends APIResource {
     });
   }
 }
+export class Batch extends BaseBatch {}
 
 export interface BatchUpdateParams {
   inputs: Array<ObjectsAPI.SimplePublicObjectBatchInput>;

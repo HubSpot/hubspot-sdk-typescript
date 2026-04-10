@@ -1,13 +1,29 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Cms } from 'hubspot-sdk/resources/cms/cms';
+import { BaseURLMappings } from 'hubspot-sdk/resources/cms/url-mappings';
+
 import HubSpot from 'hubspot-sdk';
+import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource urlMappings', () => {
+const partialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseURLMappings],
+});
+
+const parentPartialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Cms],
+});
+
+const runTests = (client: PartialHubSpot<{ cms: { urlMappings: BaseURLMappings } }>) => {
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.cms.urlMappings.create({
@@ -51,4 +67,7 @@ describe('resource urlMappings', () => {
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
   });
-});
+};
+describe('resource urlMappings', () => runTests(client));
+describe('resource urlMappings (tree shakable, base)', () => runTests(partialClient));
+describe('resource urlMappings (tree shakable, subresource)', () => runTests(parentPartialClient));

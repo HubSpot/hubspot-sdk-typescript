@@ -6,6 +6,7 @@ import * as ObjectsAPI from '../objects';
 import { SimplePublicObjectWithAssociationsPage } from '../objects';
 import * as BatchAPI from './batch';
 import {
+  BaseBatch,
   Batch,
   BatchCreateParams,
   BatchDeleteParams,
@@ -19,8 +20,12 @@ import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Companies extends APIResource {
-  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
+export class BaseCompanies extends APIResource {
+  static override readonly _key: readonly ['crm', 'objects', 'companies'] = Object.freeze([
+    'crm',
+    'objects',
+    'companies',
+  ] as const);
 
   /**
    * Create a single company. Include a `properties` object to define
@@ -111,6 +116,9 @@ export class Companies extends APIResource {
   ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/objects/2026-03/companies/search', { body, ...options });
   }
+}
+export class Companies extends BaseCompanies {
+  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
 }
 
 export interface CompanyCreateParams {
@@ -239,6 +247,7 @@ export interface CompanySearchParams {
 }
 
 Companies.Batch = Batch;
+Companies.BaseBatch = BaseBatch;
 
 export declare namespace Companies {
   export {
@@ -252,6 +261,7 @@ export declare namespace Companies {
 
   export {
     Batch as Batch,
+    BaseBatch as BaseBatch,
     type BatchCreateParams as BatchCreateParams,
     type BatchUpdateParams as BatchUpdateParams,
     type BatchDeleteParams as BatchDeleteParams,

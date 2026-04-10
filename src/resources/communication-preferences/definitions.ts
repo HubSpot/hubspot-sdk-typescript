@@ -5,7 +5,12 @@ import * as CommunicationPreferencesAPI from './communication-preferences';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 
-export class Definitions extends APIResource {
+export class BaseDefinitions extends APIResource {
+  static override readonly _key: readonly ['communicationPreferences', 'definitions'] = Object.freeze([
+    'communicationPreferences',
+    'definitions',
+  ] as const);
+
   /**
    * Get a list of subscription status definitions from the account.
    */
@@ -16,6 +21,7 @@ export class Definitions extends APIResource {
     return this._client.get('/communication-preferences/2026-03/definitions', { query, ...options });
   }
 }
+export class Definitions extends BaseDefinitions {}
 
 export interface DefinitionListParams {
   businessUnitId?: number;

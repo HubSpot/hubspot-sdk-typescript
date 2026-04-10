@@ -6,7 +6,13 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class CardsDev extends APIResource {
+export class BaseCardsDev extends APIResource {
+  static override readonly _key: readonly ['crm', 'extensions', 'cardsDev'] = Object.freeze([
+    'crm',
+    'extensions',
+    'cardsDev',
+  ] as const);
+
   /**
    * Defines a new card that will become active on an account when this app is
    * installed.
@@ -86,6 +92,7 @@ export class CardsDev extends APIResource {
     });
   }
 }
+export class CardsDev extends BaseCardsDev {}
 
 export interface ActionConfirmationBody {
   /**

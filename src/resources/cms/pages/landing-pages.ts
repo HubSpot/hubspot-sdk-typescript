@@ -10,7 +10,13 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class LandingPages extends APIResource {
+export class BaseLandingPages extends APIResource {
+  static override readonly _key: readonly ['cms', 'pages', 'landingPages'] = Object.freeze([
+    'cms',
+    'pages',
+    'landingPages',
+  ] as const);
+
   /**
    * Create a new landing page.
    */
@@ -148,6 +154,7 @@ export class LandingPages extends APIResource {
     });
   }
 }
+export class LandingPages extends BaseLandingPages {}
 
 export interface LandingPageCreateParams {
   /**

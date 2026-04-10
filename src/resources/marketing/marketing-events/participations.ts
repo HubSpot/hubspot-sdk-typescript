@@ -8,7 +8,13 @@ import { Page, type PageParams, PagePromise } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Participations extends APIResource {
+export class BaseParticipations extends APIResource {
+  static override readonly _key: readonly ['marketing', 'marketingEvents', 'participations'] = Object.freeze([
+    'marketing',
+    'marketingEvents',
+    'participations',
+  ] as const);
+
   /**
    * Read Marketing event's participations counters by externalAccountId and
    * externalEventId pair.
@@ -87,6 +93,7 @@ export class Participations extends APIResource {
     );
   }
 }
+export class Participations extends BaseParticipations {}
 
 export interface ParticipationGetByExternalAccountAndEventIDParams {
   /**

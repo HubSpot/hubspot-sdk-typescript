@@ -12,9 +12,11 @@ import {
   ABTestRerunLandingPageTestParams,
   ABTestRerunSitePageTestParams,
   ABTests,
+  BaseABTests,
 } from './a-b-tests';
 import * as BatchAPI from './batch';
 import {
+  BaseBatch,
   Batch,
   BatchCreateFoldersParams,
   BatchCreateLandingPagesParams,
@@ -30,6 +32,7 @@ import {
 } from './batch';
 import * as FoldersAPI from './folders';
 import {
+  BaseFolders,
   FolderBatchGetParams,
   FolderCreateParams,
   FolderDeleteParams,
@@ -43,6 +46,7 @@ import {
 } from './folders';
 import * as LandingPagesAPI from './landing-pages';
 import {
+  BaseLandingPages,
   LandingPageCloneParams,
   LandingPageCreateParams,
   LandingPageDeleteParams,
@@ -55,6 +59,7 @@ import {
 } from './landing-pages';
 import * as MultiLanguageAPI from './multi-language';
 import {
+  BaseMultiLanguage,
   MultiLanguage,
   MultiLanguageAttachToLangGroupParams,
   MultiLanguageCreateLanguageVariationParams,
@@ -64,6 +69,7 @@ import {
 } from './multi-language';
 import * as WebsitePagesAPI from './website-pages';
 import {
+  BaseWebsitePages,
   WebsitePageCloneParams,
   WebsitePageCreateParams,
   WebsitePageDeleteParams,
@@ -81,13 +87,8 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Pages extends APIResource {
-  aBTests: ABTestsAPI.ABTests = new ABTestsAPI.ABTests(this._client);
-  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
-  folders: FoldersAPI.Folders = new FoldersAPI.Folders(this._client);
-  landingPages: LandingPagesAPI.LandingPages = new LandingPagesAPI.LandingPages(this._client);
-  multiLanguage: MultiLanguageAPI.MultiLanguage = new MultiLanguageAPI.MultiLanguage(this._client);
-  websitePages: WebsitePagesAPI.WebsitePages = new WebsitePagesAPI.WebsitePages(this._client);
+export class BasePages extends APIResource {
+  static override readonly _key: readonly ['cms', 'pages'] = Object.freeze(['cms', 'pages'] as const);
 
   getLandingPageFolders(
     query: PageGetLandingPageFoldersParams | null | undefined = {},
@@ -261,6 +262,14 @@ export class Pages extends APIResource {
       options,
     );
   }
+}
+export class Pages extends BasePages {
+  aBTests: ABTestsAPI.ABTests = new ABTestsAPI.ABTests(this._client);
+  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
+  folders: FoldersAPI.Folders = new FoldersAPI.Folders(this._client);
+  landingPages: LandingPagesAPI.LandingPages = new LandingPagesAPI.LandingPages(this._client);
+  multiLanguage: MultiLanguageAPI.MultiLanguage = new MultiLanguageAPI.MultiLanguage(this._client);
+  websitePages: WebsitePagesAPI.WebsitePages = new WebsitePagesAPI.WebsitePages(this._client);
 }
 
 export type PageVersionsPage = Page<PageVersion>;
@@ -2036,11 +2045,17 @@ export interface PageRestoreSitePageRevisionToDraftParams {
 }
 
 Pages.ABTests = ABTests;
+Pages.BaseABTests = BaseABTests;
 Pages.Batch = Batch;
+Pages.BaseBatch = BaseBatch;
 Pages.Folders = Folders;
+Pages.BaseFolders = BaseFolders;
 Pages.LandingPages = LandingPages;
+Pages.BaseLandingPages = BaseLandingPages;
 Pages.MultiLanguage = MultiLanguage;
+Pages.BaseMultiLanguage = BaseMultiLanguage;
 Pages.WebsitePages = WebsitePages;
+Pages.BaseWebsitePages = BaseWebsitePages;
 
 export declare namespace Pages {
   export {
@@ -2082,6 +2097,7 @@ export declare namespace Pages {
 
   export {
     ABTests as ABTests,
+    BaseABTests as BaseABTests,
     type ABTestCreateLandingPageVariationParams as ABTestCreateLandingPageVariationParams,
     type ABTestCreateSitePageVariationParams as ABTestCreateSitePageVariationParams,
     type ABTestEndLandingPageTestParams as ABTestEndLandingPageTestParams,
@@ -2092,6 +2108,7 @@ export declare namespace Pages {
 
   export {
     Batch as Batch,
+    BaseBatch as BaseBatch,
     type BatchCreateFoldersParams as BatchCreateFoldersParams,
     type BatchCreateLandingPagesParams as BatchCreateLandingPagesParams,
     type BatchCreateSitePagesParams as BatchCreateSitePagesParams,
@@ -2107,6 +2124,7 @@ export declare namespace Pages {
 
   export {
     Folders as Folders,
+    BaseFolders as BaseFolders,
     type FolderCreateParams as FolderCreateParams,
     type FolderUpdateParams as FolderUpdateParams,
     type FolderListParams as FolderListParams,
@@ -2120,6 +2138,7 @@ export declare namespace Pages {
 
   export {
     LandingPages as LandingPages,
+    BaseLandingPages as BaseLandingPages,
     type LandingPageCreateParams as LandingPageCreateParams,
     type LandingPageUpdateParams as LandingPageUpdateParams,
     type LandingPageListParams as LandingPageListParams,
@@ -2132,6 +2151,7 @@ export declare namespace Pages {
 
   export {
     MultiLanguage as MultiLanguage,
+    BaseMultiLanguage as BaseMultiLanguage,
     type MultiLanguageAttachToLangGroupParams as MultiLanguageAttachToLangGroupParams,
     type MultiLanguageCreateLanguageVariationParams as MultiLanguageCreateLanguageVariationParams,
     type MultiLanguageDetachFromLangGroupParams as MultiLanguageDetachFromLangGroupParams,
@@ -2141,6 +2161,7 @@ export declare namespace Pages {
 
   export {
     WebsitePages as WebsitePages,
+    BaseWebsitePages as BaseWebsitePages,
     type WebsitePageCreateParams as WebsitePageCreateParams,
     type WebsitePageUpdateParams as WebsitePageUpdateParams,
     type WebsitePageListParams as WebsitePageListParams,

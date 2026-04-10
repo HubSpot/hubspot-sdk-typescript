@@ -1,14 +1,16 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Advanced, type AdvancedCreateParams, type AdvancedBookParams } from './advanced';
+export { Advanced, BaseAdvanced, type AdvancedCreateParams, type AdvancedBookParams } from './advanced';
 export {
   Basic,
+  BaseBasic,
   type BasicListParams,
   type BasicGetAvailabilityBySlugParams,
   type BasicGetBookingInfoBySlugParams,
 } from './basic';
 export {
   Meetings,
+  BaseMeetings,
   type CollectionResponseWithTotalExternalLinkMetadata,
   type ExternalAssociationCreateRequest,
   type ExternalBookingFormField,

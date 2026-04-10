@@ -7,7 +7,13 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Rows extends APIResource {
+export class BaseRows extends APIResource {
+  static override readonly _key: readonly ['cms', 'hubdb', 'rows'] = Object.freeze([
+    'cms',
+    'hubdb',
+    'rows',
+  ] as const);
+
   /**
    * Add a new row to a HubDB table. New rows will be added to the draft version of
    * the table. Use the `/publish` endpoint to push these changes to published
@@ -239,6 +245,7 @@ export class Rows extends APIResource {
     });
   }
 }
+export class Rows extends BaseRows {}
 
 export interface RowCreateParams {
   /**

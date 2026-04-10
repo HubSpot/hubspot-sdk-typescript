@@ -6,7 +6,14 @@ import { APIPromise } from '../../../../core/api-promise';
 import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 
-export class Batch extends APIResource {
+export class BaseBatch extends APIResource {
+  static override readonly _key: readonly ['crm', 'objects', 'invoices', 'batch'] = Object.freeze([
+    'crm',
+    'objects',
+    'invoices',
+    'batch',
+  ] as const);
+
   /**
    * Create multiple invoices at once by providing a batch of invoice data, and
    * receive a response with details of the created invoices, including their IDs.
@@ -72,6 +79,7 @@ export class Batch extends APIResource {
     return this._client.post('/crm/objects/2026-03/invoices/batch/upsert', { body, ...options });
   }
 }
+export class Batch extends BaseBatch {}
 
 export interface BatchCreateParams {
   inputs: Array<ObjectsAPI.SimplePublicObjectBatchInputForCreate>;

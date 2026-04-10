@@ -1,13 +1,29 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseAuditLogs } from 'hubspot-sdk/resources/cms/audit-logs';
+import { Cms } from 'hubspot-sdk/resources/cms/cms';
+
 import HubSpot from 'hubspot-sdk';
+import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource auditLogs', () => {
+const partialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseAuditLogs],
+});
+
+const parentPartialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Cms],
+});
+
+const runTests = (client: PartialHubSpot<{ cms: { auditLogs: BaseAuditLogs } }>) => {
   // Mock server tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.cms.auditLogs.list();
@@ -74,4 +90,7 @@ describe('resource auditLogs', () => {
       userTimeZone: 'userTimeZone',
     });
   });
-});
+};
+describe('resource auditLogs', () => runTests(client));
+describe('resource auditLogs (tree shakable, base)', () => runTests(partialClient));
+describe('resource auditLogs (tree shakable, subresource)', () => runTests(parentPartialClient));

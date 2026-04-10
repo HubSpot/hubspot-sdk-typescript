@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { AppUninstalls } from './app-uninstalls';
+export { AppUninstalls, BaseAppUninstalls } from './app-uninstalls';
 export {
   Associations,
+  BaseAssociations,
   type BatchInputPublicAssociationMultiArchive,
   type BatchInputPublicAssociationMultiPost,
   type BatchInputPublicDefaultAssociationMultiPost,
@@ -25,6 +26,7 @@ export {
 } from './associations/index';
 export {
   AssociationsSchema,
+  BaseAssociationsSchema,
   type BatchInputPublicAssociationDefinitionConfigurationCreateRequest,
   type BatchInputPublicAssociationDefinitionConfigurationUpdateRequest,
   type BatchInputPublicAssociationSpec,
@@ -42,9 +44,10 @@ export {
   type PublicAssociationDefinitionUserConfiguration,
   type PublicAssociationSpec,
 } from './associations-schema/index';
-export { Crm } from './crm';
+export { Crm, BaseCrm } from './crm';
 export {
   DealSplits,
+  BaseDealSplits,
   type BatchResponseDealToDealSplits,
   type BatchResponseDealToDealSplitsWithErrors,
   type DealToDealSplits,
@@ -54,6 +57,7 @@ export {
 } from './deal-splits/index';
 export {
   Exports,
+  BaseExports,
   type ActionResponseWithSingleResultUri,
   type PublicCrmSearchRequest,
   type PublicExportListRequest,
@@ -62,9 +66,10 @@ export {
   type PublicExportViewRequest,
   type ExportCreateAsyncParams,
 } from './exports';
-export { Extensions } from './extensions/index';
+export { Extensions, BaseExtensions } from './extensions/index';
 export {
   FeatureFlags,
+  BaseFeatureFlags,
   type BatchPortalEntry,
   type FlagPutRequest,
   type FlagResponse,
@@ -84,6 +89,7 @@ export {
 } from './feature-flags/index';
 export {
   Imports,
+  BaseImports,
   type CollectionResponsePublicImportErrorForwardPaging,
   type CollectionResponsePublicImportResponseForwardPaging,
   type ImportRowCore,
@@ -100,6 +106,7 @@ export {
 } from './imports';
 export {
   Limits,
+  BaseLimits,
   type AssociationLabelLimitResponse,
   type AssociationRecordLimitResponse,
   type AtLimitRecordSample,
@@ -121,6 +128,7 @@ export {
 } from './limits';
 export {
   Lists,
+  BaseLists,
   type APICollectionResponseJoinTimeAndRecordID,
   type APICollectionResponseRecordListMembership,
   type BatchInputRecordIDInput,
@@ -253,9 +261,10 @@ export {
   type ListUpdateScheduleConversionParams,
   type JoinTimeAndRecordIDsPage,
 } from './lists';
-export { ObjectLibrary } from './object-library/index';
+export { ObjectLibrary, BaseObjectLibrary } from './object-library/index';
 export {
   ObjectSchemas,
+  BaseObjectSchemas,
   type CollectionResponseObjectSchemaNoPaging,
   type ObjectSchema,
   type ObjectSchemaBatchReadRequest,
@@ -271,6 +280,7 @@ export {
 } from './object-schemas/index';
 export {
   Objects,
+  BaseObjects,
   type AssociatedID,
   type BatchInputSimplePublicObjectBatchInput,
   type BatchInputSimplePublicObjectBatchInputForCreate,
@@ -297,6 +307,7 @@ export {
 } from './objects/index';
 export {
   Owners,
+  BaseOwners,
   type CollectionResponsePublicOwnerForwardPaging,
   type PublicOwner,
   type PublicTeam,
@@ -306,6 +317,7 @@ export {
 } from './owners';
 export {
   Pipelines,
+  BasePipelines,
   type CollectionResponsePipelineNoPaging,
   type CollectionResponsePipelineStageNoPaging,
   type CollectionResponsePublicAuditInfoNoPaging,
@@ -334,6 +346,7 @@ export {
 } from './pipelines';
 export {
   Properties,
+  BaseProperties,
   type BatchInputPropertyCreate,
   type BatchResponseProperty,
   type BatchResponsePropertyWithErrors,
@@ -348,6 +361,7 @@ export {
 } from './properties/index';
 export {
   PropertiesValidations,
+  BasePropertiesValidations,
   type CollectionResponsePublicPropertyValidationRuleMapNoPaging,
   type CollectionResponsePublicPropertyValidationRuleNoPaging,
   type PublicPropertyValidationRule,
@@ -359,6 +373,7 @@ export {
 } from './properties-validations';
 export {
   Timeline,
+  BaseTimeline,
   type AppEventOccurrence,
   type AppEventResolutionResponse,
   type BatchInputAppEventOccurrence,

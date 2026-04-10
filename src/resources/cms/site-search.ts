@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class SiteSearch extends APIResource {
+export class BaseSiteSearch extends APIResource {
+  static override readonly _key: readonly ['cms', 'siteSearch'] = Object.freeze([
+    'cms',
+    'siteSearch',
+  ] as const);
+
   /**
    * Return all indexed data for an asset (e.g., page, blog post, HubDB table),
    * specified by ID. This is useful when debugging why a particular asset is not
@@ -32,6 +37,7 @@ export class SiteSearch extends APIResource {
     return this._client.get('/cms/site-search/2026-03/search', { query, ...options });
   }
 }
+export class SiteSearch extends BaseSiteSearch {}
 
 export interface ContentSearchResult {
   /**

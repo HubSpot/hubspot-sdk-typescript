@@ -3,12 +3,18 @@
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
 import * as SingleEmailAPI from './single-email';
-import { SingleEmail, SingleEmailSendParams } from './single-email';
+import { BaseSingleEmail, SingleEmail, SingleEmailSendParams } from './single-email';
 import * as SmtpTokensAPI from './smtp-tokens';
-import { SmtpTokenCreateParams, SmtpTokenListParams, SmtpTokens } from './smtp-tokens';
+import { BaseSmtpTokens, SmtpTokenCreateParams, SmtpTokenListParams, SmtpTokens } from './smtp-tokens';
 import { Page } from '../../../core/pagination';
 
-export class Transactional extends APIResource {
+export class BaseTransactional extends APIResource {
+  static override readonly _key: readonly ['marketing', 'transactional'] = Object.freeze([
+    'marketing',
+    'transactional',
+  ] as const);
+}
+export class Transactional extends BaseTransactional {
   singleEmail: SingleEmailAPI.SingleEmail = new SingleEmailAPI.SingleEmail(this._client);
   smtpTokens: SmtpTokensAPI.SmtpTokens = new SmtpTokensAPI.SmtpTokens(this._client);
 }
@@ -71,7 +77,9 @@ export interface SmtpAPITokenView {
 }
 
 Transactional.SingleEmail = SingleEmail;
+Transactional.BaseSingleEmail = BaseSingleEmail;
 Transactional.SmtpTokens = SmtpTokens;
+Transactional.BaseSmtpTokens = BaseSmtpTokens;
 
 export declare namespace Transactional {
   export {
@@ -80,10 +88,15 @@ export declare namespace Transactional {
     type SmtpAPITokenView as SmtpAPITokenView,
   };
 
-  export { SingleEmail as SingleEmail, type SingleEmailSendParams as SingleEmailSendParams };
+  export {
+    SingleEmail as SingleEmail,
+    BaseSingleEmail as BaseSingleEmail,
+    type SingleEmailSendParams as SingleEmailSendParams,
+  };
 
   export {
     SmtpTokens as SmtpTokens,
+    BaseSmtpTokens as BaseSmtpTokens,
     type SmtpTokenCreateParams as SmtpTokenCreateParams,
     type SmtpTokenListParams as SmtpTokenListParams,
   };

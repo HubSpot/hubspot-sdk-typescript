@@ -1,13 +1,31 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseBatch } from 'hubspot-sdk/resources/communication-preferences/statuses/batch';
+import { Statuses } from 'hubspot-sdk/resources/communication-preferences/statuses/statuses';
+
 import HubSpot from 'hubspot-sdk';
+import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource batch', () => {
+const partialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseBatch],
+});
+
+const parentPartialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Statuses],
+});
+
+const runTests = (
+  client: PartialHubSpot<{ communicationPreferences: { statuses: { batch: BaseBatch } } }>,
+) => {
   // Mock server tests are disabled
   test.skip('getUnsubscribeAllStatuses: only required params', async () => {
     const responsePromise = client.communicationPreferences.statuses.batch.getUnsubscribeAllStatuses({
@@ -117,4 +135,7 @@ describe('resource batch', () => {
       ],
     });
   });
-});
+};
+describe('resource batch', () => runTests(client));
+describe('resource batch (tree shakable, base)', () => runTests(partialClient));
+describe('resource batch (tree shakable, subresource)', () => runTests(parentPartialClient));

@@ -4,7 +4,12 @@ import { APIResource } from '../../core/resource';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 
-export class VisitorIdentification extends APIResource {
+export class BaseVisitorIdentification extends APIResource {
+  static override readonly _key: readonly ['conversations', 'visitorIdentification'] = Object.freeze([
+    'conversations',
+    'visitorIdentification',
+  ] as const);
+
   /**
    * Generate an identification token for a website visitor who has been
    * authenticated using your own system. An identification token returned from this
@@ -19,6 +24,7 @@ export class VisitorIdentification extends APIResource {
     return this._client.post('/visitor-identification/2026-03/tokens/create', { body, ...options });
   }
 }
+export class VisitorIdentification extends BaseVisitorIdentification {}
 
 export interface IdentificationTokenGenerationRequest {
   /**

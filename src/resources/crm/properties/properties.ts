@@ -4,9 +4,10 @@ import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
 import * as CrmAPI from '../crm';
 import * as BatchAPI from './batch';
-import { Batch, BatchCreateParams, BatchDeleteParams, BatchGetParams } from './batch';
+import { BaseBatch, Batch, BatchCreateParams, BatchDeleteParams, BatchGetParams } from './batch';
 import * as GroupsAPI from './groups';
 import {
+  BaseGroups,
   GroupCreateParams,
   GroupDeleteParams,
   GroupGetParams,
@@ -19,9 +20,11 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Properties extends APIResource {
-  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
-  groups: GroupsAPI.Groups = new GroupsAPI.Groups(this._client);
+export class BaseProperties extends APIResource {
+  static override readonly _key: readonly ['crm', 'properties'] = Object.freeze([
+    'crm',
+    'properties',
+  ] as const);
 
   /**
    * Create and return a copy of a new property for the specified object type.
@@ -86,6 +89,10 @@ export class Properties extends APIResource {
       ...options,
     });
   }
+}
+export class Properties extends BaseProperties {
+  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
+  groups: GroupsAPI.Groups = new GroupsAPI.Groups(this._client);
 }
 
 export interface BatchInputPropertyCreate {
@@ -544,7 +551,9 @@ export interface PropertyGetParams {
 }
 
 Properties.Batch = Batch;
+Properties.BaseBatch = BaseBatch;
 Properties.Groups = Groups;
+Properties.BaseGroups = BaseGroups;
 
 export declare namespace Properties {
   export {
@@ -563,6 +572,7 @@ export declare namespace Properties {
 
   export {
     Batch as Batch,
+    BaseBatch as BaseBatch,
     type BatchCreateParams as BatchCreateParams,
     type BatchDeleteParams as BatchDeleteParams,
     type BatchGetParams as BatchGetParams,
@@ -570,6 +580,7 @@ export declare namespace Properties {
 
   export {
     Groups as Groups,
+    BaseGroups as BaseGroups,
     type GroupCreateParams as GroupCreateParams,
     type GroupUpdateParams as GroupUpdateParams,
     type GroupListParams as GroupListParams,

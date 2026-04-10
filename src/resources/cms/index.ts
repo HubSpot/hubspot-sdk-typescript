@@ -2,6 +2,7 @@
 
 export {
   AuditLogs,
+  BaseAuditLogs,
   type CmsAuditLoggingExportFilters,
   type CmsAuditLoggingExportSettings,
   type CollectionResponsePublicAuditLog,
@@ -12,13 +13,15 @@ export {
 } from './audit-logs';
 export {
   Blogs,
+  BaseBlogs,
   type CursorPagedResultBlogAuthorLong,
   type CursorPagedResultBlogPostLong,
   type CursorPagedResultTagLong,
 } from './blogs/index';
-export { Cms } from './cms';
+export { Cms, BaseCms } from './cms';
 export {
   Domains,
+  BaseDomains,
   type CollectionResponseWithTotalDomain,
   type Domain,
   type DomainListParams,
@@ -26,6 +29,7 @@ export {
 } from './domains';
 export {
   Hubdb,
+  BaseHubdb,
   type BatchInputHubDBTableRowBatchCloneRequest,
   type BatchInputHubDBTableRowV3BatchUpdateRequest,
   type BatchInputHubDBTableRowV3Request,
@@ -56,6 +60,7 @@ export {
 } from './hubdb/index';
 export {
   MediaBridge,
+  BaseMediaBridge,
   type AbsoluteValue,
   type AddNumbers,
   type AddTime,
@@ -209,6 +214,7 @@ export {
 } from './media-bridge/index';
 export {
   Pages,
+  BasePages,
   type AbTestEndRequestVNext,
   type AbTestRerunRequestVNext,
   type BatchInputContentFolder,
@@ -249,6 +255,7 @@ export {
 } from './pages/index';
 export {
   SiteSearch,
+  BaseSiteSearch,
   type ContentSearchResult,
   type IndexedData,
   type IndexedField,
@@ -258,6 +265,7 @@ export {
 } from './site-search';
 export {
   SourceCode,
+  BaseSourceCode,
   type AssetFileMetadata,
   type FileExtractRequest,
   type SourceCodeCreateParams,
@@ -268,9 +276,15 @@ export {
   type SourceCodeUpsertParams,
   type SourceCodeValidateParams,
 } from './source-code';
-export { URLMappings, type URLMappingsURLMapping, type URLMappingCreateParams } from './url-mappings';
+export {
+  URLMappings,
+  BaseURLMappings,
+  type URLMappingsURLMapping,
+  type URLMappingCreateParams,
+} from './url-mappings';
 export {
   URLRedirects,
+  BaseURLRedirects,
   type CollectionResponseWithTotalURLMappingForwardPaging,
   type URLMapping,
   type URLMappingCreateRequestBody,

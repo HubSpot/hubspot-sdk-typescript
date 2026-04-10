@@ -5,7 +5,13 @@ import * as MeetingsAPI from './meetings';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
-export class Advanced extends APIResource {
+export class BaseAdvanced extends APIResource {
+  static override readonly _key: readonly ['scheduler', 'meetings', 'advanced'] = Object.freeze([
+    'scheduler',
+    'meetings',
+    'advanced',
+  ] as const);
+
   /**
    * Create a new calendar event and meeting object by providing the necessary
    * details such as associations, email reminders, meeting object properties, and
@@ -33,6 +39,7 @@ export class Advanced extends APIResource {
     return this._client.post('/scheduler/2026-03/meetings/meeting-links/book', { body, ...options });
   }
 }
+export class Advanced extends BaseAdvanced {}
 
 export interface AdvancedCreateParams {
   /**

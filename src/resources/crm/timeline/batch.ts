@@ -5,7 +5,13 @@ import * as TimelineAPI from './timeline';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
-export class Batch extends APIResource {
+export class BaseBatch extends APIResource {
+  static override readonly _key: readonly ['crm', 'timeline', 'batch'] = Object.freeze([
+    'crm',
+    'timeline',
+    'batch',
+  ] as const);
+
   create(
     body: BatchCreateParams,
     options?: RequestOptions,
@@ -13,6 +19,7 @@ export class Batch extends APIResource {
     return this._client.post('/integrators/timeline/2026-03/events/batch', { body, ...options });
   }
 }
+export class Batch extends BaseBatch {}
 
 export interface BatchCreateParams {
   inputs: Array<TimelineAPI.AppEventOccurrence>;

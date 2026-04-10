@@ -1,13 +1,29 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseBudget } from 'hubspot-sdk/resources/marketing/campaigns/budget';
+import { Campaigns } from 'hubspot-sdk/resources/marketing/campaigns/campaigns';
+
 import HubSpot from 'hubspot-sdk';
+import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource budget', () => {
+const partialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseBudget],
+});
+
+const parentPartialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Campaigns],
+});
+
+const runTests = (client: PartialHubSpot<{ marketing: { campaigns: { budget: BaseBudget } } }>) => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.marketing.campaigns.budget.create('campaignGuid', {
@@ -107,4 +123,7 @@ describe('resource budget', () => {
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
   });
-});
+};
+describe('resource budget', () => runTests(client));
+describe('resource budget (tree shakable, base)', () => runTests(partialClient));
+describe('resource budget (tree shakable, subresource)', () => runTests(parentPartialClient));

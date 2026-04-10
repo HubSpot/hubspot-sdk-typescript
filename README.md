@@ -232,6 +232,100 @@ while (page.hasNextPage()) {
 
 ## Advanced Usage
 
+### Tree shaking
+
+This library supports tree shaking to reduce bundle size. Instead of importing the full client, you can create a client only including the API resources you need:
+
+```ts
+import { createClient } from 'hubspot-sdk/tree-shakable';
+import { Contacts } from 'hubspot-sdk/resources/crm/objects/contacts/contacts';
+import { BaseTables } from 'hubspot-sdk/resources/cms/hubdb/tables';
+
+const client = createClient({
+  // Specify the resources you'd like to use ...
+  resources: [Contacts, BaseTables],
+});
+
+// ... then make API calls as usual.
+const simplePublicObject = await client.crm.objects.contacts.create({
+  associations: [
+    {
+      to: { id: 'id' },
+      types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
+    },
+  ],
+  properties: { foo: 'string' },
+});
+const hubDBTableV3 = await client.cms.hubdb.tables.create({
+  allowChildTables: true,
+  allowPublicApiAccess: true,
+  columns: [
+    {
+      id: 0,
+      label: 'label',
+      name: 'name',
+      options: [
+        {
+          id: 'id',
+          createdAt: '2019-12-27T18:11:19.117Z',
+          label: 'label',
+          name: 'name',
+          order: 0,
+          type: 'type',
+          updatedAt: '2019-12-27T18:11:19.117Z',
+        },
+      ],
+      type: 'BOOLEAN',
+    },
+  ],
+  dynamicMetaTags: { foo: 0 },
+  enableChildTablePages: true,
+  label: 'label',
+  name: 'name',
+  useForPages: true,
+});
+```
+
+Each API resource has two versions, the full resource (e.g., `Contacts`) which includes all subresources, and the base resource (e.g., `BaseContacts`) which does not.
+
+The tree-shaken client is fully typed, so TypeScript will provide accurate autocomplete and prevent access to resources not included in your configuration.
+The `createClient` function automatically infers the correct type, but you can also use the `PartialHubSpot` type explicitly:
+
+```ts
+import HubSpot from 'hubspot-sdk';
+import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
+import { BaseContacts } from 'hubspot-sdk/resources/crm/objects/contacts/contacts';
+
+// Explicit variable type
+const client: PartialHubSpot<{ crm: { objects: { contacts: BaseContacts } } }> = createClient({
+  resources: [BaseContacts],
+  /* ... */
+});
+
+// Function parameter type
+async function main(client: PartialHubSpot<{ crm: { objects: { contacts: BaseContacts } } }>) {
+  const simplePublicObject = await client.crm.objects.contacts.create({
+    associations: [
+      {
+        to: { id: 'id' },
+        types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
+      },
+    ],
+    properties: { foo: 'string' },
+  });
+}
+
+// Works with any client that has the contacts resource
+const treeShakableClient = createClient({
+  resources: [BaseContacts],
+  /* ... */
+});
+const fullClient = new HubSpot(/* ... */);
+
+main(treeShakableClient); // Works
+main(fullClient); // Also works
+```
+
 ### Accessing raw Response data (e.g., headers)
 
 The "raw" `Response` returned by `fetch()` can be accessed through the `.asResponse()` method on the `APIPromise` type that all methods return.

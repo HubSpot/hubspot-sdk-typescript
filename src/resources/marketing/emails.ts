@@ -8,7 +8,12 @@ import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Emails extends APIResource {
+export class BaseEmails extends APIResource {
+  static override readonly _key: readonly ['marketing', 'emails'] = Object.freeze([
+    'marketing',
+    'emails',
+  ] as const);
+
   create(body: EmailCreateParams, options?: RequestOptions): APIPromise<PublicEmail> {
     return this._client.post('/marketing/emails/2026-03', { body, ...options });
   }
@@ -225,6 +230,7 @@ export class Emails extends APIResource {
     return this._client.patch(path`/marketing/emails/2026-03/${emailID}/draft`, { body, ...options });
   }
 }
+export class Emails extends BaseEmails {}
 
 export type PublicEmailsPage = Page<PublicEmail>;
 

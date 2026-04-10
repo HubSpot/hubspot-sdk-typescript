@@ -9,11 +9,18 @@ import {
   AttendanceCreateByEventIDAndEmailParams,
   AttendanceCreateByExternalEventIDAndContactIDParams,
   AttendanceCreateByExternalEventIDAndEmailParams,
+  BaseAttendance,
 } from './attendance';
 import * as EventsAPI from './events';
-import { EventCancelByExternalEventIDParams, EventCompleteByExternalEventIDParams, Events } from './events';
+import {
+  BaseEvents,
+  EventCancelByExternalEventIDParams,
+  EventCompleteByExternalEventIDParams,
+  Events,
+} from './events';
 import * as ListAssociationsAPI from './list-associations';
 import {
+  BaseListAssociations,
   ListAssociationAssociateByExternalAccountParams,
   ListAssociationAssociateParams,
   ListAssociationDeleteByExternalAccountParams,
@@ -23,6 +30,7 @@ import {
 } from './list-associations';
 import * as ParticipationsAPI from './participations';
 import {
+  BaseParticipations,
   ParticipationGetByExternalAccountAndEventIDParams,
   ParticipationListBreakdownByContactParams,
   ParticipationListBreakdownByExternalAccountAndEventIDParams,
@@ -30,9 +38,10 @@ import {
   Participations,
 } from './participations';
 import * as SettingsAPI from './settings';
-import { SettingCreateOrUpdateParams, Settings } from './settings';
+import { BaseSettings, SettingCreateOrUpdateParams, Settings } from './settings';
 import * as SubscriberStateAPI from './subscriber-state';
 import {
+  BaseSubscriberState,
   SubscriberState,
   SubscriberStateRecordByEmailParams,
   SubscriberStateRecordByIDParams,
@@ -43,15 +52,11 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class MarketingEvents extends APIResource {
-  attendance: AttendanceAPI.Attendance = new AttendanceAPI.Attendance(this._client);
-  events: EventsAPI.Events = new EventsAPI.Events(this._client);
-  listAssociations: ListAssociationsAPI.ListAssociations = new ListAssociationsAPI.ListAssociations(
-    this._client,
-  );
-  participations: ParticipationsAPI.Participations = new ParticipationsAPI.Participations(this._client);
-  settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
-  subscriberState: SubscriberStateAPI.SubscriberState = new SubscriberStateAPI.SubscriberState(this._client);
+export class BaseMarketingEvents extends APIResource {
+  static override readonly _key: readonly ['marketing', 'marketingEvents'] = Object.freeze([
+    'marketing',
+    'marketingEvents',
+  ] as const);
 
   /**
    * Creates a new marketing event in HubSpot
@@ -270,6 +275,16 @@ export class MarketingEvents extends APIResource {
       ...options,
     });
   }
+}
+export class MarketingEvents extends BaseMarketingEvents {
+  attendance: AttendanceAPI.Attendance = new AttendanceAPI.Attendance(this._client);
+  events: EventsAPI.Events = new EventsAPI.Events(this._client);
+  listAssociations: ListAssociationsAPI.ListAssociations = new ListAssociationsAPI.ListAssociations(
+    this._client,
+  );
+  participations: ParticipationsAPI.Participations = new ParticipationsAPI.Participations(this._client);
+  settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
+  subscriberState: SubscriberStateAPI.SubscriberState = new SubscriberStateAPI.SubscriberState(this._client);
 }
 
 export type MarketingEventPublicReadResponseV2sPage = Page<MarketingEventPublicReadResponseV2>;
@@ -1810,11 +1825,17 @@ export interface MarketingEventUpsertByExternalEventIDParams {
 }
 
 MarketingEvents.Attendance = Attendance;
+MarketingEvents.BaseAttendance = BaseAttendance;
 MarketingEvents.Events = Events;
+MarketingEvents.BaseEvents = BaseEvents;
 MarketingEvents.ListAssociations = ListAssociations;
+MarketingEvents.BaseListAssociations = BaseListAssociations;
 MarketingEvents.Participations = Participations;
+MarketingEvents.BaseParticipations = BaseParticipations;
 MarketingEvents.Settings = Settings;
+MarketingEvents.BaseSettings = BaseSettings;
 MarketingEvents.SubscriberState = SubscriberState;
+MarketingEvents.BaseSubscriberState = BaseSubscriberState;
 
 export declare namespace MarketingEvents {
   export {
@@ -1880,6 +1901,7 @@ export declare namespace MarketingEvents {
 
   export {
     Attendance as Attendance,
+    BaseAttendance as BaseAttendance,
     type AttendanceCreateByEventIDAndContactIDParams as AttendanceCreateByEventIDAndContactIDParams,
     type AttendanceCreateByEventIDAndEmailParams as AttendanceCreateByEventIDAndEmailParams,
     type AttendanceCreateByExternalEventIDAndContactIDParams as AttendanceCreateByExternalEventIDAndContactIDParams,
@@ -1888,12 +1910,14 @@ export declare namespace MarketingEvents {
 
   export {
     Events as Events,
+    BaseEvents as BaseEvents,
     type EventCancelByExternalEventIDParams as EventCancelByExternalEventIDParams,
     type EventCompleteByExternalEventIDParams as EventCompleteByExternalEventIDParams,
   };
 
   export {
     ListAssociations as ListAssociations,
+    BaseListAssociations as BaseListAssociations,
     type ListAssociationDeleteParams as ListAssociationDeleteParams,
     type ListAssociationAssociateParams as ListAssociationAssociateParams,
     type ListAssociationAssociateByExternalAccountParams as ListAssociationAssociateByExternalAccountParams,
@@ -1903,16 +1927,22 @@ export declare namespace MarketingEvents {
 
   export {
     Participations as Participations,
+    BaseParticipations as BaseParticipations,
     type ParticipationGetByExternalAccountAndEventIDParams as ParticipationGetByExternalAccountAndEventIDParams,
     type ParticipationListBreakdownByContactParams as ParticipationListBreakdownByContactParams,
     type ParticipationListBreakdownByExternalAccountAndEventIDParams as ParticipationListBreakdownByExternalAccountAndEventIDParams,
     type ParticipationListBreakdownByIDParams as ParticipationListBreakdownByIDParams,
   };
 
-  export { Settings as Settings, type SettingCreateOrUpdateParams as SettingCreateOrUpdateParams };
+  export {
+    Settings as Settings,
+    BaseSettings as BaseSettings,
+    type SettingCreateOrUpdateParams as SettingCreateOrUpdateParams,
+  };
 
   export {
     SubscriberState as SubscriberState,
+    BaseSubscriberState as BaseSubscriberState,
     type SubscriberStateRecordByEmailParams as SubscriberStateRecordByEmailParams,
     type SubscriberStateRecordByIDParams as SubscriberStateRecordByIDParams,
   };

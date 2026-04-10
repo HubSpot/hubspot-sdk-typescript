@@ -5,7 +5,12 @@ import * as Shared from '../shared';
 import { Page, type PageParams, PagePromise } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 
-export class Activity extends APIResource {
+export class BaseActivity extends APIResource {
+  static override readonly _key: readonly ['account', 'activity'] = Object.freeze([
+    'account',
+    'activity',
+  ] as const);
+
   /**
    * Retrieve activity history for user actions related to approvals, content
    * updates, CRM object updates, security activity, and more (Enterprise only).
@@ -51,6 +56,7 @@ export class Activity extends APIResource {
     });
   }
 }
+export class Activity extends BaseActivity {}
 
 export type PublicAPIUserActionEventsPage = Page<PublicAPIUserActionEvent>;
 

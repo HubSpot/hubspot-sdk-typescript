@@ -6,7 +6,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 
-export class Batch extends APIResource {
+export class BaseBatch extends APIResource {
+  static override readonly _key: readonly ['marketing', 'campaigns', 'batch'] = Object.freeze([
+    'marketing',
+    'campaigns',
+    'batch',
+  ] as const);
+
   /**
    * This endpoint creates a batch of campaigns. The maximum number of items in a
    * batch request is 50. The campaigns in the response are not guaranteed to be in
@@ -66,6 +72,7 @@ export class Batch extends APIResource {
     });
   }
 }
+export class Batch extends BaseBatch {}
 
 export interface BatchCreateParams {
   /**

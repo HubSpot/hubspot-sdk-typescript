@@ -7,7 +7,13 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Labels extends APIResource {
+export class BaseLabels extends APIResource {
+  static override readonly _key: readonly ['crm', 'associationsSchema', 'labels'] = Object.freeze([
+    'crm',
+    'associationsSchema',
+    'labels',
+  ] as const);
+
   /**
    * Batch configure association limits between two object types.
    */
@@ -89,6 +95,7 @@ export class Labels extends APIResource {
     });
   }
 }
+export class Labels extends BaseLabels {}
 
 export interface LabelBatchCreateParams {
   /**

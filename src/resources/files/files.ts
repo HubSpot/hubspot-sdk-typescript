@@ -4,6 +4,7 @@ import { APIResource } from '../../core/resource';
 import * as Shared from '../shared';
 import * as FileAssetsAPI from './file-assets';
 import {
+  BaseFileAssets,
   FileAssetCreateParams,
   FileAssetGetByPathParams,
   FileAssetGetParams,
@@ -17,6 +18,7 @@ import {
 } from './file-assets';
 import * as FoldersAPI from './folders';
 import {
+  BaseFolders,
   FolderGetByIDParams,
   FolderGetByPathParams,
   FolderSearchParams,
@@ -26,7 +28,10 @@ import {
 } from './folders';
 import { Page } from '../../core/pagination';
 
-export class Files extends APIResource {
+export class BaseFiles extends APIResource {
+  static override readonly _key: readonly ['files'] = Object.freeze(['files'] as const);
+}
+export class Files extends BaseFiles {
   fileAssets: FileAssetsAPI.FileAssets = new FileAssetsAPI.FileAssets(this._client);
   folders: FoldersAPI.Folders = new FoldersAPI.Folders(this._client);
 }
@@ -539,7 +544,9 @@ export interface SignedURL {
 }
 
 Files.FileAssets = FileAssets;
+Files.BaseFileAssets = BaseFileAssets;
 Files.Folders = Folders;
+Files.BaseFolders = BaseFolders;
 
 export declare namespace Files {
   export {
@@ -562,6 +569,7 @@ export declare namespace Files {
 
   export {
     FileAssets as FileAssets,
+    BaseFileAssets as BaseFileAssets,
     type FileAssetCreateParams as FileAssetCreateParams,
     type FileAssetUpdateParams as FileAssetUpdateParams,
     type FileAssetGetParams as FileAssetGetParams,
@@ -575,6 +583,7 @@ export declare namespace Files {
 
   export {
     Folders as Folders,
+    BaseFolders as BaseFolders,
     type FolderGetByIDParams as FolderGetByIDParams,
     type FolderGetByPathParams as FolderGetByPathParams,
     type FolderSearchParams as FolderSearchParams,

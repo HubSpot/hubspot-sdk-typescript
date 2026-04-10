@@ -6,6 +6,7 @@ import * as ObjectsAPI from '../objects';
 import { SimplePublicObjectWithAssociationsPage } from '../objects';
 import * as BatchAPI from './batch';
 import {
+  BaseBatch,
   Batch,
   BatchCreateParams,
   BatchDeleteParams,
@@ -19,8 +20,12 @@ import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Courses extends APIResource {
-  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
+export class BaseCourses extends APIResource {
+  static override readonly _key: readonly ['crm', 'objects', 'courses'] = Object.freeze([
+    'crm',
+    'objects',
+    'courses',
+  ] as const);
 
   /**
    * Create a course with the given properties and return a copy of the object,
@@ -100,6 +105,9 @@ export class Courses extends APIResource {
   ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/objects/2026-03/0-410/search', { body, ...options });
   }
+}
+export class Courses extends BaseCourses {
+  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
 }
 
 export interface CourseCreateParams {
@@ -216,6 +224,7 @@ export interface CourseSearchParams {
 }
 
 Courses.Batch = Batch;
+Courses.BaseBatch = BaseBatch;
 
 export declare namespace Courses {
   export {
@@ -228,6 +237,7 @@ export declare namespace Courses {
 
   export {
     Batch as Batch,
+    BaseBatch as BaseBatch,
     type BatchCreateParams as BatchCreateParams,
     type BatchUpdateParams as BatchUpdateParams,
     type BatchDeleteParams as BatchDeleteParams,

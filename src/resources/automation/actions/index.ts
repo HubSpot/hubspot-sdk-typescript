@@ -2,6 +2,7 @@
 
 export {
   Actions,
+  BaseActions,
   type ActionExecutionIndexIdentifier,
   type AgentRequestContext,
   type ArrayFieldSchema,
@@ -45,9 +46,15 @@ export {
   type PublicActionDefinitionsPage,
   type PublicActionRevisionsPage,
 } from './actions';
-export { Callbacks, type CallbackCompleteParams, type CallbackCompleteBatchParams } from './callbacks';
+export {
+  Callbacks,
+  BaseCallbacks,
+  type CallbackCompleteParams,
+  type CallbackCompleteBatchParams,
+} from './callbacks';
 export {
   Definitions,
+  BaseDefinitions,
   type DefinitionCreateParams,
   type DefinitionUpdateParams,
   type DefinitionListParams,
@@ -58,6 +65,7 @@ export {
 } from './definitions';
 export {
   Functions,
+  BaseFunctions,
   type FunctionListParams,
   type FunctionDeleteParams,
   type FunctionCreateOrReplaceParams,
@@ -66,4 +74,4 @@ export {
   type FunctionGetParams,
   type FunctionGetByFunctionTypeParams,
 } from './functions';
-export { Revisions, type RevisionListParams, type RevisionGetParams } from './revisions';
+export { Revisions, BaseRevisions, type RevisionListParams, type RevisionGetParams } from './revisions';

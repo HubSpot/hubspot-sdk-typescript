@@ -2,6 +2,7 @@
 
 export {
   Associations,
+  BaseAssociations,
   type BatchInputPublicAssociationMultiArchive,
   type BatchInputPublicAssociationMultiPost,
   type BatchInputPublicDefaultAssociationMultiPost,
@@ -24,6 +25,7 @@ export {
 } from './associations';
 export {
   Batch,
+  BaseBatch,
   type BatchCreateParams,
   type BatchDeleteParams,
   type BatchCreateDefaultParams,

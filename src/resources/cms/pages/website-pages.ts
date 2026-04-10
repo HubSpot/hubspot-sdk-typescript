@@ -10,7 +10,13 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class WebsitePages extends APIResource {
+export class BaseWebsitePages extends APIResource {
+  static override readonly _key: readonly ['cms', 'pages', 'websitePages'] = Object.freeze([
+    'cms',
+    'pages',
+    'websitePages',
+  ] as const);
+
   /**
    * Create a new website page.
    */
@@ -149,6 +155,7 @@ export class WebsitePages extends APIResource {
     });
   }
 }
+export class WebsitePages extends BaseWebsitePages {}
 
 export interface WebsitePageCreateParams {
   /**

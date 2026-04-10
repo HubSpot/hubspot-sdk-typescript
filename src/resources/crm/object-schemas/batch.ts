@@ -5,7 +5,13 @@ import * as ObjectSchemasAPI from './object-schemas';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
-export class Batch extends APIResource {
+export class BaseBatch extends APIResource {
+  static override readonly _key: readonly ['crm', 'objectSchemas', 'batch'] = Object.freeze([
+    'crm',
+    'objectSchemas',
+    'batch',
+  ] as const);
+
   /**
    * Retrieve details of multiple custom object schemas by providing a batch request
    * with specified inputs. This operation allows you to fetch schema information,
@@ -19,6 +25,7 @@ export class Batch extends APIResource {
     return this._client.post('/crm-object-schemas/2026-03/schemas/batch/read', { body, ...options });
   }
 }
+export class Batch extends BaseBatch {}
 
 export interface BatchGetParams {
   /**

@@ -2,6 +2,7 @@
 
 export {
   Actions,
+  BaseActions,
   type ActionExecutionIndexIdentifier,
   type AgentRequestContext,
   type ArrayFieldSchema,
@@ -45,9 +46,10 @@ export {
   type PublicActionDefinitionsPage,
   type PublicActionRevisionsPage,
 } from './actions/index';
-export { Automation } from './automation';
+export { Automation, BaseAutomation } from './automation';
 export {
   Sequences,
+  BaseSequences,
   type CollectionResponseWithTotalPublicSequenceLiteResponse,
   type PublicEmailPatternResponse,
   type PublicSequenceEnrollmentLiteResponse,

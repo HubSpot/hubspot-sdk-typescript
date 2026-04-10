@@ -3,16 +3,17 @@
 import { APIResource } from '../../core/resource';
 import * as Shared from '../shared';
 import * as DefinitionsAPI from './definitions';
-import { DefinitionListParams, Definitions } from './definitions';
+import { BaseDefinitions, DefinitionListParams, Definitions } from './definitions';
 import * as StatusesAPI from './statuses/statuses';
-import { Statuses } from './statuses/statuses';
+import { BaseStatuses, Statuses } from './statuses/statuses';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class CommunicationPreferences extends APIResource {
-  definitions: DefinitionsAPI.Definitions = new DefinitionsAPI.Definitions(this._client);
-  statuses: StatusesAPI.Statuses = new StatusesAPI.Statuses(this._client);
+export class BaseCommunicationPreferences extends APIResource {
+  static override readonly _key: readonly ['communicationPreferences'] = Object.freeze([
+    'communicationPreferences',
+  ] as const);
 
   /**
    * Generate communication preference links for a subscriber. This endpoint allows
@@ -90,6 +91,10 @@ export class CommunicationPreferences extends APIResource {
       ...options,
     });
   }
+}
+export class CommunicationPreferences extends BaseCommunicationPreferences {
+  definitions: DefinitionsAPI.Definitions = new DefinitionsAPI.Definitions(this._client);
+  statuses: StatusesAPI.Statuses = new StatusesAPI.Statuses(this._client);
 }
 
 export interface ActionResponseWithResultsPublicStatus {
@@ -922,7 +927,9 @@ export interface CommunicationPreferenceUpdateStatusParams {
 }
 
 CommunicationPreferences.Definitions = Definitions;
+CommunicationPreferences.BaseDefinitions = BaseDefinitions;
 CommunicationPreferences.Statuses = Statuses;
+CommunicationPreferences.BaseStatuses = BaseStatuses;
 
 export declare namespace CommunicationPreferences {
   export {
@@ -954,7 +961,11 @@ export declare namespace CommunicationPreferences {
     type CommunicationPreferenceUpdateStatusParams as CommunicationPreferenceUpdateStatusParams,
   };
 
-  export { Definitions as Definitions, type DefinitionListParams as DefinitionListParams };
+  export {
+    Definitions as Definitions,
+    BaseDefinitions as BaseDefinitions,
+    type DefinitionListParams as DefinitionListParams,
+  };
 
-  export { Statuses as Statuses };
+  export { Statuses as Statuses, BaseStatuses as BaseStatuses };
 }

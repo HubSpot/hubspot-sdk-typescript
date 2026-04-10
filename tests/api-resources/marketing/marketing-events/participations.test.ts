@@ -1,13 +1,31 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { MarketingEvents } from 'hubspot-sdk/resources/marketing/marketing-events/marketing-events';
+import { BaseParticipations } from 'hubspot-sdk/resources/marketing/marketing-events/participations';
+
 import HubSpot from 'hubspot-sdk';
+import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource participations', () => {
+const partialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseParticipations],
+});
+
+const parentPartialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [MarketingEvents],
+});
+
+const runTests = (
+  client: PartialHubSpot<{ marketing: { marketingEvents: { participations: BaseParticipations } } }>,
+) => {
   // Mock server tests are disabled
   test.skip('getByExternalAccountAndEventID: only required params', async () => {
     const responsePromise = client.marketing.marketingEvents.participations.getByExternalAccountAndEventID(
@@ -131,4 +149,7 @@ describe('resource participations', () => {
       ),
     ).rejects.toThrow(HubSpot.NotFoundError);
   });
-});
+};
+describe('resource participations', () => runTests(client));
+describe('resource participations (tree shakable, base)', () => runTests(partialClient));
+describe('resource participations (tree shakable, subresource)', () => runTests(parentPartialClient));

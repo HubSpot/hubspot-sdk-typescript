@@ -2,6 +2,7 @@
 
 export {
   MultiLanguage,
+  BaseMultiLanguage,
   type MultiLanguageAttachToLangGroupParams,
   type MultiLanguageCreateLanguageVariationParams,
   type MultiLanguageDetachFromLangGroupParams,
@@ -10,6 +11,7 @@ export {
 } from './multi-language';
 export {
   Settings,
+  BaseSettings,
   type Blog,
   type BlogLanguageCloneRequestVNext,
   type BlogVersion,

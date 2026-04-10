@@ -6,6 +6,7 @@ import * as ObjectsAPI from '../objects';
 import { SimplePublicObjectWithAssociationsPage } from '../objects';
 import * as BatchAPI from './batch';
 import {
+  BaseBatch,
   Batch,
   BatchCreateParams,
   BatchDeleteParams,
@@ -19,8 +20,12 @@ import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Carts extends APIResource {
-  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
+export class BaseCarts extends APIResource {
+  static override readonly _key: readonly ['crm', 'objects', 'carts'] = Object.freeze([
+    'crm',
+    'objects',
+    'carts',
+  ] as const);
 
   /**
    * Create a cart with the given properties and return a copy of the object,
@@ -98,6 +103,9 @@ export class Carts extends APIResource {
   ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/objects/2026-03/carts/search', { body, ...options });
   }
+}
+export class Carts extends BaseCarts {
+  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
 }
 
 export interface CartCreateParams {
@@ -214,6 +222,7 @@ export interface CartSearchParams {
 }
 
 Carts.Batch = Batch;
+Carts.BaseBatch = BaseBatch;
 
 export declare namespace Carts {
   export {
@@ -226,6 +235,7 @@ export declare namespace Carts {
 
   export {
     Batch as Batch,
+    BaseBatch as BaseBatch,
     type BatchCreateParams as BatchCreateParams,
     type BatchUpdateParams as BatchUpdateParams,
     type BatchDeleteParams as BatchDeleteParams,

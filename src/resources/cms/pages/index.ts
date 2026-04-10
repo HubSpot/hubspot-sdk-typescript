@@ -2,6 +2,7 @@
 
 export {
   ABTests,
+  BaseABTests,
   type ABTestCreateLandingPageVariationParams,
   type ABTestCreateSitePageVariationParams,
   type ABTestEndLandingPageTestParams,
@@ -11,6 +12,7 @@ export {
 } from './a-b-tests';
 export {
   Batch,
+  BaseBatch,
   type BatchCreateFoldersParams,
   type BatchCreateLandingPagesParams,
   type BatchCreateSitePagesParams,
@@ -25,6 +27,7 @@ export {
 } from './batch';
 export {
   Folders,
+  BaseFolders,
   type FolderCreateParams,
   type FolderUpdateParams,
   type FolderListParams,
@@ -37,6 +40,7 @@ export {
 } from './folders';
 export {
   LandingPages,
+  BaseLandingPages,
   type LandingPageCreateParams,
   type LandingPageUpdateParams,
   type LandingPageListParams,
@@ -48,6 +52,7 @@ export {
 } from './landing-pages';
 export {
   MultiLanguage,
+  BaseMultiLanguage,
   type MultiLanguageAttachToLangGroupParams,
   type MultiLanguageCreateLanguageVariationParams,
   type MultiLanguageDetachFromLangGroupParams,
@@ -56,6 +61,7 @@ export {
 } from './multi-language';
 export {
   Pages,
+  BasePages,
   type AbTestEndRequestVNext,
   type AbTestRerunRequestVNext,
   type BatchInputContentFolder,
@@ -96,6 +102,7 @@ export {
 } from './pages';
 export {
   WebsitePages,
+  BaseWebsitePages,
   type WebsitePageCreateParams,
   type WebsitePageUpdateParams,
   type WebsitePageListParams,

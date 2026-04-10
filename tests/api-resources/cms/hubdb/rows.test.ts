@@ -1,13 +1,29 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Hubdb } from 'hubspot-sdk/resources/cms/hubdb/hubdb';
+import { BaseRows } from 'hubspot-sdk/resources/cms/hubdb/rows';
+
 import HubSpot from 'hubspot-sdk';
+import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource rows', () => {
+const partialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseRows],
+});
+
+const parentPartialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Hubdb],
+});
+
+const runTests = (client: PartialHubSpot<{ cms: { hubdb: { rows: BaseRows } } }>) => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.cms.hubdb.rows.create('tableIdOrName', {
@@ -385,4 +401,7 @@ describe('resource rows', () => {
       path: 'path',
     });
   });
-});
+};
+describe('resource rows', () => runTests(client));
+describe('resource rows (tree shakable, base)', () => runTests(partialClient));
+describe('resource rows (tree shakable, subresource)', () => runTests(parentPartialClient));

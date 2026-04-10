@@ -8,6 +8,7 @@ import {
   AllHistoryRefineBy,
   AllPropertyTypesOperation,
   AssociationDefinition,
+  BaseDefinitions,
   BehavioralEventTypeDefinitionLabels,
   BoolPropertyOperation,
   CalendarDatePropertyOperation,
@@ -72,6 +73,7 @@ import {
 } from './definitions';
 import * as OccurrencesAPI from './occurrences';
 import {
+  BaseOccurrences,
   CollectionResponseExternalUnifiedEvent,
   ExternalUnifiedEvent,
   ExternalUnifiedEventsPage,
@@ -80,9 +82,12 @@ import {
   VisibleExternalEventTypeNames,
 } from './occurrences';
 import * as SendAPI from './send';
-import { Send, SendBatchSendParams, SendSendParams } from './send';
+import { BaseSend, Send, SendBatchSendParams, SendSendParams } from './send';
 
-export class Events extends APIResource {
+export class BaseEvents extends APIResource {
+  static override readonly _key: readonly ['events'] = Object.freeze(['events'] as const);
+}
+export class Events extends BaseEvents {
   definitions: DefinitionsAPI.Definitions = new DefinitionsAPI.Definitions(this._client);
   occurrences: OccurrencesAPI.Occurrences = new OccurrencesAPI.Occurrences(this._client);
   send: SendAPI.Send = new SendAPI.Send(this._client);
@@ -130,8 +135,11 @@ export interface BehavioralEventHTTPCompletionRequest {
 }
 
 Events.Definitions = Definitions;
+Events.BaseDefinitions = BaseDefinitions;
 Events.Occurrences = Occurrences;
+Events.BaseOccurrences = BaseOccurrences;
 Events.Send = Send;
+Events.BaseSend = BaseSend;
 
 export declare namespace Events {
   export {
@@ -141,6 +149,7 @@ export declare namespace Events {
 
   export {
     Definitions as Definitions,
+    BaseDefinitions as BaseDefinitions,
     type AbsoluteComparativeTimestampRefineBy as AbsoluteComparativeTimestampRefineBy,
     type AbsoluteRangedTimestampRefineBy as AbsoluteRangedTimestampRefineBy,
     type AllHistoryRefineBy as AllHistoryRefineBy,
@@ -210,6 +219,7 @@ export declare namespace Events {
 
   export {
     Occurrences as Occurrences,
+    BaseOccurrences as BaseOccurrences,
     type CollectionResponseExternalUnifiedEvent as CollectionResponseExternalUnifiedEvent,
     type ExternalUnifiedEvent as ExternalUnifiedEvent,
     type VisibleExternalEventTypeNames as VisibleExternalEventTypeNames,
@@ -219,6 +229,7 @@ export declare namespace Events {
 
   export {
     Send as Send,
+    BaseSend as BaseSend,
     type SendBatchSendParams as SendBatchSendParams,
     type SendSendParams as SendSendParams,
   };

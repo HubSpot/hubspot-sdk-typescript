@@ -6,6 +6,7 @@ import * as ObjectsAPI from '../objects';
 import { SimplePublicObjectWithAssociationsPage } from '../objects';
 import * as BatchAPI from './batch';
 import {
+  BaseBatch,
   Batch,
   BatchCreateParams,
   BatchDeleteParams,
@@ -19,8 +20,12 @@ import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Meetings extends APIResource {
-  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
+export class BaseMeetings extends APIResource {
+  static override readonly _key: readonly ['crm', 'objects', 'meetings'] = Object.freeze([
+    'crm',
+    'objects',
+    'meetings',
+  ] as const);
 
   /**
    * Create a meeting with the given properties and return a copy of the object,
@@ -102,6 +107,9 @@ export class Meetings extends APIResource {
   ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/objects/2026-03/meetings/search', { body, ...options });
   }
+}
+export class Meetings extends BaseMeetings {
+  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
 }
 
 export interface MeetingCreateParams {
@@ -218,6 +226,7 @@ export interface MeetingSearchParams {
 }
 
 Meetings.Batch = Batch;
+Meetings.BaseBatch = BaseBatch;
 
 export declare namespace Meetings {
   export {
@@ -230,6 +239,7 @@ export declare namespace Meetings {
 
   export {
     Batch as Batch,
+    BaseBatch as BaseBatch,
     type BatchCreateParams as BatchCreateParams,
     type BatchUpdateParams as BatchUpdateParams,
     type BatchDeleteParams as BatchDeleteParams,

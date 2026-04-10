@@ -1,13 +1,29 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Settings } from 'hubspot-sdk/resources/settings/settings';
+import { BaseCurrencies } from 'hubspot-sdk/resources/settings/currencies/currencies';
+
 import HubSpot from 'hubspot-sdk';
+import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource currencies', () => {
+const partialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseCurrencies],
+});
+
+const parentPartialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Settings],
+});
+
+const runTests = (client: PartialHubSpot<{ settings: { currencies: BaseCurrencies } }>) => {
   // Mock server tests are disabled
   test.skip('getCompanyCurrency', async () => {
     const responsePromise = client.settings.currencies.getCompanyCurrency();
@@ -48,4 +64,7 @@ describe('resource currencies', () => {
   test.skip('updateCompanyCurrency: required and optional params', async () => {
     const response = await client.settings.currencies.updateCompanyCurrency({ currencyCode: 'AED' });
   });
-});
+};
+describe('resource currencies', () => runTests(client));
+describe('resource currencies (tree shakable, base)', () => runTests(partialClient));
+describe('resource currencies (tree shakable, subresource)', () => runTests(parentPartialClient));

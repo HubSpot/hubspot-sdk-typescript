@@ -4,6 +4,7 @@ import { APIResource } from '../../core/resource';
 import * as EmailsAPI from './emails';
 import {
   AggregateEmailStatistics,
+  BaseEmails,
   CollectionResponseWithTotalEmailStatisticInterval,
   CollectionResponseWithTotalPublicEmail,
   CollectionResponseWithTotalPublicEmailVersion,
@@ -48,9 +49,10 @@ import {
   VersionPublicEmailsPage,
 } from './emails';
 import * as SingleSendAPI from './single-send';
-import { SingleSend, SingleSendCreateParams } from './single-send';
+import { BaseSingleSend, SingleSend, SingleSendCreateParams } from './single-send';
 import * as CampaignsAPI from './campaigns/campaigns';
 import {
+  BaseCampaigns,
   BatchInputPublicCampaignBatchUpdateItem,
   BatchInputPublicCampaignDeleteInput,
   BatchInputPublicCampaignInput,
@@ -90,6 +92,7 @@ import * as MarketingEventsAPI from './marketing-events/marketing-events';
 import {
   AppInfo,
   AttendanceCounters,
+  BaseMarketingEvents,
   BatchInputMarketingEventCreateRequestParams,
   BatchInputMarketingEventEmailSubscriber,
   BatchInputMarketingEventExternalUniqueIdentifier,
@@ -150,13 +153,17 @@ import {
 } from './marketing-events/marketing-events';
 import * as TransactionalAPI from './transactional/transactional';
 import {
+  BaseTransactional,
   CollectionResponseSmtpAPITokenViewForwardPaging,
   SmtpAPITokenRequestEgg,
   SmtpAPITokenView,
   Transactional,
 } from './transactional/transactional';
 
-export class Marketing extends APIResource {
+export class BaseMarketing extends APIResource {
+  static override readonly _key: readonly ['marketing'] = Object.freeze(['marketing'] as const);
+}
+export class Marketing extends BaseMarketing {
   campaigns: CampaignsAPI.Campaigns = new CampaignsAPI.Campaigns(this._client);
   emails: EmailsAPI.Emails = new EmailsAPI.Emails(this._client);
   marketingEvents: MarketingEventsAPI.MarketingEvents = new MarketingEventsAPI.MarketingEvents(this._client);
@@ -327,10 +334,15 @@ export interface PublicSingleSendRequestEgg {
 }
 
 Marketing.Campaigns = Campaigns;
+Marketing.BaseCampaigns = BaseCampaigns;
 Marketing.Emails = Emails;
+Marketing.BaseEmails = BaseEmails;
 Marketing.MarketingEvents = MarketingEvents;
+Marketing.BaseMarketingEvents = BaseMarketingEvents;
 Marketing.SingleSend = SingleSend;
+Marketing.BaseSingleSend = BaseSingleSend;
 Marketing.Transactional = Transactional;
+Marketing.BaseTransactional = BaseTransactional;
 
 export declare namespace Marketing {
   export {
@@ -342,6 +354,7 @@ export declare namespace Marketing {
 
   export {
     Campaigns as Campaigns,
+    BaseCampaigns as BaseCampaigns,
     type BatchInputPublicCampaignBatchUpdateItem as BatchInputPublicCampaignBatchUpdateItem,
     type BatchInputPublicCampaignDeleteInput as BatchInputPublicCampaignDeleteInput,
     type BatchInputPublicCampaignInput as BatchInputPublicCampaignInput,
@@ -379,6 +392,7 @@ export declare namespace Marketing {
 
   export {
     Emails as Emails,
+    BaseEmails as BaseEmails,
     type AggregateEmailStatistics as AggregateEmailStatistics,
     type CollectionResponseWithTotalEmailStatisticInterval as CollectionResponseWithTotalEmailStatisticInterval,
     type CollectionResponseWithTotalPublicEmail as CollectionResponseWithTotalPublicEmail,
@@ -425,6 +439,7 @@ export declare namespace Marketing {
 
   export {
     MarketingEvents as MarketingEvents,
+    BaseMarketingEvents as BaseMarketingEvents,
     type AppInfo as AppInfo,
     type AttendanceCounters as AttendanceCounters,
     type BatchInputMarketingEventCreateRequestParams as BatchInputMarketingEventCreateRequestParams,
@@ -485,10 +500,15 @@ export declare namespace Marketing {
     type MarketingEventUpsertByExternalEventIDParams as MarketingEventUpsertByExternalEventIDParams,
   };
 
-  export { SingleSend as SingleSend, type SingleSendCreateParams as SingleSendCreateParams };
+  export {
+    SingleSend as SingleSend,
+    BaseSingleSend as BaseSingleSend,
+    type SingleSendCreateParams as SingleSendCreateParams,
+  };
 
   export {
     Transactional as Transactional,
+    BaseTransactional as BaseTransactional,
     type CollectionResponseSmtpAPITokenViewForwardPaging as CollectionResponseSmtpAPITokenViewForwardPaging,
     type SmtpAPITokenRequestEgg as SmtpAPITokenRequestEgg,
     type SmtpAPITokenView as SmtpAPITokenView,

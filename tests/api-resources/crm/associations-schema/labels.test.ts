@@ -1,13 +1,29 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { AssociationsSchema } from 'hubspot-sdk/resources/crm/associations-schema/associations-schema';
+import { BaseLabels } from 'hubspot-sdk/resources/crm/associations-schema/labels';
+
 import HubSpot from 'hubspot-sdk';
+import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource labels', () => {
+const partialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseLabels],
+});
+
+const parentPartialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [AssociationsSchema],
+});
+
+const runTests = (client: PartialHubSpot<{ crm: { associationsSchema: { labels: BaseLabels } } }>) => {
   // Mock server tests are disabled
   test.skip('batchCreate: only required params', async () => {
     const responsePromise = client.crm.associationsSchema.labels.batchCreate('toObjectType', {
@@ -138,4 +154,7 @@ describe('resource labels', () => {
       inverseLabel: 'inverseLabel',
     });
   });
-});
+};
+describe('resource labels', () => runTests(client));
+describe('resource labels (tree shakable, base)', () => runTests(partialClient));
+describe('resource labels (tree shakable, subresource)', () => runTests(parentPartialClient));

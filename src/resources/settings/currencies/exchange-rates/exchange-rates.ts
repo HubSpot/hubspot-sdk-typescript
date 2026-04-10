@@ -4,15 +4,19 @@ import { APIResource } from '../../../../core/resource';
 import * as CurrenciesAPI from '../currencies';
 import { ExchangeRatesPage } from '../currencies';
 import * as BatchAPI from './batch';
-import { Batch, BatchCreateParams, BatchGetParams, BatchUpdateParams } from './batch';
+import { BaseBatch, Batch, BatchCreateParams, BatchGetParams, BatchUpdateParams } from './batch';
 import { APIPromise } from '../../../../core/api-promise';
 import { Page, type PageParams, PagePromise } from '../../../../core/pagination';
 import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class ExchangeRates extends APIResource {
-  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
+export class BaseExchangeRates extends APIResource {
+  static override readonly _key: readonly ['settings', 'currencies', 'exchangeRates'] = Object.freeze([
+    'settings',
+    'currencies',
+    'exchangeRates',
+  ] as const);
 
   /**
    * Create a new exchange rate with specified conversion rate and currency codes.
@@ -82,6 +86,9 @@ export class ExchangeRates extends APIResource {
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
   }
+}
+export class ExchangeRates extends BaseExchangeRates {
+  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
 }
 
 export interface ExchangeRateCreateExchangeRateParams {
@@ -1022,6 +1029,7 @@ export interface ExchangeRateUpdateVisibilityParams {
 }
 
 ExchangeRates.Batch = Batch;
+ExchangeRates.BaseBatch = BaseBatch;
 
 export declare namespace ExchangeRates {
   export {
@@ -1033,6 +1041,7 @@ export declare namespace ExchangeRates {
 
   export {
     Batch as Batch,
+    BaseBatch as BaseBatch,
     type BatchCreateParams as BatchCreateParams,
     type BatchUpdateParams as BatchUpdateParams,
     type BatchGetParams as BatchGetParams,

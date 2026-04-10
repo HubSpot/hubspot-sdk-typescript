@@ -6,7 +6,14 @@ import { APIPromise } from '../../../../core/api-promise';
 import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 
-export class Batch extends APIResource {
+export class BaseBatch extends APIResource {
+  static override readonly _key: readonly ['crm', 'objects', 'users', 'batch'] = Object.freeze([
+    'crm',
+    'objects',
+    'users',
+    'batch',
+  ] as const);
+
   /**
    * Create multiple users in a single request by providing a batch of user
    * properties and associations. This endpoint returns the created users along with
@@ -72,6 +79,7 @@ export class Batch extends APIResource {
     return this._client.post('/crm/objects/2026-03/users/batch/upsert', { body, ...options });
   }
 }
+export class Batch extends BaseBatch {}
 
 export interface BatchCreateParams {
   inputs: Array<ObjectsAPI.SimplePublicObjectBatchInputForCreate>;

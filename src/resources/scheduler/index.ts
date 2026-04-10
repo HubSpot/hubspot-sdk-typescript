@@ -2,6 +2,7 @@
 
 export {
   Meetings,
+  BaseMeetings,
   type CollectionResponseWithTotalExternalLinkMetadata,
   type ExternalAssociationCreateRequest,
   type ExternalBookingFormField,
@@ -37,4 +38,4 @@ export {
   type ExternalValidatedFormField,
   type ExternalLinkMetadataPage,
 } from './meetings/index';
-export { Scheduler } from './scheduler';
+export { Scheduler, BaseScheduler } from './scheduler';

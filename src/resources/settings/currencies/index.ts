@@ -1,8 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { CentralFxRates, type CentralFxRateCreateCurrencyParams } from './central-fx-rates';
+export {
+  CentralFxRates,
+  BaseCentralFxRates,
+  type CentralFxRateCreateCurrencyParams,
+} from './central-fx-rates';
 export {
   Currencies,
+  BaseCurrencies,
   type BatchInputExchangeRateCreateRequest,
   type BatchInputExchangeRateUpdateRequest,
   type BatchResponseExchangeRate,
@@ -25,6 +30,7 @@ export {
 } from './currencies';
 export {
   ExchangeRates,
+  BaseExchangeRates,
   type ExchangeRateCreateExchangeRateParams,
   type ExchangeRateListExchangeRatesParams,
   type ExchangeRateUpdateExchangeRateParams,

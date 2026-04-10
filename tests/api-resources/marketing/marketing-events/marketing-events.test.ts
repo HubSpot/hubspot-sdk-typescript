@@ -1,13 +1,29 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Marketing } from 'hubspot-sdk/resources/marketing/marketing';
+import { BaseMarketingEvents } from 'hubspot-sdk/resources/marketing/marketing-events/marketing-events';
+
 import HubSpot from 'hubspot-sdk';
+import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource marketingEvents', () => {
+const partialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseMarketingEvents],
+});
+
+const parentPartialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Marketing],
+});
+
+const runTests = (client: PartialHubSpot<{ marketing: { marketingEvents: BaseMarketingEvents } }>) => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.marketing.marketingEvents.create({
@@ -626,4 +642,7 @@ describe('resource marketingEvents', () => {
       startDateTime: '2019-12-27T18:11:19.117Z',
     });
   });
-});
+};
+describe('resource marketingEvents', () => runTests(client));
+describe('resource marketingEvents (tree shakable, base)', () => runTests(partialClient));
+describe('resource marketingEvents (tree shakable, subresource)', () => runTests(parentPartialClient));

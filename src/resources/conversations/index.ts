@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Conversations } from './conversations';
+export { Conversations, BaseConversations } from './conversations';
 export {
   CustomChannels,
+  BaseCustomChannels,
   type ChannelIntegrationMessageEgg,
   type ChannelIntegrationParticipant,
   type CollectionResponseWithTotalPublicChannelAccount,
@@ -58,6 +59,7 @@ export {
 } from './custom-channels/index';
 export {
   VisitorIdentification,
+  BaseVisitorIdentification,
   type IdentificationTokenGenerationRequest,
   type IdentificationTokenResponse,
   type VisitorIdentificationGenerateTokenParams,

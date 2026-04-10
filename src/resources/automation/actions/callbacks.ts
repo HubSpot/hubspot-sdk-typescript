@@ -7,7 +7,13 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Callbacks extends APIResource {
+export class BaseCallbacks extends APIResource {
+  static override readonly _key: readonly ['automation', 'actions', 'callbacks'] = Object.freeze([
+    'automation',
+    'actions',
+    'callbacks',
+  ] as const);
+
   /**
    * Complete a specific blocked action execution by ID.
    */
@@ -30,6 +36,7 @@ export class Callbacks extends APIResource {
     });
   }
 }
+export class Callbacks extends BaseCallbacks {}
 
 export interface CallbackCompleteParams {
   /**

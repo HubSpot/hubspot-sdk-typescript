@@ -7,7 +7,11 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class SubscriberState extends APIResource {
+export class BaseSubscriberState extends APIResource {
+  static override readonly _key: readonly ['marketing', 'marketingEvents', 'subscriberState'] = Object.freeze(
+    ['marketing', 'marketingEvents', 'subscriberState'] as const,
+  );
+
   /**
    * Record a subscriber state between multiple HubSpot contacts and a marketing
    * event, using contact email addresses. Note that the contact must already exist
@@ -56,6 +60,7 @@ export class SubscriberState extends APIResource {
     );
   }
 }
+export class SubscriberState extends BaseSubscriberState {}
 
 export interface SubscriberStateRecordByEmailParams {
   /**

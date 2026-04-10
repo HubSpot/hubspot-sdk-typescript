@@ -8,7 +8,10 @@ import { Page, type PageParams, PagePromise } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class ChannelAccounts extends APIResource {
+export class BaseChannelAccounts extends APIResource {
+  static override readonly _key: readonly ['conversations', 'customChannels', 'channelAccounts'] =
+    Object.freeze(['conversations', 'customChannels', 'channelAccounts'] as const);
+
   /**
    * Create a new account for a channel. Multiple accounts can communicate over a
    * single channel using different delivery identifiers.
@@ -72,6 +75,7 @@ export class ChannelAccounts extends APIResource {
     );
   }
 }
+export class ChannelAccounts extends BaseChannelAccounts {}
 
 export interface ChannelAccountCreateParams {
   authorized: boolean;

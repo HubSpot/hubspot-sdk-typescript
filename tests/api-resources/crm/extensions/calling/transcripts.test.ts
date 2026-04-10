@@ -1,13 +1,31 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Calling } from 'hubspot-sdk/resources/crm/extensions/calling/calling';
+import { BaseTranscripts } from 'hubspot-sdk/resources/crm/extensions/calling/transcripts';
+
 import HubSpot from 'hubspot-sdk';
+import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource transcripts', () => {
+const partialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseTranscripts],
+});
+
+const parentPartialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Calling],
+});
+
+const runTests = (
+  client: PartialHubSpot<{ crm: { extensions: { calling: { transcripts: BaseTranscripts } } } }>,
+) => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.crm.extensions.calling.transcripts.create({
@@ -117,4 +135,7 @@ describe('resource transcripts', () => {
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
   });
-});
+};
+describe('resource transcripts', () => runTests(client));
+describe('resource transcripts (tree shakable, base)', () => runTests(partialClient));
+describe('resource transcripts (tree shakable, subresource)', () => runTests(parentPartialClient));

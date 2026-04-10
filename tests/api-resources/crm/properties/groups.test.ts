@@ -1,13 +1,29 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseGroups } from 'hubspot-sdk/resources/crm/properties/groups';
+import { Properties } from 'hubspot-sdk/resources/crm/properties/properties';
+
 import HubSpot from 'hubspot-sdk';
+import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource groups', () => {
+const partialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseGroups],
+});
+
+const parentPartialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Properties],
+});
+
+const runTests = (client: PartialHubSpot<{ crm: { properties: { groups: BaseGroups } } }>) => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.crm.properties.groups.create('objectType', {
@@ -113,4 +129,7 @@ describe('resource groups', () => {
       locale: 'locale',
     });
   });
-});
+};
+describe('resource groups', () => runTests(client));
+describe('resource groups (tree shakable, base)', () => runTests(partialClient));
+describe('resource groups (tree shakable, subresource)', () => runTests(parentPartialClient));
