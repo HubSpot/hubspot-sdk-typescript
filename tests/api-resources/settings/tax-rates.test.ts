@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { Settings } from 'hubspot-sdk/resources/settings/settings';
-import { BaseTaxRates } from 'hubspot-sdk/resources/settings/tax-rates';
+import { Settings } from '@hubspot/sdk/resources/settings/settings';
+import { BaseTaxRates } from '@hubspot/sdk/resources/settings/tax-rates';
 
-import HubSpot from 'hubspot-sdk';
-import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
+import HubSpot from '@hubspot/sdk';
+import { createClient, type PartialHubSpot } from '@hubspot/sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',

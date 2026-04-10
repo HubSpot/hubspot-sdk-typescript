@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIPromise } from 'hubspot-sdk/core/api-promise';
+import { APIPromise } from '@hubspot/sdk/core/api-promise';
 
 import util from 'node:util';
-import HubSpot from 'hubspot-sdk';
-import { APIUserAbortError } from 'hubspot-sdk';
+import HubSpot from '@hubspot/sdk';
+import { APIUserAbortError } from '@hubspot/sdk';
 const defaultFetch = fetch;
 
 describe('instantiate client', () => {

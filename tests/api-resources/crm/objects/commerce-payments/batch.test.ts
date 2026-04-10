@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { BaseBatch } from 'hubspot-sdk/resources/crm/objects/commerce-payments/batch';
-import { CommercePayments } from 'hubspot-sdk/resources/crm/objects/commerce-payments/commerce-payments';
+import { BaseBatch } from '@hubspot/sdk/resources/crm/objects/commerce-payments/batch';
+import { CommercePayments } from '@hubspot/sdk/resources/crm/objects/commerce-payments/commerce-payments';
 
-import HubSpot from 'hubspot-sdk';
-import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
+import HubSpot from '@hubspot/sdk';
+import { createClient, type PartialHubSpot } from '@hubspot/sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',

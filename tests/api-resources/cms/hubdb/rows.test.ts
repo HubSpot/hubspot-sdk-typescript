@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { Hubdb } from 'hubspot-sdk/resources/cms/hubdb/hubdb';
-import { BaseRows } from 'hubspot-sdk/resources/cms/hubdb/rows';
+import { Hubdb } from '@hubspot/sdk/resources/cms/hubdb/hubdb';
+import { BaseRows } from '@hubspot/sdk/resources/cms/hubdb/rows';
 
-import HubSpot from 'hubspot-sdk';
-import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
+import HubSpot from '@hubspot/sdk';
+import { createClient, type PartialHubSpot } from '@hubspot/sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',

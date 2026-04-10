@@ -1,5 +1,5 @@
-import { multipartFormRequestOptions, createForm } from 'hubspot-sdk/internal/uploads';
-import { toFile } from 'hubspot-sdk/core/uploads';
+import { multipartFormRequestOptions, createForm } from '@hubspot/sdk/internal/uploads';
+import { toFile } from '@hubspot/sdk/core/uploads';
 
 describe('form data validation', () => {
   test('valid values do not error', async () => {

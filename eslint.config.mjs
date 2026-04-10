@@ -25,7 +25,7 @@ export default tseslint.config(
         {
           patterns: [
             {
-              regex: '^hubspot-sdk(/.*)?',
+              regex: '^@hubspot/sdk(/.*)?',
               message: 'Use a relative import, not a package import.',
             },
           ],
