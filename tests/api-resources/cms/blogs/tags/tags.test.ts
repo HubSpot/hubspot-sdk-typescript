@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Hubspot from 'hubspot-sdk';
+import HubSpot from 'hubspot-sdk';
 
-const client = new Hubspot({
+const client = new HubSpot({
   accessToken: 'My Access Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
@@ -57,7 +57,7 @@ describe('resource tags', () => {
         },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(Hubspot.NotFoundError);
+    ).rejects.toThrow(HubSpot.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -77,7 +77,7 @@ describe('resource tags', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.cms.blogs.tags.delete('objectId', { archived: true }, { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Hubspot.NotFoundError);
+    ).rejects.toThrow(HubSpot.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -114,7 +114,7 @@ describe('resource tags', () => {
         { archived: true, property: 'property' },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(Hubspot.NotFoundError);
+    ).rejects.toThrow(HubSpot.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -137,7 +137,7 @@ describe('resource tags', () => {
         },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(Hubspot.NotFoundError);
+    ).rejects.toThrow(HubSpot.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -160,7 +160,7 @@ describe('resource tags', () => {
         },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(Hubspot.NotFoundError);
+    ).rejects.toThrow(HubSpot.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -183,7 +183,7 @@ describe('resource tags', () => {
         },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(Hubspot.NotFoundError);
+    ).rejects.toThrow(HubSpot.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -206,7 +206,7 @@ describe('resource tags', () => {
         },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(Hubspot.NotFoundError);
+    ).rejects.toThrow(HubSpot.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -229,7 +229,7 @@ describe('resource tags', () => {
         },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(Hubspot.NotFoundError);
+    ).rejects.toThrow(HubSpot.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -252,7 +252,7 @@ describe('resource tags', () => {
         },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(Hubspot.NotFoundError);
+    ).rejects.toThrow(HubSpot.NotFoundError);
   });
 
   // Mock server tests are disabled
