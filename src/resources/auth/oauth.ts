@@ -5,7 +5,9 @@ import { APIPromise } from '../../core/api-promise';
 import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 
-export class OAuth extends APIResource {
+export class BaseOAuth extends APIResource {
+  static override readonly _key: readonly ['auth', 'oauth'] = Object.freeze(['auth', 'oauth'] as const);
+
   /**
    * Authenticates a client and returns access and refresh tokens.
    */
@@ -56,6 +58,7 @@ export class OAuth extends APIResource {
     });
   }
 }
+export class OAuth extends BaseOAuth {}
 
 export interface PublicAccessTokenInfoResponse {
   token: string;

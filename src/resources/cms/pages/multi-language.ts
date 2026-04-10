@@ -6,7 +6,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 
-export class MultiLanguage extends APIResource {
+export class BaseMultiLanguage extends APIResource {
+  static override readonly _key: readonly ['cms', 'pages', 'multiLanguage'] = Object.freeze([
+    'cms',
+    'pages',
+    'multiLanguage',
+  ] as const);
+
   /**
    * Attach a site page to a multi-language group.
    */
@@ -74,6 +80,7 @@ export class MultiLanguage extends APIResource {
     });
   }
 }
+export class MultiLanguage extends BaseMultiLanguage {}
 
 export interface MultiLanguageAttachToLangGroupParams {
   /**

@@ -3,14 +3,25 @@
 import { APIResource } from '../../../../core/resource';
 import * as Shared from '../../../shared';
 import * as BatchAPI from './batch';
-import { Batch, BatchCreateParams, BatchDeleteParams, BatchGetParams, BatchUpdateParams } from './batch';
+import {
+  BaseBatch,
+  Batch,
+  BatchCreateParams,
+  BatchDeleteParams,
+  BatchGetParams,
+  BatchUpdateParams,
+} from './batch';
 import { APIPromise } from '../../../../core/api-promise';
 import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Authors extends APIResource {
-  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
+export class BaseAuthors extends APIResource {
+  static override readonly _key: readonly ['cms', 'blogs', 'authors'] = Object.freeze([
+    'cms',
+    'blogs',
+    'authors',
+  ] as const);
 
   /**
    * Create a new Blog Author.
@@ -219,6 +230,9 @@ export class Authors extends APIResource {
       __binaryResponse: true,
     });
   }
+}
+export class Authors extends BaseAuthors {
+  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
 }
 
 export interface BatchInputBlogAuthor {
@@ -6005,6 +6019,7 @@ export interface AuthorUpdateLanguagesParams {
 }
 
 Authors.Batch = Batch;
+Authors.BaseBatch = BaseBatch;
 
 export declare namespace Authors {
   export {
@@ -6034,6 +6049,7 @@ export declare namespace Authors {
 
   export {
     Batch as Batch,
+    BaseBatch as BaseBatch,
     type BatchCreateParams as BatchCreateParams,
     type BatchUpdateParams as BatchUpdateParams,
     type BatchDeleteParams as BatchDeleteParams,

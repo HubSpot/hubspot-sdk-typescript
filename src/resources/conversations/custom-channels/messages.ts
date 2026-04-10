@@ -6,7 +6,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Messages extends APIResource {
+export class BaseMessages extends APIResource {
+  static override readonly _key: readonly ['conversations', 'customChannels', 'messages'] = Object.freeze([
+    'conversations',
+    'customChannels',
+    'messages',
+  ] as const);
+
   /**
    * Publish a message over your custom channel
    */
@@ -53,6 +59,7 @@ export class Messages extends APIResource {
     );
   }
 }
+export class Messages extends BaseMessages {}
 
 export interface MessageCreateParams {
   attachments: Array<

@@ -5,6 +5,7 @@ import * as Shared from '../../shared';
 import * as CrmAPI from '../crm';
 import * as CallsAPI from './calls/calls';
 import {
+  BaseCalls,
   CallCreateParams,
   CallGetParams,
   CallListParams,
@@ -14,6 +15,7 @@ import {
 } from './calls/calls';
 import * as CartsAPI from './carts/carts';
 import {
+  BaseCarts,
   CartCreateParams,
   CartGetParams,
   CartListParams,
@@ -23,6 +25,7 @@ import {
 } from './carts/carts';
 import * as CommercePaymentsAPI from './commerce-payments/commerce-payments';
 import {
+  BaseCommercePayments,
   CommercePaymentCreateParams,
   CommercePaymentGetParams,
   CommercePaymentListParams,
@@ -32,6 +35,7 @@ import {
 } from './commerce-payments/commerce-payments';
 import * as CommunicationsAPI from './communications/communications';
 import {
+  BaseCommunications,
   CommunicationCreateParams,
   CommunicationGetParams,
   CommunicationListParams,
@@ -41,6 +45,7 @@ import {
 } from './communications/communications';
 import * as CompaniesAPI from './companies/companies';
 import {
+  BaseCompanies,
   Companies,
   CompanyCreateParams,
   CompanyGetParams,
@@ -51,6 +56,7 @@ import {
 } from './companies/companies';
 import * as ContactsAPI from './contacts/contacts';
 import {
+  BaseContacts,
   ContactCreateParams,
   ContactGdprDeleteParams,
   ContactGetParams,
@@ -63,6 +69,7 @@ import {
 } from './contacts/contacts';
 import * as ContractsAPI from './contracts/contracts';
 import {
+  BaseContracts,
   ContractCreateParams,
   ContractGetParams,
   ContractListParams,
@@ -72,6 +79,7 @@ import {
 } from './contracts/contracts';
 import * as CoursesAPI from './courses/courses';
 import {
+  BaseCourses,
   CourseCreateParams,
   CourseGetParams,
   CourseListParams,
@@ -81,6 +89,7 @@ import {
 } from './courses/courses';
 import * as CustomAPI from './custom/custom';
 import {
+  BaseCustom,
   Custom,
   CustomCreateParams,
   CustomDeleteParams,
@@ -92,6 +101,7 @@ import {
 } from './custom/custom';
 import * as DealsAPI from './deals/deals';
 import {
+  BaseDeals,
   DealCreateParams,
   DealGetParams,
   DealListParams,
@@ -102,6 +112,7 @@ import {
 } from './deals/deals';
 import * as DiscountsAPI from './discounts/discounts';
 import {
+  BaseDiscounts,
   DiscountCreateParams,
   DiscountGetParams,
   DiscountListParams,
@@ -111,6 +122,7 @@ import {
 } from './discounts/discounts';
 import * as EmailsAPI from './emails/emails';
 import {
+  BaseEmails,
   EmailCreateParams,
   EmailGetParams,
   EmailListParams,
@@ -120,6 +132,7 @@ import {
 } from './emails/emails';
 import * as FeedbackSubmissionsAPI from './feedback-submissions/feedback-submissions';
 import {
+  BaseFeedbackSubmissions,
   FeedbackSubmissionGetParams,
   FeedbackSubmissionListParams,
   FeedbackSubmissionSearchParams,
@@ -127,6 +140,7 @@ import {
 } from './feedback-submissions/feedback-submissions';
 import * as FeesAPI from './fees/fees';
 import {
+  BaseFees,
   FeeCreateParams,
   FeeGetParams,
   FeeListParams,
@@ -136,6 +150,7 @@ import {
 } from './fees/fees';
 import * as GenericObjectsAPI from './generic-objects/generic-objects';
 import {
+  BaseGenericObjects,
   GenericObjectCreateParams,
   GenericObjectDeleteParams,
   GenericObjectGetParams,
@@ -146,6 +161,7 @@ import {
 } from './generic-objects/generic-objects';
 import * as GoalTargetsAPI from './goal-targets/goal-targets';
 import {
+  BaseGoalTargets,
   GoalTargetCreateParams,
   GoalTargetGetParams,
   GoalTargetListParams,
@@ -155,6 +171,7 @@ import {
 } from './goal-targets/goal-targets';
 import * as InvoicesAPI from './invoices/invoices';
 import {
+  BaseInvoices,
   InvoiceCreateParams,
   InvoiceGetParams,
   InvoiceListParams,
@@ -164,6 +181,7 @@ import {
 } from './invoices/invoices';
 import * as LeadsAPI from './leads/leads';
 import {
+  BaseLeads,
   LeadCreateParams,
   LeadGetParams,
   LeadListParams,
@@ -173,6 +191,7 @@ import {
 } from './leads/leads';
 import * as LineItemsAPI from './line-items/line-items';
 import {
+  BaseLineItems,
   LineItemCreateParams,
   LineItemGetParams,
   LineItemListParams,
@@ -182,6 +201,7 @@ import {
 } from './line-items/line-items';
 import * as ListingsAPI from './listings/listings';
 import {
+  BaseListings,
   ListingCreateParams,
   ListingGetParams,
   ListingListParams,
@@ -191,6 +211,7 @@ import {
 } from './listings/listings';
 import * as MeetingsAPI from './meetings/meetings';
 import {
+  BaseMeetings,
   MeetingCreateParams,
   MeetingGetParams,
   MeetingListParams,
@@ -200,6 +221,7 @@ import {
 } from './meetings/meetings';
 import * as NotesAPI from './notes/notes';
 import {
+  BaseNotes,
   NoteCreateParams,
   NoteGetParams,
   NoteListParams,
@@ -209,6 +231,7 @@ import {
 } from './notes/notes';
 import * as OrdersAPI from './orders/orders';
 import {
+  BaseOrders,
   OrderCreateParams,
   OrderGetParams,
   OrderListParams,
@@ -218,6 +241,7 @@ import {
 } from './orders/orders';
 import * as PartnerClientsAPI from './partner-clients/partner-clients';
 import {
+  BasePartnerClients,
   PartnerClientGetParams,
   PartnerClientListAssociationsParams,
   PartnerClientListParams,
@@ -227,6 +251,7 @@ import {
 } from './partner-clients/partner-clients';
 import * as PartnerServicesAPI from './partner-services/partner-services';
 import {
+  BasePartnerServices,
   PartnerServiceGetParams,
   PartnerServiceListParams,
   PartnerServiceSearchParams,
@@ -235,6 +260,7 @@ import {
 } from './partner-services/partner-services';
 import * as PostalMailAPI from './postal-mail/postal-mail';
 import {
+  BasePostalMail,
   PostalMail,
   PostalMailCreateParams,
   PostalMailGetParams,
@@ -244,6 +270,7 @@ import {
 } from './postal-mail/postal-mail';
 import * as ProductsAPI from './products/products';
 import {
+  BaseProducts,
   ProductCreateParams,
   ProductGetParams,
   ProductListParams,
@@ -253,6 +280,7 @@ import {
 } from './products/products';
 import * as ProjectsAPI from './projects/projects';
 import {
+  BaseProjects,
   ProjectCreateParams,
   ProjectGetParams,
   ProjectListParams,
@@ -263,6 +291,7 @@ import {
 } from './projects/projects';
 import * as QuotesAPI from './quotes/quotes';
 import {
+  BaseQuotes,
   QuoteCreateParams,
   QuoteGetParams,
   QuoteListParams,
@@ -272,6 +301,7 @@ import {
 } from './quotes/quotes';
 import * as ServicesAPI from './services/services';
 import {
+  BaseServices,
   ServiceCreateParams,
   ServiceGetParams,
   ServiceListParams,
@@ -281,6 +311,7 @@ import {
 } from './services/services';
 import * as SubscriptionsAPI from './subscriptions/subscriptions';
 import {
+  BaseSubscriptions,
   SubscriptionCreateParams,
   SubscriptionGetParams,
   SubscriptionListParams,
@@ -290,6 +321,7 @@ import {
 } from './subscriptions/subscriptions';
 import * as TasksAPI from './tasks/tasks';
 import {
+  BaseTasks,
   TaskCreateParams,
   TaskGetParams,
   TaskListParams,
@@ -299,6 +331,7 @@ import {
 } from './tasks/tasks';
 import * as TaxesAPI from './taxes/taxes';
 import {
+  BaseTaxes,
   TaxCreateParams,
   TaxGetParams,
   TaxListParams,
@@ -308,6 +341,7 @@ import {
 } from './taxes/taxes';
 import * as TicketsAPI from './tickets/tickets';
 import {
+  BaseTickets,
   TicketCreateParams,
   TicketGetParams,
   TicketListParams,
@@ -318,6 +352,7 @@ import {
 } from './tickets/tickets';
 import * as UsersAPI from './users/users';
 import {
+  BaseUsers,
   UserCreateParams,
   UserGetParams,
   UserListParams,
@@ -327,7 +362,10 @@ import {
 } from './users/users';
 import { Page } from '../../../core/pagination';
 
-export class Objects extends APIResource {
+export class BaseObjects extends APIResource {
+  static override readonly _key: readonly ['crm', 'objects'] = Object.freeze(['crm', 'objects'] as const);
+}
+export class Objects extends BaseObjects {
   calls: CallsAPI.Calls = new CallsAPI.Calls(this._client);
   carts: CartsAPI.Carts = new CartsAPI.Carts(this._client);
   commercePayments: CommercePaymentsAPI.CommercePayments = new CommercePaymentsAPI.CommercePayments(
@@ -835,40 +873,75 @@ export interface SimplePublicUpsertObject {
 }
 
 Objects.Calls = Calls;
+Objects.BaseCalls = BaseCalls;
 Objects.Carts = Carts;
+Objects.BaseCarts = BaseCarts;
 Objects.CommercePayments = CommercePayments;
+Objects.BaseCommercePayments = BaseCommercePayments;
 Objects.Communications = Communications;
+Objects.BaseCommunications = BaseCommunications;
 Objects.Companies = Companies;
+Objects.BaseCompanies = BaseCompanies;
 Objects.Contacts = Contacts;
+Objects.BaseContacts = BaseContacts;
 Objects.Contracts = Contracts;
+Objects.BaseContracts = BaseContracts;
 Objects.Courses = Courses;
+Objects.BaseCourses = BaseCourses;
 Objects.Custom = Custom;
+Objects.BaseCustom = BaseCustom;
 Objects.Deals = Deals;
+Objects.BaseDeals = BaseDeals;
 Objects.Discounts = Discounts;
+Objects.BaseDiscounts = BaseDiscounts;
 Objects.Emails = Emails;
+Objects.BaseEmails = BaseEmails;
 Objects.FeedbackSubmissions = FeedbackSubmissions;
+Objects.BaseFeedbackSubmissions = BaseFeedbackSubmissions;
 Objects.Fees = Fees;
+Objects.BaseFees = BaseFees;
 Objects.GenericObjects = GenericObjects;
+Objects.BaseGenericObjects = BaseGenericObjects;
 Objects.GoalTargets = GoalTargets;
+Objects.BaseGoalTargets = BaseGoalTargets;
 Objects.Invoices = Invoices;
+Objects.BaseInvoices = BaseInvoices;
 Objects.Leads = Leads;
+Objects.BaseLeads = BaseLeads;
 Objects.LineItems = LineItems;
+Objects.BaseLineItems = BaseLineItems;
 Objects.Listings = Listings;
+Objects.BaseListings = BaseListings;
 Objects.Meetings = Meetings;
+Objects.BaseMeetings = BaseMeetings;
 Objects.Notes = Notes;
+Objects.BaseNotes = BaseNotes;
 Objects.Orders = Orders;
+Objects.BaseOrders = BaseOrders;
 Objects.PartnerClients = PartnerClients;
+Objects.BasePartnerClients = BasePartnerClients;
 Objects.PartnerServices = PartnerServices;
+Objects.BasePartnerServices = BasePartnerServices;
 Objects.PostalMail = PostalMail;
+Objects.BasePostalMail = BasePostalMail;
 Objects.Products = Products;
+Objects.BaseProducts = BaseProducts;
 Objects.Projects = Projects;
+Objects.BaseProjects = BaseProjects;
 Objects.Quotes = Quotes;
+Objects.BaseQuotes = BaseQuotes;
 Objects.Services = Services;
+Objects.BaseServices = BaseServices;
 Objects.Subscriptions = Subscriptions;
+Objects.BaseSubscriptions = BaseSubscriptions;
 Objects.Tasks = Tasks;
+Objects.BaseTasks = BaseTasks;
 Objects.Taxes = Taxes;
+Objects.BaseTaxes = BaseTaxes;
 Objects.Tickets = Tickets;
+Objects.BaseTickets = BaseTickets;
 Objects.Users = Users;
+Objects.BaseUsers = BaseUsers;
 
 export declare namespace Objects {
   export {
@@ -898,6 +971,7 @@ export declare namespace Objects {
 
   export {
     Calls as Calls,
+    BaseCalls as BaseCalls,
     type CallCreateParams as CallCreateParams,
     type CallUpdateParams as CallUpdateParams,
     type CallListParams as CallListParams,
@@ -907,6 +981,7 @@ export declare namespace Objects {
 
   export {
     Carts as Carts,
+    BaseCarts as BaseCarts,
     type CartCreateParams as CartCreateParams,
     type CartUpdateParams as CartUpdateParams,
     type CartListParams as CartListParams,
@@ -916,6 +991,7 @@ export declare namespace Objects {
 
   export {
     CommercePayments as CommercePayments,
+    BaseCommercePayments as BaseCommercePayments,
     type CommercePaymentCreateParams as CommercePaymentCreateParams,
     type CommercePaymentUpdateParams as CommercePaymentUpdateParams,
     type CommercePaymentListParams as CommercePaymentListParams,
@@ -925,6 +1001,7 @@ export declare namespace Objects {
 
   export {
     Communications as Communications,
+    BaseCommunications as BaseCommunications,
     type CommunicationCreateParams as CommunicationCreateParams,
     type CommunicationUpdateParams as CommunicationUpdateParams,
     type CommunicationListParams as CommunicationListParams,
@@ -934,6 +1011,7 @@ export declare namespace Objects {
 
   export {
     Companies as Companies,
+    BaseCompanies as BaseCompanies,
     type CompanyCreateParams as CompanyCreateParams,
     type CompanyUpdateParams as CompanyUpdateParams,
     type CompanyListParams as CompanyListParams,
@@ -944,6 +1022,7 @@ export declare namespace Objects {
 
   export {
     Contacts as Contacts,
+    BaseContacts as BaseContacts,
     type PublicGdprDeleteInput as PublicGdprDeleteInput,
     type ContactCreateParams as ContactCreateParams,
     type ContactUpdateParams as ContactUpdateParams,
@@ -956,6 +1035,7 @@ export declare namespace Objects {
 
   export {
     Contracts as Contracts,
+    BaseContracts as BaseContracts,
     type ContractCreateParams as ContractCreateParams,
     type ContractUpdateParams as ContractUpdateParams,
     type ContractListParams as ContractListParams,
@@ -965,6 +1045,7 @@ export declare namespace Objects {
 
   export {
     Courses as Courses,
+    BaseCourses as BaseCourses,
     type CourseCreateParams as CourseCreateParams,
     type CourseUpdateParams as CourseUpdateParams,
     type CourseListParams as CourseListParams,
@@ -974,6 +1055,7 @@ export declare namespace Objects {
 
   export {
     Custom as Custom,
+    BaseCustom as BaseCustom,
     type CustomCreateParams as CustomCreateParams,
     type CustomUpdateParams as CustomUpdateParams,
     type CustomListParams as CustomListParams,
@@ -985,6 +1067,7 @@ export declare namespace Objects {
 
   export {
     Deals as Deals,
+    BaseDeals as BaseDeals,
     type DealCreateParams as DealCreateParams,
     type DealUpdateParams as DealUpdateParams,
     type DealListParams as DealListParams,
@@ -995,6 +1078,7 @@ export declare namespace Objects {
 
   export {
     Discounts as Discounts,
+    BaseDiscounts as BaseDiscounts,
     type DiscountCreateParams as DiscountCreateParams,
     type DiscountUpdateParams as DiscountUpdateParams,
     type DiscountListParams as DiscountListParams,
@@ -1004,6 +1088,7 @@ export declare namespace Objects {
 
   export {
     Emails as Emails,
+    BaseEmails as BaseEmails,
     type EmailCreateParams as EmailCreateParams,
     type EmailUpdateParams as EmailUpdateParams,
     type EmailListParams as EmailListParams,
@@ -1013,6 +1098,7 @@ export declare namespace Objects {
 
   export {
     FeedbackSubmissions as FeedbackSubmissions,
+    BaseFeedbackSubmissions as BaseFeedbackSubmissions,
     type FeedbackSubmissionListParams as FeedbackSubmissionListParams,
     type FeedbackSubmissionGetParams as FeedbackSubmissionGetParams,
     type FeedbackSubmissionSearchParams as FeedbackSubmissionSearchParams,
@@ -1020,6 +1106,7 @@ export declare namespace Objects {
 
   export {
     Fees as Fees,
+    BaseFees as BaseFees,
     type FeeCreateParams as FeeCreateParams,
     type FeeUpdateParams as FeeUpdateParams,
     type FeeListParams as FeeListParams,
@@ -1029,6 +1116,7 @@ export declare namespace Objects {
 
   export {
     GenericObjects as GenericObjects,
+    BaseGenericObjects as BaseGenericObjects,
     type GenericObjectCreateParams as GenericObjectCreateParams,
     type GenericObjectUpdateParams as GenericObjectUpdateParams,
     type GenericObjectListParams as GenericObjectListParams,
@@ -1039,6 +1127,7 @@ export declare namespace Objects {
 
   export {
     GoalTargets as GoalTargets,
+    BaseGoalTargets as BaseGoalTargets,
     type GoalTargetCreateParams as GoalTargetCreateParams,
     type GoalTargetUpdateParams as GoalTargetUpdateParams,
     type GoalTargetListParams as GoalTargetListParams,
@@ -1048,6 +1137,7 @@ export declare namespace Objects {
 
   export {
     Invoices as Invoices,
+    BaseInvoices as BaseInvoices,
     type InvoiceCreateParams as InvoiceCreateParams,
     type InvoiceUpdateParams as InvoiceUpdateParams,
     type InvoiceListParams as InvoiceListParams,
@@ -1057,6 +1147,7 @@ export declare namespace Objects {
 
   export {
     Leads as Leads,
+    BaseLeads as BaseLeads,
     type LeadCreateParams as LeadCreateParams,
     type LeadUpdateParams as LeadUpdateParams,
     type LeadListParams as LeadListParams,
@@ -1066,6 +1157,7 @@ export declare namespace Objects {
 
   export {
     LineItems as LineItems,
+    BaseLineItems as BaseLineItems,
     type LineItemCreateParams as LineItemCreateParams,
     type LineItemUpdateParams as LineItemUpdateParams,
     type LineItemListParams as LineItemListParams,
@@ -1075,6 +1167,7 @@ export declare namespace Objects {
 
   export {
     Listings as Listings,
+    BaseListings as BaseListings,
     type ListingCreateParams as ListingCreateParams,
     type ListingUpdateParams as ListingUpdateParams,
     type ListingListParams as ListingListParams,
@@ -1084,6 +1177,7 @@ export declare namespace Objects {
 
   export {
     Meetings as Meetings,
+    BaseMeetings as BaseMeetings,
     type MeetingCreateParams as MeetingCreateParams,
     type MeetingUpdateParams as MeetingUpdateParams,
     type MeetingListParams as MeetingListParams,
@@ -1093,6 +1187,7 @@ export declare namespace Objects {
 
   export {
     Notes as Notes,
+    BaseNotes as BaseNotes,
     type NoteCreateParams as NoteCreateParams,
     type NoteUpdateParams as NoteUpdateParams,
     type NoteListParams as NoteListParams,
@@ -1102,6 +1197,7 @@ export declare namespace Objects {
 
   export {
     Orders as Orders,
+    BaseOrders as BaseOrders,
     type OrderCreateParams as OrderCreateParams,
     type OrderUpdateParams as OrderUpdateParams,
     type OrderListParams as OrderListParams,
@@ -1111,6 +1207,7 @@ export declare namespace Objects {
 
   export {
     PartnerClients as PartnerClients,
+    BasePartnerClients as BasePartnerClients,
     type PartnerClientUpdateParams as PartnerClientUpdateParams,
     type PartnerClientListParams as PartnerClientListParams,
     type PartnerClientGetParams as PartnerClientGetParams,
@@ -1120,6 +1217,7 @@ export declare namespace Objects {
 
   export {
     PartnerServices as PartnerServices,
+    BasePartnerServices as BasePartnerServices,
     type PartnerServiceUpdateParams as PartnerServiceUpdateParams,
     type PartnerServiceListParams as PartnerServiceListParams,
     type PartnerServiceGetParams as PartnerServiceGetParams,
@@ -1128,6 +1226,7 @@ export declare namespace Objects {
 
   export {
     PostalMail as PostalMail,
+    BasePostalMail as BasePostalMail,
     type PostalMailCreateParams as PostalMailCreateParams,
     type PostalMailUpdateParams as PostalMailUpdateParams,
     type PostalMailListParams as PostalMailListParams,
@@ -1137,6 +1236,7 @@ export declare namespace Objects {
 
   export {
     Products as Products,
+    BaseProducts as BaseProducts,
     type ProductCreateParams as ProductCreateParams,
     type ProductUpdateParams as ProductUpdateParams,
     type ProductListParams as ProductListParams,
@@ -1146,6 +1246,7 @@ export declare namespace Objects {
 
   export {
     Projects as Projects,
+    BaseProjects as BaseProjects,
     type ProjectCreateParams as ProjectCreateParams,
     type ProjectUpdateParams as ProjectUpdateParams,
     type ProjectListParams as ProjectListParams,
@@ -1156,6 +1257,7 @@ export declare namespace Objects {
 
   export {
     Quotes as Quotes,
+    BaseQuotes as BaseQuotes,
     type QuoteCreateParams as QuoteCreateParams,
     type QuoteUpdateParams as QuoteUpdateParams,
     type QuoteListParams as QuoteListParams,
@@ -1165,6 +1267,7 @@ export declare namespace Objects {
 
   export {
     Services as Services,
+    BaseServices as BaseServices,
     type ServiceCreateParams as ServiceCreateParams,
     type ServiceUpdateParams as ServiceUpdateParams,
     type ServiceListParams as ServiceListParams,
@@ -1174,6 +1277,7 @@ export declare namespace Objects {
 
   export {
     Subscriptions as Subscriptions,
+    BaseSubscriptions as BaseSubscriptions,
     type SubscriptionCreateParams as SubscriptionCreateParams,
     type SubscriptionUpdateParams as SubscriptionUpdateParams,
     type SubscriptionListParams as SubscriptionListParams,
@@ -1183,6 +1287,7 @@ export declare namespace Objects {
 
   export {
     Tasks as Tasks,
+    BaseTasks as BaseTasks,
     type TaskCreateParams as TaskCreateParams,
     type TaskUpdateParams as TaskUpdateParams,
     type TaskListParams as TaskListParams,
@@ -1192,6 +1297,7 @@ export declare namespace Objects {
 
   export {
     Taxes as Taxes,
+    BaseTaxes as BaseTaxes,
     type TaxCreateParams as TaxCreateParams,
     type TaxUpdateParams as TaxUpdateParams,
     type TaxListParams as TaxListParams,
@@ -1201,6 +1307,7 @@ export declare namespace Objects {
 
   export {
     Tickets as Tickets,
+    BaseTickets as BaseTickets,
     type TicketCreateParams as TicketCreateParams,
     type TicketUpdateParams as TicketUpdateParams,
     type TicketListParams as TicketListParams,
@@ -1211,6 +1318,7 @@ export declare namespace Objects {
 
   export {
     Users as Users,
+    BaseUsers as BaseUsers,
     type UserCreateParams as UserCreateParams,
     type UserUpdateParams as UserUpdateParams,
     type UserListParams as UserListParams,

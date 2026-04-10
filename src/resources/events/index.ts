@@ -2,6 +2,7 @@
 
 export {
   Definitions,
+  BaseDefinitions,
   type AbsoluteComparativeTimestampRefineBy,
   type AbsoluteRangedTimestampRefineBy,
   type AllHistoryRefineBy,
@@ -68,13 +69,14 @@ export {
   type DefinitionUpdatePropertyParams,
   type ExternalBehavioralEventTypeDefinitionsPage,
 } from './definitions';
-export { Events } from './events';
+export { Events, BaseEvents } from './events';
 export {
   Occurrences,
+  BaseOccurrences,
   type CollectionResponseExternalUnifiedEvent,
   type ExternalUnifiedEvent,
   type VisibleExternalEventTypeNames,
   type OccurrenceListParams,
   type ExternalUnifiedEventsPage,
 } from './occurrences';
-export { Send, type SendBatchSendParams, type SendSendParams } from './send';
+export { Send, BaseSend, type SendBatchSendParams, type SendSendParams } from './send';

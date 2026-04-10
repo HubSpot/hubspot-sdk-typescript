@@ -1,13 +1,29 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Blogs } from 'hubspot-sdk/resources/cms/blogs/blogs';
+import { BaseTags } from 'hubspot-sdk/resources/cms/blogs/tags/tags';
+
 import HubSpot from 'hubspot-sdk';
+import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource tags', () => {
+const partialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseTags],
+});
+
+const parentPartialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Blogs],
+});
+
+const runTests = (client: PartialHubSpot<{ cms: { blogs: { tags: BaseTags } } }>) => {
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.cms.blogs.tags.create({
@@ -279,4 +295,7 @@ describe('resource tags', () => {
       primaryId: 'primaryId',
     });
   });
-});
+};
+describe('resource tags', () => runTests(client));
+describe('resource tags (tree shakable, base)', () => runTests(partialClient));
+describe('resource tags (tree shakable, subresource)', () => runTests(parentPartialClient));

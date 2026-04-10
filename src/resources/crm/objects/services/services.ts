@@ -6,6 +6,7 @@ import * as ObjectsAPI from '../objects';
 import { SimplePublicObjectWithAssociationsPage } from '../objects';
 import * as BatchAPI from './batch';
 import {
+  BaseBatch,
   Batch,
   BatchCreateParams,
   BatchDeleteParams,
@@ -19,8 +20,12 @@ import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Services extends APIResource {
-  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
+export class BaseServices extends APIResource {
+  static override readonly _key: readonly ['crm', 'objects', 'services'] = Object.freeze([
+    'crm',
+    'objects',
+    'services',
+  ] as const);
 
   /**
    * Create a service with the given properties and return a copy of the object,
@@ -101,6 +106,9 @@ export class Services extends APIResource {
   ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/objects/2026-03/0-162/search', { body, ...options });
   }
+}
+export class Services extends BaseServices {
+  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
 }
 
 export interface ServiceCreateParams {
@@ -217,6 +225,7 @@ export interface ServiceSearchParams {
 }
 
 Services.Batch = Batch;
+Services.BaseBatch = BaseBatch;
 
 export declare namespace Services {
   export {
@@ -229,6 +238,7 @@ export declare namespace Services {
 
   export {
     Batch as Batch,
+    BaseBatch as BaseBatch,
     type BatchCreateParams as BatchCreateParams,
     type BatchUpdateParams as BatchUpdateParams,
     type BatchDeleteParams as BatchDeleteParams,

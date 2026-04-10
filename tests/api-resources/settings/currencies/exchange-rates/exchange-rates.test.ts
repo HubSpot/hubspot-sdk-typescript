@@ -1,13 +1,31 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Currencies } from 'hubspot-sdk/resources/settings/currencies/currencies';
+import { BaseExchangeRates } from 'hubspot-sdk/resources/settings/currencies/exchange-rates/exchange-rates';
+
 import HubSpot from 'hubspot-sdk';
+import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource exchangeRates', () => {
+const partialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseExchangeRates],
+});
+
+const parentPartialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Currencies],
+});
+
+const runTests = (
+  client: PartialHubSpot<{ settings: { currencies: { exchangeRates: BaseExchangeRates } } }>,
+) => {
   // Mock server tests are disabled
   test.skip('createExchangeRate: only required params', async () => {
     const responsePromise = client.settings.currencies.exchangeRates.createExchangeRate({
@@ -130,4 +148,7 @@ describe('resource exchangeRates', () => {
       visibleInUI: true,
     });
   });
-});
+};
+describe('resource exchangeRates', () => runTests(client));
+describe('resource exchangeRates (tree shakable, base)', () => runTests(partialClient));
+describe('resource exchangeRates (tree shakable, subresource)', () => runTests(parentPartialClient));

@@ -6,6 +6,7 @@ import * as ObjectsAPI from '../objects';
 import { SimplePublicObjectWithAssociationsPage } from '../objects';
 import * as BatchAPI from './batch';
 import {
+  BaseBatch,
   Batch,
   BatchCreateParams,
   BatchDeleteParams,
@@ -19,8 +20,12 @@ import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class GoalTargets extends APIResource {
-  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
+export class BaseGoalTargets extends APIResource {
+  static override readonly _key: readonly ['crm', 'objects', 'goalTargets'] = Object.freeze([
+    'crm',
+    'objects',
+    'goalTargets',
+  ] as const);
 
   /**
    * Create a goal target with the given properties and return a copy of the object,
@@ -99,6 +104,9 @@ export class GoalTargets extends APIResource {
   ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/objects/2026-03/goal_targets/search', { body, ...options });
   }
+}
+export class GoalTargets extends BaseGoalTargets {
+  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
 }
 
 export interface GoalTargetCreateParams {
@@ -215,6 +223,7 @@ export interface GoalTargetSearchParams {
 }
 
 GoalTargets.Batch = Batch;
+GoalTargets.BaseBatch = BaseBatch;
 
 export declare namespace GoalTargets {
   export {
@@ -227,6 +236,7 @@ export declare namespace GoalTargets {
 
   export {
     Batch as Batch,
+    BaseBatch as BaseBatch,
     type BatchCreateParams as BatchCreateParams,
     type BatchUpdateParams as BatchUpdateParams,
     type BatchDeleteParams as BatchDeleteParams,

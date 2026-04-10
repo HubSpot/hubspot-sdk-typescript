@@ -7,7 +7,13 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Functions extends APIResource {
+export class BaseFunctions extends APIResource {
+  static override readonly _key: readonly ['automation', 'actions', 'functions'] = Object.freeze([
+    'automation',
+    'actions',
+    'functions',
+  ] as const);
+
   /**
    * Retrieve all functions included in a definition.
    */
@@ -118,6 +124,7 @@ export class Functions extends APIResource {
     );
   }
 }
+export class Functions extends BaseFunctions {}
 
 export interface FunctionListParams {
   appId: number;

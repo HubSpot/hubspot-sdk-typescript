@@ -8,7 +8,12 @@ import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Users extends APIResource {
+export class BaseUsers extends APIResource {
+  static override readonly _key: readonly ['settings', 'users'] = Object.freeze([
+    'settings',
+    'users',
+  ] as const);
+
   create(body: UserCreateParams, options?: RequestOptions): APIPromise<PublicUser> {
     return this._client.post('/settings/users/2026-03', { body, ...options });
   }
@@ -76,6 +81,7 @@ export class Users extends APIResource {
     return this._client.get('/settings/users/2026-03/teams', options);
   }
 }
+export class Users extends BaseUsers {}
 
 export type PublicUsersPage = Page<PublicUser>;
 

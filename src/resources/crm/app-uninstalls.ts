@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 
-export class AppUninstalls extends APIResource {
+export class BaseAppUninstalls extends APIResource {
+  static override readonly _key: readonly ['crm', 'appUninstalls'] = Object.freeze([
+    'crm',
+    'appUninstalls',
+  ] as const);
+
   /**
    * Use this endpoint to uninstall your app from a customer's HubSpot account. If
    * successful, this endpoint will return a 204 and the customer will receive an
@@ -18,3 +23,4 @@ export class AppUninstalls extends APIResource {
     });
   }
 }
+export class AppUninstalls extends BaseAppUninstalls {}

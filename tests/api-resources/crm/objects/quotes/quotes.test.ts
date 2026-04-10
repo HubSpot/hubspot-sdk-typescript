@@ -1,13 +1,29 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Objects } from 'hubspot-sdk/resources/crm/objects/objects';
+import { BaseQuotes } from 'hubspot-sdk/resources/crm/objects/quotes/quotes';
+
 import HubSpot from 'hubspot-sdk';
+import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource quotes', () => {
+const partialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseQuotes],
+});
+
+const parentPartialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Objects],
+});
+
+const runTests = (client: PartialHubSpot<{ crm: { objects: { quotes: BaseQuotes } } }>) => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.crm.objects.quotes.create({
@@ -174,4 +190,7 @@ describe('resource quotes', () => {
       query: 'query',
     });
   });
-});
+};
+describe('resource quotes', () => runTests(client));
+describe('resource quotes (tree shakable, base)', () => runTests(partialClient));
+describe('resource quotes (tree shakable, subresource)', () => runTests(parentPartialClient));

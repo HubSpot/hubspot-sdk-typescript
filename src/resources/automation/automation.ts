@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as SequencesAPI from './sequences';
 import {
+  BaseSequences,
   CollectionResponseWithTotalPublicSequenceLiteResponse,
   PublicEmailPatternResponse,
   PublicSequenceEnrollmentLiteResponse,
@@ -26,6 +27,7 @@ import {
   Actions,
   AgentRequestContext,
   ArrayFieldSchema,
+  BaseActions,
   BatchInputCallbackCompletionBatchRequest,
   BooleanFieldSchema,
   CallbackCompletionBatchRequest,
@@ -65,17 +67,23 @@ import {
   WorkflowsRequestContext,
 } from './actions/actions';
 
-export class Automation extends APIResource {
+export class BaseAutomation extends APIResource {
+  static override readonly _key: readonly ['automation'] = Object.freeze(['automation'] as const);
+}
+export class Automation extends BaseAutomation {
   actions: ActionsAPI.Actions = new ActionsAPI.Actions(this._client);
   sequences: SequencesAPI.Sequences = new SequencesAPI.Sequences(this._client);
 }
 
 Automation.Actions = Actions;
+Automation.BaseActions = BaseActions;
 Automation.Sequences = Sequences;
+Automation.BaseSequences = BaseSequences;
 
 export declare namespace Automation {
   export {
     Actions as Actions,
+    BaseActions as BaseActions,
     type ActionExecutionIndexIdentifier as ActionExecutionIndexIdentifier,
     type AgentRequestContext as AgentRequestContext,
     type ArrayFieldSchema as ArrayFieldSchema,
@@ -120,6 +128,7 @@ export declare namespace Automation {
 
   export {
     Sequences as Sequences,
+    BaseSequences as BaseSequences,
     type CollectionResponseWithTotalPublicSequenceLiteResponse as CollectionResponseWithTotalPublicSequenceLiteResponse,
     type PublicEmailPatternResponse as PublicEmailPatternResponse,
     type PublicSequenceEnrollmentLiteResponse as PublicSequenceEnrollmentLiteResponse,

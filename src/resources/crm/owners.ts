@@ -7,7 +7,9 @@ import { Page, type PageParams, PagePromise } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Owners extends APIResource {
+export class BaseOwners extends APIResource {
+  static override readonly _key: readonly ['crm', 'owners'] = Object.freeze(['crm', 'owners'] as const);
+
   list(
     query: OwnerListParams | null | undefined = {},
     options?: RequestOptions,
@@ -26,6 +28,7 @@ export class Owners extends APIResource {
     return this._client.get(path`/crm/owners/2026-03/${ownerID}`, { query, ...options });
   }
 }
+export class Owners extends BaseOwners {}
 
 export type PublicOwnersPage = Page<PublicOwner>;
 

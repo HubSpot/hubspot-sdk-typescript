@@ -7,7 +7,9 @@ import { Page, type PageParams, PagePromise } from '../../core/pagination';
 import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 
-export class AuditLogs extends APIResource {
+export class BaseAuditLogs extends APIResource {
+  static override readonly _key: readonly ['cms', 'auditLogs'] = Object.freeze(['cms', 'auditLogs'] as const);
+
   list(
     query: AuditLogListParams | null | undefined = {},
     options?: RequestOptions,
@@ -23,6 +25,7 @@ export class AuditLogs extends APIResource {
     });
   }
 }
+export class AuditLogs extends BaseAuditLogs {}
 
 export type PublicAuditLogsPage = Page<PublicAuditLog>;
 

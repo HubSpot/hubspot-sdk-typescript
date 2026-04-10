@@ -7,7 +7,12 @@ import { Page, type PageParams, PagePromise } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class TaxRates extends APIResource {
+export class BaseTaxRates extends APIResource {
+  static override readonly _key: readonly ['settings', 'taxRates'] = Object.freeze([
+    'settings',
+    'taxRates',
+  ] as const);
+
   /**
    * Retrieve a paginated list of all tax rates set up in the account tax rate
    * library
@@ -29,6 +34,7 @@ export class TaxRates extends APIResource {
     return this._client.get(path`/tax-rates/2026-03/tax-rates/${taxRateGroupID}`, options);
   }
 }
+export class TaxRates extends BaseTaxRates {}
 
 export type PublicTaxRateGroupsPage = Page<PublicTaxRateGroup>;
 

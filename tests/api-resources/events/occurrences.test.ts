@@ -1,13 +1,29 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Events } from 'hubspot-sdk/resources/events/events';
+import { BaseOccurrences } from 'hubspot-sdk/resources/events/occurrences';
+
 import HubSpot from 'hubspot-sdk';
+import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource occurrences', () => {
+const partialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseOccurrences],
+});
+
+const parentPartialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Events],
+});
+
+const runTests = (client: PartialHubSpot<{ events: { occurrences: BaseOccurrences } }>) => {
   // Mock server tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.events.occurrences.list();
@@ -56,4 +72,7 @@ describe('resource occurrences', () => {
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
   });
-});
+};
+describe('resource occurrences', () => runTests(client));
+describe('resource occurrences (tree shakable, base)', () => runTests(partialClient));
+describe('resource occurrences (tree shakable, subresource)', () => runTests(parentPartialClient));

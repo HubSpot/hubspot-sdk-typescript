@@ -1,13 +1,29 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Crm } from 'hubspot-sdk/resources/crm/crm';
+import { BaseOwners } from 'hubspot-sdk/resources/crm/owners';
+
 import HubSpot from 'hubspot-sdk';
+import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource owners', () => {
+const partialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseOwners],
+});
+
+const parentPartialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Crm],
+});
+
+const runTests = (client: PartialHubSpot<{ crm: { owners: BaseOwners } }>) => {
   // Mock server tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.crm.owners.list();
@@ -55,4 +71,7 @@ describe('resource owners', () => {
       client.crm.owners.get(0, { archived: true, idProperty: 'id' }, { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(HubSpot.NotFoundError);
   });
-});
+};
+describe('resource owners', () => runTests(client));
+describe('resource owners (tree shakable, base)', () => runTests(partialClient));
+describe('resource owners (tree shakable, subresource)', () => runTests(parentPartialClient));

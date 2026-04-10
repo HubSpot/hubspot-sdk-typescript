@@ -6,7 +6,14 @@ import { APIPromise } from '../../../../core/api-promise';
 import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 
-export class Batch extends APIResource {
+export class BaseBatch extends APIResource {
+  static override readonly _key: readonly ['crm', 'objects', 'courses', 'batch'] = Object.freeze([
+    'crm',
+    'objects',
+    'courses',
+    'batch',
+  ] as const);
+
   /**
    * Create a batch of objects
    */
@@ -66,6 +73,7 @@ export class Batch extends APIResource {
     return this._client.post('/crm/objects/2026-03/0-410/batch/upsert', { body, ...options });
   }
 }
+export class Batch extends BaseBatch {}
 
 export interface BatchCreateParams {
   inputs: Array<ObjectsAPI.SimplePublicObjectBatchInputForCreate>;

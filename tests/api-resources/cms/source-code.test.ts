@@ -1,13 +1,29 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Cms } from 'hubspot-sdk/resources/cms/cms';
+import { BaseSourceCode } from 'hubspot-sdk/resources/cms/source-code';
+
 import HubSpot, { toFile } from 'hubspot-sdk';
+import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource sourceCode', () => {
+const partialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseSourceCode],
+});
+
+const parentPartialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Cms],
+});
+
+const runTests = (client: PartialHubSpot<{ cms: { sourceCode: BaseSourceCode } }>) => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.cms.sourceCode.create('path', { environment: 'environment' });
@@ -126,4 +142,7 @@ describe('resource sourceCode', () => {
       file: await toFile(Buffer.from('Example data'), 'README.md'),
     });
   });
-});
+};
+describe('resource sourceCode', () => runTests(client));
+describe('resource sourceCode (tree shakable, base)', () => runTests(partialClient));
+describe('resource sourceCode (tree shakable, subresource)', () => runTests(parentPartialClient));

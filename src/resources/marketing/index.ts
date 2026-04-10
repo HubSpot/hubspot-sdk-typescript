@@ -2,6 +2,7 @@
 
 export {
   Campaigns,
+  BaseCampaigns,
   type BatchInputPublicCampaignBatchUpdateItem,
   type BatchInputPublicCampaignDeleteInput,
   type BatchInputPublicCampaignInput,
@@ -39,6 +40,7 @@ export {
 } from './campaigns/index';
 export {
   Emails,
+  BaseEmails,
   type AggregateEmailStatistics,
   type CollectionResponseWithTotalEmailStatisticInterval,
   type CollectionResponseWithTotalPublicEmail,
@@ -82,9 +84,10 @@ export {
   type PublicEmailsPage,
   type VersionPublicEmailsPage,
 } from './emails';
-export { Marketing } from './marketing';
+export { Marketing, BaseMarketing } from './marketing';
 export {
   MarketingEvents,
+  BaseMarketingEvents,
   type AppInfo,
   type AttendanceCounters,
   type BatchInputMarketingEventCreateRequestParams,
@@ -145,9 +148,10 @@ export {
   type ParticipationBreakdownsPage,
   type MarketingEventPublicReadResponseV2sPage,
 } from './marketing-events/index';
-export { SingleSend, type SingleSendCreateParams } from './single-send';
+export { SingleSend, BaseSingleSend, type SingleSendCreateParams } from './single-send';
 export {
   Transactional,
+  BaseTransactional,
   type CollectionResponseSmtpAPITokenViewForwardPaging,
   type SmtpAPITokenRequestEgg,
   type SmtpAPITokenView,

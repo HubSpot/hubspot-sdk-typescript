@@ -2,6 +2,7 @@
 
 export {
   ChannelAccounts,
+  BaseChannelAccounts,
   type ChannelAccountCreateParams,
   type ChannelAccountUpdateParams,
   type ChannelAccountListParams,
@@ -9,6 +10,7 @@ export {
 } from './channel-accounts';
 export {
   CustomChannels,
+  BaseCustomChannels,
   type ChannelIntegrationMessageEgg,
   type ChannelIntegrationParticipant,
   type CollectionResponseWithTotalPublicChannelAccount,
@@ -64,6 +66,7 @@ export {
 } from './custom-channels';
 export {
   Messages,
+  BaseMessages,
   type MessageCreateParams,
   type MessageUpdateParams,
   type MessageGetParams,

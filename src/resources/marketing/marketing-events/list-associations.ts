@@ -7,7 +7,10 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class ListAssociations extends APIResource {
+export class BaseListAssociations extends APIResource {
+  static override readonly _key: readonly ['marketing', 'marketingEvents', 'listAssociations'] =
+    Object.freeze(['marketing', 'marketingEvents', 'listAssociations'] as const);
+
   /**
    * Gets lists associated with a marketing event by marketing event id
    */
@@ -96,6 +99,7 @@ export class ListAssociations extends APIResource {
     );
   }
 }
+export class ListAssociations extends BaseListAssociations {}
 
 export interface ListAssociationDeleteParams {
   /**

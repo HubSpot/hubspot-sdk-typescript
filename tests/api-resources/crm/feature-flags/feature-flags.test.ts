@@ -1,13 +1,29 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Crm } from 'hubspot-sdk/resources/crm/crm';
+import { BaseFeatureFlags } from 'hubspot-sdk/resources/crm/feature-flags/feature-flags';
+
 import HubSpot from 'hubspot-sdk';
+import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource featureFlags', () => {
+const partialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseFeatureFlags],
+});
+
+const parentPartialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Crm],
+});
+
+const runTests = (client: PartialHubSpot<{ crm: { featureFlags: BaseFeatureFlags } }>) => {
   // Mock server tests are disabled
   test.skip('update: only required params', async () => {
     const responsePromise = client.crm.featureFlags.update('flagName', { appId: 0, defaultState: 'ABSENT' });
@@ -154,4 +170,7 @@ describe('resource featureFlags', () => {
       flagState: 'ABSENT',
     });
   });
-});
+};
+describe('resource featureFlags', () => runTests(client));
+describe('resource featureFlags (tree shakable, base)', () => runTests(partialClient));
+describe('resource featureFlags (tree shakable, subresource)', () => runTests(parentPartialClient));

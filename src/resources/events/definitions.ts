@@ -9,7 +9,12 @@ import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Definitions extends APIResource {
+export class BaseDefinitions extends APIResource {
+  static override readonly _key: readonly ['events', 'definitions'] = Object.freeze([
+    'events',
+    'definitions',
+  ] as const);
+
   /**
    * Create a custom event definition.
    */
@@ -117,6 +122,7 @@ export class Definitions extends APIResource {
     });
   }
 }
+export class Definitions extends BaseDefinitions {}
 
 export type ExternalBehavioralEventTypeDefinitionsPage = Page<ExternalBehavioralEventTypeDefinition>;
 

@@ -6,14 +6,18 @@ import { MultiAssociatedObjectWithLabelsPage } from '../../crm';
 import * as ObjectsAPI from '../objects';
 import { SimplePublicObjectWithAssociationsPage } from '../objects';
 import * as BatchAPI from './batch';
-import { Batch, BatchGetParams, BatchUpdateParams } from './batch';
+import { BaseBatch, Batch, BatchGetParams, BatchUpdateParams } from './batch';
 import { APIPromise } from '../../../../core/api-promise';
 import { Page, type PageParams, PagePromise } from '../../../../core/pagination';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class PartnerClients extends APIResource {
-  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
+export class BasePartnerClients extends APIResource {
+  static override readonly _key: readonly ['crm', 'objects', 'partnerClients'] = Object.freeze([
+    'crm',
+    'objects',
+    'partnerClients',
+  ] as const);
 
   /**
    * Update the specified properties of an existing partner client.
@@ -92,6 +96,9 @@ export class PartnerClients extends APIResource {
   ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/objects/2026-03/partner_clients/search', { body, ...options });
   }
+}
+export class PartnerClients extends BasePartnerClients {
+  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
 }
 
 export interface PartnerClientUpdateParams {
@@ -206,6 +213,7 @@ export interface PartnerClientSearchParams {
 }
 
 PartnerClients.Batch = Batch;
+PartnerClients.BaseBatch = BaseBatch;
 
 export declare namespace PartnerClients {
   export {
@@ -218,6 +226,7 @@ export declare namespace PartnerClients {
 
   export {
     Batch as Batch,
+    BaseBatch as BaseBatch,
     type BatchUpdateParams as BatchUpdateParams,
     type BatchGetParams as BatchGetParams,
   };

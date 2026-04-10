@@ -5,7 +5,9 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Limits extends APIResource {
+export class BaseLimits extends APIResource {
+  static override readonly _key: readonly ['crm', 'limits'] = Object.freeze(['crm', 'limits'] as const);
+
   /**
    * Returns limits and usage for custom association labels
    */
@@ -86,6 +88,7 @@ export class Limits extends APIResource {
     return this._client.get('/crm/limits/2026-03/records', options);
   }
 }
+export class Limits extends BaseLimits {}
 
 export interface AssociationLabelLimitResponse {
   /**

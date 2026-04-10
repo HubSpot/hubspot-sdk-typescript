@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as TaxRatesAPI from './tax-rates';
 import {
+  BaseTaxRates,
   CollectionResponsePublicTaxRateGroupForwardPaging,
   PublicTaxRateGroup,
   PublicTaxRateGroupsPage,
@@ -11,6 +12,7 @@ import {
 } from './tax-rates';
 import * as UsersAPI from './users';
 import {
+  BaseUsers,
   CollectionResponsePublicPermissionSetNoPaging,
   CollectionResponsePublicTeamNoPaging,
   CollectionResponsePublicUserForwardPaging,
@@ -29,6 +31,7 @@ import {
 } from './users';
 import * as CurrenciesAPI from './currencies/currencies';
 import {
+  BaseCurrencies,
   BatchInputExchangeRateCreateRequest,
   BatchInputExchangeRateUpdateRequest,
   BatchResponseExchangeRate,
@@ -50,19 +53,26 @@ import {
   ExchangeRateUpdateRequest,
 } from './currencies/currencies';
 
-export class Settings extends APIResource {
+export class BaseSettings extends APIResource {
+  static override readonly _key: readonly ['settings'] = Object.freeze(['settings'] as const);
+}
+export class Settings extends BaseSettings {
   currencies: CurrenciesAPI.Currencies = new CurrenciesAPI.Currencies(this._client);
   taxRates: TaxRatesAPI.TaxRates = new TaxRatesAPI.TaxRates(this._client);
   users: UsersAPI.Users = new UsersAPI.Users(this._client);
 }
 
 Settings.Currencies = Currencies;
+Settings.BaseCurrencies = BaseCurrencies;
 Settings.TaxRates = TaxRates;
+Settings.BaseTaxRates = BaseTaxRates;
 Settings.Users = Users;
+Settings.BaseUsers = BaseUsers;
 
 export declare namespace Settings {
   export {
     Currencies as Currencies,
+    BaseCurrencies as BaseCurrencies,
     type BatchInputExchangeRateCreateRequest as BatchInputExchangeRateCreateRequest,
     type BatchInputExchangeRateUpdateRequest as BatchInputExchangeRateUpdateRequest,
     type BatchResponseExchangeRate as BatchResponseExchangeRate,
@@ -85,6 +95,7 @@ export declare namespace Settings {
 
   export {
     TaxRates as TaxRates,
+    BaseTaxRates as BaseTaxRates,
     type CollectionResponsePublicTaxRateGroupForwardPaging as CollectionResponsePublicTaxRateGroupForwardPaging,
     type PublicTaxRateGroup as PublicTaxRateGroup,
     type PublicTaxRateGroupsPage as PublicTaxRateGroupsPage,
@@ -93,6 +104,7 @@ export declare namespace Settings {
 
   export {
     Users as Users,
+    BaseUsers as BaseUsers,
     type CollectionResponsePublicPermissionSetNoPaging as CollectionResponsePublicPermissionSetNoPaging,
     type CollectionResponsePublicTeamNoPaging as CollectionResponsePublicTeamNoPaging,
     type CollectionResponsePublicUserForwardPaging as CollectionResponsePublicUserForwardPaging,

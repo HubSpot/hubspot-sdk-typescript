@@ -1,13 +1,31 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Objects } from 'hubspot-sdk/resources/crm/objects/objects';
+import { BaseFeedbackSubmissions } from 'hubspot-sdk/resources/crm/objects/feedback-submissions/feedback-submissions';
+
 import HubSpot from 'hubspot-sdk';
+import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource feedbackSubmissions', () => {
+const partialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseFeedbackSubmissions],
+});
+
+const parentPartialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Objects],
+});
+
+const runTests = (
+  client: PartialHubSpot<{ crm: { objects: { feedbackSubmissions: BaseFeedbackSubmissions } } }>,
+) => {
   // Mock server tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.crm.objects.feedbackSubmissions.list();
@@ -109,4 +127,7 @@ describe('resource feedbackSubmissions', () => {
       query: 'query',
     });
   });
-});
+};
+describe('resource feedbackSubmissions', () => runTests(client));
+describe('resource feedbackSubmissions (tree shakable, base)', () => runTests(partialClient));
+describe('resource feedbackSubmissions (tree shakable, subresource)', () => runTests(parentPartialClient));

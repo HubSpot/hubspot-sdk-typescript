@@ -3,7 +3,7 @@
 import { HubSpotError } from './error';
 import { FinalRequestOptions } from '../internal/request-options';
 import { defaultParseResponse } from '../internal/parse';
-import { type HubSpot } from '../client';
+import { type BaseHubSpot } from '../client';
 import { APIPromise } from './api-promise';
 import { type APIResponseProps } from '../internal/parse';
 import { maybeObj } from '../internal/utils/values';
@@ -11,13 +11,13 @@ import { maybeObj } from '../internal/utils/values';
 export type PageRequestOptions = Pick<FinalRequestOptions, 'query' | 'headers' | 'body' | 'path' | 'method'>;
 
 export abstract class AbstractPage<Item> implements AsyncIterable<Item> {
-  #client: HubSpot;
+  #client: BaseHubSpot;
   protected options: FinalRequestOptions;
 
   protected response: Response;
   protected body: unknown;
 
-  constructor(client: HubSpot, response: Response, body: unknown, options: FinalRequestOptions) {
+  constructor(client: BaseHubSpot, response: Response, body: unknown, options: FinalRequestOptions) {
     this.#client = client;
     this.options = options;
     this.response = response;
@@ -80,7 +80,7 @@ export class PagePromise<
   implements AsyncIterable<Item>
 {
   constructor(
-    client: HubSpot,
+    client: BaseHubSpot,
     request: Promise<APIResponseProps>,
     Page: new (...args: ConstructorParameters<typeof AbstractPage>) => PageClass,
   ) {
@@ -136,7 +136,12 @@ export class Page<Item> extends AbstractPage<Item> implements PageResponse<Item>
 
   paging: PageResponse.Paging;
 
-  constructor(client: HubSpot, response: Response, body: PageResponse<Item>, options: FinalRequestOptions) {
+  constructor(
+    client: BaseHubSpot,
+    response: Response,
+    body: PageResponse<Item>,
+    options: FinalRequestOptions,
+  ) {
     super(client, response, body, options);
 
     this.results = body.results || [];

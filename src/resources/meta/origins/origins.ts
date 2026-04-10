@@ -2,9 +2,18 @@
 
 import { APIResource } from '../../../core/resource';
 import * as IPRangesAPI from './ip-ranges';
-import { IPRangeListParams, IPRangeListSimpleParams, IPRangeListSimpleResponse, IPRanges } from './ip-ranges';
+import {
+  BaseIPRanges,
+  IPRangeListParams,
+  IPRangeListSimpleParams,
+  IPRangeListSimpleResponse,
+  IPRanges,
+} from './ip-ranges';
 
-export class Origins extends APIResource {
+export class BaseOrigins extends APIResource {
+  static override readonly _key: readonly ['meta', 'origins'] = Object.freeze(['meta', 'origins'] as const);
+}
+export class Origins extends BaseOrigins {
   ipRanges: IPRangesAPI.IPRanges = new IPRangesAPI.IPRanges(this._client);
 }
 
@@ -40,6 +49,7 @@ export interface IPRange {
 }
 
 Origins.IPRanges = IPRanges;
+Origins.BaseIPRanges = BaseIPRanges;
 
 export declare namespace Origins {
   export {
@@ -49,6 +59,7 @@ export declare namespace Origins {
 
   export {
     IPRanges as IPRanges,
+    BaseIPRanges as BaseIPRanges,
     type IPRangeListSimpleResponse as IPRangeListSimpleResponse,
     type IPRangeListParams as IPRangeListParams,
     type IPRangeListSimpleParams as IPRangeListSimpleParams,

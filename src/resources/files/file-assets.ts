@@ -11,7 +11,12 @@ import { RequestOptions } from '../../internal/request-options';
 import { multipartFormRequestOptions } from '../../internal/uploads';
 import { path } from '../../internal/utils/path';
 
-export class FileAssets extends APIResource {
+export class BaseFileAssets extends APIResource {
+  static override readonly _key: readonly ['files', 'fileAssets'] = Object.freeze([
+    'files',
+    'fileAssets',
+  ] as const);
+
   /**
    * Creates a folder.
    */
@@ -135,6 +140,7 @@ export class FileAssets extends APIResource {
     );
   }
 }
+export class FileAssets extends BaseFileAssets {}
 
 export interface FileAssetCreateParams {
   /**

@@ -4,9 +4,15 @@ import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
 import * as CrmAPI from '../crm';
 import * as BatchAPI from './batch';
-import { Batch, BatchReadParams, BatchUpsertParams } from './batch';
+import { BaseBatch, Batch, BatchReadParams, BatchUpsertParams } from './batch';
 
-export class DealSplits extends APIResource {
+export class BaseDealSplits extends APIResource {
+  static override readonly _key: readonly ['crm', 'dealSplits'] = Object.freeze([
+    'crm',
+    'dealSplits',
+  ] as const);
+}
+export class DealSplits extends BaseDealSplits {
   batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
 }
 
@@ -143,6 +149,7 @@ export interface PublicDealSplitsCreateRequest {
 }
 
 DealSplits.Batch = Batch;
+DealSplits.BaseBatch = BaseBatch;
 
 export declare namespace DealSplits {
   export {
@@ -156,6 +163,7 @@ export declare namespace DealSplits {
 
   export {
     Batch as Batch,
+    BaseBatch as BaseBatch,
     type BatchReadParams as BatchReadParams,
     type BatchUpsertParams as BatchUpsertParams,
   };

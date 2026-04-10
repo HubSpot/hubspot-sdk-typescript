@@ -2,6 +2,7 @@
 
 export {
   AssociationsSchema,
+  BaseAssociationsSchema,
   type BatchInputPublicAssociationDefinitionConfigurationCreateRequest,
   type BatchInputPublicAssociationDefinitionConfigurationUpdateRequest,
   type BatchInputPublicAssociationSpec,
@@ -21,6 +22,7 @@ export {
 } from './associations-schema';
 export {
   Labels,
+  BaseLabels,
   type LabelBatchCreateParams,
   type LabelCreateLabelParams,
   type LabelDeleteLabelParams,
@@ -29,6 +31,7 @@ export {
 } from './labels';
 export {
   Limits,
+  BaseLimits,
   type LimitBatchDeleteParams,
   type LimitBatchUpdateParams,
   type LimitGetByObjectTypesParams,

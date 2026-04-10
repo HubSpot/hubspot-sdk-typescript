@@ -1,13 +1,29 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Files } from 'hubspot-sdk/resources/files/files';
+import { BaseFolders } from 'hubspot-sdk/resources/files/folders';
+
 import HubSpot from 'hubspot-sdk';
+import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource folders', () => {
+const partialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseFolders],
+});
+
+const parentPartialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Files],
+});
+
+const runTests = (client: PartialHubSpot<{ files: { folders: BaseFolders } }>) => {
   // Mock server tests are disabled
   test.skip('deleteByID', async () => {
     const responsePromise = client.files.folders.deleteByID('321669910225');
@@ -165,4 +181,7 @@ describe('resource folders', () => {
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
   });
-});
+};
+describe('resource folders', () => runTests(client));
+describe('resource folders (tree shakable, base)', () => runTests(partialClient));
+describe('resource folders (tree shakable, subresource)', () => runTests(parentPartialClient));

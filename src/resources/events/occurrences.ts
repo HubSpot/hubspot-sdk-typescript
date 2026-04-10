@@ -6,7 +6,12 @@ import { APIPromise } from '../../core/api-promise';
 import { Page, type PageParams, PagePromise } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 
-export class Occurrences extends APIResource {
+export class BaseOccurrences extends APIResource {
+  static override readonly _key: readonly ['events', 'occurrences'] = Object.freeze([
+    'events',
+    'occurrences',
+  ] as const);
+
   /**
    * Retrieve event occurrences for the specified time frame. This endpoint allows
    * filtering by various parameters such as object type, event type, and occurrence
@@ -33,6 +38,7 @@ export class Occurrences extends APIResource {
     return this._client.get('/events/event-occurrences/2026-03/event-types', options);
   }
 }
+export class Occurrences extends BaseOccurrences {}
 
 export type ExternalUnifiedEventsPage = Page<ExternalUnifiedEvent>;
 

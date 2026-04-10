@@ -7,7 +7,13 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Spend extends APIResource {
+export class BaseSpend extends APIResource {
+  static override readonly _key: readonly ['marketing', 'campaigns', 'spend'] = Object.freeze([
+    'marketing',
+    'campaigns',
+    'spend',
+  ] as const);
+
   /**
    * Create a new campaign spend item
    */
@@ -57,6 +63,7 @@ export class Spend extends APIResource {
     return this._client.get(path`/marketing/campaigns/2026-03/${campaignGuid}/spend/${spendID}`, options);
   }
 }
+export class Spend extends BaseSpend {}
 
 export interface SpendCreateParams {
   /**

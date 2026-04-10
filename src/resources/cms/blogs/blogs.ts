@@ -20,6 +20,7 @@ import {
   AuthorUpdateLanguagesParams,
   AuthorUpdateParams,
   Authors,
+  BaseAuthors,
   BatchInputBlogAuthor,
   BatchResponseBlogAuthor,
   BatchResponseBlogAuthorWithErrors,
@@ -29,6 +30,7 @@ import {
 } from './authors/authors';
 import * as PostsAPI from './posts/posts';
 import {
+  BasePosts,
   BatchInputBlogPost,
   BatchResponseBlogPost,
   BatchResponseBlogPostWithErrors,
@@ -55,6 +57,7 @@ import {
 } from './posts/posts';
 import * as SettingsAPI from './settings/settings';
 import {
+  BaseSettings,
   Blog,
   BlogLanguageCloneRequestVNext,
   BlogVersion,
@@ -70,6 +73,7 @@ import {
 } from './settings/settings';
 import * as TagsAPI from './tags/tags';
 import {
+  BaseTags,
   BatchInputTag,
   BatchResponseTag,
   BatchResponseTagWithErrors,
@@ -95,7 +99,10 @@ import {
   Tags,
 } from './tags/tags';
 
-export class Blogs extends APIResource {
+export class BaseBlogs extends APIResource {
+  static override readonly _key: readonly ['cms', 'blogs'] = Object.freeze(['cms', 'blogs'] as const);
+}
+export class Blogs extends BaseBlogs {
   authors: AuthorsAPI.Authors = new AuthorsAPI.Authors(this._client);
   posts: PostsAPI.Posts = new PostsAPI.Posts(this._client);
   settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
@@ -109,9 +116,13 @@ export type CursorPagedResultBlogPostLong = unknown;
 export type CursorPagedResultTagLong = unknown;
 
 Blogs.Authors = Authors;
+Blogs.BaseAuthors = BaseAuthors;
 Blogs.Posts = Posts;
+Blogs.BasePosts = BasePosts;
 Blogs.Settings = Settings;
+Blogs.BaseSettings = BaseSettings;
 Blogs.Tags = Tags;
+Blogs.BaseTags = BaseTags;
 
 export declare namespace Blogs {
   export {
@@ -122,6 +133,7 @@ export declare namespace Blogs {
 
   export {
     Authors as Authors,
+    BaseAuthors as BaseAuthors,
     type BatchInputBlogAuthor as BatchInputBlogAuthor,
     type BatchResponseBlogAuthor as BatchResponseBlogAuthor,
     type BatchResponseBlogAuthorWithErrors as BatchResponseBlogAuthorWithErrors,
@@ -148,6 +160,7 @@ export declare namespace Blogs {
 
   export {
     Posts as Posts,
+    BasePosts as BasePosts,
     type BatchInputBlogPost as BatchInputBlogPost,
     type BatchResponseBlogPost as BatchResponseBlogPost,
     type BatchResponseBlogPostWithErrors as BatchResponseBlogPostWithErrors,
@@ -174,6 +187,7 @@ export declare namespace Blogs {
 
   export {
     Settings as Settings,
+    BaseSettings as BaseSettings,
     type Blog as Blog,
     type BlogLanguageCloneRequestVNext as BlogLanguageCloneRequestVNext,
     type BlogVersion as BlogVersion,
@@ -189,6 +203,7 @@ export declare namespace Blogs {
 
   export {
     Tags as Tags,
+    BaseTags as BaseTags,
     type BatchInputTag as BatchInputTag,
     type BatchResponseTag as BatchResponseTag,
     type BatchResponseTagWithErrors as BatchResponseTagWithErrors,

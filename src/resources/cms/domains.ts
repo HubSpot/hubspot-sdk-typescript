@@ -7,7 +7,9 @@ import { Page, type PageParams, PagePromise } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Domains extends APIResource {
+export class BaseDomains extends APIResource {
+  static override readonly _key: readonly ['cms', 'domains'] = Object.freeze(['cms', 'domains'] as const);
+
   list(
     query: DomainListParams | null | undefined = {},
     options?: RequestOptions,
@@ -22,6 +24,7 @@ export class Domains extends APIResource {
     return this._client.get(path`/cms/domains/2026-03/${domainID}`, options);
   }
 }
+export class Domains extends BaseDomains {}
 
 export type DomainsPage = Page<Domain>;
 

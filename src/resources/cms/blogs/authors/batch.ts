@@ -6,7 +6,14 @@ import { APIPromise } from '../../../../core/api-promise';
 import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 
-export class Batch extends APIResource {
+export class BaseBatch extends APIResource {
+  static override readonly _key: readonly ['cms', 'blogs', 'authors', 'batch'] = Object.freeze([
+    'cms',
+    'blogs',
+    'authors',
+    'batch',
+  ] as const);
+
   /**
    * Create the Blog Author objects detailed in the request body.
    */
@@ -58,6 +65,7 @@ export class Batch extends APIResource {
     });
   }
 }
+export class Batch extends BaseBatch {}
 
 export interface BatchCreateParams {
   /**

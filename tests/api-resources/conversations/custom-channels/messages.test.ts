@@ -1,13 +1,31 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { CustomChannels } from 'hubspot-sdk/resources/conversations/custom-channels/custom-channels';
+import { BaseMessages } from 'hubspot-sdk/resources/conversations/custom-channels/messages';
+
 import HubSpot from 'hubspot-sdk';
+import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource messages', () => {
+const partialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseMessages],
+});
+
+const parentPartialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [CustomChannels],
+});
+
+const runTests = (
+  client: PartialHubSpot<{ conversations: { customChannels: { messages: BaseMessages } } }>,
+) => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.conversations.customChannels.messages.create(0, {
@@ -105,4 +123,7 @@ describe('resource messages', () => {
   test.skip('get: required and optional params', async () => {
     const response = await client.conversations.customChannels.messages.get('messageId', { channelId: 0 });
   });
-});
+};
+describe('resource messages', () => runTests(client));
+describe('resource messages (tree shakable, base)', () => runTests(partialClient));
+describe('resource messages (tree shakable, subresource)', () => runTests(parentPartialClient));

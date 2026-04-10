@@ -8,7 +8,13 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Batch extends APIResource {
+export class BaseBatch extends APIResource {
+  static override readonly _key: readonly ['cms', 'mediaBridge', 'batch'] = Object.freeze([
+    'cms',
+    'mediaBridge',
+    'batch',
+  ] as const);
+
   /**
    * Create a batch of properties of the specified object type.
    */
@@ -51,6 +57,7 @@ export class Batch extends APIResource {
     });
   }
 }
+export class Batch extends BaseBatch {}
 
 export interface BatchCreateParams {
   /**

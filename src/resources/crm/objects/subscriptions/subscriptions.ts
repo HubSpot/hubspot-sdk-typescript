@@ -6,6 +6,7 @@ import * as ObjectsAPI from '../objects';
 import { SimplePublicObjectWithAssociationsPage } from '../objects';
 import * as BatchAPI from './batch';
 import {
+  BaseBatch,
   Batch,
   BatchCreateParams,
   BatchDeleteParams,
@@ -19,8 +20,12 @@ import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Subscriptions extends APIResource {
-  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
+export class BaseSubscriptions extends APIResource {
+  static override readonly _key: readonly ['crm', 'objects', 'subscriptions'] = Object.freeze([
+    'crm',
+    'objects',
+    'subscriptions',
+  ] as const);
 
   /**
    * Create a new subscription object with specified properties and optional
@@ -98,6 +103,9 @@ export class Subscriptions extends APIResource {
   ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/objects/2026-03/subscriptions/search', { body, ...options });
   }
+}
+export class Subscriptions extends BaseSubscriptions {
+  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
 }
 
 export interface SubscriptionCreateParams {
@@ -214,6 +222,7 @@ export interface SubscriptionSearchParams {
 }
 
 Subscriptions.Batch = Batch;
+Subscriptions.BaseBatch = BaseBatch;
 
 export declare namespace Subscriptions {
   export {
@@ -226,6 +235,7 @@ export declare namespace Subscriptions {
 
   export {
     Batch as Batch,
+    BaseBatch as BaseBatch,
     type BatchCreateParams as BatchCreateParams,
     type BatchUpdateParams as BatchUpdateParams,
     type BatchDeleteParams as BatchDeleteParams,

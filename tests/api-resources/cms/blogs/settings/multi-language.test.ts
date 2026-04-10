@@ -1,13 +1,31 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseMultiLanguage } from 'hubspot-sdk/resources/cms/blogs/settings/multi-language';
+import { Settings } from 'hubspot-sdk/resources/cms/blogs/settings/settings';
+
 import HubSpot from 'hubspot-sdk';
+import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource multiLanguage', () => {
+const partialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseMultiLanguage],
+});
+
+const parentPartialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Settings],
+});
+
+const runTests = (
+  client: PartialHubSpot<{ cms: { blogs: { settings: { multiLanguage: BaseMultiLanguage } } } }>,
+) => {
   // Mock server tests are disabled
   test.skip('attachToLangGroup: required and optional params', async () => {
     const response = await client.cms.blogs.settings.multiLanguage.attachToLangGroup({
@@ -69,4 +87,7 @@ describe('resource multiLanguage', () => {
       primaryId: 'primaryId',
     });
   });
-});
+};
+describe('resource multiLanguage', () => runTests(client));
+describe('resource multiLanguage (tree shakable, base)', () => runTests(partialClient));
+describe('resource multiLanguage (tree shakable, subresource)', () => runTests(parentPartialClient));

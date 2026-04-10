@@ -6,6 +6,7 @@ import * as ObjectsAPI from '../objects';
 import { SimplePublicObjectWithAssociationsPage } from '../objects';
 import * as BatchAPI from './batch';
 import {
+  BaseBatch,
   Batch,
   BatchCreateParams,
   BatchDeleteParams,
@@ -19,8 +20,12 @@ import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class LineItems extends APIResource {
-  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
+export class BaseLineItems extends APIResource {
+  static override readonly _key: readonly ['crm', 'objects', 'lineItems'] = Object.freeze([
+    'crm',
+    'objects',
+    'lineItems',
+  ] as const);
 
   /**
    * Create a line item with the given properties and return a copy of the object,
@@ -104,6 +109,9 @@ export class LineItems extends APIResource {
   ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/objects/2026-03/line_items/search', { body, ...options });
   }
+}
+export class LineItems extends BaseLineItems {
+  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
 }
 
 export interface LineItemCreateParams {
@@ -220,6 +228,7 @@ export interface LineItemSearchParams {
 }
 
 LineItems.Batch = Batch;
+LineItems.BaseBatch = BaseBatch;
 
 export declare namespace LineItems {
   export {
@@ -232,6 +241,7 @@ export declare namespace LineItems {
 
   export {
     Batch as Batch,
+    BaseBatch as BaseBatch,
     type BatchCreateParams as BatchCreateParams,
     type BatchUpdateParams as BatchUpdateParams,
     type BatchDeleteParams as BatchDeleteParams,

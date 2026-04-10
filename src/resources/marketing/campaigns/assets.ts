@@ -7,7 +7,13 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Assets extends APIResource {
+export class BaseAssets extends APIResource {
+  static override readonly _key: readonly ['marketing', 'campaigns', 'assets'] = Object.freeze([
+    'marketing',
+    'campaigns',
+    'assets',
+  ] as const);
+
   /**
    * Associate a specified asset with a campaign. Using the API, you can create
    * associations for the following asset types: ads, blog posts, calls, case
@@ -66,6 +72,7 @@ export class Assets extends APIResource {
     );
   }
 }
+export class Assets extends BaseAssets {}
 
 export interface AssetUpdateParams {
   campaignGuid: string;

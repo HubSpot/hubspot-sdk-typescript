@@ -6,6 +6,7 @@ import * as CrmAPI from '../crm';
 import { MultiAssociatedObjectWithLabelsPage } from '../crm';
 import * as BatchAPI from './batch';
 import {
+  BaseBatch,
   Batch,
   BatchCreateDefaultParams,
   BatchCreateParams,
@@ -19,8 +20,11 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Associations extends APIResource {
-  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
+export class BaseAssociations extends APIResource {
+  static override readonly _key: readonly ['crm', 'associations'] = Object.freeze([
+    'crm',
+    'associations',
+  ] as const);
 
   /**
    * Retrieve all associations between a specific record and an object type. Limit
@@ -74,6 +78,9 @@ export class Associations extends APIResource {
       { body: body, ...options },
     );
   }
+}
+export class Associations extends BaseAssociations {
+  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
 }
 
 export interface BatchInputPublicAssociationMultiArchive {
@@ -355,6 +362,7 @@ export interface AssociationUpdateAssociationLabelsParams {
 }
 
 Associations.Batch = Batch;
+Associations.BaseBatch = BaseBatch;
 
 export declare namespace Associations {
   export {
@@ -381,6 +389,7 @@ export declare namespace Associations {
 
   export {
     Batch as Batch,
+    BaseBatch as BaseBatch,
     type BatchCreateParams as BatchCreateParams,
     type BatchDeleteParams as BatchDeleteParams,
     type BatchCreateDefaultParams as BatchCreateDefaultParams,

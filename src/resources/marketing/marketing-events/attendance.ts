@@ -6,7 +6,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Attendance extends APIResource {
+export class BaseAttendance extends APIResource {
+  static override readonly _key: readonly ['marketing', 'marketingEvents', 'attendance'] = Object.freeze([
+    'marketing',
+    'marketingEvents',
+    'attendance',
+  ] as const);
+
   /**
    * Records the participation of multiple HubSpot contacts in a Marketing Event
    * using their HubSpot contact IDs.
@@ -115,6 +121,7 @@ export class Attendance extends APIResource {
     );
   }
 }
+export class Attendance extends BaseAttendance {}
 
 export interface AttendanceCreateByEventIDAndContactIDParams {
   /**

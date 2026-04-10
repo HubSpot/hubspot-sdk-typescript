@@ -8,7 +8,13 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Batch extends APIResource {
+export class BaseBatch extends APIResource {
+  static override readonly _key: readonly ['crm', 'associations', 'batch'] = Object.freeze([
+    'crm',
+    'associations',
+    'batch',
+  ] as const);
+
   create(
     toObjectID: string,
     params: BatchCreateParams,
@@ -82,6 +88,7 @@ export class Batch extends APIResource {
     });
   }
 }
+export class Batch extends BaseBatch {}
 
 export interface BatchCreateParams {
   fromObjectType: string;

@@ -1,13 +1,31 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseBusinessUnitEntries } from 'hubspot-sdk/resources/business-units/business-unit-entries';
+import { BusinessUnits } from 'hubspot-sdk/resources/business-units/business-units';
+
 import HubSpot from 'hubspot-sdk';
+import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource businessUnitEntries', () => {
+const partialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseBusinessUnitEntries],
+});
+
+const parentPartialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BusinessUnits],
+});
+
+const runTests = (
+  client: PartialHubSpot<{ businessUnits: { businessUnitEntries: BaseBusinessUnitEntries } }>,
+) => {
   // Mock server tests are disabled
   test.skip('getByUserID', async () => {
     const responsePromise = client.businessUnits.businessUnitEntries.getByUserID('userId');
@@ -31,4 +49,7 @@ describe('resource businessUnitEntries', () => {
       ),
     ).rejects.toThrow(HubSpot.NotFoundError);
   });
-});
+};
+describe('resource businessUnitEntries', () => runTests(client));
+describe('resource businessUnitEntries (tree shakable, base)', () => runTests(partialClient));
+describe('resource businessUnitEntries (tree shakable, subresource)', () => runTests(parentPartialClient));

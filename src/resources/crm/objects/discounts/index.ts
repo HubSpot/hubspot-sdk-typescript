@@ -2,6 +2,7 @@
 
 export {
   Batch,
+  BaseBatch,
   type BatchCreateParams,
   type BatchUpdateParams,
   type BatchDeleteParams,
@@ -10,6 +11,7 @@ export {
 } from './batch';
 export {
   Discounts,
+  BaseDiscounts,
   type DiscountCreateParams,
   type DiscountUpdateParams,
   type DiscountListParams,

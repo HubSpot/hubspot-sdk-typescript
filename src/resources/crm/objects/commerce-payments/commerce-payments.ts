@@ -6,6 +6,7 @@ import * as ObjectsAPI from '../objects';
 import { SimplePublicObjectWithAssociationsPage } from '../objects';
 import * as BatchAPI from './batch';
 import {
+  BaseBatch,
   Batch,
   BatchCreateParams,
   BatchDeleteParams,
@@ -19,8 +20,12 @@ import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class CommercePayments extends APIResource {
-  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
+export class BaseCommercePayments extends APIResource {
+  static override readonly _key: readonly ['crm', 'objects', 'commercePayments'] = Object.freeze([
+    'crm',
+    'objects',
+    'commercePayments',
+  ] as const);
 
   /**
    * Create a commerce payment with the given properties and return a copy of the
@@ -106,6 +111,9 @@ export class CommercePayments extends APIResource {
   ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/objects/2026-03/commerce_payments/search', { body, ...options });
   }
+}
+export class CommercePayments extends BaseCommercePayments {
+  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
 }
 
 export interface CommercePaymentCreateParams {
@@ -222,6 +230,7 @@ export interface CommercePaymentSearchParams {
 }
 
 CommercePayments.Batch = Batch;
+CommercePayments.BaseBatch = BaseBatch;
 
 export declare namespace CommercePayments {
   export {
@@ -234,6 +243,7 @@ export declare namespace CommercePayments {
 
   export {
     Batch as Batch,
+    BaseBatch as BaseBatch,
     type BatchCreateParams as BatchCreateParams,
     type BatchUpdateParams as BatchUpdateParams,
     type BatchDeleteParams as BatchDeleteParams,

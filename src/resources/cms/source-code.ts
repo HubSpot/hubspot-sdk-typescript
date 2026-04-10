@@ -9,7 +9,12 @@ import { RequestOptions } from '../../internal/request-options';
 import { multipartFormRequestOptions } from '../../internal/uploads';
 import { path } from '../../internal/utils/path';
 
-export class SourceCode extends APIResource {
+export class BaseSourceCode extends APIResource {
+  static override readonly _key: readonly ['cms', 'sourceCode'] = Object.freeze([
+    'cms',
+    'sourceCode',
+  ] as const);
+
   /**
    * Creates a file at the specified path in the specified environment. Accepts
    * multipart/form-data content type. Throws an error if a file already exists at
@@ -121,6 +126,7 @@ export class SourceCode extends APIResource {
     );
   }
 }
+export class SourceCode extends BaseSourceCode {}
 
 export interface AssetFileMetadata {
   /**

@@ -5,6 +5,7 @@ import * as Shared from '../../../shared';
 import * as CmsAPI from '../../cms';
 import * as MultiLanguageAPI from './multi-language';
 import {
+  BaseMultiLanguage,
   MultiLanguage,
   MultiLanguageAttachToLangGroupParams,
   MultiLanguageCreateLanguageVariationParams,
@@ -17,8 +18,12 @@ import { Page, type PageParams, PagePromise } from '../../../../core/pagination'
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Settings extends APIResource {
-  multiLanguage: MultiLanguageAPI.MultiLanguage = new MultiLanguageAPI.MultiLanguage(this._client);
+export class BaseSettings extends APIResource {
+  static override readonly _key: readonly ['cms', 'blogs', 'settings'] = Object.freeze([
+    'cms',
+    'blogs',
+    'settings',
+  ] as const);
 
   /**
    * Get the list of blogs. Results can be limited and filtered by creation or
@@ -68,6 +73,9 @@ export class Settings extends APIResource {
       { query, ...options },
     );
   }
+}
+export class Settings extends BaseSettings {
+  multiLanguage: MultiLanguageAPI.MultiLanguage = new MultiLanguageAPI.MultiLanguage(this._client);
 }
 
 export type BlogsPage = Page<Blog>;
@@ -1092,6 +1100,7 @@ export interface SettingListRevisionsParams extends PageParams {
 }
 
 Settings.MultiLanguage = MultiLanguage;
+Settings.BaseMultiLanguage = BaseMultiLanguage;
 
 export declare namespace Settings {
   export {
@@ -1110,6 +1119,7 @@ export declare namespace Settings {
 
   export {
     MultiLanguage as MultiLanguage,
+    BaseMultiLanguage as BaseMultiLanguage,
     type MultiLanguageAttachToLangGroupParams as MultiLanguageAttachToLangGroupParams,
     type MultiLanguageCreateLanguageVariationParams as MultiLanguageCreateLanguageVariationParams,
     type MultiLanguageDetachFromLangGroupParams as MultiLanguageDetachFromLangGroupParams,

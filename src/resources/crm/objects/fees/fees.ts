@@ -6,6 +6,7 @@ import * as ObjectsAPI from '../objects';
 import { SimplePublicObjectWithAssociationsPage } from '../objects';
 import * as BatchAPI from './batch';
 import {
+  BaseBatch,
   Batch,
   BatchCreateParams,
   BatchDeleteParams,
@@ -19,8 +20,12 @@ import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Fees extends APIResource {
-  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
+export class BaseFees extends APIResource {
+  static override readonly _key: readonly ['crm', 'objects', 'fees'] = Object.freeze([
+    'crm',
+    'objects',
+    'fees',
+  ] as const);
 
   /**
    * Create a fee with the given properties and return a copy of the object,
@@ -101,6 +106,9 @@ export class Fees extends APIResource {
   ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/objects/2026-03/fees/search', { body, ...options });
   }
+}
+export class Fees extends BaseFees {
+  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
 }
 
 export interface FeeCreateParams {
@@ -217,6 +225,7 @@ export interface FeeSearchParams {
 }
 
 Fees.Batch = Batch;
+Fees.BaseBatch = BaseBatch;
 
 export declare namespace Fees {
   export {
@@ -229,6 +238,7 @@ export declare namespace Fees {
 
   export {
     Batch as Batch,
+    BaseBatch as BaseBatch,
     type BatchCreateParams as BatchCreateParams,
     type BatchUpdateParams as BatchUpdateParams,
     type BatchDeleteParams as BatchDeleteParams,

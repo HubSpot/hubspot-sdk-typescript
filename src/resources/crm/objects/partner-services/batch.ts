@@ -5,7 +5,14 @@ import * as ObjectsAPI from '../objects';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 
-export class Batch extends APIResource {
+export class BaseBatch extends APIResource {
+  static override readonly _key: readonly ['crm', 'objects', 'partnerServices', 'batch'] = Object.freeze([
+    'crm',
+    'objects',
+    'partnerServices',
+    'batch',
+  ] as const);
+
   /**
    * Update multiple partner services using their internal IDs or unique property
    * values. This operation allows for batch processing of updates, ensuring
@@ -34,6 +41,7 @@ export class Batch extends APIResource {
     });
   }
 }
+export class Batch extends BaseBatch {}
 
 export interface BatchUpdateParams {
   inputs: Array<ObjectsAPI.SimplePublicObjectBatchInput>;

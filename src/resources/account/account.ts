@@ -8,6 +8,7 @@ import {
   ActivityListAuditLogsParams,
   ActivityListLoginActivitiesParams,
   ActivityListSecurityActivitiesParams,
+  BaseActivity,
   CollectionResponseHydratedCriticalActionForwardPaging,
   CollectionResponsePublicAPIUserActionEventForwardPaging,
   CollectionResponsePublicLoginAuditForwardPaging,
@@ -21,8 +22,8 @@ import {
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 
-export class Account extends APIResource {
-  activity: ActivityAPI.Activity = new ActivityAPI.Activity(this._client);
+export class BaseAccount extends APIResource {
+  static override readonly _key: readonly ['account'] = Object.freeze(['account'] as const);
 
   /**
    * Retrieve account details such as the account type, time zone, currencies, and
@@ -39,6 +40,9 @@ export class Account extends APIResource {
   getDailyPrivateAppsUsage(options?: RequestOptions): APIPromise<CollectionResponseAPIUsageNoPaging> {
     return this._client.get('/account-info/2026-03/api-usage/daily/private-apps', options);
   }
+}
+export class Account extends BaseAccount {
+  activity: ActivityAPI.Activity = new ActivityAPI.Activity(this._client);
 }
 
 export interface APIUsage {
@@ -123,6 +127,7 @@ export interface PortalInformationResponse {
 }
 
 Account.Activity = Activity;
+Account.BaseActivity = BaseActivity;
 
 export declare namespace Account {
   export {
@@ -133,6 +138,7 @@ export declare namespace Account {
 
   export {
     Activity as Activity,
+    BaseActivity as BaseActivity,
     type ActingUser as ActingUser,
     type CollectionResponseHydratedCriticalActionForwardPaging as CollectionResponseHydratedCriticalActionForwardPaging,
     type CollectionResponsePublicAPIUserActionEventForwardPaging as CollectionResponsePublicAPIUserActionEventForwardPaging,

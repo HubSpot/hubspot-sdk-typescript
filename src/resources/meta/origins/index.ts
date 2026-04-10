@@ -2,8 +2,9 @@
 
 export {
   IPRanges,
+  BaseIPRanges,
   type IPRangeListSimpleResponse,
   type IPRangeListParams,
   type IPRangeListSimpleParams,
 } from './ip-ranges';
-export { Origins, type CollectionResponseIPRangeNoPaging, type IPRange } from './origins';
+export { Origins, BaseOrigins, type CollectionResponseIPRangeNoPaging, type IPRange } from './origins';

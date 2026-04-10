@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Auth } from './auth';
+export { Auth, BaseAuth } from './auth';
 export {
   OAuth,
+  BaseOAuth,
   type PublicAccessTokenInfoResponse,
   type PublicRefreshTokenInfoResponse,
   type SignedAccessToken,

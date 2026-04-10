@@ -7,7 +7,13 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Budget extends APIResource {
+export class BaseBudget extends APIResource {
+  static override readonly _key: readonly ['marketing', 'campaigns', 'budget'] = Object.freeze([
+    'marketing',
+    'campaigns',
+    'budget',
+  ] as const);
+
   /**
    * Add a new budget item to the campaign
    */
@@ -68,6 +74,7 @@ export class Budget extends APIResource {
     return this._client.get(path`/marketing/campaigns/2026-03/${campaignGuid}/budget/totals`, options);
   }
 }
+export class Budget extends BaseBudget {}
 
 export interface BudgetCreateParams {
   /**

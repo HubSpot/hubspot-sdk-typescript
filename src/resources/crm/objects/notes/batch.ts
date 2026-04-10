@@ -6,7 +6,14 @@ import { APIPromise } from '../../../../core/api-promise';
 import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 
-export class Batch extends APIResource {
+export class BaseBatch extends APIResource {
+  static override readonly _key: readonly ['crm', 'objects', 'notes', 'batch'] = Object.freeze([
+    'crm',
+    'objects',
+    'notes',
+    'batch',
+  ] as const);
+
   /**
    * Create multiple notes in a single request by providing the necessary properties
    * for each note. This operation returns the created notes with their unique
@@ -72,6 +79,7 @@ export class Batch extends APIResource {
     return this._client.post('/crm/objects/2026-03/notes/batch/upsert', { body, ...options });
   }
 }
+export class Batch extends BaseBatch {}
 
 export interface BatchCreateParams {
   inputs: Array<ObjectsAPI.SimplePublicObjectBatchInputForCreate>;

@@ -3,6 +3,7 @@
 import { APIResource } from '../../../../core/resource';
 import * as TranscriptsAPI from './transcripts';
 import {
+  BaseTranscripts,
   Speaker,
   TranscriptCreateInboundCallParams,
   TranscriptCreateParams,
@@ -18,8 +19,12 @@ import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Calling extends APIResource {
-  transcripts: TranscriptsAPI.Transcripts = new TranscriptsAPI.Transcripts(this._client);
+export class BaseCalling extends APIResource {
+  static override readonly _key: readonly ['crm', 'extensions', 'calling'] = Object.freeze([
+    'crm',
+    'extensions',
+    'calling',
+  ] as const);
 
   /**
    * Establish new channel connection settings for the specified app.
@@ -168,6 +173,9 @@ export class Calling extends APIResource {
   ): APIPromise<SettingsResponse> {
     return this._client.patch(path`/crm/extensions/calling/2026-03/${appID}/settings`, { body, ...options });
   }
+}
+export class Calling extends BaseCalling {
+  transcripts: TranscriptsAPI.Transcripts = new TranscriptsAPI.Transcripts(this._client);
 }
 
 export interface ChannelConnectionSettingsPatchRequest {
@@ -740,6 +748,7 @@ export interface CallingUpdateSettingsParams {
 }
 
 Calling.Transcripts = Transcripts;
+Calling.BaseTranscripts = BaseTranscripts;
 
 export declare namespace Calling {
   export {
@@ -771,6 +780,7 @@ export declare namespace Calling {
 
   export {
     Transcripts as Transcripts,
+    BaseTranscripts as BaseTranscripts,
     type Speaker as Speaker,
     type TranscriptCreateRequest as TranscriptCreateRequest,
     type TranscriptCreateResponse as TranscriptCreateResponse,

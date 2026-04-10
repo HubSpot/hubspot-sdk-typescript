@@ -1,13 +1,31 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Objects } from 'hubspot-sdk/resources/crm/objects/objects';
+import { BaseCommercePayments } from 'hubspot-sdk/resources/crm/objects/commerce-payments/commerce-payments';
+
 import HubSpot from 'hubspot-sdk';
+import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource commercePayments', () => {
+const partialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseCommercePayments],
+});
+
+const parentPartialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Objects],
+});
+
+const runTests = (
+  client: PartialHubSpot<{ crm: { objects: { commercePayments: BaseCommercePayments } } }>,
+) => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.crm.objects.commercePayments.create({
@@ -176,4 +194,7 @@ describe('resource commercePayments', () => {
       query: 'query',
     });
   });
-});
+};
+describe('resource commercePayments', () => runTests(client));
+describe('resource commercePayments (tree shakable, base)', () => runTests(partialClient));
+describe('resource commercePayments (tree shakable, subresource)', () => runTests(parentPartialClient));

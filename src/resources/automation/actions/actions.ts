@@ -3,9 +3,10 @@
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
 import * as CallbacksAPI from './callbacks';
-import { CallbackCompleteBatchParams, CallbackCompleteParams, Callbacks } from './callbacks';
+import { BaseCallbacks, CallbackCompleteBatchParams, CallbackCompleteParams, Callbacks } from './callbacks';
 import * as DefinitionsAPI from './definitions';
 import {
+  BaseDefinitions,
   DefinitionCreateParams,
   DefinitionCreateRequiresObjectParams,
   DefinitionDeleteParams,
@@ -17,6 +18,7 @@ import {
 } from './definitions';
 import * as FunctionsAPI from './functions';
 import {
+  BaseFunctions,
   FunctionCreateOrReplaceByFunctionTypeParams,
   FunctionCreateOrReplaceParams,
   FunctionDeleteByFunctionTypeParams,
@@ -27,10 +29,16 @@ import {
   Functions,
 } from './functions';
 import * as RevisionsAPI from './revisions';
-import { RevisionGetParams, RevisionListParams, Revisions } from './revisions';
+import { BaseRevisions, RevisionGetParams, RevisionListParams, Revisions } from './revisions';
 import { Page } from '../../../core/pagination';
 
-export class Actions extends APIResource {
+export class BaseActions extends APIResource {
+  static override readonly _key: readonly ['automation', 'actions'] = Object.freeze([
+    'automation',
+    'actions',
+  ] as const);
+}
+export class Actions extends BaseActions {
   callbacks: CallbacksAPI.Callbacks = new CallbacksAPI.Callbacks(this._client);
   definitions: DefinitionsAPI.Definitions = new DefinitionsAPI.Definitions(this._client);
   functions: FunctionsAPI.Functions = new FunctionsAPI.Functions(this._client);
@@ -1037,9 +1045,13 @@ export interface WorkflowsRequestContext {
 }
 
 Actions.Callbacks = Callbacks;
+Actions.BaseCallbacks = BaseCallbacks;
 Actions.Definitions = Definitions;
+Actions.BaseDefinitions = BaseDefinitions;
 Actions.Functions = Functions;
+Actions.BaseFunctions = BaseFunctions;
 Actions.Revisions = Revisions;
+Actions.BaseRevisions = BaseRevisions;
 
 export declare namespace Actions {
   export {
@@ -1087,12 +1099,14 @@ export declare namespace Actions {
 
   export {
     Callbacks as Callbacks,
+    BaseCallbacks as BaseCallbacks,
     type CallbackCompleteParams as CallbackCompleteParams,
     type CallbackCompleteBatchParams as CallbackCompleteBatchParams,
   };
 
   export {
     Definitions as Definitions,
+    BaseDefinitions as BaseDefinitions,
     type DefinitionCreateParams as DefinitionCreateParams,
     type DefinitionUpdateParams as DefinitionUpdateParams,
     type DefinitionListParams as DefinitionListParams,
@@ -1104,6 +1118,7 @@ export declare namespace Actions {
 
   export {
     Functions as Functions,
+    BaseFunctions as BaseFunctions,
     type FunctionListParams as FunctionListParams,
     type FunctionDeleteParams as FunctionDeleteParams,
     type FunctionCreateOrReplaceParams as FunctionCreateOrReplaceParams,
@@ -1115,6 +1130,7 @@ export declare namespace Actions {
 
   export {
     Revisions as Revisions,
+    BaseRevisions as BaseRevisions,
     type RevisionListParams as RevisionListParams,
     type RevisionGetParams as RevisionGetParams,
   };

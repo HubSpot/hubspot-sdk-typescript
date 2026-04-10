@@ -8,7 +8,13 @@ import { Page, type PageParams, PagePromise } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Basic extends APIResource {
+export class BaseBasic extends APIResource {
+  static override readonly _key: readonly ['scheduler', 'meetings', 'basic'] = Object.freeze([
+    'scheduler',
+    'meetings',
+    'basic',
+  ] as const);
+
   /**
    * Get a paged list meeting scheduling pages
    */
@@ -51,6 +57,7 @@ export class Basic extends APIResource {
     });
   }
 }
+export class Basic extends BaseBasic {}
 
 export interface BasicListParams extends PageParams {
   name?: string;

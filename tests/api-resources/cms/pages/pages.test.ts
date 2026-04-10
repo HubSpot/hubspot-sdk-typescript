@@ -1,13 +1,29 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Cms } from 'hubspot-sdk/resources/cms/cms';
+import { BasePages } from 'hubspot-sdk/resources/cms/pages/pages';
+
 import HubSpot from 'hubspot-sdk';
+import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource pages', () => {
+const partialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BasePages],
+});
+
+const parentPartialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Cms],
+});
+
+const runTests = (client: PartialHubSpot<{ cms: { pages: BasePages } }>) => {
   // Mock server tests are disabled
   test.skip('getLandingPageFolders', async () => {
     const responsePromise = client.cms.pages.getLandingPageFolders();
@@ -391,4 +407,7 @@ describe('resource pages', () => {
   test.skip('restoreSitePageRevisionToDraft: required and optional params', async () => {
     const response = await client.cms.pages.restoreSitePageRevisionToDraft(0, { objectId: 'objectId' });
   });
-});
+};
+describe('resource pages', () => runTests(client));
+describe('resource pages (tree shakable, base)', () => runTests(partialClient));
+describe('resource pages (tree shakable, subresource)', () => runTests(parentPartialClient));

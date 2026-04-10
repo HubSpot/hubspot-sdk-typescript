@@ -9,7 +9,13 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Folders extends APIResource {
+export class BaseFolders extends APIResource {
+  static override readonly _key: readonly ['cms', 'pages', 'folders'] = Object.freeze([
+    'cms',
+    'pages',
+    'folders',
+  ] as const);
+
   /**
    * Create a new folder for landing pages.
    */
@@ -146,6 +152,7 @@ export class Folders extends APIResource {
     );
   }
 }
+export class Folders extends BaseFolders {}
 
 export interface FolderCreateParams {
   /**

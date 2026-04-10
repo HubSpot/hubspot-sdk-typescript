@@ -7,7 +7,9 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Exports extends APIResource {
+export class BaseExports extends APIResource {
+  static override readonly _key: readonly ['crm', 'exports'] = Object.freeze(['crm', 'exports'] as const);
+
   /**
    * Begins exporting CRM data for the portal as specified in the request body
    */
@@ -31,6 +33,7 @@ export class Exports extends APIResource {
     return this._client.get(path`/crm/exports/2026-03/export/async/tasks/${taskID}/status`, options);
   }
 }
+export class Exports extends BaseExports {}
 
 export interface ActionResponseWithSingleResultUri {
   /**

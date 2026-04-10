@@ -7,7 +7,14 @@ import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Transcripts extends APIResource {
+export class BaseTranscripts extends APIResource {
+  static override readonly _key: readonly ['crm', 'extensions', 'calling', 'transcripts'] = Object.freeze([
+    'crm',
+    'extensions',
+    'calling',
+    'transcripts',
+  ] as const);
+
   create(body: TranscriptCreateParams, options?: RequestOptions): APIPromise<TranscriptCreateResponse> {
     return this._client.post('/crm/extensions/calling/2026-03/transcripts', { body, ...options });
   }
@@ -30,6 +37,7 @@ export class Transcripts extends APIResource {
     return this._client.get(path`/crm/extensions/calling/2026-03/transcripts/${transcriptID}`, options);
   }
 }
+export class Transcripts extends BaseTranscripts {}
 
 export interface Speaker {
   id: string;

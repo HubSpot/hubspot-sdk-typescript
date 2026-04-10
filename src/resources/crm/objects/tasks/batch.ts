@@ -6,7 +6,14 @@ import { APIPromise } from '../../../../core/api-promise';
 import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 
-export class Batch extends APIResource {
+export class BaseBatch extends APIResource {
+  static override readonly _key: readonly ['crm', 'objects', 'tasks', 'batch'] = Object.freeze([
+    'crm',
+    'objects',
+    'tasks',
+    'batch',
+  ] as const);
+
   /**
    * Create multiple tasks in a single request by providing a batch of task
    * properties and associations. This endpoint allows for efficient task creation by
@@ -71,6 +78,7 @@ export class Batch extends APIResource {
     return this._client.post('/crm/objects/2026-03/tasks/batch/upsert', { body, ...options });
   }
 }
+export class Batch extends BaseBatch {}
 
 export interface BatchCreateParams {
   inputs: Array<ObjectsAPI.SimplePublicObjectBatchInputForCreate>;

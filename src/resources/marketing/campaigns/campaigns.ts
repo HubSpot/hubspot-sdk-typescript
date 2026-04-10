@@ -3,11 +3,19 @@
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
 import * as AssetsAPI from './assets';
-import { AssetDeleteParams, AssetListParams, AssetUpdateParams, Assets } from './assets';
+import { AssetDeleteParams, AssetListParams, AssetUpdateParams, Assets, BaseAssets } from './assets';
 import * as BatchAPI from './batch';
-import { Batch, BatchCreateParams, BatchDeleteParams, BatchGetParams, BatchUpdateParams } from './batch';
+import {
+  BaseBatch,
+  Batch,
+  BatchCreateParams,
+  BatchDeleteParams,
+  BatchGetParams,
+  BatchUpdateParams,
+} from './batch';
 import * as BudgetAPI from './budget';
 import {
+  BaseBudget,
   Budget,
   BudgetCreateParams,
   BudgetDeleteParams,
@@ -16,25 +24,32 @@ import {
 } from './budget';
 import * as MetricsAPI from './metrics';
 import {
+  BaseMetrics,
   MetricGetAttributionMetricsParams,
   MetricGetRevenueAttributionParams,
   MetricListContactIDsByTypeParams,
   Metrics,
 } from './metrics';
 import * as SpendAPI from './spend';
-import { Spend, SpendCreateParams, SpendDeleteParams, SpendGetParams, SpendUpdateParams } from './spend';
+import {
+  BaseSpend,
+  Spend,
+  SpendCreateParams,
+  SpendDeleteParams,
+  SpendGetParams,
+  SpendUpdateParams,
+} from './spend';
 import { APIPromise } from '../../../core/api-promise';
 import { Page, type PageParams, PagePromise } from '../../../core/pagination';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Campaigns extends APIResource {
-  assets: AssetsAPI.Assets = new AssetsAPI.Assets(this._client);
-  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
-  budget: BudgetAPI.Budget = new BudgetAPI.Budget(this._client);
-  metrics: MetricsAPI.Metrics = new MetricsAPI.Metrics(this._client);
-  spend: SpendAPI.Spend = new SpendAPI.Spend(this._client);
+export class BaseCampaigns extends APIResource {
+  static override readonly _key: readonly ['marketing', 'campaigns'] = Object.freeze([
+    'marketing',
+    'campaigns',
+  ] as const);
 
   /**
    * Create a campaign with the specified properties and receive a copy of the
@@ -100,6 +115,13 @@ export class Campaigns extends APIResource {
   ): APIPromise<PublicCampaignWithAssets> {
     return this._client.get(path`/marketing/campaigns/2026-03/${campaignGuid}`, { query, ...options });
   }
+}
+export class Campaigns extends BaseCampaigns {
+  assets: AssetsAPI.Assets = new AssetsAPI.Assets(this._client);
+  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
+  budget: BudgetAPI.Budget = new BudgetAPI.Budget(this._client);
+  metrics: MetricsAPI.Metrics = new MetricsAPI.Metrics(this._client);
+  spend: SpendAPI.Spend = new SpendAPI.Spend(this._client);
 }
 
 export type PublicCampaignsPage = Page<PublicCampaign>;
@@ -1053,10 +1075,15 @@ export interface CampaignGetParams {
 }
 
 Campaigns.Assets = Assets;
+Campaigns.BaseAssets = BaseAssets;
 Campaigns.Batch = Batch;
+Campaigns.BaseBatch = BaseBatch;
 Campaigns.Budget = Budget;
+Campaigns.BaseBudget = BaseBudget;
 Campaigns.Metrics = Metrics;
+Campaigns.BaseMetrics = BaseMetrics;
 Campaigns.Spend = Spend;
+Campaigns.BaseSpend = BaseSpend;
 
 export declare namespace Campaigns {
   export {
@@ -1097,6 +1124,7 @@ export declare namespace Campaigns {
 
   export {
     Assets as Assets,
+    BaseAssets as BaseAssets,
     type AssetUpdateParams as AssetUpdateParams,
     type AssetListParams as AssetListParams,
     type AssetDeleteParams as AssetDeleteParams,
@@ -1104,6 +1132,7 @@ export declare namespace Campaigns {
 
   export {
     Batch as Batch,
+    BaseBatch as BaseBatch,
     type BatchCreateParams as BatchCreateParams,
     type BatchUpdateParams as BatchUpdateParams,
     type BatchDeleteParams as BatchDeleteParams,
@@ -1112,6 +1141,7 @@ export declare namespace Campaigns {
 
   export {
     Budget as Budget,
+    BaseBudget as BaseBudget,
     type BudgetCreateParams as BudgetCreateParams,
     type BudgetUpdateParams as BudgetUpdateParams,
     type BudgetDeleteParams as BudgetDeleteParams,
@@ -1120,6 +1150,7 @@ export declare namespace Campaigns {
 
   export {
     Metrics as Metrics,
+    BaseMetrics as BaseMetrics,
     type MetricGetAttributionMetricsParams as MetricGetAttributionMetricsParams,
     type MetricGetRevenueAttributionParams as MetricGetRevenueAttributionParams,
     type MetricListContactIDsByTypeParams as MetricListContactIDsByTypeParams,
@@ -1127,6 +1158,7 @@ export declare namespace Campaigns {
 
   export {
     Spend as Spend,
+    BaseSpend as BaseSpend,
     type SpendCreateParams as SpendCreateParams,
     type SpendUpdateParams as SpendUpdateParams,
     type SpendDeleteParams as SpendDeleteParams,

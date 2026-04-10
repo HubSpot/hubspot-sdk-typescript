@@ -11,7 +11,13 @@ import { RequestOptions } from '../../../internal/request-options';
 import { multipartFormRequestOptions } from '../../../internal/uploads';
 import { path } from '../../../internal/utils/path';
 
-export class Tables extends APIResource {
+export class BaseTables extends APIResource {
+  static override readonly _key: readonly ['cms', 'hubdb', 'tables'] = Object.freeze([
+    'cms',
+    'hubdb',
+    'tables',
+  ] as const);
+
   /**
    * Creates a new draft HubDB table given a JSON schema. The table name and label
    * should be unique for each account.
@@ -247,6 +253,7 @@ export class Tables extends APIResource {
     });
   }
 }
+export class Tables extends BaseTables {}
 
 export interface TableCreateParams {
   /**

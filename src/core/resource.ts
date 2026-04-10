@@ -1,11 +1,16 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import type { HubSpot } from '../client';
+import { BaseHubSpot } from '../client';
 
 export abstract class APIResource {
-  protected _client: HubSpot;
+  /**
+   * The key path from the client. For example, a resource accessible as `client.resource.subresource` would
+   * have a property `static override readonly _key = Object.freeze(['resource', 'subresource'] as const);`.
+   */
+  static readonly _key: readonly string[] = [];
+  protected _client: BaseHubSpot;
 
-  constructor(client: HubSpot) {
+  constructor(client: BaseHubSpot) {
     this._client = client;
   }
 }

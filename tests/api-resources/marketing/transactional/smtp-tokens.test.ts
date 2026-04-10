@@ -1,13 +1,31 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseSmtpTokens } from 'hubspot-sdk/resources/marketing/transactional/smtp-tokens';
+import { Transactional } from 'hubspot-sdk/resources/marketing/transactional/transactional';
+
 import HubSpot from 'hubspot-sdk';
+import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource smtpTokens', () => {
+const partialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseSmtpTokens],
+});
+
+const parentPartialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Transactional],
+});
+
+const runTests = (
+  client: PartialHubSpot<{ marketing: { transactional: { smtpTokens: BaseSmtpTokens } } }>,
+) => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.marketing.transactional.smtpTokens.create({
@@ -94,4 +112,7 @@ describe('resource smtpTokens', () => {
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
   });
-});
+};
+describe('resource smtpTokens', () => runTests(client));
+describe('resource smtpTokens (tree shakable, base)', () => runTests(partialClient));
+describe('resource smtpTokens (tree shakable, subresource)', () => runTests(parentPartialClient));

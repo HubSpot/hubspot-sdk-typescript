@@ -3,10 +3,11 @@
 import { APIResource } from '../../core/resource';
 import * as Shared from '../shared';
 import * as AppUninstallsAPI from './app-uninstalls';
-import { AppUninstalls } from './app-uninstalls';
+import { AppUninstalls, BaseAppUninstalls } from './app-uninstalls';
 import * as ExportsAPI from './exports';
 import {
   ActionResponseWithSingleResultUri,
+  BaseExports,
   ExportCreateAsyncParams,
   Exports,
   PublicCrmSearchRequest,
@@ -17,6 +18,7 @@ import {
 } from './exports';
 import * as ImportsAPI from './imports';
 import {
+  BaseImports,
   CollectionResponsePublicImportErrorForwardPaging,
   CollectionResponsePublicImportResponseForwardPaging,
   ImportCreateParams,
@@ -37,6 +39,7 @@ import {
   AssociationLabelLimitResponse,
   AssociationRecordLimitResponse,
   AtLimitRecordSample,
+  BaseLimits,
   CalculatedPropertyLimitResponse,
   CollectionResponseAssociationLabelLimitResponseNoPaging,
   CollectionResponseObjectTypeNearOrAtAssociationLimitNoPaging,
@@ -58,6 +61,7 @@ import * as ListsAPI from './lists';
 import {
   APICollectionResponseJoinTimeAndRecordID,
   APICollectionResponseRecordListMembership,
+  BaseLists,
   BatchInputRecordIDInput,
   BatchResponseRecordIDWithMemberships,
   BatchResponseRecordIDWithMembershipsWithErrors,
@@ -191,6 +195,7 @@ import {
 } from './lists';
 import * as OwnersAPI from './owners';
 import {
+  BaseOwners,
   CollectionResponsePublicOwnerForwardPaging,
   OwnerGetParams,
   OwnerListParams,
@@ -201,6 +206,7 @@ import {
 } from './owners';
 import * as PipelinesAPI from './pipelines';
 import {
+  BasePipelines,
   CollectionResponsePipelineNoPaging,
   CollectionResponsePipelineStageNoPaging,
   CollectionResponsePublicAuditInfoNoPaging,
@@ -230,6 +236,7 @@ import {
 } from './pipelines';
 import * as PropertiesValidationsAPI from './properties-validations';
 import {
+  BasePropertiesValidations,
   CollectionResponsePublicPropertyValidationRuleMapNoPaging,
   CollectionResponsePublicPropertyValidationRuleNoPaging,
   PropertiesValidationGetByObjectTypeIDAndPropertyNameParams,
@@ -243,6 +250,7 @@ import {
 import * as AssociationsSchemaAPI from './associations-schema/associations-schema';
 import {
   AssociationsSchema,
+  BaseAssociationsSchema,
   BatchInputPublicAssociationDefinitionConfigurationCreateRequest,
   BatchInputPublicAssociationDefinitionConfigurationUpdateRequest,
   BatchInputPublicAssociationSpec,
@@ -267,6 +275,7 @@ import {
   AssociationSearchParams,
   AssociationUpdateAssociationLabelsParams,
   Associations,
+  BaseAssociations,
   BatchInputPublicAssociationMultiArchive,
   BatchInputPublicAssociationMultiPost,
   BatchInputPublicDefaultAssociationMultiPost,
@@ -285,6 +294,7 @@ import {
 } from './associations/associations';
 import * as DealSplitsAPI from './deal-splits/deal-splits';
 import {
+  BaseDealSplits,
   BatchResponseDealToDealSplits,
   BatchResponseDealToDealSplitsWithErrors,
   DealSplits,
@@ -294,9 +304,10 @@ import {
   PublicDealSplitsCreateRequest,
 } from './deal-splits/deal-splits';
 import * as ExtensionsAPI from './extensions/extensions';
-import { Extensions } from './extensions/extensions';
+import { BaseExtensions, Extensions } from './extensions/extensions';
 import * as FeatureFlagsAPI from './feature-flags/feature-flags';
 import {
+  BaseFeatureFlags,
   BatchPortalEntry,
   FeatureFlagDeleteParams,
   FeatureFlagDeletePortalStateParams,
@@ -316,9 +327,10 @@ import {
   PortalFlagStateResponse,
 } from './feature-flags/feature-flags';
 import * as ObjectLibraryAPI from './object-library/object-library';
-import { ObjectLibrary } from './object-library/object-library';
+import { BaseObjectLibrary, ObjectLibrary } from './object-library/object-library';
 import * as ObjectSchemasAPI from './object-schemas/object-schemas';
 import {
+  BaseObjectSchemas,
   CollectionResponseObjectSchemaNoPaging,
   ObjectSchema,
   ObjectSchemaBatchReadRequest,
@@ -336,6 +348,7 @@ import {
 import * as ObjectsAPI from './objects/objects';
 import {
   AssociatedID,
+  BaseObjects,
   BatchInputSimplePublicObjectBatchInput,
   BatchInputSimplePublicObjectBatchInputForCreate,
   BatchInputSimplePublicObjectBatchInputUpsert,
@@ -361,6 +374,7 @@ import {
 } from './objects/objects';
 import * as PropertiesAPI from './properties/properties';
 import {
+  BaseProperties,
   BatchInputPropertyCreate,
   BatchResponseProperty,
   BatchResponsePropertyWithErrors,
@@ -378,6 +392,7 @@ import * as TimelineAPI from './timeline/timeline';
 import {
   AppEventOccurrence,
   AppEventResolutionResponse,
+  BaseTimeline,
   BatchInputAppEventOccurrence,
   BatchResponseAppEventOccurrence,
   DeveloperQualifiedSymbol,
@@ -389,7 +404,10 @@ import {
 } from './timeline/timeline';
 import { Page } from '../../core/pagination';
 
-export class Crm extends APIResource {
+export class BaseCrm extends APIResource {
+  static override readonly _key: readonly ['crm'] = Object.freeze(['crm'] as const);
+}
+export class Crm extends BaseCrm {
   appUninstalls: AppUninstallsAPI.AppUninstalls = new AppUninstallsAPI.AppUninstalls(this._client);
   associations: AssociationsAPI.Associations = new AssociationsAPI.Associations(this._client);
   associationsSchema: AssociationsSchemaAPI.AssociationsSchema = new AssociationsSchemaAPI.AssociationsSchema(
@@ -886,23 +904,41 @@ export interface ValueWithTimestamp {
 }
 
 Crm.AppUninstalls = AppUninstalls;
+Crm.BaseAppUninstalls = BaseAppUninstalls;
 Crm.Associations = Associations;
+Crm.BaseAssociations = BaseAssociations;
 Crm.AssociationsSchema = AssociationsSchema;
+Crm.BaseAssociationsSchema = BaseAssociationsSchema;
 Crm.DealSplits = DealSplits;
+Crm.BaseDealSplits = BaseDealSplits;
 Crm.Exports = Exports;
+Crm.BaseExports = BaseExports;
 Crm.Extensions = Extensions;
+Crm.BaseExtensions = BaseExtensions;
 Crm.FeatureFlags = FeatureFlags;
+Crm.BaseFeatureFlags = BaseFeatureFlags;
 Crm.Imports = Imports;
+Crm.BaseImports = BaseImports;
 Crm.Limits = Limits;
+Crm.BaseLimits = BaseLimits;
 Crm.Lists = Lists;
+Crm.BaseLists = BaseLists;
 Crm.ObjectLibrary = ObjectLibrary;
+Crm.BaseObjectLibrary = BaseObjectLibrary;
 Crm.ObjectSchemas = ObjectSchemas;
+Crm.BaseObjectSchemas = BaseObjectSchemas;
 Crm.Objects = Objects;
+Crm.BaseObjects = BaseObjects;
 Crm.Owners = Owners;
+Crm.BaseOwners = BaseOwners;
 Crm.Pipelines = Pipelines;
+Crm.BasePipelines = BasePipelines;
 Crm.Properties = Properties;
+Crm.BaseProperties = BaseProperties;
 Crm.PropertiesValidations = PropertiesValidations;
+Crm.BasePropertiesValidations = BasePropertiesValidations;
 Crm.Timeline = Timeline;
+Crm.BaseTimeline = BaseTimeline;
 
 export declare namespace Crm {
   export {
@@ -921,10 +957,11 @@ export declare namespace Crm {
     type ValueWithTimestamp as ValueWithTimestamp,
   };
 
-  export { AppUninstalls as AppUninstalls };
+  export { AppUninstalls as AppUninstalls, BaseAppUninstalls as BaseAppUninstalls };
 
   export {
     Associations as Associations,
+    BaseAssociations as BaseAssociations,
     type BatchInputPublicAssociationMultiArchive as BatchInputPublicAssociationMultiArchive,
     type BatchInputPublicAssociationMultiPost as BatchInputPublicAssociationMultiPost,
     type BatchInputPublicDefaultAssociationMultiPost as BatchInputPublicDefaultAssociationMultiPost,
@@ -948,6 +985,7 @@ export declare namespace Crm {
 
   export {
     AssociationsSchema as AssociationsSchema,
+    BaseAssociationsSchema as BaseAssociationsSchema,
     type BatchInputPublicAssociationDefinitionConfigurationCreateRequest as BatchInputPublicAssociationDefinitionConfigurationCreateRequest,
     type BatchInputPublicAssociationDefinitionConfigurationUpdateRequest as BatchInputPublicAssociationDefinitionConfigurationUpdateRequest,
     type BatchInputPublicAssociationSpec as BatchInputPublicAssociationSpec,
@@ -968,6 +1006,7 @@ export declare namespace Crm {
 
   export {
     DealSplits as DealSplits,
+    BaseDealSplits as BaseDealSplits,
     type BatchResponseDealToDealSplits as BatchResponseDealToDealSplits,
     type BatchResponseDealToDealSplitsWithErrors as BatchResponseDealToDealSplitsWithErrors,
     type DealToDealSplits as DealToDealSplits,
@@ -978,6 +1017,7 @@ export declare namespace Crm {
 
   export {
     Exports as Exports,
+    BaseExports as BaseExports,
     type ActionResponseWithSingleResultUri as ActionResponseWithSingleResultUri,
     type PublicCrmSearchRequest as PublicCrmSearchRequest,
     type PublicExportListRequest as PublicExportListRequest,
@@ -987,10 +1027,11 @@ export declare namespace Crm {
     type ExportCreateAsyncParams as ExportCreateAsyncParams,
   };
 
-  export { Extensions as Extensions };
+  export { Extensions as Extensions, BaseExtensions as BaseExtensions };
 
   export {
     FeatureFlags as FeatureFlags,
+    BaseFeatureFlags as BaseFeatureFlags,
     type BatchPortalEntry as BatchPortalEntry,
     type FlagPutRequest as FlagPutRequest,
     type FlagResponse as FlagResponse,
@@ -1011,6 +1052,7 @@ export declare namespace Crm {
 
   export {
     Imports as Imports,
+    BaseImports as BaseImports,
     type CollectionResponsePublicImportErrorForwardPaging as CollectionResponsePublicImportErrorForwardPaging,
     type CollectionResponsePublicImportResponseForwardPaging as CollectionResponsePublicImportResponseForwardPaging,
     type ImportRowCore as ImportRowCore,
@@ -1028,6 +1070,7 @@ export declare namespace Crm {
 
   export {
     Limits as Limits,
+    BaseLimits as BaseLimits,
     type AssociationLabelLimitResponse as AssociationLabelLimitResponse,
     type AssociationRecordLimitResponse as AssociationRecordLimitResponse,
     type AtLimitRecordSample as AtLimitRecordSample,
@@ -1050,6 +1093,7 @@ export declare namespace Crm {
 
   export {
     Lists as Lists,
+    BaseLists as BaseLists,
     type APICollectionResponseJoinTimeAndRecordID as APICollectionResponseJoinTimeAndRecordID,
     type APICollectionResponseRecordListMembership as APICollectionResponseRecordListMembership,
     type BatchInputRecordIDInput as BatchInputRecordIDInput,
@@ -1183,10 +1227,11 @@ export declare namespace Crm {
     type ListUpdateScheduleConversionParams as ListUpdateScheduleConversionParams,
   };
 
-  export { ObjectLibrary as ObjectLibrary };
+  export { ObjectLibrary as ObjectLibrary, BaseObjectLibrary as BaseObjectLibrary };
 
   export {
     ObjectSchemas as ObjectSchemas,
+    BaseObjectSchemas as BaseObjectSchemas,
     type CollectionResponseObjectSchemaNoPaging as CollectionResponseObjectSchemaNoPaging,
     type ObjectSchema as ObjectSchema,
     type ObjectSchemaBatchReadRequest as ObjectSchemaBatchReadRequest,
@@ -1203,6 +1248,7 @@ export declare namespace Crm {
 
   export {
     Objects as Objects,
+    BaseObjects as BaseObjects,
     type AssociatedID as AssociatedID,
     type BatchInputSimplePublicObjectBatchInput as BatchInputSimplePublicObjectBatchInput,
     type BatchInputSimplePublicObjectBatchInputForCreate as BatchInputSimplePublicObjectBatchInputForCreate,
@@ -1229,6 +1275,7 @@ export declare namespace Crm {
 
   export {
     Owners as Owners,
+    BaseOwners as BaseOwners,
     type CollectionResponsePublicOwnerForwardPaging as CollectionResponsePublicOwnerForwardPaging,
     type PublicOwner as PublicOwner,
     type PublicTeam as PublicTeam,
@@ -1239,6 +1286,7 @@ export declare namespace Crm {
 
   export {
     Pipelines as Pipelines,
+    BasePipelines as BasePipelines,
     type CollectionResponsePipelineNoPaging as CollectionResponsePipelineNoPaging,
     type CollectionResponsePipelineStageNoPaging as CollectionResponsePipelineStageNoPaging,
     type CollectionResponsePublicAuditInfoNoPaging as CollectionResponsePublicAuditInfoNoPaging,
@@ -1268,6 +1316,7 @@ export declare namespace Crm {
 
   export {
     Properties as Properties,
+    BaseProperties as BaseProperties,
     type BatchInputPropertyCreate as BatchInputPropertyCreate,
     type BatchResponseProperty as BatchResponseProperty,
     type BatchResponsePropertyWithErrors as BatchResponsePropertyWithErrors,
@@ -1283,6 +1332,7 @@ export declare namespace Crm {
 
   export {
     PropertiesValidations as PropertiesValidations,
+    BasePropertiesValidations as BasePropertiesValidations,
     type CollectionResponsePublicPropertyValidationRuleMapNoPaging as CollectionResponsePublicPropertyValidationRuleMapNoPaging,
     type CollectionResponsePublicPropertyValidationRuleNoPaging as CollectionResponsePublicPropertyValidationRuleNoPaging,
     type PublicPropertyValidationRule as PublicPropertyValidationRule,
@@ -1295,6 +1345,7 @@ export declare namespace Crm {
 
   export {
     Timeline as Timeline,
+    BaseTimeline as BaseTimeline,
     type AppEventOccurrence as AppEventOccurrence,
     type AppEventResolutionResponse as AppEventResolutionResponse,
     type BatchInputAppEventOccurrence as BatchInputAppEventOccurrence,

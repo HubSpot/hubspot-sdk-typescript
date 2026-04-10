@@ -1,8 +1,15 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Assets, type AssetUpdateParams, type AssetListParams, type AssetDeleteParams } from './assets';
+export {
+  Assets,
+  BaseAssets,
+  type AssetUpdateParams,
+  type AssetListParams,
+  type AssetDeleteParams,
+} from './assets';
 export {
   Batch,
+  BaseBatch,
   type BatchCreateParams,
   type BatchUpdateParams,
   type BatchDeleteParams,
@@ -10,6 +17,7 @@ export {
 } from './batch';
 export {
   Budget,
+  BaseBudget,
   type BudgetCreateParams,
   type BudgetUpdateParams,
   type BudgetDeleteParams,
@@ -17,6 +25,7 @@ export {
 } from './budget';
 export {
   Campaigns,
+  BaseCampaigns,
   type BatchInputPublicCampaignBatchUpdateItem,
   type BatchInputPublicCampaignDeleteInput,
   type BatchInputPublicCampaignInput,
@@ -54,12 +63,14 @@ export {
 } from './campaigns';
 export {
   Metrics,
+  BaseMetrics,
   type MetricGetAttributionMetricsParams,
   type MetricGetRevenueAttributionParams,
   type MetricListContactIDsByTypeParams,
 } from './metrics';
 export {
   Spend,
+  BaseSpend,
   type SpendCreateParams,
   type SpendUpdateParams,
   type SpendDeleteParams,

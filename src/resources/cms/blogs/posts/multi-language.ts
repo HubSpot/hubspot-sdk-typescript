@@ -5,7 +5,14 @@ import { APIPromise } from '../../../../core/api-promise';
 import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 
-export class MultiLanguage extends APIResource {
+export class BaseMultiLanguage extends APIResource {
+  static override readonly _key: readonly ['cms', 'blogs', 'posts', 'multiLanguage'] = Object.freeze([
+    'cms',
+    'blogs',
+    'posts',
+    'multiLanguage',
+  ] as const);
+
   /**
    * Attach a blog post to a
    * [multi-language group](https://developers.hubspot.com/docs/guides/cms/content/multi-language-content).
@@ -79,6 +86,7 @@ export class MultiLanguage extends APIResource {
     });
   }
 }
+export class MultiLanguage extends BaseMultiLanguage {}
 
 export interface MultiLanguageAttachToLangGroupParams {
   /**

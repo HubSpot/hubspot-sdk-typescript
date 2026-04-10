@@ -1,13 +1,29 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Cms } from 'hubspot-sdk/resources/cms/cms';
+import { BaseMediaBridge } from 'hubspot-sdk/resources/cms/media-bridge/media-bridge';
+
 import HubSpot from 'hubspot-sdk';
+import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource mediaBridge', () => {
+const partialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseMediaBridge],
+});
+
+const parentPartialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Cms],
+});
+
+const runTests = (client: PartialHubSpot<{ cms: { mediaBridge: BaseMediaBridge } }>) => {
   // Mock server tests are disabled
   test.skip('createAssociation: only required params', async () => {
     const responsePromise = client.cms.mediaBridge.createAssociation('objectType', {
@@ -773,4 +789,7 @@ describe('resource mediaBridge', () => {
       name: 'name',
     });
   });
-});
+};
+describe('resource mediaBridge', () => runTests(client));
+describe('resource mediaBridge (tree shakable, base)', () => runTests(partialClient));
+describe('resource mediaBridge (tree shakable, subresource)', () => runTests(parentPartialClient));

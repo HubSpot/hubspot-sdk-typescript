@@ -3,14 +3,17 @@
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
 import * as BatchAPI from './batch';
-import { Batch, BatchCreateParams, BatchDeleteParams, BatchGetParams } from './batch';
+import { BaseBatch, Batch, BatchCreateParams, BatchDeleteParams, BatchGetParams } from './batch';
 import { APIPromise } from '../../../core/api-promise';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class MediaBridge extends APIResource {
-  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
+export class BaseMediaBridge extends APIResource {
+  static override readonly _key: readonly ['cms', 'mediaBridge'] = Object.freeze([
+    'cms',
+    'mediaBridge',
+  ] as const);
 
   /**
    * Create a new association definition for the specified object type.
@@ -417,6 +420,9 @@ export class MediaBridge extends APIResource {
   ): APIPromise<MediaBridgeProviderRegistrationResponse> {
     return this._client.put(path`/media-bridge/2026-03/${appID}/settings`, { body, ...options });
   }
+}
+export class MediaBridge extends BaseMediaBridge {
+  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
 }
 
 export interface AbsoluteValue {
@@ -8363,6 +8369,7 @@ export interface MediaBridgeUpdateSettingsParams {
 }
 
 MediaBridge.Batch = Batch;
+MediaBridge.BaseBatch = BaseBatch;
 
 export declare namespace MediaBridge {
   export {
@@ -8520,6 +8527,7 @@ export declare namespace MediaBridge {
 
   export {
     Batch as Batch,
+    BaseBatch as BaseBatch,
     type BatchCreateParams as BatchCreateParams,
     type BatchDeleteParams as BatchDeleteParams,
     type BatchGetParams as BatchGetParams,

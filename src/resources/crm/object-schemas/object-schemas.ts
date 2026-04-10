@@ -4,14 +4,17 @@ import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
 import * as CrmAPI from '../crm';
 import * as BatchAPI from './batch';
-import { Batch, BatchGetParams } from './batch';
+import { BaseBatch, Batch, BatchGetParams } from './batch';
 import { APIPromise } from '../../../core/api-promise';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class ObjectSchemas extends APIResource {
-  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
+export class BaseObjectSchemas extends APIResource {
+  static override readonly _key: readonly ['crm', 'objectSchemas'] = Object.freeze([
+    'crm',
+    'objectSchemas',
+  ] as const);
 
   /**
    * Create a new custom object schema by defining its properties and associations.
@@ -104,6 +107,9 @@ export class ObjectSchemas extends APIResource {
   ): APIPromise<ObjectSchema> {
     return this._client.get(path`/crm-object-schemas/2026-03/schemas/${objectType}`, { query, ...options });
   }
+}
+export class ObjectSchemas extends BaseObjectSchemas {
+  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
 }
 
 export interface CollectionResponseObjectSchemaNoPaging {
@@ -482,6 +488,7 @@ export interface ObjectSchemaGetParams {
 }
 
 ObjectSchemas.Batch = Batch;
+ObjectSchemas.BaseBatch = BaseBatch;
 
 export declare namespace ObjectSchemas {
   export {
@@ -499,5 +506,5 @@ export declare namespace ObjectSchemas {
     type ObjectSchemaGetParams as ObjectSchemaGetParams,
   };
 
-  export { Batch as Batch, type BatchGetParams as BatchGetParams };
+  export { Batch as Batch, BaseBatch as BaseBatch, type BatchGetParams as BatchGetParams };
 }

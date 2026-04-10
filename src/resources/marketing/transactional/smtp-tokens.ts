@@ -9,7 +9,13 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class SmtpTokens extends APIResource {
+export class BaseSmtpTokens extends APIResource {
+  static override readonly _key: readonly ['marketing', 'transactional', 'smtpTokens'] = Object.freeze([
+    'marketing',
+    'transactional',
+    'smtpTokens',
+  ] as const);
+
   /**
    * Create a SMTP API token.
    */
@@ -63,6 +69,7 @@ export class SmtpTokens extends APIResource {
     );
   }
 }
+export class SmtpTokens extends BaseSmtpTokens {}
 
 export interface SmtpTokenCreateParams {
   /**

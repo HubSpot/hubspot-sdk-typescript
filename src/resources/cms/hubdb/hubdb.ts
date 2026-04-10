@@ -4,6 +4,7 @@ import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
 import * as RowsAPI from './rows';
 import {
+  BaseRows,
   RowCloneBatchParams,
   RowCloneDraftParams,
   RowCreateBatchParams,
@@ -23,6 +24,7 @@ import {
 } from './rows';
 import * as TablesAPI from './tables';
 import {
+  BaseTables,
   TableCloneDraftParams,
   TableCreateParams,
   TableDeleteVersionParams,
@@ -41,7 +43,10 @@ import {
 } from './tables';
 import { Page } from '../../../core/pagination';
 
-export class Hubdb extends APIResource {
+export class BaseHubdb extends APIResource {
+  static override readonly _key: readonly ['cms', 'hubdb'] = Object.freeze(['cms', 'hubdb'] as const);
+}
+export class Hubdb extends BaseHubdb {
   rows: RowsAPI.Rows = new RowsAPI.Rows(this._client);
   tables: TablesAPI.Tables = new TablesAPI.Tables(this._client);
 }
@@ -781,7 +786,9 @@ export type UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3 =
 export type Variant = unknown;
 
 Hubdb.Rows = Rows;
+Hubdb.BaseRows = BaseRows;
 Hubdb.Tables = Tables;
+Hubdb.BaseTables = BaseTables;
 
 export declare namespace Hubdb {
   export {
@@ -815,6 +822,7 @@ export declare namespace Hubdb {
 
   export {
     Rows as Rows,
+    BaseRows as BaseRows,
     type RowCreateParams as RowCreateParams,
     type RowListParams as RowListParams,
     type RowCloneBatchParams as RowCloneBatchParams,
@@ -834,6 +842,7 @@ export declare namespace Hubdb {
 
   export {
     Tables as Tables,
+    BaseTables as BaseTables,
     type TableCreateParams as TableCreateParams,
     type TableListParams as TableListParams,
     type TableCloneDraftParams as TableCloneDraftParams,

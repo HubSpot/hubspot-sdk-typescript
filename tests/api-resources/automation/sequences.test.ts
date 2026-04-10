@@ -1,13 +1,29 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Automation } from 'hubspot-sdk/resources/automation/automation';
+import { BaseSequences } from 'hubspot-sdk/resources/automation/sequences';
+
 import HubSpot from 'hubspot-sdk';
+import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource sequences', () => {
+const partialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseSequences],
+});
+
+const parentPartialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Automation],
+});
+
+const runTests = (client: PartialHubSpot<{ automation: { sequences: BaseSequences } }>) => {
   // Mock server tests are disabled
   test.skip('list: only required params', async () => {
     const responsePromise = client.automation.sequences.list({ userId: 'userId' });
@@ -86,4 +102,7 @@ describe('resource sequences', () => {
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
   });
-});
+};
+describe('resource sequences', () => runTests(client));
+describe('resource sequences (tree shakable, base)', () => runTests(partialClient));
+describe('resource sequences (tree shakable, subresource)', () => runTests(parentPartialClient));

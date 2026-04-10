@@ -5,14 +5,18 @@ import * as CrmAPI from '../../crm';
 import * as ObjectsAPI from '../objects';
 import { SimplePublicObjectWithAssociationsPage } from '../objects';
 import * as BatchAPI from './batch';
-import { Batch, BatchGetParams } from './batch';
+import { BaseBatch, Batch, BatchGetParams } from './batch';
 import { APIPromise } from '../../../../core/api-promise';
 import { Page, type PageParams, PagePromise } from '../../../../core/pagination';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class FeedbackSubmissions extends APIResource {
-  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
+export class BaseFeedbackSubmissions extends APIResource {
+  static override readonly _key: readonly ['crm', 'objects', 'feedbackSubmissions'] = Object.freeze([
+    'crm',
+    'objects',
+    'feedbackSubmissions',
+  ] as const);
 
   /**
    * Read a page of feedback submissions. Control what is returned via the
@@ -56,6 +60,9 @@ export class FeedbackSubmissions extends APIResource {
   ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/objects/2026-03/feedback_submissions/search', { body, ...options });
   }
+}
+export class FeedbackSubmissions extends BaseFeedbackSubmissions {
+  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
 }
 
 export interface FeedbackSubmissionListParams extends PageParams {
@@ -151,6 +158,7 @@ export interface FeedbackSubmissionSearchParams {
 }
 
 FeedbackSubmissions.Batch = Batch;
+FeedbackSubmissions.BaseBatch = BaseBatch;
 
 export declare namespace FeedbackSubmissions {
   export {
@@ -159,7 +167,7 @@ export declare namespace FeedbackSubmissions {
     type FeedbackSubmissionSearchParams as FeedbackSubmissionSearchParams,
   };
 
-  export { Batch as Batch, type BatchGetParams as BatchGetParams };
+  export { Batch as Batch, BaseBatch as BaseBatch, type BatchGetParams as BatchGetParams };
 }
 
 export { type SimplePublicObjectWithAssociationsPage };

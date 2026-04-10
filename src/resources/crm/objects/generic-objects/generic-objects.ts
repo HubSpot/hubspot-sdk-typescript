@@ -6,6 +6,7 @@ import * as ObjectsAPI from '../objects';
 import { SimplePublicObjectWithAssociationsPage } from '../objects';
 import * as BatchAPI from './batch';
 import {
+  BaseBatch,
   Batch,
   BatchCreateParams,
   BatchDeleteParams,
@@ -19,8 +20,12 @@ import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class GenericObjects extends APIResource {
-  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
+export class BaseGenericObjects extends APIResource {
+  static override readonly _key: readonly ['crm', 'objects', 'genericObjects'] = Object.freeze([
+    'crm',
+    'objects',
+    'genericObjects',
+  ] as const);
 
   /**
    * Create a CRM object with the given properties and return a copy of the object,
@@ -105,6 +110,9 @@ export class GenericObjects extends APIResource {
   ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post(path`/crm/objects/2026-03/${objectType}/search`, { body, ...options });
   }
+}
+export class GenericObjects extends BaseGenericObjects {
+  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
 }
 
 export interface GenericObjectCreateParams {
@@ -235,6 +243,7 @@ export interface GenericObjectSearchParams {
 }
 
 GenericObjects.Batch = Batch;
+GenericObjects.BaseBatch = BaseBatch;
 
 export declare namespace GenericObjects {
   export {
@@ -248,6 +257,7 @@ export declare namespace GenericObjects {
 
   export {
     Batch as Batch,
+    BaseBatch as BaseBatch,
     type BatchCreateParams as BatchCreateParams,
     type BatchUpdateParams as BatchUpdateParams,
     type BatchDeleteParams as BatchDeleteParams,

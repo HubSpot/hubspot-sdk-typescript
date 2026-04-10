@@ -8,7 +8,9 @@ import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Lists extends APIResource {
+export class BaseLists extends APIResource {
+  static override readonly _key: readonly ['crm', 'lists'] = Object.freeze(['crm', 'lists'] as const);
+
   create(body: ListCreateParams, options?: RequestOptions): APIPromise<ListCreateResponse> {
     return this._client.post('/crm/lists/2026-03', { body, ...options });
   }
@@ -269,6 +271,7 @@ export class Lists extends APIResource {
     return this._client.put(path`/crm/lists/2026-03/${listID}/schedule-conversion`, { body, ...options });
   }
 }
+export class Lists extends BaseLists {}
 
 export type JoinTimeAndRecordIDsPage = Page<JoinTimeAndRecordID>;
 

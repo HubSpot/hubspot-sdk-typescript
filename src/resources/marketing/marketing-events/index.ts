@@ -2,6 +2,7 @@
 
 export {
   Attendance,
+  BaseAttendance,
   type AttendanceCreateByEventIDAndContactIDParams,
   type AttendanceCreateByEventIDAndEmailParams,
   type AttendanceCreateByExternalEventIDAndContactIDParams,
@@ -9,11 +10,13 @@ export {
 } from './attendance';
 export {
   Events,
+  BaseEvents,
   type EventCancelByExternalEventIDParams,
   type EventCompleteByExternalEventIDParams,
 } from './events';
 export {
   ListAssociations,
+  BaseListAssociations,
   type ListAssociationDeleteParams,
   type ListAssociationAssociateParams,
   type ListAssociationAssociateByExternalAccountParams,
@@ -22,6 +25,7 @@ export {
 } from './list-associations';
 export {
   MarketingEvents,
+  BaseMarketingEvents,
   type AppInfo,
   type AttendanceCounters,
   type BatchInputMarketingEventCreateRequestParams,
@@ -84,14 +88,16 @@ export {
 } from './marketing-events';
 export {
   Participations,
+  BaseParticipations,
   type ParticipationGetByExternalAccountAndEventIDParams,
   type ParticipationListBreakdownByContactParams,
   type ParticipationListBreakdownByExternalAccountAndEventIDParams,
   type ParticipationListBreakdownByIDParams,
 } from './participations';
-export { Settings, type SettingCreateOrUpdateParams } from './settings';
+export { Settings, BaseSettings, type SettingCreateOrUpdateParams } from './settings';
 export {
   SubscriberState,
+  BaseSubscriberState,
   type SubscriberStateRecordByEmailParams,
   type SubscriberStateRecordByIDParams,
 } from './subscriber-state';

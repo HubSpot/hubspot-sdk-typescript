@@ -7,7 +7,13 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Limits extends APIResource {
+export class BaseLimits extends APIResource {
+  static override readonly _key: readonly ['crm', 'associationsSchema', 'limits'] = Object.freeze([
+    'crm',
+    'associationsSchema',
+    'limits',
+  ] as const);
+
   /**
    * Retrieve all configured association limits between objects, which include
    * details about how different CRM object types are associated with each other.
@@ -67,6 +73,7 @@ export class Limits extends APIResource {
     );
   }
 }
+export class Limits extends BaseLimits {}
 
 export interface LimitBatchDeleteParams {
   /**

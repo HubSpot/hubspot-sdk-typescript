@@ -6,7 +6,9 @@ import { APIPromise } from '../../core/api-promise';
 import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 
-export class Send extends APIResource {
+export class BaseSend extends APIResource {
+  static override readonly _key: readonly ['events', 'send'] = Object.freeze(['events', 'send'] as const);
+
   /**
    * Send multiple event occurrences at once.
    */
@@ -29,6 +31,7 @@ export class Send extends APIResource {
     });
   }
 }
+export class Send extends BaseSend {}
 
 export interface SendBatchSendParams {
   inputs: Array<EventsAPI.BehavioralEventHTTPCompletionRequest>;

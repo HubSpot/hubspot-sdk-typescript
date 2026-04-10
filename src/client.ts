@@ -122,9 +122,9 @@ export interface ClientOptions {
 }
 
 /**
- * API Client for interfacing with the HubSpot API.
+ * Base class for HubSpot API clients.
  */
-export class HubSpot {
+export class BaseHubSpot {
   accessToken: string | null;
   developerAPIKey: string | null;
 
@@ -167,7 +167,7 @@ export class HubSpot {
     };
 
     this.baseURL = options.baseURL!;
-    this.timeout = options.timeout ?? HubSpot.DEFAULT_TIMEOUT /* 1 minute */;
+    this.timeout = options.timeout ?? BaseHubSpot.DEFAULT_TIMEOUT /* 1 minute */;
     this.logger = options.logger ?? console;
     const defaultLogLevel = 'warn';
     // Set default logLevel early so that we can log a warning in parseLogLevel.
@@ -741,8 +741,14 @@ export class HubSpot {
     }
   }
 
-  static HubSpot = this;
   static DEFAULT_TIMEOUT = 60000; // 1 minute
+}
+
+/**
+ * API Client for interfacing with the HubSpot API.
+ */
+export class HubSpot extends BaseHubSpot {
+  static HubSpot = this;
 
   static HubSpotError = Errors.HubSpotError;
   static APIError = Errors.APIError;

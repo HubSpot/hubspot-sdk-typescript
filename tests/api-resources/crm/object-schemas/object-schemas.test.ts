@@ -1,13 +1,29 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Crm } from 'hubspot-sdk/resources/crm/crm';
+import { BaseObjectSchemas } from 'hubspot-sdk/resources/crm/object-schemas/object-schemas';
+
 import HubSpot from 'hubspot-sdk';
+import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource objectSchemas', () => {
+const partialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseObjectSchemas],
+});
+
+const parentPartialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Crm],
+});
+
+const runTests = (client: PartialHubSpot<{ crm: { objectSchemas: BaseObjectSchemas } }>) => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.crm.objectSchemas.create({
@@ -228,4 +244,7 @@ describe('resource objectSchemas', () => {
       ),
     ).rejects.toThrow(HubSpot.NotFoundError);
   });
-});
+};
+describe('resource objectSchemas', () => runTests(client));
+describe('resource objectSchemas (tree shakable, base)', () => runTests(partialClient));
+describe('resource objectSchemas (tree shakable, subresource)', () => runTests(parentPartialClient));

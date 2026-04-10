@@ -6,6 +6,7 @@ import * as ObjectsAPI from '../objects';
 import { SimplePublicObjectWithAssociationsPage } from '../objects';
 import * as BatchAPI from './batch';
 import {
+  BaseBatch,
   Batch,
   BatchCreateParams,
   BatchDeleteParams,
@@ -19,8 +20,12 @@ import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Discounts extends APIResource {
-  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
+export class BaseDiscounts extends APIResource {
+  static override readonly _key: readonly ['crm', 'objects', 'discounts'] = Object.freeze([
+    'crm',
+    'objects',
+    'discounts',
+  ] as const);
 
   /**
    * Create a discount with the given properties and return a copy of the object,
@@ -97,6 +102,9 @@ export class Discounts extends APIResource {
   ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/objects/2026-03/discounts/search', { body, ...options });
   }
+}
+export class Discounts extends BaseDiscounts {
+  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
 }
 
 export interface DiscountCreateParams {
@@ -213,6 +221,7 @@ export interface DiscountSearchParams {
 }
 
 Discounts.Batch = Batch;
+Discounts.BaseBatch = BaseBatch;
 
 export declare namespace Discounts {
   export {
@@ -225,6 +234,7 @@ export declare namespace Discounts {
 
   export {
     Batch as Batch,
+    BaseBatch as BaseBatch,
     type BatchCreateParams as BatchCreateParams,
     type BatchUpdateParams as BatchUpdateParams,
     type BatchDeleteParams as BatchDeleteParams,

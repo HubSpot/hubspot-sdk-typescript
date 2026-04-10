@@ -5,6 +5,7 @@ import * as Shared from '../../shared';
 import * as CrmAPI from '../crm';
 import * as LabelsAPI from './labels';
 import {
+  BaseLabels,
   LabelBatchCreateParams,
   LabelCreateLabelParams,
   LabelDeleteLabelParams,
@@ -14,13 +15,20 @@ import {
 } from './labels';
 import * as LimitsAPI from './limits';
 import {
+  BaseLimits,
   LimitBatchDeleteParams,
   LimitBatchUpdateParams,
   LimitGetByObjectTypesParams,
   Limits,
 } from './limits';
 
-export class AssociationsSchema extends APIResource {
+export class BaseAssociationsSchema extends APIResource {
+  static override readonly _key: readonly ['crm', 'associationsSchema'] = Object.freeze([
+    'crm',
+    'associationsSchema',
+  ] as const);
+}
+export class AssociationsSchema extends BaseAssociationsSchema {
   labels: LabelsAPI.Labels = new LabelsAPI.Labels(this._client);
   limits: LimitsAPI.Limits = new LimitsAPI.Limits(this._client);
 }
@@ -277,7 +285,9 @@ export interface PublicAssociationSpec {
 }
 
 AssociationsSchema.Labels = Labels;
+AssociationsSchema.BaseLabels = BaseLabels;
 AssociationsSchema.Limits = Limits;
+AssociationsSchema.BaseLimits = BaseLimits;
 
 export declare namespace AssociationsSchema {
   export {
@@ -301,6 +311,7 @@ export declare namespace AssociationsSchema {
 
   export {
     Labels as Labels,
+    BaseLabels as BaseLabels,
     type LabelBatchCreateParams as LabelBatchCreateParams,
     type LabelCreateLabelParams as LabelCreateLabelParams,
     type LabelDeleteLabelParams as LabelDeleteLabelParams,
@@ -310,6 +321,7 @@ export declare namespace AssociationsSchema {
 
   export {
     Limits as Limits,
+    BaseLimits as BaseLimits,
     type LimitBatchDeleteParams as LimitBatchDeleteParams,
     type LimitBatchUpdateParams as LimitBatchUpdateParams,
     type LimitGetByObjectTypesParams as LimitGetByObjectTypesParams,

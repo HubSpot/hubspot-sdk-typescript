@@ -9,7 +9,9 @@ import { RequestOptions } from '../../internal/request-options';
 import { multipartFormRequestOptions } from '../../internal/uploads';
 import { path } from '../../internal/utils/path';
 
-export class Imports extends APIResource {
+export class BaseImports extends APIResource {
+  static override readonly _key: readonly ['crm', 'imports'] = Object.freeze(['crm', 'imports'] as const);
+
   create(
     body: ImportCreateParams | null | undefined = {},
     options?: RequestOptions,
@@ -46,6 +48,7 @@ export class Imports extends APIResource {
     });
   }
 }
+export class Imports extends BaseImports {}
 
 export type PublicImportResponsesPage = Page<PublicImportResponse>;
 

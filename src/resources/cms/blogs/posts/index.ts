@@ -2,6 +2,7 @@
 
 export {
   Batch,
+  BaseBatch,
   type BatchCreateParams,
   type BatchUpdateParams,
   type BatchDeleteParams,
@@ -9,6 +10,7 @@ export {
 } from './batch';
 export {
   MultiLanguage,
+  BaseMultiLanguage,
   type MultiLanguageAttachToLangGroupParams,
   type MultiLanguageCreateLangVariationParams,
   type MultiLanguageDetachFromLangGroupParams,
@@ -17,6 +19,7 @@ export {
 } from './multi-language';
 export {
   Posts,
+  BasePosts,
   type BatchInputBlogPost,
   type BatchResponseBlogPost,
   type BatchResponseBlogPostWithErrors,
@@ -42,6 +45,7 @@ export {
 } from './posts';
 export {
   Revisions,
+  BaseRevisions,
   type RevisionGetPreviousVersionParams,
   type RevisionGetPreviousVersionsParams,
   type RevisionRestorePreviousVersionParams,

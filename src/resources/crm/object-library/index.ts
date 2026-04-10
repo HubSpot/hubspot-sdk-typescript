@@ -2,7 +2,8 @@
 
 export {
   Enablement,
+  BaseEnablement,
   type ObjectTypeEnablementPublicResponse,
   type PortalObjectTypeEnablementPublicResponse,
 } from './enablement';
-export { ObjectLibrary } from './object-library';
+export { ObjectLibrary, BaseObjectLibrary } from './object-library';

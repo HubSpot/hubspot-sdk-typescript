@@ -7,7 +7,9 @@ import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Webhooks extends APIResource {
+export class BaseWebhooks extends APIResource {
+  static override readonly _key: readonly ['webhooks'] = Object.freeze(['webhooks'] as const);
+
   createCrmSnapshot(
     body: WebhookCreateCrmSnapshotParams,
     options?: RequestOptions,
@@ -348,6 +350,7 @@ export class Webhooks extends APIResource {
     });
   }
 }
+export class Webhooks extends BaseWebhooks {}
 
 export interface ActionOverrideRequest {
   associatedObjectTypeIds?: Array<string>;

@@ -2,6 +2,7 @@
 
 export {
   Currencies,
+  BaseCurrencies,
   type BatchInputExchangeRateCreateRequest,
   type BatchInputExchangeRateUpdateRequest,
   type BatchResponseExchangeRate,
@@ -22,9 +23,10 @@ export {
   type CurrencyUpdateCompanyCurrencyParams,
   type ExchangeRatesPage,
 } from './currencies/index';
-export { Settings } from './settings';
+export { Settings, BaseSettings } from './settings';
 export {
   TaxRates,
+  BaseTaxRates,
   type CollectionResponsePublicTaxRateGroupForwardPaging,
   type PublicTaxRateGroup,
   type TaxRateListParams,
@@ -32,6 +34,7 @@ export {
 } from './tax-rates';
 export {
   Users,
+  BaseUsers,
   type CollectionResponsePublicPermissionSetNoPaging,
   type CollectionResponsePublicTeamNoPaging,
   type CollectionResponsePublicUserForwardPaging,

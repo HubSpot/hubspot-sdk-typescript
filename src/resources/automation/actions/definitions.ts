@@ -9,7 +9,13 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Definitions extends APIResource {
+export class BaseDefinitions extends APIResource {
+  static override readonly _key: readonly ['automation', 'actions', 'definitions'] = Object.freeze([
+    'automation',
+    'actions',
+    'definitions',
+  ] as const);
+
   /**
    * Create a new custom workflow action.
    */
@@ -108,6 +114,7 @@ export class Definitions extends APIResource {
     );
   }
 }
+export class Definitions extends BaseDefinitions {}
 
 export interface DefinitionCreateParams {
   /**

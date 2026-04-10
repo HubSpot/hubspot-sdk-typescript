@@ -2,6 +2,7 @@
 
 export {
   Calling,
+  BaseCalling,
   type ChannelConnectionSettingsPatchRequest,
   type ChannelConnectionSettingsRequest,
   type ChannelConnectionSettingsResponse,
@@ -29,6 +30,7 @@ export {
 } from './calling/index';
 export {
   CardsDev,
+  BaseCardsDev,
   type ActionConfirmationBody,
   type ActionHookActionBody,
   type CardActions,
@@ -57,9 +59,10 @@ export {
   type CardsDevGetByIDParams,
   type CardsDevMigrateViewsParams,
 } from './cards-dev';
-export { Extensions } from './extensions';
+export { Extensions, BaseExtensions } from './extensions';
 export {
   VideoConferencing,
+  BaseVideoConferencing,
   type ExternalSettings,
   type VideoConferencingUpdateParams,
 } from './video-conferencing';

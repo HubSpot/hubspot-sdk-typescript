@@ -6,6 +6,7 @@ import * as ObjectsAPI from '../objects';
 import { SimplePublicObjectWithAssociationsPage } from '../objects';
 import * as BatchAPI from './batch';
 import {
+  BaseBatch,
   Batch,
   BatchCreateParams,
   BatchDeleteParams,
@@ -19,8 +20,12 @@ import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Contracts extends APIResource {
-  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
+export class BaseContracts extends APIResource {
+  static override readonly _key: readonly ['crm', 'objects', 'contracts'] = Object.freeze([
+    'crm',
+    'objects',
+    'contracts',
+  ] as const);
 
   /**
    * Create a contract with the given properties and return a copy of the object,
@@ -103,6 +108,9 @@ export class Contracts extends APIResource {
   ): APIPromise<CrmAPI.CollectionResponseWithTotalSimplePublicObject> {
     return this._client.post('/crm/objects/2026-03/contracts/search', { body, ...options });
   }
+}
+export class Contracts extends BaseContracts {
+  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
 }
 
 export interface ContractCreateParams {
@@ -219,6 +227,7 @@ export interface ContractSearchParams {
 }
 
 Contracts.Batch = Batch;
+Contracts.BaseBatch = BaseBatch;
 
 export declare namespace Contracts {
   export {
@@ -231,6 +240,7 @@ export declare namespace Contracts {
 
   export {
     Batch as Batch,
+    BaseBatch as BaseBatch,
     type BatchCreateParams as BatchCreateParams,
     type BatchUpdateParams as BatchUpdateParams,
     type BatchDeleteParams as BatchDeleteParams,

@@ -6,7 +6,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class BusinessUnitEntries extends APIResource {
+export class BaseBusinessUnitEntries extends APIResource {
+  static override readonly _key: readonly ['businessUnits', 'businessUnitEntries'] = Object.freeze([
+    'businessUnits',
+    'businessUnitEntries',
+  ] as const);
+
   /**
    * Retrieve the brands that a specific user can access.
    */
@@ -21,6 +26,7 @@ export class BusinessUnitEntries extends APIResource {
     });
   }
 }
+export class BusinessUnitEntries extends BaseBusinessUnitEntries {}
 
 export interface BusinessUnitEntryGetByUserIDParams {
   name?: Array<string>;

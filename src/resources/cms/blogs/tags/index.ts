@@ -2,6 +2,7 @@
 
 export {
   Batch,
+  BaseBatch,
   type BatchDeleteParams,
   type BatchCreateBatchParams,
   type BatchGetBatchParams,
@@ -9,6 +10,7 @@ export {
 } from './batch';
 export {
   Tags,
+  BaseTags,
   type BatchInputTag,
   type BatchResponseTag,
   type BatchResponseTagWithErrors,

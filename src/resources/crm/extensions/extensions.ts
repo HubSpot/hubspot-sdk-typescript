@@ -5,6 +5,7 @@ import * as CardsDevAPI from './cards-dev';
 import {
   ActionConfirmationBody,
   ActionHookActionBody,
+  BaseCardsDev,
   CardActions,
   CardAuditResponse,
   CardCreateRequest,
@@ -33,9 +34,15 @@ import {
   TopLevelActions,
 } from './cards-dev';
 import * as VideoConferencingAPI from './video-conferencing';
-import { ExternalSettings, VideoConferencing, VideoConferencingUpdateParams } from './video-conferencing';
+import {
+  BaseVideoConferencing,
+  ExternalSettings,
+  VideoConferencing,
+  VideoConferencingUpdateParams,
+} from './video-conferencing';
 import * as CallingAPI from './calling/calling';
 import {
+  BaseCalling,
   Calling,
   CallingCreateChannelConnectionSettingsParams,
   CallingCreateInboundCallParams,
@@ -63,7 +70,13 @@ import {
   SettingsResponse,
 } from './calling/calling';
 
-export class Extensions extends APIResource {
+export class BaseExtensions extends APIResource {
+  static override readonly _key: readonly ['crm', 'extensions'] = Object.freeze([
+    'crm',
+    'extensions',
+  ] as const);
+}
+export class Extensions extends BaseExtensions {
   calling: CallingAPI.Calling = new CallingAPI.Calling(this._client);
   cardsDev: CardsDevAPI.CardsDev = new CardsDevAPI.CardsDev(this._client);
   videoConferencing: VideoConferencingAPI.VideoConferencing = new VideoConferencingAPI.VideoConferencing(
@@ -72,12 +85,16 @@ export class Extensions extends APIResource {
 }
 
 Extensions.Calling = Calling;
+Extensions.BaseCalling = BaseCalling;
 Extensions.CardsDev = CardsDev;
+Extensions.BaseCardsDev = BaseCardsDev;
 Extensions.VideoConferencing = VideoConferencing;
+Extensions.BaseVideoConferencing = BaseVideoConferencing;
 
 export declare namespace Extensions {
   export {
     Calling as Calling,
+    BaseCalling as BaseCalling,
     type ChannelConnectionSettingsPatchRequest as ChannelConnectionSettingsPatchRequest,
     type ChannelConnectionSettingsRequest as ChannelConnectionSettingsRequest,
     type ChannelConnectionSettingsResponse as ChannelConnectionSettingsResponse,
@@ -106,6 +123,7 @@ export declare namespace Extensions {
 
   export {
     CardsDev as CardsDev,
+    BaseCardsDev as BaseCardsDev,
     type ActionConfirmationBody as ActionConfirmationBody,
     type ActionHookActionBody as ActionHookActionBody,
     type CardActions as CardActions,
@@ -137,6 +155,7 @@ export declare namespace Extensions {
 
   export {
     VideoConferencing as VideoConferencing,
+    BaseVideoConferencing as BaseVideoConferencing,
     type ExternalSettings as ExternalSettings,
     type VideoConferencingUpdateParams as VideoConferencingUpdateParams,
   };

@@ -1,13 +1,22 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseWebhooks } from 'hubspot-sdk/resources/webhooks/webhooks';
+
 import HubSpot from 'hubspot-sdk';
+import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource webhooks', () => {
+const partialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseWebhooks],
+});
+
+const runTests = (client: PartialHubSpot<{ webhooks: BaseWebhooks }>) => {
   // Mock server tests are disabled
   test.skip('createCrmSnapshot: only required params', async () => {
     const responsePromise = client.webhooks.createCrmSnapshot({
@@ -568,4 +577,6 @@ describe('resource webhooks', () => {
   test.skip('updateSubscription: required and optional params', async () => {
     const response = await client.webhooks.updateSubscription(0, { appId: 0, active: true });
   });
-});
+};
+describe('resource webhooks', () => runTests(client));
+describe('resource webhooks (tree shakable, base)', () => runTests(partialClient));

@@ -5,7 +5,14 @@ import * as ObjectsAPI from '../objects';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 
-export class Batch extends APIResource {
+export class BaseBatch extends APIResource {
+  static override readonly _key: readonly ['crm', 'objects', 'feedbackSubmissions', 'batch'] = Object.freeze([
+    'crm',
+    'objects',
+    'feedbackSubmissions',
+    'batch',
+  ] as const);
+
   /**
    * Retrieve records by record ID or include the `idProperty` parameter to retrieve
    * records by a custom unique value property.
@@ -22,6 +29,7 @@ export class Batch extends APIResource {
     });
   }
 }
+export class Batch extends BaseBatch {}
 
 export interface BatchGetParams {
   /**

@@ -1,13 +1,29 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseBasic } from 'hubspot-sdk/resources/scheduler/meetings/basic';
+import { Meetings } from 'hubspot-sdk/resources/scheduler/meetings/meetings';
+
 import HubSpot from 'hubspot-sdk';
+import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource basic', () => {
+const partialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseBasic],
+});
+
+const parentPartialClient = createClient({
+  accessToken: 'My Access Token',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Meetings],
+});
+
+const runTests = (client: PartialHubSpot<{ scheduler: { meetings: { basic: BaseBasic } } }>) => {
   // Mock server tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.scheduler.meetings.basic.list();
@@ -79,4 +95,7 @@ describe('resource basic', () => {
       timezone: 'timezone',
     });
   });
-});
+};
+describe('resource basic', () => runTests(client));
+describe('resource basic (tree shakable, base)', () => runTests(partialClient));
+describe('resource basic (tree shakable, subresource)', () => runTests(parentPartialClient));

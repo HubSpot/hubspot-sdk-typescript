@@ -6,7 +6,13 @@ import * as DealSplitsAPI from './deal-splits';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
-export class Batch extends APIResource {
+export class BaseBatch extends APIResource {
+  static override readonly _key: readonly ['crm', 'dealSplits', 'batch'] = Object.freeze([
+    'crm',
+    'dealSplits',
+    'batch',
+  ] as const);
+
   /**
    * Read a batch of deal split objects by their associated deal object internal ID
    */
@@ -29,6 +35,7 @@ export class Batch extends APIResource {
     return this._client.post('/deal-splits/2026-03/batch/upsert', { body, ...options });
   }
 }
+export class Batch extends BaseBatch {}
 
 export interface BatchReadParams {
   /**

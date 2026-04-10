@@ -6,7 +6,9 @@ import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Pipelines extends APIResource {
+export class BasePipelines extends APIResource {
+  static override readonly _key: readonly ['crm', 'pipelines'] = Object.freeze(['crm', 'pipelines'] as const);
+
   /**
    * Create a new pipeline with the provided property values. The entire pipeline
    * object, including its unique ID, will be returned in the response.
@@ -187,6 +189,7 @@ export class Pipelines extends APIResource {
     });
   }
 }
+export class Pipelines extends BasePipelines {}
 
 export interface CollectionResponsePipelineNoPaging {
   results: Array<Pipeline>;

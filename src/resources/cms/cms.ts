@@ -6,6 +6,7 @@ import {
   AuditLogExportParams,
   AuditLogListParams,
   AuditLogs,
+  BaseAuditLogs,
   CmsAuditLoggingExportFilters,
   CmsAuditLoggingExportSettings,
   CollectionResponsePublicAuditLog,
@@ -13,9 +14,17 @@ import {
   PublicAuditLogsPage,
 } from './audit-logs';
 import * as DomainsAPI from './domains';
-import { CollectionResponseWithTotalDomain, Domain, DomainListParams, Domains, DomainsPage } from './domains';
+import {
+  BaseDomains,
+  CollectionResponseWithTotalDomain,
+  Domain,
+  DomainListParams,
+  Domains,
+  DomainsPage,
+} from './domains';
 import * as SiteSearchAPI from './site-search';
 import {
+  BaseSiteSearch,
   ContentSearchResult,
   IndexedData,
   IndexedField,
@@ -27,6 +36,7 @@ import {
 import * as SourceCodeAPI from './source-code';
 import {
   AssetFileMetadata,
+  BaseSourceCode,
   FileExtractRequest,
   SourceCode,
   SourceCodeCreateParams,
@@ -38,9 +48,10 @@ import {
   SourceCodeValidateParams,
 } from './source-code';
 import * as URLMappingsAPI from './url-mappings';
-import { URLMappingCreateParams, URLMappings, URLMappingsURLMapping } from './url-mappings';
+import { BaseURLMappings, URLMappingCreateParams, URLMappings, URLMappingsURLMapping } from './url-mappings';
 import * as URLRedirectsAPI from './url-redirects';
 import {
+  BaseURLRedirects,
   CollectionResponseWithTotalURLMappingForwardPaging,
   URLMapping,
   URLMappingCreateRequestBody,
@@ -52,6 +63,7 @@ import {
 } from './url-redirects';
 import * as BlogsAPI from './blogs/blogs';
 import {
+  BaseBlogs,
   Blogs,
   CursorPagedResultBlogAuthorLong,
   CursorPagedResultBlogPostLong,
@@ -59,6 +71,7 @@ import {
 } from './blogs/blogs';
 import * as HubdbAPI from './hubdb/hubdb';
 import {
+  BaseHubdb,
   BatchInputHubDBTableRowBatchCloneRequest,
   BatchInputHubDBTableRowV3BatchUpdateRequest,
   BatchInputHubDBTableRowV3Request,
@@ -96,6 +109,7 @@ import {
   AttentionSpanCalculatedValues,
   AttentionSpanEvent,
   AttentionSpanEventRequest,
+  BaseMediaBridge,
   BatchInputPropertyCreate,
   BatchResponseProperty,
   BatchResponsePropertyWithErrors,
@@ -245,6 +259,7 @@ import * as PagesAPI from './pages/pages';
 import {
   AbTestEndRequestVNext,
   AbTestRerunRequestVNext,
+  BasePages,
   BatchInputContentFolder,
   BatchInputPage,
   BatchResponseContentFolder,
@@ -280,7 +295,10 @@ import {
   Pages,
 } from './pages/pages';
 
-export class Cms extends APIResource {
+export class BaseCms extends APIResource {
+  static override readonly _key: readonly ['cms'] = Object.freeze(['cms'] as const);
+}
+export class Cms extends BaseCms {
   auditLogs: AuditLogsAPI.AuditLogs = new AuditLogsAPI.AuditLogs(this._client);
   blogs: BlogsAPI.Blogs = new BlogsAPI.Blogs(this._client);
   domains: DomainsAPI.Domains = new DomainsAPI.Domains(this._client);
@@ -3215,15 +3233,25 @@ export interface UpdateLanguagesRequestVNext {
 }
 
 Cms.AuditLogs = AuditLogs;
+Cms.BaseAuditLogs = BaseAuditLogs;
 Cms.Blogs = Blogs;
+Cms.BaseBlogs = BaseBlogs;
 Cms.Domains = Domains;
+Cms.BaseDomains = BaseDomains;
 Cms.Hubdb = Hubdb;
+Cms.BaseHubdb = BaseHubdb;
 Cms.MediaBridge = MediaBridge;
+Cms.BaseMediaBridge = BaseMediaBridge;
 Cms.Pages = Pages;
+Cms.BasePages = BasePages;
 Cms.SiteSearch = SiteSearch;
+Cms.BaseSiteSearch = BaseSiteSearch;
 Cms.SourceCode = SourceCode;
+Cms.BaseSourceCode = BaseSourceCode;
 Cms.URLMappings = URLMappings;
+Cms.BaseURLMappings = BaseURLMappings;
 Cms.URLRedirects = URLRedirects;
+Cms.BaseURLRedirects = BaseURLRedirects;
 
 export declare namespace Cms {
   export {
@@ -3253,6 +3281,7 @@ export declare namespace Cms {
 
   export {
     AuditLogs as AuditLogs,
+    BaseAuditLogs as BaseAuditLogs,
     type CmsAuditLoggingExportFilters as CmsAuditLoggingExportFilters,
     type CmsAuditLoggingExportSettings as CmsAuditLoggingExportSettings,
     type CollectionResponsePublicAuditLog as CollectionResponsePublicAuditLog,
@@ -3264,6 +3293,7 @@ export declare namespace Cms {
 
   export {
     Blogs as Blogs,
+    BaseBlogs as BaseBlogs,
     type CursorPagedResultBlogAuthorLong as CursorPagedResultBlogAuthorLong,
     type CursorPagedResultBlogPostLong as CursorPagedResultBlogPostLong,
     type CursorPagedResultTagLong as CursorPagedResultTagLong,
@@ -3271,6 +3301,7 @@ export declare namespace Cms {
 
   export {
     Domains as Domains,
+    BaseDomains as BaseDomains,
     type CollectionResponseWithTotalDomain as CollectionResponseWithTotalDomain,
     type Domain as Domain,
     type DomainsPage as DomainsPage,
@@ -3279,6 +3310,7 @@ export declare namespace Cms {
 
   export {
     Hubdb as Hubdb,
+    BaseHubdb as BaseHubdb,
     type BatchInputHubDBTableRowBatchCloneRequest as BatchInputHubDBTableRowBatchCloneRequest,
     type BatchInputHubDBTableRowV3BatchUpdateRequest as BatchInputHubDBTableRowV3BatchUpdateRequest,
     type BatchInputHubDBTableRowV3Request as BatchInputHubDBTableRowV3Request,
@@ -3309,6 +3341,7 @@ export declare namespace Cms {
 
   export {
     MediaBridge as MediaBridge,
+    BaseMediaBridge as BaseMediaBridge,
     type AbsoluteValue as AbsoluteValue,
     type AddNumbers as AddNumbers,
     type AddTime as AddTime,
@@ -3463,6 +3496,7 @@ export declare namespace Cms {
 
   export {
     Pages as Pages,
+    BasePages as BasePages,
     type AbTestEndRequestVNext as AbTestEndRequestVNext,
     type AbTestRerunRequestVNext as AbTestRerunRequestVNext,
     type BatchInputContentFolder as BatchInputContentFolder,
@@ -3501,6 +3535,7 @@ export declare namespace Cms {
 
   export {
     SiteSearch as SiteSearch,
+    BaseSiteSearch as BaseSiteSearch,
     type ContentSearchResult as ContentSearchResult,
     type IndexedData as IndexedData,
     type IndexedField as IndexedField,
@@ -3511,6 +3546,7 @@ export declare namespace Cms {
 
   export {
     SourceCode as SourceCode,
+    BaseSourceCode as BaseSourceCode,
     type AssetFileMetadata as AssetFileMetadata,
     type FileExtractRequest as FileExtractRequest,
     type SourceCodeCreateParams as SourceCodeCreateParams,
@@ -3524,12 +3560,14 @@ export declare namespace Cms {
 
   export {
     URLMappings as URLMappings,
+    BaseURLMappings as BaseURLMappings,
     type URLMappingsURLMapping as URLMappingsURLMapping,
     type URLMappingCreateParams as URLMappingCreateParams,
   };
 
   export {
     URLRedirects as URLRedirects,
+    BaseURLRedirects as BaseURLRedirects,
     type CollectionResponseWithTotalURLMappingForwardPaging as CollectionResponseWithTotalURLMappingForwardPaging,
     type URLMapping as URLMapping,
     type URLMappingCreateRequestBody as URLMappingCreateRequestBody,

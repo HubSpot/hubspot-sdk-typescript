@@ -2,6 +2,7 @@
 
 export {
   Calls,
+  BaseCalls,
   type CallCreateParams,
   type CallUpdateParams,
   type CallListParams,
@@ -10,6 +11,7 @@ export {
 } from './calls/index';
 export {
   Carts,
+  BaseCarts,
   type CartCreateParams,
   type CartUpdateParams,
   type CartListParams,
@@ -18,6 +20,7 @@ export {
 } from './carts/index';
 export {
   CommercePayments,
+  BaseCommercePayments,
   type CommercePaymentCreateParams,
   type CommercePaymentUpdateParams,
   type CommercePaymentListParams,
@@ -26,6 +29,7 @@ export {
 } from './commerce-payments/index';
 export {
   Communications,
+  BaseCommunications,
   type CommunicationCreateParams,
   type CommunicationUpdateParams,
   type CommunicationListParams,
@@ -34,6 +38,7 @@ export {
 } from './communications/index';
 export {
   Companies,
+  BaseCompanies,
   type CompanyCreateParams,
   type CompanyUpdateParams,
   type CompanyListParams,
@@ -43,6 +48,7 @@ export {
 } from './companies/index';
 export {
   Contacts,
+  BaseContacts,
   type PublicGdprDeleteInput,
   type ContactCreateParams,
   type ContactUpdateParams,
@@ -54,6 +60,7 @@ export {
 } from './contacts/index';
 export {
   Contracts,
+  BaseContracts,
   type ContractCreateParams,
   type ContractUpdateParams,
   type ContractListParams,
@@ -62,6 +69,7 @@ export {
 } from './contracts/index';
 export {
   Courses,
+  BaseCourses,
   type CourseCreateParams,
   type CourseUpdateParams,
   type CourseListParams,
@@ -70,6 +78,7 @@ export {
 } from './courses/index';
 export {
   Custom,
+  BaseCustom,
   type CustomCreateParams,
   type CustomUpdateParams,
   type CustomListParams,
@@ -80,6 +89,7 @@ export {
 } from './custom/index';
 export {
   Deals,
+  BaseDeals,
   type DealCreateParams,
   type DealUpdateParams,
   type DealListParams,
@@ -89,6 +99,7 @@ export {
 } from './deals/index';
 export {
   Discounts,
+  BaseDiscounts,
   type DiscountCreateParams,
   type DiscountUpdateParams,
   type DiscountListParams,
@@ -97,6 +108,7 @@ export {
 } from './discounts/index';
 export {
   Emails,
+  BaseEmails,
   type EmailCreateParams,
   type EmailUpdateParams,
   type EmailListParams,
@@ -105,12 +117,14 @@ export {
 } from './emails/index';
 export {
   FeedbackSubmissions,
+  BaseFeedbackSubmissions,
   type FeedbackSubmissionListParams,
   type FeedbackSubmissionGetParams,
   type FeedbackSubmissionSearchParams,
 } from './feedback-submissions/index';
 export {
   Fees,
+  BaseFees,
   type FeeCreateParams,
   type FeeUpdateParams,
   type FeeListParams,
@@ -119,6 +133,7 @@ export {
 } from './fees/index';
 export {
   GenericObjects,
+  BaseGenericObjects,
   type GenericObjectCreateParams,
   type GenericObjectUpdateParams,
   type GenericObjectListParams,
@@ -128,6 +143,7 @@ export {
 } from './generic-objects/index';
 export {
   GoalTargets,
+  BaseGoalTargets,
   type GoalTargetCreateParams,
   type GoalTargetUpdateParams,
   type GoalTargetListParams,
@@ -136,6 +152,7 @@ export {
 } from './goal-targets/index';
 export {
   Invoices,
+  BaseInvoices,
   type InvoiceCreateParams,
   type InvoiceUpdateParams,
   type InvoiceListParams,
@@ -144,6 +161,7 @@ export {
 } from './invoices/index';
 export {
   Leads,
+  BaseLeads,
   type LeadCreateParams,
   type LeadUpdateParams,
   type LeadListParams,
@@ -152,6 +170,7 @@ export {
 } from './leads/index';
 export {
   LineItems,
+  BaseLineItems,
   type LineItemCreateParams,
   type LineItemUpdateParams,
   type LineItemListParams,
@@ -160,6 +179,7 @@ export {
 } from './line-items/index';
 export {
   Listings,
+  BaseListings,
   type ListingCreateParams,
   type ListingUpdateParams,
   type ListingListParams,
@@ -168,6 +188,7 @@ export {
 } from './listings/index';
 export {
   Meetings,
+  BaseMeetings,
   type MeetingCreateParams,
   type MeetingUpdateParams,
   type MeetingListParams,
@@ -176,6 +197,7 @@ export {
 } from './meetings/index';
 export {
   Notes,
+  BaseNotes,
   type NoteCreateParams,
   type NoteUpdateParams,
   type NoteListParams,
@@ -184,6 +206,7 @@ export {
 } from './notes/index';
 export {
   Objects,
+  BaseObjects,
   type AssociatedID,
   type BatchInputSimplePublicObjectBatchInput,
   type BatchInputSimplePublicObjectBatchInputForCreate,
@@ -210,6 +233,7 @@ export {
 } from './objects';
 export {
   Orders,
+  BaseOrders,
   type OrderCreateParams,
   type OrderUpdateParams,
   type OrderListParams,
@@ -218,6 +242,7 @@ export {
 } from './orders/index';
 export {
   PartnerClients,
+  BasePartnerClients,
   type PartnerClientUpdateParams,
   type PartnerClientListParams,
   type PartnerClientGetParams,
@@ -226,6 +251,7 @@ export {
 } from './partner-clients/index';
 export {
   PartnerServices,
+  BasePartnerServices,
   type PartnerServiceUpdateParams,
   type PartnerServiceListParams,
   type PartnerServiceGetParams,
@@ -233,6 +259,7 @@ export {
 } from './partner-services/index';
 export {
   PostalMail,
+  BasePostalMail,
   type PostalMailCreateParams,
   type PostalMailUpdateParams,
   type PostalMailListParams,
@@ -241,6 +268,7 @@ export {
 } from './postal-mail/index';
 export {
   Products,
+  BaseProducts,
   type ProductCreateParams,
   type ProductUpdateParams,
   type ProductListParams,
@@ -249,6 +277,7 @@ export {
 } from './products/index';
 export {
   Projects,
+  BaseProjects,
   type ProjectCreateParams,
   type ProjectUpdateParams,
   type ProjectListParams,
@@ -258,6 +287,7 @@ export {
 } from './projects/index';
 export {
   Quotes,
+  BaseQuotes,
   type QuoteCreateParams,
   type QuoteUpdateParams,
   type QuoteListParams,
@@ -266,6 +296,7 @@ export {
 } from './quotes/index';
 export {
   Services,
+  BaseServices,
   type ServiceCreateParams,
   type ServiceUpdateParams,
   type ServiceListParams,
@@ -274,6 +305,7 @@ export {
 } from './services/index';
 export {
   Subscriptions,
+  BaseSubscriptions,
   type SubscriptionCreateParams,
   type SubscriptionUpdateParams,
   type SubscriptionListParams,
@@ -282,6 +314,7 @@ export {
 } from './subscriptions/index';
 export {
   Tasks,
+  BaseTasks,
   type TaskCreateParams,
   type TaskUpdateParams,
   type TaskListParams,
@@ -290,6 +323,7 @@ export {
 } from './tasks/index';
 export {
   Taxes,
+  BaseTaxes,
   type TaxCreateParams,
   type TaxUpdateParams,
   type TaxListParams,
@@ -298,6 +332,7 @@ export {
 } from './taxes/index';
 export {
   Tickets,
+  BaseTickets,
   type TicketCreateParams,
   type TicketUpdateParams,
   type TicketListParams,
@@ -307,6 +342,7 @@ export {
 } from './tickets/index';
 export {
   Users,
+  BaseUsers,
   type UserCreateParams,
   type UserUpdateParams,
   type UserListParams,

@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as VisitorIdentificationAPI from './visitor-identification';
 import {
+  BaseVisitorIdentification,
   IdentificationTokenGenerationRequest,
   IdentificationTokenResponse,
   VisitorIdentification,
@@ -10,6 +11,7 @@ import {
 } from './visitor-identification';
 import * as CustomChannelsAPI from './custom-channels/custom-channels';
 import {
+  BaseCustomChannels,
   ChannelIntegrationMessageEgg,
   ChannelIntegrationParticipant,
   CollectionResponseWithTotalPublicChannelAccount,
@@ -64,18 +66,24 @@ import {
   UnsupportedContentAttachment,
 } from './custom-channels/custom-channels';
 
-export class Conversations extends APIResource {
+export class BaseConversations extends APIResource {
+  static override readonly _key: readonly ['conversations'] = Object.freeze(['conversations'] as const);
+}
+export class Conversations extends BaseConversations {
   customChannels: CustomChannelsAPI.CustomChannels = new CustomChannelsAPI.CustomChannels(this._client);
   visitorIdentification: VisitorIdentificationAPI.VisitorIdentification =
     new VisitorIdentificationAPI.VisitorIdentification(this._client);
 }
 
 Conversations.CustomChannels = CustomChannels;
+Conversations.BaseCustomChannels = BaseCustomChannels;
 Conversations.VisitorIdentification = VisitorIdentification;
+Conversations.BaseVisitorIdentification = BaseVisitorIdentification;
 
 export declare namespace Conversations {
   export {
     CustomChannels as CustomChannels,
+    BaseCustomChannels as BaseCustomChannels,
     type ChannelIntegrationMessageEgg as ChannelIntegrationMessageEgg,
     type ChannelIntegrationParticipant as ChannelIntegrationParticipant,
     type CollectionResponseWithTotalPublicChannelAccount as CollectionResponseWithTotalPublicChannelAccount,
@@ -131,6 +139,7 @@ export declare namespace Conversations {
 
   export {
     VisitorIdentification as VisitorIdentification,
+    BaseVisitorIdentification as BaseVisitorIdentification,
     type IdentificationTokenGenerationRequest as IdentificationTokenGenerationRequest,
     type IdentificationTokenResponse as IdentificationTokenResponse,
     type VisitorIdentificationGenerateTokenParams as VisitorIdentificationGenerateTokenParams,
