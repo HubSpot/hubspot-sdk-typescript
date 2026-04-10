@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Hubspot from 'hubspot-sdk';
+import HubSpot from 'hubspot-sdk';
 
-const client = new Hubspot({
+const client = new HubSpot({
   accessToken: 'My Access Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
@@ -211,7 +211,7 @@ describe('resource webhooks', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.webhooks.getEarliestJournal({ installPortalId: 0 }, { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Hubspot.NotFoundError);
+    ).rejects.toThrow(HubSpot.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -235,7 +235,7 @@ describe('resource webhooks', () => {
         { installPortalId: 0 },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(Hubspot.NotFoundError);
+    ).rejects.toThrow(HubSpot.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -243,7 +243,7 @@ describe('resource webhooks', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.webhooks.getEarliestLocalJournal({ installPortalId: 0 }, { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Hubspot.NotFoundError);
+    ).rejects.toThrow(HubSpot.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -267,7 +267,7 @@ describe('resource webhooks', () => {
         { installPortalId: 0 },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(Hubspot.NotFoundError);
+    ).rejects.toThrow(HubSpot.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -324,7 +324,7 @@ describe('resource webhooks', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.webhooks.getLatestJournal({ installPortalId: 0 }, { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Hubspot.NotFoundError);
+    ).rejects.toThrow(HubSpot.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -344,7 +344,7 @@ describe('resource webhooks', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.webhooks.getLatestJournalBatch(1, { installPortalId: 0 }, { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Hubspot.NotFoundError);
+    ).rejects.toThrow(HubSpot.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -352,7 +352,7 @@ describe('resource webhooks', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.webhooks.getLatestLocalJournal({ installPortalId: 0 }, { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Hubspot.NotFoundError);
+    ).rejects.toThrow(HubSpot.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -376,7 +376,7 @@ describe('resource webhooks', () => {
         { installPortalId: 0 },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(Hubspot.NotFoundError);
+    ).rejects.toThrow(HubSpot.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -437,7 +437,7 @@ describe('resource webhooks', () => {
         { installPortalId: 0 },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(Hubspot.NotFoundError);
+    ).rejects.toThrow(HubSpot.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -449,7 +449,7 @@ describe('resource webhooks', () => {
         { installPortalId: 0 },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(Hubspot.NotFoundError);
+    ).rejects.toThrow(HubSpot.NotFoundError);
   });
 
   // Mock server tests are disabled

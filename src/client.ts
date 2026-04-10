@@ -122,9 +122,9 @@ export interface ClientOptions {
 }
 
 /**
- * API Client for interfacing with the Hubspot API.
+ * API Client for interfacing with the HubSpot API.
  */
-export class Hubspot {
+export class HubSpot {
   accessToken: string | null;
   developerAPIKey: string | null;
 
@@ -141,7 +141,7 @@ export class Hubspot {
   private _options: ClientOptions;
 
   /**
-   * API Client for interfacing with the Hubspot API.
+   * API Client for interfacing with the HubSpot API.
    *
    * @param {string | null | undefined} [opts.accessToken]
    * @param {string | null | undefined} [opts.developerAPIKey]
@@ -167,7 +167,7 @@ export class Hubspot {
     };
 
     this.baseURL = options.baseURL!;
-    this.timeout = options.timeout ?? Hubspot.DEFAULT_TIMEOUT /* 1 minute */;
+    this.timeout = options.timeout ?? HubSpot.DEFAULT_TIMEOUT /* 1 minute */;
     this.logger = options.logger ?? console;
     const defaultLogLevel = 'warn';
     // Set default logLevel early so that we can log a warning in parseLogLevel.
@@ -510,7 +510,7 @@ export class Hubspot {
     options: PromiseOrValue<FinalRequestOptions>,
   ): Pagination.PagePromise<PageClass, Item> {
     const request = this.makeRequest(options, null, undefined);
-    return new Pagination.PagePromise<PageClass, Item>(this as any as Hubspot, request, Page);
+    return new Pagination.PagePromise<PageClass, Item>(this as any as HubSpot, request, Page);
   }
 
   async fetchWithTimeout(
@@ -741,10 +741,10 @@ export class Hubspot {
     }
   }
 
-  static Hubspot = this;
+  static HubSpot = this;
   static DEFAULT_TIMEOUT = 60000; // 1 minute
 
-  static HubspotError = Errors.HubspotError;
+  static HubSpotError = Errors.HubSpotError;
   static APIError = Errors.APIError;
   static APIConnectionError = Errors.APIConnectionError;
   static APIConnectionTimeoutError = Errors.APIConnectionTimeoutError;
@@ -777,23 +777,23 @@ export class Hubspot {
   webhooks: API.Webhooks = new API.Webhooks(this);
 }
 
-Hubspot.Account = Account;
-Hubspot.Auth = Auth;
-Hubspot.Automation = Automation;
-Hubspot.BusinessUnits = BusinessUnits;
-Hubspot.Cms = Cms;
-Hubspot.CommunicationPreferences = CommunicationPreferences;
-Hubspot.Conversations = Conversations;
-Hubspot.Crm = Crm;
-Hubspot.Events = Events;
-Hubspot.Files = Files;
-Hubspot.Marketing = Marketing;
-Hubspot.Meta = Meta;
-Hubspot.Scheduler = Scheduler;
-Hubspot.Settings = Settings;
-Hubspot.Webhooks = Webhooks;
+HubSpot.Account = Account;
+HubSpot.Auth = Auth;
+HubSpot.Automation = Automation;
+HubSpot.BusinessUnits = BusinessUnits;
+HubSpot.Cms = Cms;
+HubSpot.CommunicationPreferences = CommunicationPreferences;
+HubSpot.Conversations = Conversations;
+HubSpot.Crm = Crm;
+HubSpot.Events = Events;
+HubSpot.Files = Files;
+HubSpot.Marketing = Marketing;
+HubSpot.Meta = Meta;
+HubSpot.Scheduler = Scheduler;
+HubSpot.Settings = Settings;
+HubSpot.Webhooks = Webhooks;
 
-export declare namespace Hubspot {
+export declare namespace HubSpot {
   export type RequestOptions = Opts.RequestOptions;
 
   export import Page = Pagination.Page;

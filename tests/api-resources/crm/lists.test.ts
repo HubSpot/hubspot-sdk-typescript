@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Hubspot from 'hubspot-sdk';
+import HubSpot from 'hubspot-sdk';
 
-const client = new Hubspot({
+const client = new HubSpot({
   accessToken: 'My Access Token',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
@@ -237,7 +237,7 @@ describe('resource lists', () => {
         { includeFilters: true, listIds: ['string'] },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(Hubspot.NotFoundError);
+    ).rejects.toThrow(HubSpot.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -405,7 +405,7 @@ describe('resource lists', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.crm.lists.get('listId', { includeFilters: true }, { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Hubspot.NotFoundError);
+    ).rejects.toThrow(HubSpot.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -447,7 +447,7 @@ describe('resource lists', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.crm.lists.getIDMapping({ legacyListId: 'legacyListId' }, { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Hubspot.NotFoundError);
+    ).rejects.toThrow(HubSpot.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -475,7 +475,7 @@ describe('resource lists', () => {
         },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(Hubspot.NotFoundError);
+    ).rejects.toThrow(HubSpot.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -532,7 +532,7 @@ describe('resource lists', () => {
         { endDate: 'endDate', startDate: 'startDate' },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(Hubspot.NotFoundError);
+    ).rejects.toThrow(HubSpot.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -582,7 +582,7 @@ describe('resource lists', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.crm.lists.listFolders({ folderId: 'folderId' }, { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Hubspot.NotFoundError);
+    ).rejects.toThrow(HubSpot.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -610,7 +610,7 @@ describe('resource lists', () => {
         },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(Hubspot.NotFoundError);
+    ).rejects.toThrow(HubSpot.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -685,7 +685,7 @@ describe('resource lists', () => {
         { newFolderName: 'newFolderName' },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(Hubspot.NotFoundError);
+    ).rejects.toThrow(HubSpot.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -1103,7 +1103,7 @@ describe('resource lists', () => {
         { includeFilters: true, listName: 'listName' },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(Hubspot.NotFoundError);
+    ).rejects.toThrow(HubSpot.NotFoundError);
   });
 
   // Mock server tests are disabled
