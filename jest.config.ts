@@ -7,8 +7,8 @@ const config: JestConfigWithTsJest = {
     '^.+\\.(t|j)sx?$': ['@swc/jest', { sourceMaps: 'inline' }],
   },
   moduleNameMapper: {
-    '^hubspot-sdk$': '<rootDir>/src/index.ts',
-    '^hubspot-sdk/(.*)$': '<rootDir>/src/$1',
+    '^@hubspot/sdk$': '<rootDir>/src/index.ts',
+    '^@hubspot/sdk/(.*)$': '<rootDir>/src/$1',
   },
   modulePathIgnorePatterns: [
     '<rootDir>/ecosystem-tests/',

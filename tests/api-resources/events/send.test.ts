@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { Events } from 'hubspot-sdk/resources/events/events';
-import { BaseSend } from 'hubspot-sdk/resources/events/send';
+import { Events } from '@hubspot/sdk/resources/events/events';
+import { BaseSend } from '@hubspot/sdk/resources/events/send';
 
-import HubSpot from 'hubspot-sdk';
-import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
+import HubSpot from '@hubspot/sdk';
+import { createClient, type PartialHubSpot } from '@hubspot/sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',

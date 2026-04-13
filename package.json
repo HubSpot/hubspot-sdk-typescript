@@ -1,12 +1,12 @@
 {
-  "name": "hubspot-sdk",
-  "version": "0.0.1",
+  "name": "@hubspot/sdk",
+  "version": "0.1.0-alpha.1",
   "description": "The official TypeScript library for the HubSpot API",
   "author": "HubSpot <>",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "type": "commonjs",
-  "repository": "github:stainless-sdks/hubspot-sdk-typescript",
+  "repository": "github:HubSpot/hubspot-sdk-typescript",
   "license": "Apache-2.0",
   "packageManager": "yarn@1.22.22",
   "files": [

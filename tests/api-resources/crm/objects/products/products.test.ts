@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { Objects } from 'hubspot-sdk/resources/crm/objects/objects';
-import { BaseProducts } from 'hubspot-sdk/resources/crm/objects/products/products';
+import { Objects } from '@hubspot/sdk/resources/crm/objects/objects';
+import { BaseProducts } from '@hubspot/sdk/resources/crm/objects/products/products';
 
-import HubSpot from 'hubspot-sdk';
-import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
+import HubSpot from '@hubspot/sdk';
+import { createClient, type PartialHubSpot } from '@hubspot/sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',

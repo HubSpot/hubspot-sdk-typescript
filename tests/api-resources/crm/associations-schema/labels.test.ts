@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { AssociationsSchema } from 'hubspot-sdk/resources/crm/associations-schema/associations-schema';
-import { BaseLabels } from 'hubspot-sdk/resources/crm/associations-schema/labels';
+import { AssociationsSchema } from '@hubspot/sdk/resources/crm/associations-schema/associations-schema';
+import { BaseLabels } from '@hubspot/sdk/resources/crm/associations-schema/labels';
 
-import HubSpot from 'hubspot-sdk';
-import { createClient, type PartialHubSpot } from 'hubspot-sdk/tree-shakable';
+import HubSpot from '@hubspot/sdk';
+import { createClient, type PartialHubSpot } from '@hubspot/sdk/tree-shakable';
 
 const client = new HubSpot({
   accessToken: 'My Access Token',
