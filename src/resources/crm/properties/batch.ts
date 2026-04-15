@@ -59,7 +59,7 @@ export class BaseBatch extends APIResource {
 export class Batch extends BaseBatch {}
 
 export interface BatchCreateParams {
-  inputs: Array<PropertiesAPI.PropertyCreate>;
+  inputs: Array<Shared.PropertyCreate>;
 }
 
 export interface BatchDeleteParams {

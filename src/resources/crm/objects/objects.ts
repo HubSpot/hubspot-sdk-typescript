@@ -781,7 +781,7 @@ export interface SimplePublicObjectWithAssociations {
   /**
    * Key value pairs representing the properties of the object.
    */
-  properties: { [key: string]: string | null };
+  properties: { [key: string]: string };
 
   /**
    * The timestamp when the object was last updated, in ISO 8601 format.

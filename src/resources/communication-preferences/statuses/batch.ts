@@ -71,7 +71,8 @@ export class Batch extends BaseBatch {}
 
 export interface BatchGetUnsubscribeAllStatusesParams {
   /**
-   * Query param
+   * Query param: The communication channel to filter the unsubscribe statuses. This
+   * parameter is required and currently supports 'EMAIL' as a valid value.
    */
   channel: 'EMAIL';
 
@@ -81,14 +82,16 @@ export interface BatchGetUnsubscribeAllStatusesParams {
   inputs: Array<string>;
 
   /**
-   * Query param
+   * Query param: The ID of the business unit to filter the results. This is an
+   * optional parameter.
    */
   businessUnitId?: number;
 }
 
 export interface BatchReadParams {
   /**
-   * Query param
+   * Query param: The communication channel to filter the subscription statuses. Must
+   * be 'EMAIL'.
    */
   channel: 'EMAIL';
 
@@ -98,14 +101,16 @@ export interface BatchReadParams {
   inputs: Array<string>;
 
   /**
-   * Query param
+   * Query param: An optional integer representing the business unit ID. This
+   * parameter helps to filter the results based on the specific business unit.
    */
   businessUnitId?: number;
 }
 
 export interface BatchUnsubscribeAllParams {
   /**
-   * Query param
+   * Query param: The communication channel from which subscribers will be
+   * unsubscribed. This parameter is required and currently supports only 'EMAIL'.
    */
   channel: 'EMAIL';
 
@@ -115,12 +120,14 @@ export interface BatchUnsubscribeAllParams {
   inputs: Array<string>;
 
   /**
-   * Query param
+   * Query param: An optional integer representing the business unit ID for which the
+   * operation is being performed.
    */
   businessUnitId?: number;
 
   /**
-   * Query param
+   * Query param: A boolean indicating whether to include detailed information in the
+   * response. Defaults to false.
    */
   verbose?: boolean;
 }

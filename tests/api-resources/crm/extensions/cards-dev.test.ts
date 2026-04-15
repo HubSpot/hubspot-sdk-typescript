@@ -194,6 +194,7 @@ const runTests = (client: PartialHubSpot<{ crm: { extensions: { cardsDev: BaseCa
   // Mock server tests are disabled
   test.skip('migrateViews: only required params', async () => {
     const responsePromise = client.crm.extensions.cardsDev.migrateViews(0, {
+      allowDuplicateAppCardIds: true,
       appCardId: 0,
       legacyCrmCardId: 0,
     });
@@ -209,6 +210,7 @@ const runTests = (client: PartialHubSpot<{ crm: { extensions: { cardsDev: BaseCa
   // Mock server tests are disabled
   test.skip('migrateViews: required and optional params', async () => {
     const response = await client.crm.extensions.cardsDev.migrateViews(0, {
+      allowDuplicateAppCardIds: true,
       appCardId: 0,
       legacyCrmCardId: 0,
       helpdeskAppCardId: 0,

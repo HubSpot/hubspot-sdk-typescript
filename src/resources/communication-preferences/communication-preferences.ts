@@ -838,7 +838,8 @@ export interface SubscriptionDefinition {
 
 export interface CommunicationPreferenceGenerateLinksParams {
   /**
-   * Query param
+   * Query param: The communication channel for which the links are generated. Must
+   * be 'EMAIL'.
    */
   channel: 'EMAIL';
 
@@ -849,7 +850,8 @@ export interface CommunicationPreferenceGenerateLinksParams {
   subscriberIdString: string;
 
   /**
-   * Query param
+   * Query param: The identifier of the business unit. Defaults to 0 if not
+   * specified.
    */
   businessUnitId?: number;
 
@@ -867,24 +869,55 @@ export interface CommunicationPreferenceGenerateLinksParams {
 }
 
 export interface CommunicationPreferenceGetStatusesParams {
+  /**
+   * The communication channel for which the subscription status is being retrieved.
+   * This parameter is required and currently supports only 'EMAIL'.
+   */
   channel: 'EMAIL';
 
+  /**
+   * The ID of the business unit to filter the subscription status by. This is an
+   * optional parameter.
+   */
   businessUnitId?: number;
 }
 
 export interface CommunicationPreferenceGetUnsubscribeAllStatusParams {
+  /**
+   * The communication channel from which to unsubscribe the subscriber. This is a
+   * required parameter and must be 'EMAIL'.
+   */
   channel: 'EMAIL';
 
+  /**
+   * The ID of the business unit to which the subscriber belongs. This is an optional
+   * parameter.
+   */
   businessUnitId?: number;
 
+  /**
+   * A boolean indicating whether to include detailed information in the response.
+   * Defaults to false.
+   */
   verbose?: boolean;
 }
 
 export interface CommunicationPreferenceUnsubscribeAllParams {
+  /**
+   * The communication channel to unsubscribe from. Must be 'EMAIL'.
+   */
   channel: 'EMAIL';
 
+  /**
+   * The ID of the business unit associated with the request. This is an optional
+   * integer parameter.
+   */
   businessUnitId?: number;
 
+  /**
+   * A boolean indicating whether to include detailed information in the response.
+   * Defaults to false.
+   */
   verbose?: boolean;
 }
 

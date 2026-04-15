@@ -243,6 +243,7 @@ const runTests = (client: PartialHubSpot<{ cms: { mediaBridge: BaseMediaBridge }
       name: 'name',
       type: 'bool',
       calculationFormula: 'calculationFormula',
+      currencyPropertyName: 'currencyPropertyName',
       dataSensitivity: 'highly_sensitive',
       description: 'description',
       displayOrder: 0,
@@ -250,6 +251,7 @@ const runTests = (client: PartialHubSpot<{ cms: { mediaBridge: BaseMediaBridge }
       formField: true,
       hasUniqueValue: true,
       hidden: true,
+      numberDisplayHint: 'currency',
       options: [
         {
           displayOrder: 0,
@@ -260,6 +262,7 @@ const runTests = (client: PartialHubSpot<{ cms: { mediaBridge: BaseMediaBridge }
         },
       ],
       referencedObjectType: 'referencedObjectType',
+      showCurrencySymbol: true,
     });
   });
 
@@ -691,6 +694,7 @@ const runTests = (client: PartialHubSpot<{ cms: { mediaBridge: BaseMediaBridge }
       appId: 0,
       objectType: 'objectType',
       calculationFormula: 'calculationFormula',
+      currencyPropertyName: 'currencyPropertyName',
       description: 'description',
       displayOrder: 0,
       fieldType: 'booleancheckbox',
@@ -699,6 +703,7 @@ const runTests = (client: PartialHubSpot<{ cms: { mediaBridge: BaseMediaBridge }
       hasUniqueValue: true,
       hidden: true,
       label: 'label',
+      numberDisplayHint: 'currency',
       options: [
         {
           displayOrder: 0,
@@ -708,6 +713,7 @@ const runTests = (client: PartialHubSpot<{ cms: { mediaBridge: BaseMediaBridge }
           description: 'description',
         },
       ],
+      showCurrencySymbol: true,
       type: 'bool',
     });
   });

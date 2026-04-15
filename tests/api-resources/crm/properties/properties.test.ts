@@ -59,6 +59,7 @@ const runTests = (client: PartialHubSpot<{ crm: { properties: BaseProperties } }
       formField: true,
       hasUniqueValue: true,
       hidden: true,
+      numberDisplayHint: 'currency',
       options: [
         {
           displayOrder: 0,
@@ -98,6 +99,7 @@ const runTests = (client: PartialHubSpot<{ crm: { properties: BaseProperties } }
       groupName: 'groupName',
       hidden: true,
       label: 'label',
+      numberDisplayHint: 'currency',
       options: [
         {
           displayOrder: 0,

@@ -10,7 +10,6 @@ Types:
 - <code><a href="./src/resources/crm/crm.ts">FilterGroup</a></code>
 - <code><a href="./src/resources/crm/crm.ts">LabelsBetweenObjectPair</a></code>
 - <code><a href="./src/resources/crm/crm.ts">MultiAssociatedObjectWithLabel</a></code>
-- <code><a href="./src/resources/crm/crm.ts">Property</a></code>
 - <code><a href="./src/resources/crm/crm.ts">PublicDefaultAssociation</a></code>
 - <code><a href="./src/resources/crm/crm.ts">PublicObjectSearchRequest</a></code>
 - <code><a href="./src/resources/crm/crm.ts">SimplePublicObject</a></code>
@@ -1319,11 +1318,9 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/crm/properties/properties.ts">BatchInputPropertyCreate</a></code>
 - <code><a href="./src/resources/crm/properties/properties.ts">BatchResponseProperty</a></code>
 - <code><a href="./src/resources/crm/properties/properties.ts">BatchResponsePropertyWithErrors</a></code>
 - <code><a href="./src/resources/crm/properties/properties.ts">CollectionResponsePropertyNoPaging</a></code>
-- <code><a href="./src/resources/crm/properties/properties.ts">PropertyCreate</a></code>
 - <code><a href="./src/resources/crm/properties/properties.ts">PropertyUpdate</a></code>
 
 Methods:
