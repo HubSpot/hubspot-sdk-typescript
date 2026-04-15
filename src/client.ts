@@ -841,6 +841,7 @@ export declare namespace HubSpot {
   export type AssociationDefinitionEgg = API.AssociationDefinitionEgg;
   export type AssociationSpec = API.AssociationSpec;
   export type AutomationActionsOption = API.AutomationActionsOption;
+  export type BatchInputPropertyCreate = API.BatchInputPropertyCreate;
   export type BatchInputPropertyName = API.BatchInputPropertyName;
   export type BatchInputPublicObjectID = API.BatchInputPublicObjectID;
   export type BatchInputString = API.BatchInputString;
@@ -857,6 +858,8 @@ export declare namespace HubSpot {
   export type OptionInput = API.OptionInput;
   export type Paging = API.Paging;
   export type PreviousPage = API.PreviousPage;
+  export type Property = API.Property;
+  export type PropertyCreate = API.PropertyCreate;
   export type PropertyGroup = API.PropertyGroup;
   export type PropertyGroupCreate = API.PropertyGroupCreate;
   export type PropertyGroupUpdate = API.PropertyGroupUpdate;

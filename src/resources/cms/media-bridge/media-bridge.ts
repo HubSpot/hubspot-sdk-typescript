@@ -500,6 +500,7 @@ export interface AbsoluteValue {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -586,6 +587,7 @@ export interface AddNumbers {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -670,6 +672,7 @@ export interface AddTime {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime;
 
@@ -745,6 +748,7 @@ export interface AddTime {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -831,6 +835,7 @@ export interface And {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -968,10 +973,6 @@ export interface AttentionSpanEventRequest {
   rawDataString?: string;
 }
 
-export interface BatchInputPropertyCreate {
-  inputs: Array<PropertyCreate>;
-}
-
 export interface BatchResponseProperty {
   completedAt: string;
 
@@ -1079,6 +1080,7 @@ export interface BeginsWith {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime;
 
@@ -1154,6 +1156,7 @@ export interface BeginsWith {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -1270,6 +1273,7 @@ export interface ConcatStrings {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -1378,6 +1382,7 @@ export interface Contains {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime;
 
@@ -1453,6 +1458,7 @@ export interface Contains {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -1537,6 +1543,7 @@ export interface Date {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -1621,6 +1628,7 @@ export interface DatedExchangeRate {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -1723,6 +1731,7 @@ export interface DivideNumbers {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -1861,6 +1870,7 @@ export interface ExtractMostRecentEmailReplyHTML {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -1945,6 +1955,7 @@ export interface ExtractMostRecentEmailReplyText {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -2029,6 +2040,7 @@ export interface ExtractMostRecentPlainTextEmailReply {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -2113,6 +2125,7 @@ export interface FetchCurrencyDecimalPlaces {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -2197,6 +2210,7 @@ export interface FetchExchangeRate {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -2303,6 +2317,7 @@ export interface FormatFullName {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -2387,6 +2402,7 @@ export interface FormatPhoneNumber {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -2471,6 +2487,7 @@ export interface FormatSearchablePhoneNumber {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -2587,6 +2604,7 @@ export interface HasEmailReply {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -2671,6 +2689,7 @@ export interface HasPlainTextEmailReply {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -2755,6 +2774,7 @@ export interface IfBoolean {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime;
 
@@ -2832,6 +2852,7 @@ export interface IfBoolean {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime;
 
@@ -2907,6 +2928,7 @@ export interface IfBoolean {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -2991,6 +3013,7 @@ export interface IfNumber {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime;
 
@@ -3068,6 +3091,7 @@ export interface IfNumber {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime;
 
@@ -3143,6 +3167,7 @@ export interface IfNumber {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -3227,6 +3252,7 @@ export interface IfString {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime;
 
@@ -3304,6 +3330,7 @@ export interface IfString {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime;
 
@@ -3379,6 +3406,7 @@ export interface IfString {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -3431,6 +3459,8 @@ export interface InboundDBObjectType {
   name: string;
 
   objectTypeId: string;
+
+  objectTypeIdString: string;
 
   permissioningType: 'ALL_OR_NONE' | 'DO_NOT_CHECK_PERMISSIONS' | 'EXPLICIT' | 'OWNER_BASED' | 'TEAM_BASED';
 
@@ -3509,6 +3539,91 @@ export interface IntegratorObjectCreationResponse {
   properties: Array<PropertyDefinition>;
 
   propertyGroups: Array<Group>;
+}
+
+export interface IsBlank {
+  operator: 'IS_BLANK';
+
+  inputs?: Array<
+    | ConstantBoolean
+    | ConstantNumber
+    | ConstantString
+    | BooleanPropertyVariable
+    | StringPropertyVariable
+    | NumberPropertyVariable
+    | TimestampOfPropertyVariable
+    | BooleanTargetPropertyVariable
+    | StringTargetPropertyVariable
+    | NumberTargetPropertyVariable
+    | TimestampOfTargetPropertyVariable
+    | AddNumbers
+    | SubtractNumbers
+    | MultiplyNumbers
+    | DivideNumbers
+    | RoundDownNumbers
+    | RoundUpNumbers
+    | RoundNearestNumbers
+    | UpperCase
+    | LowerCase
+    | ConcatStrings
+    | Contains
+    | BeginsWith
+    | NumberToString
+    | ParseNumber
+    | FetchExchangeRate
+    | FetchCurrencyDecimalPlaces
+    | FetchSingleCurrencyPortalCurrency
+    | DatedExchangeRate
+    | PipelineProbability
+    | MaxNumbers
+    | MinNumbers
+    | LessThan
+    | LessThanOrEqual
+    | MoreThan
+    | MoreThanOrEqual
+    | NumberEquals
+    | StringEquals
+    | IsPipelineStageClosed
+    | Not
+    | Date
+    | Month
+    | Year
+    | Now
+    | TimeBetween
+    | TimeBetweenSkipWeekends
+    | PeriodToMonths
+    | PeriodToWeeks
+    | And
+    | Or
+    | Xor
+    | IfString
+    | IfNumber
+    | IfBoolean
+    | IsPresent
+    | HasEmailReply
+    | HasPlainTextEmailReply
+    | ExtractMostRecentEmailReplyHTML
+    | ExtractMostRecentEmailReplyText
+    | ExtractMostRecentPlainTextEmailReply
+    | SetContainsString
+    | IsEngagementType
+    | FormatFullName
+    | FormatPhoneNumber
+    | FormatSearchablePhoneNumber
+    | AbsoluteValue
+    | SquareRoot
+    | Power
+    | Substring
+    | Euler
+    | StringLength
+    | IsBlank
+    | AddTime
+    | SubtractTime
+  >;
+
+  propertyName?: string;
+
+  value?: boolean;
 }
 
 export interface IsEngagementType {
@@ -3594,6 +3709,7 @@ export interface IsPipelineStageClosed {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -3676,6 +3792,7 @@ export interface IsPresent {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime;
 
@@ -3761,6 +3878,7 @@ export interface LessThan {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -3845,6 +3963,7 @@ export interface LessThanOrEqual {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -3929,6 +4048,7 @@ export interface LowerCase {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -4013,6 +4133,7 @@ export interface MaxNumbers {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -4024,6 +4145,8 @@ export interface MaxNumbers {
 
 export interface MediaBridgePropertyUpdate {
   calculationFormula?: string;
+
+  currencyPropertyName?: string;
 
   description?: string;
 
@@ -4053,7 +4176,11 @@ export interface MediaBridgePropertyUpdate {
 
   label?: string;
 
+  numberDisplayHint?: 'currency' | 'duration' | 'formatted' | 'percentage' | 'probability' | 'unformatted';
+
   options?: Array<Shared.OptionInput>;
+
+  showCurrencySymbol?: boolean;
 
   type?: 'bool' | 'date' | 'datetime' | 'enumeration' | 'number' | 'phone_number' | 'string';
 }
@@ -4309,6 +4436,7 @@ export interface MinNumbers {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -4393,6 +4521,7 @@ export interface Month {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -4477,6 +4606,7 @@ export interface MoreThan {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -4561,6 +4691,7 @@ export interface MoreThanOrEqual {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -4647,6 +4778,7 @@ export interface MultiplyNumbers {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -4731,6 +4863,7 @@ export interface Not {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -4823,6 +4956,7 @@ export interface NumberEquals {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -4923,6 +5057,7 @@ export interface NumberToString {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -5111,6 +5246,7 @@ export interface Or {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -5195,6 +5331,7 @@ export interface ParseNumber {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -5279,6 +5416,7 @@ export interface PeriodToMonths {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -5363,6 +5501,7 @@ export interface PeriodToWeeks {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -5447,6 +5586,7 @@ export interface PipelineProbability {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -5531,6 +5671,7 @@ export interface Power {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -5983,6 +6124,8 @@ export interface Property1 {
 
   createdUserId?: string;
 
+  currencyPropertyName?: string;
+
   dataSensitivity?: 'highly_sensitive' | 'non_sensitive' | 'sensitive';
 
   dateDisplayHint?: 'absolute' | 'absolute_with_relative' | 'time_since' | 'time_until';
@@ -6001,6 +6144,8 @@ export interface Property1 {
 
   modificationMetadata?: Shared.PropertyModificationMetadata;
 
+  numberDisplayHint?: 'currency' | 'duration' | 'formatted' | 'percentage' | 'probability' | 'unformatted';
+
   referencedObjectType?: string;
 
   sensitiveDataCategories?: Array<string>;
@@ -6010,50 +6155,6 @@ export interface Property1 {
   updatedAt?: string;
 
   updatedUserId?: string;
-}
-
-export interface PropertyCreate {
-  fieldType:
-    | 'booleancheckbox'
-    | 'calculation_equation'
-    | 'checkbox'
-    | 'date'
-    | 'file'
-    | 'html'
-    | 'number'
-    | 'phonenumber'
-    | 'radio'
-    | 'select'
-    | 'text'
-    | 'textarea';
-
-  groupName: string;
-
-  label: string;
-
-  name: string;
-
-  type: 'bool' | 'date' | 'datetime' | 'enumeration' | 'number' | 'phone_number' | 'string';
-
-  calculationFormula?: string;
-
-  dataSensitivity?: 'highly_sensitive' | 'non_sensitive' | 'sensitive';
-
-  description?: string;
-
-  displayOrder?: number;
-
-  externalOptions?: boolean;
-
-  formField?: boolean;
-
-  hasUniqueValue?: boolean;
-
-  hidden?: boolean;
-
-  options?: Array<Shared.OptionInput>;
-
-  referencedObjectType?: string;
 }
 
 export interface PropertyDefinition {
@@ -6136,6 +6237,7 @@ export interface PropertyDefinition {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime;
 
@@ -6269,6 +6371,7 @@ export interface RollupExpression {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime;
 
@@ -6354,6 +6457,7 @@ export interface RoundDownNumbers {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -6438,6 +6542,7 @@ export interface RoundNearestNumbers {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -6522,6 +6627,7 @@ export interface RoundUpNumbers {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -6614,6 +6720,7 @@ export interface SetContainsString {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime;
 
@@ -6689,6 +6796,7 @@ export interface SetContainsString {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -6777,6 +6885,7 @@ export interface SquareRoot {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -6861,6 +6970,7 @@ export interface StringEquals {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -6945,6 +7055,7 @@ export interface StringLength {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -7045,6 +7156,7 @@ export interface Substring {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime;
 
@@ -7120,6 +7232,7 @@ export interface Substring {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -7206,6 +7319,7 @@ export interface SubtractNumbers {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -7290,6 +7404,7 @@ export interface SubtractTime {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime;
 
@@ -7365,6 +7480,7 @@ export interface SubtractTime {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -7449,6 +7565,7 @@ export interface TimeBetween {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -7533,6 +7650,7 @@ export interface TimeBetweenSkipWeekends {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -7633,6 +7751,7 @@ export interface UpperCase {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -7719,6 +7838,7 @@ export interface Xor {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -7803,6 +7923,7 @@ export interface Year {
     | Substring
     | Euler
     | StringLength
+    | IsBlank
     | AddTime
     | SubtractTime
   >;
@@ -7997,6 +8118,11 @@ export interface MediaBridgeCreatePropertyParams {
   /**
    * Body param
    */
+  currencyPropertyName?: string;
+
+  /**
+   * Body param
+   */
   dataSensitivity?: 'highly_sensitive' | 'non_sensitive' | 'sensitive';
 
   /**
@@ -8032,12 +8158,22 @@ export interface MediaBridgeCreatePropertyParams {
   /**
    * Body param
    */
+  numberDisplayHint?: 'currency' | 'duration' | 'formatted' | 'percentage' | 'probability' | 'unformatted';
+
+  /**
+   * Body param
+   */
   options?: Array<Shared.OptionInput>;
 
   /**
    * Body param
    */
   referencedObjectType?: string;
+
+  /**
+   * Body param
+   */
+  showCurrencySymbol?: boolean;
 }
 
 export interface MediaBridgeCreatePropertyGroupParams {
@@ -8224,6 +8360,11 @@ export interface MediaBridgeUpdatePropertyParams {
   /**
    * Body param
    */
+  currencyPropertyName?: string;
+
+  /**
+   * Body param
+   */
   description?: string;
 
   /**
@@ -8276,7 +8417,17 @@ export interface MediaBridgeUpdatePropertyParams {
   /**
    * Body param
    */
+  numberDisplayHint?: 'currency' | 'duration' | 'formatted' | 'percentage' | 'probability' | 'unformatted';
+
+  /**
+   * Body param
+   */
   options?: Array<Shared.OptionInput>;
+
+  /**
+   * Body param
+   */
+  showCurrencySymbol?: boolean;
 
   /**
    * Body param
@@ -8380,7 +8531,6 @@ export declare namespace MediaBridge {
     type AttentionSpanCalculatedValues as AttentionSpanCalculatedValues,
     type AttentionSpanEvent as AttentionSpanEvent,
     type AttentionSpanEventRequest as AttentionSpanEventRequest,
-    type BatchInputPropertyCreate as BatchInputPropertyCreate,
     type BatchResponseProperty as BatchResponseProperty,
     type BatchResponsePropertyWithErrors as BatchResponsePropertyWithErrors,
     type BeginsWith as BeginsWith,
@@ -8429,6 +8579,7 @@ export declare namespace MediaBridge {
     type IntegratorOEmbedDomainRequest as IntegratorOEmbedDomainRequest,
     type IntegratorObjectCreationRequest as IntegratorObjectCreationRequest,
     type IntegratorObjectCreationResponse as IntegratorObjectCreationResponse,
+    type IsBlank as IsBlank,
     type IsEngagementType as IsEngagementType,
     type IsPipelineStageClosed as IsPipelineStageClosed,
     type IsPresent as IsPresent,
@@ -8469,7 +8620,6 @@ export declare namespace MediaBridge {
     type Power as Power,
     type Property as Property,
     type Property1 as Property1,
-    type PropertyCreate as PropertyCreate,
     type PropertyDefinition as PropertyDefinition,
     type PropertyDefinitionSource as PropertyDefinitionSource,
     type RequiredPropertiesExtensionData as RequiredPropertiesExtensionData,

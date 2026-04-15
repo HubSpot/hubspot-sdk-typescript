@@ -4,9 +4,6 @@
 
 Types:
 
-- <code><a href="./src/resources/auth/oauth.ts">PublicAccessTokenInfoResponse</a></code>
-- <code><a href="./src/resources/auth/oauth.ts">PublicRefreshTokenInfoResponse</a></code>
-- <code><a href="./src/resources/auth/oauth.ts">SignedAccessToken</a></code>
 - <code><a href="./src/resources/auth/oauth.ts">TokenInfoResponseBaseIf</a></code>
 
 Methods:

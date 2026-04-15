@@ -45,6 +45,7 @@ const runTests = (client: PartialHubSpot<{ cms: { urlMappings: BaseURLMappings }
       isRegex: true,
       isTrailingSlashOptional: true,
       label: 'label',
+      lastUsedAt: 0,
       name: 'name',
       note: 'note',
       portalId: 0,

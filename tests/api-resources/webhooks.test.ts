@@ -18,8 +18,29 @@ const partialClient = createClient({
 
 const runTests = (client: PartialHubSpot<{ webhooks: BaseWebhooks }>) => {
   // Mock server tests are disabled
-  test.skip('createCrmSnapshot: only required params', async () => {
-    const responsePromise = client.webhooks.createCrmSnapshot({
+  test.skip('createBatchEventSubscriptions: only required params', async () => {
+    const responsePromise = client.webhooks.createBatchEventSubscriptions(0, {
+      inputs: [{ id: 0, active: true }],
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('createBatchEventSubscriptions: required and optional params', async () => {
+    const response = await client.webhooks.createBatchEventSubscriptions(0, {
+      inputs: [{ id: 0, active: true }],
+    });
+  });
+
+  // Mock server tests are disabled
+  test.skip('createCrmSnapshots: only required params', async () => {
+    const responsePromise = client.webhooks.createCrmSnapshots({
       snapshotRequests: [
         {
           objectId: 0,
@@ -39,8 +60,8 @@ const runTests = (client: PartialHubSpot<{ webhooks: BaseWebhooks }>) => {
   });
 
   // Mock server tests are disabled
-  test.skip('createCrmSnapshot: required and optional params', async () => {
-    const response = await client.webhooks.createCrmSnapshot({
+  test.skip('createCrmSnapshots: required and optional params', async () => {
+    const response = await client.webhooks.createCrmSnapshots({
       snapshotRequests: [
         {
           objectId: 0,
@@ -49,6 +70,32 @@ const runTests = (client: PartialHubSpot<{ webhooks: BaseWebhooks }>) => {
           properties: ['string'],
         },
       ],
+    });
+  });
+
+  // Mock server tests are disabled
+  test.skip('createEventSubscription: only required params', async () => {
+    const responsePromise = client.webhooks.createEventSubscription(0, {
+      active: true,
+      eventType: 'company.associationChange',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('createEventSubscription: required and optional params', async () => {
+    const response = await client.webhooks.createEventSubscription(0, {
+      active: true,
+      eventType: 'company.associationChange',
+      eventTypeName: 'eventTypeName',
+      objectTypeId: 'objectTypeId',
+      propertyName: 'propertyName',
     });
   });
 
@@ -62,32 +109,6 @@ const runTests = (client: PartialHubSpot<{ webhooks: BaseWebhooks }>) => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('createSubscription: only required params', async () => {
-    const responsePromise = client.webhooks.createSubscription(0, {
-      active: true,
-      eventType: 'company.associationChange',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('createSubscription: required and optional params', async () => {
-    const response = await client.webhooks.createSubscription(0, {
-      active: true,
-      eventType: 'company.associationChange',
-      eventTypeName: 'eventTypeName',
-      objectTypeId: 'objectTypeId',
-      propertyName: 'propertyName',
-    });
   });
 
   // Mock server tests are disabled
@@ -132,10 +153,8 @@ const runTests = (client: PartialHubSpot<{ webhooks: BaseWebhooks }>) => {
   });
 
   // Mock server tests are disabled
-  test.skip('createSubscriptionsBatch: only required params', async () => {
-    const responsePromise = client.webhooks.createSubscriptionsBatch(0, {
-      inputs: [{ id: 0, active: true }],
-    });
+  test.skip('deleteEventSubscription: only required params', async () => {
+    const responsePromise = client.webhooks.deleteEventSubscription(0, { appId: 0 });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -146,8 +165,8 @@ const runTests = (client: PartialHubSpot<{ webhooks: BaseWebhooks }>) => {
   });
 
   // Mock server tests are disabled
-  test.skip('createSubscriptionsBatch: required and optional params', async () => {
-    const response = await client.webhooks.createSubscriptionsBatch(0, { inputs: [{ id: 0, active: true }] });
+  test.skip('deleteEventSubscription: required and optional params', async () => {
+    const response = await client.webhooks.deleteEventSubscription(0, { appId: 0 });
   });
 
   // Mock server tests are disabled
@@ -163,8 +182,8 @@ const runTests = (client: PartialHubSpot<{ webhooks: BaseWebhooks }>) => {
   });
 
   // Mock server tests are disabled
-  test.skip('deletePortalSubscriptions', async () => {
-    const responsePromise = client.webhooks.deletePortalSubscriptions(0);
+  test.skip('deleteJournalSubscriptionForPortal', async () => {
+    const responsePromise = client.webhooks.deleteJournalSubscriptionForPortal(0);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -187,23 +206,6 @@ const runTests = (client: PartialHubSpot<{ webhooks: BaseWebhooks }>) => {
   });
 
   // Mock server tests are disabled
-  test.skip('deleteSubscription: only required params', async () => {
-    const responsePromise = client.webhooks.deleteSubscription(0, { appId: 0 });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('deleteSubscription: required and optional params', async () => {
-    const response = await client.webhooks.deleteSubscription(0, { appId: 0 });
-  });
-
-  // Mock server tests are disabled
   test.skip('deleteSubscriptionFilter', async () => {
     const responsePromise = client.webhooks.deleteSubscriptionFilter(0);
     const rawResponse = await responsePromise.asResponse();
@@ -213,14 +215,6 @@ const runTests = (client: PartialHubSpot<{ webhooks: BaseWebhooks }>) => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('getEarliestJournal: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.webhooks.getEarliestJournal({ installPortalId: 0 }, { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(HubSpot.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -248,10 +242,10 @@ const runTests = (client: PartialHubSpot<{ webhooks: BaseWebhooks }>) => {
   });
 
   // Mock server tests are disabled
-  test.skip('getEarliestLocalJournal: request options and params are passed correctly', async () => {
+  test.skip('getEarliestJournalEntry: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.webhooks.getEarliestLocalJournal({ installPortalId: 0 }, { path: '/_stainless_unknown_path' }),
+      client.webhooks.getEarliestJournalEntry({ installPortalId: 0 }, { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(HubSpot.NotFoundError);
   });
 
@@ -280,8 +274,19 @@ const runTests = (client: PartialHubSpot<{ webhooks: BaseWebhooks }>) => {
   });
 
   // Mock server tests are disabled
-  test.skip('getJournalBatch: only required params', async () => {
-    const responsePromise = client.webhooks.getJournalBatch({ inputs: ['string'] });
+  test.skip('getEarliestLocalJournalEntry: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.webhooks.getEarliestLocalJournalEntry(
+        { installPortalId: 0 },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(HubSpot.NotFoundError);
+  });
+
+  // Mock server tests are disabled
+  test.skip('getEventSubscription: only required params', async () => {
+    const responsePromise = client.webhooks.getEventSubscription(0, { appId: 0 });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -292,13 +297,13 @@ const runTests = (client: PartialHubSpot<{ webhooks: BaseWebhooks }>) => {
   });
 
   // Mock server tests are disabled
-  test.skip('getJournalBatch: required and optional params', async () => {
-    const response = await client.webhooks.getJournalBatch({ inputs: ['string'], installPortalId: 0 });
+  test.skip('getEventSubscription: required and optional params', async () => {
+    const response = await client.webhooks.getEventSubscription(0, { appId: 0 });
   });
 
   // Mock server tests are disabled
-  test.skip('getJournalBatchAfterOffset: only required params', async () => {
-    const responsePromise = client.webhooks.getJournalBatchAfterOffset(1, { offset: 'offset' });
+  test.skip('getJournalBatchByRequest: only required params', async () => {
+    const responsePromise = client.webhooks.getJournalBatchByRequest({ inputs: ['string'] });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -309,8 +314,28 @@ const runTests = (client: PartialHubSpot<{ webhooks: BaseWebhooks }>) => {
   });
 
   // Mock server tests are disabled
-  test.skip('getJournalBatchAfterOffset: required and optional params', async () => {
-    const response = await client.webhooks.getJournalBatchAfterOffset(1, {
+  test.skip('getJournalBatchByRequest: required and optional params', async () => {
+    const response = await client.webhooks.getJournalBatchByRequest({
+      inputs: ['string'],
+      installPortalId: 0,
+    });
+  });
+
+  // Mock server tests are disabled
+  test.skip('getJournalBatchFromOffset: only required params', async () => {
+    const responsePromise = client.webhooks.getJournalBatchFromOffset(1, { offset: 'offset' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('getJournalBatchFromOffset: required and optional params', async () => {
+    const response = await client.webhooks.getJournalBatchFromOffset(1, {
       offset: 'offset',
       installPortalId: 0,
     });
@@ -329,11 +354,15 @@ const runTests = (client: PartialHubSpot<{ webhooks: BaseWebhooks }>) => {
   });
 
   // Mock server tests are disabled
-  test.skip('getLatestJournal: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.webhooks.getLatestJournal({ installPortalId: 0 }, { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(HubSpot.NotFoundError);
+  test.skip('getJournalSubscription', async () => {
+    const responsePromise = client.webhooks.getJournalSubscription(0);
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
   });
 
   // Mock server tests are disabled
@@ -357,10 +386,10 @@ const runTests = (client: PartialHubSpot<{ webhooks: BaseWebhooks }>) => {
   });
 
   // Mock server tests are disabled
-  test.skip('getLatestLocalJournal: request options and params are passed correctly', async () => {
+  test.skip('getLatestJournalEntry: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.webhooks.getLatestLocalJournal({ installPortalId: 0 }, { path: '/_stainless_unknown_path' }),
+      client.webhooks.getLatestJournalEntry({ installPortalId: 0 }, { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(HubSpot.NotFoundError);
   });
 
@@ -389,8 +418,19 @@ const runTests = (client: PartialHubSpot<{ webhooks: BaseWebhooks }>) => {
   });
 
   // Mock server tests are disabled
-  test.skip('getLocalJournalBatch: only required params', async () => {
-    const responsePromise = client.webhooks.getLocalJournalBatch({ inputs: ['string'] });
+  test.skip('getLatestLocalJournalEntry: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.webhooks.getLatestLocalJournalEntry(
+        { installPortalId: 0 },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(HubSpot.NotFoundError);
+  });
+
+  // Mock server tests are disabled
+  test.skip('getLocalJournalBatchByRequest: only required params', async () => {
+    const responsePromise = client.webhooks.getLocalJournalBatchByRequest({ inputs: ['string'] });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -401,13 +441,16 @@ const runTests = (client: PartialHubSpot<{ webhooks: BaseWebhooks }>) => {
   });
 
   // Mock server tests are disabled
-  test.skip('getLocalJournalBatch: required and optional params', async () => {
-    const response = await client.webhooks.getLocalJournalBatch({ inputs: ['string'], installPortalId: 0 });
+  test.skip('getLocalJournalBatchByRequest: required and optional params', async () => {
+    const response = await client.webhooks.getLocalJournalBatchByRequest({
+      inputs: ['string'],
+      installPortalId: 0,
+    });
   });
 
   // Mock server tests are disabled
-  test.skip('getLocalJournalBatchAfterOffset: only required params', async () => {
-    const responsePromise = client.webhooks.getLocalJournalBatchAfterOffset(1, { offset: 'offset' });
+  test.skip('getLocalJournalBatchFromOffset: only required params', async () => {
+    const responsePromise = client.webhooks.getLocalJournalBatchFromOffset(1, { offset: 'offset' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -418,8 +461,8 @@ const runTests = (client: PartialHubSpot<{ webhooks: BaseWebhooks }>) => {
   });
 
   // Mock server tests are disabled
-  test.skip('getLocalJournalBatchAfterOffset: required and optional params', async () => {
-    const response = await client.webhooks.getLocalJournalBatchAfterOffset(1, {
+  test.skip('getLocalJournalBatchFromOffset: required and optional params', async () => {
+    const response = await client.webhooks.getLocalJournalBatchFromOffset(1, {
       offset: 'offset',
       installPortalId: 0,
     });
@@ -438,10 +481,10 @@ const runTests = (client: PartialHubSpot<{ webhooks: BaseWebhooks }>) => {
   });
 
   // Mock server tests are disabled
-  test.skip('getNextJournalAfterOffset: request options and params are passed correctly', async () => {
+  test.skip('getNextJournalEntries: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.webhooks.getNextJournalAfterOffset(
+      client.webhooks.getNextJournalEntries(
         'offset',
         { installPortalId: 0 },
         { path: '/_stainless_unknown_path' },
@@ -450,10 +493,10 @@ const runTests = (client: PartialHubSpot<{ webhooks: BaseWebhooks }>) => {
   });
 
   // Mock server tests are disabled
-  test.skip('getNextLocalJournalAfterOffset: request options and params are passed correctly', async () => {
+  test.skip('getNextLocalJournalEntries: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.webhooks.getNextLocalJournalAfterOffset(
+      client.webhooks.getNextLocalJournalEntries(
         'offset',
         { installPortalId: 0 },
         { path: '/_stainless_unknown_path' },
@@ -474,23 +517,6 @@ const runTests = (client: PartialHubSpot<{ webhooks: BaseWebhooks }>) => {
   });
 
   // Mock server tests are disabled
-  test.skip('getSubscription: only required params', async () => {
-    const responsePromise = client.webhooks.getSubscription(0, { appId: 0 });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('getSubscription: required and optional params', async () => {
-    const response = await client.webhooks.getSubscription(0, { appId: 0 });
-  });
-
-  // Mock server tests are disabled
   test.skip('getSubscriptionFilter', async () => {
     const responsePromise = client.webhooks.getSubscriptionFilter(0);
     const rawResponse = await responsePromise.asResponse();
@@ -503,8 +529,8 @@ const runTests = (client: PartialHubSpot<{ webhooks: BaseWebhooks }>) => {
   });
 
   // Mock server tests are disabled
-  test.skip('getSubscriptionFilters', async () => {
-    const responsePromise = client.webhooks.getSubscriptionFilters(0);
+  test.skip('listEventSubscriptions', async () => {
+    const responsePromise = client.webhooks.listEventSubscriptions(0);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -527,8 +553,8 @@ const runTests = (client: PartialHubSpot<{ webhooks: BaseWebhooks }>) => {
   });
 
   // Mock server tests are disabled
-  test.skip('listSubscriptions', async () => {
-    const responsePromise = client.webhooks.listSubscriptions(0);
+  test.skip('listSubscriptionFilters', async () => {
+    const responsePromise = client.webhooks.listSubscriptionFilters(0);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -536,6 +562,23 @@ const runTests = (client: PartialHubSpot<{ webhooks: BaseWebhooks }>) => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('updateEventSubscription: only required params', async () => {
+    const responsePromise = client.webhooks.updateEventSubscription(0, { appId: 0 });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('updateEventSubscription: required and optional params', async () => {
+    const response = await client.webhooks.updateEventSubscription(0, { appId: 0, active: true });
   });
 
   // Mock server tests are disabled
@@ -559,23 +602,6 @@ const runTests = (client: PartialHubSpot<{ webhooks: BaseWebhooks }>) => {
       targetUrl: 'targetUrl',
       throttling: { maxConcurrentRequests: 0 },
     });
-  });
-
-  // Mock server tests are disabled
-  test.skip('updateSubscription: only required params', async () => {
-    const responsePromise = client.webhooks.updateSubscription(0, { appId: 0 });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('updateSubscription: required and optional params', async () => {
-    const response = await client.webhooks.updateSubscription(0, { appId: 0, active: true });
   });
 };
 describe('resource webhooks', () => runTests(client));

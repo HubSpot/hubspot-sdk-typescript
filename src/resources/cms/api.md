@@ -308,7 +308,6 @@ Types:
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">AttentionSpanCalculatedValues</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">AttentionSpanEvent</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">AttentionSpanEventRequest</a></code>
-- <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">BatchInputPropertyCreate</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">BatchResponseProperty</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">BatchResponsePropertyWithErrors</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">BeginsWith</a></code>
@@ -357,6 +356,7 @@ Types:
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">IntegratorOEmbedDomainRequest</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">IntegratorObjectCreationRequest</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">IntegratorObjectCreationResponse</a></code>
+- <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">IsBlank</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">IsEngagementType</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">IsPipelineStageClosed</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">IsPresent</a></code>
@@ -397,7 +397,6 @@ Types:
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">Power</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">Property</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">Property1</a></code>
-- <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">PropertyCreate</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">PropertyDefinition</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">PropertyDefinitionSource</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">RequiredPropertiesExtensionData</a></code>
