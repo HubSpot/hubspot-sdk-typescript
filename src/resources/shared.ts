@@ -141,6 +141,10 @@ export interface AutomationActionsOption {
   value: string;
 }
 
+export interface BatchInputPropertyCreate {
+  inputs: Array<PropertyCreate>;
+}
+
 export interface BatchInputPropertyName {
   inputs: Array<PropertyName>;
 }
@@ -396,6 +400,219 @@ export interface PreviousPage {
   link?: string;
 }
 
+/**
+ * A HubSpot property
+ */
+export interface Property {
+  /**
+   * A description of the property that will be shown as help text in HubSpot.
+   */
+  description: string;
+
+  /**
+   * Controls how the property appears in HubSpot.
+   */
+  fieldType: string;
+
+  /**
+   * The name of the property group the property belongs to.
+   */
+  groupName: string;
+
+  /**
+   * A human-readable property label that will be shown in HubSpot.
+   */
+  label: string;
+
+  /**
+   * The internal property name, which must be used when referencing the property via
+   * the API.
+   */
+  name: string;
+
+  /**
+   * A list of valid options for the property. This field is required for enumerated
+   * properties, but will be empty for other property types.
+   */
+  options: Array<Option>;
+
+  /**
+   * The property data type.
+   */
+  type: string;
+
+  /**
+   * Whether or not the property is archived.
+   */
+  archived?: boolean;
+
+  /**
+   * When the property was archived.
+   */
+  archivedAt?: string;
+
+  /**
+   * For default properties, true indicates that the property is calculated by a
+   * HubSpot process. It has no effect for custom properties.
+   */
+  calculated?: boolean;
+
+  /**
+   * The formula used for calculated properties.
+   */
+  calculationFormula?: string;
+
+  /**
+   * When the property was created
+   */
+  createdAt?: string;
+
+  /**
+   * The internal ID of the user who created the property in HubSpot. This field may
+   * not exist if the property was created outside of HubSpot.
+   */
+  createdUserId?: string;
+
+  /**
+   * The name of the related currency property.
+   */
+  currencyPropertyName?: string;
+
+  /**
+   * Indicates the sensitivity level of the property, such as "non_sensitive",
+   * "sensitive", or "highly_sensitive".
+   */
+  dataSensitivity?: 'highly_sensitive' | 'non_sensitive' | 'sensitive';
+
+  /**
+   * Controls how date properties are displayed in the HubSpot UI, with options such
+   * as 'absolute', 'absolute_with_relative', 'time_since', and 'time_until'.
+   */
+  dateDisplayHint?: 'absolute' | 'absolute_with_relative' | 'time_since' | 'time_until';
+
+  /**
+   * The order that this property should be displayed in the HubSpot UI relative to
+   * other properties for this object type. Properties are displayed in order
+   * starting with the lowest positive integer value. A value of -1 will cause the
+   * property to be displayed **after** any positive values.
+   */
+  displayOrder?: number;
+
+  /**
+   * For default properties, true indicates that the options are stored externally to
+   * the property settings.
+   */
+  externalOptions?: boolean;
+
+  /**
+   * Whether or not the property can be used in a HubSpot form.
+   */
+  formField?: boolean;
+
+  /**
+   * Whether or not the property's value must be unique. Once set, this can't be
+   * changed.
+   */
+  hasUniqueValue?: boolean;
+
+  /**
+   * Hidden options won't be shown in HubSpot.
+   */
+  hidden?: boolean;
+
+  /**
+   * This will be true for default object properties built into HubSpot.
+   */
+  hubspotDefined?: boolean;
+
+  modificationMetadata?: PropertyModificationMetadata;
+
+  /**
+   * Hint for how a number property is displayed and validated in HubSpot's UI. Can
+   * be: "unformatted", "formatted", "currency", "percentage", "duration", or
+   * "probability".
+   */
+  numberDisplayHint?: 'currency' | 'duration' | 'formatted' | 'percentage' | 'probability' | 'unformatted';
+
+  /**
+   * If this property is related to other object(s), they'll be listed here.
+   */
+  referencedObjectType?: string;
+
+  /**
+   * When sensitiveData is true, lists the type of sensitive data contained in the
+   * property (e.g., "HIPAA").
+   */
+  sensitiveDataCategories?: Array<string>;
+
+  /**
+   * Whether the property will display the currency symbol set in the account
+   * settings.
+   */
+  showCurrencySymbol?: boolean;
+
+  /**
+   * When the object type was last updated.
+   */
+  updatedAt?: string;
+
+  /**
+   * The internal user ID of the user who updated the property in HubSpot. This field
+   * may not exist if the property was updated outside of HubSpot.
+   */
+  updatedUserId?: string;
+}
+
+export interface PropertyCreate {
+  fieldType:
+    | 'booleancheckbox'
+    | 'calculation_equation'
+    | 'checkbox'
+    | 'date'
+    | 'file'
+    | 'html'
+    | 'number'
+    | 'phonenumber'
+    | 'radio'
+    | 'select'
+    | 'text'
+    | 'textarea';
+
+  groupName: string;
+
+  label: string;
+
+  name: string;
+
+  type: 'bool' | 'date' | 'datetime' | 'enumeration' | 'number' | 'phone_number' | 'string';
+
+  calculationFormula?: string;
+
+  currencyPropertyName?: string;
+
+  dataSensitivity?: 'highly_sensitive' | 'non_sensitive' | 'sensitive';
+
+  description?: string;
+
+  displayOrder?: number;
+
+  externalOptions?: boolean;
+
+  formField?: boolean;
+
+  hasUniqueValue?: boolean;
+
+  hidden?: boolean;
+
+  numberDisplayHint?: 'currency' | 'duration' | 'formatted' | 'percentage' | 'probability' | 'unformatted';
+
+  options?: Array<OptionInput>;
+
+  referencedObjectType?: string;
+
+  showCurrencySymbol?: boolean;
+}
+
 export interface PropertyGroup {
   archived: boolean;
 
@@ -556,6 +773,7 @@ export interface PropertyValue {
     | 'LEGAL_BASIS_REMEDIATION'
     | 'MARKET_SOURCING'
     | 'MARKETPLACE'
+    | 'MARKETS'
     | 'MEETINGS'
     | 'MERGE_COMPANIES'
     | 'MERGE_CONTACTS'
@@ -580,6 +798,7 @@ export interface PropertyValue {
     | 'QUOTES'
     | 'RECYCLING_BIN'
     | 'RESTORE_OBJECTS'
+    | 'REVENUE_PLATFORM'
     | 'SALES'
     | 'SALES_MESSAGES'
     | 'SALESFORCE'

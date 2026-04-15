@@ -4,9 +4,6 @@ export { Auth, BaseAuth } from './auth';
 export {
   OAuth,
   BaseOAuth,
-  type PublicAccessTokenInfoResponse,
-  type PublicRefreshTokenInfoResponse,
-  type SignedAccessToken,
   type TokenInfoResponseBaseIf,
   type OAuthCreateTokenParams,
   type OAuthIntrospectTokenParams,

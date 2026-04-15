@@ -24,8 +24,16 @@ export class BaseDefinitions extends APIResource {
 export class Definitions extends BaseDefinitions {}
 
 export interface DefinitionListParams {
+  /**
+   * An integer representing the ID of the business unit for which to retrieve
+   * subscription definitions.
+   */
   businessUnitId?: number;
 
+  /**
+   * A boolean indicating whether to include translations of the communication
+   * preferences definitions in the response.
+   */
   includeTranslations?: boolean;
 }
 

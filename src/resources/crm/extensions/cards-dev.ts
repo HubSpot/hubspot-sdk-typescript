@@ -281,6 +281,8 @@ export interface CardFetchBodyPatch {
 }
 
 export interface CardMigrateViewsRequest {
+  allowDuplicateAppCardIds: boolean;
+
   appCardId: number;
 
   legacyCrmCardId: number;
@@ -551,7 +553,7 @@ export interface CardsDevCreateParams {
 
 export interface CardsDevUpdateParams {
   /**
-   * Path param
+   * Path param: The appId of the app containing the Legacy CRM Card(s)
    */
   appId: number;
 
@@ -577,14 +579,22 @@ export interface CardsDevUpdateParams {
 }
 
 export interface CardsDevDeleteParams {
+  /**
+   * The appId of the app containing the Legacy CRM Card(s)
+   */
   appId: number;
 }
 
 export interface CardsDevGetByIDParams {
+  /**
+   * The appId of the app containing the Legacy CRM Card(s)
+   */
   appId: number;
 }
 
 export interface CardsDevMigrateViewsParams {
+  allowDuplicateAppCardIds: boolean;
+
   appCardId: number;
 
   legacyCrmCardId: number;

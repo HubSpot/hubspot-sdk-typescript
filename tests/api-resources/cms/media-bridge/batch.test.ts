@@ -59,6 +59,7 @@ const runTests = (client: PartialHubSpot<{ cms: { mediaBridge: { batch: BaseBatc
           name: 'name',
           type: 'bool',
           calculationFormula: 'calculationFormula',
+          currencyPropertyName: 'currencyPropertyName',
           dataSensitivity: 'highly_sensitive',
           description: 'description',
           displayOrder: 0,
@@ -66,6 +67,7 @@ const runTests = (client: PartialHubSpot<{ cms: { mediaBridge: { batch: BaseBatc
           formField: true,
           hasUniqueValue: true,
           hidden: true,
+          numberDisplayHint: 'currency',
           options: [
             {
               displayOrder: 0,
@@ -76,6 +78,7 @@ const runTests = (client: PartialHubSpot<{ cms: { mediaBridge: { batch: BaseBatc
             },
           ],
           referencedObjectType: 'referencedObjectType',
+          showCurrencySymbol: true,
         },
       ],
     });

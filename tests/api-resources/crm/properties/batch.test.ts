@@ -65,6 +65,7 @@ const runTests = (client: PartialHubSpot<{ crm: { properties: { batch: BaseBatch
           formField: true,
           hasUniqueValue: true,
           hidden: true,
+          numberDisplayHint: 'currency',
           options: [
             {
               displayOrder: 0,

@@ -19,11 +19,9 @@ export {
 export {
   Properties,
   BaseProperties,
-  type BatchInputPropertyCreate,
   type BatchResponseProperty,
   type BatchResponsePropertyWithErrors,
   type CollectionResponsePropertyNoPaging,
-  type PropertyCreate,
   type PropertyUpdate,
   type PropertyCreateParams,
   type PropertyUpdateParams,

@@ -46,7 +46,6 @@ Types:
 - <code><a href="./src/resources/events/definitions.ts">NowReference</a></code>
 - <code><a href="./src/resources/events/definitions.ts">NumOccurrencesRefineBy</a></code>
 - <code><a href="./src/resources/events/definitions.ts">NumberPropertyOperation</a></code>
-- <code><a href="./src/resources/events/definitions.ts">Property</a></code>
 - <code><a href="./src/resources/events/definitions.ts">PropertyFilter</a></code>
 - <code><a href="./src/resources/events/definitions.ts">PropertyFilterContext</a></code>
 - <code><a href="./src/resources/events/definitions.ts">PropertyReferencedTime</a></code>

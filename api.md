@@ -8,6 +8,7 @@ Types:
 - <code><a href="./src/resources/shared.ts">AssociationDefinitionEgg</a></code>
 - <code><a href="./src/resources/shared.ts">AssociationSpec</a></code>
 - <code><a href="./src/resources/shared.ts">AutomationActionsOption</a></code>
+- <code><a href="./src/resources/shared.ts">BatchInputPropertyCreate</a></code>
 - <code><a href="./src/resources/shared.ts">BatchInputPropertyName</a></code>
 - <code><a href="./src/resources/shared.ts">BatchInputPublicObjectID</a></code>
 - <code><a href="./src/resources/shared.ts">BatchInputString</a></code>
@@ -24,6 +25,8 @@ Types:
 - <code><a href="./src/resources/shared.ts">OptionInput</a></code>
 - <code><a href="./src/resources/shared.ts">Paging</a></code>
 - <code><a href="./src/resources/shared.ts">PreviousPage</a></code>
+- <code><a href="./src/resources/shared.ts">Property</a></code>
+- <code><a href="./src/resources/shared.ts">PropertyCreate</a></code>
 - <code><a href="./src/resources/shared.ts">PropertyGroup</a></code>
 - <code><a href="./src/resources/shared.ts">PropertyGroupCreate</a></code>
 - <code><a href="./src/resources/shared.ts">PropertyGroupUpdate</a></code>

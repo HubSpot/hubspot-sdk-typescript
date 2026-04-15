@@ -225,6 +225,8 @@ export interface URLMappingsURLMapping {
    */
   label: string;
 
+  lastUsedAt: number;
+
   /**
    * The name of the URL mapping.
    */
@@ -424,6 +426,8 @@ export interface URLMappingCreateParams {
    * A label for the URL mapping.
    */
   label: string;
+
+  lastUsedAt: number;
 
   /**
    * The name of the URL mapping.
