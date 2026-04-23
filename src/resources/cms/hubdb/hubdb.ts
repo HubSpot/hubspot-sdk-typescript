@@ -254,7 +254,7 @@ export interface Column {
   /**
    * Options to choose for select and multi-select columns
    */
-  options?: Array<Option>;
+  options?: Array<HubdbOption>;
 
   /**
    * The timestamp when the column was last updated.
@@ -293,7 +293,7 @@ export interface ColumnRequest {
   /**
    * Options to choose for select and multi-select columns
    */
-  options: Array<Option>;
+  options: Array<HubdbOption>;
 
   /**
    * Type of the column
@@ -649,32 +649,10 @@ export interface HubDBTableV3Request {
   useForPages: boolean;
 }
 
-export interface ImportResult {
-  /**
-   * Specifies number of duplicate rows
-   */
-  duplicateRows: number;
-
-  /**
-   * List of errors during import
-   */
-  errors: Array<Shared.Error>;
-
-  /**
-   * Specifies whether row limit exceeded during import
-   */
-  rowLimitExceeded: boolean;
-
-  /**
-   * Specifies number of rows imported
-   */
-  rowsImported: number;
-}
-
 /**
  * A HubSpot property option
  */
-export interface Option {
+export interface HubdbOption {
   /**
    * The unique ID of the option.
    */
@@ -723,6 +701,28 @@ export interface Option {
    * The ID of the user who last updated the option.
    */
   updatedByUserId?: number;
+}
+
+export interface ImportResult {
+  /**
+   * Specifies number of duplicate rows
+   */
+  duplicateRows: number;
+
+  /**
+   * List of errors during import
+   */
+  errors: Array<Shared.BaseError>;
+
+  /**
+   * Specifies whether row limit exceeded during import
+   */
+  rowLimitExceeded: boolean;
+
+  /**
+   * Specifies number of rows imported
+   */
+  rowsImported: number;
 }
 
 export interface RandomAccessCollectionResponseWithTotalHubDBTableRowV3 {
@@ -783,7 +783,7 @@ export type UnifiedCollectionResponseWithTotalBaseHubDBTableRowV3 =
   | RandomAccessCollectionResponseWithTotalHubDBTableRowV3
   | StreamingCollectionResponseWithTotalHubDBTableRowV3;
 
-export type Variant = unknown;
+export type Variant = { [key: string]: unknown };
 
 Hubdb.Rows = Rows;
 Hubdb.BaseRows = BaseRows;
@@ -811,8 +811,8 @@ export declare namespace Hubdb {
     type HubDBTableRowV3Wrapper as HubDBTableRowV3Wrapper,
     type HubDBTableV3 as HubDBTableV3,
     type HubDBTableV3Request as HubDBTableV3Request,
+    type HubdbOption as HubdbOption,
     type ImportResult as ImportResult,
-    type Option as Option,
     type RandomAccessCollectionResponseWithTotalHubDBTableRowV3 as RandomAccessCollectionResponseWithTotalHubDBTableRowV3,
     type SimpleUser as SimpleUser,
     type StreamingCollectionResponseWithTotalHubDBTableRowV3 as StreamingCollectionResponseWithTotalHubDBTableRowV3,

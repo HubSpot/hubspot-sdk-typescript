@@ -6,7 +6,6 @@ import * as FileAssetsAPI from './file-assets';
 import {
   BaseFileAssets,
   FileAssetCreateParams,
-  FileAssetGetByPathParams,
   FileAssetGetParams,
   FileAssetGetSignedURLParams,
   FileAssetImportFromURLAsyncParams,
@@ -573,7 +572,6 @@ export declare namespace Files {
     type FileAssetCreateParams as FileAssetCreateParams,
     type FileAssetUpdateParams as FileAssetUpdateParams,
     type FileAssetGetParams as FileAssetGetParams,
-    type FileAssetGetByPathParams as FileAssetGetByPathParams,
     type FileAssetGetSignedURLParams as FileAssetGetSignedURLParams,
     type FileAssetImportFromURLAsyncParams as FileAssetImportFromURLAsyncParams,
     type FileAssetReplaceParams as FileAssetReplaceParams,

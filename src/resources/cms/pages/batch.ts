@@ -80,8 +80,8 @@ export class BaseBatch extends APIResource {
   }
 
   /**
-   * Delete a batch of website pages as specified in the request body. Note: this is
-   * not the same as the dashboard `archive` function. To perform a dashboard
+   * Delete a batch of website pages as specified in the request body. Note that this
+   * is not the same as the dashboard `archive` function. To perform a dashboard
    * `archive` send an normal update with the `archivedInDashboard` field set to
    * `true`.
    */

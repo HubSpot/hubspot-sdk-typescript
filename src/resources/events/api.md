@@ -13,7 +13,6 @@ Types:
 - <code><a href="./src/resources/events/definitions.ts">AbsoluteRangedTimestampRefineBy</a></code>
 - <code><a href="./src/resources/events/definitions.ts">AllHistoryRefineBy</a></code>
 - <code><a href="./src/resources/events/definitions.ts">AllPropertyTypesOperation</a></code>
-- <code><a href="./src/resources/events/definitions.ts">AssociationDefinition</a></code>
 - <code><a href="./src/resources/events/definitions.ts">BehavioralEventTypeDefinitionLabels</a></code>
 - <code><a href="./src/resources/events/definitions.ts">BoolPropertyOperation</a></code>
 - <code><a href="./src/resources/events/definitions.ts">CalendarDatePropertyOperation</a></code>
@@ -28,6 +27,7 @@ Types:
 - <code><a href="./src/resources/events/definitions.ts">DatePoint</a></code>
 - <code><a href="./src/resources/events/definitions.ts">DatePropertyOperation</a></code>
 - <code><a href="./src/resources/events/definitions.ts">DateTimePropertyOperation</a></code>
+- <code><a href="./src/resources/events/definitions.ts">DefinitionsAssociationDefinition</a></code>
 - <code><a href="./src/resources/events/definitions.ts">EnumerationPropertyOperation</a></code>
 - <code><a href="./src/resources/events/definitions.ts">ExternalBehavioralEventPropertyCreate</a></code>
 - <code><a href="./src/resources/events/definitions.ts">ExternalBehavioralEventPropertyDefinitionPatch</a></code>
@@ -72,11 +72,11 @@ Methods:
 - <code title="patch /events/2026-03/event-definitions/{eventName}">client.events.definitions.<a href="./src/resources/events/definitions.ts">update</a>(eventName, { ...params }) -> ExternalBehavioralEventTypeDefinition</code>
 - <code title="get /events/2026-03/event-definitions">client.events.definitions.<a href="./src/resources/events/definitions.ts">list</a>({ ...params }) -> ExternalBehavioralEventTypeDefinitionsPage</code>
 - <code title="delete /events/2026-03/event-definitions/{eventName}">client.events.definitions.<a href="./src/resources/events/definitions.ts">delete</a>(eventName) -> void</code>
-- <code title="post /events/2026-03/event-definitions/{eventName}/property">client.events.definitions.<a href="./src/resources/events/definitions.ts">createProperty</a>(eventName, { ...params }) -> Property</code>
+- <code title="post /events/2026-03/event-definitions/{eventName}/property">client.events.definitions.<a href="./src/resources/events/definitions.ts">createProperty</a>(eventName, { ...params }) -> BaseProperty</code>
 - <code title="delete /events/2026-03/event-definitions/{eventName}/property/{propertyName}">client.events.definitions.<a href="./src/resources/events/definitions.ts">deleteProperty</a>(propertyName, { ...params }) -> void</code>
 - <code title="get /events/2026-03/event-definitions/{eventName}">client.events.definitions.<a href="./src/resources/events/definitions.ts">get</a>(eventName) -> ExternalBehavioralEventTypeDefinition</code>
 - <code title="post /events/2026-03/send/batch">client.events.definitions.<a href="./src/resources/events/definitions.ts">sendBatch</a>({ ...params }) -> void</code>
-- <code title="patch /events/2026-03/event-definitions/{eventName}/property/{propertyName}">client.events.definitions.<a href="./src/resources/events/definitions.ts">updateProperty</a>(propertyName, { ...params }) -> Property</code>
+- <code title="patch /events/2026-03/event-definitions/{eventName}/property/{propertyName}">client.events.definitions.<a href="./src/resources/events/definitions.ts">updateProperty</a>(propertyName, { ...params }) -> BaseProperty</code>
 
 ## Occurrences
 

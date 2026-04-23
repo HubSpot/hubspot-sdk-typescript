@@ -296,6 +296,7 @@ export interface ExternalCalendarMeetingEventResponseProperties {
     | 'COMPANIES'
     | 'COMPANY_FAMILIES'
     | 'COMPANY_INSIGHTS'
+    | 'CONNECTED_ACCOUNT'
     | 'CONTACTS'
     | 'CONTACTS_WEB'
     | 'CONTENT_MEMBERSHIP'

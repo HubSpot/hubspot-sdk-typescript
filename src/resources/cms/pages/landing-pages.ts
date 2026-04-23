@@ -47,9 +47,10 @@ export class BaseLandingPages extends APIResource {
   }
 
   /**
-   * Get the list of landing pages. Supports paging and filtering. This method would
-   * be useful for an integration that examined these models and used an external
-   * service to suggest edits.
+   * Retrieve a list of landing pages in your HubSpot account. This endpoint allows
+   * you to filter landing pages based on creation and update timestamps, sort them,
+   * and paginate through results. You can also choose to include archived pages or
+   * specify certain properties to be included in the response.
    */
   list(
     query: LandingPageListParams | null | undefined = {},
@@ -2602,20 +2603,44 @@ export interface LandingPageListParams extends PageParams {
    */
   archived?: boolean;
 
+  /**
+   * Filter landing pages created after a specific date and time.
+   */
   createdAfter?: string;
 
+  /**
+   * Filter landing pages by their creation timestamp.
+   */
   createdAt?: string;
 
+  /**
+   * Filter landing pages created before a specific date and time.
+   */
   createdBefore?: string;
 
+  /**
+   * Specify which properties of the landing pages to include in the response.
+   */
   property?: string;
 
+  /**
+   * Specify the order in which results are returned. Accepts an array of strings.
+   */
   sort?: Array<string>;
 
+  /**
+   * Filter landing pages updated after a specific date and time.
+   */
   updatedAfter?: string;
 
+  /**
+   * Filter landing pages by their last updated timestamp.
+   */
   updatedAt?: string;
 
+  /**
+   * Filter landing pages updated before a specific date and time.
+   */
   updatedBefore?: string;
 }
 
@@ -2644,6 +2669,9 @@ export interface LandingPageGetParams {
    */
   archived?: boolean;
 
+  /**
+   * A specific property of the landing page to include in the response.
+   */
   property?: string;
 }
 

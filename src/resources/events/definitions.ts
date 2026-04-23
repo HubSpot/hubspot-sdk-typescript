@@ -67,7 +67,7 @@ export class BaseDefinitions extends APIResource {
     eventName: string,
     body: DefinitionCreatePropertyParams,
     options?: RequestOptions,
-  ): APIPromise<Shared.Property> {
+  ): APIPromise<Shared.BaseProperty> {
     return this._client.post(path`/events/2026-03/event-definitions/${eventName}/property`, {
       body,
       ...options,
@@ -114,7 +114,7 @@ export class BaseDefinitions extends APIResource {
     propertyName: string,
     params: DefinitionUpdatePropertyParams,
     options?: RequestOptions,
-  ): APIPromise<Shared.Property> {
+  ): APIPromise<Shared.BaseProperty> {
     const { eventName, ...body } = params;
     return this._client.patch(path`/events/2026-03/event-definitions/${eventName}/property/${propertyName}`, {
       body,
@@ -175,10 +175,260 @@ export interface AllPropertyTypesOperation {
   renderSpec?: string;
 }
 
+export interface BehavioralEventTypeDefinitionLabels {
+  singular: string;
+
+  plural?: string;
+}
+
+export interface BoolPropertyOperation {
+  includeObjectsWithNoValueSet: boolean;
+
+  operationType: string;
+
+  operator: 'HAS_EVER_BEEN_EQUAL_TO' | 'HAS_NEVER_BEEN_EQUAL_TO' | 'IS_EQUAL_TO' | 'IS_NOT_EQUAL_TO';
+
+  operatorName: string;
+
+  propertyType: 'bool';
+
+  value: boolean;
+
+  defaultValue?: string;
+
+  renderSpec?: string;
+}
+
+export interface CalendarDatePropertyOperation {
+  includeObjectsWithNoValueSet: boolean;
+
+  operationType: string;
+
+  operator: 'IN_LAST_TIME_UNIT' | 'IN_NEXT_TIME_UNIT' | 'IN_THIS_TIME_UNIT' | 'IN_THIS_TIME_UNIT_SO_FAR';
+
+  operatorName: string;
+
+  propertyType: 'calendar-date';
+
+  timeUnit: 'DAY' | 'MONTH' | 'QUARTER' | 'WEEK' | 'YEAR';
+
+  timeUnitCount: number;
+
+  useFiscalYear: boolean;
+
+  defaultValue?: string;
+
+  fiscalYearStart?:
+    | 'APRIL'
+    | 'AUGUST'
+    | 'DECEMBER'
+    | 'FEBRUARY'
+    | 'JANUARY'
+    | 'JULY'
+    | 'JUNE'
+    | 'MARCH'
+    | 'MAY'
+    | 'NOVEMBER'
+    | 'OCTOBER'
+    | 'SEPTEMBER';
+
+  renderSpec?: string;
+}
+
+export interface CollectionResponseWithTotalExternalBehavioralEventTypeDefinition {
+  results: Array<ExternalBehavioralEventTypeDefinition>;
+
+  total: number;
+
+  paging?: Shared.Paging;
+}
+
+export interface ComboEventRule {
+  count: number;
+
+  eventTypeId: string;
+
+  propertyFilters: Array<PropertyFilter>;
+
+  lookbackWindowDays?: number;
+}
+
+export interface ComboEventRuleBranch {
+  composingRules: Array<ComboEventRule>;
+
+  operationType: 'AND' | 'OR';
+
+  ruleBranches: Array<ComboEventRuleBranch>;
+}
+
+export interface ComparativeBoolPropertyOperation {
+  comparisonPropertyName: string;
+
+  includeObjectsWithNoValueSet: boolean;
+
+  operationType: string;
+
+  operator: 'IS_EQUAL_TO' | 'IS_NOT_EQUAL_TO';
+
+  operatorName: string;
+
+  propertyType: 'bool-comparative';
+
+  defaultValue?: string;
+
+  renderSpec?: string;
+}
+
+export interface ComparativeDatePropertyOperation {
+  comparisonPropertyName: string;
+
+  includeObjectsWithNoValueSet: boolean;
+
+  operationType: string;
+
+  operator: 'IS_AFTER' | 'IS_BEFORE';
+
+  operatorName: string;
+
+  propertyType: 'datetime-comparative';
+
+  defaultComparisonValue?: string;
+
+  defaultValue?: string;
+
+  renderSpec?: string;
+}
+
+export interface ComparativeNumberPropertyOperation {
+  comparisonPropertyName: string;
+
+  includeObjectsWithNoValueSet: boolean;
+
+  operationType: string;
+
+  operator:
+    | 'IS_EQUAL_TO'
+    | 'IS_GREATER_THAN'
+    | 'IS_GREATER_THAN_OR_EQUAL_TO'
+    | 'IS_LESS_THAN'
+    | 'IS_LESS_THAN_OR_EQUAL_TO'
+    | 'IS_NOT_EQUAL_TO';
+
+  operatorName: string;
+
+  propertyType: 'number-comparative';
+
+  defaultValue?: string;
+
+  renderSpec?: string;
+}
+
+export interface ComparativePropertyUpdatedOperation {
+  comparisonPropertyName: string;
+
+  includeObjectsWithNoValueSet: boolean;
+
+  operationType: string;
+
+  operator: 'IS_AFTER' | 'IS_BEFORE';
+
+  operatorName: string;
+
+  propertyType: 'property-updated-comparative';
+
+  defaultComparisonValue?: string;
+
+  defaultValue?: string;
+
+  renderSpec?: string;
+}
+
+export interface ComparativeStringPropertyOperation {
+  comparisonPropertyName: string;
+
+  includeObjectsWithNoValueSet: boolean;
+
+  operationType: string;
+
+  operator: 'CONTAINS' | 'DOES_NOT_CONTAIN' | 'ENDS_WITH' | 'IS_EQUAL_TO' | 'IS_NOT_EQUAL_TO' | 'STARTS_WITH';
+
+  operatorName: string;
+
+  propertyType: 'string-comparative';
+
+  defaultValue?: string;
+
+  renderSpec?: string;
+}
+
+export interface DatePoint {
+  day: number;
+
+  month: number;
+
+  timeType: 'DATE';
+
+  timezoneSource: 'CUSTOM' | 'PORTAL' | 'USER';
+
+  year: number;
+
+  zoneId: string;
+
+  hour?: number;
+
+  millisecond?: number;
+
+  minute?: number;
+
+  second?: number;
+}
+
+export interface DatePropertyOperation {
+  day: number;
+
+  includeObjectsWithNoValueSet: boolean;
+
+  month: 'APR' | 'AUG' | 'DEC' | 'FEB' | 'JAN' | 'JUL' | 'JUN' | 'MAR' | 'MAY' | 'NOV' | 'OCT' | 'SEP';
+
+  operationType: string;
+
+  operator: 'AFTER' | 'BEFORE' | 'EQUAL';
+
+  operatorName: string;
+
+  propertyType: 'date';
+
+  year: number;
+
+  defaultValue?: string;
+
+  renderSpec?: string;
+}
+
+export interface DateTimePropertyOperation {
+  includeObjectsWithNoValueSet: boolean;
+
+  operationType: string;
+
+  operator: 'IS_AFTER' | 'IS_AFTER_DATE' | 'IS_BEFORE' | 'IS_BEFORE_DATE' | 'IS_EQUAL_TO';
+
+  operatorName: string;
+
+  propertyType: 'datetime';
+
+  requiresTimeZoneConversion: boolean;
+
+  timestamp: number;
+
+  defaultValue?: string;
+
+  renderSpec?: string;
+}
+
 /**
  * The definition of an association
  */
-export interface AssociationDefinition {
+export interface DefinitionsAssociationDefinition {
   /**
    * The unique ID of the associated object (e.g., a contact ID).
    */
@@ -641,256 +891,6 @@ export interface AssociationDefinition {
     | 'WEB_INTERACTIVE';
 }
 
-export interface BehavioralEventTypeDefinitionLabels {
-  singular: string;
-
-  plural?: string;
-}
-
-export interface BoolPropertyOperation {
-  includeObjectsWithNoValueSet: boolean;
-
-  operationType: string;
-
-  operator: 'HAS_EVER_BEEN_EQUAL_TO' | 'HAS_NEVER_BEEN_EQUAL_TO' | 'IS_EQUAL_TO' | 'IS_NOT_EQUAL_TO';
-
-  operatorName: string;
-
-  propertyType: 'bool';
-
-  value: boolean;
-
-  defaultValue?: string;
-
-  renderSpec?: string;
-}
-
-export interface CalendarDatePropertyOperation {
-  includeObjectsWithNoValueSet: boolean;
-
-  operationType: string;
-
-  operator: 'IN_LAST_TIME_UNIT' | 'IN_NEXT_TIME_UNIT' | 'IN_THIS_TIME_UNIT' | 'IN_THIS_TIME_UNIT_SO_FAR';
-
-  operatorName: string;
-
-  propertyType: 'calendar-date';
-
-  timeUnit: 'DAY' | 'MONTH' | 'QUARTER' | 'WEEK' | 'YEAR';
-
-  timeUnitCount: number;
-
-  useFiscalYear: boolean;
-
-  defaultValue?: string;
-
-  fiscalYearStart?:
-    | 'APRIL'
-    | 'AUGUST'
-    | 'DECEMBER'
-    | 'FEBRUARY'
-    | 'JANUARY'
-    | 'JULY'
-    | 'JUNE'
-    | 'MARCH'
-    | 'MAY'
-    | 'NOVEMBER'
-    | 'OCTOBER'
-    | 'SEPTEMBER';
-
-  renderSpec?: string;
-}
-
-export interface CollectionResponseWithTotalExternalBehavioralEventTypeDefinition {
-  results: Array<ExternalBehavioralEventTypeDefinition>;
-
-  total: number;
-
-  paging?: Shared.Paging;
-}
-
-export interface ComboEventRule {
-  count: number;
-
-  eventTypeId: string;
-
-  propertyFilters: Array<PropertyFilter>;
-
-  lookbackWindowDays?: number;
-}
-
-export interface ComboEventRuleBranch {
-  composingRules: Array<ComboEventRule>;
-
-  operationType: 'AND' | 'OR';
-
-  ruleBranches: Array<ComboEventRuleBranch>;
-}
-
-export interface ComparativeBoolPropertyOperation {
-  comparisonPropertyName: string;
-
-  includeObjectsWithNoValueSet: boolean;
-
-  operationType: string;
-
-  operator: 'IS_EQUAL_TO' | 'IS_NOT_EQUAL_TO';
-
-  operatorName: string;
-
-  propertyType: 'bool-comparative';
-
-  defaultValue?: string;
-
-  renderSpec?: string;
-}
-
-export interface ComparativeDatePropertyOperation {
-  comparisonPropertyName: string;
-
-  includeObjectsWithNoValueSet: boolean;
-
-  operationType: string;
-
-  operator: 'IS_AFTER' | 'IS_BEFORE';
-
-  operatorName: string;
-
-  propertyType: 'datetime-comparative';
-
-  defaultComparisonValue?: string;
-
-  defaultValue?: string;
-
-  renderSpec?: string;
-}
-
-export interface ComparativeNumberPropertyOperation {
-  comparisonPropertyName: string;
-
-  includeObjectsWithNoValueSet: boolean;
-
-  operationType: string;
-
-  operator:
-    | 'IS_EQUAL_TO'
-    | 'IS_GREATER_THAN'
-    | 'IS_GREATER_THAN_OR_EQUAL_TO'
-    | 'IS_LESS_THAN'
-    | 'IS_LESS_THAN_OR_EQUAL_TO'
-    | 'IS_NOT_EQUAL_TO';
-
-  operatorName: string;
-
-  propertyType: 'number-comparative';
-
-  defaultValue?: string;
-
-  renderSpec?: string;
-}
-
-export interface ComparativePropertyUpdatedOperation {
-  comparisonPropertyName: string;
-
-  includeObjectsWithNoValueSet: boolean;
-
-  operationType: string;
-
-  operator: 'IS_AFTER' | 'IS_BEFORE';
-
-  operatorName: string;
-
-  propertyType: 'property-updated-comparative';
-
-  defaultComparisonValue?: string;
-
-  defaultValue?: string;
-
-  renderSpec?: string;
-}
-
-export interface ComparativeStringPropertyOperation {
-  comparisonPropertyName: string;
-
-  includeObjectsWithNoValueSet: boolean;
-
-  operationType: string;
-
-  operator: 'CONTAINS' | 'DOES_NOT_CONTAIN' | 'ENDS_WITH' | 'IS_EQUAL_TO' | 'IS_NOT_EQUAL_TO' | 'STARTS_WITH';
-
-  operatorName: string;
-
-  propertyType: 'string-comparative';
-
-  defaultValue?: string;
-
-  renderSpec?: string;
-}
-
-export interface DatePoint {
-  day: number;
-
-  month: number;
-
-  timeType: 'DATE';
-
-  timezoneSource: 'CUSTOM' | 'PORTAL' | 'USER';
-
-  year: number;
-
-  zoneId: string;
-
-  hour?: number;
-
-  millisecond?: number;
-
-  minute?: number;
-
-  second?: number;
-}
-
-export interface DatePropertyOperation {
-  day: number;
-
-  includeObjectsWithNoValueSet: boolean;
-
-  month: 'APR' | 'AUG' | 'DEC' | 'FEB' | 'JAN' | 'JUL' | 'JUN' | 'MAR' | 'MAY' | 'NOV' | 'OCT' | 'SEP';
-
-  operationType: string;
-
-  operator: 'AFTER' | 'BEFORE' | 'EQUAL';
-
-  operatorName: string;
-
-  propertyType: 'date';
-
-  year: number;
-
-  defaultValue?: string;
-
-  renderSpec?: string;
-}
-
-export interface DateTimePropertyOperation {
-  includeObjectsWithNoValueSet: boolean;
-
-  operationType: string;
-
-  operator: 'IS_AFTER' | 'IS_AFTER_DATE' | 'IS_BEFORE' | 'IS_BEFORE_DATE' | 'IS_EQUAL_TO';
-
-  operatorName: string;
-
-  propertyType: 'datetime';
-
-  requiresTimeZoneConversion: boolean;
-
-  timestamp: number;
-
-  defaultValue?: string;
-
-  renderSpec?: string;
-}
-
 export interface EnumerationPropertyOperation {
   includeObjectsWithNoValueSet: boolean;
 
@@ -974,7 +974,7 @@ export interface ExternalBehavioralEventTypeDefinition {
 
   archived: boolean;
 
-  associations: Array<AssociationDefinition>;
+  associations: Array<DefinitionsAssociationDefinition>;
 
   fullyQualifiedName: string;
 
@@ -984,7 +984,7 @@ export interface ExternalBehavioralEventTypeDefinition {
 
   objectTypeId: string;
 
-  properties: Array<Shared.Property>;
+  properties: Array<Shared.BaseProperty>;
 
   comboEventRules?: ComboEventRuleBranch;
 
@@ -995,6 +995,10 @@ export interface ExternalBehavioralEventTypeDefinition {
   customMatchingId?: ExternalObjectResolutionMappingResponse;
 
   description?: string;
+
+  detailTemplate?: string;
+
+  headerTemplate?: string;
 
   primaryObject?: string;
 
@@ -1717,7 +1721,6 @@ export declare namespace Definitions {
     type AbsoluteRangedTimestampRefineBy as AbsoluteRangedTimestampRefineBy,
     type AllHistoryRefineBy as AllHistoryRefineBy,
     type AllPropertyTypesOperation as AllPropertyTypesOperation,
-    type AssociationDefinition as AssociationDefinition,
     type BehavioralEventTypeDefinitionLabels as BehavioralEventTypeDefinitionLabels,
     type BoolPropertyOperation as BoolPropertyOperation,
     type CalendarDatePropertyOperation as CalendarDatePropertyOperation,
@@ -1732,6 +1735,7 @@ export declare namespace Definitions {
     type DatePoint as DatePoint,
     type DatePropertyOperation as DatePropertyOperation,
     type DateTimePropertyOperation as DateTimePropertyOperation,
+    type DefinitionsAssociationDefinition as DefinitionsAssociationDefinition,
     type EnumerationPropertyOperation as EnumerationPropertyOperation,
     type ExternalBehavioralEventPropertyCreate as ExternalBehavioralEventPropertyCreate,
     type ExternalBehavioralEventPropertyDefinitionPatch as ExternalBehavioralEventPropertyDefinitionPatch,

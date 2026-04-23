@@ -25,10 +25,11 @@ export class BaseWebhooks extends APIResource {
   }
 
   /**
-   * Create a batch of CRM object snapshots for a specified portal. This endpoint
-   * allows you to capture the current state of CRM objects by submitting a batch
-   * request with the necessary object details. It is useful for tracking changes or
-   * maintaining historical records of CRM data.
+   * Create a batch of CRM object snapshots for the specified portal. This endpoint
+   * allows you to capture the state of CRM objects at a specific point in time,
+   * which can be useful for auditing or historical analysis. The request requires a
+   * list of CRM object snapshot requests, each specifying the portal ID, object ID,
+   * object type ID, and properties to include in the snapshot.
    */
   createCrmSnapshots(
     body: WebhookCreateCrmSnapshotsParams,
@@ -49,10 +50,11 @@ export class BaseWebhooks extends APIResource {
   }
 
   /**
-   * Create a new subscription in the webhooks journal for the specified version.
-   * This endpoint allows you to define the subscription details, including actions
-   * and object types, to manage webhook events effectively. It requires a valid
-   * request body with the subscription details.
+   * Create a new webhook subscription for the specified portal in the HubSpot
+   * account. This endpoint allows you to define the subscription details, including
+   * the types of events you want to subscribe to. The request body must include the
+   * necessary subscription information as defined by the SubscriptionUpsertRequest
+   * schema.
    */
   createJournalSubscription(
     body: WebhookCreateJournalSubscriptionParams,
@@ -62,10 +64,10 @@ export class BaseWebhooks extends APIResource {
   }
 
   /**
-   * Create a new filter for a webhook subscription in the HubSpot account. This
-   * endpoint allows you to define conditions that determine when a webhook event
-   * should be triggered for a specific subscription. The request body must include
-   * the subscription ID and the filter details.
+   * Create a new filter for a webhook subscription in your HubSpot account. This
+   * endpoint allows you to define specific conditions that a webhook event must meet
+   * to trigger the subscription. It is useful for managing and customizing the
+   * behavior of webhook subscriptions based on specific criteria.
    */
   createSubscriptionFilter(
     body: WebhookCreateSubscriptionFilterParams,
@@ -92,7 +94,7 @@ export class BaseWebhooks extends APIResource {
   /**
    * Delete a specific webhook journal subscription using its unique identifier. This
    * operation is useful for managing and cleaning up subscriptions that are no
-   * longer needed.
+   * longer needed or relevant.
    */
   deleteJournalSubscription(subscriptionID: number, options?: RequestOptions): APIPromise<void> {
     return this._client.delete(path`/webhooks-journal/subscriptions/2026-03/${subscriptionID}`, {
@@ -103,8 +105,8 @@ export class BaseWebhooks extends APIResource {
 
   /**
    * Delete a webhook journal subscription for a specific portal. This operation
-   * removes the subscription associated with the given portalId, effectively
-   * stopping any webhook events from being sent to the portal.
+   * removes the subscription associated with the given portalId, and no content is
+   * returned upon successful deletion.
    */
   deleteJournalSubscriptionForPortal(portalID: number, options?: RequestOptions): APIPromise<void> {
     return this._client.delete(path`/webhooks-journal/subscriptions/2026-03/portals/${portalID}`, {
@@ -125,10 +127,10 @@ export class BaseWebhooks extends APIResource {
   }
 
   /**
-   * Remove a specific filter from your webhook journal subscriptions. This operation
-   * is useful when you need to clean up or modify the filters applied to your
-   * webhook subscriptions. The filter identified by the filterId will be permanently
-   * deleted.
+   * Delete a specific filter associated with a webhook journal subscription. This
+   * operation is useful for managing and cleaning up filters that are no longer
+   * needed in your subscription setup. The endpoint requires the unique identifier
+   * of the filter to be deleted.
    */
   deleteSubscriptionFilter(filterID: number, options?: RequestOptions): APIPromise<void> {
     return this._client.delete(path`/webhooks-journal/subscriptions/2026-03/filters/${filterID}`, {
@@ -140,7 +142,7 @@ export class BaseWebhooks extends APIResource {
   /**
    * Retrieve the earliest batch of webhook journal entries up to the specified
    * count. This endpoint is useful for fetching historical webhook data in batches,
-   * allowing you to process or analyze them as needed.
+   * allowing you to process or analyze the earliest entries first.
    */
   getEarliestJournalBatch(
     count: number,
@@ -154,9 +156,9 @@ export class BaseWebhooks extends APIResource {
   }
 
   /**
-   * Retrieve the earliest entry from the webhooks journal for the specified portal.
-   * This endpoint is useful for accessing the initial entries in the journal, which
-   * can be helpful for debugging or auditing purposes.
+   * Retrieve the earliest entry from the webhooks journal for the specified version.
+   * This endpoint is useful for accessing the oldest records available in the
+   * journal, which can be helpful for auditing or historical data analysis.
    */
   getEarliestJournalEntry(
     query: WebhookGetEarliestJournalEntryParams | null | undefined = {},
@@ -171,9 +173,9 @@ export class BaseWebhooks extends APIResource {
   }
 
   /**
-   * Retrieve the earliest batch of webhook journal entries up to a specified count.
-   * This endpoint is useful for accessing the oldest records available in the
-   * webhook journal, allowing you to process or analyze historical webhook data.
+   * Retrieve the earliest batch of webhook journal entries based on the specified
+   * count. This endpoint is useful for fetching a specific number of the earliest
+   * entries in the webhook journal for analysis or processing.
    */
   getEarliestLocalJournalBatch(
     count: number,
@@ -188,8 +190,8 @@ export class BaseWebhooks extends APIResource {
 
   /**
    * Retrieve the earliest entry from the webhooks journal for the specified portal.
-   * This endpoint is useful for accessing the oldest available data in the journal,
-   * which can be used for historical analysis or troubleshooting.
+   * This endpoint is useful for accessing the oldest records in the journal, which
+   * can be helpful for auditing or tracking purposes.
    */
   getEarliestLocalJournalEntry(
     query: WebhookGetEarliestLocalJournalEntryParams | null | undefined = {},
@@ -216,9 +218,10 @@ export class BaseWebhooks extends APIResource {
   }
 
   /**
-   * Read a batch of webhook journal entries for the specified portal. This endpoint
-   * allows you to retrieve detailed information about webhook events processed by
-   * your HubSpot account. It is useful for auditing and tracking webhook activity.
+   * Perform a batch read operation on the webhooks journal for the specified date.
+   * This endpoint allows you to retrieve multiple entries from the webhooks journal
+   * in a single request, which can be useful for processing large amounts of data
+   * efficiently.
    */
   getJournalBatchByRequest(
     params: WebhookGetJournalBatchByRequestParams,
@@ -234,8 +237,8 @@ export class BaseWebhooks extends APIResource {
 
   /**
    * Retrieve a batch of webhook journal entries starting from a specified offset.
-   * This endpoint allows you to specify the number of entries to retrieve, helping
-   * you manage and paginate through large sets of webhook data efficiently.
+   * This endpoint allows you to fetch a specified number of entries, making it
+   * useful for paginating through large sets of webhook journal data.
    */
   getJournalBatchFromOffset(
     count: number,
@@ -250,19 +253,18 @@ export class BaseWebhooks extends APIResource {
   }
 
   /**
-   * Retrieve the status of a specific webhook journal entry using its unique status
-   * ID. This endpoint is useful for monitoring the progress or outcome of a webhook
-   * operation, providing insights into whether it is pending, in progress,
-   * completed, failed, or expired.
+   * Retrieve the status of a specific webhook journal entry using its status ID.
+   * This endpoint is useful for checking the current state of a webhook process,
+   * such as whether it is pending, in progress, completed, failed, or expired.
    */
   getJournalStatus(statusID: string, options?: RequestOptions): APIPromise<SnapshotStatusResponse> {
     return this._client.get(path`/webhooks-journal/journal/2026-03/status/${statusID}`, options);
   }
 
   /**
-   * Retrieve details of a specific webhook journal subscription using its unique
-   * identifier. This endpoint is useful for obtaining information about a particular
-   * subscription, such as its actions, object types, and associated properties.
+   * Retrieve details of a specific webhook subscription using its unique identifier.
+   * This endpoint is useful for obtaining information about a particular
+   * subscription's configuration and status within the HubSpot account.
    */
   getJournalSubscription(
     subscriptionID: number,
@@ -272,10 +274,9 @@ export class BaseWebhooks extends APIResource {
   }
 
   /**
-   * Retrieve the latest batch of webhook journal entries up to a specified count.
-   * This endpoint is useful for fetching the most recent webhook events processed by
-   * your HubSpot account. The response includes details about each event, and you
-   * can specify the number of entries to retrieve.
+   * Retrieve the latest batch of webhook journal entries. This endpoint allows you
+   * to specify the number of entries to fetch, providing a way to access recent
+   * webhook activity within your HubSpot account.
    */
   getLatestJournalBatch(
     count: number,
@@ -289,9 +290,10 @@ export class BaseWebhooks extends APIResource {
   }
 
   /**
-   * Retrieve the latest entry from the webhooks journal for the specified portal.
-   * This endpoint is useful for accessing the most recent webhook data available in
-   * the journal.
+   * Retrieve the latest entries from the webhooks journal for the specified portal.
+   * This endpoint is useful for accessing the most recent webhook events processed
+   * by your HubSpot account. It allows you to filter the results by the portal ID to
+   * ensure you are retrieving data relevant to a specific installation.
    */
   getLatestJournalEntry(
     query: WebhookGetLatestJournalEntryParams | null | undefined = {},
@@ -306,9 +308,9 @@ export class BaseWebhooks extends APIResource {
   }
 
   /**
-   * Retrieve the latest batch of webhook journal entries up to a specified count.
-   * This endpoint is useful for fetching the most recent webhook events processed by
-   * the system. It requires authentication and supports various security schemes.
+   * Retrieve the latest batch of webhook journal entries. This endpoint is useful
+   * for accessing the most recent data entries processed by the webhook journal. It
+   * requires specifying the number of entries to retrieve.
    */
   getLatestLocalJournalBatch(
     count: number,
@@ -322,10 +324,9 @@ export class BaseWebhooks extends APIResource {
   }
 
   /**
-   * Retrieve the latest entries from the webhooks journal. This endpoint is useful
-   * for accessing the most recent webhook data for analysis or troubleshooting. It
-   * supports filtering by the installPortalId to narrow down results to a specific
-   * portal.
+   * Retrieve the latest entries from the webhooks journal for the specified portal.
+   * This endpoint is useful for accessing the most recent webhook events that have
+   * been logged, allowing you to process or analyze them as needed.
    */
   getLatestLocalJournalEntry(
     query: WebhookGetLatestLocalJournalEntryParams | null | undefined = {},
@@ -341,8 +342,10 @@ export class BaseWebhooks extends APIResource {
 
   /**
    * Perform a batch read operation on the webhooks journal. This endpoint allows you
-   * to retrieve a batch of journal entries by providing the necessary input data. It
-   * is useful for processing large volumes of webhook data efficiently.
+   * to read multiple entries from the journal in a single request. It requires a
+   * JSON request body specifying the inputs to be read. The response includes the
+   * results of the batch read operation, and may return multiple statuses if there
+   * are errors.
    */
   getLocalJournalBatchByRequest(
     params: WebhookGetLocalJournalBatchByRequestParams,
@@ -358,8 +361,8 @@ export class BaseWebhooks extends APIResource {
 
   /**
    * Retrieve a batch of webhook journal entries starting from a specified offset.
-   * This endpoint is useful for fetching sequential batches of data, allowing you to
-   * paginate through large sets of webhook journal entries efficiently.
+   * This endpoint allows you to fetch a defined number of entries, facilitating the
+   * processing of webhook data in manageable chunks.
    */
   getLocalJournalBatchFromOffset(
     count: number,
@@ -375,19 +378,17 @@ export class BaseWebhooks extends APIResource {
 
   /**
    * Retrieve the status of a specific webhook journal entry using its unique status
-   * ID. This endpoint is useful for checking the progress or result of a webhook
-   * operation, such as whether it is pending, in progress, completed, failed, or
-   * expired.
+   * ID. This endpoint is useful for monitoring the progress or completion of webhook
+   * processing tasks.
    */
   getLocalJournalStatus(statusID: string, options?: RequestOptions): APIPromise<SnapshotStatusResponse> {
     return this._client.get(path`/webhooks-journal/journal-local/2026-03/status/${statusID}`, options);
   }
 
   /**
-   * Retrieve the next set of webhook journal entries starting from a specified
-   * offset. This endpoint is useful for paginating through webhook journal entries
-   * in a HubSpot account. It allows you to continue fetching entries from where the
-   * last request left off, using the offset parameter.
+   * Retrieve the next batch of webhook journal entries starting from a specified
+   * offset. This endpoint is useful for paginating through large sets of webhook
+   * data, allowing you to continue fetching entries from where you last left off.
    */
   getNextJournalEntries(
     offset: string,
@@ -403,10 +404,9 @@ export class BaseWebhooks extends APIResource {
   }
 
   /**
-   * Retrieve the next set of journal entries starting from a specified offset. This
-   * endpoint is useful for paginating through webhook journal entries in a
-   * sequential manner. It requires specifying the offset from which the next entries
-   * should be fetched.
+   * Retrieve the next set of webhook journal entries starting from a specified
+   * offset. This endpoint is useful for paginating through webhook journal data in a
+   * sequential manner, allowing you to fetch entries beyond a given point.
    */
   getNextLocalJournalEntries(
     offset: string,
@@ -430,10 +430,9 @@ export class BaseWebhooks extends APIResource {
   }
 
   /**
-   * Retrieve a specific filter associated with a webhook journal subscription. This
-   * endpoint allows you to access detailed information about the filter identified
-   * by the filterId path parameter. It is useful for managing and reviewing filter
-   * configurations within your webhook subscriptions.
+   * Retrieve details of a specific filter associated with a webhook subscription in
+   * the HubSpot account. This endpoint is useful for accessing the configuration and
+   * conditions of a filter by its unique identifier.
    */
   getSubscriptionFilter(filterID: number, options?: RequestOptions): APIPromise<FilterResponse> {
     return this._client.get(path`/webhooks-journal/subscriptions/2026-03/filters/${filterID}`, options);
@@ -447,9 +446,10 @@ export class BaseWebhooks extends APIResource {
   }
 
   /**
-   * Retrieve a list of webhook journal subscriptions for the specified version. This
-   * endpoint allows you to view all active subscriptions without pagination. It is
-   * useful for managing and auditing webhook subscriptions in your HubSpot account.
+   * Retrieve a list of webhook journal subscriptions for the specified API version.
+   * This endpoint provides details about each subscription, including actions,
+   * object types, and associated properties. It is useful for managing and reviewing
+   * current webhook subscriptions.
    */
   listJournalSubscriptions(
     options?: RequestOptions,
@@ -458,10 +458,10 @@ export class BaseWebhooks extends APIResource {
   }
 
   /**
-   * Retrieve the filters associated with a specific webhook subscription. This
-   * endpoint is useful for obtaining detailed information about the filters applied
-   * to a subscription, which can help in managing and understanding the data flow
-   * through your webhook integrations.
+   * Retrieve the filters associated with a specific webhook subscription in the
+   * HubSpot account. This endpoint is useful for obtaining detailed information
+   * about the filters applied to a given subscription, identified by its
+   * subscription ID.
    */
   listSubscriptionFilters(
     subscriptionID: number,
@@ -509,20 +509,20 @@ export interface ActionOverrideRequest {
   associatedObjectTypeIds?: Array<string>;
 
   /**
-   * An array of integers representing list IDs that are affected by the action
-   * override. These IDs are in int64 format.
+   * An array of integers representing list IDs that are associated with the action
+   * override. The integers are in int64 format.
    */
   listIds?: Array<number>;
 
   /**
    * An array of integers, each representing an object ID for which the action
-   * override is applicable. These IDs are in int64 format.
+   * override is applicable. The integers are in int64 format.
    */
   objectIds?: Array<number>;
 
   /**
-   * An array of strings representing specific properties to be overridden in the
-   * action. Each entry in the array corresponds to a property name.
+   * An array of strings representing the properties to be overridden in the action.
+   * Each string corresponds to a property name.
    */
   properties?: Array<string>;
 }
@@ -590,8 +590,8 @@ export interface BatchResponseJournalFetchResponse {
   completedAt: string;
 
   /**
-   * An array of journal fetch responses, each containing details about individual
-   * journal entries.
+   * An array of results from the batch operation, each represented as a
+   * JournalFetchResponse object.
    */
   results: Array<JournalFetchResponse>;
 
@@ -607,8 +607,7 @@ export interface BatchResponseJournalFetchResponse {
   status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   /**
-   * A map of link names to associated URIs, providing additional resources or
-   * documentation related to the batch operation.
+   * A map of link names to associated URIs related to the batch operation.
    */
   links?: { [key: string]: string };
 
@@ -620,46 +619,46 @@ export interface BatchResponseJournalFetchResponse {
 
 export interface BatchResponseJournalFetchResponseWithErrors {
   /**
-   * The date and time when the batch operation was completed, in ISO 8601 format.
+   * The date and time when the batch process was completed, in ISO 8601 format.
    */
   completedAt: string;
 
   /**
    * An array of journal fetch responses, each representing a result from the batch
-   * operation.
+   * process.
    */
   results: Array<JournalFetchResponse>;
 
   /**
-   * The date and time when the batch operation started, in ISO 8601 format.
+   * The date and time when the batch process started, in ISO 8601 format.
    */
   startedAt: string;
 
   /**
-   * The current status of the batch operation. Valid values include 'PENDING',
+   * The current status of the batch process. Valid values include 'PENDING',
    * 'PROCESSING', 'CANCELED', and 'COMPLETE'.
    */
   status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   /**
-   * An array of errors that occurred during the batch operation, each represented by
-   * a StandardError object.
+   * An array of standard errors that occurred during the batch process, providing
+   * details about each error.
    */
   errors?: Array<Shared.StandardError>;
 
   /**
-   * A map of link names to associated URIs, which may provide additional information
-   * or resources related to the batch operation.
+   * A map of link names to associated URIs, providing additional context or actions
+   * related to the batch process.
    */
   links?: { [key: string]: string };
 
   /**
-   * The number of errors that occurred during the batch operation.
+   * The number of errors that occurred during the batch process.
    */
   numErrors?: number;
 
   /**
-   * The date and time when the batch operation was requested, in ISO 8601 format.
+   * The date and time when the batch request was made, in ISO 8601 format.
    */
   requestedAt?: string;
 }
@@ -671,8 +670,8 @@ export interface BatchResponseSubscriptionResponse {
   completedAt: string;
 
   /**
-   * An array of SubscriptionResponse objects, each representing the result of an
-   * individual subscription update within the batch operation.
+   * An array containing the results of the batch operation, with each item
+   * representing an individual subscription response.
    */
   results: Array<SubscriptionResponse>;
 
@@ -688,8 +687,8 @@ export interface BatchResponseSubscriptionResponse {
   status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   /**
-   * A map of link names to associated URIs, providing additional information or
-   * resources related to the batch operation.
+   * A map of link names to associated URIs providing additional information about
+   * the batch operation.
    */
   links?: { [key: string]: string };
 
@@ -701,18 +700,18 @@ export interface BatchResponseSubscriptionResponse {
 
 export interface BatchResponseSubscriptionResponseWithErrors {
   /**
-   * The date and time when the batch operation was completed, in ISO 8601 format.
+   * The date and time when the batch processing was completed, in ISO 8601 format.
    */
   completedAt: string;
 
   /**
-   * An array of SubscriptionResponse objects, representing the results of the batch
-   * operation.
+   * An array of SubscriptionResponse objects representing the results of each
+   * subscription update processed in the batch.
    */
   results: Array<SubscriptionResponse>;
 
   /**
-   * The date and time when the batch operation started, in ISO 8601 format.
+   * The date and time when the batch processing began, in ISO 8601 format.
    */
   startedAt: string;
 
@@ -723,8 +722,8 @@ export interface BatchResponseSubscriptionResponseWithErrors {
   status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
   /**
-   * An array of StandardError objects, detailing any errors that occurred during the
-   * batch operation.
+   * An array of StandardError objects detailing any errors that occurred during the
+   * batch processing.
    */
   errors?: Array<Shared.StandardError>;
 
@@ -735,12 +734,12 @@ export interface BatchResponseSubscriptionResponseWithErrors {
   links?: { [key: string]: string };
 
   /**
-   * The number of errors encountered during the batch operation.
+   * The total number of errors encountered during the batch operation.
    */
   numErrors?: number;
 
   /**
-   * The date and time when the batch operation was requested, in ISO 8601 format.
+   * The date and time when the batch request was initially made, in ISO 8601 format.
    */
   requestedAt?: string;
 }
@@ -748,21 +747,22 @@ export interface BatchResponseSubscriptionResponseWithErrors {
 export interface CollectionResponseSubscriptionResponseNoPaging {
   /**
    * An array of SubscriptionResponse objects, each representing a subscription's
-   * details such as actions, app ID, and timestamps.
+   * details such as actions, appId, createdAt, and other relevant properties.
    */
   results: Array<SubscriptionResponse1>;
 }
 
 export interface Condition {
   /**
-   * A string representing the type of filter. Valid value is 'CRM_OBJECT_PROPERTY'.
+   * A string indicating the type of filter being applied. Valid value is
+   * 'CRM_OBJECT_PROPERTY'.
    */
   filterType: 'CRM_OBJECT_PROPERTY';
 
   /**
-   * A string indicating the operation to apply for filtering. Valid values include
-   * 'EQ', 'N_EQ', 'LT', 'GT', 'LTE', 'GTE', 'CONTAINS', 'STARTS_WITH', 'ENDS_WITH',
-   * 'IN', 'NOT_IN', 'IS_EMPTY', and 'IS_NOT_EMPTY'.
+   * A string specifying the operation to be performed in the condition. Valid values
+   * include 'EQ', 'N_EQ', 'LT', 'GT', 'LTE', 'GTE', 'CONTAINS', 'STARTS_WITH',
+   * 'ENDS_WITH', 'IN', 'NOT_IN', 'IS_EMPTY', and 'IS_NOT_EMPTY'.
    */
   operator:
     | 'CONTAINS'
@@ -780,19 +780,20 @@ export interface Condition {
     | 'STARTS_WITH';
 
   /**
-   * A string specifying the property of the CRM object to be filtered.
+   * A string representing the specific property of the CRM object that the condition
+   * applies to.
    */
   property: string;
 
   /**
-   * A string representing the value to compare against the specified property when
-   * filtering.
+   * A string representing the value to be compared against the specified property
+   * when using single-value operators.
    */
   value?: string;
 
   /**
-   * An array of strings, each representing a value to be used in the filtering
-   * operation.
+   * An array of strings used to specify multiple values for comparison when using
+   * operators that support multiple values, such as 'IN' or 'NOT_IN'.
    */
   values?: Array<string>;
 }
@@ -800,15 +801,15 @@ export interface Condition {
 export interface CrmObjectSnapshotBatchRequest {
   /**
    * An array of CrmObjectSnapshotRequest objects, each representing a request to
-   * capture a snapshot of a specific CRM object. This property is required.
+   * create a snapshot for a specific CRM object. This property is required.
    */
   snapshotRequests: Array<CrmObjectSnapshotRequest>;
 }
 
 export interface CrmObjectSnapshotBatchResponse {
   /**
-   * An array of CrmObjectSnapshotResponse objects, each containing the details of a
-   * single CRM object snapshot request. This property is required.
+   * An array of CrmObjectSnapshotResponse objects, each representing the result of a
+   * snapshot operation for a specific CRM object. This property is required.
    */
   snapshotResponses: Array<CrmObjectSnapshotResponse>;
 }
@@ -816,45 +817,51 @@ export interface CrmObjectSnapshotBatchResponse {
 export interface CrmObjectSnapshotRequest {
   /**
    * An integer representing the unique identifier of the CRM object for which the
-   * snapshot is being requested.
+   * snapshot is requested.
    */
   objectId: number;
 
   /**
-   * A string representing the type identifier of the CRM object.
+   * A string representing the type identifier of the CRM object, specifying what
+   * kind of object it is within HubSpot.
    */
   objectTypeId: string;
 
   /**
-   * An integer representing the unique identifier of the HubSpot portal.
+   * An integer representing the unique identifier of the HubSpot account (portal)
+   * where the CRM object resides.
    */
   portalId: number;
 
   /**
-   * An array of strings, each representing a property of the CRM object to be
-   * included in the snapshot.
+   * An array of strings, each representing a property of the CRM object that should
+   * be included in the snapshot.
    */
   properties: Array<string>;
 }
 
 export interface CrmObjectSnapshotResponse {
   /**
-   * An integer representing the unique identifier for the CRM object.
+   * An integer representing the unique identifier of the CRM object for which the
+   * snapshot is taken.
    */
   objectId: number;
 
   /**
-   * A string representing the type identifier of the CRM object.
+   * A string indicating the type of the CRM object, such as contact, company, or
+   * deal.
    */
   objectTypeId: string;
 
   /**
-   * An integer representing the unique identifier for the HubSpot portal.
+   * An integer representing the unique identifier of the HubSpot portal associated
+   * with the CRM object.
    */
   portalId: number;
 
   /**
-   * A UUID string representing the status identifier of the snapshot.
+   * A UUID string representing the status identifier of the snapshot request,
+   * indicating the current state of the snapshot process.
    */
   snapshotStatusId: string;
 }
@@ -866,9 +873,8 @@ export interface CrmObjectSnapshotResponse {
  */
 export interface Filter {
   /**
-   * An array of conditions that define the filter criteria. Each condition specifies
-   * a property, operator, and value to determine if a data item meets the filter
-   * requirements.
+   * An array of conditions that define the criteria for the filter. Each condition
+   * specifies a property, an operator, and optionally a value or values.
    */
   conditions: Array<Condition>;
 }
@@ -883,7 +889,7 @@ export interface FilterCreateRequest {
 
   /**
    * The unique identifier of the subscription to which the filter will be applied.
-   * It is an integer in int64 format.
+   * It is an integer formatted as int64.
    */
   subscriptionId: number;
 }
@@ -903,8 +909,7 @@ export interface FilterResponse {
   id: number;
 
   /**
-   * A timestamp indicating when the filter was created, represented as an integer in
-   * int64 format.
+   * A Unix timestamp in milliseconds indicating when the filter was created.
    */
   createdAt: number;
 
@@ -948,8 +953,8 @@ export interface GdprPrivacyDeletionSubscriptionUpsertRequest {
 
 export interface JournalFetchResponse {
   /**
-   * A UUID string indicating the current offset in the journal data, used for
-   * pagination.
+   * The unique identifier for the current offset of the journal entry, formatted as
+   * a UUID.
    */
   currentOffset: string;
 
@@ -959,7 +964,7 @@ export interface JournalFetchResponse {
   expiresAt: string;
 
   /**
-   * A string representing the URL where the fetched journal data can be accessed.
+   * The URL where the journal entry can be accessed. It is a string.
    */
   url: string;
 }
@@ -1032,9 +1037,7 @@ export interface ObjectSubscriptionUpsertRequest {
 
 export interface SettingsChangeRequest {
   /**
-   * A publicly available URL for Hubspot to call where event payloads will be
-   * delivered. See [link-so-some-doc](#) for details about the format of these event
-   * payloads.
+   * The URL to which webhook events will be sent. It is a string.
    */
   targetUrl: string;
 
@@ -1063,45 +1066,44 @@ export interface SettingsResponse {
 
 export interface SnapshotStatusResponse {
   /**
-   * The unique identifier for the snapshot operation, formatted as a UUID.
+   * The unique identifier for the snapshot operation, represented as a UUID.
    */
   id: string;
 
   /**
-   * A Unix timestamp in milliseconds indicating when the snapshot operation was
-   * initiated.
+   * The timestamp indicating when the snapshot operation was initiated, represented
+   * as a Unix timestamp in milliseconds.
    */
   initiatedAt: number;
 
   /**
-   * The current status of the snapshot operation. Valid values include 'PENDING',
+   * The current status of the snapshot. Valid values include 'PENDING',
    * 'IN_PROGRESS', 'COMPLETED', 'FAILED', and 'EXPIRED'.
    */
   status: 'COMPLETED' | 'EXPIRED' | 'FAILED' | 'IN_PROGRESS' | 'PENDING';
 
   /**
-   * A Unix timestamp in milliseconds indicating when the snapshot operation was
-   * completed.
+   * The timestamp indicating when the snapshot operation was completed, represented
+   * as a Unix timestamp in milliseconds.
    */
   completedAt?: number;
 
   /**
-   * The code representing any error that occurred during the snapshot operation.
-   * Possible values are 'TIMEOUT', 'VALIDATION_ERROR', 'INTERNAL_ERROR', and
-   * 'PERMISSION_DENIED'.
+   * A code representing the error that occurred, if any. Possible values are
+   * 'TIMEOUT', 'VALIDATION_ERROR', 'INTERNAL_ERROR', and 'PERMISSION_DENIED'.
    */
   errorCode?: 'INTERNAL_ERROR' | 'PERMISSION_DENIED' | 'TIMEOUT' | 'VALIDATION_ERROR';
 
   /**
    * A descriptive message providing additional information about the snapshot
-   * operation or any errors encountered.
+   * operation or error.
    */
   message?: string;
 }
 
 export interface SubscriptionBatchUpdateRequest {
   /**
-   * The unique identifier for the subscription to be updated. It is an integer.
+   * The unique identifier for the subscription. It is an integer.
    */
   id: number;
 
@@ -1113,14 +1115,14 @@ export interface SubscriptionBatchUpdateRequest {
 
 export interface SubscriptionCreateRequest {
   /**
-   * A boolean indicating whether the subscription is active. This field is required.
+   * A boolean indicating whether the subscription is active.
    */
   active: boolean;
 
   /**
    * A string representing the type of event to subscribe to. Valid values include
-   * various object changes such as 'contact.propertyChange', 'deal.creation', and
-   * 'conversation.newMessage'.
+   * various property changes, creations, deletions, merges, restorations,
+   * association changes, and event completions.
    */
   eventType:
     | 'company.associationChange'
@@ -1173,44 +1175,42 @@ export interface SubscriptionCreateRequest {
     | 'ticket.restore';
 
   /**
-   * A string that provides a human-readable name for the event type. This is
-   * optional.
+   * A string providing a human-readable name for the event type.
    */
   eventTypeName?: string;
 
   /**
-   * A string representing the identifier of the object type for which the
-   * subscription is being created. This is optional.
+   * A string representing the ID of the object type associated with the
+   * subscription.
    */
   objectTypeId?: string;
 
   /**
-   * A string indicating the name of the property that triggers the event. This is
-   * optional and used when subscribing to property change events.
+   * A string indicating the specific property name related to the event type, if
+   * applicable.
    */
   propertyName?: string;
 }
 
 export interface SubscriptionListResponse {
   /**
-   * An array of SubscriptionResponse objects, each representing a subscription
-   * associated with the app. This property is required.
+   * An array of subscription responses, each detailing a specific subscription's
+   * properties and status.
    */
   results: Array<SubscriptionResponse>;
 }
 
 export interface SubscriptionPatchRequest {
   /**
-   * Whether to activate or pause the webhook subscription. If true, the subscription
-   * will send webhook notifications. If false, the subscription is paused and will
-   * not send notifications.
+   * A boolean indicating whether the subscription is active. If true, the
+   * subscription is active; if false, it is inactive.
    */
   active?: boolean;
 }
 
 export interface SubscriptionResponse {
   /**
-   * The unique identifier for the subscription, represented as an integer.
+   * The unique identifier for the subscription. It is an integer formatted as int64.
    */
   id: string;
 
@@ -1226,8 +1226,8 @@ export interface SubscriptionResponse {
 
   /**
    * The type of event that triggers the subscription. Valid values include various
-   * object changes such as 'contact.propertyChange', 'deal.creation', and
-   * 'ticket.deletion'.
+   * property changes, creations, deletions, merges, restores, and association
+   * changes for different HubSpot objects.
    */
   eventType:
     | 'company.associationChange'
@@ -1280,18 +1280,18 @@ export interface SubscriptionResponse {
     | 'ticket.restore';
 
   /**
-   * A descriptive name for the event type.
+   * The name of the event type for the subscription.
    */
   eventTypeName?: string;
 
   /**
-   * The identifier for the object type associated with the subscription, represented
-   * as a string.
+   * The identifier for the object type associated with the subscription. It is a
+   * string.
    */
   objectTypeId?: string;
 
   /**
-   * The name of the property associated with the event, if applicable.
+   * The name of the property associated with the subscription event, if applicable.
    */
   propertyName?: string;
 
@@ -1303,15 +1303,15 @@ export interface SubscriptionResponse {
 
 export interface SubscriptionResponse1 {
   /**
-   * The unique identifier for the subscription, represented as an integer.
+   * The unique identifier for the subscription. It is an integer formatted as int64.
    */
   id: number;
 
   /**
-   * An array of actions that trigger the subscription, such as 'CREATE', 'UPDATE',
-   * 'DELETE', 'MERGE', 'RESTORE', 'ASSOCIATION_ADDED', 'ASSOCIATION_REMOVED',
-   * 'SNAPSHOT', 'APP_INSTALL', 'APP_UNINSTALL', 'ADDED_TO_LIST',
-   * 'REMOVED_FROM_LIST', and 'GDPR_DELETE'.
+   * A list of actions that trigger the subscription. Possible values include
+   * 'CREATE', 'UPDATE', 'DELETE', 'MERGE', 'RESTORE', 'ASSOCIATION_ADDED',
+   * 'ASSOCIATION_REMOVED', 'SNAPSHOT', 'APP_INSTALL', 'APP_UNINSTALL',
+   * 'ADDED_TO_LIST', 'REMOVED_FROM_LIST', and 'GDPR_DELETE'.
    */
   actions: Array<
     | 'CREATE'
@@ -1330,8 +1330,8 @@ export interface SubscriptionResponse1 {
   >;
 
   /**
-   * The unique identifier for the app associated with the subscription, represented
-   * as an integer.
+   * The unique identifier for the app associated with the subscription. It is an
+   * integer formatted as int64.
    */
   appId: number;
 
@@ -1341,14 +1341,15 @@ export interface SubscriptionResponse1 {
   createdAt: string;
 
   /**
-   * The identifier for the object type associated with the subscription, represented
-   * as a string.
+   * The identifier for the object type associated with the subscription. It is a
+   * string.
    */
   objectTypeId: string;
 
   /**
-   * The type of subscription, which can be one of 'OBJECT', 'ASSOCIATION', 'EVENT',
-   * 'APP_LIFECYCLE_EVENT', 'LIST_MEMBERSHIP', or 'GDPR_PRIVACY_DELETION'.
+   * The type of subscription, which can be one of the following: 'OBJECT',
+   * 'ASSOCIATION', 'EVENT', 'APP_LIFECYCLE_EVENT', 'LIST_MEMBERSHIP', or
+   * 'GDPR_PRIVACY_DELETION'.
    */
   subscriptionType:
     | 'APP_LIFECYCLE_EVENT'
@@ -1370,42 +1371,43 @@ export interface SubscriptionResponse1 {
   actionOverrides?: { [key: string]: ActionOverrideRequest };
 
   /**
-   * An array of strings representing the associated object type IDs for the
-   * subscription.
+   * A list of associated object type IDs. Each ID is a string.
    */
   associatedObjectTypeIds?: Array<string>;
 
   /**
-   * The unique identifier for the user who created the subscription, represented as
-   * an integer.
+   * The ID of the user who created the subscription. It is an integer formatted as
+   * int64.
    */
   createdBy?: number;
 
   /**
-   * The date and time when the subscription was deleted, in ISO 8601 format.
+   * The date and time when the subscription was deleted, in ISO 8601 format, if
+   * applicable.
    */
   deletedAt?: string;
 
   /**
-   * An array of integers representing the list IDs associated with the subscription.
+   * A list of list IDs associated with the subscription. Each ID is an integer
+   * formatted as int64.
    */
   listIds?: Array<number>;
 
   /**
-   * An array of integers representing the object IDs associated with the
-   * subscription.
+   * A list of object IDs associated with the subscription. Each ID is an integer
+   * formatted as int64.
    */
   objectIds?: Array<number>;
 
   /**
-   * The unique identifier for the portal associated with the subscription,
-   * represented as an integer.
+   * The unique identifier for the portal associated with the subscription. It is an
+   * integer formatted as int64.
    */
   portalId?: number;
 
   /**
-   * An array of strings representing the properties associated with the
-   * subscription.
+   * A list of property names associated with the subscription. Each property is a
+   * string.
    */
   properties?: Array<string>;
 }
@@ -1419,7 +1421,7 @@ export type SubscriptionUpsertRequest =
 
 export interface ThrottlingSettings {
   /**
-   * The maximum number of concurrent requests allowed. It is an integer value.
+   * The maximum number of concurrent requests allowed. This is an integer value.
    */
   maxConcurrentRequests: number;
 }
@@ -1437,21 +1439,21 @@ export interface WebhookCreateBatchEventSubscriptionsParams {
 export interface WebhookCreateCrmSnapshotsParams {
   /**
    * An array of CrmObjectSnapshotRequest objects, each representing a request to
-   * capture a snapshot of a specific CRM object. This property is required.
+   * create a snapshot for a specific CRM object. This property is required.
    */
   snapshotRequests: Array<CrmObjectSnapshotRequest>;
 }
 
 export interface WebhookCreateEventSubscriptionParams {
   /**
-   * A boolean indicating whether the subscription is active. This field is required.
+   * A boolean indicating whether the subscription is active.
    */
   active: boolean;
 
   /**
    * A string representing the type of event to subscribe to. Valid values include
-   * various object changes such as 'contact.propertyChange', 'deal.creation', and
-   * 'conversation.newMessage'.
+   * various property changes, creations, deletions, merges, restorations,
+   * association changes, and event completions.
    */
   eventType:
     | 'company.associationChange'
@@ -1504,20 +1506,19 @@ export interface WebhookCreateEventSubscriptionParams {
     | 'ticket.restore';
 
   /**
-   * A string that provides a human-readable name for the event type. This is
-   * optional.
+   * A string providing a human-readable name for the event type.
    */
   eventTypeName?: string;
 
   /**
-   * A string representing the identifier of the object type for which the
-   * subscription is being created. This is optional.
+   * A string representing the ID of the object type associated with the
+   * subscription.
    */
   objectTypeId?: string;
 
   /**
-   * A string indicating the name of the property that triggers the event. This is
-   * optional and used when subscribing to property change events.
+   * A string indicating the specific property name related to the event type, if
+   * applicable.
    */
   propertyName?: string;
 }
@@ -1551,7 +1552,7 @@ export interface WebhookCreateSubscriptionFilterParams {
 
   /**
    * The unique identifier of the subscription to which the filter will be applied.
-   * It is an integer in int64 format.
+   * It is an integer formatted as int64.
    */
   subscriptionId: number;
 }
@@ -1565,31 +1566,30 @@ export interface WebhookDeleteEventSubscriptionParams {
 
 export interface WebhookGetEarliestJournalBatchParams {
   /**
-   * The ID of the portal installation for which to fetch the journal entries. This
-   * is an optional parameter.
+   * The ID of the portal installation to filter the webhook journal entries by. This
+   * is an integer value.
    */
   installPortalId?: number;
 }
 
 export interface WebhookGetEarliestJournalEntryParams {
   /**
-   * The ID of the portal installation to filter the journal entries. This is an
-   * integer value.
+   * The ID of the portal installation to filter the journal entries. It is an
+   * integer.
    */
   installPortalId?: number;
 }
 
 export interface WebhookGetEarliestLocalJournalBatchParams {
   /**
-   * The ID of the portal installation to filter the webhook journal entries. It is
-   * an integer value.
+   * The ID of the portal where the webhooks are installed. This is an integer value.
    */
   installPortalId?: number;
 }
 
 export interface WebhookGetEarliestLocalJournalEntryParams {
   /**
-   * The ID of the portal for which to retrieve the earliest journal entry. This
+   * The ID of the portal installation to filter the journal entries by. This
    * parameter is optional and should be an integer.
    */
   installPortalId?: number;
@@ -1609,39 +1609,37 @@ export interface WebhookGetJournalBatchByRequestParams {
   inputs: Array<string>;
 
   /**
-   * Query param: The ID of the portal from which to retrieve webhook journal
-   * entries. This is an integer value.
+   * Query param: The ID of the portal where the webhooks are installed. This is an
+   * integer value.
    */
   installPortalId?: number;
 }
 
 export interface WebhookGetJournalBatchFromOffsetParams {
   /**
-   * Path param: The starting point for retrieving the batch of webhook journal
-   * entries. This parameter is required and determines where the batch retrieval
-   * begins.
+   * Path param: The starting point for fetching the next batch of journal entries.
+   * This is a string value that indicates the offset position.
    */
   offset: string;
 
   /**
-   * Query param: The ID of the portal installation to filter the webhook journal
-   * entries. This parameter is optional and is used to specify which portal's data
-   * to retrieve.
+   * Query param: The ID of the portal installation. This is an integer value used to
+   * specify the portal context for the request.
    */
   installPortalId?: number;
 }
 
 export interface WebhookGetLatestJournalBatchParams {
   /**
-   * The ID of the portal installation. This parameter is optional and can be used to
-   * filter results by a specific portal.
+   * The ID of the portal installation. This is an integer value used to identify the
+   * specific portal.
    */
   installPortalId?: number;
 }
 
 export interface WebhookGetLatestJournalEntryParams {
   /**
-   * The ID of the portal for which to retrieve the latest journal entry. It is an
+   * The ID of the portal installation to filter the journal entries. It is an
    * integer value.
    */
   installPortalId?: number;
@@ -1649,16 +1647,16 @@ export interface WebhookGetLatestJournalEntryParams {
 
 export interface WebhookGetLatestLocalJournalBatchParams {
   /**
-   * The ID of the portal installation to filter the webhook journal entries. It is
-   * an optional integer parameter.
+   * The ID of the portal installation. This parameter is optional and used to filter
+   * the journal entries by a specific portal.
    */
   installPortalId?: number;
 }
 
 export interface WebhookGetLatestLocalJournalEntryParams {
   /**
-   * An integer representing the ID of the portal to filter the webhook journal
-   * entries.
+   * The ID of the portal for which to retrieve the latest journal entries. This
+   * parameter is optional and should be an integer.
    */
   installPortalId?: number;
 }
@@ -1670,37 +1668,37 @@ export interface WebhookGetLocalJournalBatchByRequestParams {
   inputs: Array<string>;
 
   /**
-   * Query param: The ID of the portal where the webhook is installed. This parameter
-   * is optional and is used to specify the portal context for the operation.
+   * Query param: The ID of the portal where the webhooks are installed. This
+   * parameter is optional and is used to specify the target portal.
    */
   installPortalId?: number;
 }
 
 export interface WebhookGetLocalJournalBatchFromOffsetParams {
   /**
-   * Path param: The starting point for the batch retrieval. This is a string value
-   * representing the offset in the journal.
+   * Path param: The starting point for fetching the batch of journal entries. This
+   * is a string value that indicates the offset position.
    */
   offset: string;
 
   /**
-   * Query param: The ID of the portal where the webhooks are installed. This is an
-   * integer value.
+   * Query param: The ID of the portal installation. This is an integer value used to
+   * specify the portal context for the request.
    */
   installPortalId?: number;
 }
 
 export interface WebhookGetNextJournalEntriesParams {
   /**
-   * The ID of the portal where the webhooks are installed. This is an integer value.
+   * The ID of the portal installation to filter the webhook journal entries. This is
+   * an optional parameter.
    */
   installPortalId?: number;
 }
 
 export interface WebhookGetNextLocalJournalEntriesParams {
   /**
-   * The ID of the portal installation to filter the journal entries by. This is an
-   * optional parameter.
+   * The ID of the portal where the webhook is installed. This is an integer value.
    */
   installPortalId?: number;
 }
@@ -1712,18 +1710,15 @@ export interface WebhookUpdateEventSubscriptionParams {
   appId: number;
 
   /**
-   * Body param: Whether to activate or pause the webhook subscription. If true, the
-   * subscription will send webhook notifications. If false, the subscription is
-   * paused and will not send notifications.
+   * Body param: A boolean indicating whether the subscription is active. If true,
+   * the subscription is active; if false, it is inactive.
    */
   active?: boolean;
 }
 
 export interface WebhookUpdateSettingsParams {
   /**
-   * A publicly available URL for Hubspot to call where event payloads will be
-   * delivered. See [link-so-some-doc](#) for details about the format of these event
-   * payloads.
+   * The URL to which webhook events will be sent. It is a string.
    */
   targetUrl: string;
 

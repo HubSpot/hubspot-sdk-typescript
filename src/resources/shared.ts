@@ -41,42 +41,6 @@ export interface ActionResponse {
   requestedAt?: string;
 }
 
-/**
- * The definition of an association
- */
-export interface AssociationDefinition {
-  /**
-   * The unique ID of the associated object (e.g., a contact ID).
-   */
-  id: string;
-
-  /**
-   * The ID of the source object type (e.g., 0-1 for contacts).
-   */
-  fromObjectTypeId: string;
-
-  /**
-   * The ID of the destination object type (e.g., 0-3 for deals).
-   */
-  toObjectTypeId: string;
-
-  /**
-   * The timestamp when the association was created, in ISO 8601 format.
-   */
-  createdAt?: string;
-
-  /**
-   * For labeled association types, the internal name of the association.
-   */
-  name?: string;
-
-  /**
-   * The timestamp when the last update was made to an association, in ISO 8601
-   * format.
-   */
-  updatedAt?: string;
-}
-
 export interface AssociationDefinitionEgg {
   fromObjectTypeId: string;
 
@@ -141,41 +105,43 @@ export interface AutomationActionsOption {
   value: string;
 }
 
-export interface BatchInputPropertyCreate {
-  inputs: Array<PropertyCreate>;
-}
-
-export interface BatchInputPropertyName {
-  inputs: Array<PropertyName>;
-}
-
-export interface BatchInputPublicObjectID {
+/**
+ * The definition of an association
+ */
+export interface BaseAssociationDefinition {
   /**
-   * An array of deal split inputs
+   * The unique ID of the associated object (e.g., a contact ID).
    */
-  inputs: Array<PublicObjectID>;
-}
+  id: string;
 
-export interface BatchInputString {
   /**
-   * Strings to input.
+   * The ID of the source object type (e.g., 0-1 for contacts).
    */
-  inputs: Array<string>;
+  fromObjectTypeId: string;
+
+  /**
+   * The ID of the destination object type (e.g., 0-3 for deals).
+   */
+  toObjectTypeId: string;
+
+  /**
+   * The timestamp when the association was created, in ISO 8601 format.
+   */
+  createdAt?: string;
+
+  /**
+   * For labeled association types, the internal name of the association.
+   */
+  name?: string;
+
+  /**
+   * The timestamp when the last update was made to an association, in ISO 8601
+   * format.
+   */
+  updatedAt?: string;
 }
 
-export interface BatchReadInputPropertyName {
-  archived: boolean;
-
-  dataSensitivity: 'highly_sensitive' | 'non_sensitive' | 'sensitive';
-
-  inputs: Array<PropertyName>;
-}
-
-export interface CollectionResponsePropertyGroupNoPaging {
-  results: Array<PropertyGroup>;
-}
-
-export interface Error {
+export interface BaseError {
   /**
    * The error category
    */
@@ -215,59 +181,7 @@ export interface Error {
   subCategory?: string;
 }
 
-export interface ErrorDetail {
-  /**
-   * A human readable message describing the error along with remediation steps where
-   * appropriate
-   */
-  message: string;
-
-  /**
-   * The status code associated with the error detail
-   */
-  code?: string;
-
-  /**
-   * Context about the error condition
-   */
-  context?: { [key: string]: Array<string> };
-
-  /**
-   * The name of the field or parameter in which the error was found.
-   */
-  in?: string;
-
-  /**
-   * A specific category that contains more specific detail about the error
-   */
-  subCategory?: string;
-}
-
-export interface ForwardPaging {
-  /**
-   * Specifies the paging information needed to retrieve the next set of results in a
-   * paginated API response
-   */
-  next?: NextPage;
-}
-
-/**
- * Specifies the paging information needed to retrieve the next set of results in a
- * paginated API response
- */
-export interface NextPage {
-  /**
-   * A paging cursor token for retrieving subsequent pages.
-   */
-  after: string;
-
-  /**
-   * A URL that can be used to retrieve the next page results.
-   */
-  link?: string;
-}
-
-export interface ObjectTypeDefinition {
+export interface BaseObjectTypeDefinition {
   id: string;
 
   allowsSensitiveProperties: boolean;
@@ -299,36 +213,10 @@ export interface ObjectTypeDefinition {
   updatedAt?: string;
 }
 
-export interface ObjectTypeDefinitionLabels {
-  plural?: string;
-
-  singular?: string;
-}
-
-export interface ObjectTypeDefinitionPatch {
-  clearDescription: boolean;
-
-  allowsSensitiveProperties?: boolean;
-
-  description?: string;
-
-  labels?: ObjectTypeDefinitionLabels;
-
-  primaryDisplayProperty?: string;
-
-  requiredProperties?: Array<string>;
-
-  restorable?: boolean;
-
-  searchableProperties?: Array<string>;
-
-  secondaryDisplayProperties?: Array<string>;
-}
-
 /**
  * A HubSpot property option
  */
-export interface Option {
+export interface BaseOption {
   /**
    * Hidden options will not be displayed in HubSpot.
    */
@@ -357,53 +245,10 @@ export interface Option {
   displayOrder?: number;
 }
 
-export interface OptionInput {
-  displayOrder: number;
-
-  hidden: boolean;
-
-  label: string;
-
-  value: string;
-
-  description?: string;
-}
-
-export interface Paging {
-  /**
-   * Specifies the paging information needed to retrieve the next set of results in a
-   * paginated API response
-   */
-  next?: NextPage;
-
-  /**
-   * specifies the paging information needed to retrieve the previous set of results
-   * in a paginated API response
-   */
-  prev?: PreviousPage;
-}
-
-/**
- * specifies the paging information needed to retrieve the previous set of results
- * in a paginated API response
- */
-export interface PreviousPage {
-  /**
-   * A string token used to identify the position before the current page in the
-   * pagination sequence.
-   */
-  before: string;
-
-  /**
-   * A URL string that provides a direct link to the previous page of results.
-   */
-  link?: string;
-}
-
 /**
  * A HubSpot property
  */
-export interface Property {
+export interface BaseProperty {
   /**
    * A description of the property that will be shown as help text in HubSpot.
    */
@@ -434,7 +279,7 @@ export interface Property {
    * A list of valid options for the property. This field is required for enumerated
    * properties, but will be empty for other property types.
    */
-  options: Array<Option>;
+  options: Array<BaseOption>;
 
   /**
    * The property data type.
@@ -561,6 +406,161 @@ export interface Property {
    * may not exist if the property was updated outside of HubSpot.
    */
   updatedUserId?: string;
+}
+
+export interface BatchInputPropertyCreate {
+  inputs: Array<PropertyCreate>;
+}
+
+export interface BatchInputPropertyName {
+  inputs: Array<PropertyName>;
+}
+
+export interface BatchInputPublicObjectID {
+  /**
+   * An array of deal split inputs
+   */
+  inputs: Array<PublicObjectID>;
+}
+
+export interface BatchInputString {
+  /**
+   * Strings to input.
+   */
+  inputs: Array<string>;
+}
+
+export interface BatchReadInputPropertyName {
+  archived: boolean;
+
+  dataSensitivity: 'highly_sensitive' | 'non_sensitive' | 'sensitive';
+
+  inputs: Array<PropertyName>;
+}
+
+export interface CollectionResponsePropertyGroupNoPaging {
+  results: Array<PropertyGroup>;
+}
+
+export interface ErrorDetail {
+  /**
+   * A human readable message describing the error along with remediation steps where
+   * appropriate
+   */
+  message: string;
+
+  /**
+   * The status code associated with the error detail
+   */
+  code?: string;
+
+  /**
+   * Context about the error condition
+   */
+  context?: { [key: string]: Array<string> };
+
+  /**
+   * The name of the field or parameter in which the error was found.
+   */
+  in?: string;
+
+  /**
+   * A specific category that contains more specific detail about the error
+   */
+  subCategory?: string;
+}
+
+export interface ForwardPaging {
+  /**
+   * Specifies the paging information needed to retrieve the next set of results in a
+   * paginated API response
+   */
+  next?: NextPage;
+}
+
+/**
+ * Specifies the paging information needed to retrieve the next set of results in a
+ * paginated API response
+ */
+export interface NextPage {
+  /**
+   * A paging cursor token for retrieving subsequent pages.
+   */
+  after: string;
+
+  /**
+   * A URL that can be used to retrieve the next page results.
+   */
+  link?: string;
+}
+
+export interface ObjectTypeDefinitionLabels {
+  plural?: string;
+
+  singular?: string;
+}
+
+export interface ObjectTypeDefinitionPatch {
+  clearDescription: boolean;
+
+  allowsSensitiveProperties?: boolean;
+
+  description?: string;
+
+  labels?: ObjectTypeDefinitionLabels;
+
+  primaryDisplayProperty?: string;
+
+  requiredProperties?: Array<string>;
+
+  restorable?: boolean;
+
+  searchableProperties?: Array<string>;
+
+  secondaryDisplayProperties?: Array<string>;
+}
+
+export interface OptionInput {
+  displayOrder: number;
+
+  hidden: boolean;
+
+  label: string;
+
+  value: string;
+
+  description?: string;
+}
+
+export interface Paging {
+  /**
+   * Specifies the paging information needed to retrieve the next set of results in a
+   * paginated API response
+   */
+  next?: NextPage;
+
+  /**
+   * specifies the paging information needed to retrieve the previous set of results
+   * in a paginated API response
+   */
+  prev?: PreviousPage;
+}
+
+/**
+ * specifies the paging information needed to retrieve the previous set of results
+ * in a paginated API response
+ */
+export interface PreviousPage {
+  /**
+   * A string token used to identify the position before the current page in the
+   * pagination sequence.
+   */
+  before: string;
+
+  /**
+   * A URL string that provides a direct link to the previous page of results.
+   */
+  link?: string;
 }
 
 export interface PropertyCreate {
@@ -733,6 +733,7 @@ export interface PropertyValue {
     | 'COMPANIES'
     | 'COMPANY_FAMILIES'
     | 'COMPANY_INSIGHTS'
+    | 'CONNECTED_ACCOUNT'
     | 'CONTACTS'
     | 'CONTACTS_WEB'
     | 'CONTENT_MEMBERSHIP'

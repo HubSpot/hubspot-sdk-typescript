@@ -29,7 +29,7 @@ const runTests = (client: PartialHubSpot<{ cms: { hubdb: { rows: BaseRows } } }>
     const responsePromise = client.cms.hubdb.rows.create('tableIdOrName', {
       childTableId: 0,
       displayIndex: 0,
-      values: { foo: {} },
+      values: { foo: { foo: 'bar' } },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -45,7 +45,7 @@ const runTests = (client: PartialHubSpot<{ cms: { hubdb: { rows: BaseRows } } }>
     const response = await client.cms.hubdb.rows.create('tableIdOrName', {
       childTableId: 0,
       displayIndex: 0,
-      values: { foo: {} },
+      values: { foo: { foo: 'bar' } },
       name: 'name',
       path: 'path',
     });
@@ -130,7 +130,7 @@ const runTests = (client: PartialHubSpot<{ cms: { hubdb: { rows: BaseRows } } }>
         {
           childTableId: 0,
           displayIndex: 0,
-          values: { foo: {} },
+          values: { foo: { foo: 'bar' } },
         },
       ],
     });
@@ -150,7 +150,7 @@ const runTests = (client: PartialHubSpot<{ cms: { hubdb: { rows: BaseRows } } }>
         {
           childTableId: 0,
           displayIndex: 0,
-          values: { foo: {} },
+          values: { foo: { foo: 'bar' } },
           name: 'name',
           path: 'path',
         },
@@ -279,7 +279,7 @@ const runTests = (client: PartialHubSpot<{ cms: { hubdb: { rows: BaseRows } } }>
         {
           childTableId: 0,
           displayIndex: 0,
-          values: { foo: {} },
+          values: { foo: { foo: 'bar' } },
         },
       ],
     });
@@ -299,7 +299,7 @@ const runTests = (client: PartialHubSpot<{ cms: { hubdb: { rows: BaseRows } } }>
         {
           childTableId: 0,
           displayIndex: 0,
-          values: { foo: {} },
+          values: { foo: { foo: 'bar' } },
           id: 'id',
           name: 'name',
           path: 'path',
@@ -314,7 +314,7 @@ const runTests = (client: PartialHubSpot<{ cms: { hubdb: { rows: BaseRows } } }>
       tableIdOrName: 'tableIdOrName',
       childTableId: 0,
       displayIndex: 0,
-      values: { foo: {} },
+      values: { foo: { foo: 'bar' } },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -331,7 +331,7 @@ const runTests = (client: PartialHubSpot<{ cms: { hubdb: { rows: BaseRows } } }>
       tableIdOrName: 'tableIdOrName',
       childTableId: 0,
       displayIndex: 0,
-      values: { foo: {} },
+      values: { foo: { foo: 'bar' } },
       name: 'name',
       path: 'path',
     });
@@ -344,7 +344,7 @@ const runTests = (client: PartialHubSpot<{ cms: { hubdb: { rows: BaseRows } } }>
         {
           childTableId: 0,
           displayIndex: 0,
-          values: { foo: {} },
+          values: { foo: { foo: 'bar' } },
         },
       ],
     });
@@ -364,7 +364,7 @@ const runTests = (client: PartialHubSpot<{ cms: { hubdb: { rows: BaseRows } } }>
         {
           childTableId: 0,
           displayIndex: 0,
-          values: { foo: {} },
+          values: { foo: { foo: 'bar' } },
           id: 'id',
           name: 'name',
           path: 'path',
@@ -379,7 +379,7 @@ const runTests = (client: PartialHubSpot<{ cms: { hubdb: { rows: BaseRows } } }>
       tableIdOrName: 'tableIdOrName',
       childTableId: 0,
       displayIndex: 0,
-      values: { foo: {} },
+      values: { foo: { foo: 'bar' } },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -396,7 +396,7 @@ const runTests = (client: PartialHubSpot<{ cms: { hubdb: { rows: BaseRows } } }>
       tableIdOrName: 'tableIdOrName',
       childTableId: 0,
       displayIndex: 0,
-      values: { foo: {} },
+      values: { foo: { foo: 'bar' } },
       name: 'name',
       path: 'path',
     });
