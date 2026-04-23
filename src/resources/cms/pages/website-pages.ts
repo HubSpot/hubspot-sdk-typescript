@@ -2603,20 +2603,45 @@ export interface WebsitePageListParams extends PageParams {
    */
   archived?: boolean;
 
+  /**
+   * Filter pages created after a specific date and time.
+   */
   createdAfter?: string;
 
+  /**
+   * Filter pages by the exact creation timestamp. Format is date-time.
+   */
   createdAt?: string;
 
+  /**
+   * Filter pages created before a specific date-time.
+   */
   createdBefore?: string;
 
+  /**
+   * Specify properties to include in the response.
+   */
   property?: string;
 
+  /**
+   * Specify the order of results. Accepts an array of field names to sort by.
+   */
   sort?: Array<string>;
 
+  /**
+   * Filter pages updated after the specified date-time.
+   */
   updatedAfter?: string;
 
+  /**
+   * Filter pages by their exact update timestamp in ISO 8601 format.
+   */
   updatedAt?: string;
 
+  /**
+   * Filter pages updated before a specific date and time. Format should be
+   * date-time.
+   */
   updatedBefore?: string;
 }
 

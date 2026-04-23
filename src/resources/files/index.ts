@@ -6,7 +6,6 @@ export {
   type FileAssetCreateParams,
   type FileAssetUpdateParams,
   type FileAssetGetParams,
-  type FileAssetGetByPathParams,
   type FileAssetGetSignedURLParams,
   type FileAssetImportFromURLAsyncParams,
   type FileAssetReplaceParams,

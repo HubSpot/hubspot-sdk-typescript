@@ -2637,7 +2637,7 @@ export interface PublicRangedTimeOperation {
   /**
    * Specifies the type of operation (TIME_RANGED).
    */
-  operationType: string;
+  operationType: 'TIME_RANGED';
 
   /**
    * Defines the operation to be applied within the time range (IS_BETWEEN,

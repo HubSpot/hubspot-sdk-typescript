@@ -63,17 +63,6 @@ export class BaseFileAssets extends APIResource {
   }
 
   /**
-   * Retrieve a file by its path.
-   */
-  getByPath(
-    path_: string,
-    query: FileAssetGetByPathParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<FilesAPI.FileStat> {
-    return this._client.get(path`/files/2026-03/files/stat/${path_}`, { query, ...options });
-  }
-
-  /**
    * Check the status of requested import.
    */
   getImportTaskStatus(taskID: string, options?: RequestOptions): APIPromise<FilesAPI.FileActionResponse> {
@@ -207,10 +196,6 @@ export interface FileAssetUpdateParams {
 }
 
 export interface FileAssetGetParams {
-  properties?: Array<string>;
-}
-
-export interface FileAssetGetByPathParams {
   properties?: Array<string>;
 }
 
@@ -394,7 +379,6 @@ export declare namespace FileAssets {
     type FileAssetCreateParams as FileAssetCreateParams,
     type FileAssetUpdateParams as FileAssetUpdateParams,
     type FileAssetGetParams as FileAssetGetParams,
-    type FileAssetGetByPathParams as FileAssetGetByPathParams,
     type FileAssetGetSignedURLParams as FileAssetGetSignedURLParams,
     type FileAssetImportFromURLAsyncParams as FileAssetImportFromURLAsyncParams,
     type FileAssetReplaceParams as FileAssetReplaceParams,

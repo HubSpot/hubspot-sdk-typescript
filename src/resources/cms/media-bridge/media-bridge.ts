@@ -22,7 +22,7 @@ export class BaseMediaBridge extends APIResource {
     objectType: string,
     params: MediaBridgeCreateAssociationParams,
     options?: RequestOptions,
-  ): APIPromise<Shared.AssociationDefinition> {
+  ): APIPromise<Shared.BaseAssociationDefinition> {
     const { appId, ...body } = params;
     return this._client.post(path`/media-bridge/2026-03/${appId}/schemas/${objectType}/associations`, {
       body,
@@ -96,7 +96,7 @@ export class BaseMediaBridge extends APIResource {
     objectType: string,
     params: MediaBridgeCreatePropertyParams,
     options?: RequestOptions,
-  ): APIPromise<Property> {
+  ): APIPromise<MediaBridgeProperty> {
     const { appId, ...body } = params;
     return this._client.post(path`/media-bridge/2026-03/${appId}/properties/${objectType}`, {
       body,
@@ -122,7 +122,7 @@ export class BaseMediaBridge extends APIResource {
   createVideoAssociationDefinition(
     appID: number,
     options?: RequestOptions,
-  ): APIPromise<Shared.AssociationDefinition> {
+  ): APIPromise<Shared.BaseAssociationDefinition> {
     return this._client.post(
       path`/media-bridge/2026-03/${appID}/settings/video-association-definition`,
       options,
@@ -219,7 +219,7 @@ export class BaseMediaBridge extends APIResource {
     propertyName: string,
     params: MediaBridgeGetPropertyParams,
     options?: RequestOptions,
-  ): APIPromise<Property> {
+  ): APIPromise<MediaBridgeProperty> {
     const { appId, objectType, ...query } = params;
     return this._client.get(path`/media-bridge/2026-03/${appId}/properties/${objectType}/${propertyName}`, {
       query,
@@ -371,7 +371,7 @@ export class BaseMediaBridge extends APIResource {
     propertyName: string,
     params: MediaBridgeUpdatePropertyParams,
     options?: RequestOptions,
-  ): APIPromise<Property> {
+  ): APIPromise<MediaBridgeProperty> {
     const { appId, objectType, ...body } = params;
     return this._client.patch(path`/media-bridge/2026-03/${appId}/properties/${objectType}/${propertyName}`, {
       body,
@@ -401,7 +401,7 @@ export class BaseMediaBridge extends APIResource {
     objectType: string,
     params: MediaBridgeUpdateSchemaParams,
     options?: RequestOptions,
-  ): APIPromise<Shared.ObjectTypeDefinition> {
+  ): APIPromise<Shared.BaseObjectTypeDefinition> {
     const { appId, ...body } = params;
     return this._client.patch(path`/media-bridge/2026-03/${appId}/schemas/${objectType}`, {
       body,
@@ -600,81 +600,7 @@ export interface AddNumbers {
 export interface AddTime {
   operator: 'ADD_TIME';
 
-  stringToCheck:
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime;
+  stringToCheck: unknown;
 
   inputs?: Array<
     | ConstantBoolean
@@ -976,7 +902,7 @@ export interface AttentionSpanEventRequest {
 export interface BatchResponseProperty {
   completedAt: string;
 
-  results: Array<Property>;
+  results: Array<MediaBridgeProperty>;
 
   startedAt: string;
 
@@ -990,7 +916,7 @@ export interface BatchResponseProperty {
 export interface BatchResponsePropertyWithErrors {
   completedAt: string;
 
-  results: Array<Property>;
+  results: Array<MediaBridgeProperty>;
 
   startedAt: string;
 
@@ -1008,81 +934,7 @@ export interface BatchResponsePropertyWithErrors {
 export interface BeginsWith {
   operator: 'BEGINS_WITH';
 
-  stringToCheck:
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime;
+  stringToCheck: unknown;
 
   inputs?: Array<
     | ConstantBoolean
@@ -1310,81 +1162,7 @@ export interface ConstantString {
 export interface Contains {
   operator: 'CONTAINS';
 
-  stringToCheck:
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime;
+  stringToCheck: unknown;
 
   inputs?: Array<
     | ConstantBoolean
@@ -2702,159 +2480,11 @@ export interface HasPlainTextEmailReply {
 export interface IfBoolean {
   enclosedInParentheses: boolean;
 
-  ifExpression:
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime;
+  ifExpression: unknown;
 
   operator: 'IF_BOOLEAN';
 
-  elseExpression?:
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime;
+  elseExpression?: unknown;
 
   inputs?: Array<
     | ConstantBoolean
@@ -2941,159 +2571,11 @@ export interface IfBoolean {
 export interface IfNumber {
   enclosedInParentheses: boolean;
 
-  ifExpression:
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime;
+  ifExpression: unknown;
 
   operator: 'IF_NUMBER';
 
-  elseExpression?:
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime;
+  elseExpression?: unknown;
 
   inputs?: Array<
     | ConstantBoolean
@@ -3180,159 +2662,11 @@ export interface IfNumber {
 export interface IfString {
   enclosedInParentheses: boolean;
 
-  ifExpression:
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime;
+  ifExpression: unknown;
 
   operator: 'IF_STRING';
 
-  elseExpression?:
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime;
+  elseExpression?: unknown;
 
   inputs?: Array<
     | ConstantBoolean
@@ -3720,81 +3054,7 @@ export interface IsPipelineStageClosed {
 }
 
 export interface IsPresent {
-  expressionToEvaluate:
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime;
+  expressionToEvaluate: unknown;
 
   operator: 'IS_PRESENT';
 
@@ -3973,6 +3233,20 @@ export interface LessThanOrEqual {
   value?: boolean;
 }
 
+export interface LookupAssociationSpec {
+  /**
+   * Defines the type, direction, and details of the relationship between two CRM
+   * objects.
+   */
+  associationSpec: Shared.AssociationSpec;
+
+  cardinality?: 'ONE_TO_MANY' | 'ONE_TO_ONE';
+
+  maxToObjectIds?: number;
+
+  toObjectTypeId?: string;
+}
+
 export interface LowerCase {
   operator: 'LOWER_CASE';
 
@@ -4141,6 +3415,422 @@ export interface MaxNumbers {
   propertyName?: string;
 
   value?: number;
+}
+
+/**
+ * A HubSpot property
+ */
+export interface MediaBridgeProperty {
+  /**
+   * Object types permitted to use this property.
+   */
+  allowedObjectTypes: Array<ObjectTypeIDProto>;
+
+  /**
+   * Whether the property is a calculated field.
+   */
+  calculated: boolean;
+
+  canArchive: boolean;
+
+  canRestore: boolean;
+
+  /**
+   * The timestamp when the property was created, in ISO 8601 format.
+   */
+  createdAt: number;
+
+  /**
+   * The ID of the user who created the property.
+   */
+  createdUserId: number;
+
+  /**
+   * The name of the related currency property.
+   */
+  currencyPropertyName: string;
+
+  /**
+   * Indicates the sensitivity level of the property, such as "non_sensitive",
+   * "sensitive", or "highly_sensitive".
+   */
+  dataSensitivity: 'high' | 'none' | 'standard';
+
+  dateDisplayHint: 'absolute' | 'absolute_with_relative' | 'time_since' | 'time_until';
+
+  /**
+   * Whether the property has been deleted.
+   */
+  deleted: boolean;
+
+  /**
+   * A summary of the property's purpose.
+   */
+  description: string;
+
+  /**
+   * The mode in which the property is displayed. Can be: "current_value" or
+   * "all_unique_versions".
+   */
+  displayMode: 'all_unique_versions' | 'current_value';
+
+  /**
+   * The position of the item relative to others in the list.
+   */
+  displayOrder: number;
+
+  enforceMultivalueUniqueness: boolean;
+
+  /**
+   * Applicable only for enumeration type properties. Should be set to true with a
+   * 'referencedObjectType' of 'OWNER'. Otherwise false.
+   */
+  externalOptions: boolean;
+
+  /**
+   * When externalOptions is true, indicates the property's option values will be
+   * populated from other systems (e.g., "OWNER" for the hubspot_owner_id property).
+   */
+  externalOptionsReferenceType: string;
+
+  /**
+   * Deprecated. Whether the property is marked as a favorite.
+   */
+  favorited: boolean;
+
+  /**
+   * Deprecated. The order position when marked as favorited.
+   */
+  favoritedOrder: number;
+
+  /**
+   * Determines how the property will appear in HubSpot's UI or on a form. Learn more
+   * in the properties API guide.
+   */
+  fieldType: string;
+
+  /**
+   * Whether the property can appear on forms.
+   */
+  formField: boolean;
+
+  /**
+   * The ID of the user who last updated the property.
+   */
+  fromUserId: number;
+
+  /**
+   * The name of the group to which the property is assigned.
+   */
+  groupName: string;
+
+  /**
+   * Whether the property is a unique identifier property.
+   */
+  hasUniqueValue: boolean;
+
+  /**
+   * Whether or not the property will be hidden from the HubSpot UI. It's recommended
+   * that this be set to false for custom properties.
+   */
+  hidden: boolean;
+
+  /**
+   * A boolean value set to true for HubSpot default properties.
+   */
+  hubspotDefined: boolean;
+
+  /**
+   * For default properties, whether the property has been customized. Equivalent to
+   * the 'isCustomizedDefault' field.
+   */
+  isCustomizedDefault: boolean;
+
+  /**
+   * Whether the property can contain multiple values.
+   */
+  isMultiValued: boolean;
+
+  /**
+   * For default properties, whether the property has been customized. Equivalent to
+   * the 'isCustomizedDefault' field.
+   */
+  isPartial: boolean;
+
+  /**
+   * The display label for the property.
+   */
+  label: string;
+
+  /**
+   * Whether the property definition can be customized but not deleted.
+   */
+  mutableDefinitionNotDeletable: boolean;
+
+  /**
+   * The internal name for the property.
+   */
+  name: string;
+
+  /**
+   * Hint for how a number property is displayed and validated in HubSpot's UI. Can
+   * be: "unformatted", "formatted", "currency", "percentage", "duration", or
+   * "probability".
+   */
+  numberDisplayHint: 'currency' | 'duration' | 'formatted' | 'percentage' | 'probability' | 'unformatted';
+
+  /**
+   * A list of valid options for the property. This field is required for enumerated
+   * properties.
+   */
+  options: Array<Shared.AutomationActionsOption>;
+
+  /**
+   * Whether options can be modified after creation.
+   */
+  optionsAreMutable: boolean;
+
+  /**
+   * Specifies how to sort property options. Can be either "DISPLAY_ORDER" to defer
+   * to the displayOrder field, or "ALPHABETICAL".
+   */
+  optionSortStrategy: 'ALPHABETICAL' | 'DISPLAY_ORDER';
+
+  owningAppId: number;
+
+  /**
+   * The ID of the HubSpot account where the property is defined.
+   */
+  portalId: number;
+
+  /**
+   * Whether the property's description is read-only.
+   */
+  readOnlyDefinition: boolean;
+
+  /**
+   * Indicates if the property's value is read-only.
+   */
+  readOnlyValue: boolean;
+
+  /**
+   * Deprecated. Use externalOptionsReferenceType instead.
+   */
+  referencedObjectType:
+    | 'ABANDONED_CART'
+    | 'ACCEPTANCE_TEST'
+    | 'AD'
+    | 'AD_ACCOUNT'
+    | 'AD_CAMPAIGN'
+    | 'AD_GROUP'
+    | 'AI_FORECAST'
+    | 'ALL_PAGES'
+    | 'APPROVAL'
+    | 'APPROVAL_STEP'
+    | 'ATTRIBUTION'
+    | 'AUDIENCE'
+    | 'AUTOMATION_JOURNEY'
+    | 'AUTOMATION_PLATFORM_FLOW'
+    | 'AUTOMATION_PLATFORM_FLOW_ACTION'
+    | 'BET_ALERT'
+    | 'BET_DELIVERABLE_SERVICE'
+    | 'BLOG_LISTING_PAGE'
+    | 'BLOG_POST'
+    | 'CALL'
+    | 'CAMPAIGN'
+    | 'CAMPAIGN_BUDGET_ITEM'
+    | 'CAMPAIGN_SPEND_ITEM'
+    | 'CAMPAIGN_STEP'
+    | 'CAMPAIGN_TEMPLATE'
+    | 'CAMPAIGN_TEMPLATE_STEP'
+    | 'CART'
+    | 'CASE_STUDY'
+    | 'CHATFLOW'
+    | 'CLIP'
+    | 'CMS_URL'
+    | 'COMBO_EVENT_CONFIGURATION'
+    | 'COMMERCE_PAYMENT'
+    | 'COMMUNICATION'
+    | 'COMPANY'
+    | 'CONTACT'
+    | 'CONTACT_CREATE_ATTRIBUTION'
+    | 'CONTENT'
+    | 'CONTENT_AUDIT'
+    | 'CONTENT_AUDIT_PAGE'
+    | 'CONVERSATION'
+    | 'CONVERSATION_INBOX'
+    | 'CONVERSATION_SESSION'
+    | 'CRM_OBJECTS_DUMMY_TYPE'
+    | 'CRM_PIPELINES_DUMMY_TYPE'
+    | 'CTA'
+    | 'CTA_VARIANT'
+    | 'DATA_PRIVACY_CONSENT'
+    | 'DATA_SYNC_STATE'
+    | 'DEAL'
+    | 'DEAL_CREATE_ATTRIBUTION'
+    | 'DEAL_REGISTRATION'
+    | 'DEAL_SPLIT'
+    | 'DISCOUNT'
+    | 'DISCOUNT_CODE'
+    | 'DISCOUNT_TEMPLATE'
+    | 'EMAIL'
+    | 'ENGAGEMENT'
+    | 'EXPORT'
+    | 'EXTERNAL_WEB_URL'
+    | 'FEE'
+    | 'FEEDBACK_SUBMISSION'
+    | 'FEEDBACK_SURVEY'
+    | 'FILE_MANAGER_FILE'
+    | 'FILE_MANAGER_FOLDER'
+    | 'FOLDER'
+    | 'FORECAST'
+    | 'FORM'
+    | 'FORM_SUBMISSION_INBOUNDDB'
+    | 'GOAL_TARGET'
+    | 'GOAL_TARGET_GROUP'
+    | 'GOAL_TEMPLATE'
+    | 'GSC_PROPERTY'
+    | 'HUB'
+    | 'IMPORT'
+    | 'INVOICE'
+    | 'KEYWORD'
+    | 'KNOWLEDGE_ARTICLE'
+    | 'LANDING_PAGE'
+    | 'LEAD'
+    | 'LINE_ITEM'
+    | 'MARKETING_CALENDAR'
+    | 'MARKETING_CAMPAIGN_UTM'
+    | 'MARKETING_EMAIL'
+    | 'MARKETING_EVENT'
+    | 'MARKETING_EVENT_ATTENDANCE'
+    | 'MARKETING_SMS'
+    | 'MEDIA_BRIDGE'
+    | 'MEETING_EVENT'
+    | 'MIC'
+    | 'NOTE'
+    | 'OBJECT_LIST'
+    | 'ORDER'
+    | 'OWNER'
+    | 'PARTNER_ACCOUNT'
+    | 'PARTNER_CLIENT'
+    | 'PARTNER_CLIENT_REVENUE'
+    | 'PARTNER_SERVICE'
+    | 'PAYMENT_LINK'
+    | 'PAYMENT_SCHEDULE'
+    | 'PAYMENT_SCHEDULE_INSTALLMENT'
+    | 'PERMISSIONS_TESTING'
+    | 'PLAYBOOK'
+    | 'PLAYBOOK_QUESTION'
+    | 'PLAYBOOK_SUBMISSION'
+    | 'PLAYBOOK_SUBMISSION_ANSWER'
+    | 'PLAYLIST'
+    | 'PLAYLIST_FOLDER'
+    | 'PODCAST_EPISODE'
+    | 'PORTAL'
+    | 'PORTAL_OBJECT_SYNC_MESSAGE'
+    | 'POSTAL_MAIL'
+    | 'PRIVACY_SCANNER_COOKIE'
+    | 'PRODUCT'
+    | 'PRODUCT_OR_FOLDER'
+    | 'PROPERTY_INFO'
+    | 'PROSPECTING_AGENT_CONTACT_ASSIGNMENT'
+    | 'PUBLISHING_TASK'
+    | 'QUARANTINED_SUBMISSION'
+    | 'QUOTA'
+    | 'QUOTE'
+    | 'QUOTE_FIELD'
+    | 'QUOTE_MODULE'
+    | 'QUOTE_MODULE_FIELD'
+    | 'QUOTE_TEMPLATE'
+    | 'RESTORABLE_CRM_OBJECT'
+    | 'ROSTER'
+    | 'ROSTER_MEMBER'
+    | 'SALES_DOCUMENT'
+    | 'SALES_TASK'
+    | 'SALES_WORKLOAD'
+    | 'SALESFORCE_SYNC_ERROR'
+    | 'SCHEDULING_PAGE'
+    | 'SCHEMAS_BACKEND_TEST'
+    | 'SCORE_CONFIGURATION'
+    | 'SEQUENCE'
+    | 'SEQUENCE_ENROLLMENT'
+    | 'SEQUENCE_STEP'
+    | 'SEQUENCE_STEP_ENROLLMENT'
+    | 'SERVICE'
+    | 'SITE_PAGE'
+    | 'SNIPPET'
+    | 'SOCIAL_BROADCAST'
+    | 'SOCIAL_CHANNEL'
+    | 'SOCIAL_POST'
+    | 'SOCIAL_PROFILE'
+    | 'SOX_PROTECTED_DUMMY_TYPE'
+    | 'SOX_PROTECTED_TEST_TYPE'
+    | 'SUBMISSION_TAG'
+    | 'SUBSCRIPTION'
+    | 'TASK'
+    | 'TASK_TEMPLATE'
+    | 'TAX'
+    | 'TEMPLATE'
+    | 'TICKET'
+    | 'UNKNOWN'
+    | 'UNSUBSCRIBE'
+    | 'USER'
+    | 'VIEW'
+    | 'VIEW_BLOCK'
+    | 'WEB_INTERACTIVE';
+
+  /**
+   * Whether the property is searchable globaly.
+   */
+  searchableInGlobalSearch: boolean;
+
+  searchTextAnalysisMode: 'NONE' | 'NOT_ANALYZED_TEXT';
+
+  /**
+   * When sensitiveData is true, lists the type of sensitive data contained in the
+   * property (e.g., "HIPAA").
+   */
+  sensitiveDataCategories: Array<string>;
+
+  /**
+   * Whether to show the currency symbol in HubSpot's UI.
+   */
+  showCurrencySymbol: boolean;
+
+  /**
+   * Hint for how the text is displayed and validated in HubSpot's UI. Can be:
+   * "unformatted_single_line", "multi_line", "email", "phone_number", "domain_name",
+   * "ip_address", "physical_address", or "postal_code".
+   */
+  textDisplayHint:
+    | 'domain_name'
+    | 'email'
+    | 'ip_address'
+    | 'multi_line'
+    | 'phone_number'
+    | 'physical_address'
+    | 'postal_code'
+    | 'unformatted_single_line';
+
+  /**
+   * The data type of the property, such as string or number.
+   */
+  type:
+    | 'bool'
+    | 'currency_number'
+    | 'date'
+    | 'datetime'
+    | 'enumeration'
+    | 'json'
+    | 'number'
+    | 'object_coordinates'
+    | 'phone_number'
+    | 'string';
+
+  /**
+   * The timestamp when the property was last updated, in ISO 8601 format.
+   */
+  updatedAt: number;
 }
 
 export interface MediaBridgePropertyUpdate {
@@ -5092,7 +4782,7 @@ export interface ObjectSchema {
 
   archived: boolean;
 
-  associations: Array<Shared.AssociationDefinition>;
+  associations: Array<Shared.BaseAssociationDefinition>;
 
   fullyQualifiedName: string;
 
@@ -5681,422 +5371,6 @@ export interface Power {
   value?: number;
 }
 
-/**
- * A HubSpot property
- */
-export interface Property {
-  /**
-   * Object types permitted to use this property.
-   */
-  allowedObjectTypes: Array<ObjectTypeIDProto>;
-
-  /**
-   * Whether the property is a calculated field.
-   */
-  calculated: boolean;
-
-  canArchive: boolean;
-
-  canRestore: boolean;
-
-  /**
-   * The timestamp when the property was created, in ISO 8601 format.
-   */
-  createdAt: number;
-
-  /**
-   * The ID of the user who created the property.
-   */
-  createdUserId: number;
-
-  /**
-   * The name of the related currency property.
-   */
-  currencyPropertyName: string;
-
-  /**
-   * Indicates the sensitivity level of the property, such as "non_sensitive",
-   * "sensitive", or "highly_sensitive".
-   */
-  dataSensitivity: 'high' | 'none' | 'standard';
-
-  dateDisplayHint: 'absolute' | 'absolute_with_relative' | 'time_since' | 'time_until';
-
-  /**
-   * Whether the property has been deleted.
-   */
-  deleted: boolean;
-
-  /**
-   * A summary of the property's purpose.
-   */
-  description: string;
-
-  /**
-   * The mode in which the property is displayed. Can be: "current_value" or
-   * "all_unique_versions".
-   */
-  displayMode: 'all_unique_versions' | 'current_value';
-
-  /**
-   * The position of the item relative to others in the list.
-   */
-  displayOrder: number;
-
-  enforceMultivalueUniqueness: boolean;
-
-  /**
-   * Applicable only for enumeration type properties. Should be set to true with a
-   * 'referencedObjectType' of 'OWNER'. Otherwise false.
-   */
-  externalOptions: boolean;
-
-  /**
-   * When externalOptions is true, indicates the property's option values will be
-   * populated from other systems (e.g., "OWNER" for the hubspot_owner_id property).
-   */
-  externalOptionsReferenceType: string;
-
-  /**
-   * Deprecated. Whether the property is marked as a favorite.
-   */
-  favorited: boolean;
-
-  /**
-   * Deprecated. The order position when marked as favorited.
-   */
-  favoritedOrder: number;
-
-  /**
-   * Determines how the property will appear in HubSpot's UI or on a form. Learn more
-   * in the properties API guide.
-   */
-  fieldType: string;
-
-  /**
-   * Whether the property can appear on forms.
-   */
-  formField: boolean;
-
-  /**
-   * The ID of the user who last updated the property.
-   */
-  fromUserId: number;
-
-  /**
-   * The name of the group to which the property is assigned.
-   */
-  groupName: string;
-
-  /**
-   * Whether the property is a unique identifier property.
-   */
-  hasUniqueValue: boolean;
-
-  /**
-   * Whether or not the property will be hidden from the HubSpot UI. It's recommended
-   * that this be set to false for custom properties.
-   */
-  hidden: boolean;
-
-  /**
-   * A boolean value set to true for HubSpot default properties.
-   */
-  hubspotDefined: boolean;
-
-  /**
-   * For default properties, whether the property has been customized. Equivalent to
-   * the 'isCustomizedDefault' field.
-   */
-  isCustomizedDefault: boolean;
-
-  /**
-   * Whether the property can contain multiple values.
-   */
-  isMultiValued: boolean;
-
-  /**
-   * For default properties, whether the property has been customized. Equivalent to
-   * the 'isCustomizedDefault' field.
-   */
-  isPartial: boolean;
-
-  /**
-   * The display label for the property.
-   */
-  label: string;
-
-  /**
-   * Whether the property definition can be customized but not deleted.
-   */
-  mutableDefinitionNotDeletable: boolean;
-
-  /**
-   * The internal name for the property.
-   */
-  name: string;
-
-  /**
-   * Hint for how a number property is displayed and validated in HubSpot's UI. Can
-   * be: "unformatted", "formatted", "currency", "percentage", "duration", or
-   * "probability".
-   */
-  numberDisplayHint: 'currency' | 'duration' | 'formatted' | 'percentage' | 'probability' | 'unformatted';
-
-  /**
-   * A list of valid options for the property. This field is required for enumerated
-   * properties.
-   */
-  options: Array<Shared.AutomationActionsOption>;
-
-  /**
-   * Whether options can be modified after creation.
-   */
-  optionsAreMutable: boolean;
-
-  /**
-   * Specifies how to sort property options. Can be either "DISPLAY_ORDER" to defer
-   * to the displayOrder field, or "ALPHABETICAL".
-   */
-  optionSortStrategy: 'ALPHABETICAL' | 'DISPLAY_ORDER';
-
-  owningAppId: number;
-
-  /**
-   * The ID of the HubSpot account where the property is defined.
-   */
-  portalId: number;
-
-  /**
-   * Whether the property's description is read-only.
-   */
-  readOnlyDefinition: boolean;
-
-  /**
-   * Indicates if the property's value is read-only.
-   */
-  readOnlyValue: boolean;
-
-  /**
-   * Deprecated. Use externalOptionsReferenceType instead.
-   */
-  referencedObjectType:
-    | 'ABANDONED_CART'
-    | 'ACCEPTANCE_TEST'
-    | 'AD'
-    | 'AD_ACCOUNT'
-    | 'AD_CAMPAIGN'
-    | 'AD_GROUP'
-    | 'AI_FORECAST'
-    | 'ALL_PAGES'
-    | 'APPROVAL'
-    | 'APPROVAL_STEP'
-    | 'ATTRIBUTION'
-    | 'AUDIENCE'
-    | 'AUTOMATION_JOURNEY'
-    | 'AUTOMATION_PLATFORM_FLOW'
-    | 'AUTOMATION_PLATFORM_FLOW_ACTION'
-    | 'BET_ALERT'
-    | 'BET_DELIVERABLE_SERVICE'
-    | 'BLOG_LISTING_PAGE'
-    | 'BLOG_POST'
-    | 'CALL'
-    | 'CAMPAIGN'
-    | 'CAMPAIGN_BUDGET_ITEM'
-    | 'CAMPAIGN_SPEND_ITEM'
-    | 'CAMPAIGN_STEP'
-    | 'CAMPAIGN_TEMPLATE'
-    | 'CAMPAIGN_TEMPLATE_STEP'
-    | 'CART'
-    | 'CASE_STUDY'
-    | 'CHATFLOW'
-    | 'CLIP'
-    | 'CMS_URL'
-    | 'COMBO_EVENT_CONFIGURATION'
-    | 'COMMERCE_PAYMENT'
-    | 'COMMUNICATION'
-    | 'COMPANY'
-    | 'CONTACT'
-    | 'CONTACT_CREATE_ATTRIBUTION'
-    | 'CONTENT'
-    | 'CONTENT_AUDIT'
-    | 'CONTENT_AUDIT_PAGE'
-    | 'CONVERSATION'
-    | 'CONVERSATION_INBOX'
-    | 'CONVERSATION_SESSION'
-    | 'CRM_OBJECTS_DUMMY_TYPE'
-    | 'CRM_PIPELINES_DUMMY_TYPE'
-    | 'CTA'
-    | 'CTA_VARIANT'
-    | 'DATA_PRIVACY_CONSENT'
-    | 'DATA_SYNC_STATE'
-    | 'DEAL'
-    | 'DEAL_CREATE_ATTRIBUTION'
-    | 'DEAL_REGISTRATION'
-    | 'DEAL_SPLIT'
-    | 'DISCOUNT'
-    | 'DISCOUNT_CODE'
-    | 'DISCOUNT_TEMPLATE'
-    | 'EMAIL'
-    | 'ENGAGEMENT'
-    | 'EXPORT'
-    | 'EXTERNAL_WEB_URL'
-    | 'FEE'
-    | 'FEEDBACK_SUBMISSION'
-    | 'FEEDBACK_SURVEY'
-    | 'FILE_MANAGER_FILE'
-    | 'FILE_MANAGER_FOLDER'
-    | 'FOLDER'
-    | 'FORECAST'
-    | 'FORM'
-    | 'FORM_SUBMISSION_INBOUNDDB'
-    | 'GOAL_TARGET'
-    | 'GOAL_TARGET_GROUP'
-    | 'GOAL_TEMPLATE'
-    | 'GSC_PROPERTY'
-    | 'HUB'
-    | 'IMPORT'
-    | 'INVOICE'
-    | 'KEYWORD'
-    | 'KNOWLEDGE_ARTICLE'
-    | 'LANDING_PAGE'
-    | 'LEAD'
-    | 'LINE_ITEM'
-    | 'MARKETING_CALENDAR'
-    | 'MARKETING_CAMPAIGN_UTM'
-    | 'MARKETING_EMAIL'
-    | 'MARKETING_EVENT'
-    | 'MARKETING_EVENT_ATTENDANCE'
-    | 'MARKETING_SMS'
-    | 'MEDIA_BRIDGE'
-    | 'MEETING_EVENT'
-    | 'MIC'
-    | 'NOTE'
-    | 'OBJECT_LIST'
-    | 'ORDER'
-    | 'OWNER'
-    | 'PARTNER_ACCOUNT'
-    | 'PARTNER_CLIENT'
-    | 'PARTNER_CLIENT_REVENUE'
-    | 'PARTNER_SERVICE'
-    | 'PAYMENT_LINK'
-    | 'PAYMENT_SCHEDULE'
-    | 'PAYMENT_SCHEDULE_INSTALLMENT'
-    | 'PERMISSIONS_TESTING'
-    | 'PLAYBOOK'
-    | 'PLAYBOOK_QUESTION'
-    | 'PLAYBOOK_SUBMISSION'
-    | 'PLAYBOOK_SUBMISSION_ANSWER'
-    | 'PLAYLIST'
-    | 'PLAYLIST_FOLDER'
-    | 'PODCAST_EPISODE'
-    | 'PORTAL'
-    | 'PORTAL_OBJECT_SYNC_MESSAGE'
-    | 'POSTAL_MAIL'
-    | 'PRIVACY_SCANNER_COOKIE'
-    | 'PRODUCT'
-    | 'PRODUCT_OR_FOLDER'
-    | 'PROPERTY_INFO'
-    | 'PROSPECTING_AGENT_CONTACT_ASSIGNMENT'
-    | 'PUBLISHING_TASK'
-    | 'QUARANTINED_SUBMISSION'
-    | 'QUOTA'
-    | 'QUOTE'
-    | 'QUOTE_FIELD'
-    | 'QUOTE_MODULE'
-    | 'QUOTE_MODULE_FIELD'
-    | 'QUOTE_TEMPLATE'
-    | 'RESTORABLE_CRM_OBJECT'
-    | 'ROSTER'
-    | 'ROSTER_MEMBER'
-    | 'SALES_DOCUMENT'
-    | 'SALES_TASK'
-    | 'SALES_WORKLOAD'
-    | 'SALESFORCE_SYNC_ERROR'
-    | 'SCHEDULING_PAGE'
-    | 'SCHEMAS_BACKEND_TEST'
-    | 'SCORE_CONFIGURATION'
-    | 'SEQUENCE'
-    | 'SEQUENCE_ENROLLMENT'
-    | 'SEQUENCE_STEP'
-    | 'SEQUENCE_STEP_ENROLLMENT'
-    | 'SERVICE'
-    | 'SITE_PAGE'
-    | 'SNIPPET'
-    | 'SOCIAL_BROADCAST'
-    | 'SOCIAL_CHANNEL'
-    | 'SOCIAL_POST'
-    | 'SOCIAL_PROFILE'
-    | 'SOX_PROTECTED_DUMMY_TYPE'
-    | 'SOX_PROTECTED_TEST_TYPE'
-    | 'SUBMISSION_TAG'
-    | 'SUBSCRIPTION'
-    | 'TASK'
-    | 'TASK_TEMPLATE'
-    | 'TAX'
-    | 'TEMPLATE'
-    | 'TICKET'
-    | 'UNKNOWN'
-    | 'UNSUBSCRIBE'
-    | 'USER'
-    | 'VIEW'
-    | 'VIEW_BLOCK'
-    | 'WEB_INTERACTIVE';
-
-  /**
-   * Whether the property is searchable globaly.
-   */
-  searchableInGlobalSearch: boolean;
-
-  searchTextAnalysisMode: 'NONE' | 'NOT_ANALYZED_TEXT';
-
-  /**
-   * When sensitiveData is true, lists the type of sensitive data contained in the
-   * property (e.g., "HIPAA").
-   */
-  sensitiveDataCategories: Array<string>;
-
-  /**
-   * Whether to show the currency symbol in HubSpot's UI.
-   */
-  showCurrencySymbol: boolean;
-
-  /**
-   * Hint for how the text is displayed and validated in HubSpot's UI. Can be:
-   * "unformatted_single_line", "multi_line", "email", "phone_number", "domain_name",
-   * "ip_address", "physical_address", or "postal_code".
-   */
-  textDisplayHint:
-    | 'domain_name'
-    | 'email'
-    | 'ip_address'
-    | 'multi_line'
-    | 'phone_number'
-    | 'physical_address'
-    | 'postal_code'
-    | 'unformatted_single_line';
-
-  /**
-   * The data type of the property, such as string or number.
-   */
-  type:
-    | 'bool'
-    | 'currency_number'
-    | 'date'
-    | 'datetime'
-    | 'enumeration'
-    | 'json'
-    | 'number'
-    | 'object_coordinates'
-    | 'phone_number'
-    | 'string';
-
-  /**
-   * The timestamp when the property was last updated, in ISO 8601 format.
-   */
-  updatedAt: number;
-}
-
 export interface Property1 {
   description: string;
 
@@ -6163,83 +5437,9 @@ export interface PropertyDefinition {
   /**
    * A HubSpot property
    */
-  property: Property;
+  property: MediaBridgeProperty;
 
-  calculationExpression?:
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime;
+  calculationExpression?: unknown;
 
   calculationFormula?: string;
 
@@ -6254,6 +5454,8 @@ export interface PropertyDefinition {
   fulcrumTimestamp?: number;
 
   janusGroup?: string;
+
+  lookupAssociationSpec?: LookupAssociationSpec;
 
   permission?: FieldLevelPermission;
 
@@ -6299,81 +5501,7 @@ export interface RollupExpression {
 
   sourcePropertyName: string;
 
-  conditionalExpression?:
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime;
+  conditionalExpression?: unknown;
 
   conditionalFormula?: string;
 
@@ -6648,81 +5776,7 @@ export interface ScopeMapping {
 export interface SetContainsString {
   operator: 'SET_CONTAINS_STRING';
 
-  stringToCheck:
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime;
+  stringToCheck: unknown;
 
   inputs?: Array<
     | ConstantBoolean
@@ -7084,81 +6138,7 @@ export interface StringTargetPropertyVariable {
 export interface Substring {
   operator: 'SUBSTRING';
 
-  stringToCheck:
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime;
+  stringToCheck: unknown;
 
   inputs?: Array<
     | ConstantBoolean
@@ -7332,81 +6312,7 @@ export interface SubtractNumbers {
 export interface SubtractTime {
   operator: 'SUBTRACT_TIME';
 
-  stringToCheck:
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime;
+  stringToCheck: unknown;
 
   inputs?: Array<
     | ConstantBoolean
@@ -8585,8 +7491,10 @@ export declare namespace MediaBridge {
     type IsPresent as IsPresent,
     type LessThan as LessThan,
     type LessThanOrEqual as LessThanOrEqual,
+    type LookupAssociationSpec as LookupAssociationSpec,
     type LowerCase as LowerCase,
     type MaxNumbers as MaxNumbers,
+    type MediaBridgeProperty as MediaBridgeProperty,
     type MediaBridgePropertyUpdate as MediaBridgePropertyUpdate,
     type MediaBridgeProviderPartial as MediaBridgeProviderPartial,
     type MediaBridgeProviderRegistrationResponse as MediaBridgeProviderRegistrationResponse,
@@ -8618,7 +7526,6 @@ export declare namespace MediaBridge {
     type PeriodToWeeks as PeriodToWeeks,
     type PipelineProbability as PipelineProbability,
     type Power as Power,
-    type Property as Property,
     type Property1 as Property1,
     type PropertyDefinition as PropertyDefinition,
     type PropertyDefinitionSource as PropertyDefinitionSource,

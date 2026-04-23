@@ -96,7 +96,7 @@ export interface AssociationLabelLimitResponse {
    */
   allLabels: Array<string>;
 
-  fromObjectType: ObjectTypeDefinition;
+  fromObjectType: LimitsObjectTypeDefinition;
 
   /**
    * The maximum number of association labels allowed.
@@ -108,7 +108,7 @@ export interface AssociationLabelLimitResponse {
    */
   percentage: number;
 
-  toObjectType: ObjectTypeDefinition;
+  toObjectType: LimitsObjectTypeDefinition;
 
   /**
    * The current number of association labels used.
@@ -264,6 +264,23 @@ export interface LimitAndUsageForObjectType {
   usage: number;
 }
 
+export interface LimitsObjectTypeDefinition {
+  /**
+   * The unique identifier for the object type.
+   */
+  objectTypeId: string;
+
+  /**
+   * The plural form label for the object type.
+   */
+  pluralLabel: string;
+
+  /**
+   * The singular form label for the object type.
+   */
+  singularLabel: string;
+}
+
 export interface NearLimitRecordSample {
   /**
    * The primary identifier of the record.
@@ -284,23 +301,6 @@ export interface NearLimitRecordSample {
    * The number of records currently in use.
    */
   usage: number;
-}
-
-export interface ObjectTypeDefinition {
-  /**
-   * The unique identifier for the object type.
-   */
-  objectTypeId: string;
-
-  /**
-   * The plural form label for the object type.
-   */
-  pluralLabel: string;
-
-  /**
-   * The singular form label for the object type.
-   */
-  singularLabel: string;
 }
 
 export interface ObjectTypeNearOrAtAssociationLimit {
@@ -386,8 +386,8 @@ export declare namespace Limits {
     type CustomObjectRecordLimitResponse as CustomObjectRecordLimitResponse,
     type CustomPropertyLimitResponse as CustomPropertyLimitResponse,
     type LimitAndUsageForObjectType as LimitAndUsageForObjectType,
+    type LimitsObjectTypeDefinition as LimitsObjectTypeDefinition,
     type NearLimitRecordSample as NearLimitRecordSample,
-    type ObjectTypeDefinition as ObjectTypeDefinition,
     type ObjectTypeNearOrAtAssociationLimit as ObjectTypeNearOrAtAssociationLimit,
     type PipelineLimitResponse as PipelineLimitResponse,
     type RecordLimitResponse as RecordLimitResponse,

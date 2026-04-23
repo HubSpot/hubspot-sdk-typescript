@@ -240,12 +240,21 @@ export interface FolderListParams extends PageParams {
    */
   archived?: boolean;
 
+  /**
+   * Filter folders created after the specified date and time.
+   */
   createdAfter?: string;
 
+  /**
+   * Filter folders by their exact creation date and time.
+   */
   createdAt?: string;
 
   createdBefore?: string;
 
+  /**
+   * Specify a property to include in the response.
+   */
   property?: string;
 
   sort?: Array<string>;
