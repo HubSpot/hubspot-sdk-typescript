@@ -497,10 +497,10 @@ Types:
 Methods:
 
 - <code title="post /crm-object-schemas/2026-03/schemas">client.crm.objectSchemas.<a href="./src/resources/crm/object-schemas/object-schemas.ts">create</a>({ ...params }) -> ObjectSchema</code>
-- <code title="patch /crm-object-schemas/2026-03/schemas/{objectType}">client.crm.objectSchemas.<a href="./src/resources/crm/object-schemas/object-schemas.ts">update</a>(objectType, { ...params }) -> ObjectTypeDefinition</code>
+- <code title="patch /crm-object-schemas/2026-03/schemas/{objectType}">client.crm.objectSchemas.<a href="./src/resources/crm/object-schemas/object-schemas.ts">update</a>(objectType, { ...params }) -> BaseObjectTypeDefinition</code>
 - <code title="get /crm-object-schemas/2026-03/schemas">client.crm.objectSchemas.<a href="./src/resources/crm/object-schemas/object-schemas.ts">list</a>({ ...params }) -> CollectionResponseObjectSchemaNoPaging</code>
 - <code title="delete /crm-object-schemas/2026-03/schemas/{objectType}">client.crm.objectSchemas.<a href="./src/resources/crm/object-schemas/object-schemas.ts">delete</a>(objectType, { ...params }) -> void</code>
-- <code title="post /crm-object-schemas/2026-03/schemas/{objectType}/associations">client.crm.objectSchemas.<a href="./src/resources/crm/object-schemas/object-schemas.ts">createAssociation</a>(objectType, { ...params }) -> AssociationDefinition</code>
+- <code title="post /crm-object-schemas/2026-03/schemas/{objectType}/associations">client.crm.objectSchemas.<a href="./src/resources/crm/object-schemas/object-schemas.ts">createAssociation</a>(objectType, { ...params }) -> BaseAssociationDefinition</code>
 - <code title="delete /crm-object-schemas/2026-03/schemas/{objectType}/associations/{associationIdentifier}">client.crm.objectSchemas.<a href="./src/resources/crm/object-schemas/object-schemas.ts">deleteAssociation</a>(associationIdentifier, { ...params }) -> void</code>
 - <code title="get /crm-object-schemas/2026-03/schemas/{objectType}">client.crm.objectSchemas.<a href="./src/resources/crm/object-schemas/object-schemas.ts">get</a>(objectType, { ...params }) -> ObjectSchema</code>
 
@@ -1325,11 +1325,11 @@ Types:
 
 Methods:
 
-- <code title="post /crm/properties/2026-03/{objectType}">client.crm.properties.<a href="./src/resources/crm/properties/properties.ts">create</a>(objectType, { ...params }) -> Property</code>
-- <code title="patch /crm/properties/2026-03/{objectType}/{propertyName}">client.crm.properties.<a href="./src/resources/crm/properties/properties.ts">update</a>(propertyName, { ...params }) -> Property</code>
+- <code title="post /crm/properties/2026-03/{objectType}">client.crm.properties.<a href="./src/resources/crm/properties/properties.ts">create</a>(objectType, { ...params }) -> BaseProperty</code>
+- <code title="patch /crm/properties/2026-03/{objectType}/{propertyName}">client.crm.properties.<a href="./src/resources/crm/properties/properties.ts">update</a>(propertyName, { ...params }) -> BaseProperty</code>
 - <code title="get /crm/properties/2026-03/{objectType}">client.crm.properties.<a href="./src/resources/crm/properties/properties.ts">list</a>(objectType, { ...params }) -> CollectionResponsePropertyNoPaging</code>
 - <code title="delete /crm/properties/2026-03/{objectType}/{propertyName}">client.crm.properties.<a href="./src/resources/crm/properties/properties.ts">delete</a>(propertyName, { ...params }) -> void</code>
-- <code title="get /crm/properties/2026-03/{objectType}/{propertyName}">client.crm.properties.<a href="./src/resources/crm/properties/properties.ts">get</a>(propertyName, { ...params }) -> Property</code>
+- <code title="get /crm/properties/2026-03/{objectType}/{propertyName}">client.crm.properties.<a href="./src/resources/crm/properties/properties.ts">get</a>(propertyName, { ...params }) -> BaseProperty</code>
 
 ### Batch
 
