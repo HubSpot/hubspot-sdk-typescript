@@ -30,7 +30,7 @@ export class BaseObjectSchemas extends APIResource {
     objectType: string,
     body: ObjectSchemaUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<Shared.ObjectTypeDefinition> {
+  ): APIPromise<Shared.BaseObjectTypeDefinition> {
     return this._client.patch(path`/crm-object-schemas/2026-03/schemas/${objectType}`, { body, ...options });
   }
 
@@ -71,7 +71,7 @@ export class BaseObjectSchemas extends APIResource {
     objectType: string,
     body: ObjectSchemaCreateAssociationParams,
     options?: RequestOptions,
-  ): APIPromise<Shared.AssociationDefinition> {
+  ): APIPromise<Shared.BaseAssociationDefinition> {
     return this._client.post(path`/crm-object-schemas/2026-03/schemas/${objectType}/associations`, {
       body,
       ...options,
@@ -129,7 +129,7 @@ export interface ObjectSchema {
   /**
    * Associations defined for a given object type.
    */
-  associations: Array<Shared.AssociationDefinition>;
+  associations: Array<Shared.BaseAssociationDefinition>;
 
   /**
    * An assigned unique ID for the object, including portal ID and object name.
@@ -148,7 +148,7 @@ export interface ObjectSchema {
   /**
    * Properties defined for this object type.
    */
-  properties: Array<Shared.Property>;
+  properties: Array<Shared.BaseProperty>;
 
   /**
    * The names of properties that should be **required** when creating an object of

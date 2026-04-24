@@ -77,8 +77,8 @@ export {
   type ContentFolder,
   type ContentFolderVersion,
   type ContentLanguageCloneRequestVNext,
+  type PageData,
   type PageVersion,
-  type PagesPage,
   type PageGetLandingPageRevisionParams,
   type PageGetSitePageRevisionParams,
   type PageListLandingPageRevisionsParams,
@@ -89,7 +89,7 @@ export {
   type PageRestoreSitePageRevisionToDraftParams,
   type ContentFoldersPage,
   type ContentFolderVersionsPage,
-  type PagesPagesPage,
+  type PageDataPage,
   type PageVersionsPage,
 } from './pages';
 export {

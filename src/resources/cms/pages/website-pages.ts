@@ -3,7 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as CmsAPI from '../cms';
 import * as PagesAPI from './pages';
-import { PagesPagesPage } from './pages';
+import { PageDataPage } from './pages';
 import { APIPromise } from '../../../core/api-promise';
 import { Page, type PageParams, PagePromise } from '../../../core/pagination';
 import { buildHeaders } from '../../../internal/headers';
@@ -20,7 +20,7 @@ export class BaseWebsitePages extends APIResource {
   /**
    * Create a new website page.
    */
-  create(body: WebsitePageCreateParams, options?: RequestOptions): APIPromise<PagesAPI.PagesPage> {
+  create(body: WebsitePageCreateParams, options?: RequestOptions): APIPromise<PagesAPI.PageData> {
     return this._client.post('/cms/pages/2026-03/site-pages', {
       body,
       ...options,
@@ -36,7 +36,7 @@ export class BaseWebsitePages extends APIResource {
     objectID: string,
     params: WebsitePageUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<PagesAPI.PagesPage> {
+  ): APIPromise<PagesAPI.PageData> {
     const { archived, ...body } = params;
     return this._client.patch(path`/cms/pages/2026-03/site-pages/${objectID}`, {
       query: { archived },
@@ -54,8 +54,8 @@ export class BaseWebsitePages extends APIResource {
   list(
     query: WebsitePageListParams | null | undefined = {},
     options?: RequestOptions,
-  ): PagePromise<PagesPagesPage, PagesAPI.PagesPage> {
-    return this._client.getAPIList('/cms/pages/2026-03/site-pages', Page<PagesAPI.PagesPage>, {
+  ): PagePromise<PageDataPage, PagesAPI.PageData> {
+    return this._client.getAPIList('/cms/pages/2026-03/site-pages', Page<PagesAPI.PageData>, {
       query,
       ...options,
     });
@@ -80,7 +80,7 @@ export class BaseWebsitePages extends APIResource {
   /**
    * Create a copy of an existing website page.
    */
-  clone(body: WebsitePageCloneParams, options?: RequestOptions): APIPromise<PagesAPI.PagesPage> {
+  clone(body: WebsitePageCloneParams, options?: RequestOptions): APIPromise<PagesAPI.PageData> {
     return this._client.post('/cms/pages/2026-03/site-pages/clone', {
       body,
       ...options,
@@ -95,14 +95,14 @@ export class BaseWebsitePages extends APIResource {
     objectID: string,
     query: WebsitePageGetParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<PagesAPI.PagesPage> {
+  ): APIPromise<PagesAPI.PageData> {
     return this._client.get(path`/cms/pages/2026-03/site-pages/${objectID}`, { query, ...options });
   }
 
   /**
    * Retrieve the full draft version of a website page, specified by its ID.
    */
-  getDraft(objectID: string, options?: RequestOptions): APIPromise<PagesAPI.PagesPage> {
+  getDraft(objectID: string, options?: RequestOptions): APIPromise<PagesAPI.PageData> {
     return this._client.get(path`/cms/pages/2026-03/site-pages/${objectID}/draft`, options);
   }
 
@@ -147,7 +147,7 @@ export class BaseWebsitePages extends APIResource {
     objectID: string,
     body: WebsitePageUpdateDraftParams,
     options?: RequestOptions,
-  ): APIPromise<PagesAPI.PagesPage> {
+  ): APIPromise<PagesAPI.PageData> {
     return this._client.patch(path`/cms/pages/2026-03/site-pages/${objectID}/draft`, {
       body,
       ...options,
@@ -3920,4 +3920,4 @@ export declare namespace WebsitePages {
   };
 }
 
-export { type PagesPagesPage };
+export { type PageDataPage };
