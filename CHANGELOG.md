@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.0-alpha.4 (2026-04-24)
+
+Full Changelog: [v0.1.0-alpha.3...v0.1.0-alpha.4](https://github.com/HubSpot/hubspot-sdk-typescript/compare/v0.1.0-alpha.3...v0.1.0-alpha.4)
+
+### Chores
+
+* update SDK settings ([d9d255b](https://github.com/HubSpot/hubspot-sdk-typescript/commit/d9d255bfa13e9844b5d42e3cb62342440307f0c7))
+* update SDK settings ([af40353](https://github.com/HubSpot/hubspot-sdk-typescript/commit/af4035302e948b2f60b40ea51d1a3b7f7b64c2e5))
+* update SDK settings ([3ce2be8](https://github.com/HubSpot/hubspot-sdk-typescript/commit/3ce2be80bf4338ea1da9faa12784e1403b1471c4))
+
 ## 0.1.0-alpha.3 (2026-04-24)
 
 Full Changelog: [v0.1.0-alpha.2...v0.1.0-alpha.3](https://github.com/HubSpot/hubspot-sdk-typescript/compare/v0.1.0-alpha.2...v0.1.0-alpha.3)
