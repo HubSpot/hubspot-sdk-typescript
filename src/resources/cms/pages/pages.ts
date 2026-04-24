@@ -90,20 +90,6 @@ import { path } from '../../../internal/utils/path';
 export class BasePages extends APIResource {
   static override readonly _key: readonly ['cms', 'pages'] = Object.freeze(['cms', 'pages'] as const);
 
-  getLandingPageFolders(
-    query: PageGetLandingPageFoldersParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<unknown> {
-    return this._client.get('/cms/pages/2026-03/landing-pages/folders/cursor', { query, ...options });
-  }
-
-  getLandingPageFoldersByQuery(
-    query: PageGetLandingPageFoldersByQueryParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<unknown> {
-    return this._client.get('/cms/pages/2026-03/landing-pages/folders/cursor/query', { query, ...options });
-  }
-
   /**
    * Retrieve a previous version of a landing page, specified by page ID and revision
    * ID.
@@ -120,20 +106,6 @@ export class BasePages extends APIResource {
     );
   }
 
-  getLandingPages(
-    query: PageGetLandingPagesParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<unknown> {
-    return this._client.get('/cms/pages/2026-03/landing-pages/cursor', { query, ...options });
-  }
-
-  getLandingPagesByQuery(
-    query: PageGetLandingPagesByQueryParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<unknown> {
-    return this._client.get('/cms/pages/2026-03/landing-pages/cursor/query', { query, ...options });
-  }
-
   /**
    * Retrieve a previous version of a website page by the revision ID.
    */
@@ -144,20 +116,6 @@ export class BasePages extends APIResource {
   ): APIPromise<PageVersion> {
     const { objectId } = params;
     return this._client.get(path`/cms/pages/2026-03/site-pages/${objectId}/revisions/${revisionID}`, options);
-  }
-
-  getSitePages(
-    query: PageGetSitePagesParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<unknown> {
-    return this._client.get('/cms/pages/2026-03/site-pages/cursor', { query, ...options });
-  }
-
-  getSitePagesByQuery(
-    query: PageGetSitePagesByQueryParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<unknown> {
-    return this._client.get('/cms/pages/2026-03/site-pages/cursor/query', { query, ...options });
   }
 
   /**
@@ -573,10 +531,6 @@ export interface ContentLanguageCloneRequestVNext {
    */
   primaryLanguage?: string;
 }
-
-export type CursorPagedResultContentFolderLong = unknown;
-
-export type CursorPagedResultPageLong = unknown;
 
 export interface PageData {
   /**
@@ -1802,222 +1756,15 @@ export interface PageVersion {
   user: Shared.VersionUser;
 }
 
-export interface PageGetLandingPageFoldersParams {
-  /**
-   * The paging cursor token of the last successfully read resource will be returned
-   * as the `paging.next.after` JSON property of a paged response containing more
-   * results.
-   */
-  after?: string;
-
-  /**
-   * Whether to return only results that have been archived.
-   */
-  archived?: boolean;
-
-  createdAfter?: string;
-
-  createdAt?: string;
-
-  createdBefore?: string;
-
-  /**
-   * The maximum number of results to display per page.
-   */
-  limit?: number;
-
-  property?: string;
-
-  sort?: Array<string>;
-
-  updatedAfter?: string;
-
-  updatedAt?: string;
-
-  updatedBefore?: string;
-}
-
-export interface PageGetLandingPageFoldersByQueryParams {
-  /**
-   * The paging cursor token of the last successfully read resource will be returned
-   * as the `paging.next.after` JSON property of a paged response containing more
-   * results.
-   */
-  after?: string;
-
-  /**
-   * Whether to return only results that have been archived.
-   */
-  archived?: boolean;
-
-  createdAfter?: string;
-
-  createdAt?: string;
-
-  createdBefore?: string;
-
-  /**
-   * The maximum number of results to display per page.
-   */
-  limit?: number;
-
-  property?: string;
-
-  sort?: Array<string>;
-
-  updatedAfter?: string;
-
-  updatedAt?: string;
-
-  updatedBefore?: string;
-}
-
 export interface PageGetLandingPageRevisionParams {
   objectId: string;
 }
 
-export interface PageGetLandingPagesParams {
-  /**
-   * The paging cursor token of the last successfully read resource will be returned
-   * as the `paging.next.after` JSON property of a paged response containing more
-   * results.
-   */
-  after?: string;
-
-  /**
-   * Whether to return only results that have been archived.
-   */
-  archived?: boolean;
-
-  createdAfter?: string;
-
-  createdAt?: string;
-
-  createdBefore?: string;
-
-  /**
-   * The maximum number of results to display per page.
-   */
-  limit?: number;
-
-  property?: string;
-
-  sort?: Array<string>;
-
-  updatedAfter?: string;
-
-  updatedAt?: string;
-
-  updatedBefore?: string;
-}
-
-export interface PageGetLandingPagesByQueryParams {
-  /**
-   * The paging cursor token of the last successfully read resource will be returned
-   * as the `paging.next.after` JSON property of a paged response containing more
-   * results.
-   */
-  after?: string;
-
-  /**
-   * Whether to return only results that have been archived.
-   */
-  archived?: boolean;
-
-  createdAfter?: string;
-
-  createdAt?: string;
-
-  createdBefore?: string;
-
-  /**
-   * The maximum number of results to display per page.
-   */
-  limit?: number;
-
-  property?: string;
-
-  sort?: Array<string>;
-
-  updatedAfter?: string;
-
-  updatedAt?: string;
-
-  updatedBefore?: string;
-}
-
 export interface PageGetSitePageRevisionParams {
+  /**
+   * The unique identifier of the site page.
+   */
   objectId: string;
-}
-
-export interface PageGetSitePagesParams {
-  /**
-   * The paging cursor token of the last successfully read resource will be returned
-   * as the `paging.next.after` JSON property of a paged response containing more
-   * results.
-   */
-  after?: string;
-
-  /**
-   * Whether to return only results that have been archived.
-   */
-  archived?: boolean;
-
-  createdAfter?: string;
-
-  createdAt?: string;
-
-  createdBefore?: string;
-
-  /**
-   * The maximum number of results to display per page.
-   */
-  limit?: number;
-
-  property?: string;
-
-  sort?: Array<string>;
-
-  updatedAfter?: string;
-
-  updatedAt?: string;
-
-  updatedBefore?: string;
-}
-
-export interface PageGetSitePagesByQueryParams {
-  /**
-   * The paging cursor token of the last successfully read resource will be returned
-   * as the `paging.next.after` JSON property of a paged response containing more
-   * results.
-   */
-  after?: string;
-
-  /**
-   * Whether to return only results that have been archived.
-   */
-  archived?: boolean;
-
-  createdAfter?: string;
-
-  createdAt?: string;
-
-  createdBefore?: string;
-
-  /**
-   * The maximum number of results to display per page.
-   */
-  limit?: number;
-
-  property?: string;
-
-  sort?: Array<string>;
-
-  updatedAfter?: string;
-
-  updatedAt?: string;
-
-  updatedBefore?: string;
 }
 
 export interface PageListLandingPageRevisionsParams extends PageParams {
@@ -2074,19 +1821,11 @@ export declare namespace Pages {
     type ContentFolder as ContentFolder,
     type ContentFolderVersion as ContentFolderVersion,
     type ContentLanguageCloneRequestVNext as ContentLanguageCloneRequestVNext,
-    type CursorPagedResultContentFolderLong as CursorPagedResultContentFolderLong,
-    type CursorPagedResultPageLong as CursorPagedResultPageLong,
     type PageData as PageData,
     type PageVersion as PageVersion,
     type PageVersionsPage as PageVersionsPage,
-    type PageGetLandingPageFoldersParams as PageGetLandingPageFoldersParams,
-    type PageGetLandingPageFoldersByQueryParams as PageGetLandingPageFoldersByQueryParams,
     type PageGetLandingPageRevisionParams as PageGetLandingPageRevisionParams,
-    type PageGetLandingPagesParams as PageGetLandingPagesParams,
-    type PageGetLandingPagesByQueryParams as PageGetLandingPagesByQueryParams,
     type PageGetSitePageRevisionParams as PageGetSitePageRevisionParams,
-    type PageGetSitePagesParams as PageGetSitePagesParams,
-    type PageGetSitePagesByQueryParams as PageGetSitePagesByQueryParams,
     type PageListLandingPageRevisionsParams as PageListLandingPageRevisionsParams,
     type PageListSitePageRevisionsParams as PageListSitePageRevisionsParams,
     type PageRestoreLandingPageRevisionParams as PageRestoreLandingPageRevisionParams,

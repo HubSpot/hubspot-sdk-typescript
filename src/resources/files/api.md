@@ -27,7 +27,6 @@ Methods:
 - <code title="delete /files/2026-03/files/{fileId}">client.files.fileAssets.<a href="./src/resources/files/file-assets.ts">delete</a>(fileID) -> void</code>
 - <code title="delete /files/2026-03/files/{fileId}/gdpr-delete">client.files.fileAssets.<a href="./src/resources/files/file-assets.ts">gdprDelete</a>(fileID) -> void</code>
 - <code title="get /files/2026-03/files/{fileId}">client.files.fileAssets.<a href="./src/resources/files/file-assets.ts">get</a>(fileID, { ...params }) -> File</code>
-- <code title="get /files/2026-03/files/stat/{path}">client.files.fileAssets.<a href="./src/resources/files/file-assets.ts">getByPath</a>(path\_, { ...params }) -> FileStat</code>
 - <code title="get /files/2026-03/files/import-from-url/async/tasks/{taskId}/status">client.files.fileAssets.<a href="./src/resources/files/file-assets.ts">getImportTaskStatus</a>(taskID) -> FileActionResponse</code>
 - <code title="get /files/2026-03/files/{fileId}/signed-url">client.files.fileAssets.<a href="./src/resources/files/file-assets.ts">getSignedURL</a>(fileID, { ...params }) -> SignedURL</code>
 - <code title="post /files/2026-03/files/import-from-url/async">client.files.fileAssets.<a href="./src/resources/files/file-assets.ts">importFromURLAsync</a>({ ...params }) -> ImportFromURLTaskLocator</code>

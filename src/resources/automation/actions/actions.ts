@@ -81,18 +81,7 @@ export interface AgentRequestContext {
 }
 
 export interface ArrayFieldSchema {
-  /**
-   * Defines the type of elements contained within the array, which can be an
-   * integer, long, double, string, boolean, another array, or an object.
-   */
-  items:
-    | IntegerFieldSchema
-    | LongFieldSchema
-    | DoubleFieldSchema
-    | StringFieldSchema
-    | BooleanFieldSchema
-    | ArrayFieldSchema
-    | ObjectFieldSchema;
+  items: unknown;
 
   /**
    * Specifies that the field is of type 'ARRAY'.
@@ -220,6 +209,8 @@ export interface ChirpAIContextObject {
   >;
 
   complianceIds?: ComplianceIDs;
+
+  conversationId?: string;
 
   /**
    * The identifier for the feature associated with the context.

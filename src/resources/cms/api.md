@@ -249,8 +249,8 @@ Types:
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">HubDBTableRowV3Wrapper</a></code>
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">HubDBTableV3</a></code>
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">HubDBTableV3Request</a></code>
+- <code><a href="./src/resources/cms/hubdb/hubdb.ts">HubdbOption</a></code>
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">ImportResult</a></code>
-- <code><a href="./src/resources/cms/hubdb/hubdb.ts">Option</a></code>
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">RandomAccessCollectionResponseWithTotalHubDBTableRowV3</a></code>
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">SimpleUser</a></code>
 - <code><a href="./src/resources/cms/hubdb/hubdb.ts">StreamingCollectionResponseWithTotalHubDBTableRowV3</a></code>
@@ -362,8 +362,10 @@ Types:
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">IsPresent</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">LessThan</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">LessThanOrEqual</a></code>
+- <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">LookupAssociationSpec</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">LowerCase</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">MaxNumbers</a></code>
+- <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">MediaBridgeProperty</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">MediaBridgePropertyUpdate</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">MediaBridgeProviderPartial</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">MediaBridgeProviderRegistrationResponse</a></code>
@@ -395,7 +397,6 @@ Types:
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">PeriodToWeeks</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">PipelineProbability</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">Power</a></code>
-- <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">Property</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">Property1</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">PropertyDefinition</a></code>
 - <code><a href="./src/resources/cms/media-bridge/media-bridge.ts">PropertyDefinitionSource</a></code>
@@ -425,22 +426,22 @@ Types:
 
 Methods:
 
-- <code title="post /media-bridge/2026-03/{appId}/schemas/{objectType}/associations">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">createAssociation</a>(objectType, { ...params }) -> AssociationDefinition</code>
+- <code title="post /media-bridge/2026-03/{appId}/schemas/{objectType}/associations">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">createAssociation</a>(objectType, { ...params }) -> BaseAssociationDefinition</code>
 - <code title="post /media-bridge/2026-03/events/attention-span">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">createAttentionSpanEvent</a>({ ...params }) -> AttentionSpanEvent</code>
 - <code title="post /media-bridge/2026-03/events/media-played">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">createMediaPlayedEvent</a>({ ...params }) -> MediaPlayedEvent</code>
 - <code title="post /media-bridge/2026-03/events/media-played-percent">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">createMediaPlayedPercentEvent</a>({ ...params }) -> MediaPlayedPercentageEvent</code>
 - <code title="post /media-bridge/2026-03/{appId}/settings/object-definitions">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">createObjectType</a>(appID, { ...params }) -> BulkIntegratorObjectCreationResponse</code>
 - <code title="post /media-bridge/2026-03/{appId}/settings/oembed-domains">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">createOembedDomain</a>(appID, { ...params }) -> IntegratorOEmbedDomainModel</code>
-- <code title="post /media-bridge/2026-03/{appId}/properties/{objectType}">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">createProperty</a>(objectType, { ...params }) -> Property</code>
+- <code title="post /media-bridge/2026-03/{appId}/properties/{objectType}">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">createProperty</a>(objectType, { ...params }) -> MediaBridgeProperty</code>
 - <code title="post /media-bridge/2026-03/{appId}/properties/{objectType}/groups">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">createPropertyGroup</a>(objectType, { ...params }) -> PropertyGroup</code>
-- <code title="post /media-bridge/2026-03/{appId}/settings/video-association-definition">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">createVideoAssociationDefinition</a>(appID) -> AssociationDefinition</code>
+- <code title="post /media-bridge/2026-03/{appId}/settings/video-association-definition">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">createVideoAssociationDefinition</a>(appID) -> BaseAssociationDefinition</code>
 - <code title="delete /media-bridge/2026-03/{appId}/schemas/{objectType}/associations/{associationId}">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">deleteAssociation</a>(associationID, { ...params }) -> void</code>
 - <code title="delete /media-bridge/2026-03/{appId}/settings/oembed-domains">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">deleteOembedDomain</a>(appID, { ...params }) -> void</code>
 - <code title="delete /media-bridge/2026-03/{appId}/properties/{objectType}/{propertyName}">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">deleteProperty</a>(propertyName, { ...params }) -> void</code>
 - <code title="delete /media-bridge/2026-03/{appId}/properties/{objectType}/groups/{groupName}">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">deletePropertyGroup</a>(groupName, { ...params }) -> void</code>
 - <code title="get /media-bridge/2026-03/{appId}/settings/event-visibility">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">getEventVisibilitySettings</a>(appID) -> EventVisibilityResponse</code>
 - <code title="get /media-bridge/2026-03/{appId}/settings/oembed-domains/{oEmbedDomainId}">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">getOembedDomain</a>(oEmbedDomainID, { ...params }) -> IntegratorOEmbedDomainModel</code>
-- <code title="get /media-bridge/2026-03/{appId}/properties/{objectType}/{propertyName}">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">getProperty</a>(propertyName, { ...params }) -> Property</code>
+- <code title="get /media-bridge/2026-03/{appId}/properties/{objectType}/{propertyName}">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">getProperty</a>(propertyName, { ...params }) -> MediaBridgeProperty</code>
 - <code title="get /media-bridge/2026-03/{appId}/properties/{objectType}/groups/{groupName}">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">getPropertyGroup</a>(groupName, { ...params }) -> PropertyGroup</code>
 - <code title="get /media-bridge/2026-03/{appId}/schemas/{objectType}">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">getSchema</a>(objectType, { ...params }) -> ObjectSchema</code>
 - <code title="get /media-bridge/2026-03/{appId}/settings/object-definitions/{mediaType}">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">listObjectTypesByMediaType</a>(mediaType, { ...params }) -> ObjectDefinitionResponse</code>
@@ -451,9 +452,9 @@ Methods:
 - <code title="post /media-bridge/2026-03/{appId}/settings/register">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">registerAppName</a>(appID, { ...params }) -> MediaBridgeProviderRegistrationResponse</code>
 - <code title="patch /media-bridge/2026-03/{appId}/settings/event-visibility">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">updateEventVisibilitySettings</a>(appID, { ...params }) -> EventVisibilityChange</code>
 - <code title="patch /media-bridge/2026-03/{appId}/settings/oembed-domains/{oEmbedDomainId}">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">updateOembedDomain</a>(oEmbedDomainID, { ...params }) -> IntegratorOEmbedDomainModel</code>
-- <code title="patch /media-bridge/2026-03/{appId}/properties/{objectType}/{propertyName}">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">updateProperty</a>(propertyName, { ...params }) -> Property</code>
+- <code title="patch /media-bridge/2026-03/{appId}/properties/{objectType}/{propertyName}">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">updateProperty</a>(propertyName, { ...params }) -> MediaBridgeProperty</code>
 - <code title="patch /media-bridge/2026-03/{appId}/properties/{objectType}/groups/{groupName}">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">updatePropertyGroup</a>(groupName, { ...params }) -> PropertyGroup</code>
-- <code title="patch /media-bridge/2026-03/{appId}/schemas/{objectType}">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">updateSchema</a>(objectType, { ...params }) -> ObjectTypeDefinition</code>
+- <code title="patch /media-bridge/2026-03/{appId}/schemas/{objectType}">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">updateSchema</a>(objectType, { ...params }) -> BaseObjectTypeDefinition</code>
 - <code title="put /media-bridge/2026-03/{appId}/settings">client.cms.mediaBridge.<a href="./src/resources/cms/media-bridge/media-bridge.ts">updateSettings</a>(appID, { ...params }) -> MediaBridgeProviderRegistrationResponse</code>
 
 ### Batch
@@ -483,21 +484,13 @@ Types:
 - <code><a href="./src/resources/cms/pages/pages.ts">ContentFolder</a></code>
 - <code><a href="./src/resources/cms/pages/pages.ts">ContentFolderVersion</a></code>
 - <code><a href="./src/resources/cms/pages/pages.ts">ContentLanguageCloneRequestVNext</a></code>
-- <code><a href="./src/resources/cms/pages/pages.ts">CursorPagedResultContentFolderLong</a></code>
-- <code><a href="./src/resources/cms/pages/pages.ts">CursorPagedResultPageLong</a></code>
 - <code><a href="./src/resources/cms/pages/pages.ts">PageData</a></code>
 - <code><a href="./src/resources/cms/pages/pages.ts">PageVersion</a></code>
 
 Methods:
 
-- <code title="get /cms/pages/2026-03/landing-pages/folders/cursor">client.cms.pages.<a href="./src/resources/cms/pages/pages.ts">getLandingPageFolders</a>({ ...params }) -> unknown</code>
-- <code title="get /cms/pages/2026-03/landing-pages/folders/cursor/query">client.cms.pages.<a href="./src/resources/cms/pages/pages.ts">getLandingPageFoldersByQuery</a>({ ...params }) -> unknown</code>
 - <code title="get /cms/pages/2026-03/landing-pages/{objectId}/revisions/{revisionId}">client.cms.pages.<a href="./src/resources/cms/pages/pages.ts">getLandingPageRevision</a>(revisionID, { ...params }) -> PageVersion</code>
-- <code title="get /cms/pages/2026-03/landing-pages/cursor">client.cms.pages.<a href="./src/resources/cms/pages/pages.ts">getLandingPages</a>({ ...params }) -> unknown</code>
-- <code title="get /cms/pages/2026-03/landing-pages/cursor/query">client.cms.pages.<a href="./src/resources/cms/pages/pages.ts">getLandingPagesByQuery</a>({ ...params }) -> unknown</code>
 - <code title="get /cms/pages/2026-03/site-pages/{objectId}/revisions/{revisionId}">client.cms.pages.<a href="./src/resources/cms/pages/pages.ts">getSitePageRevision</a>(revisionID, { ...params }) -> PageVersion</code>
-- <code title="get /cms/pages/2026-03/site-pages/cursor">client.cms.pages.<a href="./src/resources/cms/pages/pages.ts">getSitePages</a>({ ...params }) -> unknown</code>
-- <code title="get /cms/pages/2026-03/site-pages/cursor/query">client.cms.pages.<a href="./src/resources/cms/pages/pages.ts">getSitePagesByQuery</a>({ ...params }) -> unknown</code>
 - <code title="get /cms/pages/2026-03/landing-pages/{objectId}/revisions">client.cms.pages.<a href="./src/resources/cms/pages/pages.ts">listLandingPageRevisions</a>(objectID, { ...params }) -> PageVersionsPage</code>
 - <code title="get /cms/pages/2026-03/site-pages/{objectId}/revisions">client.cms.pages.<a href="./src/resources/cms/pages/pages.ts">listSitePageRevisions</a>(objectID, { ...params }) -> PageVersionsPage</code>
 - <code title="post /cms/pages/2026-03/site-pages/{objectId}/draft/reset">client.cms.pages.<a href="./src/resources/cms/pages/pages.ts">resetSitePageDraft</a>(objectID) -> void</code>
@@ -612,14 +605,8 @@ Types:
 
 Methods:
 
-- <code title="post /cms/source-code/2026-03/{environment}/content/{path}">client.cms.sourceCode.<a href="./src/resources/cms/source-code.ts">create</a>(path\_, { ...params }) -> AssetFileMetadata</code>
-- <code title="delete /cms/source-code/2026-03/{environment}/content/{path}">client.cms.sourceCode.<a href="./src/resources/cms/source-code.ts">delete</a>(path\_, { ...params }) -> void</code>
 - <code title="post /cms/source-code/2026-03/extract/async">client.cms.sourceCode.<a href="./src/resources/cms/source-code.ts">extractAsync</a>({ ...params }) -> TaskLocator</code>
-- <code title="get /cms/source-code/2026-03/{environment}/content/{path}">client.cms.sourceCode.<a href="./src/resources/cms/source-code.ts">get</a>(path\_, { ...params }) -> Response</code>
 - <code title="get /cms/source-code/2026-03/extract/async/tasks/{taskId}/status">client.cms.sourceCode.<a href="./src/resources/cms/source-code.ts">getExtractionStatus</a>(taskID) -> ActionResponse</code>
-- <code title="get /cms/source-code/2026-03/{environment}/metadata/{path}">client.cms.sourceCode.<a href="./src/resources/cms/source-code.ts">getMetadata</a>(path\_, { ...params }) -> AssetFileMetadata</code>
-- <code title="put /cms/source-code/2026-03/{environment}/content/{path}">client.cms.sourceCode.<a href="./src/resources/cms/source-code.ts">upsert</a>(path\_, { ...params }) -> AssetFileMetadata</code>
-- <code title="post /cms/source-code/2026-03/{environment}/validate/{path}">client.cms.sourceCode.<a href="./src/resources/cms/source-code.ts">validate</a>(path\_, { ...params }) -> Response</code>
 
 ## URLMappings
 
