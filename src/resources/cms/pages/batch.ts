@@ -186,14 +186,14 @@ export interface BatchCreateLandingPagesParams {
   /**
    * Pages to input.
    */
-  inputs: Array<PagesAPI.PageData>;
+  inputs: Array<PagesAPI.PagesPage>;
 }
 
 export interface BatchCreateSitePagesParams {
   /**
    * Pages to input.
    */
-  inputs: Array<PagesAPI.PageData>;
+  inputs: Array<PagesAPI.PagesPage>;
 }
 
 export interface BatchDeleteFoldersParams {

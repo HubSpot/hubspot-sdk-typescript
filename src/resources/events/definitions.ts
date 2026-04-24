@@ -67,7 +67,7 @@ export class BaseDefinitions extends APIResource {
     eventName: string,
     body: DefinitionCreatePropertyParams,
     options?: RequestOptions,
-  ): APIPromise<Shared.BaseProperty> {
+  ): APIPromise<Shared.Property> {
     return this._client.post(path`/events/2026-03/event-definitions/${eventName}/property`, {
       body,
       ...options,
@@ -114,7 +114,7 @@ export class BaseDefinitions extends APIResource {
     propertyName: string,
     params: DefinitionUpdatePropertyParams,
     options?: RequestOptions,
-  ): APIPromise<Shared.BaseProperty> {
+  ): APIPromise<Shared.Property> {
     const { eventName, ...body } = params;
     return this._client.patch(path`/events/2026-03/event-definitions/${eventName}/property/${propertyName}`, {
       body,
@@ -984,7 +984,7 @@ export interface ExternalBehavioralEventTypeDefinition {
 
   objectTypeId: string;
 
-  properties: Array<Shared.BaseProperty>;
+  properties: Array<Shared.Property>;
 
   comboEventRules?: ComboEventRuleBranch;
 

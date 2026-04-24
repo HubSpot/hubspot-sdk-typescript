@@ -22,7 +22,7 @@ export class BaseMediaBridge extends APIResource {
     objectType: string,
     params: MediaBridgeCreateAssociationParams,
     options?: RequestOptions,
-  ): APIPromise<Shared.BaseAssociationDefinition> {
+  ): APIPromise<Shared.AssociationDefinition> {
     const { appId, ...body } = params;
     return this._client.post(path`/media-bridge/2026-03/${appId}/schemas/${objectType}/associations`, {
       body,
@@ -122,7 +122,7 @@ export class BaseMediaBridge extends APIResource {
   createVideoAssociationDefinition(
     appID: number,
     options?: RequestOptions,
-  ): APIPromise<Shared.BaseAssociationDefinition> {
+  ): APIPromise<Shared.AssociationDefinition> {
     return this._client.post(
       path`/media-bridge/2026-03/${appID}/settings/video-association-definition`,
       options,
@@ -401,7 +401,7 @@ export class BaseMediaBridge extends APIResource {
     objectType: string,
     params: MediaBridgeUpdateSchemaParams,
     options?: RequestOptions,
-  ): APIPromise<Shared.BaseObjectTypeDefinition> {
+  ): APIPromise<Shared.ObjectTypeDefinition> {
     const { appId, ...body } = params;
     return this._client.patch(path`/media-bridge/2026-03/${appId}/schemas/${objectType}`, {
       body,
@@ -4782,7 +4782,7 @@ export interface ObjectSchema {
 
   archived: boolean;
 
-  associations: Array<Shared.BaseAssociationDefinition>;
+  associations: Array<Shared.AssociationDefinition>;
 
   fullyQualifiedName: string;
 

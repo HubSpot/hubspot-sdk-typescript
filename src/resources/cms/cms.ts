@@ -267,7 +267,6 @@ import {
   ContentFolder,
   ContentFolderVersion,
   ContentLanguageCloneRequestVNext,
-  PageData,
   PageGetLandingPageRevisionParams,
   PageGetSitePageRevisionParams,
   PageListLandingPageRevisionsParams,
@@ -279,6 +278,7 @@ import {
   PageVersion,
   PageVersionsPage,
   Pages,
+  PagesPage,
 } from './pages/pages';
 
 export class BaseCms extends APIResource {
@@ -3498,8 +3498,8 @@ export declare namespace Cms {
     type ContentFolder as ContentFolder,
     type ContentFolderVersion as ContentFolderVersion,
     type ContentLanguageCloneRequestVNext as ContentLanguageCloneRequestVNext,
-    type PageData as PageData,
     type PageVersion as PageVersion,
+    type PagesPage as PagesPage,
     type PageVersionsPage as PageVersionsPage,
     type PageGetLandingPageRevisionParams as PageGetLandingPageRevisionParams,
     type PageGetSitePageRevisionParams as PageGetSitePageRevisionParams,

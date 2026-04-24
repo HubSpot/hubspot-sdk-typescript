@@ -712,7 +712,7 @@ export interface ImportResult {
   /**
    * List of errors during import
    */
-  errors: Array<Shared.BaseError>;
+  errors: Array<Shared.ErrorData>;
 
   /**
    * Specifies whether row limit exceeded during import

@@ -230,8 +230,8 @@ export {
   type ContentFolder,
   type ContentFolderVersion,
   type ContentLanguageCloneRequestVNext,
-  type PageData,
   type PageVersion,
+  type PagesPage,
   type PageGetLandingPageRevisionParams,
   type PageGetSitePageRevisionParams,
   type PageListLandingPageRevisionsParams,
@@ -242,7 +242,7 @@ export {
   type PageRestoreSitePageRevisionToDraftParams,
   type ContentFoldersPage,
   type ContentFolderVersionsPage,
-  type PageDataPage,
+  type PagesPagesPage,
   type PageVersionsPage,
 } from './pages/index';
 export {
