@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.1.0-alpha.5 (2026-05-01)
+
+Full Changelog: [v0.1.0-alpha.4...v0.1.0-alpha.5](https://github.com/HubSpot/hubspot-sdk-typescript/compare/v0.1.0-alpha.4...v0.1.0-alpha.5)
+
+### Features
+
+* support setting headers via env ([1ba9f64](https://github.com/HubSpot/hubspot-sdk-typescript/commit/1ba9f64d9239b317182810f08b2c18a876f23283))
+
+
+### Chores
+
+* **format:** run eslint and prettier separately ([177f989](https://github.com/HubSpot/hubspot-sdk-typescript/commit/177f98996a03b457acd5be47d350caf640128cda))
+* **internal:** codegen related update ([4c37f54](https://github.com/HubSpot/hubspot-sdk-typescript/commit/4c37f540bf08c4ee2213803d46387f15a5687c84))
+* update SDK settings ([4b6424f](https://github.com/HubSpot/hubspot-sdk-typescript/commit/4b6424f84e00f2d362347877d528da41c7deab25))
+* update SDK settings ([d8b6fc7](https://github.com/HubSpot/hubspot-sdk-typescript/commit/d8b6fc7880a5f4d3d76fb55031b36c145836ad67))
+
 ## 0.1.0-alpha.4 (2026-04-24)
 
 Full Changelog: [v0.1.0-alpha.3...v0.1.0-alpha.4](https://github.com/HubSpot/hubspot-sdk-typescript/compare/v0.1.0-alpha.3...v0.1.0-alpha.4)
