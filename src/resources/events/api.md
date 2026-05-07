@@ -72,11 +72,11 @@ Methods:
 - <code title="patch /events/2026-03/event-definitions/{eventName}">client.events.definitions.<a href="./src/resources/events/definitions.ts">update</a>(eventName, { ...params }) -> ExternalBehavioralEventTypeDefinition</code>
 - <code title="get /events/2026-03/event-definitions">client.events.definitions.<a href="./src/resources/events/definitions.ts">list</a>({ ...params }) -> ExternalBehavioralEventTypeDefinitionsPage</code>
 - <code title="delete /events/2026-03/event-definitions/{eventName}">client.events.definitions.<a href="./src/resources/events/definitions.ts">delete</a>(eventName) -> void</code>
-- <code title="post /events/2026-03/event-definitions/{eventName}/property">client.events.definitions.<a href="./src/resources/events/definitions.ts">createProperty</a>(eventName, { ...params }) -> BaseProperty</code>
+- <code title="post /events/2026-03/event-definitions/{eventName}/property">client.events.definitions.<a href="./src/resources/events/definitions.ts">createProperty</a>(eventName, { ...params }) -> Property</code>
 - <code title="delete /events/2026-03/event-definitions/{eventName}/property/{propertyName}">client.events.definitions.<a href="./src/resources/events/definitions.ts">deleteProperty</a>(propertyName, { ...params }) -> void</code>
 - <code title="get /events/2026-03/event-definitions/{eventName}">client.events.definitions.<a href="./src/resources/events/definitions.ts">get</a>(eventName) -> ExternalBehavioralEventTypeDefinition</code>
 - <code title="post /events/2026-03/send/batch">client.events.definitions.<a href="./src/resources/events/definitions.ts">sendBatch</a>({ ...params }) -> void</code>
-- <code title="patch /events/2026-03/event-definitions/{eventName}/property/{propertyName}">client.events.definitions.<a href="./src/resources/events/definitions.ts">updateProperty</a>(propertyName, { ...params }) -> BaseProperty</code>
+- <code title="patch /events/2026-03/event-definitions/{eventName}/property/{propertyName}">client.events.definitions.<a href="./src/resources/events/definitions.ts">updateProperty</a>(propertyName, { ...params }) -> Property</code>
 
 ## Occurrences
 

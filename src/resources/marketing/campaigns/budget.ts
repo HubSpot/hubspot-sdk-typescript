@@ -100,7 +100,8 @@ export interface BudgetCreateParams {
 
 export interface BudgetUpdateParams {
   /**
-   * Path param
+   * Path param: The UUID of the campaign, required Example:
+   * 9dbec438-53e2-4b28-8c0f-38f56574a6e8
    */
   campaignGuid: string;
 
@@ -126,10 +127,16 @@ export interface BudgetUpdateParams {
 }
 
 export interface BudgetDeleteParams {
+  /**
+   * The UUID of the campaign, required Example: 9dbec438-53e2-4b28-8c0f-38f56574a6e8
+   */
   campaignGuid: string;
 }
 
 export interface BudgetGetParams {
+  /**
+   * The UUID of the campaign, required Example: 9dbec438-53e2-4b28-8c0f-38f56574a6e8
+   */
   campaignGuid: string;
 }
 

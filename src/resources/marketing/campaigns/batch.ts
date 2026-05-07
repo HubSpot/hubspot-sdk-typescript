@@ -106,17 +106,25 @@ export interface BatchGetParams {
   inputs: Array<CampaignsAPI.PublicCampaignReadInput>;
 
   /**
-   * Query param
+   * Query param: End date to fetch asset metrics, formatted as YYYY-MM-DD. This date
+   * is used to fetch the metrics associated with the assets for a specified period.
+   * If not provided, no asset metrics will be fetched. Example: 2024-01-27
    */
   endDate?: string;
 
   /**
-   * Query param
+   * Query param: A comma-separated list of the properties to be returned in the
+   * response. If any of the specified properties has empty value on the requested
+   * object(s), they will be ignored and not returned in response. If this parameter
+   * is empty, the response will include an empty properties map. Example: hs_name,
+   * hs_campaign_status, hs_notes
    */
   properties?: Array<string>;
 
   /**
-   * Query param
+   * Query param: Start date to fetch asset metrics, formatted as YYYY-MM-DD. This
+   * date is used to fetch the metrics associated with the assets for a specified
+   * period. If not provided, no asset metrics will be fetched. Example: 2023-01-20
    */
   startDate?: string;
 }

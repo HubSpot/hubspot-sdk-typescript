@@ -32,7 +32,7 @@ export class BaseProperties extends APIResource {
     objectType: string,
     body: PropertyCreateParams,
     options?: RequestOptions,
-  ): APIPromise<Shared.BaseProperty> {
+  ): APIPromise<Shared.Property> {
     return this._client.post(path`/crm/properties/2026-03/${objectType}`, { body, ...options });
   }
 
@@ -44,7 +44,7 @@ export class BaseProperties extends APIResource {
     propertyName: string,
     params: PropertyUpdateParams,
     options?: RequestOptions,
-  ): APIPromise<Shared.BaseProperty> {
+  ): APIPromise<Shared.Property> {
     const { objectType, ...body } = params;
     return this._client.patch(path`/crm/properties/2026-03/${objectType}/${propertyName}`, {
       body,
@@ -81,7 +81,7 @@ export class BaseProperties extends APIResource {
     propertyName: string,
     params: PropertyGetParams,
     options?: RequestOptions,
-  ): APIPromise<Shared.BaseProperty> {
+  ): APIPromise<Shared.Property> {
     const { objectType, ...query } = params;
     return this._client.get(path`/crm/properties/2026-03/${objectType}/${propertyName}`, {
       query,
@@ -100,7 +100,7 @@ export interface BatchResponseProperty {
    */
   completedAt: string;
 
-  results: Array<Shared.BaseProperty>;
+  results: Array<Shared.Property>;
 
   /**
    * The timestamp indicating when the batch operation began processing.
@@ -128,7 +128,7 @@ export interface BatchResponseProperty {
 export interface BatchResponsePropertyWithErrors {
   completedAt: string;
 
-  results: Array<Shared.BaseProperty>;
+  results: Array<Shared.Property>;
 
   startedAt: string;
 
@@ -144,7 +144,7 @@ export interface BatchResponsePropertyWithErrors {
 }
 
 export interface CollectionResponsePropertyNoPaging {
-  results: Array<Shared.BaseProperty>;
+  results: Array<Shared.Property>;
 }
 
 export interface PropertyUpdate {

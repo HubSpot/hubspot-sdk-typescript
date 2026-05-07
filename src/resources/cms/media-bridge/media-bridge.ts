@@ -22,7 +22,7 @@ export class BaseMediaBridge extends APIResource {
     objectType: string,
     params: MediaBridgeCreateAssociationParams,
     options?: RequestOptions,
-  ): APIPromise<Shared.BaseAssociationDefinition> {
+  ): APIPromise<Shared.AssociationDefinition> {
     const { appId, ...body } = params;
     return this._client.post(path`/media-bridge/2026-03/${appId}/schemas/${objectType}/associations`, {
       body,
@@ -122,7 +122,7 @@ export class BaseMediaBridge extends APIResource {
   createVideoAssociationDefinition(
     appID: number,
     options?: RequestOptions,
-  ): APIPromise<Shared.BaseAssociationDefinition> {
+  ): APIPromise<Shared.AssociationDefinition> {
     return this._client.post(
       path`/media-bridge/2026-03/${appID}/settings/video-association-definition`,
       options,
@@ -401,7 +401,7 @@ export class BaseMediaBridge extends APIResource {
     objectType: string,
     params: MediaBridgeUpdateSchemaParams,
     options?: RequestOptions,
-  ): APIPromise<Shared.BaseObjectTypeDefinition> {
+  ): APIPromise<Shared.ObjectTypeDefinition> {
     const { appId, ...body } = params;
     return this._client.patch(path`/media-bridge/2026-03/${appId}/schemas/${objectType}`, {
       body,
@@ -428,82 +428,7 @@ export class MediaBridge extends BaseMediaBridge {
 export interface AbsoluteValue {
   operator: 'ABSOLUTE_VALUE';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -515,82 +440,7 @@ export interface AddNumbers {
 
   operator: 'ADD_NUMBERS';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -602,82 +452,7 @@ export interface AddTime {
 
   stringToCheck: unknown;
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -689,82 +464,7 @@ export interface And {
 
   operator: 'AND';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -936,82 +636,7 @@ export interface BeginsWith {
 
   stringToCheck: unknown;
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -1053,82 +678,7 @@ export interface CollectionResponsePropertyNoPaging {
 export interface ConcatStrings {
   operator: 'CONCAT_STRINGS';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -1164,82 +714,7 @@ export interface Contains {
 
   stringToCheck: unknown;
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -1249,82 +724,7 @@ export interface Contains {
 export interface Date {
   operator: 'DATE';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -1334,82 +734,7 @@ export interface Date {
 export interface DatedExchangeRate {
   operator: 'DATED_EXCHANGE_RATE';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -1437,82 +762,7 @@ export interface DivideNumbers {
 
   operator: 'DIVIDE_NUMBERS';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -1576,82 +826,7 @@ export interface ExternalOptionsMetaData {
 export interface ExtractMostRecentEmailReplyHTML {
   operator: 'EXTRACT_MOST_RECENT_EMAIL_REPLY_HTML';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -1661,82 +836,7 @@ export interface ExtractMostRecentEmailReplyHTML {
 export interface ExtractMostRecentEmailReplyText {
   operator: 'EXTRACT_MOST_RECENT_EMAIL_REPLY_TEXT';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -1746,82 +846,7 @@ export interface ExtractMostRecentEmailReplyText {
 export interface ExtractMostRecentPlainTextEmailReply {
   operator: 'EXTRACT_MOST_RECENT_PLAIN_TEXT_EMAIL_REPLY';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -1831,82 +856,7 @@ export interface ExtractMostRecentPlainTextEmailReply {
 export interface FetchCurrencyDecimalPlaces {
   operator: 'FETCH_CURRENCY_DECIMAL_PLACES';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -1916,86 +866,19 @@ export interface FetchCurrencyDecimalPlaces {
 export interface FetchExchangeRate {
   operator: 'FETCH_EXCHANGE_RATE';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
   value?: number;
+}
+
+export interface FetchPortalHomeCurrency {
+  operator: 'FETCH_PORTAL_HOME_CURRENCY';
+
+  propertyName?: string;
+
+  value?: string;
 }
 
 export interface FetchSingleCurrencyPortalCurrency {
@@ -2023,82 +906,7 @@ export interface FilteringMetaData {
 export interface FormatFullName {
   operator: 'FORMAT_FULL_NAME';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -2108,82 +916,7 @@ export interface FormatFullName {
 export interface FormatPhoneNumber {
   operator: 'FORMAT_PHONE_NUMBER';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -2193,82 +926,7 @@ export interface FormatPhoneNumber {
 export interface FormatSearchablePhoneNumber {
   operator: 'FORMAT_SEARCHABLE_PHONE_NUMBER';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -2310,82 +968,7 @@ export interface GroupView {
 export interface HasEmailReply {
   operator: 'HAS_EMAIL_REPLY';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -2395,82 +978,7 @@ export interface HasEmailReply {
 export interface HasPlainTextEmailReply {
   operator: 'HAS_PLAIN_TEXT_EMAIL_REPLY';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -2486,82 +994,7 @@ export interface IfBoolean {
 
   elseExpression?: unknown;
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -2577,82 +1010,7 @@ export interface IfNumber {
 
   elseExpression?: unknown;
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -2668,82 +1026,7 @@ export interface IfString {
 
   elseExpression?: unknown;
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -2878,82 +1161,17 @@ export interface IntegratorObjectCreationResponse {
 export interface IsBlank {
   operator: 'IS_BLANK';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
+
+  propertyName?: string;
+
+  value?: boolean;
+}
+
+export interface IsDayBasedISOPeriod {
+  operator: 'IS_DAY_BASED_ISO_PERIOD';
+
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -2968,85 +1186,48 @@ export interface IsEngagementType {
   value?: boolean;
 }
 
+export interface IsMonthBasedISOPeriod {
+  operator: 'IS_MONTH_BASED_ISO_PERIOD';
+
+  inputs?: Array<unknown>;
+
+  propertyName?: string;
+
+  value?: boolean;
+}
+
+export interface IsMultipleOf {
+  operator: 'IS_MULTIPLE_OF';
+
+  inputs?: Array<unknown>;
+
+  propertyName?: string;
+
+  value?: boolean;
+}
+
 export interface IsPipelineStageClosed {
   operator: 'IS_PIPELINE_STAGE_CLOSED';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
+
+  propertyName?: string;
+
+  value?: boolean;
+}
+
+export interface IsPortalEnabledCurrency {
+  operator: 'IS_PORTAL_ENABLED_CURRENCY';
+
+  inputs?: Array<unknown>;
+
+  propertyName?: string;
+
+  value?: boolean;
+}
+
+export interface IsPortalMulticurrencyEnabled {
+  operator: 'IS_PORTAL_MULTICURRENCY_ENABLED';
 
   propertyName?: string;
 
@@ -3063,85 +1244,20 @@ export interface IsPresent {
   value?: boolean;
 }
 
+export interface IsValidISOPeriod {
+  operator: 'IS_VALID_ISO_PERIOD';
+
+  inputs?: Array<unknown>;
+
+  propertyName?: string;
+
+  value?: boolean;
+}
+
 export interface LessThan {
   operator: 'LESS_THAN';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -3151,82 +1267,7 @@ export interface LessThan {
 export interface LessThanOrEqual {
   operator: 'LESS_THAN_OR_EQUAL';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -3250,82 +1291,7 @@ export interface LookupAssociationSpec {
 export interface LowerCase {
   operator: 'LOWER_CASE';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -3335,82 +1301,7 @@ export interface LowerCase {
 export interface MaxNumbers {
   operator: 'MAX_NUMBERS';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -4054,82 +1945,7 @@ export interface MediaPlayedPercentageEventRequest {
 export interface MinNumbers {
   operator: 'MIN_NUMBERS';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -4139,82 +1955,7 @@ export interface MinNumbers {
 export interface Month {
   operator: 'MONTH';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -4224,82 +1965,7 @@ export interface Month {
 export interface MoreThan {
   operator: 'MORE_THAN';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -4309,82 +1975,7 @@ export interface MoreThan {
 export interface MoreThanOrEqual {
   operator: 'MORE_THAN_OR_EQUAL';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -4396,82 +1987,7 @@ export interface MultiplyNumbers {
 
   operator: 'MULTIPLY_NUMBERS';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -4481,82 +1997,7 @@ export interface MultiplyNumbers {
 export interface Not {
   operator: 'NOT';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -4574,82 +2015,7 @@ export interface Now {
 export interface NumberEquals {
   operator: 'NUMBER_EQUALS';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -4675,82 +2041,7 @@ export interface NumberTargetPropertyVariable {
 export interface NumberToString {
   operator: 'NUMBER_TO_STRING';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -4782,7 +2073,7 @@ export interface ObjectSchema {
 
   archived: boolean;
 
-  associations: Array<Shared.BaseAssociationDefinition>;
+  associations: Array<Shared.AssociationDefinition>;
 
   fullyQualifiedName: string;
 
@@ -4864,82 +2155,7 @@ export interface Or {
 
   operator: 'OR';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -4949,82 +2165,7 @@ export interface Or {
 export interface ParseNumber {
   operator: 'PARSE_NUMBER';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -5034,82 +2175,7 @@ export interface ParseNumber {
 export interface PeriodToMonths {
   operator: 'PERIOD_TO_MONTHS';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -5119,82 +2185,7 @@ export interface PeriodToMonths {
 export interface PeriodToWeeks {
   operator: 'PERIOD_TO_WEEKS';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -5204,82 +2195,7 @@ export interface PeriodToWeeks {
 export interface PipelineProbability {
   operator: 'PIPELINE_PROBABILITY';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -5289,82 +2205,7 @@ export interface PipelineProbability {
 export interface Power {
   operator: 'POWER';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -5472,6 +2313,16 @@ export interface PropertyDefinitionSource {
   name?: string;
 }
 
+export interface RegexMatches {
+  operator: 'REGEX_MATCHES';
+
+  inputs?: Array<unknown>;
+
+  propertyName?: string;
+
+  value?: boolean;
+}
+
 export interface RequiredPropertiesExtensionData {
   isRequiredProperty: boolean;
 }
@@ -5513,82 +2364,7 @@ export interface RollupExpression {
 export interface RoundDownNumbers {
   operator: 'ROUND_DOWN';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -5598,82 +2374,7 @@ export interface RoundDownNumbers {
 export interface RoundNearestNumbers {
   operator: 'ROUND_NEAREST';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -5683,82 +2384,7 @@ export interface RoundNearestNumbers {
 export interface RoundUpNumbers {
   operator: 'ROUND_UP';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -5778,82 +2404,7 @@ export interface SetContainsString {
 
   stringToCheck: unknown;
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -5867,82 +2418,7 @@ export interface SoftRequiredPropertiesExtensionData {
 export interface SquareRoot {
   operator: 'SQUARE_ROOT';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -5952,82 +2428,7 @@ export interface SquareRoot {
 export interface StringEquals {
   operator: 'STRING_EQUALS';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -6037,82 +2438,7 @@ export interface StringEquals {
 export interface StringLength {
   operator: 'STRING_LENGTH';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -6140,82 +2466,7 @@ export interface Substring {
 
   stringToCheck: unknown;
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -6227,82 +2478,7 @@ export interface SubtractNumbers {
 
   operator: 'SUBTRACT_NUMBERS';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -6314,82 +2490,7 @@ export interface SubtractTime {
 
   stringToCheck: unknown;
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -6399,82 +2500,7 @@ export interface SubtractTime {
 export interface TimeBetween {
   operator: 'TIME_BETWEEN';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -6484,82 +2510,7 @@ export interface TimeBetween {
 export interface TimeBetweenSkipWeekends {
   operator: 'TIME_BETWEEN_SKIP_WEEKENDS';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -6585,82 +2536,7 @@ export interface TimestampOfTargetPropertyVariable {
 export interface UpperCase {
   operator: 'UPPER_CASE';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -6672,82 +2548,7 @@ export interface Xor {
 
   operator: 'XOR';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -6757,82 +2558,7 @@ export interface Xor {
 export interface Year {
   operator: 'YEAR';
 
-  inputs?: Array<
-    | ConstantBoolean
-    | ConstantNumber
-    | ConstantString
-    | BooleanPropertyVariable
-    | StringPropertyVariable
-    | NumberPropertyVariable
-    | TimestampOfPropertyVariable
-    | BooleanTargetPropertyVariable
-    | StringTargetPropertyVariable
-    | NumberTargetPropertyVariable
-    | TimestampOfTargetPropertyVariable
-    | AddNumbers
-    | SubtractNumbers
-    | MultiplyNumbers
-    | DivideNumbers
-    | RoundDownNumbers
-    | RoundUpNumbers
-    | RoundNearestNumbers
-    | UpperCase
-    | LowerCase
-    | ConcatStrings
-    | Contains
-    | BeginsWith
-    | NumberToString
-    | ParseNumber
-    | FetchExchangeRate
-    | FetchCurrencyDecimalPlaces
-    | FetchSingleCurrencyPortalCurrency
-    | DatedExchangeRate
-    | PipelineProbability
-    | MaxNumbers
-    | MinNumbers
-    | LessThan
-    | LessThanOrEqual
-    | MoreThan
-    | MoreThanOrEqual
-    | NumberEquals
-    | StringEquals
-    | IsPipelineStageClosed
-    | Not
-    | Date
-    | Month
-    | Year
-    | Now
-    | TimeBetween
-    | TimeBetweenSkipWeekends
-    | PeriodToMonths
-    | PeriodToWeeks
-    | And
-    | Or
-    | Xor
-    | IfString
-    | IfNumber
-    | IfBoolean
-    | IsPresent
-    | HasEmailReply
-    | HasPlainTextEmailReply
-    | ExtractMostRecentEmailReplyHTML
-    | ExtractMostRecentEmailReplyText
-    | ExtractMostRecentPlainTextEmailReply
-    | SetContainsString
-    | IsEngagementType
-    | FormatFullName
-    | FormatPhoneNumber
-    | FormatSearchablePhoneNumber
-    | AbsoluteValue
-    | SquareRoot
-    | Power
-    | Substring
-    | Euler
-    | StringLength
-    | IsBlank
-    | AddTime
-    | SubtractTime
-  >;
+  inputs?: Array<unknown>;
 
   propertyName?: string;
 
@@ -7467,6 +3193,7 @@ export declare namespace MediaBridge {
     type ExtractMostRecentPlainTextEmailReply as ExtractMostRecentPlainTextEmailReply,
     type FetchCurrencyDecimalPlaces as FetchCurrencyDecimalPlaces,
     type FetchExchangeRate as FetchExchangeRate,
+    type FetchPortalHomeCurrency as FetchPortalHomeCurrency,
     type FetchSingleCurrencyPortalCurrency as FetchSingleCurrencyPortalCurrency,
     type FieldLevelPermission as FieldLevelPermission,
     type FilteringMetaData as FilteringMetaData,
@@ -7486,9 +3213,15 @@ export declare namespace MediaBridge {
     type IntegratorObjectCreationRequest as IntegratorObjectCreationRequest,
     type IntegratorObjectCreationResponse as IntegratorObjectCreationResponse,
     type IsBlank as IsBlank,
+    type IsDayBasedISOPeriod as IsDayBasedISOPeriod,
     type IsEngagementType as IsEngagementType,
+    type IsMonthBasedISOPeriod as IsMonthBasedISOPeriod,
+    type IsMultipleOf as IsMultipleOf,
     type IsPipelineStageClosed as IsPipelineStageClosed,
+    type IsPortalEnabledCurrency as IsPortalEnabledCurrency,
+    type IsPortalMulticurrencyEnabled as IsPortalMulticurrencyEnabled,
     type IsPresent as IsPresent,
+    type IsValidISOPeriod as IsValidISOPeriod,
     type LessThan as LessThan,
     type LessThanOrEqual as LessThanOrEqual,
     type LookupAssociationSpec as LookupAssociationSpec,
@@ -7529,6 +3262,7 @@ export declare namespace MediaBridge {
     type Property1 as Property1,
     type PropertyDefinition as PropertyDefinition,
     type PropertyDefinitionSource as PropertyDefinitionSource,
+    type RegexMatches as RegexMatches,
     type RequiredPropertiesExtensionData as RequiredPropertiesExtensionData,
     type RollupExpression as RollupExpression,
     type RoundDownNumbers as RoundDownNumbers,

@@ -20,7 +20,7 @@ export class BaseABTests extends APIResource {
   createLandingPageVariation(
     body: ABTestCreateLandingPageVariationParams,
     options?: RequestOptions,
-  ): APIPromise<PagesAPI.PageData> {
+  ): APIPromise<PagesAPI.PagesPage> {
     return this._client.post('/cms/pages/2026-03/landing-pages/ab-test/create-variation', {
       body,
       ...options,
@@ -35,7 +35,7 @@ export class BaseABTests extends APIResource {
   createSitePageVariation(
     body: ABTestCreateSitePageVariationParams,
     options?: RequestOptions,
-  ): APIPromise<PagesAPI.PageData> {
+  ): APIPromise<PagesAPI.PagesPage> {
     return this._client.post('/cms/pages/2026-03/site-pages/ab-test/create-variation', {
       body,
       ...options,

@@ -75,14 +75,21 @@ export class BaseAssets extends APIResource {
 export class Assets extends BaseAssets {}
 
 export interface AssetUpdateParams {
+  /**
+   * The UUID of the campaign, required Example: 9dbec438-53e2-4b28-8c0f-38f56574a6e8
+   */
   campaignGuid: string;
 
+  /**
+   * The type of asset to disassociate, required Example: OBJECT_LIST
+   */
   assetType: string;
 }
 
 export interface AssetListParams {
   /**
-   * Path param
+   * Path param: The UUID of the campaign, required Example:
+   * 9dbec438-53e2-4b28-8c0f-38f56574a6e8
    */
   campaignGuid: string;
 
@@ -94,7 +101,9 @@ export interface AssetListParams {
   after?: string;
 
   /**
-   * Query param
+   * Query param: End date to fetch asset metrics, formatted as YYYY-MM-DD. This date
+   * is used to fetch the metrics associated with the assets for a specified period.
+   * If not provided, no asset metrics will be fetched. Example: 2024-01-27
    */
   endDate?: string;
 
@@ -104,14 +113,22 @@ export interface AssetListParams {
   limit?: string;
 
   /**
-   * Query param
+   * Query param: Start date to fetch asset metrics, formatted as YYYY-MM-DD. This
+   * date is used to fetch the metrics associated with the assets for a specified
+   * period. If not provided, no asset metrics will be fetched. Example: 2023-01-20
    */
   startDate?: string;
 }
 
 export interface AssetDeleteParams {
+  /**
+   * The UUID of the campaign, required Example: 9dbec438-53e2-4b28-8c0f-38f56574a6e8
+   */
   campaignGuid: string;
 
+  /**
+   * The type of asset to disassociate, required Example: OBJECT_LIST
+   */
   assetType: string;
 }
 
