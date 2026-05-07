@@ -237,6 +237,9 @@ export interface BatchResponsePublicCampaignWithAssetsWithErrors {
    */
   completedAt: string;
 
+  /**
+   * The list of successfully retrieved campaigns with their associated assets.
+   */
   results: Array<PublicCampaignWithAssets>;
 
   /**
@@ -250,6 +253,10 @@ export interface BatchResponsePublicCampaignWithAssetsWithErrors {
    */
   status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
+  /**
+   * The list of errors for individual campaign reads that failed within the batch
+   * (e.g., campaign not found, permission denied). Only included when non-empty.
+   */
   errors?: Array<Shared.StandardError>;
 
   /**
@@ -274,6 +281,9 @@ export interface BatchResponsePublicCampaignWithErrors {
    */
   completedAt: string;
 
+  /**
+   * The list of successfully created or updated campaigns.
+   */
   results: Array<PublicCampaign>;
 
   /**
@@ -287,6 +297,10 @@ export interface BatchResponsePublicCampaignWithErrors {
    */
   status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
+  /**
+   * The list of errors for individual campaign operations that failed within the
+   * batch. Only included when non-empty.
+   */
   errors?: Array<Shared.StandardError>;
 
   /**
@@ -1059,18 +1073,41 @@ export interface CampaignUpdateParams {
 }
 
 export interface CampaignListParams extends PageParams {
+  /**
+   * Filter campaigns by name. Optional.
+   */
   name?: string;
 
+  /**
+   * A comma-separated list of properties to include in the response.
+   *  Unrecognized properties are ignored. Optional. Example:
+   *  hs_name, hs_budget,hs_notes
+   */
   properties?: Array<string>;
 
+  /**
+   * The property to sort results by. Optional.
+   */
   sort?: string;
 }
 
 export interface CampaignGetParams {
+  /**
+   * The end date for fetching asset metrics, in YYYY-MM-DD format. Optional.
+   * Example: 2000-01-27
+   */
   endDate?: string;
 
+  /**
+   * A comma-separated list of properties to include in the response.
+   *  Unrecognized properties are ignored. Optional. Example: hs_name,hs_budget, hs_notes
+   */
   properties?: Array<string>;
 
+  /**
+   * The start date for fetching asset metrics, in YYYY-MM-DD format.
+   * Optional. Example: 2000-01-20
+   */
   startDate?: string;
 }
 

@@ -19,8 +19,6 @@ Types:
 - <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">FileAttachment</a></code>
 - <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">LocationAttachment</a></code>
 - <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">MessageHeaderAttachment</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PreResolvedContact</a></code>
-- <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PreResolvedContacts</a></code>
 - <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicChannelAccount</a></code>
 - <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicChannelAccountEgg</a></code>
 - <code><a href="./src/resources/conversations/custom-channels/custom-channels.ts">PublicChannelAccountStagingToken</a></code>

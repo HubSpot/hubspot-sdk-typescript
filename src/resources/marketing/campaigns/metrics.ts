@@ -63,12 +63,26 @@ export class BaseMetrics extends APIResource {
 export class Metrics extends BaseMetrics {}
 
 export interface MetricGetAttributionMetricsParams {
+  /**
+   * The end date for fetching attribution data, in YYYY-MM-DD format. Optional.
+   * Example: 2000-01-27
+   */
   endDate?: string;
 
+  /**
+   * The start date for fetching attribution data, in YYYY-MM-DD format. Optional.
+   * Example: 2000-01-20
+   */
   startDate?: string;
 }
 
 export interface MetricGetRevenueAttributionParams {
+  /**
+   * The revenue attribution model used to calculate deal revenue credit. Defaults to
+   * LINEAR if not specified. Enum values: LINEAR, FIRST_INTERACTION,
+   * LAST_INTERACTION, FULL_PATH, U_SHAPED, W_SHAPED, TIME_DECAY, J_SHAPED,
+   * INVERSE_J_SHAPED
+   */
   attributionModel?: string;
 
   /**
@@ -89,12 +103,14 @@ export interface MetricListContactIDsByTypeParams extends PageParams {
   campaignGuid: string;
 
   /**
-   * Query param
+   * Query param: The end date for fetching contact data, in YYYY-MM-DD format.
+   * Optional. Example: 2000-01-27
    */
   endDate?: string;
 
   /**
-   * Query param
+   * Query param: The start date for fetching contact data, in YYYY-MM-DD format.
+   * Optional. Example: 2000-01-20
    */
   startDate?: string;
 }

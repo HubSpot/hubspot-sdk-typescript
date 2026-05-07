@@ -81,6 +81,10 @@ export class BaseCardsDev extends APIResource {
     return this._client.get('/crm/extensions/cards-dev/2026-03/sample-response', options);
   }
 
+  /**
+   * Swaps a Legacy CRM Card with an App Card in views. Reference the "Migrate a
+   * legacy CRM card to an app card" docs for more information
+   */
   migrateViews(
     appID: number,
     body: CardsDevMigrateViewsParams,
@@ -292,10 +296,30 @@ export interface CardMigrateViewsRequest {
 
 export interface CardMigrateViewsResponse {
   /**
-   * A human readable message describing the error along with remediation steps where
-   * appropriate
+   * A human readable message describing the progress of the migration.
    */
   message: string;
+
+  /**
+   * The timestamp for when the migration ended.
+   */
+  endedAt?: number;
+
+  /**
+   * The number of portals that remain to be swapped from the Legacy CRM Card to the
+   * App Card
+   */
+  remainingPortalCount?: number;
+
+  /**
+   * The timestamp for when the migration started.
+   */
+  startedAt?: number;
+
+  /**
+   * The total number of portals that have access to the Legacy CRM Card
+   */
+  totalPortalCount?: number;
 }
 
 export interface CardObjectTypeBody {
