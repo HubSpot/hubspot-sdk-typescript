@@ -89,7 +89,8 @@ export interface SpendCreateParams {
 
 export interface SpendUpdateParams {
   /**
-   * Path param
+   * Path param: The UUID of the campaign, required Example:
+   * 9dbec438-53e2-4b28-8c0f-38f56574a6e8
    */
   campaignGuid: string;
 
@@ -115,10 +116,16 @@ export interface SpendUpdateParams {
 }
 
 export interface SpendDeleteParams {
+  /**
+   * The UUID of the campaign, required Example: 9dbec438-53e2-4b28-8c0f-38f56574a6e8
+   */
   campaignGuid: string;
 }
 
 export interface SpendGetParams {
+  /**
+   * The UUID of the campaign, required Example: 9dbec438-53e2-4b28-8c0f-38f56574a6e8
+   */
   campaignGuid: string;
 }
 

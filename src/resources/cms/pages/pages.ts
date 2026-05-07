@@ -166,7 +166,7 @@ export class BasePages extends APIResource {
     revisionID: string,
     params: PageRestoreLandingPageRevisionParams,
     options?: RequestOptions,
-  ): APIPromise<PageData> {
+  ): APIPromise<PagesPage> {
     const { objectId } = params;
     return this._client.post(
       path`/cms/pages/2026-03/landing-pages/${objectId}/revisions/${revisionID}/restore`,
@@ -181,7 +181,7 @@ export class BasePages extends APIResource {
     revisionID: number,
     params: PageRestoreLandingPageRevisionToDraftParams,
     options?: RequestOptions,
-  ): APIPromise<PageData> {
+  ): APIPromise<PagesPage> {
     const { objectId } = params;
     return this._client.post(
       path`/cms/pages/2026-03/landing-pages/${objectId}/revisions/${revisionID}/restore-to-draft`,
@@ -197,7 +197,7 @@ export class BasePages extends APIResource {
     revisionID: string,
     params: PageRestoreSitePageRevisionParams,
     options?: RequestOptions,
-  ): APIPromise<PageData> {
+  ): APIPromise<PagesPage> {
     const { objectId } = params;
     return this._client.post(
       path`/cms/pages/2026-03/site-pages/${objectId}/revisions/${revisionID}/restore`,
@@ -213,7 +213,7 @@ export class BasePages extends APIResource {
     revisionID: number,
     params: PageRestoreSitePageRevisionToDraftParams,
     options?: RequestOptions,
-  ): APIPromise<PageData> {
+  ): APIPromise<PagesPage> {
     const { objectId } = params;
     return this._client.post(
       path`/cms/pages/2026-03/site-pages/${objectId}/revisions/${revisionID}/restore-to-draft`,
@@ -236,7 +236,7 @@ export type ContentFoldersPage = Page<ContentFolder>;
 
 export type ContentFolderVersionsPage = Page<ContentFolderVersion>;
 
-export type PageDataPage = Page<PageData>;
+export type PagesPagesPage = Page<PagesPage>;
 
 export interface AbTestEndRequestVNext {
   /**
@@ -273,7 +273,7 @@ export interface BatchInputPage {
   /**
    * Pages to input.
    */
-  inputs: Array<PageData>;
+  inputs: Array<PagesPage>;
 }
 
 export interface BatchResponseContentFolder {
@@ -359,7 +359,7 @@ export interface BatchResponsePage {
   /**
    * Results of batch operation.
    */
-  results: Array<PageData>;
+  results: Array<PagesPage>;
 
   /**
    * Time of batch operation start.
@@ -391,7 +391,7 @@ export interface BatchResponsePageWithErrors {
   /**
    * Results of batch operation.
    */
-  results: Array<PageData>;
+  results: Array<PagesPage>;
 
   /**
    * Time of batch operation start.
@@ -450,7 +450,7 @@ export interface CollectionResponseWithTotalPageForwardPaging {
   /**
    * Collection of pages.
    */
-  results: Array<PageData>;
+  results: Array<PagesPage>;
 
   /**
    * Total number of pages.
@@ -532,7 +532,17 @@ export interface ContentLanguageCloneRequestVNext {
   primaryLanguage?: string;
 }
 
-export interface PageData {
+export interface PageVersion {
+  id: string;
+
+  object: PagesPage;
+
+  updatedAt: string;
+
+  user: Shared.VersionUser;
+}
+
+export interface PagesPage {
   /**
    * The unique ID of the page.
    */
@@ -1746,16 +1756,6 @@ export interface PageData {
   widgets: { [key: string]: unknown };
 }
 
-export interface PageVersion {
-  id: string;
-
-  object: PageData;
-
-  updatedAt: string;
-
-  user: Shared.VersionUser;
-}
-
 export interface PageGetLandingPageRevisionParams {
   objectId: string;
 }
@@ -1821,8 +1821,8 @@ export declare namespace Pages {
     type ContentFolder as ContentFolder,
     type ContentFolderVersion as ContentFolderVersion,
     type ContentLanguageCloneRequestVNext as ContentLanguageCloneRequestVNext,
-    type PageData as PageData,
     type PageVersion as PageVersion,
+    type PagesPage as PagesPage,
     type PageVersionsPage as PageVersionsPage,
     type PageGetLandingPageRevisionParams as PageGetLandingPageRevisionParams,
     type PageGetSitePageRevisionParams as PageGetSitePageRevisionParams,

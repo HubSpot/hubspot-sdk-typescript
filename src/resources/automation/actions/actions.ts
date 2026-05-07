@@ -174,6 +174,8 @@ export interface ChirpAIContextObject {
    */
   applicationId: string;
 
+  isPrivate: boolean;
+
   /**
    * Additional metadata related to the context, represented as key-value pairs.
    */

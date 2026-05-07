@@ -92,8 +92,6 @@ export interface MessageCreateParams {
 
   integrationThreadId?: string;
 
-  preResolvedContacts?: CustomChannelsAPI.PreResolvedContacts;
-
   richText?: string;
 }
 
