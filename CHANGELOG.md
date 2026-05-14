@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-alpha.7 (2026-05-14)
+
+Full Changelog: [v0.1.0-alpha.6...v0.1.0-alpha.7](https://github.com/HubSpot/hubspot-sdk-typescript/compare/v0.1.0-alpha.6...v0.1.0-alpha.7)
+
+### Chores
+
+* redact api-key headers in debug logs ([69f7f40](https://github.com/HubSpot/hubspot-sdk-typescript/commit/69f7f40316d1e89fb413642298f57c7f27dcb971))
+
 ## 0.1.0-alpha.6 (2026-05-07)
 
 Full Changelog: [v0.1.0-alpha.5...v0.1.0-alpha.6](https://github.com/HubSpot/hubspot-sdk-typescript/compare/v0.1.0-alpha.5...v0.1.0-alpha.6)
