@@ -3,7 +3,6 @@
 import { APIResource } from '../../../../core/resource';
 import * as ObjectsAPI from '../objects';
 import { APIPromise } from '../../../../core/api-promise';
-import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 
 export class BaseBatch extends APIResource {
@@ -13,42 +12,6 @@ export class BaseBatch extends APIResource {
     'contracts',
     'batch',
   ] as const);
-
-  /**
-   * Create multiple contracts in a single request by providing the necessary
-   * properties and associations for each contract. This endpoint returns a batch
-   * response containing the details of each created contract.
-   */
-  create(
-    body: BatchCreateParams,
-    options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.BatchResponseSimplePublicObject> {
-    return this._client.post('/crm/objects/2026-03/contracts/batch/create', { body, ...options });
-  }
-
-  /**
-   * Update multiple contracts by their internal IDs or unique property values. This
-   * endpoint allows you to modify the properties of several contracts in a single
-   * request, streamlining the update process for batch operations.
-   */
-  update(
-    body: BatchUpdateParams,
-    options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.BatchResponseSimplePublicObject> {
-    return this._client.post('/crm/objects/2026-03/contracts/batch/update', { body, ...options });
-  }
-
-  /**
-   * Archive a batch of contracts by their IDs. This operation moves the specified
-   * contracts to the archive, making them inactive but still retrievable if needed.
-   */
-  delete(body: BatchDeleteParams, options?: RequestOptions): APIPromise<void> {
-    return this._client.post('/crm/objects/2026-03/contracts/batch/archive', {
-      body,
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
-  }
 
   /**
    * Retrieve records by record ID or include the `idProperty` parameter to retrieve
@@ -65,32 +28,8 @@ export class BaseBatch extends APIResource {
       ...options,
     });
   }
-
-  /**
-   * Create or update records identified by a unique property value as specified by
-   * the `idProperty` query param. `idProperty` query param refers to a property
-   * whose values are unique for the object.
-   */
-  upsert(
-    body: BatchUpsertParams,
-    options?: RequestOptions,
-  ): APIPromise<ObjectsAPI.BatchResponseSimplePublicUpsertObject> {
-    return this._client.post('/crm/objects/2026-03/contracts/batch/upsert', { body, ...options });
-  }
 }
 export class Batch extends BaseBatch {}
-
-export interface BatchCreateParams {
-  inputs: Array<ObjectsAPI.SimplePublicObjectBatchInputForCreate>;
-}
-
-export interface BatchUpdateParams {
-  inputs: Array<ObjectsAPI.SimplePublicObjectBatchInput>;
-}
-
-export interface BatchDeleteParams {
-  inputs: Array<ObjectsAPI.SimplePublicObjectID>;
-}
 
 export interface BatchGetParams {
   /**
@@ -121,16 +60,6 @@ export interface BatchGetParams {
   idProperty?: string;
 }
 
-export interface BatchUpsertParams {
-  inputs: Array<ObjectsAPI.SimplePublicObjectBatchInputUpsert>;
-}
-
 export declare namespace Batch {
-  export {
-    type BatchCreateParams as BatchCreateParams,
-    type BatchUpdateParams as BatchUpdateParams,
-    type BatchDeleteParams as BatchDeleteParams,
-    type BatchGetParams as BatchGetParams,
-    type BatchUpsertParams as BatchUpsertParams,
-  };
+  export { type BatchGetParams as BatchGetParams };
 }

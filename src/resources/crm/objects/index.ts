@@ -58,15 +58,7 @@ export {
   type ContactMergeParams,
   type ContactSearchParams,
 } from './contacts/index';
-export {
-  Contracts,
-  BaseContracts,
-  type ContractCreateParams,
-  type ContractUpdateParams,
-  type ContractListParams,
-  type ContractGetParams,
-  type ContractSearchParams,
-} from './contracts/index';
+export { Contracts, BaseContracts, type ContractListParams, type ContractGetParams } from './contracts/index';
 export {
   Courses,
   BaseCourses,

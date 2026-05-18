@@ -113,6 +113,7 @@ const runTests = (client: PartialHubSpot<{ cms: { blogs: { tags: BaseTags } } }>
       name: 'name',
       language: 'language',
       primaryLanguage: 'primaryLanguage',
+      usePublished: true,
     });
   });
 

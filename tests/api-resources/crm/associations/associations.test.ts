@@ -25,6 +25,31 @@ const parentPartialClient = createClient({
 
 const runTests = (client: PartialHubSpot<{ crm: { associations: BaseAssociations } }>) => {
   // Mock server tests are disabled
+  test.skip('create: only required params', async () => {
+    const responsePromise = client.crm.associations.create('toObjectId', {
+      fromObjectType: 'fromObjectType',
+      fromObjectId: 'fromObjectId',
+      toObjectType: 'toObjectType',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('create: required and optional params', async () => {
+    const response = await client.crm.associations.create('toObjectId', {
+      fromObjectType: 'fromObjectType',
+      fromObjectId: 'fromObjectId',
+      toObjectType: 'toObjectType',
+    });
+  });
+
+  // Mock server tests are disabled
   test.skip('list: only required params', async () => {
     const responsePromise = client.crm.associations.list('toObjectType', {
       objectType: 'objectType',
@@ -129,8 +154,8 @@ const runTests = (client: PartialHubSpot<{ crm: { associations: BaseAssociations
   });
 
   // Mock server tests are disabled
-  test.skip('updateAssociationLabels: only required params', async () => {
-    const responsePromise = client.crm.associations.updateAssociationLabels('toObjectId', {
+  test.skip('updateLabels: only required params', async () => {
+    const responsePromise = client.crm.associations.updateLabels('toObjectId', {
       objectType: 'objectType',
       objectId: 'objectId',
       toObjectType: 'toObjectType',
@@ -146,8 +171,8 @@ const runTests = (client: PartialHubSpot<{ crm: { associations: BaseAssociations
   });
 
   // Mock server tests are disabled
-  test.skip('updateAssociationLabels: required and optional params', async () => {
-    const response = await client.crm.associations.updateAssociationLabels('toObjectId', {
+  test.skip('updateLabels: required and optional params', async () => {
+    const response = await client.crm.associations.updateLabels('toObjectId', {
       objectType: 'objectType',
       objectId: 'objectId',
       toObjectType: 'toObjectType',

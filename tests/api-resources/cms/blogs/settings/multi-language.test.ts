@@ -55,6 +55,7 @@ const runTests = (
       language: 'language',
       primaryLanguage: 'primaryLanguage',
       slug: 'slug',
+      usePublished: true,
     });
   });
 

@@ -41,6 +41,7 @@ const runTests = (
     const response = await client.cms.blogs.posts.multiLanguage.createLangVariation({
       id: 'id',
       language: 'language',
+      usePublished: true,
     });
   });
 

@@ -872,7 +872,7 @@ export interface PropertyValue {
  */
 export interface PublicObjectID {
   /**
-   * ID of the object
+   * The unique identifier for the public object.
    */
   id: string;
 }

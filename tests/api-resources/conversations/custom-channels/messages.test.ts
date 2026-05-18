@@ -78,6 +78,7 @@ const runTests = (
       inReplyToId: 'inReplyToId',
       integrationIdempotencyId: 'integrationIdempotencyId',
       integrationThreadId: 'integrationThreadId',
+      preResolvedContacts: { contacts: [{ contactPropertiesLeadingToMatch: ['address'], contactVid: 0 }] },
       richText: 'richText',
     });
   });

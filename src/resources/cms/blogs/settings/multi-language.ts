@@ -1810,6 +1810,8 @@ export interface MultiLanguageCreateLanguageVariationParams {
    * Path to this blog.
    */
   slug?: string;
+
+  usePublished?: boolean;
 }
 
 export interface MultiLanguageDetachFromLangGroupParams {

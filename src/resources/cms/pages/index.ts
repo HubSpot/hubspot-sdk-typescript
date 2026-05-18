@@ -1,44 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  ABTests,
-  BaseABTests,
-  type ABTestCreateLandingPageVariationParams,
-  type ABTestCreateSitePageVariationParams,
-  type ABTestEndLandingPageTestParams,
-  type ABTestEndSitePageTestParams,
-  type ABTestRerunLandingPageTestParams,
-  type ABTestRerunSitePageTestParams,
-} from './a-b-tests';
-export {
-  Batch,
-  BaseBatch,
-  type BatchCreateFoldersParams,
-  type BatchCreateLandingPagesParams,
-  type BatchCreateSitePagesParams,
-  type BatchDeleteFoldersParams,
-  type BatchDeleteLandingPagesParams,
-  type BatchDeleteSitePagesParams,
-  type BatchGetLandingPagesParams,
-  type BatchGetSitePagesParams,
-  type BatchUpdateFoldersParams,
-  type BatchUpdateLandingPagesParams,
-  type BatchUpdateSitePagesParams,
-} from './batch';
-export {
-  Folders,
-  BaseFolders,
-  type FolderCreateParams,
-  type FolderUpdateParams,
-  type FolderListParams,
-  type FolderDeleteParams,
-  type FolderBatchGetParams,
-  type FolderGetParams,
-  type FolderGetRevisionParams,
-  type FolderListRevisionsParams,
-  type FolderRestoreRevisionParams,
-} from './folders';
-export {
   LandingPages,
   BaseLandingPages,
   type LandingPageCreateParams,
@@ -48,17 +10,7 @@ export {
   type LandingPageCloneParams,
   type LandingPageGetParams,
   type LandingPageScheduleParams,
-  type LandingPageUpdateDraftParams,
-} from './landing-pages';
-export {
-  MultiLanguage,
-  BaseMultiLanguage,
-  type MultiLanguageAttachToLangGroupParams,
-  type MultiLanguageCreateLanguageVariationParams,
-  type MultiLanguageDetachFromLangGroupParams,
-  type MultiLanguageSetNewLangPrimaryParams,
-  type MultiLanguageUpdateLanguagesParams,
-} from './multi-language';
+} from './landing-pages/index';
 export {
   Pages,
   BasePages,
@@ -79,29 +31,19 @@ export {
   type ContentLanguageCloneRequestVNext,
   type PageVersion,
   type PagesPage,
-  type PageGetLandingPageRevisionParams,
-  type PageGetSitePageRevisionParams,
-  type PageListLandingPageRevisionsParams,
-  type PageListSitePageRevisionsParams,
-  type PageRestoreLandingPageRevisionParams,
-  type PageRestoreLandingPageRevisionToDraftParams,
-  type PageRestoreSitePageRevisionParams,
-  type PageRestoreSitePageRevisionToDraftParams,
+  type PagesPagesPage,
   type ContentFoldersPage,
   type ContentFolderVersionsPage,
-  type PagesPagesPage,
   type PageVersionsPage,
 } from './pages';
 export {
-  WebsitePages,
-  BaseWebsitePages,
-  type WebsitePageCreateParams,
-  type WebsitePageUpdateParams,
-  type WebsitePageListParams,
-  type WebsitePageDeleteParams,
-  type WebsitePageCloneParams,
-  type WebsitePageGetParams,
-  type WebsitePageScheduleParams,
-  type WebsitePageSetNewLangPrimaryParams,
-  type WebsitePageUpdateDraftParams,
-} from './website-pages';
+  SitePages,
+  BaseSitePages,
+  type SitePageCreateParams,
+  type SitePageUpdateParams,
+  type SitePageListParams,
+  type SitePageDeleteParams,
+  type SitePageCloneParams,
+  type SitePageGetParams,
+  type SitePageScheduleParams,
+} from './site-pages/index';

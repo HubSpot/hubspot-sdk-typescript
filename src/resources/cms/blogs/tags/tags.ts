@@ -1229,6 +1229,8 @@ export interface TagCloneRequestVNext {
    * Language of primary blog tag to clone.
    */
   primaryLanguage?: string;
+
+  usePublished?: boolean;
 }
 
 export interface TagCreateParams {
@@ -4773,6 +4775,8 @@ export interface TagCreateLangVariationParams {
    * Language of primary blog tag to clone.
    */
   primaryLanguage?: string;
+
+  usePublished?: boolean;
 }
 
 export interface TagDetachFromLangGroupParams {
