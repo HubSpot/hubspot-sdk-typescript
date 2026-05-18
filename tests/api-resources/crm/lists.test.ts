@@ -545,7 +545,7 @@ const runTests = (client: PartialHubSpot<{ crm: { lists: BaseLists } }>) => {
     await expect(
       client.crm.lists.getSizeAndEditsHistoryBetween(
         'listId',
-        { endDate: 'endDate', startDate: 'startDate' },
+        { endDate: '2019-12-27T18:11:19.117Z', startDate: '2019-12-27T18:11:19.117Z' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(HubSpot.NotFoundError);

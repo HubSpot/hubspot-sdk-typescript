@@ -78,7 +78,7 @@ const runTests = (client: PartialHubSpot<{ cms: { blogs: { posts: BasePosts } } 
                   r: 0,
                 },
                 backgroundGradient: {
-                  angle: { units: 'deg', value: 0 },
+                  angle: { units: 'DEGREES', value: 0 },
                   colors: [
                     {
                       color: {
@@ -104,14 +104,14 @@ const runTests = (client: PartialHubSpot<{ cms: { blogs: { posts: BasePosts } } 
                   foo: {
                     hidden: true,
                     margin: {
-                      bottom: { units: '%', value: 0 },
-                      top: { units: '%', value: 0 },
+                      bottom: { units: 'CH', value: 0 },
+                      top: { units: 'CH', value: 0 },
                     },
                     padding: {
-                      bottom: { units: '%', value: 0 },
-                      left: { units: '%', value: 0 },
-                      right: { units: '%', value: 0 },
-                      top: { units: '%', value: 0 },
+                      bottom: { units: 'CH', value: 0 },
+                      left: { units: 'CH', value: 0 },
+                      right: { units: 'CH', value: 0 },
+                      top: { units: 'CH', value: 0 },
                     },
                   },
                 },
@@ -127,7 +127,7 @@ const runTests = (client: PartialHubSpot<{ cms: { blogs: { posts: BasePosts } } 
               r: 0,
             },
             backgroundGradient: {
-              angle: { units: 'deg', value: 0 },
+              angle: { units: 'DEGREES', value: 0 },
               colors: [
                 {
                   color: {
@@ -153,14 +153,14 @@ const runTests = (client: PartialHubSpot<{ cms: { blogs: { posts: BasePosts } } 
               foo: {
                 hidden: true,
                 margin: {
-                  bottom: { units: '%', value: 0 },
-                  top: { units: '%', value: 0 },
+                  bottom: { units: 'CH', value: 0 },
+                  top: { units: 'CH', value: 0 },
                 },
                 padding: {
-                  bottom: { units: '%', value: 0 },
-                  left: { units: '%', value: 0 },
-                  right: { units: '%', value: 0 },
-                  top: { units: '%', value: 0 },
+                  bottom: { units: 'CH', value: 0 },
+                  left: { units: 'CH', value: 0 },
+                  right: { units: 'CH', value: 0 },
+                  top: { units: 'CH', value: 0 },
                 },
               },
             },
@@ -274,7 +274,7 @@ const runTests = (client: PartialHubSpot<{ cms: { blogs: { posts: BasePosts } } 
                   r: 0,
                 },
                 backgroundGradient: {
-                  angle: { units: 'deg', value: 0 },
+                  angle: { units: 'DEGREES', value: 0 },
                   colors: [
                     {
                       color: {
@@ -300,14 +300,14 @@ const runTests = (client: PartialHubSpot<{ cms: { blogs: { posts: BasePosts } } 
                   foo: {
                     hidden: true,
                     margin: {
-                      bottom: { units: '%', value: 0 },
-                      top: { units: '%', value: 0 },
+                      bottom: { units: 'CH', value: 0 },
+                      top: { units: 'CH', value: 0 },
                     },
                     padding: {
-                      bottom: { units: '%', value: 0 },
-                      left: { units: '%', value: 0 },
-                      right: { units: '%', value: 0 },
-                      top: { units: '%', value: 0 },
+                      bottom: { units: 'CH', value: 0 },
+                      left: { units: 'CH', value: 0 },
+                      right: { units: 'CH', value: 0 },
+                      top: { units: 'CH', value: 0 },
                     },
                   },
                 },
@@ -323,7 +323,7 @@ const runTests = (client: PartialHubSpot<{ cms: { blogs: { posts: BasePosts } } 
               r: 0,
             },
             backgroundGradient: {
-              angle: { units: 'deg', value: 0 },
+              angle: { units: 'DEGREES', value: 0 },
               colors: [
                 {
                   color: {
@@ -349,14 +349,14 @@ const runTests = (client: PartialHubSpot<{ cms: { blogs: { posts: BasePosts } } 
               foo: {
                 hidden: true,
                 margin: {
-                  bottom: { units: '%', value: 0 },
-                  top: { units: '%', value: 0 },
+                  bottom: { units: 'CH', value: 0 },
+                  top: { units: 'CH', value: 0 },
                 },
                 padding: {
-                  bottom: { units: '%', value: 0 },
-                  left: { units: '%', value: 0 },
-                  right: { units: '%', value: 0 },
-                  top: { units: '%', value: 0 },
+                  bottom: { units: 'CH', value: 0 },
+                  left: { units: 'CH', value: 0 },
+                  right: { units: 'CH', value: 0 },
+                  top: { units: 'CH', value: 0 },
                 },
               },
             },
@@ -693,7 +693,7 @@ const runTests = (client: PartialHubSpot<{ cms: { blogs: { posts: BasePosts } } 
                   r: 0,
                 },
                 backgroundGradient: {
-                  angle: { units: 'deg', value: 0 },
+                  angle: { units: 'DEGREES', value: 0 },
                   colors: [
                     {
                       color: {
@@ -719,14 +719,14 @@ const runTests = (client: PartialHubSpot<{ cms: { blogs: { posts: BasePosts } } 
                   foo: {
                     hidden: true,
                     margin: {
-                      bottom: { units: '%', value: 0 },
-                      top: { units: '%', value: 0 },
+                      bottom: { units: 'CH', value: 0 },
+                      top: { units: 'CH', value: 0 },
                     },
                     padding: {
-                      bottom: { units: '%', value: 0 },
-                      left: { units: '%', value: 0 },
-                      right: { units: '%', value: 0 },
-                      top: { units: '%', value: 0 },
+                      bottom: { units: 'CH', value: 0 },
+                      left: { units: 'CH', value: 0 },
+                      right: { units: 'CH', value: 0 },
+                      top: { units: 'CH', value: 0 },
                     },
                   },
                 },
@@ -742,7 +742,7 @@ const runTests = (client: PartialHubSpot<{ cms: { blogs: { posts: BasePosts } } 
               r: 0,
             },
             backgroundGradient: {
-              angle: { units: 'deg', value: 0 },
+              angle: { units: 'DEGREES', value: 0 },
               colors: [
                 {
                   color: {
@@ -768,14 +768,14 @@ const runTests = (client: PartialHubSpot<{ cms: { blogs: { posts: BasePosts } } 
               foo: {
                 hidden: true,
                 margin: {
-                  bottom: { units: '%', value: 0 },
-                  top: { units: '%', value: 0 },
+                  bottom: { units: 'CH', value: 0 },
+                  top: { units: 'CH', value: 0 },
                 },
                 padding: {
-                  bottom: { units: '%', value: 0 },
-                  left: { units: '%', value: 0 },
-                  right: { units: '%', value: 0 },
-                  top: { units: '%', value: 0 },
+                  bottom: { units: 'CH', value: 0 },
+                  left: { units: 'CH', value: 0 },
+                  right: { units: 'CH', value: 0 },
+                  top: { units: 'CH', value: 0 },
                 },
               },
             },

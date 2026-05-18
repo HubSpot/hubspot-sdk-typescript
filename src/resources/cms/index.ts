@@ -240,17 +240,9 @@ export {
   type ContentLanguageCloneRequestVNext,
   type PageVersion,
   type PagesPage,
-  type PageGetLandingPageRevisionParams,
-  type PageGetSitePageRevisionParams,
-  type PageListLandingPageRevisionsParams,
-  type PageListSitePageRevisionsParams,
-  type PageRestoreLandingPageRevisionParams,
-  type PageRestoreLandingPageRevisionToDraftParams,
-  type PageRestoreSitePageRevisionParams,
-  type PageRestoreSitePageRevisionToDraftParams,
+  type PagesPagesPage,
   type ContentFoldersPage,
   type ContentFolderVersionsPage,
-  type PagesPagesPage,
   type PageVersionsPage,
 } from './pages/index';
 export {
@@ -261,7 +253,6 @@ export {
   type IndexedField,
   type PublicSearchResults,
   type SiteSearchGetIndexedDataParams,
-  type SiteSearchSearchParams,
 } from './site-search';
 export {
   SourceCode,

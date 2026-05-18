@@ -176,9 +176,9 @@ const runTests = (client: PartialHubSpot<{ marketing: { emails: BaseEmails } }>)
       client.marketing.emails.get(
         {
           emailIds: [0],
-          endTimestamp: 'endTimestamp',
+          endTimestamp: '2019-12-27T18:11:19.117Z',
           property: 'property',
-          startTimestamp: 'startTimestamp',
+          startTimestamp: '2019-12-27T18:11:19.117Z',
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -247,9 +247,9 @@ const runTests = (client: PartialHubSpot<{ marketing: { emails: BaseEmails } }>)
       client.marketing.emails.getHistogram(
         {
           emailIds: [0],
-          endTimestamp: 'endTimestamp',
+          endTimestamp: '2019-12-27T18:11:19.117Z',
           interval: 'DAY',
-          startTimestamp: 'startTimestamp',
+          startTimestamp: '2019-12-27T18:11:19.117Z',
         },
         { path: '/_stainless_unknown_path' },
       ),
