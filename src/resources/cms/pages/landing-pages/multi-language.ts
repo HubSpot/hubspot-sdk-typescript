@@ -1,26 +1,27 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../core/resource';
-import * as PagesAPI from './pages';
-import { APIPromise } from '../../../core/api-promise';
-import { buildHeaders } from '../../../internal/headers';
-import { RequestOptions } from '../../../internal/request-options';
+import { APIResource } from '../../../../core/resource';
+import * as PagesAPI from '../pages';
+import { APIPromise } from '../../../../core/api-promise';
+import { buildHeaders } from '../../../../internal/headers';
+import { RequestOptions } from '../../../../internal/request-options';
 
 export class BaseMultiLanguage extends APIResource {
-  static override readonly _key: readonly ['cms', 'pages', 'multiLanguage'] = Object.freeze([
+  static override readonly _key: readonly ['cms', 'pages', 'landingPages', 'multiLanguage'] = Object.freeze([
     'cms',
     'pages',
+    'landingPages',
     'multiLanguage',
   ] as const);
 
   /**
-   * Attach a site page to a multi-language group.
+   * Attach a landing page to a multi-language group.
    */
   attachToLangGroup(
     body: MultiLanguageAttachToLangGroupParams,
     options?: RequestOptions,
   ): APIPromise<Response> {
-    return this._client.post('/cms/pages/2026-03/site-pages/multi-language/attach-to-lang-group', {
+    return this._client.post('/cms/pages/2026-03/landing-pages/multi-language/attach-to-lang-group', {
       body,
       ...options,
       headers: buildHeaders([{ 'Content-Type': '*/*', Accept: '*/*' }, options?.headers]),
@@ -29,16 +30,16 @@ export class BaseMultiLanguage extends APIResource {
   }
 
   /**
-   * Create a new language variation from an existing website page. The variation
+   * Create a new language variation from an existing landing page. The variation
    * will be a copy of the draft state of the source page. To preview the content,
    * you can
-   * [retrieve the draft of the source website page](/api-reference/latest/cms/pages/website-pages/drafts/get-website-page-draft).
+   * [retrieve the draft of the source landing page](/api-reference/latest/cms/pages/landing-pages/drafts/get-landing-page-draft).
    */
   createLanguageVariation(
     body: MultiLanguageCreateLanguageVariationParams,
     options?: RequestOptions,
   ): APIPromise<PagesAPI.PagesPage> {
-    return this._client.post('/cms/pages/2026-03/site-pages/multi-language/create-language-variation', {
+    return this._client.post('/cms/pages/2026-03/landing-pages/multi-language/create-language-variation', {
       body,
       ...options,
       headers: buildHeaders([{ 'Content-Type': '*/*' }, options?.headers]),
@@ -46,13 +47,13 @@ export class BaseMultiLanguage extends APIResource {
   }
 
   /**
-   * Detach a website page from a multi-language group.
+   * Detach a landing page from a multi-language group.
    */
   detachFromLangGroup(
     body: MultiLanguageDetachFromLangGroupParams,
     options?: RequestOptions,
   ): APIPromise<Response> {
-    return this._client.post('/cms/pages/2026-03/site-pages/multi-language/detach-from-lang-group', {
+    return this._client.post('/cms/pages/2026-03/landing-pages/multi-language/detach-from-lang-group', {
       body,
       ...options,
       headers: buildHeaders([{ 'Content-Type': '*/*', Accept: '*/*' }, options?.headers]),
@@ -61,10 +62,10 @@ export class BaseMultiLanguage extends APIResource {
   }
 
   /**
-   * Set a site page as the primary language of a multi-language group.
+   * Set a landing page as the primary language of a multi-language group.
    */
   setNewLangPrimary(body: MultiLanguageSetNewLangPrimaryParams, options?: RequestOptions): APIPromise<void> {
-    return this._client.put('/cms/pages/2026-03/site-pages/multi-language/set-new-lang-primary', {
+    return this._client.put('/cms/pages/2026-03/landing-pages/multi-language/set-new-lang-primary', {
       body,
       ...options,
       headers: buildHeaders([{ 'Content-Type': '*/*', Accept: '*/*' }, options?.headers]),
@@ -72,10 +73,10 @@ export class BaseMultiLanguage extends APIResource {
   }
 
   /**
-   * Explicitly set new languages for each site page in a multi-language group.
+   * Explicitly set new languages for each landing page in a multi-language group.
    */
   updateLanguages(body: MultiLanguageUpdateLanguagesParams, options?: RequestOptions): APIPromise<Response> {
-    return this._client.post('/cms/pages/2026-03/site-pages/multi-language/update-languages', {
+    return this._client.post('/cms/pages/2026-03/landing-pages/multi-language/update-languages', {
       body,
       ...options,
       headers: buildHeaders([{ 'Content-Type': '*/*', Accept: '*/*' }, options?.headers]),
@@ -1808,6 +1809,8 @@ export interface MultiLanguageCreateLanguageVariationParams {
    * Language of primary content to clone.
    */
   primaryLanguage?: string;
+
+  usePublished?: boolean;
 }
 
 export interface MultiLanguageDetachFromLangGroupParams {

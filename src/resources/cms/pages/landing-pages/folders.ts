@@ -1,18 +1,19 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../core/resource';
-import * as PagesAPI from './pages';
-import { ContentFolderVersionsPage, ContentFoldersPage } from './pages';
-import { APIPromise } from '../../../core/api-promise';
-import { Page, type PageParams, PagePromise } from '../../../core/pagination';
-import { buildHeaders } from '../../../internal/headers';
-import { RequestOptions } from '../../../internal/request-options';
-import { path } from '../../../internal/utils/path';
+import { APIResource } from '../../../../core/resource';
+import * as PagesAPI from '../pages';
+import { ContentFolderVersionsPage, ContentFoldersPage } from '../pages';
+import { APIPromise } from '../../../../core/api-promise';
+import { Page, type PageParams, PagePromise } from '../../../../core/pagination';
+import { buildHeaders } from '../../../../internal/headers';
+import { RequestOptions } from '../../../../internal/request-options';
+import { path } from '../../../../internal/utils/path';
 
 export class BaseFolders extends APIResource {
-  static override readonly _key: readonly ['cms', 'pages', 'folders'] = Object.freeze([
+  static override readonly _key: readonly ['cms', 'pages', 'landingPages', 'folders'] = Object.freeze([
     'cms',
     'pages',
+    'landingPages',
     'folders',
   ] as const);
 
@@ -93,6 +94,31 @@ export class BaseFolders extends APIResource {
   }
 
   /**
+   * Create a batch of folders as detailed in the request body.
+   */
+  createFolders(
+    body: FolderCreateFoldersParams,
+    options?: RequestOptions,
+  ): APIPromise<PagesAPI.BatchResponseContentFolder> {
+    return this._client.post('/cms/pages/2026-03/landing-pages/folders/batch/create', {
+      body,
+      ...options,
+      headers: buildHeaders([{ 'Content-Type': '*/*' }, options?.headers]),
+    });
+  }
+
+  /**
+   * Delete a batch of folders as specified in the request body.
+   */
+  deleteFolders(body: FolderDeleteFoldersParams, options?: RequestOptions): APIPromise<void> {
+    return this._client.post('/cms/pages/2026-03/landing-pages/folders/batch/archive', {
+      body,
+      ...options,
+      headers: buildHeaders([{ 'Content-Type': '*/*', Accept: '*/*' }, options?.headers]),
+    });
+  }
+
+  /**
    * Retrieve a landing page folder, specified by its ID.
    */
   get(
@@ -150,6 +176,22 @@ export class BaseFolders extends APIResource {
       path`/cms/pages/2026-03/landing-pages/folders/${objectId}/revisions/${revisionID}/restore`,
       options,
     );
+  }
+
+  /**
+   * Update a batch of landing page folders as specified in the request body.
+   */
+  updateFolders(
+    params: FolderUpdateFoldersParams,
+    options?: RequestOptions,
+  ): APIPromise<PagesAPI.BatchResponseContentFolder> {
+    const { archived, ...body } = params;
+    return this._client.post('/cms/pages/2026-03/landing-pages/folders/batch/update', {
+      query: { archived },
+      body,
+      ...options,
+      headers: buildHeaders([{ 'Content-Type': '*/*' }, options?.headers]),
+    });
   }
 }
 export class Folders extends BaseFolders {}
@@ -285,6 +327,20 @@ export interface FolderBatchGetParams {
   archived?: boolean;
 }
 
+export interface FolderCreateFoldersParams {
+  /**
+   * Content folders to input.
+   */
+  inputs: Array<PagesAPI.ContentFolder>;
+}
+
+export interface FolderDeleteFoldersParams {
+  /**
+   * Strings to input.
+   */
+  inputs: Array<string>;
+}
+
 export interface FolderGetParams {
   /**
    * Whether to return only results that have been archived.
@@ -306,6 +362,18 @@ export interface FolderRestoreRevisionParams {
   objectId: string;
 }
 
+export interface FolderUpdateFoldersParams {
+  /**
+   * Body param: JSON nodes to input.
+   */
+  inputs: Array<unknown>;
+
+  /**
+   * Query param: Whether to return only results that have been archived.
+   */
+  archived?: boolean;
+}
+
 export declare namespace Folders {
   export {
     type FolderCreateParams as FolderCreateParams,
@@ -313,10 +381,13 @@ export declare namespace Folders {
     type FolderListParams as FolderListParams,
     type FolderDeleteParams as FolderDeleteParams,
     type FolderBatchGetParams as FolderBatchGetParams,
+    type FolderCreateFoldersParams as FolderCreateFoldersParams,
+    type FolderDeleteFoldersParams as FolderDeleteFoldersParams,
     type FolderGetParams as FolderGetParams,
     type FolderGetRevisionParams as FolderGetRevisionParams,
     type FolderListRevisionsParams as FolderListRevisionsParams,
     type FolderRestoreRevisionParams as FolderRestoreRevisionParams,
+    type FolderUpdateFoldersParams as FolderUpdateFoldersParams,
   };
 }
 

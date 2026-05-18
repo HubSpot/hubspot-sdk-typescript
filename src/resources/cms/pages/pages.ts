@@ -3,48 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
 import * as CmsAPI from '../cms';
-import * as ABTestsAPI from './a-b-tests';
-import {
-  ABTestCreateLandingPageVariationParams,
-  ABTestCreateSitePageVariationParams,
-  ABTestEndLandingPageTestParams,
-  ABTestEndSitePageTestParams,
-  ABTestRerunLandingPageTestParams,
-  ABTestRerunSitePageTestParams,
-  ABTests,
-  BaseABTests,
-} from './a-b-tests';
-import * as BatchAPI from './batch';
-import {
-  BaseBatch,
-  Batch,
-  BatchCreateFoldersParams,
-  BatchCreateLandingPagesParams,
-  BatchCreateSitePagesParams,
-  BatchDeleteFoldersParams,
-  BatchDeleteLandingPagesParams,
-  BatchDeleteSitePagesParams,
-  BatchGetLandingPagesParams,
-  BatchGetSitePagesParams,
-  BatchUpdateFoldersParams,
-  BatchUpdateLandingPagesParams,
-  BatchUpdateSitePagesParams,
-} from './batch';
-import * as FoldersAPI from './folders';
-import {
-  BaseFolders,
-  FolderBatchGetParams,
-  FolderCreateParams,
-  FolderDeleteParams,
-  FolderGetParams,
-  FolderGetRevisionParams,
-  FolderListParams,
-  FolderListRevisionsParams,
-  FolderRestoreRevisionParams,
-  FolderUpdateParams,
-  Folders,
-} from './folders';
-import * as LandingPagesAPI from './landing-pages';
+import * as LandingPagesAPI from './landing-pages/landing-pages';
 import {
   BaseLandingPages,
   LandingPageCloneParams,
@@ -53,190 +12,38 @@ import {
   LandingPageGetParams,
   LandingPageListParams,
   LandingPageScheduleParams,
-  LandingPageUpdateDraftParams,
   LandingPageUpdateParams,
   LandingPages,
-} from './landing-pages';
-import * as MultiLanguageAPI from './multi-language';
+} from './landing-pages/landing-pages';
+import * as SitePagesAPI from './site-pages/site-pages';
 import {
-  BaseMultiLanguage,
-  MultiLanguage,
-  MultiLanguageAttachToLangGroupParams,
-  MultiLanguageCreateLanguageVariationParams,
-  MultiLanguageDetachFromLangGroupParams,
-  MultiLanguageSetNewLangPrimaryParams,
-  MultiLanguageUpdateLanguagesParams,
-} from './multi-language';
-import * as WebsitePagesAPI from './website-pages';
-import {
-  BaseWebsitePages,
-  WebsitePageCloneParams,
-  WebsitePageCreateParams,
-  WebsitePageDeleteParams,
-  WebsitePageGetParams,
-  WebsitePageListParams,
-  WebsitePageScheduleParams,
-  WebsitePageSetNewLangPrimaryParams,
-  WebsitePageUpdateDraftParams,
-  WebsitePageUpdateParams,
-  WebsitePages,
-} from './website-pages';
-import { APIPromise } from '../../../core/api-promise';
-import { Page, type PageParams, PagePromise } from '../../../core/pagination';
-import { buildHeaders } from '../../../internal/headers';
-import { RequestOptions } from '../../../internal/request-options';
-import { path } from '../../../internal/utils/path';
+  BaseSitePages,
+  SitePageCloneParams,
+  SitePageCreateParams,
+  SitePageDeleteParams,
+  SitePageGetParams,
+  SitePageListParams,
+  SitePageScheduleParams,
+  SitePageUpdateParams,
+  SitePages,
+} from './site-pages/site-pages';
+import { Page } from '../../../core/pagination';
 
 export class BasePages extends APIResource {
   static override readonly _key: readonly ['cms', 'pages'] = Object.freeze(['cms', 'pages'] as const);
-
-  /**
-   * Retrieve a previous version of a landing page, specified by page ID and revision
-   * ID.
-   */
-  getLandingPageRevision(
-    revisionID: string,
-    params: PageGetLandingPageRevisionParams,
-    options?: RequestOptions,
-  ): APIPromise<PageVersion> {
-    const { objectId } = params;
-    return this._client.get(
-      path`/cms/pages/2026-03/landing-pages/${objectId}/revisions/${revisionID}`,
-      options,
-    );
-  }
-
-  /**
-   * Retrieve a previous version of a website page by the revision ID.
-   */
-  getSitePageRevision(
-    revisionID: string,
-    params: PageGetSitePageRevisionParams,
-    options?: RequestOptions,
-  ): APIPromise<PageVersion> {
-    const { objectId } = params;
-    return this._client.get(path`/cms/pages/2026-03/site-pages/${objectId}/revisions/${revisionID}`, options);
-  }
-
-  /**
-   * Retrieve all the previous versions of a landing page, specified by page ID.
-   */
-  listLandingPageRevisions(
-    objectID: string,
-    query: PageListLandingPageRevisionsParams | null | undefined = {},
-    options?: RequestOptions,
-  ): PagePromise<PageVersionsPage, PageVersion> {
-    return this._client.getAPIList(
-      path`/cms/pages/2026-03/landing-pages/${objectID}/revisions`,
-      Page<PageVersion>,
-      { query, ...options },
-    );
-  }
-
-  /**
-   * Retrieves all the previous versions of a website page, specified by page ID.
-   */
-  listSitePageRevisions(
-    objectID: string,
-    query: PageListSitePageRevisionsParams | null | undefined = {},
-    options?: RequestOptions,
-  ): PagePromise<PageVersionsPage, PageVersion> {
-    return this._client.getAPIList(
-      path`/cms/pages/2026-03/site-pages/${objectID}/revisions`,
-      Page<PageVersion>,
-      { query, ...options },
-    );
-  }
-
-  /**
-   * Discards any edits and resets the draft to match the live version.
-   */
-  resetSitePageDraft(objectID: string, options?: RequestOptions): APIPromise<void> {
-    return this._client.post(path`/cms/pages/2026-03/site-pages/${objectID}/draft/reset`, {
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
-  }
-
-  /**
-   * Restores a previous version of a landing page, specified by page ID and revision
-   * ID.
-   */
-  restoreLandingPageRevision(
-    revisionID: string,
-    params: PageRestoreLandingPageRevisionParams,
-    options?: RequestOptions,
-  ): APIPromise<PagesPage> {
-    const { objectId } = params;
-    return this._client.post(
-      path`/cms/pages/2026-03/landing-pages/${objectId}/revisions/${revisionID}/restore`,
-      options,
-    );
-  }
-
-  /**
-   * Specify a previous version of a landing page to set as the page draft.
-   */
-  restoreLandingPageRevisionToDraft(
-    revisionID: number,
-    params: PageRestoreLandingPageRevisionToDraftParams,
-    options?: RequestOptions,
-  ): APIPromise<PagesPage> {
-    const { objectId } = params;
-    return this._client.post(
-      path`/cms/pages/2026-03/landing-pages/${objectId}/revisions/${revisionID}/restore-to-draft`,
-      options,
-    );
-  }
-
-  /**
-   * Restores a website page to a previous version, specified by page ID and version
-   * ID.
-   */
-  restoreSitePageRevision(
-    revisionID: string,
-    params: PageRestoreSitePageRevisionParams,
-    options?: RequestOptions,
-  ): APIPromise<PagesPage> {
-    const { objectId } = params;
-    return this._client.post(
-      path`/cms/pages/2026-03/site-pages/${objectId}/revisions/${revisionID}/restore`,
-      options,
-    );
-  }
-
-  /**
-   * Takes a specified version of a website page and sets it as the new draft version
-   * of the page.
-   */
-  restoreSitePageRevisionToDraft(
-    revisionID: number,
-    params: PageRestoreSitePageRevisionToDraftParams,
-    options?: RequestOptions,
-  ): APIPromise<PagesPage> {
-    const { objectId } = params;
-    return this._client.post(
-      path`/cms/pages/2026-03/site-pages/${objectId}/revisions/${revisionID}/restore-to-draft`,
-      options,
-    );
-  }
 }
 export class Pages extends BasePages {
-  aBTests: ABTestsAPI.ABTests = new ABTestsAPI.ABTests(this._client);
-  batch: BatchAPI.Batch = new BatchAPI.Batch(this._client);
-  folders: FoldersAPI.Folders = new FoldersAPI.Folders(this._client);
   landingPages: LandingPagesAPI.LandingPages = new LandingPagesAPI.LandingPages(this._client);
-  multiLanguage: MultiLanguageAPI.MultiLanguage = new MultiLanguageAPI.MultiLanguage(this._client);
-  websitePages: WebsitePagesAPI.WebsitePages = new WebsitePagesAPI.WebsitePages(this._client);
+  sitePages: SitePagesAPI.SitePages = new SitePagesAPI.SitePages(this._client);
 }
 
-export type PageVersionsPage = Page<PageVersion>;
+export type PagesPagesPage = Page<PagesPage>;
 
 export type ContentFoldersPage = Page<ContentFolder>;
 
 export type ContentFolderVersionsPage = Page<ContentFolderVersion>;
 
-export type PagesPagesPage = Page<PagesPage>;
+export type PageVersionsPage = Page<PageVersion>;
 
 export interface AbTestEndRequestVNext {
   /**
@@ -530,6 +337,8 @@ export interface ContentLanguageCloneRequestVNext {
    * Language of primary content to clone.
    */
   primaryLanguage?: string;
+
+  usePublished?: boolean;
 }
 
 export interface PageVersion {
@@ -1756,53 +1565,10 @@ export interface PagesPage {
   widgets: { [key: string]: unknown };
 }
 
-export interface PageGetLandingPageRevisionParams {
-  objectId: string;
-}
-
-export interface PageGetSitePageRevisionParams {
-  /**
-   * The unique identifier of the site page.
-   */
-  objectId: string;
-}
-
-export interface PageListLandingPageRevisionsParams extends PageParams {
-  before?: string;
-}
-
-export interface PageListSitePageRevisionsParams extends PageParams {
-  before?: string;
-}
-
-export interface PageRestoreLandingPageRevisionParams {
-  objectId: string;
-}
-
-export interface PageRestoreLandingPageRevisionToDraftParams {
-  objectId: string;
-}
-
-export interface PageRestoreSitePageRevisionParams {
-  objectId: string;
-}
-
-export interface PageRestoreSitePageRevisionToDraftParams {
-  objectId: string;
-}
-
-Pages.ABTests = ABTests;
-Pages.BaseABTests = BaseABTests;
-Pages.Batch = Batch;
-Pages.BaseBatch = BaseBatch;
-Pages.Folders = Folders;
-Pages.BaseFolders = BaseFolders;
 Pages.LandingPages = LandingPages;
 Pages.BaseLandingPages = BaseLandingPages;
-Pages.MultiLanguage = MultiLanguage;
-Pages.BaseMultiLanguage = BaseMultiLanguage;
-Pages.WebsitePages = WebsitePages;
-Pages.BaseWebsitePages = BaseWebsitePages;
+Pages.SitePages = SitePages;
+Pages.BaseSitePages = BaseSitePages;
 
 export declare namespace Pages {
   export {
@@ -1823,56 +1589,6 @@ export declare namespace Pages {
     type ContentLanguageCloneRequestVNext as ContentLanguageCloneRequestVNext,
     type PageVersion as PageVersion,
     type PagesPage as PagesPage,
-    type PageVersionsPage as PageVersionsPage,
-    type PageGetLandingPageRevisionParams as PageGetLandingPageRevisionParams,
-    type PageGetSitePageRevisionParams as PageGetSitePageRevisionParams,
-    type PageListLandingPageRevisionsParams as PageListLandingPageRevisionsParams,
-    type PageListSitePageRevisionsParams as PageListSitePageRevisionsParams,
-    type PageRestoreLandingPageRevisionParams as PageRestoreLandingPageRevisionParams,
-    type PageRestoreLandingPageRevisionToDraftParams as PageRestoreLandingPageRevisionToDraftParams,
-    type PageRestoreSitePageRevisionParams as PageRestoreSitePageRevisionParams,
-    type PageRestoreSitePageRevisionToDraftParams as PageRestoreSitePageRevisionToDraftParams,
-  };
-
-  export {
-    ABTests as ABTests,
-    BaseABTests as BaseABTests,
-    type ABTestCreateLandingPageVariationParams as ABTestCreateLandingPageVariationParams,
-    type ABTestCreateSitePageVariationParams as ABTestCreateSitePageVariationParams,
-    type ABTestEndLandingPageTestParams as ABTestEndLandingPageTestParams,
-    type ABTestEndSitePageTestParams as ABTestEndSitePageTestParams,
-    type ABTestRerunLandingPageTestParams as ABTestRerunLandingPageTestParams,
-    type ABTestRerunSitePageTestParams as ABTestRerunSitePageTestParams,
-  };
-
-  export {
-    Batch as Batch,
-    BaseBatch as BaseBatch,
-    type BatchCreateFoldersParams as BatchCreateFoldersParams,
-    type BatchCreateLandingPagesParams as BatchCreateLandingPagesParams,
-    type BatchCreateSitePagesParams as BatchCreateSitePagesParams,
-    type BatchDeleteFoldersParams as BatchDeleteFoldersParams,
-    type BatchDeleteLandingPagesParams as BatchDeleteLandingPagesParams,
-    type BatchDeleteSitePagesParams as BatchDeleteSitePagesParams,
-    type BatchGetLandingPagesParams as BatchGetLandingPagesParams,
-    type BatchGetSitePagesParams as BatchGetSitePagesParams,
-    type BatchUpdateFoldersParams as BatchUpdateFoldersParams,
-    type BatchUpdateLandingPagesParams as BatchUpdateLandingPagesParams,
-    type BatchUpdateSitePagesParams as BatchUpdateSitePagesParams,
-  };
-
-  export {
-    Folders as Folders,
-    BaseFolders as BaseFolders,
-    type FolderCreateParams as FolderCreateParams,
-    type FolderUpdateParams as FolderUpdateParams,
-    type FolderListParams as FolderListParams,
-    type FolderDeleteParams as FolderDeleteParams,
-    type FolderBatchGetParams as FolderBatchGetParams,
-    type FolderGetParams as FolderGetParams,
-    type FolderGetRevisionParams as FolderGetRevisionParams,
-    type FolderListRevisionsParams as FolderListRevisionsParams,
-    type FolderRestoreRevisionParams as FolderRestoreRevisionParams,
   };
 
   export {
@@ -1885,30 +1601,17 @@ export declare namespace Pages {
     type LandingPageCloneParams as LandingPageCloneParams,
     type LandingPageGetParams as LandingPageGetParams,
     type LandingPageScheduleParams as LandingPageScheduleParams,
-    type LandingPageUpdateDraftParams as LandingPageUpdateDraftParams,
   };
 
   export {
-    MultiLanguage as MultiLanguage,
-    BaseMultiLanguage as BaseMultiLanguage,
-    type MultiLanguageAttachToLangGroupParams as MultiLanguageAttachToLangGroupParams,
-    type MultiLanguageCreateLanguageVariationParams as MultiLanguageCreateLanguageVariationParams,
-    type MultiLanguageDetachFromLangGroupParams as MultiLanguageDetachFromLangGroupParams,
-    type MultiLanguageSetNewLangPrimaryParams as MultiLanguageSetNewLangPrimaryParams,
-    type MultiLanguageUpdateLanguagesParams as MultiLanguageUpdateLanguagesParams,
-  };
-
-  export {
-    WebsitePages as WebsitePages,
-    BaseWebsitePages as BaseWebsitePages,
-    type WebsitePageCreateParams as WebsitePageCreateParams,
-    type WebsitePageUpdateParams as WebsitePageUpdateParams,
-    type WebsitePageListParams as WebsitePageListParams,
-    type WebsitePageDeleteParams as WebsitePageDeleteParams,
-    type WebsitePageCloneParams as WebsitePageCloneParams,
-    type WebsitePageGetParams as WebsitePageGetParams,
-    type WebsitePageScheduleParams as WebsitePageScheduleParams,
-    type WebsitePageSetNewLangPrimaryParams as WebsitePageSetNewLangPrimaryParams,
-    type WebsitePageUpdateDraftParams as WebsitePageUpdateDraftParams,
+    SitePages as SitePages,
+    BaseSitePages as BaseSitePages,
+    type SitePageCreateParams as SitePageCreateParams,
+    type SitePageUpdateParams as SitePageUpdateParams,
+    type SitePageListParams as SitePageListParams,
+    type SitePageDeleteParams as SitePageDeleteParams,
+    type SitePageCloneParams as SitePageCloneParams,
+    type SitePageGetParams as SitePageGetParams,
+    type SitePageScheduleParams as SitePageScheduleParams,
   };
 }

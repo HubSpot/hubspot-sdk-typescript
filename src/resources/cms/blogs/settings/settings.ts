@@ -1026,6 +1026,8 @@ export interface BlogLanguageCloneRequestVNext {
    * Path to this blog.
    */
   slug?: string;
+
+  usePublished?: boolean;
 }
 
 export interface BlogVersion {

@@ -149,6 +149,7 @@ const runTests = (client: PartialHubSpot<{ cms: { blogs: { authors: BaseAuthors 
       },
       language: 'language',
       primaryLanguage: 'primaryLanguage',
+      usePublished: true,
     });
   });
 

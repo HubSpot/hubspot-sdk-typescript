@@ -26,6 +26,8 @@ export {
   type FileAttachment,
   type LocationAttachment,
   type MessageHeaderAttachment,
+  type PreResolvedContact,
+  type PreResolvedContacts,
   type PublicChannelAccount,
   type PublicChannelAccountEgg,
   type PublicChannelAccountStagingToken,

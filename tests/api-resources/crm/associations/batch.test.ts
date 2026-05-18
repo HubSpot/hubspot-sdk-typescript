@@ -26,10 +26,15 @@ const parentPartialClient = createClient({
 const runTests = (client: PartialHubSpot<{ crm: { associations: { batch: BaseBatch } } }>) => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.crm.associations.batch.create('toObjectId', {
+    const responsePromise = client.crm.associations.batch.create('toObjectType', {
       fromObjectType: 'fromObjectType',
-      fromObjectId: 'fromObjectId',
-      toObjectType: 'toObjectType',
+      inputs: [
+        {
+          from: { id: 'id' },
+          to: { id: 'id' },
+          types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
+        },
+      ],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -42,10 +47,15 @@ const runTests = (client: PartialHubSpot<{ crm: { associations: { batch: BaseBat
 
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
-    const response = await client.crm.associations.batch.create('toObjectId', {
+    const response = await client.crm.associations.batch.create('toObjectType', {
       fromObjectType: 'fromObjectType',
-      fromObjectId: 'fromObjectId',
-      toObjectType: 'toObjectType',
+      inputs: [
+        {
+          from: { id: 'id' },
+          to: { id: 'id' },
+          types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 0 }],
+        },
+      ],
     });
   });
 

@@ -86,7 +86,7 @@ export interface ArrayFieldSchema {
   /**
    * Specifies that the field is of type 'ARRAY'.
    */
-  type: 'ARRAY';
+  type: 'ARRAY' | 'BOOLEAN' | 'DOUBLE' | 'INTEGER' | 'LONG' | 'OBJECT' | 'STRING';
 }
 
 export interface BatchInputCallbackCompletionBatchRequest {
@@ -98,7 +98,7 @@ export interface BooleanFieldSchema {
    * Specifies the field type as BOOLEAN, indicating that the field can hold a true
    * or false value.
    */
-  type: 'BOOLEAN';
+  type: 'ARRAY' | 'BOOLEAN' | 'DOUBLE' | 'INTEGER' | 'LONG' | 'OBJECT' | 'STRING';
 }
 
 export interface CallbackCompletionBatchRequest {
@@ -302,7 +302,7 @@ export interface DoubleFieldSchema {
   /**
    * Indicates the field type as DOUBLE.
    */
-  type: 'DOUBLE';
+  type: 'ARRAY' | 'BOOLEAN' | 'DOUBLE' | 'INTEGER' | 'LONG' | 'OBJECT' | 'STRING';
 
   /**
    * The maximum allowable value for the double field.
@@ -581,7 +581,7 @@ export interface IntegerFieldSchema {
   /**
    * The type of the field, which is set to INTEGER.
    */
-  type: 'INTEGER';
+  type: 'ARRAY' | 'BOOLEAN' | 'DOUBLE' | 'INTEGER' | 'LONG' | 'OBJECT' | 'STRING';
 
   /**
    * The maximum value allowed for the integer field.
@@ -598,7 +598,7 @@ export interface LongFieldSchema {
   /**
    * The type of the field, which is LONG by default.
    */
-  type: 'LONG';
+  type: 'ARRAY' | 'BOOLEAN' | 'DOUBLE' | 'INTEGER' | 'LONG' | 'OBJECT' | 'STRING';
 
   /**
    * The maximum value allowed for the long field.
@@ -620,7 +620,7 @@ export interface ObjectFieldSchema {
   /**
    * Specifies the type of the field, which is 'OBJECT' by default.
    */
-  type: 'OBJECT';
+  type: 'ARRAY' | 'BOOLEAN' | 'DOUBLE' | 'INTEGER' | 'LONG' | 'OBJECT' | 'STRING';
 }
 
 export interface OutputFieldDefinition {
@@ -1001,7 +1001,7 @@ export interface StringFieldSchema {
   /**
    * Indicates that the type is a string, with the default value being STRING.
    */
-  type: 'STRING';
+  type: 'ARRAY' | 'BOOLEAN' | 'DOUBLE' | 'INTEGER' | 'LONG' | 'OBJECT' | 'STRING';
 
   /**
    * Specifies the format of the string, with accepted values: DATE, DATE_TIME,

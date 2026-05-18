@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../core/resource';
 import * as CrmAPI from '../crm';
-import * as AssociationsAPI from './associations';
 import { APIPromise } from '../../../core/api-promise';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
@@ -15,16 +14,19 @@ export class BaseBatch extends APIResource {
     'batch',
   ] as const);
 
+  /**
+   * Batch create associations for objects
+   */
   create(
-    toObjectID: string,
+    toObjectType: string,
     params: BatchCreateParams,
     options?: RequestOptions,
-  ): APIPromise<CrmAPI.BatchResponsePublicDefaultAssociation> {
-    const { fromObjectType, fromObjectId, toObjectType } = params;
-    return this._client.put(
-      path`/crm/objects/2026-03/${fromObjectType}/${fromObjectId}/associations/default/${toObjectType}/${toObjectID}`,
-      options,
-    );
+  ): APIPromise<CrmAPI.BatchResponseLabelsBetweenObjectPair> {
+    const { fromObjectType, ...body } = params;
+    return this._client.post(path`/crm/associations/2026-03/${fromObjectType}/${toObjectType}/batch/create`, {
+      body,
+      ...options,
+    });
   }
 
   /**
@@ -80,7 +82,7 @@ export class BaseBatch extends APIResource {
     toObjectType: string,
     params: BatchGetParams,
     options?: RequestOptions,
-  ): APIPromise<AssociationsAPI.BatchResponsePublicAssociationMultiWithLabel> {
+  ): APIPromise<CrmAPI.BatchResponsePublicAssociationMultiWithLabel> {
     const { fromObjectType, ...body } = params;
     return this._client.post(path`/crm/associations/2026-03/${fromObjectType}/${toObjectType}/batch/read`, {
       body,
@@ -91,11 +93,15 @@ export class BaseBatch extends APIResource {
 export class Batch extends BaseBatch {}
 
 export interface BatchCreateParams {
+  /**
+   * Path param
+   */
   fromObjectType: string;
 
-  fromObjectId: string;
-
-  toObjectType: string;
+  /**
+   * Body param
+   */
+  inputs: Array<CrmAPI.PublicAssociationMultiPost>;
 }
 
 export interface BatchDeleteParams {
@@ -107,7 +113,7 @@ export interface BatchDeleteParams {
   /**
    * Body param
    */
-  inputs: Array<AssociationsAPI.PublicAssociationMultiArchive>;
+  inputs: Array<CrmAPI.PublicAssociationMultiArchive>;
 }
 
 export interface BatchCreateDefaultParams {
@@ -119,7 +125,7 @@ export interface BatchCreateDefaultParams {
   /**
    * Body param
    */
-  inputs: Array<AssociationsAPI.PublicDefaultAssociationMultiPost>;
+  inputs: Array<CrmAPI.PublicDefaultAssociationMultiPost>;
 }
 
 export interface BatchDeleteLabelsParams {
@@ -131,7 +137,7 @@ export interface BatchDeleteLabelsParams {
   /**
    * Body param
    */
-  inputs: Array<AssociationsAPI.PublicAssociationMultiPost>;
+  inputs: Array<CrmAPI.PublicAssociationMultiPost>;
 }
 
 export interface BatchGetParams {
@@ -143,7 +149,7 @@ export interface BatchGetParams {
   /**
    * Body param
    */
-  inputs: Array<AssociationsAPI.PublicFetchAssociationsBatchRequest>;
+  inputs: Array<CrmAPI.PublicFetchAssociationsBatchRequest>;
 }
 
 export declare namespace Batch {

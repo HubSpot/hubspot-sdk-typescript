@@ -3,15 +3,30 @@
 Types:
 
 - <code><a href="./src/resources/crm/crm.ts">AssociationSpecWithLabel</a></code>
+- <code><a href="./src/resources/crm/crm.ts">BatchInputPublicAssociationMultiArchive</a></code>
+- <code><a href="./src/resources/crm/crm.ts">BatchInputPublicAssociationMultiPost</a></code>
+- <code><a href="./src/resources/crm/crm.ts">BatchInputPublicDefaultAssociationMultiPost</a></code>
+- <code><a href="./src/resources/crm/crm.ts">BatchInputPublicFetchAssociationsBatchRequest</a></code>
+- <code><a href="./src/resources/crm/crm.ts">BatchResponseLabelsBetweenObjectPair</a></code>
+- <code><a href="./src/resources/crm/crm.ts">BatchResponseLabelsBetweenObjectPairWithErrors</a></code>
+- <code><a href="./src/resources/crm/crm.ts">BatchResponsePublicAssociationMultiWithLabel</a></code>
+- <code><a href="./src/resources/crm/crm.ts">BatchResponsePublicAssociationMultiWithLabelWithErrors</a></code>
 - <code><a href="./src/resources/crm/crm.ts">BatchResponsePublicDefaultAssociation</a></code>
 - <code><a href="./src/resources/crm/crm.ts">CollectionResponseMultiAssociatedObjectWithLabelForwardPaging</a></code>
 - <code><a href="./src/resources/crm/crm.ts">CollectionResponseWithTotalSimplePublicObject</a></code>
+- <code><a href="./src/resources/crm/crm.ts">DateTime</a></code>
 - <code><a href="./src/resources/crm/crm.ts">Filter</a></code>
 - <code><a href="./src/resources/crm/crm.ts">FilterGroup</a></code>
 - <code><a href="./src/resources/crm/crm.ts">LabelsBetweenObjectPair</a></code>
 - <code><a href="./src/resources/crm/crm.ts">MultiAssociatedObjectWithLabel</a></code>
+- <code><a href="./src/resources/crm/crm.ts">PublicAssociationMultiArchive</a></code>
+- <code><a href="./src/resources/crm/crm.ts">PublicAssociationMultiPost</a></code>
+- <code><a href="./src/resources/crm/crm.ts">PublicAssociationMultiWithLabel</a></code>
 - <code><a href="./src/resources/crm/crm.ts">PublicDefaultAssociation</a></code>
+- <code><a href="./src/resources/crm/crm.ts">PublicDefaultAssociationMultiPost</a></code>
+- <code><a href="./src/resources/crm/crm.ts">PublicFetchAssociationsBatchRequest</a></code>
 - <code><a href="./src/resources/crm/crm.ts">PublicObjectSearchRequest</a></code>
+- <code><a href="./src/resources/crm/crm.ts">ReportCreationResponse</a></code>
 - <code><a href="./src/resources/crm/crm.ts">SimplePublicObject</a></code>
 - <code><a href="./src/resources/crm/crm.ts">ValueWithTimestamp</a></code>
 
@@ -23,37 +38,20 @@ Methods:
 
 ## Associations
 
-Types:
-
-- <code><a href="./src/resources/crm/associations/associations.ts">BatchInputPublicAssociationMultiArchive</a></code>
-- <code><a href="./src/resources/crm/associations/associations.ts">BatchInputPublicAssociationMultiPost</a></code>
-- <code><a href="./src/resources/crm/associations/associations.ts">BatchInputPublicDefaultAssociationMultiPost</a></code>
-- <code><a href="./src/resources/crm/associations/associations.ts">BatchInputPublicFetchAssociationsBatchRequest</a></code>
-- <code><a href="./src/resources/crm/associations/associations.ts">BatchResponseLabelsBetweenObjectPair</a></code>
-- <code><a href="./src/resources/crm/associations/associations.ts">BatchResponseLabelsBetweenObjectPairWithErrors</a></code>
-- <code><a href="./src/resources/crm/associations/associations.ts">BatchResponsePublicAssociationMultiWithLabel</a></code>
-- <code><a href="./src/resources/crm/associations/associations.ts">BatchResponsePublicAssociationMultiWithLabelWithErrors</a></code>
-- <code><a href="./src/resources/crm/associations/associations.ts">DateTime</a></code>
-- <code><a href="./src/resources/crm/associations/associations.ts">PublicAssociationMultiArchive</a></code>
-- <code><a href="./src/resources/crm/associations/associations.ts">PublicAssociationMultiPost</a></code>
-- <code><a href="./src/resources/crm/associations/associations.ts">PublicAssociationMultiWithLabel</a></code>
-- <code><a href="./src/resources/crm/associations/associations.ts">PublicDefaultAssociationMultiPost</a></code>
-- <code><a href="./src/resources/crm/associations/associations.ts">PublicFetchAssociationsBatchRequest</a></code>
-- <code><a href="./src/resources/crm/associations/associations.ts">ReportCreationResponse</a></code>
-
 Methods:
 
+- <code title="put /crm/objects/2026-03/{fromObjectType}/{fromObjectId}/associations/default/{toObjectType}/{toObjectId}">client.crm.associations.<a href="./src/resources/crm/associations/associations.ts">create</a>(toObjectID, { ...params }) -> BatchResponsePublicDefaultAssociation</code>
 - <code title="get /crm/objects/2026-03/{objectType}/{objectId}/associations/{toObjectType}">client.crm.associations.<a href="./src/resources/crm/associations/associations.ts">list</a>(toObjectType, { ...params }) -> MultiAssociatedObjectWithLabelsPage</code>
 - <code title="delete /crm/objects/2026-03/{objectType}/{objectId}/associations/{toObjectType}/{toObjectId}">client.crm.associations.<a href="./src/resources/crm/associations/associations.ts">delete</a>(toObjectID, { ...params }) -> void</code>
 - <code title="post /crm/associations/2026-03/usage/high-usage-report/{userId}">client.crm.associations.<a href="./src/resources/crm/associations/associations.ts">requestHighUsageReport</a>(userID) -> ReportCreationResponse</code>
 - <code title="post /crm/objects/2026-03/{objectType}/search">client.crm.associations.<a href="./src/resources/crm/associations/associations.ts">search</a>(objectType, { ...params }) -> CollectionResponseWithTotalSimplePublicObject</code>
-- <code title="put /crm/objects/2026-03/{objectType}/{objectId}/associations/{toObjectType}/{toObjectId}">client.crm.associations.<a href="./src/resources/crm/associations/associations.ts">updateAssociationLabels</a>(toObjectID, [ ...body ]) -> LabelsBetweenObjectPair</code>
+- <code title="put /crm/objects/2026-03/{objectType}/{objectId}/associations/{toObjectType}/{toObjectId}">client.crm.associations.<a href="./src/resources/crm/associations/associations.ts">updateLabels</a>(toObjectID, [ ...body ]) -> LabelsBetweenObjectPair</code>
 
 ### Batch
 
 Methods:
 
-- <code title="put /crm/objects/2026-03/{fromObjectType}/{fromObjectId}/associations/default/{toObjectType}/{toObjectId}">client.crm.associations.batch.<a href="./src/resources/crm/associations/batch.ts">create</a>(toObjectID, { ...params }) -> BatchResponsePublicDefaultAssociation</code>
+- <code title="post /crm/associations/2026-03/{fromObjectType}/{toObjectType}/batch/create">client.crm.associations.batch.<a href="./src/resources/crm/associations/batch.ts">create</a>(toObjectType, { ...params }) -> BatchResponseLabelsBetweenObjectPair</code>
 - <code title="post /crm/associations/2026-03/{fromObjectType}/{toObjectType}/batch/archive">client.crm.associations.batch.<a href="./src/resources/crm/associations/batch.ts">delete</a>(toObjectType, { ...params }) -> void</code>
 - <code title="post /crm/associations/2026-03/{fromObjectType}/{toObjectType}/batch/associate/default">client.crm.associations.batch.<a href="./src/resources/crm/associations/batch.ts">createDefault</a>(toObjectType, { ...params }) -> BatchResponsePublicDefaultAssociation</code>
 - <code title="post /crm/associations/2026-03/{fromObjectType}/{toObjectType}/batch/labels/archive">client.crm.associations.batch.<a href="./src/resources/crm/associations/batch.ts">deleteLabels</a>(toObjectType, { ...params }) -> void</code>
@@ -674,22 +672,14 @@ Methods:
 
 Methods:
 
-- <code title="post /crm/objects/2026-03/contracts">client.crm.objects.contracts.<a href="./src/resources/crm/objects/contracts/contracts.ts">create</a>({ ...params }) -> SimplePublicObject</code>
-- <code title="patch /crm/objects/2026-03/contracts/{contractId}">client.crm.objects.contracts.<a href="./src/resources/crm/objects/contracts/contracts.ts">update</a>(contractID, { ...params }) -> SimplePublicObject</code>
 - <code title="get /crm/objects/2026-03/contracts">client.crm.objects.contracts.<a href="./src/resources/crm/objects/contracts/contracts.ts">list</a>({ ...params }) -> SimplePublicObjectWithAssociationsPage</code>
-- <code title="delete /crm/objects/2026-03/contracts/{contractId}">client.crm.objects.contracts.<a href="./src/resources/crm/objects/contracts/contracts.ts">delete</a>(contractID) -> void</code>
 - <code title="get /crm/objects/2026-03/contracts/{contractId}">client.crm.objects.contracts.<a href="./src/resources/crm/objects/contracts/contracts.ts">get</a>(contractID, { ...params }) -> SimplePublicObjectWithAssociations</code>
-- <code title="post /crm/objects/2026-03/contracts/search">client.crm.objects.contracts.<a href="./src/resources/crm/objects/contracts/contracts.ts">search</a>({ ...params }) -> CollectionResponseWithTotalSimplePublicObject</code>
 
 #### Batch
 
 Methods:
 
-- <code title="post /crm/objects/2026-03/contracts/batch/create">client.crm.objects.contracts.batch.<a href="./src/resources/crm/objects/contracts/batch.ts">create</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
-- <code title="post /crm/objects/2026-03/contracts/batch/update">client.crm.objects.contracts.batch.<a href="./src/resources/crm/objects/contracts/batch.ts">update</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
-- <code title="post /crm/objects/2026-03/contracts/batch/archive">client.crm.objects.contracts.batch.<a href="./src/resources/crm/objects/contracts/batch.ts">delete</a>({ ...params }) -> void</code>
 - <code title="post /crm/objects/2026-03/contracts/batch/read">client.crm.objects.contracts.batch.<a href="./src/resources/crm/objects/contracts/batch.ts">get</a>({ ...params }) -> BatchResponseSimplePublicObject</code>
-- <code title="post /crm/objects/2026-03/contracts/batch/upsert">client.crm.objects.contracts.batch.<a href="./src/resources/crm/objects/contracts/batch.ts">upsert</a>({ ...params }) -> BatchResponseSimplePublicUpsertObject</code>
 
 ### Courses
 

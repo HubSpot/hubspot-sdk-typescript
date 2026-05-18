@@ -31,7 +31,6 @@ import {
   PublicSearchResults,
   SiteSearch,
   SiteSearchGetIndexedDataParams,
-  SiteSearchSearchParams,
 } from './site-search';
 import * as SourceCodeAPI from './source-code';
 import {
@@ -275,16 +274,7 @@ import {
   ContentFolder,
   ContentFolderVersion,
   ContentLanguageCloneRequestVNext,
-  PageGetLandingPageRevisionParams,
-  PageGetSitePageRevisionParams,
-  PageListLandingPageRevisionsParams,
-  PageListSitePageRevisionsParams,
-  PageRestoreLandingPageRevisionParams,
-  PageRestoreLandingPageRevisionToDraftParams,
-  PageRestoreSitePageRevisionParams,
-  PageRestoreSitePageRevisionToDraftParams,
   PageVersion,
-  PageVersionsPage,
   Pages,
   PagesPage,
 } from './pages/pages';
@@ -309,7 +299,7 @@ export interface Angle {
   /**
    * The unit of measurement for the angle.
    */
-  units: 'deg' | 'grad' | 'rad' | 'turn';
+  units: 'DEGREES' | 'GRADIANS' | 'RADIANS' | 'TURNS';
 
   /**
    * The numerical representation of the angle.
@@ -2306,23 +2296,23 @@ export interface SideOrCorner {
 
 export interface Size {
   units:
-    | '%'
-    | 'ch'
-    | 'cm'
-    | 'em'
-    | 'ex'
-    | 'in'
-    | 'lh'
-    | 'mm'
-    | 'pc'
-    | 'pt'
-    | 'px'
+    | 'CH'
+    | 'CM'
+    | 'EM'
+    | 'EX'
+    | 'IN'
+    | 'LH'
+    | 'MM'
+    | 'PC'
+    | 'PERCENTAGE'
+    | 'PT'
+    | 'PX'
     | 'Q'
-    | 'rem'
-    | 'vh'
-    | 'vmax'
-    | 'vmin'
-    | 'vw';
+    | 'REM'
+    | 'VH'
+    | 'VMAX'
+    | 'VMIN'
+    | 'VW';
 
   value: number;
 }
@@ -3516,15 +3506,6 @@ export declare namespace Cms {
     type ContentLanguageCloneRequestVNext as ContentLanguageCloneRequestVNext,
     type PageVersion as PageVersion,
     type PagesPage as PagesPage,
-    type PageVersionsPage as PageVersionsPage,
-    type PageGetLandingPageRevisionParams as PageGetLandingPageRevisionParams,
-    type PageGetSitePageRevisionParams as PageGetSitePageRevisionParams,
-    type PageListLandingPageRevisionsParams as PageListLandingPageRevisionsParams,
-    type PageListSitePageRevisionsParams as PageListSitePageRevisionsParams,
-    type PageRestoreLandingPageRevisionParams as PageRestoreLandingPageRevisionParams,
-    type PageRestoreLandingPageRevisionToDraftParams as PageRestoreLandingPageRevisionToDraftParams,
-    type PageRestoreSitePageRevisionParams as PageRestoreSitePageRevisionParams,
-    type PageRestoreSitePageRevisionToDraftParams as PageRestoreSitePageRevisionToDraftParams,
   };
 
   export {
@@ -3535,7 +3516,6 @@ export declare namespace Cms {
     type IndexedField as IndexedField,
     type PublicSearchResults as PublicSearchResults,
     type SiteSearchGetIndexedDataParams as SiteSearchGetIndexedDataParams,
-    type SiteSearchSearchParams as SiteSearchSearchParams,
   };
 
   export {

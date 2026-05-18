@@ -1568,6 +1568,8 @@ export interface BlogPostLanguageCloneRequestVNext {
    * Target language of new variant.
    */
   language?: string;
+
+  usePublished?: boolean;
 }
 
 export interface BlogPostVersion {

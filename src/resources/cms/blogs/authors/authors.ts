@@ -1268,6 +1268,8 @@ export interface BlogAuthorCloneRequestVNext {
    * Primary language in multi-language group.
    */
   primaryLanguage?: string;
+
+  usePublished?: boolean;
 }
 
 export interface CollectionResponseWithTotalBlogAuthorForwardPaging {
@@ -4926,6 +4928,8 @@ export interface AuthorCreateLanguageVariationParams {
    * Primary language in multi-language group.
    */
   primaryLanguage?: string;
+
+  usePublished?: boolean;
 }
 
 export interface AuthorDetachFromLangGroupParams {

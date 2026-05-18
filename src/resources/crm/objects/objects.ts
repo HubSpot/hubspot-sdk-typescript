@@ -68,15 +68,7 @@ import {
   PublicGdprDeleteInput,
 } from './contacts/contacts';
 import * as ContractsAPI from './contracts/contracts';
-import {
-  BaseContracts,
-  ContractCreateParams,
-  ContractGetParams,
-  ContractListParams,
-  ContractSearchParams,
-  ContractUpdateParams,
-  Contracts,
-} from './contracts/contracts';
+import { BaseContracts, ContractGetParams, ContractListParams, Contracts } from './contracts/contracts';
 import * as CoursesAPI from './courses/courses';
 import {
   BaseCourses,
@@ -1036,11 +1028,8 @@ export declare namespace Objects {
   export {
     Contracts as Contracts,
     BaseContracts as BaseContracts,
-    type ContractCreateParams as ContractCreateParams,
-    type ContractUpdateParams as ContractUpdateParams,
     type ContractListParams as ContractListParams,
     type ContractGetParams as ContractGetParams,
-    type ContractSearchParams as ContractSearchParams,
   };
 
   export {

@@ -270,27 +270,13 @@ import {
 } from './associations-schema/associations-schema';
 import * as AssociationsAPI from './associations/associations';
 import {
+  AssociationCreateParams,
   AssociationDeleteParams,
   AssociationListParams,
   AssociationSearchParams,
-  AssociationUpdateAssociationLabelsParams,
+  AssociationUpdateLabelsParams,
   Associations,
   BaseAssociations,
-  BatchInputPublicAssociationMultiArchive,
-  BatchInputPublicAssociationMultiPost,
-  BatchInputPublicDefaultAssociationMultiPost,
-  BatchInputPublicFetchAssociationsBatchRequest,
-  BatchResponseLabelsBetweenObjectPair,
-  BatchResponseLabelsBetweenObjectPairWithErrors,
-  BatchResponsePublicAssociationMultiWithLabel,
-  BatchResponsePublicAssociationMultiWithLabelWithErrors,
-  DateTime,
-  PublicAssociationMultiArchive,
-  PublicAssociationMultiPost,
-  PublicAssociationMultiWithLabel,
-  PublicDefaultAssociationMultiPost,
-  PublicFetchAssociationsBatchRequest,
-  ReportCreationResponse,
 } from './associations/associations';
 import * as DealSplitsAPI from './deal-splits/deal-splits';
 import {
@@ -437,20 +423,134 @@ export type MultiAssociatedObjectWithLabelsPage = Page<MultiAssociatedObjectWith
  */
 export interface AssociationSpecWithLabel {
   /**
-   * The category of the association, such as HUBSPOT_DEFINED, USER_DEFINED, or
-   * INTEGRATOR_DEFINED.
+   * Association category. Can be HUBSPOT_DEFINED, USER_DEFINED, INTEGRATOR_DEFINED
+   * or WORK
    */
   category: 'HUBSPOT_DEFINED' | 'INTEGRATOR_DEFINED' | 'USER_DEFINED' | 'WORK';
 
   /**
-   * The unique identifier for the type of association.
+   * An integer value used to uniquely identify a specific association type within
+   * its Association Category.
    */
   typeId: number;
 
   /**
-   * A label describing the association between two objects.
+   * An optional descriptor that provides additional context about the relationship
+   * between associated records, such as "Mentor" and "Mentee".
    */
   label?: string;
+}
+
+export interface BatchInputPublicAssociationMultiArchive {
+  inputs: Array<PublicAssociationMultiArchive>;
+}
+
+export interface BatchInputPublicAssociationMultiPost {
+  inputs: Array<PublicAssociationMultiPost>;
+}
+
+export interface BatchInputPublicDefaultAssociationMultiPost {
+  inputs: Array<PublicDefaultAssociationMultiPost>;
+}
+
+export interface BatchInputPublicFetchAssociationsBatchRequest {
+  inputs: Array<PublicFetchAssociationsBatchRequest>;
+}
+
+export interface BatchResponseLabelsBetweenObjectPair {
+  /**
+   * The timestamp when the batch processing was completed, in ISO 8601 format.
+   */
+  completedAt: string;
+
+  results: Array<LabelsBetweenObjectPair>;
+
+  /**
+   * The timestamp when the batch processing began, in ISO 8601 format.
+   */
+  startedAt: string;
+
+  /**
+   * The status of the batch processing request: "PENDING", "PROCESSING",
+   * "CANCELLED", or "COMPLETE".
+   */
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
+
+  /**
+   * An object containing relevant links related to the batch request.
+   */
+  links?: { [key: string]: string };
+
+  /**
+   * The timestamp when the batch request was initially made, in ISO 8601 format.
+   */
+  requestedAt?: string;
+}
+
+export interface BatchResponseLabelsBetweenObjectPairWithErrors {
+  completedAt: string;
+
+  results: Array<LabelsBetweenObjectPair>;
+
+  startedAt: string;
+
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
+
+  errors?: Array<Shared.StandardError>;
+
+  links?: { [key: string]: string };
+
+  numErrors?: number;
+
+  requestedAt?: string;
+}
+
+export interface BatchResponsePublicAssociationMultiWithLabel {
+  /**
+   * The timestamp when the batch processing was completed, in ISO 8601 format.
+   */
+  completedAt: string;
+
+  results: Array<PublicAssociationMultiWithLabel>;
+
+  /**
+   * The timestamp when the batch processing began, in ISO 8601 format.
+   */
+  startedAt: string;
+
+  /**
+   * The status of the batch processing request: "PENDING", "PROCESSING", "CANCELED",
+   * or "COMPLETE".
+   */
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
+
+  /**
+   * An object containing relevant links related to the batch request.
+   */
+  links?: { [key: string]: string };
+
+  /**
+   * The timestamp when the batch request was initially made, in ISO 8601 format.
+   */
+  requestedAt?: string;
+}
+
+export interface BatchResponsePublicAssociationMultiWithLabelWithErrors {
+  completedAt: string;
+
+  results: Array<PublicAssociationMultiWithLabel>;
+
+  startedAt: string;
+
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
+
+  errors?: Array<Shared.StandardError>;
+
+  links?: { [key: string]: string };
+
+  numErrors?: number;
+
+  requestedAt?: string;
 }
 
 /**
@@ -470,8 +570,8 @@ export interface BatchResponsePublicDefaultAssociation {
   startedAt: string;
 
   /**
-   * The status of the batch processing request: "PENDING", "PROCESSING",
-   * "CANCELLED", or "COMPLETE".
+   * The status of the batch processing request. Can be: "PENDING", "PROCESSING",
+   * "CANCELED", or "COMPLETE".
    */
   status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
 
@@ -483,7 +583,7 @@ export interface BatchResponsePublicDefaultAssociation {
   links?: { [key: string]: string };
 
   /**
-   * The number of errors encountered during the batch processing.
+   * The total number of errors that occurred during the operation.
    */
   numErrors?: number;
 
@@ -507,11 +607,30 @@ export interface CollectionResponseWithTotalSimplePublicObject {
   results: Array<SimplePublicObject>;
 
   /**
-   * The total number of objects in the collection.
+   * The number of available results
    */
   total: number;
 
   paging?: Shared.Paging;
+}
+
+export interface DateTime {
+  /**
+   * Indicates whether the DateTime value represents only a date without a time
+   * component.
+   */
+  dateOnly: boolean;
+
+  /**
+   * The integer value representing the shift in minutes from UTC for the DateTime
+   * value.
+   */
+  timeZoneShift: number;
+
+  /**
+   * The integer value representing a specific point in time.
+   */
+  value: number;
 }
 
 /**
@@ -568,27 +687,24 @@ export interface FilterGroup {
  */
 export interface LabelsBetweenObjectPair {
   /**
-   * The ID of the source object in the association.
+   * Source unique ID of the object.
    */
   fromObjectId: string;
 
   /**
-   * The type ID of the source object in the association.
+   * Source object type.
    */
   fromObjectTypeId: string;
 
-  /**
-   * An array of labels associated with the relationship between the objects.
-   */
   labels: Array<string>;
 
   /**
-   * The ID of the target object in the association.
+   * Target unique ID of the object.
    */
   toObjectId: string;
 
   /**
-   * The type ID of the target object in the association.
+   * Target object type.
    */
   toObjectTypeId: string;
 }
@@ -601,9 +717,43 @@ export interface MultiAssociatedObjectWithLabel {
   associationTypes: Array<AssociationSpecWithLabel>;
 
   /**
-   * The unique identifier for the target object in the association.
+   * Target unique ID of the object.
    */
   toObjectId: string;
+}
+
+export interface PublicAssociationMultiArchive {
+  /**
+   * Contains the Id of a Public Object
+   */
+  from: Shared.PublicObjectID;
+
+  to: Array<Shared.PublicObjectID>;
+}
+
+export interface PublicAssociationMultiPost {
+  /**
+   * Contains the Id of a Public Object
+   */
+  from: Shared.PublicObjectID;
+
+  /**
+   * Contains the Id of a Public Object
+   */
+  to: Shared.PublicObjectID;
+
+  types: Array<Shared.AssociationSpec>;
+}
+
+export interface PublicAssociationMultiWithLabel {
+  /**
+   * Contains the Id of a Public Object
+   */
+  from: Shared.PublicObjectID;
+
+  to: Array<MultiAssociatedObjectWithLabel>;
+
+  paging?: Shared.Paging;
 }
 
 export interface PublicDefaultAssociation {
@@ -622,6 +772,31 @@ export interface PublicDefaultAssociation {
    * Contains the Id of a Public Object
    */
   to: Shared.PublicObjectID;
+}
+
+export interface PublicDefaultAssociationMultiPost {
+  /**
+   * Contains the Id of a Public Object
+   */
+  from: Shared.PublicObjectID;
+
+  /**
+   * Contains the Id of a Public Object
+   */
+  to: Shared.PublicObjectID;
+}
+
+export interface PublicFetchAssociationsBatchRequest {
+  /**
+   * The unique identifier for the object whose associations are being fetched.
+   */
+  id: string;
+
+  /**
+   * A paging cursor token used to retrieve the next set of results in a paginated
+   * response.
+   */
+  after?: string;
 }
 
 /**
@@ -659,6 +834,20 @@ export interface PublicObjectSearchRequest {
   query?: string;
 }
 
+export interface ReportCreationResponse {
+  enqueueTime: DateTime;
+
+  /**
+   * Email of the user
+   */
+  userEmail: string;
+
+  /**
+   * ID of the user
+   */
+  userId: number;
+}
+
 /**
  * A simple public object.
  */
@@ -694,7 +883,7 @@ export interface SimplePublicObject {
   archivedAt?: string;
 
   /**
-   * A unique identifier for tracing the creation request.
+   * An identifier used for tracing the write request for the object.
    */
   objectWriteTraceId?: string;
 
@@ -785,15 +974,30 @@ Crm.BaseTimeline = BaseTimeline;
 export declare namespace Crm {
   export {
     type AssociationSpecWithLabel as AssociationSpecWithLabel,
+    type BatchInputPublicAssociationMultiArchive as BatchInputPublicAssociationMultiArchive,
+    type BatchInputPublicAssociationMultiPost as BatchInputPublicAssociationMultiPost,
+    type BatchInputPublicDefaultAssociationMultiPost as BatchInputPublicDefaultAssociationMultiPost,
+    type BatchInputPublicFetchAssociationsBatchRequest as BatchInputPublicFetchAssociationsBatchRequest,
+    type BatchResponseLabelsBetweenObjectPair as BatchResponseLabelsBetweenObjectPair,
+    type BatchResponseLabelsBetweenObjectPairWithErrors as BatchResponseLabelsBetweenObjectPairWithErrors,
+    type BatchResponsePublicAssociationMultiWithLabel as BatchResponsePublicAssociationMultiWithLabel,
+    type BatchResponsePublicAssociationMultiWithLabelWithErrors as BatchResponsePublicAssociationMultiWithLabelWithErrors,
     type BatchResponsePublicDefaultAssociation as BatchResponsePublicDefaultAssociation,
     type CollectionResponseMultiAssociatedObjectWithLabelForwardPaging as CollectionResponseMultiAssociatedObjectWithLabelForwardPaging,
     type CollectionResponseWithTotalSimplePublicObject as CollectionResponseWithTotalSimplePublicObject,
+    type DateTime as DateTime,
     type Filter as Filter,
     type FilterGroup as FilterGroup,
     type LabelsBetweenObjectPair as LabelsBetweenObjectPair,
     type MultiAssociatedObjectWithLabel as MultiAssociatedObjectWithLabel,
+    type PublicAssociationMultiArchive as PublicAssociationMultiArchive,
+    type PublicAssociationMultiPost as PublicAssociationMultiPost,
+    type PublicAssociationMultiWithLabel as PublicAssociationMultiWithLabel,
     type PublicDefaultAssociation as PublicDefaultAssociation,
+    type PublicDefaultAssociationMultiPost as PublicDefaultAssociationMultiPost,
+    type PublicFetchAssociationsBatchRequest as PublicFetchAssociationsBatchRequest,
     type PublicObjectSearchRequest as PublicObjectSearchRequest,
+    type ReportCreationResponse as ReportCreationResponse,
     type SimplePublicObject as SimplePublicObject,
     type ValueWithTimestamp as ValueWithTimestamp,
   };
@@ -803,25 +1007,11 @@ export declare namespace Crm {
   export {
     Associations as Associations,
     BaseAssociations as BaseAssociations,
-    type BatchInputPublicAssociationMultiArchive as BatchInputPublicAssociationMultiArchive,
-    type BatchInputPublicAssociationMultiPost as BatchInputPublicAssociationMultiPost,
-    type BatchInputPublicDefaultAssociationMultiPost as BatchInputPublicDefaultAssociationMultiPost,
-    type BatchInputPublicFetchAssociationsBatchRequest as BatchInputPublicFetchAssociationsBatchRequest,
-    type BatchResponseLabelsBetweenObjectPair as BatchResponseLabelsBetweenObjectPair,
-    type BatchResponseLabelsBetweenObjectPairWithErrors as BatchResponseLabelsBetweenObjectPairWithErrors,
-    type BatchResponsePublicAssociationMultiWithLabel as BatchResponsePublicAssociationMultiWithLabel,
-    type BatchResponsePublicAssociationMultiWithLabelWithErrors as BatchResponsePublicAssociationMultiWithLabelWithErrors,
-    type DateTime as DateTime,
-    type PublicAssociationMultiArchive as PublicAssociationMultiArchive,
-    type PublicAssociationMultiPost as PublicAssociationMultiPost,
-    type PublicAssociationMultiWithLabel as PublicAssociationMultiWithLabel,
-    type PublicDefaultAssociationMultiPost as PublicDefaultAssociationMultiPost,
-    type PublicFetchAssociationsBatchRequest as PublicFetchAssociationsBatchRequest,
-    type ReportCreationResponse as ReportCreationResponse,
+    type AssociationCreateParams as AssociationCreateParams,
     type AssociationListParams as AssociationListParams,
     type AssociationDeleteParams as AssociationDeleteParams,
     type AssociationSearchParams as AssociationSearchParams,
-    type AssociationUpdateAssociationLabelsParams as AssociationUpdateAssociationLabelsParams,
+    type AssociationUpdateLabelsParams as AssociationUpdateLabelsParams,
   };
 
   export {
