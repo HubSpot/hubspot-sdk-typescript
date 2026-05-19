@@ -1,7 +1,6 @@
 import fs from 'fs';
 import type { ResponseLike } from '@hubspot/sdk/internal/to-file';
 import { toFile } from '@hubspot/sdk/core/uploads';
-import { File } from 'node:buffer';
 
 class MyClass {
   name: string = 'foo';
