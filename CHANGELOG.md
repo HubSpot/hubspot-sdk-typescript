@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.1.0-alpha.9 (2026-05-19)
+
+Full Changelog: [v0.1.0-alpha.8...v0.1.0-alpha.9](https://github.com/HubSpot/hubspot-sdk-typescript/compare/v0.1.0-alpha.8...v0.1.0-alpha.9)
+
+### Bug Fixes
+
+* **typescript:** upgrade tsc-multi so that it works with Node 26 ([65de019](https://github.com/HubSpot/hubspot-sdk-typescript/commit/65de0197a89d312879149b2fe69b8ce93504b42b))
+
+
+### Chores
+
+* **tests:** remove redundant File import ([7b5fdb3](https://github.com/HubSpot/hubspot-sdk-typescript/commit/7b5fdb39fd9e7fdb314be1bae02bf8cfaaf40559))
+
 ## 0.1.0-alpha.8 (2026-05-18)
 
 Full Changelog: [v0.1.0-alpha.7...v0.1.0-alpha.8](https://github.com/HubSpot/hubspot-sdk-typescript/compare/v0.1.0-alpha.7...v0.1.0-alpha.8)
