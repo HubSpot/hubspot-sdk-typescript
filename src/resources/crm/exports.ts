@@ -78,7 +78,7 @@ export interface ActionResponseWithSingleResultUri {
 export interface PublicCrmSearchRequest {
   filterGroups: Array<CrmAPI.FilterGroup>;
 
-  filters: Array<CrmAPI.Filter>;
+  filters: Array<CrmAPI.CrmFilter>;
 
   /**
    * Defines the order in which the CRM records should be returned.
@@ -100,30 +100,58 @@ export interface PublicExportListRequest {
 
   exportType: 'LIST';
 
-  format: 'XLS' | 'XLSX' | 'CSV';
+  format: 'CSV' | 'XLS' | 'XLSX';
 
   includeLabeledAssociations: boolean;
 
   includePrimaryDisplayPropertyForAssociatedObjects: boolean;
 
   language:
-    | 'EN'
-    | 'DE'
-    | 'ES'
-    | 'FR'
-    | 'JA'
-    | 'NL'
-    | 'PT_BR'
-    | 'IT'
-    | 'PL'
-    | 'SV'
-    | 'FI'
-    | 'ZH_TW'
+    | 'AF_ZA'
+    | 'AR_EG'
+    | 'BG'
+    | 'BN'
+    | 'CA_ES'
+    | 'CS'
     | 'DA_DK'
-    | 'NO'
+    | 'DE'
+    | 'EL_GR'
+    | 'EN'
+    | 'EN_GB'
+    | 'ES'
+    | 'ES_MX'
+    | 'ET_EE'
+    | 'FI'
+    | 'FR'
+    | 'FR_CA'
+    | 'HE_IL'
+    | 'HI_IN'
+    | 'HR'
+    | 'HU'
+    | 'ID'
+    | 'IT'
+    | 'JA'
     | 'KO_KR'
+    | 'LT_LT'
+    | 'MS'
+    | 'NL'
+    | 'NO'
+    | 'PL'
+    | 'PT_BR'
+    | 'PT_PT'
+    | 'RO'
+    | 'RU'
+    | 'SK_SK'
+    | 'SL'
+    | 'SV'
     | 'TH'
-    | 'ZH_CN';
+    | 'TL'
+    | 'TR'
+    | 'UK'
+    | 'VI_VN'
+    | 'ZH_CN'
+    | 'ZH_HK'
+    | 'ZH_TW';
 
   listId: string;
 
@@ -201,30 +229,58 @@ export interface PublicExportViewRequest {
 
   exportType: 'VIEW';
 
-  format: 'XLS' | 'XLSX' | 'CSV';
+  format: 'CSV' | 'XLS' | 'XLSX';
 
   includeLabeledAssociations: boolean;
 
   includePrimaryDisplayPropertyForAssociatedObjects: boolean;
 
   language:
-    | 'EN'
-    | 'DE'
-    | 'ES'
-    | 'FR'
-    | 'JA'
-    | 'NL'
-    | 'PT_BR'
-    | 'IT'
-    | 'PL'
-    | 'SV'
-    | 'FI'
-    | 'ZH_TW'
+    | 'AF_ZA'
+    | 'AR_EG'
+    | 'BG'
+    | 'BN'
+    | 'CA_ES'
+    | 'CS'
     | 'DA_DK'
-    | 'NO'
+    | 'DE'
+    | 'EL_GR'
+    | 'EN'
+    | 'EN_GB'
+    | 'ES'
+    | 'ES_MX'
+    | 'ET_EE'
+    | 'FI'
+    | 'FR'
+    | 'FR_CA'
+    | 'HE_IL'
+    | 'HI_IN'
+    | 'HR'
+    | 'HU'
+    | 'ID'
+    | 'IT'
+    | 'JA'
     | 'KO_KR'
+    | 'LT_LT'
+    | 'MS'
+    | 'NL'
+    | 'NO'
+    | 'PL'
+    | 'PT_BR'
+    | 'PT_PT'
+    | 'RO'
+    | 'RU'
+    | 'SK_SK'
+    | 'SL'
+    | 'SV'
     | 'TH'
-    | 'ZH_CN';
+    | 'TL'
+    | 'TR'
+    | 'UK'
+    | 'VI_VN'
+    | 'ZH_CN'
+    | 'ZH_HK'
+    | 'ZH_TW';
 
   objectProperties: Array<string>;
 
@@ -240,9 +296,147 @@ export type ExportCreateAsyncParams =
   | ExportCreateAsyncParams.PublicExportListRequest;
 
 export declare namespace ExportCreateAsyncParams {
-  export interface PublicExportViewRequest {}
+  export interface PublicExportViewRequest {
+    associatedObjectType: Array<string>;
 
-  export interface PublicExportListRequest {}
+    exportInternalValuesOptions: Array<'NAMES' | 'VALUES'>;
+
+    exportName: string;
+
+    exportType: 'VIEW';
+
+    format: 'CSV' | 'XLS' | 'XLSX';
+
+    includeLabeledAssociations: boolean;
+
+    includePrimaryDisplayPropertyForAssociatedObjects: boolean;
+
+    language:
+      | 'AF_ZA'
+      | 'AR_EG'
+      | 'BG'
+      | 'BN'
+      | 'CA_ES'
+      | 'CS'
+      | 'DA_DK'
+      | 'DE'
+      | 'EL_GR'
+      | 'EN'
+      | 'EN_GB'
+      | 'ES'
+      | 'ES_MX'
+      | 'ET_EE'
+      | 'FI'
+      | 'FR'
+      | 'FR_CA'
+      | 'HE_IL'
+      | 'HI_IN'
+      | 'HR'
+      | 'HU'
+      | 'ID'
+      | 'IT'
+      | 'JA'
+      | 'KO_KR'
+      | 'LT_LT'
+      | 'MS'
+      | 'NL'
+      | 'NO'
+      | 'PL'
+      | 'PT_BR'
+      | 'PT_PT'
+      | 'RO'
+      | 'RU'
+      | 'SK_SK'
+      | 'SL'
+      | 'SV'
+      | 'TH'
+      | 'TL'
+      | 'TR'
+      | 'UK'
+      | 'VI_VN'
+      | 'ZH_CN'
+      | 'ZH_HK'
+      | 'ZH_TW';
+
+    objectProperties: Array<string>;
+
+    objectType: string;
+
+    overrideAssociatedObjectsPerDefinitionPerRowLimit: boolean;
+
+    publicCrmSearchRequest?: PublicCrmSearchRequest;
+  }
+
+  export interface PublicExportListRequest {
+    associatedObjectType: Array<string>;
+
+    exportInternalValuesOptions: Array<'NAMES' | 'VALUES'>;
+
+    exportName: string;
+
+    exportType: 'LIST';
+
+    format: 'CSV' | 'XLS' | 'XLSX';
+
+    includeLabeledAssociations: boolean;
+
+    includePrimaryDisplayPropertyForAssociatedObjects: boolean;
+
+    language:
+      | 'AF_ZA'
+      | 'AR_EG'
+      | 'BG'
+      | 'BN'
+      | 'CA_ES'
+      | 'CS'
+      | 'DA_DK'
+      | 'DE'
+      | 'EL_GR'
+      | 'EN'
+      | 'EN_GB'
+      | 'ES'
+      | 'ES_MX'
+      | 'ET_EE'
+      | 'FI'
+      | 'FR'
+      | 'FR_CA'
+      | 'HE_IL'
+      | 'HI_IN'
+      | 'HR'
+      | 'HU'
+      | 'ID'
+      | 'IT'
+      | 'JA'
+      | 'KO_KR'
+      | 'LT_LT'
+      | 'MS'
+      | 'NL'
+      | 'NO'
+      | 'PL'
+      | 'PT_BR'
+      | 'PT_PT'
+      | 'RO'
+      | 'RU'
+      | 'SK_SK'
+      | 'SL'
+      | 'SV'
+      | 'TH'
+      | 'TL'
+      | 'TR'
+      | 'UK'
+      | 'VI_VN'
+      | 'ZH_CN'
+      | 'ZH_HK'
+      | 'ZH_TW';
+
+    listId: string;
+
+    objectProperties: Array<string>;
+
+    objectType: string;
+
+    overrideAssociatedObjectsPerDefinitionPerRowLimit: boolean;
+  }
 }
 
 export declare namespace Exports {

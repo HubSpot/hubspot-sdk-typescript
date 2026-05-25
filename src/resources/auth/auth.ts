@@ -3,7 +3,9 @@
 import { APIResource } from '../../core/resource';
 import * as OAuthAPI from './oauth';
 import {
+  AccessTokenResponse,
   BaseOAuth,
+  ClientCredentialsTokenResponse,
   OAuth,
   OAuthCreateTokenParams,
   OAuthIntrospectTokenParams,
@@ -12,6 +14,7 @@ import {
   PublicRefreshTokenInfoResponse,
   SignedAccessToken,
   TokenInfoResponseBaseIf,
+  TokenResponseIf,
 } from './oauth';
 
 export class BaseAuth extends APIResource {
@@ -28,10 +31,13 @@ export declare namespace Auth {
   export {
     OAuth as OAuth,
     BaseOAuth as BaseOAuth,
+    type AccessTokenResponse as AccessTokenResponse,
+    type ClientCredentialsTokenResponse as ClientCredentialsTokenResponse,
     type PublicAccessTokenInfoResponse as PublicAccessTokenInfoResponse,
     type PublicRefreshTokenInfoResponse as PublicRefreshTokenInfoResponse,
     type SignedAccessToken as SignedAccessToken,
     type TokenInfoResponseBaseIf as TokenInfoResponseBaseIf,
+    type TokenResponseIf as TokenResponseIf,
     type OAuthCreateTokenParams as OAuthCreateTokenParams,
     type OAuthIntrospectTokenParams as OAuthIntrospectTokenParams,
     type OAuthRevokeTokenParams as OAuthRevokeTokenParams,

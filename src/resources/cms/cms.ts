@@ -25,10 +25,8 @@ import {
 import * as SiteSearchAPI from './site-search';
 import {
   BaseSiteSearch,
-  ContentSearchResult,
   IndexedData,
   IndexedField,
-  PublicSearchResults,
   SiteSearch,
   SiteSearchGetIndexedDataParams,
 } from './site-search';
@@ -50,6 +48,7 @@ import {
   URLMappingCreateRequestBody,
   URLMappingsPage,
   URLRedirectCreateParams,
+  URLRedirectCreateURLMappingParams,
   URLRedirectListParams,
   URLRedirectUpdateParams,
   URLRedirects,
@@ -3511,10 +3510,8 @@ export declare namespace Cms {
   export {
     SiteSearch as SiteSearch,
     BaseSiteSearch as BaseSiteSearch,
-    type ContentSearchResult as ContentSearchResult,
     type IndexedData as IndexedData,
     type IndexedField as IndexedField,
-    type PublicSearchResults as PublicSearchResults,
     type SiteSearchGetIndexedDataParams as SiteSearchGetIndexedDataParams,
   };
 
@@ -3543,5 +3540,6 @@ export declare namespace Cms {
     type URLRedirectCreateParams as URLRedirectCreateParams,
     type URLRedirectUpdateParams as URLRedirectUpdateParams,
     type URLRedirectListParams as URLRedirectListParams,
+    type URLRedirectCreateURLMappingParams as URLRedirectCreateURLMappingParams,
   };
 }

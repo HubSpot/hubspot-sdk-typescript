@@ -541,6 +541,7 @@ export interface PreResolvedContact {
     | 'hs_social_twitter_clicks'
     | 'hs_source_object_id'
     | 'hs_source_portal_id'
+    | 'hs_sourced_contact_origin'
     | 'hs_state_code'
     | 'hs_sub_role'
     | 'hs_testpurge'
