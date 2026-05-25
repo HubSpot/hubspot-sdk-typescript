@@ -14,8 +14,8 @@ Types:
 - <code><a href="./src/resources/crm/crm.ts">BatchResponsePublicDefaultAssociation</a></code>
 - <code><a href="./src/resources/crm/crm.ts">CollectionResponseMultiAssociatedObjectWithLabelForwardPaging</a></code>
 - <code><a href="./src/resources/crm/crm.ts">CollectionResponseWithTotalSimplePublicObject</a></code>
+- <code><a href="./src/resources/crm/crm.ts">CrmFilter</a></code>
 - <code><a href="./src/resources/crm/crm.ts">DateTime</a></code>
-- <code><a href="./src/resources/crm/crm.ts">Filter</a></code>
 - <code><a href="./src/resources/crm/crm.ts">FilterGroup</a></code>
 - <code><a href="./src/resources/crm/crm.ts">LabelsBetweenObjectPair</a></code>
 - <code><a href="./src/resources/crm/crm.ts">MultiAssociatedObjectWithLabel</a></code>
@@ -128,7 +128,7 @@ Types:
 
 Methods:
 
-- <code title="post /crm/exports/2026-03/export/async">client.crm.exports.<a href="./src/resources/crm/exports.ts">createAsync</a>() -> TaskLocator</code>
+- <code title="post /crm/exports/2026-03/export/async">client.crm.exports.<a href="./src/resources/crm/exports.ts">createAsync</a>({ ...params }) -> TaskLocator</code>
 - <code title="get /crm/exports/2026-03/export/{exportId}">client.crm.exports.<a href="./src/resources/crm/exports.ts">get</a>(exportID) -> PublicExportResponse</code>
 - <code title="get /crm/exports/2026-03/export/async/tasks/{taskId}/status">client.crm.exports.<a href="./src/resources/crm/exports.ts">getStatus</a>(taskID) -> ActionResponseWithSingleResultUri</code>
 
@@ -362,7 +362,6 @@ Types:
 - <code><a href="./src/resources/crm/lists.ts">PublicBatchMigrationMapping</a></code>
 - <code><a href="./src/resources/crm/lists.ts">PublicBoolPropertyOperation</a></code>
 - <code><a href="./src/resources/crm/lists.ts">PublicCalendarDatePropertyOperation</a></code>
-- <code><a href="./src/resources/crm/lists.ts">PublicCampaignInfluencedFilter</a></code>
 - <code><a href="./src/resources/crm/lists.ts">PublicCommunicationSubscriptionFilter</a></code>
 - <code><a href="./src/resources/crm/lists.ts">PublicComparativeDatePropertyOperation</a></code>
 - <code><a href="./src/resources/crm/lists.ts">PublicComparativePropertyUpdatedOperation</a></code>
@@ -398,7 +397,6 @@ Types:
 - <code><a href="./src/resources/crm/lists.ts">PublicNotAllFilterBranch</a></code>
 - <code><a href="./src/resources/crm/lists.ts">PublicNotAnyFilterBranch</a></code>
 - <code><a href="./src/resources/crm/lists.ts">PublicNowReference</a></code>
-- <code><a href="./src/resources/crm/lists.ts">PublicNumAssociationsFilter</a></code>
 - <code><a href="./src/resources/crm/lists.ts">PublicNumOccurrencesRefineBy</a></code>
 - <code><a href="./src/resources/crm/lists.ts">PublicNumberPropertyOperation</a></code>
 - <code><a href="./src/resources/crm/lists.ts">PublicObjectList</a></code>
@@ -406,8 +404,6 @@ Types:
 - <code><a href="./src/resources/crm/lists.ts">PublicOrFilterBranch</a></code>
 - <code><a href="./src/resources/crm/lists.ts">PublicPageViewAnalyticsFilter</a></code>
 - <code><a href="./src/resources/crm/lists.ts">PublicPrivacyAnalyticsFilter</a></code>
-- <code><a href="./src/resources/crm/lists.ts">PublicPropertyAssociationFilterBranch</a></code>
-- <code><a href="./src/resources/crm/lists.ts">PublicPropertyAssociationInListFilter</a></code>
 - <code><a href="./src/resources/crm/lists.ts">PublicPropertyFilter</a></code>
 - <code><a href="./src/resources/crm/lists.ts">PublicPropertyReferencedTime</a></code>
 - <code><a href="./src/resources/crm/lists.ts">PublicQuarterReference</a></code>

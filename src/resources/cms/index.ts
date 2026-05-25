@@ -248,10 +248,8 @@ export {
 export {
   SiteSearch,
   BaseSiteSearch,
-  type ContentSearchResult,
   type IndexedData,
   type IndexedField,
-  type PublicSearchResults,
   type SiteSearchGetIndexedDataParams,
 } from './site-search';
 export {
@@ -276,5 +274,6 @@ export {
   type URLRedirectCreateParams,
   type URLRedirectUpdateParams,
   type URLRedirectListParams,
+  type URLRedirectCreateURLMappingParams,
   type URLMappingsPage,
 } from './url-redirects';

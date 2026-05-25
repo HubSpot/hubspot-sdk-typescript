@@ -375,7 +375,6 @@ export interface ListCreateRequest {
     | PublicNotAnyFilterBranch
     | PublicRestrictedFilterBranch
     | PublicUnifiedEventsFilterBranch
-    | PublicPropertyAssociationFilterBranch
     | PublicAssociationFilterBranch;
 
   /**
@@ -408,7 +407,6 @@ export interface ListFilterUpdateRequest {
     | PublicNotAnyFilterBranch
     | PublicRestrictedFilterBranch
     | PublicUnifiedEventsFilterBranch
-    | PublicPropertyAssociationFilterBranch
     | PublicAssociationFilterBranch;
 }
 
@@ -683,7 +681,6 @@ export interface PublicAndFilterBranch {
     | PublicNotAnyFilterBranch
     | PublicRestrictedFilterBranch
     | PublicUnifiedEventsFilterBranch
-    | PublicPropertyAssociationFilterBranch
     | PublicAssociationFilterBranch
   >;
 
@@ -708,7 +705,6 @@ export interface PublicAndFilterBranch {
     | PublicIntegrationEventFilter
     | PublicEmailSubscriptionFilter
     | PublicCommunicationSubscriptionFilter
-    | PublicCampaignInfluencedFilter
     | PublicSurveyMonkeyFilter
     | PublicSurveyMonkeyValueFilter
     | PublicWebinarFilter
@@ -717,9 +713,7 @@ export interface PublicAndFilterBranch {
     | PublicAdsSearchFilter
     | PublicAdsTimeFilter
     | PublicInListFilter
-    | PublicNumAssociationsFilter
     | PublicUnifiedEventsFilter
-    | PublicPropertyAssociationInListFilter
     | PublicConstantFilter
   >;
 }
@@ -743,7 +737,6 @@ export interface PublicAssociationFilterBranch {
     | PublicNotAnyFilterBranch
     | PublicRestrictedFilterBranch
     | PublicUnifiedEventsFilterBranch
-    | PublicPropertyAssociationFilterBranch
     | PublicAssociationFilterBranch
   >;
 
@@ -768,7 +761,6 @@ export interface PublicAssociationFilterBranch {
     | PublicIntegrationEventFilter
     | PublicEmailSubscriptionFilter
     | PublicCommunicationSubscriptionFilter
-    | PublicCampaignInfluencedFilter
     | PublicSurveyMonkeyFilter
     | PublicSurveyMonkeyValueFilter
     | PublicWebinarFilter
@@ -777,9 +769,7 @@ export interface PublicAssociationFilterBranch {
     | PublicAdsSearchFilter
     | PublicAdsTimeFilter
     | PublicInListFilter
-    | PublicNumAssociationsFilter
     | PublicUnifiedEventsFilter
-    | PublicPropertyAssociationInListFilter
     | PublicConstantFilter
   >;
 
@@ -931,18 +921,6 @@ export interface PublicCalendarDatePropertyOperation {
    * Specifies whether the fiscal year should be used in the operation.
    */
   useFiscalYear?: boolean;
-}
-
-export interface PublicCampaignInfluencedFilter {
-  /**
-   * The ID of the campaign that influences the filter.
-   */
-  campaignId: string;
-
-  /**
-   * Indicates the type of filter (CAMPAIGN_INFLUENCED).
-   */
-  filterType: 'CAMPAIGN_INFLUENCED';
 }
 
 export interface PublicCommunicationSubscriptionFilter {
@@ -1885,7 +1863,6 @@ export interface PublicNotAllFilterBranch {
     | PublicNotAnyFilterBranch
     | PublicRestrictedFilterBranch
     | PublicUnifiedEventsFilterBranch
-    | PublicPropertyAssociationFilterBranch
     | PublicAssociationFilterBranch
   >;
 
@@ -1910,7 +1887,6 @@ export interface PublicNotAllFilterBranch {
     | PublicIntegrationEventFilter
     | PublicEmailSubscriptionFilter
     | PublicCommunicationSubscriptionFilter
-    | PublicCampaignInfluencedFilter
     | PublicSurveyMonkeyFilter
     | PublicSurveyMonkeyValueFilter
     | PublicWebinarFilter
@@ -1919,9 +1895,7 @@ export interface PublicNotAllFilterBranch {
     | PublicAdsSearchFilter
     | PublicAdsTimeFilter
     | PublicInListFilter
-    | PublicNumAssociationsFilter
     | PublicUnifiedEventsFilter
-    | PublicPropertyAssociationInListFilter
     | PublicConstantFilter
   >;
 }
@@ -1934,7 +1908,6 @@ export interface PublicNotAnyFilterBranch {
     | PublicNotAnyFilterBranch
     | PublicRestrictedFilterBranch
     | PublicUnifiedEventsFilterBranch
-    | PublicPropertyAssociationFilterBranch
     | PublicAssociationFilterBranch
   >;
 
@@ -1960,7 +1933,6 @@ export interface PublicNotAnyFilterBranch {
     | PublicIntegrationEventFilter
     | PublicEmailSubscriptionFilter
     | PublicCommunicationSubscriptionFilter
-    | PublicCampaignInfluencedFilter
     | PublicSurveyMonkeyFilter
     | PublicSurveyMonkeyValueFilter
     | PublicWebinarFilter
@@ -1969,9 +1941,7 @@ export interface PublicNotAnyFilterBranch {
     | PublicAdsSearchFilter
     | PublicAdsTimeFilter
     | PublicInListFilter
-    | PublicNumAssociationsFilter
     | PublicUnifiedEventsFilter
-    | PublicPropertyAssociationInListFilter
     | PublicConstantFilter
   >;
 }
@@ -2001,38 +1971,6 @@ export interface PublicNowReference {
    * The second component of the current time reference.
    */
   second?: number;
-}
-
-export interface PublicNumAssociationsFilter {
-  /**
-   * Defines the category of the association (HUBSPOT_DEFINED, USER_DEFINED,
-   * INTEGRATOR_DEFINED, WORK).
-   */
-  associationCategory: string;
-
-  /**
-   * The ID representing the type of association being filtered.
-   */
-  associationTypeId: number;
-
-  /**
-   * Specifies the criteria for refining the association filter.
-   */
-  coalescingRefineBy:
-    | PublicNumOccurrencesRefineBy
-    | PublicSetOccurrencesRefineBy
-    | PublicRelativeComparativeTimestampRefineBy
-    | PublicRelativeRangedTimestampRefineBy
-    | PublicAbsoluteComparativeTimestampRefineBy
-    | PublicAbsoluteRangedTimestampRefineBy
-    | PublicAllHistoryRefineBy
-    | PublicTimePointOperation
-    | PublicRangedTimeOperation;
-
-  /**
-   * Indicates the type of filter being applied (NUM_ASSOCIATIONS).
-   */
-  filterType: 'NUM_ASSOCIATIONS';
 }
 
 export interface PublicNumOccurrencesRefineBy {
@@ -2135,7 +2073,6 @@ export interface PublicObjectList {
     | PublicNotAnyFilterBranch
     | PublicRestrictedFilterBranch
     | PublicUnifiedEventsFilterBranch
-    | PublicPropertyAssociationFilterBranch
     | PublicAssociationFilterBranch;
 
   /**
@@ -2239,7 +2176,6 @@ export interface PublicOrFilterBranch {
     | PublicNotAnyFilterBranch
     | PublicRestrictedFilterBranch
     | PublicUnifiedEventsFilterBranch
-    | PublicPropertyAssociationFilterBranch
     | PublicAssociationFilterBranch
   >;
 
@@ -2264,7 +2200,6 @@ export interface PublicOrFilterBranch {
     | PublicIntegrationEventFilter
     | PublicEmailSubscriptionFilter
     | PublicCommunicationSubscriptionFilter
-    | PublicCampaignInfluencedFilter
     | PublicSurveyMonkeyFilter
     | PublicSurveyMonkeyValueFilter
     | PublicWebinarFilter
@@ -2273,9 +2208,7 @@ export interface PublicOrFilterBranch {
     | PublicAdsSearchFilter
     | PublicAdsTimeFilter
     | PublicInListFilter
-    | PublicNumAssociationsFilter
     | PublicUnifiedEventsFilter
-    | PublicPropertyAssociationInListFilter
     | PublicConstantFilter
   >;
 }
@@ -2348,113 +2281,6 @@ export interface PublicPrivacyAnalyticsFilter {
    * The name of the privacy setting used in the filter.
    */
   privacyName: string;
-}
-
-export interface PublicPropertyAssociationFilterBranch {
-  filterBranches: Array<
-    | PublicOrFilterBranch
-    | PublicAndFilterBranch
-    | PublicNotAllFilterBranch
-    | PublicNotAnyFilterBranch
-    | PublicRestrictedFilterBranch
-    | PublicUnifiedEventsFilterBranch
-    | PublicPropertyAssociationFilterBranch
-    | PublicAssociationFilterBranch
-  >;
-
-  /**
-   * The logical operator used to combine filters within the branch.
-   */
-  filterBranchOperator: string;
-
-  /**
-   * The type of the filter branch (PROPERTY_ASSOCIATION).
-   */
-  filterBranchType: 'PROPERTY_ASSOCIATION';
-
-  filters: Array<
-    | PublicPropertyFilter
-    | PublicAssociationInListFilter
-    | PublicPageViewAnalyticsFilter
-    | PublicCtaAnalyticsFilter
-    | PublicEventAnalyticsFilter
-    | PublicFormSubmissionFilter
-    | PublicFormSubmissionOnPageFilter
-    | PublicIntegrationEventFilter
-    | PublicEmailSubscriptionFilter
-    | PublicCommunicationSubscriptionFilter
-    | PublicCampaignInfluencedFilter
-    | PublicSurveyMonkeyFilter
-    | PublicSurveyMonkeyValueFilter
-    | PublicWebinarFilter
-    | PublicEmailEventFilter
-    | PublicPrivacyAnalyticsFilter
-    | PublicAdsSearchFilter
-    | PublicAdsTimeFilter
-    | PublicInListFilter
-    | PublicNumAssociationsFilter
-    | PublicUnifiedEventsFilter
-    | PublicPropertyAssociationInListFilter
-    | PublicConstantFilter
-  >;
-
-  /**
-   * The ID representing the type of object associated with the filter branch.
-   */
-  objectTypeId: string;
-
-  /**
-   * Defines the operation to be applied within the filter branch (IN_LIST,
-   * NOT_IN_LIST).
-   */
-  operator: string;
-
-  /**
-   * The property that is associated with the object ID in the filter branch.
-   */
-  propertyWithObjectId: string;
-}
-
-export interface PublicPropertyAssociationInListFilter {
-  /**
-   * Specifies the criteria for refining the filter by coalescing.
-   */
-  coalescingRefineBy:
-    | PublicNumOccurrencesRefineBy
-    | PublicSetOccurrencesRefineBy
-    | PublicRelativeComparativeTimestampRefineBy
-    | PublicRelativeRangedTimestampRefineBy
-    | PublicAbsoluteComparativeTimestampRefineBy
-    | PublicAbsoluteRangedTimestampRefineBy
-    | PublicAllHistoryRefineBy
-    | PublicTimePointOperation
-    | PublicRangedTimeOperation;
-
-  /**
-   * Indicates the type of filter being applied (PROPERTY_ASSOCIATION).
-   */
-  filterType: 'PROPERTY_ASSOCIATION';
-
-  /**
-   * The ID of the list used in the property association filter.
-   */
-  listId: string;
-
-  /**
-   * Defines the operation to be applied by the filter (IN_LIST, NOT_IN_LIST).
-   */
-  operator: string;
-
-  /**
-   * The property associated with the object ID in the filter.
-   */
-  propertyWithObjectId: string;
-
-  /**
-   * The ID representing the type of object that the property association filter is
-   * targeting.
-   */
-  toObjectTypeId?: string;
 }
 
 export interface PublicPropertyFilter {
@@ -2709,7 +2535,6 @@ export interface PublicRestrictedFilterBranch {
     | PublicNotAnyFilterBranch
     | PublicRestrictedFilterBranch
     | PublicUnifiedEventsFilterBranch
-    | PublicPropertyAssociationFilterBranch
     | PublicAssociationFilterBranch
   >;
 
@@ -2735,7 +2560,6 @@ export interface PublicRestrictedFilterBranch {
     | PublicIntegrationEventFilter
     | PublicEmailSubscriptionFilter
     | PublicCommunicationSubscriptionFilter
-    | PublicCampaignInfluencedFilter
     | PublicSurveyMonkeyFilter
     | PublicSurveyMonkeyValueFilter
     | PublicWebinarFilter
@@ -2744,9 +2568,7 @@ export interface PublicRestrictedFilterBranch {
     | PublicAdsSearchFilter
     | PublicAdsTimeFilter
     | PublicInListFilter
-    | PublicNumAssociationsFilter
     | PublicUnifiedEventsFilter
-    | PublicPropertyAssociationInListFilter
     | PublicConstantFilter
   >;
 }
@@ -3056,7 +2878,6 @@ export interface PublicUnifiedEventsFilterBranch {
     | PublicNotAnyFilterBranch
     | PublicRestrictedFilterBranch
     | PublicUnifiedEventsFilterBranch
-    | PublicPropertyAssociationFilterBranch
     | PublicAssociationFilterBranch
   >;
 
@@ -3081,7 +2902,6 @@ export interface PublicUnifiedEventsFilterBranch {
     | PublicIntegrationEventFilter
     | PublicEmailSubscriptionFilter
     | PublicCommunicationSubscriptionFilter
-    | PublicCampaignInfluencedFilter
     | PublicSurveyMonkeyFilter
     | PublicSurveyMonkeyValueFilter
     | PublicWebinarFilter
@@ -3090,9 +2910,7 @@ export interface PublicUnifiedEventsFilterBranch {
     | PublicAdsSearchFilter
     | PublicAdsTimeFilter
     | PublicInListFilter
-    | PublicNumAssociationsFilter
     | PublicUnifiedEventsFilter
-    | PublicPropertyAssociationInListFilter
     | PublicConstantFilter
   >;
 
@@ -3291,7 +3109,6 @@ export interface ListCreateParams {
     | PublicNotAnyFilterBranch
     | PublicRestrictedFilterBranch
     | PublicUnifiedEventsFilterBranch
-    | PublicPropertyAssociationFilterBranch
     | PublicAssociationFilterBranch;
 
   /**
@@ -3474,7 +3291,6 @@ export interface ListUpdateListFiltersParams {
     | PublicNotAnyFilterBranch
     | PublicRestrictedFilterBranch
     | PublicUnifiedEventsFilterBranch
-    | PublicPropertyAssociationFilterBranch
     | PublicAssociationFilterBranch;
 
   /**
@@ -3572,7 +3388,6 @@ export declare namespace Lists {
     type PublicBatchMigrationMapping as PublicBatchMigrationMapping,
     type PublicBoolPropertyOperation as PublicBoolPropertyOperation,
     type PublicCalendarDatePropertyOperation as PublicCalendarDatePropertyOperation,
-    type PublicCampaignInfluencedFilter as PublicCampaignInfluencedFilter,
     type PublicCommunicationSubscriptionFilter as PublicCommunicationSubscriptionFilter,
     type PublicComparativeDatePropertyOperation as PublicComparativeDatePropertyOperation,
     type PublicComparativePropertyUpdatedOperation as PublicComparativePropertyUpdatedOperation,
@@ -3608,7 +3423,6 @@ export declare namespace Lists {
     type PublicNotAllFilterBranch as PublicNotAllFilterBranch,
     type PublicNotAnyFilterBranch as PublicNotAnyFilterBranch,
     type PublicNowReference as PublicNowReference,
-    type PublicNumAssociationsFilter as PublicNumAssociationsFilter,
     type PublicNumOccurrencesRefineBy as PublicNumOccurrencesRefineBy,
     type PublicNumberPropertyOperation as PublicNumberPropertyOperation,
     type PublicObjectList as PublicObjectList,
@@ -3616,8 +3430,6 @@ export declare namespace Lists {
     type PublicOrFilterBranch as PublicOrFilterBranch,
     type PublicPageViewAnalyticsFilter as PublicPageViewAnalyticsFilter,
     type PublicPrivacyAnalyticsFilter as PublicPrivacyAnalyticsFilter,
-    type PublicPropertyAssociationFilterBranch as PublicPropertyAssociationFilterBranch,
-    type PublicPropertyAssociationInListFilter as PublicPropertyAssociationInListFilter,
     type PublicPropertyFilter as PublicPropertyFilter,
     type PublicPropertyReferencedTime as PublicPropertyReferencedTime,
     type PublicQuarterReference as PublicQuarterReference,

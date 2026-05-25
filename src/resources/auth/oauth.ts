@@ -14,15 +14,11 @@ export class BaseOAuth extends APIResource {
   createToken(
     body: OAuthCreateTokenParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<Response> {
+  ): APIPromise<TokenResponseIf> {
     return this._client.post('/oauth/2026-03/token', {
       body,
       ...options,
-      headers: buildHeaders([
-        { 'Content-Type': 'application/x-www-form-urlencoded', Accept: '*/*' },
-        options?.headers,
-      ]),
-      __binaryResponse: true,
+      headers: buildHeaders([{ 'Content-Type': 'application/x-www-form-urlencoded' }, options?.headers]),
     });
   }
 
@@ -59,6 +55,44 @@ export class BaseOAuth extends APIResource {
   }
 }
 export class OAuth extends BaseOAuth {}
+
+export interface AccessTokenResponse {
+  access_token: string;
+
+  expires_in: number;
+
+  refresh_token: string;
+
+  token_type: string;
+
+  token_use: 'access_token';
+
+  hub_id?: number;
+
+  id_token?: string;
+
+  scopes?: Array<string>;
+
+  user_id?: number;
+}
+
+export interface ClientCredentialsTokenResponse {
+  access_token: string;
+
+  expires_in: number;
+
+  token_type: string;
+
+  token_use: 'client_credentials';
+
+  hub_id?: number;
+
+  id_token?: string;
+
+  scopes?: Array<string>;
+
+  user_id?: number;
+}
 
 export interface PublicAccessTokenInfoResponse {
   token: string;
@@ -148,6 +182,8 @@ export interface SignedAccessToken {
 
 export type TokenInfoResponseBaseIf = PublicAccessTokenInfoResponse | PublicRefreshTokenInfoResponse;
 
+export type TokenResponseIf = AccessTokenResponse | ClientCredentialsTokenResponse;
+
 export interface OAuthCreateTokenParams {
   client_id?: string;
 
@@ -157,7 +193,7 @@ export interface OAuthCreateTokenParams {
 
   code_verifier?: string;
 
-  grant_type?: 'authorization_code' | 'refresh_token';
+  grant_type?: 'authorization_code' | 'client_credentials' | 'refresh_token';
 
   redirect_uri?: string;
 
@@ -188,10 +224,13 @@ export interface OAuthRevokeTokenParams {
 
 export declare namespace OAuth {
   export {
+    type AccessTokenResponse as AccessTokenResponse,
+    type ClientCredentialsTokenResponse as ClientCredentialsTokenResponse,
     type PublicAccessTokenInfoResponse as PublicAccessTokenInfoResponse,
     type PublicRefreshTokenInfoResponse as PublicRefreshTokenInfoResponse,
     type SignedAccessToken as SignedAccessToken,
     type TokenInfoResponseBaseIf as TokenInfoResponseBaseIf,
+    type TokenResponseIf as TokenResponseIf,
     type OAuthCreateTokenParams as OAuthCreateTokenParams,
     type OAuthIntrospectTokenParams as OAuthIntrospectTokenParams,
     type OAuthRevokeTokenParams as OAuthRevokeTokenParams,

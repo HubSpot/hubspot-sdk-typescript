@@ -28,7 +28,10 @@ const runTests = (
 ) => {
   // Mock server tests are disabled
   test.skip('generateToken: only required params', async () => {
-    const responsePromise = client.conversations.visitorIdentification.generateToken({ email: 'email' });
+    const responsePromise = client.conversations.visitorIdentification.generateToken({
+      email: 'email',
+      hsCustomerAgentContext: { foo: 'string' },
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -42,6 +45,7 @@ const runTests = (
   test.skip('generateToken: required and optional params', async () => {
     const response = await client.conversations.visitorIdentification.generateToken({
       email: 'email',
+      hsCustomerAgentContext: { foo: 'string' },
       firstName: 'firstName',
       lastName: 'lastName',
     });

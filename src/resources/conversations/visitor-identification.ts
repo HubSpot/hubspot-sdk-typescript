@@ -32,6 +32,8 @@ export interface IdentificationTokenGenerationRequest {
    */
   email: string;
 
+  hsCustomerAgentContext: { [key: string]: string };
+
   /**
    * The first name of the visitor that you wish to identify. This value will only be
    * set in HubSpot for new contacts and existing contacts where first name is
@@ -60,6 +62,8 @@ export interface VisitorIdentificationGenerateTokenParams {
    * The email of the visitor that you wish to identify
    */
   email: string;
+
+  hsCustomerAgentContext: { [key: string]: string };
 
   /**
    * The first name of the visitor that you wish to identify. This value will only be

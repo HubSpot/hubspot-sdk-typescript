@@ -19,3 +19,4 @@ export { Meta, BaseMeta } from './meta/meta';
 export { Scheduler, BaseScheduler } from './scheduler/scheduler';
 export { Settings, BaseSettings } from './settings/settings';
 export { Webhooks, BaseWebhooks } from './webhooks';
+export { WebhooksJournal, BaseWebhooksJournal } from './webhooks-journal/webhooks-journal';

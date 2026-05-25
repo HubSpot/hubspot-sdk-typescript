@@ -3,21 +3,39 @@
 Types:
 
 - <code><a href="./src/resources/shared.ts">AbTestCreateRequestVNext</a></code>
+- <code><a href="./src/resources/shared.ts">ActionOverrideRequest</a></code>
 - <code><a href="./src/resources/shared.ts">ActionResponse</a></code>
+- <code><a href="./src/resources/shared.ts">AppLifecycleEventSubscriptionUpsertRequest</a></code>
 - <code><a href="./src/resources/shared.ts">AssociationDefinition</a></code>
 - <code><a href="./src/resources/shared.ts">AssociationDefinitionEgg</a></code>
 - <code><a href="./src/resources/shared.ts">AssociationSpec</a></code>
+- <code><a href="./src/resources/shared.ts">AssociationSubscriptionUpsertRequest</a></code>
 - <code><a href="./src/resources/shared.ts">AutomationActionsOption</a></code>
 - <code><a href="./src/resources/shared.ts">BatchInputPropertyCreate</a></code>
 - <code><a href="./src/resources/shared.ts">BatchInputPropertyName</a></code>
 - <code><a href="./src/resources/shared.ts">BatchInputPublicObjectID</a></code>
 - <code><a href="./src/resources/shared.ts">BatchInputString</a></code>
 - <code><a href="./src/resources/shared.ts">BatchReadInputPropertyName</a></code>
+- <code><a href="./src/resources/shared.ts">BatchResponseJournalFetchResponse</a></code>
+- <code><a href="./src/resources/shared.ts">BatchResponseJournalFetchResponseWithErrors</a></code>
 - <code><a href="./src/resources/shared.ts">CollectionResponsePropertyGroupNoPaging</a></code>
+- <code><a href="./src/resources/shared.ts">Condition</a></code>
+- <code><a href="./src/resources/shared.ts">CrmObjectSnapshotBatchRequest</a></code>
+- <code><a href="./src/resources/shared.ts">CrmObjectSnapshotBatchResponse</a></code>
+- <code><a href="./src/resources/shared.ts">CrmObjectSnapshotRequest</a></code>
+- <code><a href="./src/resources/shared.ts">CrmObjectSnapshotResponse</a></code>
 - <code><a href="./src/resources/shared.ts">ErrorData</a></code>
 - <code><a href="./src/resources/shared.ts">ErrorDetail</a></code>
+- <code><a href="./src/resources/shared.ts">Filter</a></code>
+- <code><a href="./src/resources/shared.ts">FilterCreateRequest</a></code>
+- <code><a href="./src/resources/shared.ts">FilterCreateResponse</a></code>
+- <code><a href="./src/resources/shared.ts">FilterResponse</a></code>
 - <code><a href="./src/resources/shared.ts">ForwardPaging</a></code>
+- <code><a href="./src/resources/shared.ts">GdprPrivacyDeletionSubscriptionUpsertRequest</a></code>
+- <code><a href="./src/resources/shared.ts">JournalFetchResponse</a></code>
+- <code><a href="./src/resources/shared.ts">ListMembershipSubscriptionUpsertRequest</a></code>
 - <code><a href="./src/resources/shared.ts">NextPage</a></code>
+- <code><a href="./src/resources/shared.ts">ObjectSubscriptionUpsertRequest</a></code>
 - <code><a href="./src/resources/shared.ts">ObjectTypeDefinition</a></code>
 - <code><a href="./src/resources/shared.ts">ObjectTypeDefinitionLabels</a></code>
 - <code><a href="./src/resources/shared.ts">ObjectTypeDefinitionPatch</a></code>
@@ -34,7 +52,9 @@ Types:
 - <code><a href="./src/resources/shared.ts">PropertyName</a></code>
 - <code><a href="./src/resources/shared.ts">PropertyValue</a></code>
 - <code><a href="./src/resources/shared.ts">PublicObjectID</a></code>
+- <code><a href="./src/resources/shared.ts">SnapshotStatusResponse</a></code>
 - <code><a href="./src/resources/shared.ts">StandardError</a></code>
+- <code><a href="./src/resources/shared.ts">SubscriptionUpsertRequest</a></code>
 - <code><a href="./src/resources/shared.ts">TaskLocator</a></code>
 - <code><a href="./src/resources/shared.ts">VersionUser</a></code>
 
@@ -67,3 +87,5 @@ Types:
 # [Settings](src/resources/settings/api.md)
 
 # [Webhooks](src/resources/webhooks/api.md)
+
+# [WebhooksJournal](src/resources/webhooks-journal/api.md)

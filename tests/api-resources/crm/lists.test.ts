@@ -61,31 +61,13 @@ const runTests = (client: PartialHubSpot<{ crm: { lists: BaseLists } }>) => {
                             eventTypeId: 'eventTypeId',
                             filterBranches: [
                               {
+                                associationCategory: 'associationCategory',
+                                associationTypeId: 0,
                                 filterBranches: [
                                   {
-                                    associationCategory: 'associationCategory',
-                                    associationTypeId: 0,
-                                    filterBranches: [
-                                      {
-                                        filterBranches: [],
-                                        filterBranchOperator: 'filterBranchOperator',
-                                        filterBranchType: 'OR',
-                                        filters: [
-                                          {
-                                            filterType: 'PROPERTY',
-                                            operation: {
-                                              includeObjectsWithNoValueSet: true,
-                                              operationType: 'BOOL',
-                                              operator: 'operator',
-                                              value: true,
-                                            },
-                                            property: 'property',
-                                          },
-                                        ],
-                                      },
-                                    ],
+                                    filterBranches: [],
                                     filterBranchOperator: 'filterBranchOperator',
-                                    filterBranchType: 'ASSOCIATION',
+                                    filterBranchType: 'OR',
                                     filters: [
                                       {
                                         filterType: 'PROPERTY',
@@ -98,12 +80,10 @@ const runTests = (client: PartialHubSpot<{ crm: { lists: BaseLists } }>) => {
                                         property: 'property',
                                       },
                                     ],
-                                    objectTypeId: 'objectTypeId',
-                                    operator: 'operator',
                                   },
                                 ],
                                 filterBranchOperator: 'filterBranchOperator',
-                                filterBranchType: 'PROPERTY_ASSOCIATION',
+                                filterBranchType: 'ASSOCIATION',
                                 filters: [
                                   {
                                     filterType: 'PROPERTY',
@@ -118,7 +98,6 @@ const runTests = (client: PartialHubSpot<{ crm: { lists: BaseLists } }>) => {
                                 ],
                                 objectTypeId: 'objectTypeId',
                                 operator: 'operator',
-                                propertyWithObjectId: 'propertyWithObjectId',
                               },
                             ],
                             filterBranchOperator: 'filterBranchOperator',
@@ -745,31 +724,13 @@ const runTests = (client: PartialHubSpot<{ crm: { lists: BaseLists } }>) => {
                             eventTypeId: 'eventTypeId',
                             filterBranches: [
                               {
+                                associationCategory: 'associationCategory',
+                                associationTypeId: 0,
                                 filterBranches: [
                                   {
-                                    associationCategory: 'associationCategory',
-                                    associationTypeId: 0,
-                                    filterBranches: [
-                                      {
-                                        filterBranches: [],
-                                        filterBranchOperator: 'filterBranchOperator',
-                                        filterBranchType: 'OR',
-                                        filters: [
-                                          {
-                                            filterType: 'PROPERTY',
-                                            operation: {
-                                              includeObjectsWithNoValueSet: true,
-                                              operationType: 'BOOL',
-                                              operator: 'operator',
-                                              value: true,
-                                            },
-                                            property: 'property',
-                                          },
-                                        ],
-                                      },
-                                    ],
+                                    filterBranches: [],
                                     filterBranchOperator: 'filterBranchOperator',
-                                    filterBranchType: 'ASSOCIATION',
+                                    filterBranchType: 'OR',
                                     filters: [
                                       {
                                         filterType: 'PROPERTY',
@@ -782,12 +743,10 @@ const runTests = (client: PartialHubSpot<{ crm: { lists: BaseLists } }>) => {
                                         property: 'property',
                                       },
                                     ],
-                                    objectTypeId: 'objectTypeId',
-                                    operator: 'operator',
                                   },
                                 ],
                                 filterBranchOperator: 'filterBranchOperator',
-                                filterBranchType: 'PROPERTY_ASSOCIATION',
+                                filterBranchType: 'ASSOCIATION',
                                 filters: [
                                   {
                                     filterType: 'PROPERTY',
@@ -802,7 +761,6 @@ const runTests = (client: PartialHubSpot<{ crm: { lists: BaseLists } }>) => {
                                 ],
                                 objectTypeId: 'objectTypeId',
                                 operator: 'operator',
-                                propertyWithObjectId: 'propertyWithObjectId',
                               },
                             ],
                             filterBranchOperator: 'filterBranchOperator',
@@ -928,31 +886,13 @@ const runTests = (client: PartialHubSpot<{ crm: { lists: BaseLists } }>) => {
                             eventTypeId: 'eventTypeId',
                             filterBranches: [
                               {
+                                associationCategory: 'associationCategory',
+                                associationTypeId: 0,
                                 filterBranches: [
                                   {
-                                    associationCategory: 'associationCategory',
-                                    associationTypeId: 0,
-                                    filterBranches: [
-                                      {
-                                        filterBranches: [],
-                                        filterBranchOperator: 'filterBranchOperator',
-                                        filterBranchType: 'OR',
-                                        filters: [
-                                          {
-                                            filterType: 'PROPERTY',
-                                            operation: {
-                                              includeObjectsWithNoValueSet: true,
-                                              operationType: 'BOOL',
-                                              operator: 'operator',
-                                              value: true,
-                                            },
-                                            property: 'property',
-                                          },
-                                        ],
-                                      },
-                                    ],
+                                    filterBranches: [],
                                     filterBranchOperator: 'filterBranchOperator',
-                                    filterBranchType: 'ASSOCIATION',
+                                    filterBranchType: 'OR',
                                     filters: [
                                       {
                                         filterType: 'PROPERTY',
@@ -965,12 +905,10 @@ const runTests = (client: PartialHubSpot<{ crm: { lists: BaseLists } }>) => {
                                         property: 'property',
                                       },
                                     ],
-                                    objectTypeId: 'objectTypeId',
-                                    operator: 'operator',
                                   },
                                 ],
                                 filterBranchOperator: 'filterBranchOperator',
-                                filterBranchType: 'PROPERTY_ASSOCIATION',
+                                filterBranchType: 'ASSOCIATION',
                                 filters: [
                                   {
                                     filterType: 'PROPERTY',
@@ -985,7 +923,6 @@ const runTests = (client: PartialHubSpot<{ crm: { lists: BaseLists } }>) => {
                                 ],
                                 objectTypeId: 'objectTypeId',
                                 operator: 'operator',
-                                propertyWithObjectId: 'propertyWithObjectId',
                               },
                             ],
                             filterBranchOperator: 'filterBranchOperator',
