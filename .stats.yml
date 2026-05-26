@@ -1,4 +1,4 @@
 configured_endpoints: 959
-openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/hubspot/hubspot-sdk-5471b42def181422e461f5657935bcc5d80f62e169b34b60d017257cab8ed6a7.yml
+openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/hubspot/hubspot-sdk-3260c0cfb88ce2653c37c4c97e1dd39b965df4f2c14177677bc46d95b104525d.yml
 openapi_spec_hash: 93b8671a542b331e067319184c943fdd
-config_hash: 42a440e814378897b5ca0c2ad29c7f99
+config_hash: 0bcc56e67986936da66e382674e17c79

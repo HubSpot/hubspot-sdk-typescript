@@ -60,7 +60,7 @@ export class BaseWebhooks extends APIResource {
   createJournalSubscription(
     body: WebhookCreateJournalSubscriptionParams,
     options?: RequestOptions,
-  ): APIPromise<WebhooksJournalAPI.SubscriptionResponse> {
+  ): APIPromise<WebhooksJournalAPI.JournalSubscriptionResponse> {
     return this._client.post('/webhooks-journal/subscriptions/2026-03', { body, ...options });
   }
 
@@ -274,7 +274,7 @@ export class BaseWebhooks extends APIResource {
   getJournalSubscription(
     subscriptionID: number,
     options?: RequestOptions,
-  ): APIPromise<WebhooksJournalAPI.SubscriptionResponse> {
+  ): APIPromise<WebhooksJournalAPI.JournalSubscriptionResponse> {
     return this._client.get(path`/webhooks-journal/subscriptions/2026-03/${subscriptionID}`, options);
   }
 
@@ -463,7 +463,7 @@ export class BaseWebhooks extends APIResource {
    */
   listJournalSubscriptions(
     options?: RequestOptions,
-  ): APIPromise<WebhooksJournalAPI.CollectionResponseSubscriptionResponseNoPaging> {
+  ): APIPromise<WebhooksJournalAPI.JournalCollectionResponseSubscriptionResponseNoPaging> {
     return this._client.get('/webhooks-journal/subscriptions/2026-03', options);
   }
 
