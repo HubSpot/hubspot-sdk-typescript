@@ -26,7 +26,7 @@ export class BaseSubscriptions extends APIResource {
   create(
     body: SubscriptionCreateParams,
     options?: RequestOptions,
-  ): APIPromise<WebhooksJournalAPI.SubscriptionResponse> {
+  ): APIPromise<WebhooksJournalAPI.JournalSubscriptionResponse> {
     return this._client.post('/webhooks-journal/subscriptions/2026-03', { body, ...options });
   }
 
@@ -38,7 +38,7 @@ export class BaseSubscriptions extends APIResource {
    */
   list(
     options?: RequestOptions,
-  ): APIPromise<WebhooksJournalAPI.CollectionResponseSubscriptionResponseNoPaging> {
+  ): APIPromise<WebhooksJournalAPI.JournalCollectionResponseSubscriptionResponseNoPaging> {
     return this._client.get('/webhooks-journal/subscriptions/2026-03', options);
   }
 
@@ -72,7 +72,10 @@ export class BaseSubscriptions extends APIResource {
    * This endpoint is useful for obtaining information about a particular
    * subscription, such as its actions, object type, and associated properties.
    */
-  get(subscriptionID: number, options?: RequestOptions): APIPromise<WebhooksJournalAPI.SubscriptionResponse> {
+  get(
+    subscriptionID: number,
+    options?: RequestOptions,
+  ): APIPromise<WebhooksJournalAPI.JournalSubscriptionResponse> {
     return this._client.get(path`/webhooks-journal/subscriptions/2026-03/${subscriptionID}`, options);
   }
 }

@@ -1119,11 +1119,11 @@ export interface InboundDBObjectType {
 
   status?: 'Deprecated' | 'In development' | 'Live';
 
-  visibilities?: Array<
+  visibility?: 'Customer-facing' | 'Customer-facing public API' | 'Customer-facing UI' | 'Internal only';
+
+  visibility_values?: Array<
     'Customer-facing' | 'Internal only' | 'Customer-facing UI' | 'Customer-facing public API'
   >;
-
-  visibility?: 'Customer-facing' | 'Customer-facing public API' | 'Customer-facing UI' | 'Internal only';
 
   writeScopeName?: string;
 }

@@ -2,8 +2,8 @@
 
 Types:
 
-- <code><a href="./src/resources/webhooks-journal/webhooks-journal.ts">CollectionResponseSubscriptionResponseNoPaging</a></code>
-- <code><a href="./src/resources/webhooks-journal/webhooks-journal.ts">SubscriptionResponse</a></code>
+- <code><a href="./src/resources/webhooks-journal/webhooks-journal.ts">JournalCollectionResponseSubscriptionResponseNoPaging</a></code>
+- <code><a href="./src/resources/webhooks-journal/webhooks-journal.ts">JournalSubscriptionResponse</a></code>
 
 ## Journal
 
@@ -49,11 +49,11 @@ Methods:
 
 Methods:
 
-- <code title="post /webhooks-journal/subscriptions/2026-03">client.webhooksJournal.subscriptions.<a href="./src/resources/webhooks-journal/subscriptions/subscriptions.ts">create</a>({ ...params }) -> SubscriptionResponse</code>
-- <code title="get /webhooks-journal/subscriptions/2026-03">client.webhooksJournal.subscriptions.<a href="./src/resources/webhooks-journal/subscriptions/subscriptions.ts">list</a>() -> CollectionResponseSubscriptionResponseNoPaging</code>
+- <code title="post /webhooks-journal/subscriptions/2026-03">client.webhooksJournal.subscriptions.<a href="./src/resources/webhooks-journal/subscriptions/subscriptions.ts">create</a>({ ...params }) -> JournalSubscriptionResponse</code>
+- <code title="get /webhooks-journal/subscriptions/2026-03">client.webhooksJournal.subscriptions.<a href="./src/resources/webhooks-journal/subscriptions/subscriptions.ts">list</a>() -> JournalCollectionResponseSubscriptionResponseNoPaging</code>
 - <code title="delete /webhooks-journal/subscriptions/2026-03/{subscriptionId}">client.webhooksJournal.subscriptions.<a href="./src/resources/webhooks-journal/subscriptions/subscriptions.ts">delete</a>(subscriptionID) -> void</code>
 - <code title="delete /webhooks-journal/subscriptions/2026-03/portals/{portalId}">client.webhooksJournal.subscriptions.<a href="./src/resources/webhooks-journal/subscriptions/subscriptions.ts">deleteForPortal</a>(portalID) -> void</code>
-- <code title="get /webhooks-journal/subscriptions/2026-03/{subscriptionId}">client.webhooksJournal.subscriptions.<a href="./src/resources/webhooks-journal/subscriptions/subscriptions.ts">get</a>(subscriptionID) -> SubscriptionResponse</code>
+- <code title="get /webhooks-journal/subscriptions/2026-03/{subscriptionId}">client.webhooksJournal.subscriptions.<a href="./src/resources/webhooks-journal/subscriptions/subscriptions.ts">get</a>(subscriptionID) -> JournalSubscriptionResponse</code>
 
 ### Filters
 

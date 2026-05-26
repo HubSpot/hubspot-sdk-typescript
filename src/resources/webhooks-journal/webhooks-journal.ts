@@ -32,15 +32,15 @@ export class WebhooksJournal extends BaseWebhooksJournal {
   subscriptions: SubscriptionsAPI.Subscriptions = new SubscriptionsAPI.Subscriptions(this._client);
 }
 
-export interface CollectionResponseSubscriptionResponseNoPaging {
+export interface JournalCollectionResponseSubscriptionResponseNoPaging {
   /**
    * An array of subscription responses, where each item contains details about a
    * specific subscription. Each item follows the SubscriptionResponse schema.
    */
-  results: Array<SubscriptionResponse>;
+  results: Array<JournalSubscriptionResponse>;
 }
 
-export interface SubscriptionResponse {
+export interface JournalSubscriptionResponse {
   /**
    * The unique identifier for the subscription, represented as an integer.
    */
@@ -162,8 +162,8 @@ WebhooksJournal.BaseSubscriptions = BaseSubscriptions;
 
 export declare namespace WebhooksJournal {
   export {
-    type CollectionResponseSubscriptionResponseNoPaging as CollectionResponseSubscriptionResponseNoPaging,
-    type SubscriptionResponse as SubscriptionResponse,
+    type JournalCollectionResponseSubscriptionResponseNoPaging as JournalCollectionResponseSubscriptionResponseNoPaging,
+    type JournalSubscriptionResponse as JournalSubscriptionResponse,
   };
 
   export {
