@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.1.0-alpha.10 (2026-05-26)
+
+Full Changelog: [v0.1.0-alpha.9...v0.1.0-alpha.10](https://github.com/HubSpot/hubspot-sdk-typescript/compare/v0.1.0-alpha.9...v0.1.0-alpha.10)
+
+### Features
+
+* **api:** manual updates ([e45d0b4](https://github.com/HubSpot/hubspot-sdk-typescript/commit/e45d0b4366da37911312a9e24c97fa4579411553))
+* **api:** manual updates ([b69a1bc](https://github.com/HubSpot/hubspot-sdk-typescript/commit/b69a1bca2d05b92d248f4ced6b5844c3d0fde4ba))
+* **api:** manual updates ([3cdcc58](https://github.com/HubSpot/hubspot-sdk-typescript/commit/3cdcc58594135075c61b6e5732dd10c4848d8337))
+
+
+### Chores
+
+* configure new SDK language ([45a1eb1](https://github.com/HubSpot/hubspot-sdk-typescript/commit/45a1eb12ae407caf090294bc4bcb9645d82168a3))
+
 ## 0.1.0-alpha.9 (2026-05-19)
 
 Full Changelog: [v0.1.0-alpha.8...v0.1.0-alpha.9](https://github.com/HubSpot/hubspot-sdk-typescript/compare/v0.1.0-alpha.8...v0.1.0-alpha.9)
