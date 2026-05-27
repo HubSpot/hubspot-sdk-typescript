@@ -630,10 +630,8 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/cms/site-search.ts">ContentSearchResult</a></code>
 - <code><a href="./src/resources/cms/site-search.ts">IndexedData</a></code>
 - <code><a href="./src/resources/cms/site-search.ts">IndexedField</a></code>
-- <code><a href="./src/resources/cms/site-search.ts">PublicSearchResults</a></code>
 
 Methods:
 
@@ -678,4 +676,8 @@ Methods:
 - <code title="patch /cms/url-redirects/2026-03/{urlRedirectId}">client.cms.urlRedirects.<a href="./src/resources/cms/url-redirects.ts">update</a>(urlRedirectID, { ...params }) -> URLMapping</code>
 - <code title="get /cms/url-redirects/2026-03">client.cms.urlRedirects.<a href="./src/resources/cms/url-redirects.ts">list</a>({ ...params }) -> URLMappingsPage</code>
 - <code title="delete /cms/url-redirects/2026-03/{urlRedirectId}">client.cms.urlRedirects.<a href="./src/resources/cms/url-redirects.ts">delete</a>(urlRedirectID) -> void</code>
+- <code title="post /cms/url-redirects/2026-03/url-mappings">client.cms.urlRedirects.<a href="./src/resources/cms/url-redirects.ts">createURLMapping</a>({ ...params }) -> Response</code>
+- <code title="delete /cms/url-redirects/2026-03/url-mappings/{id}">client.cms.urlRedirects.<a href="./src/resources/cms/url-redirects.ts">deleteURLMapping</a>(id) -> void</code>
 - <code title="get /cms/url-redirects/2026-03/{urlRedirectId}">client.cms.urlRedirects.<a href="./src/resources/cms/url-redirects.ts">get</a>(urlRedirectID) -> URLMapping</code>
+- <code title="get /cms/url-redirects/2026-03/url-mappings/{id}">client.cms.urlRedirects.<a href="./src/resources/cms/url-redirects.ts">getURLMapping</a>(id) -> Response</code>
+- <code title="get /cms/url-redirects/2026-03/url-mappings">client.cms.urlRedirects.<a href="./src/resources/cms/url-redirects.ts">listURLMappings</a>() -> Response</code>

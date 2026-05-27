@@ -25,8 +25,20 @@ const parentPartialClient = createClient({
 
 const runTests = (client: PartialHubSpot<{ crm: { exports: BaseExports } }>) => {
   // Mock server tests are disabled
-  test.skip('createAsync', async () => {
-    const responsePromise = client.crm.exports.createAsync({});
+  test.skip('createAsync: only required params', async () => {
+    const responsePromise = client.crm.exports.createAsync({
+      associatedObjectType: ['string'],
+      exportInternalValuesOptions: ['NAMES'],
+      exportName: 'exportName',
+      exportType: 'VIEW',
+      format: 'CSV',
+      includeLabeledAssociations: true,
+      includePrimaryDisplayPropertyForAssociatedObjects: true,
+      language: 'AF_ZA',
+      objectProperties: ['string'],
+      objectType: 'objectType',
+      overrideAssociatedObjectsPerDefinitionPerRowLimit: true,
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -34,6 +46,49 @@ const runTests = (client: PartialHubSpot<{ crm: { exports: BaseExports } }>) => 
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('createAsync: required and optional params', async () => {
+    const response = await client.crm.exports.createAsync({
+      associatedObjectType: ['string'],
+      exportInternalValuesOptions: ['NAMES'],
+      exportName: 'exportName',
+      exportType: 'VIEW',
+      format: 'CSV',
+      includeLabeledAssociations: true,
+      includePrimaryDisplayPropertyForAssociatedObjects: true,
+      language: 'AF_ZA',
+      objectProperties: ['string'],
+      objectType: 'objectType',
+      overrideAssociatedObjectsPerDefinitionPerRowLimit: true,
+      publicCrmSearchRequest: {
+        filterGroups: [
+          {
+            filters: [
+              {
+                operator: 'BETWEEN',
+                propertyName: 'propertyName',
+                highValue: 'highValue',
+                value: 'value',
+                values: ['string'],
+              },
+            ],
+          },
+        ],
+        filters: [
+          {
+            operator: 'BETWEEN',
+            propertyName: 'propertyName',
+            highValue: 'highValue',
+            value: 'value',
+            values: ['string'],
+          },
+        ],
+        sorts: ['string'],
+        query: 'query',
+      },
+    });
   });
 
   // Mock server tests are disabled

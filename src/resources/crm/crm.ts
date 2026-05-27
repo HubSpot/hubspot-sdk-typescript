@@ -120,7 +120,6 @@ import {
   PublicBatchMigrationMapping,
   PublicBoolPropertyOperation,
   PublicCalendarDatePropertyOperation,
-  PublicCampaignInfluencedFilter,
   PublicCommunicationSubscriptionFilter,
   PublicComparativeDatePropertyOperation,
   PublicComparativePropertyUpdatedOperation,
@@ -156,7 +155,6 @@ import {
   PublicNotAllFilterBranch,
   PublicNotAnyFilterBranch,
   PublicNowReference,
-  PublicNumAssociationsFilter,
   PublicNumOccurrencesRefineBy,
   PublicNumberPropertyOperation,
   PublicObjectList,
@@ -164,8 +162,6 @@ import {
   PublicOrFilterBranch,
   PublicPageViewAnalyticsFilter,
   PublicPrivacyAnalyticsFilter,
-  PublicPropertyAssociationFilterBranch,
-  PublicPropertyAssociationInListFilter,
   PublicPropertyFilter,
   PublicPropertyReferencedTime,
   PublicQuarterReference,
@@ -614,31 +610,12 @@ export interface CollectionResponseWithTotalSimplePublicObject {
   paging?: Shared.Paging;
 }
 
-export interface DateTime {
-  /**
-   * Indicates whether the DateTime value represents only a date without a time
-   * component.
-   */
-  dateOnly: boolean;
-
-  /**
-   * The integer value representing the shift in minutes from UTC for the DateTime
-   * value.
-   */
-  timeZoneShift: number;
-
-  /**
-   * The integer value representing a specific point in time.
-   */
-  value: number;
-}
-
 /**
  * Defines a single condition for searching CRM objects, specifying the property to
  * filter on, the operator to use (such as equals, greater than, or contains), and
  * the value(s) to compare against.
  */
-export interface Filter {
+export interface CrmFilter {
   /**
    * The comparison operator used in the filter, such as "EQ" or "GT".
    */
@@ -678,8 +655,27 @@ export interface Filter {
   values?: Array<string>;
 }
 
+export interface DateTime {
+  /**
+   * Indicates whether the DateTime value represents only a date without a time
+   * component.
+   */
+  dateOnly: boolean;
+
+  /**
+   * The integer value representing the shift in minutes from UTC for the DateTime
+   * value.
+   */
+  timeZoneShift: number;
+
+  /**
+   * The integer value representing a specific point in time.
+   */
+  value: number;
+}
+
 export interface FilterGroup {
-  filters: Array<Filter>;
+  filters: Array<CrmFilter>;
 }
 
 /**
@@ -985,8 +981,8 @@ export declare namespace Crm {
     type BatchResponsePublicDefaultAssociation as BatchResponsePublicDefaultAssociation,
     type CollectionResponseMultiAssociatedObjectWithLabelForwardPaging as CollectionResponseMultiAssociatedObjectWithLabelForwardPaging,
     type CollectionResponseWithTotalSimplePublicObject as CollectionResponseWithTotalSimplePublicObject,
+    type CrmFilter as CrmFilter,
     type DateTime as DateTime,
-    type Filter as Filter,
     type FilterGroup as FilterGroup,
     type LabelsBetweenObjectPair as LabelsBetweenObjectPair,
     type MultiAssociatedObjectWithLabel as MultiAssociatedObjectWithLabel,
@@ -1159,7 +1155,6 @@ export declare namespace Crm {
     type PublicBatchMigrationMapping as PublicBatchMigrationMapping,
     type PublicBoolPropertyOperation as PublicBoolPropertyOperation,
     type PublicCalendarDatePropertyOperation as PublicCalendarDatePropertyOperation,
-    type PublicCampaignInfluencedFilter as PublicCampaignInfluencedFilter,
     type PublicCommunicationSubscriptionFilter as PublicCommunicationSubscriptionFilter,
     type PublicComparativeDatePropertyOperation as PublicComparativeDatePropertyOperation,
     type PublicComparativePropertyUpdatedOperation as PublicComparativePropertyUpdatedOperation,
@@ -1195,7 +1190,6 @@ export declare namespace Crm {
     type PublicNotAllFilterBranch as PublicNotAllFilterBranch,
     type PublicNotAnyFilterBranch as PublicNotAnyFilterBranch,
     type PublicNowReference as PublicNowReference,
-    type PublicNumAssociationsFilter as PublicNumAssociationsFilter,
     type PublicNumOccurrencesRefineBy as PublicNumOccurrencesRefineBy,
     type PublicNumberPropertyOperation as PublicNumberPropertyOperation,
     type PublicObjectList as PublicObjectList,
@@ -1203,8 +1197,6 @@ export declare namespace Crm {
     type PublicOrFilterBranch as PublicOrFilterBranch,
     type PublicPageViewAnalyticsFilter as PublicPageViewAnalyticsFilter,
     type PublicPrivacyAnalyticsFilter as PublicPrivacyAnalyticsFilter,
-    type PublicPropertyAssociationFilterBranch as PublicPropertyAssociationFilterBranch,
-    type PublicPropertyAssociationInListFilter as PublicPropertyAssociationInListFilter,
     type PublicPropertyFilter as PublicPropertyFilter,
     type PublicPropertyReferencedTime as PublicPropertyReferencedTime,
     type PublicQuarterReference as PublicQuarterReference,

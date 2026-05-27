@@ -12,6 +12,32 @@ export interface AbTestCreateRequestVNext {
   variationName: string;
 }
 
+export interface ActionOverrideRequest {
+  /**
+   * An array of strings, each representing an associated object type ID relevant to
+   * the action override.
+   */
+  associatedObjectTypeIds?: Array<string>;
+
+  /**
+   * An array of integers representing list IDs that are associated with the action
+   * override. The integers are in int64 format.
+   */
+  listIds?: Array<number>;
+
+  /**
+   * An array of integers, each representing an object ID for which the action
+   * override is applicable. The integers are in int64 format.
+   */
+  objectIds?: Array<number>;
+
+  /**
+   * An array of strings representing the properties to be overridden in the action.
+   * Each string corresponds to a property name.
+   */
+  properties?: Array<string>;
+}
+
 export interface ActionResponse {
   /**
    * The timestamp indicating when the action was completed.
@@ -39,6 +65,14 @@ export interface ActionResponse {
    * The timestamp indicating when the action was requested.
    */
   requestedAt?: string;
+}
+
+export interface AppLifecycleEventSubscriptionUpsertRequest {
+  eventTypeId: string;
+
+  properties: Array<string>;
+
+  subscriptionType: 'APP_LIFECYCLE_EVENT';
 }
 
 /**
@@ -99,6 +133,34 @@ export interface AssociationSpec {
    * The ID representing the specific type of association.
    */
   associationTypeId: number;
+}
+
+export interface AssociationSubscriptionUpsertRequest {
+  actions: Array<
+    | 'CREATE'
+    | 'UPDATE'
+    | 'DELETE'
+    | 'MERGE'
+    | 'RESTORE'
+    | 'ASSOCIATION_ADDED'
+    | 'ASSOCIATION_REMOVED'
+    | 'SNAPSHOT'
+    | 'APP_INSTALL'
+    | 'APP_UNINSTALL'
+    | 'ADDED_TO_LIST'
+    | 'REMOVED_FROM_LIST'
+    | 'GDPR_DELETE'
+  >;
+
+  associatedObjectTypeIds: Array<string>;
+
+  objectIds: Array<number>;
+
+  objectTypeId: string;
+
+  portalId: number;
+
+  subscriptionType: 'ASSOCIATION';
 }
 
 /**
@@ -171,8 +233,202 @@ export interface BatchReadInputPropertyName {
   inputs: Array<PropertyName>;
 }
 
+export interface BatchResponseJournalFetchResponse {
+  /**
+   * The date and time when the batch operation was completed, in ISO 8601 format.
+   */
+  completedAt: string;
+
+  /**
+   * An array of results from the batch operation, each represented as a
+   * JournalFetchResponse object.
+   */
+  results: Array<JournalFetchResponse>;
+
+  /**
+   * The date and time when the batch operation started, in ISO 8601 format.
+   */
+  startedAt: string;
+
+  /**
+   * The current status of the batch operation. Valid values include 'PENDING',
+   * 'PROCESSING', 'CANCELED', and 'COMPLETE'.
+   */
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
+
+  /**
+   * A map of link names to associated URIs related to the batch operation.
+   */
+  links?: { [key: string]: string };
+
+  /**
+   * The date and time when the batch operation was requested, in ISO 8601 format.
+   */
+  requestedAt?: string;
+}
+
+export interface BatchResponseJournalFetchResponseWithErrors {
+  /**
+   * The date and time when the batch process was completed, in ISO 8601 format.
+   */
+  completedAt: string;
+
+  /**
+   * An array of journal fetch responses, each representing a result from the batch
+   * process.
+   */
+  results: Array<JournalFetchResponse>;
+
+  /**
+   * The date and time when the batch process started, in ISO 8601 format.
+   */
+  startedAt: string;
+
+  /**
+   * The current status of the batch process. Valid values include 'PENDING',
+   * 'PROCESSING', 'CANCELED', and 'COMPLETE'.
+   */
+  status: 'CANCELED' | 'COMPLETE' | 'PENDING' | 'PROCESSING';
+
+  /**
+   * An array of standard errors that occurred during the batch process, providing
+   * details about each error.
+   */
+  errors?: Array<StandardError>;
+
+  /**
+   * A map of link names to associated URIs, providing additional context or actions
+   * related to the batch process.
+   */
+  links?: { [key: string]: string };
+
+  /**
+   * The number of errors that occurred during the batch process.
+   */
+  numErrors?: number;
+
+  /**
+   * The date and time when the batch request was made, in ISO 8601 format.
+   */
+  requestedAt?: string;
+}
+
 export interface CollectionResponsePropertyGroupNoPaging {
   results: Array<PropertyGroup>;
+}
+
+export interface Condition {
+  /**
+   * A string indicating the type of filter being applied. Valid value is
+   * 'CRM_OBJECT_PROPERTY'.
+   */
+  filterType: 'CRM_OBJECT_PROPERTY';
+
+  /**
+   * A string specifying the operation to be performed in the condition. Valid values
+   * include 'EQ', 'N_EQ', 'LT', 'GT', 'LTE', 'GTE', 'CONTAINS', 'STARTS_WITH',
+   * 'ENDS_WITH', 'IN', 'NOT_IN', 'IS_EMPTY', and 'IS_NOT_EMPTY'.
+   */
+  operator:
+    | 'CONTAINS'
+    | 'ENDS_WITH'
+    | 'EQ'
+    | 'GT'
+    | 'GTE'
+    | 'IN'
+    | 'IS_EMPTY'
+    | 'IS_NOT_EMPTY'
+    | 'LT'
+    | 'LTE'
+    | 'N_EQ'
+    | 'NOT_IN'
+    | 'STARTS_WITH';
+
+  /**
+   * A string representing the specific property of the CRM object that the condition
+   * applies to.
+   */
+  property: string;
+
+  /**
+   * A string representing the value to be compared against the specified property
+   * when using single-value operators.
+   */
+  value?: string;
+
+  /**
+   * An array of strings used to specify multiple values for comparison when using
+   * operators that support multiple values, such as 'IN' or 'NOT_IN'.
+   */
+  values?: Array<string>;
+}
+
+export interface CrmObjectSnapshotBatchRequest {
+  /**
+   * An array of CrmObjectSnapshotRequest objects, each representing a request to
+   * create a snapshot for a specific CRM object. This property is required.
+   */
+  snapshotRequests: Array<CrmObjectSnapshotRequest>;
+}
+
+export interface CrmObjectSnapshotBatchResponse {
+  /**
+   * An array of CrmObjectSnapshotResponse objects, each representing the result of a
+   * snapshot operation for a specific CRM object. This property is required.
+   */
+  snapshotResponses: Array<CrmObjectSnapshotResponse>;
+}
+
+export interface CrmObjectSnapshotRequest {
+  /**
+   * An integer representing the unique identifier of the CRM object for which the
+   * snapshot is requested.
+   */
+  objectId: number;
+
+  /**
+   * A string representing the type identifier of the CRM object, specifying what
+   * kind of object it is within HubSpot.
+   */
+  objectTypeId: string;
+
+  /**
+   * An integer representing the unique identifier of the HubSpot account (portal)
+   * where the CRM object resides.
+   */
+  portalId: number;
+
+  /**
+   * An array of strings, each representing a property of the CRM object that should
+   * be included in the snapshot.
+   */
+  properties: Array<string>;
+}
+
+export interface CrmObjectSnapshotResponse {
+  /**
+   * An integer representing the unique identifier of the CRM object for which the
+   * snapshot is taken.
+   */
+  objectId: number;
+
+  /**
+   * A string indicating the type of the CRM object, such as contact, company, or
+   * deal.
+   */
+  objectTypeId: string;
+
+  /**
+   * An integer representing the unique identifier of the HubSpot portal associated
+   * with the CRM object.
+   */
+  portalId: number;
+
+  /**
+   * A UUID string representing the status identifier of the snapshot request,
+   * indicating the current state of the snapshot process.
+   */
+  snapshotStatusId: string;
 }
 
 export interface ErrorData {
@@ -243,12 +499,135 @@ export interface ErrorDetail {
   subCategory?: string;
 }
 
+/**
+ * Defines a single condition for searching CRM objects, specifying the property to
+ * filter on, the operator to use (such as equals, greater than, or contains), and
+ * the value(s) to compare against.
+ */
+export interface Filter {
+  /**
+   * An array of conditions that define the criteria for the filter. Each condition
+   * specifies a property, an operator, and optionally a value or values.
+   */
+  conditions: Array<Condition>;
+}
+
+export interface FilterCreateRequest {
+  /**
+   * Defines a single condition for searching CRM objects, specifying the property to
+   * filter on, the operator to use (such as equals, greater than, or contains), and
+   * the value(s) to compare against.
+   */
+  filter: Filter;
+
+  /**
+   * The unique identifier of the subscription to which the filter will be applied.
+   * It is an integer formatted as int64.
+   */
+  subscriptionId: number;
+}
+
+export interface FilterCreateResponse {
+  /**
+   * The unique identifier for the created filter. It is an integer formatted as
+   * int64.
+   */
+  filterId: number;
+}
+
+export interface FilterResponse {
+  /**
+   * The unique identifier for the filter. It is an integer in int64 format.
+   */
+  id: number;
+
+  /**
+   * A Unix timestamp in milliseconds indicating when the filter was created.
+   */
+  createdAt: number;
+
+  /**
+   * Defines a single condition for searching CRM objects, specifying the property to
+   * filter on, the operator to use (such as equals, greater than, or contains), and
+   * the value(s) to compare against.
+   */
+  filter: Filter;
+}
+
 export interface ForwardPaging {
   /**
    * Specifies the paging information needed to retrieve the next set of results in a
    * paginated API response
    */
   next?: NextPage;
+}
+
+export interface GdprPrivacyDeletionSubscriptionUpsertRequest {
+  actions: Array<
+    | 'CREATE'
+    | 'UPDATE'
+    | 'DELETE'
+    | 'MERGE'
+    | 'RESTORE'
+    | 'ASSOCIATION_ADDED'
+    | 'ASSOCIATION_REMOVED'
+    | 'SNAPSHOT'
+    | 'APP_INSTALL'
+    | 'APP_UNINSTALL'
+    | 'ADDED_TO_LIST'
+    | 'REMOVED_FROM_LIST'
+    | 'GDPR_DELETE'
+  >;
+
+  objectTypeId: string;
+
+  portalId: number;
+
+  subscriptionType: 'GDPR_PRIVACY_DELETION';
+}
+
+export interface JournalFetchResponse {
+  /**
+   * The unique identifier for the current offset of the journal entry, formatted as
+   * a UUID.
+   */
+  currentOffset: string;
+
+  /**
+   * The date and time when the URL will expire, in ISO 8601 format.
+   */
+  expiresAt: string;
+
+  /**
+   * The URL where the journal entry can be accessed. It is a string.
+   */
+  url: string;
+}
+
+export interface ListMembershipSubscriptionUpsertRequest {
+  actions: Array<
+    | 'CREATE'
+    | 'UPDATE'
+    | 'DELETE'
+    | 'MERGE'
+    | 'RESTORE'
+    | 'ASSOCIATION_ADDED'
+    | 'ASSOCIATION_REMOVED'
+    | 'SNAPSHOT'
+    | 'APP_INSTALL'
+    | 'APP_UNINSTALL'
+    | 'ADDED_TO_LIST'
+    | 'REMOVED_FROM_LIST'
+    | 'GDPR_DELETE'
+  >;
+
+  listIds: Array<number>;
+
+  objectIds: Array<number>;
+
+  portalId: number;
+
+  subscriptionType: 'LIST_MEMBERSHIP';
 }
 
 /**
@@ -265,6 +644,34 @@ export interface NextPage {
    * A URL that can be used to retrieve the next page results.
    */
   link?: string;
+}
+
+export interface ObjectSubscriptionUpsertRequest {
+  actions: Array<
+    | 'CREATE'
+    | 'UPDATE'
+    | 'DELETE'
+    | 'MERGE'
+    | 'RESTORE'
+    | 'ASSOCIATION_ADDED'
+    | 'ASSOCIATION_REMOVED'
+    | 'SNAPSHOT'
+    | 'APP_INSTALL'
+    | 'APP_UNINSTALL'
+    | 'ADDED_TO_LIST'
+    | 'REMOVED_FROM_LIST'
+    | 'GDPR_DELETE'
+  >;
+
+  objectIds: Array<number>;
+
+  objectTypeId: string;
+
+  portalId: number;
+
+  properties: Array<string>;
+
+  subscriptionType: 'OBJECT';
 }
 
 export interface ObjectTypeDefinition {
@@ -725,6 +1132,7 @@ export interface PropertyValue {
     | 'BIDEN'
     | 'BILLING'
     | 'BOT'
+    | 'BREEZE_AGENT'
     | 'CALCULATED'
     | 'CENTRAL_EXCHANGE_RATES'
     | 'CHATSPOT'
@@ -749,6 +1157,7 @@ export interface PropertyValue {
     | 'DEALS'
     | 'DEFAULT'
     | 'DELETE_OBJECTS'
+    | 'DI_WRITE_TO_CRM'
     | 'EMAIL'
     | 'EMAIL_INBOX_IMPORT'
     | 'EMAIL_INTEGRATION'
@@ -877,6 +1286,43 @@ export interface PublicObjectID {
   id: string;
 }
 
+export interface SnapshotStatusResponse {
+  /**
+   * The unique identifier for the snapshot operation, represented as a UUID.
+   */
+  id: string;
+
+  /**
+   * The timestamp indicating when the snapshot operation was initiated, represented
+   * as a Unix timestamp in milliseconds.
+   */
+  initiatedAt: number;
+
+  /**
+   * The current status of the snapshot. Valid values include 'PENDING',
+   * 'IN_PROGRESS', 'COMPLETED', 'FAILED', and 'EXPIRED'.
+   */
+  status: 'COMPLETED' | 'EXPIRED' | 'FAILED' | 'IN_PROGRESS' | 'PENDING';
+
+  /**
+   * The timestamp indicating when the snapshot operation was completed, represented
+   * as a Unix timestamp in milliseconds.
+   */
+  completedAt?: number;
+
+  /**
+   * A code representing the error that occurred, if any. Possible values are
+   * 'TIMEOUT', 'VALIDATION_ERROR', 'INTERNAL_ERROR', and 'PERMISSION_DENIED'.
+   */
+  errorCode?: 'INTERNAL_ERROR' | 'PERMISSION_DENIED' | 'TIMEOUT' | 'VALIDATION_ERROR';
+
+  /**
+   * A descriptive message providing additional information about the snapshot
+   * operation or error.
+   */
+  message?: string;
+}
+
 /**
  * Ye olde error
  */
@@ -921,6 +1367,13 @@ export interface StandardError {
    */
   subCategory?: unknown;
 }
+
+export type SubscriptionUpsertRequest =
+  | ObjectSubscriptionUpsertRequest
+  | AssociationSubscriptionUpsertRequest
+  | AppLifecycleEventSubscriptionUpsertRequest
+  | ListMembershipSubscriptionUpsertRequest
+  | GdprPrivacyDeletionSubscriptionUpsertRequest;
 
 export interface TaskLocator {
   /**

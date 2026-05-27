@@ -100,8 +100,15 @@ const runTests = (client: PartialHubSpot<{ webhooks: BaseWebhooks }>) => {
   });
 
   // Mock server tests are disabled
-  test.skip('createJournalSubscription', async () => {
-    const responsePromise = client.webhooks.createJournalSubscription({});
+  test.skip('createJournalSubscription: only required params', async () => {
+    const responsePromise = client.webhooks.createJournalSubscription({
+      actions: ['CREATE'],
+      objectIds: [0],
+      objectTypeId: 'objectTypeId',
+      portalId: 0,
+      properties: ['string'],
+      subscriptionType: 'OBJECT',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -109,6 +116,18 @@ const runTests = (client: PartialHubSpot<{ webhooks: BaseWebhooks }>) => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('createJournalSubscription: required and optional params', async () => {
+    const response = await client.webhooks.createJournalSubscription({
+      actions: ['CREATE'],
+      objectIds: [0],
+      objectTypeId: 'objectTypeId',
+      portalId: 0,
+      properties: ['string'],
+      subscriptionType: 'OBJECT',
+    });
   });
 
   // Mock server tests are disabled

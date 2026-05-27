@@ -134,7 +134,7 @@ const runTests = (client: PartialHubSpot<{ automation: { actions: { definitions:
               },
             ],
             schema: {
-              type: 'ARRAY',
+              type: 'INTEGER',
               maximum: 0,
               minimum: 0,
             },
@@ -239,7 +239,7 @@ const runTests = (client: PartialHubSpot<{ automation: { actions: { definitions:
               },
             ],
             schema: {
-              type: 'ARRAY',
+              type: 'INTEGER',
               maximum: 0,
               minimum: 0,
             },

@@ -148,6 +148,37 @@ const runTests = (client: PartialHubSpot<{ cms: { urlRedirects: BaseURLRedirects
   });
 
   // Mock server tests are disabled
+  test.skip('createURLMapping: required and optional params', async () => {
+    const response = await client.cms.urlRedirects.createURLMapping({
+      id: 'id',
+      created: '2019-12-27T18:11:19.117Z',
+      destination: 'destination',
+      isMatchFullUrl: true,
+      isMatchQueryString: true,
+      isOnlyAfterNotFound: true,
+      isPattern: true,
+      isProtocolAgnostic: true,
+      isTrailingSlashOptional: true,
+      precedence: 0,
+      redirectStyle: 0,
+      routePrefix: 'routePrefix',
+      updated: '2019-12-27T18:11:19.117Z',
+    });
+  });
+
+  // Mock server tests are disabled
+  test.skip('deleteURLMapping', async () => {
+    const responsePromise = client.cms.urlRedirects.deleteURLMapping(0);
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
   test.skip('get', async () => {
     const responsePromise = client.cms.urlRedirects.get('urlRedirectId');
     const rawResponse = await responsePromise.asResponse();

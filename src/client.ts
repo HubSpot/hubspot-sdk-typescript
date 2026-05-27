@@ -33,6 +33,7 @@ import { Marketing } from './resources/marketing/marketing';
 import { Meta } from './resources/meta/meta';
 import { Scheduler } from './resources/scheduler/scheduler';
 import { Settings } from './resources/settings/settings';
+import { WebhooksJournal } from './resources/webhooks-journal/webhooks-journal';
 import { Webhooks } from './resources/webhooks/webhooks';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
@@ -793,6 +794,7 @@ export class HubSpot extends BaseHubSpot {
   scheduler: API.Scheduler = new API.Scheduler(this);
   settings: API.Settings = new API.Settings(this);
   webhooks: API.Webhooks = new API.Webhooks(this);
+  webhooksJournal: API.WebhooksJournal = new API.WebhooksJournal(this);
 }
 
 HubSpot.Account = Account;
@@ -810,6 +812,7 @@ HubSpot.Meta = Meta;
 HubSpot.Scheduler = Scheduler;
 HubSpot.Settings = Settings;
 HubSpot.Webhooks = Webhooks;
+HubSpot.WebhooksJournal = WebhooksJournal;
 
 export declare namespace HubSpot {
   export type RequestOptions = Opts.RequestOptions;
@@ -847,22 +850,42 @@ export declare namespace HubSpot {
 
   export { Webhooks as Webhooks };
 
+  export { WebhooksJournal as WebhooksJournal };
+
   export type AbTestCreateRequestVNext = API.AbTestCreateRequestVNext;
+  export type ActionOverrideRequest = API.ActionOverrideRequest;
   export type ActionResponse = API.ActionResponse;
+  export type AppLifecycleEventSubscriptionUpsertRequest = API.AppLifecycleEventSubscriptionUpsertRequest;
   export type AssociationDefinition = API.AssociationDefinition;
   export type AssociationDefinitionEgg = API.AssociationDefinitionEgg;
   export type AssociationSpec = API.AssociationSpec;
+  export type AssociationSubscriptionUpsertRequest = API.AssociationSubscriptionUpsertRequest;
   export type AutomationActionsOption = API.AutomationActionsOption;
   export type BatchInputPropertyCreate = API.BatchInputPropertyCreate;
   export type BatchInputPropertyName = API.BatchInputPropertyName;
   export type BatchInputPublicObjectID = API.BatchInputPublicObjectID;
   export type BatchInputString = API.BatchInputString;
   export type BatchReadInputPropertyName = API.BatchReadInputPropertyName;
+  export type BatchResponseJournalFetchResponse = API.BatchResponseJournalFetchResponse;
+  export type BatchResponseJournalFetchResponseWithErrors = API.BatchResponseJournalFetchResponseWithErrors;
   export type CollectionResponsePropertyGroupNoPaging = API.CollectionResponsePropertyGroupNoPaging;
+  export type Condition = API.Condition;
+  export type CrmObjectSnapshotBatchRequest = API.CrmObjectSnapshotBatchRequest;
+  export type CrmObjectSnapshotBatchResponse = API.CrmObjectSnapshotBatchResponse;
+  export type CrmObjectSnapshotRequest = API.CrmObjectSnapshotRequest;
+  export type CrmObjectSnapshotResponse = API.CrmObjectSnapshotResponse;
   export type ErrorData = API.ErrorData;
   export type ErrorDetail = API.ErrorDetail;
+  export type Filter = API.Filter;
+  export type FilterCreateRequest = API.FilterCreateRequest;
+  export type FilterCreateResponse = API.FilterCreateResponse;
+  export type FilterResponse = API.FilterResponse;
   export type ForwardPaging = API.ForwardPaging;
+  export type GdprPrivacyDeletionSubscriptionUpsertRequest = API.GdprPrivacyDeletionSubscriptionUpsertRequest;
+  export type JournalFetchResponse = API.JournalFetchResponse;
+  export type ListMembershipSubscriptionUpsertRequest = API.ListMembershipSubscriptionUpsertRequest;
   export type NextPage = API.NextPage;
+  export type ObjectSubscriptionUpsertRequest = API.ObjectSubscriptionUpsertRequest;
   export type ObjectTypeDefinition = API.ObjectTypeDefinition;
   export type ObjectTypeDefinitionLabels = API.ObjectTypeDefinitionLabels;
   export type ObjectTypeDefinitionPatch = API.ObjectTypeDefinitionPatch;
@@ -879,7 +902,9 @@ export declare namespace HubSpot {
   export type PropertyName = API.PropertyName;
   export type PropertyValue = API.PropertyValue;
   export type PublicObjectID = API.PublicObjectID;
+  export type SnapshotStatusResponse = API.SnapshotStatusResponse;
   export type StandardError = API.StandardError;
+  export type SubscriptionUpsertRequest = API.SubscriptionUpsertRequest;
   export type TaskLocator = API.TaskLocator;
   export type VersionUser = API.VersionUser;
 }
