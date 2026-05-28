@@ -1767,6 +1767,16 @@ export interface MediaBridgePropertyUpdate {
 
   showCurrencySymbol?: boolean;
 
+  textDisplayHint?:
+    | 'domain_name'
+    | 'email'
+    | 'ip_address'
+    | 'multi_line'
+    | 'phone_number'
+    | 'physical_address'
+    | 'postal_code'
+    | 'unformatted_single_line';
+
   type?: 'bool' | 'date' | 'datetime' | 'enumeration' | 'number' | 'phone_number' | 'string';
 }
 
@@ -2270,6 +2280,16 @@ export interface Property1 {
   sensitiveDataCategories?: Array<string>;
 
   showCurrencySymbol?: boolean;
+
+  textDisplayHint?:
+    | 'domain_name'
+    | 'email'
+    | 'ip_address'
+    | 'multi_line'
+    | 'phone_number'
+    | 'physical_address'
+    | 'postal_code'
+    | 'unformatted_single_line';
 
   updatedAt?: string;
 
@@ -2810,6 +2830,19 @@ export interface MediaBridgeCreatePropertyParams {
    * Body param
    */
   showCurrencySymbol?: boolean;
+
+  /**
+   * Body param
+   */
+  textDisplayHint?:
+    | 'domain_name'
+    | 'email'
+    | 'ip_address'
+    | 'multi_line'
+    | 'phone_number'
+    | 'physical_address'
+    | 'postal_code'
+    | 'unformatted_single_line';
 }
 
 export interface MediaBridgeCreatePropertyGroupParams {
@@ -3064,6 +3097,19 @@ export interface MediaBridgeUpdatePropertyParams {
    * Body param
    */
   showCurrencySymbol?: boolean;
+
+  /**
+   * Body param
+   */
+  textDisplayHint?:
+    | 'domain_name'
+    | 'email'
+    | 'ip_address'
+    | 'multi_line'
+    | 'phone_number'
+    | 'physical_address'
+    | 'postal_code'
+    | 'unformatted_single_line';
 
   /**
    * Body param

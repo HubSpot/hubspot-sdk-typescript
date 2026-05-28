@@ -79,6 +79,7 @@ const runTests = (client: PartialHubSpot<{ cms: { mediaBridge: { batch: BaseBatc
           ],
           referencedObjectType: 'referencedObjectType',
           showCurrencySymbol: true,
+          textDisplayHint: 'domain_name',
         },
       ],
     });

@@ -71,6 +71,7 @@ const runTests = (client: PartialHubSpot<{ crm: { properties: BaseProperties } }
       ],
       referencedObjectType: 'referencedObjectType',
       showCurrencySymbol: true,
+      textDisplayHint: 'domain_name',
     });
   });
 
@@ -110,6 +111,7 @@ const runTests = (client: PartialHubSpot<{ crm: { properties: BaseProperties } }
         },
       ],
       showCurrencySymbol: true,
+      textDisplayHint: 'domain_name',
       type: 'bool',
     });
   });
