@@ -77,6 +77,7 @@ const runTests = (client: PartialHubSpot<{ crm: { properties: { batch: BaseBatch
           ],
           referencedObjectType: 'referencedObjectType',
           showCurrencySymbol: true,
+          textDisplayHint: 'domain_name',
         },
       ],
     });

@@ -240,6 +240,7 @@ export interface HydratedCriticalAction {
     | 'TEAM_DELETED'
     | 'TEAM_USER_ADDED'
     | 'TEAM_USER_DELETED'
+    | 'TEMPLATE_DELETED'
     | 'TEMPLATE_MODIFIED'
     | 'TOUCHLESS_PURCHASE'
     | 'UNIFIED_RESTORE_UNDO_EXECUTION'
