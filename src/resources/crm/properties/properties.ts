@@ -213,6 +213,16 @@ export interface PropertyUpdate {
 
   showCurrencySymbol?: boolean;
 
+  textDisplayHint?:
+    | 'domain_name'
+    | 'email'
+    | 'ip_address'
+    | 'multi_line'
+    | 'phone_number'
+    | 'physical_address'
+    | 'postal_code'
+    | 'unformatted_single_line';
+
   /**
    * The data type of the property.
    */
@@ -267,6 +277,16 @@ export interface PropertyCreateParams {
   referencedObjectType?: string;
 
   showCurrencySymbol?: boolean;
+
+  textDisplayHint?:
+    | 'domain_name'
+    | 'email'
+    | 'ip_address'
+    | 'multi_line'
+    | 'phone_number'
+    | 'physical_address'
+    | 'postal_code'
+    | 'unformatted_single_line';
 }
 
 export interface PropertyUpdateParams {
@@ -349,6 +369,19 @@ export interface PropertyUpdateParams {
    * Body param
    */
   showCurrencySymbol?: boolean;
+
+  /**
+   * Body param
+   */
+  textDisplayHint?:
+    | 'domain_name'
+    | 'email'
+    | 'ip_address'
+    | 'multi_line'
+    | 'phone_number'
+    | 'physical_address'
+    | 'postal_code'
+    | 'unformatted_single_line';
 
   /**
    * Body param: The data type of the property.

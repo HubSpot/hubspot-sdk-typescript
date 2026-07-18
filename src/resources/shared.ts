@@ -959,6 +959,21 @@ export interface Property {
   showCurrencySymbol?: boolean;
 
   /**
+   * Hint for how the text is displayed and validated in HubSpot's UI. Can be:
+   * "unformatted_single_line", "multi_line", "email", "phone_number", "domain_name",
+   * "ip_address", "physical_address", or "postal_code".
+   */
+  textDisplayHint?:
+    | 'domain_name'
+    | 'email'
+    | 'ip_address'
+    | 'multi_line'
+    | 'phone_number'
+    | 'physical_address'
+    | 'postal_code'
+    | 'unformatted_single_line';
+
+  /**
    * When the object type was last updated.
    */
   updatedAt?: string;
@@ -1018,6 +1033,16 @@ export interface PropertyCreate {
   referencedObjectType?: string;
 
   showCurrencySymbol?: boolean;
+
+  textDisplayHint?:
+    | 'domain_name'
+    | 'email'
+    | 'ip_address'
+    | 'multi_line'
+    | 'phone_number'
+    | 'physical_address'
+    | 'postal_code'
+    | 'unformatted_single_line';
 }
 
 export interface PropertyGroup {

@@ -263,6 +263,7 @@ const runTests = (client: PartialHubSpot<{ cms: { mediaBridge: BaseMediaBridge }
       ],
       referencedObjectType: 'referencedObjectType',
       showCurrencySymbol: true,
+      textDisplayHint: 'domain_name',
     });
   });
 
@@ -714,6 +715,7 @@ const runTests = (client: PartialHubSpot<{ cms: { mediaBridge: BaseMediaBridge }
         },
       ],
       showCurrencySymbol: true,
+      textDisplayHint: 'domain_name',
       type: 'bool',
     });
   });

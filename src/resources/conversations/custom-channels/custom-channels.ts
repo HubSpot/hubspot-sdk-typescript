@@ -443,6 +443,7 @@ export interface PreResolvedContact {
     | 'hs_ip_timezone'
     | 'hs_is_contact'
     | 'hs_is_enriched'
+    | 'hs_is_mass_marketing_activation_disallowed'
     | 'hs_is_merge_revertible'
     | 'hs_is_unworked'
     | 'hs_job_change_detected_date'
