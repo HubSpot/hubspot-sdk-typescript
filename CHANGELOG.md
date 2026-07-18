@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.1.0-alpha.11 (2026-07-18)
+
+Full Changelog: [v0.1.0-alpha.10...v0.1.0-alpha.11](https://github.com/HubSpot/hubspot-sdk-typescript/compare/v0.1.0-alpha.10...v0.1.0-alpha.11)
+
+### Features
+
+* **api:** api update ([8ab717c](https://github.com/HubSpot/hubspot-sdk-typescript/commit/8ab717c2a88a6d3ae1a641283073532db166796e))
+* **stlc:** configurable CI runner and private-production-repo support in workflow templates ([d7214de](https://github.com/HubSpot/hubspot-sdk-typescript/commit/d7214de95fe2c97e3d7fc5e3439d403c3caa5f4f))
+
+
+### Bug Fixes
+
+* **ci:** bump @arethetypeswrong/cli to ^0.18.0 and run CI workflows on Node 24 ([2bc5dd1](https://github.com/HubSpot/hubspot-sdk-typescript/commit/2bc5dd129a336d277246ca95068b912d38d747f0))
+* **client:** send content-type header for requests with an omitted optional body ([ecd4341](https://github.com/HubSpot/hubspot-sdk-typescript/commit/ecd4341758b340e4f224fe71a8377ae401f20377))
+
+
+### Chores
+
+* **internal:** codegen related update ([ec70475](https://github.com/HubSpot/hubspot-sdk-typescript/commit/ec7047519fa0a05ecda9bd89c65a2afd5c213a53))
+
 ## 0.1.0-alpha.10 (2026-05-26)
 
 Full Changelog: [v0.1.0-alpha.9...v0.1.0-alpha.10](https://github.com/HubSpot/hubspot-sdk-typescript/compare/v0.1.0-alpha.9...v0.1.0-alpha.10)
