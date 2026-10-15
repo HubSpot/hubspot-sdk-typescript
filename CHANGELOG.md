@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.1.0-alpha.11 (2026-10-15)
+
+Full Changelog: [v0.1.0-alpha.10...v0.1.0-alpha.11](https://github.com/HubSpot/hubspot-sdk-typescript/compare/v0.1.0-alpha.10...v0.1.0-alpha.11)
+
+### ⚠ BREAKING CHANGES
+
+* **api:** `requestContext` is removed from `CallbackCompleteParams`, `CallbackCompletionRequest` and `CallbackCompletionBatchRequest`, and the related request-context types are no longer exported.
+
+### Bug Fixes
+
+* **api:** remove requestContext from automation callback requests ([49ee3c1](https://github.com/HubSpot/hubspot-sdk-typescript/commit/49ee3c14ced2dddf1566bbf3a359aec1812459eb))
+
 ## 0.1.0-alpha.10 (2026-05-26)
 
 Full Changelog: [v0.1.0-alpha.9...v0.1.0-alpha.10](https://github.com/HubSpot/hubspot-sdk-typescript/compare/v0.1.0-alpha.9...v0.1.0-alpha.10)
