@@ -49,37 +49,6 @@ export type PublicActionDefinitionsPage = Page<PublicActionDefinition>;
 
 export type PublicActionRevisionsPage = Page<PublicActionRevision>;
 
-export interface ActionExecutionIndexIdentifier {
-  /**
-   * The index number representing the execution order of the action.
-   */
-  actionExecutionIndex: number;
-
-  /**
-   * The ID associated with the enrollment process.
-   */
-  enrollmentId: number;
-}
-
-export interface AgentRequestContext {
-  /**
-   * The unique identifier for the agent making the request.
-   */
-  agentId: number;
-
-  chirpAiContextObject: ChirpAIContextObject;
-
-  /**
-   * Indicates the source of the request, with the default value being 'AGENTS'.
-   */
-  source: 'AGENTS';
-
-  /**
-   * The unique identifier for the trajectory associated with the agent request.
-   */
-  trajectoryId?: string;
-}
-
 export interface ArrayFieldSchema {
   items: unknown;
 
@@ -121,17 +90,6 @@ export interface CallbackCompletionBatchRequest {
    * Specifies the type of failure reason for the callback completion.
    */
   failureReasonType?: string;
-
-  /**
-   * Defines the context of the request, which can be one of several predefined
-   * types.
-   */
-  requestContext?:
-    | WorkflowsRequestContext
-    | AgentRequestContext
-    | CopilotRequestContext
-    | StandaloneRequestContext
-    | TestRequestContext;
 }
 
 export interface CallbackCompletionRequest {
@@ -150,84 +108,6 @@ export interface CallbackCompletionRequest {
    * Indicates the reason for the failure of a callback completion.
    */
   failureReasonType?: string;
-
-  /**
-   * Specifies the context in which the request is made, which can be one of several
-   * predefined contexts.
-   */
-  requestContext?:
-    | WorkflowsRequestContext
-    | AgentRequestContext
-    | CopilotRequestContext
-    | StandaloneRequestContext
-    | TestRequestContext;
-}
-
-export interface ChirpAIContextObject {
-  /**
-   * The group to which the application belongs.
-   */
-  applicationGroup: string;
-
-  /**
-   * The identifier for the application associated with the context.
-   */
-  applicationId: string;
-
-  isPrivate: boolean;
-
-  /**
-   * Additional metadata related to the context, represented as key-value pairs.
-   */
-  metadata: { [key: string]: string };
-
-  /**
-   * Holds OpenTelemetry context information as key-value pairs.
-   */
-  otelContextHolder: { [key: string]: string };
-
-  unstructuredSources: Array<
-    | 'NONE'
-    | 'USER_INPUT'
-    | 'LOGGED_EMAIL'
-    | 'VIDEO_CALL'
-    | 'AUDIO_CALL'
-    | 'CALL_TRANSCRIPT'
-    | 'MEETING_TRANSCRIPT'
-    | 'FORMS'
-    | 'FEEDBACK_SURVEY'
-    | 'PDF'
-    | 'QUOTE'
-    | 'INVOICE'
-    | 'OTHER_ATTACHMENT_DOC'
-    | 'WHATSAPP'
-    | 'SMS'
-    | 'CHAT'
-    | 'FACEBOOK_MESSENGER'
-    | 'CUSTOM_CHANNEL_OR_API'
-    | 'MANY'
-    | 'NOTE'
-    | 'DERIVED'
-  >;
-
-  complianceIds?: ComplianceIDs;
-
-  conversationId?: string;
-
-  /**
-   * The identifier for the feature associated with the context.
-   */
-  featureId?: string;
-
-  /**
-   * The identifier for the inference associated with the context.
-   */
-  inferenceId?: string;
-
-  /**
-   * The identifier for the trajectory, formatted as a UUID.
-   */
-  trajectoryId?: string;
 }
 
 export interface CollectionResponsePublicActionDefinitionForwardPaging {
@@ -244,58 +124,6 @@ export interface CollectionResponsePublicActionRevisionForwardPaging {
   results: Array<PublicActionRevision>;
 
   paging?: Shared.ForwardPaging;
-}
-
-export interface ComplianceIDs {
-  contactIds: Array<ContactID>;
-
-  portalIds: Array<number>;
-
-  userIds: Array<number>;
-
-  /**
-   * The reason why no contact ID is available.
-   */
-  noContactIdReason?: string;
-
-  /**
-   * The reason why no portal ID is available.
-   */
-  noPortalIdReason?: string;
-
-  /**
-   * The reason why no user ID is available.
-   */
-  noUserIdReason?: string;
-}
-
-export interface ContactID {
-  /**
-   * The ID of the portal associated with the contact.
-   */
-  portalId: number;
-
-  /**
-   * The email address of the contact.
-   */
-  email?: string;
-
-  /**
-   * The unique identifier for the contact.
-   */
-  vid?: number;
-}
-
-export interface CopilotRequestContext {
-  /**
-   * Indicates the source of the request, with the default value being 'COPILOT'.
-   */
-  source: 'COPILOT';
-
-  /**
-   * The unique identifier for the trajectory.
-   */
-  trajectoryId?: string;
 }
 
 export interface DoubleFieldSchema {
@@ -983,20 +811,6 @@ export interface PublicSingleFieldDependency {
   dependentFieldNames: Array<string>;
 }
 
-export interface StandaloneRequestContext {
-  chirpAiContextObject: ChirpAIContextObject;
-
-  /**
-   * Indicates the source of the request, with the default value being 'STANDALONE'.
-   */
-  source: 'STANDALONE';
-
-  /**
-   * A unique identifier for tracking the trajectory of the request.
-   */
-  trajectoryId?: string;
-}
-
 export interface StringFieldSchema {
   /**
    * Indicates that the type is a string, with the default value being STRING.
@@ -1010,33 +824,6 @@ export interface StringFieldSchema {
   format?: 'DATE' | 'DATE_TIME' | 'OBJECT_COORDINATE' | 'TIME' | 'URI';
 }
 
-export interface TestRequestContext {
-  /**
-   * Indicates the source of the test request, with the only accepted value being
-   * 'TEST'.
-   */
-  source: 'TEST';
-}
-
-export interface WorkflowsRequestContext {
-  /**
-   * Indicates the source of the request, with the default value being WORKFLOWS.
-   */
-  source: 'WORKFLOWS';
-
-  /**
-   * The ID of the workflow associated with the request context.
-   */
-  workflowId: number;
-
-  actionExecutionIndexIdentifier?: ActionExecutionIndexIdentifier;
-
-  /**
-   * The ID of the action within the workflow context.
-   */
-  actionId?: number;
-}
-
 Actions.Callbacks = Callbacks;
 Actions.BaseCallbacks = BaseCallbacks;
 Actions.Definitions = Definitions;
@@ -1048,20 +835,14 @@ Actions.BaseRevisions = BaseRevisions;
 
 export declare namespace Actions {
   export {
-    type ActionExecutionIndexIdentifier as ActionExecutionIndexIdentifier,
-    type AgentRequestContext as AgentRequestContext,
     type ArrayFieldSchema as ArrayFieldSchema,
     type BatchInputCallbackCompletionBatchRequest as BatchInputCallbackCompletionBatchRequest,
     type BooleanFieldSchema as BooleanFieldSchema,
     type CallbackCompletionBatchRequest as CallbackCompletionBatchRequest,
     type CallbackCompletionRequest as CallbackCompletionRequest,
-    type ChirpAIContextObject as ChirpAIContextObject,
     type CollectionResponsePublicActionDefinitionForwardPaging as CollectionResponsePublicActionDefinitionForwardPaging,
     type CollectionResponsePublicActionFunctionIdentifierNoPaging as CollectionResponsePublicActionFunctionIdentifierNoPaging,
     type CollectionResponsePublicActionRevisionForwardPaging as CollectionResponsePublicActionRevisionForwardPaging,
-    type ComplianceIDs as ComplianceIDs,
-    type ContactID as ContactID,
-    type CopilotRequestContext as CopilotRequestContext,
     type DoubleFieldSchema as DoubleFieldSchema,
     type FieldTypeDefinition as FieldTypeDefinition,
     type IntegerFieldSchema as IntegerFieldSchema,
@@ -1084,10 +865,7 @@ export declare namespace Actions {
     type PublicObjectRequestOptions as PublicObjectRequestOptions,
     type PublicOption as PublicOption,
     type PublicSingleFieldDependency as PublicSingleFieldDependency,
-    type StandaloneRequestContext as StandaloneRequestContext,
     type StringFieldSchema as StringFieldSchema,
-    type TestRequestContext as TestRequestContext,
-    type WorkflowsRequestContext as WorkflowsRequestContext,
   };
 
   export {

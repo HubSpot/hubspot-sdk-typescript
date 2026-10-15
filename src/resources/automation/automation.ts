@@ -23,22 +23,16 @@ import {
 } from './sequences';
 import * as ActionsAPI from './actions/actions';
 import {
-  ActionExecutionIndexIdentifier,
   Actions,
-  AgentRequestContext,
   ArrayFieldSchema,
   BaseActions,
   BatchInputCallbackCompletionBatchRequest,
   BooleanFieldSchema,
   CallbackCompletionBatchRequest,
   CallbackCompletionRequest,
-  ChirpAIContextObject,
   CollectionResponsePublicActionDefinitionForwardPaging,
   CollectionResponsePublicActionFunctionIdentifierNoPaging,
   CollectionResponsePublicActionRevisionForwardPaging,
-  ComplianceIDs,
-  ContactID,
-  CopilotRequestContext,
   DoubleFieldSchema,
   FieldTypeDefinition,
   IntegerFieldSchema,
@@ -61,10 +55,7 @@ import {
   PublicObjectRequestOptions,
   PublicOption,
   PublicSingleFieldDependency,
-  StandaloneRequestContext,
   StringFieldSchema,
-  TestRequestContext,
-  WorkflowsRequestContext,
 } from './actions/actions';
 
 export class BaseAutomation extends APIResource {
@@ -84,20 +75,14 @@ export declare namespace Automation {
   export {
     Actions as Actions,
     BaseActions as BaseActions,
-    type ActionExecutionIndexIdentifier as ActionExecutionIndexIdentifier,
-    type AgentRequestContext as AgentRequestContext,
     type ArrayFieldSchema as ArrayFieldSchema,
     type BatchInputCallbackCompletionBatchRequest as BatchInputCallbackCompletionBatchRequest,
     type BooleanFieldSchema as BooleanFieldSchema,
     type CallbackCompletionBatchRequest as CallbackCompletionBatchRequest,
     type CallbackCompletionRequest as CallbackCompletionRequest,
-    type ChirpAIContextObject as ChirpAIContextObject,
     type CollectionResponsePublicActionDefinitionForwardPaging as CollectionResponsePublicActionDefinitionForwardPaging,
     type CollectionResponsePublicActionFunctionIdentifierNoPaging as CollectionResponsePublicActionFunctionIdentifierNoPaging,
     type CollectionResponsePublicActionRevisionForwardPaging as CollectionResponsePublicActionRevisionForwardPaging,
-    type ComplianceIDs as ComplianceIDs,
-    type ContactID as ContactID,
-    type CopilotRequestContext as CopilotRequestContext,
     type DoubleFieldSchema as DoubleFieldSchema,
     type FieldTypeDefinition as FieldTypeDefinition,
     type IntegerFieldSchema as IntegerFieldSchema,
@@ -120,10 +105,7 @@ export declare namespace Automation {
     type PublicObjectRequestOptions as PublicObjectRequestOptions,
     type PublicOption as PublicOption,
     type PublicSingleFieldDependency as PublicSingleFieldDependency,
-    type StandaloneRequestContext as StandaloneRequestContext,
     type StringFieldSchema as StringFieldSchema,
-    type TestRequestContext as TestRequestContext,
-    type WorkflowsRequestContext as WorkflowsRequestContext,
   };
 
   export {

@@ -54,17 +54,6 @@ export interface CallbackCompleteParams {
    * Indicates the reason for the failure of a callback completion.
    */
   failureReasonType?: string;
-
-  /**
-   * Specifies the context in which the request is made, which can be one of several
-   * predefined contexts.
-   */
-  requestContext?:
-    | ActionsAPI.WorkflowsRequestContext
-    | ActionsAPI.AgentRequestContext
-    | ActionsAPI.CopilotRequestContext
-    | ActionsAPI.StandaloneRequestContext
-    | ActionsAPI.TestRequestContext;
 }
 
 export interface CallbackCompleteBatchParams {
