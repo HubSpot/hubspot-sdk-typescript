@@ -4,20 +4,14 @@
 
 Types:
 
-- <code><a href="./src/resources/automation/actions/actions.ts">ActionExecutionIndexIdentifier</a></code>
-- <code><a href="./src/resources/automation/actions/actions.ts">AgentRequestContext</a></code>
 - <code><a href="./src/resources/automation/actions/actions.ts">ArrayFieldSchema</a></code>
 - <code><a href="./src/resources/automation/actions/actions.ts">BatchInputCallbackCompletionBatchRequest</a></code>
 - <code><a href="./src/resources/automation/actions/actions.ts">BooleanFieldSchema</a></code>
 - <code><a href="./src/resources/automation/actions/actions.ts">CallbackCompletionBatchRequest</a></code>
 - <code><a href="./src/resources/automation/actions/actions.ts">CallbackCompletionRequest</a></code>
-- <code><a href="./src/resources/automation/actions/actions.ts">ChirpAIContextObject</a></code>
 - <code><a href="./src/resources/automation/actions/actions.ts">CollectionResponsePublicActionDefinitionForwardPaging</a></code>
 - <code><a href="./src/resources/automation/actions/actions.ts">CollectionResponsePublicActionFunctionIdentifierNoPaging</a></code>
 - <code><a href="./src/resources/automation/actions/actions.ts">CollectionResponsePublicActionRevisionForwardPaging</a></code>
-- <code><a href="./src/resources/automation/actions/actions.ts">ComplianceIDs</a></code>
-- <code><a href="./src/resources/automation/actions/actions.ts">ContactID</a></code>
-- <code><a href="./src/resources/automation/actions/actions.ts">CopilotRequestContext</a></code>
 - <code><a href="./src/resources/automation/actions/actions.ts">DoubleFieldSchema</a></code>
 - <code><a href="./src/resources/automation/actions/actions.ts">FieldTypeDefinition</a></code>
 - <code><a href="./src/resources/automation/actions/actions.ts">IntegerFieldSchema</a></code>
@@ -40,10 +34,7 @@ Types:
 - <code><a href="./src/resources/automation/actions/actions.ts">PublicObjectRequestOptions</a></code>
 - <code><a href="./src/resources/automation/actions/actions.ts">PublicOption</a></code>
 - <code><a href="./src/resources/automation/actions/actions.ts">PublicSingleFieldDependency</a></code>
-- <code><a href="./src/resources/automation/actions/actions.ts">StandaloneRequestContext</a></code>
 - <code><a href="./src/resources/automation/actions/actions.ts">StringFieldSchema</a></code>
-- <code><a href="./src/resources/automation/actions/actions.ts">TestRequestContext</a></code>
-- <code><a href="./src/resources/automation/actions/actions.ts">WorkflowsRequestContext</a></code>
 
 ### Callbacks
 

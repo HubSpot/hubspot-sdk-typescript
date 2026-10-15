@@ -45,12 +45,6 @@ const runTests = (client: PartialHubSpot<{ automation: { actions: { callbacks: B
       outputFields: { foo: 'string' },
       typedOutputs: {},
       failureReasonType: 'failureReasonType',
-      requestContext: {
-        source: 'WORKFLOWS',
-        workflowId: 0,
-        actionExecutionIndexIdentifier: { actionExecutionIndex: 0, enrollmentId: 0 },
-        actionId: 0,
-      },
     });
   });
 
@@ -83,12 +77,6 @@ const runTests = (client: PartialHubSpot<{ automation: { actions: { callbacks: B
           outputFields: { foo: 'string' },
           typedOutputs: {},
           failureReasonType: 'failureReasonType',
-          requestContext: {
-            source: 'WORKFLOWS',
-            workflowId: 0,
-            actionExecutionIndexIdentifier: { actionExecutionIndex: 0, enrollmentId: 0 },
-            actionId: 0,
-          },
         },
       ],
     });
